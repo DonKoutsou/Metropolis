@@ -1,0 +1,44 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Scenes/GuyInh.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/Character_Animations.cs" type="Script" id=2]
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "Jump"
+
+[sub_resource type="AnimationNodeAnimation" id=5]
+animation = "Walk-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "Idle-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=6]
+
+[sub_resource type="AnimationNodeOneShot" id=8]
+
+[sub_resource type="AnimationNodeBlendTree" id=9]
+graph_offset = Vector2( -76.7945, -147.049 )
+nodes/Animation/node = SubResource( 3 )
+nodes/Animation/position = Vector2( -40, 120 )
+"nodes/Animation 2/node" = SubResource( 7 )
+"nodes/Animation 2/position" = Vector2( -80, -20 )
+"nodes/Animation 3/node" = SubResource( 5 )
+"nodes/Animation 3/position" = Vector2( -20, 380 )
+nodes/Idle_Walk_Blend/node = SubResource( 6 )
+nodes/Idle_Walk_Blend/position = Vector2( 240, 240 )
+nodes/JumpShot/node = SubResource( 8 )
+nodes/JumpShot/position = Vector2( 460, 160 )
+nodes/output/position = Vector2( 980, 160 )
+node_connections = [ "JumpShot", 0, "Idle_Walk_Blend", "JumpShot", 1, "Animation 2", "Idle_Walk_Blend", 0, "Animation", "Idle_Walk_Blend", 1, "Animation 3", "output", 0, "JumpShot" ]
+
+[node name="Guy" instance=ExtResource( 1 )]
+
+[node name="AnimationPlayer" parent="." index="1"]
+script = ExtResource( 2 )
+
+[node name="AnimationTree" type="AnimationTree" parent="AnimationPlayer" index="0"]
+tree_root = SubResource( 9 )
+anim_player = NodePath("..")
+active = true
+parameters/Idle_Walk_Blend/blend_amount = 0.0
+parameters/JumpShot/active = false

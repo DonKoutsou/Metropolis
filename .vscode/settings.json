@@ -1,0 +1,18 @@
+{
+    "mono-debug.exceptionOptions": {
+        "System.ArithmeticException": "always",
+        "System.ArrayTypeMismatchException": "always",
+        "System.DivideByZeroException": "always",
+        "System.Exception": "always",
+        "System.IndexOutOfRangeException": "always",
+        "System.InvalidCastException": "always",
+        "System.NullReferenceException": "always",
+        "System.OutOfMemoryException": "always",
+        "System.OverflowException": "always",
+        "System.StackOverflowException": "always",
+        "System.SystemException": "always",
+        "System.TypeInitializationException": "always"
+    },
+    "godot_tools.editor_path": "E:/Godot/Godot_v3.5.3-stable_mono_win64/Godot_v3.5.3-stable_mono_win64.exe",
+    "debug.allowBreakpointsEverywhere": true,
+}

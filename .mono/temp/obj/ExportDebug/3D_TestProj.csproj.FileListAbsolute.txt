@@ -1,0 +1,8 @@
+E:\Godot_Project\3D_Proj_Test\.mono\temp\bin\ExportDebug\3D_TestProj.dll
+E:\Godot_Project\3D_Proj_Test\.mono\temp\bin\ExportDebug\3D_TestProj.pdb
+E:\Godot_Project\3D_Proj_Test\.mono\temp\obj\ExportDebug\3D_TestProj.csproj.AssemblyReference.cache
+E:\Godot_Project\3D_Proj_Test\.mono\temp\obj\ExportDebug\3D_TestProj.csproj.CoreCompileInputs.cache
+E:\Godot_Project\3D_Proj_Test\.mono\temp\obj\ExportDebug\3D_TestProj.AssemblyInfoInputs.cache
+E:\Godot_Project\3D_Proj_Test\.mono\temp\obj\ExportDebug\3D_TestProj.AssemblyInfo.cs
+E:\Godot_Project\3D_Proj_Test\.mono\temp\obj\ExportDebug\3D_TestProj.dll
+E:\Godot_Project\3D_Proj_Test\.mono\temp\obj\ExportDebug\3D_TestProj.pdb

@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scripts/Item.cs" type="Script" id=1]
+[ext_resource path="res://Assets/Drachma/Drachma.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://Assets/Drachma/M_Drachma.material" type="Material" id=3]
+[ext_resource path="res://Assets/Drachma/Drachma.png" type="Texture" id=4]
+
+[sub_resource type="CylinderShape" id=1]
+height = 0.206309
+radius = 1.21842
+
+[node name="Item" type="RigidBody"]
+collision_layer = 16
+collision_mask = 15
+mass = 0.00102041
+script = ExtResource( 1 )
+ItemIcon = ExtResource( 4 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = ExtResource( 2 )
+material/0 = ExtResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.113449, 0 )
+visible = false
+shape = SubResource( 1 )

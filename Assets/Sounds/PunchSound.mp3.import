@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/PunchSound.mp3-1f0d4bf89bc0d8a6eff8adfb15f336b7.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/PunchSound.mp3"
+dest_files=[ "res://.import/PunchSound.mp3-1f0d4bf89bc0d8a6eff8adfb15f336b7.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

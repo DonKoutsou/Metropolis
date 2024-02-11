@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/WorldMap.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/MyWorld.cs" type="Script" id=4]
+
+[node name="MyWorld" type="Spatial" groups=["World"]]
+script = ExtResource( 4 )
+
+[node name="WorldMap" parent="." instance=ExtResource( 1 )]
+z_index = -2
+cell_custom_transform = Transform2D( 0, 0, 0, 0, 0, 0 )
+cell_tile_origin = 1
+centered_textures = true
+collision_layer = 0
+collision_mask = 0
+tile_data = PoolIntArray( -196607, 0, 0, -196606, 3, 0, -65537, 3, 0, -131071, 0, 0, -131070, 0, 0, -1, 0, 0, -65536, 1, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0, 0, 0, 0, 1, 0, 0, 3, 0, 0, 65536, 0, 0, 65539, 3, 0, 131072, 0, 0, 196608, 3, 0 )
+scenestospawn = PoolStringArray( "res://Scenes/Islands/Island1.tscn" )
+Entrytospawn = "res://Scenes/Islands/IslandStarting.tscn"
+Exittospawn = "res://Scenes/Islands/Island1.tscn"
+HideBasedOnState = true
+
+[node name="Player" parent="." instance=ExtResource( 2 )]

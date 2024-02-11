@@ -1,0 +1,122 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Spatial",
+"class": "RoadContainer",
+"language": "GDScript",
+"path": "res://addons/road-generator/nodes/road_container.gd"
+}, {
+"base": "Spatial",
+"class": "RoadIntersection",
+"language": "GDScript",
+"path": "res://addons/road-generator/nodes/road_intersection.gd"
+}, {
+"base": "Path",
+"class": "RoadLane",
+"language": "GDScript",
+"path": "res://addons/road-generator/nodes/road_lane.gd"
+}, {
+"base": "Spatial",
+"class": "RoadManager",
+"language": "GDScript",
+"path": "res://addons/road-generator/nodes/road_manager.gd"
+}, {
+"base": "Spatial",
+"class": "RoadPoint",
+"language": "GDScript",
+"path": "res://addons/road-generator/nodes/road_point.gd"
+} ]
+_global_script_class_icons={
+"RoadContainer": "res://addons/road-generator/resources/road_container.png",
+"RoadIntersection": "res://addons/road-generator/resources/road_intersection.png",
+"RoadLane": "res://addons/road-generator/resources/road_lane.png",
+"RoadManager": "res://addons/road-generator/resources/road_manager.png",
+"RoadPoint": "res://addons/road-generator/resources/road_point.png"
+}
+
+[MonoCustomResourceRegistry]
+
+ClassPrefix=""
+SearchType=0
+ResourceScriptDirectories=[ "res://" ]
+
+[application]
+
+config/name="3D_TestProj"
+run/main_scene="res://Scenes/MainWorld.tscn"
+config/icon="res://icon.png"
+
+[display]
+
+window/size/width=1920
+window/size/height=1080
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/MonoCustomResourceRegistry/plugin.cfg", "res://addons/road-generator/plugin.cfg" )
+
+[gui]
+
+common/drop_mouse_on_gui_input_disabled=true
+
+[input]
+
+Move_Up={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":87,"unicode":0,"echo":false,"script":null)
+ ]
+}
+Move_Down={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":83,"unicode":0,"echo":false,"script":null)
+ ]
+}
+Move_Left={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":65,"unicode":0,"echo":false,"script":null)
+ ]
+}
+Move_Right={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":68,"unicode":0,"echo":false,"script":null)
+ ]
+}
+jump={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":32,"unicode":0,"echo":false,"script":null)
+ ]
+}
+Run={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777237,"unicode":0,"echo":false,"script":null)
+ ]
+}
+
+[layer_names]
+
+3d_physics/layer_1="player"
+3d_physics/layer_2="enemies"
+3d_physics/layer_3="world"
+3d_physics/layer_4="door"
+3d_physics/layer_5="Item"
+
+[mono]
+
+project/assembly_name="3D_TestProj"
+debugger_agent/wait_timeout=6000
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"

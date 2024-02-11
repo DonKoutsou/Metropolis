@@ -1,0 +1,288 @@
+[gd_scene load_steps=24 format=2]
+
+[ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
+[ext_resource path="res://Scripts/Stamina_Bar.cs" type="Script" id=2]
+[ext_resource path="res://Scripts/HP_Bar.cs" type="Script" id=3]
+[ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Scripts/InventorySlots.cs" type="Script" id=5]
+[ext_resource path="res://Scenes/InventoryUISlot.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Inventory.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Sounds/PunchSound.mp3" type="AudioStream" id=8]
+[ext_resource path="res://Assets/Sounds/HeavyBreathing.mp3" type="AudioStream" id=9]
+[ext_resource path="res://Assets/Sounds/WalkingSound.mp3" type="AudioStream" id=10]
+[ext_resource path="res://Assets/Sounds/Cave_Ambient.mp3" type="AudioStream" id=11]
+[ext_resource path="res://Scripts/CameraPivot.cs" type="Script" id=12]
+[ext_resource path="res://Scenes/Character_Mesh.tscn" type="PackedScene" id=13]
+
+[sub_resource type="CapsuleShape" id=6]
+height = 2.0
+
+[sub_resource type="CylinderShape" id=71]
+
+[sub_resource type="Shader" id=72]
+code = "shader_type canvas_item;
+
+uniform float u_amount = 0.1;
+
+float get_noise(vec2 uv) {
+	return fract(sin(dot(uv ,vec2(12.9898,78.233))) * 43758.5453);
+}
+
+void fragment() {
+	float n = 2.0 * get_noise(UV + vec2(TIME, 0.0)) - 1.0;
+	COLOR = texture(TEXTURE, UV) + n * u_amount;
+}"
+
+[sub_resource type="ShaderMaterial" id=70]
+render_priority = 5
+shader = SubResource( 72 )
+shader_param/u_amount = 1.62
+
+[sub_resource type="CanvasItemMaterial" id=65]
+render_priority = 100
+light_mode = 1
+
+[sub_resource type="StyleBoxFlat" id=66]
+bg_color = Color( 0.596078, 0.211765, 0.211765, 0.792157 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 0 )
+border_blend = true
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="CanvasItemMaterial" id=67]
+render_priority = 100
+light_mode = 1
+
+[sub_resource type="StyleBoxFlat" id=68]
+bg_color = Color( 0.266667, 0.521569, 0.305882, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 0 )
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+anti_aliasing_size = 0.01
+
+[sub_resource type="DynamicFont" id=64]
+size = 13
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
+
+[sub_resource type="Theme" id=69]
+default_font = SubResource( 64 )
+
+[node name="Player" type="KinematicBody" groups=["player"]]
+collision_mask = 6
+script = ExtResource( 1 )
+Speed = 6
+m_HP = 300.0
+m_Stamina = 300.0
+RunSpeed = 14
+
+[node name="Pivot" type="Spatial" parent="."]
+
+[node name="Guy" parent="Pivot" instance=ExtResource( 13 )]
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.00207, 0 )
+shape = SubResource( 6 )
+
+[node name="MobDetector" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.390558, 0 )
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape" type="CollisionShape" parent="MobDetector"]
+transform = Transform( 1.47899, 0, 0, 0, 0.256205, 0, 0, 0, 1.68566, 0, 0, 0 )
+shape = SubResource( 71 )
+
+[node name="DoorDetector" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.390558, 0 )
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+
+[node name="CollisionShape" type="CollisionShape" parent="DoorDetector"]
+transform = Transform( 1.47899, 0, 0, 0, 0.256205, 0, 0, 0, 1.68566, 0, 0, 0 )
+shape = SubResource( 71 )
+
+[node name="CameraPivot" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.879466, 0.475962, 0, -0.475962, 0.879466, 0, 0, 0 )
+script = ExtResource( 12 )
+Speed = 5
+
+[node name="Camera" type="Camera" parent="CameraPivot"]
+transform = Transform( 1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 8.32865, 32.9338 )
+fov = 45.0
+size = 5.0
+
+[node name="DamageColor" type="ColorRect" parent="."]
+show_behind_parent = true
+margin_left = -1016.0
+margin_top = -600.0
+margin_right = 1032.0
+margin_bottom = 600.0
+color = Color( 0.623529, 0.172549, 0.172549, 0 )
+
+[node name="Turnofftimer" type="Timer" parent="DamageColor"]
+wait_time = 0.2
+one_shot = true
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 8 )
+area_mask = 0
+
+[node name="TiredSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 9 )
+area_mask = 0
+
+[node name="WalkingSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 10 )
+area_mask = 0
+
+[node name="EnvSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 11 )
+volume_db = 10.0
+autoplay = true
+area_mask = 0
+
+[node name="Inventory" parent="." instance=ExtResource( 7 )]
+Capacity = 150.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="InventorySlots" type="Control" parent="CanvasLayer"]
+margin_left = 487.0
+margin_top = 552.0
+margin_right = 527.0
+margin_bottom = 592.0
+script = ExtResource( 5 )
+
+[node name="Node2D" parent="CanvasLayer/InventorySlots" instance=ExtResource( 6 )]
+position = Vector2( 20, 20 )
+
+[node name="Node2D2" parent="CanvasLayer/InventorySlots" instance=ExtResource( 6 )]
+position = Vector2( 120, 20 )
+
+[node name="Node2D5" parent="CanvasLayer/InventorySlots" instance=ExtResource( 6 )]
+position = Vector2( -80, 20 )
+
+[node name="Node2D3" parent="CanvasLayer/InventorySlots" instance=ExtResource( 6 )]
+position = Vector2( 220, 20 )
+
+[node name="Node2D6" parent="CanvasLayer/InventorySlots" instance=ExtResource( 6 )]
+position = Vector2( -180, 20 )
+
+[node name="Node2D4" parent="CanvasLayer/InventorySlots" instance=ExtResource( 6 )]
+position = Vector2( 320, 20 )
+
+[node name="Node2D7" parent="CanvasLayer/InventorySlots" instance=ExtResource( 6 )]
+position = Vector2( -280, 20 )
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+modulate = Color( 1, 1, 1, 0.0156863 )
+material = SubResource( 70 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -464.0
+margin_top = -410.0
+margin_right = -460.0
+margin_bottom = -407.0
+rect_scale = Vector2( 500, 500 )
+rect_pivot_offset = Vector2( 1, 0.5 )
+
+[node name="PlayerUI" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+
+[node name="HP_Bar" type="ProgressBar" parent="PlayerUI"]
+material = SubResource( 65 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -15.0
+margin_top = -7.0
+margin_right = 15.0
+margin_bottom = 7.0
+rect_scale = Vector2( 1, 0.5 )
+size_flags_horizontal = 9
+size_flags_vertical = 8
+custom_colors/font_color = Color( 0, 0, 0, 0 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_styles/fg = SubResource( 66 )
+value = 10.0
+script = ExtResource( 3 )
+
+[node name="VisibilityTimerHP" type="Timer" parent="PlayerUI/HP_Bar"]
+one_shot = true
+
+[node name="Stamina_Bar" type="ProgressBar" parent="PlayerUI"]
+material = SubResource( 67 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -15.0
+margin_right = 15.0
+margin_bottom = 14.0
+rect_scale = Vector2( 1, 0.5 )
+size_flags_horizontal = 9
+size_flags_vertical = 8
+custom_colors/font_color = Color( 0, 0, 0, 0 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0 )
+custom_styles/fg = SubResource( 68 )
+value = 20.0
+script = ExtResource( 2 )
+
+[node name="VisibilityTimerStamina" type="Timer" parent="PlayerUI/Stamina_Bar"]
+one_shot = true
+
+[node name="TalkText" type="RichTextLabel" parent="PlayerUI"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -101.0
+margin_top = -28.0
+margin_right = 101.0
+margin_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource( 69 )
+bbcode_enabled = true
+bbcode_text = "[center]Talk
+[/center]"
+text = "Talk
+"
+scroll_active = false
+
+[node name="UpdateTimer" type="Timer" parent="PlayerUI/TalkText"]
+wait_time = 0.2
+
+[connection signal="body_entered" from="MobDetector" to="." method="OnMobDetectorBodyEntered"]
+[connection signal="body_entered" from="DoorDetector" to="." method="OnDoorDetectorBodyEntered"]
+[connection signal="timeout" from="PlayerUI/HP_Bar/VisibilityTimerHP" to="PlayerUI/HP_Bar" method="TurnOff"]
+[connection signal="timeout" from="PlayerUI/Stamina_Bar/VisibilityTimerStamina" to="PlayerUI/Stamina_Bar" method="TurnOff"]
