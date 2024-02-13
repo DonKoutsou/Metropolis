@@ -48,9 +48,10 @@ public class Player : Character
     public override void _PhysicsProcess(float delta)
 	{
         var spd = Speed;
-        var direction = Vector3.Zero;
+        var direction = loctomove - GlobalTransform.origin;
+        float dist = loctomove.DistanceTo(GlobalTransform.origin);
         double stam = m_Stamina;
-		if (Input.IsActionPressed("Move_Right"))
+		/*if (Input.IsActionPressed("Move_Right"))
 		{
 			direction.x += 1;
 		}
@@ -68,8 +69,9 @@ public class Player : Character
 		if (Input.IsActionPressed("Move_Up"))
 		{
             direction.z -= 1f;
-		}
-        if (Input.IsActionPressed("Run") && m_Stamina > 10 && _velocity != Vector3.Zero)
+		}*/
+
+        if (Input.IsActionPressed("Run") && m_Stamina > 10 && direction != Vector3.Zero)
 		{
 			spd = RunSpeed;
 			m_Stamina = m_Stamina - 1f;
@@ -78,11 +80,11 @@ public class Player : Character
 		{
 			m_Stamina = m_Stamina + 0.5f;
 				
-			if (_velocity == Vector3.Zero )
+			if (direction == Vector3.Zero )
 				m_Stamina = m_Stamina + 1f;
 
 		}
-        if (direction == Vector3.Zero)
+        if (dist < 1)
 		{
 			if (!GetNode<AudioStreamPlayer2D>("WalkingSound").StreamPaused)
 				GetNode<AudioStreamPlayer2D>("WalkingSound").StreamPaused = true;
@@ -91,7 +93,8 @@ public class Player : Character
 		else
 		{
             direction = direction.Normalized();
-            GetNode<Spatial>("Pivot").LookAt(Translation - direction, Vector3.Up);
+            Vector3 lookloc = new Vector3(direction.x, 0, direction.z);
+            GetNode<Spatial>("Pivot").LookAt(Translation - lookloc, Vector3.Up);
 			if (GetNode<AudioStreamPlayer2D>("WalkingSound").StreamPaused)
             {
                 GetNode<AudioStreamPlayer2D>("WalkingSound").StreamPaused = false;
@@ -119,7 +122,8 @@ public class Player : Character
         // Vertical velocity
         _velocity.y -= FallAcceleration * delta;
         // Moving the character
-        _velocity = MoveAndSlide(_velocity, Vector3.Up);
+        if (dist > 1)
+            _velocity = MoveAndSlide(_velocity, Vector3.Up);
         if (IsOnFloor() && Input.IsActionJustPressed("jump"))
         {
             anim.PlayAnimation(E_Animations.Jump);
@@ -142,6 +146,23 @@ public class Player : Character
             }
         }
     }
+    Vector3 loctomove;
+    public override void _Input(InputEvent @event)
+	{
+		if (@event.IsActionPressed("Move"))
+		{
+            var spacestate = GetWorld().DirectSpaceState;
+            Vector2 mousepos = GetViewport().GetMousePosition();
+            Camera cam = GetTree().GetRoot().GetCamera();
+            Vector3 rayor = cam.ProjectRayOrigin(mousepos);
+            Vector3 rayend = rayor + cam.ProjectRayNormal(mousepos) * 2000;
+            var rayar = spacestate.IntersectRay(rayor, rayend);
+            //if ray finds nothiong return
+            if (rayar.Count == 0)
+                return;
+            loctomove = (Vector3)rayar["position"];
+		}
+	}
     private void Die()
     {
         EmitSignal(nameof(Hit));
@@ -160,6 +181,7 @@ public class Player : Character
 			Wall bod = (Wall)body;
 			bod.Touch(this);
 		}
+        loctomove = GlobalTransform.origin;
     }
 
         // ...

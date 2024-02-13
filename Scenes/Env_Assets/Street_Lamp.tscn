@@ -18,7 +18,7 @@ light_color = Color( 0.784314, 0.74902, 0.541176, 1 )
 shadow_enabled = true
 shadow_bias = 0.0
 shadow_reverse_cull_face = true
-spot_range = 233.254
+spot_range = 22.142
 spot_angle = 64.83
 
 [node name="MeshInstance" type="MeshInstance" parent="."]

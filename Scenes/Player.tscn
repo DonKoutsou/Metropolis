@@ -85,10 +85,9 @@ default_font = SubResource( 64 )
 [node name="Player" type="KinematicBody" groups=["player"]]
 collision_mask = 6
 script = ExtResource( 1 )
-Speed = 6
 m_HP = 300.0
 m_Stamina = 300.0
-RunSpeed = 14
+RunSpeed = 100
 
 [node name="Pivot" type="Spatial" parent="."]
 
@@ -119,14 +118,14 @@ transform = Transform( 1.47899, 0, 0, 0, 0.256205, 0, 0, 0, 1.68566, 0, 0, 0 )
 shape = SubResource( 71 )
 
 [node name="CameraPivot" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.879466, 0.475962, 0, -0.475962, 0.879466, 0, 0, 0 )
 script = ExtResource( 12 )
 Speed = 5
 
 [node name="Camera" type="Camera" parent="CameraPivot"]
-transform = Transform( 1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 8.32865, 32.9338 )
+transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 20, 20 )
 fov = 45.0
 size = 5.0
+far = 8192.0
 
 [node name="DamageColor" type="ColorRect" parent="."]
 show_behind_parent = true
@@ -165,6 +164,7 @@ Capacity = 150.0
 layer = 3
 
 [node name="InventorySlots" type="Control" parent="CanvasLayer"]
+visible = false
 margin_left = 487.0
 margin_top = 552.0
 margin_right = 527.0
@@ -172,27 +172,35 @@ margin_bottom = 592.0
 script = ExtResource( 5 )
 
 [node name="Node2D" parent="CanvasLayer/InventorySlots" instance=ExtResource( 6 )]
+visible = false
 position = Vector2( 20, 20 )
 
 [node name="Node2D2" parent="CanvasLayer/InventorySlots" instance=ExtResource( 6 )]
+visible = false
 position = Vector2( 120, 20 )
 
 [node name="Node2D5" parent="CanvasLayer/InventorySlots" instance=ExtResource( 6 )]
+visible = false
 position = Vector2( -80, 20 )
 
 [node name="Node2D3" parent="CanvasLayer/InventorySlots" instance=ExtResource( 6 )]
+visible = false
 position = Vector2( 220, 20 )
 
 [node name="Node2D6" parent="CanvasLayer/InventorySlots" instance=ExtResource( 6 )]
+visible = false
 position = Vector2( -180, 20 )
 
 [node name="Node2D4" parent="CanvasLayer/InventorySlots" instance=ExtResource( 6 )]
+visible = false
 position = Vector2( 320, 20 )
 
 [node name="Node2D7" parent="CanvasLayer/InventorySlots" instance=ExtResource( 6 )]
+visible = false
 position = Vector2( -280, 20 )
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
 modulate = Color( 1, 1, 1, 0.0156863 )
 material = SubResource( 70 )
 anchor_left = 0.5

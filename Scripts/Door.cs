@@ -73,22 +73,21 @@ public class Door : Wall
 
 		if (player is Player)
 		{
-			((Island)GetParent()).DeactivateIsland();
-			IslandAccess.EnableIsland();
+			MyWorld.IleTransition((Island)GetParent(), IslandAccess);
 		}
 		else
 		{
 			player.UpdateMap();
 		}
 
-		Vector3 mypos = player.Transform.origin;
-		Vector3 ispos = m_closestdoor.GetSpawnPos().GlobalTransform.origin;
-		player.GlobalTranslation = ispos;
+		//Vector3 mypos = player.Transform.origin;
+		//Vector3 ispos = m_closestdoor.GetSpawnPos().GlobalTransform.origin;
+		//player.GlobalTranslation = ispos;
 		//sl.UpdateMap();
 
 		
 		
-		GD.Print("Teleported from " + mypos + " to " + ispos);
+		//GD.Print("Teleported from " + mypos + " to " + ispos);
 	}
 
 }

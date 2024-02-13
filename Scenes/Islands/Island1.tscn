@@ -13,22 +13,22 @@
 [ext_resource path="res://Assets/Guy/Guy.glb" type="PackedScene" id=11]
 
 [sub_resource type="BoxShape" id=1]
-extents = Vector3( 100, 0.5, 100 )
+extents = Vector3( 1000, 0.5, 1000 )
 
 [node name="Island" type="Spatial" groups=["Islands"]]
 script = ExtResource( 3 )
 
 [node name="Door_Left" parent="." instance=ExtResource( 2 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -100, 0, 0 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1000, 0, 0 )
 
 [node name="Door_Down" parent="." instance=ExtResource( 2 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 100 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 1007 )
 
 [node name="Door_Top" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -100 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1008 )
 
 [node name="Door_Right" parent="." instance=ExtResource( 2 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 100, 0, 0 )
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1000, 0, 0 )
 
 [node name="Floor" type="StaticBody" parent="."]
 
@@ -51,7 +51,7 @@ edge_rp_locals = [ NodePath("RP_001"), NodePath("RP_003") ]
 edge_rp_local_dirs = [ 1, 0 ]
 
 [node name="RP_001" type="Spatial" parent="Floor/RoadManager/RoadContainer"]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -99.419, 0, 0 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -999.42, 0, 0 )
 script = ExtResource( 9 )
 traffic_dir = [ 2, 2, 1, 1 ]
 lanes = [ 2, 4, 4, 2 ]
@@ -68,7 +68,7 @@ prior_mag = 16.0
 next_mag = 16.0
 
 [node name="RP_003" type="Spatial" parent="Floor/RoadManager/RoadContainer"]
-transform = Transform( -4.37114e-08, -0.00977369, 0.999952, 0, 0.999952, 0.00977369, -1, 4.27221e-10, -4.37093e-08, 100.332, 0, 0 )
+transform = Transform( -4.37114e-08, -0.00977369, 0.999952, 0, 0.999952, 0.00977369, -1, 4.27221e-10, -4.37093e-08, 999.33, 0, 0 )
 script = ExtResource( 9 )
 traffic_dir = [ 2, 2, 1, 1 ]
 lanes = [ 2, 4, 4, 2 ]
@@ -77,7 +77,7 @@ prior_mag = 16.0
 next_mag = 16.0
 
 [node name="MeshInstance" type="MeshInstance" parent="Floor"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 10, 0, -1, 0 )
 material_override = ExtResource( 7 )
 mesh = ExtResource( 10 )
 skeleton = NodePath("../..")
@@ -165,6 +165,210 @@ transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 9
 
 [node name="StreetLamp8" parent="." instance=ExtResource( 1 )]
 transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 9, -1, 19 )
+
+[node name="StreetLamp13" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 159, -1, -12 )
+
+[node name="StreetLamp14" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 134, -1, -12 )
+
+[node name="StreetLamp15" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 102, -1, -12 )
+
+[node name="StreetLamp16" parent="." instance=ExtResource( 1 )]
+transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 102, -1, 19 )
+
+[node name="StreetLamp17" parent="." instance=ExtResource( 1 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 127, -1, 19 )
+
+[node name="StreetLamp18" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 242, -1, -12 )
+
+[node name="StreetLamp19" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 210, -1, -12 )
+
+[node name="StreetLamp20" parent="." instance=ExtResource( 1 )]
+transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 210, -1, 19 )
+
+[node name="StreetLamp21" parent="." instance=ExtResource( 1 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 235, -1, 19 )
+
+[node name="StreetLamp22" parent="." instance=ExtResource( 1 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 159, -1, 19 )
+
+[node name="StreetLamp23" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 176, -1, -12 )
+
+[node name="StreetLamp24" parent="." instance=ExtResource( 1 )]
+transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 176, -1, 19 )
+
+[node name="StreetLamp27" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 236, -1, -12 )
+
+[node name="StreetLamp28" parent="." instance=ExtResource( 1 )]
+transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 236, -1, 19 )
+
+[node name="StreetLamp29" parent="." instance=ExtResource( 1 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 261, -1, 19 )
+
+[node name="StreetLamp32" parent="." instance=ExtResource( 1 )]
+transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 344, -1, 19 )
+
+[node name="StreetLamp33" parent="." instance=ExtResource( 1 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 369, -1, 19 )
+
+[node name="StreetLamp34" parent="." instance=ExtResource( 1 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 293, -1, 19 )
+
+[node name="StreetLamp35" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 310, -1, -12 )
+
+[node name="StreetLamp37" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 345, -1, -12 )
+
+[node name="StreetLamp36" parent="." instance=ExtResource( 1 )]
+transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 310, -1, 19 )
+
+[node name="StreetLamp25" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -468, -1, -12 )
+
+[node name="StreetLamp26" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -493, -1, -12 )
+
+[node name="StreetLamp30" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -525, -1, -12 )
+
+[node name="StreetLamp31" parent="." instance=ExtResource( 1 )]
+transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -525, -1, 19 )
+
+[node name="StreetLamp38" parent="." instance=ExtResource( 1 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -500, -1, 19 )
+
+[node name="StreetLamp39" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -385, -1, -12 )
+
+[node name="StreetLamp40" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -417, -1, -12 )
+
+[node name="StreetLamp41" parent="." instance=ExtResource( 1 )]
+transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -417, -1, 19 )
+
+[node name="StreetLamp42" parent="." instance=ExtResource( 1 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -392, -1, 19 )
+
+[node name="StreetLamp43" parent="." instance=ExtResource( 1 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -468, -1, 19 )
+
+[node name="StreetLamp67" parent="." instance=ExtResource( 1 )]
+transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -691, -1, 19 )
+
+[node name="StreetLamp68" parent="." instance=ExtResource( 1 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -666, -1, 19 )
+
+[node name="StreetLamp69" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -551, -1, -12 )
+
+[node name="StreetLamp70" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -583, -1, -12 )
+
+[node name="StreetLamp71" parent="." instance=ExtResource( 1 )]
+transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -583, -1, 19 )
+
+[node name="StreetLamp72" parent="." instance=ExtResource( 1 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -558, -1, 19 )
+
+[node name="StreetLamp73" parent="." instance=ExtResource( 1 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -634, -1, 19 )
+
+[node name="StreetLamp74" parent="." instance=ExtResource( 1 )]
+transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -859, -1, 19 )
+
+[node name="StreetLamp75" parent="." instance=ExtResource( 1 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -834, -1, 19 )
+
+[node name="StreetLamp76" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -719, -1, -12 )
+
+[node name="StreetLamp77" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -751, -1, -12 )
+
+[node name="StreetLamp78" parent="." instance=ExtResource( 1 )]
+transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -751, -1, 19 )
+
+[node name="StreetLamp79" parent="." instance=ExtResource( 1 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -726, -1, 19 )
+
+[node name="StreetLamp80" parent="." instance=ExtResource( 1 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -802, -1, 19 )
+
+[node name="StreetLamp44" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -451, -1, -12 )
+
+[node name="StreetLamp45" parent="." instance=ExtResource( 1 )]
+transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -451, -1, 19 )
+
+[node name="StreetLamp46" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -301, -1, -12 )
+
+[node name="StreetLamp47" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -326, -1, -12 )
+
+[node name="StreetLamp48" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -358, -1, -12 )
+
+[node name="StreetLamp49" parent="." instance=ExtResource( 1 )]
+transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -358, -1, 19 )
+
+[node name="StreetLamp50" parent="." instance=ExtResource( 1 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -333, -1, 19 )
+
+[node name="StreetLamp51" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -218, -1, -12 )
+
+[node name="StreetLamp52" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -250, -1, -12 )
+
+[node name="StreetLamp53" parent="." instance=ExtResource( 1 )]
+transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -250, -1, 19 )
+
+[node name="StreetLamp54" parent="." instance=ExtResource( 1 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -225, -1, 19 )
+
+[node name="StreetLamp55" parent="." instance=ExtResource( 1 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -301, -1, 19 )
+
+[node name="StreetLamp56" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -284, -1, -12 )
+
+[node name="StreetLamp57" parent="." instance=ExtResource( 1 )]
+transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -284, -1, 19 )
+
+[node name="StreetLamp58" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -224, -1, -12 )
+
+[node name="StreetLamp59" parent="." instance=ExtResource( 1 )]
+transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -224, -1, 19 )
+
+[node name="StreetLamp60" parent="." instance=ExtResource( 1 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -199, -1, 19 )
+
+[node name="StreetLamp61" parent="." instance=ExtResource( 1 )]
+transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -116, -1, 19 )
+
+[node name="StreetLamp62" parent="." instance=ExtResource( 1 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -91, -1, 19 )
+
+[node name="StreetLamp63" parent="." instance=ExtResource( 1 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -167, -1, 19 )
+
+[node name="StreetLamp64" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -150, -1, -12 )
+
+[node name="StreetLamp65" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -115, -1, -12 )
+
+[node name="StreetLamp66" parent="." instance=ExtResource( 1 )]
+transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -150, -1, 19 )
 
 [node name="Guy" parent="." instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -60, -1, -6 )

@@ -30,7 +30,14 @@ public class Island : Spatial
 				en.Stop();
 		}
 	}
-
+	public void GetClosestIles(out List<Island> closestiles)
+	{
+		closestiles = new List<Island>();
+		for (int i = 0; i < closeislands.Count; i ++)
+		{
+			closestiles.Insert(i, closeislands[i]);
+		}
+	}
 	public override void _Ready()
 	{
 		a_doors = new Door[4];
@@ -236,7 +243,6 @@ public class Island : Spatial
 			Show();
 		ToggleEnemies(true);
 		m_enabled = true;
-		
 	}
 	public void DeactivateIsland()
 	{

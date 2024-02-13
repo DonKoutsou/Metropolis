@@ -29,7 +29,7 @@ public class WorldMap : TileMap
 
     void EnableIslands()
     {
-        CellSize = new Vector2(10000, 10000);
+        CellSize = new Vector2(2000, 2000);
         int leng = scenestospawn.Length;
         
         var cells = GetUsedCellsById(0);
@@ -46,7 +46,7 @@ public class WorldMap : TileMap
             pos.x = postoput.x;
             pos.z = postoput.y;
             Ile.GlobalTranslation = pos;
-            GetParent().AddChild(Ile);
+            ((MyWorld)GetParent()).RegisterIle(Ile);
             
         }
         
@@ -85,21 +85,6 @@ public class WorldMap : TileMap
             //GetTree().CallGroup("Islands", "ScrambleDoorDestinations");
         
     }
-    /*Island GetClosestIslandToPl()
-    {
-        float mindist = 999999999.0f;
-		Island closestile = null;
-
-		foreach (Island ile in GetTree().GetNodesInGroup("Islands"))
-		{
-			var dist = GlobalTransform.origin.DistanceTo( ile.GlobalTransform.origin );
-			if (dist < mindist)
-			{
-				mindist = dist; 
-				closestile = ile;
-			}
-		}
-		return closestile;
-    }*/
+    
 }
 
