@@ -39,8 +39,14 @@ public class CameraPivot : Position3D
 		{
 			if (!Input.IsActionPressed("CamPan"))
 				return;
-			Vector3 rot = new Vector3(GlobalRotation.x, GlobalRotation.y - ((InputEventMouseMotion)@event).Relative.x * 0.001f, GlobalRotation.z ) ;
+			Vector3 prevrot = GlobalRotation;
+			Vector3 rot = new Vector3(GlobalRotation.x - ((InputEventMouseMotion)@event).Relative.y * 0.001f, GlobalRotation.y - ((InputEventMouseMotion)@event).Relative.x * 0.001f, GlobalRotation.z ) ;
+			
 			GlobalRotation = rot;
+
+			Camera cam =  GetNode<Camera>("Camera");
+			if (cam.GlobalTransform.origin.y < 1)
+				GlobalRotation = prevrot;
 			//screen
 			//Input.WarpMousePosition(new Vector2(0, 0));
 			//RotateObjectLocal(Vector3.Up, ((InputEventMouseMotion)@event).Relative.x * 0.001f);
@@ -48,9 +54,9 @@ public class CameraPivot : Position3D
 		if (@event.IsActionPressed("ZoomOut"))
 		{
 			Camera cam =  GetNode<Camera>("Camera");
-
+			if (cam.Translation.y > 300)
+				return;
 			cam.Translation = new Vector3(cam.Translation.x, cam.Translation.y * 1.1f, cam.Translation.z * 1.1f);
-			
 		}
 		if (@event.IsActionPressed("ZoomIn"))
 		{

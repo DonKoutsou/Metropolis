@@ -10,7 +10,7 @@ public class Item : RigidBody
     public ItemName ItemType;
 
     [Export]
-    Texture ItemIcon;
+    public Texture ItemIcon = null;
     public override void _Ready()
     {
         GetNode<CollisionShape>("CollisionShape").SetDeferred("disabled",false);

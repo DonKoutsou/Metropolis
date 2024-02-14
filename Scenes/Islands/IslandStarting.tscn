@@ -4,13 +4,13 @@
 [ext_resource path="res://Scenes/Door.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/Island.cs" type="Script" id=3]
 [ext_resource path="res://Scenes/Env_Assets/Street_Lamp.tscn" type="PackedScene" id=4]
-[ext_resource path="res://addons/road-generator/resources/road_texture.material" type="Material" id=5]
-[ext_resource path="res://addons/road-generator/nodes/road_container.gd" type="Script" id=6]
-[ext_resource path="res://addons/road-generator/nodes/road_point.gd" type="Script" id=7]
-[ext_resource path="res://addons/road-generator/nodes/road_manager.gd" type="Script" id=8]
+[ext_resource path="res://Scenes/GrassCubes.tscn" type="PackedScene" id=5]
+[ext_resource path="res://addons/road-generator/nodes/road_manager.gd" type="Script" id=6]
+[ext_resource path="res://addons/road-generator/resources/road_texture.material" type="Material" id=7]
+[ext_resource path="res://addons/road-generator/nodes/road_container.gd" type="Script" id=8]
 [ext_resource path="res://Assets/Ground/Ground.obj" type="ArrayMesh" id=9]
 [ext_resource path="res://Assets/Ground/M_Ground.material" type="Material" id=10]
-[ext_resource path="res://Scenes/Kolopoustas.tscn" type="PackedScene" id=11]
+[ext_resource path="res://addons/road-generator/nodes/road_point.gd" type="Script" id=11]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1000, 0.5, 1000 )
@@ -21,15 +21,19 @@ m_bOriginalIle = true
 
 [node name="Door_Left" parent="." instance=ExtResource( 2 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1000, 0, 0 )
+visible = false
 
 [node name="Door_Down" parent="." instance=ExtResource( 2 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 1000 )
+visible = false
 
 [node name="Door_Top" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1000 )
+visible = false
 
 [node name="Door_Right" parent="." instance=ExtResource( 2 )]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1000, 0, 0 )
+visible = false
 
 [node name="Floor" type="StaticBody" parent="."]
 
@@ -46,104 +50,37 @@ skeleton = NodePath("../..")
 [node name="StreetLamp" parent="Floor" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.387413, -0.999967, -12.1204 )
 
-[node name="StreetLamp2" parent="Floor" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.4443, -0.999967, -12.1204 )
+[node name="Item" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.7353, -1.01029, -3.5246 )
 
-[node name="StreetLamp3" parent="Floor" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -29.8981, -0.999967, -12.1204 )
-
-[node name="StreetLamp6" parent="Floor" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -89.3874, -0.999967, -12.1204 )
-
-[node name="StreetLamp9" parent="Floor" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -65.5557, -0.999967, -12.1204 )
-
-[node name="StreetLamp4" parent="Floor" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -50.8981, -0.999967, -12.1204 )
-
-[node name="StreetLamp5" parent="Floor" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 94.6126, -0.999967, -12.1204 )
-
-[node name="StreetLamp7" parent="Floor" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 65.1019, -0.999967, -12.1204 )
-
-[node name="StreetLamp8" parent="Floor" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 44.1019, -0.999967, -12.1204 )
-
-[node name="StreetLamp10" parent="Floor" instance=ExtResource( 4 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 5.61259, -0.999967, 14.8796 )
-
-[node name="StreetLamp11" parent="Floor" instance=ExtResource( 4 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -18.2192, -0.999967, 14.8796 )
-
-[node name="StreetLamp12" parent="Floor" instance=ExtResource( 4 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 35.1233, -0.999967, 14.8796 )
-
-[node name="StreetLamp13" parent="Floor" instance=ExtResource( 4 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 94.6126, -0.999967, 14.8796 )
-
-[node name="StreetLamp14" parent="Floor" instance=ExtResource( 4 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 70.7809, -0.999967, 14.8796 )
-
-[node name="StreetLamp15" parent="Floor" instance=ExtResource( 4 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 56.1233, -0.999967, 14.8796 )
-
-[node name="StreetLamp16" parent="Floor" instance=ExtResource( 4 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -89.3874, -0.999967, 14.8796 )
-
-[node name="StreetLamp17" parent="Floor" instance=ExtResource( 4 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -59.8767, -0.999967, 14.8796 )
-
-[node name="StreetLamp18" parent="Floor" instance=ExtResource( 4 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -38.8767, -0.999967, 14.8796 )
+[node name="Spatial" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
 
 [node name="RoadManager" type="Spatial" parent="."]
-script = ExtResource( 8 )
+script = ExtResource( 6 )
 
 [node name="RoadContainer" type="Spatial" parent="RoadManager"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
-script = ExtResource( 6 )
-material_resource = ExtResource( 5 )
+script = ExtResource( 8 )
+material_resource = ExtResource( 7 )
 use_lowpoly_preview = true
 edge_containers = [ "", "" ]
 edge_rp_targets = [ "", "" ]
 edge_rp_target_dirs = [ -1, -1 ]
-edge_rp_locals = [ NodePath("RP_001"), NodePath("RP_003") ]
-edge_rp_local_dirs = [ 0, 1 ]
+edge_rp_locals = [ NodePath("RP_001"), NodePath("RP_002") ]
+edge_rp_local_dirs = [ 1, 0 ]
 
 [node name="RP_001" type="Spatial" parent="RoadManager/RoadContainer"]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100.841, 0, 0 )
-script = ExtResource( 7 )
-traffic_dir = [ 2, 2, 1, 1 ]
-lanes = [ 2, 4, 4, 2 ]
-prior_pt_init = NodePath("../RP_002")
-
-[node name="RP_002" type="Spatial" parent="RoadManager/RoadContainer"]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.166, 0, 0 )
-script = ExtResource( 7 )
-traffic_dir = [ 2, 2, 1, 1 ]
-lanes = [ 2, 4, 4, 2 ]
-prior_pt_init = NodePath("../RP_003")
-next_pt_init = NodePath("../RP_001")
-prior_mag = 16.0
-next_mag = 16.0
-
-[node name="RP_003" type="Spatial" parent="RoadManager/RoadContainer"]
-transform = Transform( -0.0206108, 0, 0.999788, 0, 1, 0, -0.999788, 0, -0.0206108, -100.698, 0, 0 )
-script = ExtResource( 7 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 219.411, 0.000366211, -5.49747 )
+script = ExtResource( 11 )
 traffic_dir = [ 2, 2, 1, 1 ]
 lanes = [ 2, 4, 4, 2 ]
 next_pt_init = NodePath("../RP_002")
+
+[node name="RP_002" type="Spatial" parent="RoadManager/RoadContainer"]
+transform = Transform( 0.0296141, 1.03625e-06, -0.999561, -4.48723e-07, 1, 1.02341e-06, 0.999561, 4.18219e-07, 0.0296141, -115.91, 0.000709534, 4.4371 )
+script = ExtResource( 11 )
+traffic_dir = [ 2, 2, 1, 1 ]
+lanes = [ 2, 4, 4, 2 ]
+prior_pt_init = NodePath("../RP_001")
 prior_mag = 16.0
 next_mag = 16.0
-
-[node name="Item" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.7353, -1.01029, 11.4754 )
-
-[node name="KinematicBody" parent="." instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -1, 5 )
-AnimToPlay = "Idle"
-
-[node name="KinematicBody2" parent="." instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, -1, 5 )
-AnimToPlay = "Walk"

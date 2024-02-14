@@ -16,6 +16,12 @@ public class Character : KinematicBody
 	[Export]
 	public float m_Stamina = 100;
 
+	[Export]
+	public float m_StaminaRegen = 0.5f;
+
+	[Export]
+	public float m_RunCost = 1;
+
 	public float startingstaming;
 
 	public bool m_balive = true;

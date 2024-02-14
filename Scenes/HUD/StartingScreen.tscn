@@ -115,6 +115,7 @@ align = 1
 valign = 1
 
 [node name="DialoguePanel" parent="." instance=ExtResource( 3 )]
+visible = false
 
 [node name="LoadingScreen" type="CanvasLayer" parent="."]
 visible = false
@@ -135,7 +136,7 @@ margin_top = -100.0
 margin_right = 288.0
 margin_bottom = 100.0
 theme = SubResource( 6 )
-text = "φορτώνει.....
+text = "φορτώνει.......
 
 "
 scroll_active = false

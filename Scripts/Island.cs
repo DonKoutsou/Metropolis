@@ -5,7 +5,7 @@ using System.Linq;
 public class Island : Spatial
 {
 	[Export]
-	bool m_bOriginalIle = false;
+	public bool m_bOriginalIle = false;
 	public Door[] a_doors;
 	List<Island> closeislands;
 
@@ -15,8 +15,11 @@ public class Island : Spatial
 
 	bool m_enabled = false;
 
-	bool Inited = false;
+	public bool Inited = false;
 
+	int imidiateSiblingcount = 0;
+
+	public Vector3 loctospawnat;
 	public void RegisterChar(Character en)
 	{
 		if (en is Player)
@@ -33,6 +36,11 @@ public class Island : Spatial
 	public void GetClosestIles(out List<Island> closestiles)
 	{
 		closestiles = new List<Island>();
+		if (closeislands.Count == 0)
+		{
+			GD.Print("Island has no close islands, somehting is off");
+			return;
+		}
 		for (int i = 0; i < closeislands.Count; i ++)
 		{
 			closestiles.Insert(i, closeislands[i]);
@@ -40,6 +48,7 @@ public class Island : Spatial
 	}
 	public override void _Ready()
 	{
+		GlobalTranslation = loctospawnat;
 		a_doors = new Door[4];
 		var door__left = (Door)GetNode<Door>("Door_Left");
 		a_doors[0] = door__left;
@@ -51,16 +60,8 @@ public class Island : Spatial
 		a_doors[3] = door__right;
 
 		map = GetParent().GetNode<WorldMap>("WorldMap");
-		
-		//m_enem.Insert(0, GetNode<Enemy>("Enemy"));
-
-		if (!m_bOriginalIle)
-			DeactivateIsland();
-		else
-			EnableIsland();
-		
 	}
-	void Init()
+	public void Init()
 	{
 		Door[] doors; 
 		GetIslandDoors(out doors);
@@ -71,20 +72,11 @@ public class Island : Spatial
 
 		DissableUnusedDoors();
 
-		var childer = GetChildren();
-		//for (int i = 0; i < childer.Count; i ++)
-		//{
-		//	if (childer[i] is DecorationMap)
-		//	{
-		//		((DecorationMap)childer[i]).Dothin();
-		//	}
-		//}
-		
 		Inited = true;
-
-		
+		string contents = string.Empty;
+		foreach (Island ile in closeislands)
+			contents = contents + " ," + ile.GlobalTransform.origin;
 	}
-
 	void DissableUnusedDoors()
 	{
 		for (int f = 0; f < a_doors.Count(); f++)
@@ -92,9 +84,16 @@ public class Island : Spatial
 			Island ile;
 			a_doors[f].GetIslandAcces(out ile);
 			if (ile == null)
-				a_doors[f].Hide();
+				a_doors[f].Toggle(false);
 		}
-		
+	}
+	public void AddCloseIle(Island ile)
+	{
+		if (ile == this)
+			return;
+		if (closeislands == null || closeislands.Contains(ile))
+			return;
+		closeislands.Insert(closeislands.Count, ile);
 	}
 
 	public Door GetClosestDoor(Vector3 GlobalPos)
@@ -105,16 +104,13 @@ public class Island : Spatial
 		for (f = 0; f < a_doors.Count(); f++)
 		{
 			Vector3 doorloc = a_doors[f].GlobalTransform.origin;
-			float dist = GlobalTransform.origin.DistanceTo(doorloc);
+			float dist = GlobalPos.DistanceTo(doorloc);
 			if (dist > closestdist)
 				continue;
 			closestdoor = a_doors[f];
 			closestdist = dist;
 		}
-
 		return closestdoor;
-
-
 	}
 
 	public void GetIslandDoors(out Door[] doors)
@@ -126,11 +122,13 @@ public class Island : Spatial
 	{
 		int i = 0;
 		Vector2 mypos = new Vector2(GlobalTransform.origin.x, GlobalTransform.origin.z) ;
-		for (i = 0; i < closeislands.Count(); i++)
+		for (i = 0; i < closeislands.Count; i++)
 		{
 			Vector2 islandloc = new Vector2(closeislands[i].GlobalTransform.origin.x, closeislands[i].GlobalTransform.origin.z);
-
+			if (closeislands[i].GlobalTransform.origin.DistanceTo(GlobalTransform.origin) > 2100)
+				continue;
 			Door closestdoor = null;
+			
 			//down
 			if (islandloc.y > mypos.y)
 			{
@@ -153,56 +151,36 @@ public class Island : Spatial
 			}
 			if (closestdoor == null)
 				continue;
+			closestdoor.Toggle(true);
 			closestdoor.SetIslandToAccess(closeislands[i]);
 		}
 	}
-
-	void ScrambleDoorDestinations()
+	public bool HasIslandInClose(Island ile)
 	{
-		List<Island> islands = new List<Island>();
-		List <Door> doors = new List<Door>();
-		int failed = 0;
-		for (int f = 0; f < a_doors.Count(); f++)
-		{
-			Island ile = null;
-			a_doors[f].GetIslandAcces(out ile);
-			if (ile == null)
-			{
-				failed = failed + 1;
-				continue;
-			}
-			islands.Insert(f - failed, ile);
-			doors.Insert(f - failed, a_doors[f]);
-		}
-		for (int f = 0; f < doors.Count(); f++)
-		{
-			Random rnd = new Random();
-			int r = rnd.Next(islands.Count);
-			doors[f].SetIslandToAccess(islands[r]);
-			islands.Remove(islands[r]);
-		}
+		if (closeislands == null)
+			return false;
+		return closeislands.Contains(ile);
 	}
-	
 	void FindSiblings()
 	{
 		var islands = GetTree().GetNodesInGroup("Islands");
 		Island[] isnaldarray = new Island[islands.Count];
 		islands.CopyTo(isnaldarray, 0);
-		
-		int i;
-		int closei = 0;
 		float mindistance = 0;
 
 		closeislands = new List<Island>();
 
-		Vector2 mypos = new Vector2(GlobalTransform.origin.x, GlobalTransform.origin.z);
-		for (i = 0; i < isnaldarray.Count(); i++)
+		Vector3 mypos = GlobalTransform.origin;
+		for (int i = 0; i < isnaldarray.Count(); i++)
 		{
 			if (isnaldarray[i] == this)
 				continue;
 			
-			Vector2 Islandloc = new Vector2(isnaldarray[i].GlobalTransform.origin.x, isnaldarray[i].GlobalTransform.origin.z); ;
+			Vector3 Islandloc = isnaldarray[i].GlobalTransform.origin;
 			float dist = mypos.DistanceTo(Islandloc);
+			
+			if (dist > 2100)
+				continue;
 
 			if (mypos.x != Islandloc.x && mypos.y != Islandloc.y)
 				continue;
@@ -218,13 +196,53 @@ public class Island : Spatial
 			{
 				mindistance = dist;
 				closeislands.Clear();
-				closei = 0;
 				closeislands = new List<Island>();
 			}
-			int f = closeislands.Count();
-			closeislands.Insert(closei, isnaldarray[i]);
-			closei = closei + 1;
+			closeislands.Insert(closeislands.Count, isnaldarray[i]);
 		}
+		mindistance = 0;
+		List<Island> closeislands2 = new List<Island>();
+		for (int i = 0; i < isnaldarray.Count(); i++)
+		{
+			if (isnaldarray[i] == this)
+				continue;
+			if (closeislands.Contains(isnaldarray[i]))
+				continue;
+			
+			Vector3 Islandloc = isnaldarray[i].GlobalTransform.origin;
+			float dist = mypos.DistanceTo(Islandloc);
+
+			if (dist > 3000)
+				continue;
+
+			if (mypos.x == Islandloc.x && mypos.y == Islandloc.y)
+				continue;
+
+			//GD.Print(dist);
+
+			if (mindistance == 0)
+				mindistance = dist;
+
+			if (dist > mindistance)
+				continue;
+			if (dist < mindistance)
+			{
+				mindistance = dist;
+				closeislands2.Clear();
+				closeislands2 = new List<Island>();
+			}
+			closeislands2.Insert(closeislands2.Count, isnaldarray[i]);
+		}
+		for (int i = 0; i < closeislands2.Count(); i++)
+		{
+			closeislands.Insert(closeislands.Count, closeislands2[i]);
+		}
+		for (int i = 0; i < closeislands.Count(); i++)
+		{
+			if (!closeislands[i].HasIslandInClose(this))
+				closeislands[i].AddCloseIle(this);
+		}
+		
 	}
 	public virtual void EnableIsland()
 	{

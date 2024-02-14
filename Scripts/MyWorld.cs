@@ -29,14 +29,17 @@ public class MyWorld : Spatial
 	}
 	public void RegisterIle(Island ile)
 	{
+		AddChild(ile);
 		iles.Insert(iles.Count, ile);
+		ile.DeactivateIsland();
+		DissabledIles.Insert(DissabledIles.Count, ile);
+		GD.Print("Spawned Island on locations: " + ile.loctospawnat);
 	}
 	public override void _Process(float delta)
 	{
 		d -= delta;
 		if (d > 0)
 			return;
-		
 	}
 	Island GetClosestIslandToPl()
     {
@@ -58,16 +61,14 @@ public class MyWorld : Spatial
     }
 	public static void IleTransition(Island from, Island to)
 	{
-		(from).DeactivateIsland();
-		DissabledIles.Insert(DissabledIles.Count, from);
-		if (EnalbedIles.Contains(from))
-		{
-			EnalbedIles.Remove(from);
-		}
+		//if (EnalbedIles.Contains(from))
+		//{
+		//	EnalbedIles.Remove(from);
+		//}
+		GD.Print("Transitioning from : " + from.Name + " to " + to.Name);
 		List<Island> closestfrom;
 		from.GetClosestIles(out closestfrom);
-		to.EnableIsland();
-		EnalbedIles.Insert(EnalbedIles.Count, to);
+
 		if (DissabledIles.Contains(to))
 		{
 			DissabledIles.Remove(to);
@@ -76,29 +77,54 @@ public class MyWorld : Spatial
 		to.GetClosestIles(out closestto);
 		for (int i = 0; i < closestfrom.Count; i ++)
 		{
+			if (closestfrom[i] == to)
+				continue;
 			if (closestto.Contains(closestfrom[i]))
 				continue;
 			else
 			{
 				if (DissabledIles.Contains(closestfrom[i]))
 					continue;
-				closestfrom[i].DeactivateIsland();
-				DissabledIles.Insert(DissabledIles.Count, closestfrom[i]);
-				if (EnalbedIles.Contains(closestfrom[i]))
-				{
-					EnalbedIles.Remove(closestfrom[i]);
-				}
-			}	
+				ToggleIsland(closestfrom[i], false);
+			}
 		}
 		for (int i = 0; i < closestto.Count; i ++)
 		{
 			if (EnalbedIles.Contains(closestto[i]))
 					continue;
-			closestto[i].EnableIsland();
-			EnalbedIles.Insert(EnalbedIles.Count, closestto[i]);
-			if (DissabledIles.Contains(closestto[i]))
+			ToggleIsland(closestto[i], true);
+		}
+		GD.Print("-----------Transition Finished------------");
+	}
+	public static void ToggleIsland(Island ile, bool Toggle, bool affectneigh = false)
+	{
+		if (Toggle)
+		{
+			if (EnalbedIles.Contains(ile))
+				return;
+			ile.EnableIsland();
+			EnalbedIles.Insert(EnalbedIles.Count, ile);
+			if (DissabledIles.Contains(ile))
+				DissabledIles.Remove(ile);
+		}
+		else
+		{
+			if (DissabledIles.Contains(ile))
+				return;
+			ile.DeactivateIsland();
+			DissabledIles.Insert(DissabledIles.Count, ile);
+			if (EnalbedIles.Contains(ile))
+				EnalbedIles.Remove(ile);
+		}
+		if (affectneigh)
+		{
+			List<Island> closestto;
+			ile.GetClosestIles(out closestto);
+			for (int i = 0; i < closestto.Count; i ++)
 			{
-				DissabledIles.Remove(closestto[i]);
+				if (EnalbedIles.Contains(closestto[i]))
+						continue;
+				ToggleIsland(closestto[i], true);
 			}
 		}
 	}

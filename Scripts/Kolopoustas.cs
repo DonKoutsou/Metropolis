@@ -4,7 +4,7 @@ using System;
 public class Kolopoustas : KinematicBody
 {
     [Export]
-    string AnimToPlay;
+    string AnimToPlay = null;
     public override void _Ready()
     {
         AnimationPlayer anim = GetNode<AnimationPlayer>("AnimationPlayer");

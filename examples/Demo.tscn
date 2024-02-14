@@ -1,0 +1,95 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://addons/dialogue_nodes/objects/dialogueBox.gd" type="Script" id=1]
+[ext_resource path="res://examples/demo.gd" type="Script" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://addons/dialogue_nodes/themes/bubbly.theme" type="Theme" id=4]
+[ext_resource path="res://addons/dialogue_nodes/objects/bbcodeWait.gd" type="Script" id=5]
+[ext_resource path="res://examples/ExampleCharacters.tres" type="Resource" id=6]
+[ext_resource path="res://examples/ExampleSignals.tres" type="Resource" id=7]
+[ext_resource path="res://examples/ExampleVariables.tres" type="Resource" id=8]
+[ext_resource path="res://examples/ExampleBBCodes.tres" type="Resource" id=9]
+[ext_resource path="res://examples/ExampleBranching.tres" type="Resource" id=10]
+[ext_resource path="res://examples/ExampleBasic.tres" type="Resource" id=11]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -2.71435, 0.0, 0, 0 ]
+
+[sub_resource type="RichTextEffect" id=2]
+script = ExtResource( 5 )
+
+[node name="Demo" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 4 )
+script = ExtResource( 2 )
+demos = [ ExtResource( 11 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ]
+
+[node name="LanguageSelector" type="OptionButton" parent="."]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 62.0
+margin_bottom = 47.0
+text = "en"
+items = [ "en", null, false, 0, null, "ja", null, false, 1, null ]
+selected = 0
+
+[node name="DemoSelector" type="OptionButton" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -107.0
+margin_top = 84.0
+margin_right = 107.0
+margin_bottom = 125.0
+
+[node name="Button" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -52.0
+margin_top = 193.214
+margin_right = 52.0
+margin_bottom = 224.214
+text = "Start Demo"
+
+[node name="Particles" type="CPUParticles2D" parent="."]
+position = Vector2( 508.747, 200.498 )
+emitting = false
+amount = 64
+one_shot = true
+speed_scale = 1.5
+explosiveness = 0.9
+randomness = 0.2
+lifetime_randomness = 0.5
+texture = ExtResource( 3 )
+emission_shape = 1
+emission_sphere_radius = 32.0
+direction = Vector2( 0, 0 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 200.0
+initial_velocity_random = 0.5
+scale_amount_curve = SubResource( 1 )
+
+[node name="DialogueBox" type="PopupDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -352.5
+margin_top = -201.0
+margin_right = 352.5
+margin_bottom = -26.0
+rect_min_size = Vector2( 300, 72 )
+popup_exclusive = true
+script = ExtResource( 1 )
+start_id = "START"
+custom_effects = [ SubResource( 2 ) ]
+
+[connection signal="item_selected" from="LanguageSelector" to="." method="_on_language_selected"]
+[connection signal="item_selected" from="DemoSelector" to="." method="_on_demo_selected"]
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[connection signal="dialogue_signal" from="DialogueBox" to="." method="_on_dialogue_signal"]
