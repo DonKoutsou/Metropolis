@@ -1,12 +1,12 @@
 [gd_scene load_steps=3 format=2]
 
+[ext_resource path="res://Scenes/Env_Assets/House.tres" type="CubeMesh" id=1]
+
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 14, 40, 14 )
 
-[sub_resource type="CubeMesh" id=2]
-size = Vector3( 28, 100, 28 )
-
 [node name="StaticBody" type="StaticBody"]
+collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 40, 0 )
@@ -14,4 +14,4 @@ shape = SubResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0 )
-mesh = SubResource( 2 )
+mesh = ExtResource( 1 )

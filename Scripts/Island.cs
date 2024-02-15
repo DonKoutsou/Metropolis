@@ -17,9 +17,10 @@ public class Island : Spatial
 
 	public bool Inited = false;
 
-	int imidiateSiblingcount = 0;
-
 	public Vector3 loctospawnat;
+
+	GrassCubes grass;
+
 	public void RegisterChar(Character en)
 	{
 		if (en is Player)
@@ -59,12 +60,11 @@ public class Island : Spatial
 		var door__right = (Door)GetNode<Door>("Door_Right");
 		a_doors[3] = door__right;
 
+		grass = GetNode<GrassCubes>("Grass");
 		map = GetParent().GetNode<WorldMap>("WorldMap");
 	}
 	public void Init()
 	{
-		Door[] doors; 
-		GetIslandDoors(out doors);
 
 		FindSiblings();
 
@@ -73,9 +73,6 @@ public class Island : Spatial
 		DissableUnusedDoors();
 
 		Inited = true;
-		string contents = string.Empty;
-		foreach (Island ile in closeislands)
-			contents = contents + " ," + ile.GlobalTransform.origin;
 	}
 	void DissableUnusedDoors()
 	{
@@ -242,23 +239,29 @@ public class Island : Spatial
 			if (!closeislands[i].HasIslandInClose(this))
 				closeislands[i].AddCloseIle(this);
 		}
-		
 	}
 	public virtual void EnableIsland()
 	{
+		if (m_enabled)
+			return;
 		if (!Inited)
 		{
 			Init();
 		}
 		for (int i = 0;i < closeislands.Count; i++)
+		{
+			if (!closeislands[i].Inited)
 			{
-				if (!closeislands[i].Inited)
-				{
-					closeislands[i].Init();
-				}
+				closeislands[i].Init();
 			}
+		}
 		if (map.HideBasedOnState)
 			Show();
+		foreach (Door d in a_doors)
+		{
+			d.ToggleCollisions(true);
+		}
+		grass.ToggleGrass(true);
 		ToggleEnemies(true);
 		m_enabled = true;
 	}
@@ -266,7 +269,12 @@ public class Island : Spatial
 	{
 		if (map.HideBasedOnState)
 			Hide();
+		foreach (Door d in a_doors)
+		{
+			d.ToggleCollisions(false);
+		}
 		ToggleEnemies(false);
+		grass.ToggleGrass(false);
 		m_enabled = false;
 	}
 	void ToggleEnemies(bool toggle)
@@ -284,9 +292,5 @@ public class Island : Spatial
 			}
 		}
 		
-	}
-	public override void _Process(float delta)
-	{
-		 
 	}
 }

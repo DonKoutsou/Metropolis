@@ -21,19 +21,15 @@ m_bOriginalIle = true
 
 [node name="Door_Left" parent="." instance=ExtResource( 2 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1000, 0, 0 )
-visible = false
 
 [node name="Door_Down" parent="." instance=ExtResource( 2 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 1000 )
-visible = false
 
 [node name="Door_Top" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1000 )
-visible = false
 
 [node name="Door_Right" parent="." instance=ExtResource( 2 )]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1000, 0, 0 )
-visible = false
 
 [node name="Floor" type="StaticBody" parent="."]
 
@@ -52,9 +48,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.387413, -0.999967, -12.1204
 
 [node name="Item" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.7353, -1.01029, -3.5246 )
-
-[node name="Spatial" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
 
 [node name="RoadManager" type="Spatial" parent="."]
 script = ExtResource( 6 )
@@ -84,3 +77,6 @@ lanes = [ 2, 4, 4, 2 ]
 prior_pt_init = NodePath("../RP_001")
 prior_mag = 16.0
 next_mag = 16.0
+
+[node name="Grass" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )

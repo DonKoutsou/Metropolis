@@ -28,6 +28,12 @@ public class Player : Character
 	Character_Animations anim;
 
 
+	public void Teleport(Vector3 pos)
+	{
+		GlobalTranslation = pos;
+		loctomove = pos;
+	}
+
 	public override void _Ready()
 	{
 		base._Ready();
@@ -44,7 +50,6 @@ public class Player : Character
 		GetNode<AudioStreamPlayer3D>("TiredSound").Play();
 		GetNode<AudioStreamPlayer3D>("TiredSound").StreamPaused = true;
 		anim = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Character_Animations>("AnimationPlayer");
-		
 	}
 	public override void _PhysicsProcess(float delta)
 	{

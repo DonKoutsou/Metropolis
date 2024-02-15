@@ -41,12 +41,6 @@ public class Door : Wall
 		m_spawnpos = GetNode<Position3D>("SpawnPos");
 		Toggle(false);
 	}
-
-
-	 public override void _Process(float delta)
-	{
-
-	}
 	 public override void Touch(object body)
 	{
 		Vector3 forw = GlobalTransform.basis.z;
@@ -98,6 +92,13 @@ public class Door : Wall
 			Material blueprintShader = ResourceLoader.Load<Material>("res://Scenes/RedMat.tres");
 			GetNode<MeshInstance>("MeshInstance").MaterialOverride = blueprintShader;		
 		}
+	}
+	public void ToggleCollisions(bool toggle)
+	{
+		if (toggle)
+			GetNode<CollisionShape>("CollisionShape").SetDeferred("disabled",false);
+		else
+			GetNode<CollisionShape>("CollisionShape").SetDeferred("disabled",true);
 	}
 
 }

@@ -5,33 +5,11 @@ public class CameraPivot : Position3D
 {
     [Export]
 	public int Speed { get; set; } = 14; // How fast the player will move (pixels/sec).
+
+	Camera cam;
     public override void _Ready()
 	{
-		//Input.MouseMode = Input.MouseModeEnum.Captured;
-        /*var spd = Speed;
-        var direction = Vector3.Zero;
-		if (Input.IsActionPressed("Move_Right"))
-		{
-			direction.x += 1;
-		}
-
-		if (Input.IsActionPressed("Move_Left"))
-		{
-			direction.x -= 1;
-		}
-
-		if (Input.IsActionPressed("Move_Down"))
-		{
-			direction.z += 1f;
-		}
-
-		if (Input.IsActionPressed("Move_Up"))
-		{
-            direction.z -= 1f;
-		}
-        Vector3 pos = GlobalTransform.origin;
-        pos = pos + direction;
-        GlobalTranslation = pos;*/
+		cam = GetNode<Camera>("Camera");
     }
 	public override void _Input(InputEvent @event)
 	{
@@ -44,7 +22,6 @@ public class CameraPivot : Position3D
 			
 			GlobalRotation = rot;
 
-			Camera cam =  GetNode<Camera>("Camera");
 			if (cam.GlobalTransform.origin.y < 1)
 				GlobalRotation = prevrot;
 			//screen
@@ -53,14 +30,14 @@ public class CameraPivot : Position3D
 		}
 		if (@event.IsActionPressed("ZoomOut"))
 		{
-			Camera cam =  GetNode<Camera>("Camera");
 			if (cam.Translation.y > 300)
 				return;
 			cam.Translation = new Vector3(cam.Translation.x, cam.Translation.y * 1.1f, cam.Translation.z * 1.1f);
 		}
 		if (@event.IsActionPressed("ZoomIn"))
 		{
-			Camera cam =  GetNode<Camera>("Camera");
+			if (cam.Translation.y < 10)
+				return;
 			cam.Translation = new Vector3(cam.Translation.x, cam.Translation.y * 0.90f, cam.Translation.z * 0.90f);
 		}
 	}

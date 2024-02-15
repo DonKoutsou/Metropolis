@@ -24,13 +24,12 @@ public class StartingScreen : Control
 			return;
 		//GetNode<Label>("TitleLabel").Hide();
 		GetNode<Button>("Start_Button").Hide();
-		//GetNode<CanvasLayer>("LoadingScreen").Show();
-		
+		GetNode<LoadingScreen>("LoadingScreen").EnableTime();
 		foreach (Button but in WorldButtons)
 		{
 			but.Hide();
 		}
-		world.CallDeferred("SpawnMap", selectedmap);
+		world.SpawnMap(selectedmap);
 	}
 	public void GameOver()
 	{

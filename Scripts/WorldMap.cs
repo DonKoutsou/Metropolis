@@ -71,16 +71,8 @@ public class WorldMap : TileMap
         delt -= delta;
         if (delt < 0)
         {
-            if (StartIniting)
-            {
-                InitIsland(toInit);
-                return;
-            }
-            else
-            {
-                delt = 0.1f;
-                EnableIsland(currentile, currenttiletype);
-            }
+            delt = 0.1f;
+            EnableIsland(currentile, currenttiletype);
         }
     }
     int currentile;
@@ -91,11 +83,7 @@ public class WorldMap : TileMap
 
     List <Vector2> spawned = new List<Vector2>();
 
-    
 
-    bool StartIniting = false;
-
-    int toInit = 0;
     void EnableIsland(int curtile, int curtiletype)
     {
         if (curtiletype == 0)
@@ -115,7 +103,7 @@ public class WorldMap : TileMap
                 Ile.loctospawnat = pos;
                 ((MyWorld)GetParent()).RegisterIle(Ile);
                 var pls = GetTree().GetNodesInGroup("player");
-                ((Player)pls[0]).GlobalTranslation = pos;
+                ((Player)pls[0]).Teleport(pos);
                 iles.Insert(iles.Count, Ile);
                 spawned.Insert(spawned.Count, cellArray);
             }
@@ -144,7 +132,6 @@ public class WorldMap : TileMap
                 {
                     MyWorld.ToggleIsland(iles[i], true, true);
                 }
-                    
             }
             GD.Print("-------------- Initial map generation Finished ---------------");
             currenttiletype += 1;
@@ -201,98 +188,10 @@ public class WorldMap : TileMap
         if (curtiletype == 4)
         {
             GD.Print("Toggling final islands");
-            StartIniting = true;
-            //SetProcess(false);
-        }
-        
-        
-        
-       // GetTree().CallGroup("Islands", "Init");
-
-        //if (ScrableDoors)
-            //GetTree().CallGroup("Islands", "ScrambleDoorDestinations");
-        
-    }
-    void InitIsland(int ile)
-    {
-        if (!iles[ile].Inited)
-        {
-            iles[ile].Init();
-        }
-        toInit += 1;
-        if (toInit >= iles.Count)
-        {
+            iles.Clear();
+            iles = null;
             SetProcess(false);
-            GD.Print("------ Toggling of Islands Finished -------");
         }
-    }
-    void EnableIslands()
-    {
-        int leng = scenestospawn.Length;
-        
-        var cells = GetUsedCellsById(0);
-        cells.Shuffle();
-        int cellcount = cells.Count;
-        Random random = new Random();
-        foreach (Vector2 cellArray in cells)
-        {
-            int start2 = random.Next(0, scenestospawn.Length);
-            var scene = GD.Load<PackedScene>(scenestospawn[start2]);
-            Island Ile = (Island)scene.Instance();
-            Vector2 postoput = MapToWorld(cellArray);
-            postoput += CellSize / 2;
-            Vector3 pos = new Vector3();
-            pos.x = postoput.x;
-            pos.z = postoput.y;
-            Ile.GlobalTranslation = pos;
-            ((MyWorld)GetParent()).RegisterIle(Ile);
-            iles.Insert(iles.Count, Ile);
-        }
-        
-        var Exitcells = GetUsedCellsById(3);
-        var Exitscene = GD.Load<PackedScene>(Exittospawn);
-        foreach (Vector2 cellArray in Exitcells)
-        {
-            Island Ile = (Island)Exitscene.Instance();
-            Vector2 postoput = MapToWorld(cellArray);
-            postoput += CellSize / 2;
-            Vector3 pos = new Vector3();
-            pos.x = postoput.x;
-            pos.z = postoput.y;
-            Ile.GlobalTranslation = pos;
-            ((MyWorld)GetParent()).RegisterIle(Ile);
-            iles.Insert(iles.Count, Ile);
-        }
-        var Entrycells = GetUsedCellsById(1);
-        var Entryscene = GD.Load<PackedScene>(Entrytospawn);
-        foreach (Vector2 cellArray in Entrycells)
-        {
-            Island Ile = (Island)Entryscene.Instance();
-            Vector2 postoput = MapToWorld(cellArray);
-            postoput += CellSize / 2;
-            Vector3 pos = new Vector3();
-            pos.x = postoput.x;
-            pos.z = postoput.y;
-            Ile.GlobalTranslation = pos;
-            ((MyWorld)GetParent()).RegisterIle(Ile);
-            var pls = GetTree().GetNodesInGroup("player");
-            ((Player)pls[0]).GlobalTranslation = pos;
-            iles.Insert(iles.Count, Ile);
-        }
-        for(int i = 0; i < iles.Count; i++)
-        {
-            if (iles[i].m_bOriginalIle)
-            {
-                MyWorld.ToggleIsland(iles[i], true, true);
-                return;
-            }
-                
-        }
-       // GetTree().CallGroup("Islands", "Init");
-
-        //if (ScrableDoors)
-            //GetTree().CallGroup("Islands", "ScrambleDoorDestinations");
-        
     }
     
 }
