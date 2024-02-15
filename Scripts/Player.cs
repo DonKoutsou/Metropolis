@@ -32,6 +32,7 @@ public class Player : Character
 	{
 		GlobalTranslation = pos;
 		loctomove = pos;
+		CameraMovePivot.GetInstance().GlobalTranslation = pos;
 	}
 
 	public override void _Ready()
@@ -71,25 +72,7 @@ public class Player : Character
 		Vector2 loc = new Vector2(loctomove.x, loctomove.z);
 		float dist = loc.DistanceTo(new Vector2( GlobalTransform.origin.x, GlobalTransform.origin.z));
 		double stam = m_Stamina;
-		/*if (Input.IsActionPressed("Move_Right"))
-		{
-			direction.x += 1;
-		}
-
-		if (Input.IsActionPressed("Move_Left"))
-		{
-			direction.x -= 1;
-		}
-
-		if (Input.IsActionPressed("Move_Down"))
-		{
-			direction.z += 1f;
-		}
-
-		if (Input.IsActionPressed("Move_Up"))
-		{
-			direction.z -= 1f;
-		}*/
+		
 
 		if (Input.IsActionPressed("Run") && m_Stamina > 10 && direction != Vector3.Zero)
 		{

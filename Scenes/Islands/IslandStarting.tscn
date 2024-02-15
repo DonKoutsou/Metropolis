@@ -1,19 +1,20 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scenes/Item.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Door.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/Island.cs" type="Script" id=3]
 [ext_resource path="res://Scenes/Env_Assets/Street_Lamp.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/GrassCubes.tscn" type="PackedScene" id=5]
-[ext_resource path="res://addons/road-generator/nodes/road_manager.gd" type="Script" id=6]
-[ext_resource path="res://addons/road-generator/resources/road_texture.material" type="Material" id=7]
-[ext_resource path="res://addons/road-generator/nodes/road_container.gd" type="Script" id=8]
-[ext_resource path="res://Assets/Ground/Ground.obj" type="ArrayMesh" id=9]
-[ext_resource path="res://Assets/Ground/M_Ground.material" type="Material" id=10]
-[ext_resource path="res://addons/road-generator/nodes/road_point.gd" type="Script" id=11]
+[ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=12]
+[ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=13]
+[ext_resource path="res://TerainData/data.hterrain" type="Resource" id=14]
+[ext_resource path="res://Scenes/Islands/IslandStarting_slot0_normal_roughness.packed_tex" type="Texture" id=15]
+[ext_resource path="res://Scenes/Islands/IslandStarting_slot0_albedo_bump.packed_tex" type="Texture" id=16]
+[ext_resource path="res://Scenes/Sea.tscn" type="PackedScene" id=17]
 
-[sub_resource type="BoxShape" id=1]
-extents = Vector3( 1000, 0.5, 1000 )
+[sub_resource type="Resource" id=2]
+script = ExtResource( 13 )
+mode = 0
+textures = [ [ ExtResource( 16 ) ], [ ExtResource( 15 ) ] ]
 
 [node name="Island" type="Spatial" groups=["Islands"]]
 script = ExtResource( 3 )
@@ -31,52 +32,32 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1000 )
 [node name="Door_Right" parent="." instance=ExtResource( 2 )]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1000, 0, 0 )
 
-[node name="Floor" type="StaticBody" parent="."]
-
-[node name="CollisionShape" type="CollisionShape" parent="Floor"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0 )
-shape = SubResource( 1 )
-
-[node name="MeshInstance" type="MeshInstance" parent="Floor"]
-transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, -1, 0 )
-material_override = ExtResource( 10 )
-mesh = ExtResource( 9 )
-skeleton = NodePath("../..")
-
-[node name="StreetLamp" parent="Floor" instance=ExtResource( 4 )]
+[node name="StreetLamp" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.387413, -0.999967, -12.1204 )
 
 [node name="Item" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.7353, -1.01029, -3.5246 )
 
-[node name="RoadManager" type="Spatial" parent="."]
-script = ExtResource( 6 )
+[node name="HTerrain" type="Spatial" parent="."]
+script = ExtResource( 12 )
+lod_scale = 2.0
+map_scale = Vector3( 3.9, 4, 3.9 )
+centered = true
+_terrain_data = ExtResource( 14 )
+chunk_size = 32
+collision_enabled = true
+collision_layer = 4
+collision_mask = 0
+shader_type = "Classic4Lite"
+custom_shader = null
+custom_globalmap_shader = null
+texture_set = SubResource( 2 )
+render_layers = 1
+cast_shadow = 1
+shader_params/u_ground_uv_scale = 20
+shader_params/u_depth_blending = true
+shader_params/u_triplanar = false
+shader_params/u_tile_reduction = Plane( 0, 0, 0, 0 )
 
-[node name="RoadContainer" type="Spatial" parent="RoadManager"]
-script = ExtResource( 8 )
-material_resource = ExtResource( 7 )
-use_lowpoly_preview = true
-edge_containers = [ "", "" ]
-edge_rp_targets = [ "", "" ]
-edge_rp_target_dirs = [ -1, -1 ]
-edge_rp_locals = [ NodePath("RP_001"), NodePath("RP_002") ]
-edge_rp_local_dirs = [ 1, 0 ]
-
-[node name="RP_001" type="Spatial" parent="RoadManager/RoadContainer"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 219.411, 0.000366211, -5.49747 )
-script = ExtResource( 11 )
-traffic_dir = [ 2, 2, 1, 1 ]
-lanes = [ 2, 4, 4, 2 ]
-next_pt_init = NodePath("../RP_002")
-
-[node name="RP_002" type="Spatial" parent="RoadManager/RoadContainer"]
-transform = Transform( 0.0296141, 1.03625e-06, -0.999561, -4.48723e-07, 1, 1.02341e-06, 0.999561, 4.18219e-07, 0.0296141, -115.91, 0.000709534, 4.4371 )
-script = ExtResource( 11 )
-traffic_dir = [ 2, 2, 1, 1 ]
-lanes = [ 2, 4, 4, 2 ]
-prior_pt_init = NodePath("../RP_001")
-prior_mag = 16.0
-next_mag = 16.0
-
-[node name="Grass" parent="." instance=ExtResource( 5 )]
+[node name="SeaBed" parent="." instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )

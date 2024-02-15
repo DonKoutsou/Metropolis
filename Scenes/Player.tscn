@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/Stamina_Bar.cs" type="Script" id=2]
@@ -11,8 +11,10 @@
 [ext_resource path="res://Assets/Sounds/HeavyBreathing.mp3" type="AudioStream" id=9]
 [ext_resource path="res://Assets/Sounds/WalkingSound.mp3" type="AudioStream" id=10]
 [ext_resource path="res://Assets/Sounds/Cave_Ambient.mp3" type="AudioStream" id=11]
-[ext_resource path="res://Scripts/CameraPivot.cs" type="Script" id=12]
+[ext_resource path="res://Scripts/CameraZoomPivot.cs" type="Script" id=12]
 [ext_resource path="res://Scenes/Character_Mesh.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scripts/CameraPanPivot.cs" type="Script" id=14]
+[ext_resource path="res://Scripts/CameraMovePivot.cs" type="Script" id=15]
 
 [sub_resource type="CapsuleShape" id=6]
 height = 2.0
@@ -91,6 +93,13 @@ RunSpeed = 30
 
 [node name="Pivot" type="Spatial" parent="."]
 
+[node name="SpotLight" type="SpotLight" parent="Pivot"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 19.3607, 0 )
+light_energy = 0.412
+spot_range = 33.06
+spot_attenuation = 2.73208
+spot_angle = 26.62
+
 [node name="Guy" parent="Pivot" instance=ExtResource( 13 )]
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
@@ -116,32 +125,6 @@ monitorable = false
 [node name="CollisionShape" type="CollisionShape" parent="DoorDetector"]
 transform = Transform( 1.47899, 0, 0, 0, 0.256205, 0, 0, 0, 1.68566, 0, 0, 0 )
 shape = SubResource( 71 )
-
-[node name="CameraPivot" type="Position3D" parent="."]
-script = ExtResource( 12 )
-Speed = 5
-
-[node name="Camera" type="Camera" parent="CameraPivot"]
-transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 20, 20 )
-cull_mask = 1
-fov = 45.0
-size = 5.0
-far = 1e+06
-
-[node name="EnvSound" type="AudioStreamPlayer3D" parent="CameraPivot/Camera"]
-transform = Transform( 1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0 )
-stream = ExtResource( 11 )
-max_db = -13.118
-autoplay = true
-max_distance = 16.06
-area_mask = 0
-
-[node name="SpotLight" type="SpotLight" parent="CameraPivot"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 19.3607, 0 )
-light_energy = 0.412
-spot_range = 33.06
-spot_attenuation = 2.73208
-spot_angle = 26.62
 
 [node name="DamageColor" type="ColorRect" parent="."]
 show_behind_parent = true
@@ -292,6 +275,32 @@ scroll_active = false
 
 [node name="UpdateTimer" type="Timer" parent="PlayerUI/TalkText"]
 wait_time = 0.2
+
+[node name="CameraMovePivot" type="Position3D" parent="."]
+transform = Transform( 1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 0, 0, 0 )
+script = ExtResource( 15 )
+
+[node name="CameraPanPivot" type="Position3D" parent="CameraMovePivot"]
+script = ExtResource( 14 )
+
+[node name="CameraZoomPivot" type="Position3D" parent="CameraMovePivot/CameraPanPivot"]
+script = ExtResource( 12 )
+Speed = 5
+
+[node name="Camera" type="Camera" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot"]
+transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 20, 20 )
+cull_mask = 1
+fov = 45.0
+size = 5.0
+far = 1e+06
+
+[node name="EnvSound" type="AudioStreamPlayer3D" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot/Camera"]
+transform = Transform( 1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0 )
+stream = ExtResource( 11 )
+max_db = -13.118
+autoplay = true
+max_distance = 16.06
+area_mask = 0
 
 [connection signal="body_entered" from="MobDetector" to="." method="OnMobDetectorBodyEntered"]
 [connection signal="body_entered" from="DoorDetector" to="." method="OnDoorDetectorBodyEntered"]

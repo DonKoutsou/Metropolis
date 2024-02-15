@@ -261,7 +261,8 @@ public class Island : Spatial
 		{
 			d.ToggleCollisions(true);
 		}
-		grass.ToggleGrass(true);
+		if (grass != null)
+			grass.ToggleGrass(true);
 		ToggleEnemies(true);
 		m_enabled = true;
 	}
@@ -274,7 +275,8 @@ public class Island : Spatial
 			d.ToggleCollisions(false);
 		}
 		ToggleEnemies(false);
-		grass.ToggleGrass(false);
+		if (grass != null)
+			grass.ToggleGrass(false);
 		m_enabled = false;
 	}
 	void ToggleEnemies(bool toggle)
