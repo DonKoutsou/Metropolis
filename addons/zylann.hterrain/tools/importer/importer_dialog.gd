@@ -36,12 +36,12 @@ func _ready():
 		},
 		"min_height": {
 			"type": TYPE_REAL,
-			"range": {"min": -2000.0, "max": 2000.0, "step": 0.01},
+			"range": {"min": -2000.0, "max": 2000.0, "step": 1.0},
 			"default_value": 0.0
 		},
 		"max_height": {
 			"type": TYPE_REAL,
-			"range": {"min": -2000.0, "max": 2000.0, "step": 0.01},
+			"range": {"min": -2000.0, "max": 2000.0, "step": 1.0},
 			"default_value": 400.0
 		},
 		"splatmap": {
@@ -182,7 +182,7 @@ func _validate_form():
 		if min_height >= max_height:
 			res.errors.append("Minimum height must be lower than maximum height")
 			# Returning early because min and max can be slided,
-			# so we avoid loading other maps every time to do further checks.
+			# so we avoid loading other maps everytime to do further checks
 			return res
 
 		var size = _load_image_size(heightmap_path, _logger)

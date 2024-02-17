@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Building/BuildingExtrerior.tres" type="ArrayMesh" id=1]
+[ext_resource path="res://Assets/Building/BuildingInterior.tres" type="ArrayMesh" id=2]
+[ext_resource path="res://Assets/Building/BuildingExtra.tres" type="ArrayMesh" id=3]
+[ext_resource path="res://Scenes/HouseDoor.tscn" type="PackedScene" id=4]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 10, 0.102231, 10 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 2.25601, 0.105625, 3.71343 )
+
+[node name="House" type="Spatial"]
+
+[node name="HouseExterior" type="StaticBody" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="BuildingExterior" type="MeshInstance" parent="HouseExterior"]
+mesh = ExtResource( 1 )
+skeleton = NodePath("../..")
+
+[node name="StaticBody2" type="StaticBody" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.46977, 0 )
+shape = SubResource( 1 )
+
+[node name="BuildingInterior" type="MeshInstance" parent="StaticBody2"]
+mesh = ExtResource( 2 )
+skeleton = NodePath("../..")
+
+[node name="StaticBody3" type="StaticBody" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="BuildingExtra" type="MeshInstance" parent="StaticBody3"]
+mesh = ExtResource( 3 )
+skeleton = NodePath("../..")
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody3"]
+transform = Transform( 1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0.0095892, 1.63442, 13.2454 )
+shape = SubResource( 2 )
+
+[node name="Door2" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.56817, 10.0763 )

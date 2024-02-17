@@ -2,12 +2,15 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Security.Policy;
 
 public class WorldMap : TileMap
 {
     [Export]
     public string[] scenestospawn;
+
+    List <PackedScene> loadedscenes = new List<PackedScene>();
 
     [Export]
     public string Entrytospawn;
@@ -28,6 +31,11 @@ public class WorldMap : TileMap
         //CallDeferred("EnableIslands");
         CellSize = new Vector2(2000, 2000);
         ArrangeCellsBasedOnDistance();
+        for (int i = 0; i < scenestospawn.Count(); i++)
+        {
+            var scene = GD.Load<PackedScene>(scenestospawn[i]);
+            loadedscenes.Insert(i, scene);
+        }
         //SetProcess(true);
         //CallDeferred("SetProcess", true);
     }
@@ -113,8 +121,8 @@ public class WorldMap : TileMap
                 if (cellArray.DistanceTo(entycell) > 3)
                     continue;
                 Random random = new Random();
-                int start2 = random.Next(0, scenestospawn.Length);
-                var scene = GD.Load<PackedScene>(scenestospawn[start2]);
+                int start2 = random.Next(0, loadedscenes.Count);
+                var scene = loadedscenes[start2];
                 Island Ile = (Island)scene.Instance();
                 Vector2 postoput = MapToWorld(cellArray);
                 postoput += CellSize / 2;

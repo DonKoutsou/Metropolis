@@ -86,8 +86,6 @@ var _normalmap_material : ShaderMaterial
 var _import_mode = HTerrainTextureSet.MODE_TEXTURES
 
 class HT_TextureSetImportEditorSlot:
-	# Array of strings.
-	# Can be either path to images, hexadecimal colors starting with #, or empty string for "null".
 	var texture_paths = []
 	var flip_normalmap_y := false
 	
@@ -95,7 +93,6 @@ class HT_TextureSetImportEditorSlot:
 		for i in HTerrainTextureSet.SRC_TYPE_COUNT:
 			texture_paths.append("")
 
-# Array of HT_TextureSetImportEditorSlot
 var _slots_data = []
 
 var _import_settings = {
@@ -256,14 +253,14 @@ func set_texture_set(texture_set: HTerrainTextureSet):
 					var slot = HT_TextureSetImportEditorSlot.new()
 					_slots_data.append(slot)
 				
-				var slot : HT_TextureSetImportEditorSlot = _slots_data[slot_index]
+				var slot = _slots_data[slot_index]
 				
 				if src_data.has("rgb"):
 					slot.texture_paths[src_types[0]] = src_data["rgb"]
 				if src_data.has("a"):
 					slot.texture_paths[src_types[1]] = src_data["a"]
 
-	# TODO If the set doesn't have a file, use terrain path by default?
+	# TODO If the set doesnt have a file, use terrain path by default?
 	if texture_set.resource_path != "":
 		var dir = texture_set.resource_path.get_base_dir()
 		_import_directory_line_edit.text = dir
@@ -355,24 +352,13 @@ func _set_ui_slot_texture_from_path(im_path: String, type: int):
 		return
 	
 	var im := Image.new()
-	
-	if im_path.begins_with("#") and im_path.find(".") == -1:
-		# The path is actually a preset for a uniform color.
-		# This is a feature of packed texture descriptor files.
-		# Make a small placeholder image.
-		var color := Color(im_path)
-		im.create(4, 4, false, Image.FORMAT_BPTC_RGBA)
-		im.fill(color)
-		
-	else:
-		# Regular path
-		var err := im.load(im_path)
-		if err != OK:
-			_logger.error(str("Unable to load image from ", im_path))
-			# TODO Different icon for images that can't load?
-			ed.set_texture(null)
-			ed.set_texture_tooltip("<empty>")
-			return
+	var err := im.load(im_path)
+	if err != OK:
+		_logger.error(str("Unable to load image from ", im_path))
+		# TODO Different icon for images that can't load?
+		ed.set_texture(null)
+		ed.set_texture_tooltip("<empty>")
+		return
 
 	var tex := ImageTexture.new()
 	tex.create_from_image(im, 0)

@@ -157,8 +157,6 @@ var _shader_type := SHADER_CLASSIC4_LITE
 var _shader_uses_texture_array := false
 var _material := ShaderMaterial.new()
 var _material_params_need_update := false
-# Possible values are the same as the enum `GeometryInstance.SHADOW_CASTING_SETTING_*`.
-var _cast_shadow_setting := GeometryInstance.SHADOW_CASTING_SETTING_ON
 
 var _render_layer_mask := 1
 
@@ -203,7 +201,7 @@ var _lookdev_material : ShaderMaterial
 
 func _init():
 	_logger.debug("Create HeightMap")
-	# This sets up the defaults. They may be overridden shortly after by the scene loader.
+	# This sets up the defaults. They may be overriden shortly after by the scene loader.
 
 	_lodder.set_callbacks( \
 		funcref(self, "_cb_make_chunk"), \
@@ -324,13 +322,6 @@ func _get_property_list():
 			"type": TYPE_INT,
 			"usage": PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE,
 			"hint": PROPERTY_HINT_LAYERS_3D_RENDER
-		},
-		{
-			"name": "cast_shadow",
-			"type": TYPE_INT,
-			"usage": PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE,
-			"hint": PROPERTY_HINT_ENUM,
-			"hint_string": "Off,On,DoubleSided,ShadowsOnly"
 		}
 	]
 
@@ -391,9 +382,6 @@ func _get(key: String):
 	elif key == "render_layers":
 		return get_render_layer_mask()
 	
-	elif key == "cast_shadow":
-		return _cast_shadow_setting
-	
 
 func _set(key: String, value):
 	if key == "data_directory":
@@ -452,9 +440,6 @@ func _set(key: String, value):
 	elif key == "render_layers":
 		return set_render_layer_mask(value)
 
-	elif key == "cast_shadow":
-		set_cast_shadow(value)
-
 
 func get_texture_set() -> HTerrainTextureSet:
 	return _texture_set
@@ -496,17 +481,6 @@ func set_render_layer_mask(mask: int):
 
 func get_render_layer_mask() -> int:
 	return _render_layer_mask
-
-
-func set_cast_shadow(setting: int):
-	if setting == _cast_shadow_setting:
-		return
-	_cast_shadow_setting = setting
-	_for_all_chunks(HT_SetCastShadowSettingAction.new(setting))
-
-
-func get_cast_shadow() -> int:
-	return _cast_shadow_setting
 
 
 func _set_data_directory(dirpath: String):
@@ -830,7 +804,6 @@ func _reset_ground_chunks():
 
 	_mesher.configure(_chunk_size, _chunk_size, _lodder.get_lod_count())
 
-
 func _on_data_region_changed(min_x, min_y, size_x, size_y, channel):
 	# Testing only heights because it's the only channel that can impact geometry and LOD
 	if channel == HTerrainData.CHANNEL_HEIGHT:
@@ -960,7 +933,7 @@ func _update_material_params():
 		res.x = _data.get_resolution()
 		res.y = res.x
 
-	# Set all parameters from the terrain system.
+	# Set all parameters from the terrain sytem.
 
 	if is_inside_tree():
 		var gt = get_internal_transform()
@@ -1164,6 +1137,10 @@ func _process(delta: float):
 		# In editor, the camera is only accessible from an editor plugin
 		_update_viewer_position(null)
 
+	_mesher.configure2()
+	if (!_mesher.anyleft):
+		return
+
 	if has_data():
 		if _data.is_locked():
 			# Can't use the data for now
@@ -1353,7 +1330,6 @@ func _cb_make_chunk(cpos_x: int, cpos_y: int, lod: int):
 		chunk.parent_transform_changed(get_internal_transform())
 
 		chunk.set_render_layer_mask(_render_layer_mask)
-		chunk.set_cast_shadow_setting(_cast_shadow_setting)
 
 		var grid = _chunks[lod]
 		var row = grid[cpos_y]
@@ -1632,10 +1608,3 @@ class HT_SetRenderLayerMaskAction:
 	func exec(chunk):
 		chunk.set_render_layer_mask(mask)
 
-
-class HT_SetCastShadowSettingAction:
-	var setting := 0
-	func _init(s: int):
-		setting = s
-	func exec(chunk):
-		chunk.set_cast_shadow_setting(setting)

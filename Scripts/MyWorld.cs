@@ -25,6 +25,7 @@ public class MyWorld : Spatial
 	}
 	public void RegisterIle(Island ile)
 	{
+		//ile.Hide();
 		AddChild(ile);
 		ile.Init();
 		ToggleIsland(ile, false);

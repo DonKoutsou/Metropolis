@@ -15,6 +15,25 @@ var _chunk_size_x := 16
 var _chunk_size_y := 16
 
 
+var lodcount := 0
+var curseam := 0
+var anyleft := false
+
+
+func configure2():
+	if (anyleft):
+		return
+	var slot = []
+	slot.resize(lodcount)
+	_mesh_cache[curseam] = slot
+	for lod in range(lodcount):
+		slot[lod] = make_flat_chunk(_chunk_size_x, _chunk_size_y, 1 << lod, curseam)
+	curseam += 1
+	if (curseam >= SEAM_CONFIG_COUNT):
+		anyleft = true
+	
+
+
 func configure(chunk_size_x: int, chunk_size_y: int, lod_count: int):
 	assert(typeof(chunk_size_x) == TYPE_INT)
 	assert(typeof(chunk_size_y) == TYPE_INT)
@@ -31,15 +50,19 @@ func configure(chunk_size_x: int, chunk_size_y: int, lod_count: int):
 	_chunk_size_x = chunk_size_x
 	_chunk_size_y = chunk_size_y
 
+	lodcount = lod_count
 	# TODO Will reduce the size of this cache, but need index buffer swap feature
-	for seams in range(SEAM_CONFIG_COUNT):
+	#start doing thing
+
+	#for seams in range(SEAM_CONFIG_COUNT):
 		
-		var slot = []
-		slot.resize(lod_count)
-		_mesh_cache[seams] = slot
+	#	var slot = []
+	#	slot.resize(lod_count)
+	#	_mesh_cache[seams] = slot
 		
-		for lod in range(lod_count):
-			slot[lod] = make_flat_chunk(_chunk_size_x, _chunk_size_y, 1 << lod, seams)
+		
+	#	for lod in range(lod_count):
+	#		slot[lod] = make_flat_chunk(_chunk_size_x, _chunk_size_y, 1 << lod, seams)
 
 
 func get_chunk(lod: int, seams: int) -> Mesh:

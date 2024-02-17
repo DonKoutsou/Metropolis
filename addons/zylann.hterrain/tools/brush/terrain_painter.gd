@@ -424,7 +424,9 @@ func _paint_splat4(data: HTerrainData, position: Vector2):
 	splat[_texture_index] = 1.0;
 	p.set_brush_shader(HT_Splat4Shader)
 	p.set_brush_shader_param("u_splat", splat)
-	_set_slope_limit_shader_params(p, heightmap_texture)
+	p.set_brush_shader_param("u_normal_min_y", cos(_slope_limit_high_angle))
+	p.set_brush_shader_param("u_normal_max_y", cos(_slope_limit_low_angle) + 0.001)
+	p.set_brush_shader_param("u_heightmap", heightmap_texture)
 	p.set_image(image, texture)
 	p.paint_input(position)
 
@@ -498,7 +500,9 @@ func _paint_splat16(data: HTerrainData, position: Vector2):
 		p.set_brush_shader_param("u_other_splatmap_1", other_splatmaps[0])
 		p.set_brush_shader_param("u_other_splatmap_2", other_splatmaps[1])
 		p.set_brush_shader_param("u_other_splatmap_3", other_splatmaps[2])
-		_set_slope_limit_shader_params(p, heightmap_texture)
+		p.set_brush_shader_param("u_normal_min_y", cos(_slope_limit_high_angle))
+		p.set_brush_shader_param("u_normal_max_y", cos(_slope_limit_low_angle) + 0.001)
+		p.set_brush_shader_param("u_heightmap", heightmap_texture)
 		p.set_image(image, texture)
 		p.paint_input(position)
 
@@ -520,8 +524,6 @@ func _paint_color(data: HTerrainData, position: Vector2):
 
 	p.set_brush_shader(HT_ColorShader)
 	p.set_brush_shader_param("u_color", _color)
-	p.set_brush_shader_param("u_normal_min_y", 0.0)
-	p.set_brush_shader_param("u_normal_max_y", 1.0)
 	p.set_image(image, texture)
 	p.paint_input(position)
 
@@ -547,8 +549,7 @@ func _paint_mask(data: HTerrainData, position: Vector2):
 func _paint_detail(data: HTerrainData, position: Vector2):
 	var image := data.get_image(HTerrainData.CHANNEL_DETAIL, _detail_index)
 	var texture := data.get_texture(HTerrainData.CHANNEL_DETAIL, _detail_index, true)
-	var heightmap_texture = data.get_texture(HTerrainData.CHANNEL_HEIGHT, 0)
-
+	
 	var mm := HT_ModifiedMap.new()
 	mm.map_type = HTerrainData.CHANNEL_DETAIL
 	mm.map_index = _detail_index
@@ -558,15 +559,8 @@ func _paint_detail(data: HTerrainData, position: Vector2):
 	var p : HT_Painter = _painters[0]
 	var c := Color(_detail_density, _detail_density, _detail_density, 1.0)
 	
-	# TODO Don't use this shader (why?)
+	# TODO Don't use this shader
 	p.set_brush_shader(HT_ColorShader)
 	p.set_brush_shader_param("u_color", c)
-	_set_slope_limit_shader_params(p, heightmap_texture)
 	p.set_image(image, texture)
 	p.paint_input(position)
-
-
-func _set_slope_limit_shader_params(p: HT_Painter, heightmap_texture: Texture):
-	p.set_brush_shader_param("u_normal_min_y", cos(_slope_limit_high_angle))
-	p.set_brush_shader_param("u_normal_max_y", cos(_slope_limit_low_angle) + 0.001)
-	p.set_brush_shader_param("u_heightmap", heightmap_texture)

@@ -21,6 +21,7 @@ public class Island : Spatial
 
 	GrassCubes grass;
 
+	Spatial Terain;
 	public void RegisterChar(Character en)
 	{
 		if (en is Player)
@@ -50,6 +51,7 @@ public class Island : Spatial
 	public override void _Ready()
 	{
 		GlobalTranslation = loctospawnat;
+		Terain = GetNode<Spatial>("HTerrain");
 		a_doors = new Door[4];
 		var door__left = (Door)GetNode<Door>("Door_Left");
 		a_doors[0] = door__left;
@@ -248,6 +250,10 @@ public class Island : Spatial
 		{
 			Init();
 		}
+		if (Terain != null)
+		{
+			Terain.SetProcess(true);
+		}
 		for (int i = 0;i < closeislands.Count; i++)
 		{
 			if (!closeislands[i].Inited)
@@ -270,6 +276,10 @@ public class Island : Spatial
 	{
 		if (map.HideBasedOnState)
 			Hide();
+		if (Terain != null)
+		{
+			Terain.SetProcess(false);
+		}
 		foreach (Door d in a_doors)
 		{
 			d.ToggleCollisions(false);

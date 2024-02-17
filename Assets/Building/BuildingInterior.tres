@@ -1,0 +1,18 @@
+[gd_resource type="ArrayMesh" load_steps=2 format=2]
+
+[ext_resource path="res://Assets/Building/BuildingInterior.material" type="Material" id=1]
+
+[resource]
+resource_name = "Building_Mesh001"
+surfaces/0 = {
+"aabb": AABB( -10.0835, 3.57484, -10.0835, 20.167, 1.33514e-05, 20.167 ),
+"array_data": PoolByteArray( 7, 86, 33, 65, 48, 202, 100, 64, 7, 86, 33, 193, 0, 126, 127, 193, 0, 57, 0, 52, 7, 86, 33, 65, 34, 202, 100, 64, 7, 86, 33, 65, 0, 126, 127, 193, 0, 57, 0, 0, 7, 86, 33, 193, 34, 202, 100, 64, 7, 86, 33, 65, 0, 126, 127, 193, 0, 57, 0, 0, 7, 86, 33, 193, 48, 202, 100, 64, 7, 86, 33, 193, 0, 126, 127, 193, 0, 57, 0, 52 ),
+"array_index_data": PoolByteArray( 2, 0, 3, 0, 1, 0, 3, 0, 0, 0, 1, 0 ),
+"blend_shape_data": [  ],
+"format": 2194711,
+"index_count": 6,
+"material": ExtResource( 1 ),
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 4
+}

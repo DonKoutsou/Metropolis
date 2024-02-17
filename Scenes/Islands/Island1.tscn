@@ -1,26 +1,27 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://Scenes/Islands/Island1_slot0_albedo_bump.packed_tex" type="Texture" id=1]
+[ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Door.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/Island.cs" type="Script" id=3]
 [ext_resource path="res://Scenes/Sea.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/Islands/Island_1_terain/data.hterrain" type="Resource" id=5]
-[ext_resource path="res://Scenes/Islands/Island1_slot0_normal_roughness.packed_tex" type="Texture" id=6]
-[ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=7]
-[ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=8]
-[ext_resource path="res://addons/zylann.hterrain/hterrain_detail_layer.gd" type="Script" id=9]
-[ext_resource path="res://addons/zylann.hterrain/tools/icons/icon_detail_layer_node.svg" type="Texture" id=10]
+[ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/Islands/Island_1Terain/data.hterrain" type="Resource" id=6]
+[ext_resource path="res://Scenes/Islands/Island1_slot0_albedo_bump.packed_tex" type="Texture" id=7]
+[ext_resource path="res://Scenes/Islands/Island1_slot0_normal_roughness.packed_tex" type="Texture" id=8]
+[ext_resource path="res://Scenes/GrassCubes.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/Building/BuildingComposition.tscn" type="PackedScene" id=10]
 
-[sub_resource type="Resource" id=3]
-script = ExtResource( 8 )
+[sub_resource type="Resource" id=1]
+script = ExtResource( 5 )
 mode = 0
-textures = [ [ ExtResource( 1 ) ], [ ExtResource( 6 ) ] ]
+textures = [ [ ExtResource( 7 ) ], [ ExtResource( 8 ) ] ]
 
 [node name="Island" type="Spatial" groups=["Islands"]]
 script = ExtResource( 3 )
 
 [node name="Door_Left" parent="." instance=ExtResource( 2 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1000, 0, 0 )
+visible = false
 
 [node name="Door_Down" parent="." instance=ExtResource( 2 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 1000 )
@@ -34,35 +35,33 @@ transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1000, 0
 [node name="SeaBed" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
 
+[node name="Grass" parent="." instance=ExtResource( 9 )]
+
+[node name="House" parent="." instance=ExtResource( 10 )]
+transform = Transform( 0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 45, 0, -20 )
+
+[node name="House2" parent="." instance=ExtResource( 10 )]
+transform = Transform( -0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866025, 140, 0, 360 )
+
 [node name="HTerrain" type="Spatial" parent="."]
-script = ExtResource( 7 )
+script = ExtResource( 1 )
 lod_scale = 2.0
-map_scale = Vector3( 3.9, 4, 3.9 )
+map_scale = Vector3( 31.249, 1, 31.249 )
 centered = true
-_terrain_data = ExtResource( 5 )
+_terrain_data = ExtResource( 6 )
 chunk_size = 32
 collision_enabled = true
-collision_layer = 1
-collision_mask = 1
-shader_type = "Classic4Lite"
+collision_layer = 4
+collision_mask = 0
+shader_type = "Classic4"
 custom_shader = null
 custom_globalmap_shader = null
-texture_set = SubResource( 3 )
+texture_set = SubResource( 1 )
 render_layers = 1
-cast_shadow = 1
-shader_params/u_ground_uv_scale = 20
+shader_params/u_ground_uv_scale_per_texture = Plane( 1, 1, 1, 1 )
 shader_params/u_depth_blending = true
 shader_params/u_triplanar = false
 shader_params/u_tile_reduction = Plane( 0, 0, 0, 0 )
-
-[node name="HTerrainDetailLayer" type="Spatial" parent="HTerrain"]
-script = ExtResource( 9 )
-__meta__ = {
-"_editor_icon": ExtResource( 10 )
-}
-view_distance = 500.0
-shader_params/u_globalmap_tint_bottom = null
-shader_params/u_globalmap_tint_top = null
-shader_params/u_bottom_ao = null
-shader_params/u_instance_scale = Vector3( 1, 1, 1 )
-shader_params/u_roughness = 0.9
+shader_params/u_globalmap_blend_start = null
+shader_params/u_globalmap_blend_distance = null
+shader_params/u_colormap_opacity_per_texture = Plane( 1, 1, 1, 1 )

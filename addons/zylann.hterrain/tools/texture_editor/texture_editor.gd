@@ -37,6 +37,7 @@ func _ready():
 
 func set_terrain(terrain: HTerrain):
 	_terrain = terrain
+	_textures_list.clear()
 
 
 static func _get_slot_count(terrain: HTerrain) -> int:

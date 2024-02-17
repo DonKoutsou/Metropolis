@@ -10,7 +10,6 @@ env = Environment(ENV = os.environ)
 opts.Add(EnumVariable('target', "Compilation target", 'debug', ['debug', 'release']))
 opts.Add(EnumVariable('platform', "Compilation platform", '', ['', 'windows', 'linux', 'osx']))
 opts.Add(BoolVariable('use_llvm', "Use the LLVM / Clang compiler", 'no'))
-opts.Add(EnumVariable('macos_arch', "Target macOS architecture", 'universal', ['universal', 'x86_64', 'arm64']))
 
 # Hardcoded ones
 target_path = "bin/"
@@ -50,11 +49,9 @@ if env['platform'] == "osx":
     cpp_bindings_library += '.osx'
     if env['target'] == 'debug':
         env.Append(CCFLAGS = ['-g', '-O2', '-arch', 'x86_64'])
-        env.Append(CXXFLAGS = ['-std=c++17'])
         env.Append(LINKFLAGS = ['-arch', 'x86_64'])
     else:
         env.Append(CCFLAGS = ['-g', '-O3', '-arch', 'x86_64'])
-        env.Append(CXXFLAGS = ['-std=c++17'])
         env.Append(LINKFLAGS = ['-arch', 'x86_64'])
 
 elif env['platform'] == "linux":
@@ -91,10 +88,7 @@ if env['target'] == 'debug':
 else:
     cpp_bindings_library += '.release'
 
-if env['macos_arch'] == 'universal':
-    cpp_bindings_library += '.' + str(bits)
-else:
-    cpp_bindings_library += '.' + env['macos_arch']
+cpp_bindings_library += '.' + str(bits)
 
 # make sure our binding library is properly included
 env.Append(CPPPATH = [
