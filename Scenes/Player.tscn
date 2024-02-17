@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/Stamina_Bar.cs" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://Scenes/Character_Mesh.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scripts/CameraPanPivot.cs" type="Script" id=14]
 [ext_resource path="res://Scripts/CameraMovePivot.cs" type="Script" id=15]
+[ext_resource path="res://Scenes/MoveLocation.tscn" type="PackedScene" id=16]
 
 [sub_resource type="CapsuleShape" id=6]
 height = 2.0
@@ -85,7 +86,8 @@ font_data = ExtResource( 4 )
 default_font = SubResource( 64 )
 
 [node name="Player" type="KinematicBody" groups=["player"]]
-collision_mask = 6
+collision_layer = 9
+collision_mask = 38
 script = ExtResource( 1 )
 m_Stamina = 500.0
 m_StaminaRegen = 1.0
@@ -201,14 +203,10 @@ rect_scale = Vector2( 500, 500 )
 rect_pivot_offset = Vector2( 1, 0.5 )
 
 [node name="PlayerUI" type="Control" parent="."]
-anchor_left = 0.5
-anchor_top = 0.695
-anchor_right = 0.5
-anchor_bottom = 0.974
-margin_left = -20.0
-margin_top = 137.4
-margin_right = 20.0
-margin_bottom = -118.96
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -44.9599
+margin_right = 40.0
 
 [node name="HP_Bar" type="ProgressBar" parent="PlayerUI"]
 material = SubResource( 65 )
@@ -217,9 +215,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -15.0
-margin_top = -7.0
-margin_right = 15.0
-margin_bottom = 7.0
+margin_top = -17.48
+margin_right = 156.0
+margin_bottom = 14.52
 rect_scale = Vector2( 1, 0.5 )
 size_flags_horizontal = 9
 size_flags_vertical = 8
@@ -239,8 +237,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -15.0
-margin_right = 15.0
-margin_bottom = 14.0
+margin_top = -0.47998
+margin_right = 156.0
+margin_bottom = 28.52
 rect_scale = Vector2( 1, 0.5 )
 size_flags_horizontal = 9
 size_flags_vertical = 8
@@ -301,6 +300,10 @@ max_db = -13.118
 autoplay = true
 max_distance = 16.06
 area_mask = 0
+
+[node name="MoveLoc" parent="." instance=ExtResource( 16 )]
+
+[node name="NavigationAgent" type="NavigationAgent" parent="."]
 
 [connection signal="body_entered" from="MobDetector" to="." method="OnMobDetectorBodyEntered"]
 [connection signal="body_entered" from="DoorDetector" to="." method="OnDoorDetectorBodyEntered"]

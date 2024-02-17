@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public class House : RigidBody2D
+public class House : Spatial
 {
     [Export]
     public string[] ItemSpawnPool;
@@ -13,18 +13,17 @@ public class House : RigidBody2D
     [Export]
 	public DialogueLine EmptyLines;
 
-    Item itemToDrop;
 
-    bool m_bEmpty;
+    //bool m_bEmpty;
 
-    Inventory HouseInventory;
+    //Inventory HouseInventory;
 
-    DialoguePanel DiagPan;
+    //DialoguePanel DiagPan;
 
-
+    public NavigationMeshInstance navmesh;
     public override void _Ready()
     {
-        HouseInventory = GetNode<Inventory>("Inventory");
+        /*HouseInventory = GetNode<Inventory>("Inventory");
         var panels = GetTree().GetNodesInGroup("DialoguePanel");
 		DiagPan = (DialoguePanel)panels[0];
 
@@ -39,11 +38,11 @@ public class House : RigidBody2D
         if (itemToSpawn == null)
             return;
         itemToDrop = (Item)itemToSpawn.Instance();
-        HouseInventory.InsertItem(itemToDrop);
-
+        HouseInventory.InsertItem(itemToDrop);*/
+        //navmesh = GetNode<NavigationMeshInstance>("NavigationMeshInstance");
         
     }
-    public bool GetIsEmpty()
+    /*public bool GetIsEmpty()
     {
         return m_bEmpty;
     }
@@ -71,5 +70,5 @@ public class House : RigidBody2D
             return true;
         }
         return false;
-    }
+    }*/
 }

@@ -32,7 +32,7 @@ public class Character : KinematicBody
 
 	public CollisionShape collider;
 
-	NavigationAgent NavAgent;
+	public NavigationAgent NavAgent;
 
 	public Vector3 m_velocity = Vector3.Zero;
 

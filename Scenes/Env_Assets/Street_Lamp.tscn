@@ -7,7 +7,7 @@
 height = 9.11002
 radius = 0.469705
 
-[node name="StreetLamp" type="StaticBody"]
+[node name="StreetLamp" type="StaticBody" groups=["Clutter"]]
 collision_layer = 4
 collision_mask = 0
 

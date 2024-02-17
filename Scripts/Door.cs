@@ -63,6 +63,7 @@ public class Door : Wall
 		if (player is Player)
 		{
 			MyWorld.IleTransition(IslandAccess, (Island)GetParent());
+			//player.UpdateMap();
 		}
 		else
 		{

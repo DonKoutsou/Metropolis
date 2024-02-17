@@ -13,8 +13,6 @@ public class Mob : Character
     [Signal]
     public delegate void Squashed();
 
-    // ...
-    NavigationAgent NavAgent;
 
     public override void _PhysicsProcess(float delta)
     {

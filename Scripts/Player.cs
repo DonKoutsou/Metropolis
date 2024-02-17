@@ -27,11 +27,14 @@ public class Player : Character
 
 	Character_Animations anim;
 
+	MoveLocation moveloc;
+
 
 	public void Teleport(Vector3 pos)
 	{
 		GlobalTranslation = pos;
 		loctomove = pos;
+		NavAgent.SetTargetLocation(loctomove);
 		CameraMovePivot.GetInstance().GlobalTranslation = pos;
 	}
 
@@ -51,6 +54,15 @@ public class Player : Character
 		GetNode<AudioStreamPlayer3D>("TiredSound").Play();
 		GetNode<AudioStreamPlayer3D>("TiredSound").StreamPaused = true;
 		anim = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Character_Animations>("AnimationPlayer");
+		moveloc = GetNode<MoveLocation>("MoveLoc");
+
+		NavAgent = GetNode<NavigationAgent>("NavigationAgent");
+
+		myrid  = NavigationServer.AgentCreate();
+        RID default_3d_map_rid  = GetWorld().NavigationMap;
+
+        NavigationServer.AgentSetMap(myrid, default_3d_map_rid);
+        NavigationServer.AgentSetRadius(myrid, 0.5f);
 	}
 	public override void _PhysicsProcess(float delta)
 	{
@@ -61,16 +73,21 @@ public class Player : Character
 			Camera cam = GetTree().Root.GetCamera();
 			Vector3 rayor = cam.ProjectRayOrigin(mousepos);
 			Vector3 rayend = rayor + cam.ProjectRayNormal(mousepos) * 2000;
-			var rayar = spacestate.IntersectRay(rayor, rayend);
+			var rayar = spacestate.IntersectRay(rayor, rayend, new Godot.Collections.Array { this }, moveloc.MoveLayer);
 			//if ray finds nothiong return
 			if (rayar.Count == 0)
 				return;
 			loctomove = (Vector3)rayar["position"];
+			//NavAgent.SetTargetLocation(loctomove);
+			moveloc.Show();
 		}
+		moveloc.GlobalTranslation = loctomove;
+		//Vector3 nextloc = NavAgent.GetNextLocation();
 		var spd = Speed;
 		var direction = loctomove - GlobalTransform.origin;
 		Vector2 loc = new Vector2(loctomove.x, loctomove.z);
-		float dist = loc.DistanceTo(new Vector2( GlobalTransform.origin.x, GlobalTransform.origin.z));
+		
+		float dist = new Vector2(loctomove.x, loctomove.z).DistanceTo(new Vector2( GlobalTransform.origin.x, GlobalTransform.origin.z));
 		double stam = m_Stamina;
 		
 
@@ -92,6 +109,7 @@ public class Player : Character
 			if (!GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused)
 				GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused = true;
 			anim.PlayAnimation(E_Animations.Idle);
+			moveloc.Hide();	
 		}
 		else
 		{
@@ -122,6 +140,7 @@ public class Player : Character
 		// Ground velocity
 		_velocity.x = direction.x * spd;
 		_velocity.z = direction.z * spd;
+		//_velocity.y = direction.y * spd;
 		// Vertical velocity
 		_velocity.y -= FallAcceleration * delta;
 		// Moving the character

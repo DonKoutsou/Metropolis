@@ -22,6 +22,10 @@ public class Island : Spatial
 	GrassCubes grass;
 
 	Spatial Terain;
+
+	NavigationMeshInstance navmesh;
+
+	Sea waterbody;
 	public void RegisterChar(Character en)
 	{
 		if (en is Player)
@@ -51,7 +55,9 @@ public class Island : Spatial
 	public override void _Ready()
 	{
 		GlobalTranslation = loctospawnat;
+		navmesh = GetNode<NavigationMeshInstance>("NavigationMeshInstance");
 		Terain = GetNode<Spatial>("HTerrain");
+		waterbody = GetNode<Sea>("SeaBed");
 		a_doors = new Door[4];
 		var door__left = (Door)GetNode<Door>("Door_Left");
 		a_doors[0] = door__left;
@@ -270,6 +276,10 @@ public class Island : Spatial
 		if (grass != null)
 			grass.ToggleGrass(true);
 		ToggleEnemies(true);
+		//if (navmesh != null)
+			//navmesh.Enabled = true;
+
+		waterbody.Start();
 		m_enabled = true;
 	}
 	public void DeactivateIsland()
@@ -287,6 +297,9 @@ public class Island : Spatial
 		ToggleEnemies(false);
 		if (grass != null)
 			grass.ToggleGrass(false);
+		//if (navmesh != null)
+			//navmesh.Enabled = false;
+		waterbody.Stop();
 		m_enabled = false;
 	}
 	void ToggleEnemies(bool toggle)
