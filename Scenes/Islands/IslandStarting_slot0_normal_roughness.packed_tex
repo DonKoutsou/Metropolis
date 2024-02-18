@@ -2,7 +2,7 @@
 	"contains_albedo": false,
 	"resolution": 512,
 	"src": {
-		"a": "res://Assets/TerainTex/Ground037_1K-JPG/Ground037_1K-JPG_Roughness.jpg",
-		"rgb": "res://Assets/TerainTex/Ground037_1K-JPG/Ground037_1K-JPG_NormalGL.jpg"
+		"a": "res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_Roughness.jpg",
+		"rgb": "res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_NormalGL.jpg"
 	}
 }

@@ -4,6 +4,11 @@
 [ext_resource path="res://Scripts/Character_Animations.cs" type="Script" id=2]
 
 [sub_resource type="SpatialMaterial" id=10]
+params_diffuse_mode = 4
+params_specular_mode = 3
+albedo_color = Color( 0.635294, 0.635294, 0.635294, 1 )
+metallic_specular = 1.0
+roughness = 0.0
 
 [sub_resource type="AnimationNodeAnimation" id=7]
 animation = "Jump"
@@ -31,7 +36,7 @@ nodes/Idle_Walk_Blend/position = Vector2( 240, 240 )
 nodes/JumpShot/node = SubResource( 8 )
 nodes/JumpShot/position = Vector2( 460, 160 )
 nodes/output/position = Vector2( 980, 160 )
-node_connections = [ "Idle_Walk_Blend", 0, "Animation", "Idle_Walk_Blend", 1, "Animation 3", "JumpShot", 0, "Idle_Walk_Blend", "JumpShot", 1, "Animation 2", "output", 0, "JumpShot" ]
+node_connections = [ "output", 0, "JumpShot", "JumpShot", 0, "Idle_Walk_Blend", "JumpShot", 1, "Animation 2", "Idle_Walk_Blend", 0, "Animation", "Idle_Walk_Blend", 1, "Animation 3" ]
 
 [node name="Guy" instance=ExtResource( 1 )]
 

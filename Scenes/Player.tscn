@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/Stamina_Bar.cs" type="Script" id=2]
@@ -16,6 +16,8 @@
 [ext_resource path="res://Scripts/CameraPanPivot.cs" type="Script" id=14]
 [ext_resource path="res://Scripts/CameraMovePivot.cs" type="Script" id=15]
 [ext_resource path="res://Scenes/MoveLocation.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scripts/SandParticles.cs" type="Script" id=17]
+[ext_resource path="res://Scripts/Time_UI.cs" type="Script" id=18]
 
 [sub_resource type="CapsuleShape" id=6]
 height = 2.0
@@ -85,6 +87,52 @@ font_data = ExtResource( 4 )
 [sub_resource type="Theme" id=69]
 default_font = SubResource( 64 )
 
+[sub_resource type="DynamicFont" id=79]
+size = 54
+font_data = ExtResource( 4 )
+
+[sub_resource type="Theme" id=80]
+default_font = SubResource( 79 )
+
+[sub_resource type="PlaneMesh" id=76]
+
+[sub_resource type="Shader" id=77]
+code = "shader_type spatial;
+render_mode unshaded;
+
+const int pixel_size = 2; //resolution must be divisible by pixel_size
+
+void fragment() {
+	float x = float(int(FRAGCOORD.x) % pixel_size);
+	float y = float(int(FRAGCOORD.y) % pixel_size);
+
+	x = FRAGCOORD.x + floor(float(pixel_size) / 2.0) - x;
+	y = FRAGCOORD.y + floor(float(pixel_size) / 2.0) - y;
+
+	ALBEDO = texture(SCREEN_TEXTURE, vec2(x, y) / VIEWPORT_SIZE).xyz;
+}"
+
+[sub_resource type="ShaderMaterial" id=78]
+shader = SubResource( 77 )
+
+[sub_resource type="SpatialMaterial" id=73]
+albedo_color = Color( 0.517647, 0.517647, 0.427451, 1 )
+
+[sub_resource type="ParticlesMaterial" id=74]
+emission_shape = 2
+emission_box_extents = Vector3( 1000, 200, 200 )
+direction = Vector3( 2.507, 0, 0 )
+spread = 9.4
+flatness = 1.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 129.94
+
+[sub_resource type="SphereMesh" id=75]
+radius = 0.1
+height = 0.2
+radial_segments = 8
+rings = 8
+
 [node name="Player" type="KinematicBody" groups=["player"]]
 collision_layer = 9
 collision_mask = 38
@@ -130,9 +178,13 @@ shape = SubResource( 71 )
 
 [node name="DamageColor" type="ColorRect" parent="."]
 show_behind_parent = true
-margin_left = -1016.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -1024.0
 margin_top = -600.0
-margin_right = 1032.0
+margin_right = 1024.0
 margin_bottom = 600.0
 color = Color( 0.623529, 0.172549, 0.172549, 0 )
 
@@ -275,6 +327,15 @@ scroll_active = false
 [node name="UpdateTimer" type="Timer" parent="PlayerUI/TalkText"]
 wait_time = 0.2
 
+[node name="Time_UI" type="RichTextLabel" parent="PlayerUI"]
+margin_left = 40.0
+margin_top = -1371.04
+margin_right = 512.0
+margin_bottom = -1291.04
+theme = SubResource( 80 )
+text = "24 : 00"
+script = ExtResource( 18 )
+
 [node name="CameraMovePivot" type="Position3D" parent="."]
 transform = Transform( 1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 0, 0, 0 )
 script = ExtResource( 15 )
@@ -301,9 +362,26 @@ autoplay = true
 max_distance = 16.06
 area_mask = 0
 
+[node name="MeshInstance" type="MeshInstance" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot/Camera"]
+transform = Transform( 10, 8.14214e-07, -1.42109e-13, 4.61853e-14, -4.76837e-07, -10, -8.14214e-07, 10, -4.76837e-07, -2.38417e-07, 0.267969, -4.46409 )
+mesh = SubResource( 76 )
+material/0 = SubResource( 78 )
+
 [node name="MoveLoc" parent="." instance=ExtResource( 16 )]
 
 [node name="NavigationAgent" type="NavigationAgent" parent="."]
+
+[node name="Particles" type="Particles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.85324, 0 )
+material_override = SubResource( 73 )
+amount = 2000
+lifetime = 4.54
+preprocess = 0.78
+speed_scale = 3.0
+draw_order = 1
+process_material = SubResource( 74 )
+draw_pass_1 = SubResource( 75 )
+script = ExtResource( 17 )
 
 [connection signal="body_entered" from="MobDetector" to="." method="OnMobDetectorBodyEntered"]
 [connection signal="body_entered" from="DoorDetector" to="." method="OnDoorDetectorBodyEntered"]

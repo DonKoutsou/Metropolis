@@ -55,9 +55,9 @@ public class Island : Spatial
 	public override void _Ready()
 	{
 		GlobalTranslation = loctospawnat;
-		navmesh = GetNode<NavigationMeshInstance>("NavigationMeshInstance");
+		//navmesh = GetNode<NavigationMeshInstance>("NavigationMeshInstance");
 		Terain = GetNode<Spatial>("HTerrain");
-		waterbody = GetNode<Sea>("SeaBed");
+		//waterbody = GetNode<Sea>("SeaBed");
 		a_doors = new Door[4];
 		var door__left = (Door)GetNode<Door>("Door_Left");
 		a_doors[0] = door__left;
@@ -68,7 +68,7 @@ public class Island : Spatial
 		var door__right = (Door)GetNode<Door>("Door_Right");
 		a_doors[3] = door__right;
 
-		grass = GetNode<GrassCubes>("Grass");
+		//grass = GetNode<GrassCubes>("Grass");
 		map = GetParent().GetNode<WorldMap>("WorldMap");
 	}
 	public void Init()
@@ -273,13 +273,13 @@ public class Island : Spatial
 		{
 			d.ToggleCollisions(true);
 		}
-		if (grass != null)
-			grass.ToggleGrass(true);
+		//if (grass != null)
+			//grass.ToggleGrass(true);
 		ToggleEnemies(true);
 		//if (navmesh != null)
 			//navmesh.Enabled = true;
 
-		waterbody.Start();
+		//waterbody.Start();
 		m_enabled = true;
 	}
 	public void DeactivateIsland()
@@ -295,11 +295,11 @@ public class Island : Spatial
 			d.ToggleCollisions(false);
 		}
 		ToggleEnemies(false);
-		if (grass != null)
-			grass.ToggleGrass(false);
+		//if (grass != null)
+			//grass.ToggleGrass(false);
 		//if (navmesh != null)
 			//navmesh.Enabled = false;
-		waterbody.Stop();
+		//waterbody.Stop();
 		m_enabled = false;
 	}
 	void ToggleEnemies(bool toggle)
