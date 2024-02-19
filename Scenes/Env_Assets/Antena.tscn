@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Clutter/Antenna/Antena.tres" type="ArrayMesh" id=1]
+
+[sub_resource type="CylinderShape" id=8]
+height = 21.328
+radius = 0.369843
+
+[sub_resource type="CylinderShape" id=9]
+height = 0.401172
+radius = 2.39064
+
+[sub_resource type="CylinderShape" id=10]
+height = 0.268275
+radius = 5.20862
+
+[sub_resource type="CylinderShape" id=11]
+height = 0.547829
+radius = 1.22749
+
+[sub_resource type="CylinderShape" id=12]
+height = 0.292995
+radius = 2.06783
+
+[node name="StaticBody" type="StaticBody"]
+collision_layer = 4
+collision_mask = 0
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.1511, 0 )
+shape = SubResource( 8 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.5863, 0 )
+shape = SubResource( 9 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.2629, 0 )
+shape = SubResource( 10 )
+
+[node name="CollisionShape4" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18.5122, 0 )
+shape = SubResource( 11 )
+
+[node name="CollisionShape5" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.472, 0 )
+shape = SubResource( 12 )

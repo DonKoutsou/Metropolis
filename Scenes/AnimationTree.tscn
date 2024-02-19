@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=2]
+
+[sub_resource type="AnimationNodeAnimation" id=14]
+animation = "Jump"
+
+[sub_resource type="AnimationNodeAnimation" id=15]
+animation = "Walk-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=16]
+animation = "Idle-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=17]
+
+[sub_resource type="AnimationNodeOneShot" id=18]
+
+[sub_resource type="AnimationNodeTimeScale" id=19]
+
+[sub_resource type="AnimationNodeBlendTree" id=20]
+graph_offset = Vector2( -405.924, -53.3041 )
+nodes/Animation/node = SubResource( 16 )
+nodes/Animation/position = Vector2( -40, 120 )
+"nodes/Animation 2/node" = SubResource( 14 )
+"nodes/Animation 2/position" = Vector2( -80, -20 )
+"nodes/Animation 3/node" = SubResource( 15 )
+"nodes/Animation 3/position" = Vector2( -260, 420 )
+nodes/Idle_Walk_Blend/node = SubResource( 17 )
+nodes/Idle_Walk_Blend/position = Vector2( 240, 240 )
+nodes/JumpShot/node = SubResource( 18 )
+nodes/JumpShot/position = Vector2( 460, 160 )
+nodes/Walk_Speed/node = SubResource( 19 )
+nodes/Walk_Speed/position = Vector2( 0, 320 )
+nodes/output/position = Vector2( 980, 160 )
+node_connections = [ "JumpShot", 0, "Idle_Walk_Blend", "JumpShot", 1, "Animation 2", "Idle_Walk_Blend", 0, "Animation", "Idle_Walk_Blend", 1, "Walk_Speed", "output", 0, "JumpShot", "Walk_Speed", 0, "Animation 3" ]
+
+[node name="AnimationTree" type="AnimationTree"]
+tree_root = SubResource( 20 )
+anim_player = NodePath("..")
+parameters/Idle_Walk_Blend/blend_amount = 0.0
+parameters/JumpShot/active = false
+parameters/Walk_Speed/scale = 1.0

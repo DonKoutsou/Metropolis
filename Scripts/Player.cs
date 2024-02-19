@@ -29,7 +29,6 @@ public class Player : Character
 
 	MoveLocation moveloc;
 
-
 	public void Teleport(Vector3 pos)
 	{
 		GlobalTranslation = pos;
@@ -66,7 +65,7 @@ public class Player : Character
 	}
 	public override void _PhysicsProcess(float delta)
 	{
-        if (Input.IsActionPressed("Move"))
+		if (Input.IsActionPressed("Move"))
 		{
 			var spacestate = GetWorld().DirectSpaceState;
 			Vector2 mousepos = GetViewport().GetMousePosition();
@@ -75,11 +74,11 @@ public class Player : Character
 			Vector3 rayend = rayor + cam.ProjectRayNormal(mousepos) * 2000;
 			var rayar = spacestate.IntersectRay(rayor, rayend, new Godot.Collections.Array { this }, moveloc.MoveLayer);
 			//if ray finds nothiong return
-			if (rayar.Count == 0)
-				return;
-			loctomove = (Vector3)rayar["position"];
-			//NavAgent.SetTargetLocation(loctomove);
-			moveloc.Show();
+			if (rayar.Count > 0)
+			{
+				loctomove = (Vector3)rayar["position"];
+				moveloc.Show();
+			}
 		}
 		moveloc.GlobalTranslation = loctomove;
 		//Vector3 nextloc = NavAgent.GetNextLocation();
@@ -94,14 +93,14 @@ public class Player : Character
 		if (Input.IsActionPressed("Run") && m_Stamina > 10 && direction != Vector3.Zero)
 		{
 			spd = RunSpeed;
-			m_Stamina = m_Stamina - m_RunCost;
+			//m_Stamina = m_Stamina - m_RunCost;
 		}
 		else if (!Input.IsActionPressed("Run") && m_Stamina < startingstaming)
 		{
-			m_Stamina = m_Stamina + m_StaminaRegen;
+			//m_Stamina = m_Stamina + m_StaminaRegen;
 				
-			if (direction == Vector3.Zero )
-				m_Stamina = m_Stamina + m_StaminaRegen * 2;
+			//if (direction == Vector3.Zero )
+				//m_Stamina = m_Stamina + m_StaminaRegen * 2;
 
 		}
 		if (dist < 1)
@@ -124,19 +123,22 @@ public class Player : Character
 			if (Input.IsActionPressed("Run"))
 			{
 				GetNode<AudioStreamPlayer3D>("WalkingSound").PitchScale = 1f;
+
 				//GetNode<AudioStreamPlayer3D>("WalkingSound").db = 5f;
+				anim.PlayAnimation(E_Animations.Run);
 			}
-			anim.PlayAnimation(E_Animations.Walk);
+			else
+				anim.PlayAnimation(E_Animations.Walk);
 		}
-		Stamina_bar.Value = m_Stamina;
+		//Stamina_bar.Value = m_Stamina;
 
-		if (m_Stamina < startingstaming / 10)
-			GetNode<AudioStreamPlayer3D>("TiredSound").StreamPaused = false;
-		else
-			GetNode<AudioStreamPlayer3D>("TiredSound").StreamPaused = true;
+		//if (m_Stamina < startingstaming / 10)
+			//GetNode<AudioStreamPlayer3D>("TiredSound").StreamPaused = false;
+		//else
+			//GetNode<AudioStreamPlayer3D>("TiredSound").StreamPaused = true;
 
-		if (stam != m_Stamina)
-			Stamina_bar.ChangeVisibility();
+		//if (stam != m_Stamina)
+			//Stamina_bar.ChangeVisibility();
 		// Ground velocity
 		_velocity.x = direction.x * spd;
 		_velocity.z = direction.z * spd;
@@ -145,12 +147,15 @@ public class Player : Character
 		_velocity.y -= FallAcceleration * delta;
 		// Moving the character
 		_velocity = MoveAndSlide(_velocity, Vector3.Up);
-		if (IsOnFloor() && Input.IsActionJustPressed("jump"))
+		if (Input.IsActionJustPressed("jump"))
 		{
-			anim.PlayAnimation(E_Animations.Jump);
-			_velocity.y += JumpImpulse;
-
+			if (IsOnFloor())
+			{
+				anim.PlayAnimation(E_Animations.Jump);
+				_velocity.y += JumpImpulse;
+			}
 		}
+		
 		for (int index = 0; index < GetSlideCount(); index++)
 		{
 			// We check every collision that occurred this frame.
@@ -178,11 +183,12 @@ public class Player : Character
 			Camera cam = GetTree().Root.GetCamera();
 			Vector3 rayor = cam.ProjectRayOrigin(mousepos);
 			Vector3 rayend = rayor + cam.ProjectRayNormal(mousepos) * 2000;
-			var rayar = spacestate.IntersectRay(rayor, rayend);
+			var rayar = spacestate.IntersectRay(rayor, rayend, new Godot.Collections.Array { this }, moveloc.MoveLayer);
 			//if ray finds nothiong return
 			if (rayar.Count == 0)
 				return;
 			loctomove = (Vector3)rayar["position"];
+			moveloc.Show();
 		}
 	}
 	private void Die()

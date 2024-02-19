@@ -5,9 +5,9 @@ using System.Drawing;
 public class TalkText : RichTextLabel
 {
     [Export]
-    Curve TextSizePerDistance;
+    Curve TextSizePerDistance = null;
     [Export]
-    Curve ElevationPerDistance;
+    Curve ElevationPerDistance = null;
     static TalkText instance;
     public void Talk(string diag)
     {

@@ -1,13 +1,17 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Door.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/Island.cs" type="Script" id=3]
+[ext_resource path="res://Scenes/Env_Assets/Antena.tscn" type="PackedScene" id=4]
 [ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Islands/Island_1Terain_Data/data.hterrain" type="Resource" id=6]
 [ext_resource path="res://Scenes/Islands/Island1_slot0_albedo_bump.packed_tex" type="Texture" id=7]
 [ext_resource path="res://Scenes/Islands/Island1_slot0_normal_roughness.packed_tex" type="Texture" id=8]
+[ext_resource path="res://Scenes/Env_Assets/CylinderThing.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Building/BuildingComposition.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Env_Assets/CylinderThingHuge.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/House.tscn" type="PackedScene" id=12]
 
 [sub_resource type="Shader" id=7]
 code = "shader_type spatial;
@@ -353,6 +357,14 @@ script = ExtResource( 5 )
 mode = 0
 textures = [ [ ExtResource( 7 ) ], [ ExtResource( 8 ) ] ]
 
+[sub_resource type="SpatialMaterial" id=9]
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="CubeMesh" id=8]
+material = SubResource( 9 )
+flip_faces = true
+size = Vector3( 2000, 2000, 2000 )
+
 [node name="Island" type="Spatial" groups=["Islands"]]
 script = ExtResource( 3 )
 
@@ -377,7 +389,7 @@ transform = Transform( -0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866025, 201, 25, 
 [node name="HTerrain" type="Spatial" parent="."]
 script = ExtResource( 1 )
 lod_scale = 2.0
-map_scale = Vector3( 7.82, 10, 7.82 )
+map_scale = Vector3( 7.813, 10, 7.813 )
 centered = true
 _terrain_data = ExtResource( 6 )
 chunk_size = 32
@@ -396,3 +408,69 @@ shader_params/u_tile_reduction = Plane( 0, 0, 0, 0 )
 shader_params/u_globalmap_blend_start = null
 shader_params/u_globalmap_blend_distance = null
 shader_params/u_colormap_opacity_per_texture = Plane( 1, 1, 1, 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="HTerrain"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1000, 0 )
+layers = 0
+generate_lightmap = false
+mesh = SubResource( 8 )
+
+[node name="StaticBody2" parent="." instance=ExtResource( 4 )]
+transform = Transform( 0.990842, -0.135024, 0, 0.13056, 0.958084, 0.255007, -0.034432, -0.252672, 0.966939, 67.3847, 129.319, 56.6032 )
+
+[node name="StaticBody6" parent="." instance=ExtResource( 4 )]
+transform = Transform( 0.990842, -0.135024, 0, 0.13056, 0.958084, 0.255007, -0.034432, -0.252672, 0.966939, 124.979, 143.071, -20.8093 )
+
+[node name="StaticBody7" parent="." instance=ExtResource( 4 )]
+transform = Transform( -0.779376, 0.593652, -0.200376, -0.00911328, 0.30903, 0.951009, 0.62649, 0.74302, -0.235441, 224.438, 153.132, 97.0873 )
+
+[node name="StaticBody5" parent="." instance=ExtResource( 4 )]
+transform = Transform( 6.75407, -0.920389, 0, 0.861397, 6.32117, -2.40111, 0.324207, 2.37912, 6.37959, 169.408, 139.379, 56.6032 )
+
+[node name="StaticBody9" parent="." instance=ExtResource( 4 )]
+transform = Transform( 6.81051, 0.276889, -0.0691891, -0.272446, 6.79964, 0.394013, 0.085023, -0.390904, 6.80474, -19.2567, 93.2913, -293.06 )
+
+[node name="StaticBody8" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 180.339, 154.116, 11.0841 )
+
+[node name="StaticBody" parent="." instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 0.414804, -0.909911, 0, 0.909911, 0.414804, -673.315, -54.3898, -523.477 )
+
+[node name="StaticBody3" parent="." instance=ExtResource( 11 )]
+transform = Transform( 0.433518, -0.885564, 0.166849, 0, 0.185152, 0.98271, -0.901145, -0.426022, 0.0802667, 649.192, 13.3555, -478.462 )
+
+[node name="StaticBody4" parent="." instance=ExtResource( 11 )]
+transform = Transform( 0.74862, -0.360046, -0.556717, 0, 0.839696, -0.543057, 0.662999, 0.406544, 0.628613, 434.296, -5.85968, 665.69 )
+
+[node name="StaticBody10" parent="." instance=ExtResource( 4 )]
+transform = Transform( 0.406035, -0.188769, -0.894149, 0, 0.978433, -0.206563, 0.913858, 0.0838717, 0.397278, -233.902, 93.7599, 173.44 )
+
+[node name="StaticBody11" parent="." instance=ExtResource( 4 )]
+transform = Transform( 0.336237, 0.392172, -0.856239, -0.227616, 0.916061, 0.330188, 0.913858, 0.0838717, 0.397278, -131.758, 78.8842, 362.733 )
+
+[node name="StaticBody12" parent="." instance=ExtResource( 4 )]
+transform = Transform( 0.336237, 0.392172, -0.856239, -0.227616, 0.916061, 0.330188, 0.913858, 0.0838717, 0.397278, 810.12, 50.1024, -7.45036 )
+
+[node name="StaticBody13" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -672.021, 29.4255, 287.673 )
+
+[node name="StaticBody14" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -672.021, 29.4255, 130.852 )
+
+[node name="StaticBody15" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -475.928, 29.4255, 130.852 )
+
+[node name="StaticBody16" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -475.928, 29.4255, 130.852 )
+
+[node name="StaticBody18" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -105.777, 29.4255, -487.136 )
+
+[node name="StaticBody19" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 341.029, 20.5367, -792.859 )
+
+[node name="StaticBody20" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -298.164, 29.4255, -720.823 )
+
+[node name="StaticBody17" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 0.694219, 0.719764, 0, -0.719764, 0.694219, -475.928, 29.4255, 282.671 )

@@ -1,4 +1,4 @@
 [gd_resource type="CubeMesh" format=2]
 
 [resource]
-size = Vector3( 28, 100, 28 )
+size = Vector3( 50, 150, 50 )

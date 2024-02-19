@@ -9,6 +9,6 @@ void fragment() {
 
 	x = FRAGCOORD.x + floor(float(pixel_size) / 2.0) - x;
 	y = FRAGCOORD.y + floor(float(pixel_size) / 2.0) - y;
-
+	//ALBEDO = SCREEN_TEXTURE;
 	ALBEDO = texture(SCREEN_TEXTURE, vec2(x, y) / VIEWPORT_SIZE).xyz;
 }

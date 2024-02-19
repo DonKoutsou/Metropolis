@@ -1,16 +1,16 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://addons/AllSkyFree/Skyboxes/AllSkyFree_Sky_EpicGloriousPink_Equirect.png" type="Texture" id=1]
+[ext_resource path="res://addons/AllSkyFree/Skyboxes/AllSkyFree_Sky_OvercastLow_Equirect.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/DayNight.cs" type="Script" id=3]
 
-[sub_resource type="PanoramaSky" id=1]
+[sub_resource type="PanoramaSky" id=12]
 panorama = ExtResource( 1 )
 
 [sub_resource type="Environment" id=2]
 background_mode = 2
-background_sky = SubResource( 1 )
-background_energy = 0.0
-ambient_light_energy = 0.0
+background_sky = SubResource( 12 )
+background_sky_custom_fov = 75.0
+background_color = Color( 1, 1, 1, 1 )
 fog_color = Color( 0.0352941, 0.0352941, 0.0352941, 1 )
 fog_sun_color = Color( 1, 0.945098, 0.835294, 1 )
 fog_sun_amount = 1.0
@@ -48,7 +48,7 @@ _data = [ Vector2( 0, 0.0363636 ), 0.0, 0.0, 0, 0, Vector2( 0.145288, 0.0363636 
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.496073, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=11]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.498691, 0.172727 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0.0545454 ), 0.0, 0.0, 0, 0, Vector2( 0.499092, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0454545 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=9]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.20288, 0.8 ), 0.0, 0.0, 0, 0, Vector2( 0.846859, 0.781818 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
@@ -64,7 +64,7 @@ _data = [ Vector2( 0.498638, 1 ), 0.0, 0.0, 0, 0 ]
 _data = [ Vector2( 0, 0.345455 ), 0.0, 0.0, 0, 0, Vector2( 0.501362, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.254545 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=7]
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.498638, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.500907, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [node name="AllSkyFree_EpicGloriousPink" type="Spatial"]
 
@@ -81,15 +81,15 @@ sunGcolorcurve = SubResource( 6 )
 sunBcolorcurve = SubResource( 7 )
 
 [node name="Sun" type="DirectionalLight" parent="."]
-transform = Transform( 1, 0, 0, 0, -0.0687466, 0.997634, 0, -0.997634, -0.0687466, 0, 26.5368, 0 )
-visible = false
+transform = Transform( 0.214411, -0.781895, -0.585379, 0.976743, 0.171639, 0.1285, 0, -0.599317, 0.800512, 0, 26.5368, 0 )
 light_bake_mode = 0
 shadow_enabled = true
 directional_shadow_max_distance = 1000.0
 
 [node name="Moon" type="DirectionalLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.441678, 0.897174, 0, -0.897174, 0.441678, 0, 26.5368, 0 )
-light_color = Color( 0.560784, 0.698039, 1, 1 )
+transform = Transform( -0.38721, 0.407223, 0.827187, -0.921992, -0.171022, -0.347394, 0, -0.897174, 0.441678, 0, 26.5368, 0 )
+visible = false
+light_color = Color( 0.862745, 0.905882, 1, 1 )
 light_energy = 0.234
 light_bake_mode = 0
 shadow_enabled = true

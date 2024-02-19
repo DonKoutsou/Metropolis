@@ -27,7 +27,7 @@ public class Island : Spatial
 
 	//NavigationMeshInstance navmesh;
 
-	//Sea waterbody;
+	Sea waterbody;
 	public void RegisterChar(Character en)
 	{
 		if (en is Player)
@@ -58,20 +58,20 @@ public class Island : Spatial
 	{
 		GlobalTranslation = loctospawnat;
 		//Apply rotation random
-		
-		Transform.Rotated(new Vector3(0, 1, 0), rotationtospawnwith);
+		Rotate(new Vector3(0, 1, 0), Mathf.Deg2Rad(rotationtospawnwith));
+		//Transform.Rotated(new Vector3(0, 1, 0), rotationtospawnwith);
 
 		//navmesh = GetNode<NavigationMeshInstance>("NavigationMeshInstance");
 		Terain = GetNode<Spatial>("HTerrain");
-		//waterbody = GetNode<Sea>("SeaBed");
+		waterbody = GetNodeOrNull<Sea>("SeaBed");
 		a_doors = new Door[4];
-		var door__left = (Door)GetNode<Door>("Door_Left");
+		var door__left = GetNode<Door>("Door_Left");
 		a_doors[0] = door__left;
-		var door__down = (Door)GetNode<Door>("Door_Down");
+		var door__down = GetNode<Door>("Door_Down");
 		a_doors[1] = door__down;
-		var door__top = (Door)GetNode<Door>("Door_Top");
+		var door__top = GetNode<Door>("Door_Top");
 		a_doors[2] = door__top;
-		var door__right = (Door)GetNode<Door>("Door_Right");
+		var door__right = GetNode<Door>("Door_Right");
 		a_doors[3] = door__right;
 
 		//grass = GetNode<GrassCubes>("Grass");
@@ -284,8 +284,8 @@ public class Island : Spatial
 		ToggleEnemies(true);
 		//if (navmesh != null)
 			//navmesh.Enabled = true;
-
-		//waterbody.Start();
+		if (waterbody != null)
+			waterbody.Start();
 		m_enabled = true;
 	}
 	public void DeactivateIsland()
@@ -305,7 +305,8 @@ public class Island : Spatial
 			//grass.ToggleGrass(false);
 		//if (navmesh != null)
 			//navmesh.Enabled = false;
-		//waterbody.Stop();
+		if (waterbody != null)
+			waterbody.Stop();
 		m_enabled = false;
 	}
 	void ToggleEnemies(bool toggle)

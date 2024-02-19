@@ -1,20 +1,30 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scenes/Item.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Door.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/Island.cs" type="Script" id=3]
+[ext_resource path="res://Scenes/Env_Assets/Antena.tscn" type="PackedScene" id=4]
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=5]
 [ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=6]
 [ext_resource path="res://Scenes/Islands/StartingislandTerain/data.hterrain" type="Resource" id=7]
 [ext_resource path="res://Scenes/Islands/IslandStarting_slot0_normal_roughness.packed_tex" type="Texture" id=8]
 [ext_resource path="res://Scenes/Islands/IslandStarting_slot0_albedo_bump.packed_tex" type="Texture" id=9]
 [ext_resource path="res://Assets/Building/BuildingComposition.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Scenes/Sea.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Scenes/Env_Assets/CylinderThingHuge.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Env_Assets/CylinderThing.tscn" type="PackedScene" id=12]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 6 )
 mode = 0
 textures = [ [ ExtResource( 9 ) ], [ ExtResource( 8 ) ] ]
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="CubeMesh" id=2]
+material = SubResource( 3 )
+flip_faces = true
+size = Vector3( 2000, 2000, 2000 )
 
 [node name="Island" type="Spatial" groups=["Islands"]]
 script = ExtResource( 3 )
@@ -39,11 +49,6 @@ visible = false
 [node name="Item" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.7353, 0.924315, -3.5246 )
 
-[node name="SeaBed" parent="." instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
-visible = false
-collision_layer = 0
-
 [node name="House" parent="." instance=ExtResource( 10 )]
 transform = Transform( 0.644311, 0, 0.764764, 0, 1, 0, -0.764764, 0, 0.644311, 173.684, -83.3181, -396.486 )
 
@@ -56,7 +61,7 @@ transform = Transform( 0.512373, 0, 0.858763, 0, 1, 0, -0.858763, 0, 0.512373, -
 [node name="HTerrain" type="Spatial" parent="."]
 script = ExtResource( 5 )
 lod_scale = 2.0
-map_scale = Vector3( 7.82, 10.308, 7.82 )
+map_scale = Vector3( 7.813, 10.308, 7.813 )
 centered = true
 _terrain_data = ExtResource( 7 )
 chunk_size = 32
@@ -75,3 +80,26 @@ shader_params/u_tile_reduction = Plane( 0, 0, 0, 0 )
 shader_params/u_globalmap_blend_start = null
 shader_params/u_globalmap_blend_distance = null
 shader_params/u_colormap_opacity_per_texture = Plane( 1, 1, 1, 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="HTerrain"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1000, 0 )
+layers = 0
+mesh = SubResource( 2 )
+
+[node name="StaticBody" parent="." instance=ExtResource( 4 )]
+transform = Transform( 22.0028, 6.80931, 0, -6.80931, 22.0028, 0, 0, 0, 23.0323, 206.954, -16.5524, 305.759 )
+
+[node name="StaticBody2" parent="." instance=ExtResource( 4 )]
+transform = Transform( 0.996883, 0.0788941, 0, -0.0788941, 0.996883, 0, 0, 0, 1, 214.986, -80.8573, -401.927 )
+
+[node name="StaticBody3" parent="." instance=ExtResource( 4 )]
+transform = Transform( 0.898711, -0.404989, 0.168234, 0.437748, 0.851507, -0.288637, -0.0263574, 0.333045, 0.942542, 23.5999, -51.5132, -343.841 )
+
+[node name="StaticBody4" parent="." instance=ExtResource( 4 )]
+transform = Transform( 3.03735, -0.140602, 4.09331, -0.819711, 4.97208, 0.779036, -4.01286, -1.12208, 2.93911, -530.453, 72.2333, -260.097 )
+
+[node name="StaticBody5" parent="." instance=ExtResource( 11 )]
+transform = Transform( 0.56882, -0.321441, 0.757046, 0, 0.920464, 0.390828, -0.822462, -0.222311, 0.523579, 729.52, -125.535, 420.581 )
+
+[node name="StaticBody6" parent="." instance=ExtResource( 12 )]
+transform = Transform( -0.746464, 0, -0.665426, 0, 1, 0, 0.665426, 0, -0.746464, -93.7762, -53.4309, -392.701 )

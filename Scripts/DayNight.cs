@@ -5,28 +5,27 @@ public class DayNight : WorldEnvironment
 {
 
     [Export]
-    Curve brightnesscurve;
+    Curve brightnesscurve = null;
 
     [Export]
-    Curve sunbrightnesscurve;
+    Curve sunbrightnesscurve = null;
 
     [Export]
-    Curve moonbrightnesscurve;
+    Curve moonbrightnesscurve = null;
 
     [Export]
-    Curve softlightnesscurve;
+    Curve softlightnesscurve = null;
+    [Export]
+    Curve sunrotcurve = null;
 
     [Export]
-    Curve sunrotcurve;
+    Curve sunRcolorcurve = null;
 
     [Export]
-    Curve sunRcolorcurve;
+    Curve sunGcolorcurve = null;
 
     [Export]
-    Curve sunGcolorcurve;
-
-    [Export]
-    Curve sunBcolorcurve;
+    Curve sunBcolorcurve = null;
 
     
 
@@ -51,7 +50,7 @@ public class DayNight : WorldEnvironment
     DirectionalLight moon;
     public override void _Process(float delta)
     {
-        currentmins += delta * 50;
+        currentmins += delta;
         if (currentmins > 60)
         {
             currentmins = 0;
