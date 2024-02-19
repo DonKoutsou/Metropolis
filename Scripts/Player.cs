@@ -33,7 +33,7 @@ public class Player : Character
 	{
 		GlobalTranslation = pos;
 		loctomove = pos;
-		NavAgent.SetTargetLocation(loctomove);
+		//NavAgent.SetTargetLocation(loctomove);
 		CameraMovePivot.GetInstance().GlobalTranslation = pos;
 	}
 

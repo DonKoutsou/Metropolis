@@ -112,6 +112,7 @@ public class WorldMap : TileMap
                 pos.x = postoput.x;
                 pos.z = postoput.y;
                 Ile.loctospawnat = pos;
+                //pos.y = 500;
                 int index = random.Next(rots.Count);
                 Ile.rotationtospawnwith = rots[index];
                 ((MyWorld)GetParent()).RegisterIle(Ile);
