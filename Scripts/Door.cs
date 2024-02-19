@@ -5,9 +5,6 @@ public class Door : Wall
 {
 	Island IslandAccess;
 
-
-	Position3D m_spawnpos;
-
 	public void SetIslandToAccess(Island ile)
 	{
 		if (ile == null)
@@ -31,20 +28,15 @@ public class Door : Wall
 	{
 		ile = IslandAccess;	
 	}
-	Position3D GetSpawnPos()
-	{
-		return m_spawnpos;
-	}
 		
 	public override void _Ready()
 	{
-		m_spawnpos = GetNode<Position3D>("SpawnPos");
 		Toggle(false);
 	}
 	 public override void Touch(object body)
 	{
 		Vector3 forw = GlobalTransform.basis.z;
-		Vector3 toOther = GlobalTransform.origin - ((Spatial)body).GlobalTransform.origin;
+		Vector3 toOther = GetNode<CollisionShape>("CollisionShape").GlobalTransform.origin - ((Spatial)body).GlobalTransform.origin;
 		var thing = forw.Dot(toOther);
 		if (thing < 0)
 			return;

@@ -191,6 +191,7 @@ Move_Down={
 3d_physics/layer_4="door"
 3d_physics/layer_5="Item"
 3d_physics/layer_6="Wall"
+3d_physics/layer_7="HouseDoor"
 
 [mono]
 

@@ -3,43 +3,43 @@ using System;
 
 public class HouseDoor : Door
 {
-    bool m_Knocked = false;
+	bool m_Knocked = false;
 
-    //House ParentHouse;
+	//House ParentHouse;
 
-    StaticBody HouseExterior;
+	StaticBody HouseExterior;
 
-    public override void _Ready()
+	public override void _Ready()
 	{
-        HouseExterior = GetParent().GetNode<StaticBody>("HouseExterior");
-        //ParentHouse = (House)GetParent();
+		HouseExterior = GetParent().GetNode<StaticBody>("HouseExterior");
+		//ParentHouse = (House)GetParent();
 	}
-    public bool GetKnocked()
-    {
-        return m_Knocked;
-    }
-    public override void Touch(object body)
+	public bool GetKnocked()
+	{
+		return m_Knocked;
+	}
+	public override void Touch(object body)
 	{
 		Vector3 forw = GlobalTransform.basis.z;
-		Vector3 toOther = GlobalTransform.origin - ((Spatial)body).GlobalTransform.origin;
+		Vector3 toOther = GetNode<CollisionShape>("CollisionShape").GlobalTransform.origin - ((Spatial)body).GlobalTransform.origin;
 		var thing = forw.Dot(toOther);
 		if (thing < 0)
 		{
-            HouseExterior.Hide();
-        }
-        else
-        {
-            HouseExterior.Show();
-        }
+			((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").MaterialOverride).ParamsCullMode = SpatialMaterial.CullMode.Front;
+		}
+		else
+		{
+			((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").MaterialOverride).ParamsCullMode = SpatialMaterial.CullMode.Disabled;
+		}
 	}
-    public bool Knock()
-    {
-        //m_Knocked = true;
-        //GetNode<AudioStreamPlayer2D>("DoorKnockSound").Play();
-        //EmitSignal(nameof(OnKnocked), this);
-        //return !ParentHouse.GetIsEmpty();
-        return false;
-    }
-    [Signal]
-    public delegate void OnKnocked(HouseDoor door);
+	public bool Knock()
+	{
+		//m_Knocked = true;
+		//GetNode<AudioStreamPlayer2D>("DoorKnockSound").Play();
+		//EmitSignal(nameof(OnKnocked), this);
+		//return !ParentHouse.GetIsEmpty();
+		return false;
+	}
+	[Signal]
+	public delegate void OnKnocked(HouseDoor door);
 }

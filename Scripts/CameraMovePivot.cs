@@ -20,13 +20,15 @@ public class CameraMovePivot : Position3D
 		pl = (Player)GetParent();
         instance = this;
     }
-    public override void _Process(float delta)
+	
+    public override void _PhysicsProcess(float delta)
 	{
         if (shouldfollowpl)
         {
             GlobalTranslation = pl.GlobalTranslation;
         }
         Vector3 prev = zpivot.Translation;
+		//Vector3 myprev = GlobalTranslation;
 		Vector3 trans = zpivot.Translation;
 		if (Input.IsActionPressed("Move_Right"))
 		{
@@ -55,8 +57,10 @@ public class CameraMovePivot : Position3D
 		{
 			trans.y -= 1f;
         }
+		if (trans == prev)
+			return;
         zpivot.Translation = trans;
-        if (pl.GlobalTranslation.DistanceTo(zpivot.GlobalTranslation) < 300 && cam.GlobalTranslation.y > 0)
+        if (pl.GlobalTranslation.DistanceTo(zpivot.GlobalTranslation) < 300 && !MyCamera.IsClipping())
         {
             GlobalTranslation = zpivot.GlobalTranslation;
         }

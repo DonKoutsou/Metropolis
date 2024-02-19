@@ -205,7 +205,17 @@ public class Player : Character
 		}
 		//loctomove = GlobalTransform.origin;
 	}
-
+	public void OnHouseDoorDetectorBodyEntered(Node body)
+	{
+		if (body is HouseDoor)
+		{
+			Wall bod = (Wall)body;
+			bod.Touch(this);
+			TalkText.GetInstance().Talk("'Αδειο...");
+		}
+		//loctomove = GlobalTransform.origin;
+	}
+	
 		// ...
 
 		

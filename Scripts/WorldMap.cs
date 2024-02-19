@@ -91,6 +91,9 @@ public class WorldMap : TileMap
 
     List <Vector2> spawned = new List<Vector2>();
 
+    List <float> rots = new List<float>{0f, 90f, 180f, -90f};
+
+    Random random = new Random();
 
     void EnableIsland(int curtile, int curtiletype)
     {
@@ -109,6 +112,8 @@ public class WorldMap : TileMap
                 pos.x = postoput.x;
                 pos.z = postoput.y;
                 Ile.loctospawnat = pos;
+                int index = random.Next(rots.Count);
+                Ile.rotationtospawnwith = rots[index];
                 ((MyWorld)GetParent()).RegisterIle(Ile);
                 var pls = GetTree().GetNodesInGroup("player");
                 ((Player)pls[0]).Teleport(pos);
@@ -130,6 +135,8 @@ public class WorldMap : TileMap
                 pos.x = postoput.x;
                 pos.z = postoput.y;
                 Ile.loctospawnat = pos;
+                int index = random.Next(rots.Count);
+                Ile.rotationtospawnwith = rots[index];
                 ((MyWorld)GetParent()).RegisterIle(Ile);
                 iles.Insert(iles.Count, Ile);
                 spawned.Insert(spawned.Count, cellArray);
@@ -165,6 +172,8 @@ public class WorldMap : TileMap
             pos.x = postoput.x;
             pos.z = postoput.y;
             Ile.loctospawnat = pos;
+            int index = random.Next(rots.Count);
+            Ile.rotationtospawnwith = rots[index];
             ((MyWorld)GetParent()).RegisterIle(Ile);
             iles.Insert(iles.Count, Ile);
             currentile += 1;
@@ -187,6 +196,8 @@ public class WorldMap : TileMap
                 pos.x = postoput.x;
                 pos.z = postoput.y;
                 Ile.loctospawnat = pos;
+                int index = random.Next(rots.Count);
+                Ile.rotationtospawnwith = rots[index];
                 ((MyWorld)GetParent()).RegisterIle(Ile);
                 iles.Insert(iles.Count, Ile);
             }

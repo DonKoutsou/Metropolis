@@ -358,19 +358,15 @@ script = ExtResource( 3 )
 
 [node name="Door_Left" parent="." instance=ExtResource( 2 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1000, 0, 0 )
-visible = false
 
 [node name="Door_Down" parent="." instance=ExtResource( 2 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 1000 )
-visible = false
 
 [node name="Door_Top" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1000 )
-visible = false
 
 [node name="Door_Right" parent="." instance=ExtResource( 2 )]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1000, 0, 0 )
-visible = false
 
 [node name="House" parent="." instance=ExtResource( 10 )]
 transform = Transform( 0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, -88, 93, -147 )
@@ -387,7 +383,7 @@ _terrain_data = ExtResource( 6 )
 chunk_size = 32
 collision_enabled = true
 collision_layer = 4
-collision_mask = 0
+collision_mask = 4
 shader_type = "Classic4"
 custom_shader = SubResource( 7 )
 custom_globalmap_shader = null

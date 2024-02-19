@@ -3,24 +3,55 @@ using System;
 
 public class DayNight : WorldEnvironment
 {
-    [Export]
-    float[] timebrightness;
 
     [Export]
-    float[] SunRotation;
+    Curve brightnesscurve;
 
     [Export]
-    int startinghour;
+    Curve sunbrightnesscurve;
 
-    int currenthour;
+    [Export]
+    Curve moonbrightnesscurve;
+
+    [Export]
+    Curve softlightnesscurve;
+
+    [Export]
+    Curve sunrotcurve;
+
+    [Export]
+    Curve sunRcolorcurve;
+
+    [Export]
+    Curve sunGcolorcurve;
+
+    [Export]
+    Curve sunBcolorcurve;
+
+    
+
+   // [Export]
+    //Curve moonRcolorcurve;
+
+    //[Export]
+   // Curve moonGcolorcurve;
+
+    //[Export]
+    //Curve moonBcolorcurve;
+
+    [Export]
+    int startinghour = 10;
+
+    float currenthour;
     float currentmins;
 
     Time_UI UI;
 
     DirectionalLight sun;
+    DirectionalLight moon;
     public override void _Process(float delta)
     {
-        currentmins += delta * 10;
+        currentmins += delta * 50;
         if (currentmins > 60)
         {
             currentmins = 0;
@@ -36,20 +67,48 @@ public class DayNight : WorldEnvironment
             UI = Time_UI.GetInstance();
 
         var minval = (currentmins-0)/(60-0);
-        var brightness = timebrightness[currenthour] + (minval / 10);
-        var sunrot = SunRotation[currenthour];
-        Environment.AdjustmentBrightness = brightness;
+        var hourval = (currenthour + minval)/24;
+        //var currentval = hourval + (minval / 10);
+        var brightness = brightnesscurve.Interpolate(hourval);
+        var sunbrightness = sunbrightnesscurve.Interpolate(hourval);
+        var moonbrightness = moonbrightnesscurve.Interpolate(hourval);
+        var softlight = softlightnesscurve.Interpolate(hourval);
+        var sunrot = sunrotcurve.Interpolate(hourval);
+        
+        //var brightness = timebrightness[currenthour] + (minval / 10);
+        //var sunrot = SunRotation[(int)currenthour];
+        Environment.BackgroundEnergy = brightness;
+        Environment.AmbientLightEnergy = softlight;
+        sun.LightEnergy = sunbrightness;
+        moon.LightEnergy = moonbrightness;
+        Color newsuncol = new Color(sunRcolorcurve.Interpolate(hourval) , sunGcolorcurve.Interpolate(hourval), sunBcolorcurve.Interpolate(hourval));
+        //Color newmooncol = new Color(moonRcolorcurve.Interpolate(hourval) , moonGcolorcurve.Interpolate(hourval), moonBcolorcurve.Interpolate(hourval));
+        sun.LightColor = newsuncol;
+        //moon.LightColor = newmooncol;
+        if (sunrot > 180)
+        {
+            sun.Show();
+            sunrot = -(180 - (sunrot - 180));
+            moon.Hide();
+        }
+        else
+        {
+            sun.Hide();
+            moon.Show();
+        }
+        var moonrot = -(180 - sunrot);
+            
         sun.RotationDegrees = new Vector3(sunrot, 0, 0);
-        sun.LightEnergy = brightness;
-
-        GD.Print(brightness);
-        GD.Print(sunrot);
+        moon.RotationDegrees = new Vector3(moonrot, 0, 0);
+        //GD.Print(brightness);
+        //GD.Print(sunrot);
     }
     public override void _Ready()
     {
         base._Ready();
         currenthour = startinghour;
         sun = GetParent().GetNode<DirectionalLight>("Sun");
+        moon = GetParent().GetNode<DirectionalLight>("Moon");
     }
 
 }

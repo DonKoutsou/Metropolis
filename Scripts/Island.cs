@@ -19,13 +19,15 @@ public class Island : Spatial
 
 	public Vector3 loctospawnat;
 
-	GrassCubes grass;
+	public float rotationtospawnwith;
+
+	//GrassCubes grass;
 
 	Spatial Terain;
 
-	NavigationMeshInstance navmesh;
+	//NavigationMeshInstance navmesh;
 
-	Sea waterbody;
+	//Sea waterbody;
 	public void RegisterChar(Character en)
 	{
 		if (en is Player)
@@ -55,6 +57,10 @@ public class Island : Spatial
 	public override void _Ready()
 	{
 		GlobalTranslation = loctospawnat;
+		//Apply rotation random
+		
+		Transform.Rotated(new Vector3(0, 1, 0), rotationtospawnwith);
+
 		//navmesh = GetNode<NavigationMeshInstance>("NavigationMeshInstance");
 		Terain = GetNode<Spatial>("HTerrain");
 		//waterbody = GetNode<Sea>("SeaBed");
@@ -132,8 +138,8 @@ public class Island : Spatial
 			Vector2 islandloc = new Vector2(closeislands[i].GlobalTransform.origin.x, closeislands[i].GlobalTransform.origin.z);
 			if (closeislands[i].GlobalTransform.origin.DistanceTo(GlobalTransform.origin) > 2100)
 				continue;
-			Door closestdoor = null;
-			
+			Door closestdoor = GetClosestDoor(closeislands[i].GlobalTransform.origin);
+			/*
 			//down
 			if (islandloc.y > mypos.y)
 			{
@@ -153,7 +159,7 @@ public class Island : Spatial
 			if (islandloc.x < mypos.x)
 			{
 				closestdoor = a_doors[0];
-			}
+			}*/
 			if (closestdoor == null)
 				continue;
 			closestdoor.Toggle(true);

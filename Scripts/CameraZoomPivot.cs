@@ -16,6 +16,7 @@ public class CameraZoomPivot : Position3D
     }
 	public override void _Input(InputEvent @event)
 	{
+		Vector3 prevpos = Translation;
 		if (@event.IsActionPressed("ZoomOut"))
 		{
 			if (cam.Translation.y > 300)
@@ -32,6 +33,8 @@ public class CameraZoomPivot : Position3D
 		{
 			cam.Translation = new Vector3(0, 20, 20);
 		}
+		if (MyCamera.IsClipping())
+			cam.Translation = prevpos;
 	}
 	
 	
