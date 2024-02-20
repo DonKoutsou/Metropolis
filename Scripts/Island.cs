@@ -262,10 +262,7 @@ public class Island : Spatial
 		{
 			Init();
 		}
-		if (Terain != null)
-		{
-			Terain.SetProcess(true);
-		}
+		
 		for (int i = 0;i < closeislands.Count; i++)
 		{
 			if (!closeislands[i].Inited)
@@ -274,7 +271,13 @@ public class Island : Spatial
 			}
 		}
 		if (map.HideBasedOnState)
+		{
 			Show();
+		}
+		if (Terain != null)
+		{
+			Terain.SetProcess(true);
+		}	
 		foreach (Door d in a_doors)
 		{
 			d.ToggleCollisions(true);
@@ -291,7 +294,9 @@ public class Island : Spatial
 	public void DeactivateIsland()
 	{
 		if (map.HideBasedOnState)
+		{
 			Hide();
+		}
 		if (Terain != null)
 		{
 			Terain.SetProcess(false);
