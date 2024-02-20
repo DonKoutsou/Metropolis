@@ -30,4 +30,3 @@ Pit_City = ExtResource( 7 )
 Slab = ExtResource( 6 )
 Volcano = ExtResource( 8 )
 Sea = ExtResource( 9 )
-HideBasedOnState = false

@@ -427,8 +427,6 @@ enabled = true
 cast_to = Vector3( 0, -2, 0 )
 collision_mask = 4
 
-[node name="MoveLoc" parent="." instance=ExtResource( 16 )]
-
 [node name="NavigationAgent" type="NavigationAgent" parent="."]
 
 [node name="Particles" type="Particles" parent="."]
@@ -458,6 +456,8 @@ mesh = SubResource( 85 )
 transform = Transform( 1, 1.64334e-08, 6.58151e-09, -7.64833e-08, 1, 2.08616e-07, 1.41731e-07, 1.49012e-07, 1, 0, 0, -10000 )
 cast_shadow = 0
 mesh = SubResource( 86 )
+
+[node name="MoveLoc" parent="." instance=ExtResource( 16 )]
 
 [connection signal="body_entered" from="MobDetector" to="." method="OnMobDetectorBodyEntered"]
 [connection signal="body_entered" from="DoorDetector" to="." method="OnDoorDetectorBodyEntered"]

@@ -81,12 +81,23 @@ public class Player : Character
 			//if ray finds nothiong return
 			if (rayar.Count > 0)
 			{
+				Spatial ob = (Spatial)rayar["collider"];
 				loctomove = (Vector3)rayar["position"];
+				Vector3 norm = (Vector3)rayar["normal"];
+				var result = new Basis();
+				result.x = norm.Cross(moveloc.GlobalTransform.basis.z);
+				result.y = norm;
+				result.z = moveloc.GlobalTransform.basis.x.Cross(norm);
+				var scale = moveloc.GlobalTransform.basis.Scale;
+				result = result.Orthonormalized();
+				result.Scale = new Vector3(1, 1, 1);
+				Transform or = new Transform();
+				or.basis = result;
+				moveloc.GlobalTransform = or;
 				moveloc.Show();
 			}
 		}
 		moveloc.GlobalTranslation = loctomove;
-		//Vector3 nextloc = NavAgent.GetNextLocation();
 		var spd = RunSpeed;
 		var direction = loctomove - GlobalTransform.origin;
 		Vector2 loc = new Vector2(loctomove.x, loctomove.z);
@@ -197,6 +208,17 @@ public class Player : Character
 			if (rayar.Count == 0)
 				return;
 			loctomove = (Vector3)rayar["position"];
+			Vector3 norm = (Vector3)rayar["normal"];
+			var result = new Basis();
+			result.x = norm.Cross(moveloc.GlobalTransform.basis.z);
+			result.y = norm;
+			result.z = moveloc.GlobalTransform.basis.x.Cross(norm);
+			var scale = moveloc.GlobalTransform.basis.Scale;
+			result = result.Orthonormalized();
+			result.Scale = new Vector3(1, 1, 1);
+			Transform or = new Transform();
+			or.basis = result;
+			moveloc.GlobalTransform = or;
 			moveloc.Show();
 		}
 	}
