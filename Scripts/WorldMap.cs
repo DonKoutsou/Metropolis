@@ -13,10 +13,22 @@ public class WorldMap : TileMap
     List <PackedScene> loadedscenes = new List<PackedScene>();
 
     [Export]
-    public string Entrytospawn;
+    public PackedScene Entrytospawn;
 
     [Export]
-    public string Exittospawn;
+    public PackedScene Exittospawn;
+
+    [Export]
+    public PackedScene Pit_City;
+
+    [Export]
+    public PackedScene Slab;
+
+    [Export]
+    public PackedScene Volcano;
+
+    [Export]
+    public PackedScene Sea;
 
     //[Export]
     //bool ScrableDoors = false;
@@ -101,10 +113,9 @@ public class WorldMap : TileMap
         {
             GD.Print("Starting to generate initial map.");
             var Entrycells = GetUsedCellsById(0);
-            var Entryscene = GD.Load<PackedScene>(Entrytospawn);
             foreach (Vector2 cellArray in Entrycells)
             {
-                Island Ile = (Island)Entryscene.Instance();
+                Island Ile = (Island)Entrytospawn.Instance();
                 Vector2 postoput = MapToWorld(cellArray);
                 entycell = cellArray;
                 postoput += CellSize / 2;
@@ -117,7 +128,7 @@ public class WorldMap : TileMap
                 Ile.rotationtospawnwith = rots[index];
                 ((MyWorld)GetParent()).RegisterIle(Ile);
                 var pls = GetTree().GetNodesInGroup("player");
-                ((Player)pls[0]).Teleport(pos);
+                ((Player)pls[0]).Teleport(Ile.GetNode<Position3D>("SpawnPosition").GlobalTranslation);
                 iles.Insert(iles.Count, Ile);
                 spawned.Insert(spawned.Count, cellArray);
             }
@@ -142,6 +153,59 @@ public class WorldMap : TileMap
                 iles.Insert(iles.Count, Ile);
                 spawned.Insert(spawned.Count, cellArray);
             }
+            var pitcells = GetUsedCellsById(4);
+            foreach (Vector2 cellArray in pitcells)
+            {
+                var scene = Pit_City;
+                Island Ile = (Island)scene.Instance();
+                Vector2 postoput = MapToWorld(cellArray);
+                postoput += CellSize / 2;
+                Vector3 pos = new Vector3();
+                pos.x = postoput.x;
+                pos.z = postoput.y;
+                Ile.loctospawnat = pos;
+                int index = random.Next(rots.Count);
+                Ile.rotationtospawnwith = rots[index];
+                ((MyWorld)GetParent()).RegisterIle(Ile);
+                iles.Insert(iles.Count, Ile);
+                spawned.Insert(spawned.Count, cellArray);
+            }
+            var SlabChunks = GetUsedCellsById(5);
+            foreach (Vector2 cellArray in SlabChunks)
+            {
+                var scene = Slab;
+                Island Ile = (Island)scene.Instance();
+                Vector2 postoput = MapToWorld(cellArray);
+                
+                postoput += CellSize / 2;
+                Vector3 pos = new Vector3();
+                pos.x = postoput.x;
+                pos.z = postoput.y;
+                Ile.loctospawnat = pos;
+                int index = random.Next(rots.Count);
+                Ile.rotationtospawnwith = rots[index];
+                ((MyWorld)GetParent()).RegisterIle(Ile);
+                iles.Insert(iles.Count, Ile);
+                spawned.Insert(spawned.Count, cellArray);
+            }
+            var VolcanoChunks = GetUsedCellsById(6);
+            foreach (Vector2 cellArray in VolcanoChunks)
+            {
+                var scene = Volcano;
+                Island Ile = (Island)scene.Instance();
+                Vector2 postoput = MapToWorld(cellArray);
+                postoput += CellSize / 2;
+                Vector3 pos = new Vector3();
+                pos.x = postoput.x;
+                pos.z = postoput.y;
+                Ile.loctospawnat = pos;
+                int index = random.Next(rots.Count);
+                Ile.rotationtospawnwith = rots[index];
+                ((MyWorld)GetParent()).RegisterIle(Ile);
+                iles.Insert(iles.Count, Ile);
+                spawned.Insert(spawned.Count, cellArray);
+            }
+            
             for(int i = 0; i < iles.Count; i++)
             {
                 if (iles[i].m_bOriginalIle)
@@ -187,10 +251,9 @@ public class WorldMap : TileMap
         {
             GD.Print("Generating Exits");
             var Exitcells = GetUsedCellsById(3);
-            var Exitscene = GD.Load<PackedScene>(Exittospawn);
             foreach (Vector2 cellArray in Exitcells)
             {
-                Island Ile = (Island)Exitscene.Instance();
+                Island Ile = (Island)Exittospawn.Instance();
                 Vector2 postoput = MapToWorld(cellArray);
                 postoput += CellSize / 2;
                 Vector3 pos = new Vector3();
@@ -202,10 +265,31 @@ public class WorldMap : TileMap
                 ((MyWorld)GetParent()).RegisterIle(Ile);
                 iles.Insert(iles.Count, Ile);
             }
+            currenttiletype += 4;
+            GD.Print("-------------- Finished generating exit ---------------");
+        }
+        if (curtiletype == 7)
+        {
+            GD.Print("Generating Seas");
+            var Seas = GetUsedCellsById(7);
+            foreach (Vector2 cellArray in Seas)
+            {
+                Island Ile = (Island)Sea.Instance();
+                Vector2 postoput = MapToWorld(cellArray);
+                postoput += CellSize / 2;
+                Vector3 pos = new Vector3();
+                pos.x = postoput.x;
+                pos.z = postoput.y;
+                Ile.loctospawnat = pos;
+                //int index = random.Next(rots.Count);
+                //Ile.rotationtospawnwith = rots[index];
+                ((MyWorld)GetParent()).RegisterIle(Ile);
+                iles.Insert(iles.Count, Ile);
+            }
             currenttiletype += 1;
             GD.Print("-------------- Finished generating exit ---------------");
         }
-        if (curtiletype == 4)
+        if (curtiletype == 8)
         {
             GD.Print("Toggling final islands");
             iles.Clear();
@@ -213,6 +297,6 @@ public class WorldMap : TileMap
             SetProcess(false);
         }
     }
-    
+	
 }
 

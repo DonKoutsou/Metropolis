@@ -62,6 +62,11 @@ public class Player : Character
 
         NavigationServer.AgentSetMap(myrid, default_3d_map_rid);
         NavigationServer.AgentSetRadius(myrid, 0.5f);
+
+		Spatial sunmoonpiv = GetNode<Spatial>("SunMoonPivot");
+		MainWorld world = (MainWorld)GetParent().GetParent();
+		DayNight env = world.GetNode<Spatial>("Sky").GetNode<DayNight>("DayNightController");
+		env.SunMoonMeshPivot = sunmoonpiv;
 	}
 	public override void _PhysicsProcess(float delta)
 	{
@@ -71,7 +76,7 @@ public class Player : Character
 			Vector2 mousepos = GetViewport().GetMousePosition();
 			Camera cam = GetTree().Root.GetCamera();
 			Vector3 rayor = cam.ProjectRayOrigin(mousepos);
-			Vector3 rayend = rayor + cam.ProjectRayNormal(mousepos) * 2000;
+			Vector3 rayend = rayor + cam.ProjectRayNormal(mousepos) * 10000;
 			var rayar = spacestate.IntersectRay(rayor, rayend, new Godot.Collections.Array { this }, moveloc.MoveLayer);
 			//if ray finds nothiong return
 			if (rayar.Count > 0)
@@ -82,7 +87,7 @@ public class Player : Character
 		}
 		moveloc.GlobalTranslation = loctomove;
 		//Vector3 nextloc = NavAgent.GetNextLocation();
-		var spd = Speed;
+		var spd = RunSpeed;
 		var direction = loctomove - GlobalTransform.origin;
 		Vector2 loc = new Vector2(loctomove.x, loctomove.z);
 		
@@ -92,7 +97,7 @@ public class Player : Character
 
 		if (Input.IsActionPressed("Run") && m_Stamina > 10 && direction != Vector3.Zero)
 		{
-			spd = RunSpeed;
+			spd = Speed;
 			//m_Stamina = m_Stamina - m_RunCost;
 		}
 		else if (!Input.IsActionPressed("Run") && m_Stamina < startingstaming)
@@ -122,13 +127,17 @@ public class Player : Character
 			}
 			if (Input.IsActionPressed("Run"))
 			{
-				GetNode<AudioStreamPlayer3D>("WalkingSound").PitchScale = 1f;
-
+				
+				GetNode<AudioStreamPlayer3D>("WalkingSound").PitchScale = 0.5f;
 				//GetNode<AudioStreamPlayer3D>("WalkingSound").db = 5f;
-				anim.PlayAnimation(E_Animations.Run);
+				anim.PlayAnimation(E_Animations.Walk);
 			}
 			else
-				anim.PlayAnimation(E_Animations.Walk);
+			{
+				GetNode<AudioStreamPlayer3D>("WalkingSound").PitchScale = 1f;
+				anim.PlayAnimation(E_Animations.Run);
+			}
+				
 		}
 		//Stamina_bar.Value = m_Stamina;
 
@@ -182,7 +191,7 @@ public class Player : Character
 			Vector2 mousepos = GetViewport().GetMousePosition();
 			Camera cam = GetTree().Root.GetCamera();
 			Vector3 rayor = cam.ProjectRayOrigin(mousepos);
-			Vector3 rayend = rayor + cam.ProjectRayNormal(mousepos) * 2000;
+			Vector3 rayend = rayor + cam.ProjectRayNormal(mousepos) * 10000;
 			var rayar = spacestate.IntersectRay(rayor, rayend, new Godot.Collections.Array { this }, moveloc.MoveLayer);
 			//if ray finds nothiong return
 			if (rayar.Count == 0)

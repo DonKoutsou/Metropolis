@@ -18,4 +18,4 @@ layer = 4
 
 [node name="StartScreen" parent="CanvasLayer" instance=ExtResource( 1 )]
 
-[node name="AllSkyFree_EpicGloriousPink" parent="." instance=ExtResource( 3 )]
+[node name="Sky" parent="." instance=ExtResource( 3 )]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Door.tscn" type="PackedScene" id=2]
@@ -7,17 +7,22 @@
 [ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Islands/Island3_slot0_normal_roughness.packed_tex" type="Texture" id=6]
 [ext_resource path="res://Scenes/Islands/Island3_slot0_albedo_bump.packed_tex" type="Texture" id=7]
+[ext_resource path="res://Scenes/Islands/Island3_slot1_albedo_bump.packed_tex" type="Texture" id=8]
+[ext_resource path="res://Scenes/Islands/Island3_slot1_normal_roughness.packed_tex" type="Texture" id=9]
+[ext_resource path="res://Scenes/Sea.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Env_Assets/CylinderThingHuge.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Assets/Building/BuildingComposition.tscn" type="PackedScene" id=12]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 5 )
 mode = 0
-textures = [ [ ExtResource( 7 ) ], [ ExtResource( 6 ) ] ]
+textures = [ [ ExtResource( 7 ), ExtResource( 8 ) ], [ ExtResource( 6 ), ExtResource( 9 ) ] ]
 
-[sub_resource type="SpatialMaterial" id=12]
+[sub_resource type="SpatialMaterial" id=14]
 albedo_color = Color( 0, 0, 0, 1 )
 
 [sub_resource type="CubeMesh" id=13]
-material = SubResource( 12 )
+material = SubResource( 14 )
 flip_faces = true
 size = Vector3( 2000, 2000, 2000 )
 
@@ -53,7 +58,7 @@ texture_set = SubResource( 1 )
 render_layers = 1
 shader_params/u_ground_uv_scale_per_texture = Plane( 10, 10, 10, 10 )
 shader_params/u_depth_blending = true
-shader_params/u_triplanar = false
+shader_params/u_triplanar = true
 shader_params/u_tile_reduction = Plane( 0, 0, 0, 0 )
 shader_params/u_globalmap_blend_start = null
 shader_params/u_globalmap_blend_distance = null
@@ -64,3 +69,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1000, 0 )
 layers = 0
 generate_lightmap = false
 mesh = SubResource( 13 )
+
+[node name="StaticBody" parent="." instance=ExtResource( 11 )]
+transform = Transform( -0.992732, 0, -0.120345, 0, 1, 0, 0.120345, 0, -0.992732, -498.83, -20.5386, -481.751 )
+
+[node name="SeaBed" parent="." instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+
+[node name="House" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -541.511, -1.46928, -416.827 )

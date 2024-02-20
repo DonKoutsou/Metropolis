@@ -50,10 +50,10 @@ visible = false
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.7353, 0.924315, -3.5246 )
 
 [node name="House" parent="." instance=ExtResource( 10 )]
-transform = Transform( 0.644311, 0, 0.764764, 0, 1, 0, -0.764764, 0, 0.644311, 173.684, -83.3181, -396.486 )
+transform = Transform( 0.831925, 0, -0.554888, 0, 1, 0, 0.554888, 0, 0.831925, 173.684, -82.0805, -396.486 )
 
 [node name="House2" parent="." instance=ExtResource( 10 )]
-transform = Transform( 0.736192, 0, -0.676774, 0, 1, 0, 0.676774, 0, 0.736192, 481.827, -59.4231, -186.625 )
+transform = Transform( 0.900153, 0, 0.435577, 0, 1, 0, -0.435577, 0, 0.900153, 312.854, -62.696, -149.437 )
 
 [node name="House3" parent="." instance=ExtResource( 10 )]
 transform = Transform( 0.512373, 0, 0.858763, 0, 1, 0, -0.858763, 0, 0.512373, -241.035, 14.1729, -141.656 )
@@ -103,3 +103,6 @@ transform = Transform( 0.56882, -0.321441, 0.757046, 0, 0.920464, 0.390828, -0.8
 
 [node name="StaticBody6" parent="." instance=ExtResource( 12 )]
 transform = Transform( -0.746464, 0, -0.665426, 0, 1, 0, 0.665426, 0, -0.746464, -93.7762, -53.4309, -392.701 )
+
+[node name="SpawnPosition" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 177.431, -82.1887, -375.779 )

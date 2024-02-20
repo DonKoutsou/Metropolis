@@ -1,0 +1,8 @@
+{
+	"contains_albedo": false,
+	"resolution": 512,
+	"src": {
+		"a": "res://Assets/TerainTex/Rock037_1K-JPG/Rock037_1K-JPG_Roughness.jpg",
+		"rgb": "res://Assets/TerainTex/Rock037_1K-JPG/Rock037_1K-JPG_NormalGL.jpg"
+	}
+}

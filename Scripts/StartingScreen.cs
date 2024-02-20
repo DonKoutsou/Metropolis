@@ -7,29 +7,31 @@ public class StartingScreen : Control
 	
 	MainWorld world;
 
-	int selectedmap = 0;
+	//int selectedmap = 0;
 	
-	List <Button> WorldButtons = new List<Button>();
+	//List <Button> WorldButtons = new List<Button>();
 
 	public override void _Ready()
 	{
 		world = (MainWorld)GetParent().GetParent();
-		WorldButtons.Insert(0, GetNode<Button>("World1Button"));
-		WorldButtons.Insert(1, GetNode<Button>("World2Button"));
-		WorldButtons[0].Pressed = true;
+		//WorldButtons.Insert(0, GetNode<Button>("World1Button"));
+		//WorldButtons.Insert(1, GetNode<Button>("World2Button"));
+		//WorldButtons[0].Pressed = true;
 	}
 	private void On_Start_Button_Down()
 	{
-		if (selectedmap == -1)
-			return;
+		//if (selectedmap == -1)
+			//return;
 		//GetNode<Label>("TitleLabel").Hide();
 		GetNode<Button>("Start_Button").Hide();
 		GetNode<LoadingScreen>("LoadingScreen").EnableTime();
-		foreach (Button but in WorldButtons)
-		{
-			but.Hide();
-		}
-		world.SpawnMap(selectedmap);
+		//foreach (Button but in WorldButtons)
+		//{
+		//	but.Hide();
+		//}
+		world.SpawnMap(0);
+		GetNode<VideoPlayer>("VideoPlayer").Paused = true;
+		GetNode<VideoPlayer>("VideoPlayer").Hide();
 	}
 	public void GameOver()
 	{
@@ -56,21 +58,21 @@ public class StartingScreen : Control
 	{
 		if (!button_pressed)
 		{
-			selectedmap = -1;
+			//selectedmap = -1;
 			return;
 		}
-		WorldButtons[1].Pressed = false;
-		selectedmap = 0;
+		//WorldButtons[1].Pressed = false;
+		//selectedmap = 0;
 	}
 	private void SetWorld2(bool button_pressed)
 	{
 		if (!button_pressed)
 		{
-			selectedmap = -1;
+			//selectedmap = -1;
 			return;
 		}
-		WorldButtons[0].Pressed = false;
-		selectedmap = 1;
+		//WorldButtons[0].Pressed = false;
+		//selectedmap = 1;
 		// Replace with function body.
 	}
 }

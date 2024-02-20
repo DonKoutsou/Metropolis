@@ -13,10 +13,10 @@ roughness = 0.02
 normal_enabled = true
 normal_scale = 0.11
 normal_texture = ExtResource( 1 )
-uv1_scale = Vector3( 20, 20, 20 )
 uv1_offset = Vector3( 0, 0.265361, 0 )
-proximity_fade_enable = true
-proximity_fade_distance = 1.0
+distance_fade_mode = 1
+distance_fade_min_distance = 3000.0
+distance_fade_max_distance = 0.0
 
 [sub_resource type="Animation" id=3]
 length = 0.001

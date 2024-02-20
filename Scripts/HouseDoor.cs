@@ -25,11 +25,13 @@ public class HouseDoor : Door
 		var thing = forw.Dot(toOther);
 		if (thing < 0)
 		{
-			((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").MaterialOverride).ParamsCullMode = SpatialMaterial.CullMode.Front;
+			((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetSurfaceMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Front;
+			((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetSurfaceMaterial(2)).ParamsCullMode = SpatialMaterial.CullMode.Front;
 		}
 		else
 		{
-			((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").MaterialOverride).ParamsCullMode = SpatialMaterial.CullMode.Disabled;
+			((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetSurfaceMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Disabled;
+			((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetSurfaceMaterial(2)).ParamsCullMode = SpatialMaterial.CullMode.Disabled;
 		}
 	}
 	public bool Knock()

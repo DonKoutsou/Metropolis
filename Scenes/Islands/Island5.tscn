@@ -1,0 +1,105 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Scenes/Islands/Island5_Terain/data.hterrain" type="Resource" id=1]
+[ext_resource path="res://Scenes/Door.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/Island.cs" type="Script" id=3]
+[ext_resource path="res://Scenes/Islands/Island5_slot0_albedo_bump.packed_tex" type="Texture" id=4]
+[ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=5]
+[ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/Islands/Island5_slot0_normal_roughness.packed_tex" type="Texture" id=7]
+[ext_resource path="res://Scenes/PitCity.tscn" type="PackedScene" id=8]
+
+[sub_resource type="ParticlesMaterial" id=18]
+emission_shape = 2
+emission_box_extents = Vector3( 800, 1, 800 )
+direction = Vector3( 0, 1, 0 )
+spread = 14.24
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 1500.0
+
+[sub_resource type="SphereMesh" id=19]
+radius = 2.0
+height = 4.0
+
+[sub_resource type="SpatialMaterial" id=17]
+render_priority = 1
+flags_unshaded = true
+albedo_color = Color( 0, 0, 0, 1 )
+proximity_fade_enable = true
+proximity_fade_distance = 1367.17
+
+[sub_resource type="CubeMesh" id=16]
+material = SubResource( 17 )
+size = Vector3( 1500, 500, 1500 )
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 6 )
+mode = 0
+textures = [ [ ExtResource( 4 ) ], [ ExtResource( 7 ) ] ]
+
+[sub_resource type="SpatialMaterial" id=14]
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="CubeMesh" id=15]
+material = SubResource( 14 )
+flip_faces = true
+size = Vector3( 2000, 2000, 2000 )
+
+[node name="Island" type="Spatial" groups=["Islands"]]
+script = ExtResource( 3 )
+
+[node name="Door_Left" parent="." instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1000, 0, 0 )
+visible = false
+
+[node name="Door_Down" parent="." instance=ExtResource( 2 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 1000 )
+visible = false
+
+[node name="Door_Top" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1000 )
+visible = false
+
+[node name="Door_Right" parent="." instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1000, 0, 0 )
+visible = false
+
+[node name="Particles" type="Particles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -118.02, 0 )
+amount = 500
+process_material = SubResource( 18 )
+draw_pass_1 = SubResource( 19 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -317.708, 0 )
+mesh = SubResource( 16 )
+
+[node name="HTerrain" type="Spatial" parent="."]
+script = ExtResource( 5 )
+lod_scale = 2.0
+map_scale = Vector3( 7.813, 5, 7.813 )
+centered = true
+_terrain_data = ExtResource( 1 )
+chunk_size = 32
+collision_enabled = true
+collision_layer = 4
+collision_mask = 0
+shader_type = "Classic4Lite"
+custom_shader = null
+custom_globalmap_shader = null
+texture_set = SubResource( 1 )
+render_layers = 1
+shader_params/u_ground_uv_scale = 20
+shader_params/u_depth_blending = true
+shader_params/u_triplanar = false
+shader_params/u_tile_reduction = Plane( 0, 0, 0, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="HTerrain"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1000, 0 )
+layers = 0
+generate_lightmap = false
+mesh = SubResource( 15 )
+skeleton = NodePath("../..")
+
+[node name="PitCity" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -109.978, 0 )

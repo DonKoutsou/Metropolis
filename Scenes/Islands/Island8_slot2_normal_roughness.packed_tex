@@ -1,0 +1,8 @@
+{
+	"contains_albedo": false,
+	"resolution": 512,
+	"src": {
+		"a": "res://Assets/TerainTex/Lava002_1K-JPG/Lava002_1K-JPG_Roughness.jpg",
+		"rgb": "res://Assets/TerainTex/Lava002_1K-JPG/Lava002_1K-JPG_NormalGL.jpg"
+	}
+}

@@ -48,9 +48,11 @@ public class DayNight : WorldEnvironment
 
     DirectionalLight sun;
     DirectionalLight moon;
+
+    public Spatial SunMoonMeshPivot;
     public override void _Process(float delta)
     {
-        currentmins += delta;
+        currentmins += delta* 100;
         if (currentmins > 60)
         {
             currentmins = 0;
@@ -96,7 +98,10 @@ public class DayNight : WorldEnvironment
             moon.Show();
         }
         var moonrot = -(180 - sunrot);
-            
+        if (SunMoonMeshPivot != null)
+        {
+            SunMoonMeshPivot.RotationDegrees = new Vector3(sunrot, 0, 0);
+        }  
         sun.RotationDegrees = new Vector3(sunrot, 0, 0);
         moon.RotationDegrees = new Vector3(moonrot, 0, 0);
         //GD.Print(brightness);

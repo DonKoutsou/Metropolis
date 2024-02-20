@@ -62,7 +62,7 @@ public class Island : Spatial
 		//Transform.Rotated(new Vector3(0, 1, 0), rotationtospawnwith);
 
 		//navmesh = GetNode<NavigationMeshInstance>("NavigationMeshInstance");
-		Terain = GetNode<Spatial>("HTerrain");
+		Terain = GetNodeOrNull<Spatial>("HTerrain");
 		waterbody = GetNodeOrNull<Sea>("SeaBed");
 		a_doors = new Door[4];
 		var door__left = GetNode<Door>("Door_Left");

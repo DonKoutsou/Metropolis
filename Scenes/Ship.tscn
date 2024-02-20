@@ -7,10 +7,8 @@ data = PoolVector3Array( -8.1444, -3.9092, 20.99, -8.1361, 7.4611, 2.3851, 0, -3
 
 [node name="Ship" type="StaticBody"]
 
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 1 )
+
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = ExtResource( 1 )
-
-[node name="StaticBody" type="StaticBody" parent="MeshInstance"]
-
-[node name="CollisionShape" type="CollisionShape" parent="MeshInstance/StaticBody"]
-shape = SubResource( 1 )
