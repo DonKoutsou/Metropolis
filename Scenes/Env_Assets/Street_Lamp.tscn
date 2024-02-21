@@ -11,16 +11,6 @@ radius = 0.469705
 collision_layer = 4
 collision_mask = 0
 
-[node name="SpotLight2" type="SpotLight" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 9.58263, 2.366 )
-sorting_use_aabb_center = false
-light_color = Color( 0.784314, 0.74902, 0.541176, 1 )
-shadow_enabled = true
-shadow_bias = 0.0
-shadow_reverse_cull_face = true
-spot_range = 22.142
-spot_angle = 64.83
-
 [node name="MeshInstance" type="MeshInstance" parent="."]
 material_override = ExtResource( 2 )
 generate_lightmap = false

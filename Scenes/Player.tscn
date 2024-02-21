@@ -111,7 +111,7 @@ _data = [ Vector2( 0, 1024 ), 0.0, 0.0, 0, 0, Vector2( 0.0157068, 111.709 ), 0.0
 
 [sub_resource type="PlaneMesh" id=76]
 
-[sub_resource type="ShaderMaterial" id=81]
+[sub_resource type="ShaderMaterial" id=91]
 shader = ExtResource( 20 )
 
 [sub_resource type="SpatialMaterial" id=73]
@@ -390,7 +390,7 @@ cast_shadow = 0
 generate_lightmap = false
 mesh = SubResource( 76 )
 software_skinning_transform_normals = false
-material/0 = SubResource( 81 )
+material/0 = SubResource( 91 )
 
 [node name="RayCastDown" type="RayCast" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot/Camera"]
 enabled = true

@@ -1,0 +1,8 @@
+{
+	"contains_albedo": true,
+	"resolution": 512,
+	"src": {
+		"a": "res://Assets/TerainTex/Rock030_1K-JPG/Rock030_1K-JPG_Displacement.jpg",
+		"rgb": "res://Assets/TerainTex/Rock030_1K-JPG/Rock030_1K-JPG_Color.jpg"
+	}
+}

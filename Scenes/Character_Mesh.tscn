@@ -1292,7 +1292,7 @@ nodes/TimeScale/position = Vector2( 241.076, 25.6959 )
 nodes/Walk_Speed/node = SubResource( 19 )
 nodes/Walk_Speed/position = Vector2( 0, 320 )
 nodes/output/position = Vector2( 980, 160 )
-node_connections = [ "JumpShot", 0, "Idle_Walk_Blend", "JumpShot", 1, "TimeScale", "Idle_Walk_Blend", 0, "Animation", "Idle_Walk_Blend", 1, "Walk_Speed", "TimeScale", 0, "Animation 2", "output", 0, "JumpShot", "Walk_Speed", 0, "Animation 3" ]
+node_connections = [ "output", 0, "JumpShot", "Idle_Walk_Blend", 0, "Animation", "Idle_Walk_Blend", 1, "Walk_Speed", "TimeScale", 0, "Animation 2", "JumpShot", 0, "Idle_Walk_Blend", "JumpShot", 1, "TimeScale", "Walk_Speed", 0, "Animation 3" ]
 
 [node name="Cloak_Skinned" instance=ExtResource( 1 )]
 

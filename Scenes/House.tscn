@@ -6,6 +6,7 @@
 extents = Vector3( 25, 74, 25 )
 
 [node name="StaticBody" type="StaticBody"]
+collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="."]

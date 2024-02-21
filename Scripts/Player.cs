@@ -84,15 +84,18 @@ public class Player : Character
 				Spatial ob = (Spatial)rayar["collider"];
 				loctomove = (Vector3)rayar["position"];
 				Vector3 norm = (Vector3)rayar["normal"];
-				var result = new Basis();
-				result.x = norm.Cross(moveloc.GlobalTransform.basis.z);
-				result.y = norm;
-				result.z = moveloc.GlobalTransform.basis.x.Cross(norm);
-				var scale = moveloc.GlobalTransform.basis.Scale;
+
+				moveloc.Scale = new Vector3(1,1,1);
+				Basis MoveLocBasis = moveloc.GlobalTransform.basis;
+
+				var result = new Basis(norm.Cross(MoveLocBasis.z), norm, MoveLocBasis.x.Cross(norm));
+
 				result = result.Orthonormalized();
-				result.Scale = new Vector3(1, 1, 1);
-				Transform or = new Transform();
+
+				Transform or = moveloc.GlobalTransform;
+
 				or.basis = result;
+
 				moveloc.GlobalTransform = or;
 				moveloc.Show();
 			}
