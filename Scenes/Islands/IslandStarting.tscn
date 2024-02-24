@@ -1,139 +1,26 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Scenes/Item.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/Door.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scripts/Island.cs" type="Script" id=3]
-[ext_resource path="res://Scenes/Env_Assets/Antena.tscn" type="PackedScene" id=4]
-[ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=5]
-[ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=6]
-[ext_resource path="res://Scenes/Islands/StartingislandTerain/data.hterrain" type="Resource" id=7]
-[ext_resource path="res://Scenes/Islands/IslandStarting_slot0_normal_roughness.packed_tex" type="Texture" id=8]
-[ext_resource path="res://Scenes/Islands/IslandStarting_slot0_albedo_bump.packed_tex" type="Texture" id=9]
-[ext_resource path="res://Assets/Building/BuildingComposition.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Scenes/Env_Assets/CylinderThingHuge.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Scenes/Env_Assets/CylinderThing.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Assets/Building/BuildingDust.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Assets/Building/BuildingDust2.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Assets/Building/BuildingDust3.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Assets/Building/BuildingDust4.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Scenes/Env_Assets/Antena2.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Scenes/Islands/IslandStarting_slot1_normal_roughness.packed_tex" type="Texture" id=18]
-[ext_resource path="res://Scenes/Islands/IslandStarting_slot1_albedo_bump.packed_tex" type="Texture" id=19]
+[ext_resource path="res://Scenes/Islands/Island2.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/Islands/IslandBase_normal_roughness.packed_texarr" type="TextureArray" id=4]
+[ext_resource path="res://Scenes/Islands/IslandBase_albedo_bump.packed_texarr" type="TextureArray" id=5]
 
 [sub_resource type="Resource" id=1]
-script = ExtResource( 6 )
-mode = 0
-textures = [ [ ExtResource( 9 ), ExtResource( 19 ) ], [ ExtResource( 8 ), ExtResource( 18 ) ] ]
-
-[sub_resource type="SpatialMaterial" id=3]
-albedo_color = Color( 0, 0, 0, 1 )
+script = ExtResource( 3 )
+mode = 1
+textures = [ [ ExtResource( 5 ) ], [ ExtResource( 4 ) ] ]
 
 [sub_resource type="CubeMesh" id=2]
-material = SubResource( 3 )
-flip_faces = true
 size = Vector3( 2000, 2000, 2000 )
 
-[node name="Island" type="Spatial" groups=["Islands"]]
-script = ExtResource( 3 )
+[node name="Island" instance=ExtResource( 1 )]
 m_bOriginalIle = true
 
-[node name="Door_Left" parent="." instance=ExtResource( 2 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1000, 0, 0 )
-visible = false
-
-[node name="Door_Down" parent="." instance=ExtResource( 2 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 1000 )
-visible = false
-
-[node name="Door_Top" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1000 )
-visible = false
-
-[node name="Door_Right" parent="." instance=ExtResource( 2 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1000, 0, 0 )
-visible = false
-
-[node name="Item" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.7353, 0.924315, -3.5246 )
-
-[node name="House" parent="." instance=ExtResource( 10 )]
-transform = Transform( 0.831925, 0, -0.554888, 0, 1, 0, 0.554888, 0, 0.831925, 173.684, -82.0805, -396.486 )
-
-[node name="House2" parent="." instance=ExtResource( 10 )]
-transform = Transform( 0.900153, 0, 0.435577, 0, 1, 0, -0.435577, 0, 0.900153, 312.854, -62.696, -149.437 )
-
-[node name="House3" parent="." instance=ExtResource( 10 )]
-transform = Transform( 0.512373, 0, 0.858763, 0, 1, 0, -0.858763, 0, 0.512373, -241.035, 14.1729, -141.656 )
-
-[node name="HTerrain" type="Spatial" parent="."]
-script = ExtResource( 5 )
-lod_scale = 2.0
-map_scale = Vector3( 7.813, 10.308, 7.813 )
-centered = true
-_terrain_data = ExtResource( 7 )
-chunk_size = 32
-collision_enabled = true
-collision_layer = 4
-collision_mask = 0
-shader_type = "Classic4"
-custom_shader = null
-custom_globalmap_shader = null
+[node name="HTerrain" parent="." index="4"]
 texture_set = SubResource( 1 )
-render_layers = 1
-shader_params/u_ground_uv_scale_per_texture = Plane( 10, 10, 10, 10 )
-shader_params/u_depth_blending = true
-shader_params/u_triplanar = true
-shader_params/u_tile_reduction = Plane( 0, 0, 0, 0 )
-shader_params/u_globalmap_blend_start = null
-shader_params/u_globalmap_blend_distance = null
-shader_params/u_colormap_opacity_per_texture = Plane( 1, 1, 1, 1 )
 
-[node name="MeshInstance" type="MeshInstance" parent="HTerrain"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1000, 0 )
-layers = 0
+[node name="MeshInstance" parent="HTerrain" index="0"]
 mesh = SubResource( 2 )
 
-[node name="StaticBody" parent="." instance=ExtResource( 4 )]
-transform = Transform( 22.0028, 6.80931, 0, -6.80931, 22.0028, 0, 0, 0, 23.0323, 206.954, -16.5524, 305.759 )
-
-[node name="StaticBody2" parent="." instance=ExtResource( 4 )]
-transform = Transform( 0.996883, 0.0788941, 0, -0.0788941, 0.996883, 0, 0, 0, 1, 214.986, -80.8573, -401.927 )
-
-[node name="StaticBody3" parent="." instance=ExtResource( 4 )]
-transform = Transform( 0.898711, -0.404989, 0.168234, 0.437748, 0.851507, -0.288637, -0.0263574, 0.333045, 0.942542, 23.5999, -51.5132, -343.841 )
-
-[node name="StaticBody4" parent="." instance=ExtResource( 4 )]
-transform = Transform( 3.03735, -0.140602, 4.09331, -0.819711, 4.97208, 0.779036, -4.01286, -1.12208, 2.93911, -530.453, 72.2333, -260.097 )
-
-[node name="StaticBody5" parent="." instance=ExtResource( 11 )]
-transform = Transform( 0.56882, -0.321441, 0.757046, 0, 0.920464, 0.390828, -0.822462, -0.222311, 0.523579, 729.52, -125.535, 420.581 )
-
-[node name="StaticBody6" parent="." instance=ExtResource( 12 )]
-transform = Transform( -0.746464, 0, -0.665426, 0, 1, 0, 0.665426, 0, -0.746464, -93.7762, -53.4309, -392.701 )
-
-[node name="SpawnPosition" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 177.431, -82.1887, -375.779 )
-
-[node name="DestBuilding6" parent="." instance=ExtResource( 16 )]
-transform = Transform( -0.746464, 0, -0.665426, -0.579397, 0.491785, 0.649958, 0.327247, 0.870716, -0.3671, 510.196, -67.4573, -87.5125 )
-
-[node name="DestBuilding2" parent="." instance=ExtResource( 13 )]
-transform = Transform( -0.56971, 0.0662064, 0.819175, -0.152434, 0.970942, -0.184485, -0.807586, -0.229973, -0.543063, -593.449, 7.46773, -326.889 )
-
-[node name="DestBuilding11" parent="." instance=ExtResource( 13 )]
-transform = Transform( 0.443938, 0.369131, -0.816494, 0.388233, -0.900474, -0.196012, -0.807586, -0.229973, -0.543063, 187.496, 59.5004, -690.577 )
-
-[node name="DestBuilding" parent="." instance=ExtResource( 13 )]
-transform = Transform( 1, -0.0006437, 5.1735e-05, 0.000645772, 0.996786, -0.0801119, 0, 0.0801119, 0.996786, -202.266, 31.7923, 146.185 )
-
-[node name="DestBuilding3" parent="." instance=ExtResource( 14 )]
-transform = Transform( 0.510915, -0.177819, -0.841039, 0.328702, 0.944434, 0, 0.794306, -0.276451, 0.540974, -462.814, -5.77229, 53.9319 )
-
-[node name="DestBuilding4" parent="." instance=ExtResource( 14 )]
-transform = Transform( -0.932896, 0.324686, -0.155831, 0.33405, 0.618401, -0.71133, -0.134593, -0.715653, -0.685366, 537.231, -59.4569, -380.2 )
-
-[node name="DestBuilding5" parent="." instance=ExtResource( 15 )]
-transform = Transform( -0.519899, -0.759115, 0.391726, 0.102887, 0.399588, 0.910903, -0.848009, 0.513881, -0.129642, 660.998, -56.4816, -37.4575 )
-
-[node name="StaticBody7" parent="." instance=ExtResource( 17 )]
-transform = Transform( 11.1044, -1.61124, 19.2821, 0.564321, 22.2493, 1.5342, -19.3411, -0.275898, 11.1153, -128.283, -288.429, 612.661 )
+[node name="SpawnPosition" type="Position3D" parent="." index="23"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 177.431, -75.6376, -375.779 )

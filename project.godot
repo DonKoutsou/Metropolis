@@ -105,7 +105,7 @@ window/size/fullscreen=true
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/MonoCustomResourceRegistry/plugin.cfg", "res://addons/dialogue_nodes/plugin.cfg", "res://addons/road-generator/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/MonoCustomResourceRegistry/plugin.cfg", "res://addons/road-generator/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg" )
 
 [global]
 
@@ -213,4 +213,4 @@ quality/directional_shadow/size=8192
 quality/directional_shadow/size.mobile=4096
 quality/shadow_atlas/cubemap_size=1024
 environment/default_clear_color=Color( 1, 1, 1, 1 )
-environment/default_environment="res://Scenes/Env_Assets/Enviroment.tres"
+environment/default_environment="res://default_env.tres"

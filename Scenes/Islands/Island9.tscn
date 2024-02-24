@@ -1,68 +1,15 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/Door.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scripts/Island.cs" type="Script" id=3]
-[ext_resource path="res://Scenes/Islands/Island9_Terain/data.hterrain" type="Resource" id=4]
-[ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=5]
-[ext_resource path="res://Scenes/Islands/Island9_slot0_albedo_bump.packed_tex" type="Texture" id=6]
-[ext_resource path="res://Scenes/Islands/Island9_slot0_normal_roughness.packed_tex" type="Texture" id=7]
-[ext_resource path="res://Scenes/Islands/Island9_slot1_albedo_bump.packed_tex" type="Texture" id=8]
-[ext_resource path="res://Scenes/Islands/Island9_slot1_normal_roughness.packed_tex" type="Texture" id=9]
+[ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Islands/Terain_Data_IS09/data.hterrain" type="Resource" id=4]
 
-[sub_resource type="Resource" id=1]
-script = ExtResource( 5 )
-mode = 0
-textures = [ [ ExtResource( 6 ), ExtResource( 8 ) ], [ ExtResource( 7 ), ExtResource( 9 ) ] ]
+[sub_resource type="SpatialMaterial" id=1]
+params_cull_mode = 1
 
-[sub_resource type="SpatialMaterial" id=11]
-albedo_color = Color( 0, 0, 0, 1 )
+[node name="Island" instance=ExtResource( 1 )]
 
-[sub_resource type="CubeMesh" id=10]
-material = SubResource( 11 )
-flip_faces = true
-size = Vector3( 2000, 2000, 2000 )
-
-[node name="Island" type="Spatial" groups=["Islands"]]
-script = ExtResource( 3 )
-
-[node name="Door_Left" parent="." instance=ExtResource( 2 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1000, 0, 0 )
-
-[node name="Door_Down" parent="." instance=ExtResource( 2 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 1000 )
-
-[node name="Door_Top" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1000 )
-
-[node name="Door_Right" parent="." instance=ExtResource( 2 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1000, 0, 0 )
-
-[node name="HTerrain" type="Spatial" parent="."]
-script = ExtResource( 1 )
-lod_scale = 2.0
-map_scale = Vector3( 7.813, 5, 7.813 )
-centered = true
+[node name="HTerrain" parent="." index="4"]
 _terrain_data = ExtResource( 4 )
-chunk_size = 32
-collision_enabled = true
-collision_layer = 4
-collision_mask = 0
-shader_type = "Classic4"
-custom_shader = null
-custom_globalmap_shader = null
-texture_set = SubResource( 1 )
-render_layers = 1
-shader_params/u_ground_uv_scale_per_texture = Plane( 10, 10, 10, 10 )
-shader_params/u_depth_blending = true
-shader_params/u_triplanar = true
-shader_params/u_tile_reduction = Plane( 0, 0, 0, 0 )
-shader_params/u_globalmap_blend_start = null
-shader_params/u_globalmap_blend_distance = null
-shader_params/u_colormap_opacity_per_texture = Plane( 1, 1, 1, 1 )
 
-[node name="MeshInstance" type="MeshInstance" parent="HTerrain"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1000, 0 )
-layers = 0
-generate_lightmap = false
-mesh = SubResource( 10 )
+[node name="MeshInstance" parent="HTerrain" index="0"]
+material/0 = SubResource( 1 )

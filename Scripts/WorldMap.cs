@@ -111,26 +111,28 @@ public class WorldMap : TileMap
     {
         if (curtiletype == 0)
         {
+            Island entry = null;
             GD.Print("Starting to generate initial map.");
             var Entrycells = GetUsedCellsById(0);
             foreach (Vector2 cellArray in Entrycells)
             {
-                Island Ile = (Island)Entrytospawn.Instance();
+                entry = (Island)Entrytospawn.Instance();
                 Vector2 postoput = MapToWorld(cellArray);
                 entycell = cellArray;
                 postoput += CellSize / 2;
                 Vector3 pos = new Vector3();
                 pos.x = postoput.x;
                 pos.z = postoput.y;
-                Ile.loctospawnat = pos;
+                entry.loctospawnat = pos;
                 //pos.y = 500;
                 int index = random.Next(rots.Count);
-                Ile.rotationtospawnwith = rots[index];
-                ((MyWorld)GetParent()).RegisterIle(Ile);
+                entry.rotationtospawnwith = rots[index];
+                ((MyWorld)GetParent()).RegisterIle(entry);
                 var pls = GetTree().GetNodesInGroup("player");
-                ((Player)pls[0]).Teleport(Ile.GetNode<Position3D>("SpawnPosition").GlobalTranslation);
-                iles.Insert(iles.Count, Ile);
+                ((Player)pls[0]).Teleport(entry.GetNode<Position3D>("SpawnPosition").GlobalTranslation);
+                iles.Insert(iles.Count, entry);
                 spawned.Insert(spawned.Count, cellArray);
+                
             }
             var cells = GetUsedCellsById(1);
             foreach (Vector2 cellArray in cells)
@@ -205,14 +207,9 @@ public class WorldMap : TileMap
                 iles.Insert(iles.Count, Ile);
                 spawned.Insert(spawned.Count, cellArray);
             }
-            
-            for(int i = 0; i < iles.Count; i++)
-            {
-                if (iles[i].m_bOriginalIle)
-                {
-                    MyWorld.ToggleIsland(iles[i], true, true);
-                }
-            }
+
+            MyWorld.ToggleIsland(entry, true, true);
+
             GD.Print("-------------- Initial map generation Finished ---------------");
             currenttiletype += 1;
         }

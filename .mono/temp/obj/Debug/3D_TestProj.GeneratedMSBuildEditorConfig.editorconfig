@@ -1,3 +1,5 @@
 is_global = true
 build_property.RootNamespace = D_TestProj
-build_property.ProjectDir = E:\Godot_Project\3D_Proj_Test\
+build_property.ProjectDir = D:\GodotProj\3D_Proj_Test\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 

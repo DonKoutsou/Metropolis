@@ -1,0 +1,19 @@
+[remap]
+
+importer="hterrain_packed_texture_array_importer"
+type="TextureArray"
+path.s3tc="res://.import/IslandBase_albedo_bump.packed_texarr-b4b40e30062436711fca634e5015b1b7.s3tc.texarr"
+path.etc2="res://.import/IslandBase_albedo_bump.packed_texarr-b4b40e30062436711fca634e5015b1b7.etc2.texarr"
+
+[deps]
+
+source_file="res://Scenes/Islands/IslandBase_albedo_bump.packed_texarr"
+dest_files=[ "res://.import/IslandBase_albedo_bump.packed_texarr-b4b40e30062436711fca634e5015b1b7.s3tc.texarr", "res://.import/IslandBase_albedo_bump.packed_texarr-b4b40e30062436711fca634e5015b1b7.etc2.texarr" ]
+
+[params]
+
+compress/mode=1
+flags/repeat=1
+flags/filter=true
+flags/mipmaps=true
+flags/anisotropic=false

@@ -1,0 +1,30 @@
+{
+	"contains_albedo": true,
+	"layers": [
+		{
+			"a": "res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_Displacement.jpg",
+			"rgb": "res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_Color.jpg"
+		},
+		{
+			"a": "res://Assets/TerainTex/Rock030_1K-JPG/Rock030_1K-JPG_Displacement.jpg",
+			"rgb": "res://Assets/TerainTex/Rock030_1K-JPG/Rock030_1K-JPG_Color.jpg"
+		},
+		{
+			"a": "res://Assets/TerainTex/Rock035_1K-JPG/Rock035_1K-JPG_Displacement.jpg",
+			"rgb": "res://Assets/TerainTex/Rock035_1K-JPG/Rock035_1K-JPG_Color.jpg"
+		},
+		{
+			"a": "res://Assets/TerainTex/Lava002_1K-JPG/Lava002_1K-JPG_Displacement.jpg",
+			"rgb": "res://Assets/TerainTex/Lava002_1K-JPG/Lava002_1K-JPG_Color.jpg"
+		},
+		{
+			"a": "res://Assets/TerainTex/Ground037_1K-JPG/Ground037_1K-JPG_Displacement.jpg",
+			"rgb": "res://Assets/TerainTex/Ground037_1K-JPG/Ground037_1K-JPG_Color.jpg"
+		},
+		{
+			"a": "res://Assets/TerainTex/Ground054_1K-JPG/Ground054_1K-JPG_Displacement.jpg",
+			"rgb": "res://Assets/TerainTex/Ground054_1K-JPG/Ground054_1K-JPG_Color.jpg"
+		}
+	],
+	"resolution": 512
+}

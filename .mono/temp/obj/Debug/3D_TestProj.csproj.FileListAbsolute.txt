@@ -6,3 +6,13 @@ E:\Godot_Project\3D_Proj_Test\.mono\temp\obj\Debug\3D_TestProj.AssemblyInfoInput
 E:\Godot_Project\3D_Proj_Test\.mono\temp\obj\Debug\3D_TestProj.AssemblyInfo.cs
 E:\Godot_Project\3D_Proj_Test\.mono\temp\obj\Debug\3D_TestProj.dll
 E:\Godot_Project\3D_Proj_Test\.mono\temp\obj\Debug\3D_TestProj.pdb
+D:\GodotProj\3D_Proj_Test\.mono\temp\bin\Debug\3D_TestProj.dll
+D:\GodotProj\3D_Proj_Test\.mono\temp\bin\Debug\3D_TestProj.pdb
+D:\GodotProj\3D_Proj_Test\.mono\temp\obj\Debug\3D_TestProj.csproj.AssemblyReference.cache
+D:\GodotProj\3D_Proj_Test\.mono\temp\obj\Debug\3D_TestProj.GeneratedMSBuildEditorConfig.editorconfig
+D:\GodotProj\3D_Proj_Test\.mono\temp\obj\Debug\3D_TestProj.AssemblyInfoInputs.cache
+D:\GodotProj\3D_Proj_Test\.mono\temp\obj\Debug\3D_TestProj.AssemblyInfo.cs
+D:\GodotProj\3D_Proj_Test\.mono\temp\obj\Debug\3D_TestProj.csproj.CoreCompileInputs.cache
+D:\GodotProj\3D_Proj_Test\.mono\temp\obj\Debug\3D_TestProj.sourcelink.json
+D:\GodotProj\3D_Proj_Test\.mono\temp\obj\Debug\3D_TestProj.dll
+D:\GodotProj\3D_Proj_Test\.mono\temp\obj\Debug\3D_TestProj.pdb
