@@ -16,13 +16,6 @@ public class Door : Wall
 		Vector2 parislandloc = new Vector2(parent.Transform.origin.x, parent.Transform.origin.z) ;
 		Vector2 islandloc = new Vector2(IslandAccess.Transform.origin.x, IslandAccess.Transform.origin.z) ;
 
-		Island checkdis;
-		ile.GetClosestDoor(GlobalTransform.origin).GetIslandAcces(out checkdis);
-		if (checkdis == null)
-		{
-			ile.GetClosestDoor(GlobalTransform.origin).Toggle(true);
-			ile.GetClosestDoor(GlobalTransform.origin).SetIslandToAccess(parent);
-		}
 	}
 	public void GetIslandAcces(out Island ile)
 	{
@@ -38,7 +31,7 @@ public class Door : Wall
 		Vector3 forw = GlobalTransform.basis.z;
 		Vector3 toOther = GetNode<CollisionShape>("CollisionShape").GlobalTransform.origin - ((Spatial)body).GlobalTransform.origin;
 		var thing = forw.Dot(toOther);
-		if (thing < 0)
+		if (thing > 0)
 			return;
 		
 		if (body is Mob)
@@ -54,7 +47,7 @@ public class Door : Wall
 
 		if (player is Player)
 		{
-			MyWorld.IleTransition(IslandAccess, (Island)GetParent());
+			MyWorld.IleTransition((Island)GetParent(), IslandAccess);
 			//player.UpdateMap();
 		}
 		else

@@ -78,7 +78,7 @@ public class MyWorld : Spatial
 			ile.GetClosestIles(out closestto);
 			for (int i = 0; i < closestto.Count; i ++)
 			{
-				ToggleIsland(closestto[i], true);
+				ToggleIsland(closestto[i], Toggle);
 			}
 		}
 	}

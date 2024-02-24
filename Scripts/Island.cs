@@ -6,7 +6,6 @@ public class Island : Spatial
 {
 	[Export]
 	public bool m_bOriginalIle = false;
-	public Door[] a_doors;
 	List<Island> closeislands;
 
 	List<Character> m_enem = new List<Character>();
@@ -21,7 +20,7 @@ public class Island : Spatial
 
 	public float rotationtospawnwith;
 
-	//GrassCubes grass;
+	GrassCubes grass;
 
 	Spatial Terain;
 
@@ -64,17 +63,9 @@ public class Island : Spatial
 		//navmesh = GetNode<NavigationMeshInstance>("NavigationMeshInstance");
 		Terain = GetNodeOrNull<Spatial>("HTerrain");
 		waterbody = GetNodeOrNull<Sea>("SeaBed");
-		a_doors = new Door[4];
-		var door__left = GetNode<Door>("Door_Left");
-		a_doors[0] = door__left;
-		var door__down = GetNode<Door>("Door_Down");
-		a_doors[1] = door__down;
-		var door__top = GetNode<Door>("Door_Top");
-		a_doors[2] = door__top;
-		var door__right = GetNode<Door>("Door_Right");
-		a_doors[3] = door__right;
 
-		//grass = GetNode<GrassCubes>("Grass");
+
+		grass = GetNodeOrNull<GrassCubes>("Grass");
 		map = GetParent().GetNode<WorldMap>("WorldMap");
 	}
 	public void Init()
@@ -82,22 +73,10 @@ public class Island : Spatial
 
 		FindSiblings();
 
-		AssignDoors();
-
-		DissableUnusedDoors();
 
 		Inited = true;
 	}
-	void DissableUnusedDoors()
-	{
-		for (int f = 0; f < a_doors.Count(); f++)
-		{
-			Island ile;
-			a_doors[f].GetIslandAcces(out ile);
-			if (ile == null)
-				a_doors[f].Toggle(false);
-		}
-	}
+
 	public void AddCloseIle(Island ile)
 	{
 		if (ile == this)
@@ -107,65 +86,6 @@ public class Island : Spatial
 		closeislands.Insert(closeislands.Count, ile);
 	}
 
-	public Door GetClosestDoor(Vector3 GlobalPos)
-	{
-		int f = 0;
-		Door closestdoor = a_doors[0];
-		float closestdist = GlobalPos.DistanceTo(a_doors[0].GlobalTransform.origin);
-		for (f = 0; f < a_doors.Count(); f++)
-		{
-			Vector3 doorloc = a_doors[f].GlobalTransform.origin;
-			float dist = GlobalPos.DistanceTo(doorloc);
-			if (dist > closestdist)
-				continue;
-			closestdoor = a_doors[f];
-			closestdist = dist;
-		}
-		return closestdoor;
-	}
-
-	public void GetIslandDoors(out Door[] doors)
-	{
-		doors = new Door[4]; 
-		doors = (Door[])a_doors.Clone();
-	}
-	void AssignDoors()
-	{
-		int i = 0;
-		Vector2 mypos = new Vector2(GlobalTransform.origin.x, GlobalTransform.origin.z) ;
-		for (i = 0; i < closeislands.Count; i++)
-		{
-			Vector2 islandloc = new Vector2(closeislands[i].GlobalTransform.origin.x, closeislands[i].GlobalTransform.origin.z);
-			if (closeislands[i].GlobalTransform.origin.DistanceTo(GlobalTransform.origin) > 2100)
-				continue;
-			Door closestdoor = GetClosestDoor(closeislands[i].GlobalTransform.origin);
-			/*
-			//down
-			if (islandloc.y > mypos.y)
-			{
-				closestdoor = a_doors[1];
-			}
-			//up
-			if (islandloc.y < mypos.y)
-			{
-				closestdoor = a_doors[2];
-			}
-			//right
-			if (islandloc.x > mypos.x)
-			{
-				closestdoor = a_doors[3];
-			}
-			//left
-			if (islandloc.x < mypos.x)
-			{
-				closestdoor = a_doors[0];
-			}*/
-			if (closestdoor == null)
-				continue;
-			closestdoor.Toggle(true);
-			closestdoor.SetIslandToAccess(closeislands[i]);
-		}
-	}
 	public bool HasIslandInClose(Island ile)
 	{
 		if (closeislands == null)
@@ -278,12 +198,9 @@ public class Island : Spatial
 		{
 			Terain.SetProcess(true);
 		}	
-		foreach (Door d in a_doors)
-		{
-			d.ToggleCollisions(true);
-		}
-		//if (grass != null)
-			//grass.ToggleGrass(true);
+
+		if (grass != null)
+			grass.ToggleGrass(true);
 		ToggleEnemies(true);
 		//if (navmesh != null)
 			//navmesh.Enabled = true;
@@ -301,13 +218,10 @@ public class Island : Spatial
 		{
 			Terain.SetProcess(false);
 		}
-		foreach (Door d in a_doors)
-		{
-			d.ToggleCollisions(false);
-		}
+
 		ToggleEnemies(false);
-		//if (grass != null)
-			//grass.ToggleGrass(false);
+		if (grass != null)
+			grass.ToggleGrass(false);
 		//if (navmesh != null)
 			//navmesh.Enabled = false;
 		if (waterbody != null)

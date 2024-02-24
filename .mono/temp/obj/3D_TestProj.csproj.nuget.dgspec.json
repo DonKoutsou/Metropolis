@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\GodotProj\\3D_Proj_Test\\3D_TestProj.csproj": {}
+    "C:\\GodotProj\\3D_Proj_Test\\3D_TestProj.csproj": {}
   },
   "projects": {
-    "D:\\GodotProj\\3D_Proj_Test\\3D_TestProj.csproj": {
+    "C:\\GodotProj\\3D_Proj_Test\\3D_TestProj.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\GodotProj\\3D_Proj_Test\\3D_TestProj.csproj",
+        "projectUniqueName": "C:\\GodotProj\\3D_Proj_Test\\3D_TestProj.csproj",
         "projectName": "3D_TestProj",
-        "projectPath": "D:\\GodotProj\\3D_Proj_Test\\3D_TestProj.csproj",
+        "projectPath": "C:\\GodotProj\\3D_Proj_Test\\3D_TestProj.csproj",
         "packagesPath": "C:\\Users\\antho\\.nuget\\packages\\",
-        "outputPath": "D:\\GodotProj\\3D_Proj_Test\\.mono\\temp\\obj\\",
+        "outputPath": "C:\\GodotProj\\3D_Proj_Test\\.mono\\temp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\antho\\AppData\\Roaming\\NuGet\\NuGet.Config"

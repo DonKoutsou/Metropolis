@@ -24,6 +24,10 @@
 		{
 			"a": "res://Assets/TerainTex/Ground054_1K-JPG/Ground054_1K-JPG_Roughness.jpg",
 			"rgb": "res://Assets/TerainTex/Ground054_1K-JPG/Ground054_1K-JPG_NormalGL.jpg"
+		},
+		{
+			"a": "res://Assets/TerainTex/Ground068_1K-JPG/Ground068_1K-JPG_Roughness.jpg",
+			"rgb": "res://Assets/TerainTex/Ground068_1K-JPG/Ground068_1K-JPG_NormalGL.jpg"
 		}
 	],
 	"resolution": 512

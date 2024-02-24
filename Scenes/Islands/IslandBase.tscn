@@ -13,17 +13,20 @@ mode = 1
 textures = [ [ ExtResource( 5 ) ], [ ExtResource( 6 ) ] ]
 
 [sub_resource type="CubeMesh" id=2]
-size = Vector3( 2000, 2000, 2000 )
 
 [sub_resource type="SpatialMaterial" id=3]
+flags_unshaded = true
+params_blend_mode = 1
 params_cull_mode = 1
+albedo_color = Color( 0, 0, 0, 1 )
 
 [node name="Island" instance=ExtResource( 1 )]
 
-[node name="HTerrain" type="Spatial" parent="." index="4"]
+[node name="HTerrain" type="Spatial" parent="." index="0"]
+transform = Transform( 15.626, 0, 0, 0, 5, 0, 0, 0, 15.626, 0, 0, 0 )
 script = ExtResource( 3 )
-lod_scale = 2.0
-map_scale = Vector3( 15.625, 5, 15.625 )
+ambient_wind = 0.587
+lod_scale = 5.0
 centered = true
 _terrain_data = ExtResource( 4 )
 chunk_size = 32
@@ -42,7 +45,6 @@ shader_params/u_globalmap_blend_distance = null
 shader_params/u_tile_reduction = Plane( 0, 0, 0, 0 )
 
 [node name="MeshInstance" type="MeshInstance" parent="HTerrain" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1000, 0 )
-layers = 0
+transform = Transform( 64, 0, 0, 0, 400, 0, 0, 0, 64, 0, -400, 0 )
 mesh = SubResource( 2 )
 material/0 = SubResource( 3 )

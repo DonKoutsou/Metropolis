@@ -31,6 +31,7 @@ const _API_SHADER_PARAMS = {
 	"u_terrain_heightmap": true,
 	"u_terrain_detailmap": true,
 	"u_terrain_normalmap": true,
+	"u_terrain_colormap": true,
 	"u_terrain_globalmap": true,
 	"u_terrain_inverse_transform": true,
 	"u_terrain_normal_basis": true,
@@ -49,7 +50,7 @@ export(Texture) var texture : Texture setget set_texture, get_texture
 # How far detail meshes can be seen.
 # TODO Improve speed of _get_chunk_aabb() so we can increase the limit
 # See https://github.com/Zylann/godot_heightmap_plugin/issues/155
-export(float, 1.0, 500.0) \
+export(float, 1.0, 1000.0) \
 	var view_distance := 100.0 setget set_view_distance, get_view_distance
 
 # Custom shader to replace the default one.
@@ -57,7 +58,7 @@ export(Shader) \
 	var custom_shader : Shader setget set_custom_shader, get_custom_shader
 
 # Density modifier, to make more or less detail meshes appear overall.
-export(float, 0, 10) var density := 4.0 setget set_density, get_density
+export(float, 0, 100.0) var density := 4.0 setget set_density, get_density
 
 # Mesh used for every detail instance (for example, every grass patch).
 # If not assigned, an internal quad mesh will be used.
@@ -277,7 +278,7 @@ func _get_used_mesh() -> Mesh:
 
 
 func set_density(v: float):
-	v = clamp(v, 0, 10)
+	v = clamp(v, 0, 100)
 	if v == density:
 		return
 	density = v
@@ -524,7 +525,7 @@ func _update_material():
 	var normalmap_texture = null
 	var detailmap_texture = null
 	var globalmap_texture = null
-
+	var colormaptexture = null
 	if terrain_data != null:
 		if terrain_data.is_locked():
 			_logger.error("Terrain data locked, can't update detail layer now")
@@ -538,6 +539,8 @@ func _update_material():
 
 		if terrain_data.get_map_count(HTerrainData.CHANNEL_GLOBAL_ALBEDO) > 0:
 			globalmap_texture = terrain_data.get_texture(HTerrainData.CHANNEL_GLOBAL_ALBEDO)
+
+		colormaptexture = terrain_data.get_texture(HTerrainData.CHANNEL_COLOR)
 	else:
 		_logger.error("Terrain data is null, can't update detail layer completely")
 
@@ -545,6 +548,7 @@ func _update_material():
 	mat.set_shader_param("u_terrain_detailmap", detailmap_texture)
 	mat.set_shader_param("u_terrain_normalmap", normalmap_texture)
 	mat.set_shader_param("u_terrain_globalmap", globalmap_texture)
+	mat.set_shader_param("u_terrain_colormap", colormaptexture)
 
 
 func _add_debug_cube(terrain, aabb: AABB):
@@ -644,6 +648,6 @@ static func _get_random_instance_basis(scale_randomness: float) -> Basis:
 
 	var basis = Basis()
 	basis = basis.scaled(Vector3(1, s, 1))
-	basis = basis.rotated(Vector3(0, 1, 0), rand_range(0, PI))
+
 	
 	return basis

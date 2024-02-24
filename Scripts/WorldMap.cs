@@ -36,7 +36,8 @@ public class WorldMap : TileMap
     [Export]
     public bool HideBasedOnState = false;
 
-    List <Island> iles = new List<Island>();
+    Dictionary<Vector2, Island> IslandMap = new Dictionary<Vector2, Island>();
+
     public override void _Ready()
     {
         Hide();
@@ -86,14 +87,44 @@ public class WorldMap : TileMap
             }
         }
     }
+    bool finishedspawning = false;
     public override void _Process(float delta)
 	{
         delt -= delta;
         if (delt < 0)
         {
             delt = 0.1f;
-            EnableIsland(currentile, currenttiletype);
+            if (!finishedspawning)
+                EnableIsland(currentile, currenttiletype);
+
+            Vector2 plpos = new Vector2(pl.GlobalTransform.origin.x, pl.GlobalTransform.origin.z);
+            if (plpos.DistanceTo(ClosestTile) > 1000)
+            {
+                Island ilefr = null;
+                IslandMap.TryGetValue(ClosestTile, out ilefr);
+                Island ileto = null;
+                Vector2 newclos = FindClosest(plpos);
+                IslandMap.TryGetValue(FindClosest(plpos), out ileto);
+                ClosestTile = newclos;
+                MyWorld.IleTransition(ilefr, ileto);
+            }
         }
+    }
+    Vector2 FindClosest(Vector2 pos)
+    {
+        float dist = 999999999;
+        Vector2 closest = Vector2.Zero;
+        foreach(KeyValuePair<Vector2, Island> entry in IslandMap)
+        {
+            Vector2 ilepos = entry.Key;
+            float Itdist = ilepos.DistanceTo(pos);
+            if (dist > Itdist)
+            {
+                closest = ilepos;
+                dist = Itdist;
+            }
+        }
+        return closest;
     }
     int currentile;
     int currenttiletype;
@@ -107,6 +138,9 @@ public class WorldMap : TileMap
 
     Random random = new Random();
 
+    Player pl;
+
+    Vector2 ClosestTile;
     void EnableIsland(int curtile, int curtiletype)
     {
         if (curtiletype == 0)
@@ -129,10 +163,12 @@ public class WorldMap : TileMap
                 entry.rotationtospawnwith = rots[index];
                 ((MyWorld)GetParent()).RegisterIle(entry);
                 var pls = GetTree().GetNodesInGroup("player");
-                ((Player)pls[0]).Teleport(entry.GetNode<Position3D>("SpawnPosition").GlobalTranslation);
-                iles.Insert(iles.Count, entry);
+                pl = ((Player)pls[0]);
+                pl.Teleport(entry.GetNode<Position3D>("SpawnPosition").GlobalTranslation);
+                IslandMap.Add(postoput ,entry);
+                //iles.Insert(iles.Count, entry);
                 spawned.Insert(spawned.Count, cellArray);
-                
+                ClosestTile = postoput;
             }
             var cells = GetUsedCellsById(1);
             foreach (Vector2 cellArray in cells)
@@ -152,7 +188,8 @@ public class WorldMap : TileMap
                 int index = random.Next(rots.Count);
                 Ile.rotationtospawnwith = rots[index];
                 ((MyWorld)GetParent()).RegisterIle(Ile);
-                iles.Insert(iles.Count, Ile);
+                IslandMap.Add(postoput ,Ile);
+                //iles.Insert(iles.Count, Ile);
                 spawned.Insert(spawned.Count, cellArray);
             }
             var pitcells = GetUsedCellsById(4);
@@ -169,7 +206,8 @@ public class WorldMap : TileMap
                 int index = random.Next(rots.Count);
                 Ile.rotationtospawnwith = rots[index];
                 ((MyWorld)GetParent()).RegisterIle(Ile);
-                iles.Insert(iles.Count, Ile);
+                IslandMap.Add(postoput ,Ile);
+               // iles.Insert(iles.Count, Ile);
                 spawned.Insert(spawned.Count, cellArray);
             }
             var SlabChunks = GetUsedCellsById(5);
@@ -187,7 +225,8 @@ public class WorldMap : TileMap
                 int index = random.Next(rots.Count);
                 Ile.rotationtospawnwith = rots[index];
                 ((MyWorld)GetParent()).RegisterIle(Ile);
-                iles.Insert(iles.Count, Ile);
+                IslandMap.Add(postoput ,Ile);
+                //iles.Insert(iles.Count, Ile);
                 spawned.Insert(spawned.Count, cellArray);
             }
             var VolcanoChunks = GetUsedCellsById(6);
@@ -204,7 +243,8 @@ public class WorldMap : TileMap
                 int index = random.Next(rots.Count);
                 Ile.rotationtospawnwith = rots[index];
                 ((MyWorld)GetParent()).RegisterIle(Ile);
-                iles.Insert(iles.Count, Ile);
+                IslandMap.Add(postoput ,Ile);
+                //iles.Insert(iles.Count, Ile);
                 spawned.Insert(spawned.Count, cellArray);
             }
 
@@ -237,7 +277,8 @@ public class WorldMap : TileMap
             int index = random.Next(rots.Count);
             Ile.rotationtospawnwith = rots[index];
             ((MyWorld)GetParent()).RegisterIle(Ile);
-            iles.Insert(iles.Count, Ile);
+            IslandMap.Add(postoput ,Ile);
+            //iles.Insert(iles.Count, Ile);
             currentile += 1;
             if (currentile >= OrderedCells.Count)
                 currenttiletype += 2;
@@ -260,7 +301,8 @@ public class WorldMap : TileMap
                 int index = random.Next(rots.Count);
                 Ile.rotationtospawnwith = rots[index];
                 ((MyWorld)GetParent()).RegisterIle(Ile);
-                iles.Insert(iles.Count, Ile);
+                IslandMap.Add(postoput ,Ile);
+                //iles.Insert(iles.Count, Ile);
             }
             currenttiletype += 4;
             GD.Print("-------------- Finished generating exit ---------------");
@@ -281,7 +323,8 @@ public class WorldMap : TileMap
                 //int index = random.Next(rots.Count);
                 //Ile.rotationtospawnwith = rots[index];
                 ((MyWorld)GetParent()).RegisterIle(Ile);
-                iles.Insert(iles.Count, Ile);
+                IslandMap.Add(postoput ,Ile);
+                //iles.Insert(iles.Count, Ile);
             }
             currenttiletype += 1;
             GD.Print("-------------- Finished generating exit ---------------");
@@ -289,9 +332,9 @@ public class WorldMap : TileMap
         if (curtiletype == 8)
         {
             GD.Print("Toggling final islands");
-            iles.Clear();
-            iles = null;
-            SetProcess(false);
+            finishedspawning = true;
+            
+            //SetProcess(false);
         }
     }
 	

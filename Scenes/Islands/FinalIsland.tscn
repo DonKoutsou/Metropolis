@@ -14,7 +14,6 @@ textures = [ [ ExtResource( 4 ) ], [ ExtResource( 5 ) ] ]
 [node name="Island" instance=ExtResource( 1 )]
 
 [node name="HTerrain" parent="." index="4"]
-map_scale = Vector3( 15.625, 7, 15.625 )
 texture_set = SubResource( 1 )
 
 [node name="Ship" parent="." index="8" instance=ExtResource( 2 )]

@@ -1,14 +1,31 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/WorldMap.cs" type="Script" id=1]
 [ext_resource path="res://Tilesets/World_Tileset.tres" type="TileSet" id=2]
+[ext_resource path="res://Scenes/Islands/FinalIsland.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Islands/IslandStarting.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Islands/Island5.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Islands/Island4.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Islands/Volcano.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Islands/SeaIsland.tscn" type="PackedScene" id=8]
 
 [node name="WorldMap" type="TileMap"]
 tile_set = ExtResource( 2 )
+cell_tile_origin = 1
+centered_textures = true
+collision_layer = 0
+collision_mask = 0
+navigation_layers = 0
+occluder_light_mask = 0
 format = 1
-tile_data = PoolIntArray( -327689, 0, 0, -327686, 0, 0, -262150, 0, 0, -262148, 0, 0, -262147, 0, 0, -262146, 0, 0, -262145, 0, 0, -327680, 0, 0, -327679, 3, 0, -196616, 0, 0, -196615, 0, 0, -196614, 0, 0, -196612, 0, 0, -196610, 0, 0, -196609, 0, 0, -262144, 0, 0, -262143, 0, 0, -262142, 0, 0, -262141, 0, 0, -262140, 0, 0, -131081, 0, 0, -131080, 0, 0, -131079, 0, 0, -131078, 0, 0, -131077, 0, 0, -131076, 0, 0, -131074, 0, 0, -196608, 0, 0, -196606, 0, 0, -196605, 0, 0, -196604, 0, 0, -196603, 0, 0, -196602, 0, 0, -65549, 0, 0, -65548, 0, 0, -65547, 0, 0, -65546, 0, 0, -65545, 0, 0, -65542, 0, 0, -65541, 0, 0, -65540, 0, 0, -65538, 0, 0, -131072, 0, 0, -131071, 0, 0, -131070, 0, 0, -131069, 0, 0, -131067, 0, 0, -131066, 0, 0, -131065, 0, 0, -9, 0, 0, -8, 0, 0, -7, 0, 0, -6, 0, 0, -4, 0, 0, -2, 0, 0, -1, 0, 0, -65536, 1, 0, -65535, 0, 0, -65533, 0, 0, -65532, 0, 0, -65530, 0, 0, -65529, 0, 0, 65528, 0, 0, 65529, 0, 0, 65530, 0, 0, 65531, 0, 0, 65532, 0, 0, 65534, 0, 0, 65535, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 131066, 0, 0, 131067, 0, 0, 131068, 0, 0, 131069, 0, 0, 131070, 0, 0, 131071, 0, 0, 65536, 0, 0, 65537, 0, 0, 65538, 0, 0, 65539, 0, 0, 65540, 0, 0, 65541, 0, 0, 196604, 0, 0, 196605, 0, 0, 196607, 0, 0, 131072, 0, 0, 131075, 0, 0, 131076, 0, 0, 262141, 0, 0, 262142, 0, 0, 262143, 0, 0, 196608, 0, 0, 196609, 0, 0, 196610, 0, 0 )
 script = ExtResource( 1 )
-scenestospawn = PoolStringArray( "res://Scenes/Islands/Island3D.tscn" )
+scenestospawn = PoolStringArray( "res://Scenes/Islands/Island1.tscn", "res://Scenes/Islands/Island2.tscn", "res://Scenes/Islands/Island6.tscn", "res://Scenes/Islands/Island3.tscn", "res://Scenes/Islands/Island7.tscn", "res://Scenes/Islands/Island8.tscn", "res://Scenes/Islands/Island9.tscn", "res://Scenes/Islands/Island10.tscn", "res://Scenes/Islands/Island11.tscn", "res://Scenes/Islands/Island12.tscn" )
+Entrytospawn = ExtResource( 4 )
+Exittospawn = ExtResource( 3 )
+Pit_City = ExtResource( 5 )
+Slab = ExtResource( 6 )
+Volcano = ExtResource( 7 )
+Sea = ExtResource( 8 )
 HideBasedOnState = true
 
 [node name="NavMeshHolder" type="Node2D" parent="." groups=["NavigationHolder"]]

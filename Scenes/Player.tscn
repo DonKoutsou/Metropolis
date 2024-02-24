@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/Stamina_Bar.cs" type="Script" id=2]
@@ -27,9 +27,8 @@
 [sub_resource type="CapsuleShape" id=6]
 height = 2.316
 
-[sub_resource type="CylinderShape" id=71]
-
 [sub_resource type="CylinderShape" id=82]
+radius = 0.001
 
 [sub_resource type="Shader" id=72]
 code = "shader_type canvas_item;
@@ -112,6 +111,7 @@ _data = [ Vector2( 0, 1024 ), 0.0, 0.0, 0, 0, Vector2( 0.0157068, 111.709 ), 0.0
 [sub_resource type="PlaneMesh" id=76]
 
 [sub_resource type="ShaderMaterial" id=91]
+render_priority = -2
 shader = ExtResource( 20 )
 
 [sub_resource type="SpatialMaterial" id=73]
@@ -174,26 +174,6 @@ RunSpeed = 30
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.31213, 0 )
 shape = SubResource( 6 )
-
-[node name="MobDetector" type="Area" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
-collision_layer = 0
-collision_mask = 2
-monitorable = false
-
-[node name="CollisionShape" type="CollisionShape" parent="MobDetector"]
-transform = Transform( 1.47899, 0, 0, 0, 0.256205, 0, 0, 0, 1.68566, 0, 0, 0 )
-shape = SubResource( 71 )
-
-[node name="DoorDetector" type="Area" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
-collision_layer = 0
-collision_mask = 8
-monitorable = false
-
-[node name="CollisionShape" type="CollisionShape" parent="DoorDetector"]
-transform = Transform( 1.47899, 0, 0, 0, 0.256205, 0, 0, 0, 1.68566, 0, 0, 0 )
-shape = SubResource( 71 )
 
 [node name="HouseDoorDetector" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
@@ -338,7 +318,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="TalkText" type="RichTextLabel" parent="PlayerUI/MarginContainer"]
-margin_right = 1920.0
+margin_right = 1280.0
 margin_bottom = 35.0
 size_flags_vertical = 0
 theme = SubResource( 69 )
@@ -459,8 +439,6 @@ mesh = SubResource( 86 )
 
 [node name="MoveLoc" parent="." instance=ExtResource( 16 )]
 
-[connection signal="body_entered" from="MobDetector" to="." method="OnMobDetectorBodyEntered"]
-[connection signal="body_entered" from="DoorDetector" to="." method="OnDoorDetectorBodyEntered"]
 [connection signal="body_entered" from="HouseDoorDetector" to="." method="OnHouseDoorDetectorBodyEntered"]
 [connection signal="timeout" from="PlayerUI/HP_Bar/VisibilityTimerHP" to="PlayerUI/HP_Bar" method="TurnOff"]
 [connection signal="timeout" from="PlayerUI/Stamina_Bar/VisibilityTimerStamina" to="PlayerUI/Stamina_Bar" method="TurnOff"]

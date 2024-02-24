@@ -9,7 +9,7 @@
 [node name="Island" instance=ExtResource( 1 )]
 
 [node name="HTerrain" parent="." index="4"]
-map_scale = Vector3( 15.625, 1, 15.625 )
+transform = Transform( 15.625, 0, 0, 0, 1, 0, 0, 0, 15.625, 0, 0, 0 )
 _terrain_data = ExtResource( 14 )
 
 [node name="StaticBody" parent="." index="5" instance=ExtResource( 10 )]

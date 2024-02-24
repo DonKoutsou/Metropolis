@@ -232,19 +232,6 @@ public class Player : Character
 	}
 
 		// We also specified this function name in PascalCase in the editor's connection window
-	public void OnMobDetectorBodyEntered(Node body)
-	{
-		//Die();
-	}
-	public void OnDoorDetectorBodyEntered(Node body)
-	{
-		if (body is Wall)
-		{
-			Wall bod = (Wall)body;
-			bod.Touch(this);
-		}
-		//loctomove = GlobalTransform.origin;
-	}
 	public void OnHouseDoorDetectorBodyEntered(Node body)
 	{
 		if (body is HouseDoor)
