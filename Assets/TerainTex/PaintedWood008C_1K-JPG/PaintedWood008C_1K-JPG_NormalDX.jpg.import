@@ -2,28 +2,26 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/PaintedWood008C_1K-JPG_NormalDX.jpg-7cbc0613ed2a09ca7353e04ffd811624.s3tc.stex"
-path.etc2="res://.import/PaintedWood008C_1K-JPG_NormalDX.jpg-7cbc0613ed2a09ca7353e04ffd811624.etc2.stex"
+path="res://.import/PaintedWood008C_1K-JPG_NormalDX.jpg-7cbc0613ed2a09ca7353e04ffd811624.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Assets/TerainTex/PaintedWood008C_1K-JPG/PaintedWood008C_1K-JPG_NormalDX.jpg"
-dest_files=[ "res://.import/PaintedWood008C_1K-JPG_NormalDX.jpg-7cbc0613ed2a09ca7353e04ffd811624.s3tc.stex", "res://.import/PaintedWood008C_1K-JPG_NormalDX.jpg-7cbc0613ed2a09ca7353e04ffd811624.etc2.stex" ]
+dest_files=[ "res://.import/PaintedWood008C_1K-JPG_NormalDX.jpg-7cbc0613ed2a09ca7353e04ffd811624.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
-compress/normal_map=1
-flags/repeat=true
+compress/normal_map=0
+flags/repeat=0
 flags/filter=true
-flags/mipmaps=true
+flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
 process/fix_alpha_border=true
@@ -33,5 +31,5 @@ process/invert_color=false
 process/normal_map_invert_y=false
 stream=false
 size_limit=0
-detect_3d=false
+detect_3d=true
 svg/scale=1.0

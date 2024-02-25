@@ -9,6 +9,7 @@ public class MyWorld : Spatial
 	Player pl;
 
 	float d = 100;
+
 	public override void _Ready()
 	{
 		base._Ready();
@@ -80,6 +81,24 @@ public class MyWorld : Spatial
 			{
 				ToggleIsland(closestto[i], Toggle);
 			}
+		}
+	}
+	public override void _Input(InputEvent @event)
+	{
+		if (@event.IsActionPressed("Pause"))
+		{
+			StartingScreen start = ((MainWorld)GetParent()).GetStartingScreen();
+			if (!GetTree().Paused)
+			{
+				GetTree().Paused = true;
+				start.Pause(true);
+			}
+			else
+			{
+				GetTree().Paused = false;
+				start.Pause(false);
+			}
+				
 		}
 	}
 };

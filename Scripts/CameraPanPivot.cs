@@ -23,6 +23,36 @@ public class CameraPanPivot : Position3D
 				Rotation = prevrot;
 		}
     }
+	public override void _PhysicsProcess(float delta)
+	{
+		Vector3 prevrot = Rotation;
+		Vector3 rot = Rotation;
+		if (Input.IsActionPressed("ui_right"))
+		{
+			rot.y += 1f * 0.01f;
+		}
+		if (Input.IsActionPressed("ui_left"))
+		{
+			rot.y -= 1f * 0.01f;
+			
+		}
+        if (Input.IsActionPressed("ui_up"))
+		{
+			rot.x -= 1 * 0.01f;
+		}	
+		if (Input.IsActionPressed("ui_down"))
+		{
+			rot.x += 1 * 0.01f;
+        }
+		if (prevrot == rot)
+			return;
+
+		Rotation = rot;
+
+		if (MyCamera.IsClipping())
+			Rotation = prevrot;
+
+	}
 	
     
 }

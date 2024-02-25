@@ -7,14 +7,14 @@
 
 [node name="Island" instance=ExtResource( 1 )]
 
-[node name="HTerrain" parent="." index="4"]
+[node name="HTerrain" parent="." index="0"]
 _terrain_data = ExtResource( 6 )
 
-[node name="House" parent="." index="5" instance=ExtResource( 3 )]
+[node name="House" parent="." index="1" instance=ExtResource( 3 )]
 transform = Transform( 0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 142.3, 3.85479, -229.341 )
 
-[node name="House2" parent="." index="6" instance=ExtResource( 3 )]
+[node name="House2" parent="." index="2" instance=ExtResource( 3 )]
 transform = Transform( 0.954724, 0, 0.297492, 0, 1, 0, -0.297492, 0, 0.954724, 263.515, 3.21034, 645.664 )
 
-[node name="SeaBed" parent="." index="7" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+[node name="SeaBed" parent="." index="3" instance=ExtResource( 7 )]
+transform = Transform( 15.626, 0, 0, 0, 1, 0, 0, 0, 15.626, 0, -1, 0 )

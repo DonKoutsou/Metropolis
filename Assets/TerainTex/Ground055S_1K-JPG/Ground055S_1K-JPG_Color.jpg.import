@@ -1,35 +1,13 @@
 [remap]
 
-importer="texture"
-type="StreamTexture"
-path="res://.import/Ground055S_1K-JPG_Color.jpg-5f253ba88dab6fd765b655325f6286c0.stex"
-metadata={
-"vram_texture": false
-}
+importer="image"
+type="Image"
+path="res://.import/Ground055S_1K-JPG_Color.jpg-5f253ba88dab6fd765b655325f6286c0.image"
 
 [deps]
 
 source_file="res://Assets/TerainTex/Ground055S_1K-JPG/Ground055S_1K-JPG_Color.jpg"
-dest_files=[ "res://.import/Ground055S_1K-JPG_Color.jpg-5f253ba88dab6fd765b655325f6286c0.stex" ]
+dest_files=[ "res://.import/Ground055S_1K-JPG_Color.jpg-5f253ba88dab6fd765b655325f6286c0.image" ]
 
 [params]
 
-compress/mode=0
-compress/lossy_quality=0.7
-compress/hdr_mode=0
-compress/bptc_ldr=0
-compress/normal_map=0
-flags/repeat=0
-flags/filter=false
-flags/mipmaps=false
-flags/anisotropic=false
-flags/srgb=0
-process/fix_alpha_border=false
-process/premult_alpha=false
-process/HDR_as_SRGB=false
-process/invert_color=false
-process/normal_map_invert_y=false
-stream=false
-size_limit=0
-detect_3d=false
-svg/scale=1.0

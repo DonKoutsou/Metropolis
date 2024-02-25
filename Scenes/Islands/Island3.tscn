@@ -8,16 +8,16 @@
 
 [node name="Island" instance=ExtResource( 1 )]
 
-[node name="HTerrain" parent="." index="4"]
+[node name="HTerrain" parent="." index="0"]
 transform = Transform( 15.625, 0, 0, 0, 10, 0, 0, 0, 15.625, 0, 0, 0 )
 _terrain_data = ExtResource( 4 )
 shader_params/u_tile_reduction = true
 
-[node name="StaticBody" parent="." index="5" instance=ExtResource( 11 )]
+[node name="StaticBody" parent="." index="1" instance=ExtResource( 11 )]
 transform = Transform( -0.992732, 0, -0.120345, 0, 1, 0, 0.120345, 0, -0.992732, -498.83, -20.5386, -481.751 )
 
-[node name="SeaBed" parent="." index="6" instance=ExtResource( 10 )]
+[node name="SeaBed" parent="." index="2" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
 
-[node name="House" parent="." index="7" instance=ExtResource( 12 )]
+[node name="House" parent="." index="3" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -541.511, -1.46928, -416.827 )

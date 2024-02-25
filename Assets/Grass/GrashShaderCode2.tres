@@ -1,0 +1,107 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type spatial;
+render_mode cull_disabled;
+
+uniform sampler2D u_terrain_heightmap;
+uniform sampler2D u_terrain_detailmap;
+uniform sampler2D u_terrain_colormap;
+uniform sampler2D u_terrain_normalmap;
+uniform sampler2D u_terrain_globalmap : hint_albedo;
+uniform mat4 u_terrain_inverse_transform;
+uniform mat3 u_terrain_normal_basis;
+
+uniform float wind_speed = 0.2;
+uniform float wind_strength = 2.0;
+// How big, in world space, is the noise texture
+// wind will tile every wind_texture_tile_size
+uniform float wind_texture_tile_size = 20.0;
+uniform float wind_vertical_strength = 0.3;
+uniform vec2 wind_horizontal_direction = vec2(1.0,0.5);
+
+uniform sampler2D color_ramp : hint_black_albedo;
+// we need a tiling noise here!
+uniform sampler2D wind_noise : hint_black;
+
+uniform vec3 character_position;
+uniform float character_radius = 3.0;
+uniform sampler2D character_distance_falloff_curve : hint_black_albedo;
+uniform float character_push_strength = 1.0;
+
+varying float debug_wind;
+
+void vertex() {
+	
+	vec4 obj_pos = WORLD_MATRIX * vec4(0, 1, 0, 1);
+	vec3 cell_coords = (u_terrain_inverse_transform * obj_pos).xyz;
+	// Must add a half-offset so that we sample the center of pixels,
+	// otherwise bilinear filtering of the textures will give us mixed results (#183)
+	cell_coords.xz += vec2(0.5);
+	
+	
+	vec3 world_vert = (WORLD_MATRIX * vec4(VERTEX, 1.0)).xyz;
+	
+	float dr = distance(world_vert, CAMERA_MATRIX[3].xyz) / 1000.0;
+	if (dr <= 1.0)
+		COLOR.a = 1.0 - dr;
+	else
+		COLOR.a = 0.0;
+		
+	vec2 normalized_wind_direction = normalize(wind_horizontal_direction);
+	vec2 world_uv = world_vert.xz / wind_texture_tile_size + normalized_wind_direction * TIME * wind_speed;
+	// we displace only the top part of the mesh
+	// note that this means that the mesh needs to have UV in a way that the bottom of UV space
+	// is at the top of the mesh
+	float displacement_affect = (1.0 - UV.y);
+	float wind_noise_intensity = (textureLod(wind_noise, world_uv , 0.0).r - 0.5);
+
+	// We convert the direction of the wind into vertex space from world space
+	// if we used it directly in vertex space, rotated blades of grass wouldn't behave properly
+	vec2 vert_space_horizontal_dir = (inverse(WORLD_MATRIX) * vec4(wind_horizontal_direction, 0.0,0.0)).xy;
+	vert_space_horizontal_dir = normalize(vert_space_horizontal_dir);
+	
+	vec3 bump_wind = vec3(
+		wind_noise_intensity * vert_space_horizontal_dir.x,
+		1.0 - wind_noise_intensity,
+		wind_noise_intensity * vert_space_horizontal_dir.y 
+	);
+	normalize(bump_wind);
+	bump_wind *= vec3(
+		wind_strength,
+		wind_vertical_strength,
+		wind_strength
+	);
+	VERTEX += bump_wind * displacement_affect;
+	
+	// At the moment the blades are pushed away in a perfectly circular manner.
+	// We could distort the distance to the character based on a noise, to break a bit the
+	// circular shape. We could distort the falloff by sampling in a noise based on the xz coordinates.
+	// The task is left to the reader
+	
+	vec3 dir_to_character = character_position - WORLD_MATRIX[3].xyz;
+	// uncomment the following line to have a horizontal only character push
+//	dir_to_character.y = 0.0;
+	float distance_to_character = length(dir_to_character);
+	float falloff = 1.0 - smoothstep(0.0, 1.0, distance_to_character/character_radius);
+	// Because we operate in vertex space, we need to convert the direction to the character
+	// in vertex space. Otherwise, it wouldn't work for rotated blades of grass.
+	// comment the next line to observe how the blades are not all facing away from the character.
+	dir_to_character = (inverse(WORLD_MATRIX) * vec4(dir_to_character, 0.0)).xyz;
+	dir_to_character = normalize(dir_to_character);
+
+	// sample the curve based on how far we are from the character, in normalized coordinates
+	float falloff_curve = texture(character_distance_falloff_curve, vec2(falloff)).x;
+	// direction to character is inverted because we want to point away from it
+	VERTEX += normalize(-dir_to_character) * falloff_curve * character_push_strength * displacement_affect;
+	vec2 map_uv = cell_coords.xz / vec2(textureSize(u_terrain_heightmap, 0));
+	float height = texture(u_terrain_heightmap, map_uv).r / cell_coords.y;
+	VERTEX.y += height;
+	
+}
+
+void fragment() {
+	ALBEDO = texture(color_ramp, vec2(1.0 - UV.y, 0)).rgb ;
+
+	ALPHA = COLOR.a;
+}"

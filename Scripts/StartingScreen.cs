@@ -33,6 +33,11 @@ public class StartingScreen : Control
 		GetNode<VideoPlayer>("VideoPlayer").Paused = true;
 		GetNode<VideoPlayer>("VideoPlayer").Hide();
 	}
+
+	public void Pause(bool toggle)
+	{
+		GetNode<Label>("PauseLabel").Visible = toggle;
+	}
 	public void GameOver()
 	{
 		GetNode<Timer>("RestartTimer").Start();

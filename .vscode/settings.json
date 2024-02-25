@@ -15,4 +15,5 @@
     },
     "godot_tools.editor_path": "E:/Godot/Godot_v3.5.3-stable_mono_win64/Godot_v3.5.3-stable_mono_win64.exe",
     "debug.allowBreakpointsEverywhere": true,
+    "godotTools.editorPath.godot3": "c:\\Godot_v3.5.3-stable_mono_win64\\Godot_v3.5.3-stable_mono_win64.exe",
 }

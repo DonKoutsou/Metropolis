@@ -1292,7 +1292,7 @@ nodes/TimeScale/position = Vector2( 241.076, 25.6959 )
 nodes/Walk_Speed/node = SubResource( 19 )
 nodes/Walk_Speed/position = Vector2( 0, 320 )
 nodes/output/position = Vector2( 980, 160 )
-node_connections = [ "output", 0, "JumpShot", "Idle_Walk_Blend", 0, "Animation", "Idle_Walk_Blend", 1, "Walk_Speed", "TimeScale", 0, "Animation 2", "JumpShot", 0, "Idle_Walk_Blend", "JumpShot", 1, "TimeScale", "Walk_Speed", 0, "Animation 3" ]
+node_connections = [ "Idle_Walk_Blend", 0, "Animation", "Idle_Walk_Blend", 1, "Walk_Speed", "TimeScale", 0, "Animation 2", "Walk_Speed", 0, "Animation 3", "JumpShot", 0, "Idle_Walk_Blend", "JumpShot", 1, "TimeScale", "output", 0, "JumpShot" ]
 
 [node name="Cloak_Skinned" instance=ExtResource( 1 )]
 
@@ -1304,6 +1304,18 @@ local_coords = false
 draw_order = 2
 process_material = SubResource( 21 )
 draw_pass_1 = SubResource( 22 )
+
+[node name="Skeleton" parent="rig" index="1"]
+bones/16/bound_children = [ NodePath("BoneAttachment") ]
+
+[node name="BoneAttachment" type="BoneAttachment" parent="rig/Skeleton" index="2"]
+transform = Transform( 0.992079, -0.104805, 0.0692475, -0.122708, -0.690644, 0.712709, -0.0268699, -0.715561, -0.698034, 0.0820929, 4.29324, 0.205899 )
+bone_name = "DEF-spine.006"
+
+[node name="NightLight" type="SpotLight" parent="rig/Skeleton/BoneAttachment" index="0"]
+transform = Transform( 1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, -0.369, -0.65 )
+light_color = Color( 0.580392, 1, 0.619608, 1 )
+spot_range = 19.319
 
 [node name="AnimationPlayer" parent="." index="2"]
 anims/Idle-loop = SubResource( 5 )

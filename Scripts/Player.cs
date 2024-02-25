@@ -29,6 +29,10 @@ public class Player : Character
 
 	MoveLocation moveloc;
 
+	bool Autowalk = false;
+
+	SpotLight NightLight;
+
 	public void Teleport(Vector3 pos)
 	{
 		GlobalTranslation = pos;
@@ -53,6 +57,7 @@ public class Player : Character
 		GetNode<AudioStreamPlayer3D>("TiredSound").Play();
 		GetNode<AudioStreamPlayer3D>("TiredSound").StreamPaused = true;
 		anim = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Character_Animations>("AnimationPlayer");
+		NightLight = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("BoneAttachment").GetNode<SpotLight>("NightLight");
 		moveloc = GetNode<MoveLocation>("MoveLoc");
 
 		NavAgent = GetNode<NavigationAgent>("NavigationAgent");
@@ -70,7 +75,11 @@ public class Player : Character
 	}
 	public override void _PhysicsProcess(float delta)
 	{
-		if (Input.IsActionPressed("Move"))
+		if (DayNight.IsDay())
+			NightLight.LightEnergy = 0;
+		else
+			NightLight.LightEnergy = 1;
+		if (Input.IsActionPressed("Move") || Autowalk)
 		{
 			var spacestate = GetWorld().DirectSpaceState;
 			Vector2 mousepos = GetViewport().GetMousePosition();
@@ -224,6 +233,14 @@ public class Player : Character
 			moveloc.GlobalTransform = or;
 			moveloc.Show();
 		}
+		if (@event.IsActionPressed("AutoWalk"))
+		{
+			if (Autowalk)
+				Autowalk = false;
+			else
+				Autowalk = true;
+		}
+		
 	}
 	private void Die()
 	{

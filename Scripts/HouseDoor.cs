@@ -21,9 +21,9 @@ public class HouseDoor : Door
 	public override void Touch(object body)
 	{
 		Vector3 forw = GlobalTransform.basis.z;
-		Vector3 toOther = GetNode<CollisionShape>("CollisionShape").GlobalTransform.origin - ((Spatial)body).GlobalTransform.origin;
+		Vector3 toOther = GlobalTransform.origin - ((Spatial)body).GlobalTransform.origin;
 		var thing = forw.Dot(toOther);
-		if (thing < 0)
+		if (thing > 0)
 		{
 			((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetSurfaceMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Front;
 			((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetSurfaceMaterial(2)).ParamsCullMode = SpatialMaterial.CullMode.Front;

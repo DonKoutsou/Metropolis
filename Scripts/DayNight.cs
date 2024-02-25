@@ -49,6 +49,8 @@ public class DayNight : WorldEnvironment
     DirectionalLight sun;
     DirectionalLight moon;
 
+    static bool day = false;
+
     public Spatial SunMoonMeshPivot;
     public override void _Process(float delta)
     {
@@ -89,12 +91,14 @@ public class DayNight : WorldEnvironment
         if (sunrot > 180)
         {
             sun.Show();
+            day = true;
             sunrot = -(180 - (sunrot - 180));
             moon.Hide();
         }
         else
         {
             sun.Hide();
+            day = false;
             moon.Show();
         }
         var moonrot = -(180 - sunrot);
@@ -106,6 +110,10 @@ public class DayNight : WorldEnvironment
         moon.RotationDegrees = new Vector3(moonrot, 0, 0);
         //GD.Print(brightness);
         //GD.Print(sunrot);
+    }
+    public static bool IsDay()
+    {
+        return day;
     }
     public override void _Ready()
     {

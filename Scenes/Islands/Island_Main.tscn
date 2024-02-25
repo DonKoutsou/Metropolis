@@ -3,4 +3,5 @@
 [ext_resource path="res://Scripts/Island.cs" type="Script" id=2]
 
 [node name="Island" type="Spatial" groups=["Islands"]]
+pause_mode = 1
 script = ExtResource( 2 )

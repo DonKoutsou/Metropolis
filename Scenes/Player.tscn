@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/Stamina_Bar.cs" type="Script" id=2]
@@ -22,13 +22,12 @@
 [ext_resource path="res://Assets/PostProcess/PixelShader.gdshader" type="Shader" id=20]
 [ext_resource path="res://Scripts/MyCamera.cs" type="Script" id=21]
 [ext_resource path="res://Scenes/CloudBox.tscn" type="PackedScene" id=22]
-[ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_Color.jpg" type="Texture" id=23]
 
 [sub_resource type="CapsuleShape" id=6]
 height = 2.316
 
 [sub_resource type="CylinderShape" id=82]
-radius = 0.001
+radius = 0.1
 
 [sub_resource type="Shader" id=72]
 code = "shader_type canvas_item;
@@ -110,12 +109,11 @@ _data = [ Vector2( 0, 1024 ), 0.0, 0.0, 0, 0, Vector2( 0.0157068, 111.709 ), 0.0
 
 [sub_resource type="PlaneMesh" id=76]
 
-[sub_resource type="ShaderMaterial" id=91]
+[sub_resource type="ShaderMaterial" id=87]
 render_priority = -2
 shader = ExtResource( 20 )
 
 [sub_resource type="SpatialMaterial" id=73]
-albedo_texture = ExtResource( 23 )
 
 [sub_resource type="ParticlesMaterial" id=74]
 emission_shape = 2
@@ -159,6 +157,7 @@ radius = 100.0
 height = 200.0
 
 [node name="Player" type="KinematicBody" groups=["player"]]
+pause_mode = 1
 collision_layer = 9
 collision_mask = 38
 script = ExtResource( 1 )
@@ -337,6 +336,7 @@ wait_time = 2.0
 one_shot = true
 
 [node name="CameraMovePivot" type="Position3D" parent="."]
+pause_mode = 2
 transform = Transform( 1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 0, 0, 0 )
 script = ExtResource( 15 )
 
@@ -370,7 +370,7 @@ cast_shadow = 0
 generate_lightmap = false
 mesh = SubResource( 76 )
 software_skinning_transform_normals = false
-material/0 = SubResource( 91 )
+material/0 = SubResource( 87 )
 
 [node name="RayCastDown" type="RayCast" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot/Camera"]
 enabled = true
@@ -411,8 +411,10 @@ collision_mask = 4
 
 [node name="Particles" type="Particles" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.85324, 0 )
+visible = false
 material_override = SubResource( 73 )
 cast_shadow = 0
+emitting = false
 amount = 2000
 lifetime = 4.54
 preprocess = 0.78

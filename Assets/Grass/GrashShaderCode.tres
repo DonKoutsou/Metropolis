@@ -2,7 +2,7 @@
 
 [resource]
 code = "shader_type spatial;
-render_mode cull_disabled;
+render_mode cull_disabled, unshaded, shadows_disabled;
 
 uniform sampler2D u_terrain_heightmap;
 uniform sampler2D u_terrain_detailmap;
@@ -19,9 +19,15 @@ uniform float u_globalmap_tint_top : hint_range(0.0, 1.0);
 uniform float u_bottom_ao : hint_range(0.0, 1.0);
 uniform vec2 u_ambient_wind; // x: amplitude, y: time
 uniform vec3 u_instance_scale = vec3(1.0, 1.0, 1.0);
+
+uniform float wind_speed = 0.2;
+uniform float wind_strength = 2.0;
+// How big, in world space, is the noise texture
+// wind will tile every wind_texture_tile_size
+uniform float wind_texture_tile_size = 20.0;
+uniform float wind_vertical_strength = 0.3;
 uniform vec2 wind_horizontal_direction = vec2(1.0,0.5);
-uniform vec4 top_color : hint_color;
-uniform vec4 bot_color : hint_color;
+uniform sampler2D wind_noise : hint_black;
 
 varying vec3 v_normal;
 varying vec2 v_map_uv;
@@ -36,9 +42,36 @@ vec3 unpack_normal(vec4 rgba) {
 	return n;
 }
 
-vec3 get_ambient_wind_displacement(vec2 uv, float hash, vec3 world_vert) {
+vec3 get_ambient_wind_displacement(vec2 uv, mat4 hash, vec3 world_vert) {
 	// TODO This is an initial basic implementation. It may be improved in the future, especially for strong wind.
-	float t = u_ambient_wind.y ;
+	vec2 normalized_wind_direction = normalize(wind_horizontal_direction);
+	vec2 world_uv = world_vert.xz / wind_texture_tile_size + normalized_wind_direction * TIME * wind_speed;
+	// we displace only the top part of the mesh
+	// note that this means that the mesh needs to have UV in a way that the bottom of UV space
+	// is at the top of the mesh
+	float displacement_affect = (1.0 - uv.y);
+	float wind_noise_intensity = (textureLod(wind_noise, world_uv , 0.0).r - 0.5);
+
+	// We convert the direction of the wind into vertex space from world space
+	// if we used it directly in vertex space, rotated blades of grass wouldn't behave properly
+	vec2 vert_space_horizontal_dir = (inverse(hash) * vec4(wind_horizontal_direction, 0.0,0.0)).xy;
+	vert_space_horizontal_dir = normalize(vert_space_horizontal_dir);
+	
+	vec3 bump_wind = vec3(
+		wind_noise_intensity * vert_space_horizontal_dir.x,
+		1.0 - wind_noise_intensity,
+		wind_noise_intensity * vert_space_horizontal_dir.y 
+	);
+	normalize(bump_wind);
+	bump_wind *= vec3(
+		wind_strength,
+		wind_vertical_strength,
+		wind_strength
+	);
+	return bump_wind * displacement_affect;
+	
+	
+	/*float t = u_ambient_wind.y ;
 	
 	vec2 normalized_wind_direction = normalize(wind_horizontal_direction);
 	vec2 world_uv = world_vert.xz / normalized_wind_direction * t;
@@ -49,7 +82,7 @@ vec3 get_ambient_wind_displacement(vec2 uv, float hash, vec3 world_vert) {
 	// Fine displacement
 	float fine_disp_frequency = 2.0;
 	disp += 0.2 * amp * vec3(cos(t * (fine_disp_frequency + hash)), 0, sin(t * (fine_disp_frequency + hash) * 1.2));
-	return disp;
+	return disp;*/
 }
 
 void vertex() {
@@ -77,7 +110,8 @@ void vertex() {
 		VERTEX.y += height;
 		
 		vec3 world_vert = (WORLD_MATRIX * vec4(VERTEX, 1.0)).xyz;
-		VERTEX += get_ambient_wind_displacement(UV, hash, world_vert);
+		mat4 wm = WORLD_MATRIX;
+		VERTEX += get_ambient_wind_displacement(UV, wm, world_vert);
 		
 		// Fade alpha with distance
 		vec3 wpos = (WORLD_MATRIX * vec4(VERTEX, 1)).xyz;

@@ -5,6 +5,7 @@
 [ext_resource path="res://Scripts/MyWorld.cs" type="Script" id=4]
 
 [node name="MyWorld" type="Spatial" groups=["World"]]
+pause_mode = 2
 script = ExtResource( 4 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
