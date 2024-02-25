@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public class Inventory : Node2D
+public class Inventory : Spatial
 {
     List<Item> InventoryContents;
 
@@ -49,7 +49,7 @@ public class Inventory : Node2D
         AddChild(item);
         item.Hide();
         EmitSignal(nameof(On_Item_Added), item);
-        item.GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled",true);
+        item.GetNode<CollisionShape>("CollisionShape").SetDeferred("disabled",true);
         return true;
     }
     public bool RemoveItem(Item item)

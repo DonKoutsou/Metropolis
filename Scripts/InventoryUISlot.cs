@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class InventoryUISlot : Node2D
+public class InventoryUISlot : Control
 {
     public Sprite ItemIcon;
     public RichTextLabel Ammount;

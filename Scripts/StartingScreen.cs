@@ -24,6 +24,8 @@ public class StartingScreen : Control
 			//return;
 		//GetNode<Label>("TitleLabel").Hide();
 		GetNode<Button>("Start_Button").Hide();
+		GetNode<Button>("Exit_Button").Hide();
+		GetNode<Button>("Controlls_Button").Hide();
 		GetNode<LoadingScreen>("LoadingScreen").EnableTime();
 		//foreach (Button but in WorldButtons)
 		//{
@@ -32,11 +34,35 @@ public class StartingScreen : Control
 		world.SpawnMap(0);
 		GetNode<VideoPlayer>("VideoPlayer").Paused = true;
 		GetNode<VideoPlayer>("VideoPlayer").Hide();
+		MouseFilter = MouseFilterEnum.Ignore;
 	}
+	private void On_Controlls_Button_Down()
+	{
+		GetNode<TextureRect>("Controlls").Show();
+		GetNode<Button>("Controlls_Back").Show();
 
+	}
+	private void On_Controlls_Back_Button_Down()
+	{
+		GetNode<TextureRect>("Controlls").Hide();
+		GetNode<Button>("Controlls_Back").Hide();
+		
+	}
+	private void On_Exit_Button_Down()
+	{
+		GetTree().Quit();
+	}
 	public void Pause(bool toggle)
 	{
+		if (toggle)
+			MouseFilter = MouseFilterEnum.Stop;
+		else
+			MouseFilter = MouseFilterEnum.Ignore;
+		
 		GetNode<Label>("PauseLabel").Visible = toggle;
+		GetNode<Button>("Exit_Button").Visible = toggle;
+		GetNode<Button>("Controlls_Button").Visible = toggle;
+
 	}
 	public void GameOver()
 	{

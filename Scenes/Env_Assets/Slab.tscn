@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Assets/Building/Slab.material" type="Material" id=1]
+[ext_resource path="res://Assets/Clutter/CylinderThing/CylThingyMat.material" type="Material" id=1]
 
 [sub_resource type="CylinderMesh" id=1]
 top_radius = 600.0

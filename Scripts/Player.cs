@@ -33,6 +33,11 @@ public class Player : Character
 
 	SpotLight NightLight;
 
+	ActionMenu actMen;
+
+	[Export(PropertyHint.Layers3dPhysics)]
+    public uint SelectLayer { get; set; }
+
 	public void Teleport(Vector3 pos)
 	{
 		GlobalTranslation = pos;
@@ -45,7 +50,8 @@ public class Player : Character
 	{
 		base._Ready();
 		//Input.MouseMode = Input.MouseModeEnum.Visible;
-		Control plUI = GetNode<Control>("PlayerUI");
+		Spatial plUI = GetNode<Spatial>("PlayerUI");
+		actMen = plUI.GetNode<ActionMenu>("ActionMenu");
 		hp_bar = plUI.GetNode<HP_Bar>("HP_Bar");
 		hp_bar.MaxValue = m_HP;
 		Stamina_bar = plUI.GetNode<Stamina_Bar>("Stamina_Bar");
@@ -59,14 +65,6 @@ public class Player : Character
 		anim = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Character_Animations>("AnimationPlayer");
 		NightLight = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("BoneAttachment").GetNode<SpotLight>("NightLight");
 		moveloc = GetNode<MoveLocation>("MoveLoc");
-
-		NavAgent = GetNode<NavigationAgent>("NavigationAgent");
-
-		myrid  = NavigationServer.AgentCreate();
-        RID default_3d_map_rid  = GetWorld().NavigationMap;
-
-        NavigationServer.AgentSetMap(myrid, default_3d_map_rid);
-        NavigationServer.AgentSetRadius(myrid, 0.5f);
 
 		Spatial sunmoonpiv = GetNode<Spatial>("SunMoonPivot");
 		MainWorld world = (MainWorld)GetParent().GetParent();
@@ -206,6 +204,8 @@ public class Player : Character
 		}
 	}
 	Vector3 loctomove;
+
+	Item selectedobj;
 	public override void _Input(InputEvent @event)
 	{
 		if (@event.IsActionPressed("Move"))
@@ -240,7 +240,28 @@ public class Player : Character
 			else
 				Autowalk = true;
 		}
-		
+		if (@event.IsActionPressed("Select"))
+		{
+			var spacestate = GetWorld().DirectSpaceState;
+			Vector2 mousepos = GetViewport().GetMousePosition();
+			Camera cam = GetTree().Root.GetCamera();
+			Vector3 rayor = cam.ProjectRayOrigin(mousepos);
+			Vector3 rayend = rayor + cam.ProjectRayNormal(mousepos) * 10000;
+			var rayar = spacestate.IntersectRay(rayor, rayend, new Godot.Collections.Array { this }, SelectLayer);
+			//if ray finds nothiong return
+			if (rayar.Count == 0)
+			{
+				selectedobj = null;
+				actMen.Stop();
+				return;
+			}
+			var obj = rayar["collider"];
+			if (obj is Item)
+			{
+				selectedobj = (Item)obj;
+				actMen.Start(selectedobj);
+			}
+		}
 	}
 	private void Die()
 	{
@@ -255,7 +276,7 @@ public class Player : Character
 		{
 			Wall bod = (Wall)body;
 			bod.Touch(this);
-			TalkText.GetInstance().Talk("'Αδειο...");
+			TalkText.GetInst().Talk("'Αδειο...");
 		}
 		//loctomove = GlobalTransform.origin;
 	}

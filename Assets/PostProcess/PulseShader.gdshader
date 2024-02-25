@@ -23,7 +23,7 @@ varying mat4 CAMERA;
 void vertex() {
 	// Set the Quad to cover the entire screen.
 	// If it doesn't, resize the quad (x,y) to (2,2)
-	POSITION = vec4(VERTEX, 1.0);
+	//POSITION = vec4(VERTEX, 1.0);
 	
 	// Again, from the docs, we need the interpolated camera matrix
 	// Which I think you can just get in the fragment shader?
@@ -42,7 +42,7 @@ void fragment() {
 	vec3 ndc = vec3(SCREEN_UV, depth) * 2.0 - 1.0;
 	
 	// Convert to world space from NDC
-	vec4 world = CAMERA * INV_PROJECTION_MATRIX * vec4(ndc, 1.0);
+	vec4 world = CAMERA_MATRIX * INV_PROJECTION_MATRIX * vec4(ndc, 1.0);
 	vec3 world_position = world.xyz / world.w;
 	
 	// Calculate how far the fragment (in world space) is from the start point.
@@ -58,5 +58,6 @@ void fragment() {
 		
 		mix_ratio = clamp(mix_ratio, 0.0, 1.0);
 	}
+	
 	ALBEDO = mix(original.rgb, color.rgb, mix_ratio);
 }

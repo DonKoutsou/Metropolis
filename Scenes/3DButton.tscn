@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=1]
+
+[sub_resource type="DynamicFont" id=1]
+size = 24
+font_data = ExtResource( 1 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 0.5, 0.5, 0.5 )
+
+[node name="StaticBody" type="StaticBody"]
+
+[node name="Control" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+rect_pivot_offset = Vector2( -585, -83 )
+
+[node name="PickUp_Button" type="Button" parent="Control"]
+process_priority = -3
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -48.5
+margin_top = -20.0
+margin_right = 48.5
+margin_bottom = 20.0
+custom_fonts/font = SubResource( 1 )
+action_mode = 0
+text = "Πάρε"
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 2 )

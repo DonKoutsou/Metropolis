@@ -6,6 +6,6 @@ onready var mesh_instance = $MeshInstance
 func Toggle(tog : bool) -> void:
 	var mat := mesh_instance.material_override as SpatialMaterial
 	if (tog):
-		mat.CULL_BACK
+		mat.params_cull_mode = mat.CULL_BACK
 	else :
-		mat.CULL_DISABLED
+		mat.params_cull_mode = mat.CULL_DISABLED

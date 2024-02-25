@@ -14,8 +14,6 @@ public class House : Spatial
 	public DialogueLine EmptyLines;
 
 
-	//bool m_bEmpty;
-
 	//Inventory HouseInventory;
 
 	//DialoguePanel DiagPan;
@@ -23,22 +21,23 @@ public class House : Spatial
 	public NavigationMeshInstance navmesh;
 	public override void _Ready()
 	{
-		/*HouseInventory = GetNode<Inventory>("Inventory");
-		var panels = GetTree().GetNodesInGroup("DialoguePanel");
-		DiagPan = (DialoguePanel)panels[0];
 
 		var Random = new Random();
-		m_bEmpty = Random.Next(2) == 1;
-		//m_bEmpty = true;
+		//m_bEmpty = Random.Next(2) == 1;
+
 		if (ItemSpawnPool == null)
 			return;
 		Random random = new Random();
-		int start2 = random.Next(0, ItemSpawnPool.Length);
-		var itemToSpawn = GD.Load<PackedScene>(ItemSpawnPool[start2]);
-		if (itemToSpawn == null)
+		int start2 = random.Next(0, ItemSpawnPool.Length + 1);
+		if (start2 >= ItemSpawnPool.Length)
 			return;
-		itemToDrop = (Item)itemToSpawn.Instance();
-		HouseInventory.InsertItem(itemToDrop);*/
+		var itemToSpawn = GD.Load<PackedScene>(ItemSpawnPool[start2]);
+
+		Item itemToDrop = (Item)itemToSpawn.Instance();
+		AddChild(itemToDrop);
+		itemToDrop.GlobalTranslation = GetNode<Position3D>("ItemSpawnPos").GlobalTransform.origin;
+
+		//HouseInventory.InsertItem(itemToDrop);
 		//navmesh = GetNode<NavigationMeshInstance>("NavigationMeshInstance");
 		
 	}

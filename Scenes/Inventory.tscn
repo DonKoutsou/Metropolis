@@ -2,5 +2,5 @@
 
 [ext_resource path="res://Scripts/Inventory.cs" type="Script" id=1]
 
-[node name="Inventory" type="Node2D"]
+[node name="Inventory" type="Spatial"]
 script = ExtResource( 1 )

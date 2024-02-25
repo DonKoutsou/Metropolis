@@ -69,7 +69,7 @@ public class Character : KinematicBody
 
         NavigationServer.AgentSetMap(myrid, default_3d_map_rid);
         NavigationServer.AgentSetRadius(myrid, 0.5f);
-
+		
 		((Island)GetParent()).RegisterChar(this);
 	}
 	public void UpdateMap()
