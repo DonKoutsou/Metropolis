@@ -232,4 +232,4 @@ quality/directional_shadow/size=8192
 quality/directional_shadow/size.mobile=4096
 quality/shadow_atlas/cubemap_size=1024
 environment/default_clear_color=Color( 1, 1, 1, 1 )
-environment/default_environment="res://default_env.tres"
+environment/default_environment="res://new_environment2.tres"

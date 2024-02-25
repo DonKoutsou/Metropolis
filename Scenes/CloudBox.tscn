@@ -8,7 +8,7 @@ flags_transparent = true
 flags_unshaded = true
 albedo_color = Color( 1, 1, 1, 0 )
 
-[node name="Spatial" type="Spatial"]
+[node name="CloudBox" type="Spatial"]
 
 [node name="CSGBox" type="CSGBox" parent="."]
 width = 20000.0

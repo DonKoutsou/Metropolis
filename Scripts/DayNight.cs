@@ -27,7 +27,14 @@ public class DayNight : WorldEnvironment
     [Export]
     Curve sunBcolorcurve = null;
 
-    
+    [Export]
+    Curve moonRcolorcurve = null;
+
+    [Export]
+    Curve moonGcolorcurve = null;
+
+    [Export]
+    Curve moonBcolorcurve = null;
 
    // [Export]
     //Curve moonRcolorcurve;
@@ -85,14 +92,16 @@ public class DayNight : WorldEnvironment
         sun.LightEnergy = sunbrightness;
         moon.LightEnergy = moonbrightness;
         Color newsuncol = new Color(sunRcolorcurve.Interpolate(hourval) , sunGcolorcurve.Interpolate(hourval), sunBcolorcurve.Interpolate(hourval));
-        //Color newmooncol = new Color(moonRcolorcurve.Interpolate(hourval) , moonGcolorcurve.Interpolate(hourval), moonBcolorcurve.Interpolate(hourval));
+        Color newmooncol = new Color(moonRcolorcurve.Interpolate(hourval) , moonGcolorcurve.Interpolate(hourval), moonBcolorcurve.Interpolate(hourval));
         sun.LightColor = newsuncol;
-        //moon.LightColor = newmooncol;
+        
+        moon.LightColor = newmooncol;
         if (sunrot > 180)
         {
             sun.Show();
             day = true;
             sunrot = -(180 - (sunrot - 180));
+            Environment.FogSunColor = newsuncol;
             moon.Hide();
         }
         else
@@ -100,6 +109,7 @@ public class DayNight : WorldEnvironment
             sun.Hide();
             day = false;
             moon.Show();
+            Environment.FogSunColor = newmooncol;
         }
         var moonrot = -(180 - sunrot);
         if (SunMoonMeshPivot != null)

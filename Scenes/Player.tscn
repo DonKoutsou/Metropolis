@@ -21,7 +21,7 @@
 [ext_resource path="res://Scripts/TalkText.cs" type="Script" id=19]
 [ext_resource path="res://Assets/PostProcess/PixelShader.gdshader" type="Shader" id=20]
 [ext_resource path="res://Scripts/MyCamera.cs" type="Script" id=21]
-[ext_resource path="res://Scenes/CloudBox.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Scenes/Clouds.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Scenes/ActionMenu.tscn" type="PackedScene" id=23]
 
 [sub_resource type="CapsuleShape" id=6]
@@ -402,7 +402,7 @@ draw_pass_1 = SubResource( 75 )
 script = ExtResource( 17 )
 
 [node name="Spatial" parent="." instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1000, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -909.45, 910.204, -39.5116 )
 
 [node name="SunMoonPivot" type="Spatial" parent="."]
 

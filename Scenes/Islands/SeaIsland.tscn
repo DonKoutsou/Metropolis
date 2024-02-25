@@ -16,7 +16,7 @@ albedo_color = Color( 0, 0, 0, 1 )
 [node name="Island" instance=ExtResource( 2 )]
 
 [node name="SeaBed" parent="." index="0" instance=ExtResource( 1 )]
-transform = Transform( 15.625, 0, 0, 0, 15, 0, 0, 0, 15.625, 0, -1, 0 )
+transform = Transform( 17, 0, 0, 0, 15, 0, 0, 0, 17, 0, -1, 0 )
 
 [node name="StaticBody" type="StaticBody" parent="." index="1"]
 transform = Transform( 15.625, 0, 0, 0, 15, 0, 0, 0, 15.625, 0, -1, 0 )
@@ -24,7 +24,7 @@ collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -64, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.84485, 0 )
 shape = SubResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="StaticBody" index="1"]

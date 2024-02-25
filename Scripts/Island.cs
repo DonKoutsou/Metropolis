@@ -68,14 +68,6 @@ public class Island : Spatial
 		grass = GetNodeOrNull<GrassCubes>("Grass");
 		map = GetParent().GetNode<WorldMap>("WorldMap");
 	}
-	public void Init()
-	{
-
-		FindSiblings();
-
-
-		Inited = true;
-	}
 
 	public void AddCloseIle(Island ile)
 	{
@@ -92,104 +84,11 @@ public class Island : Spatial
 			return false;
 		return closeislands.Contains(ile);
 	}
-	void FindSiblings()
-	{
-		var islands = GetTree().GetNodesInGroup("Islands");
-		Island[] isnaldarray = new Island[islands.Count];
-		islands.CopyTo(isnaldarray, 0);
-		float mindistance = 0;
-
-		closeislands = new List<Island>();
-
-		Vector3 mypos = GlobalTransform.origin;
-		for (int i = 0; i < isnaldarray.Count(); i++)
-		{
-			if (isnaldarray[i] == this)
-				continue;
-			
-			Vector3 Islandloc = isnaldarray[i].GlobalTransform.origin;
-			float dist = mypos.DistanceTo(Islandloc);
-			
-			if (dist > 2100)
-				continue;
-
-			if (mypos.x != Islandloc.x && mypos.y != Islandloc.y)
-				continue;
-
-			//GD.Print(dist);
-
-			if (mindistance == 0)
-				mindistance = dist;
-
-			if (dist > mindistance)
-				continue;
-			if (dist < mindistance)
-			{
-				mindistance = dist;
-				closeislands.Clear();
-				closeislands = new List<Island>();
-			}
-			closeislands.Insert(closeislands.Count, isnaldarray[i]);
-		}
-		mindistance = 0;
-		List<Island> closeislands2 = new List<Island>();
-		for (int i = 0; i < isnaldarray.Count(); i++)
-		{
-			if (isnaldarray[i] == this)
-				continue;
-			if (closeislands.Contains(isnaldarray[i]))
-				continue;
-			
-			Vector3 Islandloc = isnaldarray[i].GlobalTransform.origin;
-			float dist = mypos.DistanceTo(Islandloc);
-
-			if (dist > 3000)
-				continue;
-
-			if (mypos.x == Islandloc.x && mypos.y == Islandloc.y)
-				continue;
-
-			//GD.Print(dist);
-
-			if (mindistance == 0)
-				mindistance = dist;
-
-			if (dist > mindistance)
-				continue;
-			if (dist < mindistance)
-			{
-				mindistance = dist;
-				closeislands2.Clear();
-				closeislands2 = new List<Island>();
-			}
-			closeislands2.Insert(closeislands2.Count, isnaldarray[i]);
-		}
-		for (int i = 0; i < closeislands2.Count(); i++)
-		{
-			closeislands.Insert(closeislands.Count, closeislands2[i]);
-		}
-		for (int i = 0; i < closeislands.Count(); i++)
-		{
-			if (!closeislands[i].HasIslandInClose(this))
-				closeislands[i].AddCloseIle(this);
-		}
-	}
 	public virtual void EnableIsland()
 	{
 		if (m_enabled)
 			return;
-		if (!Inited)
-		{
-			Init();
-		}
-		
-		for (int i = 0;i < closeislands.Count; i++)
-		{
-			if (!closeislands[i].Inited)
-			{
-				closeislands[i].Init();
-			}
-		}
+
 		if (map.HideBasedOnState)
 		{
 			Show();
@@ -197,7 +96,7 @@ public class Island : Spatial
 		if (Terain != null)
 		{
 			Terain.SetProcess(true);
-		}	
+		}
 
 		if (grass != null)
 			grass.ToggleGrass(true);

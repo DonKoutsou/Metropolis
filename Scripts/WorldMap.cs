@@ -36,7 +36,7 @@ public class WorldMap : TileMap
     [Export]
     public bool HideBasedOnState = false;
 
-    Dictionary<Vector2, Island> IslandMap = new Dictionary<Vector2, Island>();
+    static Dictionary<Vector2, Island> IslandMap = new Dictionary<Vector2, Island>();
 
     public override void _Ready()
     {
@@ -94,6 +94,7 @@ public class WorldMap : TileMap
         if (delt < 0)
         {
             delt = 0.1f;
+
             if (!finishedspawning)
                 EnableIsland(currentile, currenttiletype);
 
@@ -141,6 +142,22 @@ public class WorldMap : TileMap
     Player pl;
 
     Vector2 ClosestTile;
+    Island iletoinit;
+
+    public static void GetClosestIles(Island Ile, out List<Island> closeIles)
+    {
+        closeIles = new List<Island>();
+        foreach(KeyValuePair<Vector2, Island> entry in IslandMap)
+        {
+            Vector2 pos = new Vector2 (Ile.GlobalTransform.origin.x, Ile.GlobalTransform.origin.z);
+            if (pos.DistanceTo(entry.Key) < 8000)
+            {
+                closeIles.Insert(closeIles.Count, entry.Value);
+            }
+                
+        }
+
+    }
     void EnableIsland(int curtile, int curtiletype)
     {
         if (curtiletype == 0)
@@ -278,6 +295,7 @@ public class WorldMap : TileMap
             Ile.rotationtospawnwith = rots[index];
             ((MyWorld)GetParent()).RegisterIle(Ile);
             IslandMap.Add(postoput ,Ile);
+            iletoinit = Ile;
             //iles.Insert(iles.Count, Ile);
             currentile += 1;
             if (currentile >= OrderedCells.Count)

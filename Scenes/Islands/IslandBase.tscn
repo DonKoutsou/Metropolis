@@ -15,7 +15,7 @@ textures = [ [ ExtResource( 5 ) ], [ ExtResource( 6 ) ] ]
 [node name="Island" instance=ExtResource( 1 )]
 
 [node name="HTerrain" type="Spatial" parent="." index="0"]
-transform = Transform( 15.626, 0, 0, 0, 5, 0, 0, 0, 15.626, 0, 0, 0 )
+transform = Transform( 18, 0, 0, 0, 5, 0, 0, 0, 18, 0, 0, 0 )
 script = ExtResource( 3 )
 ambient_wind = 0.587
 lod_scale = 5.0
