@@ -7,6 +7,18 @@ public class Character : KinematicBody
 	[Export]
 	public int Speed { get; set; } = 14; // How fast the player will move (pixels/sec).
 
+	[Export]
+	public int FallAcceleration = 75;
+
+	[Export]
+	public int JumpImpulse = 20;
+
+	[Export]
+	public int BounceImpulse = 16;
+
+	[Export]
+	public int RunSpeed = 20;
+
 	//public Character_Animations anims;
 
 	[Export]
@@ -32,11 +44,8 @@ public class Character : KinematicBody
 
 	public CollisionShape collider;
 
-	public NavigationAgent NavAgent;
-
 	public Vector3 m_velocity = Vector3.Zero;
 
-	public RID myrid;
 
     public Vector3 _velocity = Vector3.Zero;
 
@@ -47,6 +56,12 @@ public class Character : KinematicBody
 	float InventoryWeightOverride = -1;
 
 	public Inventory CharacterInventory;
+
+	public SpotLight NightLight;
+
+	public Vector3 loctomove;
+
+	public Character_Animations anim;
 
 	public override void _Ready()
 	{
@@ -59,26 +74,20 @@ public class Character : KinematicBody
 		collider = GetNode<CollisionShape>("CollisionShape");
 		collider.Disabled = false;
 		startingstaming = m_Stamina;
+		
+
+		GetNode<AudioStreamPlayer3D>("WalkingSound").Play();
+		GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused = true;
+		GetNode<AudioStreamPlayer3D>("TiredSound").Play();
+		GetNode<AudioStreamPlayer3D>("TiredSound").StreamPaused = true;
+		
+		
+		anim = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Character_Animations>("AnimationPlayer");
+		NightLight = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("BoneAttachment").GetNode<SpotLight>("NightLight");
 		if (this is Player)
 			return;
-		
-		NavAgent = GetNode<NavigationAgent>("NavigationAgent");
-
-		myrid  = NavigationServer.AgentCreate();
-        RID default_3d_map_rid  = GetWorld().NavigationMap;
-
-        NavigationServer.AgentSetMap(myrid, default_3d_map_rid);
-        NavigationServer.AgentSetRadius(myrid, 0.5f);
-		
 		((Island)GetParent()).RegisterChar(this);
 	}
-	public void UpdateMap()
-    {
-        RID default_3d_map_rid  = GetWorld().NavigationMap;
-
-        Navigation2DServer.AgentSetMap(myrid, default_3d_map_rid);
-        Navigation2DServer.AgentSetRadius(myrid, 0.5f);
-    }
 	public Inventory GetCharacterInventory()
 	{
 		return CharacterInventory;
@@ -98,8 +107,11 @@ public class Character : KinematicBody
 			
 		if (origposition != Transform.origin)
 			MoveTo(origposition);
-		NavigationServer.AgentSetVelocity(myrid, _velocity);
-    	NavigationServer.AgentSetTargetVelocity(myrid, _velocity);
+
+		if (DayNight.IsDay())
+			NightLight.LightEnergy = 0;
+		else
+			NightLight.LightEnergy = 1;
 	}
     public void MoveTo(Vector3 loc)
 	{
@@ -107,11 +119,48 @@ public class Character : KinematicBody
 			return;
         _velocity = Vector3.Zero;
 		var cloc = GlobalTransform.origin;
-        NavAgent.SetTargetLocation(loc);
-        var nextloc = NavAgent.GetNextLocation();
-        var newvel = (nextloc - cloc).Normalized() * 10;
-		_velocity = newvel;
-        LookAtFromPosition(cloc, loc, Vector3.Up);
+		var spd = RunSpeed;
+		var direction = loc - GlobalTransform.origin;
+		
+		float dist = new Vector2(loctomove.x, loctomove.z).DistanceTo(new Vector2( GlobalTransform.origin.x, GlobalTransform.origin.z));
+
+		if (dist < 1)
+		{
+			if (!GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused)
+				GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused = true;
+			anim.PlayAnimation(E_Animations.Idle);
+		}
+		else
+		{
+			direction = direction.Normalized();
+			Vector3 lookloc = new Vector3(direction.x, 0, direction.z);
+			GetNode<Spatial>("Pivot").LookAt(Translation - lookloc, Vector3.Up);
+			if (GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused)
+			{
+				GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused = false;
+				GetNode<AudioStreamPlayer3D>("WalkingSound").PitchScale = 0.7f;
+			}
+			if (Input.IsActionPressed("Run"))
+			{
+				
+				GetNode<AudioStreamPlayer3D>("WalkingSound").PitchScale = 0.5f;
+				//GetNode<AudioStreamPlayer3D>("WalkingSound").db = 5f;
+				anim.PlayAnimation(E_Animations.Walk);
+			}
+			else
+			{
+				GetNode<AudioStreamPlayer3D>("WalkingSound").PitchScale = 1f;
+				anim.PlayAnimation(E_Animations.Run);
+			}
+				
+		}
+        _velocity.x = direction.x * spd;
+		_velocity.z = direction.z * spd;
+		//_velocity.y = direction.y * spd;
+		// Vertical velocity
+		_velocity.y -= FallAcceleration * 0.01f;
+		// Moving the character
+		_velocity = MoveAndSlide(_velocity, Vector3.Up);
 	}
 	public virtual void Start()
 	{

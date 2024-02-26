@@ -6,7 +6,6 @@ public class Island : Spatial
 {
 	[Export]
 	public bool m_bOriginalIle = false;
-	List<Island> closeislands;
 
 	List<Character> m_enem = new List<Character>();
 
@@ -40,24 +39,11 @@ public class Island : Spatial
 				en.Stop();
 		}
 	}
-	public void GetClosestIles(out List<Island> closestiles)
-	{
-		closestiles = new List<Island>();
-		if (closeislands.Count == 0)
-		{
-			GD.Print("Island has no close islands, somehting is off");
-			return;
-		}
-		for (int i = 0; i < closeislands.Count; i ++)
-		{
-			closestiles.Insert(i, closeislands[i]);
-		}
-	}
 	public override void _Ready()
 	{
 		GlobalTranslation = loctospawnat;
 		//Apply rotation random
-		Rotate(new Vector3(0, 1, 0), Mathf.Deg2Rad(rotationtospawnwith));
+		//Rotate(new Vector3(0, 1, 0), Mathf.Deg2Rad(rotationtospawnwith));
 		//Transform.Rotated(new Vector3(0, 1, 0), rotationtospawnwith);
 
 		//navmesh = GetNode<NavigationMeshInstance>("NavigationMeshInstance");
@@ -69,21 +55,6 @@ public class Island : Spatial
 		map = GetParent().GetNode<WorldMap>("WorldMap");
 	}
 
-	public void AddCloseIle(Island ile)
-	{
-		if (ile == this)
-			return;
-		if (closeislands == null || closeislands.Contains(ile))
-			return;
-		closeislands.Insert(closeislands.Count, ile);
-	}
-
-	public bool HasIslandInClose(Island ile)
-	{
-		if (closeislands == null)
-			return false;
-		return closeislands.Contains(ile);
-	}
 	public virtual void EnableIsland()
 	{
 		if (m_enabled)

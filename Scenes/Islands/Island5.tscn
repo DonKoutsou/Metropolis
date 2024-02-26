@@ -43,4 +43,4 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -317.708, 0 )
 mesh = SubResource( 20 )
 
 [node name="PitCity" parent="." index="3" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -109.978, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -142.762, 0 )

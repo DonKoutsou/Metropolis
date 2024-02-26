@@ -1,34 +1,22 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scenes/DayNightController.tscn" type="PackedScene" id=1]
 [ext_resource path="res://new_environment2.tres" type="Environment" id=2]
-
-[sub_resource type="Curve" id=1]
-_data = [ Vector2( 0, 0.936364 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="Curve" id=2]
-_data = [ Vector2( 0, 0.954545 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="Curve" id=3]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0 ]
 
 [node name="Sky" type="Spatial"]
 
 [node name="DayNightController" parent="." instance=ExtResource( 1 )]
 environment = ExtResource( 2 )
-moonRcolorcurve = SubResource( 1 )
-moonGcolorcurve = SubResource( 2 )
-moonBcolorcurve = SubResource( 3 )
 
 [node name="Sun" type="DirectionalLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.998658, 0.0517956, 0, -0.0517956, 0.998658, 0, 26.5368, 0 )
-visible = false
 light_bake_mode = 0
 shadow_enabled = true
 directional_shadow_max_distance = 1000.0
 
 [node name="Moon" type="DirectionalLight" parent="."]
 transform = Transform( 0.982724, 0.0979863, -0.15701, -0.0368982, 0.935048, 0.352596, 0.181362, -0.340711, 0.92251, 0, 26.5368, 0 )
+visible = false
 light_color = Color( 0.862745, 0.905882, 1, 1 )
 light_energy = 0.02
 light_indirect_energy = 0.5

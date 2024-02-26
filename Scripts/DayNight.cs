@@ -102,6 +102,7 @@ public class DayNight : WorldEnvironment
             day = true;
             sunrot = -(180 - (sunrot - 180));
             Environment.FogSunColor = newsuncol;
+            //Environment.FogColor = newsuncol;
             Environment.AmbientLightColor = newsuncol;
             Environment.FogSunAmount = 0.6f;
             moon.Hide();
@@ -112,6 +113,7 @@ public class DayNight : WorldEnvironment
             day = false;
             moon.Show();
             Environment.FogSunColor = newmooncol;
+            //Environment.FogColor = newmooncol;
             Environment.AmbientLightColor = newmooncol;
             Environment.FogSunAmount = 0.05f;
         }

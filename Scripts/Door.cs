@@ -50,10 +50,6 @@ public class Door : Wall
 			MyWorld.IleTransition((Island)GetParent(), IslandAccess);
 			//player.UpdateMap();
 		}
-		else
-		{
-			player.UpdateMap();
-		}
 
 		//Vector3 mypos = player.Transform.origin;
 		//Vector3 ispos = m_closestdoor.GetSpawnPos().GlobalTransform.origin;

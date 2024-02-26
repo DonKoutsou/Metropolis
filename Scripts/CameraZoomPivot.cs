@@ -19,7 +19,7 @@ public class CameraZoomPivot : Position3D
 		Vector3 prevpos = Translation;
 		if (@event.IsActionPressed("ZoomOut"))
 		{
-			if (cam.Translation.y > 300)
+			if (cam.Translation.y > 150)
 				return;
 			cam.Translation = new Vector3(cam.Translation.x, cam.Translation.y * 1.1f, cam.Translation.z * 1.1f);
 		}

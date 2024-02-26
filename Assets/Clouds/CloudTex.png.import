@@ -2,20 +2,22 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/CloudTex.png-c9d8783365ff06155d20216912badd98.stex"
+path.s3tc="res://.import/CloudTex.png-c9d8783365ff06155d20216912badd98.s3tc.stex"
+path.etc2="res://.import/CloudTex.png-c9d8783365ff06155d20216912badd98.etc2.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc2" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Clouds/CloudTex.png"
-dest_files=[ "res://.import/CloudTex.png-c9d8783365ff06155d20216912badd98.stex" ]
+dest_files=[ "res://.import/CloudTex.png-c9d8783365ff06155d20216912badd98.s3tc.stex", "res://.import/CloudTex.png-c9d8783365ff06155d20216912badd98.etc2.stex" ]
 
 [params]
 
-compress/mode=0
-compress/lossy_quality=1.0
+compress/mode=2
+compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
@@ -30,6 +32,6 @@ process/HDR_as_SRGB=false
 process/invert_color=false
 process/normal_map_invert_y=false
 stream=false
-size_limit=1024
+size_limit=512
 detect_3d=false
 svg/scale=0.443

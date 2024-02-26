@@ -23,7 +23,7 @@ public class TalkText : Label3D
     }
     public override void _Process(float delta)
     {
-        var pl = GetTree().GetNodesInGroup("player");
+       /* var pl = GetTree().GetNodesInGroup("player");
         if (pl.Count == 0)
             return;
         var plpos = ((Spatial)pl[0]).GlobalTransform.origin;
@@ -33,7 +33,7 @@ public class TalkText : Label3D
         var minval = (dist-0)/(300-0);
         var sz = (int)Math.Round(TextSizePerDistance.Interpolate(minval));
         //RectPosition =  new Vector2(screenpos.x - 1300, screenpos.y - ElevationPerDistance.Interpolate(minval) * 2);
-        ((DynamicFont)Font).Size = sz;
+        ((DynamicFont)Font).Size = sz;*/
     }
     public static TalkText GetInst()
     {

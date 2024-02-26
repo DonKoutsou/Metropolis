@@ -4,17 +4,7 @@ using System;
 public class Player : Character
 {
 	// The downward acceleration when in the air, in meters per second squared.
-	[Export]
-	public int FallAcceleration = 75;
-
-	[Export]
-	public int JumpImpulse = 20;
-
-	[Export]
-	public int BounceImpulse = 16;
-
-	[Export]
-	int RunSpeed = 20;
+	
 
 	[Signal]
 	public delegate void Hit();
@@ -25,13 +15,11 @@ public class Player : Character
 
 	DialoguePanel DiagPan;
 
-	Character_Animations anim;
-
 	MoveLocation moveloc;
 
 	bool Autowalk = false;
 
-	SpotLight NightLight;
+	bool IsRunning = false;
 
 	ActionMenu actMen;
 
@@ -56,14 +44,11 @@ public class Player : Character
 		hp_bar.MaxValue = m_HP;
 		Stamina_bar = plUI.GetNode<Stamina_Bar>("Stamina_Bar");
 		Stamina_bar.MaxValue = m_Stamina;
-		GetNode<AudioStreamPlayer3D>("WalkingSound").Play();
-		GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused = true;
+		
 		var panels = GetTree().GetNodesInGroup("DialoguePanel");
 		DiagPan = (DialoguePanel)panels[0];
-		GetNode<AudioStreamPlayer3D>("TiredSound").Play();
-		GetNode<AudioStreamPlayer3D>("TiredSound").StreamPaused = true;
-		anim = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Character_Animations>("AnimationPlayer");
-		NightLight = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("BoneAttachment").GetNode<SpotLight>("NightLight");
+		
+
 		moveloc = GetNode<MoveLocation>("MoveLoc");
 
 		Spatial sunmoonpiv = GetNode<Spatial>("SunMoonPivot");
@@ -108,26 +93,21 @@ public class Player : Character
 			}
 		}
 		moveloc.GlobalTranslation = loctomove;
-		var spd = RunSpeed;
+
+		var spd = Speed;
+
 		var direction = loctomove - GlobalTransform.origin;
+
 		Vector2 loc = new Vector2(loctomove.x, loctomove.z);
 		
 		float dist = new Vector2(loctomove.x, loctomove.z).DistanceTo(new Vector2( GlobalTransform.origin.x, GlobalTransform.origin.z));
+
 		double stam = m_Stamina;
 		
-
-		if (Input.IsActionPressed("Run") && m_Stamina > 10 && direction != Vector3.Zero)
+		if (IsRunning)
 		{
-			spd = Speed;
+			spd = RunSpeed;
 			//m_Stamina = m_Stamina - m_RunCost;
-		}
-		else if (!Input.IsActionPressed("Run") && m_Stamina < startingstaming)
-		{
-			//m_Stamina = m_Stamina + m_StaminaRegen;
-				
-			//if (direction == Vector3.Zero )
-				//m_Stamina = m_Stamina + m_StaminaRegen * 2;
-
 		}
 		if (dist < 1)
 		{
@@ -146,9 +126,8 @@ public class Player : Character
 				GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused = false;
 				GetNode<AudioStreamPlayer3D>("WalkingSound").PitchScale = 0.7f;
 			}
-			if (Input.IsActionPressed("Run"))
+			if (!IsRunning)
 			{
-				
 				GetNode<AudioStreamPlayer3D>("WalkingSound").PitchScale = 0.5f;
 				//GetNode<AudioStreamPlayer3D>("WalkingSound").db = 5f;
 				anim.PlayAnimation(E_Animations.Walk);
@@ -203,7 +182,7 @@ public class Player : Character
 			}
 		}
 	}
-	Vector3 loctomove;
+	
 
 	Item selectedobj;
 	public override void _Input(InputEvent @event)
@@ -240,6 +219,13 @@ public class Player : Character
 			else
 				Autowalk = true;
 		}
+		if (@event.IsActionPressed("Run"))
+		{
+			if (IsRunning)
+				IsRunning = false;
+			else
+				IsRunning = true;
+		}
 		if (@event.IsActionPressed("Select"))
 		{
 			var spacestate = GetWorld().DirectSpaceState;
@@ -260,6 +246,11 @@ public class Player : Character
 			{
 				selectedobj = (Item)obj;
 				actMen.Start(selectedobj);
+			}
+			else if (obj is Character)
+			{
+				Character selectechar = (Character)obj;
+				actMen.Start(selectechar);
 			}
 		}
 	}
