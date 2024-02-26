@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scenes/Islands/Island5.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Islands/SeaIsland.tscn" type="PackedScene" id=2]
@@ -16,6 +16,8 @@
 [ext_resource path="res://Scenes/Islands/IslandStarting.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/Islands/Island6.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Islands/Island2.tscn" type="PackedScene" id=16]
+[ext_resource path="res://addons/AllSkyFree/AllSkyFree_EpicGloriousPink.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=18]
 
 [node name="Spatial" type="Spatial"]
 
@@ -65,3 +67,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4000, 0, -2000 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4000 )
 
 [node name="Island16" parent="." instance=ExtResource( 5 )]
+
+[node name="Sky" parent="." instance=ExtResource( 17 )]
+
+[node name="Player" parent="." instance=ExtResource( 18 )]

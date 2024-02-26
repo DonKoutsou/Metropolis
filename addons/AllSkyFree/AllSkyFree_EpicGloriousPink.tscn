@@ -4,10 +4,10 @@
 [ext_resource path="res://new_environment2.tres" type="Environment" id=2]
 
 [sub_resource type="Curve" id=1]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0.936364 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=2]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0.954545 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=3]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0 ]
@@ -21,16 +21,17 @@ moonGcolorcurve = SubResource( 2 )
 moonBcolorcurve = SubResource( 3 )
 
 [node name="Sun" type="DirectionalLight" parent="."]
-transform = Transform( 0.214411, -0.781895, -0.585379, 0.976744, 0.171639, 0.1285, 0, -0.599317, 0.800512, 0, 26.5368, 0 )
+transform = Transform( 1, 0, 0, 0, 0.998658, 0.0517956, 0, -0.0517956, 0.998658, 0, 26.5368, 0 )
+visible = false
 light_bake_mode = 0
 shadow_enabled = true
 directional_shadow_max_distance = 1000.0
 
 [node name="Moon" type="DirectionalLight" parent="."]
-transform = Transform( -0.38721, 0.407223, 0.827187, -0.921992, -0.171022, -0.347395, 0, -0.897174, 0.441678, 0, 26.5368, 0 )
-visible = false
+transform = Transform( 0.982724, 0.0979863, -0.15701, -0.0368982, 0.935048, 0.352596, 0.181362, -0.340711, 0.92251, 0, 26.5368, 0 )
 light_color = Color( 0.862745, 0.905882, 1, 1 )
-light_energy = 0.234
+light_energy = 0.02
+light_indirect_energy = 0.5
 light_bake_mode = 0
 shadow_enabled = true
 directional_shadow_max_distance = 1000.0

@@ -102,6 +102,8 @@ public class DayNight : WorldEnvironment
             day = true;
             sunrot = -(180 - (sunrot - 180));
             Environment.FogSunColor = newsuncol;
+            Environment.AmbientLightColor = newsuncol;
+            Environment.FogSunAmount = 0.6f;
             moon.Hide();
         }
         else
@@ -110,6 +112,8 @@ public class DayNight : WorldEnvironment
             day = false;
             moon.Show();
             Environment.FogSunColor = newmooncol;
+            Environment.AmbientLightColor = newmooncol;
+            Environment.FogSunAmount = 0.05f;
         }
         var moonrot = -(180 - sunrot);
         if (SunMoonMeshPivot != null)

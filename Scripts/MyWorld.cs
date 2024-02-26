@@ -31,23 +31,40 @@ public class MyWorld : Spatial
 		ToggleIsland(ile, false);
 		GD.Print("Spawned Island on locations: " + ile.loctospawnat);
 	}
+	bool EnableDissableBool = false;
 	public override void _Process(float delta)
 	{
 		d -= delta;
 		if (d <= 0)
 		{
 			d = 1;
-			if (ilestodissable.Count > 0)
+			if (ilestodissable.Count > 0 && !EnableDissableBool)
 			{
 				Island ile = ilestodissable[ilestodissable.Count - 1];
 				ToggleIsland(ile, false);
 				ilestodissable.Remove(ile);
+				EnableDissableBool = true;
+			}
+			else if (ilestoenable.Count > 0 && EnableDissableBool)
+			{
+				Island ile = ilestoenable[ilestoenable.Count - 1];
+				ToggleIsland(ilestoenable[ilestoenable.Count - 1], true);
+				ilestoenable.Remove(ile);
+				EnableDissableBool = false;
+			}
+			else if (ilestodissable.Count > 0)
+			{
+				Island ile = ilestodissable[ilestodissable.Count - 1];
+				ToggleIsland(ile, false);
+				ilestodissable.Remove(ile);
+				EnableDissableBool = true;
 			}
 			else if (ilestoenable.Count > 0)
 			{
 				Island ile = ilestoenable[ilestoenable.Count - 1];
 				ToggleIsland(ilestoenable[ilestoenable.Count - 1], true);
 				ilestoenable.Remove(ile);
+				EnableDissableBool = false;
 			}
 				
 		}
@@ -63,6 +80,8 @@ public class MyWorld : Spatial
 
 		List<Island> closestto;
 		WorldMap.GetClosestIles(to,out closestto);
+		ilestodissable.Clear();
+		ilestoenable.Clear();
 		//to.GetClosestIles(out closestto);
 		for (int i = 0; i < closestfrom.Count; i ++)
 		{
@@ -70,16 +89,22 @@ public class MyWorld : Spatial
 				continue;
 			if (closestto.Contains(closestfrom[i]))
 				continue;
-			else
+			else if (!ilestodissable.Contains(closestfrom[i]))
 			{
 				ilestodissable.Insert(ilestodissable.Count, closestfrom[i]);
+				if (ilestoenable.Contains(closestfrom[i]))
+					ilestoenable.Remove(closestfrom[i]);
 				//ToggleIsland(closestfrom[i], false);
 			}
 		}
 		for (int i = 0; i < closestto.Count; i ++)
 		{
 			//ToggleIsland(closestto[i], true);
-			ilestoenable.Insert(ilestoenable.Count, closestto[i]);
+			if (!ilestoenable.Contains(closestfrom[i]))
+				ilestoenable.Insert(ilestoenable.Count, closestto[i]);
+			if (ilestodissable.Contains(closestfrom[i]))
+				ilestodissable.Remove(closestfrom[i]);
+
 		}
 		GD.Print("-----------Transition Finished------------");
 	}

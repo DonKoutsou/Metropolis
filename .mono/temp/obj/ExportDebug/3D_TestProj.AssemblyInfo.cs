@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("3D_TestProj")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("ExportDebug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ddca79e810ea4606bc5fa6c587de7bd9a3e3d520")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ee6c759447f534959cb2a1385b28f6b99dafed01")]
 [assembly: System.Reflection.AssemblyProductAttribute("3D_TestProj")]
 [assembly: System.Reflection.AssemblyTitleAttribute("3D_TestProj")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
