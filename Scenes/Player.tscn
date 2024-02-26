@@ -93,7 +93,7 @@ default_font = SubResource( 79 )
 
 [sub_resource type="DynamicFont" id=88]
 size = 24
-outline_size = 11
+outline_size = 6
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
 
@@ -292,6 +292,7 @@ script = ExtResource( 2 )
 one_shot = true
 
 [node name="Time_UI" type="RichTextLabel" parent="PlayerUI"]
+visible = false
 margin_right = 472.0
 margin_bottom = 80.0
 theme = SubResource( 80 )
