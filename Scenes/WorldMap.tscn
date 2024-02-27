@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/WorldMap.cs" type="Script" id=1]
 [ext_resource path="res://Tilesets/World_Tileset.tres" type="TileSet" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Scenes/Islands/Island4.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Islands/Volcano.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Islands/SeaIsland.tscn" type="PackedScene" id=8]
+[ext_resource path="res://addons/AllSkyFree/AllSkyFree_EpicGloriousPink.tscn" type="PackedScene" id=9]
 
 [node name="WorldMap" type="TileMap"]
 tile_set = ExtResource( 2 )
@@ -28,4 +29,4 @@ Volcano = ExtResource( 7 )
 Sea = ExtResource( 8 )
 HideBasedOnState = true
 
-[node name="NavMeshHolder" type="Node2D" parent="." groups=["NavigationHolder"]]
+[node name="Sky" parent="." instance=ExtResource( 9 )]

@@ -19,6 +19,8 @@ public class House : Spatial
 	//DialoguePanel DiagPan;
 
 	public NavigationMeshInstance navmesh;
+
+	Item Item;
 	public override void _Ready()
 	{
 
@@ -36,10 +38,17 @@ public class House : Spatial
 		Item itemToDrop = (Item)itemToSpawn.Instance();
 		AddChild(itemToDrop);
 		itemToDrop.GlobalTranslation = GetNode<Position3D>("ItemSpawnPos").GlobalTransform.origin;
-
+		Item = itemToDrop;
 		//HouseInventory.InsertItem(itemToDrop);
 		//navmesh = GetNode<NavigationMeshInstance>("NavigationMeshInstance");
-		
+	}
+	public bool HasItem()
+	{
+		return Item != null;
+	}
+	public void OnItemPicked()
+	{
+		Item = null;
 	}
 	/*public bool GetIsEmpty()
 	{

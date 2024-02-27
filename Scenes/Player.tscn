@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/Stamina_Bar.cs" type="Script" id=2]
@@ -23,6 +23,12 @@
 [ext_resource path="res://Scripts/MyCamera.cs" type="Script" id=21]
 [ext_resource path="res://Scenes/Clouds.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Scenes/ActionMenu.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_Colo2r.jpg" type="Texture" id=24]
+[ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_NormalGL2.jpg" type="Texture" id=25]
+[ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_Roughnes2s.jpg" type="Texture" id=26]
+[ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_AmbientOcclusio2n.jpg" type="Texture" id=27]
+[ext_resource path="res://Scenes/SunMoonPivot.tscn" type="PackedScene" id=28]
+[ext_resource path="res://Scenes/CheatMenu.tscn" type="PackedScene" id=29]
 
 [sub_resource type="CapsuleShape" id=6]
 height = 2.316
@@ -108,6 +114,16 @@ render_priority = -2
 shader = ExtResource( 20 )
 
 [sub_resource type="SpatialMaterial" id=73]
+albedo_texture = ExtResource( 24 )
+roughness_texture = ExtResource( 26 )
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 25 )
+ao_enabled = true
+ao_light_affect = 0.0
+ao_texture = ExtResource( 27 )
+ao_on_uv2 = false
+ao_texture_channel = 0
 
 [sub_resource type="ParticlesMaterial" id=74]
 emission_shape = 2
@@ -122,33 +138,6 @@ radius = 0.2
 height = 0.4
 radial_segments = 8
 rings = 8
-
-[sub_resource type="SpatialMaterial" id=16]
-flags_use_point_size = true
-params_grow = true
-params_grow_amount = 16.0
-emission_enabled = true
-emission = Color( 1, 0.823529, 0.490196, 1 )
-emission_energy = 16.0
-emission_operator = 0
-emission_on_uv2 = false
-
-[sub_resource type="SphereMesh" id=85]
-material = SubResource( 16 )
-radius = 200.0
-height = 400.0
-
-[sub_resource type="SpatialMaterial" id=14]
-emission_enabled = true
-emission = Color( 0.819608, 0.980392, 1, 1 )
-emission_energy = 16.0
-emission_operator = 0
-emission_on_uv2 = false
-
-[sub_resource type="SphereMesh" id=86]
-material = SubResource( 14 )
-radius = 100.0
-height = 200.0
 
 [node name="Player" type="KinematicBody" groups=["player"]]
 pause_mode = 1
@@ -321,6 +310,9 @@ one_shot = true
 [node name="ActionMenu" parent="PlayerUI" instance=ExtResource( 23 )]
 visible = false
 
+[node name="CheatMenu" parent="PlayerUI" instance=ExtResource( 29 )]
+visible = false
+
 [node name="CameraMovePivot" type="Position3D" parent="."]
 pause_mode = 2
 transform = Transform( 1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 0, 0, 0 )
@@ -399,6 +391,7 @@ collision_mask = 4
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.85324, 0 )
 material_override = SubResource( 73 )
 cast_shadow = 0
+generate_lightmap = false
 amount = 2000
 lifetime = 4.54
 preprocess = 0.78
@@ -411,17 +404,7 @@ script = ExtResource( 17 )
 [node name="Spatial" parent="." instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -909.45, 910.204, -39.5116 )
 
-[node name="SunMoonPivot" type="Spatial" parent="."]
-
-[node name="MeshInstance" type="MeshInstance" parent="SunMoonPivot"]
-transform = Transform( 1, 5.96046e-08, -7.45058e-08, 1.15591e-07, 1, 2.08616e-07, 1.68852e-07, 1.19209e-07, 1, 0, 0, 10000 )
-cast_shadow = 0
-mesh = SubResource( 85 )
-
-[node name="MeshInstance2" type="MeshInstance" parent="SunMoonPivot"]
-transform = Transform( 1, 1.64334e-08, 6.58151e-09, -7.64833e-08, 1, 2.08616e-07, 1.41731e-07, 1.49012e-07, 1, 0, 0, -10000 )
-cast_shadow = 0
-mesh = SubResource( 86 )
+[node name="SunMoonPivot" parent="." instance=ExtResource( 28 )]
 
 [node name="MoveLoc" parent="." instance=ExtResource( 16 )]
 

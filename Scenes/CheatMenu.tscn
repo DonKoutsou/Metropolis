@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/CheatMenu.cs" type="Script" id=1]
+[ext_resource path="res://Assets/Themes/ButtonTheme.tres" type="Theme" id=3]
+
+[node name="CheatMenu" type="Control"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 16.0
+margin_bottom = 16.0
+script = ExtResource( 1 )
+
+[node name="FastRun_Button" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_right = 133.0
+margin_bottom = 51.0
+mouse_default_cursor_shape = 2
+theme = ExtResource( 3 )
+action_mode = 0
+text = "FastRun"
+
+[node name="InfCamera" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_top = 64.0
+margin_right = 133.0
+margin_bottom = 115.0
+mouse_default_cursor_shape = 2
+theme = ExtResource( 3 )
+action_mode = 0
+text = "InfCam"
+
+[connection signal="button_down" from="FastRun_Button" to="." method="On_FastRun_Button_Down"]
+[connection signal="button_down" from="InfCamera" to="." method="On_InfCamera_Button_Down"]

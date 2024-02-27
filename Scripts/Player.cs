@@ -53,7 +53,8 @@ public class Player : Character
 
 		Spatial sunmoonpiv = GetNode<Spatial>("SunMoonPivot");
 		MainWorld world = (MainWorld)GetParent().GetParent();
-		DayNight env = world.GetNode<Spatial>("Sky").GetNode<DayNight>("DayNightController");
+		MyWorld w = (MyWorld)GetParent();
+		DayNight env = w.GetNode<WorldMap>("WorldMap").GetNode<Spatial>("Sky").GetNode<DayNight>("DayNightController");
 		env.SunMoonMeshPivot = sunmoonpiv;
 	}
 	public override void _PhysicsProcess(float delta)
@@ -265,9 +266,15 @@ public class Player : Character
 	{
 		if (body is HouseDoor)
 		{
-			Wall bod = (Wall)body;
-			bod.Touch(this);
-			TalkText.GetInst().Talk("'Αδειο...");
+			HouseDoor bod = (HouseDoor)body;
+			if (bod.Touch(this))
+			{
+				House h = (House)bod.GetParent();
+				if (!h.HasItem())
+					TalkText.GetInst().Talk("'Αδειο...");
+			}
+			
+			
 		}
 		//loctomove = GlobalTransform.origin;
 	}

@@ -18,7 +18,7 @@ public class HouseDoor : Door
 	{
 		return m_Knocked;
 	}
-	public override void Touch(object body)
+	public override bool Touch(object body)
 	{
 		Vector3 forw = GlobalTransform.basis.z;
 		Vector3 toOther = GlobalTransform.origin - ((Spatial)body).GlobalTransform.origin;
@@ -27,11 +27,13 @@ public class HouseDoor : Door
 		{
 			((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Front;
 			((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(2)).ParamsCullMode = SpatialMaterial.CullMode.Front;
+			return true;
 		}
 		else
 		{
 			((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Disabled;
 			((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(2)).ParamsCullMode = SpatialMaterial.CullMode.Disabled;
+			return false;
 		}
 	}
 	public bool Knock()

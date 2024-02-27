@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public class MainWorld : YSort
+public class MainWorld : Spatial
 {
 	[Export]
 	List<string> WorldScene = new List<string>();
@@ -20,6 +20,7 @@ public class MainWorld : YSort
 	}
 	public void SpawnMap(int index)
 	{
+		GetNode<Spatial>("IntoScene").QueueFree();
 		var scene = GD.Load<PackedScene>(WorldScene[index]);
 		m_myworld = (MyWorld)scene.Instance();
 		AddChild(m_myworld);

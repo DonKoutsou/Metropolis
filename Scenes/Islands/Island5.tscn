@@ -39,8 +39,8 @@ process_material = SubResource( 18 )
 draw_pass_1 = SubResource( 19 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="." index="2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -317.708, 0 )
+transform = Transform( 1.83148, 0, 0, 0, 1.83148, 0, 0, 0, 1.83148, 0, -430.703, 0 )
 mesh = SubResource( 20 )
 
 [node name="PitCity" parent="." index="3" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -142.762, 0 )
+transform = Transform( 1.79251, 0, 0, 0, 1.79251, 0, 0, 0, 1.79251, 0, -142.762, 0 )

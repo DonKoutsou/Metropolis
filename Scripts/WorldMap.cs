@@ -42,7 +42,7 @@ public class WorldMap : TileMap
     {
         Hide();
         //CallDeferred("EnableIslands");
-        CellSize = new Vector2(2000, 2000);
+        CellSize = new Vector2(4000, 4000);
         ArrangeCellsBasedOnDistance();
         for (int i = 0; i < scenestospawn.Count(); i++)
         {
@@ -99,7 +99,7 @@ public class WorldMap : TileMap
                 EnableIsland(currentile, currenttiletype);
 
             Vector2 plpos = new Vector2(pl.GlobalTransform.origin.x, pl.GlobalTransform.origin.z);
-            if (plpos.DistanceTo(ClosestTile) > 1000)
+            if (plpos.DistanceTo(ClosestTile) > 2000)
             {
                 Island ilefr = null;
                 IslandMap.TryGetValue(ClosestTile, out ilefr);
@@ -150,7 +150,7 @@ public class WorldMap : TileMap
         foreach(KeyValuePair<Vector2, Island> entry in IslandMap)
         {
             Vector2 pos = new Vector2 (Ile.GlobalTransform.origin.x, Ile.GlobalTransform.origin.z);
-            if (pos.DistanceTo(entry.Key) < 8000)
+            if (pos.DistanceTo(entry.Key) < 9000)
             {
                 closeIles.Insert(closeIles.Count, entry.Value);
             }

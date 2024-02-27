@@ -18,7 +18,13 @@ public class ActionMenu : Control
 	{
 		if (SelectedItem == null)
 			return;
+			
+		((House)SelectedItem.GetParent()).OnItemPicked();
+
 		pl.GetCharacterInventory().InsertItem(SelectedItem);
+		
+		MeshInstance rope = pl.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("BoneAttachment2").GetNode<MeshInstance>("Rope");
+		rope.Show();
         selecting = false;
 		Stop();
 	}

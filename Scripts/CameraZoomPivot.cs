@@ -8,6 +8,9 @@ public class CameraZoomPivot : Position3D
     [Export]
 	public int Speed { get; set; } = 14; // How fast the player will move (pixels/sec).
 
+	[Export]
+	public float MaxDist = 150;
+
 	Camera cam;
 
     public override void _Ready()
@@ -19,7 +22,7 @@ public class CameraZoomPivot : Position3D
 		Vector3 prevpos = Translation;
 		if (@event.IsActionPressed("ZoomOut"))
 		{
-			if (cam.Translation.y > 150)
+			if (cam.Translation.y > MaxDist)
 				return;
 			cam.Translation = new Vector3(cam.Translation.x, cam.Translation.y * 1.1f, cam.Translation.z * 1.1f);
 		}
@@ -31,10 +34,14 @@ public class CameraZoomPivot : Position3D
 		}
 		if (@event.IsActionPressed("FrameCamera"))
 		{
-			cam.Translation = new Vector3(0, 20, 20);
+			Frame();
 		}
 		if (MyCamera.IsClipping())
 			cam.Translation = prevpos;
+	}
+	public void Frame()
+	{
+		cam.Translation = new Vector3(0, 20, 20);
 	}
 	
 	

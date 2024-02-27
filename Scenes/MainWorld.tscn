@@ -2,14 +2,11 @@
 
 [ext_resource path="res://Scenes/HUD/StartingScreen.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/MainWorld.cs" type="Script" id=2]
-[ext_resource path="res://addons/AllSkyFree/AllSkyFree_EpicGloriousPink.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Islands/Test/IslandTestEscene.tscn" type="PackedScene" id=4]
 
-[node name="MainWorld" type="YSort"]
-z_index = -2
+[node name="MainWorld" type="Spatial"]
 script = ExtResource( 2 )
 WorldScene = [ "res://Scenes/World_Test.tscn", "res://Scenes/World_1.tscn" ]
-
-[node name="Sky" parent="." instance=ExtResource( 3 )]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -22,3 +19,5 @@ margin_left = -1602.5
 margin_top = -903.5
 margin_right = 1602.5
 margin_bottom = 903.5
+
+[node name="IntoScene" parent="." instance=ExtResource( 4 )]

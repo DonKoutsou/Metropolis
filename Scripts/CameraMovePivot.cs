@@ -9,9 +9,12 @@ public class CameraMovePivot : Position3D
 
     static CameraMovePivot instance;
 
-    bool shouldfollowpl = false;
+    public bool shouldfollowpl = false;
 
     Player pl;
+
+	[Export]
+	public float MaxDist = 150;
     public override void _Ready()
     {
         base._Ready();
@@ -60,7 +63,7 @@ public class CameraMovePivot : Position3D
 		if (trans == prev)
 			return;
         zpivot.Translation = trans;
-        if (pl.GlobalTranslation.DistanceTo(zpivot.GlobalTranslation) < 150 && !MyCamera.IsClipping())
+        if (pl.GlobalTranslation.DistanceTo(zpivot.GlobalTranslation) < MaxDist && !MyCamera.IsClipping())
         {
             GlobalTranslation = zpivot.GlobalTranslation;
         }
@@ -78,7 +81,11 @@ public class CameraMovePivot : Position3D
 		}
 		if (@event.IsActionPressed("FrameCamera"))
 		{
-			shouldfollowpl = true;
+			Frame();
 		}
+	}
+	public void Frame()
+	{
+		shouldfollowpl = true;
 	}
 }

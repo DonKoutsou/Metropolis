@@ -26,30 +26,31 @@ public class Door : Wall
 	{
 		Toggle(false);
 	}
-	 public override void Touch(object body)
+	 public override bool Touch(object body)
 	{
 		Vector3 forw = GlobalTransform.basis.z;
 		Vector3 toOther = GetNode<CollisionShape>("CollisionShape").GlobalTransform.origin - ((Spatial)body).GlobalTransform.origin;
 		var thing = forw.Dot(toOther);
 		if (thing > 0)
-			return;
+			return false;
 		
 		if (body is Mob)
-			return;
+			return false;
 
 		if (IslandAccess == null)
-			return;
+			return false;
 
 		Character player = (Character)body;
 
 		if (player == null)
-			return;
+			return false;
 
 		if (player is Player)
 		{
 			MyWorld.IleTransition((Island)GetParent(), IslandAccess);
 			//player.UpdateMap();
 		}
+		return true;
 
 		//Vector3 mypos = player.Transform.origin;
 		//Vector3 ispos = m_closestdoor.GetSpawnPos().GlobalTransform.origin;
