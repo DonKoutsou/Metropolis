@@ -36,6 +36,9 @@ public class WorldMap : TileMap
     [Export]
     public bool HideBasedOnState = false;
 
+    [Export]
+    public bool RandomRotation = true;
+
     static Dictionary<Vector2, Island> IslandMap = new Dictionary<Vector2, Island>();
 
     public override void _Ready()
@@ -177,7 +180,8 @@ public class WorldMap : TileMap
                 entry.loctospawnat = pos;
                 //pos.y = 500;
                 int index = random.Next(rots.Count);
-                entry.rotationtospawnwith = rots[index];
+                if (RandomRotation)
+                    entry.rotationtospawnwith = rots[index];
                 ((MyWorld)GetParent()).RegisterIle(entry);
                 var pls = GetTree().GetNodesInGroup("player");
                 pl = ((Player)pls[0]);
@@ -203,7 +207,8 @@ public class WorldMap : TileMap
                 pos.z = postoput.y;
                 Ile.loctospawnat = pos;
                 int index = random.Next(rots.Count);
-                Ile.rotationtospawnwith = rots[index];
+                if (RandomRotation)
+                    Ile.rotationtospawnwith = rots[index];
                 ((MyWorld)GetParent()).RegisterIle(Ile);
                 IslandMap.Add(postoput ,Ile);
                 //iles.Insert(iles.Count, Ile);
@@ -221,7 +226,8 @@ public class WorldMap : TileMap
                 pos.z = postoput.y;
                 Ile.loctospawnat = pos;
                 int index = random.Next(rots.Count);
-                Ile.rotationtospawnwith = rots[index];
+                if (RandomRotation)
+                    Ile.rotationtospawnwith = rots[index];
                 ((MyWorld)GetParent()).RegisterIle(Ile);
                 IslandMap.Add(postoput ,Ile);
                // iles.Insert(iles.Count, Ile);
@@ -240,7 +246,8 @@ public class WorldMap : TileMap
                 pos.z = postoput.y;
                 Ile.loctospawnat = pos;
                 int index = random.Next(rots.Count);
-                Ile.rotationtospawnwith = rots[index];
+                if (RandomRotation)
+                    Ile.rotationtospawnwith = rots[index];
                 ((MyWorld)GetParent()).RegisterIle(Ile);
                 IslandMap.Add(postoput ,Ile);
                 //iles.Insert(iles.Count, Ile);
@@ -258,7 +265,8 @@ public class WorldMap : TileMap
                 pos.z = postoput.y;
                 Ile.loctospawnat = pos;
                 int index = random.Next(rots.Count);
-                Ile.rotationtospawnwith = rots[index];
+                if (RandomRotation)
+                    Ile.rotationtospawnwith = rots[index];
                 ((MyWorld)GetParent()).RegisterIle(Ile);
                 IslandMap.Add(postoput ,Ile);
                 //iles.Insert(iles.Count, Ile);
@@ -292,7 +300,8 @@ public class WorldMap : TileMap
             pos.z = postoput.y;
             Ile.loctospawnat = pos;
             int index = random.Next(rots.Count);
-            Ile.rotationtospawnwith = rots[index];
+            if (RandomRotation)
+                Ile.rotationtospawnwith = rots[index];
             ((MyWorld)GetParent()).RegisterIle(Ile);
             IslandMap.Add(postoput ,Ile);
             iletoinit = Ile;
@@ -317,7 +326,8 @@ public class WorldMap : TileMap
                 pos.z = postoput.y;
                 Ile.loctospawnat = pos;
                 int index = random.Next(rots.Count);
-                Ile.rotationtospawnwith = rots[index];
+                if (RandomRotation)
+                    Ile.rotationtospawnwith = rots[index];
                 ((MyWorld)GetParent()).RegisterIle(Ile);
                 IslandMap.Add(postoput ,Ile);
                 //iles.Insert(iles.Count, Ile);

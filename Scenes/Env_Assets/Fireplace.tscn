@@ -1,0 +1,85 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Assets/Clutter/BoneFire/Fireplace.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://Assets/Clutter/BoneFire/FireplaceMat.tres" type="Material" id=2]
+[ext_resource path="res://Scripts/FireplaceLight.cs" type="Script" id=3]
+[ext_resource path="res://Assets/Sounds/Torch_Sound.mp3" type="AudioStream" id=4]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 1.37293, 0.547474, 1.36897 )
+
+[sub_resource type="Curve" id=5]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.275, 0.745454 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=6]
+curve = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=2]
+lifetime_randomness = 0.46
+trail_divisor = 11
+emission_shape = 1
+emission_sphere_radius = 0.4
+direction = Vector3( 0, 1, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 5.0
+initial_velocity_random = 0.1
+angular_velocity = 40.0
+angular_velocity_random = 1.0
+linear_accel = 6.6
+linear_accel_random = 0.23
+angle = 360.0
+angle_random = 1.0
+scale = 2.0
+scale_random = 0.8
+scale_curve = SubResource( 6 )
+
+[sub_resource type="SpatialMaterial" id=4]
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_blend_mode = 1
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_color = Color( 1, 0.301961, 0.027451, 1 )
+
+[sub_resource type="QuadMesh" id=3]
+material = SubResource( 4 )
+
+[node name="Fireplace" type="StaticBody"]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = ExtResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.543886, 0 )
+shape = SubResource( 1 )
+
+[node name="Particles" type="Particles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00683868, 0.313734, -0.00524759 )
+amount = 200
+lifetime = 0.5
+randomness = 1.0
+local_coords = false
+draw_order = 2
+process_material = SubResource( 2 )
+draw_pass_1 = SubResource( 3 )
+
+[node name="FireplaceLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0 )
+light_color = Color( 0.964706, 0.85098, 0.729412, 1 )
+light_energy = 1.8
+light_indirect_energy = 0.0
+shadow_enabled = true
+omni_range = 10.248
+
+[node name="FireplaceSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 4 )
+unit_db = 4.0
+area_mask = 0

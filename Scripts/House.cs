@@ -24,7 +24,6 @@ public class House : Spatial
 	public override void _Ready()
 	{
 
-		var Random = new Random();
 		//m_bEmpty = Random.Next(2) == 1;
 
 		if (ItemSpawnPool == null)

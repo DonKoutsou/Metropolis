@@ -253,6 +253,11 @@ public class Player : Character
 				Character selectechar = (Character)obj;
 				actMen.Start(selectechar);
 			}
+			else if (obj is FireplaceLight)
+			{
+				FireplaceLight selectechar = (FireplaceLight)obj;
+				actMen.Start(selectechar);
+			}
 		}
 	}
 	private void Die()

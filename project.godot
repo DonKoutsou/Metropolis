@@ -88,7 +88,7 @@ _global_script_class_icons={
 
 ClassPrefix=""
 SearchType=0
-ResourceScriptDirectories=[ "res://" ]
+ResourceScriptDirectories=[ "res://", "res://Scripts/" ]
 
 [application]
 
@@ -102,7 +102,6 @@ window/size/width=1280
 window/size/height=720
 window/size/resizable=false
 window/size/borderless=true
-window/size/fullscreen=true
 
 [editor_plugins]
 

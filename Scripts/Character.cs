@@ -78,8 +78,8 @@ public class Character : KinematicBody
 
 		GetNode<AudioStreamPlayer3D>("WalkingSound").Play();
 		GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused = true;
-		GetNode<AudioStreamPlayer3D>("TiredSound").Play();
-		GetNode<AudioStreamPlayer3D>("TiredSound").StreamPaused = true;
+		//GetNode<AudioStreamPlayer3D>("TiredSound").Play();
+		//GetNode<AudioStreamPlayer3D>("TiredSound").StreamPaused = true;
 		
 		
 		anim = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Character_Animations>("AnimationPlayer");

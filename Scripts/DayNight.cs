@@ -61,7 +61,7 @@ public class DayNight : WorldEnvironment
     public Spatial SunMoonMeshPivot;
     public override void _Process(float delta)
     {
-        currentmins += delta* 10;
+        currentmins += delta;
         if (currentmins > 60)
         {
             currentmins = 0;

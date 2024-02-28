@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/Islands/Terain_Data_IS05/data.hterrain" type="Resource" id=1]
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/NPC.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Env_Assets/Fireplace.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/PitCity.tscn" type="PackedScene" id=8]
 
 [sub_resource type="ParticlesMaterial" id=18]
@@ -44,3 +46,10 @@ mesh = SubResource( 20 )
 
 [node name="PitCity" parent="." index="3" instance=ExtResource( 8 )]
 transform = Transform( 1.79251, 0, 0, 0, 1.79251, 0, 0, 0, 1.79251, 0, -142.762, 0 )
+
+[node name="Character" parent="." index="4" instance=ExtResource( 3 )]
+transform = Transform( -0.883864, 0, -0.467745, 0, 1, 0, 0.467745, 0, -0.883864, 1231.82, 64.0112, -213.832 )
+
+[node name="Fireplace" parent="." index="5" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1229.1, 64.0112, -216.83 )
+State = true

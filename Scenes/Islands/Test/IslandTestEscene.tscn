@@ -295,6 +295,7 @@ area_mask = 0
 [node name="MeshInstance" type="MeshInstance" parent="Camera"]
 process_priority = -1
 transform = Transform( 10, 8.14214e-07, -3.69482e-13, 1.77636e-14, -4.76837e-07, -10, -8.14214e-07, 10, -4.76837e-07, 0.140605, -0.177746, -5.09794 )
+visible = false
 cast_shadow = 0
 generate_lightmap = false
 mesh = SubResource( 92 )

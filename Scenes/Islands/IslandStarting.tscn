@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/Islands/Island2.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Env_Assets/Fireplace.tscn" type="PackedScene" id=2]
 [ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Islands/IslandBase_normal_roughness.packed_texarr" type="TextureArray" id=4]
 [ext_resource path="res://Scenes/Islands/IslandBase_albedo_bump.packed_texarr" type="TextureArray" id=5]
@@ -21,4 +22,7 @@ texture_set = SubResource( 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 177.431, -58.6858, -375.779 )
 
 [node name="Character" parent="." index="19" instance=ExtResource( 6 )]
-transform = Transform( 0.991495, 0, 0.130145, 0, 1, 0, -0.130145, 0, 0.991495, 171.475, -55.9953, -406.025 )
+transform = Transform( 0.893591, 0, 0.448882, 0, 1, 0, -0.448882, 0, 0.893591, 155.047, -58.9104, -386.865 )
+
+[node name="Fireplace" parent="." index="22" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 157.709, -59.2701, -381.191 )
