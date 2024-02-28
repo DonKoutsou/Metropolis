@@ -96,7 +96,7 @@ public class WorldMap : TileMap
         delt -= delta;
         if (delt < 0)
         {
-            delt = 0.1f;
+            delt = 0.5f;
 
             if (!finishedspawning)
                 EnableIsland(currentile, currenttiletype);

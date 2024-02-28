@@ -1,0 +1,24 @@
+[gd_resource type="SpatialMaterial" load_steps=5 format=2]
+
+[ext_resource path="res://Assets/TerainTex/Rock035_1K-JPG/Rock035_1K-JPG_Roughnes2s.jpg" type="Texture" id=1]
+[ext_resource path="res://Assets/TerainTex/Rock035_1K-JPG/Rock035_1K-JPG_AmbientOcclusio2n.jpg" type="Texture" id=2]
+[ext_resource path="res://Assets/TerainTex/Rock035_1K-JPG/Rock035_1K-JPG_Nor2malGL.jpg" type="Texture" id=3]
+[ext_resource path="res://Assets/TerainTex/Rock035_1K-JPG/Rock035_1K-JPG_Col2or.jpg" type="Texture" id=4]
+
+[resource]
+resource_name = "initialShadingGroup"
+albedo_texture = ExtResource( 4 )
+metallic_specular = 0.72
+roughness_texture = ExtResource( 1 )
+roughness_texture_channel = 4
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 3 )
+ao_enabled = true
+ao_light_affect = 1.0
+ao_texture = ExtResource( 2 )
+ao_on_uv2 = false
+ao_texture_channel = 0
+distance_fade_mode = 1
+distance_fade_min_distance = 687.44
+distance_fade_max_distance = 10.0
