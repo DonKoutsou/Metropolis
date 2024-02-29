@@ -7,8 +7,10 @@
 [node name="MainWorld" type="Spatial"]
 script = ExtResource( 2 )
 WorldScene = [ "res://Scenes/World_Test.tscn", "res://Scenes/World_1.tscn" ]
+Intro = ExtResource( 4 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enable = true
 
 [node name="StartScreen" parent="CanvasLayer" instance=ExtResource( 1 )]
 anchor_left = 0.5
@@ -19,5 +21,3 @@ margin_left = -1602.5
 margin_top = -903.5
 margin_right = 1602.5
 margin_bottom = 903.5
-
-[node name="IntoScene" parent="." instance=ExtResource( 4 )]

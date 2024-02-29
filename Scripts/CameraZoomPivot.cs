@@ -28,7 +28,7 @@ public class CameraZoomPivot : Position3D
 		}
 		if (@event.IsActionPressed("ZoomIn"))
 		{
-			if (cam.Translation.y < 10)
+			if (cam.Translation.y < 2)
 				return;
 			cam.Translation = new Vector3(cam.Translation.x, cam.Translation.y * 0.90f, cam.Translation.z * 0.90f);
 		}

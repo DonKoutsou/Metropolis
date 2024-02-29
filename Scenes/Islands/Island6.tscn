@@ -1,11 +1,17 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Clutter/Rock/Rock.obj" type="ArrayMesh" id=2]
 [ext_resource path="res://Assets/Building/BuildingComposition.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Clutter/Rock/RockMat.tres" type="Material" id=4]
+[ext_resource path="res://Scenes/Env_Assets/Antena.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Islands/Terain_Data_ISFinal/data.hterrain" type="Resource" id=6]
 [ext_resource path="res://Scenes/Sea.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Env_Assets/Fireplace.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Env_Assets/CylinderThing.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Env_Assets/Antena2.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Env_Assets/Street_Lamp.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Env_Assets/PlatformWood.tscn" type="PackedScene" id=12]
 
 [sub_resource type="MultiMesh" id=2]
 transform_format = 1
@@ -19,15 +25,34 @@ transform_array = PoolVector3Array( -0.658817, -0.418741, -0.194683, 0.362471, -
 _terrain_data = ExtResource( 6 )
 
 [node name="House" parent="." index="1" instance=ExtResource( 3 )]
-transform = Transform( 0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 142.3, 3.85479, -229.341 )
+transform = Transform( 0.961165, 0, -0.275973, 0, 1, 0, 0.275973, 0, 0.961165, 45.059, -0.790549, -614.643 )
 
 [node name="House2" parent="." index="2" instance=ExtResource( 3 )]
-transform = Transform( 0.954724, 0, 0.297492, 0, 1, 0, -0.297492, 0, 0.954724, 263.515, 3.21034, 645.664 )
+transform = Transform( 0.656901, 0, 0.753976, 0, 1, 0, -0.753976, 0, 0.656901, -28.3483, -0.642424, -587.256 )
 
 [node name="SeaBed" parent="." index="3" instance=ExtResource( 7 )]
-transform = Transform( 14.0357, 0, 0, 0, 1, 0, 0, 0, 14, -6.06531, -7.34755, -0.33194 )
+transform = Transform( 21.0135, 0, 0, 0, 1.49714, 0, 0, 0, 20.96, 287.42, -7.34755, 196.183 )
 
 [node name="MultiMeshInstance" type="MultiMeshInstance" parent="." index="4"]
+visible = false
 material_override = ExtResource( 4 )
 cast_shadow = 0
 multimesh = SubResource( 2 )
+
+[node name="StaticBody" parent="." index="5" instance=ExtResource( 5 )]
+transform = Transform( 8.98773, -2.37441, -5.33046, 5.65923, 5.93365, 6.89897, 1.42294, -8.60145, 6.23067, -1161.11, 80.998, 668.264 )
+
+[node name="Fireplace" parent="." index="6" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4421, 0, -600.44 )
+
+[node name="StaticBody2" parent="." index="7" instance=ExtResource( 9 )]
+transform = Transform( -0.614739, 0, 0.78873, 0, 1, 0, -0.78873, 0, -0.614739, 130.122, -14.9439, -603.208 )
+
+[node name="StaticBody3" parent="." index="8" instance=ExtResource( 10 )]
+transform = Transform( 4.85876, 2.2135, -0.0260919, -0.639298, 1.34285, -5.12795, -2.11933, 4.66958, 1.48703, 361.729, -14.2316, -614.329 )
+
+[node name="StreetLamp" parent="." index="9" instance=ExtResource( 11 )]
+transform = Transform( 0.983963, 0, 0.178373, 0, 1, 0, -0.178373, 0, 0.983963, 85.2173, -6.89727, -561.329 )
+
+[node name="StaticBody4" parent="." index="10" instance=ExtResource( 12 )]
+transform = Transform( 0.843251, 0, -0.53752, 0, 1, 0, 0.53752, 0, 0.843251, 45.4721, -30.579, -564.13 )

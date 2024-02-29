@@ -18,7 +18,7 @@ public class FireplaceLight : StaticBody
         {
             light.LightEnergy = 0.0f;
             part.Emitting = false;
-            SetProcess(false);
+            SetPhysicsProcess(false);
             GetNode<AudioStreamPlayer3D>("FireplaceSound").Stop();
         }
         else
@@ -37,29 +37,29 @@ public class FireplaceLight : StaticBody
             light.LightEnergy = 0.0f;
             part.Emitting = false;
             GetNode<AudioStreamPlayer3D>("FireplaceSound").Stop();
-            SetProcess(false);
+            SetPhysicsProcess(false);
         }
         else
         {
             State = true;
             GetNode<AudioStreamPlayer3D>("FireplaceSound").Play();
             part.Emitting = true;
-            SetProcess(true);
+            SetPhysicsProcess(true);
         }
     }
     float d = 0.05f;
-    public override void _Process(float delta)
+    public override void _PhysicsProcess(float delta)
     {
         d -= delta;
 		if (d <= 0)
 		{
 			d = 0.05f;
             double sample = rand.NextDouble();
-            double scaled = (sample * 1.8) + 1.2;
+            double scaled = (sample * 1.2) + 0.6;
             light.LightEnergy = (float)scaled;
-            double scaled1 = (sample * 0.5) + -0.5;
-            double scaled2 = (sample * 0.5) + -0.5;
-            light.Translation = new Vector3( (float)scaled1, 1.3f, (float)scaled2);
+            //double scaled1 = (sample * 0.5) + -0.5;
+            //double scaled2 = (sample * 0.5) + -0.5;
+            //light.Translation = new Vector3( (float)scaled1, 1.3f, (float)scaled2);
         }
     }
 }

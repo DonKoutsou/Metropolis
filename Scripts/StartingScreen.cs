@@ -26,6 +26,8 @@ public class StartingScreen : Control
 		GetNode<Button>("Start_Button").Hide();
 		GetNode<Button>("Exit_Button").Hide();
 		GetNode<Button>("Controlls_Button").Hide();
+		GetNode<RichTextLabel>("SeedText2").Hide();
+		GetNode<TextEdit>("SeedText").Hide();
 		GetNode<LoadingScreen>("LoadingScreen").EnableTime();
 		//foreach (Button but in WorldButtons)
 		//{

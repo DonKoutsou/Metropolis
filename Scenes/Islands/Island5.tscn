@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Islands/Terain_Data_IS05/data.hterrain" type="Resource" id=1]
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/NPC.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Env_Assets/Fireplace.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/KillField.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/PitCity.tscn" type="PackedScene" id=8]
 
 [sub_resource type="ParticlesMaterial" id=18]
@@ -18,17 +19,6 @@ initial_velocity = 1500.0
 radius = 2.0
 height = 4.0
 
-[sub_resource type="SpatialMaterial" id=17]
-render_priority = 1
-flags_unshaded = true
-albedo_color = Color( 0, 0, 0, 1 )
-proximity_fade_enable = true
-proximity_fade_distance = 1367.17
-
-[sub_resource type="CubeMesh" id=20]
-material = SubResource( 17 )
-size = Vector3( 1500, 500, 1500 )
-
 [node name="Island" instance=ExtResource( 2 )]
 
 [node name="HTerrain" parent="." index="0"]
@@ -40,16 +30,15 @@ amount = 500
 process_material = SubResource( 18 )
 draw_pass_1 = SubResource( 19 )
 
-[node name="MeshInstance2" type="MeshInstance" parent="." index="2"]
-transform = Transform( 1.83148, 0, 0, 0, 1.83148, 0, 0, 0, 1.83148, 0, -430.703, 0 )
-mesh = SubResource( 20 )
+[node name="KillField" parent="." index="2" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -270.825, 0 )
 
 [node name="PitCity" parent="." index="3" instance=ExtResource( 8 )]
-transform = Transform( 1.79251, 0, 0, 0, 1.79251, 0, 0, 0, 1.79251, 0, -142.762, 0 )
+transform = Transform( 1.79251, 0, 0, 0, 1.79251, 0, 0, 0, 1.79251, 0, -194.471, 0 )
 
 [node name="Character" parent="." index="4" instance=ExtResource( 3 )]
-transform = Transform( -0.883864, 0, -0.467745, 0, 1, 0, 0.467745, 0, -0.883864, 1231.82, 64.0112, -213.832 )
+transform = Transform( -0.883864, 0, -0.467745, 0, 1, 0, 0.467745, 0, -0.883864, 1231.82, 12.3026, -213.832 )
 
 [node name="Fireplace" parent="." index="5" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1229.1, 64.0112, -216.83 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1229.1, 12.3026, -216.83 )
 State = true

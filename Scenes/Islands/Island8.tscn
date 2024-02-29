@@ -58,6 +58,7 @@ transform = Transform( 14.6705, 0.997046, 17.3891, -1.54414, 22.7204, 0, -17.349
 transform = Transform( 0.934428, 0.106941, 0.339716, -0.100505, 0.994265, -0.0365391, -0.341676, 0, 0.939818, 220.626, 4.35604, 328.453 )
 
 [node name="MultiMeshInstance" type="MultiMeshInstance" parent="." index="13"]
+visible = false
 material_override = ExtResource( 3 )
 cast_shadow = 0
 multimesh = SubResource( 2 )

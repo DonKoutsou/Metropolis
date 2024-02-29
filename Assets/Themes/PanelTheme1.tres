@@ -1,4 +1,6 @@
-[gd_resource type="Theme" load_steps=2 format=2]
+[gd_resource type="Theme" load_steps=4 format=2]
+
+[ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=1]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.388235, 0.384314, 0.384314, 1 )
@@ -18,5 +20,10 @@ expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 shadow_size = 5
 
+[sub_resource type="DynamicFont" id=2]
+size = 24
+font_data = ExtResource( 1 )
+
 [resource]
+default_font = SubResource( 2 )
 Panel/styles/panel = SubResource( 1 )

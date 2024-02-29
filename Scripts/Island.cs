@@ -11,7 +11,7 @@ public class Island : Spatial
 
 	WorldMap map;
 
-	bool m_enabled = false;
+	public bool m_enabled = false;
 
 	public bool Inited = false;
 
@@ -43,8 +43,8 @@ public class Island : Spatial
 	{
 		GlobalTranslation = loctospawnat;
 		//Apply rotation random
-		//Rotate(new Vector3(0, 1, 0), Mathf.Deg2Rad(rotationtospawnwith));
-		//Transform.Rotated(new Vector3(0, 1, 0), rotationtospawnwith);
+		Rotate(new Vector3(0, 1, 0), Mathf.Deg2Rad(rotationtospawnwith));
+		Transform.Rotated(new Vector3(0, 1, 0), rotationtospawnwith);
 
 		//navmesh = GetNode<NavigationMeshInstance>("NavigationMeshInstance");
 		Terain = GetNodeOrNull<Spatial>("HTerrain");
@@ -65,9 +65,7 @@ public class Island : Spatial
 			Show();
 		}
 		if (Terain != null)
-		{
 			Terain.SetProcess(true);
-		}
 
 		if (grass != null)
 			grass.ToggleGrass(true);
@@ -85,9 +83,7 @@ public class Island : Spatial
 			Hide();
 		}
 		if (Terain != null)
-		{
 			Terain.SetProcess(false);
-		}
 
 		ToggleEnemies(false);
 		if (grass != null)
@@ -114,4 +110,5 @@ public class Island : Spatial
 		}
 		
 	}
+	
 }

@@ -1,0 +1,53 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Clouds/Textures/smoke_01.png" type="Texture" id=1]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type spatial;
+render_mode shadows_disabled, vertex_lighting;
+
+uniform sampler2D tex_frg_2;
+uniform sampler2D tex_norm;
+
+uniform	float n_out3p0 = 0.500000;
+uniform	float Alphamult = 1.0;
+uniform vec4 tint_color : hint_color;
+
+const vec3 billboard = vec3(0.0f, 0.0f, 0.0f);
+
+void vertex() {
+	//MODELVIEW_MATRIX = INV_CAMERA_MATRIX * mat4(CAMERA_MATRIX[0],CAMERA_MATRIX[1],CAMERA_MATRIX[2],WORLD_MATRIX[3]);
+	
+	vec3 billboard_offset = vec3(VERTEX.xyz - billboard.xyz);
+    VERTEX.xyz = normalize(
+        CAMERA_MATRIX[0].xyz) * billboard_offset.x + normalize(
+        CAMERA_MATRIX[2].xyz) * billboard_offset.z + normalize(
+        CAMERA_MATRIX[1].xyz) * billboard_offset.y + billboard.xyz;
+	//vec3 billboard_offset = vec3(VERTEX.xyz - billboard.xyz);
+    //VERTEX.xz = normalize(
+        //CAMERA_MATRIX[0].xz) * billboard_offset.x + normalize(
+        //CAMERA_MATRIX[2].xz) * billboard_offset.z + billboard.xz;
+	//VERTEX.yz = normalize(
+        //CAMERA_MATRIX[1].yz) * billboard_offset.y + normalize(
+        //CAMERA_MATRIX[2].yz) * billboard_offset.z + billboard.yz;
+		
+}
+void fragment() {
+// Texture:2
+	vec4 tex_frg_2_read = texture(tex_frg_2, UV.xy)* tint_color ;
+	vec4 tex_frg_norm = texture(tex_norm, UV.xy);
+
+
+	ALBEDO = tex_frg_2_read.rgb;
+	ALPHA = tex_frg_2_read.a * Alphamult;
+	//ALPHA_SCISSOR = n_out3p0;
+	NORMAL = tex_frg_norm.rgb;
+}
+"
+
+[resource]
+shader = SubResource( 1 )
+shader_param/n_out3p0 = 0.5
+shader_param/Alphamult = 0.3
+shader_param/tint_color = Color( 1, 1, 0.854902, 1 )
+shader_param/tex_frg_2 = ExtResource( 1 )

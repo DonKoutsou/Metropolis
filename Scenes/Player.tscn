@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/Stamina_Bar.cs" type="Script" id=2]
@@ -19,19 +19,18 @@
 [ext_resource path="res://Scripts/SandParticles.cs" type="Script" id=17]
 [ext_resource path="res://Scripts/Time_UI.cs" type="Script" id=18]
 [ext_resource path="res://Scripts/TalkText.cs" type="Script" id=19]
-[ext_resource path="res://Assets/PostProcess/PixelShader.gdshader" type="Shader" id=20]
+[ext_resource path="res://Assets/Clouds/DustCloudMat.tres" type="Material" id=20]
 [ext_resource path="res://Scripts/MyCamera.cs" type="Script" id=21]
 [ext_resource path="res://Scenes/Clouds.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Scenes/ActionMenu.tscn" type="PackedScene" id=23]
-[ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_Colo2r.jpg" type="Texture" id=24]
-[ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_NormalGL2.jpg" type="Texture" id=25]
-[ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_Roughnes2s.jpg" type="Texture" id=26]
-[ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_AmbientOcclusio2n.jpg" type="Texture" id=27]
 [ext_resource path="res://Scenes/SunMoonPivot.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Scenes/CheatMenu.tscn" type="PackedScene" id=29]
 
 [sub_resource type="CapsuleShape" id=6]
 height = 2.316
+
+[sub_resource type="CapsuleShape" id=92]
+height = 1.963
 
 [sub_resource type="CylinderShape" id=82]
 radius = 0.1
@@ -103,41 +102,31 @@ outline_size = 6
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
 
-[sub_resource type="Curve" id=83]
-max_value = 500.0
-_data = [ Vector2( 0, 35.4545 ), 0.0, 0.0, 0, 0, Vector2( 1, 500 ), 0.0, 0.0, 0, 0 ]
+[sub_resource type="Curve" id=90]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="PlaneMesh" id=76]
-
-[sub_resource type="ShaderMaterial" id=87]
-render_priority = -2
-shader = ExtResource( 20 )
-
-[sub_resource type="SpatialMaterial" id=73]
-albedo_texture = ExtResource( 24 )
-roughness_texture = ExtResource( 26 )
-normal_enabled = true
-normal_scale = 1.0
-normal_texture = ExtResource( 25 )
-ao_enabled = true
-ao_light_affect = 0.0
-ao_texture = ExtResource( 27 )
-ao_on_uv2 = false
-ao_texture_channel = 0
+[sub_resource type="CurveTexture" id=91]
+width = 512
+curve = SubResource( 90 )
 
 [sub_resource type="ParticlesMaterial" id=74]
+trail_divisor = 3
+trail_size_modifier = SubResource( 91 )
 emission_shape = 2
-emission_box_extents = Vector3( 1000, 200, 200 )
+emission_box_extents = Vector3( 5000, 50, 5000 )
 direction = Vector3( 2.507, 0, 0 )
 spread = 12.67
 gravity = Vector3( 0, 0, 0 )
-initial_velocity = 129.94
+initial_velocity = 18.05
+linear_accel = 100.0
+linear_accel_random = 1.0
+tangential_accel = 2.8
+tangential_accel_random = 1.0
+hue_variation = 1.0
+hue_variation_random = 1.0
 
-[sub_resource type="SphereMesh" id=75]
-radius = 0.2
-height = 0.4
-radial_segments = 8
-rings = 8
+[sub_resource type="QuadMesh" id=89]
+size = Vector2( 1000, 1000 )
 
 [node name="Player" type="KinematicBody" groups=["player"]]
 pause_mode = 1
@@ -157,6 +146,15 @@ SelectLayer = 17
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.31213, 0 )
 shape = SubResource( 6 )
+
+[node name="KillFieldDetector" type="Area" parent="."]
+collision_layer = 0
+collision_mask = 128
+monitorable = false
+
+[node name="CollisionShape" type="CollisionShape" parent="KillFieldDetector"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.48264, 0 )
+shape = SubResource( 92 )
 
 [node name="HouseDoorDetector" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
@@ -301,7 +299,6 @@ font = SubResource( 88 )
 autowrap = true
 width = 5000.0
 script = ExtResource( 19 )
-TextSizePerDistance = SubResource( 83 )
 
 [node name="UpdateTimer" type="Timer" parent="PlayerUI/TalkText"]
 wait_time = 3.0
@@ -341,16 +338,6 @@ autoplay = true
 max_distance = 16.06
 area_mask = 0
 
-[node name="MeshInstance" type="MeshInstance" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot/Camera"]
-process_priority = -1
-transform = Transform( 10, 8.14214e-07, -3.69482e-13, 1.77636e-14, -4.76837e-07, -10, -8.14214e-07, 10, -4.76837e-07, 0.140605, -0.177746, -5.09794 )
-visible = false
-cast_shadow = 0
-generate_lightmap = false
-mesh = SubResource( 76 )
-software_skinning_transform_normals = false
-material/0 = SubResource( 87 )
-
 [node name="RayCastDown" type="RayCast" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot/Camera"]
 enabled = true
 cast_to = Vector3( 0, -2, 0 )
@@ -389,17 +376,16 @@ collision_mask = 4
 [node name="NavigationAgent" type="NavigationAgent" parent="."]
 
 [node name="Particles" type="Particles" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.85324, 0 )
-material_override = SubResource( 73 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0 )
+material_override = ExtResource( 20 )
 cast_shadow = 0
 generate_lightmap = false
-amount = 2000
-lifetime = 4.54
-preprocess = 0.78
-speed_scale = 2.0
+amount = 100
+lifetime = 25.62
+speed_scale = 5.0
 draw_order = 1
 process_material = SubResource( 74 )
-draw_pass_1 = SubResource( 75 )
+draw_pass_1 = SubResource( 89 )
 script = ExtResource( 17 )
 
 [node name="Spatial" parent="." instance=ExtResource( 22 )]
@@ -409,6 +395,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -909.45, 910.204, -39.5116 )
 
 [node name="MoveLoc" parent="." instance=ExtResource( 16 )]
 
+[connection signal="body_entered" from="KillFieldDetector" to="." method="OnKillFieldDetectorBodyEntered"]
 [connection signal="body_entered" from="HouseDoorDetector" to="." method="OnHouseDoorDetectorBodyEntered"]
 [connection signal="timeout" from="PlayerUI/HP_Bar/VisibilityTimerHP" to="PlayerUI/HP_Bar" method="TurnOff"]
 [connection signal="timeout" from="PlayerUI/Stamina_Bar/VisibilityTimerStamina" to="PlayerUI/Stamina_Bar" method="TurnOff"]

@@ -59,9 +59,15 @@ public class DayNight : WorldEnvironment
     static bool day = false;
 
     public Spatial SunMoonMeshPivot;
+
+    float d = 0.1f;
     public override void _Process(float delta)
     {
-        currentmins += delta;
+        d -= delta;
+		if (d > 0)
+            return;
+		d = 0.1f;
+        currentmins += d;
         if (currentmins > 60)
         {
             currentmins = 0;
@@ -104,6 +110,7 @@ public class DayNight : WorldEnvironment
             Environment.FogSunColor = newsuncol;
             //Environment.FogColor = newsuncol;
             Environment.AmbientLightColor = newsuncol;
+            Environment.BackgroundColor = newsuncol.LinearInterpolate(new Color (0.0f, 0.0f,0.0f), 1- sunbrightness);
             Environment.FogSunAmount = 0.6f;
             moon.Hide();
         }
@@ -115,6 +122,7 @@ public class DayNight : WorldEnvironment
             Environment.FogSunColor = newmooncol;
             //Environment.FogColor = newmooncol;
             Environment.AmbientLightColor = newmooncol;
+            Environment.BackgroundColor = newmooncol.LinearInterpolate(new Color (0.0f, 0.0f,0.0f), 1- moonbrightness);
             Environment.FogSunAmount = 0.05f;
         }
         var moonrot = -(180 - sunrot);

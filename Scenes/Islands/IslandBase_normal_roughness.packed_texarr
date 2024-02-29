@@ -28,6 +28,18 @@
 		{
 			"a": "res://Assets/TerainTex/Ground068_1K-JPG/Ground068_1K-JPG_Roughness.jpg",
 			"rgb": "res://Assets/TerainTex/Ground068_1K-JPG/Ground068_1K-JPG_NormalGL.jpg"
+		},
+		{
+			"a": "res://Assets/TerainTex/Ground059_1K-JPG/Ground059_1K-JPG_Roughness.jpg",
+			"rgb": "res://Assets/TerainTex/Ground059_1K-JPG/Ground059_1K-JPG_NormalGL.jpg"
+		},
+		{
+			"a": "res://Assets/TerainTex/Ground035_1K-JPG/Ground035_1K-JPG_Roughness.jpg",
+			"rgb": "res://Assets/TerainTex/Ground035_1K-JPG/Ground035_1K-JPG_NormalGL.jpg"
+		},
+		{
+			"a": "res://Assets/TerainTex/Gravel014_1K-JPG/Gravel014_1K-JPG_Roughness.jpg",
+			"rgb": "res://Assets/TerainTex/Gravel014_1K-JPG/Gravel014_1K-JPG_NormalGL.jpg"
 		}
 	],
 	"resolution": 512

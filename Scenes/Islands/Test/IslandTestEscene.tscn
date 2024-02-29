@@ -280,7 +280,11 @@ directional_shadow_max_distance = 1000.0
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 0.536744, -0.112835, -0.836166, 0.126849, 0.990545, -0.0522419, 0.834155, -0.0780262, 0.545983, 4008.22, 224.911, 138.174 )
+current = true
 far = 100000.0
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Cloak_Skinned" parent="Camera" instance=ExtResource( 7 )]
 transform = Transform( -0.962478, 0.256052, 0.0898421, 0.245182, 0.96246, -0.116413, -0.116277, -0.0900175, -0.989128, -4.36304, -3.35605, -4.95483 )

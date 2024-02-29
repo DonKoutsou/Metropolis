@@ -4,10 +4,6 @@ using System.Drawing;
 
 public class TalkText : Label3D
 {
-    [Export]
-    Curve TextSizePerDistance = null;
-    //[Export]
-    //Curve ElevationPerDistance = null;
     static TalkText instance;
     public void Talk(string diag)
     {

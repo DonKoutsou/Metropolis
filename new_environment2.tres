@@ -3,12 +3,14 @@
 [ext_resource path="res://addons/AllSkyFree/Skyboxes/AllSkyFree_Sky_OvercastLow_Equirect.png" type="Texture" id=1]
 
 [sub_resource type="PanoramaSky" id=12]
+radiance_size = 0
 panorama = ExtResource( 1 )
 
 [resource]
-background_mode = 2
+background_mode = 3
 background_sky = SubResource( 12 )
-ambient_light_color = Color( 0.901961, 0.709804, 0.709804, 1 )
+ambient_light_color = Color( 1, 0.560784, 0.470588, 1 )
+ambient_light_energy = 0.46
 ambient_light_sky_contribution = 0.0
 fog_enabled = true
 fog_color = Color( 0, 0, 0, 1 )

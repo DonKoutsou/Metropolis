@@ -96,16 +96,21 @@ config/name="3D_TestProj"
 run/main_scene="res://Scenes/MainWorld.tscn"
 config/icon="res://icon.png"
 
+[debug]
+
+settings/fps/force_fps=60
+
 [display]
 
 window/size/width=1280
 window/size/height=720
 window/size/resizable=false
 window/size/borderless=true
+window/size/fullscreen=true
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/MonoCustomResourceRegistry/plugin.cfg", "res://addons/road-generator/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/MonoCustomResourceRegistry/plugin.cfg", "res://addons/dialogue_nodes/plugin.cfg", "res://addons/road-generator/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg" )
 
 [global]
 
@@ -219,6 +224,7 @@ CheatMenu={
 3d_physics/layer_5="Item"
 3d_physics/layer_6="Wall"
 3d_physics/layer_7="HouseDoor"
+3d_physics/layer_8="KillField"
 
 [mono]
 

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 public class Character : KinematicBody
 {
+	[Signal]
+	public delegate void Hit();
 	[Export]
 	public int Speed { get; set; } = 14; // How fast the player will move (pixels/sec).
 
@@ -111,7 +113,7 @@ public class Character : KinematicBody
 		if (DayNight.IsDay())
 			NightLight.LightEnergy = 0;
 		else
-			NightLight.LightEnergy = 1;
+			NightLight.LightEnergy = 0.2f;
 	}
     public void MoveTo(Vector3 loc)
 	{
@@ -167,7 +169,7 @@ public class Character : KinematicBody
 		m_bEnabled = true;
 		origposition = Transform.origin;
 		//GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled",false);
-		SetProcess(true);
+		//SetProcess(true);
 		SetPhysicsProcess(true);
 		GetNode<CollisionShape>("CollisionShape").SetDeferred("disabled",false);
 	}
@@ -175,7 +177,7 @@ public class Character : KinematicBody
 	{
 		m_bEnabled = false;
 		//GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled",true);
-		SetProcess(false);
+		//SetProcess(false);
 		SetPhysicsProcess(false);
 		GetNode<CollisionShape>("CollisionShape").SetDeferred("disabled",false);
 	}
@@ -211,6 +213,16 @@ public class Character : KinematicBody
 		CharacterInventory.RemoveAllItems();
 		//AppliedForce = AppliedForce * 0;
 		Stop();
+		Die();
+	}
+	private void Die()
+	{
+		EmitSignal(nameof(Hit));
+		//QueueFree();
+	}
+	public virtual void OnKillFieldDetectorBodyEntered(Node body)
+	{
+		Kill();
 	}
 	public void Push(float degr, float ammount = 500)
 	{

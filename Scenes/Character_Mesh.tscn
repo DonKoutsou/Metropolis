@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scenes/CloakInh.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Character_Animations.cs" type="Script" id=2]
-[ext_resource path="res://Assets/Clouds/Dust.material" type="Material" id=3]
+[ext_resource path="res://Assets/Clouds/Clouds.material" type="Material" id=3]
 [ext_resource path="res://Assets/Guy/Textures/SandRunnerComplete_SandRunner_Emissive.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Guy/Rope.obj" type="ArrayMesh" id=5]
 [ext_resource path="res://Assets/Guy/Textures/SandRunnerComplete_SandRunner_BaseColor.png" type="Texture" id=6]
@@ -1371,7 +1371,7 @@ nodes/TimeScale/position = Vector2( 241.076, 25.6959 )
 nodes/Walk_Speed/node = SubResource( 19 )
 nodes/Walk_Speed/position = Vector2( 0, 320 )
 nodes/output/position = Vector2( 980, 160 )
-node_connections = [ "output", 0, "JumpShot", "Idle_Walk_Blend", 0, "Animation", "Idle_Walk_Blend", 1, "Walk_Speed", "TimeScale", 0, "Animation 2", "JumpShot", 0, "Idle_Walk_Blend", "JumpShot", 1, "TimeScale", "Walk_Speed", 0, "Animation 3" ]
+node_connections = [ "output", 0, "JumpShot", "TimeScale", 0, "Animation 2", "JumpShot", 0, "Idle_Walk_Blend", "JumpShot", 1, "TimeScale", "Idle_Walk_Blend", 0, "Animation", "Idle_Walk_Blend", 1, "Walk_Speed", "Walk_Speed", 0, "Animation 3" ]
 
 [node name="Cloak_Skinned" instance=ExtResource( 1 )]
 
@@ -1384,10 +1384,6 @@ draw_order = 2
 process_material = SubResource( 21 )
 draw_pass_1 = SubResource( 22 )
 
-[node name="Skeleton" parent="rig" index="1"]
-bones/12/bound_children = [ NodePath("BoneAttachment2") ]
-bones/16/bound_children = [ NodePath("BoneAttachment") ]
-
 [node name="polySurface14001" parent="rig/Skeleton" index="0"]
 mesh = SubResource( 27 )
 material/0 = ExtResource( 10 )
@@ -1397,7 +1393,7 @@ mesh = SubResource( 28 )
 material/0 = SubResource( 26 )
 
 [node name="BoneAttachment" type="BoneAttachment" parent="rig/Skeleton" index="2"]
-transform = Transform( 0.99693, -0.0705724, 0.0339152, -0.0756015, -0.754888, 0.651482, -0.0203745, -0.652046, -0.757906, -2.22353e-08, 4.2732, 0.0807205 )
+transform = Transform( 0.99693, -0.0705724, 0.0339152, -0.0756015, -0.754888, 0.651482, -0.0203745, -0.652046, -0.757906, -8.3819e-09, 4.19963, 0.164154 )
 bone_name = "DEF-spine.006"
 
 [node name="NightLight" type="SpotLight" parent="rig/Skeleton/BoneAttachment" index="0"]
@@ -1408,7 +1404,7 @@ shadow_enabled = true
 spot_range = 41.151
 
 [node name="BoneAttachment2" type="BoneAttachment" parent="rig/Skeleton" index="3"]
-transform = Transform( 1, -1.17867e-07, 1.11066e-07, -1.15722e-07, -0.999817, -0.0191244, 1.13299e-07, 0.0191244, -0.999817, -1.89525e-09, 3.09802, -0.000963458 )
+transform = Transform( 1, -1.1258e-07, 1.16422e-07, -1.15722e-07, -0.999626, 0.0273495, 1.13299e-07, -0.0273495, -0.999626, -8.83013e-09, 3.0381, -0.000963448 )
 bone_name = "DEF-spine.002"
 
 [node name="Rope" type="MeshInstance" parent="rig/Skeleton/BoneAttachment2" index="0"]

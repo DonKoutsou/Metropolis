@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/Ground035_1K-JPG_AmbientOcclusion.jpg-b6b65a56b259d2d34b3f437bee3d7812.image"
+
+[deps]
+
+source_file="res://Assets/TerainTex/Ground035_1K-JPG/Ground035_1K-JPG_AmbientOcclusion.jpg"
+dest_files=[ "res://.import/Ground035_1K-JPG_AmbientOcclusion.jpg-b6b65a56b259d2d34b3f437bee3d7812.image" ]
+
+[params]
+

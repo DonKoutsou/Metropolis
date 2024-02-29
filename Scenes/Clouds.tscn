@@ -5,12 +5,14 @@
 [sub_resource type="ParticlesMaterial" id=2]
 lifetime_randomness = 0.93
 emission_shape = 2
-emission_box_extents = Vector3( 15000, 5, 15000 )
-direction = Vector3( 10, 0, 0 )
+emission_box_extents = Vector3( 25000, 5, 25000 )
 spread = 0.0
 gravity = Vector3( 0, 0, 0 )
-initial_velocity = 14.87
-hue_variation = 0.96
+initial_velocity = 14.0
+linear_accel = 0.2
+linear_accel_random = 0.19
+hue_variation = 1.0
+hue_variation_random = 1.0
 
 [sub_resource type="QuadMesh" id=1]
 material = ExtResource( 1 )
@@ -19,6 +21,7 @@ size = Vector2( 1500, 1500 )
 [node name="Spatial" type="Spatial"]
 
 [node name="Particles" type="Particles" parent="."]
+transform = Transform( 0.99753, 0, -0.070244, 0, 1, 0, 0.070244, 0, 0.99753, 0, 0, 0 )
 sorting_use_aabb_center = false
 cast_shadow = 0
 generate_lightmap = false

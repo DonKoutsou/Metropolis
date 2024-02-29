@@ -4,11 +4,6 @@ using System;
 public class Player : Character
 {
 	// The downward acceleration when in the air, in meters per second squared.
-	
-
-	[Signal]
-	public delegate void Hit();
-
 	Stamina_Bar Stamina_bar = null;
 
 	HP_Bar hp_bar = null;
@@ -62,7 +57,7 @@ public class Player : Character
 		if (DayNight.IsDay())
 			NightLight.LightEnergy = 0;
 		else
-			NightLight.LightEnergy = 1;
+			NightLight.LightEnergy = 0.2f;
 		if (Input.IsActionPressed("Move") || Autowalk)
 		{
 			var spacestate = GetWorld().DirectSpaceState;
@@ -260,12 +255,11 @@ public class Player : Character
 			}
 		}
 	}
-	private void Die()
+	
+	public override void OnKillFieldDetectorBodyEntered(Node body)
 	{
-		EmitSignal(nameof(Hit));
-		QueueFree();
+		Kill();
 	}
-
 		// We also specified this function name in PascalCase in the editor's connection window
 	public void OnHouseDoorDetectorBodyEntered(Node body)
 	{
@@ -283,6 +277,7 @@ public class Player : Character
 		}
 		//loctomove = GlobalTransform.origin;
 	}
+	
 	
 		// ...
 

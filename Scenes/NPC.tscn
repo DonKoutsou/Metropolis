@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/Character.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Inventory.tscn" type="PackedScene" id=7]
@@ -9,6 +9,9 @@
 
 [sub_resource type="CapsuleShape" id=6]
 height = 2.316
+
+[sub_resource type="CylinderShape" id=7]
+radius = 0.1
 
 [node name="Character" type="KinematicBody" groups=["player"]]
 pause_mode = 1
@@ -42,3 +45,15 @@ area_mask = 0
 Capacity = 150.0
 
 [node name="NavigationAgent" type="NavigationAgent" parent="."]
+
+[node name="KillFieldDetector" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
+collision_layer = 0
+collision_mask = 64
+monitorable = false
+
+[node name="CollisionShape" type="CollisionShape" parent="KillFieldDetector"]
+transform = Transform( 1.47899, 0, 0, 0, 0.256205, 0, 0, 0, 1.68566, 0, 0, 0 )
+shape = SubResource( 7 )
+
+[connection signal="body_entered" from="KillFieldDetector" to="." method="OnKillFieldDetectorBodyEntered"]

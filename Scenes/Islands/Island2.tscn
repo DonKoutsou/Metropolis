@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/Islands/Terain_Data_IS02/data.hterrain" type="Resource" id=1]
 [ext_resource path="res://Assets/Building/BuildingDust3.tscn" type="PackedScene" id=2]
@@ -13,8 +13,6 @@
 [ext_resource path="res://Assets/Building/BuildingDust.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Env_Assets/Antena.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Assets/Clutter/Rock/RockMat.tres" type="Material" id=13]
-[ext_resource path="res://addons/zylann.hterrain/tools/icons/icon_detail_layer_node.svg" type="Texture" id=14]
-[ext_resource path="res://addons/zylann.hterrain/hterrain_detail_layer.gd" type="Script" id=15]
 
 [sub_resource type="MultiMesh" id=1]
 transform_format = 1
@@ -27,16 +25,6 @@ transform_array = PoolVector3Array( 0.437309, 0.266042, 0.752386, -0.417124, -0.
 [node name="HTerrain" parent="." index="0"]
 transform = Transform( 35, 0, 0, 0, 30, 0, 0, 0, 35, 0, 0, 0 )
 _terrain_data = ExtResource( 1 )
-
-[node name="HTerrainDetailLayer" type="Spatial" parent="HTerrain" index="0"]
-script = ExtResource( 15 )
-__meta__ = {
-"_editor_icon": ExtResource( 14 )
-}
-shader_params/u_globalmap_tint_bottom = null
-shader_params/u_globalmap_tint_top = null
-shader_params/u_bottom_ao = null
-shader_params/u_instance_scale = Vector3( 1, 1, 1 )
 
 [node name="House" parent="." index="1" instance=ExtResource( 7 )]
 transform = Transform( 0.831925, 0, -0.554888, 0, 1, 0, 0.554888, 0, 0.831925, 173.684, -59.7745, -396.486 )

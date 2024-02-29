@@ -7,6 +7,7 @@
 
 [resource]
 resource_name = "initialShadingGroup"
+flags_disable_ambient_light = true
 albedo_texture = ExtResource( 4 )
 metallic_specular = 0.72
 roughness_texture = ExtResource( 1 )
@@ -19,6 +20,3 @@ ao_light_affect = 1.0
 ao_texture = ExtResource( 2 )
 ao_on_uv2 = false
 ao_texture_channel = 0
-distance_fade_mode = 1
-distance_fade_min_distance = 687.44
-distance_fade_max_distance = 10.0

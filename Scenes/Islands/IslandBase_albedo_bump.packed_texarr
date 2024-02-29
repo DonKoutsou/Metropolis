@@ -28,6 +28,18 @@
 		{
 			"a": "res://Assets/TerainTex/Ground068_1K-JPG/Ground068_1K-JPG_Displacement.jpg",
 			"rgb": "res://Assets/TerainTex/Ground068_1K-JPG/Ground068_1K-JPG_Color.jpg"
+		},
+		{
+			"a": "res://Assets/TerainTex/Ground059_1K-JPG/Ground059_1K-JPG_Displacement.jpg",
+			"rgb": "res://Assets/TerainTex/Ground059_1K-JPG/Ground059_1K-JPG_Color.jpg"
+		},
+		{
+			"a": "res://Assets/TerainTex/Ground035_1K-JPG/Ground035_1K-JPG_Displacement.jpg",
+			"rgb": "res://Assets/TerainTex/Ground035_1K-JPG/Ground035_1K-JPG_Color.jpg"
+		},
+		{
+			"a": "res://Assets/TerainTex/Gravel014_1K-JPG/Gravel014_1K-JPG_Displacement.jpg",
+			"rgb": "res://Assets/TerainTex/Gravel014_1K-JPG/Gravel014_1K-JPG_Color.jpg"
 		}
 	],
 	"resolution": 512

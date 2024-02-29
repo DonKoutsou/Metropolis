@@ -17,7 +17,6 @@ transform_array = PoolVector3Array( 0.302068, -0.942645, 0.120479, -0.950306, -0
 transform = Transform( 35, 0, 0, 0, 15, 0, 0, 0, 35, 0, 0, 0 )
 ambient_wind = 0.067
 _terrain_data = ExtResource( 6 )
-shader_params/u_tile_reduction = true
 
 [node name="MultiMeshInstance" type="MultiMeshInstance" parent="." index="1"]
 material_override = ExtResource( 3 )
