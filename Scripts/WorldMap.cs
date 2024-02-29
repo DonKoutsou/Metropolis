@@ -47,7 +47,11 @@ public class WorldMap : TileMap
     public override void _Ready()
     {
         Hide();
-        random = new Random(seed);
+        MyWorld w = (MyWorld)GetParent();
+        if (w.Seed > 0)
+             random = new Random(w.Seed);
+        else
+            random = new Random(seed);
         //CallDeferred("EnableIslands");
         CellSize = new Vector2(4000, 4000);
         ArrangeCellsBasedOnDistance();

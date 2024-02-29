@@ -14,10 +14,9 @@ public class MyWorld : Spatial
 
 	public override void _Ready()
 	{
+		
 		base._Ready();
 		pl = GetNode<Player>("Player");
-		if(Seed > 0)
-			GetNode<WorldMap>("WorldMap").seed = Seed;
 	}
 	public void OnPlayerKilled()	
 	{
