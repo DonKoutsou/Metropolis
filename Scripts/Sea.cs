@@ -9,7 +9,6 @@ public class Sea : StaticBody
     {
         anim = GetNode<AnimationPlayer>("AnimationPlayer");
         anim.CurrentAnimation = "Water_Move";
-        GetNode<AnimationPlayer>("AnimationPlayer").Play();
     }
     public void Start()
     {

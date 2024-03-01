@@ -2,19 +2,19 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-
-
 public class MyWorld : Spatial
 {
 	Player pl;
 
-	float d = 0.2f;
+	bool EnableDissableBool = false;
 
-	public int Seed;
+	public static int Seed;
+
+	static List<Island> Orderedilestodissable = new List<Island>();
+	static List<Island> Orderedilestoenable = new List<Island>();
 
 	public override void _Ready()
 	{
-		
 		base._Ready();
 		pl = GetNode<Player>("Player");
 	}
@@ -23,18 +23,24 @@ public class MyWorld : Spatial
 		StartingScreen start = ((MainWorld)GetParent()).GetStartingScreen();
 		start.GameOver();
 	}
+	public static void SetSeed(int seed)
+	{
+		Seed = seed;
+	}
+	public static int GetSeed()
+	{
+		return Seed;
+	}
 	public Player GetPlayer()
 	{
 		return pl;
 	}
 	public void RegisterIle(Island ile)
 	{
-		//ile.Hide();
 		AddChild(ile);
 		ToggleIsland(ile, false);
-		//GD.Print("Spawned Island on locations: " + ile.loctospawnat);
 	}
-	bool EnableDissableBool = false;
+	float d = 0.2f;
 	public override void _Process(float delta)
 	{
 		d -= delta;
@@ -54,8 +60,7 @@ public class MyWorld : Spatial
 						{
 							ToggleIsland(ile, false);
 							break;
-						}
-							
+						}	
 					}
 				}
 			}
@@ -73,23 +78,17 @@ public class MyWorld : Spatial
 						{
 							ToggleIsland(ile, true);
 							break;
-						}
-							
+						}	
 					}
-					
 				}
 			}
-			
-			
-				
 		}
 	}
-	public static void ArrangeIlesBasedOnDistance()
+	public static void ArrangeIlesBasedOnDistance(List<Island> ilestodissable, List<Island> ilestoenable)
     {
-        var cells = ilestoenable;
-		if (cells.Count > 0)
+		if (ilestoenable.Count > 0)
 		{
-			foreach (Island IleArray in cells)
+			foreach (Island IleArray in ilestoenable)
 			{
 				if (Orderedilestoenable.Contains(IleArray))
 					continue;
@@ -122,12 +121,10 @@ public class MyWorld : Spatial
 				}
 			}
 		}
-		ilestoenable.Clear();
-		cells.Clear();
-		cells = ilestodissable;
-		if (cells.Count > 0)
+
+		if (ilestodissable.Count > 0)
 		{
-			foreach (Island IleArray in cells)
+			foreach (Island IleArray in ilestodissable)
 			{
 				if (Orderedilestodissable.Contains(IleArray))
 					continue;
@@ -160,28 +157,23 @@ public class MyWorld : Spatial
 				}
 			}
 		}
-		ilestodissable.Clear();
     }
-	static List<Island> ilestodissable = new List<Island>();
-	static List<Island> ilestoenable = new List<Island>();
-
-	static List<Island> Orderedilestodissable = new List<Island>();
-	static List<Island> Orderedilestoenable = new List<Island>();
+	
 	public static void IleTransition(Island from, Island to)
 	{
 		GD.Print("Transitioning from : " + from.Name + " to " + to.Name);
+
+		List<Island> ilestodissable = new List<Island>();
+		List<Island> ilestoenable = new List<Island>();
+
 		List<Island> closestfrom;
 		WorldMap.GetClosestIles(from ,out closestfrom);
-		//from.GetClosestIles(out closestfrom);
 
 		List<Island> closestto;
 		WorldMap.GetClosestIles(to,out closestto);
-		ilestodissable.Clear();
-		ilestoenable.Clear();
-		//to.GetClosestIles(out closestto);
+
 		for (int i = 0; i < closestfrom.Count; i ++)
 		{
-			
 			if (closestfrom[i] == to)
 				continue;
 			if (closestto.Contains(closestfrom[i]))
@@ -207,29 +199,25 @@ public class MyWorld : Spatial
 			if (Orderedilestodissable.Contains(closestto[i]))
 				Orderedilestodissable.Remove(closestto[i]);
 		}
-		ArrangeIlesBasedOnDistance();
+		ArrangeIlesBasedOnDistance(ilestodissable, ilestoenable);
+
 		GD.Print("-----------Transition Finished------------");
 	}
 
 	public static void ToggleIsland(Island ile, bool Toggle, bool affectneigh = false)
 	{
 		if (Toggle)
-		{
 			ile.EnableIsland();
-		}
 		else
-		{
 			ile.DeactivateIsland();
-		}
+			
 		if (affectneigh)
 		{
 			List<Island> closestto;
 			WorldMap.GetClosestIles(ile, out closestto);
-			//ile.GetClosestIles(out closestto);
+
 			for (int i = 0; i < closestto.Count; i ++)
-			{
 				ToggleIsland(closestto[i], Toggle);
-			}
 		}
 	}
 	public override void _Input(InputEvent @event)
@@ -237,17 +225,11 @@ public class MyWorld : Spatial
 		if (@event.IsActionPressed("Pause"))
 		{
 			StartingScreen start = ((MainWorld)GetParent()).GetStartingScreen();
-			if (!GetTree().Paused)
-			{
-				GetTree().Paused = true;
-				start.Pause(true);
-			}
-			else
-			{
-				GetTree().Paused = false;
-				start.Pause(false);
-			}
-				
+			bool paused = GetTree().Paused;
+		
+			start.Pause(!paused);
+
+			GetTree().Paused = !paused;
 		}
 	}
 };
