@@ -62,7 +62,7 @@ public class WorldMap : TileMap
     {
         Hide();
 
-        int seed = MyWorld.GetSeed();
+        int seed = Settings.GetGameSettings().Seed;
 
         random = new Random(seed);
             
@@ -107,14 +107,12 @@ public class WorldMap : TileMap
     {
         //arange all the cells that will get random tile by distance to entry and put in OrderedCells
         var cells = GetUsedCellsById(1);
-        foreach (Vector2 cellArray in cells)
+        OrderedCells.Insert(0, (Vector2)cells[0]);
+        for (int x = 1; x < cells.Count; x++)
         {
+            Vector2 cellArray = (Vector2)cells[x];
             float ind = Math.Abs(cellArray.x) + Math.Abs(cellArray.y);
-            if (OrderedCells.Count == 0)
-            {
-                OrderedCells.Insert(0, cellArray);
-                continue;
-            }
+
             Vector2 closest = OrderedCells[0];
             float dif = Math.Abs(Math.Abs(closest.x) + Math.Abs(closest.y) - ind);
             for (int i = OrderedCells.Count - 1; i > -1; i--)
@@ -146,7 +144,6 @@ public class WorldMap : TileMap
         }
     }
     
-    
     Vector2 FindClosest(Vector2 pos)
     {
         float dist = 999999999;
@@ -164,19 +161,45 @@ public class WorldMap : TileMap
         }
         return closest;
     }
-    
 
-    public static void GetClosestIles(Island Ile, out List<Island> closeIles)
+    public static void GetClosestIles(Island Ile, out List<Island> closeIles, int dist = 2)
     {
         closeIles = new List<Island>();
-        foreach(KeyValuePair<Vector2, Island> entry in IslandMap)
+        Vector3 transform = Ile.GlobalTransform.origin;
+        int ammount = 0;
+        for (int i = 0; i < dist; i ++)
+            ammount += ammount + 8;
+
+        int offset = 4000 * dist;
+        float row = transform.x - offset;
+        float collumn = transform.z - offset;
+        for (int i = 0; i < ammount + 1; i++)
         {
-            Vector2 pos = new Vector2 (Ile.GlobalTransform.origin.x, Ile.GlobalTransform.origin.z);
-            if (pos.DistanceTo(entry.Key) < 10000)
+            Island ile;
+            IslandMap.TryGetValue(new Vector2(row, collumn), out ile);
+            if (ile != null)
+                closeIles.Insert(closeIles.Count, ile);
+            row += 4000;
+            if (row > transform.x + offset)
             {
-                closeIles.Insert(closeIles.Count, entry.Value);
+                row = transform.x - offset;
+                collumn += 4000;
+                if (collumn > transform.z + offset)
+                {
+                    break;
+                }
             }
         }
+        //foreach(KeyValuePair<Vector2, Island> entry in IslandMap)
+        //{
+        //    if (entry.Value == Ile)
+        //        continue;
+        //    Vector2 pos = new Vector2 (Ile.GlobalTransform.origin.x, Ile.GlobalTransform.origin.z);
+        //    if (pos.DistanceTo(entry.Key) < 10000)
+        //    {
+        //        closeIles.Insert(closeIles.Count, entry.Value);
+        //    }
+        //}
     }
     PackedScene GetSceneToSpawn()
     {
@@ -244,12 +267,12 @@ public class WorldMap : TileMap
                 CurrentTile = MapToWorld(cellArray) + CellSize / 2;
             }
             var cells = GetUsedCellsById(1);
+            int ViewDistance = Settings.GetGameSettings().ViewDistance;
             foreach (Vector2 cellArray in cells)
             {
-                if (cellArray.DistanceTo(entycell) > 3)
+                if (cellArray.DistanceTo(entycell) > ViewDistance + 2)
                     continue;
-                int start2 = random.Next(0, loadedscenes.Count);
-                var scene = loadedscenes[start2];
+
                 Island Ile = (Island)GetSceneToSpawn().Instance();
                 SpawnIsland(Ile, cellArray, true);
                 spawned.Insert(spawned.Count, cellArray);
@@ -314,7 +337,7 @@ public class WorldMap : TileMap
             finishedspawning = true;
         }
     }
-	void SpawnIsland(Island Ile , Vector2 cell, bool roate)
+	void SpawnIsland(Island Ile , Vector2 cell, bool rotate)
     {
         Vector2 postoput = MapToWorld(cell);
         postoput += CellSize / 2;
@@ -322,7 +345,7 @@ public class WorldMap : TileMap
         pos.x = postoput.x;
         pos.z = postoput.y;
         Ile.loctospawnat = pos;
-        if (roate)
+        if (rotate)
         {
             int index = random.Next(rots.Count);
             Ile.rotationtospawnwith = rots[index];

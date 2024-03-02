@@ -8,7 +8,7 @@ public class MainWorld : Spatial
 	List<string> WorldScene = new List<string>();
 
 	[Export]
-	PackedScene Intro;
+	PackedScene Intro = null;
 
 	MyWorld m_myworld;
 	StartingScreen screen = null;
@@ -30,10 +30,10 @@ public class MainWorld : Spatial
 		var scene = GD.Load<PackedScene>(WorldScene[index]);
 		
 		m_myworld = (MyWorld)scene.Instance();
-		
+
 		AddChild(m_myworld);
 
-		MyWorld.SetSeed(screen.GetNode<TextEdit>("SeedText").Text.ToInt());
+		
 	}
 	public void StopGame()
 	{

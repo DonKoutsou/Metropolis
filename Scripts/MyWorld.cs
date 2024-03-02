@@ -8,7 +8,6 @@ public class MyWorld : Spatial
 
 	bool EnableDissableBool = false;
 
-	public static int Seed;
 
 	static List<Island> Orderedilestodissable = new List<Island>();
 	static List<Island> Orderedilestoenable = new List<Island>();
@@ -22,14 +21,6 @@ public class MyWorld : Spatial
 	{
 		StartingScreen start = ((MainWorld)GetParent()).GetStartingScreen();
 		start.GameOver();
-	}
-	public static void SetSeed(int seed)
-	{
-		Seed = seed;
-	}
-	public static int GetSeed()
-	{
-		return Seed;
 	}
 	public Player GetPlayer()
 	{
@@ -165,12 +156,12 @@ public class MyWorld : Spatial
 
 		List<Island> ilestodissable = new List<Island>();
 		List<Island> ilestoenable = new List<Island>();
-
+		int ViewDistance = Settings.GetGameSettings().ViewDistance;
 		List<Island> closestfrom;
-		WorldMap.GetClosestIles(from ,out closestfrom);
+		WorldMap.GetClosestIles(from ,out closestfrom, ViewDistance);
 
 		List<Island> closestto;
-		WorldMap.GetClosestIles(to,out closestto);
+		WorldMap.GetClosestIles(to,out closestto, ViewDistance);
 
 		for (int i = 0; i < closestfrom.Count; i ++)
 		{
@@ -214,7 +205,8 @@ public class MyWorld : Spatial
 		if (affectneigh)
 		{
 			List<Island> closestto;
-			WorldMap.GetClosestIles(ile, out closestto);
+			int ViewDistance = Settings.GetGameSettings().ViewDistance;
+			WorldMap.GetClosestIles(ile, out closestto, ViewDistance);
 
 			for (int i = 0; i < closestto.Count; i ++)
 				ToggleIsland(closestto[i], Toggle);
@@ -224,6 +216,7 @@ public class MyWorld : Spatial
 	{
 		if (@event.IsActionPressed("Pause"))
 		{
+			
 			StartingScreen start = ((MainWorld)GetParent()).GetStartingScreen();
 			bool paused = GetTree().Paused;
 		
