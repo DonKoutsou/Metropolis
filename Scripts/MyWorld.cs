@@ -216,8 +216,13 @@ public class MyWorld : Spatial
 	{
 		if (@event.IsActionPressed("Pause"))
 		{
-			
 			StartingScreen start = ((MainWorld)GetParent()).GetStartingScreen();
+			if (Settings.GetGameSettings().Visible)
+			{
+				start.CloseSettings();
+				return;
+			}
+			
 			bool paused = GetTree().Paused;
 		
 			start.Pause(!paused);

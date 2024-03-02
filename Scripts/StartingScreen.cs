@@ -33,13 +33,16 @@ public class StartingScreen : Control
 	}
 	private void On_Settings_Back_Button_Down()
 	{
+		CloseSettings();
+	}
+	public void CloseSettings()
+	{
 		GetNode<Control>("Settings").Hide();
 		GetNode<Control>("Settings").MouseFilter = MouseFilterEnum.Ignore;
 
 		GetNode<Control>("MainScreen").Show();
 		GetNode<Control>("MainScreen").MouseFilter = MouseFilterEnum.Stop;
 	}
-	
 	private void On_Controlls_Button_Down()
 	{
 		GetNode<TextureRect>("Controlls").Show();
@@ -50,6 +53,11 @@ public class StartingScreen : Control
 		GetNode<TextureRect>("Controlls").Hide();
 		GetNode<Button>("Controlls_Back").Hide();
 	}
+	private void On_FullScreen_Button_Down()
+	{
+		OS.WindowFullscreen = !OS.WindowFullscreen;
+	}
+	
 	private void On_Exit_Button_Down()
 	{
 		GetTree().Quit();

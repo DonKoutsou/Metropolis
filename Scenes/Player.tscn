@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/Stamina_Bar.cs" type="Script" id=2]
@@ -23,6 +23,8 @@
 [ext_resource path="res://Scripts/MyCamera.cs" type="Script" id=21]
 [ext_resource path="res://Scenes/Clouds.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Scenes/ActionMenu.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Scripts/Clouds.cs" type="Script" id=24]
+[ext_resource path="res://Assets/PostProcess/PixelShader.gdshader" type="Shader" id=25]
 [ext_resource path="res://Scenes/SunMoonPivot.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Scenes/CheatMenu.tscn" type="PackedScene" id=29]
 
@@ -102,16 +104,23 @@ outline_size = 6
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
 
+[sub_resource type="PlaneMesh" id=96]
+size = Vector2( 10, 10 )
+
+[sub_resource type="ShaderMaterial" id=95]
+render_priority = -2
+shader = ExtResource( 25 )
+
 [sub_resource type="Curve" id=90]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=91]
+[sub_resource type="CurveTexture" id=93]
 width = 512
 curve = SubResource( 90 )
 
 [sub_resource type="ParticlesMaterial" id=74]
 trail_divisor = 3
-trail_size_modifier = SubResource( 91 )
+trail_size_modifier = SubResource( 93 )
 emission_shape = 2
 emission_box_extents = Vector3( 5000, 50, 5000 )
 direction = Vector3( 2.507, 0, 0 )
@@ -129,7 +138,6 @@ hue_variation_random = 1.0
 size = Vector2( 1000, 1000 )
 
 [node name="Player" type="KinematicBody" groups=["player"]]
-pause_mode = 1
 collision_layer = 9
 collision_mask = 55
 script = ExtResource( 1 )
@@ -279,7 +287,6 @@ script = ExtResource( 2 )
 one_shot = true
 
 [node name="Time_UI" type="RichTextLabel" parent="PlayerUI"]
-visible = false
 margin_right = 472.0
 margin_bottom = 80.0
 theme = SubResource( 80 )
@@ -327,8 +334,13 @@ transform = Transform( 1, -1.77636e-15, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 
 cull_mask = 1
 fov = 90.0
 size = 5.0
-far = 100000.0
+far = 20000.0
 script = ExtResource( 21 )
+
+[node name="MeshInstance" type="MeshInstance" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot/Camera"]
+transform = Transform( 1, 8.14214e-08, -2.18168e-08, -2.18168e-08, -1.19209e-07, -1, -8.14214e-08, 1, -1.19209e-07, -8.10272e-08, -0.0224524, -1.58269 )
+mesh = SubResource( 96 )
+material/0 = SubResource( 95 )
 
 [node name="EnvSound" type="AudioStreamPlayer3D" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot/Camera"]
 transform = Transform( 1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0 )
@@ -373,8 +385,6 @@ enabled = true
 cast_to = Vector3( 0, -2, 0 )
 collision_mask = 4
 
-[node name="NavigationAgent" type="NavigationAgent" parent="."]
-
 [node name="Particles" type="Particles" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0 )
 material_override = ExtResource( 20 )
@@ -389,7 +399,8 @@ draw_pass_1 = SubResource( 89 )
 script = ExtResource( 17 )
 
 [node name="Spatial" parent="." instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -909.45, 910.204, -39.5116 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 900, 0 )
+script = ExtResource( 24 )
 
 [node name="SunMoonPivot" parent="." instance=ExtResource( 28 )]
 

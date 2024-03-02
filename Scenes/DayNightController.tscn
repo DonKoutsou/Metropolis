@@ -4,36 +4,35 @@
 [ext_resource path="res://Scripts/DayNight.cs" type="Script" id=2]
 
 [sub_resource type="Curve" id=8]
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.212766, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.354962, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.633588, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.789894, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.8, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.9, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=10]
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.496073, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.8, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=11]
-max_value = 0.05
-_data = [ Vector2( 0.492366, 0.0145455 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0.327273 ), 0.0, 0.0, 0, 0, Vector2( 0.3, 0.1 ), 0.0, 0.0, 0, 0, Vector2( 0.5, 0.1 ), 0.0, 0.0, 0, 0, Vector2( 0.8, 0.1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.327273 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="Curve" id=9]
-_data = [ Vector2( 0, 0.0181818 ), 0.0, 0.0, 0, 0, Vector2( 0.210106, 0.0090909 ), 0.0, 0.0, 0, 0, Vector2( 0.452128, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.829787, 0.0181818 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0181818 ), 0.0, 0.0, 0, 0 ]
+[sub_resource type="Curve" id=15]
+_data = [ Vector2( 0, 0.1 ), 0.0, 0.0, 0, 0, Vector2( 0.8, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.1 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=4]
 max_value = 360.0
-_data = [ Vector2( 0, 108 ), 0.0, 238.13, 0, 0, Vector2( 0.8, 360 ), 0.0, 0.0, 0, 0, Vector2( 0.8, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 108 ), 540.0, 0.0, 1, 0 ]
+_data = [ Vector2( 0, 108 ), 0.0, 238.13, 0, 0, Vector2( 0.8, 360 ), 0.0, 0.0, 0, 0, Vector2( 0.8, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 108 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=5]
 _data = [ Vector2( 0.498534, 1 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=6]
-_data = [ Vector2( 0, 0.5 ), 0.0, 0.0, 0, 0, Vector2( 0.501362, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.5 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0.5 ), 0.0, 0.0, 0, 0, Vector2( 0.7, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.5 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=7]
-_data = [ Vector2( 0, 0.4 ), 0.0, 0.0, 0, 0, Vector2( 0.500907, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.4 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0.4 ), 0.0, 0.0, 0, 0, Vector2( 0.7, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.4 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=12]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.49734, 0.354545 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.8, 0.6 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=13]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.49734, 0.536364 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.8, 0.6 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=14]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0 ]
@@ -44,7 +43,7 @@ script = ExtResource( 2 )
 brightnesscurve = SubResource( 8 )
 sunbrightnesscurve = SubResource( 10 )
 moonbrightnesscurve = SubResource( 11 )
-softlightnesscurve = SubResource( 9 )
+softlightnesscurve = SubResource( 15 )
 sunrotcurve = SubResource( 4 )
 sunRcolorcurve = SubResource( 5 )
 sunGcolorcurve = SubResource( 6 )
@@ -52,4 +51,4 @@ sunBcolorcurve = SubResource( 7 )
 moonRcolorcurve = SubResource( 12 )
 moonGcolorcurve = SubResource( 13 )
 moonBcolorcurve = SubResource( 14 )
-startinghour = 1
+startinghour = 18

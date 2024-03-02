@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://addons/AllSkyFree/Skyboxes/AllSkyFree_Sky_OvercastLow_Equirect.png" type="Texture" id=1]
 [ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_Colo2r.jpg" type="Texture" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://Assets/Building/Bulding_Dest2.obj" type="ArrayMesh" id=18]
 [ext_resource path="res://Assets/Building/Bulding_Dest3.obj" type="ArrayMesh" id=19]
 [ext_resource path="res://Assets/Building/BuildingExterior.material" type="Material" id=20]
+[ext_resource path="res://Assets/Clouds/DustCloudMat.tres" type="Material" id=21]
 
 [sub_resource type="SpatialMaterial" id=88]
 albedo_texture = ExtResource( 2 )
@@ -45,23 +46,26 @@ size = Vector2( 5000, 5000 )
 panorama = ExtResource( 1 )
 
 [sub_resource type="Environment" id=91]
-background_mode = 1
+background_mode = 3
 background_sky = SubResource( 12 )
-background_color = Color( 0.933333, 0.811765, 0.576471, 1 )
-background_energy = 0.12
+background_color = Color( 0.827451, 0.772549, 0.666667, 1 )
+background_energy = 0.64
 ambient_light_color = Color( 0.901961, 0.709804, 0.709804, 1 )
 ambient_light_energy = 0.38
-ambient_light_sky_contribution = 0.0
+ambient_light_sky_contribution = 0.43
 fog_enabled = true
-fog_color = Color( 0, 0, 0, 1 )
+fog_color = Color( 0.639216, 0.529412, 0.411765, 1 )
 fog_sun_color = Color( 0.854902, 0.701961, 0.627451, 1 )
 fog_sun_amount = 1.0
 fog_depth_begin = 0.0
-fog_depth_end = 25000.0
-fog_height_min = -2062.3
-fog_height_max = 3560.4
+fog_depth_end = 4000.0
+fog_depth_curve = 0.517632
+fog_height_enabled = true
+fog_height_min = 92.1
+fog_height_max = 1437.9
 tonemap_mode = 3
 auto_exposure_enabled = true
+ss_reflections_enabled = true
 ssao_enabled = true
 ssao_radius = 128.0
 ssao_intensity = 39.24
@@ -76,7 +80,6 @@ ssao_edge_sharpness = 0.0
 dof_blur_far_enabled = true
 dof_blur_far_distance = 220.58
 dof_blur_far_transition = 160.71
-dof_blur_far_amount = 0.06
 dof_blur_far_quality = 2
 glow_intensity = 1.86
 glow_strength = 0.87
@@ -85,14 +88,24 @@ glow_hdr_threshold = 0.44
 glow_bicubic_upscale = true
 adjustment_enabled = true
 adjustment_brightness = 0.8
-adjustment_contrast = 1.2
-adjustment_saturation = 1.1
+adjustment_contrast = 1.98
 
 [sub_resource type="PlaneMesh" id=92]
 
 [sub_resource type="ShaderMaterial" id=93]
 render_priority = -2
 shader = ExtResource( 10 )
+
+[sub_resource type="PlaneMesh" id=100]
+size = Vector2( 10, 10 )
+
+[sub_resource type="ShaderMaterial" id=101]
+render_priority = -1
+shader = ExtResource( 10 )
+
+[sub_resource type="SpatialMaterial" id=99]
+flags_unshaded = true
+albedo_color = Color( 0.992157, 0.960784, 0.792157, 1 )
 
 [sub_resource type="SpatialMaterial" id=16]
 flags_use_point_size = true
@@ -106,8 +119,8 @@ emission_on_uv2 = false
 
 [sub_resource type="SphereMesh" id=85]
 material = SubResource( 16 )
-radius = 200.0
-height = 400.0
+radius = 800.0
+height = 1600.0
 
 [sub_resource type="SpatialMaterial" id=14]
 emission_enabled = true
@@ -121,6 +134,12 @@ material = SubResource( 14 )
 radius = 100.0
 height = 200.0
 
+[sub_resource type="Curve" id=102]
+_data = [ Vector2( 0, 0.0545454 ), 0.0, 0.0, 0, 0, Vector2( 0.0425, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.4975, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.945, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=103]
+curve = SubResource( 102 )
+
 [sub_resource type="ParticlesMaterial" id=89]
 lifetime_randomness = 0.93
 emission_shape = 2
@@ -129,6 +148,7 @@ direction = Vector3( 10, 0, 0 )
 spread = 0.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 14.87
+scale_curve = SubResource( 103 )
 hue_variation = 0.96
 
 [sub_resource type="QuadMesh" id=90]
@@ -164,6 +184,32 @@ surfaces/0 = {
 "skeleton_aabb": [  ],
 "vertex_count": 561
 }
+
+[sub_resource type="Curve" id=95]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=96]
+width = 512
+curve = SubResource( 95 )
+
+[sub_resource type="ParticlesMaterial" id=97]
+trail_divisor = 3
+trail_size_modifier = SubResource( 96 )
+emission_shape = 2
+emission_box_extents = Vector3( 5000, 50, 5000 )
+direction = Vector3( 2.507, 0, 0 )
+spread = 12.67
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 18.05
+linear_accel = 100.0
+linear_accel_random = 1.0
+tangential_accel = 2.8
+tangential_accel_random = 1.0
+hue_variation = 1.0
+hue_variation_random = 1.0
+
+[sub_resource type="QuadMesh" id=98]
+size = Vector2( 1000, 1000 )
 
 [node name="Spatial" type="Spatial"]
 
@@ -262,10 +308,15 @@ material/0 = ExtResource( 20 )
 environment = SubResource( 91 )
 
 [node name="Sun" type="DirectionalLight" parent="Sky"]
-transform = Transform( 1, 0, 0, 0, -0.999614, 0.0277822, 0, -0.0277822, -0.999614, 0, 26.5368, 0 )
-light_color = Color( 0.996078, 0.745098, 0.745098, 1 )
+transform = Transform( 0.260454, 0.0268233, 0.965114, 0, -0.999614, 0.0277822, 0.965486, -0.00723598, -0.260353, 0, 26.5368, 0 )
+light_color = Color( 0.996078, 0.866667, 0.745098, 1 )
+light_energy = 1.784
+light_indirect_energy = 0.0
+light_specular = 0.415
 light_bake_mode = 0
 shadow_enabled = true
+shadow_bias = 0.264
+directional_shadow_mode = 0
 directional_shadow_max_distance = 1000.0
 
 [node name="Moon" type="DirectionalLight" parent="Sky"]
@@ -279,15 +330,13 @@ shadow_enabled = true
 directional_shadow_max_distance = 1000.0
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 0.536744, -0.112835, -0.836166, 0.126849, 0.990545, -0.0522419, 0.834155, -0.0780262, 0.545983, 4008.22, 224.911, 138.174 )
+transform = Transform( 0.536744, -0.112835, -0.836166, 0.126849, 0.990545, -0.0522418, 0.834155, -0.0780264, 0.545982, 4013.55, 220.638, 138.174 )
 current = true
-far = 100000.0
-__meta__ = {
-"_edit_lock_": true
-}
+fov = 75.0
+far = 5814.3
 
 [node name="Cloak_Skinned" parent="Camera" instance=ExtResource( 7 )]
-transform = Transform( -0.962478, 0.256052, 0.0898421, 0.245182, 0.96246, -0.116413, -0.116277, -0.0900175, -0.989128, -4.36304, -3.35605, -4.95483 )
+transform = Transform( -0.981146, 0.160671, 0.107404, 0.165933, 0.985243, 0.0419317, -0.0990816, 0.0589627, -0.99333, -4.823, -3.54497, -4.27856 )
 
 [node name="EnvSound" type="AudioStreamPlayer3D" parent="Camera"]
 stream = ExtResource( 9 )
@@ -306,12 +355,19 @@ mesh = SubResource( 92 )
 software_skinning_transform_normals = false
 material/0 = SubResource( 93 )
 
+[node name="MeshInstance2" type="MeshInstance" parent="Camera"]
+transform = Transform( 1, 8.9407e-08, -1.49012e-08, -2.23517e-08, -1.67638e-07, -0.999999, 2.98023e-08, 1, -1.11759e-07, 0.412842, -0.157959, -1.99268 )
+mesh = SubResource( 100 )
+material/0 = SubResource( 101 )
+
 [node name="SunMoonPivot" type="Spatial" parent="."]
-transform = Transform( -0.858692, -0.00393145, 0.512477, -0.0136439, 0.999792, -0.0151914, -0.512311, -0.0200369, -0.858566, 0, 0, 0 )
+transform = Transform( -0.141595, 0.0131078, 0.989837, -0.0136439, 0.999792, -0.0151914, -0.989831, -0.0156563, -0.141387, 0, 0, 0 )
 
 [node name="MeshInstance" type="MeshInstance" parent="SunMoonPivot"]
 transform = Transform( 1, 5.96046e-08, -7.45058e-08, 1.15591e-07, 1, 2.08616e-07, 1.68852e-07, 1.19209e-07, 1, 0, 0, 10000 )
+material_override = SubResource( 99 )
 cast_shadow = 0
+generate_lightmap = false
 mesh = SubResource( 85 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="SunMoonPivot"]
@@ -325,9 +381,9 @@ sorting_use_aabb_center = false
 cast_shadow = 0
 generate_lightmap = false
 amount = 1000
-lifetime = 600.0
-speed_scale = 4.0
-explosiveness = 0.7
+lifetime = 300.0
+speed_scale = 0.5
+explosiveness = 0.39
 visibility_aabb = AABB( -1293.38, -1000, -1158.37, 2586.77, 1000, 2316.74 )
 local_coords = false
 draw_order = 2
@@ -351,3 +407,15 @@ transform = Transform( 33.4583, 14.7582, 43.5862, 12.8033, 48.776, -26.3438, -44
 mesh = SubResource( 1 )
 skeleton = NodePath("")
 material/0 = ExtResource( 8 )
+
+[node name="Particles2" type="Particles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4185.81, 190.261, 8.78441 )
+material_override = ExtResource( 21 )
+cast_shadow = 0
+generate_lightmap = false
+amount = 100
+lifetime = 25.62
+speed_scale = 5.0
+draw_order = 1
+process_material = SubResource( 97 )
+draw_pass_1 = SubResource( 98 )

@@ -16,10 +16,10 @@ albedo_color = Color( 0, 0, 0, 1 )
 [node name="Island" instance=ExtResource( 2 )]
 
 [node name="SeaBed" parent="." index="0" instance=ExtResource( 1 )]
-transform = Transform( 35, 0, 0, 0, 15, 0, 0, 0, 35, 0, -1, 0 )
+transform = Transform( 31.25, 0, 0, 0, 15, 0, 0, 0, 31.25, 0, -20, 0 )
 
 [node name="StaticBody" type="StaticBody" parent="." index="1"]
-transform = Transform( 35, 0, 0, 0, 15, 0, 0, 0, 35, 0, -1, 0 )
+transform = Transform( 31.25, 0, 0, 0, 15, 0, 0, 0, 31.25, 0, -1, 0 )
 collision_layer = 4
 collision_mask = 0
 

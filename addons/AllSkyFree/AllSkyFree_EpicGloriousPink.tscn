@@ -7,21 +7,25 @@
 
 [node name="DayNightController" parent="." instance=ExtResource( 1 )]
 environment = ExtResource( 2 )
-startinghour = 5
+startinghour = 19
 
 [node name="Sun" type="DirectionalLight" parent="."]
-transform = Transform( 1, 0, 0, 0, -0.999614, 0.0277822, 0, -0.0277822, -0.999614, 0, 26.5368, 0 )
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 26.5368, 0 )
 light_color = Color( 0.996078, 0.745098, 0.745098, 1 )
+light_size = 1.0
 light_bake_mode = 0
 shadow_enabled = true
-directional_shadow_max_distance = 1000.0
+shadow_bias = 1.0
+shadow_reverse_cull_face = true
+directional_shadow_max_distance = 2000.0
 
 [node name="Moon" type="DirectionalLight" parent="."]
-transform = Transform( 0.982724, 0.0979863, -0.15701, -0.0368982, 0.935048, 0.352596, 0.181362, -0.340711, 0.92251, 0, 26.5368, 0 )
-visible = false
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 26.5368, 0 )
 light_color = Color( 0.862745, 0.905882, 1, 1 )
-light_energy = 0.02
+light_energy = 0.417
 light_indirect_energy = 0.5
 light_bake_mode = 0
 shadow_enabled = true
-directional_shadow_max_distance = 1000.0
+shadow_bias = 1.0
+shadow_reverse_cull_face = true
+directional_shadow_max_distance = 2000.0

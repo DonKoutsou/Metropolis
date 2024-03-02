@@ -2,7 +2,7 @@
 
 [resource]
 code = "shader_type spatial;
-render_mode diffuse_burley;
+render_mode diffuse_toon, specular_toon;
 // WIP
 // This shader uses a texture array with multiple splatmaps, allowing up to 16 textures.
 // Only the 4 textures having highest blending weight are sampled.

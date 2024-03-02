@@ -341,7 +341,7 @@ public class WorldMap : TileMap
     {
         Vector2 postoput = MapToWorld(cell);
         postoput += CellSize / 2;
-        Vector3 pos = new Vector3();
+        Vector3 pos = new Vector3(0.0f, 0.0f, 0.0f);
         pos.x = postoput.x;
         pos.z = postoput.y;
         Ile.loctospawnat = pos;

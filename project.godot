@@ -105,7 +105,6 @@ settings/fps/force_fps=60
 window/size/width=1280
 window/size/height=720
 window/size/resizable=false
-window/size/borderless=true
 
 [editor_plugins]
 
@@ -236,10 +235,9 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-quality/directional_shadow/size=8192
-quality/directional_shadow/size.mobile=4096
-quality/shadow_atlas/size=8192
-quality/shadow_atlas/size.mobile=4096
-quality/shadow_atlas/cubemap_size=4096
+quality/shadows/filter_mode=2
+quality/filters/use_nearest_mipmap_filter=true
 environment/default_clear_color=Color( 1, 1, 1, 1 )
+quality/filters/msaa=3
+quality/filters/use_fxaa=true
 environment/default_environment="res://new_environment2.tres"

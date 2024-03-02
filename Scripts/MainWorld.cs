@@ -26,7 +26,7 @@ public class MainWorld : Spatial
 	}
 	public void SpawnMap(int index)
 	{
-		intro.QueueFree();
+		intro.Free();
 		var scene = GD.Load<PackedScene>(WorldScene[index]);
 		
 		m_myworld = (MyWorld)scene.Instance();
