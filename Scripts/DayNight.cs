@@ -64,7 +64,7 @@ public class DayNight : WorldEnvironment
 
     
 
-    public override void _Process(float delta)
+    public override void _PhysicsProcess(float delta)
     {
         
         currentmins += 0.016f * timeprogmultiplier;
@@ -89,35 +89,36 @@ public class DayNight : WorldEnvironment
         var sunbrightness = sunbrightnesscurve.Interpolate(hourval);
         var moonbrightness = moonbrightnesscurve.Interpolate(hourval);
         var softlight = softlightnesscurve.Interpolate(hourval);
-        var sunrot = sunrotcurve.Interpolate(hourval);
-        
-        //var brightness = timebrightness[currenthour] + (minval / 10);
-        //var sunrot = SunRotation[(int)currenthour];
+        var sunrot = 0.0f;
+        if (hourval > 0.85f)
+            sunrot = sunrotcurve.Interpolate(hourval - 0.85f);
+        else
+            sunrot = sunrotcurve.Interpolate(hourval + 0.15f);
+
         Environment.BackgroundEnergy = brightness;
         
-        sun.LightEnergy = sunbrightness;
-        moon.LightEnergy = moonbrightness * 0.003f;
+
         Color newsuncol = new Color(sunRcolorcurve.Interpolate(hourval) , sunGcolorcurve.Interpolate(hourval), sunBcolorcurve.Interpolate(hourval));
         Color newmooncol = new Color(moonRcolorcurve.Interpolate(hourval) , moonGcolorcurve.Interpolate(hourval), moonBcolorcurve.Interpolate(hourval));
         sun.LightColor = newsuncol;
-        
+
         moon.LightColor = newmooncol;
-        if (sunrot > 200 && sunrot < 340)
+        if (sunrot > 190 && sunrot < 350)
         {
             sun.Show();
+            sun.LightEnergy = sunbrightness;
             day = true;
-            //sunrot = -(180 - (sunrot - 180));
             Environment.FogSunColor = newsuncol;
             Environment.FogColor = new Color (0.0f, 0.0f,0.0f).LinearInterpolate(newsuncol, sunbrightness);
             Environment.AmbientLightColor = new Color (0.0f, 0.0f,0.0f).LinearInterpolate(newsuncol, sunbrightness);
             Environment.BackgroundColor = new Color (0.0f, 0.0f,0.0f).LinearInterpolate(newsuncol, sunbrightness);
-            Environment.FogSunAmount = 0.6f;
-            Environment.AmbientLightEnergy = softlight * sunbrightness;
-            //moon.Hide();
+            Environment.FogSunAmount = 0.3f;
+            Environment.AmbientLightEnergy = softlight;
+            moon.Hide();
         }
-        else if (sunrot < 160 && sunrot > 20)
+        else if (sunrot < 170 && sunrot > 10)
         {
-            //sun.Hide();
+            sun.Hide();
             day = false;
             moon.Show();
             Environment.FogSunColor = newmooncol;
@@ -129,9 +130,11 @@ public class DayNight : WorldEnvironment
             
             Environment.BackgroundColor = backgroundcolor;
 
-            Environment.AmbientLightEnergy = softlight * moonbrightness;
+            Environment.AmbientLightEnergy = softlight;
 
             Environment.FogSunAmount = 0.05f;
+
+            moon.LightEnergy = moonbrightness * 0.003f;
         }
         else
         {
@@ -143,40 +146,60 @@ public class DayNight : WorldEnvironment
 
             float bright = 0;
             float fogsun = 0;
-            if (sunrot > 160 && sunrot < 200)
+            if (sunrot > 170 && sunrot < 190)
             {
-                //moon to sun
-                multi = (sunrot - 160) / 40;
+                multi = (sunrot - 170) / 20;
                 
                 
                 bright = Mathf.Lerp(moonbrightness, sunbrightness, multi);
-                fogsun = Mathf.Lerp(0.05f, 0.6f, multi);
+                fogsun = Mathf.Lerp(0.05f, 0.3f, multi);
                 Color mix = newmooncol.LinearInterpolate(newsuncol , multi);
                 
+                sun.LightEnergy = Mathf.Lerp(sunbrightness, 0, multi);
+                moon.LightEnergy = Mathf.Lerp(0, (moonbrightness * 0.003f), multi);
+                //if (multi > 0.5f)
+                //{
+                //    sun.Show();
+                //    moon.Hide();
+                //}
+                //else
+                //{
+                //    sun.Hide();
+                //    moon.Show();
+                //}
                 combination = new Color (0.0f, 0.0f,0.0f).LinearInterpolate(mix, bright);
                 Environment.FogSunColor = mix;
             }
             else
             {
-                //sun to moon
-                if (sunrot > 200)
+                if (sunrot > 190)
                 {
-                    float rot = 360 - sunrot;
-                    multi = rot / 40;
+                    float rot = 10 - (360 - sunrot);
+                    multi = rot / 20;
                 }
                 else
                 {
-                    multi = sunrot / 40;
+                    multi = (sunrot + 10) / 20;
                 }
                 
                 bright = Mathf.Lerp(sunbrightness, moonbrightness, multi);
-                fogsun = Mathf.Lerp(0.6f, 0.05f, multi);
+                fogsun = Mathf.Lerp(0.3f, 0.05f, multi);
                 Color mix = newsuncol.LinearInterpolate(newmooncol , multi);
                 combination = new Color (0.0f, 0.0f,0.0f).LinearInterpolate(mix, bright);
                 Environment.FogSunColor = mix;
+                sun.LightEnergy = Mathf.Lerp(0, sunbrightness, multi);
+                moon.LightEnergy = Mathf.Lerp((moonbrightness * 0.003f), 0, multi);
+                //if (multi > 0.5f)
+               // {
+                //    sun.Hide();
+                //    moon.Show();
+                //}
+                //else
+                //{
+                //    sun.Show();
+                //    moon.Hide();
+                //}
             }
-
-            //Environment.FogSunColor = newsuncol.LinearInterpolate(newmooncol , multi);
 
             Environment.FogColor = combination;
 
@@ -184,19 +207,22 @@ public class DayNight : WorldEnvironment
             
             Environment.BackgroundColor = combination;
 
-            Environment.AmbientLightEnergy = softlight * bright;
+            Environment.AmbientLightEnergy = softlight;
 
             Environment.FogSunAmount = fogsun;
         }
-        var moonrot = -(180 - sunrot);
+        var moonrot = 0.0f;
+        if (sunrot < 180)
+            moonrot = 180 + sunrot;
+        else
+            moonrot = -(180 - sunrot);
         if (SunMoonMeshPivot != null)
         {
             SunMoonMeshPivot.RotationDegrees = new Vector3(sunrot, 0, 0);
         }
         sun.RotationDegrees = new Vector3(sunrot, 0, 0);
         moon.RotationDegrees = new Vector3(moonrot, 0, 0);
-        //GD.Print(brightness);
-        //GD.Print(sunrot);
+
     }
     public static bool IsDay()
     {
@@ -212,7 +238,8 @@ public class DayNight : WorldEnvironment
         currenthour = startinghour;
         sun = GetParent().GetNode<DirectionalLight>("Sun");
         moon = GetParent().GetNode<DirectionalLight>("Moon");
-       timeprogmultiplier = Settings.GetGameSettings().TimeProgression;
+        timeprogmultiplier = Settings.GetGameSettings().TimeProgression;
+        Environment.FogEnabled = true;
     }
 
 }

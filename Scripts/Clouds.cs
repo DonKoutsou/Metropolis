@@ -7,6 +7,6 @@ public class Clouds : Spatial
     {
         base._Process(delta);
         Vector3 org = GlobalTransform.origin;
-        GlobalTranslation = new Vector3 (org.x, 900, org.z);
+        GlobalTranslation = new Vector3 (org.x, 1100, org.z);
     }
 }

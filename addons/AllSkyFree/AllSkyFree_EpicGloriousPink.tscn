@@ -1,13 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://Scenes/DayNightController.tscn" type="PackedScene" id=1]
-[ext_resource path="res://new_environment2.tres" type="Environment" id=2]
 
 [node name="Sky" type="Spatial"]
 
 [node name="DayNightController" parent="." instance=ExtResource( 1 )]
-environment = ExtResource( 2 )
-startinghour = 19
 
 [node name="Sun" type="DirectionalLight" parent="."]
 transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 26.5368, 0 )

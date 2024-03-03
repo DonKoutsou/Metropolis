@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scenes/Islands/Terain_Data_IS02/data.hterrain" type="Resource" id=1]
 [ext_resource path="res://Assets/Building/BuildingDust3.tscn" type="PackedScene" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://addons/AllSkyFree/AllSkyFree_EpicGloriousPink.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/Clouds.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/SunMoonPivot.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=17]
 
 [sub_resource type="MultiMesh" id=1]
 transform_format = 1
@@ -93,10 +94,12 @@ cast_shadow = 0
 multimesh = SubResource( 1 )
 
 [node name="Sky" parent="." index="21" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, -0.0984168, 0.995146, 0, -0.995146, -0.0984168, 0, 0, 0 )
+transform = Transform( 1, 0, 0, 0, -0.991232, -0.132135, 0, 0.132135, -0.991232, 0, 0, 0 )
 
 [node name="Spatial" parent="." index="22" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -36.295, 900, -174.276 )
 
 [node name="SunMoonPivot" parent="." index="23" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 0.0469147, 0.998899, 0, -0.998899, 0.0469147, 0, 0, 0 )
+
+[node name="Player" parent="." index="24" instance=ExtResource( 17 )]

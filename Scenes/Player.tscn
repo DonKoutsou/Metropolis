@@ -399,7 +399,7 @@ draw_pass_1 = SubResource( 89 )
 script = ExtResource( 17 )
 
 [node name="Spatial" parent="." instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 900, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1100, 0 )
 script = ExtResource( 24 )
 
 [node name="SunMoonPivot" parent="." instance=ExtResource( 28 )]
