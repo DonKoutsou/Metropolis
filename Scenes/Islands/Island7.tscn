@@ -30,7 +30,7 @@ transform = Transform( 3.25881, -0.711671, 4.04427, -3.48878, 2.24334, 3.20596, 
 transform = Transform( 24.4248, 6.92616, -5.54592, -3.72829, 22.7503, 11.9926, 8.05163, -10.4762, 22.3768, -56.2042, -86.1548, -5.55276 )
 
 [node name="StaticBody13" parent="." index="4" instance=ExtResource( 12 )]
-transform = Transform( 0.847752, -0.485784, 0.21291, 0.530393, 0.776451, -0.340305, 0, 0.40142, 0.915894, -61.4578, -15.5981, 287.673 )
+transform = Transform( 0.857357, -0.466878, 0.216712, 0.51469, 0.78234, -0.350768, -0.0057768, 0.412272, 0.911042, -61.4578, -15.5981, 287.673 )
 
 [node name="StaticBody14" parent="." index="5" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 464.469, -7.25391, 546.982 )
@@ -63,3 +63,14 @@ transform = Transform( -0.228419, 0.454402, -0.861013, -0.973563, -0.106613, 0.2
 material_override = ExtResource( 3 )
 cast_shadow = 0
 multimesh = SubResource( 2 )
+
+[node name="Sun" type="DirectionalLight" parent="." index="15"]
+transform = Transform( 0.278485, 0.120466, 0.952856, -0.00970309, -0.991699, 0.128212, 0.960392, -0.0449508, -0.275004, 0, 26.5368, 0 )
+light_color = Color( 0.996078, 0.866667, 0.745098, 1 )
+light_energy = 1.784
+light_indirect_energy = 0.0
+light_specular = 0.415
+light_bake_mode = 0
+shadow_bias = 0.264
+directional_shadow_mode = 0
+directional_shadow_max_distance = 1000.0

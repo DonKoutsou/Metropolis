@@ -148,15 +148,15 @@ public class DayNight : WorldEnvironment
             float fogsun = 0;
             if (sunrot > 170 && sunrot < 190)
             {
-                multi = (sunrot - 170) / 20;
-                
+                multi = (float)Math.Round((sunrot - 170) / 20, 4);
+
                 
                 bright = Mathf.Lerp(moonbrightness, sunbrightness, multi);
                 fogsun = Mathf.Lerp(0.05f, 0.3f, multi);
                 Color mix = newmooncol.LinearInterpolate(newsuncol , multi);
                 
-                sun.LightEnergy = Mathf.Lerp(sunbrightness, 0, multi);
-                moon.LightEnergy = Mathf.Lerp(0, (moonbrightness * 0.003f), multi);
+                sun.LightEnergy = Mathf.Lerp(0.0f, sunbrightness, multi);
+                moon.LightEnergy = Mathf.Lerp((moonbrightness * 0.003f), 0.0f, multi);
                 //if (multi > 0.5f)
                 //{
                 //    sun.Show();
@@ -175,20 +175,20 @@ public class DayNight : WorldEnvironment
                 if (sunrot > 190)
                 {
                     float rot = 10 - (360 - sunrot);
-                    multi = rot / 20;
+                    multi = (float)Math.Round((rot / 20), 4);
                 }
                 else
                 {
-                    multi = (sunrot + 10) / 20;
+                    multi = (float)Math.Round((sunrot + 10) / 20, 4);
                 }
-                
+
                 bright = Mathf.Lerp(sunbrightness, moonbrightness, multi);
                 fogsun = Mathf.Lerp(0.3f, 0.05f, multi);
                 Color mix = newsuncol.LinearInterpolate(newmooncol , multi);
                 combination = new Color (0.0f, 0.0f,0.0f).LinearInterpolate(mix, bright);
                 Environment.FogSunColor = mix;
-                sun.LightEnergy = Mathf.Lerp(0, sunbrightness, multi);
-                moon.LightEnergy = Mathf.Lerp((moonbrightness * 0.003f), 0, multi);
+                sun.LightEnergy = Mathf.Lerp(sunbrightness, 0.0f, multi);
+                moon.LightEnergy = Mathf.Lerp(0.0f, (moonbrightness * 0.003f), multi);
                 //if (multi > 0.5f)
                // {
                 //    sun.Hide();
