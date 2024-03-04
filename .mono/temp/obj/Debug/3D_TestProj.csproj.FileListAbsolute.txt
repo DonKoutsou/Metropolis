@@ -26,3 +26,12 @@ C:\GodotProj\3D_Proj_Test\.mono\temp\obj\Debug\3D_TestProj.csproj.CoreCompileInp
 C:\GodotProj\3D_Proj_Test\.mono\temp\obj\Debug\3D_TestProj.sourcelink.json
 C:\GodotProj\3D_Proj_Test\.mono\temp\obj\Debug\3D_TestProj.dll
 C:\GodotProj\3D_Proj_Test\.mono\temp\obj\Debug\3D_TestProj.pdb
+D:\Git\3D_Proj_Test\.mono\temp\bin\Debug\3D_TestProj.dll
+D:\Git\3D_Proj_Test\.mono\temp\bin\Debug\3D_TestProj.pdb
+D:\Git\3D_Proj_Test\.mono\temp\obj\Debug\3D_TestProj.csproj.AssemblyReference.cache
+D:\Git\3D_Proj_Test\.mono\temp\obj\Debug\3D_TestProj.GeneratedMSBuildEditorConfig.editorconfig
+D:\Git\3D_Proj_Test\.mono\temp\obj\Debug\3D_TestProj.AssemblyInfoInputs.cache
+D:\Git\3D_Proj_Test\.mono\temp\obj\Debug\3D_TestProj.AssemblyInfo.cs
+D:\Git\3D_Proj_Test\.mono\temp\obj\Debug\3D_TestProj.csproj.CoreCompileInputs.cache
+D:\Git\3D_Proj_Test\.mono\temp\obj\Debug\3D_TestProj.dll
+D:\Git\3D_Proj_Test\.mono\temp\obj\Debug\3D_TestProj.pdb

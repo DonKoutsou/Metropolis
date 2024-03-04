@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/Stamina_Bar.cs" type="Script" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://Scenes/ActionMenu.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Scripts/Clouds.cs" type="Script" id=24]
 [ext_resource path="res://Assets/PostProcess/PixelShader.gdshader" type="Shader" id=25]
+[ext_resource path="res://Scenes/Rain.tscn" type="PackedScene" id=26]
 [ext_resource path="res://Scenes/SunMoonPivot.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Scenes/CheatMenu.tscn" type="PackedScene" id=29]
 
@@ -405,6 +406,9 @@ script = ExtResource( 24 )
 [node name="SunMoonPivot" parent="." instance=ExtResource( 28 )]
 
 [node name="MoveLoc" parent="." instance=ExtResource( 16 )]
+
+[node name="Spatial2" parent="." instance=ExtResource( 26 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1000, 0 )
 
 [connection signal="body_entered" from="KillFieldDetector" to="." method="OnKillFieldDetectorBodyEntered"]
 [connection signal="body_entered" from="HouseDoorDetector" to="." method="OnHouseDoorDetectorBodyEntered"]

@@ -63,14 +63,3 @@ transform = Transform( -0.228419, 0.454402, -0.861013, -0.973563, -0.106613, 0.2
 material_override = ExtResource( 3 )
 cast_shadow = 0
 multimesh = SubResource( 2 )
-
-[node name="Sun" type="DirectionalLight" parent="." index="15"]
-transform = Transform( 0.278485, 0.120466, 0.952856, -0.00970309, -0.991699, 0.128212, 0.960392, -0.0449508, -0.275004, 0, 26.5368, 0 )
-light_color = Color( 0.996078, 0.866667, 0.745098, 1 )
-light_energy = 1.784
-light_indirect_energy = 0.0
-light_specular = 0.415
-light_bake_mode = 0
-shadow_bias = 0.264
-directional_shadow_mode = 0
-directional_shadow_max_distance = 1000.0

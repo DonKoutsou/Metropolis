@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\GodotProj\\3D_Proj_Test\\3D_TestProj.csproj": {}
+    "D:\\Git\\3D_Proj_Test\\3D_TestProj.csproj": {}
   },
   "projects": {
-    "C:\\GodotProj\\3D_Proj_Test\\3D_TestProj.csproj": {
+    "D:\\Git\\3D_Proj_Test\\3D_TestProj.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\GodotProj\\3D_Proj_Test\\3D_TestProj.csproj",
+        "projectUniqueName": "D:\\Git\\3D_Proj_Test\\3D_TestProj.csproj",
         "projectName": "3D_TestProj",
-        "projectPath": "C:\\GodotProj\\3D_Proj_Test\\3D_TestProj.csproj",
-        "packagesPath": "C:\\Users\\antho\\.nuget\\packages\\",
-        "outputPath": "C:\\GodotProj\\3D_Proj_Test\\.mono\\temp\\obj\\",
+        "projectPath": "D:\\Git\\3D_Proj_Test\\3D_TestProj.csproj",
+        "packagesPath": "C:\\Users\\koutsouradisant\\.nuget\\packages\\",
+        "outputPath": "D:\\Git\\3D_Proj_Test\\.mono\\temp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\antho\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\koutsouradisant\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net472"
@@ -32,11 +32,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -46,11 +41,11 @@
             "Microsoft.NETFramework.ReferenceAssemblies": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[1.0.3, )",
+              "version": "[1.0.2, )",
               "autoReferenced": true
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.419\\RuntimeIdentifierGraph.json"
         }
       }
     }

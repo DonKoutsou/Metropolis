@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "X3WdsfKc2yWm3evlwfIAZ9O9jFYxgzJZzbuNJdU/bVpiCRwU06hqP7iIuREdWOpabi54H15bDacEMY/Jgzx7fA==",
+  "dgSpecHash": "XdW3LmdAUaULiQnFRel2yJQo1ubMQz4XZZIPc8GP7gEinKDjP28B5PMKmSJdZNgTMLQ7nUFyhTTnxIf8IRpIJA==",
   "success": true,
-  "projectFilePath": "C:\\GodotProj\\3D_Proj_Test\\3D_TestProj.csproj",
+  "projectFilePath": "D:\\Git\\3D_Proj_Test\\3D_TestProj.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\antho\\.nuget\\packages\\microsoft.netframework.referenceassemblies\\1.0.3\\microsoft.netframework.referenceassemblies.1.0.3.nupkg.sha512",
-    "C:\\Users\\antho\\.nuget\\packages\\microsoft.netframework.referenceassemblies.net472\\1.0.3\\microsoft.netframework.referenceassemblies.net472.1.0.3.nupkg.sha512"
+    "C:\\Users\\koutsouradisant\\.nuget\\packages\\microsoft.netframework.referenceassemblies\\1.0.2\\microsoft.netframework.referenceassemblies.1.0.2.nupkg.sha512",
+    "C:\\Users\\koutsouradisant\\.nuget\\packages\\microsoft.netframework.referenceassemblies.net472\\1.0.2\\microsoft.netframework.referenceassemblies.net472.1.0.2.nupkg.sha512"
   ],
   "logs": []
 }
