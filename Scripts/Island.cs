@@ -49,13 +49,19 @@ public class Island : Spatial
 		//navmesh = GetNode<NavigationMeshInstance>("NavigationMeshInstance");
 		Terain = GetNodeOrNull<Spatial>("HTerrain");
 		waterbody = GetNodeOrNull<Sea>("SeaBed");
-
+		if (waterbody != null)
+			waterbody.GlobalRotation = new Vector3 (0.0f, 0.0f, 0.0f);
 
 		grass = GetNodeOrNull<GrassCubes>("Grass");
 		map = GetParent().GetNode<WorldMap>("WorldMap");
 	}
+    public override void _Process(float delta)
+    {
+        base._Process(delta);
 
-	public virtual void EnableIsland()
+    }
+
+    public virtual void EnableIsland()
 	{
 		if (m_enabled)
 			return;

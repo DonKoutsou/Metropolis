@@ -18,7 +18,7 @@ m_bOriginalIle = true
 texture_set = SubResource( 1 )
 
 [node name="SpawnPosition" type="Position3D" parent="." index="18"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 177.431, -58.6858, -375.779 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 177.431, 19.9246, -375.779 )
 
 [node name="Fireplace" parent="." index="21" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 157.709, -59.2701, -381.191 )

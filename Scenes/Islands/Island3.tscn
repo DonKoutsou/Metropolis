@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Clutter/Rock/Rock.obj" type="ArrayMesh" id=2]
 [ext_resource path="res://Assets/Clutter/Rock/RockMat.tres" type="Material" id=3]
 [ext_resource path="res://Scenes/Islands/Terain_Data_IS03/data.hterrain" type="Resource" id=4]
-[ext_resource path="res://Scenes/Sea.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Env_Assets/CylinderThingHuge.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Assets/Building/BuildingComposition.tscn" type="PackedScene" id=12]
 
@@ -23,13 +22,11 @@ _terrain_data = ExtResource( 4 )
 [node name="StaticBody" parent="." index="1" instance=ExtResource( 11 )]
 transform = Transform( -0.992732, 0, -0.120345, 0, 1, 0, 0.120345, 0, -0.992732, -120.572, 116.419, 1043.5 )
 
-[node name="SeaBed" parent="." index="2" instance=ExtResource( 10 )]
-transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 10, 223.958, 114.182, 556.444 )
-
 [node name="House" parent="." index="3" instance=ExtResource( 12 )]
 transform = Transform( 0.887823, 0, 0.460184, 0, 1, 0, -0.460184, 0, 0.887823, -2.92459, 137.967, 1103.73 )
 
 [node name="MultiMeshInstance" type="MultiMeshInstance" parent="." index="4"]
+visible = false
 material_override = ExtResource( 3 )
 cast_shadow = 0
 multimesh = SubResource( 3 )

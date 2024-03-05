@@ -31,14 +31,14 @@ process_material = SubResource( 18 )
 draw_pass_1 = SubResource( 19 )
 
 [node name="KillField" parent="." index="2" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -270.825, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 217.053, 0 )
 
 [node name="PitCity" parent="." index="3" instance=ExtResource( 8 )]
-transform = Transform( 1.79251, 0, 0, 0, 1.79251, 0, 0, 0, 1.79251, 0, -194.471, 0 )
+transform = Transform( 1.79251, 0, 0, 0, 1.79251, 0, 0, 0, 1.79251, 0, 236.608, 0 )
 
 [node name="Character" parent="." index="4" instance=ExtResource( 3 )]
-transform = Transform( -0.883864, 0, -0.467745, 0, 1, 0, 0.467745, 0, -0.883864, 1231.82, 12.3026, -213.832 )
+transform = Transform( -0.883864, 0, -0.467745, 0, 1, 0, 0.467745, 0, -0.883864, 1231.82, 444.865, -213.832 )
 
 [node name="Fireplace" parent="." index="5" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1229.1, 12.3026, -216.83 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1229.1, 444.865, -216.83 )
 State = true

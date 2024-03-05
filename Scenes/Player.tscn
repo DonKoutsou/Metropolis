@@ -394,13 +394,14 @@ generate_lightmap = false
 amount = 100
 lifetime = 25.62
 speed_scale = 5.0
+visibility_aabb = AABB( -1293.38, -1000, -1158.37, 2586.77, 1000, 2316.74 )
 draw_order = 1
 process_material = SubResource( 74 )
 draw_pass_1 = SubResource( 89 )
 script = ExtResource( 17 )
 
 [node name="Spatial" parent="." instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1100, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2200, 0 )
 script = ExtResource( 24 )
 
 [node name="SunMoonPivot" parent="." instance=ExtResource( 28 )]

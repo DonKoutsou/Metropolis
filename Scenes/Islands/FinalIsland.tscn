@@ -14,10 +14,8 @@ textures = [ [ ExtResource( 4 ) ], [ ExtResource( 5 ) ] ]
 [node name="Island" instance=ExtResource( 1 )]
 
 [node name="HTerrain" parent="." index="0"]
+lod_scale = 2.0
 texture_set = SubResource( 1 )
-
-[node name="SeaBed" parent="." index="3"]
-transform = Transform( 14, 0, 0, 0, 1, 0, 0, 0, 14, 0, -5.57544, 0 )
 
 [node name="Ship" parent="." index="4" instance=ExtResource( 2 )]
 transform = Transform( 0.849105, -0.0843251, -0.521451, -0.0278324, 0.978661, -0.203583, 0.52749, 0.187377, 0.828639, -286.822, -0.607956, 576.271 )

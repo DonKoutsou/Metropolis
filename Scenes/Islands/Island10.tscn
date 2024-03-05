@@ -15,7 +15,7 @@ transform_array = PoolVector3Array( 0.554643, -0.558002, 0.706965, 0.201867, -0.
 [node name="Island" instance=ExtResource( 1 )]
 
 [node name="HTerrain" parent="." index="0"]
-transform = Transform( 35, 0, 0, 0, 10, 0, 0, 0, 35, 0, -80, 0 )
+transform = Transform( 35, 0, 0, 0, 10, 0, 0, 0, 35, 0, -150, 0 )
 _terrain_data = ExtResource( 4 )
 
 [node name="StaticBody" parent="." index="1" instance=ExtResource( 2 )]

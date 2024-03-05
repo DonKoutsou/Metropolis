@@ -66,7 +66,7 @@ public class WorldMap : TileMap
 
         random = new Random(seed);
             
-        CellSize = new Vector2(4000, 4000);
+        CellSize = new Vector2(8000, 8000);
 
         ArrangeCellsBasedOnDistance();
         for (int i = 0; i < scenestospawn.Count(); i++)
@@ -74,6 +74,9 @@ public class WorldMap : TileMap
             var scene = GD.Load<PackedScene>(scenestospawn[i]);
             loadedscenes.Insert(i, scene);
         }
+        var pls = GetTree().GetNodesInGroup("player");
+        pl = (Player)pls[0];
+        //EnableInitialIsland();
     }
     public override void _Process(float delta)
 	{
@@ -83,7 +86,7 @@ public class WorldMap : TileMap
             delt = 0.1f;
             
             if (!finishedspawning)
-                EnableIsland(currentile, currenttiletype);
+                EnableIsland2(currentile);
 
             Vector2 plpos = new Vector2(pl.GlobalTransform.origin.x, pl.GlobalTransform.origin.z);
             if (plpos.DistanceTo(CurrentTile) > CellSize.x/2)
@@ -106,7 +109,7 @@ public class WorldMap : TileMap
     void ArrangeCellsBasedOnDistance()
     {
         //arange all the cells that will get random tile by distance to entry and put in OrderedCells
-        var cells = GetUsedCellsById(1);
+        var cells = GetUsedCells();
         OrderedCells.Insert(0, (Vector2)cells[0]);
         for (int x = 1; x < cells.Count; x++)
         {
@@ -170,7 +173,7 @@ public class WorldMap : TileMap
         for (int i = 0; i < dist; i ++)
             ammount += ammount + 8;
 
-        int offset = 4000 * dist;
+        int offset = 8000 * dist;
         float row = transform.x - offset;
         float collumn = transform.z - offset;
         for (int i = 0; i < ammount + 1; i++)
@@ -179,11 +182,11 @@ public class WorldMap : TileMap
             IslandMap.TryGetValue(new Vector2(row, collumn), out ile);
             if (ile != null)
                 closeIles.Insert(closeIles.Count, ile);
-            row += 4000;
+            row += 8000;
             if (row > transform.x + offset)
             {
                 row = transform.x - offset;
-                collumn += 4000;
+                collumn += 8000;
                 if (collumn > transform.z + offset)
                 {
                     break;
@@ -244,6 +247,99 @@ public class WorldMap : TileMap
             scene =  Sea;
         }
         return scene;
+    }
+    PackedScene GetSceneToSpawn2(int type)
+    {
+        PackedScene scene = null;
+        //0 entry
+        if (type == 0)
+        {
+            // if we have no maps spawned it means entry needs to spawn
+            //if (IslandMap.Count == 0)
+            //{
+                scene = Entrytospawn;
+            //}
+            // else get a random tile
+            //else
+            //{
+           //     int start2 = random.Next(0, loadedscenes.Count);
+           //     scene =  loadedscenes[start2];
+           // }
+        }
+        //1 random or event
+        else if (type == 1)
+        {
+            
+            if (RandomisedEntryID.Contains(currentile))
+            {
+                scene = GD.Load<PackedScene>(Eventscenestospawn[RandomisedEntryID.IndexOf(currentile)]);
+            }
+            else
+            {
+                int start2 = random.Next(0, loadedscenes.Count);
+                scene = loadedscenes[start2];
+            }
+        }
+        //2 exit
+        else if (type == 2)
+        {
+            scene =  Exittospawn;
+        }
+        //3 sea
+        else if (type == 3)
+        {
+            scene =  Sea;
+        }
+        return scene;
+    }
+    void EnableInitialIsland()
+    {
+        Island entry = null;
+        //GD.Print("Starting to generate initial map.");
+        var Entrycells = GetUsedCellsById(0);
+        foreach (Vector2 cellArray in Entrycells)
+        {
+            entry = (Island)GetSceneToSpawn().Instance();
+            SpawnIsland(entry, cellArray, true);
+                
+            entycell = cellArray;
+                
+            
+            
+        }
+        MyWorld.ToggleIsland(entry, true, true);
+    }
+    void EnableIsland2(int curtile)
+    {
+        if (spawned.Contains(OrderedCells[curtile]))
+        {
+            currentile += 1;
+            if (currentile >= OrderedCells.Count)
+                currenttiletype += 1;
+            return;
+        }
+        int id = GetCell((int)OrderedCells[curtile].x, (int)OrderedCells[curtile].y);
+
+        Island Ile = (Island)GetSceneToSpawn2(id).Instance();
+        SpawnIsland(Ile, OrderedCells[curtile], true);
+        
+        currentile += 1;
+
+        if (id == 0)
+        {
+            pl.Teleport(Ile.GetNode<Position3D>("SpawnPosition").GlobalTranslation);
+            spawned.Insert(spawned.Count, OrderedCells[curtile]);
+            CurrentTile = MapToWorld(OrderedCells[curtile]) + CellSize / 2;
+            MyWorld.ToggleIsland(Ile, true, true);
+        }
+
+
+        if (currentile >= OrderedCells.Count)
+        {
+            finishedspawning = true;
+            spawned.Clear();
+        }
+            
     }
     void EnableIsland(int curtile, int curtiletype)
     {

@@ -39,7 +39,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="BoxShape" id=5]
-extents = Vector3( 65, 1, 65 )
+extents = Vector3( 4000, 4, 4000 )
 
 [node name="SeaBed" type="StaticBody"]
 collision_layer = 4
@@ -47,7 +47,7 @@ collision_mask = 0
 script = ExtResource( 2 )
 
 [node name="Sea" type="MeshInstance" parent="."]
-transform = Transform( 64, 0, 0, 0, 1000, 0, 0, 0, 64, 0, 0, 0 )
+transform = Transform( 4000, 0, 0, 0, 1000, 0, 0, 0, 4000, 0, 0, 0 )
 cast_shadow = 0
 mesh = SubResource( 1 )
 material/0 = ExtResource( 1 )
