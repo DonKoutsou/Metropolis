@@ -158,10 +158,10 @@ public class MyWorld : Spatial
 		List<Island> ilestoenable = new List<Island>();
 		int ViewDistance = Settings.GetGameSettings().ViewDistance;
 		List<Island> closestfrom;
-		WorldMap.GetClosestIles(from ,out closestfrom, ViewDistance);
+		WorldMap.GetInstance().GetClosestIles(from ,out closestfrom, ViewDistance);
 
 		List<Island> closestto;
-		WorldMap.GetClosestIles(to,out closestto, ViewDistance);
+		WorldMap.GetInstance().GetClosestIles(to,out closestto, ViewDistance);
 
 		for (int i = 0; i < closestfrom.Count; i ++)
 		{
@@ -206,7 +206,7 @@ public class MyWorld : Spatial
 		{
 			List<Island> closestto;
 			int ViewDistance = Settings.GetGameSettings().ViewDistance;
-			WorldMap.GetClosestIles(ile, out closestto, ViewDistance);
+			WorldMap.GetInstance().GetClosestIles(ile, out closestto, ViewDistance);
 
 			for (int i = 0; i < closestto.Count; i ++)
 				ToggleIsland(closestto[i], Toggle);

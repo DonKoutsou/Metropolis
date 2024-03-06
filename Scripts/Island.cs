@@ -24,7 +24,6 @@ public class Island : Spatial
 	Spatial Terain;
 
 	//NavigationMeshInstance navmesh;
-
 	Sea waterbody;
 	public void RegisterChar(Character en)
 	{

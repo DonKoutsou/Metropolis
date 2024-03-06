@@ -15,6 +15,7 @@ mode = 1
 textures = [ [ ExtResource( 5 ) ], [ ExtResource( 6 ) ] ]
 
 [sub_resource type="SpatialMaterial" id=4]
+render_priority = -1
 flags_unshaded = true
 params_depth_draw_mode = 2
 albedo_color = Color( 0, 0, 0, 1 )
@@ -40,11 +41,11 @@ custom_shader = ExtResource( 7 )
 custom_globalmap_shader = null
 texture_set = SubResource( 1 )
 render_layers = 1
-shader_params/u_ground_uv_scale = 2.5
+shader_params/u_ground_uv_scale = 4.0
 shader_params/u_depth_blending = true
 shader_params/u_globalmap_blend_start = 0.0
 shader_params/u_globalmap_blend_distance = 0.0
-shader_params/u_tile_reduction = true
+shader_params/u_tile_reduction = false
 
 [node name="MeshInstance" type="MeshInstance" parent="." index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4000, 4000 )

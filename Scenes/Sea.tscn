@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Assets/Water.tres" type="Material" id=1]
+[ext_resource path="res://Assets/Water_SH.tres" type="Material" id=1]
 [ext_resource path="res://Scripts/Sea.cs" type="Script" id=2]
 
 [sub_resource type="PlaneMesh" id=1]
@@ -9,7 +9,7 @@
 length = 2.0
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:material/0:uv1_offset")
+tracks/0/path = NodePath(".:material/0:shader_param/uv1_offset")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -18,7 +18,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, -1, 0 ) ]
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 1, 0 ) ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -56,7 +56,7 @@ material/0 = ExtResource( 1 )
 root_node = NodePath("../Sea")
 reset_on_save = false
 playback_process_mode = 0
-playback_speed = 0.2
+playback_speed = 0.02
 anims/RESET = SubResource( 3 )
 anims/Water_Move = SubResource( 4 )
 

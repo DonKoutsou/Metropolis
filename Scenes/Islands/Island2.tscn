@@ -23,17 +23,17 @@ transform_array = PoolVector3Array( 0.437309, 0.266042, 0.752386, -0.417124, -0.
 [node name="Island" instance=ExtResource( 5 )]
 
 [node name="HTerrain" parent="." index="0"]
-transform = Transform( 35, 0, 0, 0, 30, 0, 0, 0, 35, 0, 0, 0 )
+transform = Transform( 35, 0, 0, 0, 70, 0, 0, 0, 35, 0, 0, 0 )
 _terrain_data = ExtResource( 1 )
 
 [node name="House" parent="." index="1" instance=ExtResource( 7 )]
-transform = Transform( -0.186987, 0, 0.982362, 0, 1, 0, -0.982362, 0, -0.186987, 310.063, 7.52975, 1341.19 )
+transform = Transform( -0.186987, 0, 0.982362, 0, 1, 0, -0.982362, 0, -0.186987, 310.063, 18.6989, 1341.19 )
 
 [node name="House2" parent="." index="2" instance=ExtResource( 7 )]
-transform = Transform( 0.325172, 0, 0.945656, 0, 1, 0, -0.945656, 0, 0.325172, 309.026, 7.41047, 1299.18 )
+transform = Transform( 0.325172, 0, 0.945656, 0, 1, 0, -0.945656, 0, 0.325172, 309.026, 17.4169, 1299.18 )
 
 [node name="House3" parent="." index="3" instance=ExtResource( 7 )]
-transform = Transform( 0.97901, 0, 0.203813, 0, 1, 0, -0.203813, 0, 0.97901, 357.306, 6.83235, 1266.46 )
+transform = Transform( 0.97901, 0, 0.203813, 0, 1, 0, -0.203813, 0, 0.97901, 357.306, 16.2345, 1266.46 )
 
 [node name="StaticBody" parent="." index="4" instance=ExtResource( 12 )]
 transform = Transform( 22.0028, 6.80931, 0, -6.80931, 22.0028, 0, 0, 0, 23.0323, 206.954, -16.5524, 305.759 )

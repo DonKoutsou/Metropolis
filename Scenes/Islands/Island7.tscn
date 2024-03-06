@@ -21,7 +21,7 @@ transform = Transform( 35, 0, 0, 0, 2, 0, 0, 0, 35, 0, 0, 0 )
 _terrain_data = ExtResource( 6 )
 
 [node name="StaticBody" parent="." index="1" instance=ExtResource( 4 )]
-transform = Transform( 0.939902, 0.266529, -0.213415, -0.311772, 0.924775, -0.218148, 0.139218, 0.271575, 0.952295, 187.413, 130.421, 267.676 )
+transform = Transform( 0.939902, 0.266529, -0.213415, -0.311772, 0.924775, -0.218148, 0.139218, 0.271575, 0.952295, 2.1306, 130.421, 254.235 )
 
 [node name="StaticBody3" parent="." index="2" instance=ExtResource( 4 )]
 transform = Transform( 3.25881, -0.711671, 4.04427, -3.48878, 2.24334, 3.20596, -2.16587, -4.68437, 0.920913, -468.566, 79.7801, 13.0891 )

@@ -8,7 +8,7 @@ public class Sea : StaticBody
     public override void _Ready()
     {
         anim = GetNode<AnimationPlayer>("AnimationPlayer");
-        anim.CurrentAnimation = "Water_Move";
+        anim.CurrentAnimation = "RESET";
     }
     public void Start()
     {
