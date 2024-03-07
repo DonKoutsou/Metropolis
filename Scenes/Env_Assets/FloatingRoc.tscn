@@ -1,0 +1,232 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Clutter/Rock/Rock.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://Assets/Clutter/Rock/RockMat.tres" type="Material" id=2]
+[ext_resource path="res://Scripts/FloatingRoc.cs" type="Script" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Dis"
+length = 10.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Rock:translation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 5, 10 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 463, 3795, 190 ), Vector3( 463, 3500, 190 ), Vector3( 463, 3795, 190 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Rock2:translation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( -822, 1636, 190 ), Vector3( -822, 1962.34, 190 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Rock3:translation")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 2.5, 7.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 928, 2345, -1245 ), Vector3( 928, 2655.22, -1245 ), Vector3( 928, 1888.48, -1245 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Rock4:translation")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 928, 1351.35, -137.827 ), Vector3( 928, 864.084, -137.827 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Rock5:translation")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 2.5, 7.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 319.643, 2431.89, 598.067 ), Vector3( 319.643, 2544.94, 598.067 ), Vector3( 319.643, 1298.37, 598.067 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Rock6:translation")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( -703.996, 2334.79, -737.502 ), Vector3( -703.996, 1126.8, -737.502 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Rock7:translation")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 166.87, 1590.26, -1041.53 ), Vector3( 166.87, 628.107, -1041.53 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Rock:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 463, 3795, 190 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Rock2:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -822, 1636, 190 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Rock3:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 928, 2345, -1245 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Rock4:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 928, 1351.35, -137.827 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Rock5:translation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 319.643, 2431.89, 598.067 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Rock6:translation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -703.996, 2334.79, -737.502 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Rock7:translation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 166.87, 1590.26, -1041.53 ) ]
+}
+
+[node name="Floating_Rock" type="Spatial"]
+script = ExtResource( 3 )
+
+[node name="Rock" type="MeshInstance" parent="."]
+transform = Transform( -118.968, -1428.09, 1208.96, 1814.71, -383.234, -274.119, 455.912, 1152.77, 1406.57, 463, 3795, 190 )
+material_override = ExtResource( 2 )
+mesh = ExtResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="Rock2" type="MeshInstance" parent="."]
+transform = Transform( 183.14, -80.3455, -317.193, -308.381, 79.1471, -198.101, 109.397, 357.613, -27.4204, -822, 1636, 190 )
+material_override = ExtResource( 2 )
+mesh = ExtResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="Rock3" type="MeshInstance" parent="."]
+transform = Transform( 297.269, 161.994, -161.234, 90.7218, -326.424, -160.697, -209.78, 88.3869, -297.972, 928, 2345, -1245 )
+material_override = ExtResource( 2 )
+mesh = ExtResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="Rock4" type="MeshInstance" parent="."]
+transform = Transform( 79.3575, 24.4315, -146.161, 148.188, -12.5511, 78.3602, 0.475794, -165.84, -27.4627, 928, 1351.35, -137.827 )
+material_override = ExtResource( 2 )
+mesh = ExtResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="Rock5" type="MeshInstance" parent="."]
+transform = Transform( 79.3575, 24.4315, -146.161, 148.188, -12.5511, 78.3602, 0.475794, -165.84, -27.4627, 319.643, 2431.89, 598.067 )
+material_override = ExtResource( 2 )
+mesh = ExtResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="Rock6" type="MeshInstance" parent="."]
+transform = Transform( 79.3575, 24.4315, -146.161, 148.188, -12.5511, 78.3602, 0.475794, -165.84, -27.4627, -703.996, 2334.79, -737.502 )
+material_override = ExtResource( 2 )
+mesh = ExtResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="Rock7" type="MeshInstance" parent="."]
+transform = Transform( 79.3575, 24.4315, -146.161, 148.188, -12.5511, 78.3602, 0.475794, -165.84, -27.4627, 166.87, 1590.26, -1041.53 )
+material_override = ExtResource( 2 )
+mesh = ExtResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Dis = SubResource( 1 )
+anims/RESET = SubResource( 2 )
+
+[connection signal="visibility_changed" from="Rock" to="." method="_on_Rock_visibility_changed"]

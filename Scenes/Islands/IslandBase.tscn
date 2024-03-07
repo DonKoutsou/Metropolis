@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/Islands/Island_Main.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://Scenes/Islands/Terain_Data_ISBase/data.hterrain" type="Resource" id=4]
 [ext_resource path="res://Scenes/Islands/IslandBase_albedo_bump.packed_texarr" type="TextureArray" id=5]
 [ext_resource path="res://Scenes/Islands/IslandBase_normal_roughness.packed_texarr" type="TextureArray" id=6]
-[ext_resource path="res://Scenes/Islands/IslandShader.tres" type="Shader" id=7]
 [ext_resource path="res://Scenes/Sea.tscn" type="PackedScene" id=8]
 
 [sub_resource type="Resource" id=1]
@@ -28,8 +27,7 @@ size = Vector2( 8000, 8000 )
 [node name="HTerrain" type="Spatial" parent="." index="0"]
 transform = Transform( 35, 0, 0, 0, 5, 0, 0, 0, 35, 0, 0, 0 )
 script = ExtResource( 3 )
-ambient_wind = 0.587
-lod_scale = 5.0
+lod_scale = 2.0
 centered = true
 _terrain_data = ExtResource( 4 )
 chunk_size = 32
@@ -37,7 +35,7 @@ collision_enabled = true
 collision_layer = 4
 collision_mask = 0
 shader_type = "MultiSplat16"
-custom_shader = ExtResource( 7 )
+custom_shader = null
 custom_globalmap_shader = null
 texture_set = SubResource( 1 )
 render_layers = 1

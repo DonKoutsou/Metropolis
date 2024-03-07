@@ -6,6 +6,9 @@ public class Settings : Control
     public int ViewDistance = 3;
 
     public int TimeProgression = 1;
+
+    public int FOVOverride = 45;
+
     public int Seed;
 
     static Settings set;
@@ -33,6 +36,11 @@ public class Settings : Control
         DayNight.UpdateTimeProgression(TimeProgression);
         GetNode<Panel>("TimeMultiplierSetting").GetNode<RichTextLabel>("TimeProgressionNumber").BbcodeText = "[center]" + TimeProgression.ToString();
     }
+    private void UpdateFOV()
+    {
+        GetTree().Root.GetCamera().Fov = FOVOverride;
+        GetNode<Panel>("FOVSetting").GetNode<RichTextLabel>("FOVNumber").BbcodeText = "[center]" + FOVOverride.ToString();
+    }
     private void IncreaseTimeProgression()
     {
         TimeProgression += 1;
@@ -44,6 +52,20 @@ public class Settings : Control
             return;
         TimeProgression -= 1;
         UpdateTimeProgression();
+    }
+    private void IncreaseFOV()
+    {
+        if (FOVOverride == 90)
+            return;
+        FOVOverride += 1;
+        UpdateFOV();
+    }
+    private void DecreaseFOV()
+    {
+        if (FOVOverride == 25)
+            return;
+        FOVOverride -= 1;
+        UpdateFOV();
     }
     private void IncreaseViewDistance()
     {

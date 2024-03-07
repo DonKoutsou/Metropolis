@@ -6,13 +6,15 @@
 [sub_resource type="CylinderMesh" id=1]
 material = ExtResource( 2 )
 height = 0.119
-radial_segments = 20
+radial_segments = 4
 rings = 0
 
 [sub_resource type="CylinderMesh" id=3]
 material = ExtResource( 2 )
+top_radius = 2.0
 bottom_radius = 0.0
-radial_segments = 20
+height = 12.0
+radial_segments = 4
 rings = 0
 
 [node name="MoveLoc" type="Spatial"]
@@ -21,8 +23,10 @@ MoveLayer = 4
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.144291, 0 )
+cast_shadow = 0
 mesh = SubResource( 1 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="."]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.588774, 0 )
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.4527, 0 )
+cast_shadow = 0
 mesh = SubResource( 3 )

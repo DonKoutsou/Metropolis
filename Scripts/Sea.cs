@@ -10,12 +10,11 @@ public class Sea : StaticBody
         anim = GetNode<AnimationPlayer>("AnimationPlayer");
         anim.CurrentAnimation = "RESET";
     }
-    public void Start()
+    private void _on_Sea_visibility_changed()
     {
-        anim.Play();
-    }
-    public void Stop()
-    {
-        anim.Stop();
+        if (Visible)
+            anim.Play();
+        else
+            anim.Stop();
     }
 }

@@ -152,7 +152,7 @@ public class MyWorld : Spatial
 	
 	public static void IleTransition(Island from, Island to)
 	{
-		GD.Print("Transitioning from : " + from.Name + " to " + to.Name);
+		//GD.Print("Transitioning from : " + from.Name + " to " + to.Name);
 
 		List<Island> ilestodissable = new List<Island>();
 		List<Island> ilestoenable = new List<Island>();
@@ -177,12 +177,10 @@ public class MyWorld : Spatial
 
 				if (Orderedilestoenable.Contains(closestfrom[i]))
 					Orderedilestoenable.Remove(closestfrom[i]);
-				//ToggleIsland(closestfrom[i], false);
 			}
 		}
 		for (int i = 0; i < closestto.Count; i ++)
 		{
-			//ToggleIsland(closestto[i], true);
 			if (!ilestoenable.Contains(closestto[i]) )
 				ilestoenable.Insert(ilestoenable.Count, closestto[i]);
 			if (ilestodissable.Contains(closestto[i]))
@@ -192,7 +190,7 @@ public class MyWorld : Spatial
 		}
 		ArrangeIlesBasedOnDistance(ilestodissable, ilestoenable);
 
-		GD.Print("-----------Transition Finished------------");
+		//GD.Print("-----------Transition Finished------------");
 	}
 
 	public static void ToggleIsland(Island ile, bool Toggle, bool affectneigh = false)

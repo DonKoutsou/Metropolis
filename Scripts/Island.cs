@@ -19,12 +19,9 @@ public class Island : Spatial
 
 	public float rotationtospawnwith;
 
-	GrassCubes grass;
-
 	Spatial Terain;
 
 	//NavigationMeshInstance navmesh;
-	Sea waterbody;
 	public void RegisterChar(Character en)
 	{
 		if (en is Player)
@@ -47,11 +44,10 @@ public class Island : Spatial
 
 		//navmesh = GetNode<NavigationMeshInstance>("NavigationMeshInstance");
 		Terain = GetNodeOrNull<Spatial>("HTerrain");
-		waterbody = GetNodeOrNull<Sea>("SeaBed");
+		StaticBody waterbody = GetNodeOrNull<StaticBody>("SeaBed");
 		if (waterbody != null)
 			waterbody.GlobalRotation = new Vector3 (0.0f, 0.0f, 0.0f);
 
-		grass = GetNodeOrNull<GrassCubes>("Grass");
 		map = GetParent().GetNode<WorldMap>("WorldMap");
 	}
     public override void _Process(float delta)
@@ -72,13 +68,10 @@ public class Island : Spatial
 		if (Terain != null)
 			Terain.SetProcess(true);
 
-		if (grass != null)
-			grass.ToggleGrass(true);
 		ToggleEnemies(true);
 		//if (navmesh != null)
 			//navmesh.Enabled = true;
-		if (waterbody != null)
-			waterbody.Start();
+
 		m_enabled = true;
 	}
 	public void DeactivateIsland()
@@ -91,12 +84,9 @@ public class Island : Spatial
 			Terain.SetProcess(false);
 
 		ToggleEnemies(false);
-		if (grass != null)
-			grass.ToggleGrass(false);
+
 		//if (navmesh != null)
 			//navmesh.Enabled = false;
-		if (waterbody != null)
-			waterbody.Stop();
 		m_enabled = false;
 	}
 	void ToggleEnemies(bool toggle)

@@ -1,43 +1,25 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Assets/Sounds/RainSound.mp3" type="AudioStream" id=1]
-
-[sub_resource type="Curve" id=5]
-min_value = -1.0
-_data = [ Vector2( 0, -1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=6]
-curve = SubResource( 5 )
+[ext_resource path="res://Assets/Rain.tres" type="Material" id=2]
 
 [sub_resource type="ParticlesMaterial" id=2]
-lifetime_randomness = 0.3
 emission_shape = 2
 emission_box_extents = Vector3( 2000, 5, 2000 )
 direction = Vector3( 0, -10, 0 )
 spread = 0.0
 gravity = Vector3( 0, -100, 0 )
-initial_velocity = 20000.0
-hue_variation = 1.0
-hue_variation_random = 1.0
-hue_variation_curve = SubResource( 6 )
+initial_velocity = 10000.0
 
-[sub_resource type="SpatialMaterial" id=4]
-vertex_color_use_as_albedo = true
-params_diffuse_mode = 4
-params_specular_mode = 3
-albedo_color = Color( 0.564706, 0.658824, 0.670588, 1 )
-
-[sub_resource type="SphereMesh" id=3]
-material = SubResource( 4 )
-radius = 0.1
-height = 50.0
-radial_segments = 16
-rings = 8
+[sub_resource type="QuadMesh" id=3]
+material = ExtResource( 2 )
+size = Vector2( 0.5, 100 )
 
 [node name="Spatial" type="Spatial"]
 
 [node name="Clouds2" type="Particles" parent="."]
 transform = Transform( 0.99753, 0, -0.070244, 0, 1, 0, 0.070244, 0, 0.99753, 0, 0, 0 )
+sorting_use_aabb_center = false
 cast_shadow = 0
 generate_lightmap = false
 amount = 1000

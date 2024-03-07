@@ -247,6 +247,7 @@ public class WorldMap : TileMap
         if (currentile == 20)
         {
             pl.Teleport(entry.GetNode<Position3D>("SpawnPosition").GlobalTranslation);
+            GetTree().Root.GetCamera().Fov = Settings.GetGameSettings().FOVOverride;
             CurrentTile = new Vector2 (entry.GlobalTransform.origin.x, entry.GlobalTransform.origin.z);
             MyWorld.ToggleIsland(entry, true, true);
         }

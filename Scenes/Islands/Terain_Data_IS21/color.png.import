@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/color.png-0579e01b0b08f48231b51458f93e46ff.image"
+
+[deps]
+
+source_file="res://Scenes/Islands/Terain_Data_IS21/color.png"
+dest_files=[ "res://.import/color.png-0579e01b0b08f48231b51458f93e46ff.image" ]
+
+[params]
+
