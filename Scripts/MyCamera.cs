@@ -10,9 +10,12 @@ public class MyCamera : Camera
 
     CameraMovePivot campiv;
 
-    public static bool IsClipping()
+    static Vector3 ClipDir;
+
+    public static bool IsClipping(out Vector3 direction)
     {
         UpdateCasts();
+        direction = ClipDir;
         return isclippingwithfloor;
     }
     static void UpdateCasts()
@@ -22,7 +25,11 @@ public class MyCamera : Camera
         {
             rays[i].ForceRaycastUpdate();
             if (rays[i].IsColliding())
+            {
+                ClipDir = rays[i].CastTo;
                 anycolliding = true;
+            }
+                
         }
         if (anycolliding)
             isclippingwithfloor = true;

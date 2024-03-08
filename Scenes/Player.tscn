@@ -324,6 +324,7 @@ transform = Transform( 1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 0, 0, 0 )
 script = ExtResource( 15 )
 
 [node name="CameraPanPivot" type="Position3D" parent="CameraMovePivot"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 script = ExtResource( 14 )
 
 [node name="CameraZoomPivot" type="Position3D" parent="CameraMovePivot/CameraPanPivot"]
@@ -352,38 +353,35 @@ max_distance = 16.06
 area_mask = 0
 
 [node name="RayCastDown" type="RayCast" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot/Camera"]
+transform = Transform( 1, 1.77636e-15, -3.55271e-15, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 enabled = true
 cast_to = Vector3( 0, -2, 0 )
 collision_mask = 4
 
 [node name="RayCastBack" type="RayCast" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot/Camera"]
-transform = Transform( 1, -2.18168e-08, -8.14214e-08, 8.14214e-08, -8.9407e-08, 1, -2.18168e-08, -1, -8.9407e-08, 0, 0, 0 )
 enabled = true
-cast_to = Vector3( 0, -2, 0 )
+cast_to = Vector3( 0, 0, 2 )
 collision_mask = 4
 
 [node name="RayCastUp" type="RayCast" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot/Camera"]
-transform = Transform( 1, 5.96046e-08, -1.03238e-07, 5.96046e-08, -1, 8.9407e-08, -1.03238e-07, -8.9407e-08, -1, -1.13687e-13, 2.86102e-06, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.13687e-13, 2.86102e-06, 0 )
 enabled = true
-cast_to = Vector3( 0, -2, 0 )
+cast_to = Vector3( 0, 2, 0 )
 collision_mask = 4
 
 [node name="RayCastFront" type="RayCast" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot/Camera"]
-transform = Transform( 1, 8.14214e-08, -2.18168e-08, -2.18168e-08, -1.19209e-07, -1, -8.14214e-08, 1, -1.19209e-07, 0, 0, 0 )
 enabled = true
-cast_to = Vector3( 0, -2, 0 )
+cast_to = Vector3( 0, 0, -2 )
 collision_mask = 4
 
 [node name="RayCastLeft" type="RayCast" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot/Camera"]
-transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0, 0 )
 enabled = true
-cast_to = Vector3( 0, -2, 0 )
+cast_to = Vector3( -2, 0, 0 )
 collision_mask = 4
 
 [node name="RayCastRight" type="RayCast" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot/Camera"]
-transform = Transform( -4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 0, 0, 0 )
 enabled = true
-cast_to = Vector3( 0, -2, 0 )
+cast_to = Vector3( 2, 0, 0 )
 collision_mask = 4
 
 [node name="Particles" type="Particles" parent="."]

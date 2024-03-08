@@ -15,11 +15,14 @@ public class CameraPanPivot : Position3D
 			if (!Input.IsActionPressed("CamPan"))
 				return;
 			Vector3 prevrot = Rotation;
-			Vector3 rot = new Vector3(Rotation.x - ((InputEventMouseMotion)@event).Relative.y * 0.001f, Rotation.y - ((InputEventMouseMotion)@event).Relative.x * 0.001f, Rotation.z ) ;
-			
+			Vector3 rot = new Vector3(Rotation.x - ((InputEventMouseMotion)@event).Relative.y * 0.001f, Rotation.y - ((InputEventMouseMotion)@event).Relative.x * 0.001f, Rotation.z );
+			if (prevrot == rot)
+				return;
 			Rotation = rot;
-
-			if (MyCamera.IsClipping())
+			Vector3 clipdir;
+			if (MyCamera.IsClipping(out clipdir))
+				Rotation += new Vector3(Mathf.Deg2Rad(clipdir.y),Mathf.Deg2Rad(clipdir.x),0);
+			if (cam.GlobalTranslation.y <= 0)
 				Rotation = prevrot;
 		}
     }
@@ -34,7 +37,6 @@ public class CameraPanPivot : Position3D
 		if (Input.IsActionPressed("ui_left"))
 		{
 			rot.y -= 1f * 0.01f;
-			
 		}
         if (Input.IsActionPressed("ui_up"))
 		{
@@ -48,8 +50,10 @@ public class CameraPanPivot : Position3D
 			return;
 
 		Rotation = rot;
-
-		if (MyCamera.IsClipping())
+		Vector3 clipdir;
+		if (MyCamera.IsClipping(out clipdir))
+			Rotation += new Vector3(Mathf.Deg2Rad(clipdir.y),Mathf.Deg2Rad(clipdir.x),0);
+		if (cam.GlobalTranslation.y <= 0)
 			Rotation = prevrot;
 
 	}

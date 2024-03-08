@@ -22,22 +22,23 @@ public class CameraZoomPivot : Position3D
 		Vector3 prevpos = Translation;
 		if (@event.IsActionPressed("ZoomOut"))
 		{
-			if (cam.Translation.y > MaxDist)
-				return;
-			cam.Translation = new Vector3(cam.Translation.x, cam.Translation.y * 1.1f, cam.Translation.z * 1.1f);
+			if (cam.Translation.y < MaxDist)
+				cam.Translation = new Vector3(cam.Translation.x, cam.Translation.y * 1.1f, cam.Translation.z * 1.1f);
 		}
 		if (@event.IsActionPressed("ZoomIn"))
 		{
-			if (cam.Translation.y < 2)
-				return;
-			cam.Translation = new Vector3(cam.Translation.x, cam.Translation.y * 0.90f, cam.Translation.z * 0.90f);
+			if (cam.Translation.y > 2)
+				cam.Translation = new Vector3(cam.Translation.x, cam.Translation.y * 0.90f, cam.Translation.z * 0.90f);
 		}
 		if (@event.IsActionPressed("FrameCamera"))
 		{
 			Frame();
 		}
-		if (MyCamera.IsClipping())
-			cam.Translation = prevpos;
+		if (prevpos == Translation)
+			return;
+		Vector3 clipdir;
+		if (MyCamera.IsClipping(out clipdir) || cam.GlobalTranslation.y <= 0)
+			cam.Translation += clipdir;
 	}
 	public void Frame()
 	{

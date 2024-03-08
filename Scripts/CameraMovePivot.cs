@@ -63,7 +63,8 @@ public class CameraMovePivot : Position3D
 		if (trans == prev)
 			return;
         zpivot.Translation = trans;
-        if (pl.GlobalTranslation.DistanceTo(zpivot.GlobalTranslation) < MaxDist && !MyCamera.IsClipping())
+		Vector3 clipdir;
+        if (pl.GlobalTranslation.DistanceTo(zpivot.GlobalTranslation) < MaxDist && !MyCamera.IsClipping(out clipdir) && zpivot.GlobalTranslation.y > 0)
         {
             GlobalTranslation = zpivot.GlobalTranslation;
         }
