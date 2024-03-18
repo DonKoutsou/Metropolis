@@ -61,6 +61,8 @@ public class Character : KinematicBody
 
 	public SpotLight NightLight;
 
+	public Spatial HeadPivot;
+
 	public Vector3 loctomove;
 
 	public Character_Animations anim;
@@ -85,7 +87,8 @@ public class Character : KinematicBody
 		
 		
 		anim = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Character_Animations>("AnimationPlayer");
-		NightLight = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("BoneAttachment").GetNode<SpotLight>("NightLight");
+		HeadPivot = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("BoneAttachment").GetNode<Spatial>("HeadPivot");
+		NightLight = HeadPivot.GetNode<SpotLight>("NightLight");
 		if (this is Player)
 			return;
 		((Island)GetParent()).RegisterChar(this);

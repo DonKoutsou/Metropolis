@@ -1,11 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XdW3LmdAUaULiQnFRel2yJQo1ubMQz4XZZIPc8GP7gEinKDjP28B5PMKmSJdZNgTMLQ7nUFyhTTnxIf8IRpIJA==",
+  "dgSpecHash": "bp+9QbE+9J3X6q02jaXJ09R3Tm8o6ZRdV/6x7LCR7QgkKmU50A2s98B0ppDSsA1ZfS1DMxzjXUFQblx4QOit/A==",
   "success": true,
-  "projectFilePath": "D:\\Git\\3D_Proj_Test\\3D_TestProj.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\koutsouradisant\\.nuget\\packages\\microsoft.netframework.referenceassemblies\\1.0.2\\microsoft.netframework.referenceassemblies.1.0.2.nupkg.sha512",
-    "C:\\Users\\koutsouradisant\\.nuget\\packages\\microsoft.netframework.referenceassemblies.net472\\1.0.2\\microsoft.netframework.referenceassemblies.net472.1.0.2.nupkg.sha512"
-  ],
+  "projectFilePath": "E:\\Godot_Project\\3D_Proj_Test\\3D_TestProj.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }

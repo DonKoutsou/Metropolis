@@ -16,6 +16,7 @@ m_bOriginalIle = true
 
 [node name="HTerrain" parent="." index="0"]
 texture_set = SubResource( 1 )
+render_layers = 1
 
 [node name="SpawnPosition" type="Position3D" parent="." index="18"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 347.289, 19.6318, 1288.5 )

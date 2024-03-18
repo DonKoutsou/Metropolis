@@ -110,7 +110,8 @@ public class Player : Character
 			if (!GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused)
 				GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused = true;
 			anim.PlayAnimation(E_Animations.Idle);
-			moveloc.Hide();	
+			moveloc.Hide();
+			HeadPivot.Rotation = new Vector3(0.0f,0.0f,0.0f);
 		}
 		else
 		{
@@ -133,6 +134,13 @@ public class Player : Character
 				GetNode<AudioStreamPlayer3D>("WalkingSound").PitchScale = 1f;
 				anim.PlayAnimation(E_Animations.Run);
 			}
+			float heightdif = GlobalTransform.origin.y - loctomove.y ;
+			float rot = heightdif / 45;
+			if (rot > 0)
+				HeadPivot.Rotation = new Vector3(Math.Min(rot, 0.3f) , 0.0f,0.0f);
+			else
+				HeadPivot.Rotation = new Vector3(Math.Max(rot, -0.5f) , 0.0f,0.0f);
+			//YOUR_NODE.RotationDegrees = Vector3.Up * Mathf.LerpAngle(YOUR_NODE.Rotation.y, Mathf.Atan2(OTHER_NODE.Translation.x - YOUR_NODE.Translation.x, OTHER_NODE.Translation.z - YOUR_NODE.Translation.z), 1f);
 				
 		}
 		//Stamina_bar.Value = m_Stamina;
@@ -149,9 +157,9 @@ public class Player : Character
 		_velocity.z = direction.z * spd;
 		//_velocity.y = direction.y * spd;
 		// Vertical velocity
-		_velocity.y -= FallAcceleration * delta;
+		//_velocity.y -= FallAcceleration * delta;
 		// Moving the character
-		_velocity = MoveAndSlide(_velocity, Vector3.Up);
+		_velocity = MoveAndSlide(new Vector3(_velocity.x, _velocity.y - FallAcceleration * delta, _velocity.z), Vector3.Up);
 		if (Input.IsActionJustPressed("jump"))
 		{
 			if (IsOnFloor())

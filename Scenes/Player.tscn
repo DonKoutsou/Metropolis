@@ -24,8 +24,8 @@
 [ext_resource path="res://Scenes/Clouds.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Scenes/ActionMenu.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Scripts/Clouds.cs" type="Script" id=24]
-[ext_resource path="res://Assets/PostProcess/PixelShader.gdshader" type="Shader" id=25]
 [ext_resource path="res://Scenes/Rain.tscn" type="PackedScene" id=26]
+[ext_resource path="res://Assets/PostProcess/KuwaharaShader.gdshader" type="Shader" id=27]
 [ext_resource path="res://Scenes/SunMoonPivot.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Scenes/CheatMenu.tscn" type="PackedScene" id=29]
 
@@ -110,7 +110,7 @@ size = Vector2( 10, 10 )
 
 [sub_resource type="ShaderMaterial" id=95]
 render_priority = -2
-shader = ExtResource( 25 )
+shader = ExtResource( 27 )
 
 [sub_resource type="Curve" id=90]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
@@ -324,7 +324,6 @@ transform = Transform( 1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 0, 0, 0 )
 script = ExtResource( 15 )
 
 [node name="CameraPanPivot" type="Position3D" parent="CameraMovePivot"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 script = ExtResource( 14 )
 
 [node name="CameraZoomPivot" type="Position3D" parent="CameraMovePivot/CameraPanPivot"]
@@ -341,6 +340,7 @@ script = ExtResource( 21 )
 
 [node name="MeshInstance" type="MeshInstance" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot/Camera"]
 transform = Transform( 1, 8.14214e-08, -2.18168e-08, -2.18168e-08, -1.19209e-07, -1, -8.14214e-08, 1, -1.19209e-07, -8.10272e-08, -0.0224524, -1.58269 )
+extra_cull_margin = 16384.0
 mesh = SubResource( 96 )
 material/0 = SubResource( 95 )
 

@@ -17,6 +17,7 @@ public class Character_Animations : AnimationPlayer
     {
         base._Ready();
         animtree = GetNode<AnimationTree>("AnimationTree");
+        animtree.Active = true;
         walkpart = GetParent().GetNode<Particles>("Particles");
         walkpart.Emitting = false;
         parent = (Spatial)GetParent();
