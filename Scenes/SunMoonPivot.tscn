@@ -2,8 +2,6 @@
 
 [sub_resource type="SpatialMaterial" id=16]
 flags_unshaded = true
-params_grow = true
-params_grow_amount = 16.0
 albedo_color = Color( 1, 0.882353, 0.709804, 1 )
 
 [sub_resource type="SphereMesh" id=85]
@@ -13,12 +11,12 @@ height = 3200.0
 
 [sub_resource type="SpatialMaterial" id=14]
 flags_unshaded = true
-albedo_color = Color( 0.792157, 1, 0.992157, 1 )
+albedo_color = Color( 0.890196, 1, 0.996078, 1 )
 
 [sub_resource type="SphereMesh" id=86]
 material = SubResource( 14 )
-radius = 800.0
-height = 1600.0
+radius = 400.0
+height = 800.0
 
 [node name="SunMoonPivot" type="Spatial"]
 

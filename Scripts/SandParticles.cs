@@ -13,6 +13,12 @@ public class SandParticles : Particles
         base._Process(delta);
         Vector3 org = GlobalTransform.origin;
         GlobalTranslation = new Vector3 (org.x, 50, org.z);
+        float winddir = DayNight.GetWindDirection();
+        float windstr = DayNight.GetWindStr();
+        float rot = Mathf.Deg2Rad(-360 - (winddir));
+        SpeedScale = windstr * 0.05f;
+        Lifetime = ((100 - windstr) * 0.5f) + 20;
+        GlobalRotation = new Vector3(0.0f, rot, 0.0f);
     }
 
 }

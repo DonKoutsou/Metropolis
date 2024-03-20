@@ -1,6 +1,7 @@
 [gd_resource type="SpatialMaterial" format=2]
 
 [resource]
+render_priority = 1
 params_billboard_mode = 2
 albedo_color = Color( 0.847059, 0.984314, 1, 1 )
 metallic_specular = 0.0

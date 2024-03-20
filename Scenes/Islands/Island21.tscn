@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Islands/Terain_Data_IS21/data.hterrain" type="Resource" id=2]
@@ -10,7 +10,6 @@
 [ext_resource path="res://Assets/TerainTex/Rock035_1K-JPG/Rock035_1K-JPG_Col2or.jpg" type="Texture" id=8]
 [ext_resource path="res://Assets/Clutter/Rock/Rock.obj" type="ArrayMesh" id=9]
 [ext_resource path="res://Assets/TerainRockShader.tres" type="Shader" id=10]
-[ext_resource path="res://Scenes/Env_Assets/FloatingRoc.tscn" type="PackedScene" id=11]
 
 [sub_resource type="OpenSimplexNoise" id=1]
 
@@ -395,6 +394,3 @@ transform = Transform( 0.482963, -0.12941, 0.866025, 0.258819, 0.965926, 0, -0.8
 
 [node name="StaticBody120" parent="." index="123" instance=ExtResource( 5 )]
 transform = Transform( 0.5, -0.75, 0.433013, 0, 0.5, 0.866025, -0.866025, -0.433013, 0.25, -1895.41, -198, 903.864 )
-
-[node name="Spatial" parent="." index="124" instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1422, -777, 441 )

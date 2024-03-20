@@ -41,8 +41,21 @@ public class DayNight : WorldEnvironment
 
     static int timeprogmultiplier = 1;
 
+
+    //WindDirPer10Days
+    [Export]
+    Curve WindDirCurve = null;
+    //WindStPer10Days
+    [Export]
+    Curve WindStreangthCurve = null;
+
+    float currentDay;
+
     float currenthour;
     float currentmins;
+
+    static public float WindDir = 0;
+    static public float WindStreangth = 100;
 
     Time_UI UI;
 
@@ -53,7 +66,23 @@ public class DayNight : WorldEnvironment
 
     public Spatial SunMoonMeshPivot;
 
+    static public float GetWindDirection()
+    {
+        return WindDir;
+    }
+    static public float GetWindStr()
+    {
+        return WindStreangth;
+    }
     
+    public void UpdateWind()
+    {
+        float value = currentDay + (((currenthour  + (currentmins / 60))/ 24));
+        while (value > 10)
+            value -= 10;
+        WindDir = WindDirCurve.Interpolate(value/ 10);
+        WindStreangth = WindStreangthCurve.Interpolate(value/ 10);
+    }
 
     public override void _PhysicsProcess(float delta)
     {
@@ -67,8 +96,13 @@ public class DayNight : WorldEnvironment
             currenthour += 1;
 
             if (currenthour > 23)
+            {
+                currentDay += 1;
                 currenthour = 0;
+            }
+                
         }
+        UpdateWind();
         if (UI != null)
             UI.UpdateTime(currenthour, currentmins);
         else
@@ -124,7 +158,7 @@ public class DayNight : WorldEnvironment
 
             Environment.BackgroundColor = backgroundcolor;
 
-            Environment.FogSunAmount = 0.3f;
+            //Environment.FogSunAmount = 0.3f;
 
             Environment.AmbientLightEnergy = softlight;
         }
@@ -150,7 +184,7 @@ public class DayNight : WorldEnvironment
 
             Environment.AmbientLightEnergy = softlight;
 
-            Environment.FogSunAmount = 0.05f;
+            //Environment.FogSunAmount = 0.05f;
 
             moon.LightEnergy = moonbrightness;
         }
@@ -176,6 +210,10 @@ public class DayNight : WorldEnvironment
             if (sunrot > 170 && sunrot < 190)
             {
                 multi = (float)Math.Round((sunrot - 170) / 20, 4);
+                if (multi > 0.5f)
+                    day = true;
+                else
+                    day = false;
                 
                 bright = Mathf.Lerp(moonbrightness, sunbrightness, multi);
 
@@ -198,7 +236,11 @@ public class DayNight : WorldEnvironment
                 }
                 else
                     multi = (float)Math.Round((sunrot + 10) / 20, 4);
-                    
+                
+                if (multi > 0.5f)
+                    day = false;
+                else
+                    day = true;
                 bright = Mathf.Lerp(sunbrightness, moonbrightness, multi);
 
                 fogsun = Mathf.Lerp(0.3f, 0.05f, multi);
@@ -224,7 +266,7 @@ public class DayNight : WorldEnvironment
 
             Environment.AmbientLightEnergy = softlight;
 
-            Environment.FogSunAmount = fogsun;
+            //Environment.FogSunAmount = fogsun;
 
             Environment.FogSunColor = mix;
         }
