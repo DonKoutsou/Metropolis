@@ -19,6 +19,10 @@ public class InventoryUI : Control
     InventoryUISlot FocusedSlot;
 
     Panel ItemOptionPanel;
+
+    bool showingDesc = false;
+
+    Item ShowingDescSample = null;
     public static InventoryUI GetInstance()
     {
         return inst;
@@ -44,11 +48,23 @@ public class InventoryUI : Control
         {
             slots.Insert(i, (InventoryUISlot)gr.GetChild(i));
         }
+        SetPhysicsProcess(false);
     }
     public void OpenInventory()
     {
         Show();
         IsOpen = true;
+        SetPhysicsProcess(true);
+    }
+    float d = 0.1f;
+    public override void _PhysicsProcess(float delta)
+    {
+        base._PhysicsProcess(delta);
+        d -= delta;
+        if (d > 0)
+            return;
+        d = 0.1f;
+
         UpdateInventory();
     }
     public void UpdateInventory()
@@ -65,11 +81,15 @@ public class InventoryUI : Control
             {
                 if (sample == null)
                     sample = Items[v - 1];
+                
                 if (Items[v - 1].GetItemType() == sample.GetItemType())
                 {
                     ammount += 1;
                     Items.RemoveAt(v - 1);
+                    
                 }
+                if (!sample.stackable)
+                    break;
             }
             itemcount.Insert(i, ammount);
             slots[i].SetItem(sample, ammount);
@@ -84,39 +104,48 @@ public class InventoryUI : Control
             ItemOptionPanel.Hide();
         float currentload = Inv.GetCurrentWeight();
         Capacity.BbcodeText = string.Format("[center]{0}/{1}", currentload, MaxLoad);
+
+        if (showingDesc)
+            Description.BbcodeText = "[center]" + ShowingDescSample.GetItemDesc();
     }
     public void CloseInventory()
     {
         Hide();
         FocusedSlot = null;
         IsOpen = false;
+        SetPhysicsProcess(false);
     }
     public void ItemHovered(Item it)
     {
         if (it == null)
+        {
             return;
+        }
+        showingDesc = true;
+        ShowingDescSample = it;
         ((Control)Description.GetParent()).Show();
         Description.BbcodeText = "[center]" + it.GetItemDesc();
         ItemName.BbcodeText = "[center]" + it.GetItemName();
     }
+    public void ItemUnHovered(Item it)
+    {
+        ((Control)Description.GetParent()).Hide();
+        showingDesc = false;
+        ShowingDescSample = null;
+    }
     public void SetFocused(InventoryUISlot slot)
     {
         FocusedSlot = slot;
-        UpdateInventory();
     }
     public void UnFocus(InventoryUISlot slot)
     {
         if (slot == FocusedSlot)
             FocusedSlot = null;
-        UpdateInventory();
-    }
-    public void ItemUnHovered(Item it)
-    {
-        ((Control)Description.GetParent()).Hide();
     }
     private void On_Drop_Button_Down()
     {
         Inv.RemoveItem(FocusedSlot.item);
+        FocusedSlot = null;
     }
     
 }

@@ -6,12 +6,12 @@ public class Battery : Item
     [Export]
     float Capacity = 100;
 
+    [Export]
     float CurrentEnergy = 0;
 
     public override void _Ready()
     {
         base._Ready();
-        CurrentEnergy = Capacity;
     }
     public void Recharge(float ammount)
     {
@@ -24,6 +24,14 @@ public class Battery : Item
     public float GetCapacity()
     {
         return Capacity;
+    }
+    public float GetCurrentCap()
+    {
+        return CurrentEnergy;
+    }
+    public override string GetItemDesc()
+    {
+        return ItemDesc + " \n Capacity: " + CurrentEnergy + "/" + Capacity;
     }
 
 }

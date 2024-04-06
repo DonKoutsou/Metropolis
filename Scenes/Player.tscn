@@ -1,9 +1,10 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/Stamina_Bar.cs" type="Script" id=2]
 [ext_resource path="res://Scripts/HP_Bar.cs" type="Script" id=3]
 [ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Scenes/HUD/new_styleboxflat.tres" type="StyleBox" id=5]
 [ext_resource path="res://Scenes/Inventory.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/Sounds/PunchSound.mp3" type="AudioStream" id=8]
 [ext_resource path="res://Assets/Sounds/HeavyBreathing.mp3" type="AudioStream" id=9]
@@ -27,6 +28,9 @@
 [ext_resource path="res://Scenes/SunMoonPivot.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Scenes/CheatMenu.tscn" type="PackedScene" id=29]
 
+[sub_resource type="Curve" id=106]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
 [sub_resource type="CapsuleShape" id=6]
 height = 2.316
 
@@ -40,8 +44,12 @@ radius = 0.1
 render_priority = 100
 light_mode = 1
 
-[sub_resource type="StyleBoxFlat" id=66]
-bg_color = Color( 0.596078, 0.211765, 0.211765, 0.792157 )
+[sub_resource type="CanvasItemMaterial" id=67]
+render_priority = 100
+light_mode = 1
+
+[sub_resource type="StyleBoxFlat" id=105]
+bg_color = Color( 0.317647, 0.792157, 0.247059, 0.792157 )
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -52,24 +60,6 @@ corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
-
-[sub_resource type="CanvasItemMaterial" id=67]
-render_priority = 100
-light_mode = 1
-
-[sub_resource type="StyleBoxFlat" id=68]
-bg_color = Color( 0.266667, 0.521569, 0.305882, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0, 0, 0, 0 )
-border_blend = true
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-anti_aliasing_size = 0.01
 
 [sub_resource type="DynamicFont" id=79]
 size = 54
@@ -163,10 +153,12 @@ RunSpeed = 30
 m_Stamina = 1000.0
 m_StaminaRegen = 5.0
 SelectLayer = 17
+Consumption = SubResource( 106 )
 
 [node name="Pivot" type="Spatial" parent="."]
 
 [node name="Guy" parent="Pivot" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39891, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.31213, 0 )
@@ -222,7 +214,7 @@ max_db = -9.473
 area_mask = 0
 
 [node name="Inventory" parent="." instance=ExtResource( 7 )]
-StartingItems = PoolStringArray( "res://Scenes/Battery.tscn" )
+StartingItems = PoolStringArray( "res://Scenes/Battery.tscn", "res://Scenes/Battery.tscn" )
 
 [node name="PlayerUI" type="Spatial" parent="."]
 
@@ -238,7 +230,7 @@ size_flags_horizontal = 9
 size_flags_vertical = 8
 custom_colors/font_color = Color( 0, 0, 0, 0 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_styles/fg = SubResource( 66 )
+custom_styles/fg = ExtResource( 5 )
 value = 10.0
 script = ExtResource( 3 )
 
@@ -256,7 +248,7 @@ size_flags_horizontal = 9
 size_flags_vertical = 8
 custom_colors/font_color = Color( 0, 0, 0, 0 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 0 )
-custom_styles/fg = SubResource( 68 )
+custom_styles/fg = SubResource( 105 )
 value = 20.0
 script = ExtResource( 2 )
 
@@ -276,7 +268,10 @@ cast_shadow = 0
 pixel_size = 0.002
 billboard = 1
 double_sided = false
+no_depth_test = true
 fixed_size = true
+render_priority = 10
+outline_render_priority = 9
 modulate = Color( 0.988235, 0.964706, 0.631373, 1 )
 text = "Talk"
 font = SubResource( 88 )
@@ -309,7 +304,7 @@ Speed = 5
 [node name="Camera" type="Camera" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot"]
 transform = Transform( 1, -1.77636e-15, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 20, 20 )
 cull_mask = 1
-fov = 90.0
+fov = 45.0
 size = 5.0
 far = 40000.0
 script = ExtResource( 21 )

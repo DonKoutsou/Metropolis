@@ -1,9 +1,17 @@
 using Godot;
 using System;
-
+using System.Collections.Generic;
+using System.Linq;
 public class Player : Character
 {
 	// The downward acceleration when in the air, in meters per second squared.
+	[Export]
+	Curve Consumption = null;
+
+	public bool HasVecicle = false;
+
+	float MachineRPM = 0;
+
 	Stamina_Bar Stamina_bar = null;
 
 	HP_Bar hp_bar = null;
@@ -42,6 +50,7 @@ public class Player : Character
 		
 		var panels = GetTree().GetNodesInGroup("DialoguePanel");
 		DiagPan = (DialoguePanel)panels[0];
+		
 		
 
 		moveloc = GetNode<MoveLocation>("MoveLoc");
@@ -90,6 +99,8 @@ public class Player : Character
 		}
 		moveloc.GlobalTranslation = loctomove;
 
+		float rpm = 0.05f;
+
 		var spd = Speed;
 
 		var direction = loctomove - GlobalTransform.origin;
@@ -100,11 +111,7 @@ public class Player : Character
 
 		double stam = m_Stamina;
 		
-		if (IsRunning)
-		{
-			spd = RunSpeed;
-			//m_Stamina = m_Stamina - m_RunCost;
-		}
+		
 		if (dist < 1)
 		{
 			if (!GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused)
@@ -125,12 +132,15 @@ public class Player : Character
 			}
 			if (!IsRunning)
 			{
+				rpm = 0.25f;
 				GetNode<AudioStreamPlayer3D>("WalkingSound").PitchScale = 0.5f;
 				//GetNode<AudioStreamPlayer3D>("WalkingSound").db = 5f;
 				anim.PlayAnimation(E_Animations.Walk);
 			}
 			else
 			{
+				spd = RunSpeed;
+				rpm = 0.5f;
 				GetNode<AudioStreamPlayer3D>("WalkingSound").PitchScale = 1f;
 				anim.PlayAnimation(E_Animations.Run);
 			}
@@ -143,6 +153,28 @@ public class Player : Character
 			//YOUR_NODE.RotationDegrees = Vector3.Up * Mathf.LerpAngle(YOUR_NODE.Rotation.y, Mathf.Atan2(OTHER_NODE.Translation.x - YOUR_NODE.Translation.x, OTHER_NODE.Translation.z - YOUR_NODE.Translation.z), 1f);
 				
 		}
+		int vehmulti = 1;
+		if (HasVecicle)
+			vehmulti = 3;
+
+		float coons = (Consumption.Interpolate(rpm) * delta) * vehmulti;
+
+		List<Item> batteries = new List<Item>();
+		CharacterInventory.GetItemsByType(out batteries, ItemName.BATTERY);
+		
+		for (int i = batteries.Count(); i > 0; i--)
+		{
+			if (((Battery)batteries[i - 1]).GetCurrentCap() < coons)
+			{
+				batteries.RemoveAt(i - 1);
+			}
+		}
+		if (batteries.Count() == 0)
+			Kill();
+		else
+			((Battery)batteries[0]).ConsumeEnergy(coons);
+
+		GD.Print("Consuming energy :" + coons);
 		//Stamina_bar.Value = m_Stamina;
 
 		//if (m_Stamina < startingstaming / 10)
@@ -153,13 +185,14 @@ public class Player : Character
 		//if (stam != m_Stamina)
 			//Stamina_bar.ChangeVisibility();
 		// Ground velocity
-		_velocity.x = direction.x * spd;
-		_velocity.z = direction.z * spd;
+		
+		_velocity.x = (direction.x * spd) * vehmulti;
+		_velocity.z = (direction.z * spd) * vehmulti;
 		//_velocity.y = direction.y * spd;
 		// Vertical velocity
-		//_velocity.y -= FallAcceleration * delta;
+		_velocity.y -= FallAcceleration * delta;
 		// Moving the character
-		_velocity = MoveAndSlide(new Vector3(_velocity.x, _velocity.y - FallAcceleration * delta, _velocity.z), Vector3.Up);
+		_velocity = MoveAndSlide(new Vector3(_velocity.x, _velocity.y, _velocity.z), Vector3.Up);
 		if (Input.IsActionJustPressed("jump"))
 		{
 			if (IsOnFloor())
@@ -259,6 +292,11 @@ public class Player : Character
 			else if (obj is FireplaceLight)
 			{
 				FireplaceLight selectechar = (FireplaceLight)obj;
+				actMen.Start(selectechar);
+			}
+			else if (obj is Vehicle)
+			{
+				Vehicle selectechar = (Vehicle)obj;
 				actMen.Start(selectechar);
 			}
 		}

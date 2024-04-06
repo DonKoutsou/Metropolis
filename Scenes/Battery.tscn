@@ -22,6 +22,8 @@ ItemType = 2
 ItemIcon = ExtResource( 4 )
 ItemName = "Μπαταρία"
 ItemDesc = "Μπαταρία μετριας χωρητικότητας."
+stackable = false
+CurrentEnergy = 40.0
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )

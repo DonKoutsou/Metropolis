@@ -16,13 +16,16 @@ public class Item : RigidBody
     string ItemName = "Item";
 
     [Export]
-    string ItemDesc = "Quifsa";
+    public string ItemDesc = "Quifsa";
+
+    [Export]
+    public bool stackable = true;
 
     public string GetItemName()
     {
         return ItemName;
     }
-    public string GetItemDesc()
+    public virtual string GetItemDesc()
     {
         return ItemDesc;
     }

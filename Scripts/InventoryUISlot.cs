@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading;
 
 public class InventoryUISlot : Control
 {
@@ -12,12 +13,15 @@ public class InventoryUISlot : Control
 
     InventoryUI UI;
 
+    ProgressBar Rbar;
     
     public override void _Ready()
     {
         ItemIcon = GetNode<Button>("ItemIcon");
         Ammount = GetNode<RichTextLabel>("Ammount");
         UI = (InventoryUI)(GetParent().GetParent());
+        Rbar = GetNode<ProgressBar>("ItemResourceBar");
+
     }
     public void SetItem(Item it, int ammount = 0)
     {
@@ -27,7 +31,7 @@ public class InventoryUISlot : Control
             SetAmmount(ammount);
             AddItemTexture(null);
             ItemIcon.MouseFilter = MouseFilterEnum.Ignore;
-            //ItemIcon.Text = "";
+            Rbar.Hide();
         }
         else
         {
@@ -35,7 +39,14 @@ public class InventoryUISlot : Control
             SetAmmount(ammount);
             AddItemTexture(it.GetIconTexture());
             ItemIcon.MouseFilter = MouseFilterEnum.Stop;
-            //ItemIcon.Text = it.GetItemName();
+            if (it.GetItemType() == (int)ItemName.BATTERY)
+            {
+                Battery bat = (Battery)it;
+                Rbar.Value = bat.GetCurrentCap();
+                Rbar.Show();
+            }
+            else
+                Rbar.Hide();
         }
     }
     public void AddItemTexture(Texture text)
@@ -46,7 +57,7 @@ public class InventoryUISlot : Control
     {
         m_ammount = ammount;
         Ammount.Text = "x" + ammount.ToString();
-        if (ammount == 0)
+        if (ammount <= 1)
             Ammount.Hide();
         else
             Ammount.Show();
@@ -66,9 +77,13 @@ public class InventoryUISlot : Control
     private void ItemIcon_Toggled(bool toggled)
     {
         if (toggled)
+        {
             UI.SetFocused(this);
+        }
         else
+        {
             UI.UnFocus(this);
+        }
+            
     }
-    
 }

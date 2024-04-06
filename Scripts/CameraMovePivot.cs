@@ -68,6 +68,7 @@ public class CameraMovePivot : Position3D
         {
             GlobalTranslation = zpivot.GlobalTranslation;
         }
+		Rotation = new Vector3(0.0f,0.0f,0.0f);
         zpivot.Translation = prev;
 	}
     static public CameraMovePivot GetInstance()

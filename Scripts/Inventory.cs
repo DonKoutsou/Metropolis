@@ -91,6 +91,15 @@ public class Inventory : Spatial
             Items.Insert(i, InventoryContents[i]);
         }
     }
+    public void GetItemsByType(out List<Item> Items, ItemName Type)
+    {
+        Items = new List<Item>();
+        for (int i = 0; i < InventoryContents.Count; i++)
+        {
+            if (InventoryContents[i].GetItemType() == (int)Type)
+                Items.Insert(i, InventoryContents[i]);
+        }
+    }
     public float GetAvailableCapacity()
     {
         return Capacity - currentweight;

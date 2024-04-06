@@ -10,6 +10,8 @@ public class ActionMenu : Control
 
 	FireplaceLight Fireplace;
 
+	Vehicle vehicle;
+
 	Player pl;
 
     bool selecting = false;
@@ -25,7 +27,10 @@ public class ActionMenu : Control
 		if (house != null && house is House)
 			((House)house).OnItemPicked();
 
-		pl.GetCharacterInventory().InsertItem(SelectedItem);
+		if (!pl.GetCharacterInventory().InsertItem(SelectedItem))
+		{
+			TalkText.GetInst().Talk("Δέν έχω χώρο.");
+		}
 		if (SelectedItem.GetItemType() == (int)ItemName.ROPE)
 		{
 			MeshInstance rope = pl.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("BoneAttachment2").GetNode<MeshInstance>("Rope");
@@ -48,6 +53,28 @@ public class ActionMenu : Control
         if (Fireplace != null)
 		{
 			Fireplace.ToggleFileplace();
+			DeselectCurrent();
+			selecting = false;
+			Stop();
+		}
+		if (vehicle != null)
+		{
+			if (!pl.HasVecicle)
+			{
+				vehicle.BoardVehicle(pl);
+				pl.HasVecicle = true;
+				DeselectCurrent();
+				selecting = false;
+				Stop();
+			}
+			else
+			{
+				vehicle.UnBoardVehicle(pl);
+				pl.HasVecicle = false;
+				DeselectCurrent();
+				selecting = false;
+				Stop();
+			}
 		}
 	}
 	
@@ -95,6 +122,20 @@ public class ActionMenu : Control
 		Show();
 		SetProcess(true);
 	}
+	public void Start(Vehicle veh)
+	{
+		if (selecting)
+            return;
+		//GetNode<Button>("PickUp_Button").focus;
+		DeselectCurrent();
+			
+
+		vehicle = veh;
+		((ShaderMaterial)vehicle.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
+		
+		Show();
+		SetProcess(true);
+	}
 	void DeselectCurrent()
 	{
 		if (SelectedItem != null)
@@ -112,6 +153,11 @@ public class ActionMenu : Control
 		{
 			((ShaderMaterial)Fireplace.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", false);
 			Fireplace = null;
+		}
+		if (vehicle != null)
+		{
+			((ShaderMaterial)vehicle.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", false);
+			vehicle = null;
 		}
 	}
 	public void Stop()
@@ -151,6 +197,11 @@ public class ActionMenu : Control
 		else if (Fireplace != null)
 		{
 			screenpos = GetTree().Root.GetCamera().UnprojectPosition(Fireplace.GlobalTransform.origin);
+			PickButton.Hide();
+		}
+		else if (vehicle != null)
+		{
+			screenpos = GetTree().Root.GetCamera().UnprojectPosition(vehicle.GlobalTransform.origin);
 			PickButton.Hide();
 		}
 		RectPosition = new Vector2 (screenpos.x, screenpos.y +50);

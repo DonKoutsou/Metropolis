@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/InventoryUISlot.cs" type="Script" id=1]
 [ext_resource path="res://Assets/Drachma/Drachma.png" type="Texture" id=2]
 [ext_resource path="res://Assets/UI/ButtonRectTheme.tres" type="Theme" id=3]
 [ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Assets/UI/PanelTheme.tres" type="Theme" id=5]
 
 [sub_resource type="Shader" id=2]
 code = "shader_type spatial;
@@ -20,6 +21,19 @@ font_data = ExtResource( 4 )
 [sub_resource type="Theme" id=5]
 default_font = SubResource( 4 )
 
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.396078, 0.596078, 0.211765, 0.792157 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 0 )
+border_blend = true
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
 [node name="InventoryBox" type="Control"]
 light_mask = 0
 material = SubResource( 3 )
@@ -30,8 +44,7 @@ anchor_bottom = 0.5
 mouse_filter = 1
 script = ExtResource( 1 )
 
-[node name="ColorRect" type="ColorRect" parent="."]
-use_parent_material = true
+[node name="Panel" type="Panel" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -40,8 +53,7 @@ margin_left = -56.0
 margin_top = -56.0
 margin_right = 56.0
 margin_bottom = 56.0
-mouse_filter = 1
-color = Color( 0.364706, 0.364706, 0.364706, 1 )
+theme = ExtResource( 5 )
 
 [node name="ItemIcon" type="Button" parent="."]
 anchor_left = 0.5
@@ -52,6 +64,7 @@ margin_left = -48.0
 margin_top = -48.0
 margin_right = 48.0
 margin_bottom = 48.0
+rect_scale = Vector2( 1, 1.06 )
 rect_clip_content = true
 theme = ExtResource( 3 )
 toggle_mode = true
@@ -75,6 +88,16 @@ theme = SubResource( 5 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 text = "x0
 "
+
+[node name="ItemResourceBar" type="ProgressBar" parent="."]
+margin_left = 40.0
+margin_top = 48.0
+margin_right = 134.0
+margin_bottom = 55.0
+rect_rotation = -89.9999
+custom_styles/fg = SubResource( 6 )
+value = 100.0
+percent_visible = false
 
 [connection signal="mouse_entered" from="ItemIcon" to="." method="On_Mouse_Entered"]
 [connection signal="mouse_exited" from="ItemIcon" to="." method="On_Mouse_Exited"]
