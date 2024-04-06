@@ -222,7 +222,6 @@ max_db = -9.473
 area_mask = 0
 
 [node name="Inventory" parent="." instance=ExtResource( 7 )]
-Capacity = 150.0
 StartingItems = PoolStringArray( "res://Scenes/Battery.tscn" )
 
 [node name="PlayerUI" type="Spatial" parent="."]

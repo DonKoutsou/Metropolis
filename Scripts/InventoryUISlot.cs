@@ -26,6 +26,7 @@ public class InventoryUISlot : Control
             item = null;
             SetAmmount(ammount);
             AddItemTexture(null);
+            ItemIcon.MouseFilter = MouseFilterEnum.Ignore;
             //ItemIcon.Text = "";
         }
         else
@@ -33,6 +34,7 @@ public class InventoryUISlot : Control
             item = it;
             SetAmmount(ammount);
             AddItemTexture(it.GetIconTexture());
+            ItemIcon.MouseFilter = MouseFilterEnum.Stop;
             //ItemIcon.Text = it.GetItemName();
         }
     }
@@ -43,11 +45,15 @@ public class InventoryUISlot : Control
     public void SetAmmount(int ammount)
     {
         m_ammount = ammount;
-        Ammount.Text = ammount.ToString();
+        Ammount.Text = "x" + ammount.ToString();
         if (ammount == 0)
             Ammount.Hide();
         else
             Ammount.Show();
+    }
+    public void Toggle(bool pressed)
+    {
+        ItemIcon.Pressed = pressed;
     }
     private void On_Mouse_Entered()
     {
@@ -57,4 +63,12 @@ public class InventoryUISlot : Control
     {
         UI.ItemUnHovered(item);
     }
+    private void ItemIcon_Toggled(bool toggled)
+    {
+        if (toggled)
+            UI.SetFocused(this);
+        else
+            UI.UnFocus(this);
+    }
+    
 }

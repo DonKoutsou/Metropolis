@@ -13,8 +13,8 @@ render_mode unshaded;"
 shader = SubResource( 2 )
 
 [sub_resource type="DynamicFont" id=4]
-size = 32
-extra_spacing_top = -11
+size = 24
+extra_spacing_top = -8
 font_data = ExtResource( 4 )
 
 [sub_resource type="Theme" id=5]
@@ -48,12 +48,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -51.0
-margin_top = -51.0
-margin_right = 51.0
-margin_bottom = 51.0
+margin_left = -48.0
+margin_top = -48.0
+margin_right = 48.0
+margin_bottom = 48.0
 rect_clip_content = true
 theme = ExtResource( 3 )
+toggle_mode = true
 icon = ExtResource( 2 )
 icon_align = 1
 expand_icon = true
@@ -66,15 +67,15 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -56.0
-margin_top = -56.0
+margin_top = 32.0
 margin_right = 56.0
-margin_bottom = 56.0
+margin_bottom = 144.0
 mouse_filter = 2
 theme = SubResource( 5 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
-text = "0
-
+text = "x0
 "
 
 [connection signal="mouse_entered" from="ItemIcon" to="." method="On_Mouse_Entered"]
 [connection signal="mouse_exited" from="ItemIcon" to="." method="On_Mouse_Exited"]
+[connection signal="toggled" from="ItemIcon" to="." method="ItemIcon_Toggled"]

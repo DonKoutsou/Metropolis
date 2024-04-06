@@ -15,10 +15,14 @@ public class InventoryUI : Control
 
     RichTextLabel Description;
     RichTextLabel ItemName;
+
+    InventoryUISlot FocusedSlot;
+
+    Panel ItemOptionPanel;
     public static InventoryUI GetInstance()
     {
         return inst;
-    } 
+    }
     public override void _Ready()
     {
         inst = this;
@@ -27,12 +31,15 @@ public class InventoryUI : Control
         float currentload = Inv.GetCurrentWeight();
         Capacity = GetNode<Panel>("CapPanel").GetNode<RichTextLabel>("CapAmmount");
         Capacity.BbcodeText = string.Format("[center]{0}/{1}", currentload, MaxLoad);
-        GridContainer gr = (GridContainer)GetChild(2);
+        GridContainer gr = GetNode<GridContainer>("GridContainer");
         int childc = gr.GetChildCount();
+
         Description = GetNode<Panel>("DescriptionPanel").GetNode<RichTextLabel>("Description");
         ItemName = GetNode<Panel>("DescriptionPanel").GetNode<RichTextLabel>("ItemName");
+        ItemOptionPanel = GetNode<Panel>("ItemOptionPanel");
         ((Control)Description.GetParent()).Hide();
         Hide();
+
         for (int i = 0; i < childc; i ++)
         {
             slots.Insert(i, (InventoryUISlot)gr.GetChild(i));
@@ -53,7 +60,7 @@ public class InventoryUI : Control
         {
             Item sample = null;
             int ammount = 0;
-
+            
             for (int v = Items.Count(); v > 0; v --)
             {
                 if (sample == null)
@@ -66,13 +73,22 @@ public class InventoryUI : Control
             }
             itemcount.Insert(i, ammount);
             slots[i].SetItem(sample, ammount);
+            if (FocusedSlot == slots[i])
+                slots[i].Toggle(true);
+            else
+                slots[i].Toggle(false);
         }
+        if (FocusedSlot != null)
+            ItemOptionPanel.Show();
+        else
+            ItemOptionPanel.Hide();
         float currentload = Inv.GetCurrentWeight();
         Capacity.BbcodeText = string.Format("[center]{0}/{1}", currentload, MaxLoad);
     }
     public void CloseInventory()
     {
         Hide();
+        FocusedSlot = null;
         IsOpen = false;
     }
     public void ItemHovered(Item it)
@@ -83,8 +99,24 @@ public class InventoryUI : Control
         Description.BbcodeText = "[center]" + it.GetItemDesc();
         ItemName.BbcodeText = "[center]" + it.GetItemName();
     }
+    public void SetFocused(InventoryUISlot slot)
+    {
+        FocusedSlot = slot;
+        UpdateInventory();
+    }
+    public void UnFocus(InventoryUISlot slot)
+    {
+        if (slot == FocusedSlot)
+            FocusedSlot = null;
+        UpdateInventory();
+    }
     public void ItemUnHovered(Item it)
     {
         ((Control)Description.GetParent()).Hide();
     }
+    private void On_Drop_Button_Down()
+    {
+        Inv.RemoveItem(FocusedSlot.item);
+    }
+    
 }

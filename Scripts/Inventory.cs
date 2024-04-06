@@ -66,9 +66,13 @@ public class Inventory : Spatial
         RemoveChild(item);
         world.AddChild(item);
         item.Show();
-        item.GlobalTransform = ((Character)GetParent()).Transform;
+        Transform loc = ((Character)GetParent()).GlobalTransform;
+        loc.origin.y += 1;
+        //loc.origin.z += 1;
+        item.GlobalTransform = loc;
         //EmitSignal(nameof(On_Item_Removed), item);
-        item.GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled",false);
+        item.GetNode<CollisionShape>("CollisionShape").SetDeferred("disabled",false);
+        
         ui.UpdateInventory();
         return true;
     }

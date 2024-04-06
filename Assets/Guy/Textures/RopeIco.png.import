@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/RopeIconpng.png-222cf453873b8e696e5d0a3049039fd3.stex"
+path="res://.import/RopeIco.png-b233ec424ff559e30867b175d2a44104.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Guy/Textures/RopeIconpng.png"
-dest_files=[ "res://.import/RopeIconpng.png-222cf453873b8e696e5d0a3049039fd3.stex" ]
+source_file="res://Assets/Guy/Textures/RopeIco.png"
+dest_files=[ "res://.import/RopeIco.png-b233ec424ff559e30867b175d2a44104.stex" ]
 
 [params]
 

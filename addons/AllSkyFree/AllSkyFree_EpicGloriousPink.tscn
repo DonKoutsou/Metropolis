@@ -13,7 +13,7 @@ _data = [ Vector2( 0, 76.3804 ), 0.0, 0.0, 0, 0, Vector2( 0.0655844, 88.6503 ), 
 [node name="Sky" type="Spatial"]
 
 [node name="DayNightController" parent="." instance=ExtResource( 1 )]
-startinghour = 8
+startinghour = 14
 WindDirCurve = SubResource( 1 )
 WindStreangthCurve = SubResource( 2 )
 

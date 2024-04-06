@@ -3,7 +3,7 @@
 [ext_resource path="res://Scripts/Item.cs" type="Script" id=1]
 [ext_resource path="res://Assets/Guy/RopeMat.material" type="Material" id=2]
 [ext_resource path="res://Assets/Guy/Rope.obj" type="ArrayMesh" id=3]
-[ext_resource path="res://Assets/Guy/Textures/RopeIconpng.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Guy/Textures/RopeIco.png" type="Texture" id=4]
 
 [sub_resource type="CylinderShape" id=1]
 height = 0.402767
