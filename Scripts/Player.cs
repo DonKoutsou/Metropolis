@@ -262,6 +262,14 @@ public class Player : Character
 				actMen.Start(selectechar);
 			}
 		}
+		if (@event.IsActionPressed("Inventory"))
+		{
+			InventoryUI inv = InventoryUI.GetInstance();
+			if (inv.IsOpen)
+				inv.CloseInventory();
+			else
+				inv.OpenInventory();
+		}
 	}
 	
 	public override void OnKillFieldDetectorBodyEntered(Node body)

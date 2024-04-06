@@ -25,9 +25,9 @@ public class WindGenerator : StaticBody
             SetProcess(false);
     }
     float d = 0.5f;
-    public override void _Process(float delta)
+    public override void _PhysicsProcess(float delta)
     {
-        base._Process(delta);
+        base._PhysicsProcess(delta);
         d -= delta;
 		if (d > 0)
             return;
@@ -51,14 +51,14 @@ public class WindGenerator : StaticBody
         {
             anim.Play();
             anim2.Play();
-            SetProcess(true);
+            SetPhysicsProcess(true);
         }
         
         else
         {
             anim.Stop();
             anim2.Stop();
-            SetProcess(false);
+            SetPhysicsProcess(false);
         }
     }
 }

@@ -1,11 +1,9 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/Stamina_Bar.cs" type="Script" id=2]
 [ext_resource path="res://Scripts/HP_Bar.cs" type="Script" id=3]
 [ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://Scripts/InventorySlots.cs" type="Script" id=5]
-[ext_resource path="res://Scenes/InventoryUISlot.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Inventory.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/Sounds/PunchSound.mp3" type="AudioStream" id=8]
 [ext_resource path="res://Assets/Sounds/HeavyBreathing.mp3" type="AudioStream" id=9]
@@ -37,25 +35,6 @@ height = 1.963
 
 [sub_resource type="CylinderShape" id=82]
 radius = 0.1
-
-[sub_resource type="Shader" id=72]
-code = "shader_type canvas_item;
-
-uniform float u_amount = 0.1;
-
-float get_noise(vec2 uv) {
-	return fract(sin(dot(uv ,vec2(12.9898,78.233))) * 43758.5453);
-}
-
-void fragment() {
-	float n = 2.0 * get_noise(UV + vec2(TIME, 0.0)) - 1.0;
-	COLOR = texture(TEXTURE, UV) + n * u_amount;
-}"
-
-[sub_resource type="ShaderMaterial" id=70]
-render_priority = 5
-shader = SubResource( 72 )
-shader_param/u_amount = 1.62
 
 [sub_resource type="CanvasItemMaterial" id=65]
 render_priority = 100
@@ -244,46 +223,7 @@ area_mask = 0
 
 [node name="Inventory" parent="." instance=ExtResource( 7 )]
 Capacity = 150.0
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 3
-
-[node name="InventorySlots" type="Control" parent="CanvasLayer"]
-visible = false
-margin_left = 487.0
-margin_top = 552.0
-margin_right = 527.0
-margin_bottom = 592.0
-script = ExtResource( 5 )
-
-[node name="Node2D" parent="CanvasLayer/InventorySlots" instance=ExtResource( 6 )]
-
-[node name="Node2D2" parent="CanvasLayer/InventorySlots" instance=ExtResource( 6 )]
-
-[node name="Node2D5" parent="CanvasLayer/InventorySlots" instance=ExtResource( 6 )]
-
-[node name="Node2D3" parent="CanvasLayer/InventorySlots" instance=ExtResource( 6 )]
-
-[node name="Node2D6" parent="CanvasLayer/InventorySlots" instance=ExtResource( 6 )]
-
-[node name="Node2D4" parent="CanvasLayer/InventorySlots" instance=ExtResource( 6 )]
-
-[node name="Node2D7" parent="CanvasLayer/InventorySlots" instance=ExtResource( 6 )]
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-visible = false
-modulate = Color( 1, 1, 1, 0.0156863 )
-material = SubResource( 70 )
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -464.0
-margin_top = -410.0
-margin_right = -460.0
-margin_bottom = -407.0
-rect_scale = Vector2( 500, 500 )
-rect_pivot_offset = Vector2( 1, 0.5 )
+StartingItems = PoolStringArray( "res://Scenes/Battery.tscn" )
 
 [node name="PlayerUI" type="Spatial" parent="."]
 

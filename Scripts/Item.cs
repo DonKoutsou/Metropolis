@@ -15,9 +15,20 @@ public class Item : RigidBody
     [Export]
     string ItemName = "Item";
 
+    [Export]
+    string ItemDesc = "Quifsa";
+
     public string GetItemName()
     {
         return ItemName;
+    }
+    public string GetItemDesc()
+    {
+        return ItemDesc;
+    }
+    public int GetItemType()
+    {
+        return (int)ItemType;
     }
     public override void _Ready()
     {
@@ -35,7 +46,7 @@ public class Item : RigidBody
 
 public enum ItemName
 {
-    BRONZE_COIN,
-    SILVER_COIN,
-    GOLD_COIN,
+    DRAHMA,
+    ROPE,
+    BATTERY,
 }

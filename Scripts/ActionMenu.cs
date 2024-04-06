@@ -20,13 +20,18 @@ public class ActionMenu : Control
 	{
 		if (SelectedItem == null)
 			return;
-			
-		((House)SelectedItem.GetParent()).OnItemPicked();
+		
+		Spatial house = (Spatial)SelectedItem.GetParent();
+		if (house != null && house is House)
+			((House)house).OnItemPicked();
 
 		pl.GetCharacterInventory().InsertItem(SelectedItem);
-		
-		MeshInstance rope = pl.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("BoneAttachment2").GetNode<MeshInstance>("Rope");
-		rope.Show();
+		if (SelectedItem.GetItemType() == (int)ItemName.ROPE)
+		{
+			MeshInstance rope = pl.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("BoneAttachment2").GetNode<MeshInstance>("Rope");
+			rope.Show();
+		}
+		DeselectCurrent();
         selecting = false;
 		Stop();
 	}

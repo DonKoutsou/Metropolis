@@ -3,14 +3,18 @@ using System;
 
 public class SandParticles : Particles
 {
-
+    float d = 0.5f;
     public override void _Ready()
     {
         Emitting = true;
     }
-    public override void _Process(float delta)
+    public override void _PhysicsProcess(float delta)
     {
-        base._Process(delta);
+        base._PhysicsProcess(delta);
+        d -= delta;
+		if (d > 0)
+            return;
+        d = 0.5f;
         Vector3 org = GlobalTransform.origin;
         GlobalTranslation = new Vector3 (org.x, 50, org.z);
         float winddir = DayNight.GetWindDirection();

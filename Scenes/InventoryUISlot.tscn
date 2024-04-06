@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/InventoryUISlot.cs" type="Script" id=1]
 [ext_resource path="res://Assets/Drachma/Drachma.png" type="Texture" id=2]
+[ext_resource path="res://Assets/UI/ButtonRectTheme.tres" type="Theme" id=3]
+[ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="Shader" id=2]
 code = "shader_type spatial;
@@ -10,6 +12,14 @@ render_mode unshaded;"
 [sub_resource type="ShaderMaterial" id=3]
 shader = SubResource( 2 )
 
+[sub_resource type="DynamicFont" id=4]
+size = 32
+extra_spacing_top = -11
+font_data = ExtResource( 4 )
+
+[sub_resource type="Theme" id=5]
+default_font = SubResource( 4 )
+
 [node name="InventoryBox" type="Control"]
 light_mask = 0
 material = SubResource( 3 )
@@ -17,6 +27,7 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+mouse_filter = 1
 script = ExtResource( 1 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -25,22 +36,45 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -20.0
-margin_top = -20.0
-margin_right = 20.0
-margin_bottom = 20.0
-color = Color( 0.54902, 0.54902, 0.54902, 1 )
+margin_left = -56.0
+margin_top = -56.0
+margin_right = 56.0
+margin_bottom = 56.0
+mouse_filter = 1
+color = Color( 0.364706, 0.364706, 0.364706, 1 )
 
-[node name="ItemIcon" type="Sprite" parent="."]
-use_parent_material = true
-scale = Vector2( 0.075, 0.075 )
-texture = ExtResource( 2 )
+[node name="ItemIcon" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -51.0
+margin_top = -51.0
+margin_right = 51.0
+margin_bottom = 51.0
+rect_clip_content = true
+theme = ExtResource( 3 )
+icon = ExtResource( 2 )
+icon_align = 1
+expand_icon = true
 
 [node name="Ammount" type="RichTextLabel" parent="."]
 light_mask = 0
 use_parent_material = true
-margin_left = -20.0
-margin_top = -20.0
-margin_right = 20.0
-margin_bottom = 20.0
-text = "0"
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -56.0
+margin_top = -56.0
+margin_right = 56.0
+margin_bottom = 56.0
+mouse_filter = 2
+theme = SubResource( 5 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+text = "0
+
+"
+
+[connection signal="mouse_entered" from="ItemIcon" to="." method="On_Mouse_Entered"]
+[connection signal="mouse_exited" from="ItemIcon" to="." method="On_Mouse_Exited"]
