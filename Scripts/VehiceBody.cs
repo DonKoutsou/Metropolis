@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class Vehiclebody : VehicleBody
+public class Vehicebody : VehicleBody
 {
     Position3D SteeringWheel;
     public override void _Ready()

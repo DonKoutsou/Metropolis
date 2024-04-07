@@ -67,13 +67,21 @@ public class Character : KinematicBody
 
 	public Character_Animations anim;
 
+	public bool HasVecicle = false;
+
+	public Vehicle currveh;
+
 	public override void _Ready()
 	{
-		CharacterInventory = GetNode<Inventory>("Inventory");
-		if (InventoryWeightOverride != -1)
+		if (this is Player)
 		{
-			CharacterInventory.OverrideWeight(InventoryWeightOverride);
+			CharacterInventory = GetNode<Inventory>("Inventory");
+			if (InventoryWeightOverride != -1)
+			{
+				CharacterInventory.OverrideWeight(InventoryWeightOverride);
+			}
 		}
+		
 		//anims = GetNode<Character_Animations>("Character_Animations");
 		collider = GetNode<CollisionShape>("CollisionShape");
 		collider.Disabled = false;
@@ -92,6 +100,19 @@ public class Character : KinematicBody
 		if (this is Player)
 			return;
 		((Island)GetParent()).RegisterChar(this);
+	}
+	public void SetVehicle(Vehicle veh)
+	{
+		if (veh == null)
+		{
+			HasVecicle = false;
+			currveh = null;
+		}
+		else
+		{
+			HasVecicle = true;
+			currveh = veh;
+		}
 	}
 	public Inventory GetCharacterInventory()
 	{

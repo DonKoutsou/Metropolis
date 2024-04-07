@@ -9,9 +9,7 @@ public class Player : Character
 	[Export]
 	Curve Consumption = null;
 
-	bool HasVecicle = false;
-
-	Vehicle currveh;
+	
 
 	float MachineRPM = 0;
 
@@ -43,19 +41,7 @@ public class Player : Character
 	{
 		return HasVecicle;
 	}
-	public void SetVehicle(Vehicle veh)
-	{
-		if (veh == null)
-		{
-			HasVecicle = false;
-			currveh = null;
-		}
-		else
-		{
-			HasVecicle = true;
-			currveh = veh;
-		}
-	}
+	
 	public override void _Ready()
 	{
 		base._Ready();
@@ -143,12 +129,12 @@ public class Player : Character
 			moveloc.Hide();
 			HeadPivot.Rotation = new Vector3(0.0f,0.0f,0.0f);
 		}
-		else
+		else if (!HasVecicle)
 		{
 			direction = direction.Normalized();
 			Vector3 lookloc = new Vector3(direction.x, 0, direction.z);
-			if (!HasVecicle)
-				GetNode<Spatial>("Pivot").LookAt(Translation - lookloc, Vector3.Up);
+			
+			GetNode<Spatial>("Pivot").LookAt(Translation - lookloc, Vector3.Up);
 
 			if (GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused)
 			{
@@ -199,7 +185,7 @@ public class Player : Character
 		else
 			((Battery)batteries[0]).ConsumeEnergy(coons);
 
-		GD.Print("Consuming energy :" + coons);
+		//GD.Print("Consuming energy :" + coons);
 		//Stamina_bar.Value = m_Stamina;
 
 		//if (m_Stamina < startingstaming / 10)
@@ -224,16 +210,21 @@ public class Player : Character
 		}
 		else
 		{
-			_velocity.y -= (FallAcceleration / 4) * delta;
 			currveh.loctomove = loctomove;
 		}
 			
-		if (Input.IsActionJustPressed("jump"))
+		if (Input.IsActionPressed("jump"))
 		{
 			if (IsOnFloor())
 			{
 				anim.PlayAnimation(E_Animations.Jump);
 				_velocity.y += JumpImpulse;
+			}
+			else if (HasVecicle)
+			{
+				anim.PlayAnimation(E_Animations.Jump);
+				currveh.Jump();
+				//_velocity.y += JumpImpulse * vehmulti;
 			}
 		}
 		
