@@ -228,6 +228,7 @@ Inventory={
 3d_physics/layer_6="Wall"
 3d_physics/layer_7="HouseDoor"
 3d_physics/layer_8="KillField"
+3d_physics/layer_9="Sea"
 
 [mono]
 

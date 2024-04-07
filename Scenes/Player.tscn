@@ -389,6 +389,7 @@ script = ExtResource( 24 )
 [node name="SunMoonPivot" parent="." instance=ExtResource( 28 )]
 
 [node name="MoveLoc" parent="." instance=ExtResource( 16 )]
+VehicleMoveLayer = 260
 
 [node name="Spatial2" parent="." instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1000, 0 )

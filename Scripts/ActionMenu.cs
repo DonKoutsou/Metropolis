@@ -59,10 +59,10 @@ public class ActionMenu : Control
 		}
 		if (vehicle != null)
 		{
-			if (!pl.HasVecicle)
+			if (!pl.HasVehicle())
 			{
 				vehicle.BoardVehicle(pl);
-				pl.HasVecicle = true;
+				pl.SetVehicle(vehicle);
 				DeselectCurrent();
 				selecting = false;
 				Stop();
@@ -70,7 +70,7 @@ public class ActionMenu : Control
 			else
 			{
 				vehicle.UnBoardVehicle(pl);
-				pl.HasVecicle = false;
+				pl.SetVehicle(null);
 				DeselectCurrent();
 				selecting = false;
 				Stop();

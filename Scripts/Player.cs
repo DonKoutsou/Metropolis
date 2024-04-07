@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,9 @@ public class Player : Character
 	[Export]
 	Curve Consumption = null;
 
-	public bool HasVecicle = false;
+	bool HasVecicle = false;
+
+	Vehicle currveh;
 
 	float MachineRPM = 0;
 
@@ -36,7 +39,23 @@ public class Player : Character
 		//NavAgent.SetTargetLocation(loctomove);
 		CameraMovePivot.GetInstance().GlobalTranslation = pos;
 	}
-
+	public bool HasVehicle()
+	{
+		return HasVecicle;
+	}
+	public void SetVehicle(Vehicle veh)
+	{
+		if (veh == null)
+		{
+			HasVecicle = false;
+			currveh = null;
+		}
+		else
+		{
+			HasVecicle = true;
+			currveh = veh;
+		}
+	}
 	public override void _Ready()
 	{
 		base._Ready();
@@ -74,7 +93,11 @@ public class Player : Character
 			Camera cam = GetTree().Root.GetCamera();
 			Vector3 rayor = cam.ProjectRayOrigin(mousepos);
 			Vector3 rayend = rayor + cam.ProjectRayNormal(mousepos) * 10000;
-			var rayar = spacestate.IntersectRay(rayor, rayend, new Godot.Collections.Array { this }, moveloc.MoveLayer);
+			var rayar = new Dictionary();
+			if (HasVecicle)
+				rayar = spacestate.IntersectRay(rayor, rayend, new Godot.Collections.Array { this }, moveloc.VehicleMoveLayer);
+			else
+				rayar = spacestate.IntersectRay(rayor, rayend, new Godot.Collections.Array { this }, moveloc.MoveLayer);
 			//if ray finds nothiong return
 			if (rayar.Count > 0)
 			{
@@ -124,7 +147,9 @@ public class Player : Character
 		{
 			direction = direction.Normalized();
 			Vector3 lookloc = new Vector3(direction.x, 0, direction.z);
-			GetNode<Spatial>("Pivot").LookAt(Translation - lookloc, Vector3.Up);
+			if (!HasVecicle)
+				GetNode<Spatial>("Pivot").LookAt(Translation - lookloc, Vector3.Up);
+
 			if (GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused)
 			{
 				GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused = false;
@@ -192,7 +217,16 @@ public class Player : Character
 		// Vertical velocity
 		_velocity.y -= FallAcceleration * delta;
 		// Moving the character
-		_velocity = MoveAndSlide(new Vector3(_velocity.x, _velocity.y, _velocity.z), Vector3.Up);
+		if (!HasVecicle)
+			_velocity = MoveAndSlide(new Vector3(_velocity.x, _velocity.y, _velocity.z), Vector3.Up);
+		else
+		{
+			float Steering = currveh.GetSteer(loctomove);
+			currveh.Steering = Steering;
+			float EngineForce =  Math.Min(200, dist);
+			currveh.EngineForce = EngineForce;
+		}
+			
 		if (Input.IsActionJustPressed("jump"))
 		{
 			if (IsOnFloor())
@@ -231,7 +265,11 @@ public class Player : Character
 			Camera cam = GetTree().Root.GetCamera();
 			Vector3 rayor = cam.ProjectRayOrigin(mousepos);
 			Vector3 rayend = rayor + cam.ProjectRayNormal(mousepos) * 10000;
-			var rayar = spacestate.IntersectRay(rayor, rayend, new Godot.Collections.Array { this }, moveloc.MoveLayer);
+			var rayar = new Dictionary();
+			if (HasVecicle)
+				rayar = spacestate.IntersectRay(rayor, rayend, new Godot.Collections.Array { this }, moveloc.VehicleMoveLayer);
+			else
+				rayar = spacestate.IntersectRay(rayor, rayend, new Godot.Collections.Array { this }, moveloc.MoveLayer);
 			//if ray finds nothiong return
 			if (rayar.Count == 0)
 				return;
@@ -331,7 +369,6 @@ public class Player : Character
 		}
 		//loctomove = GlobalTransform.origin;
 	}
-	
 	
 		// ...
 

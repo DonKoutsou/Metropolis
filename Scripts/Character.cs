@@ -257,6 +257,14 @@ public class Character : KinematicBody
 		//AddForce(velocity * ammount, velocity * ammount);
 		//AppliedForce = m_velocity * ammount;
 	}
+	public virtual void OnVehicleBoard()
+	{
+		SetCollisionMaskBit(8, true);
+	}
+	public virtual void OnVehicleUnBoard()
+	{
+		SetCollisionMaskBit(8, false);
+	}
 	private void On_DialogueButton_Button_Down()
 	{
 		

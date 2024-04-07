@@ -16,6 +16,12 @@ public class MyWorld : Spatial
 	{
 		base._Ready();
 		pl = GetNode<Player>("Player");
+		Instance = this;
+	}
+	static MyWorld Instance;
+	public static MyWorld GetInstance()
+	{
+		return Instance;
 	}
 	public void OnPlayerKilled()	
 	{

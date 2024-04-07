@@ -1,37 +1,44 @@
 using Godot;
 using System;
 
-public class Vehicle : RigidBody
+public class Vehicle : VehicleBody
 {
+    Position3D SteeringWheel;
+    public override void _Ready()
+    {
+        base._Ready();
+        SteeringWheel = GetNode<Position3D>("SteeringWheel");
+    }
+    public float GetSteer(Vector3 loc)
+    {
+        SteeringWheel.LookAt(loc, Vector3.Up);
+        return SteeringWheel.Rotation.y;
+    }
     public void BoardVehicle(Character cha)
     {
-        Rotation = new Vector3(Rotation.x,Rotation.y,0.0f);
-        cha.GlobalTranslation = GlobalTranslation;
-        GetParent().RemoveChild(this);
-        Spatial guy = cha.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy");
-        guy.Translation = new Vector3(0.0f, 1.0f, 0.0f);
-        //Translation = new Vector3(0.0f, -1.0f, 0.0f);
-        Sleeping = true;
+        //Rotation = new Vector3(Rotation.x,Rotation.y,0.0f);
+        //cha.GlobalTranslation = GlobalTranslation;
+        cha.GetParent().RemoveChild(cha);
+
+        Spatial guy = cha.GetNode<Spatial>("Pivot");
         
-        cha.GetNode<Spatial>("Pivot").AddChild(this);
-
-        Rotation = new Vector3(0.0f,0.0f,0.0f);
-
-        Translation = new Vector3(0.0f,1.0f,0.0f);
+        
+        AddChild(cha);
+        //cha.Translation = new Vector3 (0,0,0);
+        cha.OnVehicleBoard();
+        cha.Transform = GetNode<Position3D>("Position3D").Transform;
+        guy.Rotation = new Vector3(0,0,0);
+        
+        //Translation = new Vector3(0.0f,1.0f,0.0f);
     }
      public void UnBoardVehicle(Character cha)
     {
-        //cha.GlobalTransform = GlobalTransform;
-        cha.GetNode<Spatial>("Pivot").RemoveChild(this);
-        Spatial guy = cha.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy");
-        guy.Translation = new Vector3(0.0f, 0.0f, 0.0f);
-        //Translation = new Vector3(0.0f, -1.0f, 0.0f);
-        //CollisionLayer = 0;
+        cha.GetParent().RemoveChild(cha);
+
         
-        cha.GetParent().AddChild(this);
-        
-        
-        GlobalTranslation = new Vector3(cha.GlobalTranslation.x + 4, cha.GlobalTranslation.y+4, cha.GlobalTranslation.z + 4);
-        Sleeping = false;
+        MyWorld.GetInstance().AddChild(cha);
+        cha.OnVehicleUnBoard();
+        cha.GlobalTranslation = GlobalTranslation;
+        cha.Rotation = new Vector3(0,0,0);
     }
 }
