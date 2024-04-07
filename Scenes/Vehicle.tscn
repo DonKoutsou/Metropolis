@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/Drachma/M_Drachma.material" type="Material" id=1]
-[ext_resource path="res://Scripts/Vehicle.cs" type="Script" id=2]
+[ext_resource path="res://Scripts/VehiceBody.cs" type="Script" id=2]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 2, 0.12, 10 )
@@ -14,11 +14,18 @@ top_radius = 2.0
 bottom_radius = 2.0
 height = 0.25
 
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 1, 0, 0, 1 )
+
+[sub_resource type="CylinderMesh" id=4]
+material = SubResource( 5 )
+
 [node name="Spatial" type="VehicleBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0127356, 0, 0.00591087 )
 collision_layer = 16
 collision_mask = 292
 angular_damp = 38.73
+steering = 35.83
 script = ExtResource( 2 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
@@ -33,57 +40,76 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0596, 0 )
 
 [node name="Front_Left" type="VehicleWheel" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 3 )
-use_as_steering = true
 wheel_radius = 2.0
-suspension_stiffness = 30.0
+wheel_rest_length = 2.0
+suspension_stiffness = 10.0
 damping_compression = 0.8
 damping_relaxation = 0.9
 
 [node name="MeshInstance" type="MeshInstance" parent="Front_Left"]
 transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
-visible = false
 mesh = SubResource( 3 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="Front_Left"]
+transform = Transform( 0.351033, 0, 0, 0, -1.53442e-08, -0.351033, 0, 1.08452, -4.7406e-08, 0, 0, 2 )
+mesh = SubResource( 4 )
 
 [node name="Front_Right" type="VehicleWheel" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 3 )
-use_as_steering = true
 wheel_radius = 2.0
-suspension_stiffness = 30.0
+wheel_rest_length = 2.0
+suspension_stiffness = 10.0
 damping_compression = 0.8
 damping_relaxation = 0.9
 
 [node name="MeshInstance2" type="MeshInstance" parent="Front_Right"]
 transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
-visible = false
 mesh = SubResource( 3 )
+skeleton = NodePath("../../Front_Left")
+
+[node name="MeshInstance3" type="MeshInstance" parent="Front_Right"]
+transform = Transform( 0.351033, 0, 0, 0, -1.53442e-08, -0.351033, 0, 1.08452, -4.7406e-08, 0, 0, 2 )
+mesh = SubResource( 4 )
 skeleton = NodePath("../../Front_Left")
 
 [node name="Back_Left" type="VehicleWheel" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -4 )
 use_as_traction = true
+use_as_steering = true
 wheel_radius = 2.0
-suspension_stiffness = 30.0
+wheel_rest_length = 2.0
+suspension_stiffness = 10.0
 damping_compression = 0.8
 damping_relaxation = 0.9
 
 [node name="MeshInstance3" type="MeshInstance" parent="Back_Left"]
 transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
-visible = false
 mesh = SubResource( 3 )
+skeleton = NodePath("../../Front_Left")
+
+[node name="MeshInstance4" type="MeshInstance" parent="Back_Left"]
+transform = Transform( 0.351033, 0, 0, 0, -1.53442e-08, -0.351033, 0, 1.08452, -4.7406e-08, 0, 0, 2 )
+mesh = SubResource( 4 )
 skeleton = NodePath("../../Front_Left")
 
 [node name="Back_Right" type="VehicleWheel" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4 )
 use_as_traction = true
+use_as_steering = true
 wheel_radius = 2.0
-suspension_stiffness = 30.0
+wheel_rest_length = 2.0
+suspension_stiffness = 10.0
 damping_compression = 0.8
 damping_relaxation = 0.9
 
 [node name="MeshInstance4" type="MeshInstance" parent="Back_Right"]
 transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
-visible = false
 mesh = SubResource( 3 )
+skeleton = NodePath("../../Front_Left")
+
+[node name="MeshInstance5" type="MeshInstance" parent="Back_Right"]
+transform = Transform( 0.351033, 0, 0, 0, -1.53442e-08, -0.351033, 0, 1.08452, -4.7406e-08, 0, 0, 2 )
+mesh = SubResource( 4 )
 skeleton = NodePath("../../Front_Left")
 
 [node name="SteeringWheel" type="Position3D" parent="."]

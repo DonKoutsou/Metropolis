@@ -215,16 +215,17 @@ public class Player : Character
 		_velocity.z = (direction.z * spd) * vehmulti;
 		//_velocity.y = direction.y * spd;
 		// Vertical velocity
-		_velocity.y -= FallAcceleration * delta;
+		
 		// Moving the character
 		if (!HasVecicle)
+		{
+			_velocity.y -= FallAcceleration * delta;
 			_velocity = MoveAndSlide(new Vector3(_velocity.x, _velocity.y, _velocity.z), Vector3.Up);
+		}
 		else
 		{
-			float Steering = currveh.GetSteer(loctomove);
-			currveh.Steering = Steering;
-			float EngineForce =  Math.Min(200, dist);
-			currveh.EngineForce = EngineForce;
+			_velocity.y -= (FallAcceleration / 4) * delta;
+			currveh.loctomove = loctomove;
 		}
 			
 		if (Input.IsActionJustPressed("jump"))

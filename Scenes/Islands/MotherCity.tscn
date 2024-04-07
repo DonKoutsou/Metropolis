@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Islands/Terain_Data_MotherCity/data.hterrain" type="Resource" id=2]
@@ -26,6 +26,7 @@
 [ext_resource path="res://Scenes/Item.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Scenes/Drahma.tscn" type="PackedScene" id=25]
 [ext_resource path="res://Scenes/Vehicle.tscn" type="PackedScene" id=26]
+[ext_resource path="res://Scenes/HoverBoard.tscn" type="PackedScene" id=27]
 
 [sub_resource type="OpenSimplexNoise" id=3]
 
@@ -298,3 +299,6 @@ transform = Transform( 28.8694, 5.00605, 22.9546, -2.64502, 36.8278, -4.70501, -
 
 [node name="Spatial" parent="." index="77" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2292.05, 184.67, 2450.75 )
+
+[node name="Vehicle" parent="." index="78" instance=ExtResource( 27 )]
+transform = Transform( 1, -0.000665859, -0.000639929, 0.000666553, 0.999999, 0.00107017, 0.000639206, -0.0010706, 0.999999, -2277.36, 200.369, 2439.25 )

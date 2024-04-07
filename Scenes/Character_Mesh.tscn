@@ -1574,7 +1574,7 @@ material_override = SubResource( 26 )
 material/0 = SubResource( 26 )
 
 [node name="BoneAttachment" type="BoneAttachment" parent="rig/Skeleton" index="2"]
-transform = Transform( 0.99693, -0.0705724, 0.0339152, -0.0756015, -0.754888, 0.651482, -0.0203745, -0.652046, -0.757905, 2.65427e-08, 4.16275, 0.203853 )
+transform = Transform( 0.99693, -0.0705724, 0.0339152, -0.0756015, -0.754888, 0.651482, -0.0203745, -0.652046, -0.757906, 4.88944e-08, 4.16394, 0.202614 )
 bone_name = "DEF-spine.006"
 
 [node name="HeadPivot" type="Spatial" parent="rig/Skeleton/BoneAttachment" index="0"]
@@ -1605,7 +1605,7 @@ mesh = ExtResource( 4 )
 skeleton = NodePath("../..")
 
 [node name="BoneAttachment2" type="BoneAttachment" parent="rig/Skeleton" index="3"]
-transform = Transform( 1, -1.02227e-07, 1.976e-07, -1.13232e-07, -0.998401, 0.0565223, 1.91506e-07, -0.0565223, -0.998401, -1.29031e-08, 3.00045, -0.000963454 )
+transform = Transform( 1, -1.02378e-07, 1.97521e-07, -1.13232e-07, -0.998444, 0.0557592, 1.91506e-07, -0.0557592, -0.998444, -1.27914e-08, 3.00143, -0.000963421 )
 bone_name = "DEF-spine.002"
 
 [node name="Rope" type="MeshInstance" parent="rig/Skeleton/BoneAttachment2" index="0"]

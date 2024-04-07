@@ -1,0 +1,128 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Assets/Drachma/M_Drachma.material" type="Material" id=1]
+[ext_resource path="res://Scripts/Vehicle.cs" type="Script" id=2]
+
+[sub_resource type="PhysicsMaterial" id=1]
+friction = 0.0
+
+[sub_resource type="CubeMesh" id=2]
+size = Vector3( 2, 0.12, 10 )
+
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 1.33847, 1, 5.19934 )
+
+[sub_resource type="SphereMesh" id=4]
+radius = 0.5
+height = 1.0
+
+[sub_resource type="CylinderMesh" id=6]
+top_radius = 0.2
+bottom_radius = 0.0
+height = 4.212
+
+[node name="Vehicle" type="Spatial"]
+transform = Transform( 1, -0.000665859, -0.000639929, 0.000666553, 0.999999, 0.00107017, 0.000639206, -0.0010706, 0.999999, 0, 0, 0 )
+
+[node name="VehicleBody" type="RigidBody" parent="."]
+transform = Transform( 1, -1.12379e-10, 1.16415e-10, -1.55751e-10, 1, -1.16415e-10, -1.74623e-10, 1.16415e-10, 1, 0, 0, 0 )
+collision_layer = 16
+collision_mask = 292
+mass = 40.0
+physics_material_override = SubResource( 1 )
+can_sleep = false
+linear_damp = 5.0
+angular_damp = 10.0
+script = ExtResource( 2 )
+speed = 700000.0
+turnspeed = 100000.0
+HoverForce = 8000
+
+[node name="MeshInstance" type="MeshInstance" parent="VehicleBody"]
+material_override = ExtResource( 1 )
+mesh = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="VehicleBody"]
+shape = SubResource( 5 )
+
+[node name="Position3D" type="Position3D" parent="VehicleBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0596, 0 )
+
+[node name="SteeringWheel" type="Position3D" parent="VehicleBody"]
+
+[node name="RemoteTransform" type="RemoteTransform" parent="VehicleBody"]
+transform = Transform( 0.999999, 0.000670488, -0.00042542, -0.000670685, 1, -0.000474351, 0.000425108, 0.000474629, 1, 3, 0.749334, 4.99935 )
+remote_path = NodePath("../../RayFL")
+update_rotation = false
+
+[node name="RemoteTransform2" type="RemoteTransform" parent="VehicleBody"]
+transform = Transform( 1, -6.94968e-10, 2.61934e-09, -3.41203e-09, 1, -5.3551e-09, -2.73576e-09, 2.67755e-09, 1, -3, 0.750666, 5.00064 )
+remote_path = NodePath("../../RayFR")
+update_rotation = false
+
+[node name="RemoteTransform3" type="RemoteTransform" parent="VehicleBody"]
+transform = Transform( 1, 7.04233e-10, 1.04774e-09, -1.78397e-09, 1, -2.91038e-09, -1.10595e-09, 2.91038e-09, 1, -3, 0.750666, -4.99936 )
+remote_path = NodePath("../../RayBR")
+update_rotation = false
+
+[node name="RemoteTransform4" type="RemoteTransform" parent="VehicleBody"]
+transform = Transform( 1, 6.46025e-10, 9.31323e-10, -1.72582e-09, 1, -2.91038e-09, -1.04774e-09, 2.91038e-09, 1, 3, 0.749335, -5.00064 )
+remote_path = NodePath("../../RayBL")
+update_rotation = false
+
+[node name="CharacterRemoteTransform" type="RemoteTransform" parent="VehicleBody"]
+transform = Transform( 1, 4.43379e-12, 0, -9.71454e-11, 1, -2.32831e-10, 0, 2.32831e-10, 1, 0.000666544, 0.999999, 0.00107017 )
+update_rotation = false
+update_scale = false
+
+[node name="RayFL" type="RayCast" parent="."]
+transform = Transform( 1, 8.32938e-09, 1.8219e-08, -8.34348e-09, 1, -3.25963e-09, -1.8219e-08, 3.25963e-09, 1, 3, 0.749335, 4.99936 )
+enabled = true
+cast_to = Vector3( 0, -10, 0 )
+collision_mask = 292
+
+[node name="MeshInstance" type="MeshInstance" parent="RayFL"]
+mesh = SubResource( 4 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="RayFL"]
+transform = Transform( 1, -2.0782e-10, -4.65661e-10, 2.15607e-10, 1, 0, 2.32831e-10, 0, 1, -0.00133252, -2, -0.00213957 )
+mesh = SubResource( 6 )
+
+[node name="RayFR" type="RayCast" parent="."]
+transform = Transform( 1, 9.54935e-09, 1.7928e-08, -9.6245e-09, 1, -2.91038e-09, -1.79862e-08, 2.79397e-09, 1, -3, 0.750667, 5.00064 )
+enabled = true
+cast_to = Vector3( 0, -10, 0 )
+collision_mask = 292
+
+[node name="MeshInstance" type="MeshInstance" parent="RayFR"]
+mesh = SubResource( 4 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="RayFR"]
+transform = Transform( 1, -2.0782e-10, -4.65661e-10, 2.15607e-10, 1, 0, 2.32831e-10, 0, 1, -0.00133252, -2, -0.00213957 )
+mesh = SubResource( 6 )
+
+[node name="RayBR" type="RayCast" parent="."]
+transform = Transform( 1, 9.55504e-09, 1.62981e-08, -9.62626e-09, 1, -8.49832e-09, -1.62981e-08, 8.49832e-09, 1, -3, 0.750666, -4.99936 )
+enabled = true
+cast_to = Vector3( 0, -10, 0 )
+collision_mask = 292
+
+[node name="MeshInstance" type="MeshInstance" parent="RayBR"]
+mesh = SubResource( 4 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="RayBR"]
+transform = Transform( 1, -2.0782e-10, -4.65661e-10, 2.15607e-10, 1, 0, 2.32831e-10, 0, 1, -0.00133252, -2, -0.00213957 )
+mesh = SubResource( 6 )
+
+[node name="RayBL" type="RayCast" parent="."]
+transform = Transform( 1, 9.49751e-09, 1.78115e-08, -9.62473e-09, 1, -9.77889e-09, -1.78115e-08, 9.77889e-09, 1, 3.01201, 0.749333, -5.00616 )
+enabled = true
+cast_to = Vector3( 0, -10, 0 )
+collision_mask = 292
+
+[node name="MeshInstance" type="MeshInstance" parent="RayBL"]
+mesh = SubResource( 4 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="RayBL"]
+transform = Transform( 1, -2.62219e-10, -5.23869e-10, 2.19302e-10, 1, -1.16415e-10, 2.91038e-10, -1.16415e-10, 1, -0.00133276, -2, -0.00213957 )
+mesh = SubResource( 6 )
