@@ -124,13 +124,23 @@ public class Player : Character
 			anim.PlayAnimation(E_Animations.Idle);
 			moveloc.Hide();
 			HeadPivot.Rotation = new Vector3(0.0f,0.0f,0.0f);
+			rpm = 0.05f;
 		}
-		else if (!HasVecicle)
+		else if (HasVecicle && dist < 10)
+		{
+			rpm = 0.05f;
+			if (!GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused)
+				GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused = true;
+			anim.PlayAnimation(E_Animations.Idle);
+			moveloc.Hide();
+			HeadPivot.Rotation = new Vector3(0.0f,0.0f,0.0f);
+		}
+		else
 		{
 			direction = direction.Normalized();
 			Vector3 lookloc = new Vector3(direction.x, 0, direction.z);
-			
-			GetNode<Spatial>("Pivot").LookAt(Translation - lookloc, Vector3.Up);
+			if (!HasVecicle)
+				GetNode<Spatial>("Pivot").LookAt(Translation - lookloc, Vector3.Up);
 
 			if (GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused)
 			{
@@ -139,7 +149,7 @@ public class Player : Character
 			}
 			if (!IsRunning)
 			{
-				rpm = 0.25f;
+				rpm = 0.2f;
 				GetNode<AudioStreamPlayer3D>("WalkingSound").PitchScale = 0.5f;
 				//GetNode<AudioStreamPlayer3D>("WalkingSound").db = 5f;
 				anim.PlayAnimation(E_Animations.Walk);
@@ -157,14 +167,13 @@ public class Player : Character
 				HeadPivot.Rotation = new Vector3(Math.Min(rot, 0.3f) , 0.0f,0.0f);
 			else
 				HeadPivot.Rotation = new Vector3(Math.Max(rot, -0.5f) , 0.0f,0.0f);
-			//YOUR_NODE.RotationDegrees = Vector3.Up * Mathf.LerpAngle(YOUR_NODE.Rotation.y, Mathf.Atan2(OTHER_NODE.Translation.x - YOUR_NODE.Translation.x, OTHER_NODE.Translation.z - YOUR_NODE.Translation.z), 1f);
-				
+			//YOUR_NODE.RotationDegrees = Vector3.Up * Mathf.LerpAngle(YOUR_NODE.Rotation.y, Mathf.Atan2(OTHER_NODE.Translation.x - YOUR_NODE.Translation.x, OTHER_NODE.Translation.z - YOUR_NODE.Translation.z), 1f);	
 		}
-		int vehmulti = 1;
-		if (HasVecicle)
-			vehmulti = 3;
 
-		float coons = (Consumption.Interpolate(rpm) * delta) * vehmulti;
+		if (HasVecicle)
+			rpm *= 2;
+
+		float coons = Consumption.Interpolate(rpm) * delta;
 
 		List<Item> batteries = new List<Item>();
 		CharacterInventory.GetItemsByType(out batteries, ItemName.BATTERY);
@@ -193,8 +202,8 @@ public class Player : Character
 			//Stamina_bar.ChangeVisibility();
 		// Ground velocity
 		
-		_velocity.x = (direction.x * spd) * vehmulti;
-		_velocity.z = (direction.z * spd) * vehmulti;
+		_velocity.x = direction.x * spd;
+		_velocity.z = direction.z * spd;
 		//_velocity.y = direction.y * spd;
 		// Vertical velocity
 		

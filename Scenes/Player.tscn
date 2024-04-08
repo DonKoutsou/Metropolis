@@ -156,6 +156,7 @@ SelectLayer = 17
 Consumption = SubResource( 106 )
 
 [node name="Pivot" type="Spatial" parent="."]
+pause_mode = 1
 
 [node name="Guy" parent="Pivot" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39891, 0 )

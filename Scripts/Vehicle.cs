@@ -13,6 +13,9 @@ public class Vehicle : RigidBody
     int HoverForce = 500;
 
     [Export]
+    int JumpForce = 50;
+
+    [Export]
     Curve forcecurve = null;
 
     [Export]
@@ -31,6 +34,8 @@ public class Vehicle : RigidBody
 
     float latsspeed;
 
+    List<Particles> ExaustParticles = new List<Particles>();
+
     public override void _PhysicsProcess(float delta)
     {
         base._PhysicsProcess(delta);
@@ -39,7 +44,16 @@ public class Vehicle : RigidBody
         float forcemulti = 1;
         frontray.ForceRaycastUpdate();
         if (frontray.IsColliding())
+        {
             forcemulti = 4;
+            //var collisionpoint = frontray.GetCollisionPoint();
+            //var dist = collisionpoint.DistanceTo(frontray.GlobalTransform.origin);
+            //if (dist > 1 && latsspeed > speed * 2);
+           // {
+            //    Capsize();
+           //}
+        }
+            
 
         for (int i = 0; i < Rays.Count; i ++)
         {
@@ -136,7 +150,9 @@ public class Vehicle : RigidBody
         }
 
         //Steering
-        float steer = GetSteer(loctomove);
+        SteeringWheel.LookAt(loctomove, Vector3.Up);
+        float steer = Mathf.Rad2Deg(SteeringWheel.Rotation.y);
+
         if (steer > 0)
         {
             Vector3 torq;
@@ -173,11 +189,27 @@ public class Vehicle : RigidBody
             AddTorque(torq);
         }
     }
+    private void ToggleMachine(bool toggle)
+    {
+        if (toggle)
+        {
+            ExaustParticles[0].Emitting = true;
+            ExaustParticles[1].Emitting = true;
+        }
+        else
+        {
+            ExaustParticles[0].Emitting = false;
+            ExaustParticles[1].Emitting = false;
+        }
+    }
     public override void _Ready()
     {
         base._Ready();
         SteeringWheel = GetNode<Position3D>("SteeringWheel");
-        
+        ExaustParticles.Insert(0, GetNode<Particles>("ExaustParticlesL"));
+        ExaustParticles.Insert(1, GetNode<Particles>("ExaustParticlesR"));
+        ExaustParticles[0].Emitting = false;
+        ExaustParticles[1].Emitting = false;
         Spatial parent = (Spatial)GetParent();
         frontray = parent.GetNode<RayCast>("RayF");
         Rays.Insert(0, parent.GetNode<RayCast>("RayFL"));
@@ -185,29 +217,15 @@ public class Vehicle : RigidBody
         //Rays.Insert(2, parent.GetNode<RayCast>("RayF"));
         Rays.Insert(2, parent.GetNode<RayCast>("RayBL"));
         Rays.Insert(3, parent.GetNode<RayCast>("RayBR"));
+        ((Spatial)GetParent()).GlobalRotation = Vector3.Zero;
         //Rays.Insert(5, parent.GetNode<RayCast>("RayB"));
-    }
-    public float GetSteer(Vector3 loc)
-    {
-        SteeringWheel.LookAt(loc, Vector3.Up);
-        float steer = Mathf.Rad2Deg(SteeringWheel.Rotation.y);
-        //if (steer > 0)
-        //{
-        //    steer = Math.Min(30, steer);
-        //}
-        //if (steer < 0)
-        //{
-        //    steer = Math.Max(-30, steer);
-       //}
-
-        return steer;
     }
     public void Jump()
     {
         for (int i = 0; i < Rays.Count; i ++)
         {
             if (Rays[i].IsColliding())
-                AddForce(Vector3.Up * (HoverForce / 4), Rays[i].GlobalTransform.origin - GlobalTransform.origin);
+                AddForce(Vector3.Up * (JumpForce), Rays[i].GlobalTransform.origin - GlobalTransform.origin);
         }
     }
     public void BoardVehicle(Character cha)
@@ -222,31 +240,32 @@ public class Vehicle : RigidBody
         }
         
         Rotation = new Vector3(0,Rotation.y,0);
-        //cha.GlobalTranslation = GlobalTranslation;
+        Vector3 prevrot = cha.GlobalRotation;
+
         cha.GetParent().RemoveChild(cha);
 
         Spatial guy = cha.GetNode<Spatial>("Pivot");
-        guy.Rotation = new Vector3(0,0,0);
-        cha.Rotation =  new Vector3(0,0,0);
+
         cha.SetCollisionMaskBit(4, false);
         GetParent().AddChild(cha);
         RemoteTransform CharTrasn = GetNode<RemoteTransform>("CharacterRemoteTransform");
         RemoteTransform CharTrasn2 = GetNode<RemoteTransform>("CharacterRemoteTransform2");
         CharTrasn.RemotePath = cha.GetPath();
         CharTrasn2.RemotePath = guy.GetPath();
-        //cha.Translation = new Vector3 (0,0,0);
+
         cha.OnVehicleBoard();
-        cha.Transform = CharTrasn.Transform;
-        
+
+        cha.GlobalRotation = prevrot;
         Working = true;
         passengers.Insert(passengers.Count, cha);
-        //Translation = new Vector3(0.0f,1.0f,0.0f);
+        ToggleMachine(true);
     }
     private void Capsize()
     {
         if (passengers.Count == 0)
             return;
         Character chartothrowout = passengers[0];
+        Vector3 prevrot = chartothrowout.GlobalRotation;
         RemoteTransform CharTrasn = GetNode<RemoteTransform>("CharacterRemoteTransform");
         CharTrasn.RemotePath = this.GetPath();
         RemoteTransform CharTrasn2 = GetNode<RemoteTransform>("CharacterRemoteTransform2");
@@ -258,10 +277,13 @@ public class Vehicle : RigidBody
         chartothrowout.GlobalTranslation = GlobalTranslation;
         chartothrowout.Rotation = new Vector3(0,0,0);
         Working = false;
+        chartothrowout.GlobalRotation = prevrot;
         chartothrowout.SetVehicle(null);
+        ToggleMachine(false);
     }
      public void UnBoardVehicle(Character cha)
     {
+        Vector3 prevrot = cha.GlobalRotation;
         RemoteTransform CharTrasn = GetNode<RemoteTransform>("CharacterRemoteTransform");
         CharTrasn.RemotePath = this.GetPath();
         RemoteTransform CharTrasn2 = GetNode<RemoteTransform>("CharacterRemoteTransform2");
@@ -271,7 +293,9 @@ public class Vehicle : RigidBody
         MyWorld.GetInstance().AddChild(cha);
         cha.OnVehicleUnBoard();
         cha.GlobalTranslation = GlobalTranslation;
+        cha.GlobalRotation = prevrot;
         cha.Rotation = new Vector3(0,0,0);
         Working = false;
+        ToggleMachine(false);
     }
 }

@@ -12,6 +12,7 @@ absorbent = true
 extents = Vector3( 4000, 20, 4000 )
 
 [node name="SeaBed" type="StaticBody"]
+pause_mode = 1
 collision_layer = 256
 collision_mask = 0
 physics_material_override = SubResource( 6 )
