@@ -13,7 +13,7 @@ max_value = 6.0
 _data = [ Vector2( 0, 6 ), 0.0, 0.0, 0, 0, Vector2( 0.355023, 5.96319 ), 0.0, 0.0, 0, 0, Vector2( 0.672374, -6 ), 0.0, 0.0, 0, 0, Vector2( 1, -6 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=9]
-_data = [ Vector2( 0, 0.0889571 ), 0.0, 0.0, 0, 0, Vector2( 0.667808, 0.395706 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0.1 ), 0.0, 0.0, 0, 0, Vector2( 0.5, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.119632 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="CubeMesh" id=2]
 size = Vector3( 2, 0.12, 10 )
@@ -81,7 +81,6 @@ pause_mode = 1
 transform = Transform( 1, -0.000665859, -0.000639929, 0.000666553, 0.999999, 0.00107017, 0.000639206, -0.0010706, 0.999999, 0, 0, 0 )
 
 [node name="VehicleBody" type="RigidBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 collision_layer = 16
 collision_mask = 292
 mass = 40.0
@@ -176,7 +175,7 @@ process_material = SubResource( 10 )
 draw_pass_1 = SubResource( 11 )
 
 [node name="RayFL" type="RayCast" parent="."]
-transform = Transform( 1, -1.26191e-08, 1.89175e-08, 1.26672e-08, 1, -1.44355e-08, -1.89175e-08, 1.44355e-08, 1, 3, 0.749334, 4.99935 )
+transform = Transform( 1, -1.26772e-08, 1.89175e-08, 1.27837e-08, 1, -1.44355e-08, -1.89175e-08, 1.44355e-08, 1, 3, 0.749334, 4.99935 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292
@@ -189,7 +188,7 @@ transform = Transform( 1, -2.0782e-10, -4.65661e-10, 2.15607e-10, 1, 0, 2.32831e
 mesh = SubResource( 6 )
 
 [node name="RayF" type="RayCast" parent="."]
-transform = Transform( 1, 3.51292e-10, -1.74623e-10, 3.06386e-10, 1, -4.65661e-10, 2.91038e-10, -4.65661e-10, 1, -0.00105671, -0.655451, 4.81077 )
+transform = Transform( 1, 3.51918e-10, -1.74623e-10, 3.06443e-10, 1, -4.65661e-10, 2.91038e-10, -4.65661e-10, 1, -0.00105671, -0.655451, 4.81077 )
 enabled = true
 cast_to = Vector3( 0, 0, 20 )
 collision_mask = 292
@@ -203,7 +202,7 @@ transform = Transform( 1, -0.00130579, 2.59296e-05, -2.59493e-05, 3.95114e-07, 0
 mesh = SubResource( 6 )
 
 [node name="RayFR" type="RayCast" parent="."]
-transform = Transform( 1, 2.85276e-07, 5.75674e-08, -2.85199e-07, 1, -8.6613e-08, -5.75092e-08, 8.67294e-08, 1, -3, 0.750666, 5.00063 )
+transform = Transform( 1, 2.85218e-07, 5.75674e-08, -2.85141e-07, 1, -8.6613e-08, -5.75092e-08, 8.67294e-08, 1, -3, 0.750666, 5.00063 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292
@@ -216,7 +215,7 @@ transform = Transform( 1, -4.42867e-10, -8.14907e-10, 4.25757e-11, 1, -3.49246e-
 mesh = SubResource( 6 )
 
 [node name="RayBR" type="RayCast" parent="."]
-transform = Transform( 1, 2.85273e-07, 5.82077e-08, -2.85198e-07, 1, -8.16071e-08, -5.81495e-08, 8.17236e-08, 1, -3, 0.750666, -4.99936 )
+transform = Transform( 1, 2.85215e-07, 5.82077e-08, -2.8514e-07, 1, -8.16071e-08, -5.81495e-08, 8.17236e-08, 1, -3, 0.750666, -4.99936 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292
@@ -229,7 +228,7 @@ transform = Transform( 1, -2.0782e-10, -4.65661e-10, 2.15607e-10, 1, 0, 2.32831e
 mesh = SubResource( 6 )
 
 [node name="RayBL" type="RayCast" parent="."]
-transform = Transform( 1, 2.85274e-07, 5.67525e-08, -2.852e-07, 1, -8.28877e-08, -5.66943e-08, 8.30041e-08, 1, 3, 0.749335, -5.00064 )
+transform = Transform( 1, 2.85216e-07, 5.67525e-08, -2.85142e-07, 1, -8.28877e-08, -5.66943e-08, 8.30041e-08, 1, 3, 0.749335, -5.00064 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292

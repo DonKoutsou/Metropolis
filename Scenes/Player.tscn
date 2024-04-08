@@ -215,7 +215,8 @@ max_db = -9.473
 area_mask = 0
 
 [node name="Inventory" parent="." instance=ExtResource( 7 )]
-StartingItems = PoolStringArray( "res://Scenes/Battery.tscn", "res://Scenes/Battery.tscn" )
+Capacity = 40.0
+StartingItems = PoolStringArray( "res://Scenes/Battery.tscn", "res://Scenes/Battery.tscn", "res://Scenes/Battery.tscn", "res://Scenes/Battery.tscn" )
 
 [node name="PlayerUI" type="Spatial" parent="."]
 
@@ -303,7 +304,7 @@ script = ExtResource( 12 )
 Speed = 5
 
 [node name="Camera" type="Camera" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot"]
-transform = Transform( 1, -1.77636e-15, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 20, 20 )
+transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 24.3742, 20 )
 cull_mask = 1
 fov = 45.0
 size = 5.0
