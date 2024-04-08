@@ -35,20 +35,16 @@ public class Vehicle : RigidBody
     {
         base._PhysicsProcess(delta);
         bool strong = false;
-        float hoverforce2 = Hoverforcecurve.Interpolate(latsspeed /700000) * HoverForce;
+        float hoverforce2 = Hoverforcecurve.Interpolate(latsspeed /(speed * 4)) * HoverForce;
         float forcemulti = 1;
         frontray.ForceRaycastUpdate();
         if (frontray.IsColliding())
-            forcemulti = 2;
-        bool past = false;
+            forcemulti = 4;
+
         for (int i = 0; i < Rays.Count; i ++)
         {
             RayCast ray = Rays[i];
             ray.ForceRaycastUpdate();
-            
-            if (Math.Abs(GlobalTransform.origin.y - ray.GlobalTransform.origin.y) > 3)
-                past = true;
-            
             
             if (ray.IsColliding())
             {
@@ -63,22 +59,16 @@ public class Vehicle : RigidBody
                 }
                 
                 Vector3 f = Vector3.Zero;
-                //if (past)
-                    //continue;
-                //if (!past)
-                    f= (Vector3.Up * hoverforce2 * delta) * multi;
-                //else
-                    //f= (Vector3.Up * HoverForce * delta) * -multi;
+
+                f= (Vector3.Up * hoverforce2 * delta) * multi;
+
                 AddForce(f * forcemulti, ray.GlobalTransform.origin - GlobalTransform.origin);
             }
             else
             {
                 Vector3 f = Vector3.Zero;
-                //if (past)
-                    //continue;
+
                 f = (Vector3.Up * hoverforce2 * delta) * -8;
-                //else
-                   // f= (Vector3.Up * HoverForce * delta) * 8;
 
                 AddForce(f * forcemulti, ray.GlobalTransform.origin - GlobalTransform.origin);
             }
@@ -87,66 +77,100 @@ public class Vehicle : RigidBody
             return;
 
         float distance = loctomove.DistanceTo(GlobalTransform.origin);
-        if (distance < 10)
+        if (distance < 5)
         {
             latsspeed = 0;
-            //AddTorque(Vector3.Zero);
             return;
         }
+
         Vector3 force = Vector3.Zero;
         if (strong)
             force = -GlobalTransform.basis.z;
         else
             force = GlobalTransform.basis.z;
         force.y = 0;
-        latsspeed = speed * (Math.Min(500, distance - 10)/ 500);
+        float fmulti = 1;
+        if (((Player)passengers[0]).IsRunning)
+        {
+            fmulti = 4;
+        }
+        latsspeed = (speed * fmulti) * (Math.Min(500, distance - 5)/ 500);
         AddCentralForce(force * latsspeed * delta);
         
-        float rotx = Mathf.Rad2Deg(Rotation.x);
-        if (rotx > 25)
-        {
-            Vector3 torq = -GlobalTransform.basis.x * turnspeed * delta;
-            AddTorque(torq);
-        }
-        if (rotx < -25)
-        {
-            Vector3 torq = GlobalTransform.basis.x * turnspeed * delta;
-            AddTorque(torq);
-        }
-        
 
-        if (rotx > 45)
+        //keeping balance and casizing if to rotated in x 
+        float rotx = Mathf.Rad2Deg(Rotation.x);
+        if (rotx > 0)
+        {
+            float rotmulti = rotx / 45;
+            Vector3 torq = -GlobalTransform.basis.x * turnspeed * delta;
+            AddTorque(torq * rotmulti);
+        }
+        else if (rotx < 0)
+        {
+            float rotmulti = rotx / -45;
+            Vector3 torq = GlobalTransform.basis.x * turnspeed * delta;
+            AddTorque(torq * rotmulti);
+        }
+        if (rotx > 45 || rotx < -45)
             Capsize();
-        if (rotx < -45)
-            Capsize();
+
+        //keeping balance and casizing if to rotated in z
         float rotz = Mathf.Rad2Deg(Rotation.z);
-        if (rotz > 45)
-            Capsize();
-        if (rotz < -45)
-            Capsize();
-        if (rotz > 25)
+
+        if (rotz > 0)
         {
+            float rotmulti = rotz / 45;
             Vector3 torq = -GlobalTransform.basis.z * turnspeed * delta;
-            AddTorque(torq);
+            AddTorque(torq * rotmulti);
+            if (rotz > 45)
+                Capsize();
         }
-        if (rotz < -25)
+        else if (rotz < 0)
         {
+            float rotmulti = rotz / -45;
             Vector3 torq = GlobalTransform.basis.z * turnspeed * delta;
-            AddTorque(torq);
+            AddTorque(torq * rotmulti);
+            if (rotz < -45)
+                Capsize();
         }
+
+        //Steering
         float steer = GetSteer(loctomove);
         if (steer > 0)
         {
-            Vector3 torq = -GlobalTransform.basis.y * turnspeed * delta;
-            torq.z = 1000;
+            Vector3 torq;
+            if (steer < 175)
+            {
+                torq = -GlobalTransform.basis.y * turnspeed * delta;
+                torq.x *= -1;
+                torq.z = 1000;
+            }
+            else
+            {
+                float st = 180 - steer;
+                torq = (-GlobalTransform.basis.y * turnspeed * delta) * (st / 180);
+                torq.x *= -1;
+                torq.z = 1000  * (st / 180);
+            }
             AddTorque(torq);
         }
-        if (steer < 0)
+        else if (steer < 0)
         {
-            Vector3 torq = GlobalTransform.basis.y * turnspeed * delta;
-            torq.z = -1000;
+            
+            Vector3 torq;
+            if (steer > -175)
+            {
+                torq = (GlobalTransform.basis.y * turnspeed * delta);
+                torq.z = -1000;
+            }
+            else
+            {
+                float st = 180 - -steer;
+                torq = (GlobalTransform.basis.y * turnspeed * delta)  * (st / 180);
+                torq.z = -1000  * (st / 180);
+            }
             AddTorque(torq);
-            //AddTorque(GlobalTransform.basis.y * turnspeed * delta);
         }
     }
     public override void _Ready()
@@ -166,15 +190,16 @@ public class Vehicle : RigidBody
     public float GetSteer(Vector3 loc)
     {
         SteeringWheel.LookAt(loc, Vector3.Up);
-        float steer = SteeringWheel.Rotation.y;
-        if (steer > 0)
-        {
-            steer = Math.Min(30, steer);
-        }
-        if (steer < 0)
-        {
-            steer = Math.Max(-30, steer);
-        }
+        float steer = Mathf.Rad2Deg(SteeringWheel.Rotation.y);
+        //if (steer > 0)
+        //{
+        //    steer = Math.Min(30, steer);
+        //}
+        //if (steer < 0)
+        //{
+        //    steer = Math.Max(-30, steer);
+       //}
+
         return steer;
     }
     public void Jump()

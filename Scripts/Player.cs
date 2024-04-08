@@ -9,10 +9,6 @@ public class Player : Character
 	[Export]
 	Curve Consumption = null;
 
-	
-
-	float MachineRPM = 0;
-
 	Stamina_Bar Stamina_bar = null;
 
 	HP_Bar hp_bar = null;
@@ -23,7 +19,7 @@ public class Player : Character
 
 	bool Autowalk = false;
 
-	bool IsRunning = false;
+	public bool IsRunning = false;
 
 	ActionMenu actMen;
 
