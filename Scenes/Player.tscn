@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/Stamina_Bar.cs" type="Script" id=2]
@@ -82,17 +82,14 @@ render_priority = -2
 shader = ExtResource( 27 )
 
 [sub_resource type="SpatialMaterial" id=100]
+render_priority = -1
 flags_transparent = true
-flags_unshaded = true
-params_billboard_mode = 2
-albedo_color = Color( 0.227451, 0.160784, 0.0509804, 0.0862745 )
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_color = Color( 1, 0.921569, 0.796078, 0.266667 )
 albedo_texture = ExtResource( 20 )
-
-[sub_resource type="Curve" id=98]
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.498052, 0.604295 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=99]
-curve = SubResource( 98 )
 
 [sub_resource type="Curve" id=90]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
@@ -105,44 +102,23 @@ curve = SubResource( 90 )
 trail_size_modifier = SubResource( 93 )
 emission_shape = 2
 emission_box_extents = Vector3( 5000, 50, 5000 )
-direction = Vector3( 0, 0, 2 )
+direction = Vector3( 0, 0, -2 )
 spread = 1.41
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 18.05
+angular_velocity = 34.12
+angular_velocity_random = 1.0
 linear_accel = 100.0
 linear_accel_random = 0.35
 tangential_accel = 2.8
 tangential_accel_random = 1.0
 angle = 360.0
-angle_random = 1.0
-scale_curve = SubResource( 99 )
+scale_random = 0.53
 hue_variation = 1.0
 hue_variation_random = 1.0
 
 [sub_resource type="QuadMesh" id=89]
 size = Vector2( 1000, 1000 )
-
-[sub_resource type="SpatialMaterial" id=103]
-albedo_color = Color( 0.760784, 0.682353, 0.509804, 1 )
-
-[sub_resource type="ParticlesMaterial" id=101]
-trail_divisor = 3
-trail_size_modifier = SubResource( 93 )
-emission_shape = 2
-emission_box_extents = Vector3( 1000, 200, 1000 )
-direction = Vector3( 0, 0, 2 )
-spread = 1.41
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 18.05
-linear_accel = 100.0
-linear_accel_random = 0.19
-scale_curve = SubResource( 99 )
-hue_variation = 1.0
-hue_variation_random = 1.0
-
-[sub_resource type="SphereMesh" id=102]
-radius = 8.337
-height = 17.784
 
 [node name="Player" type="KinematicBody" groups=["player"]]
 collision_layer = 9
@@ -292,7 +268,7 @@ visible = false
 visible = false
 
 [node name="CameraMovePivot" type="Position3D" parent="."]
-pause_mode = 2
+pause_mode = 1
 transform = Transform( 1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 0, 0, 0 )
 script = ExtResource( 15 )
 
@@ -366,22 +342,10 @@ amount = 50
 lifetime = 24.07
 speed_scale = 5.0
 visibility_aabb = AABB( -1293.38, -1000, -1158.37, 2586.77, 8000, 2316.74 )
+local_coords = false
 draw_order = 1
 process_material = SubResource( 104 )
 draw_pass_1 = SubResource( 89 )
-script = ExtResource( 17 )
-
-[node name="Particles2" type="Particles" parent="."]
-transform = Transform( -1, 0, 0.000802906, 0, 1, 0, -0.000802906, 0, -1, 0, 50, 0 )
-material_override = SubResource( 103 )
-generate_lightmap = false
-amount = 1000
-lifetime = 24.07
-speed_scale = 32.5
-visibility_aabb = AABB( -1293.38, -1000, -1158.37, 2586.77, 8000, 2316.74 )
-draw_order = 1
-process_material = SubResource( 101 )
-draw_pass_1 = SubResource( 102 )
 script = ExtResource( 17 )
 
 [node name="Spatial" parent="." instance=ExtResource( 22 )]

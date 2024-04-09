@@ -4,9 +4,11 @@ using System;
 public class CameraPanPivot : Position3D
 {
     Camera cam;
+	CameraMovePivot MoveP;
     public override void _Ready()
 	{
 		cam = GetTree().Root.GetCamera();
+		MoveP = (CameraMovePivot)GetParent();
     }
     public override void _Input(InputEvent @event)
 	{
@@ -48,7 +50,7 @@ public class CameraPanPivot : Position3D
 		{
 			if (Mathf.Rad2Deg(prevrot.x) > -20)
 				rot.x -= 0.00005f * (amm.y -(screensize.y - mousepos.y));
-		}	
+		}
 		if (mousepos.y < amm.y)
 		{
 			if (Mathf.Rad2Deg(prevrot.x) < 90)

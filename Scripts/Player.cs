@@ -261,7 +261,7 @@ public class Player : Character
 			Vector2 mousepos = GetViewport().GetMousePosition();
 			Camera cam = GetTree().Root.GetCamera();
 			Vector3 rayor = cam.ProjectRayOrigin(mousepos);
-			Vector3 rayend = rayor + cam.ProjectRayNormal(mousepos) * 10000;
+			Vector3 rayend = rayor + cam.ProjectRayNormal(mousepos) * 20000;
 			var rayar = new Dictionary();
 			if (HasVecicle)
 				rayar = spacestate.IntersectRay(rayor, rayend, new Godot.Collections.Array { this }, moveloc.VehicleMoveLayer);
@@ -293,10 +293,14 @@ public class Player : Character
 		}
 		if (@event.IsActionPressed("Run"))
 		{
-			if (IsRunning)
-				IsRunning = false;
-			else
-				IsRunning = true;
+			if (!HasVecicle)
+			{
+				if (IsRunning)
+					IsRunning = false;
+				else
+					IsRunning = true;
+			}
+			
 		}
 		if (@event.IsActionPressed("Select"))
 		{
@@ -365,6 +369,11 @@ public class Player : Character
 			
 		}
 		//loctomove = GlobalTransform.origin;
+	}
+	public override void OnVehicleBoard()
+	{
+		base.OnVehicleBoard();
+		IsRunning = false;
 	}
 	
 		// ...

@@ -94,7 +94,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2289.45, 183.874, 2454.97 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2282.6, 183.899, 2453.16 )
 
 [node name="SpawnPosition" type="Position3D" parent="." index="17"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2279.67, 184.258, 2450.58 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2279.83, 184.598, 2450.52 )
 
 [node name="Fireplace" parent="." index="18" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -125.117, 78.4328, 2005.11 )

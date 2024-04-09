@@ -1,0 +1,173 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "/*
+void light() and corresponding variables and functions by (c) CaptainProton42's 
+Flexible Toon Shader under the MIT license 
+
+the rest was added by kmitt91; void fragment() + void vertex() and corresponding variables
+*/
+
+shader_type spatial;
+
+render_mode cull_disabled, depth_draw_alpha_prepass, diffuse_toon, specular_toon; 
+
+const float PI = 3.14159;
+
+uniform vec4 color : hint_color;
+uniform sampler2D cape_texture : hint_albedo;
+uniform sampler2D normalmap_texture : hint_normal;
+uniform sampler2D noise_texture : hint_black; 
+
+
+// variables from CaptainProton42
+
+uniform bool clamp_diffuse_to_max = false;
+
+uniform int cuts : hint_range(1, 8) = 3;
+uniform float wrap : hint_range(-2.0f, 2.0f) = 0.0f;
+uniform float steepness : hint_range(1.0f, 8.0f);
+
+uniform bool use_attenuation = true;
+
+uniform bool use_specular = true;
+uniform float specular_strength : hint_range(0.0f, 1.0f) = 1.0f;
+uniform float specular_shininess : hint_range(0.0f, 32.0f) = 16.0f;
+uniform sampler2D specular_map : hint_albedo;
+
+uniform bool use_rim = true;
+uniform float rim_width : hint_range(0.0f, 16.0f) = 8.0f;
+uniform vec4 rim_color : hint_color = vec4(1.0f);
+
+uniform bool use_ramp = false;
+uniform sampler2D ramp : hint_albedo;
+
+uniform bool use_borders = false;
+uniform float border_width = 0.01;
+
+// end from CaptainProton42 variables
+
+
+uniform float strength = 1.0;
+uniform float speed = 1.0;
+
+uniform float substractuv = 0.1;
+uniform float substractuv2 = 1;
+
+uniform float inflation = 1.0;
+
+void vertex() {
+	
+	vec2 scaled_uv = UV * vec2(0.5);
+	float noise = texture(noise_texture, scaled_uv + vec2(TIME * speed, 0.0)).r;
+	
+	float displacement = (noise * 2.0 - 0.8) * strength;
+	if (UV.y > substractuv && UV.y < substractuv2)
+	{
+		displacement *=(UV.y);
+		vec3 res;
+		if (NORMAL.x * displacement > 0.0)
+			res = vec3(NORMAL.x * displacement * inflation, res.y, res.z);
+		if (NORMAL.y * displacement > 0.0)
+			res = vec3(res.x, (NORMAL.y * displacement * inflation) , res.z);
+		if (NORMAL.z * displacement > 0.0)
+			res = vec3(res.x, res.y , NORMAL.z * displacement * inflation);
+
+		VERTEX += res;
+		//else
+			//VERTEX += vec3(displacement, 0.0, displacement);
+	}
+		
+	
+}
+
+
+void fragment() {
+	
+	vec4 cape = texture(cape_texture, UV);
+	
+	ALBEDO = color.rgb * cape.rgb;
+	
+	//ALPHA = color.a * cape.a;
+	NORMALMAP = texture(normalmap_texture, UV).rgb;
+	
+}
+
+
+
+// functions from CaptainProton42
+
+/*float staircase(int n, float x) {
+	float res = 0.0f;
+	float inc = 1.0f / float(n+1);
+	for (float edge = 0.0f; edge < 1.0f - inc; edge+=inc) {
+		res += step(edge, x);
+	}
+	return res / float(n);
+}
+
+float split_diffuse(float diffuse) {
+	return staircase(cuts, diffuse * steepness);
+}
+
+float split_specular(float specular) {
+	return step(0.5f, specular);
+}
+
+
+void light() {
+	// Attenuation.
+	float attenuation = 1.0f;
+	if (use_attenuation) {
+		attenuation = ATTENUATION.x;
+	}
+	
+	// Diffuse lighting.
+	float NdotL = dot(NORMAL, LIGHT);
+	float diffuse_amount = NdotL + (attenuation - 1.0) + wrap;
+	//float diffuse_amount = NdotL * attenuation + wrap;
+	diffuse_amount *= steepness;
+	float cuts_inv = 1.0f / float(cuts);
+	float diffuse_stepped = clamp(diffuse_amount + mod(1.0f - diffuse_amount, cuts_inv), 0.0f, 1.0f);
+
+	// Calculate borders.
+	float border = 0.0f;
+	if (use_borders) {
+		float corr_border_width = length(cross(NORMAL, LIGHT)) * border_width * steepness;
+		border = step(diffuse_stepped - corr_border_width, diffuse_amount)
+				 - step(1.0 - corr_border_width, diffuse_amount);
+	}
+	
+	// Apply diffuse result to different styles.
+	vec3 diffuse = ALBEDO.rgb * LIGHT_COLOR / PI;
+	if (use_ramp) {
+		diffuse *= texture(ramp, vec2(diffuse_stepped * (1.0f - border), 0.0f)).rgb;
+	} else {
+		diffuse *= diffuse_stepped * (1.0f - border);
+	}
+	
+	if (clamp_diffuse_to_max) {
+		// Clamp diffuse to max for multiple light sources.
+		DIFFUSE_LIGHT = max(DIFFUSE_LIGHT, diffuse);
+	} else {
+		DIFFUSE_LIGHT += diffuse;
+	}
+	
+	// Specular lighting.
+	if (use_specular) {
+		vec3 H = normalize(LIGHT + VIEW);
+		float NdotH = dot(NORMAL, H);
+		float specular_amount = max(pow(NdotH, specular_shininess*specular_shininess), 0.0f)
+							    * texture(specular_map, UV).r
+								* attenuation;
+		specular_amount = split_specular(specular_amount);
+		SPECULAR_LIGHT += specular_strength * specular_amount * LIGHT_COLOR;
+	}
+	
+	// Simple rim lighting.
+	if (use_rim) {
+		float NdotV = dot(NORMAL, VIEW);
+		float rim_light = pow(1.0 - NdotV, rim_width);
+		DIFFUSE_LIGHT += rim_light * rim_color.rgb * rim_color.a * LIGHT_COLOR / PI;
+	}
+}"

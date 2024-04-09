@@ -64,6 +64,8 @@ public class DayNight : WorldEnvironment
 
     public Spatial SunMoonMeshPivot;
 
+    Time_UI UI;
+
     static public float GetWindDirection()
     {
         return WindDir;
@@ -283,6 +285,10 @@ public class DayNight : WorldEnvironment
             }
                 
         }
+        if (UI != null)
+            UI.UpdateTime(currenthour, currentmins);
+        else
+            UI = Time_UI.GetInstance();
     }
     //updating values
     float MinuteValue;
@@ -321,14 +327,11 @@ public class DayNight : WorldEnvironment
         //////
         ///
 
-
-        float SunPlacament = SunRot - 180;
-
-        if (SunPlacament > 10)
+        if (SunRot > 190 && SunRot < 350)
         {
             CalculateDay(out FogColor, out FogSunColor, out AmbientLightColor, out BackgroundColor, out AmbientLightEnergy);
         }
-        else if (SunPlacament < -10)
+        else if (SunRot < 170 && SunRot > 10)
         {
             CalculateNight(out FogColor, out FogSunColor, out AmbientLightColor, out BackgroundColor, out AmbientLightEnergy);
         }

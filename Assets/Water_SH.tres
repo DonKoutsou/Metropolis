@@ -75,7 +75,7 @@ void fragment() {
 	//vec2 	uv 							 = UV + uv_sampler_uv_offset;
 	
 	// Normalmap:
-	vec3 	normalmap					 = texture(normalmap_a_sampler, base_uv - uv_offset*2.0).rgb * 0.75;		// 75 % sampler A
+	vec3 	normalmap					 = texture(normalmap_a_sampler, base_uv + uv_offset*4.0).rgb * 0.75;		// 75 % sampler A
 			normalmap 					+= texture(normalmap_b_sampler, base_uv + uv_offset).rgb * 0.25;			// 25 % sampler B
 	NORMALMAP = normalmap;
 	NORMALMAP_DEPTH = normal_scale;
@@ -150,7 +150,7 @@ shader_param/_DepthMaxDistance = 1.651
 shader_param/_DepthFactor = 9.326
 shader_param/ring_width = 0.077
 shader_param/fadeout = 0.266
-shader_param/sampler_direction = Vector2( 0.05, 0.04 )
+shader_param/sampler_direction = Vector2( 0, -0.04 )
 shader_param/uv1_scale = Vector2( 30, 30 )
 shader_param/uv1_offset = Vector3( 0, 0, 0 )
 shader_param/pattern = ExtResource( 2 )
