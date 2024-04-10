@@ -217,7 +217,6 @@ public class Player : Character
 		{
 			currveh.loctomove = loctomove;
 		}
-			
 		if (Input.IsActionPressed("jump"))
 		{
 			if (IsOnFloor())
@@ -232,7 +231,6 @@ public class Player : Character
 				//_velocity.y += JumpImpulse * vehmulti;
 			}
 		}
-		
 		for (int index = 0; index < GetSlideCount(); index++)
 		{
 			// We check every collision that occurred this frame.
@@ -250,8 +248,6 @@ public class Player : Character
 			}
 		}
 	}
-	
-
 	Item selectedobj;
 	public override void _Input(InputEvent @event)
 	{
@@ -348,12 +344,10 @@ public class Player : Character
 				inv.OpenInventory();
 		}
 	}
-	
 	public override void OnKillFieldDetectorBodyEntered(Node body)
 	{
 		Kill();
 	}
-		// We also specified this function name in PascalCase in the editor's connection window
 	public void OnHouseDoorDetectorBodyEntered(Node body)
 	{
 		if (body is HouseDoor)
@@ -363,25 +357,13 @@ public class Player : Character
 			{
 				House h = (House)bod.GetParent();
 				if (!h.HasItem())
-					TalkText.GetInst().Talk("'Αδειο...");
+					TalkText.GetInst().Talk("'Αδειο...", this);
 			}
-			
-			
 		}
-		//loctomove = GlobalTransform.origin;
 	}
 	public override void OnVehicleBoard()
 	{
 		base.OnVehicleBoard();
 		IsRunning = false;
 	}
-	
-		// ...
-
-		
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
 }

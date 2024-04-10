@@ -69,10 +69,10 @@ public class Vehicle : RigidBody
         }
         else
         {
-            WingMaterials[0].SetShaderParam("strength", 15);
-            WingMaterials[1].SetShaderParam("strength", 15);
-            WingMaterials[2].SetShaderParam("strength", 15);
-            WingMaterials[3].SetShaderParam("strength", 15);
+            WingMaterials[0].SetShaderParam("strength", 10);
+            WingMaterials[1].SetShaderParam("strength", 10);
+            WingMaterials[2].SetShaderParam("strength", 10);
+            WingMaterials[3].SetShaderParam("strength", 10);
             WindOnWings = true;
         }
         

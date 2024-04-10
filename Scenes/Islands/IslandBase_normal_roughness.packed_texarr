@@ -44,6 +44,10 @@
 		{
 			"a": "res://Assets/TerainTex/Sand/Stylized_Sand_001_roughness.jpg",
 			"rgb": "res://Assets/TerainTex/Sand/Stylized_Sand_001_normal.jpg"
+		},
+		{
+			"a": "res://Assets/TerainTex/Sand/Stylized_Sand_001_roughness.jpg",
+			"rgb": "res://Assets/TerainTex/Sand/Stylized_Sand_001_normal.jpg"
 		}
 	],
 	"resolution": 512

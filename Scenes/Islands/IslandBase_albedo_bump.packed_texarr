@@ -44,6 +44,10 @@
 		{
 			"a": "res://Assets/TerainTex/Sand/Stylized_Sand_001_height.png",
 			"rgb": "res://Assets/TerainTex/Sand/Stylized_Sand_001_basecolor.jpg"
+		},
+		{
+			"a": "res://Assets/TerainTex/Sand/Stylized_Sand_001_height.png",
+			"rgb": "res://Assets/TerainTex/Sand/Stylized_Sand_001_basecolor.jpg"
 		}
 	],
 	"resolution": 512

@@ -9,12 +9,14 @@ public class CameraMovePivot : Position3D
 
     static CameraMovePivot instance;
 
-    public bool shouldfollowpl = false;
+    public bool shouldfollowpl = true;
 
     Player pl;
 
 	[Export]
 	public float MaxDist = 150;
+
+	public Vector3 offset = new Vector3();
     public override void _Ready()
     {
         base._Ready();
@@ -26,9 +28,9 @@ public class CameraMovePivot : Position3D
 	
     public override void _PhysicsProcess(float delta)
 	{
-        if (shouldfollowpl)
+        /*if (shouldfollowpl)
         {
-            GlobalTranslation = pl.GlobalTranslation;
+            Translation = Vector3.Zero;
         }
         Vector3 prev = zpivot.Translation;
 		//Vector3 myprev = GlobalTranslation;
@@ -68,8 +70,8 @@ public class CameraMovePivot : Position3D
         {
             GlobalTranslation = zpivot.GlobalTranslation;
         }
-		Rotation = new Vector3(0.0f,0.0f,0.0f);
-        zpivot.Translation = prev;
+		//Rotation = new Vector3(0.0f,0.0f,0.0f);
+        zpivot.Translation = prev;*/
 	}
     static public CameraMovePivot GetInstance()
     {

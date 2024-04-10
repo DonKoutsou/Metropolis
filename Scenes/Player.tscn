@@ -82,7 +82,7 @@ render_priority = -2
 shader = ExtResource( 27 )
 
 [sub_resource type="SpatialMaterial" id=100]
-render_priority = -1
+render_priority = 1
 flags_transparent = true
 params_billboard_mode = 3
 particles_anim_h_frames = 1
@@ -122,7 +122,7 @@ size = Vector2( 1000, 1000 )
 
 [node name="Player" type="KinematicBody" groups=["player"]]
 collision_layer = 9
-collision_mask = 55
+collision_mask = 311
 script = ExtResource( 1 )
 JumpImpulse = 30
 RunSpeed = 30
@@ -241,7 +241,7 @@ text = "24 : 00"
 script = ExtResource( 18 )
 
 [node name="TalkText" type="Label3D" parent="PlayerUI"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00309825, 5.91491, -0.0881054 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.003, 6, -0.088 )
 cast_shadow = 0
 pixel_size = 0.002
 billboard = 1
@@ -269,18 +269,20 @@ visible = false
 
 [node name="CameraMovePivot" type="Position3D" parent="."]
 pause_mode = 1
-transform = Transform( 1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 0, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00875211, -0.0306139, -0.0222187 )
 script = ExtResource( 15 )
 
 [node name="CameraPanPivot" type="Position3D" parent="CameraMovePivot"]
+transform = Transform( 0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0.222545, -0.153828, -0.749961 )
 script = ExtResource( 14 )
 
 [node name="CameraZoomPivot" type="Position3D" parent="CameraMovePivot/CameraPanPivot"]
+transform = Transform( 1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 1.80304e-06, 24.3742, 20 )
 script = ExtResource( 12 )
 Speed = 5
 
 [node name="Camera" type="Camera" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot"]
-transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 24.3742, 20 )
+transform = Transform( 1, -1.95167e-08, 2.25228e-08, 0, 0.755739, 0.654873, -2.98023e-08, -0.654873, 0.755739, 0, 0, 0 )
 cull_mask = 1
 fov = 45.0
 size = 5.0
@@ -301,37 +303,29 @@ autoplay = true
 max_distance = 16.06
 area_mask = 0
 
-[node name="RayCastDown" type="RayCast" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot/Camera"]
-transform = Transform( 1, 1.77636e-15, -3.55271e-15, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-enabled = true
-cast_to = Vector3( 0, -2, 0 )
-collision_mask = 4
+[node name="RemoteTransform" type="RemoteTransform" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot/Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 2.68221e-07, 0, -2.68221e-07, 1, 0, 10.7458, -1.27413 )
+remote_path = NodePath("../../CameraTerainCast")
+update_rotation = false
+update_scale = false
 
-[node name="RayCastBack" type="RayCast" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot/Camera"]
-enabled = true
-cast_to = Vector3( 0, 0, 2 )
-collision_mask = 4
+[node name="RemoteTransform2" type="RemoteTransform" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot/Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 2.68221e-07, 0, -2.68221e-07, 1, 0, 10.7458, -1.27413 )
+remote_path = NodePath("../../CameraTerainCast2")
+update_rotation = false
+update_scale = false
 
-[node name="RayCastUp" type="RayCast" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot/Camera"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.13687e-13, 2.86102e-06, 0 )
+[node name="CameraTerainCast" type="RayCast" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot"]
+transform = Transform( 0.999978, -2.10734e-08, -8.72871e-09, 2.10732e-08, 0.707114, 0.707101, -8.72864e-09, -0.707107, 0.707093, -2.38419e-07, 7.2866, -8.00002 )
 enabled = true
-cast_to = Vector3( 0, 2, 0 )
-collision_mask = 4
+cast_to = Vector3( 0, -12, 0 )
+collision_mask = 260
 
-[node name="RayCastFront" type="RayCast" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot/Camera"]
+[node name="CameraTerainCast2" type="RayCast" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot"]
+transform = Transform( 0.999985, 2.10735e-08, -5.08752e-08, -2.10734e-08, -0.707114, -0.707105, -5.08751e-08, 0.707108, -0.707099, -2.38419e-07, 7.2866, -8.00002 )
 enabled = true
-cast_to = Vector3( 0, 0, -2 )
-collision_mask = 4
-
-[node name="RayCastLeft" type="RayCast" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot/Camera"]
-enabled = true
-cast_to = Vector3( -2, 0, 0 )
-collision_mask = 4
-
-[node name="RayCastRight" type="RayCast" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot/Camera"]
-enabled = true
-cast_to = Vector3( 2, 0, 0 )
-collision_mask = 4
+cast_to = Vector3( 0, -12, 0 )
+collision_mask = 260
 
 [node name="Particles" type="Particles" parent="."]
 transform = Transform( -1, 0, 0.000802906, 0, 1, 0, -0.000802906, 0, -1, 0, 50, 0 )

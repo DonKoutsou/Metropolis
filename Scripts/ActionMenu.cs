@@ -3,59 +3,48 @@ using System;
 
 public class ActionMenu : Control
 {
+	static Item SelectedItem;
 
-	Item SelectedItem;
+	static Character SelectedChar;
 
-	Character SelectedChar;
+	static FireplaceLight Fireplace;
 
-	FireplaceLight Fireplace;
-
-	Vehicle vehicle;
+	static Vehicle vehicle;
 
 	Player pl;
 
-    bool selecting = false;
+    static bool selecting = false;
 
     Button PickButton;
 
-	private void On_PickUp_Button_Down()
+	public static bool IsSelecting()
 	{
-		if (SelectedItem == null)
-			return;
-		
-		Spatial house = (Spatial)SelectedItem.GetParent();
-		if (house != null && house is House)
-			((House)house).OnItemPicked();
-
-		if (!pl.GetCharacterInventory().InsertItem(SelectedItem))
-		{
-			TalkText.GetInst().Talk("Δέν έχω χώρο.");
-		}
-		if (SelectedItem.GetItemType() == (int)ItemName.ROPE)
-		{
-			MeshInstance rope = pl.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("BoneAttachment2").GetNode<MeshInstance>("Rope");
-			rope.Show();
-		}
-		DeselectCurrent();
-        selecting = false;
-		Stop();
+		return SelectedItem != null || SelectedChar != null || Fireplace != null || vehicle != null;
 	}
-	private void On_Interact_Button_Down()
+	private void On_PickUp_Button_Down()
 	{
 		if (SelectedItem != null)
 		{
-			TalkText.GetInst().Talk(SelectedItem.GetItemName());
-		}
-		if (SelectedChar != null)
-		{
-			TalkText.GetInst().Talk("Φίλος");
-		}
-        if (Fireplace != null)
-		{
-			Fireplace.ToggleFileplace();
+			Spatial house = (Spatial)SelectedItem.GetParent();
+			if (house != null && house is House)
+				((House)house).OnItemPicked();
+
+			if (!pl.GetCharacterInventory().InsertItem(SelectedItem))
+			{
+				TalkText.GetInst().Talk("Δέν έχω χώρο.", pl);
+			}
+			if (SelectedItem.GetItemType() == (int)ItemName.ROPE)
+			{
+				MeshInstance rope = pl.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("BoneAttachment2").GetNode<MeshInstance>("Rope");
+				rope.Show();
+			}
 			DeselectCurrent();
 			selecting = false;
 			Stop();
+		}
+		if (SelectedChar != null)
+		{
+			TalkText.GetInst().Talk("Φίλος", SelectedChar);
 		}
 		if (vehicle != null)
 		{
@@ -77,17 +66,40 @@ public class ActionMenu : Control
 			}
 		}
 	}
+	private void On_Interact_Button_Down()
+	{
+		if (SelectedItem != null)
+		{
+			TalkText.GetInst().Talk(SelectedItem.GetItemName(), pl);
+		}
+		if (SelectedChar != null)
+		{
+			TalkText.GetInst().Talk("Φίλος", pl);
+		}
+        if (Fireplace != null)
+		{
+			Fireplace.ToggleFileplace();
+			DeselectCurrent();
+			selecting = false;
+			Stop();
+		}
+		if (vehicle != null)
+		{
+			TalkText.GetInst().Talk("Βάρκα", pl);
+		}
+	}
 	
 	public void Start(Item obj)
 	{
         if (selecting)
             return;
-		//GetNode<Button>("PickUp_Button").focus;
+
 		DeselectCurrent();
 
 		SelectedItem = obj;
-
+		PickButton.Text = "Πάρε";
 		((ShaderMaterial)SelectedItem.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
+
 		Show();
 		SetProcess(true);
 	}
@@ -95,16 +107,15 @@ public class ActionMenu : Control
 	{
 		if (selecting)
             return;
-		//GetNode<Button>("PickUp_Button").focus;
+
 		DeselectCurrent();
-			
-
-		SelectedChar = obj;
-
-		((ShaderMaterial)SelectedChar.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>("polySurface36").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
-		((ShaderMaterial)SelectedChar.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>("polySurface14001").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
 		
+		SelectedChar = obj;
+		PickButton.Text = "Kουβέντα";
 
+		((ShaderMaterial)SelectedChar.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>("Mesh001").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
+		((ShaderMaterial)SelectedChar.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>("Mesh003").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
+		
 		Show();
 		SetProcess(true);
 	}
@@ -112,10 +123,9 @@ public class ActionMenu : Control
 	{
 		if (selecting)
             return;
-		//GetNode<Button>("PickUp_Button").focus;
+
 		DeselectCurrent();
 			
-
 		Fireplace = obj;
 		((ShaderMaterial)Fireplace.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
 		
@@ -126,11 +136,11 @@ public class ActionMenu : Control
 	{
 		if (selecting)
             return;
-		//GetNode<Button>("PickUp_Button").focus;
+
 		DeselectCurrent();
 			
-
 		vehicle = veh;
+		PickButton.Text = "Επιβιβάσου";
 		((ShaderMaterial)vehicle.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
 		
 		Show();
@@ -145,8 +155,8 @@ public class ActionMenu : Control
 		}
 		if (SelectedChar != null)
 		{
-			((ShaderMaterial)SelectedChar.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>("polySurface36").GetActiveMaterial(0).NextPass).SetShaderParam("enable", false);
-			((ShaderMaterial)SelectedChar.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>("polySurface14001").GetActiveMaterial(0).NextPass).SetShaderParam("enable", false);
+			((ShaderMaterial)SelectedChar.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>("Mesh001").GetActiveMaterial(0).NextPass).SetShaderParam("enable", false);
+			((ShaderMaterial)SelectedChar.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>("Mesh003").GetActiveMaterial(0).NextPass).SetShaderParam("enable", false);
 			SelectedChar = null;
 		}
 		if (Fireplace != null)
@@ -184,7 +194,7 @@ public class ActionMenu : Control
 		{
 			screenpos = GetTree().Root.GetCamera().UnprojectPosition(SelectedItem.GlobalTransform.origin);
 			Vector3 pos = SelectedItem.GlobalTransform.origin;
-			if (pl.GlobalTransform.origin.DistanceTo(pos) > 5)
+			if (pl.GlobalTransform.origin.DistanceTo(pos) > 10)
 				PickButton.Hide();
 			else
 				PickButton.Show();
@@ -192,7 +202,15 @@ public class ActionMenu : Control
 		else if(SelectedChar != null)
 		{
 			screenpos = GetTree().Root.GetCamera().UnprojectPosition(SelectedChar.GlobalTransform.origin);
-			PickButton.Hide();
+			Vector3 pos = SelectedChar.GlobalTransform.origin;
+			if (pl.GlobalTransform.origin.DistanceTo(pos) > 10)
+			{
+				PickButton.Hide();
+			}
+			else
+			{
+				PickButton.Show();
+			}
 		}
 		else if (Fireplace != null)
 		{
@@ -202,7 +220,16 @@ public class ActionMenu : Control
 		else if (vehicle != null)
 		{
 			screenpos = GetTree().Root.GetCamera().UnprojectPosition(vehicle.GlobalTransform.origin);
-			PickButton.Hide();
+			Vector3 pos = vehicle.GlobalTransform.origin;
+			if (pl.GlobalTransform.origin.DistanceTo(pos) > 30)
+			{
+				PickButton.Hide();
+			}
+			else
+			{
+				PickButton.Show();
+			}
+				
 		}
 		RectPosition = new Vector2 (screenpos.x, screenpos.y +50);
 

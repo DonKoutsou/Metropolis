@@ -7,7 +7,7 @@ public class WorldClipRaycast : RayCast
     Player pl;
     public override void _Ready()
     {
-        pl = GetParent().GetNode<Player>("Player");
+        pl = (Player)GetParent();
     }
     public static void EnableWorldClipRaycast()
     {

@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/Wind/WindMesh.obj" type="ArrayMesh" id=1]
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.550617, 1 )
+colors = PoolColorArray( 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 2
+emission_box_extents = Vector3( 10, 10, 10 )
+direction = Vector3( 0, 0, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+color_ramp = SubResource( 3 )
+
+[node name="Particles" type="Particles"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
+cast_shadow = 0
+amount = 1
+lifetime = 2.0
+local_coords = false
+process_material = SubResource( 1 )
+draw_pass_1 = ExtResource( 1 )

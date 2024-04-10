@@ -5,10 +5,13 @@ using System.Drawing;
 public class TalkText : Label3D
 {
     static TalkText instance;
-    public void Talk(string diag)
+    static Timer TalkTimer;
+    Character Talking;
+    public void Talk(string diag, Character Talker)
     {
         Text = diag;
-        GetNode<Timer>("UpdateTimer").Start();
+        Talking = Talker;
+        TalkTimer.Start();
         Show();
         SetProcess(true);
     }
@@ -17,19 +20,14 @@ public class TalkText : Label3D
         SetProcess(false);
         Hide();
     }
+    public static bool IsTalking()
+    {
+        return TalkTimer.TimeLeft > 0;
+    }
     public override void _Process(float delta)
     {
-       /* var pl = GetTree().GetNodesInGroup("player");
-        if (pl.Count == 0)
-            return;
-        var plpos = ((Spatial)pl[0]).GlobalTransform.origin;
-        var screenpos = GetTree().Root.GetCamera().UnprojectPosition(plpos);
-        var campos = GetTree().Root.GetCamera().GlobalTransform.origin;
-        float dist = plpos.DistanceTo(campos);
-        var minval = (dist-0)/(300-0);
-        var sz = (int)Math.Round(TextSizePerDistance.Interpolate(minval));
-        //RectPosition =  new Vector2(screenpos.x - 1300, screenpos.y - ElevationPerDistance.Interpolate(minval) * 2);
-        ((DynamicFont)Font).Size = sz;*/
+        Vector3 plpos = Talking.GlobalTransform.origin;
+        GlobalTranslation = new Vector3(plpos.x, plpos.y + 6, plpos.z);
     }
     public static TalkText GetInst()
     {
@@ -38,9 +36,10 @@ public class TalkText : Label3D
     public override void _Ready()
     {
         base._Ready();
+        TalkTimer = GetNode<Timer>("UpdateTimer");
         SetProcess(false);
         Hide();
         instance = this;
     }
-
+    
 }
