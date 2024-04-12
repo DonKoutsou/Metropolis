@@ -11,6 +11,8 @@ public class ActionMenu : Control
 
 	static Vehicle vehicle;
 
+	static WindGenerator generator;
+
 	Player pl;
 
     static bool selecting = false;
@@ -88,61 +90,43 @@ public class ActionMenu : Control
 			TalkText.GetInst().Talk("Βάρκα", pl);
 		}
 	}
-	
-	public void Start(Item obj)
-	{
-        if (selecting)
-            return;
-
-		DeselectCurrent();
-
-		SelectedItem = obj;
-		PickButton.Text = "Πάρε";
-		((ShaderMaterial)SelectedItem.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
-
-		Show();
-		SetProcess(true);
-	}
-	public void Start(Character obj)
+	public void Start(Node obj)
 	{
 		if (selecting)
             return;
-
 		DeselectCurrent();
-		
-		SelectedChar = obj;
-		PickButton.Text = "Kουβέντα";
+		if (obj is Item)
+		{
+			SelectedItem = (Item)obj;
+			PickButton.Text = "Πάρε";
+			((ShaderMaterial)SelectedItem.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
+		}
+		else if (obj is Character)
+		{
+			SelectedChar = (Character)obj;
+			PickButton.Text = "Kουβέντα";
 
-		((ShaderMaterial)SelectedChar.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>("Mesh001").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
-		((ShaderMaterial)SelectedChar.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>("Mesh003").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
-		
-		Show();
-		SetProcess(true);
-	}
-	public void Start(FireplaceLight obj)
-	{
-		if (selecting)
-            return;
+			((ShaderMaterial)SelectedChar.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>("Mesh001").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
+			((ShaderMaterial)SelectedChar.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>("Mesh003").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
+		}
+		else if (obj is FireplaceLight)
+		{
+			Fireplace = (FireplaceLight)obj;
+			((ShaderMaterial)Fireplace.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
+		}
+		else if (obj is Vehicle)
+		{
+			vehicle = (Vehicle)obj;
+			PickButton.Text = "Επιβιβάσου";
+			((ShaderMaterial)vehicle.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
+		}
+		else if (obj is WindGenerator)
+		{
+			generator = (WindGenerator)obj;
+			PickButton.Text = "Επιβιβάσου";
+			((ShaderMaterial)generator.GetNode<MeshInstance>("MeshInstance2").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
+		}
 
-		DeselectCurrent();
-			
-		Fireplace = obj;
-		((ShaderMaterial)Fireplace.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
-		
-		Show();
-		SetProcess(true);
-	}
-	public void Start(Vehicle veh)
-	{
-		if (selecting)
-            return;
-
-		DeselectCurrent();
-			
-		vehicle = veh;
-		PickButton.Text = "Επιβιβάσου";
-		((ShaderMaterial)vehicle.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
-		
 		Show();
 		SetProcess(true);
 	}
@@ -168,6 +152,11 @@ public class ActionMenu : Control
 		{
 			((ShaderMaterial)vehicle.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", false);
 			vehicle = null;
+		}
+		if (generator != null)
+		{
+			((ShaderMaterial)generator.GetNode<MeshInstance>("MeshInstance2").GetActiveMaterial(0).NextPass).SetShaderParam("enable", false);
+			generator = null;
 		}
 	}
 	public void Stop()
@@ -204,13 +193,9 @@ public class ActionMenu : Control
 			screenpos = GetTree().Root.GetCamera().UnprojectPosition(SelectedChar.GlobalTransform.origin);
 			Vector3 pos = SelectedChar.GlobalTransform.origin;
 			if (pl.GlobalTransform.origin.DistanceTo(pos) > 10)
-			{
 				PickButton.Hide();
-			}
 			else
-			{
 				PickButton.Show();
-			}
 		}
 		else if (Fireplace != null)
 		{
@@ -222,14 +207,18 @@ public class ActionMenu : Control
 			screenpos = GetTree().Root.GetCamera().UnprojectPosition(vehicle.GlobalTransform.origin);
 			Vector3 pos = vehicle.GlobalTransform.origin;
 			if (pl.GlobalTransform.origin.DistanceTo(pos) > 30)
-			{
 				PickButton.Hide();
-			}
 			else
-			{
+				PickButton.Show();	
+		}
+		else if (generator != null)
+		{
+			screenpos = GetTree().Root.GetCamera().UnprojectPosition(generator.GlobalTransform.origin);
+			Vector3 pos = generator.GlobalTransform.origin;
+			if (pl.GlobalTransform.origin.DistanceTo(pos) > 20)
+				PickButton.Hide();
+			else
 				PickButton.Show();
-			}
-				
 		}
 		RectPosition = new Vector2 (screenpos.x, screenpos.y +50);
 

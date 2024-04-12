@@ -280,11 +280,11 @@ public class Character : KinematicBody
 	}
 	public virtual void OnVehicleBoard()
 	{
-		SetCollisionMaskBit(8, true);
+		//SetCollisionMaskBit(8, true);
 	}
 	public virtual void OnVehicleUnBoard()
 	{
-		SetCollisionMaskBit(8, false);
+		//SetCollisionMaskBit(8, false);
 	}
 	private void On_DialogueButton_Button_Down()
 	{

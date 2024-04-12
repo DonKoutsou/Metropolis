@@ -362,8 +362,11 @@ public class Vehicle : RigidBody
     }
     public override void _Input(InputEvent @event)
 	{
+        if (!Working)
+            return;
 		if (@event.IsActionPressed("Run"))
 		{
+
             if (wingsdeployed)
                 ToggleWings(false);
             else

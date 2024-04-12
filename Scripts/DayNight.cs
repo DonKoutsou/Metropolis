@@ -51,8 +51,8 @@ public class DayNight : WorldEnvironment
 
     float currentDay;
 
-    float currenthour;
-    float currentmins;
+    static float currenthour;
+    static float currentmins;
 
     static public float WindDir = 0;
     static public float WindStreangth = 100;
@@ -74,10 +74,13 @@ public class DayNight : WorldEnvironment
     {
         return WindStreangth;
     }
-    
+    static public void GetTime(out float hour, out float mins)
+    {
+        hour = currenthour; mins = currentmins;
+    }
     private void UpdateWind()
     {
-        float value = currentDay + (((currenthour  + (currentmins / 60))/ 24));
+        float value = currentDay + ((currenthour  + (currentmins / 60))/ 24);
         while (value > 10)
             value -= 10;
         WindDir = WindDirCurve.Interpolate(value/ 10);

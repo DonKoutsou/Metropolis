@@ -45,6 +45,7 @@ public class Inventory : Spatial
         {
             return false;
         }
+
         InventoryContents.Insert(InventoryContents.Count, item);
         currentweight += item.GetInventoryWeight();
         var parent = item.GetParent();
@@ -86,9 +87,9 @@ public class Inventory : Spatial
     public void GetContents(out List<Item> Items)
     {
         Items = new List<Item>();
-        for (int i = 0; i < InventoryContents.Count; i++)
+        for (int i = InventoryContents.Count() - 1; i > -1; i--)
         {
-            Items.Insert(i, InventoryContents[i]);
+            Items.Insert(Items.Count(), InventoryContents[i]);
         }
     }
     public void GetItemsByType(out List<Item> Items, ItemName Type)
@@ -97,7 +98,7 @@ public class Inventory : Spatial
         for (int i = 0; i < InventoryContents.Count; i++)
         {
             if (InventoryContents[i].GetItemType() == (int)Type)
-                Items.Insert(i, InventoryContents[i]);
+                Items.Insert(Items.Count(), InventoryContents[i]);
         }
     }
     public float GetAvailableCapacity()

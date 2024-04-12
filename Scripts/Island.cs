@@ -20,6 +20,7 @@ public class Island : Spatial
 	public float rotationtospawnwith;
 
 	Spatial Terain;
+	Spatial TerainDetail;
 
 	//NavigationMeshInstance navmesh;
 	public void RegisterChar(Character en)
@@ -44,6 +45,10 @@ public class Island : Spatial
 
 		//navmesh = GetNode<NavigationMeshInstance>("NavigationMeshInstance");
 		Terain = GetNodeOrNull<Spatial>("HTerrain");
+		if (Terain != null)
+		{
+			TerainDetail = Terain.GetNodeOrNull<Spatial>("HTerrainDetailLayer");
+		}
 		StaticBody waterbody = GetNodeOrNull<StaticBody>("SeaBed");
 		if (waterbody != null)
 			waterbody.GlobalRotation = new Vector3 (0.0f, 0.0f, 0.0f);
@@ -66,7 +71,13 @@ public class Island : Spatial
 			Show();
 		}
 		if (Terain != null)
+		{
 			Terain.SetProcess(true);
+			if (TerainDetail != null)
+			{
+				TerainDetail.SetProcess(true);
+			}
+		}
 
 		ToggleEnemies(true);
 		//if (navmesh != null)
@@ -81,7 +92,14 @@ public class Island : Spatial
 			Hide();
 		}
 		if (Terain != null)
+		{
 			Terain.SetProcess(false);
+			if (TerainDetail != null)
+			{
+				TerainDetail.SetProcess(false);
+			}
+		}
+			
 
 		ToggleEnemies(false);
 

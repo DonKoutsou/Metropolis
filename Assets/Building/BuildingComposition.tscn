@@ -15,7 +15,7 @@ data = PoolVector3Array( -2.2667, 3.531, 10.0572, -10.0572, 3.531, 10.0572, -10.
 
 [node name="House" type="Spatial" groups=["Clutter"]]
 script = ExtResource( 5 )
-ItemSpawnPool = PoolStringArray( "res://Scenes/Item.tscn" )
+ItemSpawnPool = PoolStringArray( "res://Scenes/Item.tscn", "res://Scenes/Drahma.tscn", "res://Scenes/BatteryEmpty.tscn" )
 
 [node name="HouseExterior" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0691166, 0 )

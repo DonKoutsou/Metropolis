@@ -202,9 +202,16 @@ public class MyWorld : Spatial
 	public static void ToggleIsland(Island ile, bool Toggle, bool affectneigh = false)
 	{
 		if (Toggle)
+		{
 			ile.EnableIsland();
+			ToggleChildrenCollision(ile, false, true);
+		}
 		else
+		{
 			ile.DeactivateIsland();
+			ToggleChildrenCollision(ile, true, true);
+		}
+			
 			
 		if (affectneigh)
 		{
@@ -214,6 +221,20 @@ public class MyWorld : Spatial
 
 			for (int i = 0; i < closestto.Count; i ++)
 				ToggleIsland(closestto[i], Toggle);
+		}
+	}
+	static private void ToggleChildrenCollision(Node node, bool toggle, bool recursive)
+	{
+		foreach (Node child in node.GetChildren())
+		{
+			if (child is CollisionShape)
+			{
+				((CollisionShape)child).Disabled = toggle;
+			}
+			if (recursive)
+			{
+				ToggleChildrenCollision(child, toggle, recursive);
+			}
 		}
 	}
 	public override void _Input(InputEvent @event)

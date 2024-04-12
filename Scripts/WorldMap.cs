@@ -94,7 +94,7 @@ public class WorldMap : TileMap
             delt = 0.1f;
             
             if (!finishedspawning)
-                EnableIsland(currentile);
+                    EnableIsland(currentile);
 
             Vector2 plpos = new Vector2(pl.GlobalTransform.origin.x, pl.GlobalTransform.origin.z);
             if (plpos.DistanceTo(CurrentTile) > CellSize.x/2)

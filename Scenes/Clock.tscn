@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scenes/Clock.cs" type="Script" id=1]
+[ext_resource path="res://Assets/Battery/M_Battery.material" type="Material" id=2]
+[ext_resource path="res://Assets/Battery/Battery.tres" type="ArrayMesh" id=3]
+[ext_resource path="res://Assets/Battery/BatteryIcon.png" type="Texture" id=4]
+
+[sub_resource type="CylinderShape" id=1]
+height = 0.054156
+radius = 0.248144
+
+[node name="Battery" type="RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00434375, 0.0105272, -0.0158259 )
+collision_layer = 16
+collision_mask = 36
+mode = 1
+mass = 0.0346939
+script = ExtResource( 1 )
+ItemType = 3
+ItemIcon = ExtResource( 4 )
+ItemName = "Ορολόι"
+ItemDesc = ""
+stackable = false
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
+material_override = ExtResource( 2 )
+mesh = ExtResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 1 )

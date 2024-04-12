@@ -5,27 +5,15 @@ using System.Collections.Generic;
 public class House : Spatial
 {
 	[Export]
+	bool spawnItems = true;
+	[Export]
 	public string[] ItemSpawnPool;
-
-	[Export]
-	public DialogueLine[] lines;
-
-	[Export]
-	public DialogueLine EmptyLines;
-
-
-	//Inventory HouseInventory;
-
-	//DialoguePanel DiagPan;
-
-	public NavigationMeshInstance navmesh;
 
 	Item Item;
 	public override void _Ready()
 	{
-
-		//m_bEmpty = Random.Next(2) == 1;
-
+		if (!spawnItems)
+			return;
 		if (ItemSpawnPool == null)
 			return;
 		Random random = new Random();
@@ -38,8 +26,7 @@ public class House : Spatial
 		AddChild(itemToDrop);
 		itemToDrop.GlobalTranslation = GetNode<Position3D>("ItemSpawnPos").GlobalTransform.origin;
 		Item = itemToDrop;
-		//HouseInventory.InsertItem(itemToDrop);
-		//navmesh = GetNode<NavigationMeshInstance>("NavigationMeshInstance");
+
 	}
 	public bool HasItem()
 	{

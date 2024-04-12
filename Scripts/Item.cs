@@ -52,4 +52,5 @@ public enum ItemName
     DRAHMA,
     ROPE,
     BATTERY,
+    CLOCK,
 }

@@ -40,7 +40,7 @@ public class CameraPanPivot : Position3D
 				Rotation = prevrot;
 		}
     }
-	public override void _PhysicsProcess(float delta)
+	public override void _Process(float delta)
 	{
 		InventoryUI inv = InventoryUI.GetInstance();
 		if (inv.IsOpen || ActionMenu.IsSelecting())

@@ -175,7 +175,7 @@ public class Player : Character
 
 		float coons = Consumption.Interpolate(rpm) * delta;
 
-		List<Item> batteries = new List<Item>();
+		List<Item> batteries;
 		CharacterInventory.GetItemsByType(out batteries, ItemName.BATTERY);
 		
 		for (int i = batteries.Count(); i > 0; i--)
@@ -332,6 +332,11 @@ public class Player : Character
 			else if (obj is Vehicle)
 			{
 				Vehicle selectechar = (Vehicle)obj;
+				actMen.Start(selectechar);
+			}
+			else if (obj is WindGenerator)
+			{
+				WindGenerator selectechar = (WindGenerator)obj;
 				actMen.Start(selectechar);
 			}
 		}

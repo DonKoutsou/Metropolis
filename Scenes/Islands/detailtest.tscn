@@ -1,0 +1,30 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://addons/zylann.hterrain/hterrain_detail_layer.gd" type="Script" id=1]
+[ext_resource path="res://addons/zylann.hterrain/tools/icons/icon_detail_layer_node.svg" type="Texture" id=2]
+[ext_resource path="res://Assets/TerainTex/Rock035_1K-JPG/Rock035_1K-JPG_Col2or.jpg" type="Texture" id=3]
+[ext_resource path="res://Assets/TerainRockShader.tres" type="Shader" id=4]
+[ext_resource path="res://Assets/Clutter/Rock/Rock.obj" type="ArrayMesh" id=5]
+
+[sub_resource type="OpenSimplexNoise" id=1]
+
+[sub_resource type="NoiseTexture" id=2]
+width = 256
+height = 256
+noise = SubResource( 1 )
+
+[node name="HTerrainDetailLayer" type="Spatial"]
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_icon": ExtResource( 2 )
+}
+texture = ExtResource( 3 )
+view_distance = 500.0
+custom_shader = ExtResource( 4 )
+density = 2.0
+instance_mesh = ExtResource( 5 )
+shader_params/u_globalmap_tint_bottom = 1.0
+shader_params/u_globalmap_tint_top = 1.0
+shader_params/u_bottom_ao = 0.61
+shader_params/u_instance_scale = Vector3( 0.05, 0.05, 0.05 )
+shader_params/surfaceNoise = SubResource( 2 )

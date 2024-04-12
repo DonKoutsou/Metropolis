@@ -48,18 +48,18 @@ public class InventoryUI : Control
         {
             slots.Insert(i, (InventoryUISlot)gr.GetChild(i));
         }
-        SetPhysicsProcess(false);
+        SetProcess(false);
     }
     public void OpenInventory()
     {
         Show();
         IsOpen = true;
-        SetPhysicsProcess(true);
+        SetProcess(true);
     }
     float d = 0.1f;
-    public override void _PhysicsProcess(float delta)
+    public override void _Process(float delta)
     {
-        base._PhysicsProcess(delta);
+        base._Process(delta);
         d -= delta;
         if (d > 0)
             return;
@@ -77,16 +77,15 @@ public class InventoryUI : Control
             Item sample = null;
             int ammount = 0;
             
-            for (int v = Items.Count(); v > 0; v --)
+            for (int v = Items.Count() - 1; v > -1; v --)
             {
                 if (sample == null)
-                    sample = Items[v - 1];
+                    sample = Items[v];
                 
-                if (Items[v - 1].GetItemType() == sample.GetItemType())
+                if (Items[v].GetItemType() == sample.GetItemType())
                 {
                     ammount += 1;
-                    Items.RemoveAt(v - 1);
-                    
+                    Items.RemoveAt(v);
                 }
                 if (!sample.stackable)
                     break;
@@ -118,9 +117,9 @@ public class InventoryUI : Control
     public void ItemHovered(Item it)
     {
         if (it == null)
-        {
             return;
-        }
+
+        
         showingDesc = true;
         ShowingDescSample = it;
         ((Control)Description.GetParent()).Show();

@@ -98,7 +98,7 @@ config/icon="res://icon.png"
 
 [debug]
 
-settings/fps/force_fps=60
+settings/stdout/print_fps=true
 
 [display]
 
@@ -238,12 +238,13 @@ debugger_agent/wait_timeout=6000
 [physics]
 
 common/enable_pause_aware_picking=true
+3d/active_soft_world=false
 
 [rendering]
 
+threads/thread_model=2
+threads/thread_safe_bvh=true
 quality/shadows/filter_mode=2
-quality/filters/use_nearest_mipmap_filter=true
 environment/default_clear_color=Color( 1, 1, 1, 1 )
-quality/filters/msaa=3
-quality/filters/use_fxaa=true
+quality/filters/msaa=1
 environment/default_environment="res://new_environment2.tres"

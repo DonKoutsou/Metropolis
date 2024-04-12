@@ -2,6 +2,12 @@ using Godot;
 using System;
 public class WindGenerator : StaticBody
 {
+    [Export]
+    private float EnergyCapacity;
+    [Export]
+    private float CurrentEnergy;
+    [Export]
+    private float EnergyPerWindStreangth = 0.1f;
     AnimationPlayer anim;
     AnimationPlayer anim2;
     AnimationPlayer anim3;
@@ -25,9 +31,9 @@ public class WindGenerator : StaticBody
             SetProcess(false);
     }
     float d = 0.5f;
-    public override void _PhysicsProcess(float delta)
+    public override void _Process(float delta)
     {
-        base._PhysicsProcess(delta);
+        base._Process(delta);
         d -= delta;
 		if (d > 0)
             return;
@@ -42,8 +48,15 @@ public class WindGenerator : StaticBody
             rot = rot - 360;
         anim3.Seek(rot / 36, true);
         //rotorpivot.GlobalRotation = new Vector3(0.0f, rot, 0.0f);
-        anim.PlaybackSpeed = windstr * 0.05f;
-        anim2.PlaybackSpeed = windstr * 0.05f;
+        float animspeed = windstr * 0.05f; 
+        float energy = EnergyPerWindStreangth * (windstr/100);
+        anim.PlaybackSpeed = animspeed;
+        anim2.PlaybackSpeed = animspeed;
+        
+        if (CurrentEnergy + energy < EnergyCapacity)
+        {
+            CurrentEnergy += energy;
+        }
     }
     private void _on_Generator_visibility_changed()
     {
@@ -51,14 +64,14 @@ public class WindGenerator : StaticBody
         {
             anim.Play();
             anim2.Play();
-            SetPhysicsProcess(true);
+            SetProcess(true);
         }
         
         else
         {
             anim.Stop();
             anim2.Stop();
-            SetPhysicsProcess(false);
+            SetProcess(false);
         }
     }
 }

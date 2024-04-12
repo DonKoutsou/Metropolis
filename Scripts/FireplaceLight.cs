@@ -37,18 +37,18 @@ public class FireplaceLight : StaticBody
             light.LightEnergy = 0.0f;
             part.Emitting = false;
             GetNode<AudioStreamPlayer3D>("FireplaceSound").Stop();
-            SetPhysicsProcess(false);
+            SetProcess(false);
         }
         else
         {
             State = true;
             GetNode<AudioStreamPlayer3D>("FireplaceSound").Play();
             part.Emitting = true;
-            SetPhysicsProcess(true);
+            SetProcess(true);
         }
     }
     float d = 0.05f;
-    public override void _PhysicsProcess(float delta)
+    public override void _Process(float delta)
     {
         d -= delta;
 		if (d <= 0)

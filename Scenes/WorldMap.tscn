@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/WorldMap.cs" type="Script" id=1]
 [ext_resource path="res://Tilesets/World_Tileset.tres" type="TileSet" id=2]
-[ext_resource path="res://Scenes/Islands/FinalIsland.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Islands/IslandStarting.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Islands/SeaIsland.tscn" type="PackedScene" id=8]
 [ext_resource path="res://addons/AllSkyFree/AllSkyFree_EpicGloriousPink.tscn" type="PackedScene" id=9]
@@ -20,7 +19,6 @@ script = ExtResource( 1 )
 scenestospawn = PoolStringArray( "res://Scenes/Islands/Island1.tscn", "res://Scenes/Islands/Island2.tscn", "res://Scenes/Islands/Island6.tscn", "res://Scenes/Islands/Island3.tscn", "res://Scenes/Islands/Island7.tscn", "res://Scenes/Islands/Island8.tscn", "res://Scenes/Islands/Island9.tscn", "res://Scenes/Islands/Island10.tscn", "res://Scenes/Islands/Island11.tscn", "res://Scenes/Islands/Island12.tscn", "res://Scenes/Islands/Island13.tscn", "res://Scenes/Islands/Island15.tscn", "res://Scenes/Islands/Island16.tscn", "res://Scenes/Islands/Island17.tscn", "res://Scenes/Islands/Island18.tscn", "res://Scenes/Islands/Island19.tscn", "res://Scenes/Islands/Island20.tscn", "res://Scenes/Islands/Island20.tscn", "res://Scenes/Islands/SeaIsland.tscn", "res://Scenes/Islands/Island21.tscn" )
 Eventscenestospawn = PoolStringArray( "res://Scenes/Islands/Volcano.tscn", "res://Scenes/Islands/Island5.tscn", "res://Scenes/Islands/Island4.tscn", "res://Scenes/Islands/Island14.tscn" )
 Entrytospawn = ExtResource( 4 )
-Exittospawn = ExtResource( 3 )
 Sea = ExtResource( 8 )
 HideBasedOnState = true
 
