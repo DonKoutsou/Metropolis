@@ -55,13 +55,13 @@ public class Island : Spatial
 
 		map = GetParent().GetNode<WorldMap>("WorldMap");
 	}
-    public override void _Process(float delta)
-    {
-        base._Process(delta);
+	//public override void _Process(float delta)
+	//{
+	//	base._Process(delta);
 
-    }
+	//}
 
-    public virtual void EnableIsland()
+	public virtual void EnableIsland()
 	{
 		if (m_enabled)
 			return;

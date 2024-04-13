@@ -9,7 +9,6 @@ public class House : Spatial
 	[Export]
 	public string[] ItemSpawnPool;
 
-	Item Item;
 	public override void _Ready()
 	{
 		if (!spawnItems)
@@ -17,24 +16,21 @@ public class House : Spatial
 		if (ItemSpawnPool == null)
 			return;
 		Random random = new Random();
-		int start2 = random.Next(0, ItemSpawnPool.Length + 1);
-		if (start2 >= ItemSpawnPool.Length)
-			return;
-		var itemToSpawn = GD.Load<PackedScene>(ItemSpawnPool[start2]);
 
-		Item itemToDrop = (Item)itemToSpawn.Instance();
-		AddChild(itemToDrop);
-		itemToDrop.GlobalTranslation = GetNode<Position3D>("ItemSpawnPos").GlobalTransform.origin;
-		Item = itemToDrop;
+		List<Furniture> furni = new List<Furniture>();
+		foreach (Node nd in GetChildren())
+		{
+			if (nd is Furniture)
+				furni.Insert(furni.Count, (Furniture)nd);
+		}
+		for (int i = 0; i < furni.Count; i++)
+		{
+			int start = random.Next(0, ItemSpawnPool.Length + 1);
+			if (start >= ItemSpawnPool.Length)
+				continue;
 
-	}
-	public bool HasItem()
-	{
-		return Item != null;
-	}
-	public void OnItemPicked()
-	{
-		Item = null;
+			furni[i].SpawnItem(ItemSpawnPool[start]);
+		}
 	}
 	/*public bool GetIsEmpty()
 	{

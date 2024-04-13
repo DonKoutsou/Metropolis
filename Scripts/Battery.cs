@@ -16,6 +16,10 @@ public class Battery : Item
     public void Recharge(float ammount)
     {
         CurrentEnergy += ammount;
+        if (CurrentEnergy > Capacity)
+        {
+            CurrentEnergy = Capacity;
+        }
     }
     public void ConsumeEnergy(float ammount)
     {

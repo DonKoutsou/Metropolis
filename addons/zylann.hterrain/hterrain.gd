@@ -141,7 +141,7 @@ const _DEBUG_AABB = false
 signal transform_changed(global_transform)
 
 export(float, 0.0, 1.0) var ambient_wind := 0.0 setget set_ambient_wind
-export(int, 2, 5) var lod_scale := 2.0 setget set_lod_scale, get_lod_scale
+export(int, 1, 5) var lod_scale := 1.0 setget set_lod_scale, get_lod_scale
 
 # TODO Replace with `size` in world units?
 # Prefer using this instead of scaling the node's transform.
@@ -1055,7 +1055,7 @@ func get_globalmap_shader() -> Shader:
 
 
 func set_lod_scale(lod_scale: float):
-	_lodder.set_split_scale(lod_scale)
+	_lodder.set_split_scale(1)
 
 
 func get_lod_scale() -> float:

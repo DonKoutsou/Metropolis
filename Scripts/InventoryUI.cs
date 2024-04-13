@@ -112,7 +112,7 @@ public class InventoryUI : Control
         Hide();
         FocusedSlot = null;
         IsOpen = false;
-        SetPhysicsProcess(false);
+        SetProcess(false);
     }
     public void ItemHovered(Item it)
     {

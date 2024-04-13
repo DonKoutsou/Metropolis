@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/Islands/Terain_Data_IS02/data.hterrain" type="Resource" id=1]
 [ext_resource path="res://Assets/Building/BuildingDust3.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Assets/Building/BuildingDust4.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Building/BuildingComposition.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Env_Assets/CylinderThingHuge.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/WindGenerator.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Env_Assets/CylinderThing.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Assets/Building/BuildingDust.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Env_Assets/Antena.tscn" type="PackedScene" id=12]
@@ -155,3 +156,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1231.27, -162.235, 2426.53 )
 
 [node name="StaticBody36" parent="." index="50" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -614.091, -162.235, 2743.07 )
+
+[node name="WindGenerator" parent="." index="51" instance=ExtResource( 9 )]
+transform = Transform( 0.166752, 0, -0.110425, 0, 0.2, 0, 0.110425, 0, 0.166752, 400.972, 19.2928, 1279.41 )
+EnergyCapacity = 100.0
+EnergyPerWindStreangth = 0.025

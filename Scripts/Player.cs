@@ -24,7 +24,7 @@ public class Player : Character
 	ActionMenu actMen;
 
 	[Export(PropertyHint.Layers3dPhysics)]
-    public uint SelectLayer { get; set; }
+	public uint SelectLayer { get; set; }
 
 	public void Teleport(Vector3 pos)
 	{
@@ -64,6 +64,7 @@ public class Player : Character
 	}
 	public override void _PhysicsProcess(float delta)
 	{
+		//ulong ms = OS.GetSystemTimeMsecs();
 		if (DayNight.IsDay())
 			NightLight.LightEnergy = 0;
 		else
@@ -178,11 +179,11 @@ public class Player : Character
 		List<Item> batteries;
 		CharacterInventory.GetItemsByType(out batteries, ItemName.BATTERY);
 		
-		for (int i = batteries.Count(); i > 0; i--)
+		for (int i = batteries.Count() -1; i > -1; i--)
 		{
-			if (((Battery)batteries[i - 1]).GetCurrentCap() < coons)
+			if (((Battery)batteries[i]).GetCurrentCap() < coons)
 			{
-				batteries.RemoveAt(i - 1);
+				batteries.RemoveAt(i);
 			}
 		}
 		if (batteries.Count() == 0)
@@ -247,8 +248,10 @@ public class Player : Character
 				}
 			}
 		}
+		//ulong msaf = OS.GetSystemTimeMsecs();
+		//GD.Print("Player processing took " + (msaf - ms).ToString() + " ms");
 	}
-	Item selectedobj;
+	
 	public override void _Input(InputEvent @event)
 	{
 		if (@event.IsActionPressed("Move"))
@@ -309,36 +312,17 @@ public class Player : Character
 			//if ray finds nothiong return
 			if (rayar.Count == 0)
 			{
-				selectedobj = null;
 				actMen.Stop();
 				return;
 			}
-			var obj = rayar["collider"];
-			if (obj is Item)
+			Spatial obj = (Spatial)rayar["collider"];
+			if (obj.GlobalTransform.origin.DistanceTo(GlobalTransform.origin) > 100)
 			{
-				selectedobj = (Item)obj;
-				actMen.Start(selectedobj);
+				actMen.Stop();
+				return;
 			}
-			else if (obj is Character)
-			{
-				Character selectechar = (Character)obj;
-				actMen.Start(selectechar);
-			}
-			else if (obj is FireplaceLight)
-			{
-				FireplaceLight selectechar = (FireplaceLight)obj;
-				actMen.Start(selectechar);
-			}
-			else if (obj is Vehicle)
-			{
-				Vehicle selectechar = (Vehicle)obj;
-				actMen.Start(selectechar);
-			}
-			else if (obj is WindGenerator)
-			{
-				WindGenerator selectechar = (WindGenerator)obj;
-				actMen.Start(selectechar);
-			}
+				
+			actMen.Start(obj);
 		}
 		if (@event.IsActionPressed("Inventory"))
 		{
@@ -358,12 +342,7 @@ public class Player : Character
 		if (body is HouseDoor)
 		{
 			HouseDoor bod = (HouseDoor)body;
-			if (bod.Touch(this))
-			{
-				House h = (House)bod.GetParent();
-				if (!h.HasItem())
-					TalkText.GetInst().Talk("'Αδειο...", this);
-			}
+			bod.Touch(this);
 		}
 	}
 	public override void OnVehicleBoard()

@@ -317,7 +317,7 @@ update_rotation = false
 update_scale = false
 
 [node name="CameraTerainCast" type="RayCast" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot"]
-transform = Transform( 0.999978, -2.10734e-08, -8.72869e-09, 2.10732e-08, 0.707114, 0.707101, -8.72867e-09, -0.707107, 0.707093, -2.38419e-07, 7.28663, -8.00005 )
+transform = Transform( 0.999978, -2.10734e-08, -8.72868e-09, 2.10732e-08, 0.707114, 0.707101, -8.72868e-09, -0.707107, 0.707093, -2.38419e-07, 7.28663, -8.00005 )
 enabled = true
 cast_to = Vector3( 0, -12, 0 )
 collision_mask = 260

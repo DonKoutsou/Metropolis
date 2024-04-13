@@ -133,7 +133,6 @@ void fragment() {
 "
 
 [resource]
-resource_local_to_scene = true
 shader = SubResource( 6 )
 shader_param/IsRaining = true
 shader_param/albedo = Color( 0.494118, 0.509804, 0.529412, 0.984314 )
@@ -148,7 +147,7 @@ shader_param/normal_scale = 1.0
 shader_param/beer_factor = 0.078
 shader_param/_DepthMaxDistance = 1.651
 shader_param/_DepthFactor = 9.326
-shader_param/ring_width = 0.077
+shader_param/ring_width = 0.05
 shader_param/fadeout = 0.266
 shader_param/sampler_direction = Vector2( 0, -0.04 )
 shader_param/uv1_scale = Vector2( 30, 30 )

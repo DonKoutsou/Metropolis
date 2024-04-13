@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Clutter/Rock/Rock.obj" type="ArrayMesh" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Scenes/Env_Assets/Fireplace.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Env_Assets/CylinderThing.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Env_Assets/Antena2.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/WindGenerator.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Env_Assets/PlatformWood.tscn" type="PackedScene" id=12]
 
 [sub_resource type="MultiMesh" id=2]
@@ -24,10 +25,10 @@ transform_array = PoolVector3Array( -0.658817, -0.418741, -0.194683, 0.362471, -
 _terrain_data = ExtResource( 6 )
 
 [node name="House" parent="." index="1" instance=ExtResource( 3 )]
-transform = Transform( 0.780779, 0, -0.624807, 0, 1, 0, 0.624807, 0, 0.780779, 382.749, -0.701544, -1261.72 )
+transform = Transform( 0.780779, 0, -0.624807, 0, 1, 0, 0.624807, 0, 0.780779, 382.749, 1.29846, -1261.72 )
 
 [node name="House2" parent="." index="2" instance=ExtResource( 3 )]
-transform = Transform( 0.656901, 0, 0.753976, 0, 1, 0, -0.753976, 0, 0.656901, 326.544, -1.19469, -1244.61 )
+transform = Transform( 0.656901, 0, 0.753976, 0, 1, 0, -0.753976, 0, 0.656901, 326.544, 0.80531, -1244.61 )
 
 [node name="MultiMeshInstance" type="MultiMeshInstance" parent="." index="4"]
 visible = false
@@ -39,7 +40,7 @@ multimesh = SubResource( 2 )
 transform = Transform( 8.56631, -5.32306, -3.62137, 5.29023, 2.38465, 9.00876, -3.66917, -8.9894, 4.53418, 317.577, -14.157, -956.636 )
 
 [node name="Fireplace" parent="." index="6" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 361.026, -0.580911, -1233.96 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 361.026, 1.35521, -1233.96 )
 
 [node name="StaticBody2" parent="." index="7" instance=ExtResource( 9 )]
 transform = Transform( -0.614739, 0, 0.78873, 0, 1, 0, -0.78873, 0, -0.614739, 476.454, -35.9142, -1177.39 )
@@ -51,4 +52,7 @@ transform = Transform( 108.719, 49.5292, -0.583832, -14.3049, 30.0476, -114.743,
 transform = Transform( 0.843251, 0, -0.53752, 0, 1, 0, 0.53752, 0, 0.843251, 45.4721, -30.579, -564.13 )
 
 [node name="StaticBody5" parent="." index="14" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 349.805, -24.2993, -1233 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 349.805, -22.2993, -1233 )
+
+[node name="WindGenerator" parent="." index="15" instance=ExtResource( 11 )]
+transform = Transform( 0.173205, 0, -0.1, 0, 0.2, 0, 0.1, 0, 0.173205, 285, 7, -1260 )

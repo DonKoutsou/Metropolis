@@ -26,8 +26,8 @@ public class CameraMovePivot : Position3D
         instance = this;
     }
 	
-    public override void _PhysicsProcess(float delta)
-	{
+    //public override void _PhysicsProcess(float delta)
+	//{
         /*if (shouldfollowpl)
         {
             Translation = Vector3.Zero;
@@ -72,7 +72,7 @@ public class CameraMovePivot : Position3D
         }
 		//Rotation = new Vector3(0.0f,0.0f,0.0f);
         zpivot.Translation = prev;*/
-	}
+	//}
     static public CameraMovePivot GetInstance()
     {
         return instance;

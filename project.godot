@@ -96,10 +96,6 @@ config/name="3D_TestProj"
 run/main_scene="res://Scenes/MainWorld.tscn"
 config/icon="res://icon.png"
 
-[debug]
-
-settings/stdout/print_fps=true
-
 [display]
 
 window/size/width=1280
@@ -233,6 +229,7 @@ Inventory={
 [mono]
 
 project/assembly_name="3D_TestProj"
+profiler/enabled=true
 debugger_agent/wait_timeout=6000
 
 [physics]
@@ -242,9 +239,6 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-threads/thread_model=2
-threads/thread_safe_bvh=true
 quality/shadows/filter_mode=2
 environment/default_clear_color=Color( 1, 1, 1, 1 )
 quality/filters/msaa=1
-environment/default_environment="res://new_environment2.tres"

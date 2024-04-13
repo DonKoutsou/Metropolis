@@ -8,9 +8,9 @@ public class SandParticles : Particles
     {
         Emitting = true;
     }
-    public override void _PhysicsProcess(float delta)
+    public override void _Process(float delta)
     {
-        base._PhysicsProcess(delta);
+        base._Process(delta);
         d -= delta;
 		if (d > 0)
             return;

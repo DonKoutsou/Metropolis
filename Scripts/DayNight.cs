@@ -49,7 +49,7 @@ public class DayNight : WorldEnvironment
     [Export]
     Curve WindStreangthCurve = null;
 
-    float currentDay;
+    static float currentDay;
 
     static float currenthour;
     static float currentmins;
@@ -303,8 +303,14 @@ public class DayNight : WorldEnvironment
     float SunRot;
     Color SunColor;
     Color MoonColor;
-    public override void _PhysicsProcess(float delta)
+    float d = 0.5f;
+    public override void _Process(float delta)
     {
+        base._Process(delta);
+        d -= delta;
+		if (d > 0)
+            return;
+        d = 0.5f;
         UpdateTime();
         
         UpdateWind();
@@ -363,6 +369,39 @@ public class DayNight : WorldEnvironment
     public static void UpdateTimeProgression(int time)
     {
         timeprogmultiplier = time;
+    }
+    public static void ProgressTime(int days = 0, int hours = 0, int mins = 0)
+    {
+        currentmins += mins;
+        while (currentmins > 60)
+        {
+            currenthour += 1;
+            currentmins -= 60;
+        }
+        currenthour += hours;
+        while (currenthour > 23)
+        {
+            currentDay += 1;
+            currenthour -= 24;
+        }
+        currentDay += days;
+    }
+    public static void MinsToTime(int ammout, out int days, out int hours, out int mins)
+    {
+        days = 0;
+        hours = 0;
+        mins = 0;
+        while (ammout > 1440)
+        {
+            days += 1;
+            ammout -= 1440;
+        }
+        while (ammout > 60)
+        {
+            hours += 1;
+            ammout -= 60;
+        }
+        mins = ammout;
     }
     public override void _Ready()
     {

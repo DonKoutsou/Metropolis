@@ -84,6 +84,7 @@ public class Vehicle : RigidBody
     public override void _PhysicsProcess(float delta)
     {
         base._PhysicsProcess(delta);
+        //ulong ms = OS.GetSystemTimeMsecs();
         bool strong = false;
         float hoverforce2 = Hoverforcecurve.Interpolate(latsspeed /(speed * 4)) * HoverForce;
         float forcemulti = 1;
@@ -102,6 +103,7 @@ public class Vehicle : RigidBody
 
         for (int i = 0; i < Rays.Count; i ++)
         {
+            
             RayCast ray = Rays[i];
             ray.ForceRaycastUpdate();
             
@@ -240,6 +242,8 @@ public class Vehicle : RigidBody
             }
             AddTorque(torq);
         }
+       // ulong msaf = OS.GetSystemTimeMsecs();
+		//GD.Print("Vehicle processing took " + (msaf - ms).ToString() + " ms");
     }
     private void ToggleMachine(bool toggle)
     {

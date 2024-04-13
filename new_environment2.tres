@@ -1,13 +1,7 @@
-[gd_resource type="Environment" load_steps=3 format=2]
-
-[ext_resource path="res://addons/AllSkyFree/Skyboxes/AllSkyFree_Sky_OvercastLow_Equirect.png" type="Texture" id=1]
-
-[sub_resource type="PanoramaSky" id=1]
-panorama = ExtResource( 1 )
+[gd_resource type="Environment" format=2]
 
 [resource]
 background_mode = 1
-background_sky = SubResource( 1 )
 background_sky_orientation = Basis( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1 )
 background_sky_rotation = Vector3( 0, 0, 3.14159 )
 background_sky_rotation_degrees = Vector3( 0, 0, 180 )

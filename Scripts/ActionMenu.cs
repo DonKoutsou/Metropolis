@@ -1,17 +1,9 @@
 using Godot;
 using System;
-
+using System.Collections.Generic;
 public class ActionMenu : Control
 {
-	static Item SelectedItem;
-
-	static Character SelectedChar;
-
-	static FireplaceLight Fireplace;
-
-	static Vehicle vehicle;
-
-	static WindGenerator generator;
+	static Spatial SelectedObj;
 
 	Player pl;
 
@@ -21,21 +13,18 @@ public class ActionMenu : Control
 
 	public static bool IsSelecting()
 	{
-		return SelectedItem != null || SelectedChar != null || Fireplace != null || vehicle != null;
+		return SelectedObj != null;
 	}
 	private void On_PickUp_Button_Down()
 	{
-		if (SelectedItem != null)
+		if (SelectedObj is Item)
 		{
-			Spatial house = (Spatial)SelectedItem.GetParent();
-			if (house != null && house is House)
-				((House)house).OnItemPicked();
-
-			if (!pl.GetCharacterInventory().InsertItem(SelectedItem))
+			Item it = (Item)SelectedObj;
+			if (!pl.GetCharacterInventory().InsertItem(it))
 			{
 				TalkText.GetInst().Talk("Δέν έχω χώρο.", pl);
 			}
-			if (SelectedItem.GetItemType() == (int)ItemName.ROPE)
+			if (it.GetItemType() == (int)ItemName.ROPE)
 			{
 				MeshInstance rope = pl.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("BoneAttachment2").GetNode<MeshInstance>("Rope");
 				rope.Show();
@@ -44,87 +33,153 @@ public class ActionMenu : Control
 			selecting = false;
 			Stop();
 		}
-		if (SelectedChar != null)
+		else if (SelectedObj is Character)
 		{
-			TalkText.GetInst().Talk("Φίλος", SelectedChar);
+			TalkText.GetInst().Talk("Φίλος", (Character)SelectedObj);
 		}
-		if (vehicle != null)
+		else if (SelectedObj is Vehicle)
 		{
+			Vehicle veh = (Vehicle)SelectedObj;
 			if (!pl.HasVehicle())
 			{
-				vehicle.BoardVehicle(pl);
-				pl.SetVehicle(vehicle);
+				veh.BoardVehicle(pl);
+				pl.SetVehicle(veh);
 				DeselectCurrent();
 				selecting = false;
 				Stop();
 			}
 			else
 			{
-				vehicle.UnBoardVehicle(pl);
+				veh.UnBoardVehicle(pl);
 				pl.SetVehicle(null);
 				DeselectCurrent();
 				selecting = false;
 				Stop();
 			}
 		}
-	}
-	private void On_Interact_Button_Down()
-	{
-		if (SelectedItem != null)
+		else if (SelectedObj is Furniture)
 		{
-			TalkText.GetInst().Talk(SelectedItem.GetItemName(), pl);
+			Furniture furn = (Furniture)SelectedObj;
+			Item foundit;
+			furn.Search(out foundit);
+			if (foundit != null)
+			{
+				pl.CharacterInventory.InsertItem(foundit);
+				TalkText.GetInst().Talk("Ένα " + foundit.GetItemName(), pl);
+			}
+			else
+				TalkText.GetInst().Talk("Τίποτα", pl);
 		}
-		if (SelectedChar != null)
+		else if (SelectedObj is WindGenerator)
 		{
-			TalkText.GetInst().Talk("Φίλος", pl);
-		}
-        if (Fireplace != null)
-		{
-			Fireplace.ToggleFileplace();
+			WindGenerator generator = (WindGenerator)SelectedObj;
+			List<Item> batteries;
+			pl.CharacterInventory.GetItemsByType(out batteries, ItemName.BATTERY);
+			float availableenergy = generator.GetCurrentEnergy();
+			float rechargeamm = 0;
+			for (int i = batteries.Count - 1; i > -1; i--)
+			{
+				if (availableenergy == 0)
+					break;
+				Battery bat = (Battery)batteries[i];
+				float cap = bat.GetCapacity();
+				float energy = bat.GetCurrentCap();
+				if (energy < cap)
+				{
+					float reachargeammount = cap - energy;
+					if (availableenergy > reachargeammount)
+					{
+						bat.Recharge(reachargeammount);
+						generator.ConsumeEnergy(reachargeammount);
+						rechargeamm += reachargeammount;
+					}
+					else
+					{
+						bat.Recharge(availableenergy);
+						generator.ConsumeEnergy(availableenergy);
+						rechargeamm += availableenergy;
+					}
+				}
+			}
+			int time = (int)Math.Round(rechargeamm * 10);
+			int days, hours, mins;
+			DayNight.MinsToTime(time, out days,out hours, out mins);
+			DayNight.ProgressTime(days, hours, mins);
 			DeselectCurrent();
 			selecting = false;
 			Stop();
 		}
-		if (vehicle != null)
+	}
+	private void On_Interact_Button_Down()
+	{
+		if (SelectedObj is Item)
+		{
+			TalkText.GetInst().Talk(((Item)SelectedObj).GetItemName(), pl);
+		}
+		else if (SelectedObj is Character)
+		{
+			TalkText.GetInst().Talk("Φίλος", pl);
+		}
+        else if (SelectedObj is FireplaceLight)
+		{
+			((FireplaceLight)SelectedObj).ToggleFileplace();
+			DeselectCurrent();
+			selecting = false;
+			Stop();
+		}
+		else if (SelectedObj is Vehicle)
 		{
 			TalkText.GetInst().Talk("Βάρκα", pl);
 		}
+		else if (SelectedObj is WindGenerator)
+		{
+			TalkText.GetInst().Talk("Γεννήτρια", pl);
+		}
+		else if (SelectedObj is Furniture)
+		{
+			Furniture furni = (Furniture)SelectedObj;
+			if (furni.HasBeenSearched())
+				TalkText.GetInst().Talk("Το έψαξα, είναι άδειο", pl);
+			else
+				TalkText.GetInst().Talk(furni.FurnitureDescription, pl);
+		}
 	}
-	public void Start(Node obj)
+	public void Start(Spatial obj)
 	{
 		if (selecting)
             return;
 		DeselectCurrent();
-		if (obj is Item)
+		SelectedObj = obj;
+		if (SelectedObj is Item)
 		{
-			SelectedItem = (Item)obj;
 			PickButton.Text = "Πάρε";
-			((ShaderMaterial)SelectedItem.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
+			((ShaderMaterial)SelectedObj.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
 		}
-		else if (obj is Character)
+		else if (SelectedObj is Character)
 		{
-			SelectedChar = (Character)obj;
 			PickButton.Text = "Kουβέντα";
 
-			((ShaderMaterial)SelectedChar.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>("Mesh001").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
-			((ShaderMaterial)SelectedChar.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>("Mesh003").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
+			((ShaderMaterial)SelectedObj.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>("Mesh001").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
+			((ShaderMaterial)SelectedObj.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>("Mesh003").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
 		}
-		else if (obj is FireplaceLight)
+		else if (SelectedObj is FireplaceLight)
 		{
-			Fireplace = (FireplaceLight)obj;
-			((ShaderMaterial)Fireplace.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
+			((ShaderMaterial)SelectedObj.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
 		}
-		else if (obj is Vehicle)
+		else if (SelectedObj is Vehicle)
 		{
-			vehicle = (Vehicle)obj;
 			PickButton.Text = "Επιβιβάσου";
-			((ShaderMaterial)vehicle.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
+			((ShaderMaterial)SelectedObj.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
 		}
-		else if (obj is WindGenerator)
+		else if (SelectedObj is Furniture)
 		{
-			generator = (WindGenerator)obj;
-			PickButton.Text = "Επιβιβάσου";
-			((ShaderMaterial)generator.GetNode<MeshInstance>("MeshInstance2").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
+			PickButton.Text = "Ψάξε";
+			((ShaderMaterial)SelectedObj.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
+		}
+		else if (SelectedObj is WindGenerator)
+		{
+			PickButton.Text = "Φόρτιση";
+			((ShaderMaterial)SelectedObj.GetNode<MeshInstance>("MeshInstance2").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
 		}
 
 		Show();
@@ -132,32 +187,32 @@ public class ActionMenu : Control
 	}
 	void DeselectCurrent()
 	{
-		if (SelectedItem != null)
+		if (SelectedObj is Item)
 		{
-			((ShaderMaterial)SelectedItem.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", false);
-			SelectedItem = null;
+			((ShaderMaterial)SelectedObj.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", false);
 		}
-		if (SelectedChar != null)
+		else if (SelectedObj is Character)
 		{
-			((ShaderMaterial)SelectedChar.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>("Mesh001").GetActiveMaterial(0).NextPass).SetShaderParam("enable", false);
-			((ShaderMaterial)SelectedChar.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>("Mesh003").GetActiveMaterial(0).NextPass).SetShaderParam("enable", false);
-			SelectedChar = null;
+			((ShaderMaterial)SelectedObj.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>("Mesh001").GetActiveMaterial(0).NextPass).SetShaderParam("enable", false);
+			((ShaderMaterial)SelectedObj.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>("Mesh003").GetActiveMaterial(0).NextPass).SetShaderParam("enable", false);
 		}
-		if (Fireplace != null)
+		else if (SelectedObj is FireplaceLight)
 		{
-			((ShaderMaterial)Fireplace.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", false);
-			Fireplace = null;
+			((ShaderMaterial)SelectedObj.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", false);
 		}
-		if (vehicle != null)
+		else if (SelectedObj is Vehicle)
 		{
-			((ShaderMaterial)vehicle.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", false);
-			vehicle = null;
+			((ShaderMaterial)SelectedObj.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", false);
 		}
-		if (generator != null)
+		else if (SelectedObj is Furniture)
 		{
-			((ShaderMaterial)generator.GetNode<MeshInstance>("MeshInstance2").GetActiveMaterial(0).NextPass).SetShaderParam("enable", false);
-			generator = null;
+			((ShaderMaterial)SelectedObj.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", false);
 		}
+		else if (SelectedObj is WindGenerator)
+		{
+			((ShaderMaterial)SelectedObj.GetNode<MeshInstance>("MeshInstance2").GetActiveMaterial(0).NextPass).SetShaderParam("enable", false);
+		}
+		SelectedObj = null;
 	}
 	public void Stop()
 	{
@@ -179,51 +234,61 @@ public class ActionMenu : Control
 	public override void _Process(float delta)
 	{
 		var screenpos = Vector2.Zero;
-		if (SelectedItem != null)
+		if (SelectedObj is Item)
 		{
-			screenpos = GetTree().Root.GetCamera().UnprojectPosition(SelectedItem.GlobalTransform.origin);
-			Vector3 pos = SelectedItem.GlobalTransform.origin;
+			screenpos = GetTree().Root.GetCamera().UnprojectPosition(SelectedObj.GlobalTransform.origin);
+			Vector3 pos = SelectedObj.GlobalTransform.origin;
 			if (pl.GlobalTransform.origin.DistanceTo(pos) > 10)
 				PickButton.Hide();
 			else
 				PickButton.Show();
 		}
-		else if(SelectedChar != null)
+		else if (SelectedObj is Character)
 		{
-			screenpos = GetTree().Root.GetCamera().UnprojectPosition(SelectedChar.GlobalTransform.origin);
-			Vector3 pos = SelectedChar.GlobalTransform.origin;
+			screenpos = GetTree().Root.GetCamera().UnprojectPosition(SelectedObj.GlobalTransform.origin);
+			Vector3 pos = SelectedObj.GlobalTransform.origin;
 			if (pl.GlobalTransform.origin.DistanceTo(pos) > 10)
 				PickButton.Hide();
 			else
 				PickButton.Show();
 		}
-		else if (Fireplace != null)
+		else if (SelectedObj is FireplaceLight)
 		{
-			screenpos = GetTree().Root.GetCamera().UnprojectPosition(Fireplace.GlobalTransform.origin);
+			screenpos = GetTree().Root.GetCamera().UnprojectPosition(SelectedObj.GlobalTransform.origin);
 			PickButton.Hide();
 		}
-		else if (vehicle != null)
+		else if (SelectedObj is Vehicle)
 		{
-			screenpos = GetTree().Root.GetCamera().UnprojectPosition(vehicle.GlobalTransform.origin);
-			Vector3 pos = vehicle.GlobalTransform.origin;
+			screenpos = GetTree().Root.GetCamera().UnprojectPosition(SelectedObj.GlobalTransform.origin);
+			Vector3 pos = SelectedObj.GlobalTransform.origin;
 			if (pl.GlobalTransform.origin.DistanceTo(pos) > 30)
 				PickButton.Hide();
 			else
 				PickButton.Show();	
 		}
-		else if (generator != null)
+		else if (SelectedObj is Furniture)
 		{
-			screenpos = GetTree().Root.GetCamera().UnprojectPosition(generator.GlobalTransform.origin);
-			Vector3 pos = generator.GlobalTransform.origin;
-			if (pl.GlobalTransform.origin.DistanceTo(pos) > 20)
+			Furniture furni = (Furniture)SelectedObj;
+			screenpos = GetTree().Root.GetCamera().UnprojectPosition(SelectedObj.GlobalTransform.origin);
+			Vector3 pos = SelectedObj.GlobalTransform.origin;
+			if (pl.GlobalTransform.origin.DistanceTo(pos) < 30 && !furni.HasBeenSearched())
+				PickButton.Show();
+			else
+				PickButton.Hide();	
+		}
+		else if (SelectedObj is WindGenerator)
+		{
+			screenpos = GetTree().Root.GetCamera().UnprojectPosition(SelectedObj.GlobalTransform.origin);
+			Vector3 pos = SelectedObj.GlobalTransform.origin;
+			if (pl.GlobalTransform.origin.DistanceTo(pos) > 60)
 				PickButton.Hide();
 			else
 				PickButton.Show();
 		}
 		RectPosition = new Vector2 (screenpos.x, screenpos.y +50);
 
-		if (screenpos < Vector2.Zero || screenpos > GetViewport().Size) 
-				Stop();
+		if (screenpos < Vector2.Zero || screenpos > GetViewport().Size)
+			Stop();
 		//GlobalTranslation =  new Vector3(itempos.x, itempos.y, itempos.z);
 	}
     private void Selecting_Action()

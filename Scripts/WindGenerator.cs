@@ -3,7 +3,7 @@ using System;
 public class WindGenerator : StaticBody
 {
     [Export]
-    private float EnergyCapacity;
+    private float EnergyCapacity = 100;
     [Export]
     private float CurrentEnergy;
     [Export]
@@ -12,6 +12,15 @@ public class WindGenerator : StaticBody
     AnimationPlayer anim2;
     AnimationPlayer anim3;
     static Random rand = new Random(69420);
+
+    public float GetCurrentEnergy()
+    {
+        return CurrentEnergy;
+    }
+    public void ConsumeEnergy(float ammount)
+    {
+        CurrentEnergy -= ammount;
+    }
     public override void _Ready()
     {
         anim = GetNode<AnimationPlayer>("AnimationPlayer");

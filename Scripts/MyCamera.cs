@@ -37,9 +37,14 @@ public class MyCamera : Camera
             isclippingwithfloor = false;
 
     }
-    public override void _PhysicsProcess(float delta)
+    float d = 0.5f;
+    public override void _Process(float delta)
     {
-        base._PhysicsProcess(delta);
+        base._Process(delta);
+        d -= delta;
+		if (d > 0)
+            return;
+        d = 0.5f;
         if (campiv == null)
         {
             campiv = CameraPanPivot.GetInstance();

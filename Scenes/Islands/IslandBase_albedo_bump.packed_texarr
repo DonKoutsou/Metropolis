@@ -48,6 +48,10 @@
 		{
 			"a": "res://Assets/TerainTex/Sand/Stylized_Sand_001_height.png",
 			"rgb": "res://Assets/TerainTex/Sand/Stylized_Sand_001_basecolor.jpg"
+		},
+		{
+			"a": "res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_Displacement.jpg",
+			"rgb": "res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_ColorAsh.jpg"
 		}
 	],
 	"resolution": 128

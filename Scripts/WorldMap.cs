@@ -92,7 +92,7 @@ public class WorldMap : TileMap
         if (delt < 0)
         {
             delt = 0.1f;
-            
+            ulong ms = OS.GetSystemTimeMsecs();
             if (!finishedspawning)
                     EnableIsland(currentile);
 
@@ -102,20 +102,23 @@ public class WorldMap : TileMap
                 Island ilefr = null;
                 IslandMap.TryGetValue(CurrentTile, out ilefr);
 
-                if (ilefr == null)
-                    return;
-                
-                CurrentTile = FindClosest(plpos);
+                if (ilefr != null)
+                {
+                    CurrentTile = FindClosest(plpos);
 
-                Island ileto = null;
-                IslandMap.TryGetValue(CurrentTile, out ileto);
+                    Island ileto = null;
+                    IslandMap.TryGetValue(CurrentTile, out ileto);
 
-                if (ilefr == ileto)
-                    return;
-
-                MyWorld.IleTransition(ilefr, ileto);
+                    if (ilefr != ileto)
+                    {
+                        MyWorld.IleTransition(ilefr, ileto);
+                    }
+                }
             }
+            ulong msaf = OS.GetSystemTimeMsecs();
+		    GD.Print("World map processing took " + (msaf - ms).ToString() + " ms");
         }
+        
     }
     void ArrangeCellsBasedOnDistance()
     {
