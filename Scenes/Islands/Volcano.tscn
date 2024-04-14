@@ -1,22 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Env_Assets/Platform.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Env_Assets/Antena.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Assets/Building/BuildingComposition.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scenes/Islands/Terain_Data_ISVolcano/data.hterrain" type="Resource" id=14]
 
 [node name="Island" instance=ExtResource( 1 )]
-
-[node name="HTerrain" parent="." index="0"]
-map_scale = Vector3( 35, 3, 35 )
-_terrain_data = ExtResource( 14 )
 
 [node name="StaticBody" parent="." index="1" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -329.077, 158.518, 57.6982 )
 
-[node name="House" parent="." index="2" instance=ExtResource( 13 )]
-transform = Transform( 0.453882, 0, -0.891062, 0, 1, 0, 0.891062, 0, 0.453882, -322.116, 182.096, 27.6344 )
-
-[node name="StaticBody2" parent="." index="3" instance=ExtResource( 12 )]
+[node name="StaticBody2" parent="." index="2" instance=ExtResource( 12 )]
 transform = Transform( 1.95476, 0.221122, -0.549647, -0.324069, 1.98543, -0.353787, 0.495969, 0.425783, 1.93516, -323.97, 178.022, 67.9535 )

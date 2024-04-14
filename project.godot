@@ -242,3 +242,4 @@ common/enable_pause_aware_picking=true
 quality/shadows/filter_mode=2
 environment/default_clear_color=Color( 1, 1, 1, 1 )
 quality/filters/msaa=1
+environment/default_environment="res://new_environment2.tres"

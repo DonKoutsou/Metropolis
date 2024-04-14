@@ -1,0 +1,14 @@
+{
+	"contains_albedo": false,
+	"layers": [
+		{
+			"a": "res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_Roughness.jpg",
+			"rgb": "res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_NormalGL.jpg"
+		},
+		{
+			"a": "res://Assets/TerainTex/Ground035_1K-JPG/Ground035_1K-JPG_Roughness.jpg",
+			"rgb": "res://Assets/TerainTex/Ground035_1K-JPG/Ground035_1K-JPG_NormalGL.jpg"
+		}
+	],
+	"resolution": 512
+}

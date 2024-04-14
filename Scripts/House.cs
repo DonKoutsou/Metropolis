@@ -9,27 +9,52 @@ public class House : Spatial
 	[Export]
 	public string[] ItemSpawnPool;
 
-	public override void _Ready()
+	List<Furniture> FurnitureList = new List<Furniture>();
+
+	//public override void _Ready()
+	//{
+		
+	//}
+	public void StartHouse(Random random)
 	{
 		if (!spawnItems)
 			return;
 		if (ItemSpawnPool == null)
 			return;
-		Random random = new Random();
 
-		List<Furniture> furni = new List<Furniture>();
 		foreach (Node nd in GetChildren())
 		{
 			if (nd is Furniture)
-				furni.Insert(furni.Count, (Furniture)nd);
+				FurnitureList.Insert(FurnitureList.Count, (Furniture)nd);
 		}
-		for (int i = 0; i < furni.Count; i++)
+		for (int i = 0; i < FurnitureList.Count; i++)
 		{
 			int start = random.Next(0, ItemSpawnPool.Length + 1);
 			if (start >= ItemSpawnPool.Length)
 				continue;
 
-			furni[i].SpawnItem(ItemSpawnPool[start]);
+			FurnitureList[i].SpawnItem(ItemSpawnPool[start]);
+		}
+	}
+	public void GetFurniture(out List<Furniture> furniture)
+	{
+		furniture = new List<Furniture>();
+		for (int i = 0; i < FurnitureList.Count; i++)
+		{
+			furniture.Insert(i, FurnitureList[i]);
+		}
+	}
+	public void InputData(HouseInfo data)
+	{
+		foreach (Furniture furni in FurnitureList)
+		{
+			foreach(FurnitureInfo Finfo in data.furni)
+			{
+				if (furni.Name == Finfo.FunritureName)
+				{
+					furni.SetData(Finfo);
+				}
+			}
 		}
 	}
 	/*public bool GetIsEmpty()

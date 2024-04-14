@@ -39,8 +39,6 @@ public class WorldMap : TileMap
 
     int currentile;
 
-    float delt = 0.1f;
-
     List <float> rots = new List<float>{0f, 90f, 180f, -90f};
 
     List <int> RandomisedEntryID = null;
@@ -53,14 +51,13 @@ public class WorldMap : TileMap
 
     Vector2 CurrentTile;
 
-    static Dictionary<Vector2, Island> IslandMap = new Dictionary<Vector2, Island>();
+    static Dictionary<Vector2, IslandInfo> ilemap = new Dictionary<Vector2, IslandInfo>();
 
     bool finishedspawning = false;
 
-    Island entry;
+    IslandInfo entry;
 
     static WorldMap Instance;
-
 
     public static WorldMap GetInstance()
     {
@@ -69,7 +66,6 @@ public class WorldMap : TileMap
     public override void _Ready()
     {
         Instance = this;
-        Hide();
 
         int seed = Settings.GetGameSettings().Seed;
 
@@ -78,6 +74,7 @@ public class WorldMap : TileMap
         CellSize = new Vector2(CellSizeOverride, CellSizeOverride);
 
         ArrangeCellsBasedOnDistance();
+
         for (int i = 0; i < scenestospawn.Count(); i++)
         {
             var scene = GD.Load<PackedScene>(scenestospawn[i]);
@@ -88,37 +85,63 @@ public class WorldMap : TileMap
     }
     public override void _Process(float delta)
 	{
-        delt -= delta;
-        if (delt < 0)
+        ulong ms = OS.GetSystemTimeMsecs();
+        if (!finishedspawning)
+                RegisterIsland(currentile);
+
+        Vector2 plpos = new Vector2(pl.GlobalTransform.origin.x, pl.GlobalTransform.origin.z);
+        if (plpos.DistanceTo(CurrentTile) > CellSize.x/2)
         {
-            delt = 0.1f;
-            ulong ms = OS.GetSystemTimeMsecs();
-            if (!finishedspawning)
-                    EnableIsland(currentile);
+            Vector2 curt = FindClosestIslandPosition(plpos);
 
-            Vector2 plpos = new Vector2(pl.GlobalTransform.origin.x, pl.GlobalTransform.origin.z);
-            if (plpos.DistanceTo(CurrentTile) > CellSize.x/2)
+            if (CurrentTile != curt)
             {
-                Island ilefr = null;
-                IslandMap.TryGetValue(CurrentTile, out ilefr);
-
-                if (ilefr != null)
-                {
-                    CurrentTile = FindClosest(plpos);
-
-                    Island ileto = null;
-                    IslandMap.TryGetValue(CurrentTile, out ileto);
-
-                    if (ilefr != ileto)
-                    {
-                        MyWorld.IleTransition(ilefr, ileto);
-                    }
-                }
+                IslandInfo ileinf = null;
+                ilemap.TryGetValue(WorldToMap(CurrentTile), out ileinf);
+                IslandInfo ileinfto = null;
+                ilemap.TryGetValue(WorldToMap(curt), out ileinfto);
+                CurrentTile = curt;
+                MyWorld.IleTransition(ileinf, ileinfto);
             }
-            ulong msaf = OS.GetSystemTimeMsecs();
-		    GD.Print("World map processing took " + (msaf - ms).ToString() + " ms");
         }
-        
+        ulong msaf = OS.GetSystemTimeMsecs();
+        GD.Print("World map processing took " + (msaf - ms).ToString() + " ms");
+    }
+    public Island SpawnIsland(IslandInfo info)
+    {
+        Island Ile = (Island)info.IleType.Instance();
+
+        Vector3 pos = new Vector3(0.0f, 0.0f, 0.0f);
+
+        Vector2 postoput = MapToWorld(new Vector2(info.pos.x, info.pos.y));
+
+        postoput += CellSize / 2;
+        pos.x = postoput.x;
+        pos.z = postoput.y;
+        Ile.loctospawnat = pos;
+        Ile.rotationtospawnwith = info.rottospawn;
+
+        info.SetInfo(Ile);
+
+        return Ile;
+    }
+    public Island ReSpawnIsland(IslandInfo info)
+    {
+        Island Ile = (Island)info.IleType.Instance();
+
+        Vector3 pos = new Vector3(0.0f, 0.0f, 0.0f);
+
+        Vector2 postoput = MapToWorld(new Vector2(info.pos.x, info.pos.y));
+
+        postoput += CellSize / 2;
+        pos.x = postoput.x;
+        pos.z = postoput.y;
+        Ile.loctospawnat = pos;
+        Ile.rotationtospawnwith = info.rottospawn;
+
+        info.SetInfo(Ile);
+        Ile.InputData(info);
+        return Ile;
     }
     void ArrangeCellsBasedOnDistance()
     {
@@ -160,15 +183,16 @@ public class WorldMap : TileMap
             RandomisedEntryID.Insert(i, SpawnIndex);
         }
     }
-    
-    Vector2 FindClosest(Vector2 pos)
+    //takes in cell position gives out global transforms of closest island
+    Vector2 FindClosestIslandPosition(Vector2 pos)
     {
         float dist = 999999999;
         Vector2 closest = Vector2.Zero;
-        foreach(KeyValuePair<Vector2, Island> entry in IslandMap)
+        foreach(KeyValuePair<Vector2, IslandInfo> entry in ilemap)
         {
-            Vector2 ilepos = entry.Key;
-
+            Vector2 ilepos = MapToWorld(new Vector2(entry.Value.pos.x, entry.Value.pos.y));
+            ilepos += CellSize / 2;
+            
             float Itdist = ilepos.DistanceTo(pos);
             if (dist > Itdist)
             {
@@ -178,11 +202,11 @@ public class WorldMap : TileMap
         }
         return closest;
     }
-
-    public void GetClosestIles(Island Ile, out List<Island> closeIles, int dist = 2)
+    public void GetClosest(Vector2 pos, out List<Vector2> closeIles, int dist = 2)
     {
-        closeIles = new List<Island>();
-        Vector3 transform = Ile.GlobalTransform.origin;
+        closeIles = new List<Vector2>();
+        Vector3 transform = new Vector3(pos.x, 0, pos.y);
+
         int ammount = 0;
         for (int i = 0; i < dist; i ++)
             ammount += ammount + 8;
@@ -192,10 +216,7 @@ public class WorldMap : TileMap
         float collumn = transform.z - offset;
         for (int i = 0; i < ammount + 1; i++)
         {
-            Island ile;
-            IslandMap.TryGetValue(new Vector2(row, collumn), out ile);
-            if (ile != null)
-                closeIles.Insert(closeIles.Count, ile);
+            closeIles.Insert(closeIles.Count, new Vector2(row, collumn));
             row += CellSizeOverride;
             if (row > transform.x + offset)
             {
@@ -206,6 +227,84 @@ public class WorldMap : TileMap
 
             }
         }
+    }
+    public void GetClosestIles(IslandInfo info, out List<IslandInfo> closeIles, int dist = 2)
+    {
+        
+        closeIles = new List<IslandInfo>();
+        Vector3 transform = new Vector3(info.pos.x, 0, info.pos.y);
+
+        int ammount = 0;
+        for (int i = 0; i < dist; i ++)
+            ammount += ammount + 8;
+
+        int offset = 1 * dist;
+        float row = transform.x - offset;
+        float collumn = transform.z - offset;
+        for (int i = 0; i < ammount + 1; i++)
+        {
+            IslandInfo ile;
+            ilemap.TryGetValue(new Vector2(row, collumn), out ile);
+            closeIles.Insert(closeIles.Count, ile);
+            row += 1;
+            if (row > transform.x + offset)
+            {
+                row = transform.x - offset;
+                collumn += 1;
+                if (collumn > transform.z + offset)
+                    break;
+            }
+        }
+    }
+    
+   
+    IslandInfo RegisterIsland(int curtile)
+    {
+        int id = GetCell((int)OrderedCells[curtile].x, (int)OrderedCells[curtile].y);
+        Vector2 cell = OrderedCells[curtile];
+
+        currentile += 1;
+
+        PackedScene ilescene = GetSceneToSpawn(id);
+        IslandInfo ileinfo = new IslandInfo();
+        
+        float rot = 0;
+
+        int index = random.Next(rots.Count);
+        rot = rots[index];
+
+        ileinfo.rottospawn = rot;
+        ileinfo.IleType = ilescene;
+        ileinfo.pos = cell;
+        
+        Island ile = SpawnIsland(ileinfo);
+        MyWorld.GetInstance().RegisterIle(ileinfo);
+        List<House> houses;
+        ile.GetHouses(out houses);
+        ileinfo.AddHouses(houses);
+
+        
+        MyWorld.GetInstance().ToggleIsland(ileinfo, false, false);
+        ilemap.Add(cell, ileinfo);
+
+        if (id == 0)
+        {
+            entry = ileinfo;
+        }
+        if (currentile == 100)
+        {
+            MyWorld.GetInstance().ToggleIsland(entry, true, true);
+            Island island = entry.ile;
+            Position3D spawnpos = island.GetNode<Position3D>("SpawnPosition");
+            pl.Teleport(spawnpos.GlobalTransform.origin);
+            WorldClipRaycast.EnableWorldClipRaycast();
+            GetTree().Root.GetCamera().Fov = Settings.GetGameSettings().FOVOverride;
+            CurrentTile = new Vector2 (island.GlobalTransform.origin.x ,island.GlobalTransform.origin.z);
+        }
+
+        if (currentile >= OrderedCells.Count)
+            finishedspawning = true;
+        return ileinfo;
     }
     PackedScene GetSceneToSpawn(int type)
     {
@@ -233,49 +332,106 @@ public class WorldMap : TileMap
 
         return scene;
     }
-    void EnableIsland(int curtile)
+	
+}
+public class IslandInfo
+{
+    public Island ile;
+    public Vector2 pos;
+    public PackedScene IleType;
+    public List<HouseInfo> Houses = new List<HouseInfo>();
+    public float rottospawn;
+    public void SetInfo(Island info)
     {
-
-        int id = GetCell((int)OrderedCells[curtile].x, (int)OrderedCells[curtile].y);
-
-        Island Ile = (Island)GetSceneToSpawn(id).Instance();
-        SpawnIsland(Ile, OrderedCells[curtile], true);
+        ile = info;
+        List<House> hous = new List<House>();
+        info.GetHouses(out hous);
+        AddHouses(hous);
         
-        currentile += 1;
-
-        if (id == 0)
-        {
-            entry = Ile;
-        }
-        if (currentile == 20)
-        {
-            pl.Teleport(entry.GetNode<Position3D>("SpawnPosition").GlobalTranslation);
-            WorldClipRaycast.EnableWorldClipRaycast();
-            GetTree().Root.GetCamera().Fov = Settings.GetGameSettings().FOVOverride;
-            CurrentTile = new Vector2 (entry.GlobalTransform.origin.x, entry.GlobalTransform.origin.z);
-            MyWorld.ToggleIsland(entry, true, true);
-        }
-
-        if (currentile >= OrderedCells.Count)
-            finishedspawning = true;
     }
-	void SpawnIsland(Island Ile , Vector2 cell, bool rotate)
+    public void GetInfo(out List<HouseInfo> Houss, out float rot, out PackedScene ilet, out Vector2 position)
     {
-        Vector2 postoput = MapToWorld(cell);
-        postoput += CellSize / 2;
-        Vector3 pos = new Vector3(0.0f, 0.0f, 0.0f);
-        pos.x = postoput.x;
-        pos.z = postoput.y;
-        Ile.loctospawnat = pos;
-        if (rotate)
+        Houss = new List<HouseInfo>();
+        for (int i = 0; i < Houses.Count; i ++)
         {
-            int index = random.Next(rots.Count);
-            Ile.rotationtospawnwith = rots[index];
+            Houss.Insert(i, Houses[i]);
         }
-       
-        ((MyWorld)GetParent()).RegisterIle(Ile);
-        IslandMap.Add(postoput ,Ile);
+        rot = rottospawn;
+        ilet = IleType;
+        position = pos;
+    }
+    public void AddHouses(List<House> HouseToAdd)
+    {
+        for (int i = 0; i < HouseToAdd.Count; i++)
+        {
+            HouseInfo info = new HouseInfo();
+            List<Furniture> furni = new List<Furniture>();
+            House h = HouseToAdd[i];
+            h.GetFurniture(out furni);
+            List<FurnitureInfo> finfo = new List<FurnitureInfo>();
+            for (int f = 0; f < furni.Count; f++)
+            {
+                Furniture furn = furni[f];
+                FurnitureInfo inf = new FurnitureInfo();
+                ItemName itn = 0;
+                if (furn.HasItem())
+                {
+                    itn = furn.GetItemName();
+                }
+                inf.SetInfo(furn.Name, furn.HasBeenSearched(), furn.HasItem(), itn);
+                finfo.Insert(f, inf);
+            }
+            info.SetInfo(HouseToAdd[i].Name, finfo);
+        }
+    }
+    public bool IsIslandSpawned()
+    {
+        if (ile == null)
+            return false;
+        else
+        {
+            return Godot.Object.IsInstanceValid(ile);
+        }
+        
+    }
+    public void GetHouses(out List<HouseInfo> GotHouses)
+    {
+        GotHouses = new List<HouseInfo>();
+        for (int i = 0; i < Houses.Count; i++)
+        {
+            GotHouses.Insert(i, Houses[i]);
+        }
+    }
+}
+public class HouseInfo
+{
+    public string HouseName;
+
+    public List<FurnitureInfo> furni = new List<FurnitureInfo>();
+    
+    public void SetInfo(string name, List<FurnitureInfo> funriture)
+    {
+        HouseName = name;
+        for (int i = 0; i < funriture.Count; i++)
+        {
+            furni.Insert(i, funriture[i]);
+        }
     }
 }
 
+public class FurnitureInfo
+{
+    public string FunritureName;
+    public bool Searched;
+    public bool HasItem;
+    public ItemName item;
+
+    public void SetInfo(string name, bool srch, bool hasI, ItemName it)
+    {
+        FunritureName = name;
+        Searched = srch;
+        HasItem = hasI;
+        item = it;
+    }
+}
 

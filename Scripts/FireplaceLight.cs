@@ -24,8 +24,8 @@ public class FireplaceLight : StaticBody
         else
         {
             GetNode<AudioStreamPlayer3D>("FireplaceSound").Play();
-            //part.Emitting = true;
-            //SetProcess(true);
+            part.Emitting = true;
+            SetProcess(true);
         }
         
     }

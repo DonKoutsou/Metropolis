@@ -4,18 +4,33 @@ using System.Collections.Generic;
 
 public class MyWorld : Spatial
 {
+	[Export]
+	Dictionary<int, string> GlobalItemListConfiguration = new Dictionary<int, string>();
 	Player pl;
 
+	static Dictionary<int, string> GlobalItemList = new Dictionary<int, string>();
+	public static string GetItemByType(ItemName name)
+	{
+		string path = string.Empty;
+		GlobalItemList.TryGetValue((int)name, out path);
+		return path;
+	}
 	bool EnableDissableBool = false;
 
-
-	static List<Island> Orderedilestodissable = new List<Island>();
-	static List<Island> Orderedilestoenable = new List<Island>();
+	static List<IslandInfo> Orderedilestodissable = new List<IslandInfo>();
+	static List<IslandInfo> Orderedilestoenable = new List<IslandInfo>();
 
 	public override void _Ready()
 	{
 		base._Ready();
 		pl = GetNode<Player>("Player");
+		foreach (KeyValuePair<int, string> pair in GlobalItemListConfiguration)
+		{
+			string text = pair.Value;
+			int key = pair.Key;
+			GlobalItemList.Add(key, text);
+		}
+		
 		Instance = this;
 	}
 	static MyWorld Instance;
@@ -32,10 +47,10 @@ public class MyWorld : Spatial
 	{
 		return pl;
 	}
-	public void RegisterIle(Island ile)
+	public void RegisterIle(IslandInfo ile)
 	{
-		AddChild(ile);
-		ToggleIsland(ile, false);
+		AddChild(ile.ile);
+		
 	}
 	float d = 0.2f;
 	public override void _Process(float delta)
@@ -51,11 +66,11 @@ public class MyWorld : Spatial
 				{
 					for (int i = Orderedilestodissable.Count - 1; i >= 0; i--)
 					{
-						Island ile = Orderedilestodissable[i];
+						IslandInfo ile = Orderedilestodissable[i];
 						Orderedilestodissable.Remove(ile);
-						if (ile.m_enabled)
+						if (ile.IsIslandSpawned())
 						{
-							ToggleIsland(ile, false);
+							ToggleIsland(ile, false, false);
 							break;
 						}	
 					}
@@ -69,11 +84,11 @@ public class MyWorld : Spatial
 					var iles = Orderedilestoenable;
 					for (int i = 0; i < iles.Count; i++)
 					{
-						Island ile = Orderedilestoenable[i];
+						IslandInfo ile = Orderedilestoenable[i];
 						Orderedilestoenable.Remove(ile);
-						if (!ile.m_enabled)
+						if (!ile.IsIslandSpawned())
 						{
-							ToggleIsland(ile, true);
+							ToggleIsland(ile, true, false);
 							break;
 						}	
 					}
@@ -81,32 +96,32 @@ public class MyWorld : Spatial
 			}
 		}
 	}
-	public static void ArrangeIlesBasedOnDistance(List<Island> ilestodissable, List<Island> ilestoenable)
+	public static void ArrangeIlesBasedOnDistance(List<IslandInfo> ilestodissable, List<IslandInfo> ilestoenable)
     {
 		if (ilestoenable.Count > 0)
 		{
-			foreach (Island IleArray in ilestoenable)
+			foreach (IslandInfo IleArray in ilestoenable)
 			{
 				if (Orderedilestoenable.Contains(IleArray))
 					continue;
-				float ind = Math.Abs(IleArray.GlobalTransform.origin.x) + Math.Abs(IleArray.GlobalTransform.origin.y);
+				float ind = Math.Abs(IleArray.pos.x) + Math.Abs(IleArray.pos.y);
 				if (Orderedilestoenable.Count == 0)
 				{
 					Orderedilestoenable.Insert(0, IleArray);
 					continue;
 				}
-				Island closest = Orderedilestoenable[0];
-				float dif = Math.Abs(Math.Abs(closest.GlobalTransform.origin.x) + Math.Abs(closest.GlobalTransform.origin.y) - ind);
+				IslandInfo closest = Orderedilestoenable[0];
+				float dif = Math.Abs(Math.Abs(closest.pos.x) + Math.Abs(closest.pos.y) - ind);
 				for (int i = Orderedilestoenable.Count - 1; i > -1; i--)
 				{
-					float newdif = Math.Abs(Math.Abs(Orderedilestoenable[i].GlobalTransform.origin.x) + Math.Abs(Orderedilestoenable[i].GlobalTransform.origin.y) - ind);
+					float newdif = Math.Abs(Math.Abs(Orderedilestoenable[i].pos.x) + Math.Abs(Orderedilestoenable[i].pos.y) - ind);
 					if (dif > newdif)
 					{
 						closest = Orderedilestoenable[i];
 						dif = newdif;
 					}
 				}
-				if (Math.Abs(closest.GlobalTransform.origin.x) + Math.Abs(closest.GlobalTransform.origin.y) < Math.Abs(IleArray.GlobalTransform.origin.x) + Math.Abs(IleArray.GlobalTransform.origin.y))
+				if (Math.Abs(closest.pos.x) + Math.Abs(closest.pos.y) < Math.Abs(IleArray.pos.x) + Math.Abs(IleArray.pos.y))
 				{
 					Orderedilestoenable.Insert(Orderedilestoenable.IndexOf(closest) + 1, IleArray);
 					continue;
@@ -121,28 +136,28 @@ public class MyWorld : Spatial
 
 		if (ilestodissable.Count > 0)
 		{
-			foreach (Island IleArray in ilestodissable)
+			foreach (IslandInfo IleArray in ilestodissable)
 			{
 				if (Orderedilestodissable.Contains(IleArray))
 					continue;
-				float ind = Math.Abs(IleArray.GlobalTransform.origin.x) + Math.Abs(IleArray.GlobalTransform.origin.y);
+				float ind = Math.Abs(IleArray.pos.x) + Math.Abs(IleArray.pos.y);
 				if (Orderedilestodissable.Count == 0)
 				{
 					Orderedilestodissable.Insert(0, IleArray);
 					continue;
 				}
-				Island closest = Orderedilestodissable[0];
-				float dif = Math.Abs(Math.Abs(closest.GlobalTransform.origin.x) + Math.Abs(closest.GlobalTransform.origin.y) - ind);
+				IslandInfo closest = Orderedilestodissable[0];
+				float dif = Math.Abs(Math.Abs(closest.pos.x) + Math.Abs(closest.pos.y) - ind);
 				for (int i = Orderedilestodissable.Count - 1; i > -1; i--)
 				{
-					float newdif = Math.Abs(Math.Abs(Orderedilestodissable[i].GlobalTransform.origin.x) + Math.Abs(Orderedilestodissable[i].GlobalTransform.origin.y) - ind);
+					float newdif = Math.Abs(Math.Abs(Orderedilestodissable[i].pos.x) + Math.Abs(Orderedilestodissable[i].pos.y) - ind);
 					if (dif > newdif)
 					{
 						closest = Orderedilestodissable[i];
 						dif = newdif;
 					}
 				}
-				if (Math.Abs(closest.GlobalTransform.origin.x) + Math.Abs(closest.GlobalTransform.origin.y) < Math.Abs(IleArray.GlobalTransform.origin.x) + Math.Abs(IleArray.GlobalTransform.origin.y))
+				if (Math.Abs(closest.pos.x) + Math.Abs(closest.pos.y) < Math.Abs(IleArray.pos.x) + Math.Abs(IleArray.pos.y))
 				{
 					Orderedilestodissable.Insert(Orderedilestodissable.IndexOf(closest) + 1, IleArray);
 					continue;
@@ -156,17 +171,17 @@ public class MyWorld : Spatial
 		}
     }
 	
-	public static void IleTransition(Island from, Island to)
+	public static void IleTransition(IslandInfo from, IslandInfo to)
 	{
 		//GD.Print("Transitioning from : " + from.Name + " to " + to.Name);
 
-		List<Island> ilestodissable = new List<Island>();
-		List<Island> ilestoenable = new List<Island>();
+		List<IslandInfo> ilestodissable = new List<IslandInfo>();
+		List<IslandInfo> ilestoenable = new List<IslandInfo>();
 		int ViewDistance = Settings.GetGameSettings().ViewDistance;
-		List<Island> closestfrom;
+		List<IslandInfo> closestfrom;
 		WorldMap.GetInstance().GetClosestIles(from ,out closestfrom, ViewDistance);
 
-		List<Island> closestto;
+		List<IslandInfo> closestto;
 		WorldMap.GetInstance().GetClosestIles(to,out closestto, ViewDistance);
 
 		for (int i = 0; i < closestfrom.Count; i ++)
@@ -198,29 +213,35 @@ public class MyWorld : Spatial
 
 		//GD.Print("-----------Transition Finished------------");
 	}
-
-	public static void ToggleIsland(Island ile, bool Toggle, bool affectneigh = false)
+	private void SpawnIsland(IslandInfo info)
+    {
+        Island Ile = (Island)info.IleType.Instance();
+		info.ile = Ile;
+       	//RegisterIle(info);
+		AddChild(Ile);
+		Ile.InitIle(info);
+    }
+	public void ToggleIsland(IslandInfo ileinfo,bool toggle, bool affectneigh)
 	{
-		if (Toggle)
+		if (toggle && !ileinfo.IsIslandSpawned())
 		{
-			ile.EnableIsland();
-			ToggleChildrenCollision(ile, false, true);
+			Island ile = WorldMap.GetInstance().ReSpawnIsland(ileinfo);
+			AddChild(ile);
+			ile.InputData(ileinfo);
 		}
-		else
+		else if (!toggle && ileinfo.IsIslandSpawned())
 		{
-			ile.DeactivateIsland();
-			ToggleChildrenCollision(ile, true, true);
+			Island ile = ileinfo.ile;
+			ile.QueueFree();
 		}
-			
-			
 		if (affectneigh)
 		{
-			List<Island> closestto;
+			List<IslandInfo> closestto;
 			int ViewDistance = Settings.GetGameSettings().ViewDistance;
-			WorldMap.GetInstance().GetClosestIles(ile, out closestto, ViewDistance);
+			WorldMap.GetInstance().GetClosestIles(ileinfo, out closestto, ViewDistance);
 
 			for (int i = 0; i < closestto.Count; i ++)
-				ToggleIsland(closestto[i], Toggle);
+				ToggleIsland(closestto[i], toggle, false);
 		}
 	}
 	static private void ToggleChildrenCollision(Node node, bool toggle, bool recursive)

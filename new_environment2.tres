@@ -19,7 +19,6 @@ fog_height_enabled = true
 fog_height_min = 900.0
 fog_height_max = 1800.0
 tonemap_mode = 2
-auto_exposure_enabled = true
 auto_exposure_min_luma = 0.23
 ssao_radius = 22.52
 ssao_intensity = 24.11

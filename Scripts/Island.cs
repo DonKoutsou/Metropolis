@@ -11,8 +11,6 @@ public class Island : Spatial
 
 	WorldMap map;
 
-	public bool m_enabled = false;
-
 	public bool Inited = false;
 
 	public Vector3 loctospawnat;
@@ -22,106 +20,55 @@ public class Island : Spatial
 	Spatial Terain;
 	Spatial TerainDetail;
 
-	//NavigationMeshInstance navmesh;
-	public void RegisterChar(Character en)
-	{
-		if (en is Player)
-			return;
-		if (!m_enem.Contains(en))
-		{
-			m_enem.Insert(m_enem.Count(), en);
-			if (m_enabled)
-				en.Start();
-			else
-				en.Stop();
-		}
-	}
+	List<House> Houses = new List<House>();
+
 	public override void _Ready()
 	{
 		GlobalTranslation = loctospawnat;
-		//Apply rotation random
+
 		Rotate(new Vector3(0, 1, 0), Mathf.Deg2Rad(rotationtospawnwith));
 		Transform.Rotated(new Vector3(0, 1, 0), rotationtospawnwith);
 
-		//navmesh = GetNode<NavigationMeshInstance>("NavigationMeshInstance");
-		Terain = GetNodeOrNull<Spatial>("HTerrain");
-		if (Terain != null)
-		{
-			TerainDetail = Terain.GetNodeOrNull<Spatial>("HTerrainDetailLayer");
-		}
 		StaticBody waterbody = GetNodeOrNull<StaticBody>("SeaBed");
 		if (waterbody != null)
 			waterbody.GlobalRotation = new Vector3 (0.0f, 0.0f, 0.0f);
 
 		map = GetParent().GetNode<WorldMap>("WorldMap");
+		FindHouses(this);
 	}
-	//public override void _Process(float delta)
-	//{
-	//	base._Process(delta);
-
-	//}
-
-	public virtual void EnableIsland()
+	public void InputData(IslandInfo data)
 	{
-		if (m_enabled)
-			return;
-
-		if (map.HideBasedOnState)
+		foreach (House hou in Houses)
 		{
-			Show();
-		}
-		if (Terain != null)
-		{
-			Terain.SetProcess(true);
-			if (TerainDetail != null)
+			foreach(HouseInfo HouseInfo in data.Houses)
 			{
-				TerainDetail.SetProcess(true);
+				if (hou.Name == HouseInfo.HouseName)
+				{
+					hou.InputData(HouseInfo);
+				}
 			}
 		}
-
-		ToggleEnemies(true);
-		//if (navmesh != null)
-			//navmesh.Enabled = true;
-
-		m_enabled = true;
 	}
-	public void DeactivateIsland()
+	public void InitIle(IslandInfo info)
 	{
-		if (map.HideBasedOnState)
-		{
-			Hide();
-		}
-		if (Terain != null)
-		{
-			Terain.SetProcess(false);
-			if (TerainDetail != null)
-			{
-				TerainDetail.SetProcess(false);
-			}
-		}
-			
 
-		ToggleEnemies(false);
-
-		//if (navmesh != null)
-			//navmesh.Enabled = false;
-		m_enabled = false;
 	}
-	void ToggleEnemies(bool toggle)
+	private void FindHouses(Node node)
 	{
-		if (m_enem.Count == 0)
-			return;
-		foreach (Character enem in m_enem)
+		foreach (Node child in node.GetChildren())
 		{
-			if (enem != null)
-			{
-				if (!toggle)
-					enem.CallDeferred("Stop");
-				else
-					enem.CallDeferred("Start");
-			}
+			if (child is House)
+				Houses.Insert(Houses.Count, (House)child);
+			else
+				FindHouses(child);
 		}
-		
 	}
-	
+	public void GetHouses(out List<House> hs)
+	{
+		hs = new List<House>();
+		for (int i = 0; i < Houses.Count; i++)
+		{
+			hs.Insert(i, Houses[i]);
+		}
+	}
 }
