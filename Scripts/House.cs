@@ -11,10 +11,14 @@ public class House : Spatial
 
 	List<Furniture> FurnitureList = new List<Furniture>();
 
-	//public override void _Ready()
-	//{
-		
-	//}
+	public override void _Ready()
+	{
+		foreach (Node nd in GetChildren())
+		{
+			if (nd is Furniture)
+				FurnitureList.Insert(FurnitureList.Count, (Furniture)nd);
+		}
+	}
 	public void StartHouse(Random random)
 	{
 		if (!spawnItems)

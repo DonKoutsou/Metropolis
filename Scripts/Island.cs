@@ -21,7 +21,7 @@ public class Island : Spatial
 	Spatial TerainDetail;
 
 	List<House> Houses = new List<House>();
-
+	List<WindGenerator> Generators = new List<WindGenerator>();
 	public override void _Ready()
 	{
 		GlobalTranslation = loctospawnat;
@@ -35,23 +35,37 @@ public class Island : Spatial
 
 		map = GetParent().GetNode<WorldMap>("WorldMap");
 		FindHouses(this);
+		FindGenerators(this);
 	}
 	public void InputData(IslandInfo data)
 	{
 		foreach (House hou in Houses)
 		{
-			foreach(HouseInfo HouseInfo in data.Houses)
+			foreach(HouseInfo Hnfo in data.Houses)
 			{
-				if (hou.Name == HouseInfo.HouseName)
+				if (hou.Name == Hnfo.HouseName)
 				{
-					hou.InputData(HouseInfo);
+					hou.InputData(Hnfo);
+				}
+			}
+		}
+		foreach (WindGenerator gen in Generators)
+		{
+			foreach(WindGeneratorInfo GenInfo in data.Generators)
+			{
+				if (gen.Name == GenInfo.WindGeneratorName)
+				{
+					gen.SetData(GenInfo);
 				}
 			}
 		}
 	}
-	public void InitIle(IslandInfo info)
+	public void InitialSpawn(Random r)
 	{
-
+		foreach(House h in Houses)
+		{
+			h.StartHouse(r);
+		}
 	}
 	private void FindHouses(Node node)
 	{
@@ -71,4 +85,23 @@ public class Island : Spatial
 			hs.Insert(i, Houses[i]);
 		}
 	}
+	private void FindGenerators(Node node)
+	{
+		foreach (Node child in node.GetChildren())
+		{
+			if (child is WindGenerator)
+				Generators.Insert(Generators.Count, (WindGenerator)child);
+			else
+				FindGenerators(child);
+		}
+	}
+	public void GetGenerator(out List<WindGenerator> wg)
+	{
+		wg = new List<WindGenerator>();
+		for (int i = 0; i < Generators.Count; i++)
+		{
+			wg.Insert(i, Generators[i]);
+		}
+	}
+	
 }

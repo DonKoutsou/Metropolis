@@ -3,7 +3,8 @@ using System;
 
 public class DayNight : WorldEnvironment
 {
-
+    [Export]
+    Curve AutoExposureCurve = null;
     [Export]
     Curve brightnesscurve = null;
 
@@ -94,6 +95,7 @@ public class DayNight : WorldEnvironment
 
         Brighness = brightnesscurve.Interpolate(HourValue);
 
+        AutoExposure = AutoExposureCurve.Interpolate(HourValue);
         SunBrightness = sunbrightnesscurve.Interpolate(HourValue);
 
         MoonBrightness = moonbrightnesscurve.Interpolate(HourValue);
@@ -297,20 +299,18 @@ public class DayNight : WorldEnvironment
     float MinuteValue;
     float HourValue;
     float Brighness;
+    float AutoExposure;
     float SunBrightness;
     float MoonBrightness;
     float Softlight;
     float SunRot;
     Color SunColor;
     Color MoonColor;
-    float d = 0.5f;
+
     public override void _Process(float delta)
     {
         base._Process(delta);
-        d -= delta;
-		if (d > 0)
-            return;
-        d = 0.5f;
+
         UpdateTime();
         
         UpdateWind();
@@ -318,6 +318,8 @@ public class DayNight : WorldEnvironment
         UpdateCurveValues();
 
         Environment.BackgroundEnergy = Brighness;
+
+        Environment.AutoExposureScale = AutoExposure;
 
         sun.LightColor = SunColor;
 

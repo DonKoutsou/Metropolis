@@ -9,15 +9,18 @@ public class Sea : MeshInstance
 	{
 		material = (ShaderMaterial)GetActiveMaterial(0);
 		((Spatial)GetParent()).GlobalRotation = Vector3.Zero;
+		AnimationPlayer anim = GetNode<AnimationPlayer>("AnimationPlayer");
+		anim.CurrentAnimation = "Wave";
+		anim.Play();
 	}
-	private void _on_Sea_visibility_changed()
+	/*private void _on_Sea_visibility_changed()
 	{
 		if (Visible)
 			SetPhysicsProcess(true);
 		else
 			SetPhysicsProcess(false);
 	}
-	/*public override void _PhysicsProcess(float delta)
+	public override void _PhysicsProcess(float delta)
 	{
 		base._PhysicsProcess(delta);
 		//float thing = ((-360 - DayNight.GetWindDirection()) / 360) - 0.5f;

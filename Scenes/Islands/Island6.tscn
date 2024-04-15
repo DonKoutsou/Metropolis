@@ -47,8 +47,8 @@ transform = Transform( 108.719, 49.5292, -0.583832, -14.3049, 30.0476, -114.743,
 [node name="StaticBody4" parent="." index="9" instance=ExtResource( 12 )]
 transform = Transform( 0.843251, 0, -0.53752, 0, 1, 0, 0.53752, 0, 0.843251, 45.4721, -30.579, -564.13 )
 
-[node name="StaticBody5" parent="." index="14" instance=ExtResource( 7 )]
+[node name="StaticBody5" parent="." index="13" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 349.805, -22.2993, -1233 )
 
-[node name="WindGenerator" parent="." index="15" instance=ExtResource( 11 )]
+[node name="WindGenerator" parent="." index="14" instance=ExtResource( 11 )]
 transform = Transform( 0.173205, 0, -0.1, 0, 0.2, 0, 0.1, 0, 0.173205, 285, 7, -1260 )

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/WindGenerator.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/TerainTest/sapila.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Env_Assets/CylinderThingHuge.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Assets/Building/BuildingComposition.tscn" type="PackedScene" id=12]
 
@@ -11,12 +12,15 @@
 transform = Transform( -0.992732, 0, -0.120345, 0, 1, 0, 0.120345, 0, -0.992732, -120.572, 116.419, 1043.5 )
 
 [node name="House" parent="." index="3" instance=ExtResource( 12 )]
-transform = Transform( 0.887823, 0, 0.460184, 0, 1, 0, -0.460184, 0, 0.887823, -2.92459, 137.967, 1103.73 )
+transform = Transform( 0.684318, 0, -0.729183, 0, 1, 0, 0.729183, 0, 0.684318, -2.92456, 179.182, 1103.73 )
 
 [node name="WindGenerator" parent="." index="7" instance=ExtResource( 2 )]
-transform = Transform( 0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 1286.19, 936.169, 14.8821 )
+transform = Transform( 0.17466, 0, -0.178868, 0, 0.25, 0, 0.178868, 0, 0.17466, 23.0155, 173.12, 1173.43 )
 EnergyCapacity = 100.0
 EnergyPerWindStreangth = 0.025
 
 [node name="House2" parent="." index="8" instance=ExtResource( 12 )]
-transform = Transform( 0.936483, 0, -0.350714, 0, 1, 0, 0.350714, 0, 0.936483, 1261.51, 940.095, -1.67001 )
+transform = Transform( 0.403338, 0, -0.915051, 0, 1, 0, 0.915051, 0, 0.403338, 17.6156, 177.046, 1144.21 )
+
+[node name="sapila" parent="." index="9" instance=ExtResource( 3 )]
+transform = Transform( 400, 0, 0, 0, 400, 0, 0, 0, 400, 0, 0, 0 )

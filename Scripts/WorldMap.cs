@@ -139,8 +139,8 @@ public class WorldMap : TileMap
         Ile.loctospawnat = pos;
         Ile.rotationtospawnwith = info.rottospawn;
 
-        info.SetInfo(Ile);
-        Ile.InputData(info);
+        info.ile = Ile;
+        //Ile.InputData(info);
         return Ile;
     }
     void ArrangeCellsBasedOnDistance()
@@ -279,6 +279,7 @@ public class WorldMap : TileMap
         
         Island ile = SpawnIsland(ileinfo);
         MyWorld.GetInstance().RegisterIle(ileinfo);
+        ile.InitialSpawn(random);
         List<House> houses;
         ile.GetHouses(out houses);
         ileinfo.AddHouses(houses);
@@ -340,14 +341,52 @@ public class IslandInfo
     public Vector2 pos;
     public PackedScene IleType;
     public List<HouseInfo> Houses = new List<HouseInfo>();
+    public List<WindGeneratorInfo> Generators = new List<WindGeneratorInfo>();
     public float rottospawn;
     public void SetInfo(Island info)
     {
         ile = info;
         List<House> hous = new List<House>();
         info.GetHouses(out hous);
+        List<WindGenerator> Gen = new List<WindGenerator>();
+        info.GetGenerator(out Gen);
         AddHouses(hous);
-        
+        AddGenerators(Gen);
+    }
+    public void UpdateInfo(Island island)
+    {
+        List<House> hous = new List<House>();
+        island.GetHouses(out hous);
+        foreach(HouseInfo HInfo in Houses)
+        {
+            House h = null;
+            foreach (House hou in hous)
+            {
+                if (hou.Name == HInfo.HouseName)
+                {
+                    h = hou;
+                    break;
+                }
+            }
+            List<Furniture> funriture;
+            h.GetFurniture(out funriture);
+            HInfo.UpdateInfo(funriture);
+        }
+        List<WindGenerator> gens = new List<WindGenerator>();
+        island.GetGenerator(out gens);
+        foreach(WindGeneratorInfo WGInfo in Generators)
+        {
+            WindGenerator g = null;
+            foreach (WindGenerator gen in gens)
+            {
+                if (gen.Name == WGInfo.WindGeneratorName)
+                {
+                    g = gen;
+                    break;
+                }
+            }
+            WGInfo.UpdateInfo(g);
+        }
     }
     public void GetInfo(out List<HouseInfo> Houss, out float rot, out PackedScene ilet, out Vector2 position)
     {
@@ -360,6 +399,7 @@ public class IslandInfo
         ilet = IleType;
         position = pos;
     }
+
     public void AddHouses(List<House> HouseToAdd)
     {
         for (int i = 0; i < HouseToAdd.Count; i++)
@@ -382,6 +422,16 @@ public class IslandInfo
                 finfo.Insert(f, inf);
             }
             info.SetInfo(HouseToAdd[i].Name, finfo);
+            Houses.Insert(Houses.Count, info);
+        }
+    }
+    public void AddGenerators(List<WindGenerator> GeneratorToAdd)
+    {
+        for (int i = 0; i < GeneratorToAdd.Count; i++)
+        {
+            WindGeneratorInfo info = new WindGeneratorInfo();
+            info.SetInfo(GeneratorToAdd[i].Name, GeneratorToAdd[i].GetCurrentEnergy());
+            Generators.Insert(Houses.Count, info);
         }
     }
     public bool IsIslandSpawned()
@@ -408,7 +458,23 @@ public class HouseInfo
     public string HouseName;
 
     public List<FurnitureInfo> furni = new List<FurnitureInfo>();
-    
+    public void UpdateInfo(List<Furniture> funriture)
+    {
+        foreach(FurnitureInfo GInfo in furni)
+        {
+            Furniture f = null;
+            foreach (Furniture fu in funriture)
+            {
+                if (fu.Name == GInfo.FunritureName)
+                {
+                    f = fu;
+                    break;
+                }
+            }
+            GInfo.UpdateInfo(f);
+
+        }
+    }
     public void SetInfo(string name, List<FurnitureInfo> funriture)
     {
         HouseName = name;
@@ -418,13 +484,30 @@ public class HouseInfo
         }
     }
 }
-
+public class WindGeneratorInfo
+{
+    public string WindGeneratorName;
+    public float CurrentEnergy;
+    public void UpdateInfo(WindGenerator gen)
+    {
+        CurrentEnergy = gen.GetCurrentEnergy();
+    }
+    public void SetInfo(string name, float CurEn)
+    {
+        WindGeneratorName = name;
+        CurrentEnergy = CurEn;
+    }
+}
 public class FurnitureInfo
 {
     public string FunritureName;
     public bool Searched;
     public bool HasItem;
     public ItemName item;
+    public void UpdateInfo(Furniture furn)
+    {
+        Searched = furn.Searched;
+    }
 
     public void SetInfo(string name, bool srch, bool hasI, ItemName it)
     {

@@ -219,7 +219,7 @@ public class MyWorld : Spatial
 		info.ile = Ile;
        	//RegisterIle(info);
 		AddChild(Ile);
-		Ile.InitIle(info);
+		//Ile.InitIle(info);
     }
 	public void ToggleIsland(IslandInfo ileinfo,bool toggle, bool affectneigh)
 	{
@@ -232,6 +232,7 @@ public class MyWorld : Spatial
 		else if (!toggle && ileinfo.IsIslandSpawned())
 		{
 			Island ile = ileinfo.ile;
+			ileinfo.UpdateInfo(ile);
 			ile.QueueFree();
 		}
 		if (affectneigh)

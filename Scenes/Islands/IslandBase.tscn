@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Islands/Island_Main.tscn" type="PackedScene" id=1]
-[ext_resource path="res://sapila.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Sea.tscn" type="PackedScene" id=8]
 
 [sub_resource type="SpatialMaterial" id=4]
@@ -36,5 +35,3 @@ material_override = SubResource( 4 )
 mesh = SubResource( 5 )
 
 [node name="SeaBed" parent="." index="4" instance=ExtResource( 8 )]
-
-[node name="sapila" parent="." index="5" instance=ExtResource( 2 )]

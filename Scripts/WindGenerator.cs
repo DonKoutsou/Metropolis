@@ -57,10 +57,12 @@ public class WindGenerator : StaticBody
             rot = rot - 360;
         anim3.Seek(rot / 36, true);
         //rotorpivot.GlobalRotation = new Vector3(0.0f, rot, 0.0f);
-        float animspeed = windstr * 0.05f; 
+        float animspeed = windstr * 0.03f;
         float energy = EnergyPerWindStreangth * (windstr/100);
-        anim.PlaybackSpeed = animspeed;
-        anim2.PlaybackSpeed = animspeed;
+        float scale = Scale.x;
+ 
+        anim.PlaybackSpeed = animspeed - (scale - 1);
+        anim2.PlaybackSpeed = animspeed - (scale - 1);
         
         if (CurrentEnergy + energy < EnergyCapacity)
         {
@@ -83,4 +85,8 @@ public class WindGenerator : StaticBody
             SetProcess(false);
         }
     }
+    public void SetData(WindGeneratorInfo info)
+	{
+		CurrentEnergy = info.CurrentEnergy;
+	}
 }
