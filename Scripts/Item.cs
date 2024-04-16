@@ -53,4 +53,5 @@ public enum ItemName
 	ROPE,
 	BATTERY,
 	CLOCK,
+	COMPASS
 }

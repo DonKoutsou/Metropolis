@@ -209,12 +209,13 @@ shape = SubResource( 10 )
 shape = SubResource( 1 )
 
 [node name="Rotor_Pivot" type="Spatial" parent="."]
+transform = Transform( 1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 0, 0, 0 )
 
 [node name="BladePivot" type="Spatial" parent="Rotor_Pivot"]
-transform = Transform( 0.999982, 0, 0.00581111, 0, 1, 0, -0.00581111, 0, 0.999982, 0, 191.821, 0 )
+transform = Transform( 0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 191.821, 0 )
 
 [node name="StaticBody" type="StaticBody" parent="Rotor_Pivot/BladePivot"]
-transform = Transform( -0.946652, -0.322259, 0, 0.322259, -0.946652, 0, 0, 0, 1, 0, 0, 6.26753 )
+transform = Transform( 1, -1.74846e-07, 0, 1.74846e-07, 1, 0, 0, 0, 1, 0, 0, 6.26753 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Rotor_Pivot/BladePivot/StaticBody"]
 transform = Transform( 1, -1.74846e-07, 0, 1.74846e-07, 1, 0, 0, 0, 1, 0, 0, 0 )
@@ -227,7 +228,7 @@ visible = false
 shape = SubResource( 4 )
 
 [node name="StaticBody2" type="StaticBody" parent="Rotor_Pivot/BladePivot"]
-transform = Transform( -0.892919, -0.450217, 0, 0.450217, -0.892919, 0, 0, 0, 1, 0, 0, -6.67876 )
+transform = Transform( 1, 1.74846e-07, 0, -1.74846e-07, 1, 0, 0, 0, 1, 0, 0, -6.67876 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="Rotor_Pivot/BladePivot/StaticBody2"]
 transform = Transform( -1, 1.86265e-09, -1.50996e-07, 1.86265e-09, 1, 1.62838e-16, 1.50996e-07, -1.18414e-16, -1, 0, 0, 0 )

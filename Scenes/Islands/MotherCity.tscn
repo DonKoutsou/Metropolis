@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/MotherCityComp.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Compass.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Building/BuildingComposition.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Building/BuildingDust2.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Env_Assets/Fireplace.tscn" type="PackedScene" id=6]
@@ -233,3 +234,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -67, 82, 1980 )
 
 [node name="MotherCityComp" parent="." index="72" instance=ExtResource( 2 )]
 transform = Transform( 800, 0, 0, 0, 800, 0, 0, 0, 800, 0, -55, 0 )
+
+[node name="Item" parent="." index="73" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -597, 28.8492, 1251 )

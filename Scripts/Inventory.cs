@@ -55,7 +55,7 @@ public class Inventory : Spatial
         item.Hide();
         //EmitSignal(nameof(On_Item_Added), item);
         item.GetNode<CollisionShape>("CollisionShape").SetDeferred("disabled",true);
-        ui.UpdateInventory();
+        //ui.UpdateInventory();
         return true;
     }
     public bool RemoveItem(Item item)

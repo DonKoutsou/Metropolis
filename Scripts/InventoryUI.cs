@@ -72,6 +72,7 @@ public class InventoryUI : Control
         List<Item> Items = new List<Item>();
         Inv.GetContents(out Items);
         List<int> itemcount = new List<int>();
+        bool hascompass = false;
         for (int i = 0; i < slots.Count(); i++)
         {
             Item sample = null;
@@ -81,7 +82,8 @@ public class InventoryUI : Control
             {
                 if (sample == null)
                     sample = Items[v];
-                
+                if (Items[v].GetItemType() == 4)
+                    hascompass = true;
                 if (Items[v].GetItemType() == sample.GetItemType())
                 {
                     ammount += 1;
@@ -106,6 +108,20 @@ public class InventoryUI : Control
 
         if (showingDesc)
             Description.BbcodeText = "[center]" + ShowingDescSample.GetItemDesc();
+
+
+        if (hascompass)
+        {
+            Compass comp = Compass.GetInstance();
+            if (comp != null)
+                comp.ToggleCompass(true);
+        }
+        else
+        {
+            Compass comp = Compass.GetInstance();
+            if (comp != null)
+                comp.ToggleCompass(false);
+        }
     }
     public void CloseInventory()
     {
@@ -113,6 +129,9 @@ public class InventoryUI : Control
         FocusedSlot = null;
         IsOpen = false;
         SetProcess(false);
+        Compass comp = Compass.GetInstance();
+        if (comp != null)
+            comp.ToggleCompass(false);
     }
     public void ItemHovered(Item it)
     {
