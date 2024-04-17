@@ -92,7 +92,7 @@ ResourceScriptDirectories=[ "res://", "res://Scripts/" ]
 
 [application]
 
-config/name="3D_TestProj"
+config/name="Μητρόπολη"
 run/main_scene="res://Scenes/MainWorld.tscn"
 config/icon="res://icon.png"
 
