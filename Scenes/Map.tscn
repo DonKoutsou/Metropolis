@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/MapGrid.cs" type="Script" id=1]
+[ext_resource path="res://Scripts/MapUI.cs" type="Script" id=3]
+
+[node name="MapUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+
+[node name="Panel" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -534.0
+margin_top = -239.0
+margin_right = -134.0
+margin_bottom = 161.0
+rect_clip_content = true
+mouse_default_cursor_shape = 6
+
+[node name="MapGrid" type="GridContainer" parent="Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -710.0
+margin_top = -249.0
+margin_right = 710.0
+margin_bottom = 251.0
+custom_constants/vseparation = 12
+custom_constants/hseparation = 12
+columns = 81
+script = ExtResource( 1 )
+TileScene = "res://Scenes/MapTile.tscn"
+
+[connection signal="mouse_entered" from="Panel" to="." method="OnMouseEntered"]
+[connection signal="mouse_exited" from="Panel" to="." method="OnMouseLeft"]

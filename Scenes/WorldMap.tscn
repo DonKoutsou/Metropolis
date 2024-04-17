@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/WorldMap.cs" type="Script" id=1]
 [ext_resource path="res://Tilesets/World_Tileset.tres" type="TileSet" id=2]
+[ext_resource path="res://Scenes/Islands/LightHouse.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Islands/IslandStarting.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Islands/SeaIsland.tscn" type="PackedScene" id=8]
 [ext_resource path="res://addons/AllSkyFree/AllSkyFree_EpicGloriousPink.tscn" type="PackedScene" id=9]
@@ -20,6 +21,7 @@ scenestospawn = PoolStringArray( "res://Scenes/Islands/Island1.tscn", "res://Sce
 Eventscenestospawn = PoolStringArray( "res://Scenes/Islands/Volcano.tscn", "res://Scenes/Islands/Island5.tscn", "res://Scenes/Islands/Island4.tscn", "res://Scenes/Islands/Island14.tscn" )
 Entrytospawn = ExtResource( 4 )
 Sea = ExtResource( 8 )
+LightHouse = ExtResource( 3 )
 HideBasedOnState = true
 
 [node name="Sky" parent="." instance=ExtResource( 9 )]

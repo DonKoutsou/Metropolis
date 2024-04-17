@@ -26,12 +26,12 @@ public class Island : Spatial
 	{
 		GlobalTranslation = loctospawnat;
 
-		Rotate(new Vector3(0, 1, 0), Mathf.Deg2Rad(rotationtospawnwith));
-		Transform.Rotated(new Vector3(0, 1, 0), rotationtospawnwith);
+		//Rotate(new Vector3(0, 1, 0), Mathf.Deg2Rad(rotationtospawnwith));
+		//Transform.Rotated(new Vector3(0, 1, 0), rotationtospawnwith);
 
-		StaticBody waterbody = GetNodeOrNull<StaticBody>("SeaBed");
-		if (waterbody != null)
-			waterbody.GlobalRotation = new Vector3 (0.0f, 0.0f, 0.0f);
+		//StaticBody waterbody = GetNodeOrNull<StaticBody>("SeaBed");
+		//if (waterbody != null)
+			//waterbody.GlobalRotation = new Vector3 (0.0f, 0.0f, 0.0f);
 
 		map = GetParent().GetNode<WorldMap>("WorldMap");
 		FindHouses(this);

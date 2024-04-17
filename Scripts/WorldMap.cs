@@ -26,6 +26,9 @@ public class WorldMap : TileMap
     public PackedScene Sea;
 
     [Export]
+    public PackedScene LightHouse;
+
+    [Export]
     public bool HideBasedOnState = false;
 
     [Export]
@@ -67,6 +70,8 @@ public class WorldMap : TileMap
     {
         Instance = this;
 
+        MapGrid.GetInstance().InitMap();
+
         int seed = Settings.GetGameSettings().Seed;
 
         random = new Random(seed);
@@ -101,6 +106,7 @@ public class WorldMap : TileMap
                 IslandInfo ileinfto = null;
                 ilemap.TryGetValue(WorldToMap(curt), out ileinfto);
                 CurrentTile = curt;
+                MapGrid.GetInstance().OnIslandVisited(ileinfto);
                 MyWorld.IleTransition(ileinf, ileinfto);
             }
         }
@@ -330,7 +336,8 @@ public class WorldMap : TileMap
         //3 sea
         else if (type == 3)
             scene =  Sea;
-
+        else if (type == 4)
+            scene = LightHouse;
         return scene;
     }
 	

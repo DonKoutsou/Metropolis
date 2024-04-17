@@ -113,9 +113,9 @@ void fragment() {
 
 [resource]
 shader = SubResource( 1 )
-shader_param/WallTexScale = 6.653
+shader_param/WallTexScale = 17.715
 shader_param/WallColor = Plane( 1, 1, 1, 0 )
-shader_param/TopTexScale = 9.414
+shader_param/TopTexScale = 7.97
 shader_param/ao_light_affect = 2.0
 shader_param/TopColor = Plane( 1, 1, 1, 0 )
 shader_param/BlendValues = Plane( 3, -2, 0, 1 )

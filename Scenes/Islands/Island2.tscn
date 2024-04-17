@@ -80,84 +80,84 @@ transform = Transform( -0.787934, -0.526188, 0.319822, 0.184472, 0.293823, 0.937
 [node name="StaticBody7" parent="." index="20" instance=ExtResource( 3 )]
 transform = Transform( -11.6495, -2.59181, -18.8488, -6.27688, 21.3875, 0.93852, 17.9609, 5.79331, -11.8973, -816.801, -34.0344, 903.905 )
 
-[node name="DestBuilding12" parent="." index="25" instance=ExtResource( 6 )]
+[node name="DestBuilding12" parent="." index="24" instance=ExtResource( 6 )]
 transform = Transform( -0.942415, 0.272364, -0.19409, -0.0690117, 0.409476, 0.909707, 0.327247, 0.870716, -0.3671, -2357.75, 118.865, 1609.39 )
 
-[node name="DestBuilding13" parent="." index="26" instance=ExtResource( 6 )]
+[node name="DestBuilding13" parent="." index="25" instance=ExtResource( 6 )]
 transform = Transform( -0.942415, 0.272364, -0.19409, -0.0690117, 0.409476, 0.909707, 0.327247, 0.870716, -0.3671, -2181.86, 181.081, 872.389 )
 
-[node name="StaticBody15" parent="." index="27" instance=ExtResource( 18 )]
+[node name="StaticBody15" parent="." index="26" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -612.723, 119.587, 1549.88 )
 
-[node name="StaticBody16" parent="." index="28" instance=ExtResource( 18 )]
+[node name="StaticBody16" parent="." index="27" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -426.904, 119.587, 1534.54 )
 
-[node name="StaticBody17" parent="." index="29" instance=ExtResource( 18 )]
+[node name="StaticBody17" parent="." index="28" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -258.058, 179.173, 1584.92 )
 
-[node name="StaticBody18" parent="." index="30" instance=ExtResource( 18 )]
+[node name="StaticBody18" parent="." index="29" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -131.503, 179.173, 1318.21 )
 
-[node name="StaticBody19" parent="." index="31" instance=ExtResource( 18 )]
+[node name="StaticBody19" parent="." index="30" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 47.0041, 179.173, 1646.46 )
 
-[node name="StaticBody20" parent="." index="32" instance=ExtResource( 18 )]
+[node name="StaticBody20" parent="." index="31" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -135.752, 155.388, 1942.72 )
 
-[node name="StaticBody21" parent="." index="33" instance=ExtResource( 18 )]
+[node name="StaticBody21" parent="." index="32" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1095.75, 158.318, 1215.97 )
 
-[node name="StaticBody22" parent="." index="34" instance=ExtResource( 18 )]
+[node name="StaticBody22" parent="." index="33" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -526.822, 172.749, 1297.67 )
 
-[node name="StaticBody23" parent="." index="35" instance=ExtResource( 18 )]
+[node name="StaticBody23" parent="." index="34" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -278.143, 172.749, 1450.45 )
 
-[node name="StaticBody24" parent="." index="36" instance=ExtResource( 18 )]
+[node name="StaticBody24" parent="." index="35" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -753.028, 172.749, 1750.21 )
 
-[node name="StaticBody25" parent="." index="37" instance=ExtResource( 18 )]
+[node name="StaticBody25" parent="." index="36" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -427.915, 124.717, 1967.19 )
 
-[node name="StaticBody26" parent="." index="38" instance=ExtResource( 18 )]
+[node name="StaticBody26" parent="." index="37" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -661.065, 114.841, 2053.62 )
 
-[node name="StaticBody27" parent="." index="39" instance=ExtResource( 18 )]
+[node name="StaticBody27" parent="." index="38" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -860.662, 140.816, 1900.87 )
 
-[node name="StaticBody28" parent="." index="40" instance=ExtResource( 18 )]
+[node name="StaticBody28" parent="." index="39" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1094.87, 137.363, 1520.85 )
 
-[node name="StaticBody29" parent="." index="41" instance=ExtResource( 18 )]
+[node name="StaticBody29" parent="." index="40" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1184.19, 68.1943, 2050.97 )
 
-[node name="StaticBody30" parent="." index="42" instance=ExtResource( 18 )]
+[node name="StaticBody30" parent="." index="41" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1184.19, 172.749, 2050.97 )
 
-[node name="StaticBody31" parent="." index="43" instance=ExtResource( 18 )]
+[node name="StaticBody31" parent="." index="42" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -441.794, 172.749, 908.541 )
 
-[node name="StaticBody32" parent="." index="44" instance=ExtResource( 18 )]
+[node name="StaticBody32" parent="." index="43" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -188.906, 172.749, 1049.73 )
 
-[node name="StaticBody33" parent="." index="45" instance=ExtResource( 18 )]
+[node name="StaticBody33" parent="." index="44" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -344.906, 172.749, 1163.73 )
 
-[node name="StaticBody34" parent="." index="46" instance=ExtResource( 18 )]
+[node name="StaticBody34" parent="." index="45" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -549.239, 99.9015, 2433.44 )
 
-[node name="StaticBody35" parent="." index="47" instance=ExtResource( 18 )]
+[node name="StaticBody35" parent="." index="46" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1231.27, 18.4387, 2426.53 )
 
-[node name="StaticBody36" parent="." index="48" instance=ExtResource( 18 )]
+[node name="StaticBody36" parent="." index="47" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -614.091, 41.5247, 2743.07 )
 
-[node name="WindGenerator" parent="." index="49" instance=ExtResource( 9 )]
+[node name="WindGenerator" parent="." index="48" instance=ExtResource( 9 )]
 transform = Transform( 0.166752, 0, -0.110425, 0, 0.2, 0, 0.110425, 0, 0.166752, -1935.61, 98.5182, 1024.7 )
 EnergyCapacity = 100.0
 EnergyPerWindStreangth = 0.025
 
-[node name="MeshInstance5" type="MeshInstance" parent="." index="50"]
+[node name="MeshInstance5" type="MeshInstance" parent="." index="49"]
 transform = Transform( 4000, 0, 0, 0, 2000, 0, 0, 0, 4000, 0, -30.7154, 0 )
 mesh = ExtResource( 1 )
 material/0 = ExtResource( 13 )

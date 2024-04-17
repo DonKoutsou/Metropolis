@@ -126,9 +126,10 @@ public class CameraPanPivot : Position3D
 	}
 	private void Pan(Vector2 Pan)
 	{
-		Vector3 trans = Vector3.Zero;
-		trans.x += Pan.x; trans.y += Pan.y;
+		float zoom = zpivot.Translation.y;
+		zoom /= zpivot.MaxDist / 2 ;
 
+		Pan *= zoom;
         offset = new Vector3(Pan.x, Pan.y, 0);
 	}
     
