@@ -73,6 +73,7 @@ public class InventoryUI : Control
         Inv.GetContents(out Items);
         List<int> itemcount = new List<int>();
         bool hascompass = false;
+        bool hasmap = false;
         for (int i = 0; i < slots.Count(); i++)
         {
             Item sample = null;
@@ -84,6 +85,9 @@ public class InventoryUI : Control
                     sample = Items[v];
                 if (Items[v].GetItemType() == 4)
                     hascompass = true;
+                if (Items[v].GetItemType() == 5)
+                    hasmap = true;
+                
                 if (Items[v].GetItemType() == sample.GetItemType())
                 {
                     ammount += 1;
@@ -121,6 +125,18 @@ public class InventoryUI : Control
             Compass comp = Compass.GetInstance();
             if (comp != null)
                 comp.ToggleCompass(false);
+        }
+        if (hasmap)
+        {
+            MapGrid map = MapGrid.GetInstance();
+            if (map != null)
+                map.ToggleMap(true);
+        }
+        else
+        {
+           MapGrid map = MapGrid.GetInstance();
+            if (map != null)
+                map.ToggleMap(false);
         }
     }
     public void CloseInventory()

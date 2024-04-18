@@ -3,6 +3,7 @@
 [ext_resource path="res://Assets/Map/Maptile.tres" type="Texture" id=1]
 
 [node name="Control" type="Control"]
+mouse_filter = 1
 
 [node name="TextureRect" type="TextureRect" parent="."]
 anchor_left = 0.5

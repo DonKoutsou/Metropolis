@@ -19,6 +19,13 @@ public class MapGrid : GridContainer
     {
         return Instance;
     }
+    public void ToggleMap(bool toggle)
+    {
+        if (toggle)
+            ((Control)GetParent()).Show();
+        else
+            ((Control)GetParent()).Hide();
+    }
     public override void _Ready()
     {
         Instance = this;

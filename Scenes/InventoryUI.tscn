@@ -58,6 +58,7 @@ margin_left = -94.0
 margin_top = 5.0
 margin_right = 94.0
 margin_bottom = 45.0
+mouse_filter = 1
 custom_styles/panel = SubResource( 22 )
 
 [node name="ItemName" type="RichTextLabel" parent="DescriptionPanel"]
