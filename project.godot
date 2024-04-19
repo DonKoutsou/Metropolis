@@ -28,7 +28,7 @@ window/size/resizable=false
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/MonoCustomResourceRegistry/plugin.cfg", "res://addons/dialogue_nodes/plugin.cfg", "res://addons/road-generator/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/MonoCustomResourceRegistry/plugin.cfg" )
 
 [global]
 
