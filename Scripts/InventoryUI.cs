@@ -49,6 +49,7 @@ public class InventoryUI : Control
             slots.Insert(i, (InventoryUISlot)gr.GetChild(i));
         }
         SetProcess(false);
+        CallDeferred("UpdateInventory");
     }
     public void OpenInventory()
     {

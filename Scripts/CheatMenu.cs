@@ -29,7 +29,7 @@ public class CheatMenu : Control
 		else
 		{
 			HasSpeed = true;
-			pl.RunSpeed = 300;
+			pl.RunSpeed = 1000;
 		}
 		
 	}

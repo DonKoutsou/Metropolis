@@ -33,7 +33,6 @@ public class MainWorld : Spatial
 
 		AddChild(m_myworld);
 
-		
 	}
 	public void StopGame()
 	{

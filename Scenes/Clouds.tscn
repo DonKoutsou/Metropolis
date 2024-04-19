@@ -12,7 +12,7 @@ curve = SubResource( 3 )
 [sub_resource type="ParticlesMaterial" id=2]
 lifetime_randomness = 0.32
 emission_shape = 2
-emission_box_extents = Vector3( 10000, 5, 10000 )
+emission_box_extents = Vector3( 30000, 5, 30000 )
 spread = 0.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 100.0
@@ -34,8 +34,9 @@ size = Vector2( 1500, 1500 )
 [node name="Spatial" type="Spatial"]
 
 [node name="Clouds2" type="Particles" parent="."]
+layers = 256
 generate_lightmap = false
-amount = 1000
+amount = 4000
 lifetime = 43.86
 speed_scale = 0.2
 explosiveness = 0.4
@@ -46,6 +47,7 @@ process_material = SubResource( 2 )
 draw_pass_1 = SubResource( 7 )
 
 [node name="Clouds3" type="Particles" parent="."]
+layers = 256
 generate_lightmap = false
 amount = 1000
 lifetime = 43.86

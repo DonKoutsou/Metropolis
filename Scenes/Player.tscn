@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/Stamina_Bar.cs" type="Script" id=2]
@@ -25,7 +25,6 @@
 [ext_resource path="res://Scenes/ActionMenu.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Scripts/Clouds.cs" type="Script" id=24]
 [ext_resource path="res://Scenes/Rain.tscn" type="PackedScene" id=26]
-[ext_resource path="res://Assets/PostProcess/KuwaharaShader.gdshader" type="Shader" id=27]
 [ext_resource path="res://Scenes/SunMoonPivot.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Scenes/CheatMenu.tscn" type="PackedScene" id=29]
 
@@ -74,13 +73,6 @@ size = 24
 outline_size = 6
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
-
-[sub_resource type="PlaneMesh" id=96]
-size = Vector2( 10, 10 )
-
-[sub_resource type="ShaderMaterial" id=95]
-render_priority = -2
-shader = ExtResource( 27 )
 
 [sub_resource type="SpatialMaterial" id=100]
 render_priority = 1
@@ -193,7 +185,7 @@ area_mask = 0
 
 [node name="Inventory" parent="." instance=ExtResource( 7 )]
 Capacity = 40.0
-StartingItems = PoolStringArray( "res://Scenes/Battery.tscn", "res://Scenes/Clock.tscn" )
+StartingItems = PoolStringArray( "res://Scenes/Battery.tscn", "res://Scenes/Clock.tscn", "res://Scenes/Compass.tscn", "res://Scenes/MapItem.tscn" )
 
 [node name="PlayerUI" type="Spatial" parent="."]
 
@@ -285,17 +277,11 @@ Speed = 5
 
 [node name="Camera" type="Camera" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot"]
 transform = Transform( 1, -1.95167e-08, 2.25228e-08, 0, 0.755739, 0.654873, -2.98023e-08, -0.654873, 0.75574, 0, 0, 0 )
-cull_mask = 1
+cull_mask = 769
 fov = 45.0
 size = 5.0
 far = 40000.0
 script = ExtResource( 21 )
-
-[node name="MeshInstance" type="MeshInstance" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot/Camera"]
-transform = Transform( 1, 8.14214e-08, -2.18168e-08, -2.18168e-08, -1.19209e-07, -1, -8.14214e-08, 1, -1.19209e-07, -8.10272e-08, -0.0224524, -1.58269 )
-extra_cull_margin = 16384.0
-mesh = SubResource( 96 )
-material/0 = SubResource( 95 )
 
 [node name="EnvSound" type="AudioStreamPlayer3D" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot/Camera"]
 transform = Transform( 1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0 )
@@ -317,16 +303,16 @@ update_rotation = false
 update_scale = false
 
 [node name="CompasUI" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot/Camera" instance=ExtResource( 6 )]
-transform = Transform( 0.999991, -1.21762e-21, -2.9802e-08, -1.95165e-08, 0.755749, -0.654865, 2.25226e-08, 0.654881, 0.755731, 2.08616e-06, -4.42838, -15.7338 )
+transform = Transform( 0.1, -5.32907e-15, -2.98023e-09, -1.95167e-09, 0.0755739, -0.0654873, 2.25228e-09, 0.0654873, 0.0755739, 2.08616e-06, -0.536543, -1.84911 )
 
 [node name="CameraTerainCast" type="RayCast" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot"]
-transform = Transform( 1, -3.55271e-15, 1.77636e-15, 0, 0.755739, 0.654869, -1.77636e-15, -0.654873, 0.755735, -2.38419e-07, 7.28663, -8.00005 )
+transform = Transform( 0.999999, -3.55271e-15, 1.77636e-15, 0, 0.755739, 0.654869, -1.77636e-15, -0.654873, 0.755734, -2.38419e-07, 7.28663, -8.00005 )
 enabled = true
 cast_to = Vector3( 0, -12, 0 )
 collision_mask = 260
 
 [node name="CameraTerainCast2" type="RayCast" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot"]
-transform = Transform( 1.00001, -1.2368e-06, 2.68221e-07, -6.06412e-07, -0.707156, -0.707142, -2.99274e-06, 0.70717, -0.707156, -2.38419e-07, 7.28663, -8.00005 )
+transform = Transform( 1.00001, -1.2368e-06, 2.68221e-07, -6.06412e-07, -0.707156, -0.707142, -2.99274e-06, 0.707169, -0.707155, -2.38419e-07, 7.28663, -8.00005 )
 enabled = true
 cast_to = Vector3( 0, -12, 0 )
 collision_mask = 260

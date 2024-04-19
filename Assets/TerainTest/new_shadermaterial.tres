@@ -24,14 +24,12 @@ uniform sampler2D WallTex;
 uniform sampler2D WallTexR;
 uniform sampler2D WallTexN;
 uniform sampler2D WallTexAO;
-uniform vec4 WallColor;
 uniform float TopTexScale;
 uniform float ao_light_affect;
 uniform sampler2D TopTex;
 uniform sampler2D TopTexR;
 uniform sampler2D TopTexN;
 uniform sampler2D TopTexAO;
-uniform vec4 TopColor;
 uniform vec4 BlendValues = vec4(3,-2,0,1);
 uniform vec4 roughness_texture_channel;
 uniform vec4 ao_texture_channel;
@@ -92,18 +90,18 @@ void fragment() {
 	vec4 wall_texr= triplanar_texture(WallTexR,power_normal, triplanar_pos,WallTexScale);
 	float wallroughness_tex = dot(wall_texr,roughness_texture_channel);
 	vec4 wall_texN = triplanar_texture(WallTexN, power_normal, triplanar_pos,WallTexScale);
-	vec3 wall = wall_tex.rgb * WallColor.rgb;
+
 	vec4 wall_texAO = triplanar_texture(WallTexAO, power_normal, triplanar_pos,WallTexScale);
 	float wallao_tex = dot(wall_texAO,ao_texture_channel);
 	vec4 top_tex = triplanar_texture(TopTex, power_normal, triplanar_pos,TopTexScale);
 	vec4 top_texr= triplanar_texture(TopTexR,power_normal, triplanar_pos,TopTexScale);
 	float toproughness_tex = dot(top_texr,roughness_texture_channel);
 	vec4 top_texn= triplanar_texture(TopTexN,power_normal, triplanar_pos,TopTexScale);
-	vec3 top = top_tex.rgb * TopColor.rgb;
+
 	vec4 top_texao= triplanar_texture(TopTexAO,power_normal, triplanar_pos,TopTexScale); 
 	float topao_tex = dot(top_texao,ao_texture_channel); 
 	float blend = clamp((flatness*BlendValues.x)+BlendValues.y,BlendValues.y,BlendValues.w);
-	ALBEDO = mix(wall,top,blend);
+	ALBEDO = mix(wall_tex.rgb,top_tex.rgb,blend);
 	ROUGHNESS = mix (wallroughness_tex, toproughness_tex, blend);
 	
 	NORMALMAP = mix(wall_texN.rgb, top_texn.rgb, blend);
@@ -114,10 +112,8 @@ void fragment() {
 [resource]
 shader = SubResource( 1 )
 shader_param/WallTexScale = 17.715
-shader_param/WallColor = Plane( 1, 1, 1, 0 )
 shader_param/TopTexScale = 7.97
 shader_param/ao_light_affect = 2.0
-shader_param/TopColor = Plane( 1, 1, 1, 0 )
 shader_param/BlendValues = Plane( 3, -2, 0, 1 )
 shader_param/roughness_texture_channel = Plane( 0, 0, 0, 1 )
 shader_param/ao_texture_channel = Plane( 1, 0, 0, 0 )

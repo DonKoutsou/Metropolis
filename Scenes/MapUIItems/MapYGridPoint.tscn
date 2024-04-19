@@ -1,0 +1,7 @@
+[gd_scene format=2]
+
+[node name="Control" type="Control"]
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 4.0
+margin_bottom = 1.0

@@ -20,6 +20,8 @@ public class CameraZoomPivot : Position3D
     }
 	public override void _Input(InputEvent @event)
 	{
+		if (MapGrid.GetInstance().IsMouseInMap())
+			return;
 		Vector3 prevpos = Translation;
 		if (@event.IsActionPressed("ZoomOut"))
 		{

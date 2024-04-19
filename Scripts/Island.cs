@@ -17,11 +17,10 @@ public class Island : Spatial
 
 	public float rotationtospawnwith;
 
-	Spatial Terain;
-	Spatial TerainDetail;
-
 	List<House> Houses = new List<House>();
+
 	List<WindGenerator> Generators = new List<WindGenerator>();
+	
 	public override void _Ready()
 	{
 		GlobalTranslation = loctospawnat;
