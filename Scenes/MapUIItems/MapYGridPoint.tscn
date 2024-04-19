@@ -3,5 +3,9 @@
 [node name="Control" type="Control"]
 
 [node name="Panel" type="Panel" parent="."]
-margin_right = 4.0
-margin_bottom = 1.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_right = 8.0
+margin_bottom = 3.0

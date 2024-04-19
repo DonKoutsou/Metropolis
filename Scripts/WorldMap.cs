@@ -106,7 +106,7 @@ public class WorldMap : TileMap
                 IslandInfo ileinfto = null;
                 ilemap.TryGetValue(WorldToMap(curt), out ileinfto);
                 CurrentTile = curt;
-                MapGrid.GetInstance().OnIslandVisited(ileinfto);
+                
                 MyWorld.IleTransition(ileinf, ileinfto);
             }
         }
@@ -301,12 +301,18 @@ public class WorldMap : TileMap
         if (currentile == 100)
         {
             MyWorld.GetInstance().ToggleIsland(entry, true, true);
+        
             Island island = entry.ile;
             Position3D spawnpos = island.GetNode<Position3D>("SpawnPosition");
             pl.Teleport(spawnpos.GlobalTransform.origin);
             WorldClipRaycast.EnableWorldClipRaycast();
             GetTree().Root.GetCamera().Fov = Settings.GetGameSettings().FOVOverride;
             CurrentTile = new Vector2 (island.GlobalTransform.origin.x ,island.GlobalTransform.origin.z);
+
+            List<IslandInfo> closestto2;
+		    GetClosestIles(entry,out closestto2, 3);
+            foreach(IslandInfo info in closestto2)
+                MapGrid.GetInstance().OnIslandVisited(info);
         }
 
         if (currentile >= OrderedCells.Count)

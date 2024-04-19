@@ -9,9 +9,10 @@
 script = ExtResource( 4 )
 
 [node name="MeshInstance3" type="MeshInstance" parent="."]
+process_priority = -10
 transform = Transform( 1, 1.63916e-07, 4.17234e-07, -1.63916e-07, 1.00001, -2.98025e-07, -4.17234e-07, 2.98022e-07, 0.999997, -2.08616e-06, 0, -5.72205e-06 )
 layers = 512
-sorting_offset = 100.0
+cast_shadow = 0
 generate_lightmap = false
 mesh = ExtResource( 3 )
 skeleton = NodePath("../../..")
@@ -23,7 +24,7 @@ transform = Transform( -0.999999, 0, -8.74227e-08, 0, 1, 0, 8.74224e-08, 0, -0.9
 [node name="MeshInstance2" type="MeshInstance" parent="CompassNeedlePivot"]
 transform = Transform( 1, 3.17637e-21, -2.22045e-15, -3.17637e-21, 1, 6.66134e-15, 2.22045e-15, -6.66134e-15, 1, 0, 0, 0 )
 layers = 512
-sorting_offset = 100.0
+cast_shadow = 0
 mesh = ExtResource( 2 )
 skeleton = NodePath("../../../..")
 material/0 = ExtResource( 1 )

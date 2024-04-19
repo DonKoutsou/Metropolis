@@ -5,6 +5,7 @@
 [ext_resource path="res://Assets/Compass/Compass_Low_Compass_Normal.png" type="Texture" id=3]
 
 [resource]
+render_priority = 100
 albedo_texture = ExtResource( 1 )
 metallic_texture = ExtResource( 2 )
 metallic_texture_channel = 2

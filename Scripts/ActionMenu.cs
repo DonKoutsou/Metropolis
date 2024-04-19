@@ -69,6 +69,9 @@ public class ActionMenu : Control
 			}
 			else
 				TalkText.GetInst().Talk("Τίποτα", pl);
+			DeselectCurrent();
+			selecting = false;
+			Stop();
 		}
 		else if (SelectedObj is WindGenerator)
 		{

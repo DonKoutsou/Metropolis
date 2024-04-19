@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Godot_Project\\3D_Proj_Test\\3D_TestProj.csproj": {}
+    "E:\\Godot_Project\\Μητρόπολη\\3D_TestProj.csproj": {}
   },
   "projects": {
-    "E:\\Godot_Project\\3D_Proj_Test\\3D_TestProj.csproj": {
+    "E:\\Godot_Project\\Μητρόπολη\\3D_TestProj.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Godot_Project\\3D_Proj_Test\\3D_TestProj.csproj",
+        "projectUniqueName": "E:\\Godot_Project\\Μητρόπολη\\3D_TestProj.csproj",
         "projectName": "3D_TestProj",
-        "projectPath": "E:\\Godot_Project\\3D_Proj_Test\\3D_TestProj.csproj",
+        "projectPath": "E:\\Godot_Project\\Μητρόπολη\\3D_TestProj.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "E:\\Godot_Project\\3D_Proj_Test\\.mono\\temp\\obj\\",
+        "outputPath": "E:\\Godot_Project\\Μητρόπολη\\.mono\\temp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",

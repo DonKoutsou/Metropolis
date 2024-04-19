@@ -45,7 +45,7 @@ tracks/0/path = NodePath("Sea:translation")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/enabled = false
+tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 2 ),
 "transitions": PoolRealArray( 1, 1 ),
@@ -68,7 +68,7 @@ tracks/1/keys = {
 [sub_resource type="BoxShape" id=5]
 extents = Vector3( 4000, 33.5075, 4000.25 )
 
-[node name="SeaBed" type="StaticBody"]
+[node name="SeaBed" type="StaticBody" groups=["Sea"]]
 pause_mode = 1
 collision_layer = 256
 collision_mask = 0

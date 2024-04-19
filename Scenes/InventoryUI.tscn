@@ -8,6 +8,13 @@
 [ext_resource path="res://Scenes/Map.tscn" type="PackedScene" id=6]
 
 [sub_resource type="StyleBoxFlat" id=22]
+bg_color = Color( 0.847059, 0.807843, 0.705882, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 1, 1, 1, 1 )
+border_blend = true
 
 [sub_resource type="CanvasItemMaterial" id=15]
 
@@ -40,8 +47,9 @@ script = ExtResource( 2 )
 [node name="MapUI" parent="." instance=ExtResource( 6 )]
 anchor_top = 1.0
 anchor_bottom = 1.0
+margin_left = -3.0
 margin_top = -40.0
-margin_right = 40.0
+margin_right = 37.0
 margin_bottom = 0.0
 
 [node name="DescriptionPanel" type="Panel" parent="."]
@@ -49,9 +57,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -528.0
-margin_top = -392.0
-margin_right = -332.0
+margin_left = -530.0
+margin_top = -398.0
+margin_right = -334.0
 mouse_filter = 1
 theme = ExtResource( 4 )
 
@@ -113,7 +121,7 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -332.0
+margin_left = -334.0
 margin_top = -64.0
 theme = ExtResource( 4 )
 
@@ -148,9 +156,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -332.0
-margin_top = -456.0
-margin_bottom = -392.0
+margin_left = -334.0
+margin_top = -462.0
+margin_bottom = -398.0
 theme = ExtResource( 4 )
 
 [node name="DropButton" type="Button" parent="ItemOptionPanel"]
@@ -172,12 +180,14 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -276.0
-margin_top = -341.0
+margin_left = -278.0
+margin_top = -342.0
 margin_right = -56.0
-margin_bottom = -121.0
-custom_constants/vseparation = 110
-custom_constants/hseparation = 110
+margin_bottom = -120.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_constants/vseparation = 111
+custom_constants/hseparation = 111
 columns = 3
 
 [node name="InventoryBox3" parent="GridContainer" instance=ExtResource( 1 )]
@@ -191,71 +201,71 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 110.0
-margin_right = 110.0
+margin_left = 111.0
+margin_right = 111.0
 
 [node name="InventoryBox2" parent="GridContainer" instance=ExtResource( 1 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 220.0
-margin_right = 220.0
+margin_left = 222.0
+margin_right = 222.0
 
 [node name="InventoryBox6" parent="GridContainer" instance=ExtResource( 1 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 110.0
-margin_bottom = 110.0
+margin_top = 111.0
+margin_bottom = 111.0
 
 [node name="InventoryBox4" parent="GridContainer" instance=ExtResource( 1 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 110.0
-margin_top = 110.0
-margin_right = 110.0
-margin_bottom = 110.0
+margin_left = 111.0
+margin_top = 111.0
+margin_right = 111.0
+margin_bottom = 111.0
 
 [node name="InventoryBox5" parent="GridContainer" instance=ExtResource( 1 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 220.0
-margin_top = 110.0
-margin_right = 220.0
-margin_bottom = 110.0
+margin_left = 222.0
+margin_top = 111.0
+margin_right = 222.0
+margin_bottom = 111.0
 
 [node name="InventoryBox7" parent="GridContainer" instance=ExtResource( 1 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 220.0
-margin_bottom = 220.0
+margin_top = 222.0
+margin_bottom = 222.0
 
 [node name="InventoryBox8" parent="GridContainer" instance=ExtResource( 1 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 110.0
-margin_top = 220.0
-margin_right = 110.0
-margin_bottom = 220.0
+margin_left = 111.0
+margin_top = 222.0
+margin_right = 111.0
+margin_bottom = 222.0
 
 [node name="InventoryBox9" parent="GridContainer" instance=ExtResource( 1 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 220.0
-margin_top = 220.0
-margin_right = 220.0
-margin_bottom = 220.0
+margin_left = 222.0
+margin_top = 222.0
+margin_right = 222.0
+margin_bottom = 222.0
 
 [connection signal="button_down" from="ItemOptionPanel/DropButton" to="." method="On_Drop_Button_Down"]

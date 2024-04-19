@@ -174,7 +174,7 @@ public class MyWorld : Spatial
 	public static void IleTransition(IslandInfo from, IslandInfo to)
 	{
 		//GD.Print("Transitioning from : " + from.Name + " to " + to.Name);
-
+		SeaManager.SyncSeas();
 		List<IslandInfo> ilestodissable = new List<IslandInfo>();
 		List<IslandInfo> ilestoenable = new List<IslandInfo>();
 		int ViewDistance = Settings.GetGameSettings().ViewDistance;
@@ -183,7 +183,10 @@ public class MyWorld : Spatial
 
 		List<IslandInfo> closestto;
 		WorldMap.GetInstance().GetClosestIles(to,out closestto, ViewDistance);
-
+		List<IslandInfo> closestto2;
+		WorldMap.GetInstance().GetClosestIles(to,out closestto2, 1);
+		foreach(IslandInfo info in closestto2)
+			MapGrid.GetInstance().OnIslandVisited(info);
 		for (int i = 0; i < closestfrom.Count; i ++)
 		{
 			if (closestfrom[i] == to)

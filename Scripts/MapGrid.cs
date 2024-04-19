@@ -141,7 +141,15 @@ public class MapGrid : GridContainer
 		}
         if (@event.IsActionPressed("FrameCamera"))
         {
-            RectPosition = RectScale/2; 
+            float sc = RectScale.x;
+            float sz = RectSize.x;
+            float amm = sz/2 * sc;
+            MarginBottom = amm;
+            MarginLeft = -amm;
+            MarginRight = amm;
+            MarginTop = -amm;
+            MapGridx.RectPosition = new Vector2(RectPosition.x, 8);
+            MapGridy.RectPosition = new Vector2(8, RectPosition.y);
         }
     }
     public void OnIslandVisited(IslandInfo info)
@@ -168,13 +176,13 @@ public class MapGrid : GridContainer
         {
             Control child = children[i].MapIle;
             if (seacells.Contains(cells[i]))
-                child.Modulate = new Color(0, 0, 1, 1);
+                child.Modulate = new Color(0, 0, 1, 0);
             else if (Lighthouses.Contains(cells[i]))
                 child.Modulate = new Color(1, 1, 0);
             else if (entries.Contains(cells[i]))
                 child.Modulate = new Color(1, 0, 0);
             else
-                child.Modulate = new Color(0, 1, 0, 1);
+                child.Modulate = new Color(0, 1, 0, 0);
             MapIleList.Add((Vector2)cells[i], child);
         }
         SetProcess(false);
