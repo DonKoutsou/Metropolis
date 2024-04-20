@@ -111,7 +111,8 @@ public class WorldMap : TileMap
             }
         }
         ulong msaf = OS.GetSystemTimeMsecs();
-        GD.Print("World map processing took " + (msaf - ms).ToString() + " ms");
+        if (msaf - ms > 18)
+            GD.Print("World map processing took longer the 16 ms. Process time : " + (msaf - ms).ToString() + " ms");
     }
     public Island SpawnIsland(IslandInfo info)
     {

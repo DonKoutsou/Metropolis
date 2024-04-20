@@ -12,7 +12,6 @@ public class MapGrid : GridContainer
     string YGridTileScene = null;
     int times = 6561;
 
-    PackedScene tilescene;
 
     List<ChildMapIleInfo> children = new List<ChildMapIleInfo>();
     Dictionary<Vector2, Control> MapIleList = new Dictionary<Vector2, Control>();
@@ -23,6 +22,8 @@ public class MapGrid : GridContainer
     static MapGrid Instance;
 
     bool MapActive = false;
+
+    StyleBoxTexture th;
 
     [Export]
     float MaxZoomScale = 2;
@@ -36,13 +37,13 @@ public class MapGrid : GridContainer
         
         if (toggle)
         {
-            ((Control)GetParent()).Show();
+            ((Control)GetParent().GetParent()).Show();
             SetProcessInput(true);
             MapActive = true;
         }
         else
         {
-            ((Control)GetParent()).Hide();
+            ((Control)GetParent().GetParent()).Hide();
             SetProcessInput(false);
             MapActive = false;
         }
@@ -52,7 +53,9 @@ public class MapGrid : GridContainer
     {
         Instance = this;
         PackedScene tilescene = GD.Load<PackedScene>(TileScene);
-        Control par = (Control)GetParent();
+        Panel par = (Panel)GetParent();
+        th = (StyleBoxTexture)par.GetStylebox("normal");
+        //Texture tex = (Texture)th.Texture;
         MapGridx = par.GetNode<Panel>("Panel").GetNode<GridContainer>("MapGridX");
         MapGridy = par.GetNode<Panel>("Panel2").GetNode<GridContainer>("MapGridY");
         while (times > 0)
@@ -104,13 +107,24 @@ public class MapGrid : GridContainer
 				return;
 
 			Vector2 pos = new Vector2(RectPosition.x + ((InputEventMouseMotion)@event).Relative.x, RectPosition.y + ((InputEventMouseMotion)@event).Relative.y);
-            //if (pos.x < 8 && pos.y < 8)
-            //{
+            //when scale is 1 max position is -500
+            float posallowance = -500 * RectScale.x;
+            if (pos.x < 4 && pos.x > posallowance)
+            {
                 MapGridx.RectPosition = new Vector2(pos.x, 8);
+                RectPosition = new Vector2(pos.x, RectPosition.y);
+                // den doulevei
+                //Rect2 rec = new Rect2(new Vector2 (pos.x, RectPosition.y), new Vector2(512, 512));
+                //th.RegionRect = rec;
+            }
+            if  (pos.y < 4 && pos.y > posallowance)
+            {
                 MapGridy.RectPosition = new Vector2(8, pos.y);
-                RectPosition = pos;
-           // }
-            
+                RectPosition = new Vector2(RectPosition.x, pos.y);
+                // den doulevei
+                //Rect2 rec = new Rect2(new Vector2 (RectPosition.x, pos.y), new Vector2(512, 512));
+                //th.RegionRect = rec;
+            }
 		}
         Vector2 scale = RectScale;
         if (@event.IsActionPressed("ZoomIn"))
@@ -128,7 +142,7 @@ public class MapGrid : GridContainer
 		}
 		if (@event.IsActionPressed("ZoomOut"))
 		{
-			if (RectScale.x > 0.1f)
+			if (RectScale.x > 0.4f)
             {
                 RectScale *= 0.9f;
                 RectPosition *= 0.9f;

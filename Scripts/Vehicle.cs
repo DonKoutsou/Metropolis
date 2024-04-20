@@ -41,38 +41,51 @@ public class Vehicle : RigidBody
     WindDetector WindD;
     bool WindOnWings = false;
     List<ShaderMaterial> WingMaterials = new List<ShaderMaterial>();
+
+    VehicleDamageManager DamageMan;
+
+
+
+    //RigidBody WingShapes;
     public void ToggleWings(bool toggle)
     {
         if (Anim.IsPlaying())
             return;
+        
         if (toggle)
         {
             Anim.Play("WingsOut");
-            wingsdeployed = true;
         }
         else
         {
             Anim.Play("Wings");
-            wingsdeployed = false;
             EnableWindOnWings(false);
         }
+        wingsdeployed = toggle;
+        DamageMan.ToggleWingCollision(toggle);
+    }
+    public void OnWingDamaged(int index)
+    {
+        GetNode<MeshInstance>("WingMesh" + index.ToString()).Hide();
     }
     private void EnableWindOnWings(bool toggle)
     {
         if (!toggle)
         {
-            WingMaterials[0].SetShaderParam("strength", 0);
-            WingMaterials[1].SetShaderParam("strength", 0);
-            WingMaterials[2].SetShaderParam("strength", 0);
-            WingMaterials[3].SetShaderParam("strength", 0);
+            for (int i = 0; i < WingMaterials.Count; i++)
+            {
+                if (DamageMan.IsWingWorking(i))
+                    WingMaterials[i].SetShaderParam("strength", 0);
+            }
             WindOnWings = false;
         }
         else
         {
-            WingMaterials[0].SetShaderParam("strength", 10);
-            WingMaterials[1].SetShaderParam("strength", 10);
-            WingMaterials[2].SetShaderParam("strength", 10);
-            WingMaterials[3].SetShaderParam("strength", 10);
+            for (int i = 0; i < WingMaterials.Count; i++)
+            {
+                if (DamageMan.IsWingWorking(i))
+                    WingMaterials[i].SetShaderParam("strength", 10);
+            }
             WindOnWings = true;
         }
         
@@ -88,18 +101,20 @@ public class Vehicle : RigidBody
         bool strong = false;
         float hoverforce2 = Hoverforcecurve.Interpolate(latsspeed /(speed * 4)) * HoverForce;
         float forcemulti = 1;
-        frontray.ForceRaycastUpdate();
-        if (frontray.IsColliding())
+        if (Working)
         {
-            forcemulti = 4;
-            //var collisionpoint = frontray.GetCollisionPoint();
-            //var dist = collisionpoint.DistanceTo(frontray.GlobalTransform.origin);
-            //if (dist > 1 && latsspeed > speed * 2);
-           // {
-            //    Capsize();
-           //}
+            frontray.ForceRaycastUpdate();
+            if (frontray.IsColliding())
+            {
+                forcemulti = 4;
+                //var collisionpoint = frontray.GetCollisionPoint();
+                //var dist = collisionpoint.DistanceTo(frontray.GlobalTransform.origin);
+                //if (dist > 1 && latsspeed > speed * 2);
+            // {
+                //    Capsize();
+            //}
+            }
         }
-            
 
         for (int i = 0; i < Rays.Count; i ++)
         {
@@ -121,7 +136,7 @@ public class Vehicle : RigidBody
                 
                 Vector3 f = Vector3.Zero;
 
-                f= (Vector3.Up * hoverforce2 * delta) * multi;
+                f= Vector3.Up * hoverforce2 * delta * multi;
 
                 AddForce(f * forcemulti, ray.GlobalTransform.origin - GlobalTransform.origin);
             }
@@ -129,13 +144,12 @@ public class Vehicle : RigidBody
             {
                 Vector3 f = Vector3.Zero;
 
-                f = (Vector3.Up * hoverforce2 * delta) * -8;
+                f = Vector3.Up * hoverforce2 * delta * -8;
 
                 AddForce(f * forcemulti, ray.GlobalTransform.origin - GlobalTransform.origin);
             }
         }
-        if (!Working)
-            return;
+        
 
         float distance = loctomove.DistanceTo(GlobalTransform.origin);
         if (distance < 5)
@@ -143,17 +157,22 @@ public class Vehicle : RigidBody
             latsspeed = 0;
             return;
         }
-
-        Vector3 force = Vector3.Zero;
-        if (strong)
-            force = -GlobalTransform.basis.z;
-        else
-            force = GlobalTransform.basis.z;
-        force.y = 0;
         float fmulti = 1;
+        Vector3 force = Vector3.Zero;
+        if (Working)
+        {
+            if (strong)
+                force = -GlobalTransform.basis.z;
+            else
+                force = GlobalTransform.basis.z;
+            force.y = 0;
+        }
         if (!IsBoatFacingWind() && wingsdeployed)
         {
-            fmulti = 0.04f *DayNight.GetWindStr();
+            force = GlobalTransform.basis.z;
+            force.y = 0;
+            float workingwingmulti = GetWorkingSailMulti();
+            fmulti += 0.03f *DayNight.GetWindStr() * workingwingmulti;
             if (!WindOnWings)
                 EnableWindOnWings(true);
         }
@@ -162,11 +181,12 @@ public class Vehicle : RigidBody
             if (WindOnWings)
                 EnableWindOnWings(false);
         }
-        latsspeed = (speed * fmulti) * (Math.Min(500, distance - 5)/ 500);
+        latsspeed = speed * fmulti * (Math.Min(500, distance - 5)/ 500);
         AddCentralForce(force * latsspeed * delta);
         
-
-        //keeping balance and casizing if to rotated in x 
+        if (!Working)
+            return;
+        //keeping balance and capsizing if to rotated in x 
         float rotx = Mathf.Rad2Deg(Rotation.x);
         if (rotx > 0)
         {
@@ -245,17 +265,30 @@ public class Vehicle : RigidBody
        // ulong msaf = OS.GetSystemTimeMsecs();
 		//GD.Print("Vehicle processing took " + (msaf - ms).ToString() + " ms");
     }
+    private float GetWorkingSailMulti()
+    {
+        int wingcount = WingMaterials.Count;
+        float count = wingcount;
+        for (int i = 0; i < wingcount; i++)
+        {
+            if (!DamageMan.IsWingWorking(i))
+                count -= 1;
+        }
+        return count / wingcount;
+    }
     private void ToggleMachine(bool toggle)
     {
         if (toggle)
         {
             ExaustParticles[0].Emitting = true;
             ExaustParticles[1].Emitting = true;
+            Working = true;
         }
         else
         {
             ExaustParticles[0].Emitting = false;
             ExaustParticles[1].Emitting = false;
+            Working = false;
         }
     }
     public override void _Ready()
@@ -277,12 +310,13 @@ public class Vehicle : RigidBody
         Rays.Insert(3, parent.GetNode<RayCast>("RayBR"));
         ((Spatial)GetParent()).GlobalRotation = Vector3.Zero;
         //Rays.Insert(5, parent.GetNode<RayCast>("RayB"));
-        
+        //WingShapes = GetNode<RigidBody>("WingShapes");
+        DamageMan = GetParent().GetNode<VehicleDamageManager>("VehicleDamageManager");
 
-        WingMaterials.Insert(0, (ShaderMaterial)GetNode<MeshInstance>("MeshInstance2").GetActiveMaterial(1));
-        WingMaterials.Insert(1, (ShaderMaterial)GetNode<MeshInstance>("MeshInstance5").GetActiveMaterial(1));
-        WingMaterials.Insert(2, (ShaderMaterial)GetNode<MeshInstance>("MeshInstance3").GetActiveMaterial(1));
-        WingMaterials.Insert(3, (ShaderMaterial)GetNode<MeshInstance>("MeshInstance4").GetActiveMaterial(1));
+        WingMaterials.Insert(0, (ShaderMaterial)GetNode<MeshInstance>("WingMesh0").GetActiveMaterial(1));
+        WingMaterials.Insert(1, (ShaderMaterial)GetNode<MeshInstance>("WingMesh1").GetActiveMaterial(1));
+        WingMaterials.Insert(2, (ShaderMaterial)GetNode<MeshInstance>("WingMesh2").GetActiveMaterial(1));
+        WingMaterials.Insert(3, (ShaderMaterial)GetNode<MeshInstance>("WingMesh3").GetActiveMaterial(1));
         ToggleWings(false);
         EnableWindOnWings(false);
     }
@@ -322,7 +356,7 @@ public class Vehicle : RigidBody
         cha.OnVehicleBoard();
 
         cha.GlobalRotation = prevrot;
-        Working = true;
+        
         passengers.Insert(passengers.Count, cha);
         ToggleMachine(true);
     }
@@ -342,7 +376,6 @@ public class Vehicle : RigidBody
         chartothrowout.OnVehicleUnBoard();
         chartothrowout.GlobalTranslation = GlobalTranslation;
         chartothrowout.Rotation = new Vector3(0,0,0);
-        Working = false;
         chartothrowout.GlobalRotation = prevrot;
         chartothrowout.SetVehicle(null);
         ToggleMachine(false);
@@ -361,7 +394,6 @@ public class Vehicle : RigidBody
         cha.GlobalTranslation = GlobalTranslation;
         cha.GlobalRotation = prevrot;
         cha.Rotation = new Vector3(0,0,0);
-        Working = false;
         ToggleMachine(false);
     }
     public override void _Input(InputEvent @event)
@@ -377,4 +409,5 @@ public class Vehicle : RigidBody
                 ToggleWings(true);
         }
     }
+    
 }

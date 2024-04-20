@@ -304,10 +304,10 @@ update_rotation = false
 update_scale = false
 
 [node name="CompasUI" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot/Camera" instance=ExtResource( 6 )]
-transform = Transform( 0.0999999, -3.55271e-15, -2.98023e-09, -1.95167e-09, 0.0755739, -0.0654872, 2.25228e-09, 0.0654873, 0.0755738, 2.09082e-06, -1.36638, -3.61433 )
+transform = Transform( 0.0999999, -3.55271e-15, -2.98023e-09, -1.95167e-09, 0.075574, -0.0654872, 2.25228e-09, 0.0654874, 0.0755738, 2.09082e-06, -0.903809, -2.67252 )
 
 [node name="CameraTerainCast" type="RayCast" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot"]
-transform = Transform( 0.999999, 1.77636e-15, -3.55271e-15, 0, 0.755739, 0.654869, 1.77636e-15, -0.654873, 0.755734, -2.38419e-07, 7.28663, -8.00005 )
+transform = Transform( 0.999999, -3.55271e-15, 1.77636e-15, 0, 0.755739, 0.654869, -1.77636e-15, -0.654873, 0.755734, -2.38419e-07, 7.28663, -8.00005 )
 enabled = true
 cast_to = Vector3( 0, -12, 0 )
 collision_mask = 260

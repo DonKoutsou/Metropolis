@@ -9,6 +9,11 @@ public class Player : Character
 	[Export]
 	Curve Consumption = null;
 
+	[Export]
+	float MaxEnergyAmmount = 100;
+
+	float CurrentEnergy = 100;
+
 	Stamina_Bar Stamina_bar = null;
 
 	HP_Bar hp_bar = null;
@@ -26,6 +31,26 @@ public class Player : Character
 	[Export(PropertyHint.Layers3dPhysics)]
 	public uint SelectLayer { get; set; }
 
+	public float GetCharacterBatteryCap()
+	{
+		return MaxEnergyAmmount;
+	}
+	public float GetCurrentCharacterEnergy()
+	{
+		return CurrentEnergy;
+	}
+	public void RechargeCharacter(float ammount)
+	{
+		CurrentEnergy += ammount;
+        if (CurrentEnergy > MaxEnergyAmmount)
+        {
+            CurrentEnergy = MaxEnergyAmmount;
+        }
+	}
+	public void ConsumeEnergy(float ammount)
+    {
+        CurrentEnergy -= ammount;
+    }
 	public void Teleport(Vector3 pos)
 	{
 		GlobalTranslation = pos;
@@ -174,8 +199,9 @@ public class Player : Character
 		if (HasVecicle)
 			rpm *= 2;
 
+		
 		float coons = Consumption.Interpolate(rpm) * delta;
-
+		ConsumeEnergy(coons);
 		List<Item> batteries;
 		CharacterInventory.GetItemsByType(out batteries, ItemName.BATTERY);
 		
@@ -187,9 +213,18 @@ public class Player : Character
 			}
 		}
 		if (batteries.Count() == 0)
-			Kill();
+		{
+			
+			if (CurrentEnergy <= 0)
+				Kill();
+		}
 		else
-			((Battery)batteries[0]).ConsumeEnergy(coons);
+		{
+			float rechargeammount = Math.Min( GetCharacterBatteryCap() - GetCurrentCharacterEnergy() , 0.1f);
+			((Battery)batteries[0]).ConsumeEnergy(rechargeammount);
+			RechargeCharacter(rechargeammount);
+		}
+			
 
 		//GD.Print("Consuming energy :" + coons);
 		//Stamina_bar.Value = m_Stamina;

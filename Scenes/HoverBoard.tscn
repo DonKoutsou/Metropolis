@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Assets/Boat/M_Boat.material" type="Material" id=1]
 [ext_resource path="res://Scripts/Vehicle.cs" type="Script" id=2]
+[ext_resource path="res://Scripts/VehicleDamageManager.cs" type="Script" id=3]
 [ext_resource path="res://Assets/Boat/Boat.obj" type="ArrayMesh" id=4]
 [ext_resource path="res://Assets/Boat/BoatWingR.obj" type="ArrayMesh" id=5]
 [ext_resource path="res://Assets/Boat/BoatWingL.obj" type="ArrayMesh" id=6]
@@ -19,6 +20,14 @@ _data = [ Vector2( 0, 6 ), 0.0, 0.0, 0, 0, Vector2( 0.355023, 5.96319 ), 0.0, 0.
 
 [sub_resource type="Curve" id=9]
 _data = [ Vector2( 0, 0.1 ), 0.0, 0.0, 0, 0, Vector2( 0.5, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.119632 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CapsuleShape" id=29]
+radius = 2.02096
+height = 9.36624
+
+[sub_resource type="CapsuleShape" id=30]
+radius = 2.02096
+height = 7.56251
 
 [sub_resource type="CapsuleShape" id=8]
 radius = 3.11783
@@ -67,7 +76,7 @@ material = SubResource( 27 )
 [sub_resource type="Animation" id=18]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("MeshInstance2:rotation_degrees")
+tracks/0/path = NodePath("WingMesh2:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -79,7 +88,7 @@ tracks/0/keys = {
 "values": [ Vector3( -3.33505e-08, 0, 3.75845e-08 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("MeshInstance3:rotation_degrees")
+tracks/1/path = NodePath("WingMesh1:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -91,7 +100,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0, -6.17937e-28, 1.42391e-08 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("MeshInstance5:rotation_degrees")
+tracks/2/path = NodePath("WingMesh3:rotation_degrees")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -103,7 +112,7 @@ tracks/2/keys = {
 "values": [ Vector3( -1.17934e-06, -45, 60 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("MeshInstance4:rotation_degrees")
+tracks/3/path = NodePath("WingMesh0:rotation_degrees")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -118,7 +127,7 @@ tracks/3/keys = {
 [sub_resource type="Animation" id=17]
 resource_name = "Wings"
 tracks/0/type = "value"
-tracks/0/path = NodePath("MeshInstance2:rotation_degrees")
+tracks/0/path = NodePath("WingMesh2:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -130,7 +139,7 @@ tracks/0/keys = {
 "values": [ Vector3( -3.33505e-08, 0, 3.75845e-08 ), Vector3( -3.89567e-07, -45, 60 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("MeshInstance3:rotation_degrees")
+tracks/1/path = NodePath("WingMesh1:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -142,7 +151,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0, -6.17937e-28, 1.42391e-08 ), Vector3( 0, 45, -60 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("MeshInstance5:rotation_degrees")
+tracks/2/path = NodePath("WingMesh3:rotation_degrees")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -154,7 +163,7 @@ tracks/2/keys = {
 "values": [ Vector3( -10, 10, 40 ), Vector3( -1.17934e-06, -45, 60 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("MeshInstance4:rotation_degrees")
+tracks/3/path = NodePath("WingMesh0:rotation_degrees")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -169,7 +178,7 @@ tracks/3/keys = {
 [sub_resource type="Animation" id=19]
 resource_name = "WingsOut"
 tracks/0/type = "value"
-tracks/0/path = NodePath("MeshInstance2:rotation_degrees")
+tracks/0/path = NodePath("WingMesh2:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -181,7 +190,7 @@ tracks/0/keys = {
 "values": [ Vector3( -3.89567e-07, -45, 60 ), Vector3( 0, 0, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("MeshInstance3:rotation_degrees")
+tracks/1/path = NodePath("WingMesh1:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -193,7 +202,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0, 45, -60 ), Vector3( 0, 0, 0 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("MeshInstance5:rotation_degrees")
+tracks/2/path = NodePath("WingMesh3:rotation_degrees")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -205,7 +214,7 @@ tracks/2/keys = {
 "values": [ Vector3( -1.17934e-06, -45, 60 ), Vector3( -10, 10, 40 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("MeshInstance4:rotation_degrees")
+tracks/3/path = NodePath("WingMesh0:rotation_degrees")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -221,17 +230,24 @@ tracks/3/keys = {
 pause_mode = 1
 transform = Transform( 1, -0.000665859, -0.000639929, 0.000666553, 0.999999, 0.00107017, 0.000639206, -0.0010706, 0.999999, 0, 0, 0 )
 
+[node name="VehicleDamageManager" type="Spatial" parent="."]
+transform = Transform( 1, -5.52518e-11, 5.82077e-11, 7.38964e-11, 1, 0, 0, 0, 1, 0, 0, 0 )
+script = ExtResource( 3 )
+
 [node name="VehicleBody" type="RigidBody" parent="."]
+transform = Transform( 1, -1.1363e-10, 1.16415e-10, 1.90312e-10, 1, 0, 0, 0, 1, -4.87234, -1.69555, 1.47451 )
 collision_layer = 16
 collision_mask = 292
 mass = 40.0
 physics_material_override = SubResource( 1 )
+contacts_reported = 4
+contact_monitor = true
 can_sleep = false
 linear_damp = 1.0
 angular_damp = 10.0
 script = ExtResource( 2 )
-speed = 250000.0
-turnspeed = 300000.0
+speed = 500000.0
+turnspeed = 1.5e+06
 HoverForce = 8000
 JumpForce = 1000
 forcecurve = SubResource( 7 )
@@ -241,26 +257,44 @@ Hoverforcecurve = SubResource( 9 )
 material_override = ExtResource( 1 )
 mesh = ExtResource( 4 )
 
-[node name="MeshInstance2" type="MeshInstance" parent="VehicleBody"]
-transform = Transform( 0.353553, -0.612373, -0.707108, 0.866026, 0.500001, 6.79924e-09, 0.353553, -0.612373, 0.707108, -1.70263, 2.99251, 6.70711 )
+[node name="WingCollider0" type="CollisionShape" parent="VehicleBody"]
+transform = Transform( -0.418248, -0.181947, 0.889925, -3.49246e-10, 0.979736, 0.200309, -0.908335, 0.0837789, -0.409772, 10, 1.883, 4.65661e-10 )
+shape = SubResource( 29 )
+
+[node name="WingCollider1" type="CollisionShape" parent="VehicleBody"]
+transform = Transform( -0.731272, -0.546463, 0.408196, -1.74623e-10, 0.598453, 0.801162, -0.682089, 0.585867, -0.43763, 8, 10, 0 )
+shape = SubResource( 30 )
+
+[node name="WingCollider2" type="CollisionShape" parent="VehicleBody"]
+transform = Transform( 0.799571, 0.479641, 0.361435, 1.74623e-10, 0.601817, -0.798637, -0.600575, 0.638567, 0.481194, -8, 10, 0 )
+shape = SubResource( 30 )
+
+[node name="WingCollider3" type="CollisionShape" parent="VehicleBody"]
+transform = Transform( 0.398142, 0.182148, 0.899061, -2.32831e-10, 0.980092, -0.198565, -0.917327, 0.0790568, 0.390214, -10, 1.898, 0 )
+shape = SubResource( 29 )
+
+[node name="WingMesh2" type="MeshInstance" parent="VehicleBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.70263, 2.99251, 6.70711 )
 mesh = ExtResource( 5 )
 material/0 = ExtResource( 1 )
 material/1 = ExtResource( 8 )
 
-[node name="MeshInstance5" type="MeshInstance" parent="VehicleBody"]
-transform = Transform( 0.353554, -0.612374, -0.707109, 0.866026, 0.500001, 2.05834e-08, 0.353554, -0.612374, 0.707109, -1.297, 1.26, 3.879 )
+[node name="RemoteTransform" type="RemoteTransform" parent="VehicleBody/WingMesh2"]
+
+[node name="WingMesh3" type="MeshInstance" parent="VehicleBody"]
+transform = Transform( 0.735025, -0.656123, 0.171011, 0.633023, 0.754408, 0.173649, -0.242946, -0.0193825, 0.969849, -1.297, 1.26, 3.879 )
 mesh = ExtResource( 5 )
 material/0 = ExtResource( 1 )
 material/1 = ExtResource( 8 )
 
-[node name="MeshInstance3" type="MeshInstance" parent="VehicleBody"]
-transform = Transform( 0.353554, 0.612373, 0.707107, -0.866026, 0.500001, 0, -0.353554, -0.612373, 0.707107, 2.00447, 2.99251, 6 )
+[node name="WingMesh1" type="MeshInstance" parent="VehicleBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.00447, 2.99251, 6 )
 mesh = ExtResource( 6 )
 material/0 = ExtResource( 1 )
 material/1 = ExtResource( 8 )
 
-[node name="MeshInstance4" type="MeshInstance" parent="VehicleBody"]
-transform = Transform( 0.353554, 0.612374, 0.707108, -0.866027, 0.500001, 1.94964e-07, -0.353554, -0.612374, 0.707108, 1.29737, 1.26046, 3.87868 )
+[node name="WingMesh0" type="MeshInstance" parent="VehicleBody"]
+transform = Transform( 0.735025, 0.656123, -0.17101, -0.633023, 0.754408, 0.173648, 0.242946, -0.0193825, 0.969848, 1.29737, 1.26046, 3.87868 )
 mesh = ExtResource( 6 )
 material/0 = ExtResource( 1 )
 material/1 = ExtResource( 8 )
@@ -339,31 +373,33 @@ anims/Wings = SubResource( 17 )
 anims/WingsOut = SubResource( 19 )
 
 [node name="RayFL" type="RayCast" parent="."]
-transform = Transform( 1, -1.69845e-08, 1.89175e-08, 1.70911e-08, 1, -1.44355e-08, -1.89175e-08, 1.44355e-08, 1, 3, 0.749334, 4.99935 )
+transform = Transform( 1, -1.83235e-08, 1.88593e-08, 1.83716e-08, 1, -1.44355e-08, -1.89175e-08, 1.44355e-08, 1, -1.87234, -0.946218, 6.47386 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292
 
 [node name="RayF" type="RayCast" parent="."]
-transform = Transform( 1, 3.51918e-10, -1.74623e-10, 3.06443e-10, 1, -4.65661e-10, 2.91038e-10, -4.65661e-10, 1, -0.00105671, -0.655451, 4.81077 )
+transform = Transform( 1, 2.35275e-10, -5.82077e-11, 4.81066e-10, 1, -4.65661e-10, 2.91038e-10, -4.65661e-10, 1, -4.8734, -2.351, 6.28528 )
 enabled = true
 cast_to = Vector3( 0, 0, 20 )
 collision_mask = 292
 
 [node name="RayFR" type="RayCast" parent="."]
-transform = Transform( 1, 2.83064e-07, 5.75674e-08, -2.82987e-07, 1, -8.6613e-08, -5.75092e-08, 8.67294e-08, 1, -3, 0.750666, 5.00063 )
+transform = Transform( 1, 2.82424e-07, 5.75674e-08, -2.82347e-07, 1, -8.76607e-08, -5.75092e-08, 8.77772e-08, 1, -7.87234, -0.944886, 6.47514 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292
 
 [node name="RayBR" type="RayCast" parent="."]
-transform = Transform( 1, 2.83061e-07, 5.82077e-08, -2.82986e-07, 1, -8.16071e-08, -5.81495e-08, 8.17236e-08, 1, -3, 0.750666, -4.99936 )
+transform = Transform( 1, 2.82421e-07, 5.82077e-08, -2.82346e-07, 1, -8.26549e-08, -5.81495e-08, 8.27713e-08, 1, -7.87234, -0.944886, -3.52485 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292
 
 [node name="RayBL" type="RayCast" parent="."]
-transform = Transform( 1, 2.82307e-07, 5.67525e-08, -2.82231e-07, 1, -8.53324e-08, -5.66943e-08, 8.54488e-08, 1, 3, 0.749335, -5.00064 )
+transform = Transform( 1, 2.81667e-07, 5.67525e-08, -2.81591e-07, 1, -8.63802e-08, -5.66943e-08, 8.64966e-08, 1, -1.87234, -0.946217, -3.52613 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292
+
+[connection signal="body_shape_exited" from="VehicleBody" to="VehicleDamageManager" method="On_Ship_Part_Collided"]

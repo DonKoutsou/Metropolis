@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/MapGrid.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/MapUI.cs" type="Script" id=3]
@@ -12,14 +12,20 @@ border_width_bottom = 5
 border_color = Color( 0, 0, 0, 1 )
 border_blend = true
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.847059, 0.807843, 0.705882, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
-border_blend = true
+[sub_resource type="OpenSimplexNoise" id=5]
+period = 0.1
+persistence = 0.623
+lacunarity = 4.0
+
+[sub_resource type="NoiseTexture" id=6]
+noise = SubResource( 5 )
+
+[sub_resource type="StyleBoxTexture" id=7]
+resource_local_to_scene = true
+resource_name = "normal"
+texture = SubResource( 6 )
+region_rect = Rect2( 0, 0, 512, 512 )
+modulate_color = Color( 0.47451, 0.588235, 0.756863, 1 )
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.607843, 0.603922, 0.603922, 1 )
@@ -69,7 +75,7 @@ margin_bottom = 200.0
 rect_clip_content = true
 mouse_filter = 1
 mouse_default_cursor_shape = 6
-custom_styles/panel = SubResource( 1 )
+custom_styles/panel = SubResource( 7 )
 
 [node name="MapGrid" type="GridContainer" parent="Panel3/Panel"]
 anchor_left = 0.5
@@ -83,7 +89,7 @@ script = ExtResource( 1 )
 TileScene = "res://Scenes/MapTile.tscn"
 XGridTileScene = "res://Scenes/MapUIItems/MapXGridPoint.tscn"
 YGridTileScene = "res://Scenes/MapUIItems/MapYGridPoint.tscn"
-MaxZoomScale = 8.0
+MaxZoomScale = 40.0
 
 [node name="Panel2" type="Panel" parent="Panel3/Panel"]
 margin_top = 16.0

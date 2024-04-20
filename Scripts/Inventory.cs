@@ -71,6 +71,7 @@ public class Inventory : Spatial
         loc.origin.y += 1;
         //loc.origin.z += 1;
         item.GlobalTransform = loc;
+        item.Translation = new Vector3(item.Translation.x, item.Translation.y, item.Translation.z + 1);
         //EmitSignal(nameof(On_Item_Removed), item);
         item.GetNode<CollisionShape>("CollisionShape").SetDeferred("disabled",false);
         

@@ -3,13 +3,6 @@ using System;
 
 public class SeaManager : Node
 {
-    [Export]
-    float minvalue = -1;
-    [Export]
-    float MaxValue = 2;
-
-    float currentvalue = 0;
-
     static SceneTree tree; 
     public override void _Ready()
     {
@@ -20,10 +13,15 @@ public class SeaManager : Node
     public static void SyncSeas()
     {
         var seas = tree.GetNodesInGroup("Sea");
+        float animstage = 0;
         foreach (Node sea in seas)
         {
-            sea.GetNode<MeshInstance>("Sea").GetNode<AnimationPlayer>("AnimationPlayer").Stop(true);
-            sea.GetNode<MeshInstance>("Sea").GetNode<AnimationPlayer>("AnimationPlayer").Play("Wave");
+            if (animstage == 0)
+            {
+                animstage = sea.GetNode<MeshInstance>("Sea").GetNode<AnimationPlayer>("AnimationPlayer").CurrentAnimationPosition;
+            }
+            sea.GetNode<MeshInstance>("Sea").GetNode<AnimationPlayer>("AnimationPlayer").Seek(animstage);
+            sea.GetNode<MeshInstance>("Sea").GetNode<AnimationPlayer>("AnimationPlayer").Play();
         }
     }
 }

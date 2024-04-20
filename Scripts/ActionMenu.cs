@@ -93,17 +93,27 @@ public class ActionMenu : Control
 					if (availableenergy > reachargeammount)
 					{
 						bat.Recharge(reachargeammount);
-						generator.ConsumeEnergy(reachargeammount);
 						rechargeamm += reachargeammount;
 					}
 					else
 					{
 						bat.Recharge(availableenergy);
-						generator.ConsumeEnergy(availableenergy);
 						rechargeamm += availableenergy;
 					}
 				}
 			}
+			float charrechargeamm = pl.GetCharacterBatteryCap() - pl.GetCurrentCharacterEnergy();
+			if (charrechargeamm > availableenergy)
+			{
+				pl.RechargeCharacter(charrechargeamm);
+				rechargeamm += charrechargeamm;
+			}
+			else
+			{
+				pl.RechargeCharacter(availableenergy);
+				rechargeamm += availableenergy;
+			}
+			generator.ConsumeEnergy(rechargeamm);
 			int time = (int)Math.Round(rechargeamm * 10);
 			int days, hours, mins;
 			DayNight.MinsToTime(time, out days,out hours, out mins);
