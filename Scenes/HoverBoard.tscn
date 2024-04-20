@@ -1,14 +1,16 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Assets/Boat/M_Boat.material" type="Material" id=1]
 [ext_resource path="res://Scripts/Vehicle.cs" type="Script" id=2]
 [ext_resource path="res://Scripts/VehicleDamageManager.cs" type="Script" id=3]
 [ext_resource path="res://Assets/Boat/Boat.obj" type="ArrayMesh" id=4]
-[ext_resource path="res://Assets/Boat/BoatWingR.obj" type="ArrayMesh" id=5]
-[ext_resource path="res://Assets/Boat/BoatWingL.obj" type="ArrayMesh" id=6]
+[ext_resource path="res://Assets/Boat/BoatWingL_Dest.tres" type="ArrayMesh" id=5]
+[ext_resource path="res://Assets/Boat/BoatWingR_Dest.tres" type="ArrayMesh" id=6]
 [ext_resource path="res://Assets/Boat/BoatWindDetector.obj" type="ArrayMesh" id=7]
 [ext_resource path="res://Assets/Boat/BoatFabric.material" type="Material" id=8]
 [ext_resource path="res://Scripts/WindDetector.cs" type="Script" id=9]
+[ext_resource path="res://Assets/Boat/Boat_WingL.tres" type="ArrayMesh" id=10]
+[ext_resource path="res://Assets/Boat/BoatWingR.tres" type="ArrayMesh" id=11]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0
@@ -252,6 +254,10 @@ HoverForce = 8000
 JumpForce = 1000
 forcecurve = SubResource( 7 )
 Hoverforcecurve = SubResource( 9 )
+LeftWingMesh = ExtResource( 10 )
+LeftDestWingMesh = ExtResource( 5 )
+RightWingMesh = ExtResource( 11 )
+RightDestWingMesh = ExtResource( 6 )
 
 [node name="MeshInstance" type="MeshInstance" parent="VehicleBody"]
 material_override = ExtResource( 1 )
@@ -275,35 +281,31 @@ shape = SubResource( 29 )
 
 [node name="WingMesh2" type="MeshInstance" parent="VehicleBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.70263, 2.99251, 6.70711 )
-mesh = ExtResource( 5 )
+mesh = ExtResource( 11 )
 material/0 = ExtResource( 1 )
 material/1 = ExtResource( 8 )
 
-[node name="RemoteTransform" type="RemoteTransform" parent="VehicleBody/WingMesh2"]
-
 [node name="WingMesh3" type="MeshInstance" parent="VehicleBody"]
 transform = Transform( 0.735025, -0.656123, 0.171011, 0.633023, 0.754408, 0.173649, -0.242946, -0.0193825, 0.969849, -1.297, 1.26, 3.879 )
-mesh = ExtResource( 5 )
+mesh = ExtResource( 11 )
 material/0 = ExtResource( 1 )
 material/1 = ExtResource( 8 )
 
 [node name="WingMesh1" type="MeshInstance" parent="VehicleBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.00447, 2.99251, 6 )
-mesh = ExtResource( 6 )
+transform = Transform( 1, -5.51381e-11, 5.82077e-11, 7.38964e-11, 1, 0, 0, 0, 1, 2.00447, 2.99251, 6 )
+mesh = ExtResource( 10 )
 material/0 = ExtResource( 1 )
 material/1 = ExtResource( 8 )
 
 [node name="WingMesh0" type="MeshInstance" parent="VehicleBody"]
 transform = Transform( 0.735025, 0.656123, -0.17101, -0.633023, 0.754408, 0.173648, 0.242946, -0.0193825, 0.969848, 1.29737, 1.26046, 3.87868 )
-mesh = ExtResource( 6 )
+mesh = ExtResource( 10 )
 material/0 = ExtResource( 1 )
 material/1 = ExtResource( 8 )
 
 [node name="WindDetector" type="MeshInstance" parent="VehicleBody"]
 transform = Transform( 0.0239615, 0.00172045, -0.999713, -0.000419282, 1, 0.00171089, 0.999716, 0.000378179, 0.0239623, -0.000107468, 3.31787, 6.50101 )
 mesh = ExtResource( 7 )
-material/0 = ExtResource( 1 )
-material/1 = ExtResource( 8 )
 script = ExtResource( 9 )
 
 [node name="CollisionShape" type="CollisionShape" parent="VehicleBody"]
@@ -373,31 +375,31 @@ anims/Wings = SubResource( 17 )
 anims/WingsOut = SubResource( 19 )
 
 [node name="RayFL" type="RayCast" parent="."]
-transform = Transform( 1, -1.83235e-08, 1.88593e-08, 1.83716e-08, 1, -1.44355e-08, -1.89175e-08, 1.44355e-08, 1, -1.87234, -0.946218, 6.47386 )
+transform = Transform( 1, -1.89636e-08, 1.89175e-08, 1.90701e-08, 1, -1.44355e-08, -1.89175e-08, 1.44355e-08, 1, -1.87234, -0.946216, 6.47386 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292
 
 [node name="RayF" type="RayCast" parent="."]
-transform = Transform( 1, 2.35275e-10, -5.82077e-11, 4.81066e-10, 1, -4.65661e-10, 2.91038e-10, -4.65661e-10, 1, -4.8734, -2.351, 6.28528 )
+transform = Transform( 1, 2.35502e-10, -5.82077e-11, 4.81066e-10, 1, -4.65661e-10, 2.91038e-10, -4.65661e-10, 1, -4.8734, -2.351, 6.28528 )
 enabled = true
 cast_to = Vector3( 0, 0, 20 )
 collision_mask = 292
 
 [node name="RayFR" type="RayCast" parent="."]
-transform = Transform( 1, 2.82424e-07, 5.75674e-08, -2.82347e-07, 1, -8.76607e-08, -5.75092e-08, 8.77772e-08, 1, -7.87234, -0.944886, 6.47514 )
+transform = Transform( 1, 2.82075e-07, 5.75674e-08, -2.81998e-07, 1, -8.76607e-08, -5.75092e-08, 8.77772e-08, 1, -7.87234, -0.944884, 6.47514 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292
 
 [node name="RayBR" type="RayCast" parent="."]
-transform = Transform( 1, 2.82421e-07, 5.82077e-08, -2.82346e-07, 1, -8.26549e-08, -5.81495e-08, 8.27713e-08, 1, -7.87234, -0.944886, -3.52485 )
+transform = Transform( 1, 2.82072e-07, 5.82077e-08, -2.81997e-07, 1, -8.26549e-08, -5.81495e-08, 8.27713e-08, 1, -7.87234, -0.944884, -3.52485 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292
 
 [node name="RayBL" type="RayCast" parent="."]
-transform = Transform( 1, 2.81667e-07, 5.67525e-08, -2.81591e-07, 1, -8.63802e-08, -5.66943e-08, 8.64966e-08, 1, -1.87234, -0.946217, -3.52613 )
+transform = Transform( 1, 2.81318e-07, 5.67525e-08, -2.81242e-07, 1, -8.63802e-08, -5.66943e-08, 8.64966e-08, 1, -1.87234, -0.946215, -3.52613 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292

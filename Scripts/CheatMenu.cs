@@ -82,6 +82,12 @@ public class CheatMenu : Control
 	}
 	public override void _Ready()
 	{
+		if (!OS.HasFeature("editor"))
+		{
+			SetProcessInput(false);
+			SetProcess(false);
+			return;
+		}
 		pl = (Player)GetParent().GetParent();
 		CamMove = pl.GetNode<CameraMovePivot>("CameraMovePivot");
 		CameraPanPivot pan = CamMove.GetNode<CameraPanPivot>("CameraPanPivot");

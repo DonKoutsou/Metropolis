@@ -28,7 +28,7 @@ public class Vehicle : RigidBody
 
     public Vector3 loctomove;
 
-    bool Working = false;
+    public bool Working = false;
 
     List<Character> passengers = new List<Character>();
 
@@ -44,7 +44,14 @@ public class Vehicle : RigidBody
 
     VehicleDamageManager DamageMan;
 
-
+    [Export]
+    Mesh LeftWingMesh = null;
+    [Export]
+    Mesh LeftDestWingMesh = null;
+    [Export]
+    Mesh RightWingMesh = null;
+    [Export]
+    Mesh RightDestWingMesh = null;
 
     //RigidBody WingShapes;
     public void ToggleWings(bool toggle)
@@ -66,7 +73,10 @@ public class Vehicle : RigidBody
     }
     public void OnWingDamaged(int index)
     {
-        GetNode<MeshInstance>("WingMesh" + index.ToString()).Hide();
+        if (GetNode<MeshInstance>("WingMesh" + index.ToString()).Mesh == LeftWingMesh)
+            GetNode<MeshInstance>("WingMesh" + index.ToString()).Mesh = LeftDestWingMesh;
+        else if (GetNode<MeshInstance>("WingMesh" + index.ToString()).Mesh == RightWingMesh)
+            GetNode<MeshInstance>("WingMesh" + index.ToString()).Mesh = RightDestWingMesh;
     }
     private void EnableWindOnWings(bool toggle)
     {
@@ -169,10 +179,12 @@ public class Vehicle : RigidBody
         }
         if (!IsBoatFacingWind() && wingsdeployed)
         {
-            force = GlobalTransform.basis.z;
+            Vector3 f = GlobalTransform.basis.z;
             force.y = 0;
             float workingwingmulti = GetWorkingSailMulti();
-            fmulti += 0.03f *DayNight.GetWindStr() * workingwingmulti;
+            fmulti += 0.01f *DayNight.GetWindStr() * workingwingmulti;
+            f *= workingwingmulti;
+            force += f;
             if (!WindOnWings)
                 EnableWindOnWings(true);
         }
@@ -276,10 +288,11 @@ public class Vehicle : RigidBody
         }
         return count / wingcount;
     }
-    private void ToggleMachine(bool toggle)
+    public  void ToggleMachine(bool toggle)
     {
         if (toggle)
         {
+            loctomove = GlobalTransform.origin;
             ExaustParticles[0].Emitting = true;
             ExaustParticles[1].Emitting = true;
             Working = true;
@@ -312,13 +325,14 @@ public class Vehicle : RigidBody
         //Rays.Insert(5, parent.GetNode<RayCast>("RayB"));
         //WingShapes = GetNode<RigidBody>("WingShapes");
         DamageMan = GetParent().GetNode<VehicleDamageManager>("VehicleDamageManager");
-
+        loctomove = GlobalTranslation;
         WingMaterials.Insert(0, (ShaderMaterial)GetNode<MeshInstance>("WingMesh0").GetActiveMaterial(1));
         WingMaterials.Insert(1, (ShaderMaterial)GetNode<MeshInstance>("WingMesh1").GetActiveMaterial(1));
         WingMaterials.Insert(2, (ShaderMaterial)GetNode<MeshInstance>("WingMesh2").GetActiveMaterial(1));
         WingMaterials.Insert(3, (ShaderMaterial)GetNode<MeshInstance>("WingMesh3").GetActiveMaterial(1));
         ToggleWings(false);
         EnableWindOnWings(false);
+        SetProcessInput(false);
     }
     public void Jump()
     {
@@ -330,6 +344,7 @@ public class Vehicle : RigidBody
     }
     public void BoardVehicle(Character cha)
     {
+        SetProcessInput(true);
         bool isthing = GetParent().GetParent() is MyWorld;
         if (!isthing)
         {
@@ -358,13 +373,16 @@ public class Vehicle : RigidBody
         cha.GlobalRotation = prevrot;
         
         passengers.Insert(passengers.Count, cha);
-        ToggleMachine(true);
+        //ToggleMachine(true);
     }
     private void Capsize()
     {
         if (passengers.Count == 0)
             return;
+        SetProcessInput(false);
+        
         Character chartothrowout = passengers[0];
+        passengers.Clear();
         Vector3 prevrot = chartothrowout.GlobalRotation;
         RemoteTransform CharTrasn = GetNode<RemoteTransform>("CharacterRemoteTransform");
         CharTrasn.RemotePath = this.GetPath();
@@ -380,8 +398,14 @@ public class Vehicle : RigidBody
         chartothrowout.SetVehicle(null);
         ToggleMachine(false);
     }
+    public bool HasPassengers()
+    {
+        return passengers.Count > 0;
+    }
      public void UnBoardVehicle(Character cha)
     {
+        passengers.Clear();
+        SetProcessInput(false);
         Vector3 prevrot = cha.GlobalRotation;
         RemoteTransform CharTrasn = GetNode<RemoteTransform>("CharacterRemoteTransform");
         CharTrasn.RemotePath = this.GetPath();
@@ -398,11 +422,8 @@ public class Vehicle : RigidBody
     }
     public override void _Input(InputEvent @event)
 	{
-        if (!Working)
-            return;
 		if (@event.IsActionPressed("Run"))
 		{
-
             if (wingsdeployed)
                 ToggleWings(false);
             else

@@ -1,12 +1,18 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Scenes/CloakInh.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Character_Animations.cs" type="Script" id=2]
 [ext_resource path="res://Assets/Clouds/Clouds.material" type="Material" id=3]
 [ext_resource path="res://Assets/Guy/Guy_Head.obj" type="ArrayMesh" id=4]
 [ext_resource path="res://Assets/Guy/Rope.obj" type="ArrayMesh" id=5]
+[ext_resource path="res://addons/3D Outline/Outline.shader" type="Shader" id=6]
+[ext_resource path="res://Assets/Guy/Textures/SandRunnerComplete_SandRunner_OcclusionRoughnessMetallic.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Guy/Textures/SandRunnerComplete_SandRunner_Emissive.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Guy/Textures/SandRunnerComplete_Cloak_BaseColor.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Guy/Textures/SandRunnerComplete_SandRunner_BaseColor.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Guy/GuyMaterial.material" type="Material" id=11]
 [ext_resource path="res://Assets/Guy/RopeMat.material" type="Material" id=12]
+[ext_resource path="res://Assets/Guy/Textures/SandRunnerComplete_SandRunner_Normal.png" type="Texture" id=13]
 
 [sub_resource type="ParticlesMaterial" id=21]
 lifetime_randomness = 0.24
@@ -19,6 +25,258 @@ initial_velocity = 1.0
 
 [sub_resource type="QuadMesh" id=22]
 material = ExtResource( 3 )
+
+[sub_resource type="ShaderMaterial" id=24]
+resource_local_to_scene = true
+shader = ExtResource( 6 )
+shader_param/enable = false
+shader_param/outline_thickness = 0.074
+shader_param/color2 = Color( 0, 0, 0, 0 )
+shader_param/color = Color( 0.941176, 0.972549, 0.403922, 0 )
+
+[sub_resource type="SpatialMaterial" id=25]
+resource_local_to_scene = true
+resource_name = "ZbrushExports:defaultMat1.001"
+render_priority = 1
+next_pass = SubResource( 24 )
+vertex_color_use_as_albedo = true
+params_diffuse_mode = 4
+params_specular_mode = 3
+params_cull_mode = 2
+albedo_texture = ExtResource( 10 )
+metallic = 1.0
+metallic_texture = ExtResource( 7 )
+metallic_texture_channel = 2
+roughness = 0.59
+roughness_texture = ExtResource( 7 )
+roughness_texture_channel = 1
+emission_enabled = true
+emission = Color( 0, 0, 0, 1 )
+emission_energy = 16.0
+emission_operator = 0
+emission_on_uv2 = false
+emission_texture = ExtResource( 8 )
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 13 )
+ao_enabled = true
+ao_light_affect = 1.0
+ao_texture = ExtResource( 7 )
+ao_on_uv2 = false
+ao_texture_channel = 0
+
+[sub_resource type="ShaderMaterial" id=26]
+resource_local_to_scene = true
+shader = ExtResource( 6 )
+shader_param/enable = false
+shader_param/outline_thickness = 0.259
+shader_param/color2 = Color( 0, 0, 0, 0 )
+shader_param/color = Color( 0.882353, 0.898039, 0.360784, 0 )
+
+[sub_resource type="Shader" id=1]
+code = "/*
+void light() and corresponding variables and functions by (c) CaptainProton42's 
+Flexible Toon Shader under the MIT license 
+
+the rest was added by kmitt91; void fragment() + void vertex() and corresponding variables
+*/
+
+shader_type spatial;
+
+render_mode cull_disabled, depth_draw_alpha_prepass, diffuse_toon, specular_toon; 
+
+const float PI = 3.14159;
+
+uniform vec4 color : hint_color;
+uniform sampler2D cape_texture : hint_albedo;
+uniform sampler2D normalmap_texture : hint_normal;
+uniform sampler2D noise_texture : hint_black; 
+
+
+// variables from CaptainProton42
+
+uniform bool clamp_diffuse_to_max = false;
+
+uniform int cuts : hint_range(1, 8) = 3;
+uniform float wrap : hint_range(-2.0f, 2.0f) = 0.0f;
+uniform float steepness : hint_range(1.0f, 8.0f);
+
+uniform bool use_attenuation = true;
+
+uniform bool use_specular = true;
+uniform float specular_strength : hint_range(0.0f, 1.0f) = 1.0f;
+uniform float specular_shininess : hint_range(0.0f, 32.0f) = 16.0f;
+uniform sampler2D specular_map : hint_albedo;
+
+uniform bool use_rim = true;
+uniform float rim_width : hint_range(0.0f, 16.0f) = 8.0f;
+uniform vec4 rim_color : hint_color = vec4(1.0f);
+
+uniform bool use_ramp = false;
+uniform sampler2D ramp : hint_albedo;
+
+uniform bool use_borders = false;
+uniform float border_width = 0.01;
+
+// end from CaptainProton42 variables
+
+
+uniform float strength = 1.0;
+uniform float speed = 1.0;
+
+uniform float substractuv = 0.1;
+
+uniform float inflation = 1.0;
+
+void vertex() {
+	
+	vec2 scaled_uv = UV * vec2(0.5);
+	float noise = texture(noise_texture, scaled_uv + vec2(TIME * speed, 0.0)).r;
+	
+	float displacement = (noise * 2.0 - 0.8) * strength;
+	if (UV.y > substractuv)
+	{
+		displacement *=(UV.y);
+		vec3 res;
+		if (NORMAL.x * displacement > 0.0)
+			res = vec3(NORMAL.x * displacement * inflation, res.y, res.z);
+		if (NORMAL.y * displacement > 0.0)
+			res = vec3(res.x, (NORMAL.y * displacement * inflation) , res.z);
+		if (NORMAL.z * displacement > 0.0)
+			res = vec3(res.x, res.y , NORMAL.z * displacement * inflation);
+
+		VERTEX += res;
+		//else
+			//VERTEX += vec3(displacement, 0.0, displacement);
+	}
+		
+	
+}
+
+
+void fragment() {
+	
+	vec4 cape = texture(cape_texture, UV);
+	
+	ALBEDO = color.rgb * cape.rgb;
+	
+	//ALPHA = color.a * cape.a;
+	NORMALMAP = texture(normalmap_texture, UV).rgb;
+	
+}
+
+
+
+// functions from CaptainProton42
+
+/*float staircase(int n, float x) {
+	float res = 0.0f;
+	float inc = 1.0f / float(n+1);
+	for (float edge = 0.0f; edge < 1.0f - inc; edge+=inc) {
+		res += step(edge, x);
+	}
+	return res / float(n);
+}
+
+float split_diffuse(float diffuse) {
+	return staircase(cuts, diffuse * steepness);
+}
+
+float split_specular(float specular) {
+	return step(0.5f, specular);
+}
+
+
+void light() {
+	// Attenuation.
+	float attenuation = 1.0f;
+	if (use_attenuation) {
+		attenuation = ATTENUATION.x;
+	}
+	
+	// Diffuse lighting.
+	float NdotL = dot(NORMAL, LIGHT);
+	float diffuse_amount = NdotL + (attenuation - 1.0) + wrap;
+	//float diffuse_amount = NdotL * attenuation + wrap;
+	diffuse_amount *= steepness;
+	float cuts_inv = 1.0f / float(cuts);
+	float diffuse_stepped = clamp(diffuse_amount + mod(1.0f - diffuse_amount, cuts_inv), 0.0f, 1.0f);
+
+	// Calculate borders.
+	float border = 0.0f;
+	if (use_borders) {
+		float corr_border_width = length(cross(NORMAL, LIGHT)) * border_width * steepness;
+		border = step(diffuse_stepped - corr_border_width, diffuse_amount)
+				 - step(1.0 - corr_border_width, diffuse_amount);
+	}
+	
+	// Apply diffuse result to different styles.
+	vec3 diffuse = ALBEDO.rgb * LIGHT_COLOR / PI;
+	if (use_ramp) {
+		diffuse *= texture(ramp, vec2(diffuse_stepped * (1.0f - border), 0.0f)).rgb;
+	} else {
+		diffuse *= diffuse_stepped * (1.0f - border);
+	}
+	
+	if (clamp_diffuse_to_max) {
+		// Clamp diffuse to max for multiple light sources.
+		DIFFUSE_LIGHT = max(DIFFUSE_LIGHT, diffuse);
+	} else {
+		DIFFUSE_LIGHT += diffuse;
+	}
+	
+	// Specular lighting.
+	if (use_specular) {
+		vec3 H = normalize(LIGHT + VIEW);
+		float NdotH = dot(NORMAL, H);
+		float specular_amount = max(pow(NdotH, specular_shininess*specular_shininess), 0.0f)
+							    * texture(specular_map, UV).r
+								* attenuation;
+		specular_amount = split_specular(specular_amount);
+		SPECULAR_LIGHT += specular_strength * specular_amount * LIGHT_COLOR;
+	}
+	
+	// Simple rim lighting.
+	if (use_rim) {
+		float NdotV = dot(NORMAL, VIEW);
+		float rim_light = pow(1.0 - NdotV, rim_width);
+		DIFFUSE_LIGHT += rim_light * rim_color.rgb * rim_color.a * LIGHT_COLOR / PI;
+	}
+}"
+
+[sub_resource type="OpenSimplexNoise" id=3]
+
+[sub_resource type="NoiseTexture" id=2]
+width = 128
+height = 128
+seamless = true
+noise = SubResource( 3 )
+
+[sub_resource type="ShaderMaterial" id=27]
+resource_local_to_scene = true
+next_pass = SubResource( 26 )
+shader = SubResource( 1 )
+shader_param/color = Color( 0.905882, 0.717647, 0.494118, 1 )
+shader_param/clamp_diffuse_to_max = false
+shader_param/cuts = 3
+shader_param/wrap = 0.0
+shader_param/steepness = 1.0
+shader_param/use_attenuation = false
+shader_param/use_specular = false
+shader_param/specular_strength = 1.0
+shader_param/specular_shininess = 16.0
+shader_param/use_rim = false
+shader_param/rim_width = 1.591
+shader_param/rim_color = Color( 1, 1, 1, 1 )
+shader_param/use_ramp = false
+shader_param/use_borders = false
+shader_param/border_width = 0.01
+shader_param/strength = 15.0
+shader_param/speed = 1.0
+shader_param/substractuv = 0.1
+shader_param/inflation = 0.1
+shader_param/cape_texture = ExtResource( 9 )
+shader_param/noise_texture = SubResource( 2 )
 
 [sub_resource type="Animation" id=5]
 resource_name = "Idle-loop"
@@ -1296,7 +1554,7 @@ nodes/TimeScale/position = Vector2( 241.076, 25.6959 )
 nodes/Walk_Speed/node = SubResource( 19 )
 nodes/Walk_Speed/position = Vector2( 0, 320 )
 nodes/output/position = Vector2( 980, 160 )
-node_connections = [ "JumpShot", 0, "Idle_Walk_Blend", "JumpShot", 1, "TimeScale", "Idle_Walk_Blend", 0, "Animation", "Idle_Walk_Blend", 1, "Walk_Speed", "Walk_Speed", 0, "Animation 3", "TimeScale", 0, "Animation 2", "output", 0, "JumpShot" ]
+node_connections = [ "output", 0, "JumpShot", "TimeScale", 0, "Animation 2", "Idle_Walk_Blend", 0, "Animation", "Idle_Walk_Blend", 1, "Walk_Speed", "Walk_Speed", 0, "Animation 3", "JumpShot", 0, "Idle_Walk_Blend", "JumpShot", 1, "TimeScale" ]
 
 [node name="Cloak_Skinned" instance=ExtResource( 1 )]
 
@@ -1311,9 +1569,14 @@ draw_pass_1 = SubResource( 22 )
 
 [node name="Mesh001" parent="rig/Skeleton" index="0"]
 material_override = ExtResource( 11 )
+material/0 = SubResource( 25 )
+
+[node name="Mesh003" parent="rig/Skeleton" index="1"]
+material_override = SubResource( 27 )
+material/0 = SubResource( 27 )
 
 [node name="BoneAttachment" type="BoneAttachment" parent="rig/Skeleton" index="2"]
-transform = Transform( 0.99693, -0.0705724, 0.0339152, -0.0756015, -0.754888, 0.651482, -0.0203745, -0.652046, -0.757906, 4.56348e-08, 4.16058, 0.206095 )
+transform = Transform( 0.99693, -0.0705724, 0.0339152, -0.0756015, -0.754888, 0.651482, -0.0203745, -0.652046, -0.757905, 3.07336e-08, 4.16906, 0.197279 )
 bone_name = "DEF-spine.006"
 
 [node name="HeadPivot" type="Spatial" parent="rig/Skeleton/BoneAttachment" index="0"]
@@ -1344,7 +1607,7 @@ mesh = ExtResource( 4 )
 skeleton = NodePath("../..")
 
 [node name="BoneAttachment2" type="BoneAttachment" parent="rig/Skeleton" index="3"]
-transform = Transform( 1, -1.01954e-07, 1.97741e-07, -1.13232e-07, -0.998322, 0.057903, 1.91506e-07, -0.057903, -0.998322, -1.31052e-08, 2.99866, -0.000963436 )
+transform = Transform( 1, -1.04002e-07, 1.96671e-07, -1.13232e-07, -0.99887, 0.0475332, 1.91506e-07, -0.0475332, -0.99887, -1.15891e-08, 3.01205, -0.00096344 )
 bone_name = "DEF-spine.002"
 
 [node name="Rope" type="MeshInstance" parent="rig/Skeleton/BoneAttachment2" index="0"]

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 public class Player : Character
 {
-	// The downward acceleration when in the air, in meters per second squared.
+	
 	[Export]
 	Curve Consumption = null;
 
@@ -14,9 +14,9 @@ public class Player : Character
 
 	float CurrentEnergy = 100;
 
-	Stamina_Bar Stamina_bar = null;
+	//Stamina_Bar Stamina_bar = null;
 
-	HP_Bar hp_bar = null;
+	//HP_Bar hp_bar = null;
 
 	DialoguePanel DiagPan;
 
@@ -27,6 +27,8 @@ public class Player : Character
 	public bool IsRunning = false;
 
 	ActionMenu actMen;
+
+	public float rpm;
 
 	[Export(PropertyHint.Layers3dPhysics)]
 	public uint SelectLayer { get; set; }
@@ -69,10 +71,10 @@ public class Player : Character
 		//Input.MouseMode = Input.MouseModeEnum.Visible;
 		Spatial plUI = GetNode<Spatial>("PlayerUI");
 		actMen = plUI.GetNode<ActionMenu>("ActionMenu");
-		hp_bar = plUI.GetNode<HP_Bar>("HP_Bar");
-		hp_bar.MaxValue = m_HP;
-		Stamina_bar = plUI.GetNode<Stamina_Bar>("Stamina_Bar");
-		Stamina_bar.MaxValue = m_Stamina;
+		//hp_bar = plUI.GetNode<HP_Bar>("HP_Bar");
+		//hp_bar.MaxValue = m_HP;
+		//Stamina_bar = plUI.GetNode<Stamina_Bar>("Stamina_Bar");
+		//Stamina_bar.MaxValue = m_Stamina;
 		
 		var panels = GetTree().GetNodesInGroup("DialoguePanel");
 		DiagPan = (DialoguePanel)panels[0];
@@ -130,8 +132,6 @@ public class Player : Character
 		}
 		moveloc.GlobalTranslation = loctomove;
 
-		float rpm = 0.05f;
-
 		var spd = Speed;
 
 		var direction = loctomove - GlobalTransform.origin;
@@ -155,6 +155,18 @@ public class Player : Character
 		else if (HasVecicle && dist < 10)
 		{
 			rpm = 0.05f;
+			if (!GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused)
+				GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused = true;
+			anim.PlayAnimation(E_Animations.Idle);
+			moveloc.Hide();
+			HeadPivot.Rotation = new Vector3(0.0f,0.0f,0.0f);
+		}
+		else if (HasVecicle && dist > 10)
+		{
+			if (currveh.Working)
+				rpm = 1;
+			else
+				rpm = 0.05f;
 			if (!GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused)
 				GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused = true;
 			anim.PlayAnimation(E_Animations.Idle);
@@ -196,8 +208,7 @@ public class Player : Character
 			//YOUR_NODE.RotationDegrees = Vector3.Up * Mathf.LerpAngle(YOUR_NODE.Rotation.y, Mathf.Atan2(OTHER_NODE.Translation.x - YOUR_NODE.Translation.x, OTHER_NODE.Translation.z - YOUR_NODE.Translation.z), 1f);	
 		}
 
-		if (HasVecicle)
-			rpm *= 2;
+		
 
 		
 		float coons = Consumption.Interpolate(rpm) * delta;
@@ -251,7 +262,8 @@ public class Player : Character
 		}
 		else
 		{
-			currveh.loctomove = loctomove;
+			if (currveh.Working)
+				currveh.loctomove = loctomove;
 		}
 		if (Input.IsActionPressed("jump"))
 		{

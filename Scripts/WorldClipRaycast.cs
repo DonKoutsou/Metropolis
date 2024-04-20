@@ -18,8 +18,8 @@ public class WorldClipRaycast : RayCast
     {
         if (!enabled)
             return;
-        ForceRaycastUpdate();
-        if (IsColliding())
+        //ForceRaycastUpdate();
+        /*if (IsColliding())
         {
             Vector3 collisionpoint = GetCollisionPoint();
             collisionpoint.y += 2;
@@ -33,6 +33,6 @@ public class WorldClipRaycast : RayCast
                 pl.GlobalTranslation = collisionpoint;
             }
             
-        }
+        }*/
     }
 }

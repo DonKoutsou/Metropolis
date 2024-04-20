@@ -16,6 +16,7 @@ public class InventoryUI : Control
     float MaxLoad = 0;
 
     RichTextLabel Description;
+    RichTextLabel WeightText;
     RichTextLabel ItemName;
 
     InventoryUISlot FocusedSlot;
@@ -33,6 +34,8 @@ public class InventoryUI : Control
     bool ShowingMap = false;
 
     ProgressBar CharacterBatteryCharge;
+
+    ProgressBar CharacterRPM;
     public static InventoryUI GetInstance()
     {
         return inst;
@@ -49,9 +52,11 @@ public class InventoryUI : Control
         GridContainer gr = GetNode<GridContainer>("GridContainer");
         int childc = gr.GetChildCount();
         CharacterBatteryCharge = GetNode<Panel>("BatteryPanel").GetNode<ProgressBar>("CharacterBatteryCharge");
+        CharacterRPM = GetNode<Panel>("BatteryPanel").GetNode<ProgressBar>("RPMAmount");
         CharacterBatteryCharge.MaxValue = pl.GetCharacterBatteryCap();
         CharacterBatteryCharge.Value = pl.GetCurrentCharacterEnergy();
         Description = GetNode<Panel>("DescriptionPanel").GetNode<RichTextLabel>("Description");
+        WeightText =  GetNode<Panel>("DescriptionPanel").GetNode<RichTextLabel>("WeightText");
         ItemName = GetNode<Panel>("DescriptionPanel").GetNode<RichTextLabel>("ItemName");
         ItemOptionPanel = GetNode<Panel>("ItemOptionPanel");
         ((Control)Description.GetParent()).Hide();
@@ -126,7 +131,7 @@ public class InventoryUI : Control
         Capacity.BbcodeText = string.Format("[center]{0}/{1}", currentload, MaxLoad);
 
         CharacterBatteryCharge.Value = pl.GetCurrentCharacterEnergy();
-        
+        CharacterRPM.Value = pl.rpm * 100;
         if (showingDesc)
             Description.BbcodeText = "[center]" + ShowingDescSample.GetItemDesc();
         if (!hascompass)
@@ -177,6 +182,7 @@ public class InventoryUI : Control
         ((Control)Description.GetParent()).Show();
         Description.BbcodeText = "[center]" + it.GetItemDesc();
         ItemName.BbcodeText = "[center]" + it.GetItemName();
+        WeightText.BbcodeText = "[center]Βάρος: " + ShowingDescSample.GetInventoryWeight();
     }
     public void ItemUnHovered(Item it)
     {
@@ -195,6 +201,12 @@ public class InventoryUI : Control
     }
     private void On_Drop_Button_Down()
     {
+        if (FocusedSlot == null)
+        {
+            TalkText.GetInst().Talk("Πρέπει να διαλέξω κάτι για να αφήσω.", pl);
+            return;
+        }
+            
         Inv.RemoveItem(FocusedSlot.item);
         FocusedSlot = null;
     }

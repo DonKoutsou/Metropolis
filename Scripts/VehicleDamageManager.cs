@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class VehicleDamageManager : Spatial
 {
+    
+
 	List<CollisionShape> WingColliders = new List<CollisionShape>();
     
     List<int> DestroyedWings = new List<int>();
@@ -22,7 +24,7 @@ public class VehicleDamageManager : Spatial
             DamagedWing = true;
             veh.OnWingDamaged(i);
             DestroyedWings.Insert(DestroyedWings.Count, i);
-            WingColliders[i].SetDeferred("disabled", true);
+            //WingColliders[i].SetDeferred("disabled", true);
             GD.Print("Wings Collided");
         }
         if (!DamagedWing)
@@ -34,8 +36,8 @@ public class VehicleDamageManager : Spatial
     {
         for (int i = 0; i < WingColliders.Count; i++)
         {
-            if (DestroyedWings.Contains(i))
-                continue;
+            //if (DestroyedWings.Contains(i))
+                //continue;
             WingColliders[i].SetDeferred("disabled", !Toggle);
         }
     }

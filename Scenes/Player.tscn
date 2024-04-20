@@ -307,13 +307,13 @@ update_scale = false
 transform = Transform( 0.0999999, -3.55271e-15, -2.98023e-09, -1.95167e-09, 0.075574, -0.0654872, 2.25228e-09, 0.0654874, 0.0755738, 2.09082e-06, -0.903809, -2.67252 )
 
 [node name="CameraTerainCast" type="RayCast" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot"]
-transform = Transform( 0.999999, -3.55271e-15, 1.77636e-15, 0, 0.755739, 0.654869, -1.77636e-15, -0.654873, 0.755734, -2.38419e-07, 7.28663, -8.00005 )
+transform = Transform( 0.999998, -3.55271e-15, 1.77636e-15, 0, 0.755739, 0.654869, -1.77636e-15, -0.654872, 0.755734, -2.38419e-07, 7.28663, -8.00005 )
 enabled = true
 cast_to = Vector3( 0, -12, 0 )
 collision_mask = 260
 
 [node name="CameraTerainCast2" type="RayCast" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot"]
-transform = Transform( 1.00001, -1.2368e-06, 2.68221e-07, -6.06412e-07, -0.707156, -0.707142, -2.99274e-06, 0.707169, -0.707155, -2.38419e-07, 7.28663, -8.00005 )
+transform = Transform( 1.00001, -1.2368e-06, 2.68221e-07, -6.06412e-07, -0.707156, -0.707142, -2.99274e-06, 0.707168, -0.707154, -2.38419e-07, 7.28663, -8.00005 )
 enabled = true
 cast_to = Vector3( 0, -12, 0 )
 collision_mask = 260

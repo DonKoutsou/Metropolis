@@ -10,6 +10,7 @@ public class ActionMenu : Control
     static bool selecting = false;
 
     Button PickButton;
+	Button IntButton;
 
 	public static bool IsSelecting()
 	{
@@ -82,7 +83,7 @@ public class ActionMenu : Control
 			float rechargeamm = 0;
 			for (int i = batteries.Count - 1; i > -1; i--)
 			{
-				if (availableenergy == 0)
+				if (availableenergy <= 0)
 					break;
 				Battery bat = (Battery)batteries[i];
 				float cap = bat.GetCapacity();
@@ -93,12 +94,14 @@ public class ActionMenu : Control
 					if (availableenergy > reachargeammount)
 					{
 						bat.Recharge(reachargeammount);
+						availableenergy -= reachargeammount;
 						rechargeamm += reachargeammount;
 					}
 					else
 					{
 						bat.Recharge(availableenergy);
 						rechargeamm += availableenergy;
+						availableenergy = 0;
 					}
 				}
 			}
@@ -114,13 +117,21 @@ public class ActionMenu : Control
 				rechargeamm += availableenergy;
 			}
 			generator.ConsumeEnergy(rechargeamm);
-			int time = (int)Math.Round(rechargeamm * 10);
+			int time = (int)Math.Round(rechargeamm / 10);
 			int days, hours, mins;
 			DayNight.MinsToTime(time, out days,out hours, out mins);
 			DayNight.ProgressTime(days, hours, mins);
 			DeselectCurrent();
 			selecting = false;
 			Stop();
+		}
+	}
+	private void On_Interact_Button2_Down()
+	{
+		if (SelectedObj is Vehicle)
+		{
+			Vehicle veh = (Vehicle)SelectedObj;
+			veh.ToggleMachine(!veh.Working);
 		}
 	}
 	private void On_Interact_Button_Down()
@@ -182,6 +193,7 @@ public class ActionMenu : Control
 		else if (SelectedObj is Vehicle)
 		{
 			PickButton.Text = "Επιβιβάσου";
+			IntButton.Text = "Έναρξη";
 			((ShaderMaterial)SelectedObj.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
 		}
 		else if (SelectedObj is Furniture)
@@ -243,12 +255,14 @@ public class ActionMenu : Control
 		pl = (Player)GetParent().GetParent();
 		SetProcess(false);
         PickButton = GetNode<Button>("PickUp_Button");
+		IntButton = GetNode<Button>("Interact_Button2");
 	}
 	public override void _Process(float delta)
 	{
 		var screenpos = Vector2.Zero;
 		if (SelectedObj is Item)
 		{
+			IntButton.Hide();
 			screenpos = GetTree().Root.GetCamera().UnprojectPosition(SelectedObj.GlobalTransform.origin);
 			Vector3 pos = SelectedObj.GlobalTransform.origin;
 			if (pl.GlobalTransform.origin.DistanceTo(pos) > 10)
@@ -258,6 +272,7 @@ public class ActionMenu : Control
 		}
 		else if (SelectedObj is Character)
 		{
+			IntButton.Hide();
 			screenpos = GetTree().Root.GetCamera().UnprojectPosition(SelectedObj.GlobalTransform.origin);
 			Vector3 pos = SelectedObj.GlobalTransform.origin;
 			if (pl.GlobalTransform.origin.DistanceTo(pos) > 10)
@@ -267,6 +282,7 @@ public class ActionMenu : Control
 		}
 		else if (SelectedObj is FireplaceLight)
 		{
+			IntButton.Hide();
 			screenpos = GetTree().Root.GetCamera().UnprojectPosition(SelectedObj.GlobalTransform.origin);
 			PickButton.Hide();
 		}
@@ -275,12 +291,23 @@ public class ActionMenu : Control
 			screenpos = GetTree().Root.GetCamera().UnprojectPosition(SelectedObj.GlobalTransform.origin);
 			Vector3 pos = SelectedObj.GlobalTransform.origin;
 			if (pl.GlobalTransform.origin.DistanceTo(pos) > 30)
+			{
 				PickButton.Hide();
+				IntButton.Hide();
+			}
 			else
-				PickButton.Show();	
+			{
+				PickButton.Show();
+				if (((Vehicle)SelectedObj).HasPassengers())
+					IntButton.Show();
+				else
+					IntButton.Hide();
+			}
+				
 		}
 		else if (SelectedObj is Furniture)
 		{
+			IntButton.Hide();
 			Furniture furni = (Furniture)SelectedObj;
 			screenpos = GetTree().Root.GetCamera().UnprojectPosition(SelectedObj.GlobalTransform.origin);
 			Vector3 pos = SelectedObj.GlobalTransform.origin;
@@ -291,6 +318,7 @@ public class ActionMenu : Control
 		}
 		else if (SelectedObj is WindGenerator)
 		{
+			IntButton.Hide();
 			screenpos = GetTree().Root.GetCamera().UnprojectPosition(SelectedObj.GlobalTransform.origin);
 			Vector3 pos = SelectedObj.GlobalTransform.origin;
 			if (pl.GlobalTransform.origin.DistanceTo(pos) > 60)
