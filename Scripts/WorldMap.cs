@@ -9,10 +9,10 @@ using System.Security.Policy;
 public class WorldMap : TileMap
 {
     [Export]
-    public string[] scenestospawn;
+    public PackedScene[] scenestospawn;
 
     [Export]
-    public string[] Eventscenestospawn;
+    public PackedScene[] Eventscenestospawn;
 
     List <PackedScene> loadedscenes = new List<PackedScene>();
 
@@ -44,7 +44,12 @@ public class WorldMap : TileMap
 
     List <float> rots = new List<float>{0f, 90f, 180f, -90f};
 
+
+    //id of cells to be changed to events
     List <int> RandomisedEntryID = null;
+
+    //id of exit
+    int ExitID = 0;
 
     List <Vector2> OrderedCells = new List<Vector2>();
 
@@ -82,17 +87,20 @@ public class WorldMap : TileMap
 
         for (int i = 0; i < scenestospawn.Count(); i++)
         {
-            var scene = GD.Load<PackedScene>(scenestospawn[i]);
-            loadedscenes.Insert(i, scene);
+            loadedscenes.Insert(i, scenestospawn[i]);
         }
         var pls = GetTree().GetNodesInGroup("player");
         pl = (Player)pls[0];
+    }
+    public Vector2 GetCurrentTile()
+    {
+        return WorldToMap(CurrentTile);
     }
     public override void _Process(float delta)
 	{
         ulong ms = OS.GetSystemTimeMsecs();
         if (!finishedspawning)
-                RegisterIsland(currentile);
+            RegisterIsland(currentile);
 
         Vector2 plpos = new Vector2(pl.GlobalTransform.origin.x, pl.GlobalTransform.origin.z);
         if (plpos.DistanceTo(CurrentTile) > CellSize.x/2)
@@ -129,7 +137,7 @@ public class WorldMap : TileMap
         Ile.rotationtospawnwith = info.rottospawn;
 
         info.SetInfo(Ile);
-
+        MapGrid.GetInstance().UpdateIleInfo(info.pos, info.type);
         return Ile;
     }
     public Island ReSpawnIsland(IslandInfo info)
@@ -189,6 +197,10 @@ public class WorldMap : TileMap
             int SpawnIndex = random.Next(0, OrderedCells.Count);
             RandomisedEntryID.Insert(i, SpawnIndex);
         }
+        var exitcells = GetUsedCellsById(2);
+        int RandomExitIndex = random.Next(0, exitcells.Count);
+        Vector2 Exitpalcement = (Vector2)exitcells[RandomExitIndex];
+        ExitID = OrderedCells.IndexOf(Exitpalcement) + 1;
     }
     //takes in cell position gives out global transforms of closest island
     Vector2 FindClosestIslandPosition(Vector2 pos)
@@ -331,15 +343,18 @@ public class WorldMap : TileMap
         else if (type == 1)
         {
             if (RandomisedEntryID.Contains(currentile))
-                scene = GD.Load<PackedScene>(Eventscenestospawn[RandomisedEntryID.IndexOf(currentile)]);
-
+                scene = Eventscenestospawn[RandomisedEntryID.IndexOf(currentile)];
             else
                 scene = loadedscenes[random.Next(0, loadedscenes.Count)];
         }
         //2 exit
         else if (type == 2)
-            scene =  Exittospawn;
-
+        {
+            if (currentile == ExitID)
+                scene =  Exittospawn;
+            else
+                scene = loadedscenes[random.Next(0, loadedscenes.Count)];
+        }
         //3 sea
         else if (type == 3)
             scene =  Sea;
@@ -352,18 +367,20 @@ public class WorldMap : TileMap
 public class IslandInfo
 {
     public Island ile;
+    public IleType type;
     public Vector2 pos;
     public PackedScene IleType;
     public List<HouseInfo> Houses = new List<HouseInfo>();
     public List<WindGeneratorInfo> Generators = new List<WindGeneratorInfo>();
     public float rottospawn;
-    public void SetInfo(Island info)
+    public void SetInfo(Island Ile)
     {
-        ile = info;
+        ile = Ile;
+        type = Ile.GetIslandType();
         List<House> hous = new List<House>();
-        info.GetHouses(out hous);
+        Ile.GetHouses(out hous);
         List<WindGenerator> Gen = new List<WindGenerator>();
-        info.GetGenerator(out Gen);
+        Ile.GetGenerator(out Gen);
         AddHouses(hous);
         AddGenerators(Gen);
     }

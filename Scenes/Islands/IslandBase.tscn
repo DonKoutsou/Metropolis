@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Islands/Island_Main.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/Sea.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Env_Assets/Sea.tscn" type="PackedScene" id=8]
 
 [sub_resource type="SpatialMaterial" id=4]
 render_priority = -1

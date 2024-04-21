@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Scripts/MapGridPoint.cs" type="Script" id=2]
+[ext_resource path="res://Scenes/HUD/MapUIItems/MapGridUIStyle.tres" type="StyleBox" id=3]
+
+[sub_resource type="DynamicFont" id=20]
+size = 24
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=19]
+default_font = SubResource( 20 )
+
+[node name="Control" type="Control"]
+mouse_filter = 1
+script = ExtResource( 2 )
+
+[node name="Panel" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_top = 24.0
+margin_right = 3.0
+margin_bottom = 57.0
+rect_pivot_offset = Vector2( -15, -12 )
+mouse_filter = 1
+custom_styles/panel = ExtResource( 3 )
+
+[node name="GridNum" type="RichTextLabel" parent="Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -49.5
+margin_top = -48.5
+margin_right = 50.5
+margin_bottom = 1.5
+mouse_filter = 1
+size_flags_horizontal = 5
+size_flags_stretch_ratio = 0.0
+theme = SubResource( 19 )
+bbcode_enabled = true
+bbcode_text = "[center]22"
+text = "22"

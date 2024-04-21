@@ -1,0 +1,357 @@
+[gd_scene load_steps=47 format=2]
+
+[ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
+[ext_resource path="res://Scripts/Stamina_Bar.cs" type="Script" id=2]
+[ext_resource path="res://Scripts/HP_Bar.cs" type="Script" id=3]
+[ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Scenes/HUD/new_styleboxflat.tres" type="StyleBox" id=5]
+[ext_resource path="res://Scenes/HUD/CompassUi.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Inventory/Inventory.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Sounds/PunchSound.mp3" type="AudioStream" id=8]
+[ext_resource path="res://Assets/Sounds/HeavyBreathing.mp3" type="AudioStream" id=9]
+[ext_resource path="res://Assets/Sounds/WalkingSound.mp3" type="AudioStream" id=10]
+[ext_resource path="res://Assets/Sounds/Cave_Ambient.mp3" type="AudioStream" id=11]
+[ext_resource path="res://Scripts/CameraZoomPivot.cs" type="Script" id=12]
+[ext_resource path="res://Scenes/Characters/Character_Mesh.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scripts/CameraPanPivot.cs" type="Script" id=14]
+[ext_resource path="res://Scripts/CameraMovePivot.cs" type="Script" id=15]
+[ext_resource path="res://Scenes/Characters/MoveLocation.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scripts/SandParticles.cs" type="Script" id=17]
+[ext_resource path="res://Scripts/Time_UI.cs" type="Script" id=18]
+[ext_resource path="res://Scripts/TalkText.cs" type="Script" id=19]
+[ext_resource path="res://Assets/Clouds/Textures/smoke_01.png" type="Texture" id=20]
+[ext_resource path="res://Scripts/MyCamera.cs" type="Script" id=21]
+[ext_resource path="res://Scenes/Env_Assets/Clouds.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Scenes/HUD/ActionMenu.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Scripts/Clouds.cs" type="Script" id=24]
+[ext_resource path="res://Scenes/Items/Battery.tscn" type="PackedScene" id=25]
+[ext_resource path="res://Scenes/Env_Assets/Rain.tscn" type="PackedScene" id=26]
+[ext_resource path="res://Scenes/Items/Clock.tscn" type="PackedScene" id=27]
+[ext_resource path="res://Scenes/World/SunMoonPivot.tscn" type="PackedScene" id=28]
+[ext_resource path="res://Scenes/HUD/CheatMenu.tscn" type="PackedScene" id=29]
+[ext_resource path="res://Scenes/Items/Compass.tscn" type="PackedScene" id=30]
+[ext_resource path="res://Scenes/Items/MapItem.tscn" type="PackedScene" id=31]
+
+[sub_resource type="Curve" id=106]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.5 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CapsuleShape" id=6]
+height = 2.316
+
+[sub_resource type="CapsuleShape" id=92]
+height = 1.963
+
+[sub_resource type="CylinderShape" id=82]
+radius = 0.1
+
+[sub_resource type="CanvasItemMaterial" id=65]
+render_priority = 100
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=67]
+render_priority = 100
+light_mode = 1
+
+[sub_resource type="StyleBoxFlat" id=105]
+bg_color = Color( 0.317647, 0.792157, 0.247059, 0.792157 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 0 )
+border_blend = true
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="DynamicFont" id=79]
+size = 54
+font_data = ExtResource( 4 )
+
+[sub_resource type="Theme" id=80]
+default_font = SubResource( 79 )
+
+[sub_resource type="DynamicFont" id=88]
+size = 24
+outline_size = 6
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
+
+[sub_resource type="SpatialMaterial" id=100]
+render_priority = 1
+flags_transparent = true
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_color = Color( 1, 0.921569, 0.796078, 0.266667 )
+albedo_texture = ExtResource( 20 )
+
+[sub_resource type="Curve" id=90]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=93]
+width = 512
+curve = SubResource( 90 )
+
+[sub_resource type="ParticlesMaterial" id=104]
+trail_size_modifier = SubResource( 93 )
+emission_shape = 2
+emission_box_extents = Vector3( 5000, 50, 5000 )
+direction = Vector3( 0, 0, -2 )
+spread = 1.41
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 18.05
+angular_velocity = 34.12
+angular_velocity_random = 1.0
+linear_accel = 100.0
+linear_accel_random = 0.35
+tangential_accel = 2.8
+tangential_accel_random = 1.0
+angle = 360.0
+scale_random = 0.53
+hue_variation = 1.0
+hue_variation_random = 1.0
+
+[sub_resource type="QuadMesh" id=89]
+size = Vector2( 1000, 1000 )
+
+[node name="Player" type="KinematicBody" groups=["player"]]
+collision_layer = 9
+collision_mask = 311
+script = ExtResource( 1 )
+JumpImpulse = 30
+RunSpeed = 30
+m_Stamina = 1000.0
+m_StaminaRegen = 5.0
+SelectLayer = 17
+Consumption = SubResource( 106 )
+
+[node name="Pivot" type="Spatial" parent="."]
+pause_mode = 1
+
+[node name="Guy" parent="Pivot" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39891, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.31213, 0 )
+shape = SubResource( 6 )
+
+[node name="KillFieldDetector" type="Area" parent="."]
+collision_layer = 0
+collision_mask = 128
+monitorable = false
+
+[node name="CollisionShape" type="CollisionShape" parent="KillFieldDetector"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.48264, 0 )
+shape = SubResource( 92 )
+
+[node name="HouseDoorDetector" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
+collision_layer = 0
+collision_mask = 64
+monitorable = false
+
+[node name="CollisionShape" type="CollisionShape" parent="HouseDoorDetector"]
+transform = Transform( 1.47899, 0, 0, 0, 0.256205, 0, 0, 0, 1.68566, 0, 0, 0 )
+shape = SubResource( 82 )
+
+[node name="DamageColor" type="ColorRect" parent="."]
+show_behind_parent = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -1024.0
+margin_top = -600.0
+margin_right = 1024.0
+margin_bottom = 600.0
+color = Color( 0.623529, 0.172549, 0.172549, 0 )
+
+[node name="Turnofftimer" type="Timer" parent="DamageColor"]
+wait_time = 0.2
+one_shot = true
+
+[node name="HitSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 8 )
+area_mask = 0
+
+[node name="TiredSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 9 )
+area_mask = 0
+
+[node name="WalkingSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 10 )
+unit_db = 10.614
+max_db = -9.473
+area_mask = 0
+
+[node name="Inventory" parent="." instance=ExtResource( 7 )]
+Capacity = 40.0
+StartingItems = [ ExtResource( 25 ), ExtResource( 27 ), ExtResource( 30 ), ExtResource( 31 ) ]
+
+[node name="PlayerUI" type="Spatial" parent="."]
+
+[node name="HP_Bar" type="ProgressBar" parent="PlayerUI"]
+material = SubResource( 65 )
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = -32.0
+margin_right = 104.0
+margin_bottom = -18.0
+size_flags_horizontal = 9
+size_flags_vertical = 8
+custom_colors/font_color = Color( 0, 0, 0, 0 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_styles/fg = ExtResource( 5 )
+value = 10.0
+script = ExtResource( 3 )
+
+[node name="VisibilityTimerHP" type="Timer" parent="PlayerUI/HP_Bar"]
+one_shot = true
+
+[node name="Stamina_Bar" type="ProgressBar" parent="PlayerUI"]
+material = SubResource( 67 )
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = -14.0
+margin_right = 104.0
+size_flags_horizontal = 9
+size_flags_vertical = 8
+custom_colors/font_color = Color( 0, 0, 0, 0 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0 )
+custom_styles/fg = SubResource( 105 )
+value = 20.0
+script = ExtResource( 2 )
+
+[node name="VisibilityTimerStamina" type="Timer" parent="PlayerUI/Stamina_Bar"]
+one_shot = true
+
+[node name="Time_UI" type="RichTextLabel" parent="PlayerUI"]
+visible = false
+margin_right = 472.0
+margin_bottom = 80.0
+theme = SubResource( 80 )
+text = "24 : 00"
+script = ExtResource( 18 )
+
+[node name="TalkText" type="Label3D" parent="PlayerUI"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.003, 6, -0.088 )
+cast_shadow = 0
+pixel_size = 0.002
+billboard = 1
+double_sided = false
+no_depth_test = true
+fixed_size = true
+render_priority = 10
+outline_render_priority = 9
+modulate = Color( 0.988235, 0.964706, 0.631373, 1 )
+text = "Talk"
+font = SubResource( 88 )
+autowrap = true
+width = 5000.0
+script = ExtResource( 19 )
+
+[node name="UpdateTimer" type="Timer" parent="PlayerUI/TalkText"]
+wait_time = 3.0
+one_shot = true
+
+[node name="ActionMenu" parent="PlayerUI" instance=ExtResource( 23 )]
+visible = false
+
+[node name="CheatMenu" parent="PlayerUI" instance=ExtResource( 29 )]
+visible = false
+
+[node name="CameraMovePivot" type="Position3D" parent="."]
+pause_mode = 1
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00875211, -0.0306139, -0.0222187 )
+script = ExtResource( 15 )
+
+[node name="CameraPanPivot" type="Position3D" parent="CameraMovePivot"]
+transform = Transform( 0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 2.79397e-09, 0, -0.75 )
+script = ExtResource( 14 )
+
+[node name="CameraZoomPivot" type="Position3D" parent="CameraMovePivot/CameraPanPivot"]
+transform = Transform( 1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 1.80304e-06, 24.3742, 20 )
+script = ExtResource( 12 )
+Speed = 5
+
+[node name="Camera" type="Camera" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot"]
+transform = Transform( 1, -1.95167e-08, 2.25228e-08, 0, 0.755739, 0.654873, -2.98023e-08, -0.654873, 0.75574, 0, 0, 0 )
+cull_mask = 769
+current = true
+fov = 45.0
+size = 5.0
+far = 40000.0
+script = ExtResource( 21 )
+
+[node name="EnvSound" type="AudioStreamPlayer3D" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot/Camera"]
+transform = Transform( 1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0 )
+stream = ExtResource( 11 )
+max_db = -13.118
+autoplay = true
+max_distance = 16.06
+area_mask = 0
+
+[node name="RemoteTransform" type="RemoteTransform" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot/Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 2.68221e-07, 0, -2.68221e-07, 1, 0, 10.7458, -1.27413 )
+remote_path = NodePath("../../CameraTerainCast")
+update_scale = false
+
+[node name="RemoteTransform2" type="RemoteTransform" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot/Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 2.68221e-07, 0, -2.68221e-07, 1, 0, 10.7458, -1.27413 )
+remote_path = NodePath("../../CameraTerainCast2")
+update_rotation = false
+update_scale = false
+
+[node name="CompasUI" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot/Camera" instance=ExtResource( 6 )]
+transform = Transform( 0.0880203, -0.0474596, 1.32888e-08, 0.0102406, 0.0189926, -0.0976442, 0.0463415, 0.0859472, 0.0215775, 1.24807, 0.617609, -2.18268 )
+
+[node name="CameraTerainCast" type="RayCast" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot"]
+transform = Transform( 0.999998, -3.55271e-15, 1.77636e-15, 0, 0.755739, 0.654869, -1.77636e-15, -0.654872, 0.755734, -2.38419e-07, 7.28663, -8.00005 )
+enabled = true
+cast_to = Vector3( 0, -12, 0 )
+collision_mask = 260
+
+[node name="CameraTerainCast2" type="RayCast" parent="CameraMovePivot/CameraPanPivot/CameraZoomPivot"]
+transform = Transform( 1.00001, -1.2368e-06, 2.68221e-07, -6.06412e-07, -0.707156, -0.707142, -2.99274e-06, 0.707168, -0.707154, -2.38419e-07, 7.28663, -8.00005 )
+enabled = true
+cast_to = Vector3( 0, -12, 0 )
+collision_mask = 260
+
+[node name="Particles" type="Particles" parent="."]
+transform = Transform( -1, 0, 0.000802906, 0, 1, 0, -0.000802906, 0, -1, 0, 50, 0 )
+material_override = SubResource( 100 )
+cast_shadow = 0
+generate_lightmap = false
+amount = 50
+lifetime = 24.07
+speed_scale = 5.0
+visibility_aabb = AABB( -1293.38, -1000, -1158.37, 2586.77, 8000, 2316.74 )
+local_coords = false
+draw_order = 1
+process_material = SubResource( 104 )
+draw_pass_1 = SubResource( 89 )
+script = ExtResource( 17 )
+
+[node name="Spatial" parent="." instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2200, 0 )
+script = ExtResource( 24 )
+
+[node name="SunMoonPivot" parent="." instance=ExtResource( 28 )]
+
+[node name="MoveLoc" parent="." instance=ExtResource( 16 )]
+MoveLayer = 260
+VehicleMoveLayer = 260
+
+[node name="Spatial2" parent="." instance=ExtResource( 26 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1000, 0 )
+
+[connection signal="body_entered" from="KillFieldDetector" to="." method="OnKillFieldDetectorBodyEntered"]
+[connection signal="body_entered" from="HouseDoorDetector" to="." method="OnHouseDoorDetectorBodyEntered"]
+[connection signal="timeout" from="PlayerUI/HP_Bar/VisibilityTimerHP" to="PlayerUI/HP_Bar" method="TurnOff"]
+[connection signal="timeout" from="PlayerUI/Stamina_Bar/VisibilityTimerStamina" to="PlayerUI/Stamina_Bar" method="TurnOff"]
+[connection signal="timeout" from="PlayerUI/TalkText/UpdateTimer" to="PlayerUI/TalkText" method="TurnOff"]

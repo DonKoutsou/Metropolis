@@ -6,6 +6,8 @@ public class Island : Spatial
 {
 	[Export]
 	public bool m_bOriginalIle = false;
+	[Export]
+	IleType type = IleType.LAND;
 
 	List<Character> m_enem = new List<Character>();
 
@@ -35,6 +37,10 @@ public class Island : Spatial
 		map = GetParent().GetNode<WorldMap>("WorldMap");
 		FindHouses(this);
 		FindGenerators(this);
+	}
+	public IleType GetIslandType()
+	{
+		return type;
 	}
 	public void InputData(IslandInfo data)
 	{
@@ -103,4 +109,12 @@ public class Island : Spatial
 		}
 	}
 	
+}
+public enum IleType
+{
+	ENTRANCE,
+	LAND,
+	EXIT,
+	SEA,
+	LIGHTHOUSE
 }

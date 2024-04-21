@@ -30,6 +30,12 @@ public class Player : Character
 
 	public float rpm;
 
+	static Player instance;
+
+	public static Player GetInstance()
+	{
+		return instance;
+	}
 	[Export(PropertyHint.Layers3dPhysics)]
 	public uint SelectLayer { get; set; }
 
@@ -68,6 +74,7 @@ public class Player : Character
 	public override void _Ready()
 	{
 		base._Ready();
+		instance = this;
 		//Input.MouseMode = Input.MouseModeEnum.Visible;
 		Spatial plUI = GetNode<Spatial>("PlayerUI");
 		actMen = plUI.GetNode<ActionMenu>("ActionMenu");

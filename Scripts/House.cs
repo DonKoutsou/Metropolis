@@ -7,8 +7,7 @@ public class House : Spatial
 	[Export]
 	bool spawnItems = true;
 	[Export]
-	public string[] ItemSpawnPool;
-
+	public PackedScene[] ItemSpawnPool;
 	List<Furniture> FurnitureList = new List<Furniture>();
 
 	public override void _Ready()

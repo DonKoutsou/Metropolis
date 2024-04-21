@@ -1,0 +1,247 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Scripts/MapGrid.cs" type="Script" id=1]
+[ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Scripts/MapUI.cs" type="Script" id=3]
+[ext_resource path="res://Assets/UI/ButtonRectTheme.tres" type="Theme" id=4]
+[ext_resource path="res://Assets/UI/Button/Icon/Replay.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/HUD/MapUIItems/MapTile.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/HUD/MapUIItems/MapXGridPoint.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/HUD/MapUIItems/MapYGridPoint.tscn" type="PackedScene" id=8]
+
+[sub_resource type="OpenSimplexNoise" id=5]
+octaves = 1
+period = 1.5
+persistence = 0.0
+
+[sub_resource type="NoiseTexture" id=6]
+width = 256
+height = 256
+seamless = true
+noise = SubResource( 5 )
+
+[sub_resource type="StyleBoxTexture" id=19]
+resource_local_to_scene = true
+resource_name = "normal"
+texture = SubResource( 6 )
+region_rect = Rect2( 0, 0, 512, 512 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.607843, 0.603922, 0.603922, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
+border_blend = true
+anti_aliasing = false
+
+[sub_resource type="DynamicFont" id=16]
+size = 24
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 2 )
+
+[sub_resource type="Theme" id=15]
+default_font = SubResource( 16 )
+
+[sub_resource type="StyleBoxFlat" id=17]
+bg_color = Color( 0.847059, 0.807843, 0.705882, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
+border_blend = true
+
+[sub_resource type="Animation" id=20]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel/Panel:custom_styles/panel:texture:noise:seed")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=18]
+resource_name = "static"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel/Panel:custom_styles/panel:texture:noise:seed")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+}
+
+[node name="MapUI" type="Control"]
+margin_right = 1280.0
+margin_bottom = 720.0
+mouse_filter = 1
+script = ExtResource( 3 )
+
+[node name="Panel" type="Panel" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 48.0
+margin_top = -440.0
+margin_right = 357.0
+margin_bottom = -171.0
+rect_clip_content = true
+mouse_filter = 1
+mouse_default_cursor_shape = 6
+
+[node name="MapGrid" type="GridContainer" parent="Panel"]
+custom_constants/vseparation = 15
+custom_constants/hseparation = 15
+columns = 81
+script = ExtResource( 1 )
+TileScene = ExtResource( 6 )
+XGridTileScene = ExtResource( 7 )
+YGridTileScene = ExtResource( 8 )
+ColorList = [ Color( 0.807843, 0.952941, 0.741176, 1 ), Color( 0.537255, 0.92549, 0.862745, 1 ), Color( 0.909804, 0.862745, 0.627451, 1 ), Color( 0.945098, 0.376471, 0.372549, 1 ), Color( 0.180392, 0.556863, 0.921569, 1 ) ]
+MaxZoomScale = 40.0
+
+[node name="MapGridY" type="GridContainer" parent="Panel"]
+margin_right = 10.0
+margin_bottom = 1000.0
+custom_constants/vseparation = 15
+custom_constants/hseparation = 15
+
+[node name="MapGridX" type="GridContainer" parent="Panel"]
+margin_right = 1000.0
+margin_bottom = 10.0
+custom_constants/vseparation = 15
+custom_constants/hseparation = 15
+columns = 81
+
+[node name="Panel" type="Panel" parent="Panel"]
+modulate = Color( 1, 1, 1, 0.27451 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -154.5
+margin_top = -134.5
+margin_right = 154.5
+margin_bottom = 134.5
+rect_clip_content = true
+mouse_filter = 1
+mouse_default_cursor_shape = 6
+custom_styles/panel = SubResource( 19 )
+
+[node name="Panel2" type="Panel" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = -440.0
+margin_right = 48.0
+margin_bottom = -171.0
+rect_clip_content = true
+mouse_filter = 1
+custom_styles/panel = SubResource( 2 )
+
+[node name="Panel3" type="Panel" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 48.0
+margin_top = -463.0
+margin_right = 357.0
+margin_bottom = -440.0
+rect_clip_content = true
+mouse_filter = 1
+custom_styles/panel = SubResource( 2 )
+
+[node name="Panel5" type="Panel" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = -504.0
+margin_right = 48.0
+margin_bottom = -440.0
+rect_clip_content = true
+mouse_filter = 1
+custom_styles/panel = SubResource( 2 )
+
+[node name="RefreshCoords" type="Button" parent="Panel5"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.0
+margin_top = 3.0
+margin_right = -3.0
+margin_bottom = -3.0
+mouse_default_cursor_shape = 2
+theme = ExtResource( 4 )
+shortcut_in_tooltip = false
+action_mode = 0
+icon = ExtResource( 5 )
+icon_align = 1
+expand_icon = true
+
+[node name="Panel4" type="Panel" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 48.0
+margin_top = -504.0
+margin_right = 357.0
+margin_bottom = -463.0
+rect_pivot_offset = Vector2( -1128, -210 )
+rect_clip_content = true
+mouse_filter = 1
+custom_styles/panel = SubResource( 2 )
+
+[node name="w" type="RichTextLabel" parent="Panel4"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 3.0
+margin_top = -17.5
+margin_right = 191.0
+margin_bottom = 17.5
+mouse_filter = 1
+theme = SubResource( 15 )
+text = " Συντεταγμένες :"
+
+[node name="CoordText" type="RichTextLabel" parent="Panel4"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -96.0
+margin_top = -17.5
+margin_right = -3.0
+margin_bottom = 17.5
+mouse_filter = 1
+theme = SubResource( 15 )
+bbcode_enabled = true
+bbcode_text = "[center]0 / -1"
+text = "0 / -1"
+
+[node name="Panel" type="Panel" parent="Panel4/CoordText"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+custom_styles/panel = SubResource( 17 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 2.0
+anims/RESET = SubResource( 20 )
+anims/static = SubResource( 18 )
+
+[connection signal="mouse_entered" from="Panel" to="." method="OnMouseEntered"]
+[connection signal="mouse_exited" from="Panel" to="." method="OnMouseLeft"]
+[connection signal="mouse_entered" from="Panel/Panel" to="." method="OnMouseEntered"]
+[connection signal="mouse_exited" from="Panel/Panel" to="." method="OnMouseLeft"]
+[connection signal="button_down" from="Panel5/RefreshCoords" to="." method="UpdateCoordinates"]

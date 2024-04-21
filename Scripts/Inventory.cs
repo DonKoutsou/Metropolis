@@ -15,10 +15,8 @@ public class Inventory : Spatial
 
     [Export]
     float Capacity = 10;
-
     [Export]
-    public string[] StartingItems;
-
+    public PackedScene[] StartingItems;
     float currentweight = 0;
     InventoryUI ui;
 
@@ -30,8 +28,7 @@ public class Inventory : Spatial
             return;
         for (int i = 0; i < StartingItems.Count(); i ++)
         {
-            var itemToSpawn = GD.Load<PackedScene>(StartingItems[i]);
-            Item it = (Item)itemToSpawn.Instance();
+            Item it = (Item)StartingItems[i].Instance();
             InsertItem(it);
         }
     }

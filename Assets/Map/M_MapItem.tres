@@ -1,7 +1,7 @@
 [gd_resource type="SpatialMaterial" load_steps=4 format=2]
 
 [ext_resource path="res://Assets/Drachma/Drachma_NMO.png" type="Texture" id=1]
-[ext_resource path="res://addons/3D Outline/Outline.shader" type="Shader" id=2]
+[ext_resource path="res://shaders/Outline.shader" type="Shader" id=2]
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true

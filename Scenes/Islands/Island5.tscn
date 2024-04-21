@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/NPC.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Characters/NPC.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Env_Assets/Fireplace.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/KillField.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/PitCity.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Env_Assets/KillField.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Env_Assets/PitCity.tscn" type="PackedScene" id=8]
 
 [sub_resource type="ParticlesMaterial" id=18]
 emission_shape = 2

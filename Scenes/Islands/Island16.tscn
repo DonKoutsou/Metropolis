@@ -4,6 +4,7 @@
 [ext_resource path="res://Assets/Clutter/Powerline/PowerLine.tscn" type="PackedScene" id=3]
 
 [node name="Island" instance=ExtResource( 1 )]
+type = 3
 
 [node name="StaticBody" parent="." index="1" instance=ExtResource( 3 )]
 transform = Transform( 0.932115, 0.228323, 0.281122, 0, 0.776233, -0.630446, -0.362161, 0.587648, 0.723539, 1081.84, -334.278, -224.895 )

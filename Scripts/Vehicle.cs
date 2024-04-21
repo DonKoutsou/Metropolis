@@ -196,8 +196,7 @@ public class Vehicle : RigidBody
         latsspeed = speed * fmulti * (Math.Min(500, distance - 5)/ 500);
         AddCentralForce(force * latsspeed * delta);
         
-        if (!Working)
-            return;
+        
         //keeping balance and capsizing if to rotated in x 
         float rotx = Mathf.Rad2Deg(Rotation.x);
         if (rotx > 0)
@@ -234,7 +233,8 @@ public class Vehicle : RigidBody
             if (rotz < -45)
                 Capsize();
         }
-
+        if (!Working)
+            return;
         //Steering
         SteeringWheel.LookAt(loctomove, Vector3.Up);
         float steer = Mathf.Rad2Deg(SteeringWheel.Rotation.y);

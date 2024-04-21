@@ -17,7 +17,7 @@ ResourceScriptDirectories=[ "res://", "res://Scripts/" ]
 [application]
 
 config/name="Μητρόπολη"
-run/main_scene="res://Scenes/MainWorld.tscn"
+run/main_scene="res://Scenes/World/MainWorld.tscn"
 config/icon="res://icon.png"
 
 [display]
@@ -165,6 +165,7 @@ common/enable_pause_aware_picking=true
 
 quality/shadows/filter_mode=2
 quality/filters/use_nearest_mipmap_filter=true
+quality/subsurface_scattering/quality=0
 environment/default_clear_color=Color( 1, 1, 1, 1 )
 quality/filters/msaa=3
 quality/filters/use_fxaa=true

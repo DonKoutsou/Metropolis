@@ -1,0 +1,26 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scripts/WorldMap.cs" type="Script" id=1]
+[ext_resource path="res://Scenes/World/World_Tileset.tres" type="TileSet" id=2]
+[ext_resource path="res://Scenes/Islands/LightHouse.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Islands/IslandStarting.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Islands/SeaIsland.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/World/AllSkyFree_EpicGloriousPink.tscn" type="PackedScene" id=9]
+
+[node name="WorldMap" type="TileMap"]
+tile_set = ExtResource( 2 )
+cell_tile_origin = 1
+centered_textures = true
+collision_layer = 0
+collision_mask = 0
+navigation_layers = 0
+occluder_light_mask = 0
+format = 1
+script = ExtResource( 1 )
+Entrytospawn = ExtResource( 4 )
+Sea = ExtResource( 8 )
+LightHouse = ExtResource( 3 )
+HideBasedOnState = true
+
+[node name="Sky" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 426.959, 0 )

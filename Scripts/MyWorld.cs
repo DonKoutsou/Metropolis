@@ -5,13 +5,13 @@ using System.Collections.Generic;
 public class MyWorld : Spatial
 {
 	[Export]
-	Dictionary<int, string> GlobalItemListConfiguration = new Dictionary<int, string>();
+	Dictionary<int, PackedScene> GlobalItemListConfiguration = new Dictionary<int, PackedScene>();
 	Player pl;
 
-	static Dictionary<int, string> GlobalItemList = new Dictionary<int, string>();
-	public static string GetItemByType(ItemName name)
+	static Dictionary<int, PackedScene> GlobalItemList = new Dictionary<int, PackedScene>();
+	public static PackedScene GetItemByType(ItemName name)
 	{
-		string path = string.Empty;
+		PackedScene path = null;
 		GlobalItemList.TryGetValue((int)name, out path);
 		return path;
 	}
@@ -24,9 +24,9 @@ public class MyWorld : Spatial
 	{
 		base._Ready();
 		pl = GetNode<Player>("Player");
-		foreach (KeyValuePair<int, string> pair in GlobalItemListConfiguration)
+		foreach (KeyValuePair<int, PackedScene> pair in GlobalItemListConfiguration)
 		{
-			string text = pair.Value;
+			PackedScene text = pair.Value;
 			int key = pair.Key;
 			GlobalItemList.Add(key, text);
 		}
