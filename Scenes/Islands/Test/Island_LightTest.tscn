@@ -98,10 +98,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -36.295, 900, -174.276 )
 visible = false
 
 [node name="SunMoonPivot" parent="." index="23" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 0.0469147, 0.998899, 0, -0.998899, 0.0469147, 0, 0, 0 )
+transform = Transform( 0.83403, 0.551111, -0.0258837, 0, 0.0469147, 0.998899, 0.551719, -0.833112, 0.0391283, 0, 0, 0 )
 
 [node name="Player" parent="." index="24" instance=ExtResource( 17 )]
-transform = Transform( -0.997079, 0, 0.0763711, 0, 1, 0, -0.0763711, 0, -0.997079, 0, 57.7508, 0 )
+transform = Transform( -0.997079, 0, 0.0763711, 0.00802935, 0.994458, 0.104829, -0.0759478, 0.105136, -0.991553, 0, 57.7508, 0 )
 
 [node name="Island" parent="." index="28" instance=ExtResource( 18 )]
 

@@ -177,8 +177,8 @@ public class Player : Character
 			if (!GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused)
 				GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused = true;
 			anim.PlayAnimation(E_Animations.Idle);
-			moveloc.Hide();
 			HeadPivot.Rotation = new Vector3(0.0f,0.0f,0.0f);
+			moveloc.Show();
 		}
 		else
 		{

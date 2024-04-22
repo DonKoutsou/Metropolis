@@ -64,8 +64,8 @@ public class MapGrid : GridContainer
         mapui = (MapUI)par.GetParent();
         th = (StyleBoxTexture)par.GetStylebox("normal");
         //Texture tex = (Texture)th.Texture;
-        MapGridx = par.GetNode<GridContainer>("MapGridX");
-        MapGridy = par.GetNode<GridContainer>("MapGridY");
+        MapGridx = par.GetParent().GetNode<Panel>("Panel3").GetNode<GridContainer>("MapGridX");
+        MapGridy = par.GetParent().GetNode<Panel>("Panel2").GetNode<GridContainer>("MapGridY");
         while (times > 0)
         {
             Control maptile = (Control)TileScene.Instance();

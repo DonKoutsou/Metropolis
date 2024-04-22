@@ -20,7 +20,7 @@ public class CameraMovePivot : Position3D
     public override void _Ready()
     {
         base._Ready();
-        zpivot = GetNode<CameraPanPivot>("CameraPanPivot").GetNode<CameraZoomPivot>("CameraZoomPivot");
+        zpivot = GetNode<CameraPanPivot>("CameraPanPivot").GetNode<SpringArm>("SpringArm").GetNode<CameraZoomPivot>("CameraZoomPivot");
         cam = GetTree().Root.GetCamera();
 		pl = (Player)GetParent();
         instance = this;

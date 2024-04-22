@@ -138,7 +138,7 @@ public class DayNight : WorldEnvironment
 
         sun.LightEnergy = SunBrightness;
 
-        Color backgroundcolor = new Color (0.0f, 0.0f,0.0f).LinearInterpolate(SunColor, SunBrightness);
+        Color backgroundcolor = new Color (0.0f, 0.0f,0.0f).LinearInterpolate(SunColor, Softlight);
 
         FogSunColor = SunColor;
 
@@ -161,7 +161,7 @@ public class DayNight : WorldEnvironment
 
         FogSunColor = MoonColor;
 
-        Color backgroundcolor = new Color (0.0f, 0.0f,0.0f).LinearInterpolate(MoonColor, MoonBrightness);
+        Color backgroundcolor = new Color (0.0f, 0.0f,0.0f).LinearInterpolate(MoonColor, Softlight);
 
         FogColor = backgroundcolor;
 
@@ -182,13 +182,13 @@ public class DayNight : WorldEnvironment
 
         Color combination;
 
-        float bright;
+        //float bright;
 
         //float fogsun;
 
-        float SunLightEnergy = 0.0f;
+        float SunLightEnergy;
 
-        float MoonLightEnergy = 0.0f;
+        float MoonLightEnergy;
 
         Color mix;
 
@@ -200,7 +200,7 @@ public class DayNight : WorldEnvironment
             else
                 day = false;
             
-            bright = Mathf.Lerp(MoonBrightness, SunBrightness, multi);
+           //bright = Mathf.Lerp(MoonBrightness, SunBrightness, multi);
 
             //fogsun = Mathf.Lerp(0.05f, 0.3f, multi);
 
@@ -210,14 +210,14 @@ public class DayNight : WorldEnvironment
             
             MoonLightEnergy = Mathf.Lerp(MoonBrightness, 0.0f, multi);
 
-            combination = new Color (0.0f, 0.0f,0.0f).LinearInterpolate(mix, bright);
+            combination = new Color (0.0f, 0.0f,0.0f).LinearInterpolate(mix, Softlight);
         }
         else
         {
             if (SunRot > 190)
             {
                 float rot = 10 - (360 - SunRot);
-                multi = (float)Math.Round((rot / 20), 4);
+                multi = (float)Math.Round(rot / 20, 4);
             }
             else
                 multi = (float)Math.Round((SunRot + 10) / 20, 4);
@@ -226,7 +226,7 @@ public class DayNight : WorldEnvironment
                 day = false;
             else
                 day = true;
-            bright = Mathf.Lerp(SunBrightness, MoonBrightness, multi);
+            //bright = Mathf.Lerp(SunBrightness, MoonBrightness, multi);
 
             //fogsun = Mathf.Lerp(0.3f, 0.05f, multi);
 
@@ -236,7 +236,7 @@ public class DayNight : WorldEnvironment
             
             MoonLightEnergy = Mathf.Lerp(0.0f, MoonBrightness, multi);
 
-            combination = new Color (0.0f, 0.0f,0.0f).LinearInterpolate(mix, bright);
+            combination = new Color (0.0f, 0.0f,0.0f).LinearInterpolate(mix, Softlight);
         }
         
         sun.LightEnergy = (float)Math.Round(SunLightEnergy, 4);

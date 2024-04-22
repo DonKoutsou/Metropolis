@@ -11,37 +11,48 @@ public class CameraZoomPivot : Position3D
 	[Export]
 	public float MaxDist = 600;
 
-	Camera cam;
-	CameraPanPivot panp;
+	SpringArm arm;
+
+	//Camera cam;
+	//CameraPanPivot panp;
     public override void _Ready()
 	{
-		cam = GetNode<Camera>("Camera");
-		panp = (CameraPanPivot)GetParent();
+		arm = (SpringArm)GetParent();
+		//cam = GetNode<Camera>("Camera");
+		//panp = (CameraPanPivot)GetParent();
     }
 	public override void _Input(InputEvent @event)
 	{
 		if (MapGrid.GetInstance().IsMouseInMap())
 			return;
-		Vector3 prevpos = Translation;
+		Vector3 prevpos = arm.Translation;
 		if (@event.IsActionPressed("ZoomOut"))
 		{
-			if (Translation.y < MaxDist)
-				Translation = new Vector3(prevpos.x, prevpos.y * 1.1f, prevpos.z * 1.1f);
+			if (arm.Translation.y < MaxDist)
+			{
+				arm.SpringLength = arm.SpringLength * 1.1f;
+				arm.Translation = new Vector3(prevpos.x, prevpos.y * 1.1f, prevpos.z);
+			}
+				
 		}
 		if (@event.IsActionPressed("ZoomIn"))
 		{
-			if (Translation.y > 2)
-				Translation = new Vector3(prevpos.x, prevpos.y * 0.90f, prevpos.z * 0.90f);
+			if (arm.Translation.y > 10)
+			{
+				arm.SpringLength = arm.SpringLength * 0.90f;
+				arm.Translation = new Vector3(prevpos.x, prevpos.y * 0.90f, prevpos.z);
+			}
+				
 		}
-		if (@event.IsActionPressed("FrameCamera"))
-		{
-			Frame();
-		}
-		if (prevpos == Translation)
-			return;
-		Vector3 clipdir;
-		if (MyCamera.IsClipping(out clipdir) || GlobalTranslation.y <= 0)
-			Translation = prevpos;
+		//if (@event.IsActionPressed("FrameCamera"))
+		//{
+		//	Frame();
+		//}
+		//if (prevpos == Translation)
+			//return;
+		//Vector3 clipdir;
+		//if (MyCamera.IsClipping(out clipdir) || GlobalTranslation.y <= 0)
+			//Translation = prevpos;
 		//panp.caminitpos = new Vector3(0, Translation.y, Translation.z);
 	}
 	public void Frame()

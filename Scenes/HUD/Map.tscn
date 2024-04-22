@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scripts/MapGrid.cs" type="Script" id=1]
 [ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=2]
@@ -28,6 +28,16 @@ region_rect = Rect2( 0, 0, 512, 512 )
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.607843, 0.603922, 0.603922, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
+border_blend = true
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=21]
+bg_color = Color( 0.847059, 0.807843, 0.705882, 1 )
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -87,18 +97,24 @@ tracks/0/keys = {
 }
 
 [node name="MapUI" type="Control"]
-margin_right = 1280.0
-margin_bottom = 720.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -640.0
+margin_top = -360.0
+margin_right = 640.0
+margin_bottom = 360.0
 mouse_filter = 1
 script = ExtResource( 3 )
 
 [node name="Panel" type="Panel" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 48.0
-margin_top = -440.0
-margin_right = 357.0
-margin_bottom = -171.0
+margin_left = 68.0
+margin_top = -428.0
+margin_right = 469.0
+margin_bottom = 5.0
 rect_clip_content = true
 mouse_filter = 1
 mouse_default_cursor_shape = 6
@@ -111,21 +127,8 @@ script = ExtResource( 1 )
 TileScene = ExtResource( 6 )
 XGridTileScene = ExtResource( 7 )
 YGridTileScene = ExtResource( 8 )
-ColorList = [ Color( 0.807843, 0.952941, 0.741176, 1 ), Color( 0.537255, 0.92549, 0.862745, 1 ), Color( 0.909804, 0.862745, 0.627451, 1 ), Color( 0.945098, 0.376471, 0.372549, 1 ), Color( 0.180392, 0.556863, 0.921569, 1 ) ]
+ColorList = [ Color( 0, 0.0352941, 0.556863, 1 ), Color( 0, 0.537255, 0.0352941, 1 ), Color( 0.909804, 0.862745, 0.627451, 1 ), Color( 0.945098, 0.376471, 0.372549, 1 ), Color( 0.180392, 0.556863, 0.921569, 1 ) ]
 MaxZoomScale = 40.0
-
-[node name="MapGridY" type="GridContainer" parent="Panel"]
-margin_right = 10.0
-margin_bottom = 1000.0
-custom_constants/vseparation = 15
-custom_constants/hseparation = 15
-
-[node name="MapGridX" type="GridContainer" parent="Panel"]
-margin_right = 1000.0
-margin_bottom = 10.0
-custom_constants/vseparation = 15
-custom_constants/hseparation = 15
-columns = 81
 
 [node name="Panel" type="Panel" parent="Panel"]
 modulate = Color( 1, 1, 1, 0.27451 )
@@ -133,10 +136,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -154.5
-margin_top = -134.5
-margin_right = 154.5
-margin_bottom = 134.5
+margin_left = -200.5
+margin_top = -216.5
+margin_right = 200.5
+margin_bottom = 216.5
 rect_clip_content = true
 mouse_filter = 1
 mouse_default_cursor_shape = 6
@@ -146,31 +149,67 @@ custom_styles/panel = SubResource( 19 )
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 24.0
-margin_top = -440.0
-margin_right = 48.0
-margin_bottom = -171.0
+margin_top = -428.0
+margin_right = 68.0
+margin_bottom = 5.0
 rect_clip_content = true
 mouse_filter = 1
 custom_styles/panel = SubResource( 2 )
 
+[node name="Panel6" type="Panel" parent="Panel2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -18.0
+margin_top = -216.5
+margin_right = 18.0
+margin_bottom = 216.5
+rect_clip_content = true
+mouse_filter = 1
+custom_styles/panel = SubResource( 21 )
+
+[node name="MapGridY" type="GridContainer" parent="Panel2"]
+margin_right = 10.0
+margin_bottom = 1000.0
+custom_constants/vseparation = 15
+custom_constants/hseparation = 15
+
 [node name="Panel3" type="Panel" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 48.0
+margin_left = 68.0
 margin_top = -463.0
-margin_right = 357.0
-margin_bottom = -440.0
+margin_right = 469.0
+margin_bottom = -428.0
 rect_clip_content = true
 mouse_filter = 1
 custom_styles/panel = SubResource( 2 )
+
+[node name="Panel6" type="Panel" parent="Panel3"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -31.0
+margin_right = 401.0
+margin_bottom = -4.0
+rect_clip_content = true
+mouse_filter = 1
+custom_styles/panel = SubResource( 21 )
+
+[node name="MapGridX" type="GridContainer" parent="Panel3"]
+margin_right = 1000.0
+margin_bottom = 10.0
+custom_constants/vseparation = 15
+custom_constants/hseparation = 15
+columns = 81
 
 [node name="Panel5" type="Panel" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 24.0
 margin_top = -504.0
-margin_right = 48.0
-margin_bottom = -440.0
+margin_right = 68.0
+margin_bottom = -428.0
 rect_clip_content = true
 mouse_filter = 1
 custom_styles/panel = SubResource( 2 )
@@ -178,10 +217,10 @@ custom_styles/panel = SubResource( 2 )
 [node name="RefreshCoords" type="Button" parent="Panel5"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 3.0
-margin_top = 3.0
-margin_right = -3.0
-margin_bottom = -3.0
+margin_left = 6.0
+margin_top = 7.0
+margin_right = -6.0
+margin_bottom = -7.0
 mouse_default_cursor_shape = 2
 theme = ExtResource( 4 )
 shortcut_in_tooltip = false
@@ -193,9 +232,9 @@ expand_icon = true
 [node name="Panel4" type="Panel" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 48.0
+margin_left = 68.0
 margin_top = -504.0
-margin_right = 357.0
+margin_right = 469.0
 margin_bottom = -463.0
 rect_pivot_offset = Vector2( -1128, -210 )
 rect_clip_content = true
@@ -218,7 +257,7 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -96.0
+margin_left = -157.0
 margin_top = -17.5
 margin_right = -3.0
 margin_bottom = 17.5

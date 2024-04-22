@@ -34,7 +34,9 @@ public class InventoryUI : Control
     bool ShowingMap = false;
 
     ProgressBar CharacterBatteryCharge;
-
+    
+    Compass comp;
+    MapGrid map;
     ProgressBar CharacterRPM;
     public static InventoryUI GetInstance()
     {
@@ -45,6 +47,8 @@ public class InventoryUI : Control
         inst = this;
         Inv = (Inventory)GetParent();
         pl = (Player)Inv.GetParent();
+        comp = Compass.GetInstance();
+        map = MapGrid.GetInstance();
         MaxLoad = Inv.GetMaxCap();
         float currentload = Inv.GetCurrentWeight();
         Capacity = GetNode<Panel>("CapPanel").GetNode<RichTextLabel>("CapAmmount");
@@ -76,59 +80,62 @@ public class InventoryUI : Control
         IsOpen = true;
         SetProcess(true);
     }
-    float d = 0.1f;
+    float d = 0.5f;
     public override void _Process(float delta)
     {
         base._Process(delta);
         d -= delta;
         if (d > 0)
             return;
-        d = 0.1f;
+        d = 0.5f;
 
         UpdateInventory();
     }
     public void UpdateInventory()
     {
-        List<Item> Items = new List<Item>();
-        Inv.GetContents(out Items);
-        List<int> itemcount = new List<int>();
-        hascompass = false;
-        hasmap = false;
-        for (int i = 0; i < slots.Count(); i++)
+        if (!ShowingMap)
         {
-            Item sample = null;
-            int ammount = 0;
-            
-            for (int v = Items.Count() - 1; v > -1; v --)
+            List<Item> Items = new List<Item>();
+            Inv.GetContents(out Items);
+            List<int> itemcount = new List<int>();
+            hascompass = false;
+            hasmap = false;
+            for (int i = 0; i < slots.Count(); i++)
             {
-                if (sample == null)
-                    sample = Items[v];
-                if (Items[v].GetItemType() == 4)
-                    hascompass = true;
-                if (Items[v].GetItemType() == 5)
-                    hasmap = true;
+                Item sample = null;
+                int ammount = 0;
                 
-                if (Items[v].GetItemType() == sample.GetItemType())
+                for (int v = Items.Count() - 1; v > -1; v --)
                 {
-                    ammount += 1;
-                    Items.RemoveAt(v);
+                    if (sample == null)
+                        sample = Items[v];
+                    if (Items[v].GetItemType() == 4)
+                        hascompass = true;
+                    if (Items[v].GetItemType() == 5)
+                        hasmap = true;
+                    
+                    if (Items[v].GetItemType() == sample.GetItemType())
+                    {
+                        ammount += 1;
+                        Items.RemoveAt(v);
+                    }
+                    if (!sample.stackable)
+                        break;
                 }
-                if (!sample.stackable)
-                    break;
+                itemcount.Insert(i, ammount);
+                slots[i].SetItem(sample, ammount);
+                if (FocusedSlot == slots[i])
+                    slots[i].Toggle(true);
+                else
+                    slots[i].Toggle(false);
             }
-            itemcount.Insert(i, ammount);
-            slots[i].SetItem(sample, ammount);
-            if (FocusedSlot == slots[i])
-                slots[i].Toggle(true);
-            else
-                slots[i].Toggle(false);
+            //if (FocusedSlot != null)
+                //ItemOptionPanel.Show();
+            //else
+                //ItemOptionPanel.Hide();
+            float currentload = Inv.GetCurrentWeight();
+            Capacity.BbcodeText = string.Format("[center]{0}/{1}", currentload, MaxLoad);
         }
-        //if (FocusedSlot != null)
-            //ItemOptionPanel.Show();
-        //else
-            //ItemOptionPanel.Hide();
-        float currentload = Inv.GetCurrentWeight();
-        Capacity.BbcodeText = string.Format("[center]{0}/{1}", currentload, MaxLoad);
 
         CharacterBatteryCharge.Value = pl.GetCurrentCharacterEnergy();
         CharacterRPM.Value = pl.rpm * 100;
@@ -140,38 +147,40 @@ public class InventoryUI : Control
             ShowingMap = false;
         if (ShowingCompass)
         {
-            Compass comp = Compass.GetInstance();
-            if (comp != null)
+            comp = Compass.GetInstance();
+            //if (comp != null)
                 comp.ToggleCompass(true);
         }
         else
         {
-            Compass comp = Compass.GetInstance();
-            if (comp != null)
+            comp = Compass.GetInstance();
+            //if (comp != null)
                 comp.ToggleCompass(false);
         }
         if (ShowingMap)
         {
-            MapGrid map = MapGrid.GetInstance();
-            if (map != null)
+            map = MapGrid.GetInstance();
+            //if (map != null)
                 map.ToggleMap(true);
         }
         else
         {
-           MapGrid map = MapGrid.GetInstance();
-            if (map != null)
+            map = MapGrid.GetInstance();
+            //if (map != null)
                 map.ToggleMap(false);
         }
     }
     public void CloseInventory()
     {
+        WarpMouse(GetViewport().Size/2);
         Hide();
         FocusedSlot = null;
         IsOpen = false;
         SetProcess(false);
-        Compass comp = Compass.GetInstance();
-        if (comp != null)
+        comp = Compass.GetInstance();
+        //if (comp != null)
             comp.ToggleCompass(false);
+        
     }
     public void ItemHovered(Item it)
     {

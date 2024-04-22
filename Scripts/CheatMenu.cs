@@ -91,7 +91,7 @@ public class CheatMenu : Control
 		pl = (Player)GetParent().GetParent();
 		CamMove = pl.GetNode<CameraMovePivot>("CameraMovePivot");
 		CameraPanPivot pan = CamMove.GetNode<CameraPanPivot>("CameraPanPivot");
-		CamZoom = pan.GetNode<CameraZoomPivot>("CameraZoomPivot");
+		CamZoom = pan.GetNode<SpringArm>("SpringArm").GetNode<CameraZoomPivot>("CameraZoomPivot");
 		FpsCounter = GetNode<Label>("FPS_Counter");
 	}
     public override void _Process(float delta)
