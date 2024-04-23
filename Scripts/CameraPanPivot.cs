@@ -5,7 +5,7 @@ public class CameraPanPivot : Position3D
 {
     Camera cam;
 	CameraMovePivot MoveP;
-	CameraZoomPivot zpivot;
+	SpringArm zpivot;
 	Position3D PanXPivot;
 	Vector3 offset;
 	public Vector3 caminitpos;
@@ -19,10 +19,11 @@ public class CameraPanPivot : Position3D
     public override void _Ready()
 	{
 		cam = GetTree().Root.GetCamera();
-		caminitpos = cam.Translation;
+		
 		MoveP = (CameraMovePivot)GetParent();
-		zpivot = GetNode<SpringArm>("SpringArm").GetNode<CameraZoomPivot>("CameraZoomPivot");
-		PanXPivot = zpivot.GetNode<Position3D>("CameraPanXPivot");
+		zpivot = GetNode<SpringArm>("SpringArm");
+		caminitpos = zpivot.Translation;
+		PanXPivot = zpivot.GetNode<CameraZoomPivot>("CameraZoomPivot").GetNode<Position3D>("CameraPanXPivot");
 		instance = this;
 		inv = InventoryUI.GetInstance();
     }
@@ -129,8 +130,7 @@ public class CameraPanPivot : Position3D
 		}
 
 		Pan(pan);
-		cam.Translation = caminitpos + offset;
-
+		zpivot.Translation = caminitpos + offset;
 	}
 	private void Pan(Vector2 Pan)
 	{

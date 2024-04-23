@@ -120,15 +120,15 @@ mouse_filter = 1
 mouse_default_cursor_shape = 6
 
 [node name="MapGrid" type="GridContainer" parent="Panel"]
-custom_constants/vseparation = 15
-custom_constants/hseparation = 15
+custom_constants/vseparation = 12
+custom_constants/hseparation = 12
 columns = 81
 script = ExtResource( 1 )
 TileScene = ExtResource( 6 )
 XGridTileScene = ExtResource( 7 )
 YGridTileScene = ExtResource( 8 )
 ColorList = [ Color( 0, 0.0352941, 0.556863, 1 ), Color( 0, 0.537255, 0.0352941, 1 ), Color( 0.909804, 0.862745, 0.627451, 1 ), Color( 0.945098, 0.376471, 0.372549, 1 ), Color( 0.180392, 0.556863, 0.921569, 1 ) ]
-MaxZoomScale = 40.0
+MaxZoomScale = 4.0
 
 [node name="Panel" type="Panel" parent="Panel"]
 modulate = Color( 1, 1, 1, 0.27451 )
@@ -141,7 +141,7 @@ margin_top = -216.5
 margin_right = 200.5
 margin_bottom = 216.5
 rect_clip_content = true
-mouse_filter = 1
+mouse_filter = 2
 mouse_default_cursor_shape = 6
 custom_styles/panel = SubResource( 19 )
 
@@ -172,8 +172,8 @@ custom_styles/panel = SubResource( 21 )
 [node name="MapGridY" type="GridContainer" parent="Panel2"]
 margin_right = 10.0
 margin_bottom = 1000.0
-custom_constants/vseparation = 15
-custom_constants/hseparation = 15
+custom_constants/vseparation = 12
+custom_constants/hseparation = 12
 
 [node name="Panel3" type="Panel" parent="."]
 anchor_top = 1.0
@@ -199,8 +199,8 @@ custom_styles/panel = SubResource( 21 )
 [node name="MapGridX" type="GridContainer" parent="Panel3"]
 margin_right = 1000.0
 margin_bottom = 10.0
-custom_constants/vseparation = 15
-custom_constants/hseparation = 15
+custom_constants/vseparation = 12
+custom_constants/hseparation = 12
 columns = 81
 
 [node name="Panel5" type="Panel" parent="."]

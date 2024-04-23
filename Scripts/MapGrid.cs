@@ -85,6 +85,13 @@ public class MapGrid : GridContainer
             gridtilex.Name = "x" + (i-40);
             gridtiley.Name = "y" + (i-40);
         }
+        CallDeferred("FrameMap");
+        if (RectScale.x <= 0.5f)
+            SwitchGridValues(0);
+        else if (RectScale.x <= 2)
+            SwitchGridValues(1);
+        else
+            SwitchGridValues(2);
         //MarginLeft = -(RectSize.x / 2);
         //RectPosition = RectScale/2; 
     }
@@ -116,23 +123,12 @@ public class MapGrid : GridContainer
 				return;
 
 			Vector2 pos = new Vector2(RectPosition.x + ((InputEventMouseMotion)@event).Relative.x, RectPosition.y + ((InputEventMouseMotion)@event).Relative.y);
-            //when scale is 1 max position is -500
-            float posallowance = -500 * RectScale.x;
-            //if (pos.x < 0 && pos.x > posallowance)
-            //{
+
             MapGridx.RectPosition = new Vector2(pos.x, 8);
-                // den doulevei
-                //Rect2 rec = new Rect2(new Vector2 (pos.x, RectPosition.y), new Vector2(512, 512));
-                //th.RegionRect = rec;
-            //}
-            //if  (pos.y < 0 && pos.y > posallowance)
-           // {
+
             MapGridy.RectPosition = new Vector2(8, pos.y);
             RectPosition = new Vector2(pos.x, pos.y);
-                // den doulevei
-                //Rect2 rec = new Rect2(new Vector2 (RectPosition.x, pos.y), new Vector2(512, 512));
-                //th.RegionRect = rec;
-            //}
+
 		}
         Vector2 scale = RectScale;
         if (@event.IsActionPressed("ZoomIn"))
@@ -146,16 +142,14 @@ public class MapGrid : GridContainer
                 RectPosition -= parentsize /2;
                 MapGridx.RectPosition = new Vector2(MapGridx.RectPosition.x * 2 - parentsize.x /2, MapGridx.RectPosition.y);
                 MapGridy.RectPosition  = new Vector2(MapGridy.RectPosition.x, MapGridy.RectPosition.y * 2 - parentsize.y /2);
-                MapGridx.AddConstantOverride("hseparation", (int)(15 * RectScale.x));
-                MapGridy.AddConstantOverride("vseparation", (int)(15 * RectScale.y));
-                //MapGridx.RectScale = new Vector2(MapGridx.RectScale.x * 1.1f, MapGridx.RectScale.y * 1.1f);
-                //MapGridy.RectScale = new Vector2(MapGridy.RectScale.x * 1.1f, MapGridy.RectScale.y * 1.1f);
+                MapGridx.AddConstantOverride("hseparation", (int)(12 * RectScale.x));
+                MapGridy.AddConstantOverride("vseparation", (int)(12 * RectScale.y));
             }
 				
 		}
 		if (@event.IsActionPressed("ZoomOut"))
 		{
-			if (RectScale.x > 1)
+			if (RectScale.x > 0.25f)
             {
                 RectScale /= 2;
                 
@@ -164,32 +158,94 @@ public class MapGrid : GridContainer
                 RectPosition += parentsize /4;
                 MapGridx.RectPosition = new Vector2(MapGridx.RectPosition.x / 2 + parentsize.x /4, MapGridx.RectPosition.y);
                 MapGridy.RectPosition  = new Vector2(MapGridy.RectPosition.x, MapGridy.RectPosition.y / 2 + parentsize.y /4);
-                MapGridx.AddConstantOverride("hseparation", (int)(15 * RectScale.x));
-                MapGridy.AddConstantOverride("vseparation", (int)(15 * RectScale.y));
-                //MapGridx.RectScale = new Vector2(MapGridx.RectScale.x * 0.9f, MapGridx.RectScale.y * 0.9f);
-                //MapGridy.RectScale = new Vector2(MapGridy.RectScale.x * 0.9f, MapGridy.RectScale.y * 0.9f);
+                MapGridx.AddConstantOverride("hseparation", (int)(12 * RectScale.x));
+                MapGridy.AddConstantOverride("vseparation", (int)(12 * RectScale.y));
             }
 		}
-        if (RectScale.x <= 2)
-            SwitchGridValues(true);
-        else
-            SwitchGridValues(false);
         if (@event.IsActionPressed("FrameCamera"))
         {
-            float sc = RectScale.x;
-            float sz = RectSize.x;
-            float amm = sz/2 * sc;
-            MarginBottom = amm;
-            MarginLeft = -amm;
-            MarginRight = amm;
-            MarginTop = -amm;
-            MapGridx.RectPosition = new Vector2(RectPosition.x, 8);
-            MapGridy.RectPosition = new Vector2(8, RectPosition.y);
+            FrameMap();
         }
+        if (RectScale.x <= 0.25f)
+            SwitchGridValues(0);
+        else if (RectScale.x <= 0.5f)
+            SwitchGridValues(1);
+        else if (RectScale.x <= 2)
+            SwitchGridValues(2);
+        else
+            SwitchGridValues(3);
     }
-    public void SwitchGridValues(bool toggle)
+    public void FrameMap()
     {
-        if (toggle)
+        Vector2 parentsize = ((Control)GetParent()).RectSize;
+        RectPosition = new Vector2( (- RectSize.x / 2 * RectScale.x) + parentsize.x / 2,(- RectSize.y / 2 * RectScale.y) + parentsize.y / 2);
+
+        MapGridx.RectPosition = new Vector2(RectPosition.x, 8);
+
+        MapGridy.RectPosition = new Vector2(8, RectPosition.y);
+        
+    }
+    public void SwitchGridValues(int toggle)
+    {
+        if (toggle == 0)
+        {
+            int index = 0;
+            foreach (Control child in MapGridx.GetChildren())
+            {
+                if (index == 0)
+                {
+                    index = 19;
+                    child.RectClipContent = false;
+                    continue;
+                }
+
+                index -= 1;
+                child.RectClipContent = true;
+            }
+            index = 0;
+            foreach (Control child in MapGridy.GetChildren())
+            {
+                if (index == 0)
+                {
+                    index = 19;
+                    child.RectClipContent = false;
+                    continue;
+                }
+
+                index -= 1;
+                child.RectClipContent = true;
+            }
+        }
+        else if (toggle == 1)
+        {
+            int index = 0;
+            foreach (Control child in MapGridx.GetChildren())
+            {
+                if (index == 0)
+                {
+                    index = 9;
+                    child.RectClipContent = false;
+                    continue;
+                }
+
+                index -= 1;
+                child.RectClipContent = true;
+            }
+            index = 0;
+            foreach (Control child in MapGridy.GetChildren())
+            {
+                if (index == 0)
+                {
+                    index = 9;
+                    child.RectClipContent = false;
+                    continue;
+                }
+
+                index -= 1;
+                child.RectClipContent = true;
+            }
+        }
+        else if (toggle == 2)
         {  
             int index = 0;
             foreach (Control child in MapGridx.GetChildren())
@@ -197,6 +253,7 @@ public class MapGrid : GridContainer
                 if (index == 0)
                 {
                     index = 4;
+                    child.RectClipContent = false;
                     continue;
                 }
 
@@ -209,6 +266,7 @@ public class MapGrid : GridContainer
                 if (index == 0)
                 {
                     index = 4;
+                    child.RectClipContent = false;
                     continue;
                 }
 
@@ -216,7 +274,7 @@ public class MapGrid : GridContainer
                 child.RectClipContent = true;
             }
         }
-        else
+        else if (toggle == 3)
         {
             foreach (Control child in MapGridx.GetChildren())
             {
@@ -227,6 +285,7 @@ public class MapGrid : GridContainer
                 child.RectClipContent = false;
             }
         }
+        
     }
     public void OnIslandVisited(IslandInfo info)
     {
@@ -238,7 +297,6 @@ public class MapGrid : GridContainer
         col.a = 1;
         MapIle.Modulate = col;
     }
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
     public void InitMap()
     {
         WorldMap map = WorldMap.GetInstance();
@@ -251,22 +309,38 @@ public class MapGrid : GridContainer
             Control child = children[i].MapIle;
             MapIleList.Add((Vector2)cells[i], child);
         }
-        SetProcess(false);
     }
     public void UpdateIleInfo(Vector2 index, IleType type)
     {
         Control child;
         MapIleList.TryGetValue(index, out child);
+        
         if (type == IleType.ENTRANCE)
+        {
             child.Modulate = ColorList[0];
+            child.GetNode<TextureRect>("TextureRect").HintTooltip = "Η Μητρόπολη";
+        }
         else if (type == IleType.EXIT)
+        {
             child.Modulate = ColorList[1];
+            child.GetNode<TextureRect>("TextureRect").HintTooltip = "Σκάφος";
+        }
         else if (type == IleType.LAND)
+        {
             child.Modulate = ColorList[2];
+            child.GetNode<TextureRect>("TextureRect").HintTooltip = string.Empty;
+        } 
         else if (type == IleType.LIGHTHOUSE)
+        {
             child.Modulate = ColorList[3];
+            child.GetNode<TextureRect>("TextureRect").HintTooltip = "Φάρος";
+        }
         else
+        {
             child.Modulate = ColorList[4];
+            child.GetNode<TextureRect>("TextureRect").HintTooltip = string.Empty;
+        }
+            
     }
 }
 class ChildMapIleInfo

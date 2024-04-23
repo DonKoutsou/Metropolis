@@ -278,11 +278,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00875211, -0.0306139, -0.02
 script = ExtResource( 15 )
 
 [node name="CameraPanPivot" type="Position3D" parent="CameraMovePivot"]
-transform = Transform( 0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 2.79397e-09, 0, -0.75 )
+transform = Transform( 0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 15, 0 )
 script = ExtResource( 14 )
 
 [node name="SpringArm" type="SpringArm" parent="CameraMovePivot/CameraPanPivot"]
-transform = Transform( 0.999999, 0, 5.32907e-15, 0, 1, 0, -5.32907e-15, 0, 0.999999, 0, 20, 0 )
+transform = Transform( 0.999999, 0, 5.32907e-15, 0, 1, 0, -5.32907e-15, 0, 0.999999, 0, 0, 0 )
 collision_mask = 36
 spring_length = 40.0
 margin = 0.5
@@ -296,7 +296,7 @@ Speed = 5
 transform = Transform( 1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0 )
 
 [node name="Camera" type="Camera" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot"]
-transform = Transform( 1, 0, 0, 0, 0.939693, 0.342021, 0, -0.34202, 0.939695, 0, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 0.984808, 0.173649, 0, -0.173648, 0.98481, 0, 0, 0 )
 cull_mask = 769
 current = true
 fov = 45.0

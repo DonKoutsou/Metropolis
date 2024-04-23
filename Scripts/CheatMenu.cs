@@ -39,7 +39,7 @@ public class CheatMenu : Control
 		{
 			CamMove.MaxDist = 150.0f;
 			CamZoom.MaxDist = 150.0f;
-			CamMove.Frame();
+			//CamMove.Frame();
 			CamZoom.Frame();
 			HasInfCam = false;
 		}

@@ -77,7 +77,7 @@ public class CameraMovePivot : Position3D
     {
         return instance;
     }
-    public override void _Input(InputEvent @event)
+    /*public override void _Input(InputEvent @event)
 	{
         if (@event.IsActionPressed("Move_Right") || @event.IsActionPressed("Move_Left") || @event.IsActionPressed("Move_Down") || @event.IsActionPressed("Move_Up"))
 		{
@@ -91,5 +91,5 @@ public class CameraMovePivot : Position3D
 	public void Frame()
 	{
 		shouldfollowpl = true;
-	}
+	}*/
 }
