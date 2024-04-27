@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Scenes/HUD/InventoryUISlot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/InventoryUI.cs" type="Script" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://Scenes/HUD/Map.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/UI/Icon/Cross@0.5x-1.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Themes/PanelTheme1.tres" type="Theme" id=8]
+[ext_resource path="res://Assets/Themes/PanelTheme2.tres" type="Theme" id=9]
 
 [sub_resource type="DynamicFont" id=27]
 size = 24
@@ -17,15 +19,6 @@ font_data = ExtResource( 5 )
 
 [sub_resource type="Theme" id=13]
 default_font = SubResource( 27 )
-
-[sub_resource type="StyleBoxFlat" id=22]
-bg_color = Color( 0.847059, 0.807843, 0.705882, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 1, 1, 1, 1 )
-border_blend = true
 
 [sub_resource type="CanvasItemMaterial" id=15]
 
@@ -333,6 +326,7 @@ bbcode_text = "[center]100/150"
 text = "100/150"
 
 [node name="MapUI" parent="." instance=ExtResource( 6 )]
+visible = false
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -347,48 +341,54 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -729.0
+margin_left = -772.0
 margin_top = -590.0
 margin_right = -533.0
 margin_bottom = -81.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 1
 theme = ExtResource( 4 )
 
-[node name="Panel" type="Panel" parent="DescriptionPanel"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -93.0
-margin_top = 5.0
-margin_right = 95.0
-margin_bottom = 45.0
-mouse_filter = 1
-custom_styles/panel = SubResource( 22 )
-
-[node name="ItemName" type="RichTextLabel" parent="DescriptionPanel"]
-material = SubResource( 15 )
+[node name="MarginContainer" type="MarginContainer" parent="DescriptionPanel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 5.0
-margin_bottom = -347.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DescriptionPanel/MarginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 229.0
+margin_bottom = 499.0
+custom_constants/separation = 10
+
+[node name="ItemName" type="RichTextLabel" parent="DescriptionPanel/MarginContainer/VBoxContainer"]
+material = SubResource( 15 )
+margin_right = 219.0
+margin_bottom = 35.0
+rect_clip_content = false
 mouse_filter = 1
 theme = SubResource( 21 )
 bbcode_enabled = true
-bbcode_text = "[center]Item Name
-"
-text = "Item Name
-"
-scroll_active = false
+bbcode_text = "[center] Item Desafwqw"
+text = " Item Desafwqw"
+fit_content_height = true
 
-[node name="Description" type="RichTextLabel" parent="DescriptionPanel"]
+[node name="Panel" type="Panel" parent="DescriptionPanel/MarginContainer/VBoxContainer/ItemName"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 9 )
+
+[node name="Description" type="RichTextLabel" parent="DescriptionPanel/MarginContainer/VBoxContainer"]
 material = SubResource( 15 )
-anchor_left = 0.05
-anchor_top = 0.05
-anchor_right = 0.95
-anchor_bottom = 0.95
-margin_left = 0.200011
-margin_top = 32.1
-margin_right = 0.200012
-margin_bottom = 0.100006
+margin_top = 45.0
+margin_right = 219.0
+margin_bottom = 189.0
+rect_clip_content = false
 mouse_filter = 1
 theme = SubResource( 19 )
 bbcode_enabled = true
@@ -408,20 +408,38 @@ gwaawffawfwafawfawfwafwafwafaffaf
 fwa
 fwafwa
 faw"
+fit_content_height = true
 scroll_active = false
 
-[node name="WeightText" type="RichTextLabel" parent="DescriptionPanel"]
-material = SubResource( 15 )
-anchor_top = 1.0
+[node name="Panel" type="Panel" parent="DescriptionPanel/MarginContainer/VBoxContainer/Description"]
+show_behind_parent = true
+anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -22.0
-margin_right = 73.0
+theme = ExtResource( 8 )
+
+[node name="WeightText" type="RichTextLabel" parent="DescriptionPanel/MarginContainer/VBoxContainer"]
+material = SubResource( 15 )
+margin_top = 199.0
+margin_right = 219.0
+margin_bottom = 217.0
+rect_clip_content = false
 mouse_filter = 1
 theme = SubResource( 19 )
 bbcode_enabled = true
 bbcode_text = "[center]Βάρος: 50"
 text = "Βάρος: 50"
+fit_content_height = true
 scroll_active = false
+
+[node name="Panel" type="Panel" parent="DescriptionPanel/MarginContainer/VBoxContainer/WeightText"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 9 )
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="DescriptionPanel"]
+anchor_right = 1.0
+stretch_mode = 3
 
 [node name="BatteryPanel" type="Panel" parent="."]
 anchor_left = 1.0
@@ -589,15 +607,21 @@ margin_right = 256.5
 margin_bottom = 22.0
 theme = ExtResource( 4 )
 
-[node name="RefreshCoords" type="Button" parent="Panel4"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = 225.5
-margin_top = -19.0
-margin_right = 253.5
-margin_bottom = 19.0
+[node name="MarginContainer" type="MarginContainer" parent="Panel4"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -39.0
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 5
+
+[node name="RefreshCoords" type="Button" parent="Panel4/MarginContainer"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 34.0
+margin_bottom = 43.0
 mouse_default_cursor_shape = 2
 theme = ExtResource( 3 )
 shortcut_in_tooltip = false
@@ -621,4 +645,4 @@ custom_styles/panel = SubResource( 30 )
 [connection signal="button_down" from="ItemOptionPanel/DropButton" to="." method="On_Drop_Button_Down"]
 [connection signal="button_down" from="ItemOptionPanel/MapButton" to="." method="On_Map_Button_Down"]
 [connection signal="button_down" from="ItemOptionPanel/CompassButton" to="." method="On_Compass_Button_Down"]
-[connection signal="button_down" from="Panel4/RefreshCoords" to="." method="CloseInventory"]
+[connection signal="button_down" from="Panel4/MarginContainer/RefreshCoords" to="." method="CloseInventory"]

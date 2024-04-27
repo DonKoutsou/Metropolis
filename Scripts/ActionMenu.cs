@@ -12,6 +12,16 @@ public class ActionMenu : Control
     Button PickButton;
 	Button IntButton;
 
+
+	public override void _Ready()
+	{
+		pl = (Player)GetParent().GetParent();
+		SetProcess(false);
+		VBoxContainer cont = GetNode<PanelContainer>("PanelContainer").GetNode<VBoxContainer>("VBoxContainer");
+        PickButton = cont.GetNode<Button>("PickUp_Button");
+		IntButton = cont.GetNode<Button>("Interact_Button2");
+	}
+
 	public static bool IsSelecting()
 	{
 		return SelectedObj != null;
@@ -238,6 +248,7 @@ public class ActionMenu : Control
 			((ShaderMaterial)SelectedObj.GetNode<MeshInstance>("MeshInstance2").GetActiveMaterial(0).NextPass).SetShaderParam("enable", false);
 		}
 		SelectedObj = null;
+		WarpMouse(GetViewport().Size/2);
 	}
 	public void Stop()
 	{
@@ -250,13 +261,7 @@ public class ActionMenu : Control
 		SetProcess(false);
 		RectPosition = new Vector2 (0.0f, 0.0f);
 	}
-	public override void _Ready()
-	{
-		pl = (Player)GetParent().GetParent();
-		SetProcess(false);
-        PickButton = GetNode<Button>("PickUp_Button");
-		IntButton = GetNode<Button>("Interact_Button2");
-	}
+	
 	public override void _Process(float delta)
 	{
 		var screenpos = Vector2.Zero;

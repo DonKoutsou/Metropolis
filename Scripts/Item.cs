@@ -55,4 +55,5 @@ public enum ItemName
 	CLOCK,
 	COMPASS,
 	MAP,
+	LIMB,
 }

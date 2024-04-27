@@ -14,7 +14,7 @@ public class InventoryUI : Control
 
     RichTextLabel Capacity;
     float MaxLoad = 0;
-
+    Panel DescPan;
     RichTextLabel Description;
     RichTextLabel WeightText;
     RichTextLabel ItemName;
@@ -59,11 +59,12 @@ public class InventoryUI : Control
         CharacterRPM = GetNode<Panel>("BatteryPanel").GetNode<ProgressBar>("RPMAmount");
         CharacterBatteryCharge.MaxValue = pl.GetCharacterBatteryCap();
         CharacterBatteryCharge.Value = pl.GetCurrentCharacterEnergy();
-        Description = GetNode<Panel>("DescriptionPanel").GetNode<RichTextLabel>("Description");
-        WeightText =  GetNode<Panel>("DescriptionPanel").GetNode<RichTextLabel>("WeightText");
-        ItemName = GetNode<Panel>("DescriptionPanel").GetNode<RichTextLabel>("ItemName");
+        DescPan = GetNode<Panel>("DescriptionPanel");
+        Description = DescPan.GetNode<MarginContainer>("MarginContainer").GetNode<VBoxContainer>("VBoxContainer").GetNode<RichTextLabel>("Description");
+        WeightText =  DescPan.GetNode<MarginContainer>("MarginContainer").GetNode<VBoxContainer>("VBoxContainer").GetNode<RichTextLabel>("WeightText");
+        ItemName = DescPan.GetNode<MarginContainer>("MarginContainer").GetNode<VBoxContainer>("VBoxContainer").GetNode<RichTextLabel>("ItemName");
         ItemOptionPanel = GetNode<Panel>("ItemOptionPanel");
-        ((Control)Description.GetParent()).Hide();
+        DescPan.Hide();
         Hide();
 
         for (int i = 0; i < childc; i ++)
@@ -179,7 +180,7 @@ public class InventoryUI : Control
         SetProcess(false);
         comp = Compass.GetInstance();
         //if (comp != null)
-            comp.ToggleCompass(false);
+        comp.ToggleCompass(false);
         
     }
     public void ItemHovered(Item it)
@@ -188,14 +189,14 @@ public class InventoryUI : Control
             return;
         showingDesc = true;
         ShowingDescSample = it;
-        ((Control)Description.GetParent()).Show();
+        DescPan.Show();
         Description.BbcodeText = "[center]" + it.GetItemDesc();
         ItemName.BbcodeText = "[center]" + it.GetItemName();
         WeightText.BbcodeText = "[center]Βάρος: " + ShowingDescSample.GetInventoryWeight();
     }
     public void ItemUnHovered(Item it)
     {
-        ((Control)Description.GetParent()).Hide();
+        DescPan.Hide();
         showingDesc = false;
         ShowingDescSample = null;
     }

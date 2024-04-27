@@ -15,7 +15,7 @@ public class Settings : Control
 
     public override void _Ready()
     {
-        UpdateViewDistance();
+        //UpdateViewDistance();
         UpdateTimeProgression();
         var index = OS.GetDatetime();
         
@@ -34,7 +34,7 @@ public class Settings : Control
     private void UpdateTimeProgression()
     {
         DayNight.UpdateTimeProgression(TimeProgression);
-        GetNode<Panel>("TimeMultiplierSetting").GetNode<RichTextLabel>("TimeProgressionNumber").BbcodeText = "[center]" + TimeProgression.ToString();
+        //GetNode<Panel>("TimeMultiplierSetting").GetNode<RichTextLabel>("TimeProgressionNumber").BbcodeText = "[center]" + TimeProgression.ToString();
     }
     private void UpdateFOV()
     {

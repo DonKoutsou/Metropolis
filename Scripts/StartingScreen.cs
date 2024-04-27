@@ -7,16 +7,24 @@ public class StartingScreen : Control
 	
 	MainWorld world;
 
+	Dictionary<string, Button> ButtonList = new Dictionary<string, Button>();
+
 	public override void _Ready()
 	{
 		world = (MainWorld)GetParent().GetParent();
 		GetNode<Control>("Settings").Hide();
 		GetNode<Control>("MainScreen").Show();
+		VBoxContainer cont = GetNode<Control>("MainScreen").GetNode<PanelContainer>("PanelContainer").GetNode<VBoxContainer>("VBoxContainer");
+		ButtonList.Add("Start", cont.GetNode<Button>("Start_Button"));
+		ButtonList.Add("Settings", cont.GetNode<Button>("Setting_Button"));
+		ButtonList.Add("Exit", cont.GetNode<Button>("Exit_Button"));
 	}
 	private void On_Start_Button_Down()
 	{
 
 		GetNode<Control>("MainScreen").Hide();
+		GetNode<Control>("Settings").GetNode<Panel>("SeedSetting").Hide();
+		
 
 		GetNode<LoadingScreen>("LoadingScreen").EnableTime();
 
@@ -37,6 +45,7 @@ public class StartingScreen : Control
 	}
 	public void CloseSettings()
 	{
+		
 		GetNode<Control>("Settings").Hide();
 		GetNode<Control>("Settings").MouseFilter = MouseFilterEnum.Ignore;
 
@@ -70,7 +79,10 @@ public class StartingScreen : Control
 			MouseFilter = MouseFilterEnum.Ignore;
 
 		GetNode<Control>("MainScreen").Visible = toggle;
-		GetNode<Control>("MainScreen").GetNode<Button>("Start_Button").Hide();
+		Button Startbut;
+		ButtonList.TryGetValue("Start", out Startbut);
+		Startbut.Hide();
+		GetNode<Control>("MainScreen").GetNode<PanelContainer>("PanelContainer").Visible = toggle;
 	}
 	public void GameOver()
 	{

@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/Stamina_Bar.cs" type="Script" id=2]
@@ -32,6 +32,8 @@
 [ext_resource path="res://Scenes/Items/Compass.tscn" type="PackedScene" id=30]
 [ext_resource path="res://Scenes/Items/MapItem.tscn" type="PackedScene" id=31]
 [ext_resource path="res://Assets/PostProcess/KuwaharaShader.gdshader" type="Shader" id=32]
+[ext_resource path="res://Scenes/Items/SkeleArm_L.tscn" type="PackedScene" id=33]
+[ext_resource path="res://Scenes/Items/SkeleArm_R.tscn" type="PackedScene" id=34]
 
 [sub_resource type="Curve" id=106]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.5 ), 0.0, 0.0, 0, 0 ]
@@ -196,7 +198,7 @@ area_mask = 0
 
 [node name="Inventory" parent="." instance=ExtResource( 7 )]
 Capacity = 40.0
-StartingItems = [ ExtResource( 25 ), ExtResource( 27 ), ExtResource( 30 ), ExtResource( 31 ) ]
+StartingItems = [ ExtResource( 25 ), ExtResource( 27 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 33 ), ExtResource( 34 ) ]
 
 [node name="PlayerUI" type="Spatial" parent="."]
 
