@@ -50,6 +50,12 @@ public class DayNight : WorldEnvironment
     [Export]
     Curve WindStreangthCurve = null;
 
+    [Signal]
+    public delegate void DayEventHandler();
+
+    [Signal]
+    public delegate void NightEventHandler();
+
     static float currentDay;
 
     static float currenthour;
@@ -61,11 +67,18 @@ public class DayNight : WorldEnvironment
     DirectionalLight sun;
     DirectionalLight moon;
 
-    static bool day = false;
+    static bool day = true;
 
     public Spatial SunMoonMeshPivot;
 
     Time_UI UI;
+
+    static DayNight instance;
+
+    public static DayNight GetInstance()
+    {
+        return instance;
+    }
 
     static public float GetWindDirection()
     {
@@ -115,12 +128,14 @@ public class DayNight : WorldEnvironment
     {
         if (Phase == 0)
         {
+            EmitSignal("DayEventHandler");
             sun.Show();
             moon.Hide();
             day = true;
         }
         if (Phase == 1)
         {
+            EmitSignal("NightEventHandler");
             sun.Hide();
             moon.Show();
             day = false;
@@ -195,10 +210,10 @@ public class DayNight : WorldEnvironment
         if (SunRot > 170 && SunRot < 190)
         {
             multi = (float)Math.Round((SunRot - 170) / 20, 4);
-            if (multi > 0.5f)
-                day = true;
-            else
-                day = false;
+            //if (multi > 0.5f)
+                //day = true;
+            //else
+                //day = false;
             
            //bright = Mathf.Lerp(MoonBrightness, SunBrightness, multi);
 
@@ -222,10 +237,10 @@ public class DayNight : WorldEnvironment
             else
                 multi = (float)Math.Round((SunRot + 10) / 20, 4);
             
-            if (multi > 0.5f)
-                day = false;
-            else
-                day = true;
+            //if (multi > 0.5f)
+                //day = false;
+            //else
+                //day = true;
             //bright = Mathf.Lerp(SunBrightness, MoonBrightness, multi);
 
             //fogsun = Mathf.Lerp(0.3f, 0.05f, multi);
@@ -264,11 +279,11 @@ public class DayNight : WorldEnvironment
         else
             moonrot = -(180 - SunRot);
 
-        //if (SunMoonMeshPivot != null)
-        //{
+        if (SunMoonMeshPivot != null)
+        {
         SunMoonMeshPivot.RotationDegrees = new Vector3(SunRot, 0, 0);
         SunMoonMeshPivot.GlobalTranslation = new Vector3(SunMoonMeshPivot.GlobalTransform.origin.x, 0, SunMoonMeshPivot.GlobalTransform.origin.z);
-        //}
+        }
         sun.RotationDegrees = new Vector3(SunRot, 0, 0);
 
         moon.RotationDegrees = new Vector3(moonrot, 0, 0);
@@ -408,7 +423,10 @@ public class DayNight : WorldEnvironment
     public override void _Ready()
     {
         base._Ready();
+        instance = this;
         currenthour = startinghour;
+        Random rand = new Random(Settings.GetGameSettings().Seed);
+        currentDay = rand.Next(0, 10);
         sun = GetParent().GetNode<DirectionalLight>("Sun");
         moon = GetParent().GetNode<DirectionalLight>("Moon");
         timeprogmultiplier = Settings.GetGameSettings().TimeProgression;

@@ -40,7 +40,6 @@ public class ActionMenu : Control
 				MeshInstance rope = pl.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("BoneAttachment2").GetNode<MeshInstance>("Rope");
 				rope.Show();
 			}
-			DeselectCurrent();
 			selecting = false;
 			Stop();
 		}
@@ -55,7 +54,6 @@ public class ActionMenu : Control
 			{
 				veh.BoardVehicle(pl);
 				pl.SetVehicle(veh);
-				DeselectCurrent();
 				selecting = false;
 				Stop();
 			}
@@ -63,7 +61,6 @@ public class ActionMenu : Control
 			{
 				veh.UnBoardVehicle(pl);
 				pl.SetVehicle(null);
-				DeselectCurrent();
 				selecting = false;
 				Stop();
 			}
@@ -80,7 +77,6 @@ public class ActionMenu : Control
 			}
 			else
 				TalkText.GetInst().Talk("Τίποτα", pl);
-			DeselectCurrent();
 			selecting = false;
 			Stop();
 		}
@@ -131,7 +127,6 @@ public class ActionMenu : Control
 			int days, hours, mins;
 			DayNight.MinsToTime(time, out days,out hours, out mins);
 			DayNight.ProgressTime(days, hours, mins);
-			DeselectCurrent();
 			selecting = false;
 			Stop();
 		}
@@ -157,7 +152,6 @@ public class ActionMenu : Control
         else if (SelectedObj is FireplaceLight)
 		{
 			((FireplaceLight)SelectedObj).ToggleFileplace();
-			DeselectCurrent();
 			selecting = false;
 			Stop();
 		}
@@ -248,17 +242,19 @@ public class ActionMenu : Control
 			((ShaderMaterial)SelectedObj.GetNode<MeshInstance>("MeshInstance2").GetActiveMaterial(0).NextPass).SetShaderParam("enable", false);
 		}
 		SelectedObj = null;
-		WarpMouse(GetViewport().Size/2);
+		
 	}
 	public void Stop()
 	{
         if (selecting)
             return;
-
+		if (SelectedObj == null)
+			return;
 		DeselectCurrent();
 		
 		Hide();
 		SetProcess(false);
+		//WarpMouse(GetViewport().Size/2);
 		RectPosition = new Vector2 (0.0f, 0.0f);
 	}
 	

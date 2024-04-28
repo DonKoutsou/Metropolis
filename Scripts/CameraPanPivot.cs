@@ -3,11 +3,9 @@ using System;
 
 public class CameraPanPivot : Position3D
 {
-    Camera cam;
-	CameraMovePivot MoveP;
+	//SpringArm
 	SpringArm zpivot;
 	Position3D PanXPivot;
-	Vector3 offset;
 	public Vector3 caminitpos;
 	static CameraPanPivot instance;
 
@@ -18,13 +16,16 @@ public class CameraPanPivot : Position3D
 	}
     public override void _Ready()
 	{
-		cam = GetTree().Root.GetCamera();
-		
-		MoveP = (CameraMovePivot)GetParent();
-		zpivot = GetNode<SpringArm>("SpringArm");
-		caminitpos = zpivot.Translation;
-		PanXPivot = zpivot.GetNode<CameraZoomPivot>("CameraZoomPivot").GetNode<Position3D>("CameraPanXPivot");
+		//store instane
 		instance = this;
+
+		zpivot = GetNode<SpringArm>("SpringArm");
+		PanXPivot = zpivot.GetNode<CameraZoomPivot>("CameraZoomPivot").GetNode<Position3D>("CameraPanXPivot");
+
+		//store initial translation to snap back if needed
+		caminitpos = zpivot.Translation;
+		
+		
 		inv = InventoryUI.GetInstance();
     }
     public override void _Input(InputEvent @event)
@@ -35,21 +36,17 @@ public class CameraPanPivot : Position3D
 				return;
 			Vector3 prevrot = Rotation;
 			Vector3 rot = new Vector3(Rotation.x - ((InputEventMouseMotion)@event).Relative.y * 0.001f, Rotation.y - ((InputEventMouseMotion)@event).Relative.x * 0.001f, Rotation.z);
+			//if transform is same return
 			if (prevrot == rot)
 				return;
-			//Rotation = rot;
+
 			Rotation = new Vector3(0, rot.y, 0);
-			//PanXPivot.Rotation = new Vector3(rot.x, 0, 0);
-			//Vector3 clipdir;
-			//if (MyCamera.IsClipping(out clipdir))
-				//Rotation += new Vector3(-0.05f, 0,0);
-			//if (cam.GlobalTranslation.y <= 0)
-				//Rotation = prevrot;
+
 		}
     }
 	public override void _Process(float delta)
 	{
-		if (inv.IsOpen || ActionMenu.IsSelecting())
+		if (inv.IsOpen)
 			return;
 		Vector3 prevrot = new Vector3(PanXPivot.Rotation.x ,Rotation.y, 0);
 		Vector3 rot = new Vector3(PanXPivot.Rotation.x ,Rotation.y, 0);
@@ -95,7 +92,8 @@ public class CameraPanPivot : Position3D
 			}
 			pan += new Vector2(0, ammount * 0.02f);
         }
-		if (Input.IsActionPressed("ui_right"))
+		// might put it back
+		/*if (Input.IsActionPressed("ui_right"))
 		{
 			rot.y += 0.01f;
 			Pan(new Vector2(1, 0));
@@ -122,7 +120,7 @@ public class CameraPanPivot : Position3D
 				Pan(new Vector2(0, 1));
 			}
 				
-        }
+        }*/
 		if (prevrot != rot)
 		{
 			Rotation = new Vector3(0, rot.y, 0);
@@ -130,15 +128,12 @@ public class CameraPanPivot : Position3D
 		}
 
 		Pan(pan);
-		zpivot.Translation = caminitpos + offset;
+		
 	}
 	private void Pan(Vector2 Pan)
 	{
-		//float zoom = zpivot.Translation.y;
-		//zoom /= zpivot.MaxDist;
-
-		//Pan *= zoom * 2;
-        offset = new Vector3(Pan.x, Pan.y, 0);
+        Vector3 offset = new Vector3(Pan.x, Pan.y, 0);
+		zpivot.Translation = caminitpos + offset;
 	}
     
 }

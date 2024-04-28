@@ -1,8 +1,7 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Scripts/SeaManager.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/MyWorld.cs" type="Script" id=2]
-[ext_resource path="res://Scripts/WorldClipRaycast.cs" type="Script" id=3]
 [ext_resource path="res://Scenes/Islands/MotherCity.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Islands/FinIslands.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Characters/Player.tscn" type="PackedScene" id=6]
@@ -37,17 +36,7 @@ GlobalItemListConfiguration = {
 4: ExtResource( 24 ),
 5: ExtResource( 25 )
 }
-
-[node name="Player" parent="." instance=ExtResource( 6 )]
-pause_mode = 1
-
-[node name="WorldClipRaycast" type="RayCast" parent="Player"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0 )
-enabled = true
-cast_to = Vector3( 0, -4, 0 )
-collision_mask = 260
-debug_shape_thickness = 5
-script = ExtResource( 3 )
+PlayerScene = ExtResource( 6 )
 
 [node name="WorldMap" parent="." instance=ExtResource( 7 )]
 pause_mode = 1
@@ -60,5 +49,3 @@ Exittospawn = ExtResource( 5 )
 
 [node name="SeaManager" type="Node" parent="."]
 script = ExtResource( 1 )
-
-[connection signal="Hit" from="Player" to="." method="OnPlayerKilled"]

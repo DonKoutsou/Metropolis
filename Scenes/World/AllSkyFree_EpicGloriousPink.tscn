@@ -18,22 +18,22 @@ _data = [ Vector2( 0, 76.3804 ), 0.0, 0.0, 0, 0, Vector2( 0.0655844, 88.6503 ), 
 
 [node name="DayNightController" parent="." instance=ExtResource( 1 )]
 AutoExposureCurve = SubResource( 3 )
-startinghour = 14
+startinghour = 9
 WindDirCurve = SubResource( 1 )
 WindStreangthCurve = SubResource( 2 )
 
 [node name="Sun" type="DirectionalLight" parent="."]
-transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 26.5368, 0 )
+transform = Transform( 1, 0, 0, 0, 0.0171732, 0.999853, 0, -0.999853, 0.0171732, 0, 0, 0 )
 light_color = Color( 0.996078, 0.745098, 0.745098, 1 )
 light_size = 1.0
 light_bake_mode = 0
 shadow_enabled = true
-shadow_color = Color( 0.701961, 0.701961, 0.701961, 1 )
+shadow_color = Color( 0.607843, 0.603922, 0.603922, 1 )
 shadow_bias = 1.0
+shadow_reverse_cull_face = true
 directional_shadow_max_distance = 1000.0
 
 [node name="Moon" type="DirectionalLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 26.5368, 0 )
 visible = false
 light_color = Color( 0.862745, 0.905882, 1, 1 )
 light_energy = 0.417

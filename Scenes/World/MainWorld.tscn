@@ -2,15 +2,16 @@
 
 [ext_resource path="res://Scenes/HUD/StartingScreen.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/MainWorld.cs" type="Script" id=2]
-[ext_resource path="res://Scenes/Islands/Test/IslandTestEscene.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/HUD/InventoryUI.tscn" type="PackedScene" id=3]
 
 [node name="MainWorld" type="Spatial"]
 script = ExtResource( 2 )
 WorldScene = [ "res://Scenes/World/MyWorld.tscn" ]
-Intro = ExtResource( 4 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 follow_viewport_enable = true
+
+[node name="InvntoryUI" parent="CanvasLayer" instance=ExtResource( 3 )]
 
 [node name="StartScreen" parent="CanvasLayer" instance=ExtResource( 1 )]
 anchor_left = 0.5

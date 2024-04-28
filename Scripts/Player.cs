@@ -64,7 +64,7 @@ public class Player : Character
 		GlobalTranslation = pos;
 		loctomove = pos;
 		//NavAgent.SetTargetLocation(loctomove);
-		CameraMovePivot.GetInstance().GlobalTranslation = pos;
+		//CameraMovePivot.GetInstance().GlobalTranslation = pos;
 	}
 	public bool HasVehicle()
 	{
@@ -74,14 +74,12 @@ public class Player : Character
 	public override void _Ready()
 	{
 		base._Ready();
+
 		instance = this;
-		//Input.MouseMode = Input.MouseModeEnum.Visible;
+		
 		Spatial plUI = GetNode<Spatial>("PlayerUI");
 		actMen = plUI.GetNode<ActionMenu>("ActionMenu");
-		//hp_bar = plUI.GetNode<HP_Bar>("HP_Bar");
-		//hp_bar.MaxValue = m_HP;
-		//Stamina_bar = plUI.GetNode<Stamina_Bar>("Stamina_Bar");
-		//Stamina_bar.MaxValue = m_Stamina;
+		
 		
 		var panels = GetTree().GetNodesInGroup("DialoguePanel");
 		DiagPan = (DialoguePanel)panels[0];
@@ -95,10 +93,17 @@ public class Player : Character
 		MyWorld w = (MyWorld)GetParent();
 		DayNight env = w.GetNode<WorldMap>("WorldMap").GetNode<Spatial>("Sky").GetNode<DayNight>("DayNightController");
 		env.SunMoonMeshPivot = sunmoonpiv;
+
+
+		//Input.MouseMode = Input.MouseModeEnum.Visible;
+		//hp_bar = plUI.GetNode<HP_Bar>("HP_Bar");
+		//hp_bar.MaxValue = m_HP;
+		//Stamina_bar = plUI.GetNode<Stamina_Bar>("Stamina_Bar");
+		//Stamina_bar.MaxValue = m_Stamina;
 	}
 	public override void _PhysicsProcess(float delta)
 	{
-		//ulong ms = OS.GetSystemTimeMsecs();
+		ulong ms = OS.GetSystemTimeMsecs();
 		if (DayNight.IsDay())
 			NightLight.LightEnergy = 0;
 		else
@@ -118,7 +123,7 @@ public class Player : Character
 			//if ray finds nothiong return
 			if (rayar.Count > 0)
 			{
-				Spatial ob = (Spatial)rayar["collider"];
+				//Spatial ob = (Spatial)rayar["collider"];
 				loctomove = (Vector3)rayar["position"];
 				Vector3 norm = (Vector3)rayar["normal"];
 
@@ -143,11 +148,9 @@ public class Player : Character
 
 		var direction = loctomove - GlobalTransform.origin;
 
-		Vector2 loc = new Vector2(loctomove.x, loctomove.z);
 		
 		float dist = new Vector2(loctomove.x, loctomove.z).DistanceTo(new Vector2( GlobalTransform.origin.x, GlobalTransform.origin.z));
 
-		double stam = m_Stamina;
 		
 		
 		if (dist < 1)
@@ -212,7 +215,6 @@ public class Player : Character
 				HeadPivot.Rotation = new Vector3(Math.Min(rot, 0.3f) , 0.0f,0.0f);
 			else
 				HeadPivot.Rotation = new Vector3(Math.Max(rot, -0.5f) , 0.0f,0.0f);
-			//YOUR_NODE.RotationDegrees = Vector3.Up * Mathf.LerpAngle(YOUR_NODE.Rotation.y, Mathf.Atan2(OTHER_NODE.Translation.x - YOUR_NODE.Translation.x, OTHER_NODE.Translation.z - YOUR_NODE.Translation.z), 1f);	
 		}
 
 		
@@ -265,47 +267,19 @@ public class Player : Character
 		if (!HasVecicle)
 		{
 			_velocity.y -= FallAcceleration * delta;
-			_velocity = MoveAndSlide(new Vector3(_velocity.x, _velocity.y, _velocity.z), Vector3.Up);
+			_velocity = MoveAndSlide(_velocity, Vector3.Up);
 		}
 		else
 		{
 			if (currveh.Working)
 				currveh.loctomove = loctomove;
 		}
-		if (Input.IsActionPressed("jump"))
-		{
-			if (IsOnFloor())
-			{
-				anim.PlayAnimation(E_Animations.Jump);
-				_velocity.y += JumpImpulse;
-			}
-			else if (HasVecicle)
-			{
-				anim.PlayAnimation(E_Animations.Jump);
-				currveh.Jump();
-				//_velocity.y += JumpImpulse * vehmulti;
-			}
-		}
-		for (int index = 0; index < GetSlideCount(); index++)
-		{
-			// We check every collision that occurred this frame.
-			KinematicCollision collision = GetSlideCollision(index);
-			// If we collide with a monster...
-			if (collision.Collider is Mob mob && mob.IsInGroup("mob"))
-			{
-				// ...we check that we are hitting it from above.
-				if (Vector3.Up.Dot(collision.Normal) > 0.1f)
-				{
-					// If so, we squash it and bounce.
-					mob.Squash();
-					_velocity.y = BounceImpulse;
-				}
-			}
-		}
-		//ulong msaf = OS.GetSystemTimeMsecs();
-		//GD.Print("Player processing took " + (msaf - ms).ToString() + " ms");
+		
+		ulong msaf = OS.GetSystemTimeMsecs();
+		if (msaf - ms > 215)
+			GD.Print("Player processing took longer the 15 ms. Process time : " + (msaf - ms).ToString() + " ms");
 	}
-	
+	//Handling of input
 	public override void _Input(InputEvent @event)
 	{
 		if (@event.IsActionPressed("Move"))
@@ -336,6 +310,20 @@ public class Player : Character
 			or.basis = result;
 			moveloc.GlobalTransform = or;
 			moveloc.Show();
+		}
+		if (@event.IsActionPressed("jump"))
+		{
+			if (IsOnFloor())
+			{
+				anim.PlayAnimation(E_Animations.Jump);
+				_velocity.y += JumpImpulse;
+			}
+			else if (HasVecicle)
+			{
+				anim.PlayAnimation(E_Animations.Jump);
+				currveh.Jump();
+				//_velocity.y += JumpImpulse * vehmulti;
+			}
 		}
 		if (@event.IsActionPressed("AutoWalk"))
 		{

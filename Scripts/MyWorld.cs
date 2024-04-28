@@ -6,9 +6,19 @@ public class MyWorld : Spatial
 {
 	[Export]
 	Dictionary<int, PackedScene> GlobalItemListConfiguration = new Dictionary<int, PackedScene>();
+	[Export]
+	PackedScene PlayerScene;
 	Player pl;
 
 	static Dictionary<int, PackedScene> GlobalItemList = new Dictionary<int, PackedScene>();
+	public void SpawnPlayer(Vector3 pos)
+	{
+		pl = (Player)PlayerScene.Instance();
+		AddChild(pl);
+		pl.Teleport(pos);
+		
+		CameraAnimationPlayer.GetInstance().FadeIn();
+	}
 	public static PackedScene GetItemByType(ItemName name)
 	{
 		PackedScene path = null;
@@ -23,7 +33,7 @@ public class MyWorld : Spatial
 	public override void _Ready()
 	{
 		base._Ready();
-		pl = GetNode<Player>("Player");
+		//pl = GetNode<Player>("Player");
 		foreach (KeyValuePair<int, PackedScene> pair in GlobalItemListConfiguration)
 		{
 			PackedScene text = pair.Value;
@@ -42,10 +52,6 @@ public class MyWorld : Spatial
 	{
 		StartingScreen start = ((MainWorld)GetParent()).GetStartingScreen();
 		start.GameOver();
-	}
-	public Player GetPlayer()
-	{
-		return pl;
 	}
 	public void RegisterIle(IslandInfo ile)
 	{
@@ -266,18 +272,17 @@ public class MyWorld : Spatial
 	{
 		if (@event.IsActionPressed("Pause"))
 		{
-			StartingScreen start = ((MainWorld)GetParent()).GetStartingScreen();
-			if (Settings.GetGameSettings().Visible)
-			{
-				start.CloseSettings();
-				return;
-			}
-			
-			bool paused = GetTree().Paused;
-		
-			start.Pause(!paused);
-
-			GetTree().Paused = !paused;
+			Pause();
 		}
+	}
+	public void Pause()
+	{
+		StartingScreen start = ((MainWorld)GetParent()).GetStartingScreen();
+
+		bool paused = GetTree().Paused;
+		
+		start.Pause(!paused);
+
+		GetTree().Paused = !paused;
 	}
 };

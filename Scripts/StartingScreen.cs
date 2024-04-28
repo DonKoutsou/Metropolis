@@ -7,30 +7,44 @@ public class StartingScreen : Control
 	
 	MainWorld world;
 
-	Dictionary<string, Button> ButtonList = new Dictionary<string, Button>();
+	Dictionary<string, Control> ButtonList = new Dictionary<string, Control>();
+
+	
 
 	public override void _Ready()
 	{
 		world = (MainWorld)GetParent().GetParent();
-		GetNode<Control>("Settings").Hide();
+		GetNode<Control>("Settings").Show();
 		GetNode<Control>("MainScreen").Show();
-		VBoxContainer cont = GetNode<Control>("MainScreen").GetNode<PanelContainer>("PanelContainer").GetNode<VBoxContainer>("VBoxContainer");
+		Control cont = GetNode<Control>("MainScreen");
 		ButtonList.Add("Start", cont.GetNode<Button>("Start_Button"));
-		ButtonList.Add("Settings", cont.GetNode<Button>("Setting_Button"));
 		ButtonList.Add("Exit", cont.GetNode<Button>("Exit_Button"));
+		ButtonList.Add("SeedSetting", GetNode<Control>("Settings").GetNode<Panel>("SeedSetting"));
 	}
 	private void On_Start_Button_Down()
 	{
+		if (!world.IsMapSpawned())
+		{
+			GetNode<Control>("MainScreen").Hide();
 
-		GetNode<Control>("MainScreen").Hide();
-		GetNode<Control>("Settings").GetNode<Panel>("SeedSetting").Hide();
+			GetNode<LoadingScreen>("LoadingScreen").EnableTime();
+
+			Control Startbut;
+			ButtonList.TryGetValue("Start", out Startbut);
+			Control SeedSet;
+			ButtonList.TryGetValue("SeedSetting", out SeedSet);
+			SeedSet.GetNode<TextEdit>("SeedText").Readonly = true;
+			((Button)Startbut).Text = "Συνέχεια";
+			GetNode<Control>("Settings").Hide();
+			world.SpawnMap(0);
+
+			MouseFilter = MouseFilterEnum.Ignore;
+		}
+		else
+		{
+			MyWorld.GetInstance().Pause();
+		}
 		
-
-		GetNode<LoadingScreen>("LoadingScreen").EnableTime();
-
-		world.SpawnMap(0);
-
-		MouseFilter = MouseFilterEnum.Ignore;
 	}
 	private void On_Setting_Button_Down()
 	{
@@ -39,30 +53,7 @@ public class StartingScreen : Control
 		GetNode<Control>("MainScreen").Hide();
 		GetNode<Control>("MainScreen").MouseFilter = MouseFilterEnum.Ignore;
 	}
-	private void On_Settings_Back_Button_Down()
-	{
-		CloseSettings();
-	}
-	public void CloseSettings()
-	{
-		
-		GetNode<Control>("Settings").Hide();
-		GetNode<Control>("Settings").MouseFilter = MouseFilterEnum.Ignore;
-
-		GetNode<Control>("MainScreen").Show();
-		GetNode<Control>("MainScreen").MouseFilter = MouseFilterEnum.Stop;
-	}
-	private void On_Controlls_Button_Down()
-	{
-		GetNode<TextureRect>("Controlls").Show();
-		GetNode<Button>("Controlls_Back").Show();
-	}
-	private void On_Controlls_Back_Button_Down()
-	{
-		GetNode<TextureRect>("Controlls").Hide();
-		GetNode<Button>("Controlls_Back").Hide();
-	}
-	private void On_FullScreen_Button_Down()
+	private void On_Full_Screen_Toggled(bool button_pressed)
 	{
 		OS.WindowFullscreen = !OS.WindowFullscreen;
 	}
@@ -79,10 +70,7 @@ public class StartingScreen : Control
 			MouseFilter = MouseFilterEnum.Ignore;
 
 		GetNode<Control>("MainScreen").Visible = toggle;
-		Button Startbut;
-		ButtonList.TryGetValue("Start", out Startbut);
-		Startbut.Hide();
-		GetNode<Control>("MainScreen").GetNode<PanelContainer>("PanelContainer").Visible = toggle;
+		GetNode<Control>("Settings").Visible = toggle;
 	}
 	public void GameOver()
 	{

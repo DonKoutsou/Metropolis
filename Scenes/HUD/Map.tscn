@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Scripts/MapGrid.cs" type="Script" id=1]
 [ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=2]
@@ -8,8 +8,9 @@
 [ext_resource path="res://Scenes/HUD/MapUIItems/MapTile.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/HUD/MapUIItems/MapXGridPoint.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/HUD/MapUIItems/MapYGridPoint.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scripts/MagGridPanel.cs" type="Script" id=9]
 
-[sub_resource type="OpenSimplexNoise" id=5]
+[sub_resource type="OpenSimplexNoise" id=22]
 octaves = 1
 period = 1.5
 persistence = 0.0
@@ -18,7 +19,7 @@ persistence = 0.0
 width = 256
 height = 256
 seamless = true
-noise = SubResource( 5 )
+noise = SubResource( 22 )
 
 [sub_resource type="StyleBoxTexture" id=19]
 resource_local_to_scene = true
@@ -68,7 +69,7 @@ border_blend = true
 [sub_resource type="Animation" id=20]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Panel/Panel:custom_styles/panel:texture:noise:seed")
+tracks/0/path = NodePath("MagGridPanel/Panel:custom_styles/panel:texture:noise:seed")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -84,7 +85,7 @@ tracks/0/keys = {
 resource_name = "static"
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Panel/Panel:custom_styles/panel:texture:noise:seed")
+tracks/0/path = NodePath("MagGridPanel/Panel:custom_styles/panel:texture:noise:seed")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -108,7 +109,7 @@ margin_bottom = 360.0
 mouse_filter = 1
 script = ExtResource( 3 )
 
-[node name="Panel" type="Panel" parent="."]
+[node name="MagGridPanel" type="Panel" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 68.0
@@ -118,8 +119,11 @@ margin_bottom = 5.0
 rect_clip_content = true
 mouse_filter = 1
 mouse_default_cursor_shape = 6
+script = ExtResource( 9 )
 
-[node name="MapGrid" type="GridContainer" parent="Panel"]
+[node name="MapGrid" type="GridContainer" parent="MagGridPanel"]
+rect_clip_content = true
+mouse_filter = 2
 custom_constants/vseparation = 12
 custom_constants/hseparation = 12
 columns = 81
@@ -130,7 +134,7 @@ YGridTileScene = ExtResource( 8 )
 ColorList = [ Color( 0, 0.0352941, 0.556863, 1 ), Color( 0, 0.537255, 0.0352941, 1 ), Color( 0.909804, 0.862745, 0.627451, 1 ), Color( 0.945098, 0.376471, 0.372549, 1 ), Color( 0.180392, 0.556863, 0.921569, 1 ) ]
 MaxZoomScale = 4.0
 
-[node name="Panel" type="Panel" parent="Panel"]
+[node name="Panel" type="Panel" parent="MagGridPanel"]
 modulate = Color( 1, 1, 1, 0.27451 )
 anchor_left = 0.5
 anchor_top = 0.5
@@ -221,10 +225,12 @@ margin_left = 6.0
 margin_top = 7.0
 margin_right = -6.0
 margin_bottom = -7.0
+focus_mode = 0
 mouse_default_cursor_shape = 2
 theme = ExtResource( 4 )
 shortcut_in_tooltip = false
 action_mode = 0
+enabled_focus_mode = 0
 icon = ExtResource( 5 )
 icon_align = 1
 expand_icon = true
@@ -279,8 +285,8 @@ playback_speed = 2.0
 anims/RESET = SubResource( 20 )
 anims/static = SubResource( 18 )
 
-[connection signal="mouse_entered" from="Panel" to="." method="OnMouseEntered"]
-[connection signal="mouse_exited" from="Panel" to="." method="OnMouseLeft"]
-[connection signal="mouse_entered" from="Panel/Panel" to="." method="OnMouseEntered"]
-[connection signal="mouse_exited" from="Panel/Panel" to="." method="OnMouseLeft"]
+[connection signal="mouse_entered" from="MagGridPanel" to="." method="OnMouseEntered"]
+[connection signal="mouse_exited" from="MagGridPanel" to="." method="OnMouseLeft"]
+[connection signal="mouse_entered" from="MagGridPanel/Panel" to="." method="OnMouseEntered"]
+[connection signal="mouse_exited" from="MagGridPanel/Panel" to="." method="OnMouseLeft"]
 [connection signal="button_down" from="Panel5/RefreshCoords" to="." method="UpdateCoordinates"]

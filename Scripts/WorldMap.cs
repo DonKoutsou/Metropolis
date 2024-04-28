@@ -75,7 +75,7 @@ public class WorldMap : TileMap
     {
         Instance = this;
 
-        MapGrid.GetInstance().InitMap();
+        //MapGrid.GetInstance().InitMap();
 
         int seed = Settings.GetGameSettings().Seed;
 
@@ -89,8 +89,9 @@ public class WorldMap : TileMap
         {
             loadedscenes.Insert(i, scenestospawn[i]);
         }
-        var pls = GetTree().GetNodesInGroup("player");
-        pl = (Player)pls[0];
+        MapGrid.GetInstance().InitMap();
+        //var pls = GetTree().GetNodesInGroup("player");
+        //pl = (Player)pls[0];
     }
     public Vector2 GetCurrentTile()
     {
@@ -101,8 +102,9 @@ public class WorldMap : TileMap
         ulong ms = OS.GetSystemTimeMsecs();
         if (!finishedspawning)
             RegisterIsland(currentile);
-
-        Vector2 plpos = new Vector2(pl.GlobalTransform.origin.x, pl.GlobalTransform.origin.z);
+        if (Player.GetInstance() == null)
+            return;
+        Vector2 plpos = new Vector2(Player.GetInstance().GlobalTransform.origin.x, Player.GetInstance().GlobalTransform.origin.z);
         if (plpos.DistanceTo(CurrentTile) > CellSize.x/2)
         {
             Vector2 curt = FindClosestIslandPosition(plpos);
@@ -317,7 +319,7 @@ public class WorldMap : TileMap
         
             Island island = entry.ile;
             Position3D spawnpos = island.GetNode<Position3D>("SpawnPosition");
-            pl.Teleport(spawnpos.GlobalTransform.origin);
+            //pl.Teleport(spawnpos.GlobalTransform.origin);
             WorldClipRaycast.EnableWorldClipRaycast();
             GetTree().Root.GetCamera().Fov = Settings.GetGameSettings().FOVOverride;
             CurrentTile = new Vector2 (island.GlobalTransform.origin.x ,island.GlobalTransform.origin.z);

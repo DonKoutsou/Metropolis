@@ -92,6 +92,8 @@ public class MapGrid : GridContainer
             SwitchGridValues(1);
         else
             SwitchGridValues(2);
+
+        InitMap();
         //MarginLeft = -(RectSize.x / 2);
         //RectPosition = RectScale/2; 
     }

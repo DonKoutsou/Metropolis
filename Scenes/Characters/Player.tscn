@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/Stamina_Bar.cs" type="Script" id=2]
@@ -16,10 +16,8 @@
 [ext_resource path="res://Scripts/CameraPanPivot.cs" type="Script" id=14]
 [ext_resource path="res://Scripts/CameraMovePivot.cs" type="Script" id=15]
 [ext_resource path="res://Scenes/Characters/MoveLocation.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Scripts/SandParticles.cs" type="Script" id=17]
 [ext_resource path="res://Scripts/Time_UI.cs" type="Script" id=18]
 [ext_resource path="res://Scripts/TalkText.cs" type="Script" id=19]
-[ext_resource path="res://Assets/Clouds/Textures/smoke_01.png" type="Texture" id=20]
 [ext_resource path="res://Scripts/MyCamera.cs" type="Script" id=21]
 [ext_resource path="res://Scenes/Env_Assets/Clouds.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Scenes/HUD/ActionMenu.tscn" type="PackedScene" id=23]
@@ -34,6 +32,7 @@
 [ext_resource path="res://Assets/PostProcess/KuwaharaShader.gdshader" type="Shader" id=32]
 [ext_resource path="res://Scenes/Items/SkeleArm_L.tscn" type="PackedScene" id=33]
 [ext_resource path="res://Scenes/Items/SkeleArm_R.tscn" type="PackedScene" id=34]
+[ext_resource path="res://Scripts/CameraAnimationPlayer.cs" type="Script" id=35]
 
 [sub_resource type="Curve" id=106]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.5 ), 0.0, 0.0, 0, 0 ]
@@ -87,46 +86,68 @@ font_data = ExtResource( 4 )
 render_priority = -1
 shader = ExtResource( 32 )
 
-[sub_resource type="SpatialMaterial" id=100]
+[sub_resource type="SpatialMaterial" id=109]
 render_priority = 1
 flags_transparent = true
-params_billboard_mode = 3
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
-albedo_color = Color( 1, 0.921569, 0.796078, 0.266667 )
-albedo_texture = ExtResource( 20 )
+albedo_color = Color( 0, 0, 0, 1 )
 
-[sub_resource type="Curve" id=90]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+[sub_resource type="Animation" id=110]
+resource_name = "FadeIn"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("MeshInstance2:material/0:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 5.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MeshInstance2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 5.9, 6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, true, false ]
+}
 
-[sub_resource type="CurveTexture" id=93]
-width = 512
-curve = SubResource( 90 )
-
-[sub_resource type="ParticlesMaterial" id=104]
-trail_size_modifier = SubResource( 93 )
-emission_shape = 2
-emission_box_extents = Vector3( 5000, 50, 5000 )
-direction = Vector3( 0, 0, -2 )
-spread = 1.41
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 18.05
-angular_velocity = 34.12
-angular_velocity_random = 1.0
-linear_accel = 100.0
-linear_accel_random = 0.35
-tangential_accel = 2.8
-tangential_accel_random = 1.0
-angle = 360.0
-scale_random = 0.53
-hue_variation = 1.0
-hue_variation_random = 1.0
-
-[sub_resource type="QuadMesh" id=89]
-size = Vector2( 1000, 1000 )
+[sub_resource type="Animation" id=111]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("MeshInstance2:material/0:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MeshInstance2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
 
 [node name="Player" type="KinematicBody" groups=["player"]]
+pause_mode = 1
 collision_layer = 9
 collision_mask = 311
 script = ExtResource( 1 )
@@ -285,7 +306,7 @@ script = ExtResource( 14 )
 
 [node name="SpringArm" type="SpringArm" parent="CameraMovePivot/CameraPanPivot"]
 transform = Transform( 0.999999, 0, 5.32907e-15, 0, 1, 0, -5.32907e-15, 0, 0.999999, 0, 0, 0 )
-collision_mask = 36
+collision_mask = 4
 spring_length = 40.0
 margin = 0.5
 
@@ -322,20 +343,15 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0715218, -0.623331 )
 mesh = SubResource( 107 )
 material/0 = SubResource( 108 )
 
-[node name="Particles" type="Particles" parent="."]
-transform = Transform( -1, 0, 0.000802906, 0, 1, 0, -0.000802906, 0, -1, 0, 50, 0 )
-material_override = SubResource( 100 )
-cast_shadow = 0
-generate_lightmap = false
-amount = 50
-lifetime = 24.07
-speed_scale = 5.0
-visibility_aabb = AABB( -1293.38, -1000, -1158.37, 2586.77, 8000, 2316.74 )
-local_coords = false
-draw_order = 1
-process_material = SubResource( 104 )
-draw_pass_1 = SubResource( 89 )
-script = ExtResource( 17 )
+[node name="MeshInstance2" type="MeshInstance" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0715218, -0.623331 )
+mesh = SubResource( 107 )
+material/0 = SubResource( 109 )
+
+[node name="CameraAnimationPlayer" type="AnimationPlayer" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/Camera"]
+anims/FadeIn = SubResource( 110 )
+anims/RESET = SubResource( 111 )
+script = ExtResource( 35 )
 
 [node name="Spatial" parent="." instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2200, 0 )

@@ -1,11 +1,13 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Env_Assets/MotherCityComp.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Islands/Into.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Building/BuildingComposition.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Building/BuildingDust2.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Env_Assets/Fireplace.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Env_Assets/Street_Lamp.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scripts/SpawnPosition.cs" type="Script" id=8]
 [ext_resource path="res://Scenes/Env_Assets/WindGenerator.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Items/Battery.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Env_Assets/House.tscn" type="PackedScene" id=18]
@@ -67,6 +69,7 @@ transform = Transform( 0.072246, 0, 0.997387, -0.679796, 0.731746, 0.0492412, -0
 
 [node name="SpawnPosition" type="Position3D" parent="." index="16"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -91.9858, 12.1394, 2457.44 )
+script = ExtResource( 8 )
 
 [node name="StaticBody43" parent="." index="17" instance=ExtResource( 26 )]
 transform = Transform( 0.984439, 0, -0.175728, 0, 1, 0, 0.175728, 0, 0.984439, 130.645, -19.1695, 3034.27 )
@@ -229,16 +232,16 @@ EnergyPerWindStreangth = 0.2
 transform = Transform( 0.0588359, 0, 0.998268, 0, 1, 0, -0.998268, 0, 0.0588359, -949.831, 15.1781, 2087.6 )
 
 [node name="StreetLamp" parent="." index="69" instance=ExtResource( 7 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -43.9379, 10.5448, 2438.31 )
+transform = Transform( 0.980278, 0, -0.197623, 0, 1, 0, 0.197623, 0, 0.980278, -46.6908, 10.5448, 2439.15 )
 
 [node name="StreetLamp2" parent="." index="70" instance=ExtResource( 7 )]
-transform = Transform( -0.117901, 0, -0.993026, 0, 1, 0, 0.993026, 0, -0.117901, 43.8705, 11.1117, 2437.2 )
+transform = Transform( -0.99057, 0, 0.137012, 0, 1, 0, -0.137012, 0, -0.99057, 254.511, 11.1117, 2838.16 )
 
 [node name="StaticBody38" parent="." index="71" instance=ExtResource( 23 )]
 transform = Transform( -13.6067, -2.11579, 14.5046, -3.47327, 19.6923, -0.385718, -14.2406, -2.78133, -13.7648, -130.777, 183.053, 180.134 )
 
 [node name="StaticBody37" parent="." index="72" instance=ExtResource( 22 )]
-transform = Transform( 28.8694, 5.00605, 22.9546, -2.64502, 36.8278, -4.70501, -23.3448, 2.01809, 28.92, -152.929, 205.562, -62.7226 )
+transform = Transform( 28.8694, 5.00605, 22.9546, -2.64502, 36.8278, -4.70501, -23.3448, 2.01809, 28.92, -151.487, 205.562, -64.197 )
 
 [node name="Character" parent="." index="73" instance=ExtResource( 24 )]
 transform = Transform( 0.412039, 0, 0.911166, 0, 1, 0, -0.911166, 0, 0.412039, -96.9068, 11.4714, 2466.03 )
@@ -251,3 +254,5 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -67, 82, 1980 )
 
 [node name="MotherCityComp" parent="." index="76" instance=ExtResource( 2 )]
 transform = Transform( 800, 0, 0, 0, 800, 0, 0, 0, 800, 0, 0, 0 )
+
+[node name="Intro" parent="." index="77" instance=ExtResource( 3 )]

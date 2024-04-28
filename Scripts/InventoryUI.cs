@@ -45,20 +45,18 @@ public class InventoryUI : Control
     public override void _Ready()
     {
         inst = this;
-        Inv = (Inventory)GetParent();
-        pl = (Player)Inv.GetParent();
-        comp = Compass.GetInstance();
-        map = MapGrid.GetInstance();
-        MaxLoad = Inv.GetMaxCap();
-        float currentload = Inv.GetCurrentWeight();
+        
+
+        
+        
+        
         Capacity = GetNode<Panel>("CapPanel").GetNode<RichTextLabel>("CapAmmount");
-        Capacity.BbcodeText = string.Format("[center]{0}/{1}", currentload, MaxLoad);
+        
         GridContainer gr = GetNode<GridContainer>("GridContainer");
         int childc = gr.GetChildCount();
         CharacterBatteryCharge = GetNode<Panel>("BatteryPanel").GetNode<ProgressBar>("CharacterBatteryCharge");
         CharacterRPM = GetNode<Panel>("BatteryPanel").GetNode<ProgressBar>("RPMAmount");
-        CharacterBatteryCharge.MaxValue = pl.GetCharacterBatteryCap();
-        CharacterBatteryCharge.Value = pl.GetCurrentCharacterEnergy();
+        
         DescPan = GetNode<Panel>("DescriptionPanel");
         Description = DescPan.GetNode<MarginContainer>("MarginContainer").GetNode<VBoxContainer>("VBoxContainer").GetNode<RichTextLabel>("Description");
         WeightText =  DescPan.GetNode<MarginContainer>("MarginContainer").GetNode<VBoxContainer>("VBoxContainer").GetNode<RichTextLabel>("WeightText");
@@ -73,6 +71,18 @@ public class InventoryUI : Control
         }
         SetProcess(false);
         //CallDeferred("UpdateInventory");
+    }
+    public void OnPlayerSpawned(Player play)
+    {
+        pl = play;
+        Inv = pl.GetNode<Inventory>("Inventory");
+        MaxLoad = Inv.GetMaxCap();
+        float currentload = Inv.GetCurrentWeight();
+        Capacity.BbcodeText = string.Format("[center]{0}/{1}", currentload, MaxLoad);
+        CharacterBatteryCharge.MaxValue = pl.GetCharacterBatteryCap();
+        CharacterBatteryCharge.Value = pl.GetCurrentCharacterEnergy();
+        comp = Compass.GetInstance();
+        map = MapGrid.GetInstance();
     }
     public void OpenInventory()
     {
@@ -163,12 +173,14 @@ public class InventoryUI : Control
             map = MapGrid.GetInstance();
             //if (map != null)
                 map.ToggleMap(true);
+            GetNode<Panel>("ItemOptionPanel").GetNode<Button>("DropButton").Hide();
         }
         else
         {
             map = MapGrid.GetInstance();
             //if (map != null)
                 map.ToggleMap(false);
+            GetNode<Panel>("ItemOptionPanel").GetNode<Button>("DropButton").Show();
         }
     }
     public void CloseInventory()
@@ -241,9 +253,16 @@ public class InventoryUI : Control
             return;
         }
         if (!ShowingMap)
+        {
             ShowingMap = true;
+            
+        }
         else
+        {
             ShowingMap = false;
+            
+        }
+            
     }
     
 }

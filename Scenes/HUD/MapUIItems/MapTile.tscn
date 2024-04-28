@@ -54,7 +54,6 @@ margin_top = -8.0
 margin_right = 8.0
 margin_bottom = 8.0
 hint_tooltip = "Thing"
-mouse_filter = 0
 theme = SubResource( 7 )
 texture = ExtResource( 1 )
 expand = true

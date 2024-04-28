@@ -125,6 +125,7 @@ anti_aliasing = false
 [node name="InvntoryUI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 script = ExtResource( 2 )
 
 [node name="GridContainer" type="GridContainer" parent="."]
@@ -326,7 +327,6 @@ bbcode_text = "[center]100/150"
 text = "100/150"
 
 [node name="MapUI" parent="." instance=ExtResource( 6 )]
-visible = false
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -527,9 +527,11 @@ margin_left = -104.5
 margin_top = -25.5
 margin_right = -6.5
 margin_bottom = 25.5
+focus_mode = 0
 mouse_default_cursor_shape = 2
 theme = ExtResource( 3 )
 action_mode = 0
+enabled_focus_mode = 0
 text = "Άφησε"
 
 [node name="MapButton" type="Button" parent="ItemOptionPanel"]
@@ -541,9 +543,11 @@ margin_left = 6.5
 margin_top = -25.5
 margin_right = 104.5
 margin_bottom = 25.5
+focus_mode = 0
 mouse_default_cursor_shape = 2
 theme = ExtResource( 3 )
 action_mode = 0
+enabled_focus_mode = 0
 text = "Χάρτης"
 
 [node name="CompassButton" type="Button" parent="ItemOptionPanel"]
@@ -555,9 +559,11 @@ margin_left = 117.5
 margin_top = -25.5
 margin_right = 215.5
 margin_bottom = 25.5
+focus_mode = 0
 mouse_default_cursor_shape = 2
 theme = ExtResource( 3 )
 action_mode = 0
+enabled_focus_mode = 0
 text = "Πυξίδα"
 
 [node name="Panel2" type="Panel" parent="."]

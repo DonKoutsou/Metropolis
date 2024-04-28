@@ -7,13 +7,9 @@ public class MainWorld : Spatial
 	[Export]
 	List<string> WorldScene = new List<string>();
 
-	[Export]
-	PackedScene Intro = null;
-
 	MyWorld m_myworld;
 	StartingScreen screen = null;
 
-	Spatial intro;
 	public StartingScreen GetStartingScreen()
 	{
 		return screen;
@@ -21,12 +17,13 @@ public class MainWorld : Spatial
 	public override void _Ready()
 	{
 		screen = GetNode<CanvasLayer>("CanvasLayer").GetNode<StartingScreen>("StartScreen");
-		intro = (Spatial)Intro.Instance();
-		AddChild(intro, true);	
+	}
+	public bool IsMapSpawned()
+	{
+		return m_myworld != null;
 	}
 	public void SpawnMap(int index)
 	{
-		intro.Free();
 		var scene = GD.Load<PackedScene>(WorldScene[index]);
 		
 		m_myworld = (MyWorld)scene.Instance();
@@ -38,7 +35,5 @@ public class MainWorld : Spatial
 	{
 		m_myworld.QueueFree();
 		m_myworld = null;
-		intro = (Spatial)Intro.Instance();
-		AddChild(intro, true);
 	}
 }
