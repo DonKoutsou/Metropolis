@@ -106,6 +106,7 @@ void fragment() {
 	
 	ALBEDO = waterColor.rgb;
 	
+	
 	if (IsRaining)
 	{
 		vec2 pat = texture(pattern, base_uv * 5.0).rg;
@@ -135,15 +136,15 @@ void fragment() {
 [resource]
 shader = SubResource( 6 )
 shader_param/IsRaining = true
-shader_param/albedo = Color( 0.501961, 0.505882, 0.509804, 0.984314 )
+shader_param/albedo = Color( 0.501961, 0.505882, 0.509804, 1 )
 shader_param/ring_color = Color( 0.498039, 0.552941, 0.572549, 1 )
 shader_param/_DepthGradientShallow = Color( 0.529412, 0.529412, 0.529412, 1 )
-shader_param/specular = 0.0
+shader_param/specular = 1.03
 shader_param/metallic = 0.0
 shader_param/proximity_fade_distance = 2.86
-shader_param/roughness = 0.5
+shader_param/roughness = 0.625
 shader_param/refraction = 0.0
-shader_param/normal_scale = 1.0
+shader_param/normal_scale = 2.0
 shader_param/beer_factor = 0.078
 shader_param/_DepthMaxDistance = 1.651
 shader_param/_DepthFactor = 9.326

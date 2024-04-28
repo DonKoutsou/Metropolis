@@ -276,12 +276,16 @@ public class Character : KinematicBody
 		//AddForce(velocity * ammount, velocity * ammount);
 		//AppliedForce = m_velocity * ammount;
 	}
-	public virtual void OnVehicleBoard()
+	[Signal]
+    public delegate void VehicleBoardEventHandler(bool toggle, Vehicle veh);
+	public virtual void OnVehicleBoard(Vehicle veh)
 	{
+		EmitSignal("VehicleBoardEventHandler", true, veh);
 		//SetCollisionMaskBit(8, true);
 	}
-	public virtual void OnVehicleUnBoard()
+	public virtual void OnVehicleUnBoard(Vehicle veh)
 	{
+		EmitSignal("VehicleBoardEventHandler", false, veh);
 		//SetCollisionMaskBit(8, false);
 	}
 	private void On_DialogueButton_Button_Down()

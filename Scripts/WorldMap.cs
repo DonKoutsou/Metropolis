@@ -55,8 +55,6 @@ public class WorldMap : TileMap
 
     Random random;
 
-    Player pl;
-
     Vector2 CurrentTile;
 
     static Dictionary<Vector2, IslandInfo> ilemap = new Dictionary<Vector2, IslandInfo>();
@@ -135,8 +133,7 @@ public class WorldMap : TileMap
         postoput += CellSize / 2;
         pos.x = postoput.x;
         pos.z = postoput.y;
-        Ile.loctospawnat = pos;
-        Ile.rotationtospawnwith = info.rottospawn;
+        Ile.SetSpawnInfo(pos, info.rottospawn);
 
         info.SetInfo(Ile);
         MapGrid.GetInstance().UpdateIleInfo(info.pos, info.type);
@@ -153,8 +150,7 @@ public class WorldMap : TileMap
         postoput += CellSize / 2;
         pos.x = postoput.x;
         pos.z = postoput.y;
-        Ile.loctospawnat = pos;
-        Ile.rotationtospawnwith = info.rottospawn;
+        Ile.SetSpawnInfo(pos, info.rottospawn);
 
         info.ile = Ile;
         //Ile.InputData(info);

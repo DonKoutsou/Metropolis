@@ -99,8 +99,8 @@ noise = SubResource( 3 )
 
 [resource]
 shader = SubResource( 1 )
-shader_param/beer_factor = 0.8
-shader_param/foam_distance = 2.997
+shader_param/beer_factor = 0.075
+shader_param/foam_distance = 3.651
 shader_param/foam_max_distance = 2.81
 shader_param/foam_min_distance = 2.101
 shader_param/foam_color = Color( 1, 1, 1, 1 )
@@ -108,8 +108,8 @@ shader_param/surface_noise_tiling = Vector2( 1, 4 )
 shader_param/surface_noise_scroll = Vector3( 0.03, 0.03, 0 )
 shader_param/surface_noise_cutoff = 0.777
 shader_param/surface_distortion_amount = 0.27
-shader_param/_DepthGradientShallow = Color( 0.325, 0.807, 0.971, 0.725 )
-shader_param/_DepthGradientDeep = Color( 0.086, 0.407, 1, 0.749 )
+shader_param/_DepthGradientShallow = Color( 0.32549, 0.807843, 0.972549, 1 )
+shader_param/_DepthGradientDeep = Color( 0.0862745, 0.407843, 1, 1 )
 shader_param/_DepthMaxDistance = 1.0
 shader_param/_DepthFactor = 1.0
 shader_param/surfaceNoise = SubResource( 2 )

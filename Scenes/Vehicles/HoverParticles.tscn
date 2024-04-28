@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Clouds/CloudsHover.material" type="Material" id=1]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 5
+emission_ring_radius = 2.0
+emission_ring_inner_radius = 0.0
+emission_ring_height = 0.0
+emission_ring_axis = Vector3( 0, 1, 0 )
+direction = Vector3( 0, -1, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+radial_accel = 24.55
+scale_curve = SubResource( 2 )
+
+[sub_resource type="QuadMesh" id=4]
+
+[node name="Particles" type="Particles"]
+material_override = ExtResource( 1 )
+amount = 100
+process_material = SubResource( 3 )
+draw_pass_1 = SubResource( 4 )

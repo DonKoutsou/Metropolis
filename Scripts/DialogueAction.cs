@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-using MonoCustomResourceRegistry;
+//using MonoCustomResourceRegistry;
 
-[RegisteredType(nameof(DialogueAction), "", nameof(Resource))]
+//[RegisteredType(nameof(DialogueAction), "", nameof(Resource))]
 public partial class DialogueAction : Resource
 {
     [Export]

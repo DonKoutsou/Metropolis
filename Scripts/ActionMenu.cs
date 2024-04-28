@@ -197,7 +197,7 @@ public class ActionMenu : Control
 		else if (SelectedObj is Vehicle)
 		{
 			PickButton.Text = "Επιβιβάσου";
-			IntButton.Text = "Έναρξη";
+			//IntButton.Text = "Έναρξη";
 			((ShaderMaterial)SelectedObj.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
 		}
 		else if (SelectedObj is Furniture)
@@ -299,10 +299,10 @@ public class ActionMenu : Control
 			else
 			{
 				PickButton.Show();
-				if (((Vehicle)SelectedObj).HasPassengers())
-					IntButton.Show();
-				else
-					IntButton.Hide();
+				//if (((Vehicle)SelectedObj).HasPassengers())
+					//IntButton.Show();
+				//else
+				IntButton.Hide();
 			}
 				
 		}

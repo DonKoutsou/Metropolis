@@ -1,0 +1,284 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://Assets/Boat/M_Boat.material" type="Material" id=1]
+[ext_resource path="res://Scripts/Vehicle.cs" type="Script" id=2]
+[ext_resource path="res://Scripts/VehicleDamageManager.cs" type="Script" id=3]
+[ext_resource path="res://Assets/Boat/Boat.obj" type="ArrayMesh" id=4]
+[ext_resource path="res://Assets/Boat/BoatWingL_Dest.tres" type="ArrayMesh" id=5]
+[ext_resource path="res://Assets/Boat/BoatWingR_Dest.tres" type="ArrayMesh" id=6]
+[ext_resource path="res://Assets/Boat/BoatWindDetector.obj" type="ArrayMesh" id=7]
+[ext_resource path="res://Scenes/Vehicles/HoverParticles.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scripts/WindDetector.cs" type="Script" id=9]
+[ext_resource path="res://Assets/Boat/Boat_WingL.tres" type="ArrayMesh" id=10]
+[ext_resource path="res://Assets/Boat/BoatWingR.tres" type="ArrayMesh" id=11]
+[ext_resource path="res://Assets/Clouds/HoverDust.tres" type="Material" id=12]
+
+[sub_resource type="PhysicsMaterial" id=1]
+friction = 0.0
+
+[sub_resource type="Curve" id=7]
+min_value = -6.0
+max_value = 6.0
+_data = [ Vector2( 0, 6 ), 0.0, 0.0, 0, 0, Vector2( 0.355023, 5.96319 ), 0.0, 0.0, 0, 0, Vector2( 0.672374, -6 ), 0.0, 0.0, 0, 0, Vector2( 1, -6 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=9]
+_data = [ Vector2( 0, 0.1 ), 0.0, 0.0, 0, 0, Vector2( 0.5, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.119632 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CapsuleShape" id=8]
+radius = 3.11783
+height = 8.86799
+
+[sub_resource type="BoxShape" id=32]
+extents = Vector3( 0.366748, 0.297252, 0.266781 )
+
+[sub_resource type="Curve" id=25]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.275, 0.745454 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=6]
+curve = SubResource( 25 )
+
+[sub_resource type="ParticlesMaterial" id=26]
+lifetime_randomness = 0.46
+trail_divisor = 11
+emission_shape = 1
+emission_sphere_radius = 0.4
+direction = Vector3( 0, 1, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 5.0
+initial_velocity_random = 0.1
+angular_velocity = 40.0
+angular_velocity_random = 1.0
+linear_accel = 6.6
+linear_accel_random = 0.23
+angle = 360.0
+angle_random = 1.0
+scale = 2.0
+scale_random = 0.8
+scale_curve = SubResource( 6 )
+
+[sub_resource type="SpatialMaterial" id=27]
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_blend_mode = 1
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_color = Color( 1, 0.301961, 0.027451, 1 )
+
+[sub_resource type="QuadMesh" id=28]
+material = SubResource( 27 )
+
+[sub_resource type="Animation" id=18]
+length = 0.001
+
+[sub_resource type="Animation" id=17]
+resource_name = "Wings"
+
+[sub_resource type="Animation" id=19]
+resource_name = "WingsOut"
+
+[sub_resource type="CylinderMesh" id=31]
+top_radius = 0.2
+bottom_radius = 0.1
+height = 0.5
+radial_segments = 10
+
+[sub_resource type="CylinderMesh" id=33]
+bottom_radius = 0.0
+height = 4.155
+
+[node name="Vehicle" type="Spatial"]
+pause_mode = 1
+transform = Transform( 1, -0.000665859, -0.000639929, 0.000666553, 0.999999, 0.00107017, 0.000639206, -0.0010706, 0.999999, 0, 0, 0 )
+
+[node name="VehicleDamageManager" type="Spatial" parent="."]
+transform = Transform( 1, -5.52518e-11, 5.82077e-11, 7.38964e-11, 1, 0, 0, 0, 1, 0, 0, 0 )
+script = ExtResource( 3 )
+
+[node name="VehicleBody" type="RigidBody" parent="."]
+transform = Transform( 1, -1.71667e-10, 1.74623e-10, 2.48519e-10, 1, 0, 0, 0, 1, 0, 0, 0 )
+collision_layer = 16
+collision_mask = 292
+mass = 40.0
+physics_material_override = SubResource( 1 )
+contacts_reported = 4
+contact_monitor = true
+can_sleep = false
+linear_damp = 1.0
+angular_damp = 10.0
+script = ExtResource( 2 )
+speed = 500000.0
+turnspeed = 1.5e+06
+HoverForce = 8000
+JumpForce = 1000
+forcecurve = SubResource( 7 )
+Hoverforcecurve = SubResource( 9 )
+LeftWingMesh = ExtResource( 10 )
+LeftDestWingMesh = ExtResource( 5 )
+RightWingMesh = ExtResource( 11 )
+RightDestWingMesh = ExtResource( 6 )
+
+[node name="MeshInstance" type="MeshInstance" parent="VehicleBody"]
+material_override = ExtResource( 1 )
+mesh = ExtResource( 4 )
+
+[node name="WindDetector" type="MeshInstance" parent="VehicleBody"]
+transform = Transform( 0.0239615, 0.00172045, -0.999713, -0.000419282, 1, 0.00171089, 0.999716, 0.000378179, 0.0239623, -0.000107468, 3.31787, 6.50101 )
+mesh = ExtResource( 7 )
+script = ExtResource( 9 )
+
+[node name="CollisionShape" type="CollisionShape" parent="VehicleBody"]
+transform = Transform( 1, -2.88026e-10, 1.16415e-10, 1.56888e-11, 1, -4.65661e-10, 0, 4.65661e-10, 1, 0.000144172, 1.23038, -1.05494 )
+shape = SubResource( 8 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="VehicleBody"]
+transform = Transform( 1, 6.03677e-11, 9.31323e-10, -7.98309e-10, 1, 4.65661e-10, -8.14907e-10, -4.65661e-10, 1, 0.00630236, 2.78412, 6.95808 )
+shape = SubResource( 32 )
+
+[node name="SteeringWheel" type="Position3D" parent="VehicleBody"]
+
+[node name="RemoteTransform" type="RemoteTransform" parent="VehicleBody"]
+transform = Transform( 0.999999, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.8, 8 )
+remote_path = NodePath("../../RayFL")
+update_rotation = false
+
+[node name="RemoteTransform2" type="RemoteTransform" parent="VehicleBody"]
+transform = Transform( 1, -1.15949e-09, 2.73576e-09, -3.29919e-09, 1, -5.82077e-09, -2.73576e-09, 2.91038e-09, 1, -3, 0.8, 8 )
+remote_path = NodePath("../../RayFR")
+update_rotation = false
+
+[node name="RemoteTransform3" type="RemoteTransform" parent="VehicleBody"]
+transform = Transform( 1, 5.28928e-10, 1.22236e-09, -1.78755e-09, 1, -3.37604e-09, -1.10595e-09, 3.37604e-09, 1, -7, 0.8, -9 )
+remote_path = NodePath("../../RayBR")
+update_rotation = false
+
+[node name="RemoteTransform4" type="RemoteTransform" parent="VehicleBody"]
+transform = Transform( 1, 2.95699e-10, 1.33878e-09, -1.43837e-09, 1, -3.14321e-09, -1.04774e-09, 3.14321e-09, 1, 7, 0.8, -9 )
+remote_path = NodePath("../../RayBL")
+update_rotation = false
+
+[node name="RemoteTransform5" type="RemoteTransform" parent="VehicleBody"]
+transform = Transform( 1, 4.09671e-10, -2.32831e-10, 2.48349e-10, 1, -4.65661e-10, 2.91038e-10, -4.65661e-10, 1, -0.00105671, -0.655451, 4.81077 )
+remote_path = NodePath("../../RayF")
+
+[node name="CharacterRemoteTransform" type="RemoteTransform" parent="VehicleBody"]
+transform = Transform( 1, 4.43379e-12, 0, -9.71454e-11, 1, -2.32831e-10, 0, 2.32831e-10, 1, 0, 0, 0 )
+update_rotation = false
+update_scale = false
+
+[node name="CharacterRemoteTransform2" type="RemoteTransform" parent="VehicleBody"]
+transform = Transform( 1, 2.55795e-12, 1.16415e-10, -3.33159e-10, 1, -4.65661e-10, -2.32831e-10, -2.32831e-10, 1, 0, 0, 0 )
+update_position = false
+update_scale = false
+
+[node name="ExaustParticlesL" type="Particles" parent="VehicleBody"]
+transform = Transform( 1, -0.00130579, 2.59311e-05, -2.59345e-05, 3.93833e-07, 1, -0.00130579, -1, 3.68571e-07, 3.67965, 1.35407, -9.74694 )
+amount = 200
+lifetime = 0.5
+randomness = 1.0
+visibility_aabb = AABB( -17.8206, -24.3812, -12.3799, 35.6412, 48.7623, 24.7598 )
+draw_order = 2
+process_material = SubResource( 26 )
+draw_pass_1 = SubResource( 28 )
+
+[node name="ExaustParticlesR" type="Particles" parent="VehicleBody"]
+transform = Transform( 1, -0.00130579, 2.59312e-05, -2.59345e-05, 3.93833e-07, 1, -0.00130579, -1, 3.68338e-07, -3.733, 1.047, -9.747 )
+amount = 200
+lifetime = 0.5
+randomness = 1.0
+visibility_aabb = AABB( -17.1728, -26.8771, -7.68229, 34.3456, 53.754, 15.3646 )
+draw_order = 2
+process_material = SubResource( 26 )
+draw_pass_1 = SubResource( 28 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VehicleBody"]
+reset_on_save = false
+anims/RESET = SubResource( 18 )
+anims/Wings = SubResource( 17 )
+anims/WingsOut = SubResource( 19 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="VehicleBody"]
+transform = Transform( 1, -0.00022008, -0.00144871, -0.00145632, -0.258818, -0.965925, -0.000162362, 0.965926, -0.258818, 0.00629711, 2.82431, 6.90431 )
+mesh = SubResource( 31 )
+
+[node name="SpotLight" type="SpotLight" parent="VehicleBody/MeshInstance2"]
+transform = Transform( 0.999998, -0.000111043, -0.00137819, -0.00138151, -0.12076, -0.992681, -5.62005e-05, 0.992682, -0.12076, 0.000155926, 0.256663, -0.0198581 )
+light_color = Color( 1, 0.956863, 0.815686, 1 )
+shadow_enabled = true
+spot_range = 47.3573
+spot_angle = 44.4241
+
+[node name="RayFL" type="RayCast" parent="."]
+transform = Transform( 1, -3.01977e-08, 2.03145e-08, 3.02475e-08, 1, -1.44355e-08, -2.04309e-08, 1.44355e-08, 1, 3, 0.8, 8 )
+enabled = true
+cast_to = Vector3( 0, -40, 0 )
+collision_mask = 292
+
+[node name="Particles" parent="RayFL" instance=ExtResource( 8 )]
+transform = Transform( 1, 2.05701e-08, -1.85682e-08, -2.05223e-08, 1, 1.44355e-08, 1.90921e-08, -1.44355e-08, 1, -0.00278616, -4.17923, -0.00447226 )
+material_override = ExtResource( 12 )
+local_coords = false
+
+[node name="MeshInstance" type="MeshInstance" parent="RayFL"]
+transform = Transform( 1, -2.60343e-11, 0, 1.03796e-10, 1, 0, 0, 0, 1, -0.00133324, -2, -0.00213957 )
+mesh = SubResource( 33 )
+material/0 = ExtResource( 1 )
+
+[node name="RayF" type="RayCast" parent="."]
+transform = Transform( 1, 1.77295e-10, 0, 5.39274e-10, 1, -4.65661e-10, 2.91038e-10, -4.65661e-10, 1, -0.00105671, -0.655451, 4.81077 )
+enabled = true
+cast_to = Vector3( 0, 0, 20 )
+collision_mask = 292
+
+[node name="RayFR" type="RayCast" parent="."]
+transform = Transform( 1, 2.74284e-07, 5.75674e-08, -2.74198e-07, 1, -1.00932e-07, -5.75092e-08, 1.01048e-07, 1, -3, 0.8, 8 )
+enabled = true
+cast_to = Vector3( 0, -40, 0 )
+collision_mask = 292
+
+[node name="Particles" parent="RayFR" instance=ExtResource( 8 )]
+transform = Transform( 1, 2.05701e-08, -1.85682e-08, -2.05223e-08, 1, 1.44355e-08, 1.90921e-08, -1.44355e-08, 1, -0.00278616, -4.17923, -0.00447226 )
+material_override = ExtResource( 12 )
+local_coords = false
+
+[node name="MeshInstance" type="MeshInstance" parent="RayFR"]
+transform = Transform( 1, -2.60343e-11, 0, 1.03796e-10, 1, 0, 0, 0, 1, -0.00133324, -2, -0.00213957 )
+mesh = SubResource( 33 )
+material/0 = ExtResource( 1 )
+
+[node name="RayBR" type="RayCast" parent="."]
+transform = Transform( 1, 2.76431e-07, 5.81495e-08, -2.76409e-07, 1, -9.15024e-08, -5.81495e-08, 9.16189e-08, 1, -7, 0.8, -9 )
+enabled = true
+cast_to = Vector3( 0, -40, 0 )
+collision_mask = 292
+
+[node name="Particles" parent="RayBR" instance=ExtResource( 8 )]
+transform = Transform( 1, 2.0482e-08, -1.85682e-08, -2.04955e-08, 1, 1.44355e-08, 1.90339e-08, -1.44355e-08, 1, -0.00278616, -4.17923, -0.00447226 )
+material_override = ExtResource( 12 )
+local_coords = false
+
+[node name="MeshInstance" type="MeshInstance" parent="RayBR"]
+transform = Transform( 1, -2.60343e-11, 0, 1.03796e-10, 1, 0, 0, 0, 1, -0.00133324, -2, -0.00213957 )
+mesh = SubResource( 33 )
+material/0 = ExtResource( 1 )
+
+[node name="RayBL" type="RayCast" parent="."]
+transform = Transform( 1, 2.76025e-07, 5.67525e-08, -2.75945e-07, 1, -9.39472e-08, -5.66943e-08, 9.40636e-08, 1, 7, 0.8, -9 )
+enabled = true
+cast_to = Vector3( 0, -40, 0 )
+collision_mask = 292
+
+[node name="Particles" parent="RayBL" instance=ExtResource( 8 )]
+transform = Transform( 1, 2.05701e-08, -1.85682e-08, -2.05223e-08, 1, 1.44355e-08, 1.90921e-08, -1.44355e-08, 1, -0.00278616, -4.17923, -0.00447226 )
+material_override = ExtResource( 12 )
+local_coords = false
+
+[node name="MeshInstance" type="MeshInstance" parent="RayBL"]
+transform = Transform( 1, -2.60343e-11, 0, 1.03796e-10, 1, 0, 0, 0, 1, -0.00133324, -2, -0.00213957 )
+mesh = SubResource( 33 )
+material/0 = ExtResource( 1 )
+
+[connection signal="body_shape_exited" from="VehicleBody" to="VehicleDamageManager" method="On_Ship_Part_Collided"]

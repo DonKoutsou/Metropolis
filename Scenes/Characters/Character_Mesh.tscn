@@ -1564,7 +1564,7 @@ nodes/TimeScale/position = Vector2( 241.076, 25.6959 )
 nodes/Walk_Speed/node = SubResource( 19 )
 nodes/Walk_Speed/position = Vector2( 0, 320 )
 nodes/output/position = Vector2( 980, 160 )
-node_connections = [ "output", 0, "JumpShot", "Idle_Walk_Blend", 0, "Animation", "Idle_Walk_Blend", 1, "Walk_Speed", "TimeScale", 0, "Animation 2", "Walk_Speed", 0, "Animation 3", "JumpShot", 0, "Idle_Walk_Blend", "JumpShot", 1, "TimeScale" ]
+node_connections = [ "output", 0, "JumpShot", "JumpShot", 0, "Idle_Walk_Blend", "JumpShot", 1, "TimeScale", "Walk_Speed", 0, "Animation 3", "Idle_Walk_Blend", 0, "Animation", "Idle_Walk_Blend", 1, "Walk_Speed", "TimeScale", 0, "Animation 2" ]
 
 [node name="Cloak_Skinned" instance=ExtResource( 1 )]
 
@@ -1586,7 +1586,7 @@ material_override = SubResource( 27 )
 material/0 = SubResource( 27 )
 
 [node name="BoneAttachment" type="BoneAttachment" parent="rig/Skeleton" index="2"]
-transform = Transform( 0.99693, -0.0705724, 0.0339152, -0.0756015, -0.754888, 0.651482, -0.0203745, -0.652046, -0.757906, -9.0804e-09, 4.2484, 0.109746 )
+transform = Transform( 0.99693, -0.0705724, 0.0339152, -0.0756015, -0.754888, 0.651482, -0.0203745, -0.652046, -0.757906, 1.93249e-08, 4.24679, 0.111318 )
 bone_name = "DEF-spine.006"
 
 [node name="HeadPivot" type="Spatial" parent="rig/Skeleton/BoneAttachment" index="0"]
@@ -1617,7 +1617,7 @@ mesh = ExtResource( 4 )
 skeleton = NodePath("../..")
 
 [node name="BoneAttachment2" type="BoneAttachment" parent="rig/Skeleton" index="3"]
-transform = Transform( 1, -1.13809e-07, 1.91164e-07, -1.13232e-07, -0.999996, -0.00301181, 1.91506e-07, 0.00301181, -0.999996, -4.2071e-09, 3.07725, -0.000963432 )
+transform = Transform( 1, -1.12111e-07, 1.92165e-07, -1.13232e-07, -0.999983, 0.00584844, 1.91506e-07, -0.00584844, -0.999983, -5.49952e-09, 3.06583, -0.000963423 )
 bone_name = "DEF-spine.002"
 
 [node name="Rope" type="MeshInstance" parent="rig/Skeleton/BoneAttachment2" index="0"]

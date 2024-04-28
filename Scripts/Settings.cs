@@ -23,7 +23,7 @@ public class Settings : Control
 
 		Random rand = new Random(thing);
 		Seed = rand.Next(0, 99999);
-		
+		GetNode<Panel>("SeedSetting2").GetNode<CheckBox>("Full_Screen_Checkbox").SetPressedNoSignal(OS.WindowFullscreen);
 		GetNode<Panel>("SeedSetting").GetNode<TextEdit>("SeedText").Text = Seed.ToString();
 		set = this;
 	}

@@ -36,9 +36,10 @@ public class StartingScreen : Control
 			SeedSet.GetNode<TextEdit>("SeedText").Readonly = true;
 			((Button)Startbut).Text = "Συνέχεια";
 			GetNode<Control>("Settings").Hide();
-			world.SpawnMap(0);
-
 			MouseFilter = MouseFilterEnum.Ignore;
+			world.CallDeferred("SpawnMap");
+
+			
 		}
 		else
 		{

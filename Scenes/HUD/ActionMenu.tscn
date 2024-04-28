@@ -44,23 +44,29 @@ rect_pivot_offset = Vector2( 45, 0 )
 [node name="PickUp_Button" type="Button" parent="PanelContainer/VBoxContainer"]
 margin_right = 93.0
 margin_bottom = 38.0
+focus_mode = 0
 mouse_default_cursor_shape = 2
 theme = ExtResource( 1 )
 action_mode = 0
+enabled_focus_mode = 0
 text = "Πάρε"
 
 [node name="Interact_Button" type="Button" parent="PanelContainer/VBoxContainer"]
 margin_top = 42.0
 margin_right = 93.0
 margin_bottom = 80.0
+focus_mode = 0
 theme = ExtResource( 1 )
+enabled_focus_mode = 0
 text = "Interact"
 
 [node name="Interact_Button2" type="Button" parent="PanelContainer/VBoxContainer"]
 margin_top = 84.0
 margin_right = 93.0
 margin_bottom = 122.0
+focus_mode = 0
 theme = ExtResource( 1 )
+enabled_focus_mode = 0
 text = "Interact"
 
 [connection signal="button_down" from="PanelContainer/VBoxContainer/PickUp_Button" to="." method="On_PickUp_Button_Down"]

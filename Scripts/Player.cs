@@ -12,6 +12,8 @@ public class Player : Character
 	[Export]
 	float MaxEnergyAmmount = 100;
 
+	
+
 	float CurrentEnergy = 100;
 
 	//Stamina_Bar Stamina_bar = null;
@@ -387,9 +389,9 @@ public class Player : Character
 			bod.Touch(this);
 		}
 	}
-	public override void OnVehicleBoard()
+	public override void OnVehicleBoard(Vehicle Veh)
 	{
-		base.OnVehicleBoard();
+		base.OnVehicleBoard(Veh);
 		IsRunning = false;
 	}
 }

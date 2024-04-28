@@ -3,11 +3,21 @@ using System;
 
 public class Street_Lamp : StaticBody
 {
+    [Export]
+    bool Working = true;
     SpotLight light;
+    SpatialMaterial LampMat;
     public override void _Ready()
     {
         light = GetNode<SpotLight>("SpotLight");
+        MeshInstance Lamp = GetNode<MeshInstance>("MeshInstance");
+        LampMat = (SpatialMaterial)Lamp.GetActiveMaterial(0);
         DayNight dcont = DayNight.GetInstance();
+        if (!Working)
+        {
+            TurnOff();
+            return;
+        }
         if (DayNight.IsDay())
             TurnOff();
         else
@@ -18,10 +28,12 @@ public class Street_Lamp : StaticBody
     public void TurnOn()
     {
         light.Visible = true;
+        LampMat.EmissionEnabled = true;
     }
     public void TurnOff()
     {
         light.Visible = false;
+        LampMat.EmissionEnabled = false;
     }
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
 //  public override void _Process(float delta)

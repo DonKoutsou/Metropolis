@@ -1,16 +1,18 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Clutter/Rock/Rock.obj" type="ArrayMesh" id=2]
 [ext_resource path="res://Assets/Building/BuildingComposition.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Clutter/Rock/RockMat.tres" type="Material" id=4]
 [ext_resource path="res://Scenes/Env_Assets/Antena.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Env_Assets/Rock1.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Env_Assets/Platform.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Env_Assets/Fireplace.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Env_Assets/CylinderThing.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Env_Assets/Antena2.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Env_Assets/WindGenerator.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Env_Assets/PlatformWood.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Env_Assets/Rock2.tscn" type="PackedScene" id=13]
 
 [sub_resource type="MultiMesh" id=2]
 transform_format = 1
@@ -22,10 +24,10 @@ transform_array = PoolVector3Array( -0.658817, -0.418741, -0.194683, 0.362471, -
 type = 3
 
 [node name="House" parent="." index="1" instance=ExtResource( 3 )]
-transform = Transform( 0.780779, 0, -0.624807, 0, 1, 0, 0.624807, 0, 0.780779, 382.749, 1.29846, -1261.72 )
+transform = Transform( 0.043742, 0, 0.999043, 0, 1, 0, -0.999043, 0, 0.043742, 327.726, 1.29846, -1233.01 )
 
 [node name="House2" parent="." index="2" instance=ExtResource( 3 )]
-transform = Transform( 0.656901, 0, 0.753976, 0, 1, 0, -0.753976, 0, 0.656901, 326.544, 0.80531, -1244.61 )
+transform = Transform( -0.99634, 0, 0.0854688, 0, 1, 0, -0.0854688, 0, -0.99634, 374.704, 0.80531, -1197.73 )
 
 [node name="MultiMeshInstance" type="MultiMeshInstance" parent="." index="4"]
 visible = false
@@ -37,10 +39,10 @@ multimesh = SubResource( 2 )
 transform = Transform( 8.56631, -5.32306, -3.62137, 5.29023, 2.38465, 9.00876, -3.66917, -8.9894, 4.53418, 317.577, -14.157, -956.636 )
 
 [node name="Fireplace" parent="." index="6" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 361.026, 1.35521, -1233.96 )
+transform = Transform( -0.590056, 0, 0.807362, 0, 1, 0, -0.807362, 0, -0.590056, 362.956, 1.35521, -1231.85 )
 
 [node name="StaticBody2" parent="." index="7" instance=ExtResource( 9 )]
-transform = Transform( -0.614739, 0, 0.78873, 0, 1, 0, -0.78873, 0, -0.614739, 476.454, -35.9142, -1177.39 )
+transform = Transform( -0.614739, 0, 0.78873, 0, 1, 0, -0.78873, 0, -0.614739, 416.321, -4.16148, -1157.96 )
 
 [node name="StaticBody3" parent="." index="8" instance=ExtResource( 10 )]
 transform = Transform( 108.719, 49.5292, -0.583832, -14.3049, 30.0476, -114.743, -47.4221, 104.486, 33.2737, -584.823, -786.344, -1341.19 )
@@ -49,7 +51,19 @@ transform = Transform( 108.719, 49.5292, -0.583832, -14.3049, 30.0476, -114.743,
 transform = Transform( 0.843251, 0, -0.53752, 0, 1, 0, 0.53752, 0, 0.843251, 45.4721, -30.579, -564.13 )
 
 [node name="StaticBody5" parent="." index="13" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 349.805, -22.2993, -1233 )
+transform = Transform( -0.590056, 0, 0.807362, 0, 1, 0, -0.807362, 0, -0.590056, 370.352, -22.2993, -1223.36 )
 
 [node name="WindGenerator" parent="." index="14" instance=ExtResource( 11 )]
-transform = Transform( 0.173205, 0, -0.1, 0, 0.2, 0, 0.1, 0, 0.173205, 285, 7, -1260 )
+transform = Transform( 0.173205, 0, -0.1, 0, 0.2, 0, 0.1, 0, 0.173205, 125.524, 126.98, -1126.73 )
+
+[node name="Rock1" parent="." index="15" instance=ExtResource( 6 )]
+transform = Transform( 349.739, 0, 0, 0, 307.009, -167.519, 0, 167.519, 307.009, -1772.12, -576.583, 0 )
+
+[node name="Rock2" parent="." index="16" instance=ExtResource( 6 )]
+transform = Transform( 327.15, -80.3001, 94.0307, 31.9923, 311.868, 155.021, -119.442, -136.408, 299.071, 2151.8, -497.95, -1620.48 )
+
+[node name="Rock3" parent="." index="17" instance=ExtResource( 6 )]
+transform = Transform( 327.15, -80.3001, 94.0307, 118.746, 278.193, -175.57, -34.4842, 196.157, 287.49, 685.335, -561.906, 1666.89 )
+
+[node name="Rock4" parent="." index="18" instance=ExtResource( 13 )]
+transform = Transform( -113.898, 0, 167.74, 0, 202.754, 0, -167.74, 0, -113.898, 285.047, -123.356, -1124.06 )

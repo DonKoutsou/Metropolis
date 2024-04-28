@@ -1,22 +1,28 @@
-[gd_resource type="Environment" format=2]
+[gd_resource type="Environment" load_steps=3 format=2]
+
+[ext_resource path="res://Assets/AllSkyFree_Sky_OvercastLow_Equirect.png" type="Texture" id=1]
+
+[sub_resource type="PanoramaSky" id=1]
+panorama = ExtResource( 1 )
 
 [resource]
-background_mode = 1
-background_sky_orientation = Basis( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1 )
-background_sky_rotation = Vector3( 0, 0, -3.14159 )
-background_sky_rotation_degrees = Vector3( 0, 0, -180 )
+background_mode = 3
+background_sky = SubResource( 1 )
+background_sky_custom_fov = 45.0
+background_sky_orientation = Basis( -1, -1.50996e-07, 0, 1.50996e-07, -1, 0, 0, 0, 1 )
 background_color = Color( 0.47998, 0.47998, 0.47998, 1 )
 ambient_light_color = Color( 0.313726, 0.278431, 0.243137, 1 )
 ambient_light_energy = 1.42
 ambient_light_sky_contribution = 0.78
 fog_enabled = true
 fog_sun_color = Color( 1, 0.901961, 0.701961, 1 )
-fog_depth_begin = 0.0
 fog_depth_end = 20000.0
+fog_depth_curve = 0.267943
 fog_transmit_curve = 0.00961831
 fog_height_enabled = true
 fog_height_min = 1800.0
 fog_height_max = 2700.0
+fog_height_curve = 0.659755
 tonemap_mode = 2
 tonemap_white = 6.03
 auto_exposure_min_luma = 1.0

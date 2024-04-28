@@ -20,9 +20,10 @@ public class CameraZoomPivot : Position3D
     public override void _Ready()
 	{
 		arm = (SpringArm)GetParent();
-		InitialTransforms = new Vector2(arm.SpringLength, arm.Translation.y);
-		//cam = GetNode<Camera>("Camera");
 		panp = (CameraPanPivot)GetParent().GetParent();
+		InitialTransforms = new Vector2(arm.SpringLength, panp.Translation.y);
+		//cam = GetNode<Camera>("Camera");
+		
     }
 	public override void _Input(InputEvent @event)
 	{

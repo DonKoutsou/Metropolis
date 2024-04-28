@@ -13,9 +13,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Godot_Project\\Μητρόπολη\\3D_TestProj.csproj",
-      "projectName": "3D_TestProj",
-      "projectPath": "E:\\Godot_Project\\Μητρόπολη\\3D_TestProj.csproj",
+      "projectUniqueName": "E:\\Godot_Project\\Μητρόπολη\\Μητρόπολη.csproj",
+      "projectName": "Μητρόπολη",
+      "projectPath": "E:\\Godot_Project\\Μητρόπολη\\Μητρόπολη.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
       "outputPath": "E:\\Godot_Project\\Μητρόπολη\\.mono\\temp\\obj\\",
       "projectStyle": "PackageReference",

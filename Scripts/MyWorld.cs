@@ -7,16 +7,19 @@ public class MyWorld : Spatial
 	[Export]
 	Dictionary<int, PackedScene> GlobalItemListConfiguration = new Dictionary<int, PackedScene>();
 	[Export]
-	PackedScene PlayerScene;
+	PackedScene PlayerScene = null;
 	Player pl;
 
+	[Signal]
+    public delegate void PlayerSpawnedEventHandler(Player Pl);
 	static Dictionary<int, PackedScene> GlobalItemList = new Dictionary<int, PackedScene>();
 	public void SpawnPlayer(Vector3 pos)
 	{
 		pl = (Player)PlayerScene.Instance();
 		AddChild(pl);
 		pl.Teleport(pos);
-		
+		EmitSignal("PlayerSpawnedEventHandler", pl);
+		VehicleHud.GetInstance().ConnectToPlayer(pl);
 		CameraAnimationPlayer.GetInstance().FadeIn();
 	}
 	public static PackedScene GetItemByType(ItemName name)

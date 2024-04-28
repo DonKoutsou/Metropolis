@@ -34,7 +34,7 @@ public class Vehicebody : VehicleBody
         
         AddChild(cha);
         //cha.Translation = new Vector3 (0,0,0);
-        cha.OnVehicleBoard();
+        //cha.OnVehicleBoard();
         cha.Transform = GetNode<Position3D>("Position3D").Transform;
         guy.Rotation = new Vector3(0,0,0);
         
@@ -46,7 +46,7 @@ public class Vehicebody : VehicleBody
 
         
         MyWorld.GetInstance().AddChild(cha);
-        cha.OnVehicleUnBoard();
+        //cha.OnVehicleUnBoard();
         cha.GlobalTranslation = GlobalTranslation;
         cha.Rotation = new Vector3(0,0,0);
     }

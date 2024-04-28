@@ -1,9 +1,9 @@
 using Godot;
 using System;
 
-using MonoCustomResourceRegistry;
+//using MonoCustomResourceRegistry;
 
-[RegisteredType(nameof(DialogueOptions), "", nameof(Resource))]
+//[RegisteredType(nameof(DialogueOptions), "", nameof(Resource))]
 public partial class DialogueOptions : Resource
 {
     [Export]

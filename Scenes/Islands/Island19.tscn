@@ -1,5 +1,37 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/TerainTest/TerainShader5.tres" type="Shader" id=2]
+[ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_Colo2r.jpg" type="Texture" id=3]
+[ext_resource path="res://Assets/TerainTex/Rock029_1K-PNG/Rock029_1K-PNG_Color.png" type="Texture" id=4]
+[ext_resource path="res://Assets/TerainTex/Rock029_1K-PNG/Rock029_1K-PNG_NormalGL.png" type="Texture" id=5]
+[ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_AmbientOcclusio2n.jpg" type="Texture" id=6]
+[ext_resource path="res://Assets/TerainTex/Rock029_1K-PNG/Rock029_1K-PNG_AmbientOcclusion.png" type="Texture" id=7]
+[ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_NormalGL2.jpg" type="Texture" id=8]
+[ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_Roughnes2s.jpg" type="Texture" id=9]
+[ext_resource path="res://Assets/TerainTex/Rock029_1K-PNG/Rock029_1K-PNG_Roughness.png" type="Texture" id=10]
+[ext_resource path="res://Scenes/Env_Assets/Rock3.tscn" type="PackedScene" id=11]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/offset = 0.308
+shader_param/fade = 0.097
+shader_param/NormalForce = 2.0
+shader_param/uv_scale_fg = Vector3( 5, 5, 5 )
+shader_param/uv_scale_bg = Vector3( 10, 10, 10 )
+shader_param/roughness_texture_channel = Plane( 0, 0, 0, 1 )
+shader_param/albedo_texture_fg = ExtResource( 3 )
+shader_param/Rough_texture_fg = ExtResource( 9 )
+shader_param/AO_texture_fg = ExtResource( 6 )
+shader_param/normal_texture_fg = ExtResource( 8 )
+shader_param/albedo_texture_bg = ExtResource( 4 )
+shader_param/Rough_texture_bg = ExtResource( 10 )
+shader_param/AO_texture_bg = ExtResource( 7 )
+shader_param/normal_texture_bg = ExtResource( 5 )
 
 [node name="Island" instance=ExtResource( 1 )]
+transform = Transform( 0.999998, 0, 0.00218166, 0, 1, 0, -0.00218166, 0, 0.999998, 0, 0, 0 )
+
+[node name="Rock1" parent="." index="5" instance=ExtResource( 11 )]
+transform = Transform( 356.18, -645.462, 552.004, 464.359, -353.192, -712.614, 711.126, 553.922, 188.85, 2137.21, -441.552, -1969.68 )
+material/0 = SubResource( 1 )

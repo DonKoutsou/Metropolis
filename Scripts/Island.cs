@@ -9,15 +9,11 @@ public class Island : Spatial
 	[Export]
 	IleType type = IleType.LAND;
 
-	List<Character> m_enem = new List<Character>();
-
-	WorldMap map;
-
 	public bool Inited = false;
 
-	public Vector3 loctospawnat;
+	private Vector3 SpawnGlobalLocation;
 
-	public float rotationtospawnwith;
+	private float SpawnRotation;
 
 	List<House> Houses = new List<House>();
 
@@ -25,18 +21,21 @@ public class Island : Spatial
 	
 	public override void _Ready()
 	{
-		GlobalTranslation = loctospawnat;
+		GlobalTranslation = SpawnGlobalLocation;
 
-		//Rotate(new Vector3(0, 1, 0), Mathf.Deg2Rad(rotationtospawnwith));
-		//Transform.Rotated(new Vector3(0, 1, 0), rotationtospawnwith);
+		Rotate(new Vector3(0, 1, 0), Mathf.Deg2Rad(SpawnRotation));
+		Transform.Rotated(new Vector3(0, 1, 0), SpawnRotation);
 
-		//StaticBody waterbody = GetNodeOrNull<StaticBody>("SeaBed");
-		//if (waterbody != null)
-			//waterbody.GlobalRotation = new Vector3 (0.0f, 0.0f, 0.0f);
-
-		map = GetParent().GetNode<WorldMap>("WorldMap");
+		StaticBody waterbody = GetNodeOrNull<StaticBody>("SeaBed");
+		if (waterbody != null)
+			waterbody.GlobalRotation = new Vector3 (0.0f, 0.0f, 0.0f);
 		FindHouses(this);
 		FindGenerators(this);
+	}
+	public void SetSpawnInfo(Vector3 SpawnPos, float SpawnRot)
+	{
+		SpawnGlobalLocation = SpawnPos;
+		SpawnRotation = SpawnRot;
 	}
 	public IleType GetIslandType()
 	{

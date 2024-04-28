@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Scenes/HUD/InventoryUISlot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/InventoryUI.cs" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Assets/UI/Icon/Cross@0.5x-1.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Themes/PanelTheme1.tres" type="Theme" id=8]
 [ext_resource path="res://Assets/Themes/PanelTheme2.tres" type="Theme" id=9]
+[ext_resource path="res://Scenes/HUD/VehicleHud.tscn" type="PackedScene" id=10]
 
 [sub_resource type="DynamicFont" id=27]
 size = 24
@@ -344,7 +345,7 @@ anchor_bottom = 1.0
 margin_left = -772.0
 margin_top = -590.0
 margin_right = -533.0
-margin_bottom = -81.0
+margin_bottom = -85.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
@@ -362,7 +363,7 @@ custom_constants/margin_bottom = 10
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 229.0
-margin_bottom = 499.0
+margin_bottom = 495.0
 custom_constants/separation = 10
 
 [node name="ItemName" type="RichTextLabel" parent="DescriptionPanel/MarginContainer/VBoxContainer"]
@@ -647,6 +648,14 @@ margin_right = -18.0
 rect_clip_content = true
 mouse_filter = 1
 custom_styles/panel = SubResource( 30 )
+
+[node name="VehicleUI" parent="." instance=ExtResource( 10 )]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -755.0
+margin_top = -75.0
+margin_right = -533.0
+margin_bottom = -10.0
 
 [connection signal="button_down" from="ItemOptionPanel/DropButton" to="." method="On_Drop_Button_Down"]
 [connection signal="button_down" from="ItemOptionPanel/MapButton" to="." method="On_Map_Button_Down"]

@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/TerainTest/TerainShader5.tres" type="Shader" id=2]
 [ext_resource path="res://Scenes/Env_Assets/Fireplace.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Env_Assets/CylinderThingHuge.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Building/BuildingComposition.tscn" type="PackedScene" id=5]
@@ -10,93 +11,144 @@
 [ext_resource path="res://Assets/Building/BuildingDust4.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Building/BuildingDust.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Env_Assets/House.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_Colo2r.jpg" type="Texture" id=12]
+[ext_resource path="res://Assets/TerainTex/Rock029_1K-PNG/Rock029_1K-PNG_Color.png" type="Texture" id=13]
+[ext_resource path="res://Assets/TerainTex/Rock029_1K-PNG/Rock029_1K-PNG_NormalGL.png" type="Texture" id=14]
+[ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_AmbientOcclusio2n.jpg" type="Texture" id=15]
+[ext_resource path="res://Assets/TerainTex/Rock029_1K-PNG/Rock029_1K-PNG_AmbientOcclusion.png" type="Texture" id=16]
+[ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_NormalGL2.jpg" type="Texture" id=17]
+[ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_Roughnes2s.jpg" type="Texture" id=18]
+[ext_resource path="res://Assets/TerainTex/Rock029_1K-PNG/Rock029_1K-PNG_Roughness.png" type="Texture" id=19]
+[ext_resource path="res://Scenes/Env_Assets/Rock2.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Scenes/Env_Assets/WindGenerator.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Scenes/Env_Assets/Rock4.tscn" type="PackedScene" id=22]
 
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/offset = 0.308
+shader_param/fade = 0.097
+shader_param/NormalForce = 2.0
+shader_param/uv_scale_fg = Vector3( 2, 2, 2 )
+shader_param/uv_scale_bg = Vector3( 5, 5, 5 )
+shader_param/roughness_texture_channel = Plane( 0, 0, 0, 1 )
+shader_param/albedo_texture_fg = ExtResource( 12 )
+shader_param/Rough_texture_fg = ExtResource( 18 )
+shader_param/AO_texture_fg = ExtResource( 15 )
+shader_param/normal_texture_fg = ExtResource( 17 )
+shader_param/albedo_texture_bg = ExtResource( 13 )
+shader_param/Rough_texture_bg = ExtResource( 19 )
+shader_param/AO_texture_bg = ExtResource( 16 )
+shader_param/normal_texture_bg = ExtResource( 14 )
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 2 )
+shader_param/offset = 0.283
+shader_param/fade = 0.356
+shader_param/NormalForce = 2.0
+shader_param/uv_scale_fg = Vector3( 5, 5, 5 )
+shader_param/uv_scale_bg = Vector3( 5, 5, 5 )
+shader_param/roughness_texture_channel = Plane( 0, 0, 0, 1 )
+shader_param/albedo_texture_fg = ExtResource( 12 )
+shader_param/Rough_texture_fg = ExtResource( 18 )
+shader_param/AO_texture_fg = ExtResource( 15 )
+shader_param/normal_texture_fg = ExtResource( 17 )
+shader_param/albedo_texture_bg = ExtResource( 13 )
+shader_param/Rough_texture_bg = ExtResource( 19 )
+shader_param/AO_texture_bg = ExtResource( 16 )
+shader_param/normal_texture_bg = ExtResource( 14 )
 
 [node name="Island" instance=ExtResource( 1 )]
 
 [node name="House" parent="." index="1" instance=ExtResource( 5 )]
-transform = Transform( 0.0789807, 0, -0.996876, 0, 1, 0, 0.996876, 0, 0.0789807, 2812.69, 13.2628, 855.677 )
+transform = Transform( -0.4132, 0, -0.91064, 0, 1, 0, 0.91064, 0, -0.4132, 2802.9, 1.74817, 885.096 )
 
 [node name="House2" parent="." index="2" instance=ExtResource( 5 )]
-transform = Transform( 0.538285, 0, 0.842763, 0, 1, 0, -0.842763, 0, 0.538285, 2641.85, 13.0182, 844.677 )
+transform = Transform( 0.171636, 0, 0.985161, 0, 1, 0, -0.985161, 0, 0.171636, 2688.74, 12.1336, 891.109 )
 
 [node name="Fireplace" parent="." index="3" instance=ExtResource( 3 )]
-transform = Transform( 0.755419, 1.60156e-11, -0.655242, 8.73115e-11, 1, 0, 0.655242, -1.74623e-10, 0.755419, 2728.56, 14.3153, 829.673 )
+transform = Transform( 0.755419, 1.60156e-11, -0.655242, 8.73115e-11, 1, 0, 0.655242, -1.74623e-10, 0.755419, 2704.55, 12.5371, 887.143 )
 
 [node name="StaticBody" parent="." index="4" instance=ExtResource( 4 )]
 transform = Transform( 0.941828, 0.317454, -0.110377, -0.261542, 0.486003, -0.833905, -0.211082, 0.814263, 0.540759, -3234.87, -107.051, 2431.71 )
 
-[node name="House3" parent="." index="5" instance=ExtResource( 5 )]
-transform = Transform( 0.967449, 0, -0.253066, 0, 1, 0, 0.253066, 0, 0.967449, 2757.08, 14.0464, 796.27 )
+[node name="StaticBody2" parent="." index="5" instance=ExtResource( 6 )]
+transform = Transform( 16.0236, 4.02306, 0, -4.02306, 16.0236, 0, 0, 0, 16.5209, -169.028, -186.101, 271.507 )
 
-[node name="StaticBody2" parent="." index="6" instance=ExtResource( 6 )]
-transform = Transform( 16.0236, 4.02306, 0, -4.02306, 16.0236, 0, 0, 0, 16.5209, -169.028, -126.794, 271.507 )
-
-[node name="StaticBody3" parent="." index="7" instance=ExtResource( 6 )]
+[node name="StaticBody3" parent="." index="6" instance=ExtResource( 6 )]
 transform = Transform( 15.3164, -6.19258, 0, 5.49439, 13.5895, -7.62083, 2.85654, 7.06521, 14.6582, -1056.37, -154.068, -463.591 )
 
-[node name="StaticBody4" parent="." index="8" instance=ExtResource( 6 )]
-transform = Transform( 16.3606, -1.86869, 1.33406, 1.42945, 15.8018, 4.60417, -1.79679, -4.44406, 15.8102, -812.239, 31.2112, 450.133 )
-
-[node name="DestBuilding" parent="." index="9" instance=ExtResource( 7 )]
+[node name="DestBuilding" parent="." index="7" instance=ExtResource( 7 )]
 transform = Transform( 0.86392, 0.335516, -0.375595, -0.159922, 0.889937, 0.427128, 0.477564, -0.308938, 0.82249, 1229.22, -72.504, 202.611 )
 
-[node name="DestBuilding2" parent="." index="10" instance=ExtResource( 8 )]
-transform = Transform( -0.169541, 1.3209, -0.279373, -0.0951247, 0.269179, 1.33044, 1.34677, 0.185298, 0.0588008, 1884.27, -50.5557, -83.7841 )
+[node name="DestBuilding2" parent="." index="8" instance=ExtResource( 8 )]
+transform = Transform( -0.169541, 1.3209, -0.279373, -0.523742, 0.195172, 1.24064, 1.2444, 0.262108, 0.484094, 1884.27, -35.9744, -83.7841 )
 
-[node name="DestBuilding7" parent="." index="11" instance=ExtResource( 8 )]
+[node name="DestBuilding7" parent="." index="9" instance=ExtResource( 8 )]
 transform = Transform( -1.27185, 0.448305, -0.181638, 0.339819, 0.464493, -1.23302, -0.344229, -1.19785, -0.546109, 3172, -166.013, -274.357 )
 
-[node name="DestBuilding3" parent="." index="12" instance=ExtResource( 9 )]
-transform = Transform( 0.789573, 0.613413, 0.0172342, -0.595638, 0.759332, 0.261968, 0.147608, -0.217108, 0.964922, 87.1097, 78.1354, -931 )
+[node name="DestBuilding3" parent="." index="10" instance=ExtResource( 9 )]
+transform = Transform( 0.789573, 0.613413, 0.0172342, -0.595638, 0.759332, 0.261968, 0.147608, -0.217108, 0.964922, 87.1097, -0.343513, -931 )
 
-[node name="DestBuilding4" parent="." index="13" instance=ExtResource( 9 )]
-transform = Transform( -0.531918, -0.0348765, 0.846075, -0.539581, -0.756079, -0.370395, 0.652619, -0.653546, 0.383354, -1110.28, 78.8802, 596.187 )
+[node name="DestBuilding4" parent="." index="11" instance=ExtResource( 9 )]
+transform = Transform( -0.531918, -0.0348765, 0.846075, -0.539581, -0.756079, -0.370395, 0.652619, -0.653546, 0.383354, -1110.28, -15.6523, 596.187 )
 
-[node name="DestBuilding5" parent="." index="14" instance=ExtResource( 10 )]
+[node name="DestBuilding5" parent="." index="12" instance=ExtResource( 10 )]
 transform = Transform( -0.883251, -2.24343e-10, 0.468901, -2.31637e-12, 0.999999, 4.07454e-10, -0.468901, 3.42212e-10, -0.88325, 293.818, -70.728, -1645.75 )
 
-[node name="DestBuilding6" parent="." index="15" instance=ExtResource( 10 )]
+[node name="DestBuilding6" parent="." index="13" instance=ExtResource( 10 )]
 transform = Transform( -0.0874003, 0.527915, -0.844786, 0.0550041, 0.849295, 0.525042, 0.994652, -0.000577802, -0.103266, 442.115, -44.4888, 967.688 )
 
-[node name="StaticBody5" parent="." index="21" instance=ExtResource( 4 )]
+[node name="StaticBody5" parent="." index="18" instance=ExtResource( 4 )]
 transform = Transform( -0.400541, 0.686898, 0.606414, 0, 0.661822, -0.749661, -0.916279, -0.30027, -0.265087, -2735.15, -141.208, 2596.88 )
 
-[node name="StaticBody6" parent="." index="22" instance=ExtResource( 4 )]
+[node name="StaticBody6" parent="." index="19" instance=ExtResource( 4 )]
 transform = Transform( -0.302237, 0.0840152, 0.949523, -0.0560172, 0.992821, -0.105677, -0.951585, -0.085129, -0.295361, -2920.67, -141.208, 3407.37 )
 
-[node name="StaticBody7" parent="." index="23" instance=ExtResource( 11 )]
+[node name="StaticBody7" parent="." index="20" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1563.09, -60.5059, 3325.63 )
 
-[node name="StaticBody8" parent="." index="24" instance=ExtResource( 11 )]
+[node name="StaticBody8" parent="." index="21" instance=ExtResource( 11 )]
 transform = Transform( 0.998318, 0.0571476, -0.0098023, -0.0579822, 0.983948, -0.168773, 0, 0.169057, 0.985606, -1785.51, -328.678, 3155.58 )
 
-[node name="StaticBody9" parent="." index="25" instance=ExtResource( 11 )]
+[node name="StaticBody9" parent="." index="22" instance=ExtResource( 11 )]
 transform = Transform( 1, -5.16064e-05, 8.85222e-06, 5.22755e-05, 0.993715, -0.111937, -3.01968e-06, 0.111937, 0.993715, -1301.37, -115.81, 2833.39 )
 
-[node name="StaticBody12" parent="." index="26" instance=ExtResource( 11 )]
+[node name="StaticBody12" parent="." index="23" instance=ExtResource( 11 )]
 transform = Transform( 1, -5.16064e-05, 8.85222e-06, 5.22755e-05, 0.993715, -0.111937, -3.01968e-06, 0.111937, 0.993715, -967.966, -150.909, 3088.19 )
 
-[node name="StaticBody13" parent="." index="27" instance=ExtResource( 11 )]
+[node name="StaticBody13" parent="." index="24" instance=ExtResource( 11 )]
 transform = Transform( 1, -5.16064e-05, 8.85222e-06, 5.22755e-05, 0.993715, -0.111937, -3.01968e-06, 0.111937, 0.993715, -1028.44, -101.944, 3658.44 )
 
-[node name="StaticBody14" parent="." index="28" instance=ExtResource( 11 )]
+[node name="StaticBody14" parent="." index="25" instance=ExtResource( 11 )]
 transform = Transform( 0.980643, 0.187581, 0.0561561, -0.190727, 0.979977, 0.0571591, -0.0443098, -0.0667631, 0.996785, -1788.25, -101.944, 3591.81 )
 
-[node name="StaticBody15" parent="." index="29" instance=ExtResource( 11 )]
+[node name="StaticBody15" parent="." index="26" instance=ExtResource( 11 )]
 transform = Transform( 0.977706, -0.207889, 0.0295376, 0.209966, 0.96654, -0.147355, 0.00208417, 0.150272, 0.988643, -2443.58, -120.386, 3211.44 )
 
-[node name="StaticBody16" parent="." index="30" instance=ExtResource( 11 )]
+[node name="StaticBody16" parent="." index="27" instance=ExtResource( 11 )]
 transform = Transform( 0.904177, 0.174675, -0.389811, -0.224901, 0.97051, -0.0867786, 0.363157, 0.166132, 0.916797, -2297.49, -120.386, 2698.65 )
 
-[node name="StaticBody17" parent="." index="31" instance=ExtResource( 11 )]
+[node name="StaticBody17" parent="." index="28" instance=ExtResource( 11 )]
 transform = Transform( 0.905694, -0.262836, -0.33262, 0.337946, 0.921341, 0.192155, 0.255951, -0.286441, 0.923277, -1834.28, -120.386, 2048.88 )
 
-[node name="StaticBody18" parent="." index="32" instance=ExtResource( 11 )]
+[node name="StaticBody18" parent="." index="29" instance=ExtResource( 11 )]
 transform = Transform( 0.959152, 0.228658, -0.166561, -0.254635, 0.954338, -0.156201, 0.123239, 0.192233, 0.97358, -1414.97, -106.723, 2079.32 )
 
-[node name="StaticBody10" parent="." index="33" instance=ExtResource( 11 )]
+[node name="StaticBody10" parent="." index="30" instance=ExtResource( 11 )]
 transform = Transform( 0.975323, 0.219395, -0.0247109, -0.208489, 0.878404, -0.430044, -0.0726436, 0.424584, 0.902469, -2105.68, -92.0832, 2777.84 )
 
-[node name="StaticBody11" parent="." index="34" instance=ExtResource( 11 )]
+[node name="StaticBody11" parent="." index="31" instance=ExtResource( 11 )]
 transform = Transform( 0.936355, -0.347443, -0.0502315, 0.351055, 0.926713, 0.134026, -1.61479e-05, -0.14313, 0.989704, -1963.45, -173.864, 3628.68 )
+
+[node name="Rock1" parent="." index="32" instance=ExtResource( 20 )]
+transform = Transform( 60.158, 0, 0, 0, 60.158, 0, 0, 0, 60.1579, 2739.13, -35.5976, 813.499 )
+material/0 = SubResource( 1 )
+
+[node name="WindGenerator" parent="." index="33" instance=ExtResource( 21 )]
+transform = Transform( 0.296027, 0, 0, 0, 0.296027, 0, 0, 0, 0.296027, 2764.63, 32.7086, 776.372 )
+EnergyCapacity = 500.0
+EnergyPerWindStreangth = 0.05
+
+[node name="Rock2" parent="." index="34" instance=ExtResource( 22 )]
+transform = Transform( -313.858, 202.093, 142.759, 238.391, 308.743, 87.0412, -66.2698, 153.508, -363.004, 1704.37, -485.572, 1165.61 )
+material/0 = SubResource( 2 )

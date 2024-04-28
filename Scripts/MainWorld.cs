@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class MainWorld : Spatial
 {
 	[Export]
-	List<string> WorldScene = new List<string>();
+	PackedScene WorldScene = null;
 
 	MyWorld m_myworld;
 	StartingScreen screen = null;
@@ -22,11 +22,10 @@ public class MainWorld : Spatial
 	{
 		return m_myworld != null;
 	}
-	public void SpawnMap(int index)
+	public void SpawnMap()
 	{
-		var scene = GD.Load<PackedScene>(WorldScene[index]);
 		
-		m_myworld = (MyWorld)scene.Instance();
+		m_myworld = (MyWorld)WorldScene.Instance();
 
 		AddChild(m_myworld);
 

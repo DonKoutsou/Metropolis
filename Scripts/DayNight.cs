@@ -373,6 +373,8 @@ public class DayNight : WorldEnvironment
 
         Environment.BackgroundColor = BackgroundColor;
 
+        Environment.BackgroundEnergy = AmbientLightEnergy;
+
         Environment.AmbientLightEnergy = AmbientLightEnergy;
 
         //Environment.FogSunAmount = 0.3f;

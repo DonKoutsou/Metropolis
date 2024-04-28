@@ -1,12 +1,57 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/TerainTest/TerainShader5.tres" type="Shader" id=2]
 [ext_resource path="res://Scenes/Env_Assets/CylinderThingHuge.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Env_Assets/CylinderThing.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Env_Assets/House.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_Colo2r.jpg" type="Texture" id=6]
+[ext_resource path="res://Assets/TerainTex/Rock029_1K-PNG/Rock029_1K-PNG_Color.png" type="Texture" id=7]
+[ext_resource path="res://Assets/TerainTex/Rock029_1K-PNG/Rock029_1K-PNG_NormalGL.png" type="Texture" id=8]
+[ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_AmbientOcclusio2n.jpg" type="Texture" id=9]
+[ext_resource path="res://Assets/TerainTex/Rock029_1K-PNG/Rock029_1K-PNG_AmbientOcclusion.png" type="Texture" id=10]
+[ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_NormalGL2.jpg" type="Texture" id=11]
+[ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_Roughnes2s.jpg" type="Texture" id=12]
+[ext_resource path="res://Assets/TerainTex/Rock029_1K-PNG/Rock029_1K-PNG_Roughness.png" type="Texture" id=13]
+[ext_resource path="res://Scenes/Env_Assets/Rock2.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/Env_Assets/Rock3.tscn" type="PackedScene" id=15]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 2 )
+shader_param/offset = 0.308
+shader_param/fade = 0.097
+shader_param/NormalForce = 2.0
+shader_param/uv_scale_fg = Vector3( 2, 2, 2 )
+shader_param/uv_scale_bg = Vector3( 5, 5, 5 )
+shader_param/roughness_texture_channel = Plane( 0, 0, 0, 1 )
+shader_param/albedo_texture_fg = ExtResource( 6 )
+shader_param/Rough_texture_fg = ExtResource( 12 )
+shader_param/AO_texture_fg = ExtResource( 9 )
+shader_param/normal_texture_fg = ExtResource( 11 )
+shader_param/albedo_texture_bg = ExtResource( 7 )
+shader_param/Rough_texture_bg = ExtResource( 13 )
+shader_param/AO_texture_bg = ExtResource( 10 )
+shader_param/normal_texture_bg = ExtResource( 8 )
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/offset = 0.308
+shader_param/fade = 0.097
+shader_param/NormalForce = 2.0
+shader_param/uv_scale_fg = Vector3( 10, 10, 10 )
+shader_param/uv_scale_bg = Vector3( 10, 10, 10 )
+shader_param/roughness_texture_channel = Plane( 0, 0, 0, 1 )
+shader_param/albedo_texture_fg = ExtResource( 6 )
+shader_param/Rough_texture_fg = ExtResource( 12 )
+shader_param/AO_texture_fg = ExtResource( 9 )
+shader_param/normal_texture_fg = ExtResource( 11 )
+shader_param/albedo_texture_bg = ExtResource( 7 )
+shader_param/Rough_texture_bg = ExtResource( 13 )
+shader_param/AO_texture_bg = ExtResource( 10 )
+shader_param/normal_texture_bg = ExtResource( 8 )
 
 [node name="Island" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.40331, -3.98926, 2.60999 )
 type = 3
 
 [node name="StaticBody" parent="." index="5" instance=ExtResource( 3 )]
@@ -362,3 +407,11 @@ transform = Transform( 0.482963, -0.12941, 0.866025, 0.258819, 0.965926, 0, -0.8
 
 [node name="StaticBody120" parent="." index="122" instance=ExtResource( 5 )]
 transform = Transform( 0.5, -0.75, 0.433013, 0, 0.5, 0.866025, -0.866025, -0.433013, 0.25, -1895.41, -198, 903.864 )
+
+[node name="Rock1" parent="." index="123" instance=ExtResource( 15 )]
+transform = Transform( -185.328, 95.0623, -97.2269, 118.854, 193.092, -37.7593, 66.0582, -80.7167, -204.835, 466.994, -133.31, 933.645 )
+material/0 = SubResource( 2 )
+
+[node name="Rock2" parent="." index="124" instance=ExtResource( 14 )]
+transform = Transform( -155.774, -41.9745, 303.685, -8.91419, 341.116, 42.5755, -306.443, 11.414, -155.61, -157.28, -197.576, 588.194 )
+material/0 = SubResource( 1 )
