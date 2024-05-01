@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://new_environment2.tres" type="Environment" id=1]
 [ext_resource path="res://Scripts/DayNight.cs" type="Script" id=2]
@@ -19,24 +19,6 @@ _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.247596, 0.0529141 ), 0.0, 
 max_value = 360.0
 _data = [ Vector2( 0, 0 ), 0.0, 369.23, 0, 0, Vector2( 1, 360 ), 372.237, 319.291, 0, 0 ]
 
-[sub_resource type="Curve" id=5]
-_data = [ Vector2( 0.530702, 1 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="Curve" id=6]
-_data = [ Vector2( 0, 0.4 ), 0.0, 0.0, 0, 0, Vector2( 0.4, 0.5 ), 0.0, 0.0, 0, 0, Vector2( 0.6, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.709135, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.4 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="Curve" id=7]
-_data = [ Vector2( 0, 0.4 ), 0.0, 0.0, 0, 0, Vector2( 0.4, 0.4 ), 0.0, 0.0, 0, 0, Vector2( 0.6, 1 ), 0.483872, 0.483872, 0, 0, Vector2( 0.7, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.9, 0.5 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.4 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="Curve" id=12]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="Curve" id=13]
-_data = [ Vector2( 0, 0.861963 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="Curve" id=14]
-_data = [ Vector2( 0, 0.653374 ), 0.0, 0.0, 0, 0 ]
-
 [node name="DayNightController" type="WorldEnvironment"]
 environment = ExtResource( 1 )
 script = ExtResource( 2 )
@@ -45,10 +27,4 @@ sunbrightnesscurve = SubResource( 10 )
 moonbrightnesscurve = SubResource( 11 )
 softlightnesscurve = SubResource( 15 )
 sunrotcurve = SubResource( 4 )
-sunRcolorcurve = SubResource( 5 )
-sunGcolorcurve = SubResource( 6 )
-sunBcolorcurve = SubResource( 7 )
-moonRcolorcurve = SubResource( 12 )
-moonGcolorcurve = SubResource( 13 )
-moonBcolorcurve = SubResource( 14 )
 startinghour = 4

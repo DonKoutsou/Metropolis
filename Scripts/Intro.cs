@@ -26,10 +26,10 @@ public class Intro : Spatial
     private void Stop()
     {
         MyWorld.GetInstance().SpawnPlayer(SpawnPosition.GetInstance().GlobalTranslation);
-        Particles part = GetNode<Particles>("Particles");
-        RemoveChild(part);
-        Player.GetInstance().AddChild(part);
-        part.Translation = Vector3.Zero;
+        //Particles part = GetNode<Particles>("Particles");
+        //RemoveChild(part);
+        //Player.GetInstance().AddChild(part);
+        //part.Translation = Vector3.Zero;
         QueueFree();
     }
 }

@@ -90,7 +90,7 @@ public class Player : Character
 
 		moveloc = GetNode<MoveLocation>("MoveLoc");
 
-		Spatial sunmoonpiv = GetNode<Spatial>("SunMoonPivot");
+		SunMoonPivot sunmoonpiv = GetNode<SunMoonPivot>("SunMoonPivot");
 		MainWorld world = (MainWorld)GetParent().GetParent();
 		MyWorld w = (MyWorld)GetParent();
 		DayNight env = w.GetNode<WorldMap>("WorldMap").GetNode<Spatial>("Sky").GetNode<DayNight>("DayNightController");

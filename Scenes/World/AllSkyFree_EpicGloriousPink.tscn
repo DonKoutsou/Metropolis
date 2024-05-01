@@ -1,10 +1,18 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/World/DayNightController.tscn" type="PackedScene" id=1]
 
 [sub_resource type="Curve" id=3]
 max_value = 2.0
 _data = [ Vector2( 0, 2 ), 0.0, 0.0, 0, 0, Vector2( 0.4, 0.4 ), 0.0, 0.0, 0, 0, Vector2( 0.6, 0.4 ), 0.0, 0.0, 0, 0, Vector2( 1, 2 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0, 0.411326, 0.4769, 0.651267, 0.755589, 0.883756, 1 )
+colors = PoolColorArray( 0.887207, 0.662202, 0.458944, 1, 0.887207, 0.662202, 0.458944, 1, 0.892578, 0.785462, 0.626348, 1, 1, 1, 1, 1, 0.892578, 0.785462, 0.626348, 1, 0.887207, 0.662202, 0.458944, 1, 0.887207, 0.662202, 0.458944, 1 )
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0, 0.563338, 0.997019 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 0.963969, 0.68732, 1, 1, 1, 1, 1 )
 
 [sub_resource type="Curve" id=1]
 max_value = 360.0
@@ -18,7 +26,9 @@ _data = [ Vector2( 0, 76.3804 ), 0.0, 0.0, 0, 0, Vector2( 0.0655844, 88.6503 ), 
 
 [node name="DayNightController" parent="." instance=ExtResource( 1 )]
 AutoExposureCurve = SubResource( 3 )
-startinghour = 9
+SunColorGradient = SubResource( 4 )
+MoonColorGradient = SubResource( 5 )
+startinghour = 12
 WindDirCurve = SubResource( 1 )
 WindStreangthCurve = SubResource( 2 )
 

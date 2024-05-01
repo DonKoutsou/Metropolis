@@ -197,12 +197,12 @@ albedo_texture = ExtResource( 8 )
 [sub_resource type="Curve" id=95]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=93]
+[sub_resource type="CurveTexture" id=98]
 width = 512
 curve = SubResource( 95 )
 
 [sub_resource type="ParticlesMaterial" id=96]
-trail_size_modifier = SubResource( 93 )
+trail_size_modifier = SubResource( 98 )
 emission_shape = 2
 emission_box_extents = Vector3( 5000, 50, 5000 )
 direction = Vector3( 0, 0, -2 )
@@ -295,8 +295,10 @@ transform = Transform( -2.36741, 0, 2.15955, 0, 3.20442, 0, -2.15955, 0, -2.3674
 visible = false
 EnergyPerWindStreangth = 0.2
 
-[node name="Particles" type="Particles" parent="."]
-transform = Transform( -1, 0, 0.000802906, 0, 1, 0, -0.000802906, 0, -1, 0, 50, 0 )
+[node name="Spatial3" type="Spatial" parent="."]
+
+[node name="Particles" type="Particles" parent="Spatial3"]
+transform = Transform( -1, 0, 0.000802906, 0, 1, 0, -0.000802906, 0, -1, 0, 118.329, -191 )
 material_override = SubResource( 94 )
 cast_shadow = 0
 generate_lightmap = false

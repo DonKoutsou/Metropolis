@@ -14,7 +14,7 @@
 [ext_resource path="res://Scenes/Env_Assets/Rock2.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Env_Assets/Rock3.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/Vehicles/HoverBoard_Lite.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Scenes/Vehicles/HoverBoard_NoWings.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/Triggers/DialogueTrigger.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Env_Assets/House.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Assets/Building/BuildingDust4.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Assets/Building/BuildingDust3.tscn" type="PackedScene" id=20]
@@ -388,5 +388,5 @@ transform = Transform( -247.668, 60.8426, -3.4975, 60.943, 247.259, -14.2136, 0,
 [node name="Vehicle2" parent="." index="56" instance=ExtResource( 14 )]
 transform = Transform( -0.00063925, 0.0010706, -0.999999, 0.000666553, 0.999999, 0.00107017, 1, -0.000665859, -0.000639973, 328.04, 10.2002, 2862.02 )
 
-[node name="Vehicle3" parent="." index="57" instance=ExtResource( 15 )]
-transform = Transform( 1, -0.000665859, -0.000639929, 0.000666553, 0.999999, 0.00107017, 0.000639206, -0.0010706, 0.999999, 318.632, 15.7138, 2827.61 )
+[node name="DialogueTrigger" parent="." index="57" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 279.543, 11.9978, 2821.02 )

@@ -61,8 +61,8 @@ public class WindGenerator : StaticBody
         float energy = EnergyPerWindStreangth * (windstr/100);
         float scale = Scale.x;
  
-        anim.PlaybackSpeed = animspeed - (scale - 1);
-        anim2.PlaybackSpeed = animspeed - (scale - 1);
+        anim.PlaybackSpeed = Mathf.Max(animspeed - (scale - 1), 0);
+        anim2.PlaybackSpeed = Mathf.Max(animspeed - (scale - 1), 0);
         
         if (CurrentEnergy + energy < EnergyCapacity)
         {

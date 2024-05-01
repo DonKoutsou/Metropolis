@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/Stamina_Bar.cs" type="Script" id=2]
@@ -16,8 +16,10 @@
 [ext_resource path="res://Scripts/CameraPanPivot.cs" type="Script" id=14]
 [ext_resource path="res://Scripts/CameraMovePivot.cs" type="Script" id=15]
 [ext_resource path="res://Scenes/Characters/MoveLocation.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/Env_Assets/SandParticles.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scripts/Time_UI.cs" type="Script" id=18]
 [ext_resource path="res://Scripts/TalkText.cs" type="Script" id=19]
+[ext_resource path="res://Scripts/SandParticles.cs" type="Script" id=20]
 [ext_resource path="res://Scripts/MyCamera.cs" type="Script" id=21]
 [ext_resource path="res://Scenes/Env_Assets/Clouds.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Scenes/HUD/ActionMenu.tscn" type="PackedScene" id=23]
@@ -33,6 +35,7 @@
 [ext_resource path="res://Scenes/Items/SkeleArm_L.tscn" type="PackedScene" id=33]
 [ext_resource path="res://Scenes/Items/SkeleArm_R.tscn" type="PackedScene" id=34]
 [ext_resource path="res://Scripts/CameraAnimationPlayer.cs" type="Script" id=35]
+[ext_resource path="res://Assets/Clouds/Textures/smoke_01.png" type="Texture" id=36]
 
 [sub_resource type="Curve" id=106]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.5 ), 0.0, 0.0, 0, 0 ]
@@ -145,6 +148,45 @@ tracks/1/keys = {
 "update": 0,
 "values": [ true ]
 }
+
+[sub_resource type="SpatialMaterial" id=112]
+render_priority = 1
+flags_transparent = true
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_color = Color( 1, 0.921569, 0.796078, 0.266667 )
+albedo_texture = ExtResource( 36 )
+
+[sub_resource type="Curve" id=113]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=93]
+width = 512
+curve = SubResource( 113 )
+
+[sub_resource type="ParticlesMaterial" id=114]
+trail_size_modifier = SubResource( 93 )
+emission_shape = 2
+emission_box_extents = Vector3( 5000, 50, 5000 )
+direction = Vector3( 0, 0, -2 )
+spread = 1.41
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 18.05
+angular_velocity = 34.12
+angular_velocity_random = 1.0
+linear_accel = 100.0
+linear_accel_random = 0.35
+tangential_accel = 2.8
+tangential_accel_random = 1.0
+angle = 360.0
+scale_random = 0.53
+hue_variation = 1.0
+hue_variation_random = 1.0
+
+[sub_resource type="QuadMesh" id=115]
+size = Vector2( 1000, 1000 )
 
 [node name="Player" type="KinematicBody" groups=["player"]]
 pause_mode = 1
@@ -314,6 +356,7 @@ margin = 0.5
 transform = Transform( 1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0, 0, 40 )
 script = ExtResource( 12 )
 Speed = 5
+MaxDist = 150.0
 
 [node name="CameraPanXPivot" type="Position3D" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot"]
 transform = Transform( 1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0 )
@@ -365,6 +408,27 @@ VehicleMoveLayer = 260
 
 [node name="Spatial2" parent="." instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1000, 0 )
+
+[node name="Spatial3" type="Spatial" parent="."]
+
+[node name="SandParticles" parent="Spatial3" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.75545, -243.768 )
+visibility_aabb = AABB( -138.138, -205.176, -393.492, 276.276, 410.353, 786.984 )
+
+[node name="Particles" type="Particles" parent="Spatial3"]
+transform = Transform( -1, 0, 0.000802906, 0, 1, 0, -0.000802906, 0, -1, 0, 118.329, -191 )
+material_override = SubResource( 112 )
+cast_shadow = 0
+generate_lightmap = false
+amount = 50
+lifetime = 15.0
+speed_scale = 5.0
+visibility_aabb = AABB( -3825.97, 0, -4096, 7651.96, 3042.07, 8192 )
+local_coords = false
+draw_order = 1
+process_material = SubResource( 114 )
+draw_pass_1 = SubResource( 115 )
+script = ExtResource( 20 )
 
 [connection signal="body_entered" from="KillFieldDetector" to="." method="OnKillFieldDetectorBodyEntered"]
 [connection signal="body_entered" from="HouseDoorDetector" to="." method="OnHouseDoorDetectorBodyEntered"]

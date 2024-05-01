@@ -20,6 +20,12 @@ public class DayNight : WorldEnvironment
     Curve sunrotcurve = null;
 
     [Export]
+    Gradient SunColorGradient = null;
+
+    [Export]
+    Gradient MoonColorGradient = null;
+
+    /*[Export]
     Curve sunRcolorcurve = null;
 
     [Export]
@@ -35,7 +41,7 @@ public class DayNight : WorldEnvironment
     Curve moonGcolorcurve = null;
 
     [Export]
-    Curve moonBcolorcurve = null;
+    Curve moonBcolorcurve = null;*/
 
     [Export]
     int startinghour = 10;
@@ -69,7 +75,7 @@ public class DayNight : WorldEnvironment
 
     static bool day = true;
 
-    public Spatial SunMoonMeshPivot;
+    public SunMoonPivot SunMoonMeshPivot;
 
     Time_UI UI;
 
@@ -120,9 +126,10 @@ public class DayNight : WorldEnvironment
         else
             SunRot = sunrotcurve.Interpolate(HourValue + 0.15f);
 
-        SunColor = new Color(sunRcolorcurve.Interpolate(HourValue) , sunGcolorcurve.Interpolate(HourValue), sunBcolorcurve.Interpolate(HourValue));
-
-        MoonColor = new Color(moonRcolorcurve.Interpolate(HourValue) , moonGcolorcurve.Interpolate(HourValue), moonBcolorcurve.Interpolate(HourValue));
+        SunColor = SunColorGradient.Interpolate(HourValue);
+        //SunColor = new Color(sunRcolorcurve.Interpolate(HourValue) , sunGcolorcurve.Interpolate(HourValue), sunBcolorcurve.Interpolate(HourValue));
+        MoonColor = MoonColorGradient.Interpolate(HourValue);
+        //MoonColor = new Color(moonRcolorcurve.Interpolate(HourValue) , moonGcolorcurve.Interpolate(HourValue), moonBcolorcurve.Interpolate(HourValue));
     }
     private void ToggleDay(int Phase)
     {
@@ -339,6 +346,14 @@ public class DayNight : WorldEnvironment
         sun.LightColor = SunColor;
 
         moon.LightColor = MoonColor;
+
+        if (SunMoonMeshPivot != null)
+        {
+            SunMoonMeshPivot.SetSunColor(SunColor);
+            SunMoonMeshPivot.SetMoonColor(MoonColor);
+        }
+
+        
         ///
         /////
         Color FogColor;
