@@ -11,15 +11,21 @@ public class Vehicle : RigidBody
     float turnspeed = 2000;
     [Export]
     int HoverForce = 500;
-
     [Export]
     int JumpForce = 50;
-
     [Export]
     Curve forcecurve = null;
-
     [Export]
     Curve Hoverforcecurve = null;
+    [Export]
+    Mesh LeftWingMesh = null;
+    [Export]
+    Mesh LeftDestWingMesh = null;
+    [Export]
+    Mesh RightWingMesh = null;
+    [Export]
+    Mesh RightDestWingMesh = null;
+    
     Position3D SteeringWheel;
 
     List<RayCast> Rays = new List<RayCast>();
@@ -46,16 +52,8 @@ public class Vehicle : RigidBody
 
     VehicleDamageManager DamageMan;
 
-    [Export]
-    Mesh LeftWingMesh = null;
-    [Export]
-    Mesh LeftDestWingMesh = null;
-    [Export]
-    Mesh RightWingMesh = null;
-    [Export]
-    Mesh RightDestWingMesh = null;
+    
 
-    //RigidBody WingShapes;
     public bool ToggleWings(bool toggle)
     {
         if (Anim.IsPlaying())
@@ -132,12 +130,6 @@ public class Vehicle : RigidBody
             if (frontray.IsColliding())
             {
                 forcemulti = 4;
-                //var collisionpoint = frontray.GetCollisionPoint();
-                //var dist = collisionpoint.DistanceTo(frontray.GlobalTransform.origin);
-                //if (dist > 1 && latsspeed > speed * 2);
-            // {
-                //    Capsize();
-            //}
             }
         }
 
@@ -359,7 +351,6 @@ public class Vehicle : RigidBody
     {
         return FrontLight.LightEnergy == 1;
     }
-    
     public override void _Ready()
     {
         base._Ready();
@@ -376,12 +367,10 @@ public class Vehicle : RigidBody
         frontray = parent.GetNode<RayCast>("RayF");
         Rays.Insert(0, parent.GetNode<RayCast>("RayFL"));
         Rays.Insert(1, parent.GetNode<RayCast>("RayFR"));
-        //Rays.Insert(2, parent.GetNode<RayCast>("RayF"));
         Rays.Insert(2, parent.GetNode<RayCast>("RayBL"));
         Rays.Insert(3, parent.GetNode<RayCast>("RayBR"));
         ((Spatial)GetParent()).GlobalRotation = Vector3.Zero;
-        //Rays.Insert(5, parent.GetNode<RayCast>("RayB"));
-        //WingShapes = GetNode<RigidBody>("WingShapes");
+
         DamageMan = GetParent().GetNode<VehicleDamageManager>("VehicleDamageManager");
         for (int i = 0; i < 4; i++)
         {
@@ -390,10 +379,7 @@ public class Vehicle : RigidBody
                 break;
             WingMaterials.Insert(i, (ShaderMaterial)wing.GetActiveMaterial(1));
         }
-        //WingMaterials.Insert(0, (ShaderMaterial)GetNode<MeshInstance>("WingMesh0").GetActiveMaterial(1));
-        //WingMaterials.Insert(1, (ShaderMaterial)GetNode<MeshInstance>("WingMesh1").GetActiveMaterial(1));
-        //WingMaterials.Insert(2, (ShaderMaterial)GetNode<MeshInstance>("WingMesh2").GetActiveMaterial(1));
-        //WingMaterials.Insert(3, (ShaderMaterial)GetNode<MeshInstance>("WingMesh3").GetActiveMaterial(1));
+
         ToggleWings(false);
         EnableWindOnWings(false);
         SetProcessInput(false);
@@ -463,10 +449,7 @@ public class Vehicle : RigidBody
         ToggleMachine(false);
         ToggleLights(false);
     }
-    public bool HasPassengers()
-    {
-        return passengers.Count > 0;
-    }
+
      public void UnBoardVehicle(Character cha)
     {
         passengers.Clear();
@@ -486,15 +469,5 @@ public class Vehicle : RigidBody
         ToggleMachine(false);
         ToggleLights(false);
     }
-    /*public override void _Input(InputEvent @event)
-	{
-		if (@event.IsActionPressed("Run"))
-		{
-            if (wingsdeployed)
-                ToggleWings(false);
-            else
-                ToggleWings(true);
-        }
-    }*/
     
 }

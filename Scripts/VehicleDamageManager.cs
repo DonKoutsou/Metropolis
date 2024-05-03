@@ -46,8 +46,6 @@ public class VehicleDamageManager : Spatial
     {
         for (int i = 0; i < WingColliders.Count; i++)
         {
-            //if (DestroyedWings.Contains(i))
-                //continue;
             WingColliders[i].SetDeferred("disabled", !Toggle);
         }
     }
@@ -65,10 +63,7 @@ public class VehicleDamageManager : Spatial
                 break;
             WingColliders.Insert(i, wing);
         }
-		//WingColliders.Insert(0, veh.GetNode<CollisionShape>("WingCollider0"));
-		//WingColliders.Insert(1, veh.GetNode<CollisionShape>("WingCollider1"));
-		//WingColliders.Insert(2, veh.GetNode<CollisionShape>("WingCollider2"));
-		//WingColliders.Insert(3, veh.GetNode<CollisionShape>("WingCollider3"));
+
 		HullCollision = veh.GetNode<CollisionShape>("CollisionShape");
         LightCollision = veh.GetNode<CollisionShape>("CollisionShape2");
 	}

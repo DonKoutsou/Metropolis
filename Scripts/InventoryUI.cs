@@ -5,23 +5,33 @@ using System.Linq;
 
 public class InventoryUI : Control
 {
+    [Export]
+    string NoMapText = "Δεν έχω χάρτη...";
+    [Export]
+    string NoCompassText = "Δεν έχω πυξήδα...";
+    [Export]
+    string NoSelectionOnDropText = "Πρέπει να διαλέξω κάτι για να αφήσω...";
+
     Inventory Inv;
 
     Player pl;
+
     List <InventoryUISlot> slots = new List<InventoryUISlot>();
     static InventoryUI inst;
+
     public bool IsOpen = false;
 
-    RichTextLabel Capacity;
     float MaxLoad = 0;
     Panel DescPan;
+
+    RichTextLabel Capacity;
     RichTextLabel Description;
     RichTextLabel WeightText;
     RichTextLabel ItemName;
 
     InventoryUISlot FocusedSlot;
 
-    Panel ItemOptionPanel;
+    //Panel ItemOptionPanel;
 
     bool showingDesc = false;
 
@@ -45,11 +55,7 @@ public class InventoryUI : Control
     public override void _Ready()
     {
         inst = this;
-        
 
-        
-        
-        
         Capacity = GetNode<Panel>("CapPanel").GetNode<RichTextLabel>("CapAmmount");
         
         GridContainer gr = GetNode<GridContainer>("GridContainer");
@@ -61,7 +67,7 @@ public class InventoryUI : Control
         Description = DescPan.GetNode<MarginContainer>("MarginContainer").GetNode<VBoxContainer>("VBoxContainer").GetNode<RichTextLabel>("Description");
         WeightText =  DescPan.GetNode<MarginContainer>("MarginContainer").GetNode<VBoxContainer>("VBoxContainer").GetNode<RichTextLabel>("WeightText");
         ItemName = DescPan.GetNode<MarginContainer>("MarginContainer").GetNode<VBoxContainer>("VBoxContainer").GetNode<RichTextLabel>("ItemName");
-        ItemOptionPanel = GetNode<Panel>("ItemOptionPanel");
+        //ItemOptionPanel = GetNode<Panel>("ItemOptionPanel");
         DescPan.Hide();
         Hide();
 
@@ -70,7 +76,6 @@ public class InventoryUI : Control
             slots.Insert(i, (InventoryUISlot)gr.GetChild(i));
         }
         SetProcess(false);
-        //CallDeferred("UpdateInventory");
     }
     public void OnPlayerSpawned(Player play)
     {
@@ -90,6 +95,17 @@ public class InventoryUI : Control
         Show();
         IsOpen = true;
         SetProcess(true);
+    }
+    public void CloseInventory()
+    {
+        WarpMouse(GetViewport().Size/2);
+        Hide();
+        FocusedSlot = null;
+        IsOpen = false;
+        SetProcess(false);
+        comp = Compass.GetInstance();
+        //if (comp != null)
+        comp.ToggleCompass(false);
     }
     float d = 0.5f;
     public override void _Process(float delta)
@@ -150,51 +166,22 @@ public class InventoryUI : Control
 
         CharacterBatteryCharge.Value = pl.GetCurrentCharacterEnergy();
         CharacterRPM.Value = pl.rpm * 100;
+
         if (showingDesc)
             Description.BbcodeText = "[center]" + ShowingDescSample.GetItemDesc();
+
         if (!hascompass)
             ShowingCompass = false;
         if (!hasmap)
             ShowingMap = false;
-        if (ShowingCompass)
-        {
-            comp = Compass.GetInstance();
-            //if (comp != null)
-                comp.ToggleCompass(true);
-        }
-        else
-        {
-            comp = Compass.GetInstance();
-            //if (comp != null)
-                comp.ToggleCompass(false);
-        }
-        if (ShowingMap)
-        {
-            map = MapGrid.GetInstance();
-            //if (map != null)
-                map.ToggleMap(true);
-            GetNode<Panel>("ItemOptionPanel").GetNode<Button>("DropButton").Hide();
-        }
-        else
-        {
-            map = MapGrid.GetInstance();
-            //if (map != null)
-                map.ToggleMap(false);
-            GetNode<Panel>("ItemOptionPanel").GetNode<Button>("DropButton").Show();
-        }
+
+        comp.ToggleCompass(ShowingCompass);
+
+        map.ToggleMap(ShowingMap);
+
+        GetNode<Panel>("ItemOptionPanel").GetNode<Button>("DropButton").Visible = ShowingMap;
     }
-    public void CloseInventory()
-    {
-        WarpMouse(GetViewport().Size/2);
-        Hide();
-        FocusedSlot = null;
-        IsOpen = false;
-        SetProcess(false);
-        comp = Compass.GetInstance();
-        //if (comp != null)
-        comp.ToggleCompass(false);
-        
-    }
+    
     public void ItemHovered(Item it)
     {
         if (it == null)
@@ -221,35 +208,38 @@ public class InventoryUI : Control
         if (slot == FocusedSlot)
             FocusedSlot = null;
     }
+    
+
     private void On_Drop_Button_Down()
     {
         if (FocusedSlot == null)
         {
-            TalkText.GetInst().Talk("Πρέπει να διαλέξω κάτι για να αφήσω.", pl);
+            TalkText.GetInst().Talk(NoSelectionOnDropText, pl);
             return;
         }
             
         Inv.RemoveItem(FocusedSlot.item);
         FocusedSlot = null;
     }
+    
     private void On_Compass_Button_Down()
     {
         if (!hascompass)
         {
-            TalkText.GetInst().Talk("Δεν έχω πυξήδα.", pl);
+            TalkText.GetInst().Talk(NoCompassText, pl);
             return;
         }
-            
         if (!ShowingCompass)
             ShowingCompass = true;
         else
             ShowingCompass = false;
     }
+    
     private void On_Map_Button_Down()
     {
         if (!hasmap)
         {
-            TalkText.GetInst().Talk("Δεν έχω χάρτη.", pl);
+            TalkText.GetInst().Talk(NoMapText, pl);
             return;
         }
         if (!ShowingMap)

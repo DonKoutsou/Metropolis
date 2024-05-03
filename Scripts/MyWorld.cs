@@ -6,33 +6,24 @@ public class MyWorld : Spatial
 {
 	[Export]
 	Dictionary<int, PackedScene> GlobalItemListConfiguration = new Dictionary<int, PackedScene>();
+
 	[Export]
 	PackedScene PlayerScene = null;
-	Player pl;
 
 	[Signal]
     public delegate void PlayerSpawnedEventHandler(Player Pl);
+
 	static Dictionary<int, PackedScene> GlobalItemList = new Dictionary<int, PackedScene>();
-	public void SpawnPlayer(Vector3 pos)
-	{
-		pl = (Player)PlayerScene.Instance();
-		AddChild(pl);
-		pl.Teleport(pos);
-		EmitSignal("PlayerSpawnedEventHandler", pl);
-		VehicleHud.GetInstance().ConnectToPlayer(pl);
-		CameraAnimationPlayer.GetInstance().FadeIn();
-	}
-	public static PackedScene GetItemByType(ItemName name)
-	{
-		PackedScene path = null;
-		GlobalItemList.TryGetValue((int)name, out path);
-		return path;
-	}
-	bool EnableDissableBool = false;
-
+	
 	static List<IslandInfo> Orderedilestodissable = new List<IslandInfo>();
+	
 	static List<IslandInfo> Orderedilestoenable = new List<IslandInfo>();
-
+	
+	static MyWorld Instance;
+	public static MyWorld GetInstance()
+	{
+		return Instance;
+	}
 	public override void _Ready()
 	{
 		base._Ready();
@@ -46,10 +37,59 @@ public class MyWorld : Spatial
 		
 		Instance = this;
 	}
-	static MyWorld Instance;
-	public static MyWorld GetInstance()
+
+	float d = 0.2f;
+	bool EnableDissableBool = false;
+	public override void _Process(float delta)
 	{
-		return Instance;
+		d -= delta;
+		if (d <= 0)
+		{
+			d = 0.2f;
+			if (!EnableDissableBool)
+			{
+				EnableDissableBool = true;
+				for (int i = Orderedilestodissable.Count - 1; i >= 0; i--)
+				{
+					IslandInfo ile = Orderedilestodissable[i];
+					Orderedilestodissable.Remove(ile);
+					if (ile.IsIslandSpawned())
+					{
+						ToggleIsland(ile, false, false);
+						break;
+					}	
+				}
+			}
+			else if (EnableDissableBool)
+			{
+				EnableDissableBool = false;
+				for (int i = 0; i < Orderedilestoenable.Count; i++)
+				{
+					IslandInfo ile = Orderedilestoenable[i];
+					Orderedilestoenable.Remove(ile);
+					if (!ile.IsIslandSpawned())
+					{
+						ToggleIsland(ile, true, false);
+						break;
+					}	
+				}
+			}
+		}
+	}
+	public static PackedScene GetItemByType(ItemName name)
+	{
+		PackedScene path = null;
+		GlobalItemList.TryGetValue((int)name, out path);
+		return path;
+	}
+	public void SpawnPlayer(Vector3 pos)
+	{
+		Player pl = (Player)PlayerScene.Instance();
+		AddChild(pl);
+		pl.Teleport(pos);
+		EmitSignal("PlayerSpawnedEventHandler", pl);
+		VehicleHud.GetInstance().ConnectToPlayer(pl);
+		CameraAnimationPlayer.GetInstance().FadeIn();
 	}
 	public void OnPlayerKilled()	
 	{
@@ -61,50 +101,7 @@ public class MyWorld : Spatial
 		AddChild(ile.ile);
 		
 	}
-	float d = 0.2f;
-	public override void _Process(float delta)
-	{
-		d -= delta;
-		if (d <= 0)
-		{
-			d = 0.2f;
-			if (!EnableDissableBool)
-			{
-				EnableDissableBool = true;
-				if (Orderedilestodissable.Count > 0)
-				{
-					for (int i = Orderedilestodissable.Count - 1; i >= 0; i--)
-					{
-						IslandInfo ile = Orderedilestodissable[i];
-						Orderedilestodissable.Remove(ile);
-						if (ile.IsIslandSpawned())
-						{
-							ToggleIsland(ile, false, false);
-							break;
-						}	
-					}
-				}
-			}
-			else if (EnableDissableBool)
-			{
-				EnableDissableBool = false;
-				if (Orderedilestoenable.Count > 0)
-				{
-					var iles = Orderedilestoenable;
-					for (int i = 0; i < iles.Count; i++)
-					{
-						IslandInfo ile = Orderedilestoenable[i];
-						Orderedilestoenable.Remove(ile);
-						if (!ile.IsIslandSpawned())
-						{
-							ToggleIsland(ile, true, false);
-							break;
-						}	
-					}
-				}
-			}
-		}
-	}
+	
 	public static void ArrangeIlesBasedOnDistance(List<IslandInfo> ilestodissable, List<IslandInfo> ilestoenable)
     {
 		if (ilestoenable.Count > 0)
@@ -130,6 +127,7 @@ public class MyWorld : Spatial
 						dif = newdif;
 					}
 				}
+
 				if (Math.Abs(closest.pos.x) + Math.Abs(closest.pos.y) < Math.Abs(IleArray.pos.x) + Math.Abs(IleArray.pos.y))
 				{
 					Orderedilestoenable.Insert(Orderedilestoenable.IndexOf(closest) + 1, IleArray);
@@ -183,19 +181,22 @@ public class MyWorld : Spatial
 	public static void IleTransition(IslandInfo from, IslandInfo to)
 	{
 		//GD.Print("Transitioning from : " + from.Name + " to " + to.Name);
-		SeaManager.SyncSeas();
+		WorldMap map = WorldMap.GetInstance();
+		map.SyncSeas();
 		List<IslandInfo> ilestodissable = new List<IslandInfo>();
 		List<IslandInfo> ilestoenable = new List<IslandInfo>();
+		
 		int ViewDistance = Settings.GetGameSettings().ViewDistance;
+
 		List<IslandInfo> closestfrom;
-		WorldMap.GetInstance().GetClosestIles(from ,out closestfrom, ViewDistance);
+		map.GetClosestIles(from ,out closestfrom, ViewDistance);
 
 		List<IslandInfo> closestto;
-		WorldMap.GetInstance().GetClosestIles(to,out closestto, ViewDistance);
-		List<IslandInfo> closestto2;
-		WorldMap.GetInstance().GetClosestIles(to,out closestto2, 1);
-		foreach(IslandInfo info in closestto2)
-			MapGrid.GetInstance().OnIslandVisited(info);
+		map.GetClosestIles(to,out closestto, ViewDistance);
+		//List<IslandInfo> closestto2;
+		//WorldMap.GetInstance().GetClosestIles(to,out closestto2, 1);
+		//foreach(IslandInfo info in closestto2)
+			//MapGrid.GetInstance().OnIslandVisited(info);
 		for (int i = 0; i < closestfrom.Count; i ++)
 		{
 			if (closestfrom[i] == to)

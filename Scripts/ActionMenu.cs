@@ -299,9 +299,7 @@ public class ActionMenu : Control
 			else
 			{
 				PickButton.Show();
-				//if (((Vehicle)SelectedObj).HasPassengers())
-					//IntButton.Show();
-				//else
+
 				IntButton.Hide();
 			}
 				

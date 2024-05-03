@@ -20,7 +20,7 @@ public class Player : Character
 
 	//HP_Bar hp_bar = null;
 
-	DialoguePanel DiagPan;
+	//DialoguePanel DiagPan;
 
 	MoveLocation moveloc;
 
@@ -82,11 +82,8 @@ public class Player : Character
 		Spatial plUI = GetNode<Spatial>("PlayerUI");
 		actMen = plUI.GetNode<ActionMenu>("ActionMenu");
 		
-		
-		var panels = GetTree().GetNodesInGroup("DialoguePanel");
-		DiagPan = (DialoguePanel)panels[0];
-		
-		
+		//var panels = GetTree().GetNodesInGroup("DialoguePanel");
+		//DiagPan = (DialoguePanel)panels[0];
 
 		moveloc = GetNode<MoveLocation>("MoveLoc");
 
@@ -301,15 +298,12 @@ public class Player : Character
 				return;
 			loctomove = (Vector3)rayar["position"];
 			Vector3 norm = (Vector3)rayar["normal"];
-			var result = new Basis();
-			result.x = norm.Cross(moveloc.GlobalTransform.basis.z);
-			result.y = norm;
-			result.z = moveloc.GlobalTransform.basis.x.Cross(norm);
-			var scale = moveloc.GlobalTransform.basis.Scale;
+			var result = new Basis(norm.Cross(moveloc.GlobalTransform.basis.z), norm, moveloc.GlobalTransform.basis.x.Cross(norm));
+
 			result = result.Orthonormalized();
 			result.Scale = new Vector3(1, 1, 1);
-			Transform or = new Transform();
-			or.basis = result;
+			Transform or = new Transform(result, Vector3.Zero);
+
 			moveloc.GlobalTransform = or;
 			moveloc.Show();
 		}
@@ -365,7 +359,6 @@ public class Player : Character
 				actMen.Stop();
 				return;
 			}
-				
 			actMen.Start(obj);
 		}
 		if (@event.IsActionPressed("Inventory"))
@@ -380,14 +373,6 @@ public class Player : Character
 	public override void OnKillFieldDetectorBodyEntered(Node body)
 	{
 		Kill();
-	}
-	public void OnHouseDoorDetectorBodyEntered(Node body)
-	{
-		if (body is HouseDoor)
-		{
-			HouseDoor bod = (HouseDoor)body;
-			bod.Touch(this);
-		}
 	}
 	public override void OnVehicleBoard(Vehicle Veh)
 	{

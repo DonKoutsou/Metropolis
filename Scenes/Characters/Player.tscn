@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/Stamina_Bar.cs" type="Script" id=2]
@@ -19,8 +19,7 @@
 [ext_resource path="res://Scenes/Env_Assets/SandParticles.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scripts/Time_UI.cs" type="Script" id=18]
 [ext_resource path="res://Scripts/TalkText.cs" type="Script" id=19]
-[ext_resource path="res://Scripts/SandParticles.cs" type="Script" id=20]
-[ext_resource path="res://Scripts/MyCamera.cs" type="Script" id=21]
+[ext_resource path="res://Scripts/WorldParticleManager.cs" type="Script" id=21]
 [ext_resource path="res://Scenes/Env_Assets/Clouds.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Scenes/HUD/ActionMenu.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Scripts/Clouds.cs" type="Script" id=24]
@@ -45,9 +44,6 @@ height = 2.316
 
 [sub_resource type="CapsuleShape" id=92]
 height = 1.963
-
-[sub_resource type="CylinderShape" id=82]
-radius = 0.1
 
 [sub_resource type="CanvasItemMaterial" id=65]
 render_priority = 100
@@ -82,6 +78,9 @@ size = 24
 outline_size = 6
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
+
+[sub_resource type="SphereShape" id=116]
+radius = 2.0
 
 [sub_resource type="QuadMesh" id=107]
 
@@ -170,7 +169,7 @@ curve = SubResource( 113 )
 trail_size_modifier = SubResource( 93 )
 emission_shape = 2
 emission_box_extents = Vector3( 5000, 50, 5000 )
-direction = Vector3( 0, 0, -2 )
+direction = Vector3( 0, 0, 2 )
 spread = 1.41
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 18.05
@@ -204,7 +203,6 @@ Consumption = SubResource( 106 )
 pause_mode = 1
 
 [node name="Guy" parent="Pivot" instance=ExtResource( 13 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39891, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.31213, 0 )
@@ -218,16 +216,6 @@ monitorable = false
 [node name="CollisionShape" type="CollisionShape" parent="KillFieldDetector"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.48264, 0 )
 shape = SubResource( 92 )
-
-[node name="HouseDoorDetector" type="Area" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
-collision_layer = 0
-collision_mask = 64
-monitorable = false
-
-[node name="CollisionShape" type="CollisionShape" parent="HouseDoorDetector"]
-transform = Transform( 1.47899, 0, 0, 0, 0.256205, 0, 0, 0, 1.68566, 0, 0, 0 )
-shape = SubResource( 82 )
 
 [node name="DamageColor" type="ColorRect" parent="."]
 show_behind_parent = true
@@ -349,6 +337,7 @@ script = ExtResource( 14 )
 [node name="SpringArm" type="SpringArm" parent="CameraMovePivot/CameraPanPivot"]
 transform = Transform( 0.999999, 0, 5.32907e-15, 0, 1, 0, -5.32907e-15, 0, 0.999999, 0, 0, 0 )
 collision_mask = 4
+shape = SubResource( 116 )
 spring_length = 40.0
 margin = 0.5
 
@@ -368,7 +357,6 @@ current = true
 fov = 45.0
 size = 5.0
 far = 40000.0
-script = ExtResource( 21 )
 
 [node name="EnvSound" type="AudioStreamPlayer3D" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/Camera"]
 transform = Transform( 1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0 )
@@ -406,17 +394,18 @@ script = ExtResource( 24 )
 MoveLayer = 260
 VehicleMoveLayer = 260
 
-[node name="Spatial2" parent="." instance=ExtResource( 26 )]
+[node name="Rain" parent="." instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1000, 0 )
 
-[node name="Spatial3" type="Spatial" parent="."]
+[node name="WorldParticleManager" type="Spatial" parent="."]
+script = ExtResource( 21 )
 
-[node name="SandParticles" parent="Spatial3" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.75545, -243.768 )
+[node name="SandParticles" parent="WorldParticleManager" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.755, 243.768 )
 visibility_aabb = AABB( -138.138, -205.176, -393.492, 276.276, 410.353, 786.984 )
 
-[node name="Particles" type="Particles" parent="Spatial3"]
-transform = Transform( -1, 0, 0.000802906, 0, 1, 0, -0.000802906, 0, -1, 0, 118.329, -191 )
+[node name="Particles" type="Particles" parent="WorldParticleManager"]
+transform = Transform( -1, 0, 0.000802906, 0, 1, 0, -0.000802906, 0, -1, 0, 118.329, 191 )
 material_override = SubResource( 112 )
 cast_shadow = 0
 generate_lightmap = false
@@ -428,10 +417,8 @@ local_coords = false
 draw_order = 1
 process_material = SubResource( 114 )
 draw_pass_1 = SubResource( 115 )
-script = ExtResource( 20 )
 
 [connection signal="body_entered" from="KillFieldDetector" to="." method="OnKillFieldDetectorBodyEntered"]
-[connection signal="body_entered" from="HouseDoorDetector" to="." method="OnHouseDoorDetectorBodyEntered"]
 [connection signal="timeout" from="PlayerUI/HP_Bar/VisibilityTimerHP" to="PlayerUI/HP_Bar" method="TurnOff"]
 [connection signal="timeout" from="PlayerUI/Stamina_Bar/VisibilityTimerStamina" to="PlayerUI/Stamina_Bar" method="TurnOff"]
 [connection signal="timeout" from="PlayerUI/TalkText/UpdateTimer" to="PlayerUI/TalkText" method="TurnOff"]

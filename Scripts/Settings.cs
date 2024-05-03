@@ -3,7 +3,7 @@ using System;
 
 public class Settings : Control
 {
-	public int ViewDistance = 3;
+	public int ViewDistance = 2;
 
 	public int TimeProgression = 1;
 

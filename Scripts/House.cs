@@ -10,12 +10,34 @@ public class House : Spatial
 	public PackedScene[] ItemSpawnPool;
 	List<Furniture> FurnitureList = new List<Furniture>();
 
+	StaticBody HouseExterior;
+	Area HouseDoor;
 	public override void _Ready()
 	{
 		foreach (Node nd in GetChildren())
 		{
 			if (nd is Furniture)
 				FurnitureList.Insert(FurnitureList.Count, (Furniture)nd);
+		}
+		HouseDoor = GetNode<Area>("HouseDoor");
+		HouseExterior = GetNode<StaticBody>("HouseExterior");
+	}
+	public void Touch(Node body)
+	{
+		Vector3 forw = HouseDoor.GlobalTransform.basis.z;
+		Vector3 toOther = HouseDoor.GlobalTransform.origin - ((Spatial)body).GlobalTransform.origin;
+		var thing = forw.Dot(toOther);
+		if (thing > 0)
+		{
+			((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Disabled;
+			((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(2)).ParamsCullMode = SpatialMaterial.CullMode.Disabled;
+			return;
+		}
+		else
+		{
+			((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Front;
+			((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(2)).ParamsCullMode = SpatialMaterial.CullMode.Front;
+			return;
 		}
 	}
 	public void StartHouse(Random random)
@@ -60,33 +82,54 @@ public class House : Spatial
 			}
 		}
 	}
-	/*public bool GetIsEmpty()
-	{
-		return m_bEmpty;
-	}
-	private void OnDoorKnocked(HouseDoor door)
-	{
-		if (!m_bEmpty && lines != null)
-		{
-			DiagPan.DoDialogue(lines[0], this, true);
-		}
-		if (m_bEmpty && EmptyLines != null)
-		{
-			DiagPan.DoDialogue(EmptyLines, this, true);
-		}
-	}
-	public bool Search(Character Looter)
-	{
-		if (!HouseInventory.IsEmpty())
-		{
-			var items = new List<Item>();
-			HouseInventory.GetContents(out items);
-			for (int i = 0; i < items.Count; i++)
-			{
-				Looter.GetCharacterInventory().InsertItem(items[i]);
-			}
-			return true;
-		}
-		return false;
-	}*/
+}
+public class HouseInfo
+{
+    public string HouseName;
+
+    public List<FurnitureInfo> furni = new List<FurnitureInfo>();
+    public void UpdateInfo(List<Furniture> funriture)
+    {
+        foreach(FurnitureInfo GInfo in furni)
+        {
+            Furniture f = null;
+            foreach (Furniture fu in funriture)
+            {
+                if (fu.Name == GInfo.FunritureName)
+                {
+                    f = fu;
+                    break;
+                }
+            }
+            GInfo.UpdateInfo(f);
+
+        }
+    }
+    public void SetInfo(string name, List<FurnitureInfo> funriture)
+    {
+        HouseName = name;
+        for (int i = 0; i < funriture.Count; i++)
+        {
+            furni.Insert(i, funriture[i]);
+        }
+    }
+}
+public class FurnitureInfo
+{
+    public string FunritureName;
+    public bool Searched;
+    public bool HasItem;
+    public ItemName item;
+    public void UpdateInfo(Furniture furn)
+    {
+        Searched = furn.Searched;
+    }
+
+    public void SetInfo(string name, bool srch, bool hasI, ItemName it)
+    {
+        FunritureName = name;
+        Searched = srch;
+        HasItem = hasI;
+        item = it;
+    }
 }

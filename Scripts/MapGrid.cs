@@ -5,17 +5,15 @@ using System.Collections.Generic;
 public class MapGrid : GridContainer
 {
     [Export]
+    float MaxZoomScale = 2;
+    [Export]
     PackedScene TileScene = null;
     [Export]
     PackedScene XGridTileScene = null;
     [Export]
     PackedScene YGridTileScene = null;
-
-
     [Export]
     List<Color> ColorList = null;
-    int times = 6561;
-
 
     List<ChildMapIleInfo> children = new List<ChildMapIleInfo>();
     Dictionary<Vector2, Control> MapIleList = new Dictionary<Vector2, Control>();
@@ -27,12 +25,10 @@ public class MapGrid : GridContainer
 
     bool MapActive = false;
 
-    StyleBoxTexture th;
 
     MapUI mapui;
 
-    [Export]
-    float MaxZoomScale = 2;
+    
 
     public static MapGrid GetInstance()
     {
@@ -62,10 +58,22 @@ public class MapGrid : GridContainer
         Instance = this;
         Panel par = (Panel)GetParent();
         mapui = (MapUI)par.GetParent();
-        th = (StyleBoxTexture)par.GetStylebox("normal");
         //Texture tex = (Texture)th.Texture;
         MapGridx = par.GetParent().GetNode<Panel>("Panel3").GetNode<GridContainer>("MapGridX");
         MapGridy = par.GetParent().GetNode<Panel>("Panel2").GetNode<GridContainer>("MapGridY");
+
+       
+        //MarginLeft = -(RectSize.x / 2);
+        //RectPosition = RectScale/2; 
+    }
+    public void InitMap()
+    {
+         WorldMap map = WorldMap.GetInstance();
+
+        var cells = map.GetUsedCells();
+
+        int times = cells.Count;
+
         while (times > 0)
         {
             Control maptile = (Control)TileScene.Instance();
@@ -85,17 +93,22 @@ public class MapGrid : GridContainer
             gridtilex.Name = "x" + (i-40);
             gridtiley.Name = "y" + (i-40);
         }
-        CallDeferred("FrameMap");
+        
+
         if (RectScale.x <= 0.5f)
             SwitchGridValues(0);
         else if (RectScale.x <= 2)
             SwitchGridValues(1);
         else
             SwitchGridValues(2);
+        
+        for (int i = 0; i < children.Count; i++)
+        {
+            Control child = children[i].MapIle;
+            MapIleList.Add((Vector2)cells[i], child);
+        }
 
-        InitMap();
-        //MarginLeft = -(RectSize.x / 2);
-        //RectPosition = RectScale/2; 
+        CallDeferred("FrameMap");
     }
     public bool IsMouseInMap()
     {
@@ -299,19 +312,7 @@ public class MapGrid : GridContainer
         col.a = 1;
         MapIle.Modulate = col;
     }
-    public void InitMap()
-    {
-        WorldMap map = WorldMap.GetInstance();
-        if (map == null)
-            return;
-
-        var cells = map.GetUsedCells();
-        for (int i = 0; i < children.Count; i++)
-        {
-            Control child = children[i].MapIle;
-            MapIleList.Add((Vector2)cells[i], child);
-        }
-    }
+    
     public void UpdateIleInfo(Vector2 index, IleType type)
     {
         Control child;
