@@ -218,9 +218,9 @@ void fragment() {
 [resource]
 shader = SubResource( 6 )
 shader_param/IsRaining = true
-shader_param/albedo = Color( 0.513726, 0.533333, 0.545098, 1 )
+shader_param/albedo = Color( 0.690196, 0.670588, 0.670588, 1 )
 shader_param/ring_color = Color( 0.862745, 0.964706, 1, 1 )
-shader_param/_DepthGradientShallow = Color( 0.529412, 0.529412, 0.529412, 1 )
+shader_param/_DepthGradientShallow = Color( 0.694118, 0.694118, 0.694118, 1 )
 shader_param/specular = 0.63
 shader_param/metallic = 1.0
 shader_param/proximity_fade_distance = 2.86

@@ -1,28 +1,30 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Sounds/RainSound.mp3" type="AudioStream" id=1]
 [ext_resource path="res://Assets/Rain/Rain.tres" type="Material" id=2]
+[ext_resource path="res://Scripts/Rain.cs" type="Script" id=3]
 
 [sub_resource type="ParticlesMaterial" id=2]
 emission_shape = 2
-emission_box_extents = Vector3( 2000, 5, 2000 )
+emission_box_extents = Vector3( 3000, 5, 3000 )
 direction = Vector3( 0, -10, 0 )
-spread = 0.0
+spread = 5.03
 gravity = Vector3( 0, -100, 0 )
 initial_velocity = 10000.0
 
 [sub_resource type="QuadMesh" id=3]
 material = ExtResource( 2 )
-size = Vector2( 0.5, 100 )
+size = Vector2( 1, 100 )
 
-[node name="Spatial" type="Spatial"]
+[node name="Rain" type="Spatial"]
+script = ExtResource( 3 )
 
 [node name="Clouds2" type="Particles" parent="."]
 transform = Transform( 0.99753, 0, -0.070244, 0, 1, 0, 0.070244, 0, 0.99753, 0, 0, 0 )
 sorting_use_aabb_center = false
 cast_shadow = 0
 generate_lightmap = false
-amount = 1000
+amount = 5000
 speed_scale = 0.5
 visibility_aabb = AABB( -1293.38, -1000, -1158.37, 2586.77, 1000, 2316.74 )
 local_coords = false

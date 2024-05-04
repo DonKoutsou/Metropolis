@@ -171,7 +171,7 @@ curve = SubResource( 113 )
 trail_size_modifier = SubResource( 117 )
 emission_shape = 2
 emission_box_extents = Vector3( 5000, 50, 5000 )
-direction = Vector3( 0, 0, 2 )
+direction = Vector3( 0, 0, -1 )
 spread = 1.41
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 18.05
@@ -398,18 +398,17 @@ script = ExtResource( 24 )
 MoveLayer = 260
 VehicleMoveLayer = 260
 
-[node name="Rain" parent="." instance=ExtResource( 26 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1000, 0 )
-
 [node name="WorldParticleManager" type="Spatial" parent="."]
 script = ExtResource( 21 )
 
 [node name="SandParticles" parent="WorldParticleManager" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.755, 243.768 )
 visibility_aabb = AABB( -138.138, -205.176, -393.492, 276.276, 410.353, 786.984 )
+local_coords = false
+draw_order = 2
 
 [node name="Particles" type="Particles" parent="WorldParticleManager"]
-transform = Transform( -1, 0, 0.000802906, 0, 1, 0, -0.000802906, 0, -1, 0, 118.329, 191 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 118.329, 191 )
 material_override = SubResource( 112 )
 cast_shadow = 0
 generate_lightmap = false
@@ -421,6 +420,9 @@ local_coords = false
 draw_order = 1
 process_material = SubResource( 114 )
 draw_pass_1 = SubResource( 115 )
+
+[node name="Rain" parent="WorldParticleManager" instance=ExtResource( 26 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1000, 0 )
 
 [connection signal="body_entered" from="KillFieldDetector" to="." method="OnKillFieldDetectorBodyEntered"]
 [connection signal="timeout" from="PlayerUI/HP_Bar/VisibilityTimerHP" to="PlayerUI/HP_Bar" method="TurnOff"]
