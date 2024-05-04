@@ -1,7 +1,8 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://Assets/AllSkyFree_Sky_OvercastLow_Equirect.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Sea/Water_SH.tres" type="Material" id=2]
+[ext_resource path="res://Scenes/Env_Assets/Sea.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Islands/LightHouseGeo.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Clouds/Clouds2.material" type="Material" id=6]
 [ext_resource path="res://Assets/Clutter/Antenna/Antenna.material" type="Material" id=8]
 [ext_resource path="res://Assets/Sounds/Cave_Ambient.mp3" type="AudioStream" id=9]
@@ -16,19 +17,14 @@
 [ext_resource path="res://Assets/Building/Bulding_Dest2.obj" type="ArrayMesh" id=18]
 [ext_resource path="res://Assets/Building/Bulding_Dest3.obj" type="ArrayMesh" id=19]
 [ext_resource path="res://Assets/Building/BuildingExterior.material" type="Material" id=20]
-[ext_resource path="res://Assets/Clouds/DustCloudMat.tres" type="Material" id=21]
+[ext_resource path="res://Assets/Clouds/Textures/smoke_01.png" type="Texture" id=21]
 [ext_resource path="res://Assets/PostProcess/KuwaharaShader.gdshader" type="Shader" id=22]
 [ext_resource path="res://Assets/Clouds/Clouds4.material" type="Material" id=23]
 [ext_resource path="res://Scenes/Env_Assets/MotherCityComp.tscn" type="PackedScene" id=24]
-
-[sub_resource type="PhysicsMaterial" id=6]
-friction = 0.0
-absorbent = true
-
-[sub_resource type="PlaneMesh" id=1]
-
-[sub_resource type="BoxShape" id=5]
-extents = Vector3( 4000, 33.5075, 4000.25 )
+[ext_resource path="res://Scenes/Env_Assets/SandParticles.tscn" type="PackedScene" id=25]
+[ext_resource path="res://Scenes/Env_Assets/Rain.tscn" type="PackedScene" id=26]
+[ext_resource path="res://Scenes/Env_Assets/Rock1.tscn" type="PackedScene" id=28]
+[ext_resource path="res://Scenes/Env_Assets/Rock4.tscn" type="PackedScene" id=29]
 
 [sub_resource type="PanoramaSky" id=12]
 panorama = ExtResource( 1 )
@@ -36,49 +32,56 @@ panorama = ExtResource( 1 )
 [sub_resource type="Environment" id=91]
 background_mode = 1
 background_sky = SubResource( 12 )
-background_color = Color( 0.835294, 0.780392, 0.72549, 1 )
-background_energy = 0.64
-ambient_light_color = Color( 0.901961, 0.709804, 0.709804, 1 )
-ambient_light_energy = 0.38
-ambient_light_sky_contribution = 0.31
+background_color = Color( 0.262745, 0.25098, 0.239216, 1 )
+background_energy = 0.71
+ambient_light_color = Color( 1, 0.921569, 0.733333, 1 )
+ambient_light_energy = 0.07
+ambient_light_sky_contribution = 0.0
 fog_enabled = true
-fog_color = Color( 0.835294, 0.780392, 0.72549, 1 )
-fog_depth_begin = 0.0
-fog_depth_end = 2339.2
-fog_depth_curve = 1.46408
+fog_color = Color( 0.262745, 0.25098, 0.239216, 1 )
+fog_depth_begin = 2014.6
+fog_depth_end = 20000.0
+fog_depth_curve = 0.18301
+fog_transmit_enabled = true
+fog_transmit_curve = 0.0947323
 fog_height_enabled = true
-fog_height_min = 375.6
-fog_height_max = 1437.9
-tonemap_mode = 2
-auto_exposure_scale = 0.24
-auto_exposure_min_luma = 0.0
-auto_exposure_max_luma = 0.55
-ss_reflections_enabled = true
-ssao_enabled = true
+fog_height_min = 109.5
+fog_height_max = 4000.0
+fog_height_curve = 0.203064
+tonemap_mode = 4
+tonemap_white = 0.57
+auto_exposure_enabled = true
+auto_exposure_scale = 0.38
+auto_exposure_min_luma = 0.71
+auto_exposure_max_luma = 6.99
 ssao_radius = 128.0
-ssao_intensity = 39.24
+ssao_intensity = 128.0
 ssao_radius2 = 128.0
 ssao_intensity2 = 128.0
-ssao_bias = 0.099
+ssao_bias = 8.0
 ssao_light_affect = 1.0
 ssao_ao_channel_affect = 1.0
 ssao_color = Color( 0.180392, 0.207843, 0.25098, 1 )
 ssao_quality = 2
 ssao_edge_sharpness = 0.0
 dof_blur_far_enabled = true
-dof_blur_far_distance = 938.28
-dof_blur_far_transition = 3337.77
+dof_blur_far_distance = 0.01
+dof_blur_far_transition = 8192.0
+dof_blur_far_amount = 0.08
 dof_blur_far_quality = 2
+dof_blur_near_enabled = true
+dof_blur_near_distance = 2738.88
+dof_blur_near_transition = 805.83
+dof_blur_near_amount = 0.12
+dof_blur_near_quality = 2
 glow_enabled = true
-glow_intensity = 1.86
-glow_strength = 0.87
-glow_bloom = 0.02
-glow_blend_mode = 1
-glow_hdr_threshold = 0.44
+glow_intensity = 1.63
+glow_strength = 1.05
+glow_bloom = 1.0
 glow_bicubic_upscale = true
 adjustment_enabled = true
-adjustment_brightness = 0.8
-adjustment_contrast = 1.37
+adjustment_contrast = 1.12
+adjustment_saturation = 0.75
 
 [sub_resource type="PlaneMesh" id=92]
 
@@ -95,7 +98,7 @@ shader = ExtResource( 22 )
 
 [sub_resource type="SpatialMaterial" id=99]
 flags_unshaded = true
-albedo_color = Color( 0.992157, 0.960784, 0.792157, 1 )
+albedo_color = Color( 0.996078, 0.666667, 0.415686, 1 )
 
 [sub_resource type="SpatialMaterial" id=16]
 flags_use_point_size = true
@@ -130,10 +133,10 @@ _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.0241546, 1 ), 0.0, 0.0, 0,
 [sub_resource type="CurveTexture" id=4]
 curve = SubResource( 3 )
 
-[sub_resource type="ParticlesMaterial" id=2]
+[sub_resource type="ParticlesMaterial" id=114]
 lifetime_randomness = 0.32
 emission_shape = 2
-emission_box_extents = Vector3( 40000, 5, 40000 )
+emission_box_extents = Vector3( 80000, 5, 80000 )
 spread = 0.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 100.0
@@ -147,6 +150,20 @@ hue_variation_random = 1.0
 [sub_resource type="QuadMesh" id=102]
 material = ExtResource( 6 )
 size = Vector2( 1500, 1500 )
+
+[sub_resource type="ParticlesMaterial" id=115]
+lifetime_randomness = 0.32
+emission_shape = 2
+emission_box_extents = Vector3( 80000, 5, 80000 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+initial_velocity_random = 0.2
+linear_accel = 0.2
+linear_accel_random = 0.19
+scale_curve = SubResource( 4 )
+hue_variation = 1.0
+hue_variation_random = 1.0
 
 [sub_resource type="QuadMesh" id=103]
 material = ExtResource( 23 )
@@ -181,57 +198,156 @@ surfaces/0 = {
 "vertex_count": 561
 }
 
-[sub_resource type="Curve" id=95]
+[sub_resource type="ParticlesMaterial" id=108]
+emission_shape = 2
+emission_box_extents = Vector3( 2000, 2000, 2000 )
+direction = Vector3( 0, 0, -1 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 174.26
+linear_accel = 98.3
+radial_accel = 100.0
+scale = 5.93
+
+[sub_resource type="SpatialMaterial" id=109]
+render_priority = 1
+flags_transparent = true
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_color = Color( 1, 0.921569, 0.796078, 0.266667 )
+albedo_texture = ExtResource( 21 )
+
+[sub_resource type="Curve" id=110]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=96]
+[sub_resource type="CurveTexture" id=111]
 width = 512
-curve = SubResource( 95 )
+curve = SubResource( 110 )
 
-[sub_resource type="ParticlesMaterial" id=97]
-trail_divisor = 3
-trail_size_modifier = SubResource( 96 )
+[sub_resource type="ParticlesMaterial" id=112]
+trail_size_modifier = SubResource( 111 )
 emission_shape = 2
 emission_box_extents = Vector3( 5000, 50, 5000 )
-direction = Vector3( 2.507, 0, 0 )
-spread = 12.67
+direction = Vector3( 0, 0, 2 )
+spread = 1.41
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 18.05
+angular_velocity = 34.12
+angular_velocity_random = 1.0
 linear_accel = 100.0
-linear_accel_random = 1.0
+linear_accel_random = 0.35
 tangential_accel = 2.8
 tangential_accel_random = 1.0
+angle = 360.0
+scale_random = 0.53
 hue_variation = 1.0
 hue_variation_random = 1.0
 
-[sub_resource type="QuadMesh" id=98]
+[sub_resource type="QuadMesh" id=113]
 size = Vector2( 1000, 1000 )
 
 [node name="Spatial" type="Spatial"]
 
-[node name="SeaBed" type="StaticBody" parent="." groups=["Sea"]]
-pause_mode = 1
-transform = Transform( -0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, -0.258819, 6339.71, 112.508, 0 )
-collision_layer = 256
-collision_mask = 0
-physics_material_override = SubResource( 6 )
+[node name="Spatial3" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -436.303, 0, 1128.44 )
 
-[node name="Sea" type="MeshInstance" parent="SeaBed"]
-transform = Transform( 4000, 0, 0, 0, 1000, 0, 0, 0, 4000, 0, 0, 0 )
-cast_shadow = 0
-mesh = SubResource( 1 )
-material/0 = ExtResource( 2 )
+[node name="SeaBed10" parent="Spatial3" instance=ExtResource( 2 )]
 
-[node name="CollisionShape" type="CollisionShape" parent="SeaBed"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -37.1797, 0 )
-shape = SubResource( 5 )
+[node name="Spatial7" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4446.33, 0, -1568.07 )
+
+[node name="SeaBed10" parent="Spatial7" instance=ExtResource( 2 )]
+
+[node name="Spatial4" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -438.655, 0, 9128.42 )
+
+[node name="SeaBed10" parent="Spatial4" instance=ExtResource( 2 )]
+
+[node name="Spatial5" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8438.95, 0, 1126.26 )
+
+[node name="SeaBed10" parent="Spatial5" instance=ExtResource( 2 )]
+
+[node name="Spatial8" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16305, 0, 1126.26 )
+
+[node name="SeaBed10" parent="Spatial8" instance=ExtResource( 2 )]
+
+[node name="Spatial9" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16305, 0, -6855.24 )
+
+[node name="SeaBed10" parent="Spatial9" instance=ExtResource( 2 )]
+
+[node name="Spatial10" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23081.7, 0, -7052.54 )
+
+[node name="SeaBed10" parent="Spatial10" instance=ExtResource( 2 )]
+
+[node name="Spatial11" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23081.7, 0, -2847.25 )
+
+[node name="SeaBed10" parent="Spatial11" instance=ExtResource( 2 )]
+
+[node name="Spatial12" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22775.5, 0, -14764 )
+
+[node name="SeaBed10" parent="Spatial12" instance=ExtResource( 2 )]
+
+[node name="Spatial13" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14884, 0, -13736.2 )
+
+[node name="SeaBed10" parent="Spatial13" instance=ExtResource( 2 )]
+
+[node name="Spatial14" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7725.95, 0, -13736.2 )
+
+[node name="SeaBed10" parent="Spatial14" instance=ExtResource( 2 )]
+
+[node name="Spatial15" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1130.71, 0, -13736.2 )
+
+[node name="SeaBed10" parent="Spatial15" instance=ExtResource( 2 )]
+
+[node name="Spatial16" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1130.71, 0, -3827.42 )
+
+[node name="SeaBed10" parent="Spatial16" instance=ExtResource( 2 )]
+
+[node name="Spatial17" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2868.24, 0, -3827.42 )
+
+[node name="SeaBed10" parent="Spatial17" instance=ExtResource( 2 )]
+
+[node name="Spatial6" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8431.55, 0, -6869.76 )
+
+[node name="SeaBed10" parent="Spatial6" instance=ExtResource( 2 )]
 
 [node name="Island10" type="Spatial" parent="." groups=["Islands"]]
 pause_mode = 1
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5870.2, 0, -383.832 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="Island10"]
-transform = Transform( 0.98015, -0.0602962, -0.188865, 0, 0.95263, -0.304133, 0.198256, 0.298096, 0.93372, 478.928, 374.899, 227.587 )
+transform = Transform( 0.98015, -0.0602962, -0.188865, 0, 0.95263, -0.304133, 0.198256, 0.298096, 0.93372, -8190.25, 95.763, -159.14 )
+mesh = ExtResource( 11 )
+skeleton = NodePath("")
+material/0 = ExtResource( 13 )
+material/1 = ExtResource( 13 )
+material/2 = ExtResource( 13 )
+material/3 = ExtResource( 13 )
+
+[node name="MeshInstance5" type="MeshInstance" parent="Island10"]
+transform = Transform( 0.98015, -0.0602962, -0.188865, 0, 0.95263, -0.304133, 0.198256, 0.298096, 0.93372, -6828.38, 95.763, 3859.17 )
+mesh = ExtResource( 11 )
+skeleton = NodePath("")
+material/0 = ExtResource( 13 )
+material/1 = ExtResource( 13 )
+material/2 = ExtResource( 13 )
+material/3 = ExtResource( 13 )
+
+[node name="MeshInstance6" type="MeshInstance" parent="Island10"]
+transform = Transform( 0.98015, -0.0602962, -0.188865, 0, 0.95263, -0.304133, 0.198256, 0.298096, 0.93372, -3282.07, 95.763, -2711.8 )
 mesh = ExtResource( 11 )
 skeleton = NodePath("")
 material/0 = ExtResource( 13 )
@@ -240,7 +356,7 @@ material/2 = ExtResource( 13 )
 material/3 = ExtResource( 13 )
 
 [node name="MeshInstance3" type="MeshInstance" parent="Island10"]
-transform = Transform( -0.962375, -0.0826408, -0.258854, 0, 0.95263, -0.304133, 0.271726, -0.29269, -0.916787, 24.0977, 374.899, 580.305 )
+transform = Transform( -0.962375, -0.0826408, -0.258854, 0, 0.95263, -0.304133, 0.271726, -0.29269, -0.916787, -5065.7, -83.1826, 2264.95 )
 mesh = ExtResource( 11 )
 skeleton = NodePath("")
 material/0 = ExtResource( 13 )
@@ -249,7 +365,7 @@ material/2 = ExtResource( 13 )
 material/3 = ExtResource( 13 )
 
 [node name="MeshInstance4" type="MeshInstance" parent="Island10"]
-transform = Transform( -0.930053, -0.102692, 0.352784, -0.354786, 0.00131676, -0.934947, 0.0955468, -0.994712, -0.0376582, -1633.26, -467.959, 121.36 )
+transform = Transform( -0.930053, -0.102692, 0.352784, -0.354786, 0.00131676, -0.934947, 0.0955468, -0.994712, -0.0376582, 2816.3, -736.815, -127.711 )
 mesh = ExtResource( 11 )
 skeleton = NodePath("")
 material/0 = ExtResource( 13 )
@@ -258,67 +374,67 @@ material/2 = ExtResource( 13 )
 material/3 = ExtResource( 13 )
 
 [node name="Bulding_Dest2" type="MeshInstance" parent="Island10"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1604.09, -4.67884, -119.8 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -748.422, -71.0593, 5760.77 )
 mesh = ExtResource( 18 )
 skeleton = NodePath("")
 material/0 = ExtResource( 20 )
 
 [node name="Bulding_Dest5" type="MeshInstance" parent="Island10"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -935.788, -29.9741, 399.839 )
+transform = Transform( -0.809396, 0, 0.587263, 0, 1, 0, -0.587263, 0, -0.809396, -53.1133, -57.7369, 5218.53 )
 mesh = ExtResource( 18 )
 skeleton = NodePath("")
 material/0 = ExtResource( 20 )
 
 [node name="Bulding_Dest6" type="MeshInstance" parent="Island10"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1300.95, -4.79298, 631.04 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3253.11, -57.2853, 4958.34 )
 mesh = ExtResource( 18 )
 skeleton = NodePath("")
 material/0 = ExtResource( 20 )
 
 [node name="Bulding_Dest3" type="MeshInstance" parent="Island10"]
-transform = Transform( -0.977886, -0.0607767, 0.200115, 0, 0.956844, 0.290602, -0.209141, 0.284175, -0.935684, -1156.25, -172.362, -483.901 )
+transform = Transform( -0.977886, -0.0607767, 0.200115, 0, 0.956844, 0.290602, -0.209141, 0.284175, -0.935684, -3160.89, -222.02, 3797.8 )
 mesh = ExtResource( 19 )
 skeleton = NodePath("")
 material/0 = ExtResource( 20 )
 
 [node name="Bulding_Dest10" type="MeshInstance" parent="Island10"]
-transform = Transform( -0.78604, -0.179643, 0.591497, 0, 0.956844, 0.290602, -0.618175, 0.228425, -0.752118, -1334.13, -172.362, -756.029 )
+transform = Transform( -0.78604, -0.179643, 0.591497, 0, 0.956844, 0.290602, -0.618175, 0.228425, -0.752118, -4078.22, -172.362, 4693.63 )
 mesh = ExtResource( 19 )
 skeleton = NodePath("")
 material/0 = ExtResource( 20 )
 
 [node name="Bulding_Dest8" type="MeshInstance" parent="Island10"]
-transform = Transform( 0.956814, -0.0844786, 0.278157, 0, 0.956844, 0.290602, -0.290702, -0.278052, 0.915521, -1720.98, -86.8695, 75.6804 )
+transform = Transform( 0.956814, -0.0844786, 0.278157, 0, 0.956844, 0.290602, -0.290702, -0.278052, 0.915521, -4614.44, -86.8695, 2757.8 )
 mesh = ExtResource( 19 )
 skeleton = NodePath("")
 material/0 = ExtResource( 20 )
 
 [node name="Bulding_Dest9" type="MeshInstance" parent="Island10"]
-transform = Transform( 0.956814, -0.0844786, 0.278157, 0.247952, 0.736642, -0.629189, -0.151749, 0.670986, 0.725775, -1133.63, -212.527, 456.065 )
+transform = Transform( 0.956814, -0.0844786, 0.278157, 0.247952, 0.736642, -0.629189, -0.151749, 0.670986, 0.725775, -1877.09, -212.527, 3953 )
 mesh = ExtResource( 19 )
 skeleton = NodePath("")
 material/0 = ExtResource( 20 )
 
 [node name="Bulding_Dest4" type="MeshInstance" parent="Island10"]
-transform = Transform( 0.543011, 0.82135, 0.174709, -0.672104, 0.300382, 0.676791, 0.503403, -0.484928, 0.715144, -1472.38, 81.8993, 444.296 )
+transform = Transform( 0.543011, 0.82135, 0.174709, -0.672104, 0.300382, 0.676791, 0.503403, -0.484928, 0.715144, -2189.45, 4.6576, 5385.38 )
 mesh = ExtResource( 16 )
 skeleton = NodePath("")
 material/0 = ExtResource( 20 )
 
 [node name="Bulding_Dest" type="MeshInstance" parent="Island10"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -603.481, 24.8163, 522.434 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 43.1343, -94.9811, 6074.08 )
 mesh = ExtResource( 17 )
 skeleton = NodePath("")
 material/0 = ExtResource( 20 )
 
 [node name="Bulding_Dest7" type="MeshInstance" parent="Island10"]
-transform = Transform( -0.861363, 0, -0.507989, 0, 1, 0, 0.507989, 0, -0.861363, -975.1, 28.7593, 717.646 )
+transform = Transform( -0.861363, 0, -0.507989, 0, 1, 0, 0.507989, 0, -0.861363, -1198.67, -69.3086, 5520.44 )
 mesh = ExtResource( 17 )
 skeleton = NodePath("")
 material/0 = ExtResource( 20 )
 
 [node name="Bulding_Dest11" type="MeshInstance" parent="Island10"]
-transform = Transform( -0.238639, 0.0972071, -0.966231, 0.948398, 0.237248, -0.210366, 0.208787, -0.966573, -0.148808, -1426.8, 28.7593, 717.646 )
+transform = Transform( -0.238639, 0.0972071, -0.966231, 0.948398, 0.237248, -0.210366, 0.208787, -0.966573, -0.148808, -754.939, -35.9022, 5305.11 )
 mesh = ExtResource( 17 )
 skeleton = NodePath("")
 material/0 = ExtResource( 20 )
@@ -329,22 +445,24 @@ material/0 = ExtResource( 20 )
 environment = SubResource( 91 )
 
 [node name="Sun" type="DirectionalLight" parent="Sky"]
-transform = Transform( 0.260454, 0.0268233, 0.965114, 0, -0.999614, 0.0277822, 0.965486, -0.00723598, -0.260353, 0, 26.5368, 0 )
-light_color = Color( 0.996078, 0.866667, 0.745098, 1 )
-light_energy = 1.784
+transform = Transform( 0.28311, 0.758877, -0.586477, 0.910428, -0.0203425, 0.413168, 0.301613, -0.650917, -0.696661, -0.00490427, 1077.42, -0.00721574 )
+light_color = Color( 0.996078, 0.666667, 0.415686, 1 )
+light_energy = 0.25
 light_indirect_energy = 0.0
-light_specular = 0.415
+light_specular = 3.523
 light_bake_mode = 0
 shadow_enabled = true
-shadow_bias = 0.264
-directional_shadow_mode = 0
-directional_shadow_max_distance = 1000.0
+shadow_reverse_cull_face = true
+directional_shadow_blend_splits = true
+directional_shadow_normal_bias = 1.807
+directional_shadow_depth_range = 1
+directional_shadow_max_distance = 30000.0
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 0.551674, 0.364438, -0.750227, 0.12685, 0.852364, 0.507331, 0.824357, -0.375048, 0.423998, 4015.97, 367.057, 237.636 )
+transform = Transform( 0.950304, -0.0403773, 0.308694, 0, 0.991554, 0.129696, -0.311323, -0.12325, 0.942278, 853.276, 1027.04, 8376.68 )
 current = true
-fov = 75.0
-far = 20000.0
+fov = 45.0
+far = 100000.0
 
 [node name="EnvSound" type="AudioStreamPlayer3D" parent="Camera"]
 transform = Transform( 1, 0, 0, -7.45058e-09, 1, 0, 2.98023e-08, 0, 1, 0, 0, 0 )
@@ -369,8 +487,11 @@ transform = Transform( 1, 0, -2.98023e-08, 0, -1.49012e-07, -0.999999, -2.98023e
 mesh = SubResource( 100 )
 material/0 = SubResource( 101 )
 
+[node name="Spatial" parent="Camera" instance=ExtResource( 26 )]
+transform = Transform( 1, -3.72529e-09, 2.98023e-08, -7.45058e-09, 1, 0, 0, 2.98023e-08, 1, 457.619, 103.043, -797.093 )
+
 [node name="SunMoonPivot" type="Spatial" parent="."]
-transform = Transform( -0.141595, 0.0131078, 0.989837, -0.0136439, 0.999792, -0.0151914, -0.989831, -0.0156563, -0.141387, 0, 0, 0 )
+transform = Transform( -0.356924, 0.042694, -0.933157, 0.0550472, 0.998181, 0.0246138, 0.932511, -0.0425823, -0.358623, -4186.49, -98.5417, -3429.98 )
 
 [node name="MeshInstance" type="MeshInstance" parent="SunMoonPivot"]
 transform = Transform( 1, 5.96046e-08, -7.45058e-08, 1.15591e-07, 1, 2.08616e-07, 1.68852e-07, 1.19209e-07, 1, 0, 0, 10000 )
@@ -381,11 +502,12 @@ mesh = SubResource( 85 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="SunMoonPivot"]
 transform = Transform( 1, 1.64334e-08, 6.58151e-09, -7.64833e-08, 1, 2.08616e-07, 1.41731e-07, 1.49012e-07, 1, 0, 0, -10000 )
+visible = false
 cast_shadow = 0
 mesh = SubResource( 86 )
 
 [node name="Spatial" type="Spatial" parent="."]
-transform = Transform( 0.998121, 0.061275, 0, -0.061275, 0.998121, 0, 0, 0, 1, 17492.7, 719.611, -1620.91 )
+transform = Transform( 0.998121, 0.061275, 0, -0.061275, 0.998121, 0, 0, 0, 1, 9.34131, 2601.05, -138.101 )
 
 [node name="Clouds2" type="Particles" parent="Spatial"]
 generate_lightmap = false
@@ -393,10 +515,10 @@ amount = 4000
 lifetime = 43.86
 speed_scale = 0.2
 explosiveness = 1.0
-visibility_aabb = AABB( -1293.38, -3000, -1158.37, 2586.77, 3000, 2316.74 )
+visibility_aabb = AABB( -4096, -3000, -4096, 8192, 3000, 8192 )
 local_coords = false
 draw_order = 2
-process_material = SubResource( 2 )
+process_material = SubResource( 114 )
 draw_pass_1 = SubResource( 102 )
 
 [node name="Clouds3" type="Particles" parent="Spatial"]
@@ -408,7 +530,7 @@ explosiveness = 1.0
 visibility_aabb = AABB( -1293.38, -3000, -1158.37, 2586.77, 3000, 2316.74 )
 local_coords = false
 draw_order = 2
-process_material = SubResource( 2 )
+process_material = SubResource( 115 )
 draw_pass_1 = SubResource( 103 )
 
 [node name="pPlane1" type="MeshInstance" parent="."]
@@ -435,17 +557,51 @@ mesh = SubResource( 104 )
 skeleton = NodePath("")
 material/0 = ExtResource( 8 )
 
-[node name="Particles2" type="Particles" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4185.81, 190.261, 8.78441 )
-material_override = ExtResource( 21 )
+[node name="MotherCityComp" parent="." instance=ExtResource( 24 )]
+transform = Transform( 0.963993, 0, -0.265926, 0, 1, 0, 0.265926, 0, 0.963993, 1162.32, 0, 1128.44 )
+
+[node name="Spatial2" parent="." instance=ExtResource( 3 )]
+transform = Transform( 0.744032, 0, -0.668144, 0, 1, 0, 0.668144, 0, 0.744032, -8917.03, 0, -36.4624 )
+
+[node name="SandParticles" parent="." instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -761.758, 616.459, 5486.98 )
+visibility_aabb = AABB( -138.138, -205.176, -393.492, 276.276, 410.353, 786.984 )
+process_material = SubResource( 108 )
+
+[node name="Particles" type="Particles" parent="."]
+transform = Transform( -1, 0, 0.000802906, 0, 1, 0, -0.000802906, 0, -1, 0, 573.443, 5471.58 )
+material_override = SubResource( 109 )
 cast_shadow = 0
 generate_lightmap = false
-amount = 100
-lifetime = 25.62
+amount = 50
+lifetime = 15.0
 speed_scale = 5.0
+visibility_aabb = AABB( -3825.97, 0, -4096, 7651.96, 3042.07, 8192 )
+local_coords = false
 draw_order = 1
-process_material = SubResource( 97 )
-draw_pass_1 = SubResource( 98 )
+process_material = SubResource( 112 )
+draw_pass_1 = SubResource( 113 )
 
-[node name="MotherCityComp" parent="." instance=ExtResource( 24 )]
-transform = Transform( 77.6457, 0, -289.778, 0, 300, 0, 289.778, 0, 77.6457, 5792.89, 108.334, -503.57 )
+[node name="Rock1" parent="." instance=ExtResource( 28 )]
+transform = Transform( 1530.56, -778.646, -883.21, -1075.21, -333.941, -1568.88, 479.875, 1735.27, -698.232, -3469.64, -1831.02, 7489.1 )
+skeleton = NodePath("../..")
+
+[node name="Rock3" parent="." instance=ExtResource( 28 )]
+transform = Transform( -1673.85, 847.243, -457.583, 873.21, 1722.34, -5.20087, 405.844, -211.423, -1876.05, 3811.41, -1774.46, -4541.52 )
+skeleton = NodePath("../..")
+
+[node name="Rock2" parent="." instance=ExtResource( 28 )]
+transform = Transform( 717.759, 823.09, 62.5131, 792.802, -710.452, 251.571, 229.896, -119.764, -1062.72, -1939.46, -23.7651, -8821.77 )
+skeleton = NodePath("../..")
+
+[node name="Rock4" parent="." instance=ExtResource( 29 )]
+transform = Transform( -1011.43, -2515, -904.43, 2651.29, -1066.24, 0, -337.459, -839.117, 2710.76, -7883.08, -3440.13, -4164.53 )
+
+[node name="Rock5" parent="." instance=ExtResource( 29 )]
+transform = Transform( -76.6738, -190.655, -68.5623, 69.1477, -93.5301, 182.756, -190.444, 42.7993, 93.9601, -769.453, -269.103, 4868.48 )
+
+[node name="Rock6" parent="." instance=ExtResource( 29 )]
+transform = Transform( 39.7805, 187.344, 101.237, 75.3157, -108.709, 171.578, 199.184, 3.68949, -85.096, -2637.72, -269.103, 5008.11 )
+
+[node name="Rock7" parent="." instance=ExtResource( 29 )]
+transform = Transform( -49.2853, 103.142, -184.016, -195.715, 48.154, 79.4094, 78.7123, 184.315, 82.2279, 641.943, -269.103, 5484.48 )

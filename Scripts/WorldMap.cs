@@ -40,6 +40,9 @@ public class WorldMap : TileMap
     [Export]
     public int seed = 69420;
 
+    [Export]
+    PackedScene IntroScene;
+
     int currentile;
 
     List <float> rots = new List<float>{0f, 90f, 180f, -90f};
@@ -51,7 +54,7 @@ public class WorldMap : TileMap
     //id of exit
     int ExitID = 0;
 
-    List <Vector2> OrderedCells = new List<Vector2>();
+    List <Vector2> OrderedCells;
 
     Random random;
 
@@ -71,6 +74,8 @@ public class WorldMap : TileMap
     }
     public override void _Ready()
     {
+       
+
         Instance = this;
 
         //MapGrid.GetInstance().InitMap();
@@ -80,14 +85,18 @@ public class WorldMap : TileMap
         random = new Random(seed);
             
         CellSize = new Vector2(CellSizeOverride, CellSizeOverride);
-
+        ulong ms = OS.GetSystemTimeMsecs();
         ArrangeCellsBasedOnDistance();
-
+        ulong msaf = OS.GetSystemTimeMsecs();
+        GD.Print("Aranging cells took : " + (msaf - ms).ToString() + " ms");
         for (int i = 0; i < scenestospawn.Count(); i++)
         {
             loadedscenes.Insert(i, scenestospawn[i]);
         }
+        ms = OS.GetSystemTimeMsecs();
         MapGrid.GetInstance().InitMap();
+        msaf = OS.GetSystemTimeMsecs();
+        GD.Print("Initialising map grid took : " + (msaf - ms).ToString() + " ms");
         //var pls = GetTree().GetNodesInGroup("player");
         //pl = (Player)pls[0];
     }
@@ -99,7 +108,34 @@ public class WorldMap : TileMap
 	{
         ulong ms = OS.GetSystemTimeMsecs();
         if (!finishedspawning)
+        {
             RegisterIsland(currentile);
+            
+            if (currentile == 100)
+            {
+                MyWorld.GetInstance().ToggleIsland(entry, true, true);
+            
+                Island island = entry.ile;
+
+                Intro intr = (Intro)IntroScene.Instance();
+
+                island.AddChild(intr);
+                
+                intr.Translation = Vector3.Zero;
+                intr.Rotation = Vector3.Zero;
+
+                CurrentTile = new Vector2 (island.GlobalTransform.origin.x ,island.GlobalTransform.origin.z);
+
+                List<IslandInfo> closestto2;
+                GetClosestIles(entry,out closestto2, 2);
+                foreach(IslandInfo info in closestto2)
+                    MapGrid.GetInstance().OnIslandVisited(info);
+            }
+            currentile += 1;
+            if (currentile >= OrderedCells.Count)
+                finishedspawning = true;
+        }
+            
         if (Player.GetInstance() == null)
             return;
         Vector2 plpos = new Vector2(Player.GetInstance().GlobalTransform.origin.x, Player.GetInstance().GlobalTransform.origin.z);
@@ -160,14 +196,24 @@ public class WorldMap : TileMap
     {
         //arange all the cells by distance from center of world put in OrderedCells array
         var cells = GetUsedCells();
+        OrderedCells = new List<Vector2>(cells.Count);
         OrderedCells.Insert(0, (Vector2)cells[0]);
+        List<int> absolutesums = new List<int>(cells.Count);
+        absolutesums.Add((int)(Math.Abs(OrderedCells[0].x) + Math.Abs(OrderedCells[0].y)));
+
         for (int x = 1; x < cells.Count; x++)
         {
             Vector2 cellArray = (Vector2)cells[x];
-            float ind = Math.Abs(cellArray.x) + Math.Abs(cellArray.y);
+            int ind = (int)(Math.Abs(cellArray.x) + Math.Abs(cellArray.y));
 
-            Vector2 closest = OrderedCells[0];
-            float dif = Math.Abs(Math.Abs(closest.x) + Math.Abs(closest.y) - ind);
+            //Vector2 closest = OrderedCells[0];
+            int closestind = Math.Abs(absolutesums.BinarySearch(ind)) - 1;
+            closestind = Math.Max(0, closestind);
+            OrderedCells.Insert(closestind, cellArray);
+
+            absolutesums.Insert(closestind, ind);
+
+            /*float dif = Math.Abs(Math.Abs(closest.x) + Math.Abs(closest.y) - ind);
             for (int i = OrderedCells.Count - 1; i > -1; i--)
             {
                 float newdif = Math.Abs(Math.Abs(OrderedCells[i].x) + Math.Abs(OrderedCells[i].y) - ind);
@@ -177,6 +223,7 @@ public class WorldMap : TileMap
                     dif = newdif;
                 }
             }
+            
             if (Math.Abs(closest.x) + Math.Abs(closest.y) < Math.Abs(cellArray.x) + Math.Abs(cellArray.y))
             {
                 OrderedCells.Insert(OrderedCells.IndexOf(closest) + 1, cellArray);
@@ -186,7 +233,7 @@ public class WorldMap : TileMap
             {
                 OrderedCells.Insert(OrderedCells.IndexOf(closest), cellArray);
                 continue;
-            }
+            }*/
         }
         //produce indexes of where tiles events will be placed on
         RandomisedEntryID = new List<int>();
@@ -198,8 +245,9 @@ public class WorldMap : TileMap
         var exitcells = GetUsedCellsById(2);
         int RandomExitIndex = random.Next(0, exitcells.Count);
         Vector2 Exitpalcement = (Vector2)exitcells[RandomExitIndex];
-        ExitID = OrderedCells.IndexOf(Exitpalcement) + 1;
+        ExitID = OrderedCells.IndexOf(Exitpalcement);
     }
+    
     //takes in cell position gives out global transforms of closest island
     Vector2 FindClosestIslandPosition(Vector2 pos)
     {
@@ -280,8 +328,7 @@ public class WorldMap : TileMap
         int id = GetCell((int)OrderedCells[curtile].x, (int)OrderedCells[curtile].y);
         Vector2 cell = OrderedCells[curtile];
 
-        currentile += 1;
-
+        
         PackedScene ilescene = GetSceneToSpawn(id);
         IslandInfo ileinfo = new IslandInfo();
         
@@ -309,27 +356,8 @@ public class WorldMap : TileMap
         {
             entry = ileinfo;
         }
-        if (currentile == 100)
-        {
-            MyWorld.GetInstance().ToggleIsland(entry, true, true);
+
         
-            Island island = entry.ile;
-
-            //Position3D spawnpos = island.GetNode<Position3D>("SpawnPosition");
-            //pl.Teleport(spawnpos.GlobalTransform.origin);
-            //WorldClipRaycast.EnableWorldClipRaycast();
-
-            GetTree().Root.GetCamera().Fov = Settings.GetGameSettings().FOVOverride;
-            CurrentTile = new Vector2 (island.GlobalTransform.origin.x ,island.GlobalTransform.origin.z);
-
-            List<IslandInfo> closestto2;
-		    GetClosestIles(entry,out closestto2, 3);
-            foreach(IslandInfo info in closestto2)
-                MapGrid.GetInstance().OnIslandVisited(info);
-        }
-
-        if (currentile >= OrderedCells.Count)
-            finishedspawning = true;
         return ileinfo;
     }
     PackedScene GetSceneToSpawn(int type)

@@ -23,8 +23,9 @@ public class Settings : Control
 
 		Random rand = new Random(thing);
 		Seed = rand.Next(0, 99999);
-		GetNode<Panel>("SeedSetting2").GetNode<CheckBox>("Full_Screen_Checkbox").SetPressedNoSignal(OS.WindowFullscreen);
-		GetNode<Panel>("SeedSetting").GetNode<TextEdit>("SeedText").Text = Seed.ToString();
+		GetNode<Panel>("Panel").GetNode<Panel>("SeedSetting2").GetNode<CheckBox>("Full_Screen_Checkbox").SetPressedNoSignal(OS.WindowFullscreen);
+		GetNode<Panel>("Panel").GetNode<Panel>("SeedSetting").GetNode<TextEdit>("SeedText").Text = Seed.ToString();
+		GetNode<ColorRect>("ColorRect").Visible = false;
 		set = this;
 	}
 	private void UpdateViewDistance()
@@ -38,10 +39,11 @@ public class Settings : Control
 	}
 	private void UpdateFOV()
 	{
+		if (!StartingScreen.IsGameRunning())
+			return;
 		Camera	cam = GetTree().Root.GetCamera();
 		if (cam != null)
 			cam.Fov = FOVOverride;
-		GetNode<Panel>("FOVSetting").GetNode<RichTextLabel>("FOVNumber").BbcodeText = "[center]" + FOVOverride.ToString();
 	}
 	private void IncreaseTimeProgression()
 	{
@@ -60,6 +62,7 @@ public class Settings : Control
 		if (FOVOverride == 90)
 			return;
 		FOVOverride += 1;
+		GetNode<Panel>("Panel").GetNode<Panel>("FOVSetting").GetNode<RichTextLabel>("FOVNumber").BbcodeText = "[center]" + FOVOverride.ToString();
 		UpdateFOV();
 	}
 	private void DecreaseFOV()
@@ -67,6 +70,7 @@ public class Settings : Control
 		if (FOVOverride == 25)
 			return;
 		FOVOverride -= 1;
+		GetNode<Panel>("Panel").GetNode<Panel>("FOVSetting").GetNode<RichTextLabel>("FOVNumber").BbcodeText = "[center]" + FOVOverride.ToString();
 		UpdateFOV();
 	}
 	private void IncreaseViewDistance()
@@ -83,7 +87,7 @@ public class Settings : Control
 	}
 	private void On_SeedText_changed()
 	{
-		TextEdit text = GetNode<Panel>("SeedSetting").GetNode<TextEdit>("SeedText");
+		TextEdit text = GetNode<Panel>("Panel").GetNode<Panel>("SeedSetting").GetNode<TextEdit>("SeedText");
 		string newseedtext = text.Text;
 
 		if (newseedtext == string.Empty)

@@ -7,6 +7,11 @@ public class MainWorld : Spatial
 	[Export]
 	PackedScene WorldScene = null;
 
+	[Export]
+	PackedScene Intro = null;
+
+	Spatial intro;
+
 	MyWorld m_myworld;
 	StartingScreen screen = null;
 
@@ -17,6 +22,9 @@ public class MainWorld : Spatial
 	public override void _Ready()
 	{
 		screen = GetNode<CanvasLayer>("CanvasLayer").GetNode<StartingScreen>("StartScreen");
+
+		intro = (Spatial)Intro.Instance();
+		AddChild(intro, true);
 	}
 	public bool IsMapSpawned()
 	{
@@ -24,7 +32,8 @@ public class MainWorld : Spatial
 	}
 	public void SpawnMap()
 	{
-		
+		intro.Free();
+
 		m_myworld = (MyWorld)WorldScene.Instance();
 
 		AddChild(m_myworld);
@@ -34,5 +43,7 @@ public class MainWorld : Spatial
 	{
 		m_myworld.QueueFree();
 		m_myworld = null;
+		intro = (Spatial)Intro.Instance();
+		AddChild(intro, true);
 	}
 }

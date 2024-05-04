@@ -1,8 +1,6 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Scripts/Intro.cs" type="Script" id=1]
-[ext_resource path="res://Scenes/Env_Assets/MotherCityComp.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Env_Assets/WindGenerator.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/PostProcess/KuwaharaShader.gdshader" type="Shader" id=4]
 [ext_resource path="res://Assets/UI/ButtonTheme.tres" type="Theme" id=5]
 [ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=6]
@@ -254,6 +252,7 @@ mesh = SubResource( 5 )
 material/0 = SubResource( 6 )
 
 [node name="LoadingScreen" type="CanvasLayer" parent="Camera"]
+layer = -1
 
 [node name="Label" type="Label" parent="Camera/LoadingScreen"]
 anchor_left = 0.5
@@ -275,25 +274,6 @@ valign = 1
 autoplay = "Intro"
 anims/Intro = SubResource( 1 )
 anims/RESET = SubResource( 2 )
-
-[node name="MotherCityComp" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1000, 0, 0, 0, 1000, 0, 0, 0, 1000, 0, 0, 0 )
-visible = false
-
-[node name="WindGenerator10" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1.12378, 0, -3.0009, 0, 3.20442, 0, 3.0009, 0, 1.12378, -1474.44, 88.44, 902.158 )
-visible = false
-EnergyPerWindStreangth = 0.2
-
-[node name="WindGenerator11" parent="." instance=ExtResource( 3 )]
-transform = Transform( 3.19515, 0, 0.243553, 0, 3.20442, 0, -0.243553, 0, 3.19515, 1081.8, -8.37357, 1429.8 )
-visible = false
-EnergyPerWindStreangth = 0.2
-
-[node name="WindGenerator12" parent="." instance=ExtResource( 3 )]
-transform = Transform( -2.36741, 0, 2.15955, 0, 3.20442, 0, -2.15955, 0, -2.36741, 490.372, 85.44, -1510.65 )
-visible = false
-EnergyPerWindStreangth = 0.2
 
 [node name="Spatial3" type="Spatial" parent="."]
 

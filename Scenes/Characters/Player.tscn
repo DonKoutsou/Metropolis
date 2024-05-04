@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/Stamina_Bar.cs" type="Script" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://Scenes/Env_Assets/SandParticles.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scripts/Time_UI.cs" type="Script" id=18]
 [ext_resource path="res://Scripts/TalkText.cs" type="Script" id=19]
+[ext_resource path="res://Scripts/PlayerCamera.cs" type="Script" id=20]
 [ext_resource path="res://Scripts/WorldParticleManager.cs" type="Script" id=21]
 [ext_resource path="res://Scenes/Env_Assets/Clouds.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Scenes/HUD/ActionMenu.tscn" type="PackedScene" id=23]
@@ -83,6 +84,7 @@ font_data = ExtResource( 4 )
 radius = 2.0
 
 [sub_resource type="QuadMesh" id=107]
+size = Vector2( 4, 4 )
 
 [sub_resource type="ShaderMaterial" id=108]
 render_priority = -1
@@ -161,12 +163,12 @@ albedo_texture = ExtResource( 36 )
 [sub_resource type="Curve" id=113]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=93]
+[sub_resource type="CurveTexture" id=117]
 width = 512
 curve = SubResource( 113 )
 
 [sub_resource type="ParticlesMaterial" id=114]
-trail_size_modifier = SubResource( 93 )
+trail_size_modifier = SubResource( 117 )
 emission_shape = 2
 emission_box_extents = Vector3( 5000, 50, 5000 )
 direction = Vector3( 0, 0, 2 )
@@ -318,6 +320,7 @@ script = ExtResource( 19 )
 [node name="UpdateTimer" type="Timer" parent="PlayerUI/TalkText"]
 wait_time = 3.0
 one_shot = true
+autostart = true
 
 [node name="ActionMenu" parent="PlayerUI" instance=ExtResource( 23 )]
 visible = false
@@ -350,15 +353,16 @@ MaxDist = 150.0
 [node name="CameraPanXPivot" type="Position3D" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot"]
 transform = Transform( 1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0 )
 
-[node name="Camera" type="Camera" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot"]
+[node name="PlayerCamera" type="Camera" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot"]
 transform = Transform( 1, 0, 0, 0, 0.984808, 0.173649, 0, -0.173648, 0.98481, 0, 0, 0 )
 cull_mask = 769
 current = true
 fov = 45.0
 size = 5.0
 far = 40000.0
+script = ExtResource( 20 )
 
-[node name="EnvSound" type="AudioStreamPlayer3D" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/Camera"]
+[node name="EnvSound" type="AudioStreamPlayer3D" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/PlayerCamera"]
 transform = Transform( 1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0 )
 stream = ExtResource( 11 )
 max_db = -13.118
@@ -366,20 +370,20 @@ autoplay = true
 max_distance = 16.06
 area_mask = 0
 
-[node name="CompasUI" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/Camera" instance=ExtResource( 6 )]
+[node name="CompasUI" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/PlayerCamera" instance=ExtResource( 6 )]
 transform = Transform( 0.0880203, -0.0474596, 1.32888e-08, 0.0102406, 0.0189926, -0.0976442, 0.0463415, 0.0859472, 0.0215775, 1.24807, 0.617609, -2.18268 )
 
-[node name="MeshInstance" type="MeshInstance" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/Camera"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0715218, -0.623331 )
+[node name="MeshInstance" type="MeshInstance" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/PlayerCamera"]
+transform = Transform( 1, -1.05879e-22, 0, 0, 1, 0, 4.23516e-22, 0, 1, 0, -0.0715232, -0.623333 )
 mesh = SubResource( 107 )
 material/0 = SubResource( 108 )
 
-[node name="MeshInstance2" type="MeshInstance" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/Camera"]
+[node name="MeshInstance2" type="MeshInstance" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/PlayerCamera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0715218, -0.623331 )
 mesh = SubResource( 107 )
 material/0 = SubResource( 109 )
 
-[node name="CameraAnimationPlayer" type="AnimationPlayer" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/Camera"]
+[node name="CameraAnimationPlayer" type="AnimationPlayer" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/PlayerCamera"]
 anims/FadeIn = SubResource( 110 )
 anims/RESET = SubResource( 111 )
 script = ExtResource( 35 )

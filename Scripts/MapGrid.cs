@@ -87,11 +87,11 @@ public class MapGrid : GridContainer
         {
             Control gridtilex = (Control)XGridTileScene.Instance();
             Control gridtiley = (Control)YGridTileScene.Instance();
-            
-            MapGridx.AddChild(gridtilex);
-            MapGridy.AddChild(gridtiley);
             gridtilex.Name = "x" + (i-40);
             gridtiley.Name = "y" + (i-40);
+            MapGridx.AddChild(gridtilex);
+            MapGridy.AddChild(gridtiley);
+            
         }
         
 

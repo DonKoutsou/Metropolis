@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Scripts/MapGrid.cs" type="Script" id=1]
 [ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://Scenes/HUD/MapUIItems/MapXGridPoint.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/HUD/MapUIItems/MapYGridPoint.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scripts/MagGridPanel.cs" type="Script" id=9]
+[ext_resource path="res://Assets/UI/panelstylegrey.tres" type="StyleBox" id=10]
+[ext_resource path="res://Assets/UI/panelstylebox.tres" type="StyleBox" id=11]
 
 [sub_resource type="OpenSimplexNoise" id=22]
 octaves = 1
@@ -27,7 +29,7 @@ resource_name = "normal"
 texture = SubResource( 6 )
 region_rect = Rect2( 0, 0, 512, 512 )
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=23]
 bg_color = Color( 0.607843, 0.603922, 0.603922, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -47,6 +49,24 @@ border_color = Color( 0, 0, 0, 1 )
 border_blend = true
 anti_aliasing = false
 
+[sub_resource type="DynamicFont" id=25]
+size = 12
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.607843, 0.603922, 0.603922, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
+border_blend = true
+anti_aliasing = false
+
 [sub_resource type="DynamicFont" id=16]
 size = 24
 outline_size = 2
@@ -56,15 +76,6 @@ font_data = ExtResource( 2 )
 
 [sub_resource type="Theme" id=15]
 default_font = SubResource( 16 )
-
-[sub_resource type="StyleBoxFlat" id=17]
-bg_color = Color( 0.847059, 0.807843, 0.705882, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
-border_blend = true
 
 [sub_resource type="Animation" id=20]
 length = 0.001
@@ -122,17 +133,16 @@ mouse_default_cursor_shape = 6
 script = ExtResource( 9 )
 
 [node name="MapGrid" type="GridContainer" parent="MagGridPanel"]
-rect_clip_content = true
 mouse_filter = 2
 custom_constants/vseparation = 12
 custom_constants/hseparation = 12
 columns = 81
 script = ExtResource( 1 )
+MaxZoomScale = 4.0
 TileScene = ExtResource( 6 )
 XGridTileScene = ExtResource( 7 )
 YGridTileScene = ExtResource( 8 )
 ColorList = [ Color( 0, 0.0352941, 0.556863, 1 ), Color( 0, 0.537255, 0.0352941, 1 ), Color( 0.909804, 0.862745, 0.627451, 1 ), Color( 0.945098, 0.376471, 0.372549, 1 ), Color( 0.180392, 0.556863, 0.921569, 1 ) ]
-MaxZoomScale = 4.0
 
 [node name="Panel" type="Panel" parent="MagGridPanel"]
 modulate = Color( 1, 1, 1, 0.27451 )
@@ -158,7 +168,7 @@ margin_right = 68.0
 margin_bottom = 5.0
 rect_clip_content = true
 mouse_filter = 1
-custom_styles/panel = SubResource( 2 )
+custom_styles/panel = SubResource( 23 )
 
 [node name="Panel6" type="Panel" parent="Panel2"]
 anchor_left = 0.5
@@ -178,6 +188,25 @@ margin_right = 10.0
 margin_bottom = 1000.0
 custom_constants/vseparation = 12
 custom_constants/hseparation = 12
+
+[node name="PanelContainer" type="PanelContainer" parent="Panel2"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -8.0
+margin_top = -2.0
+margin_right = 8.0
+margin_bottom = 26.0
+custom_styles/panel = ExtResource( 10 )
+
+[node name="Label2" type="Label" parent="Panel2/PanelContainer"]
+margin_left = 2.0
+margin_top = 5.0
+margin_right = 14.0
+margin_bottom = 22.0
+custom_fonts/font = SubResource( 25 )
+text = "Y"
+align = 1
+valign = 1
 
 [node name="Panel3" type="Panel" parent="."]
 anchor_top = 1.0
@@ -206,6 +235,25 @@ margin_bottom = 10.0
 custom_constants/vseparation = 12
 custom_constants/hseparation = 12
 columns = 81
+
+[node name="PanelContainer" type="PanelContainer" parent="Panel3"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = -6.0
+margin_top = -11.5
+margin_right = 20.0
+margin_bottom = 11.5
+custom_styles/panel = ExtResource( 10 )
+
+[node name="Label2" type="Label" parent="Panel3/PanelContainer"]
+margin_left = 2.0
+margin_top = 3.0
+margin_right = 24.0
+margin_bottom = 20.0
+custom_fonts/font = SubResource( 25 )
+text = "X"
+align = 1
+valign = 1
 
 [node name="Panel5" type="Panel" parent="."]
 anchor_top = 1.0
@@ -250,15 +298,15 @@ custom_styles/panel = SubResource( 2 )
 [node name="w" type="RichTextLabel" parent="Panel4"]
 anchor_top = 0.5
 anchor_bottom = 0.5
-margin_left = 3.0
+margin_left = 30.0
 margin_top = -17.5
-margin_right = 191.0
+margin_right = 218.0
 margin_bottom = 17.5
 mouse_filter = 1
 theme = SubResource( 15 )
 text = " Συντεταγμένες :"
 
-[node name="CoordText" type="RichTextLabel" parent="Panel4"]
+[node name="Panel" type="Panel" parent="Panel4"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -267,18 +315,69 @@ margin_left = -157.0
 margin_top = -17.5
 margin_right = -3.0
 margin_bottom = 17.5
-mouse_filter = 1
-theme = SubResource( 15 )
-bbcode_enabled = true
-bbcode_text = "[center]0 / -1"
-text = "0 / -1"
+custom_styles/panel = ExtResource( 11 )
 
-[node name="Panel" type="Panel" parent="Panel4/CoordText"]
-show_behind_parent = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 1
-custom_styles/panel = SubResource( 17 )
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel4/Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -64.0
+margin_top = -13.5
+margin_right = 64.0
+margin_bottom = 13.5
+custom_constants/separation = 28
+
+[node name="PanelContainer" type="PanelContainer" parent="Panel4/Panel/HBoxContainer"]
+margin_right = 11.0
+margin_bottom = 27.0
+custom_styles/panel = ExtResource( 10 )
+
+[node name="Label" type="Label" parent="Panel4/Panel/HBoxContainer/PanelContainer"]
+margin_left = 2.0
+margin_top = 5.0
+margin_right = 9.0
+margin_bottom = 22.0
+custom_fonts/font = SubResource( 25 )
+text = "X"
+align = 1
+valign = 1
+
+[node name="XCordNumb" type="Label" parent="Panel4/Panel/HBoxContainer"]
+margin_left = 39.0
+margin_top = 5.0
+margin_right = 46.0
+margin_bottom = 22.0
+custom_fonts/font = SubResource( 25 )
+text = "1"
+align = 1
+valign = 1
+
+[node name="PanelContainer2" type="PanelContainer" parent="Panel4/Panel/HBoxContainer"]
+margin_left = 74.0
+margin_right = 85.0
+margin_bottom = 27.0
+custom_styles/panel = ExtResource( 10 )
+
+[node name="Label" type="Label" parent="Panel4/Panel/HBoxContainer/PanelContainer2"]
+margin_left = 2.0
+margin_top = 5.0
+margin_right = 9.0
+margin_bottom = 22.0
+custom_fonts/font = SubResource( 25 )
+text = "Y"
+align = 1
+valign = 1
+
+[node name="YCordNumb" type="Label" parent="Panel4/Panel/HBoxContainer"]
+margin_left = 113.0
+margin_top = 5.0
+margin_right = 120.0
+margin_bottom = 22.0
+custom_fonts/font = SubResource( 25 )
+text = "2"
+align = 1
+valign = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 2.0

@@ -34,6 +34,7 @@ sound=true
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
+timers/tooltip_delay_sec=0.0
 
 [input]
 
@@ -166,3 +167,4 @@ quality/subsurface_scattering/quality=0
 environment/default_clear_color=Color( 1, 1, 1, 1 )
 quality/filters/msaa=3
 quality/filters/use_fxaa=true
+environment/default_environment="res://new_environment2.tres"

@@ -3,13 +3,17 @@ using System;
 
 public class MapUI : Control
 {
-    RichTextLabel CoordText;
+    //RichTextLabel CoordText;
+    Label XCordText;
+    Label YCordText;
     static bool IsMouseInMapBool = false;
 
     public void UpdateCoordinates()
     {
         Vector2 tile = WorldMap.GetInstance().GetCurrentTile();
-        CoordText.BbcodeText = "[center]" + tile.x + " / " + tile.y;
+        //CoordText.BbcodeText = "[center]X:" + tile.x + " / Y:" + tile.y;
+        XCordText.Text = tile.x.ToString();
+        YCordText.Text = tile.y.ToString();
     }
     public static bool IsMouseInMap()
     {
@@ -34,6 +38,8 @@ public class MapUI : Control
     public override void _Ready()
     {
         base._Ready();
-        CoordText = GetNode<Panel>("Panel4").GetNode<RichTextLabel>("CoordText");
+        //CoordText = GetNode<Panel>("Panel4").GetNode<RichTextLabel>("CoordText");
+        XCordText = GetNode<Panel>("Panel4").GetNode<Panel>("Panel").GetNode<HBoxContainer>("HBoxContainer").GetNode<Label>("XCordNumb");
+        YCordText = GetNode<Panel>("Panel4").GetNode<Panel>("Panel").GetNode<HBoxContainer>("HBoxContainer").GetNode<Label>("YCordNumb");
     }
 }

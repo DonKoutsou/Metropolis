@@ -23,7 +23,7 @@ public class Inventory : Spatial
     public override void _Ready()
     {
         ui = InventoryUI.GetInstance();
-        ui.OnPlayerSpawned((Player)GetParent());
+        ui.CallDeferred("OnPlayerSpawned", (Player)GetParent());
         InventoryContents = new List<Item>();
         if (StartingItems == null)
             return;

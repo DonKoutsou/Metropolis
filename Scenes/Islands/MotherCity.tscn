@@ -1,18 +1,13 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Env_Assets/MotherCityComp.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Islands/Into.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Building/BuildingComposition.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Building/BuildingDust2.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Env_Assets/Fireplace.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Env_Assets/Street_Lamp.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scripts/SpawnPosition.cs" type="Script" id=8]
-[ext_resource path="res://Scenes/Env_Assets/WindGenerator.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Items/Battery.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Scenes/Env_Assets/Rock1.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Scenes/Env_Assets/Rock2.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Scenes/Env_Assets/Rock3.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/Vehicles/HoverBoard_Lite.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/Triggers/DialogueTrigger.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Env_Assets/House.tscn" type="PackedScene" id=18]
@@ -23,7 +18,6 @@
 [ext_resource path="res://Scenes/Env_Assets/Antena2.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Scenes/Characters/NPC.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Scenes/Vehicles/HoverBoard.tscn" type="PackedScene" id=25]
-[ext_resource path="res://Scenes/Env_Assets/Platform.tscn" type="PackedScene" id=26]
 
 [node name="Island" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 140.42, -59.7383, 53.4836 )
@@ -76,129 +70,84 @@ transform = Transform( 0.072246, 0, 0.997387, -0.679796, 0.731746, 0.0492412, -0
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -91.9858, 12.1394, 2457.44 )
 script = ExtResource( 8 )
 
-[node name="StaticBody43" parent="." index="17" instance=ExtResource( 26 )]
-transform = Transform( 0.984439, 0, -0.175728, 0, 1, 0, 0.175728, 0, 0.984439, 130.645, -19.1695, 3034.27 )
-
-[node name="Fireplace" parent="." index="18" instance=ExtResource( 6 )]
+[node name="Fireplace" parent="." index="17" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -92.2938, 11.3863, 2468.34 )
 State = true
 
-[node name="WindGenerator" parent="." index="19" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1334.32, 22.8764, 2286.96 )
-
-[node name="WindGenerator2" parent="." index="20" instance=ExtResource( 9 )]
-transform = Transform( 0.489687, 0, 0.871898, 0, 1, 0, -0.871898, 0, 0.489687, -1151.35, 1.80634, 2497.18 )
-
-[node name="WindGenerator4" parent="." index="21" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -622.83, 17.7707, 2336.96 )
-
-[node name="WindGenerator5" parent="." index="22" instance=ExtResource( 9 )]
-transform = Transform( -0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, -0.258819, -1216.92, 52.2154, 1948.26 )
-
-[node name="WindGenerator6" parent="." index="23" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -660.99, 37.8404, 1985.11 )
-
-[node name="WindGenerator7" parent="." index="24" instance=ExtResource( 9 )]
-transform = Transform( 0.712724, 0, 0.701444, 0, 1, 0, -0.701444, 0, 0.712724, 581.036, 75.2146, 2000.36 )
-
-[node name="WindGenerator8" parent="." index="25" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2385.6, -5.13775, 1545.12 )
-
-[node name="WindGenerator9" parent="." index="26" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1747.37, 33.7061, 1364.57 )
-
-[node name="WindGenerator10" parent="." index="27" instance=ExtResource( 9 )]
-transform = Transform( 1.12378, 0, -3.0009, 0, 3.20442, 0, 3.0009, 0, 1.12378, -1474.44, 88.44, 902.158 )
-EnergyPerWindStreangth = 0.2
-
-[node name="WindGenerator11" parent="." index="28" instance=ExtResource( 9 )]
-transform = Transform( 3.19515, 0, 0.243553, 0, 3.20442, 0, -0.243553, 0, 3.19515, 1081.8, -8.37357, 1429.8 )
-EnergyPerWindStreangth = 0.2
-
-[node name="WindGenerator12" parent="." index="29" instance=ExtResource( 9 )]
-transform = Transform( -2.36741, 0, 2.15955, 0, 3.20442, 0, -2.15955, 0, -2.36741, 490.372, 85.44, -1510.65 )
-EnergyPerWindStreangth = 0.2
-
-[node name="WindGenerator3" parent="." index="30" instance=ExtResource( 9 )]
-transform = Transform( 0.0588359, 0, 0.998268, 0, 1, 0, -0.998268, 0, 0.0588359, -949.831, 15.1781, 2087.6 )
-
-[node name="StreetLamp" parent="." index="31" instance=ExtResource( 7 )]
+[node name="StreetLamp" parent="." index="18" instance=ExtResource( 7 )]
 transform = Transform( -0.0628255, 0, 0.998024, 0, 1, 0, -0.998024, 0, -0.0628255, -34.7939, 10.5448, 2422.26 )
 
-[node name="StreetLamp9" parent="." index="32" instance=ExtResource( 7 )]
+[node name="StreetLamp9" parent="." index="19" instance=ExtResource( 7 )]
 transform = Transform( -0.0628255, 0, 0.998024, 0, 1, 0, -0.998024, 0, -0.0628255, -34.7939, 10.5448, 2386.45 )
 Working = false
 
-[node name="StreetLamp10" parent="." index="33" instance=ExtResource( 7 )]
+[node name="StreetLamp10" parent="." index="20" instance=ExtResource( 7 )]
 transform = Transform( -0.0628255, 0, 0.998024, 0, 1, 0, -0.998024, 0, -0.0628255, -34.7939, 10.5448, 2321.13 )
 
-[node name="StreetLamp11" parent="." index="34" instance=ExtResource( 7 )]
+[node name="StreetLamp11" parent="." index="21" instance=ExtResource( 7 )]
 transform = Transform( -0.0628255, 0, 0.998024, 0, 1, 0, -0.998024, 0, -0.0628255, -34.7939, 10.5448, 2195.32 )
 
-[node name="StreetLamp12" parent="." index="35" instance=ExtResource( 7 )]
+[node name="StreetLamp12" parent="." index="22" instance=ExtResource( 7 )]
 transform = Transform( 0.0628256, 0, -0.998024, 0, 1, 0, 0.998024, 0, 0.0628256, 35.1109, 10.5448, 2195.32 )
 
-[node name="StreetLamp13" parent="." index="36" instance=ExtResource( 7 )]
+[node name="StreetLamp13" parent="." index="23" instance=ExtResource( 7 )]
 transform = Transform( 0.0628256, 0, -0.998024, 0, 1, 0, 0.998024, 0, 0.0628256, 35.1109, 10.5448, 2231.13 )
 Working = false
 
-[node name="StreetLamp14" parent="." index="37" instance=ExtResource( 7 )]
+[node name="StreetLamp14" parent="." index="24" instance=ExtResource( 7 )]
 transform = Transform( 0.0628256, 0, -0.998024, 0, 1, 0, 0.998024, 0, 0.0628256, 35.1109, 10.5448, 2296.45 )
 
-[node name="StreetLamp15" parent="." index="38" instance=ExtResource( 7 )]
+[node name="StreetLamp15" parent="." index="25" instance=ExtResource( 7 )]
 transform = Transform( 0.0628256, 0, -0.998024, 0, 1, 0, 0.998024, 0, 0.0628256, 35.1109, 10.5448, 2422.26 )
 Working = false
 
-[node name="StreetLamp2" parent="." index="39" instance=ExtResource( 7 )]
+[node name="StreetLamp2" parent="." index="26" instance=ExtResource( 7 )]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 229.337, 11.1117, 2845.09 )
 
-[node name="StreetLamp16" parent="." index="40" instance=ExtResource( 7 )]
+[node name="StreetLamp16" parent="." index="27" instance=ExtResource( 7 )]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 287.761, 11.1117, 2558.81 )
 
-[node name="StreetLamp3" parent="." index="41" instance=ExtResource( 7 )]
+[node name="StreetLamp3" parent="." index="28" instance=ExtResource( 7 )]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 172.991, 11.1117, 3150.31 )
 
-[node name="StreetLamp4" parent="." index="42" instance=ExtResource( 7 )]
+[node name="StreetLamp4" parent="." index="29" instance=ExtResource( 7 )]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 111.936, 11.1117, 3475.53 )
 Working = false
 
-[node name="StreetLamp5" parent="." index="43" instance=ExtResource( 7 )]
+[node name="StreetLamp5" parent="." index="30" instance=ExtResource( 7 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -106.274, 11.1117, 3478.39 )
 Working = false
 
-[node name="StreetLamp6" parent="." index="44" instance=ExtResource( 7 )]
+[node name="StreetLamp6" parent="." index="31" instance=ExtResource( 7 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -171.081, 11.1117, 3181.85 )
 Working = false
 
-[node name="StreetLamp7" parent="." index="45" instance=ExtResource( 7 )]
+[node name="StreetLamp7" parent="." index="32" instance=ExtResource( 7 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -225.499, 11.1117, 2877.73 )
 Working = false
 
-[node name="StreetLamp8" parent="." index="46" instance=ExtResource( 7 )]
+[node name="StreetLamp8" parent="." index="33" instance=ExtResource( 7 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -282.745, 11.1117, 2587.61 )
 Working = false
 
-[node name="StaticBody38" parent="." index="47" instance=ExtResource( 23 )]
+[node name="StaticBody38" parent="." index="34" instance=ExtResource( 23 )]
 transform = Transform( -13.6067, -2.11579, 14.5046, -3.47327, 19.6923, -0.385718, -14.2406, -2.78133, -13.7648, -130.777, 183.053, 180.134 )
 
-[node name="StaticBody37" parent="." index="48" instance=ExtResource( 22 )]
+[node name="StaticBody37" parent="." index="35" instance=ExtResource( 22 )]
 transform = Transform( 28.8694, 5.00605, 22.9546, -2.64502, 36.8278, -4.70501, -23.3448, 2.01809, 28.92, -151.487, 205.562, -64.197 )
 
-[node name="Character" parent="." index="49" instance=ExtResource( 24 )]
+[node name="Character" parent="." index="36" instance=ExtResource( 24 )]
 transform = Transform( 0.412039, 0, 0.911166, 0, 1, 0, -0.911166, 0, 0.412039, -96.9068, 11.4714, 2466.03 )
 
-[node name="Vehicle" parent="." index="50" instance=ExtResource( 25 )]
+[node name="Vehicle" parent="." index="37" instance=ExtResource( 25 )]
 transform = Transform( 0.174312, -0.00116998, 0.98469, 0.000666553, 0.999999, 0.00107017, -0.984691, 0.000469795, 0.174313, 295.325, 14.6894, 2852.34 )
 
-[node name="Battery" parent="." index="51" instance=ExtResource( 10 )]
+[node name="Battery" parent="." index="38" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -67, 82, 1980 )
 
-[node name="MotherCityComp" parent="." index="52" instance=ExtResource( 2 )]
-transform = Transform( 800, 0, 0, 0, 800, 0, 0, 0, 800, 0, 0, 0 )
+[node name="MotherCityComp" parent="." index="39" instance=ExtResource( 2 )]
 
-[node name="Intro" parent="." index="53" instance=ExtResource( 3 )]
-
-[node name="Buildings" type="Spatial" parent="." index="54"]
+[node name="Buildings" type="Spatial" parent="." index="40"]
 
 [node name="StaticBody9" parent="Buildings" index="0" instance=ExtResource( 18 )]
 transform = Transform( -0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, -0.258819, -2957.64, -136.923, 2363.72 )
@@ -314,79 +263,8 @@ transform = Transform( 0.67636, 0.163167, -0.718271, -0.0905136, 0.986176, 0.138
 [node name="DestBuilding6" parent="Buildings" index="37" instance=ExtResource( 21 )]
 transform = Transform( -0.925222, -0.0317054, -0.3781, -0.0905136, 0.986176, 0.138794, 0.368473, 0.162639, -0.915301, -73.2258, -72.8149, 3737.48 )
 
-[node name="Rocks" type="Spatial" parent="." index="55"]
-
-[node name="Rock1" parent="Rocks" index="0" instance=ExtResource( 11 )]
-transform = Transform( -29.6513, -52.3404, -0.515877, -50.793, 28.9151, -14.2466, 12.6432, -6.58643, -58.4444, 239.65, -0.790234, 2015.97 )
-skeleton = NodePath("../..")
-
-[node name="Rock2" parent="Rocks" index="1" instance=ExtResource( 11 )]
-transform = Transform( -54.6407, 20.8024, -14.1647, 21.7607, 56.0612, -1.6104, 12.6432, -6.58643, -58.4444, 480.01, -23.7651, 2324.28 )
-skeleton = NodePath("../..")
-
-[node name="Rock4" parent="Rocks" index="2" instance=ExtResource( 11 )]
-transform = Transform( 19.4239, -165.968, -143.016, 213.982, -16.4422, 48.1433, -47.0196, -143.39, 160.016, 2358.43, -235.919, 3098.23 )
-skeleton = NodePath("../..")
-
-[node name="Rock6" parent="Rocks" index="3" instance=ExtResource( 11 )]
-transform = Transform( 10.1222, 365.113, -54.9535, 98.3318, -55.6544, -351.658, -355.891, -4.99296, -98.7253, -2852.05, -303.104, 1930.81 )
-skeleton = NodePath("../..")
-
-[node name="Rock7" parent="Rocks" index="4" instance=ExtResource( 11 )]
-transform = Transform( 290.902, -221.705, 51.5038, 226.902, 275.893, -93.9595, 17.9278, 105.639, 353.481, -2852.05, -476.176, -1611.95 )
-skeleton = NodePath("../..")
-
-[node name="Rock5" parent="Rocks" index="5" instance=ExtResource( 11 )]
-transform = Transform( 33.2753, 196.83, 68.4028, -38.3719, -62.2969, 197.927, 204.814, -43.6494, 25.9685, 2913.22, -120.586, 3206.88 )
-skeleton = NodePath("../..")
-
-[node name="Rock3" parent="Rocks" index="6" instance=ExtResource( 11 )]
-transform = Transform( -42.1445, -42.8203, 3.04039, -0.361072, 4.61415, 59.9796, -42.9265, 42.0014, -3.48953, -885.043, 10.5517, 1769.8 )
-skeleton = NodePath("../..")
-
-[node name="Rock8" parent="Rocks" index="7" instance=ExtResource( 12 )]
-transform = Transform( 10.2426, 24.6919, -123.278, 14.9685, 122.567, 25.7932, 124.832, -16.7229, 7.02224, -1391.51, -90.499, 2526.81 )
-skeleton = NodePath("../..")
-
-[node name="Rock9" parent="Rocks" index="8" instance=ExtResource( 12 )]
-transform = Transform( 123.836, -10.5881, -21.5516, 20.7368, 104.239, 67.9421, 12.1065, -70.2427, 104.074, 1557.08, -92.7417, 2415.44 )
-skeleton = NodePath("../..")
-
-[node name="Rock11" parent="Rocks" index="9" instance=ExtResource( 12 )]
-transform = Transform( 84.3502, -62.4131, 70.0118, 20.7368, 104.239, 67.9421, -91.4715, -33.9228, 79.9638, 2138.47, -69.8987, 1245.56 )
-skeleton = NodePath("../..")
-
-[node name="Rock17" parent="Rocks" index="10" instance=ExtResource( 12 )]
-transform = Transform( -56.9467, 104.755, 41.1764, 81.3892, 6.44782, 96.1573, 77.7488, 69.9776, -70.5002, -267.212, -57.2648, -2773.94 )
-skeleton = NodePath("../..")
-
-[node name="Rock18" parent="Rocks" index="11" instance=ExtResource( 12 )]
-transform = Transform( -70.0025, -80.3724, 67.468, 89.3736, -88.1654, -12.2976, 54.9912, 40.9774, 105.872, 316.544, -57.2649, -3390.42 )
-skeleton = NodePath("../..")
-
-[node name="Rock12" parent="Rocks" index="12" instance=ExtResource( 12 )]
-transform = Transform( -118.136, 21.1656, -38.8305, 8.41492, 119.493, 39.5314, 43.4163, 34.432, -113.32, 2250.78, -90.9868, 1293.38 )
-skeleton = NodePath("../..")
-
-[node name="Rock13" parent="Rocks" index="13" instance=ExtResource( 12 )]
-transform = Transform( 78.1707, -31.8311, 93.745, 5.05303, 120.572, 36.7267, -98.8727, -19.0044, 75.9936, -464.114, -90.9868, 2135.9 )
-skeleton = NodePath("../..")
-
-[node name="Rock10" parent="Rocks" index="14" instance=ExtResource( 12 )]
-transform = Transform( 114.649, 50.6397, 14.2556, 13.7113, -61.7636, 109.13, 50.7897, -97.6365, -61.6402, 1670.42, -2.70149, 1543.75 )
-skeleton = NodePath("../..")
-
-[node name="Rock14" parent="Rocks" index="15" instance=ExtResource( 13 )]
-transform = Transform( 94.7905, 0, 0, 0, -94.6342, 5.44, 0, -5.44001, -94.6341, 1359.83, -17.9685, -1515.54 )
-
-[node name="Rock15" parent="Rocks" index="16" instance=ExtResource( 13 )]
-transform = Transform( -92.0448, 22.6119, -1.29983, 22.6493, 91.8931, -5.28242, 0, -5.44001, -94.6341, -3161.44, -17.9685, -3227.11 )
-
-[node name="Rock16" parent="Rocks" index="17" instance=ExtResource( 13 )]
-transform = Transform( -247.668, 60.8426, -3.4975, 60.943, 247.259, -14.2136, 0, -14.6376, -254.635, -2404.16, 18.6792, -2139.76 )
-
-[node name="Vehicle2" parent="." index="56" instance=ExtResource( 14 )]
+[node name="Vehicle2" parent="." index="41" instance=ExtResource( 14 )]
 transform = Transform( -0.00063925, 0.0010706, -0.999999, 0.000666553, 0.999999, 0.00107017, 1, -0.000665859, -0.000639973, 328.04, 10.2002, 2862.02 )
 
-[node name="DialogueTrigger" parent="." index="57" instance=ExtResource( 15 )]
+[node name="DialogueTrigger" parent="." index="42" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 279.543, 11.9978, 2821.02 )

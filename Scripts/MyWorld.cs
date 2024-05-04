@@ -99,7 +99,6 @@ public class MyWorld : Spatial
 	public void RegisterIle(IslandInfo ile)
 	{
 		AddChild(ile.ile);
-		
 	}
 	
 	public static void ArrangeIlesBasedOnDistance(List<IslandInfo> ilestodissable, List<IslandInfo> ilestoenable)

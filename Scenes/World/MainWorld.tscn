@@ -1,13 +1,15 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/HUD/StartingScreen.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/MainWorld.cs" type="Script" id=2]
 [ext_resource path="res://Scenes/HUD/InventoryUI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/World/MyWorld.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Islands/Test/IslandTestEscene.tscn" type="PackedScene" id=5]
 
 [node name="MainWorld" type="Spatial"]
 script = ExtResource( 2 )
 WorldScene = ExtResource( 4 )
+Intro = ExtResource( 5 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 follow_viewport_enable = true
@@ -15,12 +17,4 @@ follow_viewport_enable = true
 [node name="InvntoryUI" parent="CanvasLayer" instance=ExtResource( 3 )]
 
 [node name="StartScreen" parent="CanvasLayer" instance=ExtResource( 1 )]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -1602.5
-margin_top = -903.5
-margin_right = 1602.5
-margin_bottom = 903.5
 rect_pivot_offset = Vector2( 1954.5, 1603.5 )

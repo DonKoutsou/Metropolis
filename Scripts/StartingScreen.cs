@@ -9,35 +9,34 @@ public class StartingScreen : Control
 
 	Dictionary<string, Control> ButtonList = new Dictionary<string, Control>();
 
-	
+	Control intro;
+
+	MainMenuAnimation FadeInOut;
+
+	static bool GameIsRunning = false;
+	public static bool IsGameRunning()
+	{
+		return GameIsRunning;
+	}
 
 	public override void _Ready()
 	{
 		world = (MainWorld)GetParent().GetParent();
-		GetNode<Control>("Settings").Show();
-		GetNode<Control>("MainScreen").Show();
-		Control cont = GetNode<Control>("MainScreen");
-		ButtonList.Add("Start", cont.GetNode<Button>("Start_Button"));
-		ButtonList.Add("Exit", cont.GetNode<Button>("Exit_Button"));
-		ButtonList.Add("SeedSetting", GetNode<Control>("Settings").GetNode<Panel>("SeedSetting"));
+		intro = GetNode<Control>("Intro");
+		FadeInOut = GetNode<CanvasLayer>("FadeInOut").GetNode<MainMenuAnimation>("MainMenuAnimation");
+		Control cont = GetNode<Control>("Settings");
+		cont.Show();
+		ButtonList.Add("Start", cont.GetNode<Panel>("Panel").GetNode<Button>("Start_Button"));
+		ButtonList.Add("Exit", cont.GetNode<Panel>("Panel").GetNode<Button>("Exit_Button"));
+		ButtonList.Add("SeedSetting", cont.GetNode<Panel>("Panel").GetNode<Panel>("SeedSetting"));
 	}
 	private void On_Start_Button_Down()
 	{
 		if (!world.IsMapSpawned())
 		{
-			GetNode<Control>("MainScreen").Hide();
+			
 
-			GetNode<LoadingScreen>("LoadingScreen").EnableTime();
-
-			Control Startbut;
-			ButtonList.TryGetValue("Start", out Startbut);
-			Control SeedSet;
-			ButtonList.TryGetValue("SeedSetting", out SeedSet);
-			SeedSet.GetNode<TextEdit>("SeedText").Readonly = true;
-			((Button)Startbut).Text = "Συνέχεια";
-			GetNode<Control>("Settings").Hide();
-			MouseFilter = MouseFilterEnum.Ignore;
-			world.CallDeferred("SpawnMap");
+			FadeInOut.FadeInOut();
 
 			
 		}
@@ -45,14 +44,25 @@ public class StartingScreen : Control
 		{
 			MyWorld.GetInstance().Pause();
 		}
-		
 	}
-	private void On_Setting_Button_Down()
+	public void StartGame()
 	{
-		GetNode<Control>("Settings").Show();
-		GetNode<Control>("Settings").MouseFilter = MouseFilterEnum.Stop;
-		GetNode<Control>("MainScreen").Hide();
-		GetNode<Control>("MainScreen").MouseFilter = MouseFilterEnum.Ignore;
+		intro.Hide();
+
+		GetNode<Control>("Settings").Hide();
+
+		GetNode<Control>("Settings").GetNode<ColorRect>("ColorRect").Visible = true;
+
+		Control Startbut;
+		ButtonList.TryGetValue("Start", out Startbut);
+		Control SeedSet;
+		ButtonList.TryGetValue("SeedSetting", out SeedSet);
+		SeedSet.GetNode<TextEdit>("SeedText").Readonly = true;
+		((Button)Startbut).Text = "Συνέχεια";
+		GetNode<Control>("Settings").Hide();
+		MouseFilter = MouseFilterEnum.Ignore;
+		world.CallDeferred("SpawnMap");
+		GameIsRunning = true;
 	}
 	private void On_Full_Screen_Toggled(bool button_pressed)
 	{
@@ -70,7 +80,7 @@ public class StartingScreen : Control
 		else
 			MouseFilter = MouseFilterEnum.Ignore;
 
-		GetNode<Control>("MainScreen").Visible = toggle;
+		//GetNode<Control>("MainScreen").Visible = toggle;
 		GetNode<Control>("Settings").Visible = toggle;
 	}
 	public void GameOver()
@@ -89,7 +99,8 @@ public class StartingScreen : Control
 		GetNode<Label>("GameWonLabel").Visible = false;
 		world.StopGame();
 
-		GetNode<Control>("MainScreen").Show();
+		GameIsRunning = false;
+		GetNode<Control>("Settings").Show();
 
 		GetNode<Timer>("RestartTimer").Stop();
 	}
