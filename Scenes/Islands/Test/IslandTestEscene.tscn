@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://Assets/AllSkyFree_Sky_OvercastLow_Equirect.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Env_Assets/Sea.tscn" type="PackedScene" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://Assets/Clouds/Textures/smoke_01.png" type="Texture" id=21]
 [ext_resource path="res://Assets/PostProcess/KuwaharaShader.gdshader" type="Shader" id=22]
 [ext_resource path="res://Assets/Clouds/Clouds4.material" type="Material" id=23]
+[ext_resource path="res://Assets/Clouds/Textures/smoke_04.png" type="Texture" id=24]
 [ext_resource path="res://Scenes/Env_Assets/SandParticles.tscn" type="PackedScene" id=25]
 [ext_resource path="res://Scenes/Env_Assets/Rock1.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Scenes/Env_Assets/Rock4.tscn" type="PackedScene" id=29]
@@ -210,6 +211,18 @@ surfaces/0 = {
 "skeleton_aabb": [  ],
 "vertex_count": 561
 }
+
+[sub_resource type="SpatialMaterial" id=118]
+flags_transparent = true
+flags_unshaded = true
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_color = Color( 0.94902, 0.803922, 0.529412, 1 )
+albedo_texture = ExtResource( 24 )
+proximity_fade_enable = true
+proximity_fade_distance = 1227.78
 
 [sub_resource type="ParticlesMaterial" id=108]
 emission_shape = 2
@@ -596,6 +609,7 @@ transform = Transform( 0.744032, 0, -0.668144, 0, 1, 0, 0.668144, 0, 0.744032, -
 
 [node name="SandParticles" parent="." instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -761.758, 616.459, 5486.98 )
+material_override = SubResource( 118 )
 visibility_aabb = AABB( -138.138, -205.176, -393.492, 276.276, 410.353, 786.984 )
 process_material = SubResource( 108 )
 

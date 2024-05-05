@@ -291,7 +291,7 @@ void fragment() {
 	// BEACH
 	normal_output = mix(vec3(0.5, 0.5, 1.0), normal_output, clamp( smoothstep(depths, 0.0, beach_normal_fadeout), 0.5, 1.0) ); // smooth out
 	//float alpha_output = mix(normalize(vec3(depths, 0.0, 0.0)).r, 0.00, beach_alpha_fadeout);
-	float alpha_output = smoothstep(depths, -1.0, beach_alpha_fadeout);
+	float alpha_output = smoothstep(depths, -5.0, beach_alpha_fadeout);
 	
 	ALBEDO = clamp(albedo_output, vec3(0.0, 0.0, 0.0), vec3(1.0, 1.0, 1.0));
 	//ALBEDO = vec3(depths, 0.0, 0.0);

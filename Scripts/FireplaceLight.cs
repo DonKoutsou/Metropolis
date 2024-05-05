@@ -18,7 +18,7 @@ public class FireplaceLight : StaticBody
         {
             light.LightEnergy = 0.0f;
             part.Emitting = false;
-            SetPhysicsProcess(false);
+            SetProcess(false);
             GetNode<AudioStreamPlayer3D>("FireplaceSound").Stop();
         }
         else
@@ -57,6 +57,8 @@ public class FireplaceLight : StaticBody
             double sample = rand.NextDouble();
             double scaled = (sample * 1.2) + 0.6;
             light.LightEnergy = (float)scaled;
+            if (DayNight.GetRainStr() > 10)
+                ToggleFileplace();
             //double scaled1 = (sample * 0.5) + -0.5;
             //double scaled2 = (sample * 0.5) + -0.5;
             //light.Translation = new Vector3( (float)scaled1, 1.3f, (float)scaled2);

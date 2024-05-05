@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Env_Assets/MotherCityGeo.tscn" type="PackedScene" id=2]
@@ -10,8 +10,10 @@
 [ext_resource path="res://Scripts/SpawnPosition.cs" type="Script" id=8]
 [ext_resource path="res://Scenes/Vehicles/HoverBoard_NoWings.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Items/Battery.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Env_Assets/Rock4.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Vehicles/HoverBoard_Lite.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/Triggers/DialogueTrigger.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/Env_Assets/Rock3.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/Env_Assets/House.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Assets/Building/BuildingDust4.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Assets/Building/BuildingDust3.tscn" type="PackedScene" id=20]
@@ -31,7 +33,6 @@ update_rotation = false
 update_scale = false
 
 [node name="Planks" type="Spatial" parent="." index="1"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.145, 0 )
 
 [node name="StaticBody" parent="Planks" index="0" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 48.8216, -0.00653076, 2459.9 )
@@ -124,57 +125,69 @@ transform = Transform( 0.976054, 0, -0.21753, 0, 1, 0, 0.21753, 0, 0.976054, -47
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -48.7828, -0.00653076, 2419.15 )
 
 [node name="StaticBody31" parent="Planks" index="30" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -71.7059, -0.00653076, 2457.49 )
+transform = Transform( -0.981537, 0, -0.191271, 0, 1, 0, 0.191271, 0, -0.981537, -72.9704, -0.00653076, 2457.17 )
 
 [node name="StaticBody32" parent="Planks" index="31" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -60.0342, -0.00653458, 2463.25 )
 
 [node name="StaticBody33" parent="Planks" index="32" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -72.0347, -0.00653076, 2463.22 )
+transform = Transform( 0.994047, 0, 0.108954, 0, 1, 0, -0.108954, 0, 0.994047, -72.0347, -0.00653076, 2463.22 )
 
-[node name="StaticBody34" parent="Planks" index="33" instance=ExtResource( 3 )]
-transform = Transform( 0.997842, 0, 0.0656644, 0, 1, 0, -0.0656644, 0, 0.997842, -59.4052, -0.00653076, 2457.23 )
+[node name="StaticBody49" parent="Planks" index="33" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -84.735, -0.00653076, 2457.49 )
 
-[node name="StaticBody35" parent="Planks" index="34" instance=ExtResource( 3 )]
-transform = Transform( 0.976054, 0, -0.21753, 0, 1, 0, 0.21753, 0, 0.976054, -47.774, -0.00652695, 2464.81 )
+[node name="StaticBody50" parent="Planks" index="34" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -85.0638, -0.00653076, 2463.22 )
 
-[node name="StaticBody36" parent="Planks" index="35" instance=ExtResource( 3 )]
+[node name="StaticBody51" parent="Planks" index="35" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -97.735, -0.00653076, 2456.28 )
+
+[node name="StaticBody52" parent="Planks" index="36" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -98.0638, -0.00653076, 2462.01 )
+
+[node name="StaticBody34" parent="Planks" index="37" instance=ExtResource( 3 )]
+transform = Transform( 0.996292, 0, -0.0860429, 0, 1, 0, 0.0860429, 0, 0.996292, -59.922, -0.00653076, 2457.17 )
+
+[node name="StaticBody35" parent="Planks" index="38" instance=ExtResource( 3 )]
+transform = Transform( 0.999027, 0, -0.0441075, 0, 1, 0, 0.0441075, 0, 0.999027, -47.679, -0.00652695, 2462.78 )
+
+[node name="StaticBody36" parent="Planks" index="39" instance=ExtResource( 3 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -48.7828, -0.00653076, 2457.26 )
 
-[node name="StaticBody37" parent="Planks" index="36" instance=ExtResource( 3 )]
+[node name="StaticBody37" parent="Planks" index="40" instance=ExtResource( 3 )]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.60735, -0.00653076, 2476.87 )
 
-[node name="StaticBody38" parent="Planks" index="37" instance=ExtResource( 3 )]
+[node name="StaticBody38" parent="Planks" index="41" instance=ExtResource( 3 )]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4.1512, -0.00653458, 2488.54 )
 
-[node name="StaticBody39" parent="Planks" index="38" instance=ExtResource( 3 )]
+[node name="StaticBody39" parent="Planks" index="42" instance=ExtResource( 3 )]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4.11482, -0.00653076, 2476.54 )
 
-[node name="StaticBody40" parent="Planks" index="39" instance=ExtResource( 3 )]
+[node name="StaticBody40" parent="Planks" index="43" instance=ExtResource( 3 )]
 transform = Transform( 0.0656643, 0, -0.997842, 0, 1, 0, 0.997842, 0, 0.0656643, 1.87224, -0.00653076, 2489.17 )
 
-[node name="StaticBody41" parent="Planks" index="40" instance=ExtResource( 3 )]
+[node name="StaticBody41" parent="Planks" index="44" instance=ExtResource( 3 )]
 transform = Transform( -0.21753, 0, -0.976054, 0, 1, 0, 0.976054, 0, -0.21753, -5.70735, -0.00652695, 2500.8 )
 
-[node name="StaticBody42" parent="Planks" index="41" instance=ExtResource( 3 )]
+[node name="StaticBody42" parent="Planks" index="45" instance=ExtResource( 3 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.84294, -0.00653076, 2499.79 )
 
-[node name="StaticBody43" parent="Planks" index="42" instance=ExtResource( 3 )]
+[node name="StaticBody43" parent="Planks" index="46" instance=ExtResource( 3 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.44244, -0.00653076, 2536.48 )
 
-[node name="StaticBody44" parent="Planks" index="43" instance=ExtResource( 3 )]
+[node name="StaticBody44" parent="Planks" index="47" instance=ExtResource( 3 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.316101, -0.00653458, 2524.81 )
 
-[node name="StaticBody45" parent="Planks" index="44" instance=ExtResource( 3 )]
+[node name="StaticBody45" parent="Planks" index="48" instance=ExtResource( 3 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.279724, -0.00653076, 2536.81 )
 
-[node name="StaticBody46" parent="Planks" index="45" instance=ExtResource( 3 )]
+[node name="StaticBody46" parent="Planks" index="49" instance=ExtResource( 3 )]
 transform = Transform( -0.0656644, 0, 0.997842, 0, 1, 0, -0.997842, 0, -0.0656644, -5.70734, -0.00653076, 2524.18 )
 
-[node name="StaticBody47" parent="Planks" index="46" instance=ExtResource( 3 )]
+[node name="StaticBody47" parent="Planks" index="50" instance=ExtResource( 3 )]
 transform = Transform( 0.21753, 0, 0.976054, 0, 1, 0, -0.976054, 0, 0.21753, 1.87225, -0.00652695, 2512.55 )
 
-[node name="StaticBody48" parent="Planks" index="47" instance=ExtResource( 3 )]
+[node name="StaticBody48" parent="Planks" index="51" instance=ExtResource( 3 )]
 transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -5.67804, -0.00653076, 2513.56 )
 
 [node name="House6" parent="." index="2" instance=ExtResource( 4 )]
@@ -189,72 +202,78 @@ spawnItems = false
 transform = Transform( -0.0110647, 0, 0.999938, 0, 1, 0, -0.999938, 0, -0.0110647, -30.0462, 1.02782, 2390.6 )
 spawnItems = false
 
-[node name="House12" parent="." index="5" instance=ExtResource( 4 )]
+[node name="House14" parent="." index="5" instance=ExtResource( 4 )]
+transform = Transform( -0.94239, 0, -0.334514, 0, 1, 0, 0.334514, 0, -0.94239, -1405.12, 3.75883, 2571.49 )
+spawnItems = false
+
+[node name="House12" parent="." index="6" instance=ExtResource( 4 )]
 transform = Transform( 0.0582963, 0, 0.998299, 0, 1, 0, -0.998299, 0, 0.0582963, -29.5872, 2.17905, 2305.57 )
 spawnItems = false
 
-[node name="House3" parent="." index="6" instance=ExtResource( 4 )]
+[node name="House3" parent="." index="7" instance=ExtResource( 4 )]
 transform = Transform( 0.91754, 0, 0.397644, 0, 1, 0, -0.397644, 0, 0.91754, -598.415, 1.54187, 1243.52 )
 spawnItems = false
 
-[node name="House5" parent="." index="7" instance=ExtResource( 4 )]
+[node name="House5" parent="." index="8" instance=ExtResource( 4 )]
 transform = Transform( 0.364698, 0, -0.931125, 0, 1, 0, 0.931125, 0, 0.364698, -434.973, 24.5409, 1303.02 )
 spawnItems = false
 
-[node name="DestBuilding" parent="." index="8" instance=ExtResource( 5 )]
+[node name="DestBuilding" parent="." index="9" instance=ExtResource( 5 )]
 transform = Transform( 0.072246, 0, 0.997387, -0.679796, 0.731746, 0.0492412, -0.729834, -0.681577, 0.0528657, -419.855, 68.5224, 1898.78 )
 
-[node name="SpawnPosition" type="Position3D" parent="." index="9"]
+[node name="SpawnPosition" type="Position3D" parent="." index="10"]
 transform = Transform( -0.557528, 0, 0.830158, 0, 1, 0, -0.830158, 0, -0.557528, -16.9033, 2.88788, 2375.51 )
 script = ExtResource( 8 )
 
-[node name="Fireplace" parent="." index="10" instance=ExtResource( 6 )]
+[node name="Fireplace" parent="." index="11" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.1609, 1.7247, 2370.58 )
 State = true
 
-[node name="StreetLamp" parent="." index="11" instance=ExtResource( 7 )]
+[node name="StreetLamp" parent="." index="12" instance=ExtResource( 7 )]
 transform = Transform( -0.0628255, 0, 0.998024, 0, 1, 0, -0.998024, 0, -0.0628255, -15.6061, 1.19423, 2401.73 )
 
-[node name="StreetLamp9" parent="." index="12" instance=ExtResource( 7 )]
+[node name="StreetLamp9" parent="." index="13" instance=ExtResource( 7 )]
 transform = Transform( -0.0628255, 0, 0.998024, 0, 1, 0, -0.998024, 0, -0.0628255, -18.9098, 1.69382, 2354.41 )
 Working = false
 
-[node name="StreetLamp10" parent="." index="13" instance=ExtResource( 7 )]
+[node name="StreetLamp10" parent="." index="14" instance=ExtResource( 7 )]
 transform = Transform( -0.0628255, 0, 0.998024, 0, 1, 0, -0.998024, 0, -0.0628255, -19.1534, 3.9229, 2318.12 )
 
-[node name="StreetLamp11" parent="." index="14" instance=ExtResource( 7 )]
-transform = Transform( -0.0628255, 0, 0.998024, 0, 1, 0, -0.998024, 0, -0.0628255, -34.7939, 10.5448, 2195.32 )
-
-[node name="StreetLamp12" parent="." index="15" instance=ExtResource( 7 )]
-transform = Transform( 0.0628256, 0, -0.998024, 0, 1, 0, 0.998024, 0, 0.0628256, 35.1109, 10.5448, 2195.32 )
+[node name="StreetLamp11" parent="." index="15" instance=ExtResource( 7 )]
+transform = Transform( -0.0628255, 0, 0.998024, 0, 1, 0, -0.998024, 0, -0.0628255, -36.5641, 4.8058, 2193.97 )
 
 [node name="StreetLamp13" parent="." index="16" instance=ExtResource( 7 )]
-transform = Transform( 0.0628256, 0, -0.998024, 0, 1, 0, 0.998024, 0, 0.0628256, 35.1109, 10.5448, 2231.13 )
-Working = false
+transform = Transform( 0.874467, 0, 0.485084, 0, 1, 0, -0.485084, 0, 0.874467, -34.2195, 7.7928, 1890.92 )
 
-[node name="StreetLamp14" parent="." index="17" instance=ExtResource( 7 )]
+[node name="StreetLamp12" parent="." index="17" instance=ExtResource( 7 )]
+transform = Transform( 0.0628256, 0, -0.998024, 0, 1, 0, 0.998024, 0, 0.0628256, 35.1109, 10.5448, 2195.32 )
+
+[node name="StreetLamp14" parent="." index="18" instance=ExtResource( 7 )]
 transform = Transform( 0.0628256, 0, -0.998024, 0, 1, 0, 0.998024, 0, 0.0628256, 19.642, 2.25375, 2320.58 )
 
-[node name="StreetLamp15" parent="." index="18" instance=ExtResource( 7 )]
+[node name="StreetLamp15" parent="." index="19" instance=ExtResource( 7 )]
 transform = Transform( 0.0628256, 0, -0.998024, 0, 1, 0, 0.998024, 0, 0.0628256, 19.8001, 0.866703, 2405.84 )
 Working = false
 
-[node name="StaticBody38" parent="." index="19" instance=ExtResource( 23 )]
-transform = Transform( -13.6067, -2.11579, 14.5046, -3.47327, 19.6923, -0.385718, -14.2406, -2.78133, -13.7648, -130.777, 183.053, 180.134 )
+[node name="StaticBody38" parent="." index="20" instance=ExtResource( 23 )]
+transform = Transform( -18.4802, -3.39371, -6.85322, -3.47327, 19.6923, -0.385718, 6.81328, 0.833742, -18.7853, -114.104, 361.406, -58.8084 )
 
-[node name="StaticBody37" parent="." index="20" instance=ExtResource( 22 )]
-transform = Transform( 28.8694, 5.00605, 22.9546, -2.64502, 36.8278, -4.70501, -23.3448, 2.01809, 28.92, -151.487, 205.562, -64.197 )
+[node name="StaticBody37" parent="." index="21" instance=ExtResource( 22 )]
+transform = Transform( -33.1753, -0.226791, 16.875, -2.64502, 36.8278, -4.70501, -16.6679, -5.39275, -32.8408, -157.019, 22.7396, -501.385 )
 
-[node name="Character" parent="." index="21" instance=ExtResource( 24 )]
-transform = Transform( -0.132257, 0, 0.991215, 0, 1, 0, -0.991215, 0, -0.132257, -20.6133, 1.88495, 2365.84 )
+[node name="Fireplace2" parent="." index="22" instance=ExtResource( 6 )]
+transform = Transform( 0.316328, 0, 0.94865, 0, 1, 0, -0.94865, 0, 0.316328, -1404.79, 9.81843, 2537.65 )
 
-[node name="Vehicle" parent="." index="22" instance=ExtResource( 25 )]
+[node name="Character2" parent="." index="23" instance=ExtResource( 24 )]
+transform = Transform( 0.998447, 0, -0.0556989, 0, 1, 0, 0.0556989, 0, 0.998447, -1386.39, 54.3166, 2717.6 )
+
+[node name="Vehicle" parent="." index="24" instance=ExtResource( 25 )]
 transform = Transform( 0.0898612, -0.00112574, 0.995954, 0.000666553, 0.999999, 0.00107017, -0.995955, 0.00056768, 0.0898623, 55.7356, -1.20707, 2447.56 )
 
-[node name="Battery" parent="." index="23" instance=ExtResource( 10 )]
+[node name="Battery" parent="." index="25" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -67, 82, 1980 )
 
-[node name="Buildings" type="Spatial" parent="." index="24"]
+[node name="Buildings" type="Spatial" parent="." index="26"]
 
 [node name="StaticBody9" parent="Buildings" index="0" instance=ExtResource( 18 )]
 transform = Transform( -0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, -0.258819, -2957.64, -136.923, 2363.72 )
@@ -358,34 +377,45 @@ transform = Transform( -0.259501, -0.160009, -0.952395, 0.382264, 0.888616, -0.2
 [node name="DestBuilding7" parent="Buildings" index="33" instance=ExtResource( 5 )]
 transform = Transform( -0.14834, 0.438421, 0.886444, -0.00764272, 0.895826, -0.44434, -0.988907, -0.0726884, -0.129536, -1562.16, -67.3018, 3617.73 )
 
-[node name="DestBuilding3" parent="Buildings" index="34" instance=ExtResource( 20 )]
+[node name="DestBuilding8" parent="Buildings" index="34" instance=ExtResource( 5 )]
+transform = Transform( -0.999573, 0.00569476, 0.0286743, -0.0144768, 0.755711, -0.654746, -0.0253981, -0.654881, -0.755305, -2400.35, -105.665, 2427.45 )
+
+[node name="DestBuilding3" parent="Buildings" index="35" instance=ExtResource( 20 )]
 transform = Transform( 0.192572, -0.254611, -0.531727, 0.263317, 0.537625, -0.162071, 0.527469, -0.175432, 0.275034, -2165.56, -172.269, 3034.87 )
 
-[node name="DestBuilding4" parent="Buildings" index="35" instance=ExtResource( 19 )]
+[node name="DestBuilding4" parent="Buildings" index="36" instance=ExtResource( 19 )]
 transform = Transform( -0.0309461, -0.798442, 0.601276, -0.833231, 0.352866, 0.42569, -0.552059, -0.487828, -0.676206, -1171.1, -50.3673, 3746.07 )
 
-[node name="DestBuilding5" parent="Buildings" index="36" instance=ExtResource( 21 )]
+[node name="DestBuilding5" parent="Buildings" index="37" instance=ExtResource( 21 )]
 transform = Transform( 0.67636, 0.163167, -0.718271, -0.0905136, 0.986176, 0.138794, 0.730989, -0.0288615, 0.681779, -822.901, -72.8149, 2621.04 )
 
-[node name="DestBuilding6" parent="Buildings" index="37" instance=ExtResource( 21 )]
+[node name="DestBuilding6" parent="Buildings" index="38" instance=ExtResource( 21 )]
 transform = Transform( -0.925222, -0.0317054, -0.3781, -0.0905136, 0.986176, 0.138794, 0.368473, 0.162639, -0.915301, -73.2258, -72.8149, 3737.48 )
 
-[node name="Vehicle2" parent="." index="25" instance=ExtResource( 14 )]
+[node name="Vehicle2" parent="." index="27" instance=ExtResource( 14 )]
 transform = Transform( -0.00063925, 0.0010706, -0.999999, 0.000666553, 0.999999, 0.00107017, 1, -0.000665859, -0.000639973, -56.991, 4.61303, 2444.55 )
 
-[node name="DialogueTrigger" parent="." index="26" instance=ExtResource( 15 )]
+[node name="DialogueTrigger" parent="." index="28" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 279.543, 11.9978, 2821.02 )
 
-[node name="MotherCity" parent="." index="27" instance=ExtResource( 2 )]
+[node name="MotherCity" parent="." index="29" instance=ExtResource( 2 )]
 
-[node name="Vehicle3" parent="." index="28" instance=ExtResource( 9 )]
+[node name="Vehicle3" parent="." index="30" instance=ExtResource( 9 )]
 transform = Transform( 0.00922616, -0.00107628, 0.999957, 0.000666553, 0.999999, 0.00107017, -0.999958, 0.000656641, 0.00922687, -56.2364, -0.183369, 2407.84 )
 
-[node name="Vehicle4" parent="." index="29" instance=ExtResource( 9 )]
+[node name="Vehicle4" parent="." index="31" instance=ExtResource( 9 )]
 transform = Transform( 0.00922616, -0.00107628, 0.999957, 0.000666553, 0.999999, 0.00107017, -0.999958, 0.000656641, 0.00922687, -56.2364, -0.183369, 2352.01 )
 
-[node name="Vehicle5" parent="." index="30" instance=ExtResource( 9 )]
+[node name="Vehicle5" parent="." index="32" instance=ExtResource( 9 )]
 transform = Transform( 0.331624, 0.000788573, -0.943411, 0.000666553, 0.999999, 0.00107017, 0.943412, -0.00098372, 0.331623, 59.7632, -0.183369, 2352.01 )
 
-[node name="Vehicle6" parent="." index="31" instance=ExtResource( 9 )]
+[node name="Vehicle6" parent="." index="33" instance=ExtResource( 9 )]
 transform = Transform( 0.976366, -0.000419497, -0.216127, 0.000666553, 0.999999, 0.00107017, 0.216127, -0.00118894, 0.976364, 12.5598, -0.183369, 2527.8 )
+
+[node name="Rocks" type="Spatial" parent="." index="34"]
+
+[node name="Rock1" parent="Rocks" index="0" instance=ExtResource( 12 )]
+transform = Transform( -141.918, -3.99222, -129.88, -43.5813, -179.727, 53.1453, -122.415, 68.6136, 131.652, -232.394, -264.981, -2094.15 )
+
+[node name="Rock2" parent="Rocks" index="1" instance=ExtResource( 16 )]
+transform = Transform( 60.158, 0, 0, 0, 60.158, 0, 0, 0, 60.1579, 272.904, -3.671, -1926.48 )

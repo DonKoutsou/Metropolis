@@ -157,7 +157,7 @@ params_billboard_mode = 3
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
-albedo_color = Color( 1, 0.921569, 0.796078, 0.266667 )
+albedo_color = Color( 1, 0.921569, 0.796078, 0.556863 )
 albedo_texture = ExtResource( 36 )
 
 [sub_resource type="Curve" id=113]
@@ -182,6 +182,7 @@ linear_accel_random = 0.35
 tangential_accel = 2.8
 tangential_accel_random = 1.0
 angle = 360.0
+scale = 1.5
 scale_random = 0.53
 hue_variation = 1.0
 hue_variation_random = 1.0
@@ -403,6 +404,7 @@ script = ExtResource( 21 )
 
 [node name="SandParticles" parent="WorldParticleManager" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.755, 243.768 )
+amount = 8000
 visibility_aabb = AABB( -138.138, -205.176, -393.492, 276.276, 410.353, 786.984 )
 local_coords = false
 draw_order = 2
