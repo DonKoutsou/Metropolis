@@ -56,6 +56,9 @@ public class DayNight : WorldEnvironment
     [Export]
     Curve WindStreangthCurve = null;
 
+    [Export]
+    Curve RainStreangthCurve = null;
+
     [Signal]
     public delegate void DayEventHandler();
 
@@ -67,8 +70,10 @@ public class DayNight : WorldEnvironment
     static float currenthour;
     static float currentmins;
 
-    static public float WindDir = 0;
-    static public float WindStreangth = 100;
+    static float WindDir = 0;
+    static float WindStreangth = 100;
+
+    static float Raintreangth = 100;
 
     DirectionalLight sun;
     DirectionalLight moon;
@@ -94,6 +99,10 @@ public class DayNight : WorldEnvironment
     {
         return WindStreangth;
     }
+    static public float GetRainStr()
+    {
+        return Raintreangth;
+    }
     static public void GetTime(out float hour, out float mins)
     {
         hour = currenthour; mins = currentmins;
@@ -105,6 +114,13 @@ public class DayNight : WorldEnvironment
             value -= 10;
         WindDir = WindDirCurve.Interpolate(value/ 10);
         WindStreangth = WindStreangthCurve.Interpolate(value/ 10);
+    }
+    private void UpdateRain()
+    {
+        float value = currentDay + ((currenthour  + (currentmins / 60))/ 24);
+        while (value > 10)
+            value -= 10;
+        Raintreangth = RainStreangthCurve.Interpolate(value/ 10);
     }
     private void UpdateCurveValues()
     {
@@ -336,6 +352,8 @@ public class DayNight : WorldEnvironment
         UpdateTime();
         
         UpdateWind();
+
+        UpdateRain();
 
         UpdateCurveValues();
 

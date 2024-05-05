@@ -12,6 +12,7 @@ mesh = ExtResource( 1 )
 material/0 = ExtResource( 2 )
 
 [node name="StaticBody" type="StaticBody" parent="."]
+visible = false
 collision_layer = 4
 collision_mask = 0
 

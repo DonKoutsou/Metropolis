@@ -203,9 +203,11 @@ material/0 = ExtResource( 6 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="."]
 transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, -24.6259, 0, -1.78147 )
+visible = false
 shape = SubResource( 10 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
+visible = false
 shape = SubResource( 1 )
 
 [node name="Rotor_Pivot" type="Spatial" parent="."]

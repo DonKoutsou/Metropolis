@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Assets/Boat/M_Boat.material" type="Material" id=1]
 [ext_resource path="res://Scripts/Vehicle.cs" type="Script" id=2]
@@ -12,7 +12,6 @@
 [ext_resource path="res://Assets/Boat/Boat_WingL.tres" type="ArrayMesh" id=10]
 [ext_resource path="res://Assets/Boat/BoatWingR.tres" type="ArrayMesh" id=11]
 [ext_resource path="res://Scenes/Vehicles/HoverParticles.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Assets/Clouds/HoverDust.tres" type="Material" id=13]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0
@@ -309,14 +308,13 @@ spot_range = 47.3573
 spot_angle = 44.4241
 
 [node name="RayFL" type="RayCast" parent="."]
-transform = Transform( 1, -2.15247e-08, 1.89175e-08, 2.16313e-08, 1, -1.44355e-08, -1.89175e-08, 1.44355e-08, 1, 3, 0.749334, 4.99935 )
+transform = Transform( 1, -2.23396e-08, 1.89175e-08, 2.24462e-08, 1, -1.44355e-08, -1.89175e-08, 1.44355e-08, 1, 3, 0.749334, 4.99935 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292
 
 [node name="Particles" parent="RayFL" instance=ExtResource( 12 )]
 transform = Transform( 1, 2.05701e-08, -1.85682e-08, -2.05223e-08, 1, 1.44355e-08, 1.90921e-08, -1.44355e-08, 1, -0.00278616, -4.17923, -0.00447226 )
-material_override = ExtResource( 13 )
 local_coords = false
 
 [node name="MeshInstance" type="MeshInstance" parent="RayFL"]
@@ -331,14 +329,13 @@ cast_to = Vector3( 0, 0, 20 )
 collision_mask = 292
 
 [node name="RayFR" type="RayCast" parent="."]
-transform = Transform( 1, 2.80795e-07, 5.75674e-08, -2.80717e-07, 1, -8.81264e-08, -5.75092e-08, 8.82428e-08, 1, -3, 0.750666, 5.00063 )
+transform = Transform( 1, 2.80388e-07, 5.75674e-08, -2.8031e-07, 1, -8.81264e-08, -5.75092e-08, 8.82428e-08, 1, -3, 0.750666, 5.00063 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292
 
 [node name="Particles" parent="RayFR" instance=ExtResource( 12 )]
 transform = Transform( 1, 2.05701e-08, -1.85682e-08, -2.05223e-08, 1, 1.44355e-08, 1.90921e-08, -1.44355e-08, 1, -0.00278616, -4.17923, -0.00447226 )
-material_override = ExtResource( 13 )
 local_coords = false
 
 [node name="MeshInstance" type="MeshInstance" parent="RayFR"]
@@ -347,14 +344,13 @@ mesh = SubResource( 33 )
 material/0 = ExtResource( 1 )
 
 [node name="RayBR" type="RayCast" parent="."]
-transform = Transform( 1, 2.80792e-07, 5.82077e-08, -2.80716e-07, 1, -8.31205e-08, -5.81495e-08, 8.3237e-08, 1, -3, 0.750666, -4.99936 )
+transform = Transform( 1, 2.80385e-07, 5.82077e-08, -2.80309e-07, 1, -8.31205e-08, -5.81495e-08, 8.3237e-08, 1, -3, 0.750666, -4.99936 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292
 
 [node name="Particles" parent="RayBR" instance=ExtResource( 12 )]
 transform = Transform( 1, 2.05701e-08, -1.85682e-08, -2.05223e-08, 1, 1.44355e-08, 1.90921e-08, -1.44355e-08, 1, -0.00278616, -4.17923, -0.00447226 )
-material_override = ExtResource( 13 )
 local_coords = false
 
 [node name="MeshInstance" type="MeshInstance" parent="RayBR"]
@@ -363,14 +359,13 @@ mesh = SubResource( 33 )
 material/0 = ExtResource( 1 )
 
 [node name="RayBL" type="RayCast" parent="."]
-transform = Transform( 1, 2.80038e-07, 5.67525e-08, -2.79961e-07, 1, -8.68458e-08, -5.66943e-08, 8.69622e-08, 1, 3, 0.749335, -5.00064 )
+transform = Transform( 1, 2.7963e-07, 5.67525e-08, -2.79554e-07, 1, -8.68458e-08, -5.66943e-08, 8.69622e-08, 1, 3, 0.749335, -5.00064 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292
 
 [node name="Particles" parent="RayBL" instance=ExtResource( 12 )]
 transform = Transform( 1, 2.05701e-08, -1.85682e-08, -2.05223e-08, 1, 1.44355e-08, 1.90921e-08, -1.44355e-08, 1, -0.00278616, -4.17923, -0.00447226 )
-material_override = ExtResource( 13 )
 local_coords = false
 
 [node name="MeshInstance" type="MeshInstance" parent="RayBL"]

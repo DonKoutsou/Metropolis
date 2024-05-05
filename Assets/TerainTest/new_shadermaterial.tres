@@ -5,18 +5,18 @@
 [ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_AmbientOcclusio2n.jpg" type="Texture" id=3]
 [ext_resource path="res://Assets/TerainTest/TerainShader5.tres" type="Shader" id=4]
 [ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_Colo2r.jpg" type="Texture" id=5]
-[ext_resource path="res://Assets/TerainTex/Rock029_1K-PNG/Rock029_1K-PNG_NormalGL.png" type="Texture" id=6]
+[ext_resource path="res://Assets/TerainTex/Rock029_2K-PNG/Rock029_2K-PNG_NormalGL.png" type="Texture" id=6]
 [ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_Roughnes2s.jpg" type="Texture" id=7]
 [ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_NormalGL2.jpg" type="Texture" id=8]
-[ext_resource path="res://Assets/TerainTex/Rock029_1K-PNG/Rock029_1K-PNG_Color.png" type="Texture" id=9]
+[ext_resource path="res://Assets/TerainTex/Rock029_2K-PNG/Rock029_2K-PNG_Color.png" type="Texture" id=9]
 
 [resource]
 shader = ExtResource( 4 )
-shader_param/offset = 0.735
-shader_param/fade = 0.257
+shader_param/offset = 0.74
+shader_param/fade = 0.206
 shader_param/NormalForce = 1.0
-shader_param/uv_scale_fg = Vector3( 20, 20, 20 )
-shader_param/uv_scale_bg = Vector3( 10, 10, 10 )
+shader_param/uv_scale_fg = Vector3( 10, 10, 10 )
+shader_param/uv_scale_bg = Vector3( 20, 20, 20 )
 shader_param/roughness_texture_channel = Plane( 0, 0, 0, 1 )
 shader_param/albedo_texture_fg = ExtResource( 5 )
 shader_param/Rough_texture_fg = ExtResource( 7 )
