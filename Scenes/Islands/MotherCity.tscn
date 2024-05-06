@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Env_Assets/MotherCityGeo.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Scripts/SpawnPosition.cs" type="Script" id=8]
 [ext_resource path="res://Scenes/Vehicles/HoverBoard_NoWings.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Items/Battery.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Env_Assets/Rock1.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Env_Assets/Rock4.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Vehicles/HoverBoard_Lite.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/Triggers/DialogueTrigger.tscn" type="PackedScene" id=15]
@@ -419,3 +420,9 @@ transform = Transform( -141.918, -3.99222, -129.88, -43.5813, -179.727, 53.1453,
 
 [node name="Rock2" parent="Rocks" index="1" instance=ExtResource( 16 )]
 transform = Transform( 60.158, 0, 0, 0, 60.158, 0, 0, 0, 60.1579, 272.904, -3.671, -1926.48 )
+
+[node name="Rock3" parent="Rocks" index="2" instance=ExtResource( 11 )]
+transform = Transform( 140.134, 0, -19.7917, 0, 141.524, 0, 19.7918, 0, 140.133, -444.89, -3.65854, -3418.11 )
+
+[node name="Rock4" parent="Rocks" index="3" instance=ExtResource( 16 )]
+transform = Transform( 138.739, 0, 41.46, 0, 144.801, 0, -41.4601, 0, 138.739, 542.53, -3.66984, -3811.94 )

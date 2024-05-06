@@ -8,7 +8,7 @@ public class Sea : MeshInstance
 	public override void _Ready()
 	{
 		material = (ShaderMaterial)GetActiveMaterial(0);
-		//((Spatial)GetParent()).GlobalRotation = Vector3.Zero;
+		((Spatial)GetParent()).GlobalRotation = Vector3.Zero;
 		AnimationPlayer anim = GetNode<AnimationPlayer>("AnimationPlayer");
 		anim.CurrentAnimation = "Wave";
 		anim.Play();
@@ -24,6 +24,8 @@ public class Sea : MeshInstance
 	{
 		base._PhysicsProcess(delta);
 		float str = DayNight.GetRainStr();
+		float dir = DayNight.GetWindDirection();
+		//((Spatial)GetParent()).GlobalRotation = Vector3.Zero;
 		if (str > 10)
 		{
 			material.SetShaderParam("IsRaining", true);
@@ -32,6 +34,7 @@ public class Sea : MeshInstance
 		{
 			material.SetShaderParam("IsRaining", false);
 		}
+		material.SetShaderParam("TextureRot", 180 - dir);
 		//float thing = ((-360 - DayNight.GetWindDirection()) / 360) - 0.5f;
 		//thing *= 2;
 		//float theta = Mathf.Deg2Rad(-360 - DayNight.GetWindDirection());

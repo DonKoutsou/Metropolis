@@ -34,6 +34,8 @@ uniform sampler2D gerstner_normal_map : hint_normal;
 uniform sampler2D detail_normal_map : hint_normal;
 uniform sampler2D water_highlight_map : hint_albedo;
 
+uniform float TextureRot : hint_range(-180, 180.0) = 0.0f;
+
 uniform float Roughness = 0.5f;
 uniform float Spec = 0.5f;
 
@@ -46,8 +48,8 @@ uniform float gerstner_2_normal = 0.2;
 uniform float gerstner_2_stretch = 2.0;
 uniform float gerstner_2_tiling = 0.31;
 uniform float gerstner_distance_fadeout = 0.04;
-uniform vec2 gerstner_speed = vec2(0.011, 0.014);
-uniform vec2 gerstner_2_speed = vec2(0.013, 0.008);
+const vec2 gerstner_speed = vec2(0.0, -0.014);
+const vec2 gerstner_2_speed = vec2(0.0, -0.008);
 
 uniform float normal_base_intensity = 0.7;
 uniform float normal_peak_intensity = 1.5;
@@ -155,13 +157,28 @@ void vertex() {
 	//VERTEX += ( vec3(0.0, 0.0, 0.0) + vec3(0.0, wave_z_offset, 0.0) ) * wave_height + gerstner + gerstner_2;
 	COLOR[0] = camera_distance;
 }
+vec2 rotateUV(vec2 uv, vec2 pivot, float rotation) {
+    float sine = sin(rotation);
+    float cosine = cos(rotation);
+    
+    
+	vec2 rotated = uv;
+	rotated -= pivot;
+    rotated.x = uv.x * cosine - uv.y * sine;
+	rotated.y = uv.x * sine + uv.y * cosine;
+    rotated += pivot;
 
+    return rotated;
+}
 void fragment() {
-	vec2 uv_gerstner = ( vec4(UV.x, UV.y, UV.y, 1.0) + WORLD_MATRIX[3] * 0.25 ).xz * gerstner_tiling + vec2(TIME * gerstner_speed.x, TIME * gerstner_speed.y);
+	vec2 rotateduv = rotateUV(UV, vec2(0.5,0.5), radians(TextureRot));
+	vec2 uv_gerstner = ( vec4(rotateduv.x, rotateduv.y, rotateduv.y, 1.0) ).xz * gerstner_tiling + vec2(TIME * gerstner_speed.x, TIME * gerstner_speed.y);
 	vec2 uv_gerstner_2 = uv_gerstner * gerstner_2_tiling + vec2(gerstner_2_speed.x * TIME, gerstner_2_speed.y * TIME);
 	
-	vec2 uv = fract( vec4(UV.x, UV.y, UV.y, 1.0) + WORLD_MATRIX[3] * 0.25 ).xz;
+	vec2 uv = fract( vec4(rotateduv.x, rotateduv.y, rotateduv.y, 1.0)).xz;
 	
+	//uv_gerstner = rotateUV(uv_gerstner, vec2(0.5,0.5), radians(TextureRot));
+	//uv_gerstner_2 = rotateUV(uv_gerstner_2, vec2(0.5,0.5),  radians(TextureRot));
 	vec3 normal_output;
 	//float height = texture(vector_map, uv).z;
 	//vec2 flow_map = texture(vector_map, uv).xy - vec2(0.5, 0.5);
@@ -393,11 +410,13 @@ noise = SubResource( 11 )
 gradient = ExtResource( 12 )
 
 [resource]
+resource_local_to_scene = true
 shader = SubResource( 10 )
 shader_param/IsRaining = true
 shader_param/ring_width = 83.648
 shader_param/fadeout = 0.104
 shader_param/ring_color = Color( 1, 1, 1, 1 )
+shader_param/TextureRot = 79.626
 shader_param/Roughness = 0.85
 shader_param/Spec = 0.5
 shader_param/gerstner_normal = 0.606
@@ -407,16 +426,14 @@ shader_param/gerstner_2_normal = 0.267
 shader_param/gerstner_2_stretch = 2.0
 shader_param/gerstner_2_tiling = 1.041
 shader_param/gerstner_distance_fadeout = 9.561
-shader_param/gerstner_speed = Vector2( 0.011, 0.04 )
-shader_param/gerstner_2_speed = Vector2( 0.013, -0.012 )
 shader_param/normal_base_intensity = 0.7
 shader_param/normal_peak_intensity = 1.5
 shader_param/normal_dist_fadeout = 0.015
 shader_param/detail_normal_intensity = 0.119
 shader_param/detail_normal_tiling = 10.0
 shader_param/detail_normal_speed = 12.0
-shader_param/foam_ramp = 30.966
-shader_param/foam_amount = 7.0
+shader_param/foam_ramp = 0.2
+shader_param/foam_amount = 0.0
 shader_param/foam_tiling = 1
 shader_param/foam_gerstner = 55.231
 shader_param/wave_height = 0.0
