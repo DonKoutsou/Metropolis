@@ -42,6 +42,8 @@ public class WorldMap : TileMap
 
     [Export]
     PackedScene IntroScene;
+    [Signal]
+    public delegate void OnTransitionEventHandler(Island ile);
 
     int currentile;
 
@@ -119,6 +121,8 @@ public class WorldMap : TileMap
 
                 Intro intr = (Intro)IntroScene.Instance();
 
+                EmitSignal("OnTransitionEventHandler", island);
+
                 island.AddChild(intr);
                 
                 intr.Translation = Vector3.Zero;
@@ -152,6 +156,8 @@ public class WorldMap : TileMap
                 CurrentTile = curt;
                 
                 MyWorld.IleTransition(ileinf, ileinfto);
+                
+                EmitSignal("OnTransitionEventHandler", ileinfto.ile);
             }
         }
         ulong msaf = OS.GetSystemTimeMsecs();
@@ -393,15 +399,11 @@ public class WorldMap : TileMap
 	public void SyncSeas()
     {
         var seas = GetTree().GetNodesInGroup("Sea");
-        float animstage = 0;
+        float animstage = Poseidon.GetInstance().GetAnimStage();
         foreach (Node sea in seas)
         {
-            if (animstage == 0)
-            {
-                animstage = sea.GetNode<MeshInstance>("Sea").GetNode<AnimationPlayer>("AnimationPlayer").CurrentAnimationPosition;
-            }
-            sea.GetNode<MeshInstance>("Sea").GetNode<AnimationPlayer>("AnimationPlayer").Seek(animstage);
-            sea.GetNode<MeshInstance>("Sea").GetNode<AnimationPlayer>("AnimationPlayer").Play();
+            sea.GetNode<AnimationPlayer>("AnimationPlayer").Seek(animstage);
+            sea.GetNode<AnimationPlayer>("AnimationPlayer").Play();
         }
     }
 }

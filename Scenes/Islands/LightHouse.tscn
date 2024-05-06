@@ -4,7 +4,6 @@
 [ext_resource path="res://Scenes/Islands/LightHouseGeo.tscn" type="PackedScene" id=2]
 
 [node name="Island" instance=ExtResource( 1 )]
-transform = Transform( 1, 0.000150445, 0.0001142, -0.000150411, 1, -0.000272574, -0.000114244, 0.000272556, 1, 0, 0, 0 )
 type = 4
 
-[node name="Spatial" parent="." index="5" instance=ExtResource( 2 )]
+[node name="Spatial" parent="." index="1" instance=ExtResource( 2 )]

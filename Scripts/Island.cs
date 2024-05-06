@@ -31,6 +31,7 @@ public class Island : Spatial
 			waterbody.GlobalRotation = new Vector3 (0.0f, 0.0f, 0.0f);
 		FindHouses(this);
 		FindGenerators(this);
+        //GetNode<StaticBody>("SeaBed").GetNode<MeshInstance>("Sea").QueueFree();
 	}
 	public void SetSpawnInfo(Vector3 SpawnPos, float SpawnRot)
 	{

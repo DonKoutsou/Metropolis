@@ -2,27 +2,19 @@ using Godot;
 using System;
 
 
-public class Sea : MeshInstance
+public class Sea : StaticBody
 {
 	ShaderMaterial material;
 	public override void _Ready()
 	{
-		material = (ShaderMaterial)GetActiveMaterial(0);
-		((Spatial)GetParent()).GlobalRotation = Vector3.Zero;
+		GetNode<MeshInstance>("Sea").QueueFree();
 		AnimationPlayer anim = GetNode<AnimationPlayer>("AnimationPlayer");
-		anim.CurrentAnimation = "Wave";
-		anim.Play();
+		anim.Play("Wave");
 	}
-	/*private void _on_Sea_visibility_changed()
+
+	/*public override void _Process(float delta)
 	{
-		if (Visible)
-			SetPhysicsProcess(true);
-		else
-			SetPhysicsProcess(false);
-	}*/
-	public override void _PhysicsProcess(float delta)
-	{
-		base._PhysicsProcess(delta);
+		base._Process(delta);
 		float str = DayNight.GetRainStr();
 		float dir = DayNight.GetWindDirection();
 		//((Spatial)GetParent()).GlobalRotation = Vector3.Zero;
@@ -47,5 +39,5 @@ public class Sea : MeshInstance
 		//float px = x * cs - y * sn;
 		//float py = x * sn + y * cs;
 		//material.SetShaderParam("sampler_direction", new Vector2(rotvec.x, rotvec.z));
-	}
+	}*/
 }

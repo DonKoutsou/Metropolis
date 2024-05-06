@@ -280,76 +280,7 @@ size = Vector2( 1000, 1000 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -436.303, 0, 1128.44 )
 
 [node name="SeaBed10" parent="Spatial3" instance=ExtResource( 2 )]
-
-[node name="Spatial7" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4446.33, 0, -1568.07 )
-
-[node name="SeaBed10" parent="Spatial7" instance=ExtResource( 2 )]
-
-[node name="Spatial4" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -438.655, 0, 9128.42 )
-
-[node name="SeaBed10" parent="Spatial4" instance=ExtResource( 2 )]
-
-[node name="Spatial5" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8438.95, 0, 1126.26 )
-
-[node name="SeaBed10" parent="Spatial5" instance=ExtResource( 2 )]
-
-[node name="Spatial8" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16305, 0, 1126.26 )
-
-[node name="SeaBed10" parent="Spatial8" instance=ExtResource( 2 )]
-
-[node name="Spatial9" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16305, 0, -6855.24 )
-
-[node name="SeaBed10" parent="Spatial9" instance=ExtResource( 2 )]
-
-[node name="Spatial10" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23081.7, 0, -7052.54 )
-
-[node name="SeaBed10" parent="Spatial10" instance=ExtResource( 2 )]
-
-[node name="Spatial11" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23081.7, 0, -2847.25 )
-
-[node name="SeaBed10" parent="Spatial11" instance=ExtResource( 2 )]
-
-[node name="Spatial12" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22775.5, 0, -14764 )
-
-[node name="SeaBed10" parent="Spatial12" instance=ExtResource( 2 )]
-
-[node name="Spatial13" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14884, 0, -13736.2 )
-
-[node name="SeaBed10" parent="Spatial13" instance=ExtResource( 2 )]
-
-[node name="Spatial14" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7725.95, 0, -13736.2 )
-
-[node name="SeaBed10" parent="Spatial14" instance=ExtResource( 2 )]
-
-[node name="Spatial15" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1130.71, 0, -13736.2 )
-
-[node name="SeaBed10" parent="Spatial15" instance=ExtResource( 2 )]
-
-[node name="Spatial16" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1130.71, 0, -3827.42 )
-
-[node name="SeaBed10" parent="Spatial16" instance=ExtResource( 2 )]
-
-[node name="Spatial17" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2868.24, 0, -3827.42 )
-
-[node name="SeaBed10" parent="Spatial17" instance=ExtResource( 2 )]
-
-[node name="Spatial6" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8431.55, 0, -6869.76 )
-
-[node name="SeaBed10" parent="Spatial6" instance=ExtResource( 2 )]
+script = null
 
 [node name="Island10" type="Spatial" parent="." groups=["Islands"]]
 pause_mode = 1

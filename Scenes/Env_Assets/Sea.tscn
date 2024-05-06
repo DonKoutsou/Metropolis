@@ -41,24 +41,23 @@ tracks/0/keys = {
 }
 
 [sub_resource type="BoxShape" id=5]
-extents = Vector3( 4000, 33.5075, 4000.25 )
+extents = Vector3( 4000, 33, 4000 )
 
 [node name="SeaBed" type="StaticBody" groups=["Sea"]]
 pause_mode = 1
 collision_layer = 256
 collision_mask = 0
 physics_material_override = SubResource( 6 )
+script = ExtResource( 2 )
 
 [node name="Sea" type="MeshInstance" parent="."]
-transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0 )
+transform = Transform( 60, 0, 0, 0, 60, 0, 0, 0, 60, 88.1067, 0, 0 )
 cast_shadow = 0
 extra_cull_margin = 16384.0
 mesh = ExtResource( 3 )
 material/0 = ExtResource( 1 )
-script = ExtResource( 2 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sea"]
-root_node = NodePath("../..")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 8 )
 anims/Wave = SubResource( 7 )
 

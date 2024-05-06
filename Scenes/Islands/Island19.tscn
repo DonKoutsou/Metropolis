@@ -30,8 +30,7 @@ shader_param/AO_texture_bg = ExtResource( 7 )
 shader_param/normal_texture_bg = ExtResource( 5 )
 
 [node name="Island" instance=ExtResource( 1 )]
-transform = Transform( 0.999998, 0, 0.00218166, 0, 1, 0, -0.00218166, 0, 0.999998, 0, 0, 0 )
 
-[node name="Rock1" parent="." index="5" instance=ExtResource( 11 )]
+[node name="Rock1" parent="." index="1" instance=ExtResource( 11 )]
 transform = Transform( 356.18, -645.462, 552.004, 464.359, -353.192, -712.614, 711.126, 553.922, 188.85, 2137.21, -441.552, -1969.68 )
 material/0 = SubResource( 1 )
