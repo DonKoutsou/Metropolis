@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Poseidon : Spatial
 {
-    List<MeshInstance> SeaChild = new List<MeshInstance>();
+    MeshInstance SeaChild;
     static Poseidon instance;
 
     AnimationPlayer anim;
@@ -24,7 +24,7 @@ public class Poseidon : Spatial
         {
             if (s is MeshInstance)
             {
-                SeaChild.Add((MeshInstance)s);
+                SeaChild = (MeshInstance)s;
             }
         }
         
@@ -39,18 +39,57 @@ public class Poseidon : Spatial
         GlobalTranslation = new Vector3(to.GlobalTranslation.x, GlobalTranslation.y, to.GlobalTranslation.z);
         ((WorldMap)GetParent()).SyncSeas();
     }
+    float gesnervalue = 0.0f;
+    bool Enabling = false;
+    private void UpdateRotation()
+    {
+        float dir = DayNight.GetWindDirection();
+        if (gesnervalue <= 0)
+        {
+
+            ShaderMaterial mat = (ShaderMaterial)SeaChild.GetActiveMaterial(0);
+            mat.SetShaderParam("TextureRot", -180 - dir);
+
+            Enabling = true;
+        }
+        if (gesnervalue >= 1)
+        {
+
+            ShaderMaterial mat = (ShaderMaterial)SeaChild.GetActiveMaterial(0);
+            mat.SetShaderParam("TextureRot2", -180 - dir);
+
+            Enabling = false;
+            
+        }
+        if (Enabling)
+        {
+            gesnervalue += 0.02f;
+        }
+        else
+        {
+            gesnervalue -= 0.02f;
+        }
+
+        ShaderMaterial mat2 = (ShaderMaterial)SeaChild.GetActiveMaterial(0);
+        mat2.SetShaderParam("gerstner_value", gesnervalue);
+
+    }
+    float d = 0.05f;
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
         float str = DayNight.GetRainStr();
-		float dir = DayNight.GetWindDirection();
 
-        foreach(MeshInstance s in SeaChild)
-        {
-            ShaderMaterial mat = (ShaderMaterial)s.GetActiveMaterial(0);
-            mat.SetShaderParam("RainInt", Mathf.Lerp(0.0f, 0.5f, str / 100));
-            mat.SetShaderParam("TextureRot", -180 - dir);
+        ShaderMaterial mat = (ShaderMaterial)SeaChild.GetActiveMaterial(0);
+        mat.SetShaderParam("RainInt", Mathf.Lerp(0.0f, 0.5f, str / 100));
 
+        d -= delta;
+		if (d <= 0)
+		{
+			d = 0.05f;
+            UpdateRotation();
         }
+        
+
     }
 }
