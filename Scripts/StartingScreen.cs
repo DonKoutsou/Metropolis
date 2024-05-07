@@ -24,6 +24,7 @@ public class StartingScreen : Control
 		world = (MainWorld)GetParent().GetParent();
 		intro = GetNode<Control>("Intro");
 		FadeInOut = GetNode<CanvasLayer>("FadeInOut").GetNode<MainMenuAnimation>("MainMenuAnimation");
+		GetNode<CanvasLayer>("FadeInOut").Show();
 		Control cont = GetNode<Control>("Settings");
 		cont.Show();
 		ButtonList.Add("Start", cont.GetNode<Panel>("Panel").GetNode<Button>("Start_Button"));
@@ -34,11 +35,7 @@ public class StartingScreen : Control
 	{
 		if (!world.IsMapSpawned())
 		{
-			
-
 			FadeInOut.FadeInOut();
-
-			
 		}
 		else
 		{

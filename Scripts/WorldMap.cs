@@ -41,7 +41,7 @@ public class WorldMap : TileMap
     public int seed = 69420;
 
     [Export]
-    PackedScene IntroScene;
+    PackedScene IntroScene = null;
     [Signal]
     public delegate void OnTransitionEventHandler(Island ile);
 
@@ -126,7 +126,7 @@ public class WorldMap : TileMap
                 island.AddChild(intr);
                 
                 intr.Translation = Vector3.Zero;
-                intr.Rotation = Vector3.Zero;
+                intr.GlobalRotation = Vector3.Zero;
 
                 CurrentTile = new Vector2 (island.GlobalTransform.origin.x ,island.GlobalTransform.origin.z);
 
@@ -139,10 +139,10 @@ public class WorldMap : TileMap
             if (currentile >= OrderedCells.Count)
                 finishedspawning = true;
         }
-            
-        if (Player.GetInstance() == null)
+        Player pl = Player.GetInstance();
+        if (pl == null)
             return;
-        Vector2 plpos = new Vector2(Player.GetInstance().GlobalTransform.origin.x, Player.GetInstance().GlobalTransform.origin.z);
+        Vector2 plpos = new Vector2(pl.GlobalTransform.origin.x, pl.GlobalTransform.origin.z);
         if (plpos.DistanceTo(CurrentTile) > CellSize.x/2)
         {
             Vector2 curt = FindClosestIslandPosition(plpos);
@@ -154,6 +154,12 @@ public class WorldMap : TileMap
                 IslandInfo ileinfto = null;
                 ilemap.TryGetValue(WorldToMap(curt), out ileinfto);
                 CurrentTile = curt;
+                if (pl.HasVehicle())
+                {
+                    Vehicle veh = pl.currveh;
+                    veh.ReparentVehicle(ileinfto.ile);
+                    ileinfto.AddNewVehicle(veh);
+                }
                 
                 MyWorld.IleTransition(ileinf, ileinfto);
                 
@@ -353,7 +359,12 @@ public class WorldMap : TileMap
         List<House> houses;
         ile.GetHouses(out houses);
         ileinfo.AddHouses(houses);
-
+        List<WindGenerator> generators;
+        ile.GetGenerator(out generators);
+        ileinfo.AddGenerators(generators);
+        List<Vehicle> vehiclelist;
+        ile.GetVehicles(out vehiclelist);
+        ileinfo.AddVehicles(vehiclelist);
         
         MyWorld.GetInstance().ToggleIsland(ileinfo, false, false);
         ilemap.Add(cell, ileinfo);

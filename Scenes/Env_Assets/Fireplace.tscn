@@ -48,7 +48,7 @@ albedo_color = Color( 1, 0.301961, 0.027451, 1 )
 [sub_resource type="QuadMesh" id=3]
 material = SubResource( 7 )
 
-[node name="Fireplace" type="StaticBody"]
+[node name="Fireplace" type="StaticBody" groups=["Interactables"]]
 collision_layer = 16
 collision_mask = 0
 script = ExtResource( 3 )

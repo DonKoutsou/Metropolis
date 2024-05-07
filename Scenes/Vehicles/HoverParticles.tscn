@@ -19,13 +19,13 @@ spread = 0.0
 gravity = Vector3( 0, 0, 0 )
 angular_velocity = 436.06
 radial_accel = 24.55
-scale = 2.0
+scale = 10.0
 scale_curve = SubResource( 6 )
 
 [sub_resource type="QuadMesh" id=4]
 material = ExtResource( 1 )
 
 [node name="Particles" type="Particles"]
-amount = 400
+amount = 50
 process_material = SubResource( 3 )
 draw_pass_1 = SubResource( 4 )

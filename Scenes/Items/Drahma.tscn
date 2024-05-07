@@ -9,7 +9,7 @@
 height = 0.054156
 radius = 0.248144
 
-[node name="Item" type="RigidBody"]
+[node name="Item" type="RigidBody" groups=["Interactables"]]
 collision_layer = 16
 collision_mask = 36
 mode = 1

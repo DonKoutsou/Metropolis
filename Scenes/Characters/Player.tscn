@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/Stamina_Bar.cs" type="Script" id=2]
@@ -10,32 +10,23 @@
 [ext_resource path="res://Assets/Sounds/PunchSound.mp3" type="AudioStream" id=8]
 [ext_resource path="res://Assets/Sounds/HeavyBreathing.mp3" type="AudioStream" id=9]
 [ext_resource path="res://Assets/Sounds/WalkingSound.mp3" type="AudioStream" id=10]
-[ext_resource path="res://Assets/Sounds/Cave_Ambient.mp3" type="AudioStream" id=11]
 [ext_resource path="res://Scripts/CameraZoomPivot.cs" type="Script" id=12]
 [ext_resource path="res://Scenes/Characters/Character_Mesh.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scripts/CameraPanPivot.cs" type="Script" id=14]
 [ext_resource path="res://Scripts/CameraMovePivot.cs" type="Script" id=15]
 [ext_resource path="res://Scenes/Characters/MoveLocation.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Scenes/Env_Assets/SandParticles.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scripts/Time_UI.cs" type="Script" id=18]
 [ext_resource path="res://Scripts/TalkText.cs" type="Script" id=19]
 [ext_resource path="res://Scripts/PlayerCamera.cs" type="Script" id=20]
-[ext_resource path="res://Scripts/WorldParticleManager.cs" type="Script" id=21]
-[ext_resource path="res://Scenes/Env_Assets/Clouds.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Scenes/HUD/ActionMenu.tscn" type="PackedScene" id=23]
-[ext_resource path="res://Scripts/Clouds.cs" type="Script" id=24]
 [ext_resource path="res://Scenes/Items/Battery.tscn" type="PackedScene" id=25]
-[ext_resource path="res://Scenes/Env_Assets/Rain.tscn" type="PackedScene" id=26]
 [ext_resource path="res://Scenes/Items/Clock.tscn" type="PackedScene" id=27]
-[ext_resource path="res://Scenes/World/SunMoonPivot.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Scenes/HUD/CheatMenu.tscn" type="PackedScene" id=29]
 [ext_resource path="res://Scenes/Items/Compass.tscn" type="PackedScene" id=30]
 [ext_resource path="res://Scenes/Items/MapItem.tscn" type="PackedScene" id=31]
-[ext_resource path="res://Assets/PostProcess/KuwaharaShader.gdshader" type="Shader" id=32]
 [ext_resource path="res://Scenes/Items/SkeleArm_L.tscn" type="PackedScene" id=33]
 [ext_resource path="res://Scenes/Items/SkeleArm_R.tscn" type="PackedScene" id=34]
 [ext_resource path="res://Scripts/CameraAnimationPlayer.cs" type="Script" id=35]
-[ext_resource path="res://Assets/Clouds/Textures/smoke_01.png" type="Texture" id=36]
 
 [sub_resource type="Curve" id=106]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.5 ), 0.0, 0.0, 0, 0 ]
@@ -86,10 +77,6 @@ radius = 2.0
 [sub_resource type="QuadMesh" id=107]
 size = Vector2( 4, 4 )
 
-[sub_resource type="ShaderMaterial" id=108]
-render_priority = -1
-shader = ExtResource( 32 )
-
 [sub_resource type="SpatialMaterial" id=109]
 render_priority = 1
 flags_transparent = true
@@ -97,7 +84,6 @@ albedo_color = Color( 0, 0, 0, 1 )
 
 [sub_resource type="Animation" id=110]
 resource_name = "FadeIn"
-length = 6.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("MeshInstance2:material/0:albedo_color")
 tracks/0/interp = 1
@@ -105,7 +91,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 2, 5.9 ),
+"times": PoolRealArray( 0, 0.3, 0.9 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
@@ -117,10 +103,37 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 5.9, 6 ),
+"times": PoolRealArray( 0, 0.9, 1 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ true, true, false ]
+}
+
+[sub_resource type="Animation" id=117]
+resource_name = "FadeOut"
+tracks/0/type = "value"
+tracks/0/path = NodePath("MeshInstance2:material/0:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MeshInstance2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=111]
@@ -149,46 +162,6 @@ tracks/1/keys = {
 "update": 0,
 "values": [ true ]
 }
-
-[sub_resource type="SpatialMaterial" id=112]
-render_priority = 1
-flags_transparent = true
-params_billboard_mode = 3
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
-albedo_color = Color( 1, 0.921569, 0.796078, 0.556863 )
-albedo_texture = ExtResource( 36 )
-
-[sub_resource type="Curve" id=113]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=117]
-width = 512
-curve = SubResource( 113 )
-
-[sub_resource type="ParticlesMaterial" id=114]
-trail_size_modifier = SubResource( 117 )
-emission_shape = 2
-emission_box_extents = Vector3( 5000, 50, 5000 )
-direction = Vector3( 0, 0, -1 )
-spread = 1.41
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 18.05
-angular_velocity = 34.12
-angular_velocity_random = 1.0
-linear_accel = 100.0
-linear_accel_random = 0.35
-tangential_accel = 2.8
-tangential_accel_random = 1.0
-angle = 360.0
-scale = 1.5
-scale_random = 0.53
-hue_variation = 1.0
-hue_variation_random = 1.0
-
-[sub_resource type="QuadMesh" id=115]
-size = Vector2( 1000, 1000 )
 
 [node name="Player" type="KinematicBody" groups=["player"]]
 pause_mode = 1
@@ -335,7 +308,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00875211, -0.0306139, -0.02
 script = ExtResource( 15 )
 
 [node name="CameraPanPivot" type="Position3D" parent="CameraMovePivot"]
-transform = Transform( 0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 15, 0 )
+transform = Transform( 0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 20, 0 )
 script = ExtResource( 14 )
 
 [node name="SpringArm" type="SpringArm" parent="CameraMovePivot/CameraPanPivot"]
@@ -360,71 +333,29 @@ cull_mask = 769
 current = true
 fov = 45.0
 size = 5.0
+near = 1.0
 far = 40000.0
 script = ExtResource( 20 )
-
-[node name="EnvSound" type="AudioStreamPlayer3D" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/PlayerCamera"]
-transform = Transform( 1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0 )
-stream = ExtResource( 11 )
-max_db = -13.118
-autoplay = true
-max_distance = 16.06
-area_mask = 0
 
 [node name="CompasUI" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/PlayerCamera" instance=ExtResource( 6 )]
 transform = Transform( 0.0880203, -0.0474596, 1.32888e-08, 0.0102406, 0.0189926, -0.0976442, 0.0463415, 0.0859472, 0.0215775, 1.24807, 0.617609, -2.18268 )
 
-[node name="MeshInstance" type="MeshInstance" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/PlayerCamera"]
-transform = Transform( 1, -1.05879e-22, 0, 0, 1, 0, 4.23516e-22, 0, 1, 0, -0.0715232, -0.623333 )
-mesh = SubResource( 107 )
-material/0 = SubResource( 108 )
-
 [node name="MeshInstance2" type="MeshInstance" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/PlayerCamera"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0715218, -0.623331 )
+transform = Transform( 1, -5.29396e-22, 0, -1.05879e-22, 1, 0, 2.11758e-21, 0, 1, 0, -0.0144858, -1.05511 )
 mesh = SubResource( 107 )
 material/0 = SubResource( 109 )
 
 [node name="CameraAnimationPlayer" type="AnimationPlayer" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/PlayerCamera"]
 anims/FadeIn = SubResource( 110 )
+anims/FadeOut = SubResource( 117 )
 anims/RESET = SubResource( 111 )
 script = ExtResource( 35 )
 
-[node name="Spatial" parent="." instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2200, 0 )
-script = ExtResource( 24 )
-
-[node name="SunMoonPivot" parent="." instance=ExtResource( 28 )]
-
 [node name="MoveLoc" parent="." instance=ExtResource( 16 )]
-MoveLayer = 260
-VehicleMoveLayer = 260
 
-[node name="WorldParticleManager" type="Spatial" parent="."]
-script = ExtResource( 21 )
-
-[node name="SandParticles" parent="WorldParticleManager" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.755, 243.768 )
-amount = 8000
-visibility_aabb = AABB( -138.138, -205.176, -393.492, 276.276, 410.353, 786.984 )
-local_coords = false
-draw_order = 2
-
-[node name="Particles" type="Particles" parent="WorldParticleManager"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 118.329, 191 )
-material_override = SubResource( 112 )
-cast_shadow = 0
-generate_lightmap = false
-amount = 50
-lifetime = 15.0
-speed_scale = 5.0
-visibility_aabb = AABB( -3825.97, 0, -4096, 7651.96, 3042.07, 8192 )
-local_coords = false
-draw_order = 1
-process_material = SubResource( 114 )
-draw_pass_1 = SubResource( 115 )
-
-[node name="Rain" parent="WorldParticleManager" instance=ExtResource( 26 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1000, 0 )
+[node name="WorldParticleRemoteTransform" type="RemoteTransform" parent="."]
+update_rotation = false
+update_scale = false
 
 [connection signal="body_entered" from="KillFieldDetector" to="." method="OnKillFieldDetectorBodyEntered"]
 [connection signal="timeout" from="PlayerUI/HP_Bar/VisibilityTimerHP" to="PlayerUI/HP_Bar" method="TurnOff"]

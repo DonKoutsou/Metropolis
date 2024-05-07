@@ -1,0 +1,11 @@
+[gd_resource type="TextureArray" format=2]
+
+[resource]
+data = {
+"depth": 0,
+"flags": 7,
+"format": 37,
+"height": 0,
+"layers": [  ],
+"width": 0
+}

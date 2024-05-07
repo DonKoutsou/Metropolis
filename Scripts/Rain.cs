@@ -26,16 +26,20 @@ public class Rain : Spatial
 		if (d > 0)
             return;
         d = 0.5f;
-        Vector3 rot = Rotation;
+        Vector3 rot = RainPart.Rotation;
         float rotf = 45 * (DayNight.GetWindStr() - 50) / 100;
-        rot.x = Mathf.Deg2Rad( - rotf );
-        Rotation = rot;
+        rot.x = Mathf.Deg2Rad( rotf );
+        RainPart.Rotation = rot;
         float multi = DayNight.GetRainStr() / 100;
-        int particleammount = (int)(MaxRainParticleAmmount * multi);
-        if (particleammount < 1)
-            RainPart.Amount = 1;
+        if (multi < 0.1)
+            RainPart.Emitting = false;
         else
-            RainPart.Amount = particleammount;
+            RainPart.Emitting = true;
+        //int particleammount = (int)(MaxRainParticleAmmount * multi);
+        //if (particleammount < 1)
+            //RainPart.Amount = 1;
+        //else
+            //RainPart.Amount = particleammount;
 
         RainSound.PitchScale = PitchScaleCurve.Interpolate(multi);
         RainSound.UnitDb = SoundScaleCurve.Interpolate(multi);

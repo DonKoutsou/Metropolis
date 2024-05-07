@@ -64,4 +64,9 @@ public class FireplaceLight : StaticBody
             //light.Translation = new Vector3( (float)scaled1, 1.3f, (float)scaled2);
         }
     }
+    public void HighLightObject(bool toggle)
+    {
+        ((ShaderMaterial)GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", toggle);
+    }
+
 }

@@ -174,7 +174,7 @@ transform = Transform( 1, -0.000665859, -0.000639929, 0.000666553, 0.999999, 0.0
 transform = Transform( 1, -5.52518e-11, 5.82077e-11, 7.38964e-11, 1, 0, 0, 0, 1, 0, 0, 0 )
 script = ExtResource( 3 )
 
-[node name="VehicleBody" type="RigidBody" parent="."]
+[node name="VehicleBody" type="RigidBody" parent="." groups=["Interactables"]]
 transform = Transform( 1, -1.71667e-10, 1.74623e-10, 2.48519e-10, 1, 0, 0, 0, 1, 0, 0, 0 )
 collision_layer = 16
 collision_mask = 292
@@ -308,7 +308,7 @@ spot_range = 47.3573
 spot_angle = 44.4241
 
 [node name="RayFL" type="RayCast" parent="."]
-transform = Transform( 1, -2.25725e-08, 1.89175e-08, 2.2679e-08, 1, -1.44355e-08, -1.89175e-08, 1.44355e-08, 1, 3, 0.749334, 4.99935 )
+transform = Transform( 1, -2.28053e-08, 1.89175e-08, 2.29118e-08, 1, -1.44355e-08, -1.89175e-08, 1.44355e-08, 1, 3, 0.749334, 4.99935 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292
@@ -329,7 +329,7 @@ cast_to = Vector3( 0, 0, 20 )
 collision_mask = 292
 
 [node name="RayFR" type="RayCast" parent="."]
-transform = Transform( 1, 2.80271e-07, 5.75674e-08, -2.80193e-07, 1, -8.81264e-08, -5.75092e-08, 8.82428e-08, 1, -3, 0.750666, 5.00063 )
+transform = Transform( 1, 2.80155e-07, 5.75674e-08, -2.80077e-07, 1, -8.81264e-08, -5.75092e-08, 8.82428e-08, 1, -3, 0.750666, 5.00063 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292
@@ -344,7 +344,7 @@ mesh = SubResource( 33 )
 material/0 = ExtResource( 1 )
 
 [node name="RayBR" type="RayCast" parent="."]
-transform = Transform( 1, 2.80268e-07, 5.82077e-08, -2.80192e-07, 1, -8.31205e-08, -5.81495e-08, 8.3237e-08, 1, -3, 0.750666, -4.99936 )
+transform = Transform( 1, 2.80152e-07, 5.82077e-08, -2.80076e-07, 1, -8.31205e-08, -5.81495e-08, 8.3237e-08, 1, -3, 0.750666, -4.99936 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292
@@ -359,7 +359,7 @@ mesh = SubResource( 33 )
 material/0 = ExtResource( 1 )
 
 [node name="RayBL" type="RayCast" parent="."]
-transform = Transform( 1, 2.79514e-07, 5.67525e-08, -2.79437e-07, 1, -8.68458e-08, -5.66943e-08, 8.69622e-08, 1, 3, 0.749335, -5.00064 )
+transform = Transform( 1, 2.79397e-07, 5.67525e-08, -2.79321e-07, 1, -8.68458e-08, -5.66943e-08, 8.69622e-08, 1, 3, 0.749335, -5.00064 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292

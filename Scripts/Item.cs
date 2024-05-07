@@ -45,6 +45,11 @@ public class Item : RigidBody
 	{
 		return ItemWeight;
 	}
+	public void HighLightObject(bool toggle)
+    {
+        ((ShaderMaterial)GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", toggle);
+    }
+
 }
 
 public enum ItemName

@@ -87,11 +87,10 @@ public class Player : Character
 
 		moveloc = GetNode<MoveLocation>("MoveLoc");
 
-		SunMoonPivot sunmoonpiv = GetNode<SunMoonPivot>("SunMoonPivot");
+		
 		MainWorld world = (MainWorld)GetParent().GetParent();
 		MyWorld w = (MyWorld)GetParent();
-		DayNight env = w.GetNode<WorldMap>("WorldMap").GetNode<Spatial>("Sky").GetNode<DayNight>("DayNightController");
-		env.SunMoonMeshPivot = sunmoonpiv;
+		
 
 
 		//Input.MouseMode = Input.MouseModeEnum.Visible;
@@ -127,6 +126,7 @@ public class Player : Character
 				Vector3 norm = (Vector3)rayar["normal"];
 
 				moveloc.Scale = new Vector3(1,1,1);
+				moveloc.Rotation = new Vector3(0,0,0);
 				Basis MoveLocBasis = moveloc.GlobalTransform.basis;
 
 				var result = new Basis(norm.Cross(MoveLocBasis.z), norm, MoveLocBasis.x.Cross(norm));

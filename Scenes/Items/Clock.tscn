@@ -9,7 +9,7 @@
 height = 0.054156
 radius = 0.248144
 
-[node name="Battery" type="RigidBody"]
+[node name="Battery" type="RigidBody" groups=["Interactables"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00434375, 0.0105272, -0.0158259 )
 collision_layer = 16
 collision_mask = 36

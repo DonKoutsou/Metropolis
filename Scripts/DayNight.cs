@@ -25,30 +25,10 @@ public class DayNight : WorldEnvironment
     [Export]
     Gradient MoonColorGradient = null;
 
-    /*[Export]
-    Curve sunRcolorcurve = null;
-
-    [Export]
-    Curve sunGcolorcurve = null;
-
-    [Export]
-    Curve sunBcolorcurve = null;
-
-    [Export]
-    Curve moonRcolorcurve = null;
-
-    [Export]
-    Curve moonGcolorcurve = null;
-
-    [Export]
-    Curve moonBcolorcurve = null;*/
-
     [Export]
     int startinghour = 10;
 
     static int timeprogmultiplier = 1;
-
-
     //WindDirPer10Days
     [Export]
     Curve WindDirCurve = null;
@@ -241,7 +221,6 @@ public class DayNight : WorldEnvironment
            //bright = Mathf.Lerp(MoonBrightness, SunBrightness, multi);
 
             //fogsun = Mathf.Lerp(0.05f, 0.3f, multi);
-
             mix = MoonColor.LinearInterpolate(SunColor , multi);
 
             SunLightEnergy = Mathf.Lerp(0.0f, SunBrightness, multi);
@@ -267,7 +246,7 @@ public class DayNight : WorldEnvironment
             //bright = Mathf.Lerp(SunBrightness, MoonBrightness, multi);
 
             //fogsun = Mathf.Lerp(0.3f, 0.05f, multi);
-
+            
             mix = SunColor.LinearInterpolate(MoonColor , multi);
             
             SunLightEnergy = Mathf.Lerp(SunBrightness, 0.0f, multi);
@@ -290,8 +269,13 @@ public class DayNight : WorldEnvironment
         AmbientLightEnergy = Softlight;
 
         //Environment.FogSunAmount = fogsun;
-
-        FogSunColor = mix;
+        Color fogsun;
+        if (SunLightEnergy > MoonLightEnergy)
+            fogsun = SunColor;
+        else
+            fogsun = MoonColor;
+       
+        FogSunColor = fogsun;
     }
     private void UpdateSunMoonPlacament()
     {
@@ -304,12 +288,12 @@ public class DayNight : WorldEnvironment
 
         if (SunMoonMeshPivot != null)
         {
-        SunMoonMeshPivot.RotationDegrees = new Vector3(SunRot, 0, 0);
-        SunMoonMeshPivot.GlobalTranslation = new Vector3(SunMoonMeshPivot.GlobalTransform.origin.x, 0, SunMoonMeshPivot.GlobalTransform.origin.z);
+            SunMoonMeshPivot.RotationDegrees = new Vector3(SunRot, -90, 0);
+            SunMoonMeshPivot.GlobalTranslation = new Vector3(SunMoonMeshPivot.GlobalTransform.origin.x, 0, SunMoonMeshPivot.GlobalTransform.origin.z);
         }
-        sun.RotationDegrees = new Vector3(SunRot, 0, 0);
+        sun.RotationDegrees = new Vector3(SunRot, -90, 0);
 
-        moon.RotationDegrees = new Vector3(moonrot, 0, 0);
+        moon.RotationDegrees = new Vector3(moonrot, -90, 0);
     }
     private void UpdateTime()
     {
@@ -424,6 +408,7 @@ public class DayNight : WorldEnvironment
     }
     public static void ProgressTime(int days = 0, int hours = 0, int mins = 0)
     {
+        CameraAnimationPlayer.GetInstance().FadeInOut(1);
         currentmins += mins;
         while (currentmins > 60)
         {

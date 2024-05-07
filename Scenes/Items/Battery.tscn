@@ -8,7 +8,7 @@
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.260995, 0.387509, 0.632049 )
 
-[node name="Battery" type="RigidBody"]
+[node name="Battery" type="RigidBody" groups=["Interactables"]]
 collision_layer = 16
 collision_mask = 36
 mode = 1

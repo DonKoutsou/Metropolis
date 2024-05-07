@@ -3,12 +3,16 @@ using System;
 
 public class Settings : Control
 {
+	[Export]
 	public int ViewDistance = 2;
 
+
+	[Export]
 	public int TimeProgression = 1;
 
-	public int FOVOverride = 45;
-
+	[Export]
+	public int FOVOverride = 30;
+	
 	public int Seed;
 
 	static Settings set;
@@ -62,7 +66,6 @@ public class Settings : Control
 		if (FOVOverride == 90)
 			return;
 		FOVOverride += 1;
-		GetNode<Panel>("Panel").GetNode<Panel>("FOVSetting").GetNode<RichTextLabel>("FOVNumber").BbcodeText = "[center]" + FOVOverride.ToString();
 		UpdateFOV();
 	}
 	private void DecreaseFOV()
@@ -70,7 +73,6 @@ public class Settings : Control
 		if (FOVOverride == 25)
 			return;
 		FOVOverride -= 1;
-		GetNode<Panel>("Panel").GetNode<Panel>("FOVSetting").GetNode<RichTextLabel>("FOVNumber").BbcodeText = "[center]" + FOVOverride.ToString();
 		UpdateFOV();
 	}
 	private void IncreaseViewDistance()

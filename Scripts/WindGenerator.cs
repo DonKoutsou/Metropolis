@@ -59,7 +59,7 @@ public class WindGenerator : StaticBody
         //rotorpivot.GlobalRotation = new Vector3(0.0f, rot, 0.0f);
         float animspeed = windstr * 0.03f;
         float energy = EnergyPerWindStreangth * (windstr/100);
-        int scale = (int)Scale.x;
+        int scale = Math.Max((int)Scale.x, 1);
  
         anim.PlaybackSpeed = Mathf.Max(animspeed / scale, 0);
         anim2.PlaybackSpeed = Mathf.Max(animspeed / scale, 0);
@@ -84,6 +84,10 @@ public class WindGenerator : StaticBody
             anim2.Stop();
             SetProcess(false);
         }
+    }
+    public void HighLightObject(bool toggle)
+    {
+        ((ShaderMaterial)GetNode<MeshInstance>("MeshInstance2").GetActiveMaterial(0).NextPass).SetShaderParam("enable", toggle);
     }
     public void SetData(WindGeneratorInfo info)
 	{

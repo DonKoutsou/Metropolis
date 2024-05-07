@@ -26,6 +26,10 @@ public class ActionMenu : Control
 	{
 		return SelectedObj != null;
 	}
+	public static bool IsSelected(Spatial obj)
+	{
+		return SelectedObj == obj;
+	}
 	private void On_PickUp_Button_Down()
 	{
 		if (SelectedObj is Item)
@@ -123,7 +127,7 @@ public class ActionMenu : Control
 				rechargeamm += availableenergy;
 			}
 			generator.ConsumeEnergy(rechargeamm);
-			int time = (int)Math.Round(rechargeamm / 10);
+			int time = (int)Math.Round(rechargeamm / 6);
 			int days, hours, mins;
 			DayNight.MinsToTime(time, out days,out hours, out mins);
 			DayNight.ProgressTime(days, hours, mins);
@@ -178,37 +182,27 @@ public class ActionMenu : Control
             return;
 		DeselectCurrent();
 		SelectedObj = obj;
+		SelectedObj.Call("HighLightObject", true);
 		if (SelectedObj is Item)
 		{
 			PickButton.Text = "Πάρε";
-			((ShaderMaterial)SelectedObj.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
 		}
 		else if (SelectedObj is Character)
 		{
 			PickButton.Text = "Kουβέντα";
+		}
 
-			((ShaderMaterial)SelectedObj.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>("Mesh001").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
-			((ShaderMaterial)SelectedObj.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>("Mesh003").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
-		}
-		else if (SelectedObj is FireplaceLight)
-		{
-			((ShaderMaterial)SelectedObj.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
-		}
 		else if (SelectedObj is Vehicle)
 		{
 			PickButton.Text = "Επιβιβάσου";
-			//IntButton.Text = "Έναρξη";
-			((ShaderMaterial)SelectedObj.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
 		}
 		else if (SelectedObj is Furniture)
 		{
 			PickButton.Text = "Ψάξε";
-			((ShaderMaterial)SelectedObj.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
 		}
 		else if (SelectedObj is WindGenerator)
 		{
 			PickButton.Text = "Φόρτιση";
-			((ShaderMaterial)SelectedObj.GetNode<MeshInstance>("MeshInstance2").GetActiveMaterial(0).NextPass).SetShaderParam("enable", true);
 		}
 
 		Show();
@@ -216,31 +210,9 @@ public class ActionMenu : Control
 	}
 	void DeselectCurrent()
 	{
-		if (SelectedObj is Item)
-		{
-			((ShaderMaterial)SelectedObj.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", false);
-		}
-		else if (SelectedObj is Character)
-		{
-			((ShaderMaterial)SelectedObj.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>("Mesh001").GetActiveMaterial(0).NextPass).SetShaderParam("enable", false);
-			((ShaderMaterial)SelectedObj.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>("Mesh003").GetActiveMaterial(0).NextPass).SetShaderParam("enable", false);
-		}
-		else if (SelectedObj is FireplaceLight)
-		{
-			((ShaderMaterial)SelectedObj.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", false);
-		}
-		else if (SelectedObj is Vehicle)
-		{
-			((ShaderMaterial)SelectedObj.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", false);
-		}
-		else if (SelectedObj is Furniture)
-		{
-			((ShaderMaterial)SelectedObj.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", false);
-		}
-		else if (SelectedObj is WindGenerator)
-		{
-			((ShaderMaterial)SelectedObj.GetNode<MeshInstance>("MeshInstance2").GetActiveMaterial(0).NextPass).SetShaderParam("enable", false);
-		}
+		if (SelectedObj != null)
+			SelectedObj.Call("HighLightObject", false);
+
 		SelectedObj = null;
 		
 	}
@@ -339,7 +311,26 @@ public class ActionMenu : Control
     {
         selecting = false;
     }
-
+	public override void _Input(InputEvent @event)
+	{
+		if (@event.IsActionPressed("ActionCheck"))
+		{
+			var interactables = GetTree().GetNodesInGroup("Interactables");
+			foreach (Node inter in interactables)
+			{
+				inter.Call("HighLightObject", true);
+			}
+		}
+		if (@event.IsActionReleased("ActionCheck"))
+		{
+			var interactables = GetTree().GetNodesInGroup("Interactables");
+			foreach (Node inter in interactables)
+			{
+				if (inter != SelectedObj)
+					inter.Call("HighLightObject", false);
+			}
+		}
+	}
 }
 
 

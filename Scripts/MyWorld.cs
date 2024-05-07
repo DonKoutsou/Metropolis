@@ -82,14 +82,15 @@ public class MyWorld : Spatial
 		GlobalItemList.TryGetValue((int)name, out path);
 		return path;
 	}
-	public void SpawnPlayer(Vector3 pos)
+	public Player SpawnPlayer(Vector3 pos)
 	{
 		Player pl = (Player)PlayerScene.Instance();
 		AddChild(pl);
 		pl.Teleport(pos);
 		EmitSignal("PlayerSpawnedEventHandler", pl);
 		VehicleHud.GetInstance().ConnectToPlayer(pl);
-		CameraAnimationPlayer.GetInstance().FadeIn();
+		CameraAnimationPlayer.GetInstance().FadeIn(6);
+		return pl;
 	}
 	public void OnPlayerKilled()	
 	{

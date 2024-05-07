@@ -382,7 +382,7 @@ public class Vehicle : RigidBody
 
         ToggleWings(false);
         EnableWindOnWings(false);
-        SetProcessInput(false);
+        //SetProcessInput(false);
     }
     public void Jump()
     {
@@ -392,9 +392,32 @@ public class Vehicle : RigidBody
                 AddForce(Vector3.Up * (JumpForce), Rays[i].GlobalTransform.origin - GlobalTransform.origin);
         }
     }
+    public void ReparentVehicle(Island ile)
+    {
+        Vector3 orig = GlobalTranslation;
+        Vector3 origrot = GlobalRotation;
+
+        Player pl = (Player)passengers[0];
+        Vector3 prevrot = pl.GlobalRotation;
+
+        Spatial vehpar = (Spatial)GetParent();
+        Spatial par = (Spatial)vehpar.GetParent();
+        par.RemoveChild(vehpar);
+        ile.AddChild(vehpar);
+        
+        GlobalTranslation = orig;
+        GlobalRotation = origrot;
+
+        RemoteTransform CharTrasn = GetNode<RemoteTransform>("CharacterRemoteTransform");
+        RemoteTransform CharTrasn2 = GetNode<RemoteTransform>("CharacterRemoteTransform2");
+        CharTrasn.RemotePath = pl.GetPath();
+        CharTrasn2.RemotePath = pl.GetNode<Spatial>("Pivot").GetPath();
+
+        pl.GlobalRotation = prevrot;
+    }
     public void BoardVehicle(Character cha)
     {
-        SetProcessInput(true);
+        //SetProcessInput(true);
         bool isthing = GetParent().GetParent() is MyWorld;
         if (!isthing)
         {
@@ -429,7 +452,7 @@ public class Vehicle : RigidBody
     {
         if (passengers.Count == 0)
             return;
-        SetProcessInput(false);
+        //SetProcessInput(false);
         
         Character chartothrowout = passengers[0];
         passengers.Clear();
@@ -453,7 +476,7 @@ public class Vehicle : RigidBody
      public void UnBoardVehicle(Character cha)
     {
         passengers.Clear();
-        SetProcessInput(false);
+        //SetProcessInput(false);
         Vector3 prevrot = cha.GlobalRotation;
         RemoteTransform CharTrasn = GetNode<RemoteTransform>("CharacterRemoteTransform");
         CharTrasn.RemotePath = this.GetPath();
@@ -469,5 +492,49 @@ public class Vehicle : RigidBody
         ToggleMachine(false);
         ToggleLights(false);
     }
-    
+    public void HighLightObject(bool toggle)
+    {
+        ((ShaderMaterial)GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", toggle);
+    }
+    public void InputData(VehicleInfo data)
+	{
+        if (data.removed)
+        {
+            GetParent().QueueFree();
+            return;
+        }
+		GlobalTranslation = data.loc;
+        GlobalRotation = data.rot;
+        GetParent().GetNode<VehicleDamageManager>("VehicleDamageManager").InputData(data.DamageInfo);
+	}
+}
+public class VehicleInfo
+{
+    public string VehName;
+    public Vector3 loc;
+    public Vector3 rot;
+    public VehicleDamageInfo DamageInfo;
+    public bool removed = false;
+    public string scenedata;
+    public void UpdateInfo(Vehicle veh)
+    {
+        loc = veh.GlobalTranslation;
+        rot = veh.GlobalRotation;
+        VehicleDamageManager Damageman = veh.GetParent().GetNode<VehicleDamageManager>("VehicleDamageManager");
+        DamageInfo = new VehicleDamageInfo();
+        DamageInfo.UpdateInfo(veh);
+
+    }
+    public void SetInfo(Vehicle veh)
+    {
+        VehName = veh.GetParent().Name;
+        loc = veh.GlobalTranslation;
+        rot = veh.GlobalRotation;
+        scenedata = veh.GetParent().Filename;
+        VehicleDamageManager Damageman = veh.GetParent().GetNode<VehicleDamageManager>("VehicleDamageManager");
+        DamageInfo = new VehicleDamageInfo();
+        List<int> destw;
+        Damageman.GetDestroyedWings(out destw);
+        DamageInfo.SetInfo(veh);
+    }
 }

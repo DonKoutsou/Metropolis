@@ -34,6 +34,7 @@ public class CameraZoomPivot : Position3D
 		{
 			if (panp.Translation.y < MaxDist)
 			{
+				PlayerCamera.GetInstance().Fov *= 1.02f;
 				arm.SpringLength = arm.SpringLength * 1.1f;
 				panp.Translation = new Vector3(prevpos.x, prevpos.y * 1.1f, prevpos.z);
 			}
@@ -42,6 +43,7 @@ public class CameraZoomPivot : Position3D
 		{
 			if (panp.Translation.y > 10)
 			{
+				PlayerCamera.GetInstance().Fov *= 0.98f;
 				arm.SpringLength = arm.SpringLength * 0.90f;
 				panp.Translation = new Vector3(prevpos.x, prevpos.y * 0.90f, prevpos.z);
 			}

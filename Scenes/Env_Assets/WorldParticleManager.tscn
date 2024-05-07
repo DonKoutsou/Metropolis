@@ -1,0 +1,124 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://Scenes/Env_Assets/SandParticles.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Env_Assets/Clouds.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Env_Assets/Rain.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scripts/Clouds.cs" type="Script" id=4]
+[ext_resource path="res://Scripts/WorldParticleManager.cs" type="Script" id=5]
+[ext_resource path="res://Scenes/World/SunMoonPivot.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Clouds/Textures/smoke_01.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Clouds/Textures/smoke_04.png" type="Texture" id=8]
+
+[sub_resource type="Curve" id=4]
+max_value = 3.0
+_data = [ Vector2( 0, 0.9 ), 0.0, 0.0, 0, 0, Vector2( 1, 2.4 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=5]
+min_value = -50.0
+max_value = 69.65
+_data = [ Vector2( 0, -50 ), 0.0, 0.0, 0, 0, Vector2( 1, 69.65 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="SpatialMaterial" id=2]
+flags_transparent = true
+flags_unshaded = true
+params_cull_mode = 2
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_color = Color( 1, 0.831373, 0.529412, 1 )
+albedo_texture = ExtResource( 8 )
+proximity_fade_enable = true
+proximity_fade_distance = 4096.0
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 2
+emission_box_extents = Vector3( 200, 200, 200 )
+direction = Vector3( 0, 0, -1 )
+spread = 4.48
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 174.26
+angular_velocity = 553.85
+linear_accel = 98.3
+radial_accel = 100.0
+scale = 0.5
+
+[sub_resource type="QuadMesh" id=3]
+
+[sub_resource type="SpatialMaterial" id=112]
+flags_transparent = true
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_color = Color( 1, 0.921569, 0.796078, 0.294118 )
+albedo_texture = ExtResource( 7 )
+
+[sub_resource type="Curve" id=113]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=117]
+width = 512
+curve = SubResource( 113 )
+
+[sub_resource type="ParticlesMaterial" id=114]
+trail_size_modifier = SubResource( 117 )
+emission_shape = 2
+emission_box_extents = Vector3( 5000, 10, 5000 )
+direction = Vector3( 0, 0, -1 )
+spread = 1.41
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 18.05
+angular_velocity = 34.12
+angular_velocity_random = 1.0
+linear_accel = 100.0
+linear_accel_random = 0.35
+tangential_accel = 2.8
+tangential_accel_random = 1.0
+angle = 360.0
+scale = 1.5
+scale_random = 0.53
+hue_variation = 1.0
+hue_variation_random = 1.0
+
+[sub_resource type="QuadMesh" id=115]
+size = Vector2( 1000, 1000 )
+
+[node name="WorldParticleManager" type="Spatial"]
+script = ExtResource( 5 )
+
+[node name="Spatial" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2200, 0 )
+script = ExtResource( 4 )
+
+[node name="SunMoonPivot" parent="." instance=ExtResource( 6 )]
+
+[node name="WindAllignedParticles" type="Spatial" parent="."]
+
+[node name="Rain" parent="WindAllignedParticles" instance=ExtResource( 3 )]
+PitchScaleCurve = SubResource( 4 )
+SoundScaleCurve = SubResource( 5 )
+
+[node name="SandParticles" parent="WindAllignedParticles" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.755, 243.768 )
+material_override = SubResource( 2 )
+amount = 8000
+visibility_aabb = AABB( -138.138, -205.176, -393.492, 276.276, 410.353, 786.984 )
+local_coords = false
+draw_order = 2
+process_material = SubResource( 1 )
+draw_pass_1 = SubResource( 3 )
+
+[node name="Particles" type="Particles" parent="WindAllignedParticles"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 118.329, 191 )
+material_override = SubResource( 112 )
+cast_shadow = 0
+generate_lightmap = false
+amount = 50
+lifetime = 15.0
+speed_scale = 5.0
+visibility_aabb = AABB( -3825.97, 0, -4096, 7651.96, 3042.07, 8192 )
+local_coords = false
+draw_order = 1
+process_material = SubResource( 114 )
+draw_pass_1 = SubResource( 115 )

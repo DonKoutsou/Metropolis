@@ -7,8 +7,8 @@ max_value = 2.0
 _data = [ Vector2( 0, 2 ), 0.0, 0.0, 0, 0, Vector2( 0.38538, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.598246, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 2 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=4]
-offsets = PoolRealArray( 0, 0.411326, 0.4769, 0.651267, 0.755589, 0.883756, 1 )
-colors = PoolColorArray( 0.887207, 0.662202, 0.458944, 1, 0.887207, 0.662202, 0.458944, 1, 0.892578, 0.785462, 0.626348, 1, 1, 1, 1, 1, 0.892578, 0.785462, 0.626348, 1, 0.887207, 0.662202, 0.458944, 1, 0.887207, 0.662202, 0.458944, 1 )
+offsets = PoolRealArray( 0, 0.250608, 0.274939, 0.352798, 0.372263, 0.653285, 0.755589, 0.883756, 1 )
+colors = PoolColorArray( 0.887207, 0.662202, 0.458944, 1, 0.888268, 0.654101, 0.450267, 1, 0.917309, 0.554191, 0.328462, 1, 0.927734, 0.518326, 0.284737, 1, 1, 0.950159, 0.768012, 1, 1, 0.943967, 0.739193, 1, 0.892578, 0.785462, 0.626348, 1, 0.887207, 0.662202, 0.458944, 1, 0.887207, 0.662202, 0.458944, 1 )
 
 [sub_resource type="Gradient" id=5]
 offsets = PoolRealArray( 0, 0.563338, 0.997019 )
@@ -32,7 +32,7 @@ _data = [ Vector2( 0, 100 ), 0.0, 0.0, 0, 0, Vector2( 0.01603, 26.6871 ), 0.0, 0
 AutoExposureCurve = SubResource( 3 )
 SunColorGradient = SubResource( 4 )
 MoonColorGradient = SubResource( 5 )
-startinghour = 8
+startinghour = 9
 WindDirCurve = SubResource( 1 )
 WindStreangthCurve = SubResource( 2 )
 RainStreangthCurve = SubResource( 6 )

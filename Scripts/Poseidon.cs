@@ -81,7 +81,7 @@ public class Poseidon : Spatial
         float str = DayNight.GetRainStr();
 
         ShaderMaterial mat = (ShaderMaterial)SeaChild.GetActiveMaterial(0);
-        mat.SetShaderParam("RainInt", Mathf.Lerp(0.0f, 0.5f, str / 100));
+        mat.SetShaderParam("RainInt", Mathf.Lerp(0.0f, 1.0f, str / 100));
 
         d -= delta;
 		if (d <= 0)

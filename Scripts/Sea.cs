@@ -4,7 +4,7 @@ using System;
 
 public class Sea : StaticBody
 {
-	ShaderMaterial material;
+	//ShaderMaterial material;
 	public override void _Ready()
 	{
 		GetNode<MeshInstance>("Sea").QueueFree();

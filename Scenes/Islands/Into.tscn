@@ -1,26 +1,17 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/Intro.cs" type="Script" id=1]
-[ext_resource path="res://Scenes/Env_Assets/Rain.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Env_Assets/SandParticles.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/PostProcess/KuwaharaShader.gdshader" type="Shader" id=4]
+[ext_resource path="res://Scenes/Env_Assets/WorldParticleManager.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/UI/ButtonTheme.tres" type="Theme" id=5]
 [ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=6]
-[ext_resource path="res://Assets/Clouds/Textures/smoke_01.png" type="Texture" id=8]
-[ext_resource path="res://Scripts/WorldParticleManager.cs" type="Script" id=9]
 
 [sub_resource type="QuadMesh" id=3]
+size = Vector2( 10, 10 )
 
 [sub_resource type="SpatialMaterial" id=4]
 render_priority = 1
 flags_transparent = true
 albedo_color = Color( 0, 0, 0, 1 )
-
-[sub_resource type="QuadMesh" id=5]
-
-[sub_resource type="ShaderMaterial" id=6]
-render_priority = -1
-shader = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=9]
 size = 13
@@ -32,45 +23,6 @@ default_font = SubResource( 9 )
 
 [sub_resource type="DynamicFont" id=11]
 font_data = ExtResource( 6 )
-
-[sub_resource type="SpatialMaterial" id=118]
-render_priority = 1
-flags_transparent = true
-params_billboard_mode = 3
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
-albedo_color = Color( 1, 0.921569, 0.796078, 0.266667 )
-albedo_texture = ExtResource( 8 )
-
-[sub_resource type="Curve" id=119]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=117]
-width = 512
-curve = SubResource( 119 )
-
-[sub_resource type="ParticlesMaterial" id=120]
-trail_size_modifier = SubResource( 117 )
-emission_shape = 2
-emission_box_extents = Vector3( 5000, 50, 5000 )
-direction = Vector3( 0, 0, -1 )
-spread = 1.41
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 18.05
-angular_velocity = 34.12
-angular_velocity_random = 1.0
-linear_accel = 100.0
-linear_accel_random = 0.35
-tangential_accel = 2.8
-tangential_accel_random = 1.0
-angle = 360.0
-scale_random = 0.53
-hue_variation = 1.0
-hue_variation_random = 1.0
-
-[sub_resource type="QuadMesh" id=121]
-size = Vector2( 1000, 1000 )
 
 [sub_resource type="Animation" id=1]
 resource_name = "Intro"
@@ -226,13 +178,16 @@ tracks/5/keys = {
 [node name="Intro" type="Spatial"]
 script = ExtResource( 1 )
 
+[node name="WorldParticleManager" parent="." instance=ExtResource( 2 )]
+
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 55.5804, -38.3217, 2540.33 )
 fov = 75.0
-far = 20000.0
+near = 1.0
+far = 40000.0
 
 [node name="MeshInstance" type="MeshInstance" parent="Camera"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.357 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.0271 )
 mesh = SubResource( 3 )
 material/0 = SubResource( 4 )
 
@@ -247,11 +202,6 @@ margin_right = -13.0
 margin_bottom = -10.0
 theme = ExtResource( 5 )
 text = "Skip"
-
-[node name="MeshInstance2" type="MeshInstance" parent="Camera"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0715218, -0.623331 )
-mesh = SubResource( 5 )
-material/0 = SubResource( 6 )
 
 [node name="LoadingScreen" type="CanvasLayer" parent="Camera"]
 layer = -1
@@ -271,33 +221,6 @@ custom_fonts/font = SubResource( 11 )
 text = "Μια Χούφτα Ψυχές Παρουσιάζει"
 align = 1
 valign = 1
-
-[node name="WorldParticleManager" type="Spatial" parent="Camera"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -55.5804, 38.3217, -2540.33 )
-script = ExtResource( 9 )
-
-[node name="SandParticles" parent="Camera/WorldParticleManager" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.755, 243.768 )
-visibility_aabb = AABB( -138.138, -205.176, -393.492, 276.276, 410.353, 786.984 )
-local_coords = false
-draw_order = 2
-
-[node name="Particles" type="Particles" parent="Camera/WorldParticleManager"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 118.329, 191 )
-material_override = SubResource( 118 )
-cast_shadow = 0
-generate_lightmap = false
-amount = 50
-lifetime = 15.0
-speed_scale = 5.0
-visibility_aabb = AABB( -3825.97, 0, -4096, 7651.96, 3042.07, 8192 )
-local_coords = false
-draw_order = 1
-process_material = SubResource( 120 )
-draw_pass_1 = SubResource( 121 )
-
-[node name="Rain" parent="Camera/WorldParticleManager" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1000, 0 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Intro"

@@ -22,7 +22,7 @@ albedo_color = Color( 0.486275, 0.486275, 0.486275, 1 )
 [sub_resource type="ConcavePolygonShape" id=4]
 data = PoolVector3Array( -1.5, 1, 1, 1.5, 1, 1, -1.5, -1, 1, 1.5, 1, 1, 1.5, -1, 1, -1.5, -1, 1, 1.5, 1, -1, -1.5, 1, -1, 1.5, -1, -1, -1.5, 1, -1, -1.5, -1, -1, 1.5, -1, -1, 1.5, 1, 1, 1.5, 1, -1, 1.5, -1, 1, 1.5, 1, -1, 1.5, -1, -1, 1.5, -1, 1, -1.5, 1, -1, -1.5, 1, 1, -1.5, -1, -1, -1.5, 1, 1, -1.5, -1, 1, -1.5, -1, -1, 1.5, 1, 1, -1.5, 1, 1, 1.5, 1, -1, -1.5, 1, 1, -1.5, 1, -1, 1.5, 1, -1, -1.5, -1, 1, 1.5, -1, 1, -1.5, -1, -1, 1.5, -1, 1, 1.5, -1, -1, -1.5, -1, -1 )
 
-[node name="Furniture" type="StaticBody"]
+[node name="Furniture" type="StaticBody" groups=["Interactables"]]
 collision_layer = 16
 collision_mask = 0
 script = ExtResource( 2 )

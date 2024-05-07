@@ -17,6 +17,8 @@ public class Island : Spatial
 
 	List<House> Houses = new List<House>();
 
+    List<Vehicle> Vehicles = new List<Vehicle>();
+
 	List<WindGenerator> Generators = new List<WindGenerator>();
 	
 	public override void _Ready()
@@ -31,6 +33,7 @@ public class Island : Spatial
 			waterbody.GlobalRotation = new Vector3 (0.0f, 0.0f, 0.0f);
 		FindHouses(this);
 		FindGenerators(this);
+        FindVehicles(this);
         //GetNode<StaticBody>("SeaBed").GetNode<MeshInstance>("Sea").QueueFree();
 	}
 	public void SetSpawnInfo(Vector3 SpawnPos, float SpawnRot)
@@ -64,6 +67,44 @@ public class Island : Spatial
 				}
 			}
 		}
+        List <VehicleInfo> D = new List<VehicleInfo>();
+
+        foreach (Vehicle veh in Vehicles)
+		{
+            VehicleInfo myinfo = null;
+			foreach(VehicleInfo Vnfo in data.Vehicles)
+			{
+                Spatial par = (Spatial)veh.GetParent();
+				if (par.Name == Vnfo.VehName)
+				{
+                    myinfo = Vnfo;
+					
+				}
+			}
+            if( myinfo != null)
+            {
+                if (myinfo.removed)
+                    veh.GetParent().QueueFree();
+                else
+                    veh.InputData(myinfo);
+                D.Add(myinfo);
+            }
+            else
+                veh.GetParent().QueueFree();
+		}
+        foreach(VehicleInfo inf in data.Vehicles)
+        {
+            if (inf.removed)
+                continue;
+            if (!D.Contains(inf))
+            {
+                PackedScene vehscene = GD.Load<PackedScene>(inf.scenedata);
+                Spatial veh = vehscene.Instance<Spatial>();
+                Vehicle V = veh.GetNode<Vehicle>("VehicleBody");
+                AddChild(veh);
+                V.InputData(inf);
+            }
+        }
 	}
 	public void InitialSpawn(Random r)
 	{
@@ -108,7 +149,27 @@ public class Island : Spatial
 			wg.Insert(i, Generators[i]);
 		}
 	}
-	
+	private void FindVehicles(Node node)
+	{
+		foreach (Node child in node.GetChildren())
+		{
+			if (child is Vehicle)
+				Vehicles.Insert(Vehicles.Count, (Vehicle)child);
+			else
+				FindVehicles(child);
+		}
+	}
+    public void GetVehicles(out List<Vehicle> vhs)
+	{
+		vhs = new List<Vehicle>();
+		for (int i = 0; i < Vehicles.Count; i++)
+		{
+            if (Vehicles[i] == null)
+                continue;
+                
+			vhs.Insert(i, Vehicles[i]);
+		}
+	}
 }
 public class IslandInfo
 {
@@ -118,21 +179,39 @@ public class IslandInfo
     public PackedScene IleType;
     public List<HouseInfo> Houses = new List<HouseInfo>();
     public List<WindGeneratorInfo> Generators = new List<WindGeneratorInfo>();
+
+    public List<VehicleInfo> Vehicles = new List<VehicleInfo>();
     public float rottospawn;
     public void SetInfo(Island Ile)
     {
         ile = Ile;
         type = Ile.GetIslandType();
-        List<House> hous = new List<House>();
+        List<House> hous;
         Ile.GetHouses(out hous);
-        List<WindGenerator> Gen = new List<WindGenerator>();
+        List<WindGenerator> Gen;
         Ile.GetGenerator(out Gen);
+        List<Vehicle> veh;
+        Ile.GetVehicles(out veh);
         AddHouses(hous);
         AddGenerators(Gen);
+        AddVehicles(veh);
+    }
+    public void AddNewVehicle(Vehicle veh)
+    {
+        int vehammount = 0;
+        for(int i = 0; i < Vehicles.Count; i++)
+        {
+            if (!Vehicles[i].removed)
+                vehammount += 1;
+        }
+        veh.Name = "Vehicle" + (vehammount + 1).ToString();
+        VehicleInfo data = new VehicleInfo();
+        data.SetInfo(veh);
+        Vehicles.Insert(Vehicles.Count, data);
     }
     public void UpdateInfo(Island island)
     {
-        List<House> hous = new List<House>();
+        List<House> hous;
         island.GetHouses(out hous);
         foreach(HouseInfo HInfo in Houses)
         {
@@ -149,7 +228,7 @@ public class IslandInfo
             h.GetFurniture(out funriture);
             HInfo.UpdateInfo(funriture);
         }
-        List<WindGenerator> gens = new List<WindGenerator>();
+        List<WindGenerator> gens;
         island.GetGenerator(out gens);
         foreach(WindGeneratorInfo WGInfo in Generators)
         {
@@ -164,18 +243,29 @@ public class IslandInfo
             }
             WGInfo.UpdateInfo(g);
         }
-    }
-    public void GetInfo(out List<HouseInfo> Houss, out float rot, out PackedScene ilet, out Vector2 position)
-    {
-        Houss = new List<HouseInfo>();
-        for (int i = 0; i < Houses.Count; i ++)
+        List<Vehicle> vehs;
+        island.GetVehicles(out vehs);
+        foreach(VehicleInfo VHInfo in Vehicles)
         {
-            Houss.Insert(i, Houses[i]);
+            Vehicle v = null;
+            foreach (Vehicle veh in vehs)
+            {
+                Spatial par = (Spatial)veh.GetParent();
+                if (par.Name == VHInfo.VehName)
+                {
+                    v = veh;
+                    break;
+                }
+            }
+            if (v == null)
+            {
+                VHInfo.removed = true;
+                continue;
+            }
+            VHInfo.UpdateInfo(v);
         }
-        rot = rottospawn;
-        ilet = IleType;
-        position = pos;
     }
+
 
     public void AddHouses(List<House> HouseToAdd)
     {
@@ -208,7 +298,16 @@ public class IslandInfo
         {
             WindGeneratorInfo info = new WindGeneratorInfo();
             info.SetInfo(GeneratorToAdd[i].Name, GeneratorToAdd[i].GetCurrentEnergy());
-            Generators.Insert(Houses.Count, info);
+            Generators.Insert(Generators.Count, info);
+        }
+    }
+    public void AddVehicles(List<Vehicle> VehicleToAdd)
+    {
+        for (int i = 0; i < VehicleToAdd.Count; i++)
+        {
+            VehicleInfo info = new VehicleInfo();
+            info.SetInfo(VehicleToAdd[i]);
+            Vehicles.Insert(Vehicles.Count, info);
         }
     }
     public bool IsIslandSpawned()
@@ -220,14 +319,6 @@ public class IslandInfo
             return Godot.Object.IsInstanceValid(ile);
         }
         
-    }
-    public void GetHouses(out List<HouseInfo> GotHouses)
-    {
-        GotHouses = new List<HouseInfo>();
-        for (int i = 0; i < Houses.Count; i++)
-        {
-            GotHouses.Insert(i, Houses[i]);
-        }
     }
 }
 

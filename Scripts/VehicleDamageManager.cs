@@ -13,6 +13,14 @@ public class VehicleDamageManager : Spatial
     bool LightCondition = true;
 	Vehicle veh;
 
+    public void GetDestroyedWings(out List<int>Destroyed)
+    {
+        Destroyed = new List<int>();
+        for (int i = 0; i < DestroyedWings.Count; i++)
+        {
+            Destroyed.Add(DestroyedWings[i]);
+        }
+    }
 	private void On_Ship_Part_Collided(RID body_rid, object body, int body_shape_index, int local_shape_index)
     {
         CollisionShape obj = (CollisionShape)veh.ShapeOwnerGetOwner((uint)local_shape_index);
@@ -67,8 +75,35 @@ public class VehicleDamageManager : Spatial
 		HullCollision = veh.GetNode<CollisionShape>("CollisionShape");
         LightCollision = veh.GetNode<CollisionShape>("CollisionShape2");
 	}
+    public void InputData(VehicleDamageInfo data)
+	{
+        LightCondition = data.LightCondition;
+        if (!LightCondition)
+            veh.OnLightDamaged();
+        foreach (int wings in data.DestroyedWings)
+        {
+            veh.OnWingDamaged(wings);
+            DestroyedWings.Add(wings);
+        }
+	}
 
 }
-
+public class VehicleDamageInfo
+{
+    public List<int> DestroyedWings;
+    public bool LightCondition = true;
+    public void UpdateInfo(Vehicle veh)
+    {
+        VehicleDamageManager damman = veh.GetParent().GetNode<VehicleDamageManager>("VehicleDamageManager");
+        damman.GetDestroyedWings(out DestroyedWings);
+        LightCondition = damman.GetLightCondition();
+    }
+    public void SetInfo(Vehicle veh)
+    {
+        VehicleDamageManager damman = veh.GetParent().GetNode<VehicleDamageManager>("VehicleDamageManager");
+        damman.GetDestroyedWings(out DestroyedWings);
+        LightCondition = damman.GetLightCondition();
+    }
+}
 
 

@@ -21,8 +21,12 @@ public class Intro : Spatial
     }
     private void Stop()
     {
-        MyWorld.GetInstance().SpawnPlayer(SpawnPosition.GetInstance().GlobalTranslation);
-
+        Player pl = MyWorld.GetInstance().SpawnPlayer(SpawnPosition.GetInstance().GlobalTranslation);
+        WorldMap map = WorldMap.GetInstance();
+        WorldParticleManager man = GetNode<WorldParticleManager>("WorldParticleManager");
+        RemoveChild(man);
+        map.AddChild(man);
+        pl.GetNode<RemoteTransform>("WorldParticleRemoteTransform").RemotePath = man.GetPath();
         QueueFree();
     }
 }
