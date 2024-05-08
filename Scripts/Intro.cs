@@ -27,6 +27,7 @@ public class Intro : Spatial
         RemoveChild(man);
         map.AddChild(man);
         pl.GetNode<RemoteTransform>("WorldParticleRemoteTransform").RemotePath = man.GetPath();
+        PlayerCamera.GetInstance().Current = true;
         QueueFree();
     }
 }

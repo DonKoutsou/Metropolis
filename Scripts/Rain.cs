@@ -4,20 +4,17 @@ using System;
 public class Rain : Spatial
 {
     [Export]
-    float MaxRainParticleAmmount = 5000;
-    [Export]
     Curve PitchScaleCurve = null;
     [Export]
     Curve SoundScaleCurve = null;
     Particles RainPart;
-    AudioStreamPlayer3D RainSound;
+
     float d = 0.5f;
 
     public override void _Ready()
     {
         base._Ready();
         RainPart = GetNode<Particles>("Clouds2");
-        RainSound = GetNode<AudioStreamPlayer3D>("RainSound");
     }
     public override void _Process(float delta)
     {
@@ -41,6 +38,7 @@ public class Rain : Spatial
         //else
             //RainPart.Amount = particleammount;
 
+        AudioStreamPlayer3D RainSound = WorldSoundManager.GetInstance().GetSound("Rain");
         RainSound.PitchScale = PitchScaleCurve.Interpolate(multi);
         RainSound.UnitDb = SoundScaleCurve.Interpolate(multi);
     }

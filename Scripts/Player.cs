@@ -34,6 +34,8 @@ public class Player : Character
 
 	static Player instance;
 
+	Camera DialogueCam;
+	
 	public static Player GetInstance()
 	{
 		return instance;
@@ -91,8 +93,7 @@ public class Player : Character
 		MainWorld world = (MainWorld)GetParent().GetParent();
 		MyWorld w = (MyWorld)GetParent();
 		
-
-
+		DialogueCam = GetNode<Spatial>("DialogueCameraPivot").GetNode<Camera>("DialogueCamera");
 		//Input.MouseMode = Input.MouseModeEnum.Visible;
 		//hp_bar = plUI.GetNode<HP_Bar>("HP_Bar");
 		//hp_bar.MaxValue = m_HP;
@@ -154,8 +155,9 @@ public class Player : Character
 		
 		if (dist < 1)
 		{
-			if (!GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused)
-				GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused = true;
+			AudioStreamPlayer3D walk = CharacterSoundManager.GetSound("Walk");
+			if (!walk.StreamPaused)
+				walk.StreamPaused = true;
 			anim.PlayAnimation(E_Animations.Idle);
 			moveloc.Hide();
 			HeadPivot.Rotation = new Vector3(0.0f,0.0f,0.0f);
@@ -163,9 +165,10 @@ public class Player : Character
 		}
 		else if (HasVecicle && dist < 10)
 		{
+			AudioStreamPlayer3D walk = CharacterSoundManager.GetSound("Walk");
 			rpm = 0.05f;
-			if (!GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused)
-				GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused = true;
+			if (!walk.StreamPaused)
+				walk.StreamPaused = true;
 			anim.PlayAnimation(E_Animations.Idle);
 			moveloc.Hide();
 			HeadPivot.Rotation = new Vector3(0.0f,0.0f,0.0f);
@@ -176,28 +179,31 @@ public class Player : Character
 				rpm = 1;
 			else
 				rpm = 0.05f;
-			if (!GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused)
-				GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused = true;
+
+			AudioStreamPlayer3D walk = CharacterSoundManager.GetSound("Walk");
+			if (!walk.StreamPaused)
+				walk.StreamPaused = true;
 			anim.PlayAnimation(E_Animations.Idle);
 			HeadPivot.Rotation = new Vector3(0.0f,0.0f,0.0f);
 			moveloc.Show();
 		}
 		else
 		{
+			AudioStreamPlayer3D walk = CharacterSoundManager.GetSound("Walk");
 			direction = direction.Normalized();
 			Vector3 lookloc = new Vector3(direction.x, 0, direction.z);
 			if (!HasVecicle)
 				GetNode<Spatial>("Pivot").LookAt(Translation - lookloc, Vector3.Up);
 
-			if (GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused)
+			if (walk.StreamPaused)
 			{
-				GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused = false;
-				GetNode<AudioStreamPlayer3D>("WalkingSound").PitchScale = 0.7f;
+				walk.StreamPaused = false;
+				walk.PitchScale = 0.7f;
 			}
 			if (!IsRunning)
 			{
 				rpm = 0.2f;
-				GetNode<AudioStreamPlayer3D>("WalkingSound").PitchScale = 0.5f;
+				walk.PitchScale = 0.5f;
 				//GetNode<AudioStreamPlayer3D>("WalkingSound").db = 5f;
 				anim.PlayAnimation(E_Animations.Walk);
 			}
@@ -205,7 +211,7 @@ public class Player : Character
 			{
 				spd = RunSpeed;
 				rpm = 0.5f;
-				GetNode<AudioStreamPlayer3D>("WalkingSound").PitchScale = 1f;
+				walk.PitchScale = 1f;
 				anim.PlayAnimation(E_Animations.Run);
 			}
 			float heightdif = GlobalTransform.origin.y - loctomove.y ;
@@ -378,5 +384,24 @@ public class Player : Character
 	{
 		base.OnVehicleBoard(Veh);
 		IsRunning = false;
+	}
+	public void StartDialogue(Character character)
+	{
+		if (HasVehicle())
+		{
+			currveh.UnBoardVehicle(this);
+		}
+		Position3D talkpos = character.GetNode<Position3D>("TalkPosition");
+		loctomove = talkpos.GlobalTranslation;
+		((Spatial)DialogueCam.GetParent()).GlobalRotation = talkpos.GlobalRotation;
+		CameraAnimationPlayer.GetInstance().PlayAnim("FadeInDialogue");
+		var dialogue = DialogicSharp.Start("TestTimeline");
+		AddChild(dialogue);
+		dialogue.Connect("timeline_end", this, "EndDialogue");
+		//DialogueCam.Current = true;
+	}
+	public void EndDialogue(string timeline_name)
+	{
+		CameraAnimationPlayer.GetInstance().PlayAnim("FadeOutDialogue");
 	}
 }

@@ -49,7 +49,8 @@ public class ActionMenu : Control
 		}
 		else if (SelectedObj is Character)
 		{
-			TalkText.GetInst().Talk("Φίλος", (Character)SelectedObj);
+			pl.StartDialogue((Character) SelectedObj);
+			//TalkText.GetInst().Talk("Φίλος", (Character)SelectedObj);
 		}
 		else if (SelectedObj is Vehicle)
 		{

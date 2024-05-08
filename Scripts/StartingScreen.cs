@@ -36,6 +36,7 @@ public class StartingScreen : Control
 		if (!world.IsMapSpawned())
 		{
 			FadeInOut.FadeInOut();
+			LoadingScreen.GetInstance().Start();
 		}
 		else
 		{

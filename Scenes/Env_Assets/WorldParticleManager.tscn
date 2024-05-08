@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Scenes/Env_Assets/SandParticles.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Env_Assets/Clouds.tscn" type="PackedScene" id=2]
@@ -8,6 +8,9 @@
 [ext_resource path="res://Scenes/World/SunMoonPivot.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Clouds/Textures/smoke_01.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Clouds/Textures/smoke_04.png" type="Texture" id=8]
+[ext_resource path="res://Scripts/WorldSoundManager.cs" type="Script" id=9]
+[ext_resource path="res://Assets/Sounds/RainSound.mp3" type="AudioStream" id=10]
+[ext_resource path="res://Assets/Sounds/Cave_Ambient.mp3" type="AudioStream" id=11]
 
 [sub_resource type="Curve" id=4]
 max_value = 3.0
@@ -122,3 +125,25 @@ local_coords = false
 draw_order = 1
 process_material = SubResource( 114 )
 draw_pass_1 = SubResource( 115 )
+
+[node name="WorldSoundManager" type="Spatial" parent="."]
+script = ExtResource( 9 )
+
+[node name="Listener" type="Listener" parent="WorldSoundManager"]
+current = true
+
+[node name="Rain" type="AudioStreamPlayer3D" parent="WorldSoundManager"]
+stream = ExtResource( 10 )
+unit_db = -80.0
+unit_size = 100.0
+max_db = 6.0
+pitch_scale = 1.97
+autoplay = true
+
+[node name="Enviroment" type="AudioStreamPlayer3D" parent="WorldSoundManager"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+stream = ExtResource( 11 )
+max_db = -13.118
+autoplay = true
+max_distance = 16.06
+area_mask = 0

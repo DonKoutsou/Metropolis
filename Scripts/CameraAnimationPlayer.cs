@@ -13,6 +13,11 @@ public class CameraAnimationPlayer : AnimationPlayer
         instance = this;
         SetProcess(false);
     }
+    public void PlayAnim(string name)
+    {
+        PlaybackSpeed = 1;
+        Play(name);
+    }
     public void FadeIn(int spd)
     {
         PlaybackSpeed = 1.0f / spd;

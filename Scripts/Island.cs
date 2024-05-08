@@ -26,15 +26,15 @@ public class Island : Spatial
 		GlobalTranslation = SpawnGlobalLocation;
 
 		Rotate(new Vector3(0, 1, 0), Mathf.Deg2Rad(SpawnRotation));
-		Transform.Rotated(new Vector3(0, 1, 0), SpawnRotation);
+		//Transform.Rotated(new Vector3(0, 1, 0), SpawnRotation);
+		//FindHouses(this);
+		//FindGenerators(this);
+        //FindVehicles(this);
+        GetNode<StaticBody>("SeaBed").GetNode<MeshInstance>("Sea").QueueFree();
 
-		StaticBody waterbody = GetNodeOrNull<StaticBody>("SeaBed");
-		if (waterbody != null)
-			waterbody.GlobalRotation = new Vector3 (0.0f, 0.0f, 0.0f);
-		FindHouses(this);
+        FindHouses(this);
 		FindGenerators(this);
         FindVehicles(this);
-        //GetNode<StaticBody>("SeaBed").GetNode<MeshInstance>("Sea").QueueFree();
 	}
 	public void SetSpawnInfo(Vector3 SpawnPos, float SpawnRot)
 	{
@@ -78,7 +78,6 @@ public class Island : Spatial
 				if (par.Name == Vnfo.VehName)
 				{
                     myinfo = Vnfo;
-					
 				}
 			}
             if( myinfo != null)
@@ -108,6 +107,7 @@ public class Island : Spatial
 	}
 	public void InitialSpawn(Random r)
 	{
+        
 		foreach(House h in Houses)
 		{
 			h.StartHouse(r);
@@ -174,7 +174,7 @@ public class Island : Spatial
 public class IslandInfo
 {
     public Island ile;
-    public IleType type;
+    public IleType Type;
     public Vector2 pos;
     public PackedScene IleType;
     public List<HouseInfo> Houses = new List<HouseInfo>();
@@ -185,7 +185,7 @@ public class IslandInfo
     public void SetInfo(Island Ile)
     {
         ile = Ile;
-        type = Ile.GetIslandType();
+        Type = Ile.GetIslandType();
         List<House> hous;
         Ile.GetHouses(out hous);
         List<WindGenerator> Gen;
@@ -204,7 +204,7 @@ public class IslandInfo
             if (!Vehicles[i].removed)
                 vehammount += 1;
         }
-        veh.Name = "Vehicle" + (vehammount + 1).ToString();
+        veh.GetParent().Name = "Vehicle" + (vehammount + 1).ToString();
         VehicleInfo data = new VehicleInfo();
         data.SetInfo(veh);
         Vehicles.Insert(Vehicles.Count, data);
@@ -326,8 +326,14 @@ public class WindGeneratorInfo
 {
     public string WindGeneratorName;
     public float CurrentEnergy;
+    public int DespawnDay;
+
+    public int Despawnhour;
+    public int Despawnmins;
     public void UpdateInfo(WindGenerator gen)
     {
+        DayNight.GetDay(out DespawnDay);
+        DayNight.GetTime(out Despawnhour, out Despawnmins);
         CurrentEnergy = gen.GetCurrentEnergy();
     }
     public void SetInfo(string name, float CurEn)

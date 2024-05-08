@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/Stamina_Bar.cs" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Assets/Sounds/PunchSound.mp3" type="AudioStream" id=8]
 [ext_resource path="res://Assets/Sounds/HeavyBreathing.mp3" type="AudioStream" id=9]
 [ext_resource path="res://Assets/Sounds/WalkingSound.mp3" type="AudioStream" id=10]
+[ext_resource path="res://Scripts/CharacterSoundManager.cs" type="Script" id=11]
 [ext_resource path="res://Scripts/CameraZoomPivot.cs" type="Script" id=12]
 [ext_resource path="res://Scenes/Characters/Character_Mesh.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scripts/CameraPanPivot.cs" type="Script" id=14]
@@ -80,7 +81,7 @@ size = Vector2( 4, 4 )
 [sub_resource type="SpatialMaterial" id=109]
 render_priority = 1
 flags_transparent = true
-albedo_color = Color( 0, 0, 0, 1 )
+albedo_color = Color( 0, 0, 0, 0 )
 
 [sub_resource type="Animation" id=110]
 resource_name = "FadeIn"
@@ -107,6 +108,46 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ true, true, false ]
+}
+
+[sub_resource type="Animation" id=118]
+resource_name = "FadeInDialogue"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("MeshInstance2:material/0:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6, 0.9, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../../../../../../DialogueCameraPivot/DialogueCamera:current")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("MeshInstance2:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 
 [sub_resource type="Animation" id=117]
@@ -136,6 +177,58 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
+[sub_resource type="Animation" id=119]
+resource_name = "FadeOutDialogue"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("../../../../../../DialogueCameraPivot/DialogueCamera/MeshInstance2:material/0:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:current")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.5 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("MeshInstance2:material/0:albedo_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1.5, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../../../../../../DialogueCameraPivot/DialogueCamera/MeshInstance2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.6, 3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, true, false ]
+}
+
 [sub_resource type="Animation" id=111]
 length = 0.001
 tracks/0/type = "value"
@@ -157,6 +250,54 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../../../../../../DialogueCameraPivot/DialogueCamera:current")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../../../../../../DialogueCameraPivot/DialogueCamera/MeshInstance2:material/0:albedo_color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:current")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("../../../../../../DialogueCameraPivot/DialogueCamera/MeshInstance2:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
@@ -208,20 +349,6 @@ color = Color( 0.623529, 0.172549, 0.172549, 0 )
 [node name="Turnofftimer" type="Timer" parent="DamageColor"]
 wait_time = 0.2
 one_shot = true
-
-[node name="HitSound" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource( 8 )
-area_mask = 0
-
-[node name="TiredSound" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource( 9 )
-area_mask = 0
-
-[node name="WalkingSound" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource( 10 )
-unit_db = 10.614
-max_db = -9.473
-area_mask = 0
 
 [node name="Inventory" parent="." instance=ExtResource( 7 )]
 Capacity = 40.0
@@ -347,7 +474,9 @@ material/0 = SubResource( 109 )
 
 [node name="CameraAnimationPlayer" type="AnimationPlayer" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/PlayerCamera"]
 anims/FadeIn = SubResource( 110 )
+anims/FadeInDialogue = SubResource( 118 )
 anims/FadeOut = SubResource( 117 )
+anims/FadeOutDialogue = SubResource( 119 )
 anims/RESET = SubResource( 111 )
 script = ExtResource( 35 )
 
@@ -356,6 +485,37 @@ script = ExtResource( 35 )
 [node name="WorldParticleRemoteTransform" type="RemoteTransform" parent="."]
 update_rotation = false
 update_scale = false
+
+[node name="CharacterSoundManager" type="Spatial" parent="."]
+script = ExtResource( 11 )
+
+[node name="Hit" type="AudioStreamPlayer3D" parent="CharacterSoundManager"]
+stream = ExtResource( 8 )
+area_mask = 0
+
+[node name="Tired" type="AudioStreamPlayer3D" parent="CharacterSoundManager"]
+stream = ExtResource( 9 )
+area_mask = 0
+
+[node name="Walk" type="AudioStreamPlayer3D" parent="CharacterSoundManager"]
+stream = ExtResource( 10 )
+unit_db = 10.614
+max_db = -9.473
+area_mask = 0
+
+[node name="DialogueCameraPivot" type="Spatial" parent="."]
+
+[node name="DialogueCamera" type="Camera" parent="DialogueCameraPivot"]
+transform = Transform( -0.871077, 0, -0.491147, 0, 1, 0, 0.491147, 0, -0.871077, -7.8385, 2.82016, -5.82825 )
+current = true
+fov = 45.0
+near = 1.0
+far = 40000.0
+
+[node name="MeshInstance2" type="MeshInstance" parent="DialogueCameraPivot/DialogueCamera"]
+transform = Transform( 1, -5.29396e-22, 0, -1.05879e-22, 1, 0, 2.11758e-21, 0, 1, 0, -0.0144858, -1.05511 )
+mesh = SubResource( 107 )
+material/0 = SubResource( 109 )
 
 [connection signal="body_entered" from="KillFieldDetector" to="." method="OnKillFieldDetectorBodyEntered"]
 [connection signal="timeout" from="PlayerUI/HP_Bar/VisibilityTimerHP" to="PlayerUI/HP_Bar" method="TurnOff"]

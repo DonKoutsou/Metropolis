@@ -45,9 +45,9 @@ public class DayNight : WorldEnvironment
     [Signal]
     public delegate void NightEventHandler();
 
-    static float currentDay;
+    static int currentDay;
 
-    static float currenthour;
+    static int currenthour;
     static float currentmins;
 
     static float WindDir = 0;
@@ -83,9 +83,13 @@ public class DayNight : WorldEnvironment
     {
         return Raintreangth;
     }
-    static public void GetTime(out float hour, out float mins)
+    static public void GetTime(out int hour, out int mins)
     {
-        hour = currenthour; mins = currentmins;
+        hour = currenthour; mins = (int)currentmins;
+    }
+    static public void GetDay(out int day)
+    {
+        day = currentDay;
     }
     private void UpdateWind()
     {
@@ -104,7 +108,7 @@ public class DayNight : WorldEnvironment
     }
     private void UpdateCurveValues()
     {
-        MinuteValue = (currentmins-0)/(60-0);
+        MinuteValue = currentmins/60;
 
         HourValue = (currenthour + MinuteValue)/24;
 
@@ -268,14 +272,7 @@ public class DayNight : WorldEnvironment
 
         AmbientLightEnergy = Softlight;
 
-        //Environment.FogSunAmount = fogsun;
-        Color fogsun;
-        if (SunLightEnergy > MoonLightEnergy)
-            fogsun = SunColor;
-        else
-            fogsun = MoonColor;
-       
-        FogSunColor = fogsun;
+        FogSunColor = mix;
     }
     private void UpdateSunMoonPlacament()
     {
@@ -328,12 +325,12 @@ public class DayNight : WorldEnvironment
     float SunRot;
     Color SunColor;
     Color MoonColor;
-
     public override void _Process(float delta)
     {
         base._Process(delta);
 
         UpdateTime();
+            
         
         UpdateWind();
 

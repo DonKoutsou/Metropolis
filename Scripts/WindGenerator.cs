@@ -91,6 +91,17 @@ public class WindGenerator : StaticBody
     }
     public void SetData(WindGeneratorInfo info)
 	{
-		CurrentEnergy = info.CurrentEnergy;
+        int curday;
+        DayNight.GetDay(out curday);
+        int curHours, curMins;
+        DayNight.GetTime(out curHours, out curMins);
+        int hours = curHours - info.Despawnhour;
+        int days = curday - info.DespawnDay;
+        while (days > 0)
+        {
+            days -= 1;
+            hours += 24;
+        }
+		CurrentEnergy = Math.Min(info.CurrentEnergy + hours, EnergyCapacity);
 	}
 }

@@ -87,6 +87,7 @@ public class MyWorld : Spatial
 		Player pl = (Player)PlayerScene.Instance();
 		AddChild(pl);
 		pl.Teleport(pos);
+		WorldMap.GetInstance().pl = pl;
 		EmitSignal("PlayerSpawnedEventHandler", pl);
 		VehicleHud.GetInstance().ConnectToPlayer(pl);
 		CameraAnimationPlayer.GetInstance().FadeIn(6);
@@ -96,10 +97,6 @@ public class MyWorld : Spatial
 	{
 		StartingScreen start = ((MainWorld)GetParent()).GetStartingScreen();
 		start.GameOver();
-	}
-	public void RegisterIle(IslandInfo ile)
-	{
-		AddChild(ile.ile);
 	}
 	
 	public static void ArrangeIlesBasedOnDistance(List<IslandInfo> ilestodissable, List<IslandInfo> ilestoenable)
@@ -226,20 +223,12 @@ public class MyWorld : Spatial
 
 		//GD.Print("-----------Transition Finished------------");
 	}
-	private void SpawnIsland(IslandInfo info)
-    {
-        Island Ile = (Island)info.IleType.Instance();
-		info.ile = Ile;
-       	//RegisterIle(info);
-		AddChild(Ile);
-		//Ile.InitIle(info);
-    }
+
 	public void ToggleIsland(IslandInfo ileinfo,bool toggle, bool affectneigh)
 	{
 		if (toggle && !ileinfo.IsIslandSpawned())
 		{
 			Island ile = WorldMap.GetInstance().ReSpawnIsland(ileinfo);
-			AddChild(ile);
 			ile.InputData(ileinfo);
 		}
 		else if (!toggle && ileinfo.IsIslandSpawned())

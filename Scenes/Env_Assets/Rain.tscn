@@ -1,9 +1,7 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Assets/Sounds/RainSound.mp3" type="AudioStream" id=1]
 [ext_resource path="res://Assets/Rain/Rain.tres" type="Material" id=2]
 [ext_resource path="res://Scripts/Rain.cs" type="Script" id=3]
-[ext_resource path="res://Assets/Sounds/Cave_Ambient.mp3" type="AudioStream" id=4]
 
 [sub_resource type="Curve" id=4]
 max_value = 3.0
@@ -32,7 +30,6 @@ PitchScaleCurve = SubResource( 4 )
 SoundScaleCurve = SubResource( 5 )
 
 [node name="Clouds2" type="Particles" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 sorting_use_aabb_center = false
 cast_shadow = 0
 generate_lightmap = false
@@ -42,22 +39,3 @@ local_coords = false
 draw_order = 2
 process_material = SubResource( 2 )
 draw_pass_1 = SubResource( 3 )
-
-[node name="RainSound" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource( 1 )
-unit_db = -80.0
-unit_size = 100.0
-max_db = 6.0
-pitch_scale = 1.97
-autoplay = true
-
-[node name="Listener" type="Listener" parent="."]
-current = true
-
-[node name="EnvSound" type="AudioStreamPlayer3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0 )
-stream = ExtResource( 4 )
-max_db = -13.118
-autoplay = true
-max_distance = 16.06
-area_mask = 0

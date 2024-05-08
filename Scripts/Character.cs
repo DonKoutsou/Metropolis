@@ -71,6 +71,8 @@ public class Character : KinematicBody
 
 	public Vehicle currveh;
 
+	public CharacterSoundManager CharacterSoundManager;
+
 	public override void _Ready()
 	{
 		if (this is Player)
@@ -86,10 +88,15 @@ public class Character : KinematicBody
 		collider = GetNode<CollisionShape>("CollisionShape");
 		collider.Disabled = false;
 		startingstaming = m_Stamina;
-		
 
-		GetNode<AudioStreamPlayer3D>("WalkingSound").Play();
-		GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused = true;
+		
+		CharacterSoundManager = GetNode<CharacterSoundManager>("CharacterSoundManager");
+
+
+		
+		AudioStreamPlayer3D walkingsound = CharacterSoundManager.GetSound("Walk");
+		walkingsound.Play();
+		walkingsound.StreamPaused = true;
 		//GetNode<AudioStreamPlayer3D>("TiredSound").Play();
 		//GetNode<AudioStreamPlayer3D>("TiredSound").StreamPaused = true;
 		
@@ -150,30 +157,32 @@ public class Character : KinematicBody
 
 		if (dist < 1)
 		{
-			if (!GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused)
-				GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused = true;
+			AudioStreamPlayer3D walkingsound = CharacterSoundManager.GetSound("Walk");
+			if (!walkingsound.StreamPaused)
+				walkingsound.StreamPaused = true;
 			anim.PlayAnimation(E_Animations.Idle);
 		}
 		else
 		{
+			AudioStreamPlayer3D walkingsound = CharacterSoundManager.GetSound("Walk");
 			direction = direction.Normalized();
 			Vector3 lookloc = new Vector3(direction.x, 0, direction.z);
 			GetNode<Spatial>("Pivot").LookAt(Translation - lookloc, Vector3.Up);
-			if (GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused)
+			if (walkingsound.StreamPaused)
 			{
-				GetNode<AudioStreamPlayer3D>("WalkingSound").StreamPaused = false;
-				GetNode<AudioStreamPlayer3D>("WalkingSound").PitchScale = 0.7f;
+				walkingsound.StreamPaused = false;
+				walkingsound.PitchScale = 0.7f;
 			}
 			if (Input.IsActionPressed("Run"))
 			{
 				
-				GetNode<AudioStreamPlayer3D>("WalkingSound").PitchScale = 0.5f;
+				walkingsound.PitchScale = 0.5f;
 				//GetNode<AudioStreamPlayer3D>("WalkingSound").db = 5f;
 				anim.PlayAnimation(E_Animations.Walk);
 			}
 			else
 			{
-				GetNode<AudioStreamPlayer3D>("WalkingSound").PitchScale = 1f;
+				walkingsound.PitchScale = 1f;
 				anim.PlayAnimation(E_Animations.Run);
 			}
 				
@@ -286,6 +295,7 @@ public class Character : KinematicBody
 	public virtual void OnVehicleUnBoard(Vehicle veh)
 	{
 		EmitSignal("VehicleBoardEventHandler", false, veh);
+		loctomove = GlobalTranslation;
 		//SetCollisionMaskBit(8, false);
 	}
 	private void On_DialogueButton_Button_Down()
