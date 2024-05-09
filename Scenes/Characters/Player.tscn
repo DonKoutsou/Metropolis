@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/Stamina_Bar.cs" type="Script" id=2]
@@ -81,7 +81,7 @@ size = Vector2( 4, 4 )
 [sub_resource type="SpatialMaterial" id=109]
 render_priority = 1
 flags_transparent = true
-albedo_color = Color( 0, 0, 0, 0 )
+albedo_color = Color( 0, 0, 0, 1 )
 
 [sub_resource type="Animation" id=110]
 resource_name = "FadeIn"
@@ -149,6 +149,30 @@ tracks/2/keys = {
 "update": 1,
 "values": [ true, false ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("../../../../../../DialogueCameraPivot/DialogueCamera/DialogueCameraBox:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.6, 3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../../../../../../DialogueCameraPivot/DialogueCamera/DialogueCameraBox:material/0:albedo_color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.6, 3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
 
 [sub_resource type="Animation" id=117]
 resource_name = "FadeOut"
@@ -181,7 +205,7 @@ tracks/1/keys = {
 resource_name = "FadeOutDialogue"
 length = 3.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("../../../../../../DialogueCameraPivot/DialogueCamera/MeshInstance2:material/0:albedo_color")
+tracks/0/path = NodePath("../../../../../../DialogueCameraPivot/DialogueCamera/DialogueCameraBox:material/0:albedo_color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -217,16 +241,16 @@ tracks/2/keys = {
 "values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("../../../../../../DialogueCameraPivot/DialogueCamera/MeshInstance2:visible")
+tracks/3/path = NodePath("../../../../../../DialogueCameraPivot/DialogueCamera/DialogueCameraBox:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 1.6, 3 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ true, true, false ]
+"values": [ true, false ]
 }
 
 [sub_resource type="Animation" id=111]
@@ -268,7 +292,7 @@ tracks/2/keys = {
 "values": [ true ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("../../../../../../DialogueCameraPivot/DialogueCamera/MeshInstance2:material/0:albedo_color")
+tracks/3/path = NodePath("../../../../../../DialogueCameraPivot/DialogueCamera/DialogueCameraBox:material/0:albedo_color")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -292,7 +316,7 @@ tracks/4/keys = {
 "values": [ true ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("../../../../../../DialogueCameraPivot/DialogueCamera/MeshInstance2:visible")
+tracks/5/path = NodePath("../../../../../../DialogueCameraPivot/DialogueCamera/DialogueCameraBox:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -303,6 +327,11 @@ tracks/5/keys = {
 "update": 0,
 "values": [ true ]
 }
+
+[sub_resource type="SpatialMaterial" id=120]
+render_priority = 1
+flags_transparent = true
+albedo_color = Color( 0, 0, 0, 0 )
 
 [node name="Player" type="KinematicBody" groups=["player"]]
 pause_mode = 1
@@ -512,10 +541,10 @@ fov = 45.0
 near = 1.0
 far = 40000.0
 
-[node name="MeshInstance2" type="MeshInstance" parent="DialogueCameraPivot/DialogueCamera"]
+[node name="DialogueCameraBox" type="MeshInstance" parent="DialogueCameraPivot/DialogueCamera"]
 transform = Transform( 1, -5.29396e-22, 0, -1.05879e-22, 1, 0, 2.11758e-21, 0, 1, 0, -0.0144858, -1.05511 )
 mesh = SubResource( 107 )
-material/0 = SubResource( 109 )
+material/0 = SubResource( 120 )
 
 [connection signal="body_entered" from="KillFieldDetector" to="." method="OnKillFieldDetectorBodyEntered"]
 [connection signal="timeout" from="PlayerUI/HP_Bar/VisibilityTimerHP" to="PlayerUI/HP_Bar" method="TurnOff"]

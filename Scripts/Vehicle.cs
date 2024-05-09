@@ -245,7 +245,7 @@ public class Vehicle : RigidBody
 
                 Particles part = ray.GetNode<Particles>("Particles");
 
-                if (dist < 20)
+                if (dist < 20 && Working)
                 {
                     part.Emitting = true;
                     float particleoffset = dist;

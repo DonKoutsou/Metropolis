@@ -4,19 +4,7 @@
 			"character": "character-1715202846.json",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Aoua\nafw"
-		},
-		{
-			"event_id": "dialogic_015",
-			"id": "anchor-1715203606",
-			"index": 0,
-			"name": "afwwaf"
-		},
-		{
-			"event_id": "dialogic_023",
-			"hide_dialogbox": false,
-			"wait_seconds": 2,
-			"waiting_skippable": false
+			"text": "Ό Φίλο"
 		},
 		{
 			"character": "",
@@ -25,59 +13,23 @@
 
 			],
 			"portrait": "",
-			"question": ""
+			"question": "Στρατό πήγες?"
 		},
 		{
-			"choice": "",
+			"choice": "Ναι",
 			"condition": "",
 			"definition": "",
 			"event_id": "dialogic_011",
 			"value": ""
 		},
 		{
-			"character": "",
-			"event_id": "dialogic_010",
-			"options": [
-
-			],
+			"character": "character-1715202846.json",
+			"event_id": "dialogic_001",
 			"portrait": "",
-			"question": ""
+			"text": "Καλός"
 		},
 		{
-			"choice": "",
-			"condition": "",
-			"definition": "",
-			"event_id": "dialogic_011",
-			"value": ""
-		},
-		{
-			"character": "",
-			"event_id": "dialogic_010",
-			"options": [
-
-			],
-			"portrait": "",
-			"question": ""
-		},
-		{
-			"choice": "",
-			"condition": "",
-			"definition": "",
-			"event_id": "dialogic_011",
-			"value": ""
-		},
-		{
-			"choice": "",
-			"condition": "",
-			"definition": "",
-			"event_id": "dialogic_011",
-			"value": ""
-		},
-		{
-			"event_id": "dialogic_013"
-		},
-		{
-			"choice": "",
+			"choice": "Όχι",
 			"condition": "",
 			"definition": "",
 			"event_id": "dialogic_011",
@@ -87,76 +39,7 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": ""
-		},
-		{
-			"event_id": "dialogic_013"
-		},
-		{
-			"choice": "",
-			"condition": "",
-			"definition": "",
-			"event_id": "dialogic_011",
-			"value": ""
-		},
-		{
-			"character": "",
-			"event_id": "dialogic_010",
-			"options": [
-
-			],
-			"portrait": "",
-			"question": ""
-		},
-		{
-			"choice": "",
-			"condition": "",
-			"definition": "",
-			"event_id": "dialogic_011",
-			"value": ""
-		},
-		{
-			"character": "",
-			"event_id": "dialogic_001",
-			"portrait": "",
-			"text": ""
-		},
-		{
-			"definition": "",
-			"event_id": "dialogic_014",
-			"operation": "=",
-			"random_upper_limit": 100,
-			"set_random": false,
-			"set_value": ""
-		},
-		{
-			"choice": "",
-			"condition": "",
-			"definition": "",
-			"event_id": "dialogic_011",
-			"value": ""
-		},
-		{
-			"event_id": "dialogic_013"
-		},
-		{
-			"event_id": "dialogic_013"
-		},
-		{
-			"definition": "1715205409-366",
-			"event_id": "dialogic_014",
-			"operation": "*",
-			"random_upper_limit": 100,
-			"set_random": false,
-			"set_value": ""
-		},
-		{
-			"anchor_id": "",
-			"event_id": "dialogic_016"
-		},
-		{
-			"change_scene": "",
-			"event_id": "dialogic_041"
+			"text": "Ότι νάνε."
 		}
 	],
 	"metadata": {
