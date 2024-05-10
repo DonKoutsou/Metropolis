@@ -1,0 +1,37 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path.s3tc="res://.import/Body_Texture_M_Legs_OcclusionRoughnessMetallic.png-6de9ed0b7dd2b05d1e1b78fdf0a0439a.s3tc.stex"
+path.etc2="res://.import/Body_Texture_M_Legs_OcclusionRoughnessMetallic.png-6de9ed0b7dd2b05d1e1b78fdf0a0439a.etc2.stex"
+metadata={
+"imported_formats": [ "s3tc", "etc2" ],
+"vram_texture": true
+}
+
+[deps]
+
+source_file="res://Assets/FastLegs/Textures/Body_Texture_M_Legs_OcclusionRoughnessMetallic.png"
+dest_files=[ "res://.import/Body_Texture_M_Legs_OcclusionRoughnessMetallic.png-6de9ed0b7dd2b05d1e1b78fdf0a0439a.s3tc.stex", "res://.import/Body_Texture_M_Legs_OcclusionRoughnessMetallic.png-6de9ed0b7dd2b05d1e1b78fdf0a0439a.etc2.stex" ]
+
+[params]
+
+compress/mode=2
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=true
+flags/filter=true
+flags/mipmaps=true
+flags/anisotropic=true
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+process/normal_map_invert_y=false
+stream=false
+size_limit=1024
+detect_3d=false
+svg/scale=1.0

@@ -179,7 +179,7 @@ public class InventoryUI : Control
 
         map.ToggleMap(ShowingMap);
 
-        GetNode<Panel>("ItemOptionPanel").GetNode<Button>("DropButton").Visible = ShowingMap;
+        GetNode<Panel>("ItemOptionPanel").GetNode<Button>("DropButton").Visible = !ShowingMap;
     }
     
     public void ItemHovered(Item it)

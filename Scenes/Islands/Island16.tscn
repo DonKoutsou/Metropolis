@@ -39,6 +39,6 @@ transform = Transform( 0.932115, 0.228323, 0.281122, 0, 0.776233, -0.630446, -0.
 [node name="StaticBody2" parent="." index="2" instance=ExtResource( 3 )]
 transform = Transform( -0.698062, 0.509645, 0.502962, -0.00704736, 0.697501, -0.71655, -0.716002, -0.50374, -0.483308, -2489.58, -430.9, 889.146 )
 
-[node name="Rock1" parent="." index="7" instance=ExtResource( 2 )]
+[node name="Rock1" parent="." index="3" instance=ExtResource( 2 )]
 transform = Transform( -470.209, 230.572, 152.276, -241.878, -198.148, -446.856, -133.592, -452.794, 273.092, -2663.73, -745.47, 1145.39 )
 material/0 = SubResource( 1 )
