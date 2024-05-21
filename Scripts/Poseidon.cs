@@ -8,6 +8,8 @@ public class Poseidon : Spatial
     static Poseidon instance;
 
     AnimationPlayer anim;
+
+    ShaderMaterial mat;
     public static Poseidon GetInstance()
     {
         return instance;
@@ -33,10 +35,13 @@ public class Poseidon : Spatial
         anim.Play("Wave");
         WorldMap map = (WorldMap)GetParent();
         map.Connect("OnTransitionEventHandler", this, "SwitchPlaces");
+        mat = (ShaderMaterial)SeaChild.GetActiveMaterial(0);
+        if (mat == null)
+            SetProcess(false);
     }
     public void SwitchPlaces(Island to)
     {
-        GlobalTranslation = new Vector3(to.GlobalTranslation.x, GlobalTranslation.y, to.GlobalTranslation.z);
+        //GlobalTranslation = new Vector3(to.GlobalTranslation.x, GlobalTranslation.y, to.GlobalTranslation.z);
         ((WorldMap)GetParent()).SyncSeas();
     }
     float gesnervalue = 0.0f;
@@ -46,16 +51,12 @@ public class Poseidon : Spatial
         float dir = DayNight.GetWindDirection();
         if (gesnervalue <= 0)
         {
-
-            ShaderMaterial mat = (ShaderMaterial)SeaChild.GetActiveMaterial(0);
             mat.SetShaderParam("TextureRot", -180 - dir);
 
             Enabling = true;
         }
         if (gesnervalue >= 1)
         {
-
-            ShaderMaterial mat = (ShaderMaterial)SeaChild.GetActiveMaterial(0);
             mat.SetShaderParam("TextureRot2", -180 - dir);
 
             Enabling = false;
@@ -63,24 +64,22 @@ public class Poseidon : Spatial
         }
         if (Enabling)
         {
-            gesnervalue += 0.02f;
+            gesnervalue += 0.04f;
         }
         else
         {
-            gesnervalue -= 0.02f;
+            gesnervalue -= 0.04f;
         }
-
-        ShaderMaterial mat2 = (ShaderMaterial)SeaChild.GetActiveMaterial(0);
-        mat2.SetShaderParam("gerstner_value", gesnervalue);
+        mat.SetShaderParam("gerstner_value", gesnervalue);
 
     }
     float d = 0.05f;
+    
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
         float str = DayNight.GetRainStr();
 
-        ShaderMaterial mat = (ShaderMaterial)SeaChild.GetActiveMaterial(0);
         mat.SetShaderParam("RainInt", Mathf.Lerp(0.0f, 1.0f, str / 100));
 
         d -= delta;
@@ -89,7 +88,11 @@ public class Poseidon : Spatial
 			d = 0.05f;
             UpdateRotation();
         }
-        
+        Player pl = Player.GetInstance();
+        if (pl != null)
+        {
+            GlobalTranslation = new Vector3(pl.GlobalTranslation.x, GlobalTranslation.y, pl.GlobalTranslation.z);
+        }
 
     }
 }

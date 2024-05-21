@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Assets/TerainTest/new_arraymesh2.tres" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Building/BuildingDust3.tscn" type="PackedScene" id=2]
@@ -14,6 +14,8 @@
 [ext_resource path="res://Scenes/Env_Assets/Antena.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Assets/TerainTex/SandSimple.tres" type="Material" id=13]
 [ext_resource path="res://Scenes/Env_Assets/Rock1.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=15]
+[ext_resource path="res://Assets/TerainTest/new_arraymesh2_LOD.tres" type="ArrayMesh" id=16]
 [ext_resource path="res://Scenes/Env_Assets/House.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Scenes/Env_Assets/Rock2.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Scenes/Env_Assets/Rock3.tscn" type="PackedScene" id=24]
@@ -159,15 +161,18 @@ EnergyPerWindStreangth = 0.025
 
 [node name="MeshInstance5" type="MeshInstance" parent="." index="45"]
 transform = Transform( 4000, 0, 0, 0, 2000, 0, 0, 0, 4000, 0, -138.835, 0 )
+lod_max_distance = 6000.0
 mesh = ExtResource( 1 )
 material/0 = ExtResource( 13 )
+script = ExtResource( 15 )
+LOD0 = ExtResource( 1 )
+LOD1 = ExtResource( 16 )
 
 [node name="StaticBody" type="StaticBody" parent="MeshInstance5" index="0"]
 collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance5/StaticBody" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 1 )
 
 [node name="Rock1" parent="." index="46" instance=ExtResource( 23 )]

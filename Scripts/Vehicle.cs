@@ -100,6 +100,16 @@ public class Vehicle : RigidBody
 
         ToggleWings(false);
         EnableWindOnWings(false);
+
+        Node par = GetParent();
+		while (!(par is Island))
+		{
+            if (par == null)
+				return;
+			par = par.GetParent();
+		}
+		Island ile = (Island)par;
+		ile.RegisterChild(this);
         //SetProcessInput(false);
     }
     public override void _PhysicsProcess(float delta)

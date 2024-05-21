@@ -21,6 +21,7 @@ public class WindGenerator : StaticBody
     {
         CurrentEnergy -= ammount;
     }
+    int scale;
     public override void _Ready()
     {
         anim = GetNode<AnimationPlayer>("AnimationPlayer");
@@ -36,8 +37,16 @@ public class WindGenerator : StaticBody
         anim2.PlaybackSpeed = rand.Next(2500, 3000) / 1000;
         Spatial rotorpivot = GetNode<Spatial>("Rotor_Pivot");
         rotorpivot.LookAt(new Vector3(rotorpivot.GlobalTransform.origin.x, rotorpivot.GlobalTransform.origin.y, rotorpivot.GlobalTransform.origin.z + 1), Vector3.Up);
-        if (!Visible)
-            SetProcess(false);
+        scale = Math.Max((int)Scale.x, 1);
+        Node parent = GetParent();
+		while (!(parent is Island))
+		{
+            if (parent == null)
+				return;
+			parent = parent.GetParent();
+		}
+		Island ile = (Island)parent;
+		ile.RegisterChild(this);
     }
     float d = 0.5f;
     public override void _Process(float delta)
@@ -49,7 +58,7 @@ public class WindGenerator : StaticBody
         d = 0.5f;
         float winddir = DayNight.GetWindDirection();
         float windstr = DayNight.GetWindStr();
-        Spatial rotorpivot = GetNode<Spatial>("Rotor_Pivot");
+        //Spatial rotorpivot = GetNode<Spatial>("Rotor_Pivot");
         float rot = winddir;
         Vector3 originalRotation = GlobalRotation;
         rot += Mathf.Rad2Deg(originalRotation.y) + 180;
@@ -59,7 +68,6 @@ public class WindGenerator : StaticBody
         //rotorpivot.GlobalRotation = new Vector3(0.0f, rot, 0.0f);
         float animspeed = windstr * 0.03f;
         float energy = EnergyPerWindStreangth * (windstr/100);
-        int scale = Math.Max((int)Scale.x, 1);
  
         anim.PlaybackSpeed = Mathf.Max(animspeed / scale, 0);
         anim2.PlaybackSpeed = Mathf.Max(animspeed / scale, 0);

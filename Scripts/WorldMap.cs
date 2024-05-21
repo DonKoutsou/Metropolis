@@ -110,7 +110,7 @@ public class WorldMap : TileMap
     IslandInfo IleToSave;
     public override void _Process(float delta)
     {
-        ulong ms = OS.GetSystemTimeMsecs();
+        //ulong ms = OS.GetSystemTimeMsecs();
         if (!finishedspawning)
         {
             if (IleToSave == null)
@@ -135,9 +135,9 @@ public class WorldMap : TileMap
         }
         
         CheckForTransition();
-        ulong msaf = OS.GetSystemTimeMsecs();
-        if (msaf - ms > 25)
-            GD.Print("World map processing took longer the 25 ms. Process time : " + (msaf - ms).ToString() + " ms");
+        //ulong msaf = OS.GetSystemTimeMsecs();
+        //if (msaf - ms > 10)
+            //GD.Print("World map processing took longer the 10 ms. Process time : " + (msaf - ms).ToString() + " ms. Island scene =  " + scene);
     }
     //spawning and
     IslandInfo GenerateIsland()
@@ -164,7 +164,7 @@ public class WorldMap : TileMap
         ileinfo.IleType = ilescene;
         ileinfo.pos = cell;
         
-        SpawnIsland(ileinfo);
+        SpawnIsland(ileinfo);   
 
         //SaveEntry
         if (id == 0)
@@ -172,8 +172,8 @@ public class WorldMap : TileMap
 
 
         ulong msaf = OS.GetSystemTimeMsecs();
-        
-        GD.Print("Island Generated. Process time : " + (msaf - ms).ToString() + " ms");
+        if (msaf - ms > 10)
+            GD.Print("Island Generated. Process time : " + (msaf - ms).ToString() + " ms. Island scene =  " + ilescene.ResourcePath);
 
         return ileinfo;
     }

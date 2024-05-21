@@ -32,9 +32,7 @@ public class Island : Spatial
         //FindVehicles(this);
         GetNode<StaticBody>("SeaBed").GetNode<MeshInstance>("Sea").QueueFree();
 
-        FindHouses(this);
-		FindGenerators(this);
-        FindVehicles(this);
+        //FindChildren(this);
 	}
 	public void SetSpawnInfo(Vector3 SpawnPos, float SpawnRot)
 	{
@@ -107,22 +105,38 @@ public class Island : Spatial
 	}
 	public void InitialSpawn(Random r)
 	{
-        
 		foreach(House h in Houses)
 		{
 			h.StartHouse(r);
 		}
 	}
-	private void FindHouses(Node node)
-	{
+    public void RegisterChild(Node child)
+    {
+        if (child is House)
+				Houses.Insert(Houses.Count, (House)child);
+        else if (child is WindGenerator)
+            Generators.Insert(Generators.Count, (WindGenerator)child);
+        else if (child is Vehicle)
+            Vehicles.Insert(Vehicles.Count, (Vehicle)child);
+    }
+    private void FindChildren(Node node)
+    {
+        //ulong ms = OS.GetSystemTimeMsecs();
 		foreach (Node child in node.GetChildren())
 		{
 			if (child is House)
 				Houses.Insert(Houses.Count, (House)child);
+            else if (child is WindGenerator)
+				Generators.Insert(Generators.Count, (WindGenerator)child);
+            else if (child is Vehicle)
+				Vehicles.Insert(Vehicles.Count, (Vehicle)child);
 			else
-				FindHouses(child);
+				FindChildren(child);
 		}
+        //ulong msaf = OS.GetSystemTimeMsecs();
+        //GD.Print("FoundChildren. Process time : " + (msaf - ms).ToString() + " ms");
 	}
+
 	public void GetHouses(out List<House> hs)
 	{
 		hs = new List<House>();
@@ -131,16 +145,7 @@ public class Island : Spatial
 			hs.Insert(i, Houses[i]);
 		}
 	}
-	private void FindGenerators(Node node)
-	{
-		foreach (Node child in node.GetChildren())
-		{
-			if (child is WindGenerator)
-				Generators.Insert(Generators.Count, (WindGenerator)child);
-			else
-				FindGenerators(child);
-		}
-	}
+
 	public void GetGenerator(out List<WindGenerator> wg)
 	{
 		wg = new List<WindGenerator>();
@@ -149,16 +154,7 @@ public class Island : Spatial
 			wg.Insert(i, Generators[i]);
 		}
 	}
-	private void FindVehicles(Node node)
-	{
-		foreach (Node child in node.GetChildren())
-		{
-			if (child is Vehicle)
-				Vehicles.Insert(Vehicles.Count, (Vehicle)child);
-			else
-				FindVehicles(child);
-		}
-	}
+
     public void GetVehicles(out List<Vehicle> vhs)
 	{
 		vhs = new List<Vehicle>();

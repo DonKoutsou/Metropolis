@@ -14,5 +14,6 @@ public class PlayerCamera : Camera
     {
         instance = this;
         Fov = Settings.GetGameSettings().FOVOverride;
+        UniversalLodManager.UpdateCamera(this);
     }
 }

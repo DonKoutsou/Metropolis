@@ -141,7 +141,6 @@ pitch_scale = 1.97
 autoplay = true
 
 [node name="Enviroment" type="AudioStreamPlayer3D" parent="WorldSoundManager"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 stream = ExtResource( 11 )
 max_db = -13.118
 autoplay = true

@@ -21,6 +21,16 @@ public class House : Spatial
 		}
 		HouseDoor = GetNode<Area>("HouseDoor");
 		HouseExterior = GetNode<StaticBody>("HouseExterior");
+		Node parent = GetParent();
+		
+		while (!(parent is Island))
+		{
+			if (parent == null)
+				return;
+			parent = parent.GetParent();
+		}
+		Island ile = (Island)parent;
+		ile.RegisterChild(this);
 	}
 	public void Touch(Node body)
 	{

@@ -4,7 +4,7 @@ using System;
 public class gen3test : Spatial
 {
     [Export]
-    string AnimToPlay;
+    string AnimToPlay = null;
     // Declare member variables here. Examples:
     // private int a = 2;
     // private string b = "text";

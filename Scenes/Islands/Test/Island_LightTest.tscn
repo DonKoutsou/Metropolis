@@ -103,7 +103,7 @@ transform = Transform( 0.83403, 0.551111, -0.0258837, 0, 0.0469147, 0.998899, 0.
 [node name="Player" parent="." index="24" instance=ExtResource( 17 )]
 transform = Transform( -0.997079, 0, 0.0763711, 0.00802935, 0.994458, 0.104829, -0.0759478, 0.105136, -0.991553, 0, 57.7508, 0 )
 
-[node name="Island" parent="." index="28" instance=ExtResource( 18 )]
+[node name="Island" parent="." index="25" instance=ExtResource( 18 )]
 
-[node name="Island3" parent="." index="29" instance=ExtResource( 1 )]
+[node name="Island3" parent="." index="26" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4000, 0, 0 )
