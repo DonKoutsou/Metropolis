@@ -404,7 +404,7 @@ spot_range = 47.3573
 spot_angle = 44.4241
 
 [node name="RayFL" type="RayCast" parent="."]
-transform = Transform( 1, -2.72291e-08, 1.89175e-08, 2.73357e-08, 1, -1.44355e-08, -1.89757e-08, 1.44355e-08, 1, 3, 0.749334, 4.99935 )
+transform = Transform( 1, -2.8044e-08, 1.93249e-08, 2.8151e-08, 1, -1.44355e-08, -1.93832e-08, 1.44355e-08, 1, 3, 0.749334, 4.99935 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292
@@ -416,8 +416,6 @@ material/0 = ExtResource( 1 )
 
 [node name="Particles" parent="RayFL" instance=ExtResource( 12 )]
 transform = Transform( 1, 2.05701e-08, -1.85682e-08, -2.05223e-08, 1, 1.44355e-08, 1.90921e-08, -1.44355e-08, 1, -0.00278616, -4.17923, -0.00447226 )
-visibility_aabb = AABB( -125.62, -35.3487, -87.4634, 251.24, 70.6974, 174.927 )
-local_coords = false
 
 [node name="RayF" type="RayCast" parent="."]
 transform = Transform( 1, 1.19087e-10, 5.82077e-11, 5.97481e-10, 1, -4.65661e-10, 2.91038e-10, -4.65661e-10, 1, -0.00105671, -0.655451, 4.81077 )
@@ -426,7 +424,7 @@ cast_to = Vector3( 0, 0, 20 )
 collision_mask = 292
 
 [node name="RayFR" type="RayCast" parent="."]
-transform = Transform( 1, 2.77946e-07, 5.75674e-08, -2.77865e-07, 1, -9.2783e-08, -5.75092e-08, 9.28994e-08, 1, -3, 0.750666, 5.00063 )
+transform = Transform( 1, 2.77539e-07, 5.75674e-08, -2.77457e-07, 1, -9.2783e-08, -5.75092e-08, 9.28994e-08, 1, -3, 0.750666, 5.00063 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292
@@ -438,11 +436,9 @@ material/0 = ExtResource( 1 )
 
 [node name="Particles" parent="RayFR" instance=ExtResource( 12 )]
 transform = Transform( 1, 2.05701e-08, -1.85682e-08, -2.05223e-08, 1, 1.44355e-08, 1.90921e-08, -1.44355e-08, 1, -0.00278616, -4.17923, -0.00447226 )
-visibility_aabb = AABB( -125.62, -35.3487, -87.4634, 251.24, 70.6974, 174.927 )
-local_coords = false
 
 [node name="RayBR" type="RayCast" parent="."]
-transform = Transform( 1, 2.77943e-07, 5.82077e-08, -2.77864e-07, 1, -8.77772e-08, -5.81495e-08, 8.78936e-08, 1, -3, 0.750666, -4.99936 )
+transform = Transform( 1, 2.77535e-07, 5.82077e-08, -2.77457e-07, 1, -8.77772e-08, -5.81495e-08, 8.78936e-08, 1, -3, 0.750666, -4.99936 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292
@@ -454,11 +450,9 @@ material/0 = ExtResource( 1 )
 
 [node name="Particles" parent="RayBR" instance=ExtResource( 12 )]
 transform = Transform( 1, 2.05701e-08, -1.85682e-08, -2.05223e-08, 1, 1.44355e-08, 1.90921e-08, -1.44355e-08, 1, -0.00278616, -4.17923, -0.00447226 )
-visibility_aabb = AABB( -125.62, -35.3487, -87.4634, 251.24, 70.6974, 174.927 )
-local_coords = false
 
 [node name="RayBL" type="RayCast" parent="."]
-transform = Transform( 1, 2.77189e-07, 5.67525e-08, -2.77109e-07, 1, -9.15024e-08, -5.66943e-08, 9.16189e-08, 1, 3, 0.749335, -5.00064 )
+transform = Transform( 1, 2.76781e-07, 5.67525e-08, -2.76702e-07, 1, -9.15024e-08, -5.66943e-08, 9.16189e-08, 1, 3, 0.749335, -5.00064 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292
@@ -470,7 +464,5 @@ material/0 = ExtResource( 1 )
 
 [node name="Particles" parent="RayBL" instance=ExtResource( 12 )]
 transform = Transform( 1, 2.05701e-08, -1.85682e-08, -2.05223e-08, 1, 1.44355e-08, 1.90921e-08, -1.44355e-08, 1, -0.00278616, -4.17923, -0.00447226 )
-visibility_aabb = AABB( -125.62, -35.3487, -87.4634, 251.24, 70.6974, 174.927 )
-local_coords = false
 
 [connection signal="body_shape_exited" from="VehicleBody" to="VehicleDamageManager" method="On_Ship_Part_Collided"]

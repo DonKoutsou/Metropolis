@@ -4,7 +4,6 @@
 [ext_resource path="res://Scenes/Env_Assets/Sea.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Islands/LightHouseGeo.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Env_Assets/MotherCityGeo.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Assets/Rain/Rain.tres" type="Material" id=5]
 [ext_resource path="res://Assets/Clouds/Clouds2.material" type="Material" id=6]
 [ext_resource path="res://Assets/Sounds/RainSound.mp3" type="AudioStream" id=7]
 [ext_resource path="res://Assets/Clutter/Antenna/Antenna.material" type="Material" id=8]
@@ -93,8 +92,16 @@ spread = 5.03
 gravity = Vector3( 0, -100, 0 )
 initial_velocity = 10000.0
 
+[sub_resource type="SpatialMaterial" id=122]
+render_priority = 1
+flags_unshaded = true
+params_blend_mode = 1
+params_cull_mode = 2
+params_depth_draw_mode = 1
+albedo_color = Color( 0.890196, 0.988235, 1, 1 )
+
 [sub_resource type="QuadMesh" id=3]
-material = ExtResource( 5 )
+material = SubResource( 122 )
 size = Vector2( 0.5, 50 )
 
 [sub_resource type="SpatialMaterial" id=99]
@@ -431,7 +438,7 @@ area_mask = 0
 transform = Transform( 1, -1.86265e-08, 2.08616e-07, -3.72529e-09, 1, -4.47035e-08, 5.96046e-08, 6.70552e-08, 1, 0, 0, 0 )
 
 [node name="Clouds2" type="Particles" parent="Camera/Spatial"]
-transform = Transform( 0.99753, -3.72529e-09, -0.070244, 3.72529e-09, 1, 0, 0.070244, 0, 0.99753, 0, 0, 0 )
+transform = Transform( 0.99753, -5.96046e-08, -0.0702438, 1.11759e-07, 1, -1.49012e-08, 0.070244, -6.70552e-08, 0.997533, 441.89, 1139.51, -1620.11 )
 sorting_use_aabb_center = false
 cast_shadow = 0
 generate_lightmap = false

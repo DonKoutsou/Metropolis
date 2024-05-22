@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Assets/Building/WindGenerator_Blade.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Building/WindGenerator_Base.obj" type="ArrayMesh" id=2]
@@ -187,6 +187,9 @@ tracks/0/keys = {
 "values": [ Vector3( 0, 0, 0 ) ]
 }
 
+[sub_resource type="OccluderShapePolygon" id=11]
+polygon_points = PoolVector2Array( 14, -44, 14, 45, -22, 45, -22, -44 )
+
 [node name="WindGenerator" type="StaticBody" groups=["Interactables"]]
 collision_layer = 20
 collision_mask = 0
@@ -269,6 +272,14 @@ reset_on_save = false
 playback_speed = 3.0
 anims/LookDir = SubResource( 8 )
 anims/RESET = SubResource( 9 )
+
+[node name="Occluder" type="Occluder" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.546, 43.3733, -3 )
+shape = SubResource( 11 )
+
+[node name="Occluder2" type="Occluder" parent="."]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -24.546, 43.3733, -6 )
+shape = SubResource( 11 )
 
 [connection signal="visibility_changed" from="MeshInstance" to="." method="_on_Generator_visibility_changed"]
 [connection signal="visibility_changed" from="MeshInstance2" to="." method="_on_Generator_visibility_changed"]

@@ -142,7 +142,7 @@ autoplay = true
 
 [node name="Enviroment" type="AudioStreamPlayer3D" parent="WorldSoundManager"]
 stream = ExtResource( 11 )
-max_db = -13.118
+unit_db = -80.0
+max_db = -17.065
 autoplay = true
-max_distance = 16.06
 area_mask = 0

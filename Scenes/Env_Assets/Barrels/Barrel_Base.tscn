@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Assets/Clutter/Barrel/M_Barrel.material" type="Material" id=1]
 
@@ -20,6 +20,9 @@ surfaces/0 = {
 [sub_resource type="CylinderShape" id=2]
 height = 3.30043
 
+[sub_resource type="OccluderShapePolygon" id=3]
+polygon_points = PoolVector2Array( 1.05014, -1.65785, 1.04309, 1.63352, -1.05719, 1.60533, -1.05719, -1.65785 )
+
 [node name="Barrel" type="StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.67219, 0 )
 collision_layer = 4
@@ -31,3 +34,10 @@ mesh = SubResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 2 )
+
+[node name="Occluder" type="Occluder" parent="."]
+shape = SubResource( 3 )
+
+[node name="Occluder2" type="Occluder" parent="."]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 3 )

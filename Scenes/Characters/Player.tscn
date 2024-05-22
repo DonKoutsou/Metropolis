@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/Stamina_Bar.cs" type="Script" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://Scripts/CameraPanPivot.cs" type="Script" id=14]
 [ext_resource path="res://Scripts/CameraMovePivot.cs" type="Script" id=15]
 [ext_resource path="res://Scenes/Characters/MoveLocation.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/Characters/Gen3Machine/Body.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scripts/Time_UI.cs" type="Script" id=18]
 [ext_resource path="res://Scripts/TalkText.cs" type="Script" id=19]
 [ext_resource path="res://Scripts/PlayerCamera.cs" type="Script" id=20]
@@ -33,7 +34,7 @@
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.5 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="CapsuleShape" id=6]
-height = 2.316
+height = 5.27483
 
 [sub_resource type="CapsuleShape" id=92]
 height = 1.963
@@ -348,10 +349,13 @@ Consumption = SubResource( 106 )
 [node name="Pivot" type="Spatial" parent="."]
 pause_mode = 1
 
-[node name="Guy" parent="Pivot" instance=ExtResource( 13 )]
+[node name="Guy" parent="Pivot" instance=ExtResource( 17 )]
+
+[node name="2" parent="Pivot" instance=ExtResource( 13 )]
+visible = false
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.31213, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3.36032, 0 )
 shape = SubResource( 6 )
 
 [node name="KillFieldDetector" type="Area" parent="."]
@@ -528,8 +532,8 @@ area_mask = 0
 
 [node name="Walk" type="AudioStreamPlayer3D" parent="CharacterSoundManager"]
 stream = ExtResource( 10 )
-unit_db = 10.614
-max_db = -9.473
+unit_db = -25.731
+max_db = -20.613
 area_mask = 0
 
 [node name="DialogueCameraPivot" type="Spatial" parent="."]

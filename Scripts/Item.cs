@@ -61,4 +61,5 @@ public enum ItemName
 	COMPASS,
 	MAP,
 	LIMB,
+	GUITAR,
 }

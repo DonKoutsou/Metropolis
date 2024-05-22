@@ -91,7 +91,7 @@ cast_shadow = 0
 multimesh = SubResource( 1 )
 
 [node name="Sky" parent="." index="21" instance=ExtResource( 14 )]
-transform = Transform( 0.988958, 0.0529206, 0.138426, 0.0172101, 0.886734, -0.46196, -0.147194, 0.459241, 0.876032, 0, 0, 0 )
+transform = Transform( 0.988958, 0.0529206, 0.138426, -0.141067, 0.0499427, 0.98874, 0.0454118, -0.997349, 0.0568568, 0, 0, 0 )
 
 [node name="Spatial" parent="." index="22" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -36.295, 900, -174.276 )

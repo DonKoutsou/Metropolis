@@ -6,6 +6,7 @@
 [ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_AmbientOcclusio2n.jpg" type="Texture" id=4]
 
 [resource]
+flags_world_triplanar = true
 albedo_texture = ExtResource( 3 )
 roughness_texture = ExtResource( 1 )
 normal_enabled = true
@@ -16,4 +17,5 @@ ao_light_affect = 0.0
 ao_texture = ExtResource( 4 )
 ao_on_uv2 = false
 ao_texture_channel = 0
-uv1_scale = Vector3( 50, 50, 50 )
+uv1_scale = Vector3( 0.005, 0.005, 0.005 )
+uv1_triplanar = true

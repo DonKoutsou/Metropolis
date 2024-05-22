@@ -1,12 +1,10 @@
-[gd_resource type="ShaderMaterial" load_steps=12 format=2]
+[gd_resource type="ShaderMaterial" load_steps=10 format=2]
 
 [ext_resource path="res://Assets/Water/textures/water/gerstner_normal.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Water/textures/post/lense_glare_a.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Water/textures/water/gerstner_height.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Water/textures/water/detail_normal.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Water/textures/water/foam_normal.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Water/textures/water/gradients/water_gradient_b.tres" type="Gradient" id=12]
-[ext_resource path="res://Assets/Sea/raindrops.png" type="Texture" id=13]
 
 [sub_resource type="Shader" id=10]
 code = "shader_type spatial;
@@ -16,9 +14,9 @@ render_mode async_visible,blend_mix,depth_draw_always,cull_back,diffuse_lambert,
 uniform bool IsRaining = false;
 
 uniform float ring_width : hint_range(0.0, 500.0) = 50.0f;
-uniform float fadeout : hint_range(0.0, 1.0) = 0.2;
-uniform sampler2D pattern;
-uniform vec4 ring_color : hint_color;
+//uniform float fadeout : hint_range(0.0, 1.0) = 0.2;
+//uniform sampler2D pattern;
+//uniform vec4 ring_color : hint_color;
 
 uniform sampler2D water_color : hint_albedo;
 
@@ -27,7 +25,7 @@ uniform sampler2D foam_albedo_map : hint_albedo;
 
 uniform sampler2D gerstner_height_map : hint_albedo;
 uniform sampler2D gerstner_normal_map : hint_normal;
-uniform sampler2D detail_normal_map : hint_normal;
+//uniform sampler2D detail_normal_map : hint_normal;
 uniform sampler2D water_highlight_map : hint_albedo;
 uniform float gerstner_value : hint_range(0.0, 1.0) = 0.0f;
 uniform float TextureRot : hint_range(-180, 180.0) = 0.0f;
@@ -36,30 +34,30 @@ uniform float Roughness = 0.5f;
 uniform float Spec = 0.5f;
 
 uniform float gerstner_normal = 0.25;
-uniform float gerstner_stretch = 1.5;
+//uniform float gerstner_stretch = 1.5;
 uniform float gerstner_tiling = 0.1;
 uniform float gerstner_2_normal = 0.2;
-uniform float gerstner_2_stretch = 2.0;
+//uniform float gerstner_2_stretch = 2.0;
 uniform float gerstner_2_tiling = 0.31;
 uniform float gerstner_distance_fadeout = 0.04;
 const vec2 gerstner_speed = vec2(0.0, -0.020);
 const vec2 gerstner_2_speed = vec2(0.0, -0.016);
 uniform float RainInt : hint_range(0.0, 1,0) = 0.0f;
 
-uniform float normal_base_intensity = 0.7;
-uniform float normal_peak_intensity = 1.5;
+//uniform float normal_base_intensity = 0.7;
+//uniform float normal_peak_intensity = 1.5;
 uniform float normal_dist_fadeout = 0.015;
-uniform float detail_normal_intensity = 0.05;
-uniform float detail_normal_tiling = 10.0;
-uniform float detail_normal_speed = 12.0;
+//uniform float detail_normal_intensity = 0.05;
+//uniform float detail_normal_tiling = 10.0;
+//uniform float detail_normal_speed = 12.0;
 
-uniform float foam_ramp = 0.2;
+//uniform float foam_ramp = 0.2;
 uniform float foam_amount = 7.0;
 uniform int foam_tiling = 8;
 uniform float foam_gerstner = 5.0;
 
-uniform float wave_height = 0.3;
-uniform float wave_z_offset = -0.15;
+//uniform float wave_height = 0.3;
+//uniform float wave_z_offset = -0.15;
 
 uniform float beach_alpha_fadeout = 0.05;
 uniform float beach_normal_fadeout = 0.3;
@@ -277,33 +275,21 @@ gradient = ExtResource( 12 )
 shader = SubResource( 10 )
 shader_param/IsRaining = true
 shader_param/ring_width = 450.0
-shader_param/fadeout = 0.2
-shader_param/ring_color = Color( 1, 1, 1, 1 )
-shader_param/gerstner_value = 0.0
+shader_param/gerstner_value = 1.0
 shader_param/TextureRot = 0.0
 shader_param/TextureRot2 = 0.0
 shader_param/Roughness = 0.896
 shader_param/Spec = 0.5
 shader_param/gerstner_normal = 0.606
-shader_param/gerstner_stretch = 1.5
 shader_param/gerstner_tiling = 0.1
 shader_param/gerstner_2_normal = 0.267
-shader_param/gerstner_2_stretch = 2.0
 shader_param/gerstner_2_tiling = 0.1
 shader_param/gerstner_distance_fadeout = 9.561
 shader_param/RainInt = 0.5
-shader_param/normal_base_intensity = 0.7
-shader_param/normal_peak_intensity = 1.5
-shader_param/normal_dist_fadeout = 0.313
-shader_param/detail_normal_intensity = 0.119
-shader_param/detail_normal_tiling = 10.0
-shader_param/detail_normal_speed = 12.0
-shader_param/foam_ramp = 0.2
+shader_param/normal_dist_fadeout = 0.015
 shader_param/foam_amount = 0.0
 shader_param/foam_tiling = 1
-shader_param/foam_gerstner = 55.231
-shader_param/wave_height = 0.0
-shader_param/wave_z_offset = 0.0
+shader_param/foam_gerstner = 47.877
 shader_param/beach_alpha_fadeout = 0.183
 shader_param/beach_normal_fadeout = 2.649
 shader_param/flow_blend_timing = -0.15
@@ -314,11 +300,9 @@ shader_param/sss_strength = 1.0
 shader_param/MAX_RADIUS = 2.5
 shader_param/HASHSCALE1 = 1.0
 shader_param/HASHSCALE3 = Vector3( 0.01, 0.01, 0.01 )
-shader_param/pattern = ExtResource( 13 )
 shader_param/water_color = SubResource( 2 )
 shader_param/foam_normal_map = ExtResource( 10 )
 shader_param/foam_albedo_map = SubResource( 12 )
 shader_param/gerstner_height_map = ExtResource( 5 )
 shader_param/gerstner_normal_map = ExtResource( 2 )
-shader_param/detail_normal_map = ExtResource( 7 )
 shader_param/water_highlight_map = ExtResource( 3 )

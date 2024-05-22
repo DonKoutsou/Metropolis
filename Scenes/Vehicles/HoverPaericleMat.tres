@@ -1,17 +1,16 @@
-[gd_resource type="SpatialMaterial" load_steps=3 format=2]
+[gd_resource type="SpatialMaterial" load_steps=2 format=2]
 
 [ext_resource path="res://Assets/Clouds/Textures/smoke_08.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Clouds/CloudNorm.png" type="Texture" id=2]
 
 [resource]
 flags_transparent = true
 params_blend_mode = 1
+params_depth_draw_mode = 3
 params_billboard_mode = 3
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
-particles_anim_loop = false
+particles_anim_loop = true
 albedo_color = Color( 1, 0.901961, 0.698039, 1 )
 albedo_texture = ExtResource( 1 )
-normal_enabled = true
-normal_scale = 2.0
-normal_texture = ExtResource( 2 )
+anisotropy_enabled = true
+anisotropy = 1.0

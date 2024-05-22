@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scenes/SoundMap/Waves.mp3" type="AudioStream" id=1]
+
+[node name="Spatial" type="Spatial"]
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 1 )
+max_db = -7.526
+autoplay = true
+doppler_tracking = 1

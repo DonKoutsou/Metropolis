@@ -29,6 +29,7 @@ public class Character_Animations : AnimationPlayer
             case E_Animations.Idle:
             {
                 animtree.Set("parameters/Idle_Walk_Blend/blend_amount", 0f);
+                animtree.Set("parameters/Idle_Run_Blend/blend_amount", 0f);
                 Vector3 rot = new Vector3(0, 0, 0);
                 parent.Rotation = rot;
                 walkpart.Emitting = false;
@@ -38,7 +39,8 @@ public class Character_Animations : AnimationPlayer
             case E_Animations.Walk:
             {
                 animtree.Set("parameters/Idle_Walk_Blend/blend_amount", 1f);
-                animtree.Set("parameters/Walk_Speed/scale", 2f);
+                animtree.Set("parameters/Idle_Run_Blend/blend_amount", 0f);
+                //animtree.Set("parameters/Walk_Speed/scale", 2f);
                 if (currot > 0)
                     currot -= 3f;
                 Vector3 rot = new Vector3(Mathf.Deg2Rad(currot), 0, 0);
@@ -60,8 +62,9 @@ public class Character_Animations : AnimationPlayer
                     currot += 1f;
                 Vector3 rot = new Vector3(Mathf.Deg2Rad(currot), 0, 0);
                 parent.Rotation = rot;
-                animtree.Set("parameters/Idle_Walk_Blend/blend_amount", 1f);
-                animtree.Set("parameters/Walk_Speed/scale", 4f);
+                animtree.Set("parameters/Idle_Walk_Blend/blend_amount", 0f);
+                animtree.Set("parameters/Idle_Run_Blend/blend_amount", 1f);
+                //animtree.Set("parameters/Walk_Speed/scale", 4f);
                 walkpart.Emitting = true;
                 if (walkpart.Amount != 8)
                     walkpart.Amount = 8;
