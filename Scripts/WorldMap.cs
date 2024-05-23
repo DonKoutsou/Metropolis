@@ -29,6 +29,9 @@ public class WorldMap : TileMap
     public PackedScene LightHouse;
 
     [Export]
+    public PackedScene Μαχαλάς;
+
+    [Export]
     public bool HideBasedOnState = false;
 
     [Export]
@@ -52,6 +55,8 @@ public class WorldMap : TileMap
 
     //id of cells to be changed to events
     List <int> RandomisedEntryID = null;
+
+    int ΜαχαλάςEntryID;
 
     //id of exit
     int ExitID = 0;
@@ -315,6 +320,12 @@ public class WorldMap : TileMap
             int SpawnIndex = random.Next(0, OrderedCells.Count);
             RandomisedEntryID.Insert(i, SpawnIndex);
         }
+        // μαχαλάς randomise
+        var lighthousecells = GetUsedCellsById(4);
+        int RandomLightHouseIndex = random.Next(0, lighthousecells.Count);
+        Vector2 Μαχαλάςpalcement = (Vector2)lighthousecells[RandomLightHouseIndex];
+        ΜαχαλάςEntryID = OrderedCells.IndexOf(Μαχαλάςpalcement);
+        //exit randomise
         var exitcells = GetUsedCellsById(2);
         int RandomExitIndex = random.Next(0, exitcells.Count);
         Vector2 Exitpalcement = (Vector2)exitcells[RandomExitIndex];
@@ -423,7 +434,13 @@ public class WorldMap : TileMap
         else if (type == 3)
             scene =  Sea;
         else if (type == 4)
-            scene = LightHouse;
+        {
+            if (currentile == ΜαχαλάςEntryID)
+                scene =  Μαχαλάς;
+            else
+                scene = LightHouse;
+        }
+            
         return scene;
     }
 	public void SyncSeas()

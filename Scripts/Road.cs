@@ -1,11 +1,25 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 [Tool]
 public class Road : Path
 {
     [Export]
     float PieaceDistance = 1.0f;
+    [Export]
+    bool SnapToGround = true;
+    [Export]
+    bool AllignToNormal = true;
+
+    [Export]
+    bool SpawnCollisions = false;
+
+    [Export]
+    float pushtoflootam = 0.0f;
+
+    [Export]
+    Vector3 ExtraRot = Vector3.Zero;
 
     bool isDirty = false;
 
@@ -33,27 +47,39 @@ public class Road : Path
         }
             
     }
+    private void DeletePrevChilden()
+    {
+        foreach (Node shape in GetChildren())
+        {
+            if (shape is StaticBody)
+                shape.Free();
+        }
+    }
     private void UpdateMultiMesh()
     {
+        DeletePrevChilden();
         float pathlength = Curve.GetBakedLength();
         int count = (int)Mathf.Floor(pathlength / PieaceDistance);
         MultiMesh MultiMeshChild = GetNode<MultiMeshInstance>("MultiMeshInstance").Multimesh;
         MultiMeshChild.InstanceCount = count;
         float offset = PieaceDistance / 2.0f;
+
+        List<StaticBody> bodies = new List<StaticBody>();
         for (int i = 0; i < count; i++)
         {
             float curveDist = offset + PieaceDistance * i;
             Vector3 pos = Curve.InterpolateBaked(curveDist, true);
-
+            
             var spaceState = GetWorld().DirectSpaceState;
-            var result = spaceState.IntersectRay(pos, pos + (Vector3.Down * 1000),
-                        new Godot.Collections.Array { this }, FloorLayer);
+            var result = spaceState.IntersectRay(pos, pos + (Vector3.Down * 1000), new Godot.Collections.Array { this }, FloorLayer);
             
 
             Basis bass = Transform.basis;
             
             Vector3 up = Curve.InterpolateBakedUpVector(curveDist, true);
             Vector3 f = Curve.InterpolateBaked(curveDist + 0.1f, true);
+            //Vector3 f = up * (Vector3.Forward * 2);
+            f.y = pos.y;
 
             var forward = pos.DirectionTo(f);
             bass.y = up;
@@ -70,14 +96,69 @@ public class Road : Path
             
 
             //transform.(new Vector3(0,1,0), rot);
-
-            if (result.Count > 0)
-                transform = new Transform(resultingBasis, (Vector3)result["position"]);
+            Vector3 postouse = Vector3.Zero;
+            Basis basetouse = new Basis();
+            if (result.Count > 0 && SnapToGround)
+            {
+                if (AllignToNormal)
+                {
+                    postouse = (Vector3)result["position"];
+                    postouse.y -= pushtoflootam;
+                    basetouse = resultingBasis;
+                }
+                else
+                {
+                    postouse = (Vector3)result["position"];
+                    postouse.y -= pushtoflootam;
+                    basetouse = bass;
+                }
+            }
             else
-                transform = new Transform(resultingBasis, pos);
+            {
+                if (AllignToNormal)
+                {
+                    postouse = pos;
+                    basetouse = resultingBasis;
+                }
+                else
+                {
+                    postouse = pos;
+                    basetouse = bass;
+                }
+            }
+            //basetouse = basetouse.Rotated(ExtraRot.Normalized() , Mathf.Deg2Rad(rotam));
+            transform = new Transform(basetouse, postouse);
                 
             MultiMeshChild.SetInstanceTransform(i, transform);
+
+            if (SpawnCollisions)
+            {
+                StaticBody body = new StaticBody();
+                
+                body.Name = "body" + i.ToString();
+                bodies.Add(body);
+                AddChild(body, true);
+                
+               
+                
+                CollisionShape shape = new CollisionShape();
+                shape.Shape = new BoxShape();
+                shape.Transform = transform;
+                ((BoxShape)shape.Shape).Extents = MultiMeshChild.Mesh.GetAabb().Size / 2;
+                shape.Name = "Shape" + i.ToString();
+                body.AddChild(shape, true);
+
+                
+                body.Owner = Owner;
+                shape.Owner = Owner;
+            }
         }
+        foreach (StaticBody bod in bodies)
+        {
+            bod.CollisionLayer = FloorLayer;
+            //bod.Hide();
+        }
+        //GetTree.CurrentScene.sav
     }
     private void OnCurveChanged()
     {

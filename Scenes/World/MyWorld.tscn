@@ -53,8 +53,9 @@ tile_data = PoolIntArray( -2555944, 3, 0, -2555943, 3, 0, -2555942, 3, 0, -25559
 __meta__ = {
 "_edit_pinned_properties_": [ "scenestospawn" ]
 }
-scenestospawn = [ ExtResource( 12 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 13 ), ExtResource( 17 ), ExtResource( 16 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 21 ), ExtResource( 20 ), ExtResource( 3 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 20 ) ]
+scenestospawn = [ ExtResource( 12 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 13 ), ExtResource( 17 ), ExtResource( 16 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 21 ), ExtResource( 20 ), ExtResource( 3 ), ExtResource( 26 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 20 ) ]
 Eventscenestospawn = [ ExtResource( 23 ), ExtResource( 22 ) ]
 Entrytospawn = ExtResource( 4 )
 Exittospawn = ExtResource( 5 )
+"Μαχαλάς" = ExtResource( 27 )
 IntroScene = ExtResource( 1 )
