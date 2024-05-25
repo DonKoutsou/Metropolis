@@ -1,6 +1,7 @@
 using Godot;
 using System;
-
+using System.Collections.Generic;
+using System.Linq;
 public class Furniture : Spatial
 {
 	[Export]
@@ -73,4 +74,40 @@ public class Furniture : Spatial
 //  {
 //      
 //  }
+}
+public class FurnitureInfo
+{
+	public string FunritureName;
+	public bool Searched;
+	public bool HasItem;
+	public ItemName item;
+	public void UpdateInfo(Furniture furn)
+	{
+		Searched = furn.Searched;
+	}
+
+	public void SetInfo(string name, bool srch, bool hasI, ItemName it)
+	{
+		FunritureName = name;
+		Searched = srch;
+		HasItem = hasI;
+		item = it;
+	}
+	public Dictionary<string, object>GetPackedData()
+	{
+		Dictionary<string, object> data = new Dictionary<string, object>();
+
+		data.Add("Name", FunritureName);
+		data.Add("Searched", Searched);
+		data.Add("HasItem", HasItem);
+		data.Add("ItemType", (int)item);
+		return data;
+	}
+	public void UnPackData(Godot.Object data)
+    {
+        FunritureName = (string)data.Get("Name");
+		Searched = (bool)data.Get("Searched");
+		HasItem = (bool)data.Get("HasItem");
+		item = (ItemName)data.Get("ItemType");
+    }
 }

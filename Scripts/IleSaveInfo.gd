@@ -8,6 +8,7 @@ func _SetData(data):
 	Houses = data["Houses"]
 	Generators = data["Generators"]
 	Vehicles = data["Vehicles"]
+	Characters = data["Characters"]
 	Items = data["Items"]
 	Rotation = data["Rotation"]
 
@@ -19,4 +20,5 @@ export (Array, Resource) var Houses
 export (Array, Resource)  var Generators
 export (Array, Resource)  var Vehicles
 export (Array, Resource)  var Items
+export (Array, Resource) var Characters
 export var Rotation:float

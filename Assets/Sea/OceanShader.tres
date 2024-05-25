@@ -199,10 +199,10 @@ void fragment() {
 	ROUGHNESS = Roughness;
 	METALLIC = 0.0;
 	ALPHA = alpha_output;
-	if (IsRaining)
+	/*if (IsRaining)
 	{
 		float resolution = 10.0 * exp2(-3.0 / (1.0 / vec2(2.0, 2.0)).x);
-		vec2 uv2 = UV.xy / (1.0 /  ring_width ) * resolution + (WORLD_MATRIX[3].xz * 0.293);
+		vec2 uv2 = UV.xy / (1.0 /  ring_width ) * resolution + (WORLD_MATRIX[3].xy * 0.293);
 		vec2 p0 = floor(uv2);
 
 		vec2 circles = vec2(0.0);
@@ -238,7 +238,7 @@ void fragment() {
 		normmixed.z += 1.0;
 		NORMALMAP = mix(normal_output, normmixed, RainInt);
 		ALBEDO = mix(albedo_output, vec3(color), RainInt);
-	}
+	}*/
 }
 
 void light() {

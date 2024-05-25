@@ -317,6 +317,9 @@ public class Vehicle : RigidBody
     }
     public void Steer(float delta)
     {
+        if (SteeringWheel.GlobalTranslation.DistanceTo(loctomove) < 0.1f)
+            return;
+            
         SteeringWheel.LookAt(loctomove, Vector3.Up);
         float steer = Mathf.Rad2Deg(SteeringWheel.Rotation.y);
 
@@ -371,6 +374,10 @@ public class Vehicle : RigidBody
             ExaustParticles[1].Emitting = false;
             Working = false;
         }
+    }
+    public bool IsRunning()
+    {
+        return Working;
     }
     public  void ToggleLights(bool toggle)
     {

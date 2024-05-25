@@ -83,28 +83,34 @@ public class Character : KinematicBody
 				CharacterInventory.OverrideWeight(InventoryWeightOverride);
 			}
 		}
-		
+
 		//anims = GetNode<Character_Animations>("Character_Animations");
 		collider = GetNode<CollisionShape>("CollisionShape");
 		collider.Disabled = false;
 		startingstaming = m_Stamina;
 
-		
 		CharacterSoundManager = GetNode<CharacterSoundManager>("CharacterSoundManager");
 
-
-		
 		AudioStreamPlayer3D walkingsound = CharacterSoundManager.GetSound("Walk");
 		walkingsound.Play();
 		walkingsound.StreamPaused = true;
 		//GetNode<AudioStreamPlayer3D>("TiredSound").Play();
 		//GetNode<AudioStreamPlayer3D>("TiredSound").StreamPaused = true;
 		
-		
 		anim = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Character_Animations>("AnimationPlayer");
 		HeadPivot = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("BoneAttachment").GetNode<Spatial>("HeadPivot");
 		NightLight = HeadPivot.GetNode<SpotLight>("NightLight");
 		loctomove = GlobalTranslation;
+
+		if (this is Player)
+			return;
+		Island ile = (Island)GetParent();
+		ile.RegisterChild(this);
+	}
+	public void SetData(CharacterInfo info)
+	{
+        Name = info.Name;
+        GlobalTranslation = info.Position;
 	}
 	public void SetVehicle(Vehicle veh)
 	{
@@ -172,18 +178,6 @@ public class Character : KinematicBody
 			{
 				walkingsound.StreamPaused = false;
 				walkingsound.PitchScale = 0.7f;
-			}
-			if (Input.IsActionPressed("Run"))
-			{
-				
-				walkingsound.PitchScale = 0.5f;
-				//GetNode<AudioStreamPlayer3D>("WalkingSound").db = 5f;
-				anim.PlayAnimation(E_Animations.Walk);
-			}
-			else
-			{
-				walkingsound.PitchScale = 1f;
-				anim.PlayAnimation(E_Animations.Run);
 			}
 				
 		}
@@ -303,7 +297,61 @@ public class Character : KinematicBody
 		
 	}
 }
+public class CharacterInfo
+{
+	public string Name;
+	public Vector3 Position;
+	public string SceneData;
+	public Dictionary<string, object> CustomData = new Dictionary<string, object>();
 
+	public void UpdateInfo(Character it)
+	{
+		Name = it.Name;
+		Position = it.GlobalTranslation;
+		SceneData = it.Filename;
+
+	}
+	public Dictionary<string, object>GetPackedData(out bool HasData)
+	{
+		HasData = false;
+		Dictionary<string, object> data = new Dictionary<string, object>();
+		data.Add("Position", Position);
+		data.Add("Name", Name);
+		data.Add("SceneData", SceneData);
+		if (CustomData.Count > 0)
+		{
+			HasData = true;
+			string[] CustomDataKeys = new string[CustomData.Count];
+			object[] CustomDataValues = new object[CustomData.Count];
+			int i = 0;
+			foreach (KeyValuePair<string, object> Data in CustomData)
+			{
+				CustomDataKeys[i] = Data.Key;
+				CustomDataValues[i] = Data.Value;
+				i++;
+			}
+			data.Add("CustomDataKeys", CustomDataKeys);
+			data.Add("CustomDataValues", CustomDataValues);
+		}
+		return data;
+	}
+    public void UnPackData(Resource data)
+    {
+        Position = (Vector3)data.Get("Position");
+		Name = (string)data.Get("Name");
+		SceneData = (string)data.Get("SceneData");
+		Godot.Collections.Array CustomDataKeys = (Godot.Collections.Array)data.Get("CustomDataKeys");
+		Godot.Collections.Array CustomDataValues = (Godot.Collections.Array)data.Get("CustomDataValues");
+
+		if (CustomDataKeys.Count > 0 && CustomDataValues.Count > 0)
+		{
+			for (int i = 0; i < CustomDataKeys.Count; i++)
+			{
+				CustomData.Add((string)CustomDataKeys[i], CustomDataValues[i]);
+			}
+		}
+    }
+}
 
 
 

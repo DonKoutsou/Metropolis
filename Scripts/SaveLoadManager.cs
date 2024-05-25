@@ -33,10 +33,34 @@ public class SaveLoadManager : Control
 		}
 
 		Player pl = Player.GetInstance();
-
+		bool HasVecicle = pl.HasVecicle;
+		
 		Dictionary<string, object> data = map.GetSaveData();
+		data.Add("playerHasVehicle", HasVecicle);
+		if (HasVecicle)
+		{
+			Vehicle veh = pl.currveh;
+			data.Add("VehicleName", veh.GetParent().Name);
+			data.Add("VehicleState", veh.IsRunning());
+			data.Add("WingState", veh.HasDeployedWings());
+			data.Add("LightState", veh.LightCondition());
+		}
+			
 		data.Add("PlayerLocation", pl.GlobalTranslation);
 		data.Add("PlayerEnergy", pl.GetCurrentEnergy());
+
+		int day, hour, mins;
+		DayNight.GetDay(out day);
+		DayNight.GetTime(out hour, out mins);
+
+		int[] Date = new int[3];
+		Date[0] = day;
+		Date[1] = hour;
+		Date[2] = mins;
+
+		data.Add("Date", Date);
+
+
 		Dictionary<Vector2, int> MapData = MapGrid.GetInstance().GetSaveData();
 		Vector2[] MapGridVectorData = new Vector2[MapData.Count];
 		int[] MapGridTypeData = new int[MapData.Count];
@@ -63,14 +87,18 @@ public class SaveLoadManager : Control
 		{
 			Resource Inventorysave = (Resource)InventorySaveGD.New();
 			Dictionary<string, object> Itemdata = new Dictionary<string, object>();
+			string[] Keys = new string[4];
+			object[] Values = new object[4];
 			Itemdata.Add("SceneData", it.Filename);
 			bool HasData = false;
 			if (it is Battery)
 			{
-				Itemdata.Add("CustomDataKeys", "CurrentEnergy");
-				Itemdata.Add("CustomDataValues", ((Battery)it).GetCurrentCap());
+				Keys[0] = "CurrentEnergy";
+				Values[0] = ((Battery)it).GetCurrentCap();
 				HasData = true;
 			}
+			Itemdata.Add("CustomDataKeys", Keys);
+			Itemdata.Add("CustomDataValues", Values);
 			Inventorysave.Call("_SetData", Itemdata, HasData);
 			Inventorydata[v] = Inventorysave;
 			v ++;

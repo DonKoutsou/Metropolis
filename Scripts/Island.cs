@@ -23,6 +23,8 @@ public class Island : Spatial
 	List<WindGenerator> Generators = new List<WindGenerator>();
 
 	List<Item> Items = new List<Item>();
+
+	List<Character> Characters = new List<Character>();
 	
 	public override void _Ready()
 	{
@@ -66,6 +68,48 @@ public class Island : Spatial
 				{
 					gen.SetData(GenInfo);
 				}
+			}
+		}
+		/*foreach (Character Ch in Characters)
+		{
+			foreach(CharacterInfo CgarInfo in data.Characters)
+			{
+				if (Ch.Name == CgarInfo.Name)
+				{
+					Ch.SetData(CgarInfo);
+				}
+			}
+		}*/
+		List <CharacterInfo> C = new List<CharacterInfo>();
+
+		foreach (Character Cha in Characters)
+		{
+			CharacterInfo myinfo = null;
+			foreach(CharacterInfo ItInfo in data.Characters)
+			{
+				if (Cha.Name == ItInfo.Name)
+				{
+					myinfo = ItInfo;
+				}
+			}
+			if( myinfo != null)
+			{
+				Cha.SetData(myinfo);
+				C.Add(myinfo);
+			}
+			else
+				Cha.QueueFree();
+		}
+		foreach(CharacterInfo inf in data.Characters)
+		{
+			//if (inf.removed)
+				//continue;
+			if (!C.Contains(inf))
+			{
+				PackedScene Charscene = GD.Load<PackedScene>(inf.SceneData);
+				Character Char = Charscene.Instance<Character>();
+				AddChild(Char);
+				Char.SetData(inf);
 			}
 		}
 
@@ -138,7 +182,7 @@ public class Island : Spatial
 				Vehicle V = veh.GetNode<Vehicle>("VehicleBody");
 				AddChild(veh);
 				V.InputData(inf);
-				V.Name = inf.VehName;
+				veh.Name = inf.VehName;
 			}
 		}
 	}
@@ -159,6 +203,8 @@ public class Island : Spatial
 			Vehicles.Insert(Vehicles.Count, (Vehicle)child);
 		else if (child is Item)
 			Items.Insert(Items.Count, (Item)child);
+		else if (child is Character)
+			Characters.Insert(Characters.Count, (Character)child);
 	}
 	public void UnRegisterChild(Node child)
 	{
@@ -170,6 +216,8 @@ public class Island : Spatial
 			Vehicles.Remove((Vehicle)child);
 		else if (child is Item && Items.Contains(child))
 			Items.Remove((Item)child);
+		else if (child is Character && Characters.Contains(child))
+			Characters.Remove((Character)child);
 	}
 	private void FindChildren(Node node)
 	{
@@ -231,6 +279,17 @@ public class Island : Spatial
 			Itms.Insert(i, Items[i]);
 		}
 	}
+	public void GetCharacters(out List<Character> Char)
+	{
+		Char = new List<Character>();
+		for (int i = 0; i < Characters.Count; i++)
+		{
+			if (Characters[i] == null)
+				continue;
+				
+			Char.Insert(i, Characters[i]);
+		}
+	}
 }
 public class IslandInfo
 {
@@ -243,6 +302,8 @@ public class IslandInfo
 	public List<VehicleInfo> Vehicles = new List<VehicleInfo>();
 	
 	public List<ItemInfo> Items = new List<ItemInfo>();
+
+	public List<CharacterInfo> Characters = new List<CharacterInfo>();
 	public float rottospawn;
 
     public void UnPackData(Godot.Object data)
@@ -266,7 +327,7 @@ public class IslandInfo
 			info.UnPackData((Resource)GeneratorData[i]);
             Generators.Add(info);
 		}
-         Godot.Collections.Array VehicleData = ( Godot.Collections.Array)data.Get("Vehicles");
+        Godot.Collections.Array VehicleData = ( Godot.Collections.Array)data.Get("Vehicles");
         for (int i  = 0; i < VehicleData.Count; i++)
 		{
 			VehicleInfo info = new VehicleInfo();
@@ -279,6 +340,13 @@ public class IslandInfo
 			ItemInfo info = new ItemInfo();
 			info.UnPackData((Resource)ItemData[i]);
             Items.Add(info);
+		}
+		Godot.Collections.Array CharData = ( Godot.Collections.Array)data.Get("Characters");
+		for (int i  = 0; i < CharData.Count; i++)
+		{
+			CharacterInfo info = new CharacterInfo();
+			info.UnPackData((Resource)CharData[i]);
+            Characters.Add(info);
 		}
     }
 	public Dictionary<string, object>GetPackedData()
@@ -342,6 +410,18 @@ public class IslandInfo
 			VehicleInfoobjects[i] = Vehicleinfo;
 		}
 		data.Add("Vehicles", VehicleInfoobjects);
+
+		GDScript CharSaveScript = GD.Load<GDScript>("res://Scripts/CharacterSaveInfo.gd");
+
+		Resource[] CharacterInfoobjects = new Resource[Characters.Count];
+		for (int i = 0; i < Characters.Count; i ++)
+		{
+			Resource CharInfor = (Resource)CharSaveScript.New();
+			CharInfor.Call("_SetData", Houses[i].GetPackedData(), false);
+			CharacterInfoobjects[i] = CharInfor;
+		}
+		data.Add("Characters", CharacterInfoobjects);
+
 		return data;
 	}
     
@@ -357,10 +437,13 @@ public class IslandInfo
 		Ile.GetVehicles(out veh);
 		List <Item> Itms;
 		Ile.GetItems(out Itms);
+		List <Character> Chars;
+		Ile.GetCharacters(out Chars);
 		AddHouses(hous);
 		AddGenerators(Gen);
 		AddVehicles(veh);
 		AddItems(Itms);
+		AddChars(Chars);
 	}
 	public void AddNewVehicle(Vehicle veh)
 	{
@@ -383,6 +466,31 @@ public class IslandInfo
 			{
 				VehicleInfo info = Vehicles[i];
 				Vehicles.Remove(info);
+				break;
+			}
+		}
+	}
+	public void AddNewCharacter(Character ch)
+	{
+		int Charammount = 0;
+		for(int i = 0; i < Characters.Count; i++)
+		{
+			//if (!Vehicles[i].removed)
+				Charammount += 1;
+		}
+		ch.Name = "Character" + (Charammount + 1).ToString();
+		CharacterInfo data = new CharacterInfo();
+		data.UpdateInfo(ch);
+		Characters.Insert(Characters.Count, data);
+	}
+	public void RemoveCharacter(Character ch)
+	{
+		for(int i = 0; i < Characters.Count; i++)
+		{
+			if (Characters[i].Name == ch.GetParent().Name)
+			{
+				CharacterInfo info = Characters[i];
+				Characters.Remove(info);
 				break;
 			}
 		}
@@ -491,7 +599,28 @@ public class IslandInfo
 			}
 			VHInfo.UpdateInfo(v);
 		}
-		
+		List<Character> Chars;
+		island.GetCharacters(out Chars);
+		foreach(CharacterInfo CHInfo in Characters)
+		{
+			Character c = null;
+			foreach (Character cha in Chars)
+			{
+				if (cha == null || !Godot.Object.IsInstanceValid(cha))
+					continue;
+				if (cha.Name == CHInfo.Name)
+				{
+					c = cha;
+					break;
+				}
+			}
+			if (c == null)
+			{
+				//VHInfo.removed = true;
+				continue;
+			}
+			CHInfo.UpdateInfo(c);
+		}
 	}
 	public void AddHouses(List<House> HouseToAdd)
 	{
@@ -543,6 +672,15 @@ public class IslandInfo
 			VehicleInfo info = new VehicleInfo();
 			info.SetInfo(VehicleToAdd[i]);
 			Vehicles.Insert(Vehicles.Count, info);
+		}
+	}
+	public void AddChars(List<Character> CharsToAdd)
+	{
+		for (int i = 0; i < CharsToAdd.Count; i++)
+		{
+			CharacterInfo info = new CharacterInfo();
+			info.UpdateInfo(CharsToAdd[i]);
+			Characters.Insert(Characters.Count, info);
 		}
 	}
 	public bool IsIslandSpawned()

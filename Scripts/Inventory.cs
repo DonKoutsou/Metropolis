@@ -40,8 +40,21 @@ public class Inventory : Spatial
         DeleteContents();
         foreach(var It in items)
         {
-            PackedScene it = GD.Load<PackedScene>((string)((Resource)It).Get("SceneData"));
+            Resource res = (Resource)It;
+            PackedScene it = GD.Load<PackedScene>((string)res.Get("SceneData"));
             Item newItem = it.Instance<Item>();
+            if (newItem is Battery)
+            {
+                Array CustomDataKeys = (Array)res.Get("CustomDataKeys");
+		        Godot.Collections.Array CustomDataValues = (Godot.Collections.Array)res.Get("CustomDataValues");
+                for (int i = 0; i < CustomDataKeys.Length; i++)
+                {
+                    if ((string)CustomDataKeys.GetValue(i) == "CurrentEnergy")
+                    {
+                        ((Battery)newItem).SetCurrentCap((float)CustomDataValues[i]);
+                    }
+                }
+            }
             InsertItem(newItem);
         }
     }

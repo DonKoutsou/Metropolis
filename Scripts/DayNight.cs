@@ -420,6 +420,12 @@ public class DayNight : WorldEnvironment
         }
         currentDay += days;
     }
+    public void SetTime(int Day, int Hours, int Mins)
+    {
+        currentDay = Day;
+        currenthour = Hours;
+        currentmins = Mins;
+    }
     public static void MinsToTime(int ammout, out int days, out int hours, out int mins)
     {
         days = 0;

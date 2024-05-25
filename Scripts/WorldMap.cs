@@ -184,7 +184,16 @@ public class WorldMap : TileMap
 	{
 		if (LoadSave)
 		{
-			Resource save = GD.Load<Resource>("user://SavedGame.tres");
+			var ResourceLoaderSafe = ResourceLoader.Load("res://Scripts/safe_resource_loader.gd") as Script;
+			Resource save = (Resource)ResourceLoaderSafe.Call("load", "user://SavedGame.tres");
+			if (save == null)
+			{
+				ArrangeCellsBasedOnDistance();
+				MapGrid.GetInstance().InitMap();
+				return;
+			}
+			int[] Date = (int[])save.Get("Date");
+			DayNight.GetInstance().SetTime(Date[0], Date[1], Date[2]);
 			LoadSaveData(save);
 			IslandInfo CurIle;
 			ilemap.TryGetValue(WorldToMap(CurrentTile), out CurIle);
@@ -206,6 +215,26 @@ public class WorldMap : TileMap
 			//returning data to inventory map
 			Vector2[] MapGridVectorData = (Vector2[])save.Get("MapGridVectors");
 			int[] MapGridTypeData = (int[])save.Get("MapGridTypes");
+
+			bool HasVehicle = (bool)save.Get("playerHasVehicle");
+			if (HasVehicle)
+			{
+				string vehname = (string)save.Get("VehicleName");
+				bool MachineState = (bool)save.Get("VehicleState");
+				bool WingState = (bool)save.Get("WingState");
+				bool LightState = (bool)save.Get("LightState");
+
+
+				Vehicle veh = GetCurrentIsland().GetNode<Spatial>(vehname).GetNode<Vehicle>("VehicleBody");
+				veh.BoardVehicle(pl);
+				pl.SetVehicle(veh);
+
+				veh.ToggleMachine(MachineState);
+				veh.ToggleWings(WingState);
+				veh.ToggleLights(LightState);
+			}
+
+			
 
 			Dictionary<Vector2, int> MapGridData = new Dictionary<Vector2, int>();
 
@@ -358,9 +387,10 @@ public class WorldMap : TileMap
 				if (pl.HasVehicle())
 				{
 					Vehicle veh = pl.currveh;
+					
+					ileinf.RemoveVehicle(veh);
 					veh.ReparentVehicle(ileinf.ile ,ileinfto.ile);
 					ileinfto.AddNewVehicle(veh);
-					ileinf.RemoveVehicle(veh);
 				}
 				
 				MyWorld.IleTransition(ileinf, ileinfto);

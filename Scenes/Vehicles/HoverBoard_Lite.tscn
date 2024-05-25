@@ -175,7 +175,7 @@ transform = Transform( 1, -5.52518e-11, 5.82077e-11, 7.38964e-11, 1, 0, 0, 0, 1,
 script = ExtResource( 3 )
 
 [node name="VehicleBody" type="RigidBody" parent="." groups=["Interactables"]]
-transform = Transform( 1, -1.71667e-10, 1.74623e-10, 2.48519e-10, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform = Transform( 1, -2.29875e-10, 2.32831e-10, 3.06727e-10, 1, 0, 0, 0, 1, 0, 0, 0 )
 collision_layer = 16
 collision_mask = 292
 mass = 40.0
@@ -308,15 +308,13 @@ spot_range = 47.3573
 spot_angle = 44.4241
 
 [node name="RayFL" type="RayCast" parent="."]
-transform = Transform( 1, -2.29217e-08, 1.89175e-08, 2.30282e-08, 1, -1.44355e-08, -1.89175e-08, 1.44355e-08, 1, 3, 0.749334, 4.99935 )
+transform = Transform( 1, -2.31545e-08, 1.89175e-08, 2.32611e-08, 1, -1.44355e-08, -1.89175e-08, 1.44355e-08, 1, 3, 0.749334, 4.99935 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292
 
 [node name="Particles" parent="RayFL" instance=ExtResource( 12 )]
 transform = Transform( 1, 2.05701e-08, -1.85682e-08, -2.05223e-08, 1, 1.44355e-08, 1.90921e-08, -1.44355e-08, 1, -0.00278616, -4.17923, -0.00447226 )
-visibility_aabb = AABB( -125.62, -35.3487, -87.4634, 251.24, 70.6974, 174.927 )
-local_coords = false
 
 [node name="MeshInstance" type="MeshInstance" parent="RayFL"]
 transform = Transform( 1, -2.60343e-11, 0, 1.03796e-10, 1, 0, 0, 0, 1, -0.00133324, -2, -0.00213957 )
@@ -324,21 +322,19 @@ mesh = SubResource( 33 )
 material/0 = ExtResource( 1 )
 
 [node name="RayF" type="RayCast" parent="."]
-transform = Transform( 1, 1.77295e-10, 0, 5.39274e-10, 1, -4.65661e-10, 2.91038e-10, -4.65661e-10, 1, -0.00105671, -0.655451, 4.81077 )
+transform = Transform( 1, 1.77238e-10, 5.82077e-11, 5.97481e-10, 1, -4.65661e-10, 2.91038e-10, -4.65661e-10, 1, -0.00105671, -0.655451, 4.81077 )
 enabled = true
 cast_to = Vector3( 0, 0, 20 )
 collision_mask = 292
 
 [node name="RayFR" type="RayCast" parent="."]
-transform = Transform( 1, 2.80097e-07, 5.75674e-08, -2.80019e-07, 1, -8.81264e-08, -5.75092e-08, 8.82428e-08, 1, -3, 0.750666, 5.00063 )
+transform = Transform( 1, 2.79922e-07, 5.75674e-08, -2.79902e-07, 1, -8.82428e-08, -5.75092e-08, 8.83592e-08, 1, -3, 0.750666, 5.00063 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292
 
 [node name="Particles" parent="RayFR" instance=ExtResource( 12 )]
 transform = Transform( 1, 2.05701e-08, -1.85682e-08, -2.05223e-08, 1, 1.44355e-08, 1.90921e-08, -1.44355e-08, 1, -0.00278616, -4.17923, -0.00447226 )
-visibility_aabb = AABB( -125.62, -35.3487, -87.4634, 251.24, 70.6974, 174.927 )
-local_coords = false
 
 [node name="MeshInstance" type="MeshInstance" parent="RayFR"]
 transform = Transform( 1, -2.60343e-11, 0, 1.03796e-10, 1, 0, 0, 0, 1, -0.00133324, -2, -0.00213957 )
@@ -346,15 +342,13 @@ mesh = SubResource( 33 )
 material/0 = ExtResource( 1 )
 
 [node name="RayBR" type="RayCast" parent="."]
-transform = Transform( 1, 2.80094e-07, 5.82077e-08, -2.80018e-07, 1, -8.31205e-08, -5.81495e-08, 8.3237e-08, 1, -3, 0.750666, -4.99936 )
+transform = Transform( 1, 2.79919e-07, 5.82077e-08, -2.79901e-07, 1, -8.3237e-08, -5.81495e-08, 8.33534e-08, 1, -3, 0.750666, -4.99936 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292
 
 [node name="Particles" parent="RayBR" instance=ExtResource( 12 )]
 transform = Transform( 1, 2.05701e-08, -1.85682e-08, -2.05223e-08, 1, 1.44355e-08, 1.90921e-08, -1.44355e-08, 1, -0.00278616, -4.17923, -0.00447226 )
-visibility_aabb = AABB( -125.62, -35.3487, -87.4634, 251.24, 70.6974, 174.927 )
-local_coords = false
 
 [node name="MeshInstance" type="MeshInstance" parent="RayBR"]
 transform = Transform( 1, -2.60343e-11, 0, 1.03796e-10, 1, 0, 0, 0, 1, -0.00133324, -2, -0.00213957 )
@@ -362,15 +356,13 @@ mesh = SubResource( 33 )
 material/0 = ExtResource( 1 )
 
 [node name="RayBL" type="RayCast" parent="."]
-transform = Transform( 1, 2.79339e-07, 5.67525e-08, -2.79263e-07, 1, -8.68458e-08, -5.66943e-08, 8.69622e-08, 1, 3, 0.749335, -5.00064 )
+transform = Transform( 1, 2.79165e-07, 5.67525e-08, -2.79146e-07, 1, -8.69622e-08, -5.66943e-08, 8.70787e-08, 1, 3, 0.749335, -5.00064 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292
 
 [node name="Particles" parent="RayBL" instance=ExtResource( 12 )]
 transform = Transform( 1, 2.05701e-08, -1.85682e-08, -2.05223e-08, 1, 1.44355e-08, 1.90921e-08, -1.44355e-08, 1, -0.00278616, -4.17923, -0.00447226 )
-visibility_aabb = AABB( -125.62, -35.3487, -87.4634, 251.24, 70.6974, 174.927 )
-local_coords = false
 
 [node name="MeshInstance" type="MeshInstance" parent="RayBL"]
 transform = Transform( 1, -2.60343e-11, 0, 1.03796e-10, 1, 0, 0, 0, 1, -0.00133324, -2, -0.00213957 )

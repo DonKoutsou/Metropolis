@@ -64,7 +64,7 @@ public class Item : RigidBody
 	public void InputData(ItemInfo data)
 	{
 		GlobalTranslation = data.Position;
-		GetParent().Name = data.Name;
+		Name = data.Name;
 		if (this is Battery)
 		{
 			float cap = (float)data.CustomData["CurrentEnergy"];

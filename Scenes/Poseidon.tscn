@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Poseidon.cs" type="Script" id=1]
 [ext_resource path="res://Assets/Sea/OceanShader.tres" type="Material" id=2]
 [ext_resource path="res://Assets/Water/textures/post/waterplane_low.obj" type="ArrayMesh" id=3]
-[ext_resource path="res://Scenes/Characters/WaterEffect.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -51,6 +50,3 @@ material/0 = ExtResource( 2 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 1 )
 anims/Wave = SubResource( 2 )
-
-[node name="Spatial" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -87.4536, 0.113492, 39.9706 )

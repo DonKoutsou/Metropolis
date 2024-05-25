@@ -71,13 +71,16 @@ public class StartingScreen : Control
 
 		GetNode<Control>("Settings").GetNode<ColorRect>("ColorRect").Visible = true;
 
-		Control Startbut;
-		ButtonList.TryGetValue("Start", out Startbut);
-		Control SeedSet;
-		ButtonList.TryGetValue("SeedSetting", out SeedSet);
+		Control Startbut = ButtonList["Start"];
+		Control StartHalf = ButtonList["StartHalf"];
+		Control ContinueBut = ButtonList["Continue"];
+		Control SeedSet = ButtonList["SeedSetting"];
+
 		SeedSet.GetNode<TextEdit>("SeedText").Readonly = true;
 		((Button)Startbut).Text = "Συνέχεια";
 		Startbut.Show();
+		StartHalf.Hide();
+		ContinueBut.Hide();
 		GetNode<Control>("Settings").Hide();
 		MouseFilter = MouseFilterEnum.Ignore;
 		world.CallDeferred("SpawnMap", LoadSave);

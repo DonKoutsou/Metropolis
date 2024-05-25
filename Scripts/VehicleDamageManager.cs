@@ -121,7 +121,7 @@ public class VehicleDamageInfo
         int[] wings = (int[])data.Get("DestroyedWings");
         for (int i = 0; i < wings.Count(); i++)
         {
-            DestroyedWings[i] = wings[i];
+            DestroyedWings.Add(wings[i]);
         }
 		LightCondition = (bool)data.Get("LightCondition");
 		
