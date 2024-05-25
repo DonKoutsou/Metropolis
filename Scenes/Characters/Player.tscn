@@ -1,10 +1,7 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
-[ext_resource path="res://Scripts/Stamina_Bar.cs" type="Script" id=2]
-[ext_resource path="res://Scripts/HP_Bar.cs" type="Script" id=3]
 [ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://Scenes/HUD/new_styleboxflat.tres" type="StyleBox" id=5]
 [ext_resource path="res://Scenes/HUD/CompassUi.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Inventory/Inventory.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/Sounds/PunchSound.mp3" type="AudioStream" id=8]
@@ -38,27 +35,6 @@ height = 5.27483
 
 [sub_resource type="CapsuleShape" id=92]
 height = 1.963
-
-[sub_resource type="CanvasItemMaterial" id=65]
-render_priority = 100
-light_mode = 1
-
-[sub_resource type="CanvasItemMaterial" id=67]
-render_priority = 100
-light_mode = 1
-
-[sub_resource type="StyleBoxFlat" id=105]
-bg_color = Color( 0.317647, 0.792157, 0.247059, 0.792157 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0, 0, 0, 0 )
-border_blend = true
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
 
 [sub_resource type="DynamicFont" id=79]
 size = 54
@@ -341,8 +317,6 @@ collision_mask = 311
 script = ExtResource( 1 )
 JumpImpulse = 30
 RunSpeed = 30
-m_Stamina = 1000.0
-m_StaminaRegen = 5.0
 SelectLayer = 17
 Consumption = SubResource( 106 )
 
@@ -388,43 +362,6 @@ Capacity = 40.0
 StartingItems = [ ExtResource( 25 ), ExtResource( 27 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 33 ), ExtResource( 34 ) ]
 
 [node name="PlayerUI" type="Spatial" parent="."]
-
-[node name="HP_Bar" type="ProgressBar" parent="PlayerUI"]
-material = SubResource( 65 )
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_left = 8.0
-margin_top = -32.0
-margin_right = 104.0
-margin_bottom = -18.0
-size_flags_horizontal = 9
-size_flags_vertical = 8
-custom_colors/font_color = Color( 0, 0, 0, 0 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_styles/fg = ExtResource( 5 )
-value = 10.0
-script = ExtResource( 3 )
-
-[node name="VisibilityTimerHP" type="Timer" parent="PlayerUI/HP_Bar"]
-one_shot = true
-
-[node name="Stamina_Bar" type="ProgressBar" parent="PlayerUI"]
-material = SubResource( 67 )
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_left = 8.0
-margin_top = -14.0
-margin_right = 104.0
-size_flags_horizontal = 9
-size_flags_vertical = 8
-custom_colors/font_color = Color( 0, 0, 0, 0 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 0 )
-custom_styles/fg = SubResource( 105 )
-value = 20.0
-script = ExtResource( 2 )
-
-[node name="VisibilityTimerStamina" type="Timer" parent="PlayerUI/Stamina_Bar"]
-one_shot = true
 
 [node name="Time_UI" type="RichTextLabel" parent="PlayerUI"]
 visible = false
@@ -551,6 +488,4 @@ mesh = SubResource( 107 )
 material/0 = SubResource( 120 )
 
 [connection signal="body_entered" from="KillFieldDetector" to="." method="OnKillFieldDetectorBodyEntered"]
-[connection signal="timeout" from="PlayerUI/HP_Bar/VisibilityTimerHP" to="PlayerUI/HP_Bar" method="TurnOff"]
-[connection signal="timeout" from="PlayerUI/Stamina_Bar/VisibilityTimerStamina" to="PlayerUI/Stamina_Bar" method="TurnOff"]
 [connection signal="timeout" from="PlayerUI/TalkText/UpdateTimer" to="PlayerUI/TalkText" method="TurnOff"]

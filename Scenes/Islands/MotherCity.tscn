@@ -226,7 +226,7 @@ update_rotation = false
 update_scale = false
 
 [node name="Planks" type="Spatial" parent="." index="1"]
-transform = Transform( 0.999984, 6.39275e-11, 3.49246e-10, 2.86683e-10, 0.999983, 7.567e-09, 1.74623e-10, -8.11997e-09, 0.999983, 0, 0, 0 )
+transform = Transform( 0.999982, 1.22341e-10, 4.07454e-10, 3.44713e-10, 0.999981, 8.52742e-09, 2.32831e-10, -9.22591e-09, 0.999981, 0, 0, 0 )
 
 [node name="StaticBody6" parent="Planks" index="0" instance=ExtResource( 28 )]
 transform = Transform( 0.742315, 0, 0.670051, 0, 1, 0, -0.670051, 0, 0.742315, 87.941, -0.00652695, 2437.29 )
@@ -432,13 +432,10 @@ transform = Transform( -33.1753, -0.226791, 16.875, -2.64502, 36.8278, -4.70501,
 [node name="Fireplace2" parent="." index="24" instance=ExtResource( 12 )]
 transform = Transform( 0.316328, 0, 0.94865, 0, 1, 0, -0.94865, 0, 0.316328, -1404.79, 9.81843, 2537.65 )
 
-[node name="Character2" parent="." index="25" instance=ExtResource( 23 )]
-transform = Transform( 0.998447, 0, -0.0556989, 0, 1, 0, 0.0556989, 0, 0.998447, -1386.39, 54.3166, 2717.6 )
-
-[node name="Vehicle" parent="." index="26" instance=ExtResource( 25 )]
+[node name="Vehicle" parent="." index="25" instance=ExtResource( 25 )]
 transform = Transform( 0.0898612, -0.00112574, 0.995954, 0.000666553, 0.999999, 0.00107017, -0.995955, 0.00056768, 0.0898623, 29.7236, 0.957578, 2428.48 )
 
-[node name="Buildings" type="Spatial" parent="." index="27"]
+[node name="Buildings" type="Spatial" parent="." index="26"]
 
 [node name="StaticBody9" parent="Buildings" index="0" instance=ExtResource( 7 )]
 transform = Transform( -0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, -0.258819, -2957.64, -136.923, 2363.72 )
@@ -569,28 +566,28 @@ transform = Transform( 0.0343927, 0.142378, -0.989214, -0.0905136, 0.986176, 0.1
 [node name="DestBuilding6" parent="Buildings" index="42" instance=ExtResource( 3 )]
 transform = Transform( -0.925222, -0.0317054, -0.3781, -0.0905136, 0.986176, 0.138794, 0.368473, 0.162639, -0.915301, 1419.96, -104.808, 3154.18 )
 
-[node name="Vehicle2" parent="." index="28" instance=ExtResource( 20 )]
+[node name="Vehicle2" parent="." index="27" instance=ExtResource( 20 )]
 transform = Transform( -0.00063925, 0.0010706, -0.999999, 0.000666553, 0.999999, 0.00107017, 1, -0.000665859, -0.000639973, -19.9942, 3.57054, 2385.41 )
 
-[node name="DialogueTrigger" parent="." index="29" instance=ExtResource( 27 )]
+[node name="DialogueTrigger" parent="." index="28" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 279.543, 11.9978, 2821.02 )
 
-[node name="MotherCity" parent="." index="30" instance=ExtResource( 9 )]
+[node name="MotherCity" parent="." index="29" instance=ExtResource( 9 )]
 transform = Transform( 1, 4.79616e-12, 0, -2.64322e-12, 1, 2.91038e-11, 0, -2.91038e-11, 1, 0, 0, 0 )
 
-[node name="Vehicle3" parent="." index="31" instance=ExtResource( 21 )]
+[node name="Vehicle3" parent="." index="30" instance=ExtResource( 21 )]
 transform = Transform( 0.00922615, -0.00107628, 0.999957, 0.000666553, 0.999999, 0.00107018, -0.999958, 0.00065665, 0.00922686, -56.2364, 3.62274, 2306.86 )
 
-[node name="Vehicle4" parent="." index="32" instance=ExtResource( 21 )]
+[node name="Vehicle4" parent="." index="31" instance=ExtResource( 21 )]
 transform = Transform( 0.00922616, -0.00107628, 0.999957, 0.000666553, 0.999999, 0.00107017, -0.999958, 0.000656641, 0.00922687, -56.2364, 4.60444, 2351.84 )
 
-[node name="Vehicle5" parent="." index="33" instance=ExtResource( 21 )]
+[node name="Vehicle5" parent="." index="32" instance=ExtResource( 21 )]
 transform = Transform( 0.331624, 0.000788573, -0.943411, 0.000666553, 0.999999, 0.00107017, 0.943412, -0.00098372, 0.331623, 61.2407, 3.75581, 2387.62 )
 
-[node name="Vehicle6" parent="." index="34" instance=ExtResource( 21 )]
+[node name="Vehicle6" parent="." index="33" instance=ExtResource( 21 )]
 transform = Transform( 0.976366, -0.000419497, -0.216127, 0.000666553, 0.999999, 0.00107017, 0.216127, -0.00118894, 0.976364, -24.167, 3.39937, 2422.8 )
 
-[node name="Rocks" type="Spatial" parent="." index="35"]
+[node name="Rocks" type="Spatial" parent="." index="34"]
 
 [node name="Rock1" parent="Rocks" index="0" instance=ExtResource( 8 )]
 transform = Transform( -97.9091, -24.6931, -163.797, -43.5813, -179.727, 53.1453, -159.812, 64.1406, 85.8576, -149.348, -239.257, -2049.23 )
@@ -718,64 +715,65 @@ transform = Transform( 62.2923, 49.6593, 473.688, -251.528, 409.102, -9.81125, -
 [node name="Rock42" parent="Rocks" index="41" instance=ExtResource( 24 )]
 transform = Transform( 188.88, -381.081, -223.222, 177.4, -156.868, 417.909, -404.451, -246.772, 79.0575, -3158.93, -910.716, -2624.91 )
 
-[node name="Barrel" parent="." index="36" instance=ExtResource( 15 )]
+[node name="Barrel" parent="." index="35" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -27.5366, 2.15815, 2368.93 )
 
-[node name="Barrel3" parent="." index="37" instance=ExtResource( 15 )]
+[node name="Barrel3" parent="." index="36" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.042, 2.94965, 2339.34 )
 
-[node name="Barrel7" parent="." index="38" instance=ExtResource( 15 )]
+[node name="Barrel7" parent="." index="37" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.1719, 2.67743, 2347.98 )
 
-[node name="Barrel8" parent="." index="39" instance=ExtResource( 15 )]
+[node name="Barrel8" parent="." index="38" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.8073, 2.82457, 2343.37 )
 
-[node name="Barrel4" parent="." index="40" instance=ExtResource( 15 )]
+[node name="Barrel4" parent="." index="39" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.537, 3.85865, 2278.73 )
 
-[node name="Barrel9" parent="." index="41" instance=ExtResource( 15 )]
+[node name="Barrel9" parent="." index="40" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -34.8238, 7.1805, 2196.13 )
 
-[node name="Barrel10" parent="." index="42" instance=ExtResource( 15 )]
+[node name="Barrel10" parent="." index="41" instance=ExtResource( 15 )]
 transform = Transform( -3.8135e-08, 0.872428, -0.488743, -1, -4.37114e-08, 0, -2.13636e-08, 0.488743, 0.872428, -34.4924, 6.62715, 2193.92 )
 
-[node name="Barrel11" parent="." index="43" instance=ExtResource( 15 )]
+[node name="Barrel11" parent="." index="42" instance=ExtResource( 15 )]
 transform = Transform( -0.85116, -0.480411, 0.2115, 0.469567, -0.876957, -0.10224, 0.234594, 0.0122908, 0.972016, -85.4238, -2.60804, 1936.88 )
 
-[node name="Barrel5" parent="." index="44" instance=ExtResource( 22 )]
+[node name="Barrel5" parent="." index="43" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.1515, 2.19325, 2366.51 )
 physics_material_override = SubResource( 3 )
 
-[node name="Barrel6" parent="." index="45" instance=ExtResource( 18 )]
+[node name="Barrel6" parent="." index="44" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.1028, 2.65286, 2341.27 )
 physics_material_override = SubResource( 3 )
 
-[node name="Barrel12" parent="." index="46" instance=ExtResource( 18 )]
+[node name="Barrel12" parent="." index="45" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.1313, 2.65286, 2346.93 )
 physics_material_override = SubResource( 3 )
 
-[node name="Barrel13" parent="." index="47" instance=ExtResource( 18 )]
+[node name="Barrel13" parent="." index="46" instance=ExtResource( 18 )]
 transform = Transform( 0.0322829, -0.999479, 0, 0.999479, 0.0322829, 5.82077e-11, 2.91038e-11, -5.82077e-11, 1, 14.954, 2.06926, 2345.63 )
 physics_material_override = SubResource( 3 )
 
-[node name="Character" parent="." index="48" instance=ExtResource( 23 )]
+[node name="Character" parent="." index="47" instance=ExtResource( 23 )]
 transform = Transform( -0.314622, 0.000638386, -0.949217, 5.94261e-05, 0.999999, 0.000652849, 0.949217, 0.00014902, -0.314622, 13.1066, 1.12882, 2342.16 )
+spawnUncon = true
 
-[node name="SoundMap" parent="." index="49"]
+[node name="SoundMap" parent="." index="48"]
 data = {
 "cells": PoolIntArray( 0, 20, 524289, 65535, 20, 524289, 22, 22, 524289, 23, 22, 524289, 65533, 22, 524289, 65534, 22, 524289, 0, 23, 524289, 1, 23, 524289, 19, 23, 524289, 20, 23, 524289, 21, 23, 524289, 65533, 23, 524289, 65534, 23, 524289, 65535, 23, 524289, 2, 24, 524289, 19, 24, 524289, 65533, 24, 524289, 65535, 24, 524289, 2, 25, 524289, 5, 25, 524289, 16, 25, 524289, 17, 25, 524289, 18, 25, 524289, 65533, 25, 524289, 65534, 25, 524289, 1, 26, 524289, 6, 26, 524289, 12, 26, 524289, 13, 26, 524289, 14, 26, 524289, 15, 26, 524289, 0, 27, 524289, 7, 27, 524289, 8, 27, 524289, 10, 27, 524289, 11, 27, 524289, 12, 27, 524289, 65535, 27, 524289, 7, 28, 524289, 8, 28, 524289, 9, 28, 524289, 10, 28, 524289, 6, 29, 524289, 9, 29, 524289, 5, 30, 524289, 9, 30, 524289, 5, 31, 524289, 6, 31, 524289, 7, 31, 524289, 8, 31, 524289 )
 }
 
-[node name="Guitar" parent="." index="50" instance=ExtResource( 29 )]
+[node name="Guitar" parent="." index="49" instance=ExtResource( 29 )]
 transform = Transform( -0.317996, 0.521854, -0.791546, -0.000166058, 0.834852, 0.550472, 0.948092, 0.175179, -0.265393, 15.7417, 1.3434, 2339.9 )
 
-[node name="StreetLamp16" parent="." index="51" instance=ExtResource( 26 )]
+[node name="StreetLamp16" parent="." index="50" instance=ExtResource( 26 )]
 transform = Transform( 0.826903, -0.000138259, -0.562342, -6.99218e-05, 0.999999, -0.000348653, 0.562342, 0.000327617, 0.826903, -492.679, 63.208, 1262.44 )
 
-[node name="StreetLamp17" parent="." index="52" instance=ExtResource( 26 )]
+[node name="StreetLamp17" parent="." index="51" instance=ExtResource( 26 )]
 transform = Transform( 0.826903, -0.00013826, -0.562342, -6.99219e-05, 0.999999, -0.000348653, 0.562342, 0.000327617, 0.826903, -642.534, 68.9494, 1200.53 )
 
-[node name="Road" type="Path" parent="." index="53"]
+[node name="Road" type="Path" parent="." index="52"]
 transform = Transform( 0.999998, 4.56879e-12, 0, -2.86349e-12, 0.999998, 2.91038e-11, 0, -2.91038e-11, 0.999998, 0, 0, 0 )
 curve = SubResource( 4 )
 script = ExtResource( 30 )
@@ -1124,7 +1122,7 @@ collision_layer = 4
 transform = Transform( 0.664263, 0.00738642, 0.747462, 0.0742014, 0.994361, -0.0757683, -0.743807, 0.105793, 0.659969, -1058.27, 103.184, 926.445 )
 shape = SubResource( 57 )
 
-[node name="Road2" type="Path" parent="." index="54"]
+[node name="Road2" type="Path" parent="." index="53"]
 transform = Transform( 0.999997, 4.583e-12, 0, -2.89191e-12, 0.999997, 1.45519e-10, 0, -1.45519e-10, 0.999997, 0, 0, 0 )
 curve = SubResource( 6 )
 script = ExtResource( 30 )
@@ -1136,7 +1134,7 @@ transform = Transform( 1, -2.42579e-11, 2.91038e-11, 2.65246e-11, 1, 0, 0, 2.910
 material_override = ExtResource( 32 )
 multimesh = SubResource( 7 )
 
-[node name="Road3" type="Path" parent="." index="55"]
+[node name="Road3" type="Path" parent="." index="54"]
 transform = Transform( 0.999997, 4.59011e-12, 0, -2.89901e-12, 0.999997, 2.03727e-10, 0, -2.03727e-10, 0.999997, 0.300166, 7.27882e-05, -0.4999 )
 curve = SubResource( 8 )
 script = ExtResource( 30 )

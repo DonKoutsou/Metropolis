@@ -34,7 +34,34 @@ public class Inventory : Spatial
             InsertItem(it);
         }
     }
-
+    public bool HasBatteries()
+    {
+        for (int i = InventoryContents.Count - 1; i > -1; i--)
+        {
+            if (InventoryContents[i] is Battery)
+            {
+                if (((Battery)InventoryContents[i]).GetCurrentCap() > 10)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public void GetBatteries(out List<Battery> batter)
+    {
+        batter = new List<Battery>();
+        for (int i = InventoryContents.Count - 1; i > -1; i--)
+        {
+            if (InventoryContents[i] is Battery)
+            {
+                if (((Battery)InventoryContents[i]).GetCurrentCap() > 10)
+                {
+                    batter.Add((Battery)InventoryContents[i]);
+                }
+            }
+        }
+    }
     public void LoadSavedInventory(Godot.Collections.Array items)
     {
         DeleteContents();

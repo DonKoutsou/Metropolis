@@ -417,7 +417,8 @@ public class IslandInfo
 		for (int i = 0; i < Characters.Count; i ++)
 		{
 			Resource CharInfor = (Resource)CharSaveScript.New();
-			CharInfor.Call("_SetData", Houses[i].GetPackedData(), false);
+			bool hasdata = false;
+			CharInfor.Call("_SetData", Characters[i].GetPackedData(out hasdata), false);
 			CharacterInfoobjects[i] = CharInfor;
 		}
 		data.Add("Characters", CharacterInfoobjects);

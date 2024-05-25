@@ -26,11 +26,7 @@
 			"character": "character-1715202846.json",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Καλός"
-		},
-		{
-			"event_id": "dialogic_022",
-			"transition_duration": 1
+			"text": "Ωραίος"
 		},
 		{
 			"choice": "Όχι",
@@ -40,10 +36,13 @@
 			"value": ""
 		},
 		{
-			"character": "character-1715202846.json",
+			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Ότι νάνε."
+			"text": "Ότι Νάνε"
+		},
+		{
+			"event_id": "dialogic_013"
 		},
 		{
 			"event_id": "dialogic_022",

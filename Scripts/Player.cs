@@ -9,12 +9,7 @@ public class Player : Character
 	[Export]
 	Curve Consumption = null;
 
-	[Export]
-	float MaxEnergyAmmount = 100;
-
 	
-
-	float CurrentEnergy = 100;
 
 	//Stamina_Bar Stamina_bar = null;
 
@@ -43,30 +38,7 @@ public class Player : Character
 	[Export(PropertyHint.Layers3dPhysics)]
 	public uint SelectLayer { get; set; }
 
-	public float GetCharacterBatteryCap()
-	{
-		return MaxEnergyAmmount;
-	}
-	public float GetCurrentCharacterEnergy()
-	{
-		return CurrentEnergy;
-	}
-	public void RechargeCharacter(float ammount)
-	{
-		CurrentEnergy += ammount;
-        if (CurrentEnergy > MaxEnergyAmmount)
-        {
-            CurrentEnergy = MaxEnergyAmmount;
-        }
-	}
-	public void SetEnergy(float en)
-	{
-		CurrentEnergy = en;
-	}
-	public void ConsumeEnergy(float ammount)
-    {
-        CurrentEnergy -= ammount;
-    }
+	
 	public float GetCurrentEnergy()
 	{
 		return CurrentEnergy;
@@ -111,10 +83,9 @@ public class Player : Character
 	public override void _PhysicsProcess(float delta)
 	{
 		ulong ms = OS.GetSystemTimeMsecs();
-		if (DayNight.IsDay())
-			NightLight.LightEnergy = 0;
-		else
-			NightLight.LightEnergy = 0.2f;
+
+		base._PhysicsProcess(delta);
+
 		if (Input.IsActionPressed("Move") || Autowalk)
 		{
 			var spacestate = GetWorld().DirectSpaceState;
@@ -246,8 +217,6 @@ public class Player : Character
 		if (batteries.Count() == 0)
 		{
 			
-			if (CurrentEnergy <= 0)
-				Kill();
 		}
 		else
 		{
@@ -391,6 +360,7 @@ public class Player : Character
 		base.OnVehicleBoard(Veh);
 		IsRunning = false;
 	}
+	Character TalkingChar;
 	public void StartDialogue(Character character)
 	{
 		if (HasVehicle())
@@ -401,10 +371,40 @@ public class Player : Character
 		loctomove = talkpos.GlobalTranslation;
 		((Spatial)DialogueCam.GetParent()).GlobalRotation = talkpos.GlobalRotation;
 		CameraAnimationPlayer.GetInstance().PlayAnim("FadeInDialogue");
-		var dialogue = DialogicSharp.Start("TestTimeline");
-		AddChild(dialogue);
-		dialogue.Connect("timeline_end", this, "EndDialogue");
+		if (character.CurrentEnergy == 0)
+		{
+			bool HasBat = CharacterInventory.HasBatteries();
+			DialogicSharp.SetVariable("HasBatteries", HasBat.ToString().ToLower());
+			var dialogue = DialogicSharp.Start("UnConDialogue");
+			AddChild(dialogue);
+			dialogue.Connect("timeline_end", this, "EndUnconDialogue");
+		}
+		else
+		{
+			var dialogue =  DialogicSharp.Start("TestTimeline");
+			AddChild(dialogue);
+			dialogue.Connect("timeline_end", this, "EndDialogue");
+		}
+		TalkingChar = character;
+		
 		//DialogueCam.Current = true;
+	}
+	public void EndUnconDialogue(string timeline_name)
+	{
+		CameraAnimationPlayer.GetInstance().PlayAnim("FadeOutDialogue");
+		string saved = DialogicSharp.GetVariable("SavedCharacter");
+		if (saved == "true")
+		{
+			
+			List<Battery> bats;
+			CharacterInventory.GetBatteries(out bats);
+
+			TalkingChar.RechargeCharacter(bats[0].GetCurrentCap());
+			TalkingChar.Respawn();
+
+			CharacterInventory.DeleteItem(bats[0]);
+		}
+		
 	}
 	public void EndDialogue(string timeline_name)
 	{

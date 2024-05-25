@@ -21,30 +21,12 @@ public class Character : KinematicBody
 	[Export]
 	public int RunSpeed = 20;
 
-	//public Character_Animations anims;
-
-	[Export]
-	public float m_HP = 100;
-
-	
-	[Export]
-	public float m_Stamina = 100;
-
-	[Export]
-	public float m_StaminaRegen = 0.5f;
-
 	[Export]
 	public float m_RunCost = 1;
-
-	public float startingstaming;
 
 	public bool m_balive = true;
 
 	public Vector3 origposition;
-
-	public bool m_bEnabled = false;
-
-	public CollisionShape collider;
 
 	public Vector3 m_velocity = Vector3.Zero;
 
@@ -58,6 +40,11 @@ public class Character : KinematicBody
 	float InventoryWeightOverride = -1;
 
 	public Inventory CharacterInventory;
+
+	[Export]
+	float MaxEnergyAmmount = 100;
+
+	public float CurrentEnergy = 100;
 
 	public SpotLight NightLight;
 
@@ -73,6 +60,30 @@ public class Character : KinematicBody
 
 	public CharacterSoundManager CharacterSoundManager;
 
+	public float GetCharacterBatteryCap()
+	{
+		return MaxEnergyAmmount;
+	}
+	public float GetCurrentCharacterEnergy()
+	{
+		return CurrentEnergy;
+	}
+	public void RechargeCharacter(float ammount)
+	{
+		CurrentEnergy += ammount;
+        if (CurrentEnergy > MaxEnergyAmmount)
+        {
+            CurrentEnergy = MaxEnergyAmmount;
+        }
+	}
+	public void SetEnergy(float en)
+	{
+		CurrentEnergy = en;
+	}
+	public void ConsumeEnergy(float ammount)
+    {
+        CurrentEnergy -= ammount;
+    }
 	public override void _Ready()
 	{
 		if (this is Player)
@@ -83,11 +94,6 @@ public class Character : KinematicBody
 				CharacterInventory.OverrideWeight(InventoryWeightOverride);
 			}
 		}
-
-		//anims = GetNode<Character_Animations>("Character_Animations");
-		collider = GetNode<CollisionShape>("CollisionShape");
-		collider.Disabled = false;
-		startingstaming = m_Stamina;
 
 		CharacterSoundManager = GetNode<CharacterSoundManager>("CharacterSoundManager");
 
@@ -111,6 +117,8 @@ public class Character : KinematicBody
 	{
         Name = info.Name;
         GlobalTranslation = info.Position;
+		CurrentEnergy = info.CurrentEnergy;
+		m_balive = info.Alive;
 	}
 	public void SetVehicle(Vehicle veh)
 	{
@@ -139,16 +147,18 @@ public class Character : KinematicBody
 	}
 	public override void _PhysicsProcess(float delta)
 	{
-		if (!m_bEnabled)
-			return;
-			
-		if (origposition != Transform.origin)
-			MoveTo(origposition);
-
 		if (DayNight.IsDay())
 			NightLight.LightEnergy = 0;
 		else
 			NightLight.LightEnergy = 0.2f;
+
+		if (CurrentEnergy <= 0)
+			Kill();
+
+		if (this is Player)
+		 return;
+		if (origposition != Transform.origin)
+			MoveTo(origposition);
 	}
     public void MoveTo(Vector3 loc)
 	{
@@ -191,43 +201,24 @@ public class Character : KinematicBody
 	}
 	public virtual void Start()
 	{
-		m_bEnabled = true;
 		origposition = Transform.origin;
-		//GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled",false);
-		//SetProcess(true);
 		SetPhysicsProcess(true);
-		GetNode<CollisionShape>("CollisionShape").SetDeferred("disabled",false);
 	}
 	public virtual void Stop()
 	{
-		m_bEnabled = false;
-		//GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled",true);
-		//SetProcess(false);
 		SetPhysicsProcess(false);
-		GetNode<CollisionShape>("CollisionShape").SetDeferred("disabled",false);
 	}
 	private void On_Body_Entered(object body)
 	{
-	}
-	public virtual void Damage(float ammount, Character inst)
-	{
-		m_HP = m_HP - ammount;
-		//Push(Mathf.Rad2Deg(GetAngleTo(inst.GlobalPosition)));
-
-		if (m_HP <= 0)
-			Kill();
 	}
 	public bool IsAlive()
 	{
 		return m_balive;
 	}
-	public float GetHP()
+	public virtual void Respawn()
 	{
-		return m_HP;
-	}
-	public float GetStamina()
-	{
-		return m_Stamina;
+		m_balive = true;
+		Start();
 	}
 	public virtual void Kill()
 	{
@@ -235,7 +226,7 @@ public class Character : KinematicBody
 		//GetNode<AudioStreamPlayer2D>("WalkingSound").StreamPaused = true;
 		m_balive = false;
 		origposition = GlobalTransform.origin;
-		CharacterInventory.RemoveAllItems();
+		//CharacterInventory.RemoveAllItems();
 		//AppliedForce = AppliedForce * 0;
 		Stop();
 		Die();
@@ -302,6 +293,8 @@ public class CharacterInfo
 	public string Name;
 	public Vector3 Position;
 	public string SceneData;
+	public float CurrentEnergy = 0.0f;
+	public bool Alive = false;
 	public Dictionary<string, object> CustomData = new Dictionary<string, object>();
 
 	public void UpdateInfo(Character it)
@@ -309,15 +302,21 @@ public class CharacterInfo
 		Name = it.Name;
 		Position = it.GlobalTranslation;
 		SceneData = it.Filename;
-
+		CurrentEnergy = it.GetCurrentCharacterEnergy();
+		Alive = it.m_balive;
 	}
 	public Dictionary<string, object>GetPackedData(out bool HasData)
 	{
 		HasData = false;
-		Dictionary<string, object> data = new Dictionary<string, object>();
-		data.Add("Position", Position);
-		data.Add("Name", Name);
-		data.Add("SceneData", SceneData);
+		Dictionary<string, object> data = new Dictionary<string, object>()
+		{
+			{"Position", Position},
+			{"Name", Name},
+			{"SceneData", SceneData},
+			{"CurrentEnergy", CurrentEnergy},
+			{"Alive", Alive}
+		};
+		
 		if (CustomData.Count > 0)
 		{
 			HasData = true;
@@ -340,6 +339,9 @@ public class CharacterInfo
         Position = (Vector3)data.Get("Position");
 		Name = (string)data.Get("Name");
 		SceneData = (string)data.Get("SceneData");
+		CurrentEnergy = (float)data.Get("CurrentEnergy");
+		Alive = (bool)data.Get("Alive");
+
 		Godot.Collections.Array CustomDataKeys = (Godot.Collections.Array)data.Get("CustomDataKeys");
 		Godot.Collections.Array CustomDataValues = (Godot.Collections.Array)data.Get("CustomDataValues");
 

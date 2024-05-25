@@ -55,3 +55,11 @@ transform = Transform( -0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, 66.3636, 
 
 [node name="StreetLamp5" parent="." index="15" instance=ExtResource( 6 )]
 transform = Transform( -0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, 478.364, 673, -350.775 )
+
+[node name="CharacterPossibleSpawns" type="Spatial" parent="." index="16"]
+
+[node name="Position3D" type="Position3D" parent="CharacterPossibleSpawns" index="0"]
+transform = Transform( -22.49, 0, 38.9538, 0, 44.98, 0, -38.9538, 0, -22.49, 284, 673, -377 )
+
+[node name="Position3D2" type="Position3D" parent="CharacterPossibleSpawns" index="1"]
+transform = Transform( 38.9538, 0, 22.49, 0, 44.98, 0, -22.49, 0, 38.9538, 295, 673, -363 )
