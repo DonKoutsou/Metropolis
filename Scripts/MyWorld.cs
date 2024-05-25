@@ -35,6 +35,7 @@ public class MyWorld : Spatial
 	{
 		return Instance;
 	}
+	public bool LoadSave = false;
 	public override void _Ready()
 	{
 		base._Ready();
@@ -47,7 +48,7 @@ public class MyWorld : Spatial
 		}
 		
 		Instance = this;
-		GetNode<WorldMap>("WorldMap").Init();
+		GetNode<WorldMap>("WorldMap").Init(LoadSave);
 	}
 
 	float d = 0.2f;

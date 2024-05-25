@@ -30,12 +30,12 @@ public class MainWorld : Spatial
 	{
 		return m_myworld != null;
 	}
-	public void SpawnMap()
+	public void SpawnMap(bool LoadSave)
 	{
 		intro.Free();
 
 		m_myworld = (MyWorld)WorldScene.Instance();
-
+		m_myworld.LoadSave = LoadSave;
 		AddChild(m_myworld);
 
 	}

@@ -21,6 +21,8 @@ public class StartingScreen : Control
 
 	public override void _Ready()
 	{
+		bool HasSave = ResourceLoader.Exists("user://SavedGame.tres");
+
 		world = (MainWorld)GetParent().GetParent();
 		intro = GetNode<Control>("Intro");
 		FadeInOut = GetNode<CanvasLayer>("FadeInOut").GetNode<MainMenuAnimation>("MainMenuAnimation");
@@ -28,8 +30,18 @@ public class StartingScreen : Control
 		Control cont = GetNode<Control>("Settings");
 		cont.Show();
 		ButtonList.Add("Start", cont.GetNode<Panel>("Panel").GetNode<Button>("Start_Button"));
+		ButtonList.Add("StartHalf", cont.GetNode<Panel>("Panel").GetNode<Button>("Start_Button_Half"));
+		ButtonList.Add("Continue", cont.GetNode<Panel>("Panel").GetNode<Button>("Continue_Button_Half"));
 		ButtonList.Add("Exit", cont.GetNode<Panel>("Panel").GetNode<Button>("Exit_Button"));
 		ButtonList.Add("SeedSetting", cont.GetNode<Panel>("Panel").GetNode<Panel>("SeedSetting"));
+
+		if (HasSave)
+			cont.GetNode<Panel>("Panel").GetNode<Button>("Start_Button").Hide();
+		else
+		{
+			cont.GetNode<Panel>("Panel").GetNode<Button>("Start_Button_Half").Hide();
+			cont.GetNode<Panel>("Panel").GetNode<Button>("Continue_Button_Half").Hide();
+		}
 	}
 	private void On_Start_Button_Down()
 	{
@@ -43,6 +55,14 @@ public class StartingScreen : Control
 			MyWorld.GetInstance().Pause();
 		}
 	}
+	bool LoadSave = false;
+	private void On_Continue_Button_Down()
+	{
+		LoadSave = true;
+		FadeInOut.FadeInOut();
+		LoadingScreen.GetInstance().Start();
+	}
+
 	public void StartGame()
 	{
 		intro.Hide();
@@ -57,9 +77,10 @@ public class StartingScreen : Control
 		ButtonList.TryGetValue("SeedSetting", out SeedSet);
 		SeedSet.GetNode<TextEdit>("SeedText").Readonly = true;
 		((Button)Startbut).Text = "Συνέχεια";
+		Startbut.Show();
 		GetNode<Control>("Settings").Hide();
 		MouseFilter = MouseFilterEnum.Ignore;
-		world.CallDeferred("SpawnMap");
+		world.CallDeferred("SpawnMap", LoadSave);
 		GameIsRunning = true;
 	}
 	private void On_Full_Screen_Toggled(bool button_pressed)
@@ -72,7 +93,7 @@ public class StartingScreen : Control
 		SaveLoadManager.GetInstance().SaveGame();
 		GetTree().Quit();
 	}
-	public void Pause(bool toggle)
+		public void Pause(bool toggle)
 	{
 		if (toggle)
 			MouseFilter = MouseFilterEnum.Stop;

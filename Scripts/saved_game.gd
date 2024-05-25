@@ -15,6 +15,7 @@ func _SetData(data):
 	playerenergy = data["PlayerEnergy"]
 	MapGridVectors = data["MapGridVectors"]
 	MapGridTypes = data["MapGridTypes"]
+	InventoryContents = data["InventoryContents"]
 
 ## Path to the level that was loaded when the game was saved
 export var currentile:int
@@ -30,6 +31,7 @@ export (Array, int) var RandomisedEntryID = []
 
 export (Array, Vector2) var ilemapvectors = []
 export  (Array, Resource) var ilemap = []
+export  (Array, Resource) var InventoryContents = []
 export var playerlocation:Vector3
 export var playerenergy:float
 export (Array, Vector2) var MapGridVectors = []

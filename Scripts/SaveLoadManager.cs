@@ -47,10 +47,36 @@ public class SaveLoadManager : Control
 			MapGridTypeData[i] = kvp.Value;
 			i++;
 
-        }
+		}
 		data.Add("MapGridVectors", MapGridVectorData);
 		data.Add("MapGridTypes", MapGridTypeData);
-        save.Call("_SetData", data);
+
+		GDScript InventorySaveGD = GD.Load<GDScript>("res://Scripts/InventoryItemInfo.gd");
+		
+		
+		List<Item> InventoryContents = new List<Item>();
+		pl.GetCharacterInventory().GetContents(out InventoryContents);
+		
+		Resource[] Inventorydata = new Resource[InventoryContents.Count];
+		int v = 0;
+		foreach(Item it in InventoryContents)
+		{
+			Resource Inventorysave = (Resource)InventorySaveGD.New();
+			Dictionary<string, object> Itemdata = new Dictionary<string, object>();
+			Itemdata.Add("SceneData", it.Filename);
+			bool HasData = false;
+			if (it is Battery)
+			{
+				Itemdata.Add("CustomDataKeys", "CurrentEnergy");
+				Itemdata.Add("CustomDataValues", ((Battery)it).GetCurrentCap());
+				HasData = true;
+			}
+			Inventorysave.Call("_SetData", Itemdata, HasData);
+			Inventorydata[v] = Inventorysave;
+			v ++;
+		}
+		data.Add("InventoryContents", Inventorydata);
+		save.Call("_SetData", data);
 		/*save.RandomisedEntryID = (List <int>)data["RandomisedEntryID"];
 		save.currentile = (int)data["currentile"];
 		save.ΜαχαλάςEntryID = (int)data["ΜαχαλάςEntryID"];

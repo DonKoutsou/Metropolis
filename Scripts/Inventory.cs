@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 
 public class Inventory : Spatial
 {
@@ -33,6 +34,17 @@ public class Inventory : Spatial
             InsertItem(it);
         }
     }
+
+    public void LoadSavedInventory(Godot.Collections.Array items)
+    {
+        DeleteContents();
+        foreach(var It in items)
+        {
+            PackedScene it = GD.Load<PackedScene>((string)((Resource)It).Get("SceneData"));
+            Item newItem = it.Instance<Item>();
+            InsertItem(newItem);
+        }
+    }
     public bool IsEmpty()
     {
         return currentweight <= 0;
@@ -60,10 +72,14 @@ public class Inventory : Spatial
     {
         InventoryContents.Remove(item);
         currentweight -= item.GetInventoryWeight();
-        var worlds = GetTree().GetNodesInGroup("World");
-        MyWorld world = (MyWorld)worlds[0];
+
         RemoveChild(item);
-        world.AddChild(item);
+        IslandInfo info = WorldMap.GetInstance().GetCurrentIleInfo();
+        Island ile = info.ile;
+        ile.AddChild(item);
+        ile.RegisterChild(item);
+        info.AddNewItem(item);
+        //WorldMap.GetInstance().AddChild(item);
         item.Show();
         Transform loc = ((Character)GetParent()).GlobalTransform;
         loc.origin.y += 1;
@@ -76,11 +92,25 @@ public class Inventory : Spatial
         ui.UpdateInventory();
         return true;
     }
+    public void DeleteItem(Item item)
+    {
+        InventoryContents.Remove(item);
+        currentweight -= item.GetInventoryWeight();
+        RemoveChild(item);
+        item.QueueFree();
+    }
     public void RemoveAllItems()
     {
-        for (int i = 0; i < InventoryContents.Count; i++)
+        for (int i = InventoryContents.Count - 1; i > -1; i--)
         {
             RemoveItem(InventoryContents[i]);
+        }
+    }
+    public void DeleteContents()
+    {
+        for (int i = InventoryContents.Count - 1; i > -1; i--)
+        {
+            DeleteItem(InventoryContents[i]);
         }
     }
     public void GetContents(out List<Item> Items)
@@ -121,4 +151,60 @@ public class Inventory : Spatial
         Capacity = NewWeight;
         return true;
     }
+    public class ItemInfo
+{
+	public string Name;
+	public Vector3 Position;
+	public string SceneData;
+	public Dictionary<string, object> CustomData = new Dictionary<string, object>();
+
+	public void UpdateInfo(Item it)
+	{
+		Name = it.Name;
+		Position = it.GlobalTranslation;
+		SceneData = it.Filename;
+		if (it is Battery)
+		{
+			CustomData.Add("CurrentEnergy", ((Battery)it).GetCurrentCap());
+		}
+	}
+	public Dictionary<string, object>GetPackedData()
+	{
+		Dictionary<string, object> data = new Dictionary<string, object>();
+		data.Add("Position", Position);
+		data.Add("Name", Name);
+		data.Add("SceneData", SceneData);
+		if (CustomData.Count > 0)
+		{
+			string[] CustomDataKeys = new string[CustomData.Count];
+			object[] CustomDataValues = new object[CustomData.Count];
+			int i = 0;
+			foreach (KeyValuePair<string, object> Data in CustomData)
+			{
+				CustomDataKeys[i] = Data.Key;
+				CustomDataValues[i] = Data.Value;
+				i++;
+			}
+			data.Add("CustomDataKeys", CustomDataKeys);
+			data.Add("CustomDataValues", CustomDataValues);
+		}
+		return data;
+	}
+    public void UnPackData(Resource data)
+    {
+        Position = (Vector3)data.Get("Position");
+		Name = (string)data.Get("Name");
+		SceneData = (string)data.Get("SceneData");
+		string[] CustomDataKeys = (string[])data.Get("CustomDataKeys");
+		object[] CustomDataValues = (object[])data.Get("CustomDataKeys");
+
+		if (CustomDataKeys.Count() > 0 && CustomDataValues.Count() > 0)
+		{
+			for (int i = 0; i < CustomDataKeys.Count(); i++)
+			{
+				CustomData.Add(CustomDataKeys[i], CustomDataValues[i]);
+			}
+		}
+    }
+}
 }

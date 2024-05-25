@@ -99,6 +99,7 @@ public class Island : Spatial
 				Item Item = Itemscene.Instance<Item>();
 				AddChild(Item);
 				Item.InputData(inf);
+				Item.Name = inf.Name;
 			}
 		}
 
@@ -137,6 +138,7 @@ public class Island : Spatial
 				Vehicle V = veh.GetNode<Vehicle>("VehicleBody");
 				AddChild(veh);
 				V.InputData(inf);
+				V.Name = inf.VehName;
 			}
 		}
 	}
@@ -155,6 +157,8 @@ public class Island : Spatial
 			Generators.Insert(Generators.Count, (WindGenerator)child);
 		else if (child is Vehicle)
 			Vehicles.Insert(Vehicles.Count, (Vehicle)child);
+		else if (child is Item)
+			Items.Insert(Items.Count, (Item)child);
 	}
 	public void UnRegisterChild(Node child)
 	{
@@ -164,6 +168,8 @@ public class Island : Spatial
 			Generators.Remove((WindGenerator)child);
 		else if (child is Vehicle && Vehicles.Contains(child))
 			Vehicles.Remove((Vehicle)child);
+		else if (child is Item && Items.Contains(child))
+			Items.Remove((Item)child);
 	}
 	private void FindChildren(Node node)
 	{
@@ -177,7 +183,7 @@ public class Island : Spatial
 			else if (child is Vehicle)
 				Vehicles.Insert(Vehicles.Count, (Vehicle)child);
 			else if (child is Item)
-				Items.Insert(Items.Count, (Item)node);
+				Items.Insert(Items.Count, (Item)child);
 			else
 				FindChildren(child);
 		}
@@ -271,7 +277,7 @@ public class IslandInfo
         for (int i  = 0; i < ItemData.Count; i++)
 		{
 			ItemInfo info = new ItemInfo();
-			info.UnPackData((Resource)VehicleData[i]);
+			info.UnPackData((Resource)ItemData[i]);
             Items.Add(info);
 		}
     }
@@ -318,7 +324,9 @@ public class IslandInfo
 		for (int i = 0; i < Items.Count; i ++)
 		{
 			Resource ItemInfo = (Resource)ItemSaveScript.New();
-			ItemInfo.Call("_SetData", Items[i].GetPackedData());
+			bool hasData = false;
+			Dictionary<string, object> packeddata = Items[i].GetPackedData(out hasData);
+			ItemInfo.Call("_SetData", packeddata, hasData);
 			ItemInfoobjects[i] = ItemInfo;
 		}
 		data.Add("Items", ItemInfoobjects);
@@ -387,10 +395,10 @@ public class IslandInfo
 			//if (!Items[i].removed)
 				Itemammount += 1;
 		}
-		it.Name = "Vehicle" + (Itemammount + 1).ToString();
+		it.Name = "Item" + (Itemammount + 1).ToString();
 		ItemInfo data = new ItemInfo();
 		data.UpdateInfo(it);
-		Items.Insert(Vehicles.Count, data);
+		Items.Insert(Items.Count, data);
 	}
 	public void RemoveItem (Item it)
 	{
@@ -445,11 +453,17 @@ public class IslandInfo
 			Item I = null;
 			foreach (Item it in Its)
 			{
+				if (it == null || !Godot.Object.IsInstanceValid(it))
+					continue;
 				if (it.Name == ItInfo.Name)
 				{
 					I = it;
 					break;
 				}
+			}
+			if (I == null)
+			{
+				continue;
 			}
 			ItInfo.UpdateInfo(I);
 		}
@@ -597,14 +611,16 @@ public class ItemInfo
 			CustomData.Add("CurrentEnergy", ((Battery)it).GetCurrentCap());
 		}
 	}
-	public Dictionary<string, object>GetPackedData()
+	public Dictionary<string, object>GetPackedData(out bool HasData)
 	{
+		HasData = false;
 		Dictionary<string, object> data = new Dictionary<string, object>();
 		data.Add("Position", Position);
 		data.Add("Name", Name);
 		data.Add("SceneData", SceneData);
 		if (CustomData.Count > 0)
 		{
+			HasData = true;
 			string[] CustomDataKeys = new string[CustomData.Count];
 			object[] CustomDataValues = new object[CustomData.Count];
 			int i = 0;
@@ -624,14 +640,14 @@ public class ItemInfo
         Position = (Vector3)data.Get("Position");
 		Name = (string)data.Get("Name");
 		SceneData = (string)data.Get("SceneData");
-		string[] CustomDataKeys = (string[])data.Get("CustomDataKeys");
-		object[] CustomDataValues = (object[])data.Get("CustomDataKeys");
+		Godot.Collections.Array CustomDataKeys = (Godot.Collections.Array)data.Get("CustomDataKeys");
+		Godot.Collections.Array CustomDataValues = (Godot.Collections.Array)data.Get("CustomDataValues");
 
-		if (CustomDataKeys.Count() > 0 && CustomDataValues.Count() > 0)
+		if (CustomDataKeys.Count > 0 && CustomDataValues.Count > 0)
 		{
-			for (int i = 0; i < CustomDataKeys.Count(); i++)
+			for (int i = 0; i < CustomDataKeys.Count; i++)
 			{
-				CustomData.Add(CustomDataKeys[i], CustomDataValues[i]);
+				CustomData.Add((string)CustomDataKeys[i], CustomDataValues[i]);
 			}
 		}
     }

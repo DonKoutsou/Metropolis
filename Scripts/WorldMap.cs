@@ -180,20 +180,30 @@ public class WorldMap : TileMap
 		//msaf = OS.GetSystemTimeMsecs();
 		//GD.Print("Initialising map grid took : " + (msaf - ms).ToString() + " ms");
 	}
-	public void Init()
+	public void Init(bool LoadSave)
 	{
-		Resource save = GD.Load<Resource>("user://SavedGame.tres");
-		if (save != null)
+		if (LoadSave)
 		{
+			Resource save = GD.Load<Resource>("user://SavedGame.tres");
 			LoadSaveData(save);
 			IslandInfo CurIle;
 			ilemap.TryGetValue(WorldToMap(CurrentTile), out CurIle);
 			//((MyWorld)GetParent()).ToggleIsland(CurIle, true, true);
 			Intro intro = SpawnIntro(CurIle);
 			intro.LoadStop((Vector3)save.Get("playerlocation"));
+			Player pl = Player.GetInstance();
+
+			//setting player energy
 			Player.GetInstance().SetEnergy((float)save.Get("playerenergy"));
+
+			//loading inventory
+			Inventory inv = pl.GetCharacterInventory();
+			Godot.Collections.Array Items = (Godot.Collections.Array)save.Get("InventoryContents");
+			inv.LoadSavedInventory(Items);
+
 			MapGrid.GetInstance().InitMap();
 
+			//returning data to inventory map
 			Vector2[] MapGridVectorData = (Vector2[])save.Get("MapGridVectors");
 			int[] MapGridTypeData = (int[])save.Get("MapGridTypes");
 
@@ -202,10 +212,10 @@ public class WorldMap : TileMap
 			for (int i = 0; i < MapGridVectorData.Count(); i++)
 			{
 				MapGridData.Add(MapGridVectorData[i], MapGridTypeData[i]);
-            }
+			}
 			MapGrid.GetInstance().LoadSaveData(MapGridData);
 
-        }
+		}
 		else
 		{
 			ArrangeCellsBasedOnDistance();
@@ -216,7 +226,14 @@ public class WorldMap : TileMap
 	{
 		return WorldToMap(CurrentTile);
 	}
-
+	public Island GetCurrentIsland()
+	{
+		IslandInfo CurIle = null;
+		ilemap.TryGetValue(WorldToMap(CurrentTile), out CurIle);
+		if (CurIle == null)
+			return null;
+		return CurIle.ile;
+	}
 	//IslandInfo IleToSave;
 	public override void _Process(float delta)
 	{
@@ -374,7 +391,6 @@ public class WorldMap : TileMap
 		info.ile = Ile;
 
 		MyWorld.GetInstance().AddChild(Ile);
-		
 		
 		return Ile;
 	}

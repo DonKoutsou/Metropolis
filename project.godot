@@ -85,6 +85,11 @@ _global_script_classes=[ {
 "path": "res://Scripts/IleSaveInfo.gd"
 }, {
 "base": "Resource",
+"class": "InventoryItemSaveInfo",
+"language": "GDScript",
+"path": "res://Scripts/InventoryItemInfo.gd"
+}, {
+"base": "Resource",
 "class": "ItemSaveInfo",
 "language": "GDScript",
 "path": "res://Scripts/ItemSaveInfo.gd"
@@ -120,6 +125,7 @@ _global_script_class_icons={
 "HistoryRow": "",
 "HouseSaveInfo": "",
 "IleSaveInfo": "",
+"InventoryItemSaveInfo": "",
 "ItemSaveInfo": "",
 "SavedGame": "",
 "VehicleDamageSaveInfo": "",

@@ -231,8 +231,6 @@ public class Player : Character
 		}
 
 		
-
-		
 		float coons = Consumption.Interpolate(rpm) * delta;
 		ConsumeEnergy(coons);
 		List<Item> batteries;

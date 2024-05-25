@@ -35,7 +35,19 @@ public class Item : RigidBody
 	}
 	public override void _Ready()
 	{
-		GetNode<CollisionShape>("CollisionShape").SetDeferred("disabled",false);
+		//GetNode<CollisionShape>("CollisionShape").SetDeferred("disabled",false);
+		
+		Node par = GetParent();
+		if (par is Inventory || par is Furniture)
+			return;
+		while (!(par is Island))
+		{
+            if (par == null)
+				return;
+			par = par.GetParent();
+		}
+		Island ile = (Island)par;
+		ile.RegisterChild(this);
 	}
 	public Texture GetIconTexture()
 	{
