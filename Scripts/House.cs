@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class House : Spatial
 {
@@ -109,51 +110,101 @@ public class House : Spatial
 }
 public class HouseInfo
 {
-    public string HouseName;
+	public string HouseName;
 
-    public List<FurnitureInfo> furni = new List<FurnitureInfo>();
-    public void UpdateInfo(List<Furniture> funriture)
-    {
-        foreach(FurnitureInfo GInfo in furni)
-        {
-            Furniture f = null;
-            foreach (Furniture fu in funriture)
-            {
-                if (fu.Name == GInfo.FunritureName)
-                {
-                    f = fu;
-                    break;
-                }
-            }
-            GInfo.UpdateInfo(f);
+	public List<FurnitureInfo> furni = new List<FurnitureInfo>();
+	public void UpdateInfo(List<Furniture> funriture)
+	{
+		foreach(FurnitureInfo GInfo in furni)
+		{
+			Furniture f = null;
+			foreach (Furniture fu in funriture)
+			{
+				if (fu.Name == GInfo.FunritureName)
+				{
+					f = fu;
+					break;
+				}
+			}
+			GInfo.UpdateInfo(f);
 
-        }
-    }
-    public void SetInfo(string name, List<FurnitureInfo> funriture)
+		}
+	}
+	public void SetInfo(string name, List<FurnitureInfo> funriture)
+	{
+		HouseName = name;
+		for (int i = 0; i < funriture.Count; i++)
+		{
+			furni.Insert(i, funriture[i]);
+		}
+	}
+	public Dictionary<string, object>GetPackedData()
+	{
+		Dictionary<string, object> data = new Dictionary<string, object>();
+
+		data.Add("Name", HouseName);
+		
+		GDScript FurnitureSaveScript = GD.Load<GDScript>("res://Scripts/FurnitureSaveInfo.gd");
+
+		Resource[] FurnitureInfoobjects = new Resource[furni.Count];
+
+		for (int i = 0; i < furni.Count; i ++)
+		{
+			Resource Furniinfo = (Resource)FurnitureSaveScript.New();
+			Furniinfo.Call("_SetData", furni[i].GetPackedData());
+			FurnitureInfoobjects[i] = Furniinfo;
+		}
+
+		data.Add("Furniture", FurnitureInfoobjects);
+
+		return data;
+	}
+	public void UnPackData(Resource data)
     {
-        HouseName = name;
-        for (int i = 0; i < funriture.Count; i++)
-        {
-            furni.Insert(i, funriture[i]);
-        }
+        HouseName = (string)data.Get("Name");
+
+        Godot.Collections.Array FurnitureData = (Godot.Collections.Array)data.Get("Furniture");
+		for (int i  = 0; i < FurnitureData.Count; i++)
+		{
+			FurnitureInfo info = new FurnitureInfo();
+			info.UnPackData((Resource)FurnitureData[i]);
+			furni.Add(info);
+		}
     }
 }
 public class FurnitureInfo
 {
-    public string FunritureName;
-    public bool Searched;
-    public bool HasItem;
-    public ItemName item;
-    public void UpdateInfo(Furniture furn)
-    {
-        Searched = furn.Searched;
-    }
+	public string FunritureName;
+	public bool Searched;
+	public bool HasItem;
+	public ItemName item;
+	public void UpdateInfo(Furniture furn)
+	{
+		Searched = furn.Searched;
+	}
 
-    public void SetInfo(string name, bool srch, bool hasI, ItemName it)
+	public void SetInfo(string name, bool srch, bool hasI, ItemName it)
+	{
+		FunritureName = name;
+		Searched = srch;
+		HasItem = hasI;
+		item = it;
+	}
+	public Dictionary<string, object>GetPackedData()
+	{
+		Dictionary<string, object> data = new Dictionary<string, object>();
+
+		data.Add("Name", FunritureName);
+		data.Add("Searched", Searched);
+		data.Add("HasItem", HasItem);
+		data.Add("ItemType", (int)item);
+		return data;
+	}
+	public void UnPackData(Godot.Object data)
     {
-        FunritureName = name;
-        Searched = srch;
-        HasItem = hasI;
-        item = it;
+        FunritureName = (string)data.Get("Name");
+		Searched = (bool)data.Get("Searched");
+		HasItem = (bool)data.Get("HasItem");
+		item = (ItemName)data.Get("ItemType");
     }
 }

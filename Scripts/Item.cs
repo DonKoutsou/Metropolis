@@ -49,6 +49,16 @@ public class Item : RigidBody
     {
         ((ShaderMaterial)GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", toggle);
     }
+	public void InputData(ItemInfo data)
+	{
+		GlobalTranslation = data.Position;
+		GetParent().Name = data.Name;
+		if (this is Battery)
+		{
+			float cap = (float)data.CustomData["CurrentEnergy"];
+			((Battery)this).SetCurrentCap(cap);
+		}
+	}
 
 }
 

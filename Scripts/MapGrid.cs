@@ -16,7 +16,7 @@ public class MapGrid : GridContainer
     List<Color> ColorList = null;
 
     List<ChildMapIleInfo> children = new List<ChildMapIleInfo>();
-    Dictionary<Vector2, Control> MapIleList = new Dictionary<Vector2, Control>();
+    Dictionary<Vector2, MapTile> MapIleList = new Dictionary<Vector2, MapTile>();
 
     GridContainer MapGridx;
     GridContainer MapGridy;
@@ -104,7 +104,7 @@ public class MapGrid : GridContainer
         
         for (int i = 0; i < children.Count; i++)
         {
-            Control child = children[i].MapIle;
+            MapTile child =(MapTile)children[i].MapIle;
             MapIleList.Add((Vector2)cells[i], child);
         }
 
@@ -304,7 +304,7 @@ public class MapGrid : GridContainer
     }
     public void OnIslandVisited(IslandInfo info)
     {
-        Control MapIle;
+        MapTile MapIle;
         MapIleList.TryGetValue(info.pos, out MapIle);
         if (MapIle == null)
             return;
@@ -315,7 +315,7 @@ public class MapGrid : GridContainer
     
     public void UpdateIleInfo(Vector2 index, IleType type)
     {
-        Control child;
+        MapTile child;
         MapIleList.TryGetValue(index, out child);
         
         if (type == IleType.ENTRANCE)
@@ -343,7 +343,23 @@ public class MapGrid : GridContainer
             child.Modulate = ColorList[4];
             child.GetNode<TextureRect>("TextureRect").HintTooltip = string.Empty;
         }
-            
+        child.type = (int)type;
+    }
+    public Dictionary<Vector2, int> GetSaveData()
+    {
+        Dictionary<Vector2, int> data = new Dictionary<Vector2, int>();
+        foreach (KeyValuePair<Vector2, MapTile> entry in MapIleList)
+        {
+            data.Add(entry.Key, entry.Value.type);
+        }
+        return data;
+    }
+    public void LoadSaveData(Dictionary<Vector2, int> Data)
+    {
+        foreach (KeyValuePair<Vector2, int> entry in Data)
+        {
+            UpdateIleInfo(entry.Key, (IleType)entry.Value);
+        }
     }
 }
 class ChildMapIleInfo

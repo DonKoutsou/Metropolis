@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class VehicleDamageManager : Spatial
 {
@@ -90,7 +91,7 @@ public class VehicleDamageManager : Spatial
 }
 public class VehicleDamageInfo
 {
-    public List<int> DestroyedWings;
+    public List<int> DestroyedWings = new List<int>();
     public bool LightCondition = true;
     public void UpdateInfo(Vehicle veh)
     {
@@ -103,6 +104,27 @@ public class VehicleDamageInfo
         VehicleDamageManager damman = veh.GetParent().GetNode<VehicleDamageManager>("VehicleDamageManager");
         damman.GetDestroyedWings(out DestroyedWings);
         LightCondition = damman.GetLightCondition();
+    }
+    public Dictionary<string, object>GetPackedData()
+    {
+        Dictionary<string, object> data = new Dictionary<string, object>();
+
+        int[] wings = new int[DestroyedWings.Count];
+        for (int i = 0; i < DestroyedWings.Count; i++)
+            wings[i] = DestroyedWings[i];
+        data.Add("DestroyedWings", wings);
+        data.Add("LightCondition", LightCondition);
+        return data;
+    }
+    public void UnPackData(Godot.Object data)
+    {
+        int[] wings = (int[])data.Get("DestroyedWings");
+        for (int i = 0; i < wings.Count(); i++)
+        {
+            DestroyedWings[i] = wings[i];
+        }
+		LightCondition = (bool)data.Get("LightCondition");
+		
     }
 }
 

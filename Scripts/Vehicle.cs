@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 /*
 ██╗   ██╗███████╗██╗  ██╗██╗ ██████╗██╗     ███████╗
 ██║   ██║██╔════╝██║  ██║██║██╔════╝██║     ██╔════╝
@@ -9,7 +10,8 @@ using System.Diagnostics;
 ╚██╗ ██╔╝██╔══╝  ██╔══██║██║██║     ██║     ██╔══╝  
  ╚████╔╝ ███████╗██║  ██║██║╚██████╗███████╗███████╗
   ╚═══╝  ╚══════╝╚═╝  ╚═╝╚═╝ ╚═════╝╚══════╝╚══════╝
-*/                                                                                   
+*/
+
 
 public class Vehicle : RigidBody
 {
@@ -481,16 +483,16 @@ public class Vehicle : RigidBody
     //////Data Saving////////
     public void InputData(VehicleInfo data)
 	{
-        if (data.removed)
-        {
-            GetParent().QueueFree();
-            return;
-        }
+        //if (data.removed)
+        //{
+        //    GetParent().QueueFree();
+        //    return;
+        //}
 		GlobalTranslation = data.loc;
         GlobalRotation = data.rot;
         GetParent().GetNode<VehicleDamageManager>("VehicleDamageManager").InputData(data.DamageInfo);
 	}
-    public void ReparentVehicle(Island ile)
+    public void ReparentVehicle(Island from, Island ile)
     {
         Vector3 orig = GlobalTranslation;
         Vector3 origrot = GlobalRotation;
@@ -500,9 +502,11 @@ public class Vehicle : RigidBody
 
         Spatial vehpar = (Spatial)GetParent();
         Spatial par = (Spatial)vehpar.GetParent();
-        par.RemoveChild(vehpar);
-        ile.AddChild(vehpar);
         
+        par.RemoveChild(vehpar);
+        from.UnRegisterChild(this);
+        ile.AddChild(vehpar);
+        ile.RegisterChild(this);
         GlobalTranslation = orig;
         GlobalRotation = origrot;
 
@@ -520,7 +524,7 @@ public class VehicleInfo
     public Vector3 loc;
     public Vector3 rot;
     public VehicleDamageInfo DamageInfo;
-    public bool removed = false;
+    //public bool removed = false;
     public string scenedata;
     public void UpdateInfo(Vehicle veh)
     {
@@ -541,5 +545,33 @@ public class VehicleInfo
         List<int> destw;
         Damageman.GetDestroyedWings(out destw);
         DamageInfo.SetInfo(veh);
+    }
+    public Dictionary<string, object>GetPackedData()
+    {
+        Dictionary<string, object> data = new Dictionary<string, object>();
+        GDScript SaveGD = GD.Load<GDScript>("res://Scripts/VehicleDamageSaveInfo.gd");
+		Resource damageinfo = (Resource)SaveGD.New();
+        damageinfo.Call("_SetData", DamageInfo.GetPackedData());
+        data.Add("Name", VehName);
+        data.Add("Location", loc);
+        data.Add("Rotation", rot);
+        data.Add("DamageInfo", damageinfo);
+        //data.Add("Removed", removed);
+        data.Add("SceneData", scenedata);
+        return data;
+    }
+    public void UnPackData(Godot.Object data)
+    {
+        VehName = (string)data.Get("Name");
+        loc = (Vector3)data.Get("Location");
+        rot = (Vector3)data.Get("Rotation");
+        //removed = (bool)data.Get("Removed");
+        scenedata = (string)data.Get("SceneData");
+
+        Resource DamageData = (Resource)data.Get("DamageInfo");
+
+        VehicleDamageInfo info = new VehicleDamageInfo();
+        info.UnPackData(DamageData);
+        DamageInfo = info;
     }
 }

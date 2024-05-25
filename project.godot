@@ -59,10 +59,50 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/dialogic/Other/DialogicUtil.gd"
 }, {
+"base": "Resource",
+"class": "FurnitureSaveInfo",
+"language": "GDScript",
+"path": "res://Scripts/FurnitureSaveInfo.gd"
+}, {
+"base": "Resource",
+"class": "GeneratorSaveInfo",
+"language": "GDScript",
+"path": "res://Scripts/GeneratorSaveInfo.gd"
+}, {
 "base": "PanelContainer",
 "class": "HistoryRow",
 "language": "GDScript",
 "path": "res://addons/dialogic/Example Assets/History/HistoryRow.gd"
+}, {
+"base": "Resource",
+"class": "HouseSaveInfo",
+"language": "GDScript",
+"path": "res://Scripts/HouseSaveInfo.gd"
+}, {
+"base": "Resource",
+"class": "IleSaveInfo",
+"language": "GDScript",
+"path": "res://Scripts/IleSaveInfo.gd"
+}, {
+"base": "Resource",
+"class": "ItemSaveInfo",
+"language": "GDScript",
+"path": "res://Scripts/ItemSaveInfo.gd"
+}, {
+"base": "Resource",
+"class": "SavedGame",
+"language": "GDScript",
+"path": "res://Scripts/saved_game.gd"
+}, {
+"base": "Resource",
+"class": "VehicleDamageSaveInfo",
+"language": "GDScript",
+"path": "res://Scripts/VehicleDamageSaveInfo.gd"
+}, {
+"base": "Resource",
+"class": "VehicleSaveInfo",
+"language": "GDScript",
+"path": "res://Scripts/VehicleSaveInfo.gd"
 } ]
 _global_script_class_icons={
 "DTS": "",
@@ -75,7 +115,15 @@ _global_script_class_icons={
 "DialogicParser": "",
 "DialogicResources": "",
 "DialogicUtil": "",
-"HistoryRow": ""
+"FurnitureSaveInfo": "",
+"GeneratorSaveInfo": "",
+"HistoryRow": "",
+"HouseSaveInfo": "",
+"IleSaveInfo": "",
+"ItemSaveInfo": "",
+"SavedGame": "",
+"VehicleDamageSaveInfo": "",
+"VehicleSaveInfo": ""
 }
 
 [MonoCustomResourceRegistry]

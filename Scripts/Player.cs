@@ -59,10 +59,18 @@ public class Player : Character
             CurrentEnergy = MaxEnergyAmmount;
         }
 	}
+	public void SetEnergy(float en)
+	{
+		CurrentEnergy = en;
+	}
 	public void ConsumeEnergy(float ammount)
     {
         CurrentEnergy -= ammount;
     }
+	public float GetCurrentEnergy()
+	{
+		return CurrentEnergy;
+	}
 	public void Teleport(Vector3 pos)
 	{
 		GlobalTranslation = pos;

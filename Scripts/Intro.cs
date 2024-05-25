@@ -30,4 +30,15 @@ public class Intro : Spatial
         PlayerCamera.GetInstance().Current = true;
         QueueFree();
     }
+    public void LoadStop(Vector3 spawnpos)
+    {
+        Player pl = MyWorld.GetInstance().SpawnPlayer(spawnpos);
+        WorldMap map = WorldMap.GetInstance();
+        WorldParticleManager man = GetNode<WorldParticleManager>("WorldParticleManager");
+        RemoveChild(man);
+        map.AddChild(man);
+        pl.GetNode<RemoteTransform>("WorldParticleRemoteTransform").RemotePath = man.GetPath();
+        PlayerCamera.GetInstance().Current = true;
+        QueueFree();
+    }
 }

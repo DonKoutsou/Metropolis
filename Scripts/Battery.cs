@@ -33,6 +33,10 @@ public class Battery : Item
     {
         return CurrentEnergy;
     }
+    public void SetCurrentCap(float CurCap)
+    {
+        CurrentEnergy = CurCap;
+    }
     public override string GetItemDesc()
     {
         return ItemDesc + " \n Capacity: " + CurrentEnergy + "/" + Capacity;

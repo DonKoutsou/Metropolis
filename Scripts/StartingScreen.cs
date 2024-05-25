@@ -69,6 +69,7 @@ public class StartingScreen : Control
 	
 	private void On_Exit_Button_Down()
 	{
+		SaveLoadManager.GetInstance().SaveGame();
 		GetTree().Quit();
 	}
 	public void Pause(bool toggle)

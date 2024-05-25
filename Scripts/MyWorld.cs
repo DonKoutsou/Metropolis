@@ -18,7 +18,18 @@ public class MyWorld : Spatial
 	static List<IslandInfo> Orderedilestodissable = new List<IslandInfo>();
 	
 	static List<IslandInfo> Orderedilestoenable = new List<IslandInfo>();
+
+	List<IslandInfo> ActiveIles = new List<IslandInfo>();
 	
+	public List<IslandInfo> GetActiveIles()
+	{
+		List<IslandInfo> Active = new List<IslandInfo>();
+		foreach (IslandInfo info in ActiveIles)
+		{
+			Active.Add(info);
+		}
+		return Active;
+	}
 	static MyWorld Instance;
 	public static MyWorld GetInstance()
 	{
@@ -36,6 +47,7 @@ public class MyWorld : Spatial
 		}
 		
 		Instance = this;
+		GetNode<WorldMap>("WorldMap").Init();
 	}
 
 	float d = 0.2f;
@@ -228,11 +240,15 @@ public class MyWorld : Spatial
 	{
 		if (toggle && !ileinfo.IsIslandSpawned())
 		{
+			if (!ActiveIles.Contains(ileinfo))
+				ActiveIles.Add(ileinfo);
 			Island ile = WorldMap.GetInstance().ReSpawnIsland(ileinfo);
 			ile.InputData(ileinfo);
 		}
 		else if (!toggle && ileinfo.IsIslandSpawned())
 		{
+			if (ActiveIles.Contains(ileinfo))
+				ActiveIles.Remove(ileinfo);
 			Island ile = ileinfo.ile;
 			ileinfo.UpdateInfo(ile);
 			ile.QueueFree();
