@@ -261,12 +261,12 @@ transform = Transform( 1, 4.09671e-10, -2.32831e-10, 2.48349e-10, 1, -4.65661e-1
 remote_path = NodePath("../../RayF")
 
 [node name="CharacterRemoteTransform" type="RemoteTransform" parent="VehicleBody"]
-transform = Transform( 1, 4.43379e-12, 0, -9.71454e-11, 1, -2.32831e-10, 0, 2.32831e-10, 1, 0, 0, 0 )
+transform = Transform( 1, 4.43379e-12, 0, -9.71454e-11, 1, -2.32831e-10, 0, 2.32831e-10, 1, -0.00156844, 2.60964, -5.16635 )
 update_rotation = false
 update_scale = false
 
 [node name="CharacterRemoteTransform2" type="RemoteTransform" parent="VehicleBody"]
-transform = Transform( 1, 2.55795e-12, 1.16415e-10, -3.33159e-10, 1, -4.65661e-10, -2.32831e-10, -2.32831e-10, 1, 0, 0, 0 )
+transform = Transform( 1, 2.55795e-12, 1.16415e-10, -3.33159e-10, 1, -4.65661e-10, -2.32831e-10, -2.32831e-10, 1, -0.00156844, 2.60964, -5.16635 )
 update_position = false
 update_scale = false
 
@@ -308,7 +308,7 @@ spot_range = 47.3573
 spot_angle = 44.4241
 
 [node name="RayFL" type="RayCast" parent="."]
-transform = Transform( 1, -2.31545e-08, 1.89175e-08, 2.32611e-08, 1, -1.44355e-08, -1.89175e-08, 1.44355e-08, 1, 3, 0.749334, 4.99935 )
+transform = Transform( 1, -2.37366e-08, 1.89175e-08, 2.38431e-08, 1, -1.44355e-08, -1.89175e-08, 1.44355e-08, 1, 3, 0.749334, 4.99935 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292
@@ -322,13 +322,13 @@ mesh = SubResource( 33 )
 material/0 = ExtResource( 1 )
 
 [node name="RayF" type="RayCast" parent="."]
-transform = Transform( 1, 1.77238e-10, 5.82077e-11, 5.97481e-10, 1, -4.65661e-10, 2.91038e-10, -4.65661e-10, 1, -0.00105671, -0.655451, 4.81077 )
+transform = Transform( 1, 1.19087e-10, 5.82077e-11, 5.97481e-10, 1, -4.65661e-10, 2.91038e-10, -4.65661e-10, 1, -0.00105671, -0.655451, 4.81077 )
 enabled = true
 cast_to = Vector3( 0, 0, 20 )
 collision_mask = 292
 
 [node name="RayFR" type="RayCast" parent="."]
-transform = Transform( 1, 2.79922e-07, 5.75674e-08, -2.79902e-07, 1, -8.82428e-08, -5.75092e-08, 8.83592e-08, 1, -3, 0.750666, 5.00063 )
+transform = Transform( 1, 2.79689e-07, 5.75674e-08, -2.79611e-07, 1, -8.82428e-08, -5.75092e-08, 8.83592e-08, 1, -3, 0.750666, 5.00063 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292
@@ -342,7 +342,7 @@ mesh = SubResource( 33 )
 material/0 = ExtResource( 1 )
 
 [node name="RayBR" type="RayCast" parent="."]
-transform = Transform( 1, 2.79919e-07, 5.82077e-08, -2.79901e-07, 1, -8.3237e-08, -5.81495e-08, 8.33534e-08, 1, -3, 0.750666, -4.99936 )
+transform = Transform( 1, 2.79686e-07, 5.82077e-08, -2.7961e-07, 1, -8.3237e-08, -5.81495e-08, 8.33534e-08, 1, -3, 0.750666, -4.99936 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292
@@ -356,7 +356,7 @@ mesh = SubResource( 33 )
 material/0 = ExtResource( 1 )
 
 [node name="RayBL" type="RayCast" parent="."]
-transform = Transform( 1, 2.79165e-07, 5.67525e-08, -2.79146e-07, 1, -8.69622e-08, -5.66943e-08, 8.70787e-08, 1, 3, 0.749335, -5.00064 )
+transform = Transform( 1, 2.78932e-07, 5.67525e-08, -2.78855e-07, 1, -8.69622e-08, -5.66943e-08, 8.70787e-08, 1, 3, 0.749335, -5.00064 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292

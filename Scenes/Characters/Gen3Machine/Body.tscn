@@ -1,66 +1,88 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Assets/FastLegs/M_Legs.material" type="Material" id=1]
 [ext_resource path="res://Assets/Gen3Machine/Gen3Machine.glb" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Skele_Arm/Arms_Mat.material" type="Material" id=3]
 [ext_resource path="res://Assets/Gen3Machine/Body/BodyMat.tres" type="Material" id=4]
 [ext_resource path="res://Assets/Gen3Machine/Body/FaceMat.tres" type="Material" id=5]
+[ext_resource path="res://Assets/Gen3Machine/CharBlendTree.tres" type="AnimationNodeBlendTree" id=6]
 [ext_resource path="res://Assets/Clouds/Textures/smoke_01.png" type="Texture" id=9]
 [ext_resource path="res://Scripts/Character_Animations.cs" type="Script" id=10]
 
-[sub_resource type="AnimationNodeAnimation" id=14]
-animation = "Jump"
+[sub_resource type="AnimationNodeAnimation" id=36]
+animation = "Dead_loop"
 
-[sub_resource type="AnimationNodeAnimation" id=15]
-animation = "Walk_loop"
+[sub_resource type="AnimationNodeBlendTree" id=37]
+graph_offset = Vector2( -376.098, -84.9461 )
+nodes/Animation/node = SubResource( 36 )
+nodes/Animation/position = Vector2( -53.3333, 160 )
+node_connections = [ "output", 0, "Animation" ]
 
-[sub_resource type="AnimationNodeAnimation" id=31]
-animation = "Run_loop"
+[sub_resource type="AnimationNodeAnimation" id=53]
+animation = "GuitarPlayer_loop"
 
-[sub_resource type="AnimationNodeAnimation" id=37]
+[sub_resource type="AnimationNodeAnimation" id=47]
 animation = "Sitting_loop"
 
-[sub_resource type="AnimationNodeAnimation" id=16]
-animation = "Idle_loop"
+[sub_resource type="AnimationNodeBlend2" id=54]
+filter_enabled = true
+filters = [ "Armature/Skeleton:mixamorig_Head", "Armature/Skeleton:mixamorig_LeftArm", "Armature/Skeleton:mixamorig_LeftForeArm", "Armature/Skeleton:mixamorig_LeftHand", "Armature/Skeleton:mixamorig_LeftHandIndex1", "Armature/Skeleton:mixamorig_LeftHandIndex2", "Armature/Skeleton:mixamorig_LeftHandIndex3", "Armature/Skeleton:mixamorig_LeftHandIndex4", "Armature/Skeleton:mixamorig_LeftHandMiddle1", "Armature/Skeleton:mixamorig_LeftHandMiddle2", "Armature/Skeleton:mixamorig_LeftHandMiddle3", "Armature/Skeleton:mixamorig_LeftHandMiddle4", "Armature/Skeleton:mixamorig_LeftHandPinky1", "Armature/Skeleton:mixamorig_LeftHandPinky2", "Armature/Skeleton:mixamorig_LeftHandPinky3", "Armature/Skeleton:mixamorig_LeftHandPinky4", "Armature/Skeleton:mixamorig_LeftHandRing1", "Armature/Skeleton:mixamorig_LeftHandRing2", "Armature/Skeleton:mixamorig_LeftHandRing3", "Armature/Skeleton:mixamorig_LeftHandRing4", "Armature/Skeleton:mixamorig_LeftHandThumb2", "Armature/Skeleton:mixamorig_LeftHandThumb3", "Armature/Skeleton:mixamorig_LeftHandThumb4", "Armature/Skeleton:mixamorig_LeftLeg", "Armature/Skeleton:mixamorig_LeftShoulder", "Armature/Skeleton:mixamorig_LeftUpLeg", "Armature/Skeleton:mixamorig_Neck", "Armature/Skeleton:mixamorig_RightArm", "Armature/Skeleton:mixamorig_RightForeArm", "Armature/Skeleton:mixamorig_RightHand", "Armature/Skeleton:mixamorig_RightHandIndex1", "Armature/Skeleton:mixamorig_RightHandIndex2", "Armature/Skeleton:mixamorig_RightHandIndex3", "Armature/Skeleton:mixamorig_RightHandIndex4", "Armature/Skeleton:mixamorig_RightHandMiddle1", "Armature/Skeleton:mixamorig_RightHandMiddle2", "Armature/Skeleton:mixamorig_RightHandMiddle3", "Armature/Skeleton:mixamorig_RightHandMiddle4", "Armature/Skeleton:mixamorig_RightHandPinky1", "Armature/Skeleton:mixamorig_RightHandPinky2", "Armature/Skeleton:mixamorig_RightHandPinky3", "Armature/Skeleton:mixamorig_RightHandPinky4", "Armature/Skeleton:mixamorig_RightHandRing1", "Armature/Skeleton:mixamorig_RightHandRing2", "Armature/Skeleton:mixamorig_RightHandRing3", "Armature/Skeleton:mixamorig_RightHandRing4", "Armature/Skeleton:mixamorig_RightHandThumb1", "Armature/Skeleton:mixamorig_RightHandThumb2", "Armature/Skeleton:mixamorig_RightHandThumb3", "Armature/Skeleton:mixamorig_RightHandThumb4", "Armature/Skeleton:mixamorig_RightShoulder" ]
 
-[sub_resource type="AnimationNodeBlend2" id=32]
+[sub_resource type="AnimationNodeBlendTree" id=38]
+graph_offset = Vector2( -643.27, -20.3444 )
+nodes/Animation/node = SubResource( 47 )
+nodes/Animation/position = Vector2( 0, 146.667 )
+"nodes/Animation 2/node" = SubResource( 53 )
+"nodes/Animation 2/position" = Vector2( -26.6667, 386.667 )
+nodes/IntrumentBlend/node = SubResource( 54 )
+nodes/IntrumentBlend/position = Vector2( 280, 226.667 )
+nodes/output/position = Vector2( 533.333, 160 )
+node_connections = [ "output", 0, "IntrumentBlend", "IntrumentBlend", 0, "Animation", "IntrumentBlend", 1, "Animation 2" ]
 
-[sub_resource type="AnimationNodeBlend2" id=17]
+[sub_resource type="AnimationNodeAnimation" id=55]
+animation = "Standing"
 
-[sub_resource type="AnimationNodeOneShot" id=18]
+[sub_resource type="AnimationNodeStateMachineTransition" id=39]
+advance_condition = "Dead"
+xfade_time = 0.5
 
-[sub_resource type="AnimationNodeBlend2" id=38]
+[sub_resource type="AnimationNodeStateMachineTransition" id=42]
+advance_condition = "Sitting"
+xfade_time = 0.5
 
-[sub_resource type="AnimationNodeTimeScale" id=36]
+[sub_resource type="AnimationNodeStateMachineTransition" id=51]
+advance_condition = "Dead"
+xfade_time = 1.0
 
-[sub_resource type="AnimationNodeTimeScale" id=23]
+[sub_resource type="AnimationNodeStateMachineTransition" id=52]
+advance_condition = "Sitting"
+xfade_time = 1.0
 
-[sub_resource type="AnimationNodeBlendTree" id=33]
-graph_offset = Vector2( -376.188, 0.503255 )
-nodes/Animation/node = SubResource( 16 )
-nodes/Animation/position = Vector2( -120, 120 )
-"nodes/Animation 2/node" = SubResource( 14 )
-"nodes/Animation 2/position" = Vector2( -20, 0 )
-"nodes/Animation 3/node" = SubResource( 15 )
-"nodes/Animation 3/position" = Vector2( -373.333, 413.333 )
-"nodes/Animation 4/node" = SubResource( 31 )
-"nodes/Animation 4/position" = Vector2( 0, 533.333 )
-"nodes/Animation 5/node" = SubResource( 37 )
-"nodes/Animation 5/position" = Vector2( 560, 413.333 )
-nodes/Idle_Run_Blend/node = SubResource( 32 )
-nodes/Idle_Run_Blend/position = Vector2( 320, 280 )
-nodes/Idle_Walk_Blend/node = SubResource( 17 )
-nodes/Idle_Walk_Blend/position = Vector2( 26.6667, 253.333 )
-nodes/JumpShot/node = SubResource( 18 )
-nodes/JumpShot/position = Vector2( 560, 160 )
-nodes/SittingBlend/node = SubResource( 38 )
-nodes/SittingBlend/position = Vector2( 773.333, 173.333 )
-nodes/TimeScale/node = SubResource( 23 )
-nodes/TimeScale/position = Vector2( 241.076, 25.6959 )
-"nodes/TimeScale 2/node" = SubResource( 36 )
-"nodes/TimeScale 2/position" = Vector2( -186.667, 333.333 )
-nodes/output/position = Vector2( 980, 160 )
-node_connections = [ "output", 0, "SittingBlend", "TimeScale 2", 0, "Animation 3", "SittingBlend", 0, "JumpShot", "SittingBlend", 1, "Animation 5", "Idle_Walk_Blend", 0, "Animation", "Idle_Walk_Blend", 1, "TimeScale 2", "TimeScale", 0, "Animation 2", "Idle_Run_Blend", 0, "Idle_Walk_Blend", "Idle_Run_Blend", 1, "Animation 4", "JumpShot", 0, "Idle_Run_Blend", "JumpShot", 1, "TimeScale" ]
+[sub_resource type="AnimationNodeStateMachineTransition" id=57]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=58]
+advance_condition = "Idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=56]
+advance_condition = "Idle"
+
+[sub_resource type="AnimationNodeStateMachine" id=45]
+states/Dead/node = SubResource( 37 )
+states/Dead/position = Vector2( 707.333, 254.235 )
+states/Sitting/node = SubResource( 38 )
+states/Sitting/position = Vector2( 522.667, 45.3333 )
+states/Standing/node = SubResource( 55 )
+states/Standing/position = Vector2( 505.778, 170.667 )
+states/Walking/node = ExtResource( 6 )
+states/Walking/position = Vector2( 328.667, 235.199 )
+transitions = [ "Walking", "Dead", SubResource( 39 ), "Walking", "Sitting", SubResource( 42 ), "Sitting", "Dead", SubResource( 51 ), "Dead", "Sitting", SubResource( 52 ), "Standing", "Walking", SubResource( 57 ), "Sitting", "Standing", SubResource( 58 ), "Dead", "Standing", SubResource( 56 ) ]
+start_node = "Walking"
+graph_offset = Vector2( -30, -97 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=46]
 
 [sub_resource type="ParticlesMaterial" id=34]
 lifetime_randomness = 0.24
@@ -87,10 +109,7 @@ material = SubResource( 28 )
 [node name="Gen3Machine" instance=ExtResource( 2 )]
 
 [node name="Armature" parent="." index="0"]
-transform = Transform( 0.0236696, 0, 0, 0, 0.0235585, -0.00229084, 0, 0.00229084, 0.0235585, 0, 0, -0.619416 )
-
-[node name="Skeleton" parent="Armature" index="0"]
-bones/5/bound_children = [ NodePath("BoneAttachment") ]
+transform = Transform( 0.0236696, 0, 0, 0, 0.0236696, 0, 0, 0, 0.0236696, 0, 0, 0 )
 
 [node name="Arms" parent="Armature/Skeleton" index="0"]
 material/0 = ExtResource( 3 )
@@ -111,14 +130,14 @@ material/0 = ExtResource( 1 )
 material/0 = ExtResource( 4 )
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton" index="7"]
-transform = Transform( 0.997277, -0.0626278, -0.0389261, 0.062779, 0.998023, 0.002673, 0.0386818, -0.00510943, 0.999238, -1.27158, 266.138, 0.685429 )
+transform = Transform( 0.996514, -0.0718456, -0.0424031, 0.0660813, 0.990021, -0.124465, 0.0509222, 0.121229, 0.991317, -2.75293, 265.498, 12.6458 )
 bone_name = "mixamorig_Head"
 
 [node name="HeadPivot" type="Spatial" parent="Armature/Skeleton/BoneAttachment" index="0"]
-transform = Transform( -0.992874, 0.119, -0.00627866, 0.119049, 0.992856, -0.00798198, 0.00528393, -0.00867248, -0.999949, 3.96788, 23.0771, 23.499 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 23.077, 23.499 )
 
 [node name="NightLight" type="SpotLight" parent="Armature/Skeleton/BoneAttachment/HeadPivot" index="0"]
-transform = Transform( 1, -3.91155e-08, 4.19095e-08, 1.49012e-08, 1, 2.98023e-07, 9.31323e-10, 1.49012e-07, 1, 0, -0.317, -0.402 )
+transform = Transform( -42.2483, -4.13507e-06, -1.78814e-06, -5.96046e-08, 42.2483, -2.38419e-06, 3.69549e-06, -2.38419e-07, -42.2482, 0, 0, 0 )
 portal_mode = 1
 include_in_bound = false
 allow_merging = false
@@ -135,16 +154,22 @@ spot_angle = 65.0
 script = ExtResource( 10 )
 
 [node name="AnimationTree" type="AnimationTree" parent="AnimationPlayer" index="0"]
-tree_root = SubResource( 33 )
+tree_root = SubResource( 45 )
 anim_player = NodePath("..")
 active = true
 process_mode = 0
-parameters/Idle_Run_Blend/blend_amount = 0.0
-parameters/Idle_Walk_Blend/blend_amount = 0.0
-parameters/JumpShot/active = false
-parameters/SittingBlend/blend_amount = 0.0
-parameters/TimeScale/scale = 1.5
-"parameters/TimeScale 2/scale" = 1.2
+root_motion_track = NodePath("Armature/Skeleton:Bone")
+parameters/playback = SubResource( 46 )
+parameters/conditions/Dead = false
+parameters/conditions/Idle = false
+parameters/conditions/Sitting = false
+parameters/Sitting/IntrumentBlend/blend_amount = 0.0
+parameters/Walking/Idle_Run_Blend/blend_amount = 0
+parameters/Walking/Idle_Walk_Blend/blend_amount = 0.0
+parameters/Walking/IntrumentBlend/blend_amount = 0.0
+parameters/Walking/JumpShot/active = false
+parameters/Walking/TimeScale/scale = 1.0
+"parameters/Walking/TimeScale 2/scale" = 1.0
 
 [node name="Particles" type="Particles" parent="." index="2"]
 sorting_use_aabb_center = false

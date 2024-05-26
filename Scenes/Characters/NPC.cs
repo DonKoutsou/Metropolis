@@ -4,16 +4,18 @@ using System;
 public class NPC : Character
 {
     [Export]
-    string AnimToPlay = null;
-
-    [Export]
     bool spawnUncon = false;
+    [Export]
+    bool Sitting = true;
+    [Export]
+    bool PlayingInstrument = false;
 
     public override void _Ready()
     {
         base._Ready();
-        if (AnimToPlay != null)
-            anim.Play(AnimToPlay);
+        if (Sitting)
+            anim.ToggleSitting();
+        anim.ToggleInstrument(PlayingInstrument);
         if (spawnUncon)
         {
             CurrentEnergy = 0;

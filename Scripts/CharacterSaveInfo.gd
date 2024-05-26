@@ -5,7 +5,7 @@ func _SetData(data, HasData):
 	Name = data["Name"]
 	Position = data["Position"]
 	SceneData = data["SceneData"]
-	Energy = data["CurrentEnergy"]
+	Energy = data["Energy"]
 	Alive = data["Alive"]
 	if (HasData):
 		CustomDataKeys = data["CustomDataKeys"]

@@ -10,6 +10,8 @@ public class Island : Spatial
 	[Export]
 	IleType type = IleType.LAND;
 
+	public string IslandSpecialName = null;
+
 	public bool Inited = false;
 
 	private Vector3 SpawnGlobalLocation;
@@ -39,10 +41,11 @@ public class Island : Spatial
 
 		//FindChildren(this);
 	}
-	public void SetSpawnInfo(Vector3 SpawnPos, float SpawnRot)
+	public void SetSpawnInfo(Vector3 SpawnPos, float SpawnRot, string SpecialName)
 	{
 		SpawnGlobalLocation = SpawnPos;
 		SpawnRotation = SpawnRot;
+		IslandSpecialName = SpecialName;
 	}
 	public IleType GetIslandType()
 	{
@@ -296,6 +299,7 @@ public class IslandInfo
 	public Island ile;
 	public IleType Type;
 	public Vector2 pos;
+	public string SpecialName;
 	public PackedScene IleType;
 	public List<HouseInfo> Houses = new List<HouseInfo>();
 	public List<WindGeneratorInfo> Generators = new List<WindGeneratorInfo>();
@@ -310,6 +314,7 @@ public class IslandInfo
     {
         Type = (IleType)data.Get("Type");
         pos = (Vector2)data.Get("Pos");
+		SpecialName = (string)data.Get("SpecialName");
         IleType = (PackedScene)data.Get("Scene");
         rottospawn = (float)data.Get("Rotation");
 
@@ -354,6 +359,7 @@ public class IslandInfo
 		Dictionary<string, object> data = new Dictionary<string, object>();
 		data.Add("Type", Type);
 		data.Add("Pos", pos);
+		data.Add("SpecialPosition", SpecialName);
 		data.Add("Scene", IleType);
 		data.Add("Rotation", rottospawn);
 
@@ -430,6 +436,7 @@ public class IslandInfo
 	{
 		ile = Ile;
 		Type = Ile.GetIslandType();
+		SpecialName = Ile.IslandSpecialName;
 		List<House> hous;
 		Ile.GetHouses(out hous);
 		List<WindGenerator> Gen;

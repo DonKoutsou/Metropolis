@@ -287,7 +287,7 @@ public class Vehicle : RigidBody
                 ray.GetNode<Particles>("Particles").Emitting = false;
                 Vector3 f = Vector3.Zero;
 
-                f = Vector3.Up * Force * delta * -8;
+                f = Vector3.Up * 8000 * delta * -8;
 
                 AddForce(f * forcemulti, ray.GlobalTransform.origin - GlobalTransform.origin);
             }
@@ -425,6 +425,8 @@ public class Vehicle : RigidBody
 
         Spatial guy = cha.GetNode<Spatial>("Pivot");
 
+        cha.Anims().ToggleSitting();
+
         cha.SetCollisionMaskBit(4, false);
         GetParent().AddChild(cha);
         RemoteTransform CharTrasn = GetNode<RemoteTransform>("CharacterRemoteTransform");
@@ -446,6 +448,7 @@ public class Vehicle : RigidBody
         //SetProcessInput(false);
         
         Character chartothrowout = passengers[0];
+        chartothrowout.Anims().ToggleIdle();
         passengers.Clear();
         Vector3 prevrot = chartothrowout.GlobalRotation;
         RemoteTransform CharTrasn = GetNode<RemoteTransform>("CharacterRemoteTransform");
@@ -478,6 +481,7 @@ public class Vehicle : RigidBody
         cha.GlobalTranslation = GlobalTranslation;
         cha.GlobalRotation = prevrot;
         cha.Rotation = new Vector3(0,0,0);
+        cha.Anims().ToggleIdle();
         ToggleMachine(false);
         ToggleLights(false);
         cha.OnVehicleUnBoard(this);

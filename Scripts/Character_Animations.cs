@@ -10,7 +10,6 @@ public class Character_Animations : AnimationPlayer
 {
     AnimationTree animtree;
     Spatial parent;
-
     Particles walkpart;
     float currot;
     public override void _Ready()
@@ -18,9 +17,39 @@ public class Character_Animations : AnimationPlayer
         base._Ready();
         animtree = GetNode<AnimationTree>("AnimationTree");
         animtree.Active = true;
+
         walkpart = GetParent().GetNode<Particles>("Particles");
         walkpart.Emitting = false;
         parent = (Spatial)GetParent();
+    }
+    
+    public void ToggleInstrument(bool toggle)
+    {
+        int amm = 1;
+        if (!toggle)
+            amm = 0;
+        animtree.Set("parameters/Walking/IntrumentBlend/blend_amount", amm);
+        animtree.Set("parameters/Sitting/IntrumentBlend/blend_amount", amm);
+    }
+    public void ToggleIdle()
+    {
+        animtree.Set("parameters/conditions/Dead", false);
+        animtree.Set("parameters/conditions/Sitting", false);
+        animtree.Set("parameters/conditions/Idle", true);
+    }
+    public void ToggleDeath()
+    {
+        
+        animtree.Set("parameters/conditions/Sitting", false);
+        animtree.Set("parameters/conditions/Idle", false);
+        animtree.Set("parameters/conditions/Dead", true);
+        
+    }
+    public void ToggleSitting()
+    {
+        animtree.Set("parameters/conditions/Idle", false);
+        animtree.Set("parameters/conditions/Dead", false);
+        animtree.Set("parameters/conditions/Sitting", true);
     }
     public void PlayAnimation(E_Animations AnimationName)
     {
@@ -28,18 +57,19 @@ public class Character_Animations : AnimationPlayer
         {
             case E_Animations.Idle:
             {
-                animtree.Set("parameters/Idle_Walk_Blend/blend_amount", 0f);
-                animtree.Set("parameters/Idle_Run_Blend/blend_amount", 0f);
+                animtree.Set("parameters/Walking/Idle_Walk_Blend/blend_amount", 0f);
+                animtree.Set("parameters/Walking/Idle_Run_Blend/blend_amount", 0f);
                 Vector3 rot = new Vector3(0, 0, 0);
                 parent.Rotation = rot;
                 walkpart.Emitting = false;
-                
+
+
                 break;
             }
             case E_Animations.Walk:
             {
-                animtree.Set("parameters/Idle_Walk_Blend/blend_amount", 1f);
-                animtree.Set("parameters/Idle_Run_Blend/blend_amount", 0f);
+                animtree.Set("parameters/Walking/Idle_Walk_Blend/blend_amount", 1f);
+                animtree.Set("parameters/Walking/Idle_Run_Blend/blend_amount", 0f);
                 //animtree.Set("parameters/Walk_Speed/scale", 2f);
                 if (currot > 0)
                     currot -= 3f;
@@ -48,11 +78,12 @@ public class Character_Animations : AnimationPlayer
                 walkpart.Emitting = true;
                 if (walkpart.Amount != 4)
                     walkpart.Amount = 4;
+
                 break;
             }
             case E_Animations.Jump:
             {
-                animtree.Set("parameters/JumpShot/active", true);
+                animtree.Set("parameters/Walking/JumpShot/active", true);
                 walkpart.Emitting = false;
                 break;
             }
@@ -62,14 +93,21 @@ public class Character_Animations : AnimationPlayer
                     currot += 1f;
                 Vector3 rot = new Vector3(Mathf.Deg2Rad(currot), 0, 0);
                 parent.Rotation = rot;
-                animtree.Set("parameters/Idle_Walk_Blend/blend_amount", 0f);
-                animtree.Set("parameters/Idle_Run_Blend/blend_amount", 1f);
+                animtree.Set("parameters/Walking/Idle_Walk_Blend/blend_amount", 0f);
+                animtree.Set("parameters/Walking/Idle_Run_Blend/blend_amount", 1f);
+
                 //animtree.Set("parameters/Walk_Speed/scale", 4f);
                 walkpart.Emitting = true;
                 if (walkpart.Amount != 8)
                     walkpart.Amount = 8;
                 break;
             }
+            /*case E_Animations.Death:
+            {
+                animtree.Set("parameters/SittingBlend/blend_amount", 0f);
+                animtree.Set("parameters/DeadBlend/blend_amount", 1f);
+                break;
+            }*/
         }
         
         /*string anima = Enum.GetName(AnimationName.GetType(), AnimationName);

@@ -101,10 +101,11 @@ public class DayNight : WorldEnvironment
     }
     private void UpdateRain()
     {
-        float value = currentDay + ((currenthour  + (currentmins / 60))/ 24);
-        while (value > 10)
-            value -= 10;
-        Raintreangth = RainStreangthCurve.Interpolate(value/ 10);
+        //float value = currentDay + ((currenthour  + (currentmins / 60))/ 24);
+        //while (value > 10)
+            //value -= 10;
+        //Raintreangth = RainStreangthCurve.Interpolate(value/ 10);
+        Raintreangth = 0;
     }
     private void UpdateCurveValues()
     {

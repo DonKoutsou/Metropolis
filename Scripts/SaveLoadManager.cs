@@ -27,12 +27,17 @@ public class SaveLoadManager : Control
 		WorldMap map = WorldMap.GetInstance();
 		MyWorld world = MyWorld.GetInstance();
 
+		if (world == null)
+			return;
+
 		foreach (IslandInfo ile in world.GetActiveIles())
 		{
 			world.ToggleIsland(ile, false, false);
 		}
 
 		Player pl = Player.GetInstance();
+		if (pl == null)
+			return;
 		bool HasVecicle = pl.HasVecicle;
 		
 		Dictionary<string, object> data = map.GetSaveData();

@@ -5,7 +5,6 @@
 [resource]
 flags_transparent = true
 params_blend_mode = 1
-params_depth_draw_mode = 3
 params_billboard_mode = 3
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
@@ -14,3 +13,5 @@ albedo_color = Color( 1, 0.901961, 0.698039, 1 )
 albedo_texture = ExtResource( 1 )
 anisotropy_enabled = true
 anisotropy = 1.0
+transmission_enabled = true
+transmission = Color( 1, 1, 1, 1 )

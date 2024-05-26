@@ -79,7 +79,7 @@ public class House : Spatial
 		}
 		for (int i = 0; i < FurnitureList.Count; i++)
 		{
-			int start = random.Next(0, ItemSpawnPool.Length + 1);
+			int start = random.Next(0, ItemSpawnPool.Length * 2);
 			if (start >= ItemSpawnPool.Length)
 				continue;
 

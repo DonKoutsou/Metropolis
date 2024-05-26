@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Scenes/Islands/Island7.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Building/BuildingDust3.tscn" type="PackedScene" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://Scenes/World/SunMoonPivot.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/Characters/Player.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scenes/Islands/Island1.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Scenes/Vehicles/HoverParticles.tscn" type="PackedScene" id=19]
 
 [sub_resource type="MultiMesh" id=1]
 transform_format = 1
@@ -107,3 +108,21 @@ transform = Transform( -0.997079, 0, 0.0763711, 0.00802935, 0.994458, 0.104829, 
 
 [node name="Island3" parent="." index="26" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4000, 0, 0 )
+
+[node name="Particles" parent="." index="28" instance=ExtResource( 19 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 234.9, 1.94312, 2602.25 )
+
+[node name="Particles2" parent="." index="29" instance=ExtResource( 19 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 238.724, 1.94312, 2616.03 )
+
+[node name="Particles3" parent="." index="30" instance=ExtResource( 19 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 240.648, 1.20532, 2619.88 )
+
+[node name="Particles4" parent="." index="31" instance=ExtResource( 19 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 231.502, 1.94313, 2605.22 )
+
+[node name="Particles5" parent="." index="32" instance=ExtResource( 19 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 235.326, 1.94313, 2619 )
+
+[node name="Particles6" parent="." index="33" instance=ExtResource( 19 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 219.488, 1.94313, 2601.01 )

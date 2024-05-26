@@ -26,8 +26,6 @@ public class Character : KinematicBody
 
 	public bool m_balive = true;
 
-	public Vector3 origposition;
-
 	public Vector3 m_velocity = Vector3.Zero;
 
 
@@ -113,6 +111,10 @@ public class Character : KinematicBody
 		Island ile = (Island)GetParent();
 		ile.RegisterChild(this);
 	}
+	public Character_Animations Anims()
+	{
+		return anim;
+	}
 	public void SetData(CharacterInfo info)
 	{
         Name = info.Name;
@@ -155,10 +157,6 @@ public class Character : KinematicBody
 		if (CurrentEnergy <= 0)
 			Kill();
 
-		if (this is Player)
-		 return;
-		if (origposition != Transform.origin)
-			MoveTo(origposition);
 	}
     public void MoveTo(Vector3 loc)
 	{
@@ -201,7 +199,7 @@ public class Character : KinematicBody
 	}
 	public virtual void Start()
 	{
-		origposition = Transform.origin;
+		loctomove = Transform.origin;
 		SetPhysicsProcess(true);
 	}
 	public virtual void Stop()
@@ -218,6 +216,7 @@ public class Character : KinematicBody
 	public virtual void Respawn()
 	{
 		m_balive = true;
+		anim.ToggleIdle();
 		Start();
 	}
 	public virtual void Kill()
@@ -225,7 +224,8 @@ public class Character : KinematicBody
 		//GetNode<Character_Animations>("Character_Animations").ForceAnimation(E_Animations.Die);
 		//GetNode<AudioStreamPlayer2D>("WalkingSound").StreamPaused = true;
 		m_balive = false;
-		origposition = GlobalTransform.origin;
+		loctomove = GlobalTransform.origin;
+		anim.ToggleDeath();
 		//CharacterInventory.RemoveAllItems();
 		//AppliedForce = AppliedForce * 0;
 		Stop();
@@ -313,7 +313,7 @@ public class CharacterInfo
 			{"Position", Position},
 			{"Name", Name},
 			{"SceneData", SceneData},
-			{"CurrentEnergy", CurrentEnergy},
+			{"Energy", CurrentEnergy},
 			{"Alive", Alive}
 		};
 		
@@ -339,7 +339,7 @@ public class CharacterInfo
         Position = (Vector3)data.Get("Position");
 		Name = (string)data.Get("Name");
 		SceneData = (string)data.Get("SceneData");
-		CurrentEnergy = (float)data.Get("CurrentEnergy");
+		CurrentEnergy = (float)data.Get("Energy");
 		Alive = (bool)data.Get("Alive");
 
 		Godot.Collections.Array CustomDataKeys = (Godot.Collections.Array)data.Get("CustomDataKeys");

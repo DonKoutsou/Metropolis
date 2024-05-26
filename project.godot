@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Resource",
+"class": "CharacterSaveInfo",
+"language": "GDScript",
+"path": "res://Scripts/CharacterSaveInfo.gd"
+}, {
 "base": "Reference",
 "class": "DTS",
 "language": "GDScript",
@@ -115,6 +120,7 @@ _global_script_classes=[ {
 "path": "res://Scripts/VehicleSaveInfo.gd"
 } ]
 _global_script_class_icons={
+"CharacterSaveInfo": "",
 "DTS": "",
 "Dialogic": "",
 "DialogicAnimaPropertiesHelper": "",
@@ -154,13 +160,16 @@ config/icon="res://icon.png"
 
 [autoload]
 
+WindowCentering="*res://Scripts/WindowCentering.cs"
 UniversalLodManager="*res://Scripts/UniversalLodManager.cs"
 
 [display]
 
 window/size/width=1920
 window/size/height=1080
+window/size/borderless=true
 window/vsync/use_vsync=false
+window/stretch/aspect="keep"
 
 [editor_plugins]
 

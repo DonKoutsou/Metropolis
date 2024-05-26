@@ -32,21 +32,15 @@ public class WorldMap : TileMap
 	public PackedScene Μαχαλάς;
 
 	[Export]
-	public bool HideBasedOnState = false;
-
-	[Export]
-	public bool RandomRotation = true;
-
-	[Export]
 	int CellSizeOverride = 8000;
-
-	[Export]
-	public int seed = 69420;
 
 	[Export]
 	PackedScene IntroScene = null;
 	[Signal]
 	public delegate void OnTransitionEventHandler(Island ile);
+
+	[Export]
+	List<string> LightHouseNames = null;
 
 	List <float> rots = new List<float>{0f, 90f, 180f, -90f};
 
@@ -271,7 +265,7 @@ public class WorldMap : TileMap
 		{
 			SaveIsland(GenerateIsland());
 
-			if (currentile == 300)
+			if (currentile == LoadingScreen.GetWaitTime())
 			{
 				SpawnIntro();
 			}
@@ -295,9 +289,11 @@ public class WorldMap : TileMap
 		//Cell cords
 		Vector2 cell = OrderedCells[currentile];
 
-		//Scene using ID from cell
-		PackedScene ilescene = GetSceneToSpawn(id);
+		string SpecialName;
 
+		//Scene using ID from cell
+		PackedScene ilescene = GetSceneToSpawn(id, out SpecialName);
+		
 		//Start the Data saving
 		IslandInfo ileinfo = new IslandInfo();
 		ilemap.Add(OrderedCells[currentile], ileinfo);
@@ -309,6 +305,7 @@ public class WorldMap : TileMap
 		ileinfo.rottospawn = rot;
 		ileinfo.IleType = ilescene;
 		ileinfo.pos = cell;
+		ileinfo.SpecialName = SpecialName;
 		
 		SpawnIsland(ileinfo);   
 
@@ -416,7 +413,7 @@ public class WorldMap : TileMap
 		postoput += CellSize / 2;
 		pos.x = postoput.x;
 		pos.z = postoput.y;
-		Ile.SetSpawnInfo(pos, info.rottospawn);
+		Ile.SetSpawnInfo(pos, info.rottospawn, info.SpecialName);
 
 		info.ile = Ile;
 
@@ -436,7 +433,7 @@ public class WorldMap : TileMap
 		pos.x = postoput.x;
 		pos.z = postoput.y;
 		pos.y = 0.0f;
-		Ile.SetSpawnInfo(pos, info.rottospawn);
+		Ile.SetSpawnInfo(pos, info.rottospawn, info.SpecialName);
 
 		info.ile = Ile;
 
@@ -560,12 +557,17 @@ public class WorldMap : TileMap
 	}
 	
    
-	PackedScene GetSceneToSpawn(int type)
+	PackedScene GetSceneToSpawn(int type, out string SpecialName)
 	{
 		PackedScene scene = null;
+		SpecialName = null;
 		//0 entry
 		if (type == 0)
+		{
+			SpecialName = "Μητρόπολη";
 			scene = Entrytospawn;
+		}
+			
 
 		//1 random or event
 		else if (type == 1)
@@ -589,9 +591,20 @@ public class WorldMap : TileMap
 		else if (type == 4)
 		{
 			if (currentile == ΜαχαλάςEntryID)
+			{
+				SpecialName = "Μαχαλάς";
 				scene =  Μαχαλάς;
+			}
 			else
+			{
+				if (LightHouseNames != null && LightHouseNames.Count() > 0)
+				{
+					SpecialName = LightHouseNames[LightHouseNames.Count() - 1];
+					LightHouseNames.Remove(SpecialName);
+				}
 				scene = LightHouse;
+			}
+				
 		}
 			
 		return scene;
