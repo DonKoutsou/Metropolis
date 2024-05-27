@@ -299,7 +299,7 @@ public class IslandInfo
 	public Island ile;
 	public IleType Type;
 	public Vector2 pos;
-	public string SpecialName;
+	public string SpecialName = null;
 	public PackedScene IleType;
 	public List<HouseInfo> Houses = new List<HouseInfo>();
 	public List<WindGeneratorInfo> Generators = new List<WindGeneratorInfo>();
@@ -359,7 +359,7 @@ public class IslandInfo
 		Dictionary<string, object> data = new Dictionary<string, object>();
 		data.Add("Type", Type);
 		data.Add("Pos", pos);
-		data.Add("SpecialPosition", SpecialName);
+		data.Add("SpecialName", SpecialName);
 		data.Add("Scene", IleType);
 		data.Add("Rotation", rottospawn);
 

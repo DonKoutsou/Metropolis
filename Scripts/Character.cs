@@ -95,9 +95,9 @@ public class Character : KinematicBody
 
 		CharacterSoundManager = GetNode<CharacterSoundManager>("CharacterSoundManager");
 
-		AudioStreamPlayer3D walkingsound = CharacterSoundManager.GetSound("Walk");
-		walkingsound.Play();
-		walkingsound.StreamPaused = true;
+		//AudioStreamPlayer3D walkingsound = CharacterSoundManager.GetSound("Walk");
+		//walkingsound.Play();
+		//walkingsound.StreamPaused = true;
 		//GetNode<AudioStreamPlayer3D>("TiredSound").Play();
 		//GetNode<AudioStreamPlayer3D>("TiredSound").StreamPaused = true;
 		

@@ -20,6 +20,8 @@ public class Item : RigidBody
 
 	[Export]
 	public bool stackable = true;
+	[Export]
+	bool RegisterOnIsland = true;
 
 	public string GetItemName()
 	{
@@ -36,18 +38,21 @@ public class Item : RigidBody
 	public override void _Ready()
 	{
 		//GetNode<CollisionShape>("CollisionShape").SetDeferred("disabled",false);
-		
-		Node par = GetParent();
-		if (par is Inventory || par is Furniture)
-			return;
-		while (!(par is Island))
+		if (RegisterOnIsland)
 		{
-            if (par == null)
+			Node par = GetParent();
+			if (par is Inventory || par is Furniture)
 				return;
-			par = par.GetParent();
+			while (!(par is Island))
+			{
+				if (par == null)
+					return;
+				par = par.GetParent();
+			}
+			Island ile = (Island)par;
+			ile.RegisterChild(this);
 		}
-		Island ile = (Island)par;
-		ile.RegisterChild(this);
+		
 	}
 	public Texture GetIconTexture()
 	{

@@ -62,8 +62,6 @@ public class Character_Animations : AnimationPlayer
                 Vector3 rot = new Vector3(0, 0, 0);
                 parent.Rotation = rot;
                 walkpart.Emitting = false;
-
-
                 break;
             }
             case E_Animations.Walk:

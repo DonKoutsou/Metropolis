@@ -110,19 +110,19 @@ transform = Transform( -0.997079, 0, 0.0763711, 0.00802935, 0.994458, 0.104829, 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4000, 0, 0 )
 
 [node name="Particles" parent="." index="28" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 234.9, 1.94312, 2602.25 )
+transform = Transform( -0.962722, 0.0241337, -0.269416, 0.266065, -0.0950264, -0.95926, -0.048752, -0.995182, 0.085063, 226.655, 12.2934, 2608.33 )
 
 [node name="Particles2" parent="." index="29" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 238.724, 1.94312, 2616.03 )
+transform = Transform( -0.962722, 0.0241337, -0.269416, 0.266065, -0.0950264, -0.95926, -0.048752, -0.995182, 0.085063, 219.261, 0.0922394, 2609.31 )
 
 [node name="Particles3" parent="." index="30" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 240.648, 1.20532, 2619.88 )
+transform = Transform( -0.962722, 0.0241337, -0.269416, 0.266065, -0.0950264, -0.95926, -0.048752, -0.995182, 0.085063, 216.354, -3.0186, 2610.28 )
 
 [node name="Particles4" parent="." index="31" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 231.502, 1.94313, 2605.22 )
+transform = Transform( -0.962722, 0.0241337, -0.269416, 0.266065, -0.0950264, -0.95926, -0.048752, -0.995182, 0.085063, 229.126, 8.54048, 2608.75 )
 
 [node name="Particles5" parent="." index="32" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 235.326, 1.94313, 2619 )
+transform = Transform( -0.962722, 0.0241337, -0.269416, 0.266065, -0.0950264, -0.95926, -0.048752, -0.995182, 0.085063, 221.732, -3.66093, 2609.73 )
 
 [node name="Particles6" parent="." index="33" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 219.488, 1.94313, 2601.01 )
+transform = Transform( -0.962722, 0.0241337, -0.269416, 0.266065, -0.0950264, -0.95926, -0.048752, -0.995182, 0.085063, 241.827, 9.38228, 2608.97 )
