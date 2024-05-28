@@ -15,3 +15,6 @@ transform = Transform( -0.698062, 0.509645, 0.502962, -0.00704736, 0.697501, -0.
 
 [node name="Rock1" parent="." index="3" instance=ExtResource( 2 )]
 transform = Transform( -470.209, 230.572, 152.276, -241.878, -198.148, -446.856, -133.592, -452.794, 273.092, -2663.73, -745.47, 1145.39 )
+__meta__ = {
+"apply_volumetrics": false
+}

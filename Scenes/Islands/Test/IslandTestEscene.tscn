@@ -1,9 +1,10 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://Assets/AllSkyFree_Sky_OvercastLow_Equirect.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Env_Assets/Sea.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Islands/LightHouseGeo.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Env_Assets/MotherCityGeo.tscn" type="PackedScene" id=4]
+[ext_resource path="res://addons/SIsilicon.vfx.godrays/GodRays.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Clouds/Clouds2.material" type="Material" id=6]
 [ext_resource path="res://Assets/Sounds/RainSound.mp3" type="AudioStream" id=7]
 [ext_resource path="res://Assets/Clutter/Antenna/Antenna.material" type="Material" id=8]
@@ -39,7 +40,7 @@ ambient_light_sky_contribution = 0.0
 fog_enabled = true
 fog_color = Color( 0.262745, 0.25098, 0.239216, 1 )
 fog_sun_color = Color( 0.964706, 0.670588, 0.34902, 1 )
-fog_sun_amount = 0.28
+fog_sun_amount = 0.2
 fog_depth_begin = 2014.6
 fog_depth_end = 20000.0
 fog_depth_curve = 0.18301
@@ -105,6 +106,7 @@ material = SubResource( 122 )
 size = Vector2( 0.5, 50 )
 
 [sub_resource type="SpatialMaterial" id=99]
+flags_use_shadow_to_opacity = true
 flags_unshaded = true
 albedo_color = Color( 0.996078, 0.666667, 0.415686, 1 )
 
@@ -127,6 +129,8 @@ height = 1600.0
 size = Vector2( 50000, 50000 )
 
 [sub_resource type="SpatialMaterial" id=120]
+render_priority = -8
+flags_use_shadow_to_opacity = true
 flags_disable_ambient_light = true
 params_billboard_mode = 2
 
@@ -406,7 +410,7 @@ material/0 = ExtResource( 20 )
 environment = SubResource( 91 )
 
 [node name="Sun" type="DirectionalLight" parent="Sky"]
-transform = Transform( 0.74687, -0.0589619, -0.662351, 0, -0.996061, 0.0886685, -0.66497, -0.0662239, -0.743928, -0.00488281, 1077.42, -0.00720215 )
+transform = Transform( 0.725991, -0.0575908, -0.685289, -0.0607667, -0.997962, 0.0194915, -0.685015, 0.0274921, -0.72801, -0.00488281, 392.423, -0.00720215 )
 light_color = Color( 0.996078, 0.666667, 0.415686, 1 )
 light_energy = 1.92
 light_indirect_energy = 0.0
@@ -418,6 +422,10 @@ directional_shadow_blend_splits = true
 directional_shadow_normal_bias = 1.807
 directional_shadow_depth_range = 1
 directional_shadow_max_distance = 30000.0
+
+[node name="GodRays" type="Spatial" parent="Sky/Sun"]
+script = ExtResource( 5 )
+light_size = 0.06
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 0.950304, -0.0403773, 0.308694, 0, 0.991554, 0.129696, -0.311323, -0.12325, 0.942278, 853.276, 1027.04, 8376.68 )
@@ -469,7 +477,7 @@ generate_lightmap = false
 mesh = SubResource( 85 )
 
 [node name="MeshInstance" type="MeshInstance" parent="SunMoonPivot/MeshInstance"]
-transform = Transform( -134.649, -5.24521e-06, 0, 3.33786e-06, 134.648, 3.57628e-06, 3.05176e-05, -7.15256e-07, -134.648, 812.71, 1662.37, 1759.88 )
+transform = Transform( -134.649, -5.72205e-06, 3.8147e-06, 3.8147e-06, 134.648, 3.8147e-06, 3.05176e-05, -7.15256e-07, -134.648, 812.71, 1662.37, 1759.88 )
 include_in_bound = false
 allow_merging = false
 cast_shadow = 0
@@ -479,7 +487,6 @@ material/0 = SubResource( 120 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="SunMoonPivot"]
 transform = Transform( 1, 1.64334e-08, 6.58151e-09, -7.64833e-08, 1, 2.08616e-07, 1.41731e-07, 1.49012e-07, 1, 0, 0, -10000 )
-visible = false
 cast_shadow = 0
 mesh = SubResource( 86 )
 

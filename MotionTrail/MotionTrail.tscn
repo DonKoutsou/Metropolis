@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://MotionTrail/trailmaterial.tres" type="Material" id=1]
+[ext_resource path="res://MotionTrail/MotionTrail.gd" type="Script" id=2]
+
+[node name="MotionTrail" type="ImmediateGeometry"]
+material_override = ExtResource( 1 )
+script = ExtResource( 2 )
+toWidth = 0.515
+startColor = Color( 1, 0, 0, 1 )
+endColor = Color( 1, 0, 0, 1 )

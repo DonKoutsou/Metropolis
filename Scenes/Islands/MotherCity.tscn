@@ -230,7 +230,7 @@ update_rotation = false
 update_scale = false
 
 [node name="Planks" type="Spatial" parent="." index="1"]
-transform = Transform( 0.999976, 3.55527e-10, 5.23869e-10, 4.89614e-10, 0.999975, 1.12923e-08, 4.36557e-10, -1.19908e-08, 0.999975, 0, 0, 0 )
+transform = Transform( 0.999974, 4.72049e-10, 6.1118e-10, 5.76641e-10, 0.999973, 1.21945e-08, 4.94765e-10, -1.30676e-08, 0.999973, 0, 0, 0 )
 
 [node name="StaticBody6" parent="Planks" index="0" instance=ExtResource( 28 )]
 transform = Transform( 0.742315, 0, 0.670051, 0, 1, 0, -0.670051, 0, 0.742315, 87.941, -0.00652695, 2437.29 )
@@ -595,129 +595,255 @@ transform = Transform( 0.976366, -0.000419497, -0.216127, 0.000666553, 0.999999,
 
 [node name="Rock1" parent="Rocks" index="0" instance=ExtResource( 8 )]
 transform = Transform( -97.9091, -24.6931, -163.797, -43.5813, -179.727, 53.1453, -159.812, 64.1406, 85.8576, -149.348, -239.257, -2049.23 )
+__meta__ = {
+"_vol_id": 352
+}
 
 [node name="Rock15" parent="Rocks" index="1" instance=ExtResource( 8 )]
 transform = Transform( -108.81, 26.0966, -0.975693, -25.3443, -104.519, 30.9061, 6.29633, 30.2737, 107.543, 386.383, -40.1721, -1489.16 )
+__meta__ = {
+"_vol_id": 353
+}
 
 [node name="Rock16" parent="Rocks" index="2" instance=ExtResource( 8 )]
 transform = Transform( -85.5353, -0.592204, -72.1455, -25.3443, -104.519, 30.9061, -67.5499, 39.9647, 79.7587, 1131.22, -76.7378, 1319.89 )
+__meta__ = {
+"_vol_id": 354
+}
 
 [node name="Rock17" parent="Rocks" index="3" instance=ExtResource( 8 )]
 transform = Transform( 24.085, -36.8104, -2.54251, 2.1917, -1.60366, 43.9793, -36.8329, -24.1656, 0.954408, 2082.54, -9.76396, -1477.39 )
+__meta__ = {
+"_vol_id": 355
+}
 
 [node name="Rock18" parent="Rocks" index="4" instance=ExtResource( 8 )]
 transform = Transform( -30.224, 5.45167, 31.5965, 22.686, 34.3209, 15.7788, -22.6585, 27.0908, -26.3484, 2022.35, -33.0224, -1535.4 )
+__meta__ = {
+"_vol_id": 356
+}
 
 [node name="Rock19" parent="Rocks" index="5" instance=ExtResource( 8 )]
 transform = Transform( -35.4349, 42.8573, -42.2729, 35.9638, 54.4084, 25.014, 48.2735, -9.07525, -49.6656, 1966.36, -63.0099, -1541.29 )
+__meta__ = {
+"_vol_id": 357
+}
 
 [node name="Rock20" parent="Rocks" index="6" instance=ExtResource( 8 )]
 transform = Transform( 71.4278, 155.945, 8.10255, 21.7099, -18.7406, 169.304, 154.639, -69.4003, -27.5113, 1908.16, -169.437, -2544.42 )
+__meta__ = {
+"_vol_id": 358
+}
 
 [node name="Rock21" parent="Rocks" index="7" instance=ExtResource( 8 )]
 transform = Transform( 1.88936, -59.622, 161.022, -74.6303, -145.311, -52.9289, 154.639, -69.4003, -27.5113, 2687.44, -169.437, -1104.48 )
+__meta__ = {
+"_vol_id": 359
+}
 
 [node name="Rock6" parent="Rocks" index="8" instance=ExtResource( 8 )]
 transform = Transform( 111.422, -223.611, -69.9173, 84.6512, -33.7674, 242.897, -218.459, -127.134, 58.4606, -255.592, -210.476, -4831.69 )
+__meta__ = {
+"_vol_id": 360
+}
 
 [node name="Rock27" parent="Rocks" index="9" instance=ExtResource( 8 )]
 transform = Transform( -158.471, 200.375, 45.1914, -68.3545, 2.38131, -250.254, -193.7, -164.771, 51.3398, 1739.23, -248.506, 3520.81 )
+__meta__ = {
+"_vol_id": 361
+}
 
 [node name="Rock28" parent="Rocks" index="10" instance=ExtResource( 8 )]
 transform = Transform( -123.533, 60.4969, 219.966, -104.051, -237.552, 6.89865, 203.022, -84.9375, 137.377, 547.484, -305.065, 3727.09 )
+__meta__ = {
+"_vol_id": 362
+}
 
 [node name="Rock29" parent="Rocks" index="11" instance=ExtResource( 8 )]
 transform = Transform( -77.61, -183.705, -165.935, 150.456, 103.09, -184.501, 196.583, -151.427, 75.6984, -695.648, -309.174, 3444.24 )
+__meta__ = {
+"_vol_id": 363
+}
 
 [node name="Rock30" parent="Rocks" index="12" instance=ExtResource( 8 )]
 transform = Transform( -27.5141, -257.969, -0.378998, 103.19, -11.3555, 237.756, -236.431, 25.0647, 103.812, -2625.18, -260.551, 3303.29 )
+__meta__ = {
+"_vol_id": 364
+}
 
 [node name="Rock31" parent="Rocks" index="13" instance=ExtResource( 8 )]
 transform = Transform( 236.95, -49.3828, 93.3865, 49.4954, 254.508, 8.99778, -93.3268, 9.5985, 241.874, -2087.88, -275.638, 723.326 )
+__meta__ = {
+"_vol_id": 365
+}
 
 [node name="Rock38" parent="Rocks" index="14" instance=ExtResource( 8 )]
 transform = Transform( 235.122, -100.015, 44.9407, -29.4478, -160.025, -202.064, 105.619, 178.029, -156.382, -3550.53, -291.86, 252.804 )
+__meta__ = {
+"_vol_id": 366
+}
 
 [node name="Rock32" parent="Rocks" index="15" instance=ExtResource( 8 )]
 transform = Transform( -92.4619, 9.4183, 242.213, 49.4954, 254.508, 8.99778, -237.289, 49.4174, -92.5035, 3236.01, -329.421, 1586.35 )
+__meta__ = {
+"_vol_id": 367
+}
 
 [node name="Rock33" parent="Rocks" index="16" instance=ExtResource( 8 )]
 transform = Transform( 74.4273, -184.267, 166.767, 202.024, 146.249, 71.4331, -144.748, 109.371, 185.448, 2420.89, -329.421, -227.331 )
+__meta__ = {
+"_vol_id": 368
+}
 
 [node name="Rock34" parent="Rocks" index="17" instance=ExtResource( 8 )]
 transform = Transform( 74.4273, -184.267, 166.767, 114.993, -128.796, -193.632, 220.323, 129.469, 44.7257, 2276.04, -329.421, -2930.09 )
+__meta__ = {
+"_vol_id": 369
+}
 
 [node name="Rock2" parent="Rocks" index="18" instance=ExtResource( 6 )]
 transform = Transform( -11.6878, 59.0035, 0.982479, -58.7962, -11.729, 4.94241, 5.03912, 0, 59.9465, 116.87, -28.6038, -1978.19 )
+__meta__ = {
+"_vol_id": 370
+}
 
 [node name="Rock3" parent="Rocks" index="19" instance=ExtResource( 2 )]
 transform = Transform( 159.37, 0, -237.991, 0, 286.423, 0, 237.992, 0, 159.369, -1089.24, -3.65854, -4006.86 )
+__meta__ = {
+"_vol_id": 371
+}
 
 [node name="Rock5" parent="Rocks" index="20" instance=ExtResource( 2 )]
 transform = Transform( 13.3317, -286.093, 3.37439, 277.348, 13.752, 70.1999, -70.2815, 0, 277.666, -787.307, -269.249, -4550.04 )
+__meta__ = {
+"_vol_id": 372
+}
 
 [node name="Rock4" parent="Rocks" index="21" instance=ExtResource( 6 )]
 transform = Transform( 138.739, 0, 41.46, 0, 144.801, 0, -41.4601, 0, 138.739, 542.53, -3.66984, -3811.94 )
+__meta__ = {
+"_vol_id": 373
+}
 
 [node name="Rock8" parent="Rocks" index="22" instance=ExtResource( 6 )]
 transform = Transform( -99.7324, 1.38735, 161.239, -5.1007, -189.52, -1.52427, 161.164, -5.13961, 99.7303, 672.45, -249.677, 2953.37 )
+__meta__ = {
+"_vol_id": 374
+}
 
 [node name="Rock35" parent="Rocks" index="23" instance=ExtResource( 6 )]
 transform = Transform( -97.2269, 2.81266, 162.744, 4.92662, -189.429, 6.21718, 162.693, 7.4171, 97.0686, 2117.99, -222.342, 2011.31 )
+__meta__ = {
+"_vol_id": 375
+}
 
 [node name="Rock36" parent="Rocks" index="24" instance=ExtResource( 6 )]
 transform = Transform( -1.72617, -161.42, -99.4329, -122.984, -74.7231, 123.442, -144.286, 65.6221, -104.027, 1754.26, -162.98, -3635.94 )
+__meta__ = {
+"_vol_id": 376
+}
 
 [node name="Rock37" parent="Rocks" index="25" instance=ExtResource( 6 )]
 transform = Transform( 100.602, 48.9402, 153.07, -115.418, 147.664, 28.6437, -111.823, -108.381, 108.146, 3519.23, -250.249, -3097.29 )
+__meta__ = {
+"_vol_id": 377
+}
 
 [node name="Rock7" parent="Rocks" index="26" instance=ExtResource( 10 )]
 transform = Transform( 85.3884, -56.7973, -70.661, -57.6724, 40.8636, -102.538, 69.9487, 103.026, 1.71546, 1276.24, -59.475, 2454.21 )
+__meta__ = {
+"_vol_id": 378
+}
 
 [node name="Rock9" parent="Rocks" index="27" instance=ExtResource( 10 )]
 transform = Transform( 94.2163, -64.2649, -13.8325, -64.9582, -94.7255, -2.35663, -10.0872, 9.75401, -114.022, 132.231, -82.0601, 2911.4 )
+__meta__ = {
+"_vol_id": 379
+}
 
 [node name="Rock11" parent="Rocks" index="28" instance=ExtResource( 10 )]
 transform = Transform( -48.5383, -29.6986, 176.947, 103.626, -154.283, 2.53096, 146.471, 99.3116, 56.8468, 1881.75, -162.647, 2225.37 )
+__meta__ = {
+"_vol_id": 380
+}
 
 [node name="Rock24" parent="Rocks" index="29" instance=ExtResource( 10 )]
 transform = Transform( -25.8842, -2.00579, 70.1972, 44.431, -58.4037, 14.7146, 54.3832, 46.7613, 21.3892, 165.469, -67.0752, 1995.62 )
+__meta__ = {
+"_vol_id": 381
+}
 
 [node name="Rock25" parent="Rocks" index="30" instance=ExtResource( 10 )]
 transform = Transform( 27.5403, -66.7236, 19.7769, 32.1707, -6.65392, -67.249, 61.7107, 33.2464, 26.2318, -153.106, -70.5218, 2112.07 )
+__meta__ = {
+"_vol_id": 382
+}
 
 [node name="Rock26" parent="Rocks" index="31" instance=ExtResource( 10 )]
 transform = Transform( -77.2804, 96.6034, 6.49458, -94.6379, -73.6125, -31.1701, -20.4475, -24.4062, 119.721, 264.229, -45.2415, 2232.33 )
+__meta__ = {
+"_vol_id": 383
+}
 
 [node name="Rock12" parent="Rocks" index="32" instance=ExtResource( 10 )]
 transform = Transform( -82.7731, -60.1218, -275.912, -268.014, -73.8347, 96.4921, -88.9434, 278.437, -33.9891, 2614.83, -479.985, 816.783 )
+__meta__ = {
+"_vol_id": 384
+}
 
 [node name="Rock13" parent="Rocks" index="33" instance=ExtResource( 10 )]
 transform = Transform( 197.452, -41.7529, -42.1615, -58.9087, -120.361, -156.688, 7.11818, 162.106, -127.198, 710.835, -229.297, -1835.79 )
+__meta__ = {
+"_vol_id": 385
+}
 
 [node name="Rock14" parent="Rocks" index="34" instance=ExtResource( 10 )]
 transform = Transform( 197.452, -41.7529, -42.1615, -29.8891, 56.5684, -195.997, 51.2596, 193.817, 48.1221, 617.834, -185.531, -2542.57 )
+__meta__ = {
+"_vol_id": 386
+}
 
 [node name="Rock22" parent="Rocks" index="35" instance=ExtResource( 10 )]
 transform = Transform( -117.407, 143.06, 175.75, 226.444, 66.3653, 97.2501, 8.81154, 200.669, -157.458, 2310.68, -256.593, -1782.38 )
+__meta__ = {
+"_vol_id": 387
+}
 
 [node name="Rock10" parent="Rocks" index="36" instance=ExtResource( 10 )]
 transform = Transform( -102.388, -90.2656, 108.276, -131.842, 108.683, -34.0686, -49.8921, -101.957, -132.176, 768.074, -139.664, 1782.87 )
+__meta__ = {
+"_vol_id": 388
+}
 
 [node name="Rock23" parent="Rocks" index="37" instance=ExtResource( 6 )]
 transform = Transform( -47.5077, -60.9483, 10.3568, -61.002, 48.3354, 4.62429, -10.0355, -5.28551, -77.138, -257.76, -17.4445, 1988.98 )
+__meta__ = {
+"_vol_id": 389
+}
 
 [node name="Rock39" parent="Rocks" index="38" instance=ExtResource( 24 )]
 transform = Transform( 58.7032, 0, 13.1497, 0, 60.158, 0, -13.1497, 0, 58.7031, -818.233, -76.9026, 3341.02 )
+__meta__ = {
+"_vol_id": 390
+}
 
 [node name="Rock40" parent="Rocks" index="39" instance=ExtResource( 24 )]
 transform = Transform( 41.2688, 155.013, 39.1679, 96.1325, 8.26581, -134.002, -127.756, 56.2931, -88.1795, -3728.28, -76.7797, 822.685 )
+__meta__ = {
+"_vol_id": 391
+}
 
 [node name="Rock41" parent="Rocks" index="40" instance=ExtResource( 24 )]
 transform = Transform( 62.2923, 49.6593, 473.688, -251.528, 409.102, -9.81125, -404.451, -246.772, 79.0575, -3399.8, -1007.74, -1389.12 )
+__meta__ = {
+"_vol_id": 392
+}
 
 [node name="Rock42" parent="Rocks" index="41" instance=ExtResource( 24 )]
 transform = Transform( 188.88, -381.081, -223.222, 177.4, -156.868, 417.909, -404.451, -246.772, 79.0575, -3158.93, -910.716, -2624.91 )
+__meta__ = {
+"_vol_id": 393
+}
 
 [node name="Barrel" parent="." index="35" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -27.5366, 2.15815, 2368.93 )
@@ -799,6 +925,9 @@ SpawnCollisions = true
 transform = Transform( 1, -2.42935e-11, 2.91038e-11, 2.64819e-11, 1, 0, 2.91038e-11, 2.91038e-11, 1, 0, 0, 0 )
 material_override = ExtResource( 32 )
 multimesh = SubResource( 5 )
+__meta__ = {
+"_vol_id": 455
+}
 
 [node name="body0" type="StaticBody" parent="Road" index="1"]
 collision_layer = 4
@@ -1154,6 +1283,9 @@ PieaceDistance = 17.071
 transform = Transform( 1, -2.42579e-11, 2.91038e-11, 2.65246e-11, 1, 0, 0, 2.91038e-11, 1, 0, 0, 0 )
 material_override = ExtResource( 32 )
 multimesh = SubResource( 7 )
+__meta__ = {
+"_vol_id": 456
+}
 
 [node name="Road3" type="Path" parent="." index="57"]
 transform = Transform( 0.999997, 4.59011e-12, 0, -2.89901e-12, 0.999997, 2.03727e-10, 0, -2.03727e-10, 0.999997, 0.300166, 7.27882e-05, -0.4999 )
@@ -1165,6 +1297,9 @@ PieaceDistance = 17.071
 [node name="MultiMeshInstance" type="MultiMeshInstance" parent="Road3" index="0"]
 material_override = ExtResource( 32 )
 multimesh = SubResource( 9 )
+__meta__ = {
+"_vol_id": 457
+}
 
 [node name="CityNameTrigger" parent="." index="58" instance=ExtResource( 19 )]
 transform = Transform( 0.999999, 4.82459e-12, 0, -2.68585e-12, 0.999999, 2.61934e-10, 0, -2.61934e-10, 0.999999, 0, 0, 0 )

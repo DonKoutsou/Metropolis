@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/World/DayNightController.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/SIsilicon.vfx.godrays/GodRays.gd" type="Script" id=2]
 
 [sub_resource type="Curve" id=3]
 max_value = 2.0
@@ -32,7 +33,7 @@ _data = [ Vector2( 0, 100 ), 0.0, 0.0, 0, 0, Vector2( 0.01603, 26.6871 ), 0.0, 0
 AutoExposureCurve = SubResource( 3 )
 SunColorGradient = SubResource( 4 )
 MoonColorGradient = SubResource( 5 )
-startinghour = 9
+startinghour = 7
 WindDirCurve = SubResource( 1 )
 WindStreangthCurve = SubResource( 2 )
 RainStreangthCurve = SubResource( 6 )
@@ -48,6 +49,12 @@ shadow_bias = 1.0
 shadow_reverse_cull_face = true
 directional_shadow_max_distance = 1000.0
 
+[node name="GodRays" type="Spatial" parent="Sun"]
+script = ExtResource( 2 )
+exposure = 2.0
+attenuation = 1.18921
+light_size = 2.0
+
 [node name="Moon" type="DirectionalLight" parent="."]
 visible = false
 light_color = Color( 0.862745, 0.905882, 1, 1 )
@@ -57,3 +64,9 @@ shadow_enabled = true
 shadow_color = Color( 0.737255, 0.737255, 0.737255, 1 )
 shadow_bias = 1.0
 directional_shadow_max_distance = 1000.0
+
+[node name="GodRays" type="Spatial" parent="Moon"]
+script = ExtResource( 2 )
+exposure = 2.0
+attenuation = 1.18
+light_size = 2.0
