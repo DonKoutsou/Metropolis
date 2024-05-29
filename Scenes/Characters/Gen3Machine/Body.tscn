@@ -134,7 +134,7 @@ material/0 = ExtResource( 1 )
 material/0 = ExtResource( 4 )
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton" index="7"]
-transform = Transform( 0.997671, -0.0614593, -0.029605, 0.0573143, 0.99052, -0.12484, 0.0369969, 0.122852, 0.991735, -1.98489, 265.284, 12.3702 )
+transform = Transform( 0.997587, -0.0633491, -0.0284199, 0.0596191, 0.99134, -0.117006, 0.035586, 0.115029, 0.992724, -2.41774, 265.235, 12.1415 )
 bone_name = "mixamorig_Head"
 
 [node name="HeadPivot" type="Spatial" parent="Armature/Skeleton/BoneAttachment" index="0"]
@@ -155,7 +155,7 @@ spot_range = 41.151
 spot_angle = 65.0
 
 [node name="BoneAttachment2" type="BoneAttachment" parent="Armature/Skeleton" index="8"]
-transform = Transform( 0.994321, 0.0576088, -0.0894801, -0.0637075, 0.995726, -0.0668658, 0.0852456, 0.0721866, 0.993742, -0.031479, 183.859, 0.375119 )
+transform = Transform( 0.994635, 0.0570975, -0.0862664, -0.0622691, 0.996344, -0.0584965, 0.082611, 0.0635544, 0.994553, -0.384107, 183.751, 0.772417 )
 bone_name = "mixamorig_Hips"
 
 [node name="RemoteTransform" type="RemoteTransform" parent="Armature/Skeleton/BoneAttachment2" index="0"]
@@ -195,7 +195,7 @@ process_material = SubResource( 34 )
 draw_pass_1 = SubResource( 35 )
 
 [node name="Bouzouki" parent="." index="3" instance=ExtResource( 7 )]
-transform = Transform( -0.0272753, 0.896328, -0.442218, -0.827402, 0.227855, 0.512926, 0.560608, 0.379958, 0.735556, -1.22468, 4.28715, 0.502504 )
+transform = Transform( -0.0272753, 0.896328, -0.442218, -0.827402, 0.227855, 0.512926, 0.560608, 0.379958, 0.735556, -1.23148, 4.28788, 0.516986 )
 visible = false
 sleeping = true
 RegisterOnIsland = false

@@ -5,7 +5,7 @@ func _SetData(data):
 	Type = data["Type"]
 	Pos = data["Pos"]
 	Scene = data["Scene"]
-	##SpecialName = data["SpecialName"]
+	SpecialName = data["SpecialName"]
 	Houses = data["Houses"]
 	Generators = data["Generators"]
 	Vehicles = data["Vehicles"]

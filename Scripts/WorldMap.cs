@@ -576,6 +576,8 @@ public class WorldMap : TileMap
 				scene = Eventscenestospawn[RandomisedEntryID.IndexOf(currentile)];
 			else
 				scene = loadedscenes[random.Next(0, loadedscenes.Count)];
+
+			SpecialName = "Νησί";
 		}
 		//2 exit
 		else if (type == 2)
@@ -584,10 +586,15 @@ public class WorldMap : TileMap
 				scene =  Exittospawn;
 			else
 				scene = loadedscenes[random.Next(0, loadedscenes.Count)];
+			SpecialName = "Νησί";
 		}
 		//3 sea
 		else if (type == 3)
+		{
 			scene =  Sea;
+			SpecialName = "Νησί";
+		}
+			
 		else if (type == 4)
 		{
 			if (currentile == ΜαχαλάςEntryID)
@@ -602,9 +609,12 @@ public class WorldMap : TileMap
 					SpecialName = LightHouseNames[LightHouseNames.Count() - 1];
 					LightHouseNames.Remove(SpecialName);
 				}
+				else
+				{
+					SpecialName = "Μαχαλάς";
+				}
 				scene = LightHouse;
-			}
-				
+			}	
 		}
 			
 		return scene;

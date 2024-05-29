@@ -356,13 +356,6 @@ public class IslandInfo
     }
 	public Dictionary<string, object>GetPackedData()
 	{
-		Dictionary<string, object> data = new Dictionary<string, object>();
-		data.Add("Type", Type);
-		data.Add("Pos", pos);
-		data.Add("SpecialName", SpecialName);
-		data.Add("Scene", IleType);
-		data.Add("Rotation", rottospawn);
-
 		//Houses
 		GDScript HouseSaveScript = GD.Load<GDScript>("res://Scripts/HouseSaveInfo.gd");
 
@@ -373,7 +366,7 @@ public class IslandInfo
 			HouseInfor.Call("_SetData", Houses[i].GetPackedData());
 			HouseInfoobjects[i] = HouseInfor;
 		}
-		data.Add("Houses", HouseInfoobjects);
+		//data.Add("Houses", HouseInfoobjects);
 
 
 		//generators
@@ -387,7 +380,7 @@ public class IslandInfo
 			GeneratorInfo.Call("_SetData", Generators[i].GetPackedData());
 			GeneratorInfoobjects[i] = GeneratorInfo;
 		}
-		data.Add("Generators", GeneratorInfoobjects);
+		//data.Add("Generators", GeneratorInfoobjects);
 
 
 		//////////to add item info gdscript path
@@ -398,12 +391,12 @@ public class IslandInfo
 		for (int i = 0; i < Items.Count; i ++)
 		{
 			Resource ItemInfo = (Resource)ItemSaveScript.New();
-			bool hasData = false;
+			bool hasData;
 			Dictionary<string, object> packeddata = Items[i].GetPackedData(out hasData);
 			ItemInfo.Call("_SetData", packeddata, hasData);
 			ItemInfoobjects[i] = ItemInfo;
 		}
-		data.Add("Items", ItemInfoobjects);
+		//data.Add("Items", ItemInfoobjects);
 
 		//vehicles
 		GDScript VehicleSaveScript = GD.Load<GDScript>("res://Scripts/VehicleSaveInfo.gd");
@@ -415,7 +408,7 @@ public class IslandInfo
 			Vehicleinfo.Call("_SetData", Vehicles[i].GetPackedData());
 			VehicleInfoobjects[i] = Vehicleinfo;
 		}
-		data.Add("Vehicles", VehicleInfoobjects);
+		//data.Add("Vehicles", VehicleInfoobjects);
 
 		GDScript CharSaveScript = GD.Load<GDScript>("res://Scripts/CharacterSaveInfo.gd");
 
@@ -423,11 +416,26 @@ public class IslandInfo
 		for (int i = 0; i < Characters.Count; i ++)
 		{
 			Resource CharInfor = (Resource)CharSaveScript.New();
-			bool hasdata = false;
+			bool hasdata;
 			CharInfor.Call("_SetData", Characters[i].GetPackedData(out hasdata), false);
 			CharacterInfoobjects[i] = CharInfor;
 		}
-		data.Add("Characters", CharacterInfoobjects);
+		//data.Add("Characters", CharacterInfoobjects);
+
+		Dictionary<string, object> data = new Dictionary<string, object>
+        {
+            { "Type", Type },
+            { "Pos", pos },
+			{ "SpecialName", SpecialName},
+			{"Scene", IleType},
+			{"Rotation", rottospawn},
+			{"Houses", HouseInfoobjects},
+			{"Generators", GeneratorInfoobjects},
+			{"Items", ItemInfoobjects},
+			{"Vehicles", VehicleInfoobjects},
+			{"Characters", CharacterInfoobjects},
+
+        };
 
 		return data;
 	}
@@ -436,7 +444,7 @@ public class IslandInfo
 	{
 		ile = Ile;
 		Type = Ile.GetIslandType();
-		SpecialName = Ile.IslandSpecialName;
+		//SpecialName = Ile.IslandSpecialName;
 		List<House> hous;
 		Ile.GetHouses(out hous);
 		List<WindGenerator> Gen;

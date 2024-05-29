@@ -51,9 +51,7 @@ directional_shadow_max_distance = 1000.0
 
 [node name="GodRays" type="Spatial" parent="Sun"]
 script = ExtResource( 2 )
-exposure = 2.0
-attenuation = 1.18921
-light_size = 2.0
+attenuation = 1.6818
 
 [node name="Moon" type="DirectionalLight" parent="."]
 visible = false

@@ -5,6 +5,8 @@ using System.Drawing;
 public class TalkText : Label3D
 {
     static TalkText instance;
+    [Export]
+    float Offset = 0.0f;
     static Timer TalkTimer;
     Character Talking;
     public void Talk(string diag, Character Talker)
@@ -27,7 +29,7 @@ public class TalkText : Label3D
     public override void _Process(float delta)
     {
         Vector3 plpos = Talking.GlobalTransform.origin;
-        GlobalTranslation = new Vector3(plpos.x, plpos.y + 6, plpos.z);
+        GlobalTranslation = new Vector3(plpos.x, plpos.y + Offset, plpos.z);
     }
     public static TalkText GetInst()
     {
