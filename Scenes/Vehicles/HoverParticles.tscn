@@ -31,6 +31,7 @@ material = ExtResource( 1 )
 cast_shadow = 0
 extra_cull_margin = 875.7
 generate_lightmap = false
+emitting = false
 amount = 300
 lifetime = 3.0
 visibility_aabb = AABB( -305.224, -131.173, -265.211, 610.447, 262.346, 530.422 )

@@ -25,6 +25,10 @@ public class CameraZoomPivot : Position3D
 		//cam = GetNode<Camera>("Camera");
 		
     }
+	public float GetZoomNormalised()
+	{
+		return panp.Translation.y / MaxDist;
+	}
 	public override void _Input(InputEvent @event)
 	{
 		if (MapGrid.GetInstance().IsMouseInMap())

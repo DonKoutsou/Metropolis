@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=2]
+[gd_scene load_steps=91 format=2]
 
 [ext_resource path="res://Scripts/SpawnPosition.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Env_Assets/Rock1.tscn" type="PackedScene" id=2]
@@ -32,6 +32,8 @@
 [ext_resource path="res://Scripts/Road.cs" type="Script" id=30]
 [ext_resource path="res://Assets/Clutter/WoodPlanks/WoodPlanksRot.obj" type="ArrayMesh" id=31]
 [ext_resource path="res://Assets/Clutter/WoodPlanks/WoodPlankMat.tres" type="Material" id=32]
+[ext_resource path="res://Scenes/Env_Assets/Skampo.tscn" type="PackedScene" id=33]
+[ext_resource path="res://Scenes/Env_Assets/Pagaki.tscn" type="PackedScene" id=34]
 
 [sub_resource type="PhysicsMaterial" id=3]
 rough = true
@@ -230,7 +232,7 @@ update_rotation = false
 update_scale = false
 
 [node name="Planks" type="Spatial" parent="." index="1"]
-transform = Transform( 0.999974, 4.72049e-10, 6.1118e-10, 5.76641e-10, 0.999973, 1.21945e-08, 4.94765e-10, -1.30676e-08, 0.999973, 0, 0, 0 )
+transform = Transform( 0.999971, 5.88663e-10, 6.40284e-10, 6.92715e-10, 0.99997, 1.33878e-08, 5.82077e-10, -1.46101e-08, 0.99997, 0, 0, 0 )
 
 [node name="StaticBody6" parent="Planks" index="0" instance=ExtResource( 28 )]
 transform = Transform( 0.742315, 0, 0.670051, 0, 1, 0, -0.670051, 0, 0.742315, 87.941, -0.00652695, 2437.29 )
@@ -890,7 +892,8 @@ transform = Transform( -0.314622, 0.000638386, -0.949217, 5.94261e-05, 0.999999,
 spawnUncon = true
 
 [node name="Character2" parent="." index="48" instance=ExtResource( 23 )]
-transform = Transform( 0.835443, 0.000211283, -0.549577, -0.000123931, 0.999999, 0.000196046, 0.549577, -9.56672e-05, 0.835443, 15.8133, 1.83414, 2322.36 )
+transform = Transform( 0.116012, 0.000537527, -0.993247, -6.82952e-05, 0.999998, 0.000533204, 0.993247, 5.99856e-06, 0.116012, 18.6114, 3.4863, 2329.46 )
+Chair = NodePath("../Chair1")
 PlayingInstrument = true
 
 [node name="Character3" parent="." index="49" instance=ExtResource( 23 )]
@@ -1303,6 +1306,27 @@ __meta__ = {
 
 [node name="CityNameTrigger" parent="." index="58" instance=ExtResource( 19 )]
 transform = Transform( 0.999999, 4.82459e-12, 0, -2.68585e-12, 0.999999, 2.61934e-10, 0, -2.61934e-10, 0.999999, 0, 0, 0 )
+
+[node name="Chair1" parent="." index="59" instance=ExtResource( 33 )]
+transform = Transform( -0.0871556, 0.000592345, -0.996194, -1.52707e-05, 0.999999, 0.000595947, 0.996194, 6.71793e-05, -0.0871556, 18.7254, 1.68457, 2329.61 )
+
+[node name="Chair2" parent="." index="60" instance=ExtResource( 33 )]
+transform = Transform( 0.642787, -0.000138828, 0.766043, 0.000328427, 0.999998, -9.43737e-05, -0.766043, 0.000312246, 0.642787, 6.42772, 1.68994, 2322.7 )
+
+[node name="Chair3" parent="." index="61" instance=ExtResource( 33 )]
+transform = Transform( -0.996193, 0.000503195, 0.0871557, 0.000556383, 0.999998, 0.000585647, -0.0871552, 0.000631934, -0.996193, -27.2869, 0.485807, 2365.59 )
+
+[node name="Bench1" parent="." index="62" instance=ExtResource( 34 )]
+transform = Transform( 0.999999, 1.50386e-10, 2.58646e-07, 1.02062e-10, 0.999999, 3.7835e-10, -2.48227e-07, -6.1118e-10, 0.999999, -15.3881, 0.38149, 2369.39 )
+
+[node name="Bench2" parent="." index="63" instance=ExtResource( 34 )]
+transform = Transform( 2.6403e-07, 0.000570376, -0.999999, -3.9563e-05, 0.999998, 0.000570376, 0.999998, 3.95888e-05, 3.18862e-07, -37.1797, 0.894777, 2344.79 )
+
+[node name="Bench3" parent="." index="64" instance=ExtResource( 34 )]
+transform = Transform( 2.6403e-07, 0.000570376, -0.999999, -3.9563e-05, 0.999998, 0.000570376, 0.999998, 3.95887e-05, 3.18862e-07, -36.961, 2.61146, 2289.89 )
+
+[node name="Bench4" parent="." index="65" instance=ExtResource( 34 )]
+transform = Transform( 2.6403e-07, 0.000570376, -0.999999, -3.9563e-05, 0.999997, 0.000570375, 0.999997, 3.95887e-05, 3.18862e-07, -1398.54, 9.29553, 2543.34 )
 
 [connection signal="curve_changed" from="Road" to="Road" method="OnCurveChanged"]
 [connection signal="curve_changed" from="Road2" to="Road2" method="OnCurveChanged"]

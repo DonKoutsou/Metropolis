@@ -86,6 +86,7 @@ public class Player : Character
 
 		base._PhysicsProcess(delta);
 
+
 		if (Input.IsActionPressed("Move") || Autowalk)
 		{
 			var spacestate = GetWorld().DirectSpaceState;
@@ -121,6 +122,12 @@ public class Player : Character
 				moveloc.Show();
 			}
 		}
+		if (sitting && loctomove.DistanceTo(GlobalTranslation) > 0.5)
+		{
+			StandUp();
+		}
+		if (anim.IsStanding())
+			return;
 		moveloc.GlobalTranslation = loctomove;
 
 		var spd = Speed;

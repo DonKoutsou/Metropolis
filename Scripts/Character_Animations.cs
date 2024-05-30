@@ -12,17 +12,22 @@ public class Character_Animations : AnimationPlayer
     Spatial parent;
     Particles walkpart;
     float currot;
+    AnimationNodeStateMachinePlayback stateMachine;
     public override void _Ready()
     {
         base._Ready();
         animtree = GetNode<AnimationTree>("AnimationTree");
+        stateMachine = (AnimationNodeStateMachinePlayback)animtree.Get("parameters/playback");
         animtree.Active = true;
 
         walkpart = GetParent().GetNode<Particles>("Particles");
         walkpart.Emitting = false;
         parent = (Spatial)GetParent();
     }
-    
+    public bool IsStanding()
+    {
+        return stateMachine.GetCurrentNode() == "Standing";
+    }
     public void ToggleInstrument(bool toggle)
     {
         int amm = 1;
@@ -45,11 +50,15 @@ public class Character_Animations : AnimationPlayer
         animtree.Set("parameters/conditions/Dead", true);
         
     }
-    public void ToggleSitting()
+    public void ToggleSitting(bool chair = false)
     {
         animtree.Set("parameters/conditions/Idle", false);
         animtree.Set("parameters/conditions/Dead", false);
         animtree.Set("parameters/conditions/Sitting", true);
+        if (chair)
+            animtree.Set("parameters/Sitting/ChairBlend/blend_amount", 1);
+        else
+            animtree.Set("parameters/Sitting/ChairBlend/blend_amount", 0);
     }
     public void PlayAnimation(E_Animations AnimationName)
     {

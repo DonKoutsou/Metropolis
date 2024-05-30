@@ -57,6 +57,11 @@ public class Character : KinematicBody
 	public Vehicle currveh;
 
 	public CharacterSoundManager CharacterSoundManager;
+	public bool sitting = false;
+
+	SittingThing chair = null;
+
+	Position3D seat = null;
 
 	public float GetCharacterBatteryCap()
 	{
@@ -157,6 +162,8 @@ public class Character : KinematicBody
 		if (CurrentEnergy <= 0)
 			Kill();
 
+		
+
 	}
     public void MoveTo(Vector3 loc)
 	{
@@ -239,6 +246,36 @@ public class Character : KinematicBody
 	public virtual void OnKillFieldDetectorBodyEntered(Node body)
 	{
 		Kill();
+	}
+	public void Sit(Position3D pos, SittingThing Sitter = null)
+	{
+		GlobalTranslation = pos.GlobalTranslation;
+		loctomove = GlobalTranslation;
+		if (Sitter != null)
+		{
+			anim.ToggleSitting(true);
+			chair = Sitter;
+			seat = pos;
+			Sitter.UpdateOccupation(pos, true);
+		}
+		else
+			anim.ToggleSitting(false);
+		
+		GetNode<Spatial>("Pivot").GlobalRotation = pos.GlobalRotation;
+		sitting = true;
+		
+	}
+	public void StandUp()
+	{
+		if (chair != null)
+		{
+			chair.UpdateOccupation(seat, false);
+			chair = null;
+			seat = null;
+		}
+		
+		anim.ToggleIdle();
+		sitting = false;
 	}
 	public void Push(float degr, float ammount = 500)
 	{

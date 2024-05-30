@@ -5,6 +5,7 @@ public class CameraPanPivot : Position3D
 {
 	//SpringArm
 	SpringArm zpivot;
+	CameraZoomPivot Zoom;
 	Position3D PanXPivot;
 	public Vector3 caminitpos;
 	static CameraPanPivot instance;
@@ -20,6 +21,7 @@ public class CameraPanPivot : Position3D
 		instance = this;
 
 		zpivot = GetNode<SpringArm>("SpringArm");
+		Zoom = zpivot.GetNode<CameraZoomPivot>("CameraZoomPivot");
 		PanXPivot = zpivot.GetNode<CameraZoomPivot>("CameraZoomPivot").GetNode<Position3D>("CameraPanXPivot");
 
 		//store initial translation to snap back if needed
@@ -90,7 +92,7 @@ public class CameraPanPivot : Position3D
 				//Pan(new Vector2(0, ammount * 0.01f));
 				
 			}
-			pan += new Vector2(0, ammount * 0.02f);
+			pan += new Vector2(0, ammount * 0.05f);
         }
 		// might put it back
 		/*if (Input.IsActionPressed("ui_right"))
@@ -127,7 +129,7 @@ public class CameraPanPivot : Position3D
 			PanXPivot.Rotation = new Vector3(rot.x, 0, 0);
 		}
 
-		Pan(pan);
+		Pan(pan * Zoom.GetZoomNormalised());
 		
 	}
 	private void Pan(Vector2 Pan)

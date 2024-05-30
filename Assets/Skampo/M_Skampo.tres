@@ -1,0 +1,21 @@
+[gd_resource type="SpatialMaterial" load_steps=5 format=2]
+
+[ext_resource path="res://Assets/Skampo/Textures/Σκαμπό_low_Skampo_Normal.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Skampo/Textures/Σκαμπό_low_Skampo_BaseColor.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Skampo/Textures/Σκαμπό_low_Skampo_OcclusionRoughnessMetallic.png" type="Texture" id=3]
+[ext_resource path="res://shaders/OutlineShader.tres" type="Material" id=4]
+
+[resource]
+resource_local_to_scene = true
+next_pass = ExtResource( 4 )
+albedo_texture = ExtResource( 2 )
+roughness_texture = ExtResource( 3 )
+roughness_texture_channel = 1
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 1 )
+ao_enabled = true
+ao_light_affect = 1.0
+ao_texture = ExtResource( 3 )
+ao_on_uv2 = false
+ao_texture_channel = 0

@@ -20,6 +20,7 @@ public class ActionMenu : Control
 		VBoxContainer cont = GetNode<PanelContainer>("PanelContainer").GetNode<VBoxContainer>("VBoxContainer");
         PickButton = cont.GetNode<Button>("PickUp_Button");
 		IntButton = cont.GetNode<Button>("Interact_Button2");
+		IntButton.Hide();
 	}
 
 	public static bool IsSelecting()
@@ -143,6 +144,21 @@ public class ActionMenu : Control
 			selecting = false;
 			Stop();
 		}
+		else if (SelectedObj is SittingThing)
+		{
+			SittingThing sit = (SittingThing)SelectedObj;
+			if (!sit.HasEmptySeat())
+			{
+				TalkText.GetInst().Talk("Δεν έχει χώρο.", pl);
+				return;
+			}
+			if (pl.HasVecicle)
+			{
+				pl.currveh.UnBoardVehicle(pl);
+			}
+			Position3D seat = sit.GetSeat();
+			pl.Sit(seat, sit);
+		}
 	}
 	private void On_Interact_Button2_Down()
 	{
@@ -184,6 +200,16 @@ public class ActionMenu : Control
 			else
 				TalkText.GetInst().Talk(furni.FurnitureDescription, pl);
 		}
+		else if (SelectedObj is SittingThing)
+		{
+			SittingThing sit = (SittingThing)SelectedObj;
+			if (!sit.HasEmptySeat())
+			{
+				TalkText.GetInst().Talk("Δεν έχει χώρο.", pl);
+				return;
+			}
+			TalkText.GetInst().Talk("Μπορώ να κάτσω.", pl);
+		}
 	}
 	public void Start(Spatial obj)
 	{
@@ -200,7 +226,6 @@ public class ActionMenu : Control
 		{
 			PickButton.Text = "Kουβέντα";
 		}
-
 		else if (SelectedObj is Vehicle)
 		{
 			PickButton.Text = "Επιβιβάσου";
@@ -213,7 +238,14 @@ public class ActionMenu : Control
 		{
 			PickButton.Text = "Φόρτιση";
 		}
-
+		else if (SelectedObj is SittingThing)
+		{
+			PickButton.Text = "Κάτσε";
+		}
+		else if (SelectedObj is FireplaceLight)
+		{
+			PickButton.Hide();
+		}
 		Show();
 		SetProcess(true);
 	}
@@ -241,70 +273,20 @@ public class ActionMenu : Control
 	
 	public override void _Process(float delta)
 	{
-		var screenpos = Vector2.Zero;
-		if (SelectedObj is Item)
-		{
-			IntButton.Hide();
-			screenpos = GetTree().Root.GetCamera().UnprojectPosition(SelectedObj.GlobalTransform.origin);
-			Vector3 pos = SelectedObj.GlobalTransform.origin;
-			if (pl.GlobalTransform.origin.DistanceTo(pos) > 10)
-				PickButton.Hide();
-			else
-				PickButton.Show();
-		}
-		else if (SelectedObj is Character)
-		{
-			IntButton.Hide();
-			screenpos = GetTree().Root.GetCamera().UnprojectPosition(SelectedObj.GlobalTransform.origin);
-			Vector3 pos = SelectedObj.GlobalTransform.origin;
-			if (pl.GlobalTransform.origin.DistanceTo(pos) > 10)
-				PickButton.Hide();
-			else
-				PickButton.Show();
-		}
-		else if (SelectedObj is FireplaceLight)
-		{
-			IntButton.Hide();
-			screenpos = GetTree().Root.GetCamera().UnprojectPosition(SelectedObj.GlobalTransform.origin);
-			PickButton.Hide();
-		}
-		else if (SelectedObj is Vehicle)
-		{
-			screenpos = GetTree().Root.GetCamera().UnprojectPosition(SelectedObj.GlobalTransform.origin);
-			Vector3 pos = SelectedObj.GlobalTransform.origin;
-			if (pl.GlobalTransform.origin.DistanceTo(pos) > 30)
-			{
-				PickButton.Hide();
-				IntButton.Hide();
-			}
-			else
-			{
-				PickButton.Show();
+		var screenpos = GetTree().Root.GetCamera().UnprojectPosition(SelectedObj.GlobalTransform.origin);
 
-				IntButton.Hide();
-			}
-				
-		}
-		else if (SelectedObj is Furniture)
+		Vector3 pos = SelectedObj.GlobalTransform.origin;
+
+		//if (pl.GlobalTransform.origin.DistanceTo(pos) > 60 && selecting)
+			//PickButton.Hide();
+		//else
+			//PickButton.Show();
+
+		if (SelectedObj is Furniture)
 		{
-			IntButton.Hide();
 			Furniture furni = (Furniture)SelectedObj;
-			screenpos = GetTree().Root.GetCamera().UnprojectPosition(SelectedObj.GlobalTransform.origin);
-			Vector3 pos = SelectedObj.GlobalTransform.origin;
-			if (pl.GlobalTransform.origin.DistanceTo(pos) < 30 && !furni.HasBeenSearched())
-				PickButton.Show();
-			else
+			if (furni.HasBeenSearched())
 				PickButton.Hide();	
-		}
-		else if (SelectedObj is WindGenerator)
-		{
-			IntButton.Hide();
-			screenpos = GetTree().Root.GetCamera().UnprojectPosition(SelectedObj.GlobalTransform.origin);
-			Vector3 pos = SelectedObj.GlobalTransform.origin;
-			if (pl.GlobalTransform.origin.DistanceTo(pos) > 60)
-				PickButton.Hide();
-			else
-				PickButton.Show();
 		}
 		RectPosition = new Vector2 (screenpos.x, screenpos.y +50);
 
