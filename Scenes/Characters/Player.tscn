@@ -390,6 +390,12 @@ pause_mode = 1
 
 [node name="Guy" parent="Pivot" instance=ExtResource( 17 )]
 
+[node name="RayCast" type="RayCast" parent="Pivot/Guy"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00875211, 6.36644, 2.8713 )
+enabled = true
+cast_to = Vector3( 0, -30, 0 )
+collision_mask = 260
+
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3.36032, 0 )
 shape = SubResource( 6 )

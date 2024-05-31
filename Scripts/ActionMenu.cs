@@ -73,7 +73,8 @@ public class ActionMenu : Control
 			}
 			else
 			{
-				veh.UnBoardVehicle(pl);
+				if (!veh.UnBoardVehicle(pl))
+					return;
 				pl.SetVehicle(null);
 				selecting = false;
 				Stop();
@@ -154,7 +155,8 @@ public class ActionMenu : Control
 			}
 			if (pl.HasVecicle)
 			{
-				pl.currveh.UnBoardVehicle(pl);
+				if (!pl.currveh.UnBoardVehicle(pl))
+					return;
 			}
 			Position3D seat = sit.GetSeat();
 			pl.Sit(seat, sit);

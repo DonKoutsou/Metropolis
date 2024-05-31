@@ -81,8 +81,12 @@ public class Vehicle : RigidBody
         SteeringWheel = GetNode<Position3D>("SteeringWheel");
         ExaustParticles.Insert(0, GetNode<Particles>("ExaustParticlesL"));
         ExaustParticles.Insert(1, GetNode<Particles>("ExaustParticlesR"));
+        ExaustParticles.Insert(2, GetNode<Particles>("ExaustParticlesLSteer"));
+        ExaustParticles.Insert(3, GetNode<Particles>("ExaustParticlesRSteer"));
         ExaustParticles[0].Emitting = false;
         ExaustParticles[1].Emitting = false;
+        ExaustParticles[2].Emitting = false;
+        ExaustParticles[3].Emitting = false;
         Spatial parent = (Spatial)GetParent();
         frontray = parent.GetNode<RayCast>("RayF");
         Rays.Insert(0, parent.GetNode<RayCast>("RayFL"));
@@ -149,6 +153,11 @@ public class Vehicle : RigidBody
                 EnableWindOnWings(false);
         }
         latsspeed = speed * (Math.Min(500, distance)/ 500);
+        float engineforce = latsspeed / 500000;
+        ((ParticlesMaterial)ExaustParticles[0].ProcessMaterial).Scale = engineforce * 5;
+        ((ParticlesMaterial)ExaustParticles[0].ProcessMaterial).InitialVelocity = engineforce * 60 + 5;
+        ((ParticlesMaterial)ExaustParticles[1].ProcessMaterial).Scale = engineforce * 5;
+        ((ParticlesMaterial)ExaustParticles[1].ProcessMaterial).InitialVelocity = engineforce * 60 + 5;
         //engine
         AddCentralForce(force * latsspeed * delta);
         //sails
@@ -256,10 +265,12 @@ public class Vehicle : RigidBody
                 float distmulti = dist / - ray.CastTo.y;
 
                 Particles part = ray.GetNode<Particles>("Particles");
+                //Particles Flame = ray.GetNode<Particles>("EngineParticles");
 
                 if (dist < 20 && Working)
                 {
                     part.Emitting = true;
+                    //Flame.Emitting = true;
                     float particleoffset = dist;
                     if (((StaticBody)collisionobj).Name == "SeaBed")
                         particleoffset -= 4;
@@ -268,6 +279,7 @@ public class Vehicle : RigidBody
                 else
                 {
                     part.Emitting = false;
+                    //Flame.Emitting = false;
                 }
 
                 float multi = forcecurve.Interpolate(distmulti);
@@ -275,7 +287,8 @@ public class Vehicle : RigidBody
                 {
                     multi *= 4;
                 }
-                
+                //((ParticlesMaterial)Flame.ProcessMaterial).Scale = multi;
+                //((ParticlesMaterial)Flame.ProcessMaterial).InitialVelocity = multi * 10 + 5;
                 Vector3 f = Vector3.Zero;
 
                 f= Vector3.Up * Force * delta * multi;
@@ -285,6 +298,7 @@ public class Vehicle : RigidBody
             else
             {
                 ray.GetNode<Particles>("Particles").Emitting = false;
+                //ray.GetNode<Particles>("EngineParticles").Emitting = false;
                 Vector3 f = Vector3.Zero;
 
                 f = Vector3.Up * 8000 * delta * -8;
@@ -322,6 +336,7 @@ public class Vehicle : RigidBody
             
         SteeringWheel.LookAt(loctomove, Vector3.Up);
         float steer = Mathf.Rad2Deg(SteeringWheel.Rotation.y);
+        
 
         int mutli = - Math.Sign(steer);
 
@@ -335,11 +350,36 @@ public class Vehicle : RigidBody
         {
             float st = 180 - steer;
             eq  *=  st / 180;
+            
         }
         if (steer < -175)
         {
             float st = 180 - -steer;
             eq  *=  st / 180;
+            
+        }
+
+        float steeramm = eq * mutli;
+        if (steeramm > 0)
+        {
+            ((ParticlesMaterial)ExaustParticles[3].ProcessMaterial).Scale = steeramm * 5;
+            ((ParticlesMaterial)ExaustParticles[3].ProcessMaterial).InitialVelocity = steeramm* 60 + 5;
+            ((ParticlesMaterial)ExaustParticles[2].ProcessMaterial).Scale = 0;
+            ((ParticlesMaterial)ExaustParticles[2].ProcessMaterial).InitialVelocity = 5;
+        }
+        else if (steeramm < 0)
+        {
+            ((ParticlesMaterial)ExaustParticles[2].ProcessMaterial).Scale = Mathf.Abs(steeramm) * 5;
+            ((ParticlesMaterial)ExaustParticles[2].ProcessMaterial).InitialVelocity = Mathf.Abs(steeramm) * 60 + 5;
+            ((ParticlesMaterial)ExaustParticles[3].ProcessMaterial).Scale = 0;
+            ((ParticlesMaterial)ExaustParticles[3].ProcessMaterial).InitialVelocity = 5;
+        }
+        else
+        {
+            ((ParticlesMaterial)ExaustParticles[3].ProcessMaterial).Scale = 0;
+            ((ParticlesMaterial)ExaustParticles[3].ProcessMaterial).InitialVelocity = 5;
+            ((ParticlesMaterial)ExaustParticles[2].ProcessMaterial).Scale = 0;
+            ((ParticlesMaterial)ExaustParticles[2].ProcessMaterial).InitialVelocity = 5;
         }
 
         torq = basis * turnspeed * delta * eq;
@@ -365,6 +405,8 @@ public class Vehicle : RigidBody
             loctomove = GlobalTransform.origin;
             ExaustParticles[0].Emitting = true;
             ExaustParticles[1].Emitting = true;
+            ExaustParticles[2].Emitting = true;
+            ExaustParticles[3].Emitting = true;
             Working = true;
         }
         else
@@ -372,6 +414,8 @@ public class Vehicle : RigidBody
             loctomove = GlobalTransform.origin;
             ExaustParticles[0].Emitting = false;
             ExaustParticles[1].Emitting = false;
+            ExaustParticles[2].Emitting = false;
+            ExaustParticles[3].Emitting = false;
             Working = false;
         }
     }
@@ -466,11 +510,19 @@ public class Vehicle : RigidBody
         ToggleLights(false);
         chartothrowout.OnVehicleUnBoard(this);
     }
-     public void UnBoardVehicle(Character cha)
+     public bool UnBoardVehicle(Character cha)
     {
-        passengers.Clear();
+        
         //SetProcessInput(false);
         Vector3 prevrot = cha.GlobalRotation;
+        
+        Vector3 postoput;
+        if (!CheckForGround(out postoput))
+        {
+            TalkText.GetInst().Talk("Πρέπει να πάω πιό κοντά στην στεριά.", cha);
+            return false;
+        }
+        passengers.Clear();
         RemoteTransform CharTrasn = GetNode<RemoteTransform>("CharacterRemoteTransform");
         CharTrasn.RemotePath = this.GetPath();
         RemoteTransform CharTrasn2 = GetNode<RemoteTransform>("CharacterRemoteTransform2");
@@ -478,13 +530,35 @@ public class Vehicle : RigidBody
         cha.GetParent().RemoveChild(cha);
         cha.SetCollisionMaskBit(4, true);
         MyWorld.GetInstance().AddChild(cha);
-        cha.GlobalTranslation = GlobalTranslation;
+        cha.GlobalTranslation = postoput;
         cha.GlobalRotation = prevrot;
         cha.Rotation = new Vector3(0,0,0);
         cha.Anims().ToggleIdle();
         ToggleMachine(false);
         ToggleLights(false);
         cha.OnVehicleUnBoard(this);
+        return true;
+    }
+    private bool CheckForGround(out Vector3 GroundPos)
+    {
+        bool HasFloor = false;
+        GroundPos = Vector3.Zero;
+        Spatial groundChecks = GetNode<Spatial>("GroundChecks");
+        foreach(RayCast cast in groundChecks.GetChildren())
+        {
+            cast.ForceRaycastUpdate();
+            if (!cast.IsColliding())
+                continue;
+            bool ItsSea = ((CollisionObject)cast.GetCollider()).GetCollisionLayerBit(8);
+			if (ItsSea)
+			{
+				continue;
+			}
+            HasFloor = true;
+            GroundPos = cast.GetCollisionPoint();
+            break;
+        }
+        return HasFloor;
     }
     ///////Action Menu////////
     public void HighLightObject(bool toggle)

@@ -89,6 +89,7 @@ public class Player : Character
 
 		if (Input.IsActionPressed("Move") || Autowalk)
 		{
+
 			var spacestate = GetWorld().DirectSpaceState;
 			Vector2 mousepos = GetViewport().GetMousePosition();
 			Camera cam = GetTree().Root.GetCamera();
@@ -102,24 +103,33 @@ public class Player : Character
 			//if ray finds nothiong return
 			if (rayar.Count > 0)
 			{
-				//Spatial ob = (Spatial)rayar["collider"];
-				loctomove = (Vector3)rayar["position"];
-				Vector3 norm = (Vector3)rayar["normal"];
+				bool ItsSea = ((CollisionObject)rayar["collider"]).GetCollisionLayerBit(8);
+				if (ItsSea && !HasVecicle)
+				{
+					
+				}
+				else
+				{
+					//Spatial ob = (Spatial)rayar["collider"];
+					loctomove = (Vector3)rayar["position"];
+					Vector3 norm = (Vector3)rayar["normal"];
 
-				moveloc.Scale = new Vector3(1,1,1);
-				moveloc.Rotation = new Vector3(0,0,0);
-				Basis MoveLocBasis = moveloc.GlobalTransform.basis;
+					moveloc.Scale = new Vector3(1,1,1);
+					moveloc.Rotation = new Vector3(0,0,0);
+					Basis MoveLocBasis = moveloc.GlobalTransform.basis;
 
-				var result = new Basis(norm.Cross(MoveLocBasis.z), norm, MoveLocBasis.x.Cross(norm));
+					var result = new Basis(norm.Cross(MoveLocBasis.z), norm, MoveLocBasis.x.Cross(norm));
 
-				result = result.Orthonormalized();
+					result = result.Orthonormalized();
 
-				Transform or = moveloc.GlobalTransform;
+					Transform or = moveloc.GlobalTransform;
 
-				or.basis = result;
+					or.basis = result;
 
-				moveloc.GlobalTransform = or;
-				moveloc.Show();
+					moveloc.GlobalTransform = or;
+					moveloc.Show();
+				}
+				
 			}
 		}
 		if (sitting && loctomove.DistanceTo(GlobalTranslation) > 0.5)
@@ -137,75 +147,92 @@ public class Player : Character
 		
 		float dist = new Vector2(loctomove.x, loctomove.z).DistanceTo(new Vector2( GlobalTransform.origin.x, GlobalTransform.origin.z));
 
-		
-		
-		if (dist < 1)
+		if (HasVecicle)
 		{
-			AudioStreamPlayer3D walk = CharacterSoundManager.GetSound("Walk");
-			if (!walk.StreamPaused)
-				walk.StreamPaused = true;
-			anim.PlayAnimation(E_Animations.Idle);
-			moveloc.Hide();
-			HeadPivot.Rotation = new Vector3(0.0f,0.0f,0.0f);
-			rpm = 0.05f;
-		}
-		else if (HasVecicle && dist < 10)
-		{
-			AudioStreamPlayer3D walk = CharacterSoundManager.GetSound("Walk");
-			rpm = 0.05f;
-			if (!walk.StreamPaused)
-				walk.StreamPaused = true;
-			anim.PlayAnimation(E_Animations.Idle);
-			moveloc.Hide();
-			HeadPivot.Rotation = new Vector3(0.0f,0.0f,0.0f);
-		}
-		else if (HasVecicle && dist > 10)
-		{
-			if (currveh.Working)
-				rpm = 1;
-			else
+			if (dist < 10)
+			{
+				AudioStreamPlayer3D walk = CharacterSoundManager.GetSound("Walk");
 				rpm = 0.05f;
+				if (!walk.StreamPaused)
+					walk.StreamPaused = true;
+				anim.PlayAnimation(E_Animations.Idle);
+				moveloc.Hide();
+				HeadPivot.Rotation = new Vector3(0.0f,0.0f,0.0f);
+			}
+			else if (dist > 10)
+			{
+				if (currveh.Working)
+					rpm = 1;
+				else
+					rpm = 0.05f;
 
-			AudioStreamPlayer3D walk = CharacterSoundManager.GetSound("Walk");
-			if (!walk.StreamPaused)
-				walk.StreamPaused = true;
-			anim.PlayAnimation(E_Animations.Idle);
-			HeadPivot.Rotation = new Vector3(0.0f,0.0f,0.0f);
-			moveloc.Show();
+				AudioStreamPlayer3D walk = CharacterSoundManager.GetSound("Walk");
+				if (!walk.StreamPaused)
+					walk.StreamPaused = true;
+				anim.PlayAnimation(E_Animations.Idle);
+				HeadPivot.Rotation = new Vector3(0.0f,0.0f,0.0f);
+				moveloc.Show();
+			}
 		}
 		else
 		{
-			AudioStreamPlayer3D walk = CharacterSoundManager.GetSound("Walk");
-			direction = direction.Normalized();
-			Vector3 lookloc = new Vector3(direction.x, 0, direction.z);
-			if (!HasVecicle)
-				GetNode<Spatial>("Pivot").LookAt(Translation - lookloc, Vector3.Up);
+			
+			if (dist < 1)
+			{
+				AudioStreamPlayer3D walk = CharacterSoundManager.GetSound("Walk");
+				if (!walk.StreamPaused)
+					walk.StreamPaused = true;
+				anim.PlayAnimation(E_Animations.Idle);
+				moveloc.Hide();
+				HeadPivot.Rotation = new Vector3(0.0f,0.0f,0.0f);
+				rpm = 0.05f;
+			}
+			else
+			{
+				AudioStreamPlayer3D walk = CharacterSoundManager.GetSound("Walk");
+				direction = direction.Normalized();
+				Vector3 lookloc = new Vector3(direction.x, 0, direction.z);
+				if (!HasVecicle)
+					GetNode<Spatial>("Pivot").LookAt(Translation - lookloc, Vector3.Up);
 
-			if (walk.StreamPaused)
-			{
-				walk.StreamPaused = false;
-				walk.PitchScale = 0.7f;
+				if (walk.StreamPaused)
+				{
+					walk.StreamPaused = false;
+					walk.PitchScale = 0.7f;
+				}
+				if (!IsRunning)
+				{
+					rpm = 0.2f;
+					walk.PitchScale = 0.5f;
+					//GetNode<AudioStreamPlayer3D>("WalkingSound").db = 5f;
+					anim.PlayAnimation(E_Animations.Walk);
+				}
+				else
+				{
+					spd = RunSpeed;
+					rpm = 0.5f;
+					walk.PitchScale = 1f;
+					anim.PlayAnimation(E_Animations.Run);
+				}
+				float heightdif = GlobalTransform.origin.y - loctomove.y ;
+				float rot = heightdif / 45;
+				if (rot > 0)
+					HeadPivot.Rotation = new Vector3(Math.Min(rot, 0.3f) , 0.0f,0.0f);
+				else
+					HeadPivot.Rotation = new Vector3(Math.Max(rot, -0.5f) , 0.0f,0.0f);
 			}
-			if (!IsRunning)
-			{
-				rpm = 0.2f;
-				walk.PitchScale = 0.5f;
-				//GetNode<AudioStreamPlayer3D>("WalkingSound").db = 5f;
-				anim.PlayAnimation(E_Animations.Walk);
-			}
+			RayCast dropcheck = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<RayCast>("RayCast");
+			dropcheck.ForceUpdateTransform();
+			if (!dropcheck.IsColliding())
+				direction = Vector3.Zero;
 			else
 			{
-				spd = RunSpeed;
-				rpm = 0.5f;
-				walk.PitchScale = 1f;
-				anim.PlayAnimation(E_Animations.Run);
+				bool ItsSea = ((CollisionObject)dropcheck.GetCollider()).GetCollisionLayerBit(8);
+				if (ItsSea)
+				{
+					direction = Vector3.Zero;
+				}
 			}
-			float heightdif = GlobalTransform.origin.y - loctomove.y ;
-			float rot = heightdif / 45;
-			if (rot > 0)
-				HeadPivot.Rotation = new Vector3(Math.Min(rot, 0.3f) , 0.0f,0.0f);
-			else
-				HeadPivot.Rotation = new Vector3(Math.Max(rot, -0.5f) , 0.0f,0.0f);
 		}
 
 		
@@ -284,16 +311,25 @@ public class Player : Character
 			//if ray finds nothiong return
 			if (rayar.Count == 0)
 				return;
-			loctomove = (Vector3)rayar["position"];
-			Vector3 norm = (Vector3)rayar["normal"];
-			var result = new Basis(norm.Cross(moveloc.GlobalTransform.basis.z), norm, moveloc.GlobalTransform.basis.x.Cross(norm));
 
-			result = result.Orthonormalized();
-			result.Scale = new Vector3(1, 1, 1);
-			Transform or = new Transform(result, Vector3.Zero);
+			bool ItsSea = ((CollisionObject)rayar["collider"]).GetCollisionLayerBit(8);
+			if (ItsSea && !HasVecicle)
+			{
+				//nada
+			}
+			else
+			{
+				loctomove = (Vector3)rayar["position"];
+				Vector3 norm = (Vector3)rayar["normal"];
+				var result = new Basis(norm.Cross(moveloc.GlobalTransform.basis.z), norm, moveloc.GlobalTransform.basis.x.Cross(norm));
 
-			moveloc.GlobalTransform = or;
-			moveloc.Show();
+				result = result.Orthonormalized();
+				result.Scale = new Vector3(1, 1, 1);
+				Transform or = new Transform(result, Vector3.Zero);
+
+				moveloc.GlobalTransform = or;
+				moveloc.Show();
+			}
 		}
 		if (@event.IsActionPressed("jump"))
 		{
@@ -372,7 +408,8 @@ public class Player : Character
 	{
 		if (HasVehicle())
 		{
-			currveh.UnBoardVehicle(this);
+			if (!currveh.UnBoardVehicle(this))
+				return;
 		}
 		Position3D talkpos = character.GetNode<Position3D>("TalkPosition");
 

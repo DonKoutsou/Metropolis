@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Assets/Boat/M_Boat.material" type="Material" id=1]
 [ext_resource path="res://Scripts/Vehicle.cs" type="Script" id=2]
@@ -33,10 +33,11 @@ extents = Vector3( 0.366748, 0.297252, 0.266781 )
 [sub_resource type="Curve" id=25]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.275, 0.745454 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=6]
+[sub_resource type="CurveTexture" id=35]
 curve = SubResource( 25 )
 
-[sub_resource type="ParticlesMaterial" id=26]
+[sub_resource type="ParticlesMaterial" id=37]
+resource_local_to_scene = true
 lifetime_randomness = 0.46
 trail_divisor = 11
 emission_shape = 1
@@ -44,7 +45,7 @@ emission_sphere_radius = 0.4
 direction = Vector3( 0, 1, 0 )
 spread = 0.0
 gravity = Vector3( 0, 0, 0 )
-initial_velocity = 5.0
+initial_velocity = 60.0
 initial_velocity_random = 0.1
 angular_velocity = 40.0
 angular_velocity_random = 1.0
@@ -52,11 +53,11 @@ linear_accel = 6.6
 linear_accel_random = 0.23
 angle = 360.0
 angle_random = 1.0
-scale = 2.0
+scale = 5.0
 scale_random = 0.8
-scale_curve = SubResource( 6 )
+scale_curve = SubResource( 35 )
 
-[sub_resource type="SpatialMaterial" id=27]
+[sub_resource type="SpatialMaterial" id=36]
 flags_transparent = true
 flags_unshaded = true
 vertex_color_use_as_albedo = true
@@ -68,7 +69,71 @@ particles_anim_loop = false
 albedo_color = Color( 1, 0.301961, 0.027451, 1 )
 
 [sub_resource type="QuadMesh" id=28]
-material = SubResource( 27 )
+resource_local_to_scene = true
+material = SubResource( 36 )
+
+[sub_resource type="ParticlesMaterial" id=38]
+resource_local_to_scene = true
+lifetime_randomness = 0.46
+trail_divisor = 11
+emission_shape = 1
+emission_sphere_radius = 0.4
+direction = Vector3( 0, 1, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 60.0
+initial_velocity_random = 0.1
+angular_velocity = 40.0
+angular_velocity_random = 1.0
+linear_accel = 6.6
+linear_accel_random = 0.23
+angle = 360.0
+angle_random = 1.0
+scale = 5.0
+scale_random = 0.8
+scale_curve = SubResource( 35 )
+
+[sub_resource type="ParticlesMaterial" id=39]
+resource_local_to_scene = true
+lifetime_randomness = 0.46
+trail_divisor = 11
+emission_shape = 1
+emission_sphere_radius = 0.4
+direction = Vector3( 0, 1, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 60.0
+initial_velocity_random = 0.1
+angular_velocity = 40.0
+angular_velocity_random = 1.0
+linear_accel = 6.6
+linear_accel_random = 0.23
+angle = 360.0
+angle_random = 1.0
+scale = 5.0
+scale_random = 0.8
+scale_curve = SubResource( 35 )
+
+[sub_resource type="ParticlesMaterial" id=40]
+resource_local_to_scene = true
+lifetime_randomness = 0.46
+trail_divisor = 11
+emission_shape = 1
+emission_sphere_radius = 0.4
+direction = Vector3( 0, 1, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 60.0
+initial_velocity_random = 0.1
+angular_velocity = 40.0
+angular_velocity_random = 1.0
+linear_accel = 6.6
+linear_accel_random = 0.23
+angle = 360.0
+angle_random = 1.0
+scale = 5.0
+scale_random = 0.8
+scale_curve = SubResource( 35 )
 
 [sub_resource type="Animation" id=18]
 length = 0.001
@@ -84,6 +149,10 @@ top_radius = 0.2
 bottom_radius = 0.1
 height = 0.5
 radial_segments = 10
+
+[sub_resource type="CylinderMesh" id=34]
+top_radius = 0.404
+height = 4.394
 
 [sub_resource type="CylinderMesh" id=33]
 bottom_radius = 0.0
@@ -138,6 +207,7 @@ transform = Transform( 1, 6.03677e-11, 9.31323e-10, -7.98309e-10, 1, 4.65661e-10
 shape = SubResource( 32 )
 
 [node name="SteeringWheel" type="Position3D" parent="VehicleBody"]
+transform = Transform( 1, -5.51381e-11, 1.16415e-10, 1.32104e-10, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="RemoteTransform" type="RemoteTransform" parent="VehicleBody"]
 transform = Transform( 0.999999, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.8, 8 )
@@ -180,7 +250,27 @@ lifetime = 0.5
 randomness = 1.0
 visibility_aabb = AABB( -17.8206, -24.3812, -12.3799, 35.6412, 48.7623, 24.7598 )
 draw_order = 2
-process_material = SubResource( 26 )
+process_material = SubResource( 37 )
+draw_pass_1 = SubResource( 28 )
+
+[node name="ExaustParticlesLSteer" type="Particles" parent="VehicleBody"]
+transform = Transform( 0.708031, 0.706183, 0.000970028, -0.000588456, -0.000783643, 1, 0.706184, -0.708031, -0.000139274, 3.72258, 2.16136, -0.278607 )
+amount = 200
+lifetime = 0.5
+randomness = 1.0
+visibility_aabb = AABB( -17.8206, -24.3812, -12.3799, 35.6412, 48.7623, 24.7598 )
+draw_order = 2
+process_material = SubResource( 38 )
+draw_pass_1 = SubResource( 28 )
+
+[node name="ExaustParticlesRSteer" type="Particles" parent="VehicleBody"]
+transform = Transform( 0.706185, -0.70803, -0.000542905, 0.000926227, 0.00015703, 1, -0.708031, -0.706185, 0.000766692, -4.26507, 2.16669, -0.273496 )
+amount = 200
+lifetime = 0.5
+randomness = 1.0
+visibility_aabb = AABB( -17.8206, -24.3812, -12.3799, 35.6412, 48.7623, 24.7598 )
+draw_order = 2
+process_material = SubResource( 39 )
 draw_pass_1 = SubResource( 28 )
 
 [node name="ExaustParticlesR" type="Particles" parent="VehicleBody"]
@@ -190,7 +280,7 @@ lifetime = 0.5
 randomness = 1.0
 visibility_aabb = AABB( -17.1728, -26.8771, -7.68229, 34.3456, 53.754, 15.3646 )
 draw_order = 2
-process_material = SubResource( 26 )
+process_material = SubResource( 40 )
 draw_pass_1 = SubResource( 28 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="VehicleBody"]
@@ -210,8 +300,66 @@ shadow_enabled = true
 spot_range = 47.3573
 spot_angle = 44.4241
 
+[node name="MeshInstance3" type="MeshInstance" parent="VehicleBody"]
+transform = Transform( 0.707088, -0.707125, -0.00187554, -0.00186727, 0.000785189, -0.999999, 0.707125, 0.70709, -0.000765205, 3.13465, 2.15318, 0.517327 )
+mesh = SubResource( 34 )
+
+[node name="MeshInstance4" type="MeshInstance" parent="VehicleBody"]
+transform = Transform( 0.707126, 0.707089, -0.000361575, -0.00035384, -0.0001575, -1, -0.70709, 0.707127, 0.000138825, -3.22737, 2.15742, 0.521399 )
+mesh = SubResource( 34 )
+
+[node name="GroundChecks" type="Spatial" parent="VehicleBody"]
+
+[node name="GroundCheck" type="RayCast" parent="VehicleBody/GroundChecks"]
+transform = Transform( 1, -2.30216e-10, 2.91038e-10, 4.23142e-10, 1, 1.16415e-10, 0, -1.16415e-10, 1, 0.0198993, 13.5897, 16.9557 )
+enabled = true
+cast_to = Vector3( 0, -30, 0 )
+collision_mask = 260
+
+[node name="GroundCheck2" type="RayCast" parent="VehicleBody/GroundChecks"]
+transform = Transform( 1, -3.46915e-10, 4.07454e-10, 5.39558e-10, 1, 3.49246e-10, 0, -3.49246e-10, 1, -0.00723223, 13.6351, -25.4893 )
+enabled = true
+cast_to = Vector3( 0, -30, 0 )
+collision_mask = 260
+
+[node name="GroundCheck3" type="RayCast" parent="VehicleBody/GroundChecks"]
+transform = Transform( 1, -4.63558e-10, 4.07454e-10, 6.55973e-10, 1, 5.82077e-10, 0, -5.82077e-10, 1, -17.1733, 13.6464, 0.0109851 )
+enabled = true
+cast_to = Vector3( 0, -30, 0 )
+collision_mask = 260
+
+[node name="GroundCheck4" type="RayCast" parent="VehicleBody/GroundChecks"]
+transform = Transform( 1, -5.80144e-10, 4.07454e-10, 7.72388e-10, 1, 8.14907e-10, 0, -8.14907e-10, 1, 21.462, 13.6207, -0.0137385 )
+enabled = true
+cast_to = Vector3( 0, -30, 0 )
+collision_mask = 260
+
+[node name="GroundCheck5" type="RayCast" parent="VehicleBody/GroundChecks"]
+transform = Transform( 0.707107, 0.000951954, -0.707106, -0.000561496, 1, 0.00078477, 0.707107, -0.000157872, 0.707108, -11.9625, 13.603, 12.0014 )
+enabled = true
+cast_to = Vector3( 0, -30, 0 )
+collision_mask = 260
+
+[node name="GroundCheck6" type="RayCast" parent="VehicleBody/GroundChecks"]
+transform = Transform( 0.707107, 0.000951954, -0.707107, -0.000561496, 1, 0.000784771, 0.707107, -0.000157872, 0.707108, 18.0315, 13.6151, -18.0309 )
+enabled = true
+cast_to = Vector3( 0, -30, 0 )
+collision_mask = 260
+
+[node name="GroundCheck7" type="RayCast" parent="VehicleBody/GroundChecks"]
+transform = Transform( 0.707107, 0.000951954, -0.707107, -0.000561496, 1, 0.000784771, 0.707107, -0.000157872, 0.707108, -12.1382, 13.6561, -12.1378 )
+enabled = true
+cast_to = Vector3( 0, -30, 0 )
+collision_mask = 260
+
+[node name="GroundCheck8" type="RayCast" parent="VehicleBody/GroundChecks"]
+transform = Transform( 0.707107, 0.000951954, -0.707107, -0.000561495, 1, 0.000784771, 0.707107, -0.000157872, 0.707108, 15.1986, 13.6086, 15.1641 )
+enabled = true
+cast_to = Vector3( 0, -30, 0 )
+collision_mask = 260
+
 [node name="RayFL" type="RayCast" parent="."]
-transform = Transform( 0.999999, -3.2236e-08, 2.14786e-08, 3.23444e-08, 1, -1.234e-08, -2.14786e-08, 1.234e-08, 1, 3, 0.8, 8 )
+transform = Transform( 0.999999, -3.37503e-08, 2.22353e-08, 3.38586e-08, 1, -1.08266e-08, -2.22353e-08, 1.08266e-08, 1, 3, 0.8, 8 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292
@@ -231,7 +379,7 @@ cast_to = Vector3( 0, 0, 20 )
 collision_mask = 292
 
 [node name="RayFR" type="RayCast" parent="."]
-transform = Transform( 1, 2.73236e-07, 5.75092e-08, -2.7315e-07, 1, -1.00932e-07, -5.75092e-08, 1.01048e-07, 1, -3, 0.8, 8 )
+transform = Transform( 1, 2.72479e-07, 5.75674e-08, -2.72393e-07, 1, -9.95351e-08, -5.75092e-08, 9.95351e-08, 1, -3, 0.8, 8 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292
@@ -245,7 +393,7 @@ material/0 = ExtResource( 1 )
 transform = Transform( 1, 2.05701e-08, -1.85682e-08, -2.05223e-08, 1, 1.44355e-08, 1.90921e-08, -1.44355e-08, 1, -0.00278616, -4.17923, -0.00447226 )
 
 [node name="RayBR" type="RayCast" parent="."]
-transform = Transform( 1, 2.75442e-07, 5.82077e-08, -2.75361e-07, 1, -9.15024e-08, -5.81495e-08, 9.16189e-08, 1, -7, 0.8, -9 )
+transform = Transform( 1, 2.74686e-07, 5.82077e-08, -2.74605e-07, 1, -9.15024e-08, -5.81495e-08, 9.16189e-08, 1, -7, 0.8, -9 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292
@@ -259,7 +407,7 @@ material/0 = ExtResource( 1 )
 transform = Transform( 1, 2.05701e-08, -1.85682e-08, -2.05223e-08, 1, 1.44355e-08, 1.90921e-08, -1.44355e-08, 1, -0.00278616, -4.17923, -0.00447226 )
 
 [node name="RayBL" type="RayCast" parent="."]
-transform = Transform( 1, 2.74978e-07, 5.67525e-08, -2.74897e-07, 1, -9.39472e-08, -5.66943e-08, 9.40636e-08, 1, 7, 0.8, -9 )
+transform = Transform( 1, 2.74221e-07, 5.67525e-08, -2.7414e-07, 1, -9.39472e-08, -5.66943e-08, 9.40636e-08, 1, 7, 0.8, -9 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292

@@ -232,7 +232,7 @@ update_rotation = false
 update_scale = false
 
 [node name="Planks" type="Spatial" parent="." index="1"]
-transform = Transform( 0.99997, 7.05278e-10, 7.567e-10, 7.79927e-10, 0.999969, 1.41445e-08, 6.69388e-10, -1.5425e-08, 0.999969, 0, 0, 0 )
+transform = Transform( 0.99997, 7.05334e-10, 7.567e-10, 8.96307e-10, 0.999969, 1.43773e-08, 6.69388e-10, -1.57161e-08, 0.999969, 0, 0, 0 )
 
 [node name="StaticBody6" parent="Planks" index="0" instance=ExtResource( 28 )]
 transform = Transform( 0.742315, 0, 0.670051, 0, 1, 0, -0.670051, 0, 0.742315, 87.941, -0.00652695, 2437.29 )
@@ -241,13 +241,13 @@ transform = Transform( 0.742315, 0, 0.670051, 0, 1, 0, -0.670051, 0, 0.742315, 8
 transform = Transform( 0.0271887, 0, 0.999631, 0, 1, 0, -0.999631, 0, 0.0271887, 65.3026, -0.00653458, 2499.85 )
 
 [node name="StaticBody7" parent="Planks" index="2" instance=ExtResource( 28 )]
-transform = Transform( 0.0464091, 0, -0.998923, 0, 1, 0, 0.998923, 0, 0.0464091, 32.4677, -0.00653076, 2382.5 )
+transform = Transform( 0.0464091, 1.01394e-11, -0.998923, -5.82077e-11, 1, 3.91083e-11, 0.998923, 0, 0.0464091, 32.4681, -0.00616509, 2381.3 )
 
 [node name="StaticBody8" parent="Planks" index="3" instance=ExtResource( 28 )]
 transform = Transform( 0.0464091, 0, -0.998923, 0, 1, 0, 0.998923, 0, 0.0464091, 27.2553, -0.00653458, 2394.43 )
 
 [node name="StaticBody9" parent="Planks" index="4" instance=ExtResource( 28 )]
-transform = Transform( 0.0464091, 0, -0.998923, 0, 1, 0, 0.998923, 0, 0.0464091, 26.7284, -0.00653076, 2382.44 )
+transform = Transform( 0.0464091, 1.01394e-11, -0.998923, -5.82077e-11, 1, 3.91083e-11, 0.998923, 0, 0.0464091, 26.7288, -0.00616503, 2381.24 )
 
 [node name="StaticBody10" parent="Planks" index="5" instance=ExtResource( 28 )]
 transform = Transform( 0.111903, 0, -0.993719, 0, 1, 0, 0.993719, 0, 0.111903, 33.2983, -0.00653076, 2394.78 )
@@ -280,7 +280,7 @@ transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 71.7447
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -71.7059, -0.00653076, 2363.35 )
 
 [node name="StaticBody20" parent="Planks" index="15" instance=ExtResource( 28 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -60.0342, -0.00653458, 2369.11 )
+transform = Transform( 1, 1.01394e-11, 0, 2.02505e-12, 1, 0, 5.82077e-11, 0, 1, -59.0342, -0.00686115, 2369.31 )
 
 [node name="StaticBody21" parent="Planks" index="16" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -72.0347, -0.00653076, 2369.08 )
@@ -289,46 +289,46 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -72.0347, -0.00653076, 2369.08
 transform = Transform( 0.997842, 0, 0.0656644, 0, 1, 0, -0.0656644, 0, 0.997842, -59.4052, -0.00653076, 2363.09 )
 
 [node name="StaticBody23" parent="Planks" index="18" instance=ExtResource( 28 )]
-transform = Transform( 0.976054, 0, -0.21753, 0, 1, 0, 0.21753, 0, 0.976054, -47.774, -0.00652695, 2370.67 )
+transform = Transform( 0.976054, 1.01394e-11, -0.21753, -5.82077e-11, 1, 0, 0.21753, 0, 0.976054, -46.5737, -0.00660163, 2369.87 )
 
 [node name="StaticBody24" parent="Planks" index="19" instance=ExtResource( 28 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -48.7828, -0.00653076, 2363.12 )
+transform = Transform( -1, 1.01394e-11, -8.74279e-08, 4.26326e-13, 1, 0, 8.73697e-08, 0, -1, -48.5828, -0.00658375, 2363.12 )
 
 [node name="StaticBody25" parent="Planks" index="20" instance=ExtResource( 28 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -72.3704, -0.00653076, 2321.19 )
+transform = Transform( 1, -1.89857e-11, 2.91038e-11, 2.03215e-12, 1, 0, 0, 0, 1, -71.2703, -0.00679237, 2321.09 )
 
 [node name="StaticBody26" parent="Planks" index="21" instance=ExtResource( 28 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -60.6987, -0.00653458, 2326.95 )
+transform = Transform( 1, -1.89857e-11, 2.91038e-11, 2.03215e-12, 1, 0, 0, 0, 1, -59.1987, -0.00696337, 2327.05 )
 
 [node name="StaticBody27" parent="Planks" index="22" instance=ExtResource( 28 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -72.6992, -0.00653076, 2326.91 )
+transform = Transform( 1, -1.89857e-11, 2.91038e-11, 2.03215e-12, 1, 0, 0, 0, 1, -71.5991, -0.00673139, 2326.61 )
 
 [node name="StaticBody28" parent="Planks" index="23" instance=ExtResource( 28 )]
-transform = Transform( 0.997842, 0, 0.0656644, 0, 1, 0, -0.0656644, 0, 0.997842, -60.0697, -0.00653076, 2320.92 )
+transform = Transform( 0.997842, -1.89857e-11, 0.0656644, -2.00089e-11, 1, -2.91038e-11, -0.0656644, 0, 0.997842, -59.0697, -0.0068574, 2321.12 )
 
 [node name="StaticBody29" parent="Planks" index="24" instance=ExtResource( 28 )]
-transform = Transform( 0.976054, 0, -0.21753, 0, 1, 0, 0.21753, 0, 0.976054, -48.4385, -0.00652695, 2328.5 )
+transform = Transform( 0.976054, -1.89857e-11, -0.21753, -8.73115e-11, 1, 0, 0.21753, 0, 0.976054, -46.7385, -0.00697833, 2328.5 )
 
 [node name="StaticBody30" parent="Planks" index="25" instance=ExtResource( 28 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -49.4473, -0.00653076, 2320.95 )
+transform = Transform( -1, -1.89857e-11, -8.7457e-08, 4.12115e-13, 1, 0, 8.74279e-08, 0, -1, -47.9476, -0.00723398, 2321.95 )
 
 [node name="StaticBody37" parent="Planks" index="26" instance=ExtResource( 28 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.50047, -0.174282, 2382.63 )
+transform = Transform( -4.3714e-08, 1.01394e-11, -1, 0, 1, 1.13047e-11, 1, 0, -4.37722e-08, 1.501, -0.173794, 2381.03 )
 
 [node name="StaticBody38" parent="Planks" index="27" instance=ExtResource( 28 )]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4.1512, -0.00653458, 2394.3 )
 
 [node name="StaticBody39" parent="Planks" index="28" instance=ExtResource( 28 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4.2217, -0.174282, 2382.3 )
+transform = Transform( -4.3714e-08, 1.01394e-11, -1, 0, 1, 1.13047e-11, 1, 0, -4.37722e-08, -4.52128, -0.173806, 2381 )
 
 [node name="StaticBody40" parent="Planks" index="29" instance=ExtResource( 28 )]
-transform = Transform( 0.0656643, 0, -0.997842, 0, 1, 0, 0.997842, 0, 0.0656643, 1.76536, -0.174282, 2394.93 )
+transform = Transform( 0.0656643, 1.01394e-11, -0.997842, 0, 1, -5.45697e-12, 0.997842, 0, 0.0656643, 1.66572, -0.17392, 2393.83 )
 
 [node name="StaticBody41" parent="Planks" index="30" instance=ExtResource( 28 )]
-transform = Transform( -0.21753, 0, -0.976054, 0, 1, 0, 0.976054, 0, -0.21753, -5.70735, -0.00652695, 2406.56 )
+transform = Transform( -0.21753, 1.01394e-11, -0.976054, 0, 1, 5.82077e-11, 0.976054, 0, -0.21753, -5.20727, -0.00659877, 2406.36 )
 
 [node name="StaticBody42" parent="Planks" index="31" instance=ExtResource( 28 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.84294, -0.00653076, 2405.55 )
+transform = Transform( -4.3714e-08, 1.01394e-11, 1, 8.73115e-11, 1, 7.35483e-11, -1, 0, -4.36266e-08, 1.54326, -0.00614613, 2404.55 )
 
 [node name="StaticBody43" parent="Planks" index="32" instance=ExtResource( 28 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.44244, -0.00653076, 2442.24 )
@@ -343,7 +343,7 @@ transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.27972
 transform = Transform( -0.0656644, 0, 0.997842, 0, 1, 0, -0.997842, 0, -0.0656644, -5.70734, -0.00653076, 2429.94 )
 
 [node name="StaticBody47" parent="Planks" index="36" instance=ExtResource( 28 )]
-transform = Transform( 0.21753, 0, 0.976054, 0, 1, 0, -0.976054, 0, 0.21753, 1.87225, -0.00652695, 2418.31 )
+transform = Transform( 0.21753, 1.01394e-11, 0.976054, 0, 1, -6.54836e-11, -0.976054, 0, 0.21753, 1.17236, -0.00621897, 2417.91 )
 
 [node name="StaticBody48" parent="Planks" index="37" instance=ExtResource( 28 )]
 transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -5.67804, -0.00653076, 2419.32 )
