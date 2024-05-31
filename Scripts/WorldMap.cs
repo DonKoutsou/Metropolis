@@ -63,6 +63,7 @@ public class WorldMap : TileMap
 
 	//TO BE SAVED
 	Random random;
+	int RandomTimes = 0;
 
 	//TO BE SAVED
 	Vector2 CurrentTile;
@@ -93,6 +94,8 @@ public class WorldMap : TileMap
 		data.Add("OrderedCells", OrdC);
 		//data.Add("random", random);
 		data.Add("CurrentTile", CurrentTile);
+		data.Add("RandomTimes", RandomTimes);
+		data.Add("Seed", Settings.GetGameSettings().Seed);
 		//Dictionary<Vector2, Godot.Object> ilemapObj = new Dictionary<Vector2, Godot.Object>();
 
 		GDScript IleSaveScript = GD.Load<GDScript>("res://Scripts/IleSaveInfo.gd");
@@ -118,6 +121,19 @@ public class WorldMap : TileMap
 	{
 		finishedspawning = (bool)data.Get("finishedspawning");
 		CurrentTile = (Vector2)data.Get("CurrentTile");
+		RandomTimes = (int)data.Get("RandomTimes");
+
+
+		int seed = (int)data.Get("Seed");
+		Settings.GetGameSettings().Seed = seed;
+
+		random = new Random(seed);
+
+		for (int i = 0; i < RandomTimes; i++)
+		{
+			random.NextDouble();
+		}
+
 		currentile = (int)data.Get("currentile");
 		ΜαχαλάςEntryID = (int)data.Get("MahalasEntryID");
 		ExitID = (int)data.Get("ExitID");
@@ -300,6 +316,7 @@ public class WorldMap : TileMap
 		//Spawndata to be used when spawning
 		float rot;
 		int index = random.Next(rots.Count);
+		RandomTimes++;
 		rot = rots[index];
 
 		ileinfo.rottospawn = rot;
@@ -468,16 +485,19 @@ public class WorldMap : TileMap
 		for (int i = 0; i < Eventscenestospawn.Count(); i++)
 		{
 			int SpawnIndex = random.Next(0, OrderedCells.Count);
+			RandomTimes++;
 			RandomisedEntryID.Insert(i, SpawnIndex);
 		}
 		// μαχαλάς randomise
 		var lighthousecells = GetUsedCellsById(4);
 		int RandomLightHouseIndex = random.Next(0, lighthousecells.Count);
+		RandomTimes++;
 		Vector2 Μαχαλάςpalcement = (Vector2)lighthousecells[RandomLightHouseIndex];
 		ΜαχαλάςEntryID = OrderedCells.IndexOf(Μαχαλάςpalcement);
 		//exit randomise
 		var exitcells = GetUsedCellsById(2);
 		int RandomExitIndex = random.Next(0, exitcells.Count);
+		RandomTimes++;
 		Vector2 Exitpalcement = (Vector2)exitcells[RandomExitIndex];
 		ExitID = OrderedCells.IndexOf(Exitpalcement);
 	}
@@ -575,7 +595,11 @@ public class WorldMap : TileMap
 			if (RandomisedEntryID.Contains(currentile))
 				scene = Eventscenestospawn[RandomisedEntryID.IndexOf(currentile)];
 			else
+			{
 				scene = loadedscenes[random.Next(0, loadedscenes.Count)];
+				RandomTimes++;
+			}
+				
 
 			SpecialName = "Νησί";
 		}
@@ -585,7 +609,11 @@ public class WorldMap : TileMap
 			if (currentile == ExitID)
 				scene =  Exittospawn;
 			else
+			{
+				RandomTimes++;
 				scene = loadedscenes[random.Next(0, loadedscenes.Count)];
+			}
+				
 			SpecialName = "Νησί";
 		}
 		//3 sea

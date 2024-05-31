@@ -9,6 +9,8 @@ func _SetData(data):
 	CurrentTile = data["CurrentTile"]
 	finishedspawning = data["finishedspawning"]
 	RandomisedEntryID = data["RandomisedEntryID"]
+	RandomTimes = data["RandomTimes"]
+	Seed = data["Seed"]
 	ilemapvectors = data["ilemapVectors"]
 	ilemap = data["ilemap"]
 	playerlocation = data["PlayerLocation"]
@@ -35,6 +37,8 @@ export var finishedspawning:bool
 
 ## Saved data for all dynamic parts of the level
 export (Array, int) var RandomisedEntryID = []
+export var RandomTimes:int
+export var Seed:int
 
 export (Array, Vector2) var ilemapvectors = []
 export  (Array, Resource) var ilemap = []

@@ -375,6 +375,7 @@ public class Player : Character
 			currveh.UnBoardVehicle(this);
 		}
 		Position3D talkpos = character.GetNode<Position3D>("TalkPosition");
+
 		loctomove = talkpos.GlobalTranslation;
 		((Spatial)DialogueCam.GetParent()).GlobalRotation = talkpos.GlobalRotation;
 		CameraAnimationPlayer.GetInstance().PlayAnim("FadeInDialogue");

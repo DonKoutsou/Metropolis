@@ -18,6 +18,8 @@ pause_mode = 1
 collision_layer = 9
 collision_mask = 55
 script = ExtResource( 1 )
+lines = [  ]
+Chair = NodePath("")
 
 [node name="Pivot" type="Spatial" parent="."]
 
@@ -57,6 +59,6 @@ max_db = -9.473
 area_mask = 0
 
 [node name="TalkPosition" type="Position3D" parent="."]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 6.2749 )
+transform = Transform( -7.7783, 0, -1.17449e-06, 0, 7.7783, 0, 1.17449e-06, 0, -7.7783, 0, 0.5, 6 )
 
 [connection signal="body_entered" from="KillFieldDetector" to="." method="OnKillFieldDetectorBodyEntered"]

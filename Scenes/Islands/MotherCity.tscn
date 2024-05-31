@@ -232,7 +232,7 @@ update_rotation = false
 update_scale = false
 
 [node name="Planks" type="Spatial" parent="." index="1"]
-transform = Transform( 0.999971, 5.88663e-10, 6.40284e-10, 6.92715e-10, 0.99997, 1.33878e-08, 5.82077e-10, -1.46101e-08, 0.99997, 0, 0, 0 )
+transform = Transform( 0.99997, 7.05278e-10, 7.567e-10, 7.79927e-10, 0.999969, 1.41445e-08, 6.69388e-10, -1.5425e-08, 0.999969, 0, 0, 0 )
 
 [node name="StaticBody6" parent="Planks" index="0" instance=ExtResource( 28 )]
 transform = Transform( 0.742315, 0, 0.670051, 0, 1, 0, -0.670051, 0, 0.742315, 87.941, -0.00652695, 2437.29 )
@@ -895,9 +895,11 @@ spawnUncon = true
 transform = Transform( 0.116012, 0.000537527, -0.993247, -6.82952e-05, 0.999998, 0.000533204, 0.993247, 5.99856e-06, 0.116012, 18.6114, 3.4863, 2329.46 )
 Chair = NodePath("../Chair1")
 PlayingInstrument = true
+TalkPosPos = Vector3( 1.503, 0.5, 6 )
 
 [node name="Character3" parent="." index="49" instance=ExtResource( 23 )]
 transform = Transform( 0.973025, 7.75165e-05, -0.230695, -6.31968e-05, 0.999998, 6.94544e-05, 0.230695, -5.29985e-05, 0.973026, 11.7967, 0.520323, 2371.16 )
+TalkPosPos = Vector3( -6.796, 0.5, 0.943 )
 
 [node name="Character4" parent="." index="50" instance=ExtResource( 23 )]
 transform = Transform( -0.396154, 0.000650559, -0.918183, 9.05296e-05, 0.999998, 0.000669478, 0.918183, 0.000182122, -0.396154, -30.5027, 0.532042, 2369.55 )
