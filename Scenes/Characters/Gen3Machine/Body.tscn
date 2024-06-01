@@ -49,7 +49,7 @@ nodes/ChairBlend/position = Vector2( 186.667, 160 )
 nodes/IntrumentBlend/node = SubResource( 54 )
 nodes/IntrumentBlend/position = Vector2( 360, 266.667 )
 nodes/output/position = Vector2( 533.333, 160 )
-node_connections = [ "ChairBlend", 0, "Animation", "ChairBlend", 1, "Animation 3", "IntrumentBlend", 0, "ChairBlend", "IntrumentBlend", 1, "Animation 2", "output", 0, "IntrumentBlend" ]
+node_connections = [ "output", 0, "IntrumentBlend", "ChairBlend", 0, "Animation", "ChairBlend", 1, "Animation 3", "IntrumentBlend", 0, "ChairBlend", "IntrumentBlend", 1, "Animation 2" ]
 
 [sub_resource type="AnimationNodeAnimation" id=55]
 animation = "Standing"
@@ -125,6 +125,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="Skeleton" parent="Armature" index="0"]
 transform = Transform( 0.024, 0, 0, 0, 0.024, 0, 0, 0, 0.024, 0, 0, 0 )
+bones/1/bound_children = [ NodePath("BoneAttachment2") ]
+bones/6/bound_children = [ NodePath("BoneAttachment") ]
 
 [node name="Arms" parent="Armature/Skeleton" index="0"]
 material/0 = ExtResource( 3 )
@@ -145,28 +147,29 @@ material/0 = ExtResource( 1 )
 material/0 = ExtResource( 4 )
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton" index="7"]
-transform = Transform( 0.997247, -0.0655139, -0.0347397, 0.0613653, 0.992103, -0.109392, 0.041632, 0.106959, 0.993392, -2.3779, 265.735, 11.4258 )
+transform = Transform( 0.997248, -0.0530589, -0.0517909, 0.0457628, 0.990044, -0.133111, 0.058338, 0.130374, 0.989747, -0.596297, 265.499, 11.9352 )
 bone_name = "mixamorig_Head"
 
 [node name="HeadPivot" type="Spatial" parent="Armature/Skeleton/BoneAttachment" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 23.077, 23.499 )
 
 [node name="NightLight" type="SpotLight" parent="Armature/Skeleton/BoneAttachment/HeadPivot" index="0"]
-transform = Transform( -42.2483, -4.13507e-06, -1.78814e-06, -5.96046e-08, 42.2483, -2.38419e-06, 3.69549e-06, -2.38419e-07, -42.2482, 0, 0, 0 )
+transform = Transform( -41.6571, 0.347552, 0.824382, 0.547541, 40.268, 10.6912, -0.707532, 10.6996, -40.2632, 0, 0, 7.62939e-06 )
 portal_mode = 1
 include_in_bound = false
 allow_merging = false
 layers = 3
 light_color = Color( 0.580392, 1, 0.619608, 1 )
-light_energy = 0.3
+light_energy = 0.5
 light_bake_mode = 0
 shadow_enabled = true
 shadow_bias = 0.0
-spot_range = 41.151
-spot_angle = 65.0
+shadow_reverse_cull_face = true
+spot_range = 58.3185
+spot_angle = 47.5769
 
 [node name="BoneAttachment2" type="BoneAttachment" parent="Armature/Skeleton" index="8"]
-transform = Transform( 0.994208, 0.0544049, -0.0926826, -0.0604125, 0.996165, -0.0632955, 0.0888836, 0.0685281, 0.993682, -0.250243, 183.994, 0.885927 )
+transform = Transform( 0.992405, 0.0652078, -0.104306, -0.0729867, 0.994688, -0.0725843, 0.0990187, 0.079646, 0.991893, 0.584686, 184.008, -0.053938 )
 bone_name = "mixamorig_Hips"
 
 [node name="RemoteTransform" type="RemoteTransform" parent="Armature/Skeleton/BoneAttachment2" index="0"]
@@ -207,7 +210,7 @@ process_material = SubResource( 34 )
 draw_pass_1 = SubResource( 35 )
 
 [node name="Bouzouki" parent="." index="3" instance=ExtResource( 7 )]
-transform = Transform( -0.0272753, 0.896328, -0.442218, -0.827402, 0.227855, 0.512926, 0.560608, 0.379958, 0.735556, -1.23124, 4.28866, 0.511066 )
+transform = Transform( -0.0272753, 0.896328, -0.442218, -0.827402, 0.227855, 0.512926, 0.560608, 0.379958, 0.735556, -1.21789, 4.29825, 0.473818 )
 visible = false
 sleeping = true
 RegisterOnIsland = false

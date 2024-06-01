@@ -4,7 +4,7 @@ using System;
 public class LoadingScreen : Control
 {
 	[Export]
-	int WaitTime;
+	int WaitTime = 10;
 
 	static int Wtime;
 	static LoadingScreen Instance;

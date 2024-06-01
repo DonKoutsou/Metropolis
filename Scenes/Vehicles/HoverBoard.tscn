@@ -129,6 +129,14 @@ scale = 5.0
 scale_random = 0.8
 scale_curve = SubResource( 35 )
 
+[sub_resource type="CapsuleShape" id=46]
+radius = 2.02096
+height = 9.36624
+
+[sub_resource type="CapsuleShape" id=47]
+radius = 2.02096
+height = 7.56251
+
 [sub_resource type="Animation" id=44]
 resource_name = "Wings"
 tracks/0/type = "value"
@@ -231,38 +239,26 @@ tracks/3/keys = {
 "values": [ Vector3( -1.11706e-05, 45, -60 ), Vector3( -10, -10, -40 ) ]
 }
 
-[sub_resource type="CapsuleShape" id=46]
-radius = 2.02096
-height = 9.36624
-
-[sub_resource type="CapsuleShape" id=47]
-radius = 2.02096
-height = 7.56251
-
 [node name="Vehicle" instance=ExtResource( 3 )]
 
 [node name="MeshInstance" parent="VehicleBody" index="0"]
 material_override = SubResource( 38 )
 
-[node name="ExaustParticlesL" parent="VehicleBody" index="12"]
+[node name="ExaustParticlesL" parent="VehicleBody" index="16"]
 process_material = SubResource( 39 )
 draw_pass_1 = SubResource( 40 )
 
-[node name="ExaustParticlesLSteer" parent="VehicleBody" index="13"]
+[node name="ExaustParticlesLSteer" parent="VehicleBody" index="17"]
 process_material = SubResource( 41 )
 draw_pass_1 = SubResource( 40 )
 
-[node name="ExaustParticlesRSteer" parent="VehicleBody" index="14"]
+[node name="ExaustParticlesRSteer" parent="VehicleBody" index="18"]
 process_material = SubResource( 42 )
 draw_pass_1 = SubResource( 40 )
 
-[node name="ExaustParticlesR" parent="VehicleBody" index="15"]
+[node name="ExaustParticlesR" parent="VehicleBody" index="19"]
 process_material = SubResource( 43 )
 draw_pass_1 = SubResource( 40 )
-
-[node name="AnimationPlayer" parent="VehicleBody" index="16"]
-anims/Wings = SubResource( 44 )
-anims/WingsOut = SubResource( 45 )
 
 [node name="WingCollider0" type="CollisionShape" parent="VehicleBody" index="20"]
 transform = Transform( -0.418248, -0.181947, 0.889925, -3.49246e-10, 0.979736, 0.200309, -0.908335, 0.0837789, -0.409772, 10, 1.883, 4.65661e-10 )
@@ -304,14 +300,33 @@ mesh = ExtResource( 10 )
 material/0 = ExtResource( 1 )
 material/1 = ExtResource( 8 )
 
+[node name="AnimationPlayer" parent="VehicleBody" index="28"]
+anims/Wings = SubResource( 44 )
+anims/WingsOut = SubResource( 45 )
+
+[node name="RayFL" parent="." index="2"]
+transform = Transform( 0.999999, -3.56142e-08, 2.24099e-08, 3.57214e-08, 1, -8.96398e-09, -2.23517e-08, 8.96398e-09, 1, 3, 0.8, 8 )
+
 [node name="MeshInstance" parent="RayFL" index="0"]
 material/0 = SubResource( 38 )
+
+[node name="RayF" parent="." index="3"]
+transform = Transform( 1, 1.77295e-10, 0, 5.39274e-10, 1, -4.65661e-10, 2.91038e-10, -4.65661e-10, 1, -0.00105671, -0.655451, 4.81077 )
+
+[node name="RayFR" parent="." index="4"]
+transform = Transform( 1, 2.71546e-07, 5.75674e-08, -2.71462e-07, 1, -9.76725e-08, -5.75092e-08, 9.76725e-08, 1, -3, 0.8, 8 )
 
 [node name="MeshInstance" parent="RayFR" index="0"]
 material/0 = SubResource( 38 )
 
+[node name="RayBR" parent="." index="5"]
+transform = Transform( 1, 2.73754e-07, 5.82077e-08, -2.73673e-07, 1, -9.15024e-08, -5.81495e-08, 9.16189e-08, 1, -7, 0.8, -9 )
+
 [node name="MeshInstance" parent="RayBR" index="0"]
 material/0 = SubResource( 38 )
+
+[node name="RayBL" parent="." index="6"]
+transform = Transform( 1, 2.7329e-07, 5.67525e-08, -2.73209e-07, 1, -9.39472e-08, -5.66943e-08, 9.40636e-08, 1, 7, 0.8, -9 )
 
 [node name="MeshInstance" parent="RayBL" index="0"]
 material/0 = SubResource( 38 )

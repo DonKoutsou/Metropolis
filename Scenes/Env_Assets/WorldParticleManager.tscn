@@ -127,10 +127,8 @@ process_material = SubResource( 114 )
 draw_pass_1 = SubResource( 115 )
 
 [node name="WorldSoundManager" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.135783, 0 )
 script = ExtResource( 9 )
-
-[node name="Listener" type="Listener" parent="WorldSoundManager"]
-current = true
 
 [node name="Rain" type="AudioStreamPlayer3D" parent="WorldSoundManager"]
 stream = ExtResource( 10 )
@@ -142,7 +140,7 @@ autoplay = true
 
 [node name="Enviroment" type="AudioStreamPlayer3D" parent="WorldSoundManager"]
 stream = ExtResource( 11 )
-unit_db = -80.0
-max_db = -17.065
+unit_db = 8.0
+max_db = -0.606
 autoplay = true
 area_mask = 0

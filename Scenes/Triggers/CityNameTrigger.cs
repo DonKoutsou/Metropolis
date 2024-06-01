@@ -4,7 +4,18 @@ using System.Collections.Generic;
 
 public class CityNameTrigger : Spatial
 {
+    [Export]
+    NodePath Collision;
     bool IsIn = false;
+
+    float dist;
+
+    public override void _Ready()
+    {
+        base._Ready();
+        SphereShape sh = (SphereShape)((CollisionShape)GetNode(Collision)).Shape;
+        dist = sh.Radius;
+    }
 
     private void On_Player_Entered(object body)
     {
@@ -22,7 +33,8 @@ public class CityNameTrigger : Spatial
     }
     private void On_Player_Left(object body)
     {
-        IsIn = false;
+        if (((Spatial)body).GlobalTranslation.DistanceTo(GlobalTranslation) > dist)
+            IsIn = false;
     }
 }
 

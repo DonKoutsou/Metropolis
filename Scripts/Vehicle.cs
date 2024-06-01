@@ -118,13 +118,25 @@ public class Vehicle : RigidBody
 		ile.RegisterChild(this);
         //SetProcessInput(false);
     }
+    public override void _Process(float delta)
+    {
+        base._Process(delta);
+
+        float engineforce = latsspeed / 500000;
+        ((ParticlesMaterial)ExaustParticles[0].ProcessMaterial).Scale = engineforce * 5;
+        ((ParticlesMaterial)ExaustParticles[0].ProcessMaterial).InitialVelocity = engineforce * 60 + 5;
+        ExaustParticles[0].GetNode<AudioStreamPlayer3D>("EngineSound").UnitDb = engineforce * 15;
+        ExaustParticles[0].GetNode<AudioStreamPlayer3D>("EngineSound").PitchScale = engineforce * 0.1f + 0.2f;
+        ((ParticlesMaterial)ExaustParticles[1].ProcessMaterial).Scale = engineforce * 5;
+        ((ParticlesMaterial)ExaustParticles[1].ProcessMaterial).InitialVelocity = engineforce * 60 + 5;
+        ExaustParticles[1].GetNode<AudioStreamPlayer3D>("EngineSound").UnitDb = engineforce * 15;
+        ExaustParticles[1].GetNode<AudioStreamPlayer3D>("EngineSound").PitchScale = engineforce * 0.1f + 0.2f;
+    }
     public override void _PhysicsProcess(float delta)
     {
         base._PhysicsProcess(delta);
         //ulong ms = OS.GetSystemTimeMsecs();
         Hover(delta);
-        
-        
 
         float distance = loctomove.DistanceTo(GlobalTransform.origin);
 
@@ -153,11 +165,7 @@ public class Vehicle : RigidBody
                 EnableWindOnWings(false);
         }
         latsspeed = speed * (Math.Min(500, distance)/ 500);
-        float engineforce = latsspeed / 500000;
-        ((ParticlesMaterial)ExaustParticles[0].ProcessMaterial).Scale = engineforce * 5;
-        ((ParticlesMaterial)ExaustParticles[0].ProcessMaterial).InitialVelocity = engineforce * 60 + 5;
-        ((ParticlesMaterial)ExaustParticles[1].ProcessMaterial).Scale = engineforce * 5;
-        ((ParticlesMaterial)ExaustParticles[1].ProcessMaterial).InitialVelocity = engineforce * 60 + 5;
+        
         //engine
         AddCentralForce(force * latsspeed * delta);
         //sails
@@ -331,8 +339,8 @@ public class Vehicle : RigidBody
     }
     public void Steer(float delta)
     {
-        if (SteeringWheel.GlobalTranslation.DistanceTo(loctomove) < 0.1f)
-            return;
+        //if (SteeringWheel.GlobalTranslation.DistanceTo(loctomove) < 0.1f)
+            //return;
             
         SteeringWheel.LookAt(loctomove, Vector3.Up);
         float steer = Mathf.Rad2Deg(SteeringWheel.Rotation.y);
@@ -364,22 +372,28 @@ public class Vehicle : RigidBody
         {
             ((ParticlesMaterial)ExaustParticles[3].ProcessMaterial).Scale = steeramm * 5;
             ((ParticlesMaterial)ExaustParticles[3].ProcessMaterial).InitialVelocity = steeramm* 60 + 5;
+            ExaustParticles[3].GetNode<AudioStreamPlayer3D>("EngineSound").UnitDb = steeramm * 15;
             ((ParticlesMaterial)ExaustParticles[2].ProcessMaterial).Scale = 0;
             ((ParticlesMaterial)ExaustParticles[2].ProcessMaterial).InitialVelocity = 5;
+            ExaustParticles[2].GetNode<AudioStreamPlayer3D>("EngineSound").UnitDb = 0;
         }
         else if (steeramm < 0)
         {
             ((ParticlesMaterial)ExaustParticles[2].ProcessMaterial).Scale = Mathf.Abs(steeramm) * 5;
             ((ParticlesMaterial)ExaustParticles[2].ProcessMaterial).InitialVelocity = Mathf.Abs(steeramm) * 60 + 5;
+            ExaustParticles[2].GetNode<AudioStreamPlayer3D>("EngineSound").UnitDb = Mathf.Abs(steeramm) * 15;
             ((ParticlesMaterial)ExaustParticles[3].ProcessMaterial).Scale = 0;
             ((ParticlesMaterial)ExaustParticles[3].ProcessMaterial).InitialVelocity = 5;
+            ExaustParticles[3].GetNode<AudioStreamPlayer3D>("EngineSound").UnitDb = 0;
         }
         else
         {
             ((ParticlesMaterial)ExaustParticles[3].ProcessMaterial).Scale = 0;
             ((ParticlesMaterial)ExaustParticles[3].ProcessMaterial).InitialVelocity = 5;
+            ExaustParticles[3].GetNode<AudioStreamPlayer3D>("EngineSound").UnitDb = 0;
             ((ParticlesMaterial)ExaustParticles[2].ProcessMaterial).Scale = 0;
             ((ParticlesMaterial)ExaustParticles[2].ProcessMaterial).InitialVelocity = 5;
+            ExaustParticles[2].GetNode<AudioStreamPlayer3D>("EngineSound").UnitDb = 0;
         }
 
         torq = basis * turnspeed * delta * eq;
@@ -400,24 +414,17 @@ public class Vehicle : RigidBody
     }
     public  void ToggleMachine(bool toggle)
     {
-        if (toggle)
-        {
-            loctomove = GlobalTransform.origin;
-            ExaustParticles[0].Emitting = true;
-            ExaustParticles[1].Emitting = true;
-            ExaustParticles[2].Emitting = true;
-            ExaustParticles[3].Emitting = true;
-            Working = true;
-        }
-        else
-        {
-            loctomove = GlobalTransform.origin;
-            ExaustParticles[0].Emitting = false;
-            ExaustParticles[1].Emitting = false;
-            ExaustParticles[2].Emitting = false;
-            ExaustParticles[3].Emitting = false;
-            Working = false;
-        }
+        loctomove = GlobalTransform.origin;
+        ExaustParticles[0].Emitting = toggle;
+        ExaustParticles[0].GetNode<AudioStreamPlayer3D>("EngineSound").Playing = toggle;
+        ExaustParticles[1].Emitting = toggle;
+        ExaustParticles[1].GetNode<AudioStreamPlayer3D>("EngineSound").Playing = toggle;
+        ExaustParticles[2].Emitting = toggle;
+        ExaustParticles[2].GetNode<AudioStreamPlayer3D>("EngineSound").Playing = toggle;
+        ExaustParticles[3].Emitting = toggle;
+        ExaustParticles[3].GetNode<AudioStreamPlayer3D>("EngineSound").Playing = toggle;
+        Working = toggle;
+        SetProcess(toggle);
     }
     public bool IsRunning()
     {

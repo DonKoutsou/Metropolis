@@ -43,6 +43,7 @@ public class Player : Character
 	{
 		return CurrentEnergy;
 	}
+	
 	public void Teleport(Vector3 pos)
 	{
 		GlobalTranslation = pos;
@@ -80,66 +81,100 @@ public class Player : Character
 		//Stamina_bar = plUI.GetNode<Stamina_Bar>("Stamina_Bar");
 		//Stamina_bar.MaxValue = m_Stamina;
 	}
-	public override void _PhysicsProcess(float delta)
+	private void UpdateMoveLocation()
 	{
-		ulong ms = OS.GetSystemTimeMsecs();
+		var spacestate = GetWorld().DirectSpaceState;
+		Vector2 mousepos = GetViewport().GetMousePosition();
+		Camera cam = GetTree().Root.GetCamera();
+		Vector3 rayor = cam.ProjectRayOrigin(mousepos);
+		Vector3 rayend = rayor + cam.ProjectRayNormal(mousepos) * 10000;
+		var rayar = new Dictionary();
 
-		base._PhysicsProcess(delta);
+		rayar = spacestate.IntersectRay(rayor, rayend, new Godot.Collections.Array { this }, moveloc.MoveLayer);
+		//if ray finds nothiong return
+		if (rayar.Count > 0)
+		{
+			bool ItsSea = ((CollisionObject)rayar["collider"]).GetCollisionLayerBit(8);
+			if (ItsSea && !HasVecicle)
+			{
+				
+			}
+			else
+			{
+				//Spatial ob = (Spatial)rayar["collider"];
+				loctomove = (Vector3)rayar["position"];
+				Vector3 norm = (Vector3)rayar["normal"];
 
+				moveloc.Scale = new Vector3(1,1,1);
+				moveloc.Rotation = new Vector3(0,0,0);
+				Basis MoveLocBasis = moveloc.GlobalTransform.basis;
+
+				var result = new Basis(norm.Cross(MoveLocBasis.z), norm, MoveLocBasis.x.Cross(norm));
+
+				result = result.Orthonormalized();
+
+				Transform or = moveloc.GlobalTransform;
+
+				or.basis = result;
+
+				moveloc.GlobalTransform = or;
+				moveloc.Show();
+			}
+		}
+		
+	}
+	bool ExpressedNoBatteries = false;
+	bool ExpressedLowBattery = false;
+    public override void _Process(float delta)
+    {
+        base._Process(delta);
 
 		if (Input.IsActionPressed("Move") || Autowalk)
 		{
+			UpdateMoveLocation();
+		}
 
-			var spacestate = GetWorld().DirectSpaceState;
-			Vector2 mousepos = GetViewport().GetMousePosition();
-			Camera cam = GetTree().Root.GetCamera();
-			Vector3 rayor = cam.ProjectRayOrigin(mousepos);
-			Vector3 rayend = rayor + cam.ProjectRayNormal(mousepos) * 10000;
-			var rayar = new Dictionary();
-			if (HasVecicle)
-				rayar = spacestate.IntersectRay(rayor, rayend, new Godot.Collections.Array { this }, moveloc.VehicleMoveLayer);
-			else
-				rayar = spacestate.IntersectRay(rayor, rayend, new Godot.Collections.Array { this }, moveloc.MoveLayer);
-			//if ray finds nothiong return
-			if (rayar.Count > 0)
+		List<Item> batteries;
+		CharacterInventory.GetItemsByType(out batteries, ItemName.BATTERY);
+
+		for (int i = batteries.Count() -1; i > -1; i--)
+		{
+			if (((Battery)batteries[i]).GetCurrentCap() <= 0)
 			{
-				bool ItsSea = ((CollisionObject)rayar["collider"]).GetCollisionLayerBit(8);
-				if (ItsSea && !HasVecicle)
-				{
-					
-				}
-				else
-				{
-					//Spatial ob = (Spatial)rayar["collider"];
-					loctomove = (Vector3)rayar["position"];
-					Vector3 norm = (Vector3)rayar["normal"];
-
-					moveloc.Scale = new Vector3(1,1,1);
-					moveloc.Rotation = new Vector3(0,0,0);
-					Basis MoveLocBasis = moveloc.GlobalTransform.basis;
-
-					var result = new Basis(norm.Cross(MoveLocBasis.z), norm, MoveLocBasis.x.Cross(norm));
-
-					result = result.Orthonormalized();
-
-					Transform or = moveloc.GlobalTransform;
-
-					or.basis = result;
-
-					moveloc.GlobalTransform = or;
-					moveloc.Show();
-				}
-				
+				batteries.RemoveAt(i);
 			}
 		}
+		if (batteries.Count() > 0)
+		{
+			float rechargeammount = Math.Min( GetCharacterBatteryCap() - GetCurrentCharacterEnergy() , 0.1f);
+			((Battery)batteries[0]).ConsumeEnergy(rechargeammount);
+			RechargeCharacter(rechargeammount);
+			ExpressedNoBatteries = false;
+		}
+		else
+		{
+			if (!ExpressedNoBatteries)
+			{
+				TalkText.GetInst().Talk("Ξέμεινα από μπαταρίες. Πρέπει να βρώ κάπου να φωρτήσω.", this);
+				ExpressedNoBatteries = true;
+			}
+		}
+
+    }
+    public override void _PhysicsProcess(float delta)
+	{
+		//ulong ms = OS.GetSystemTimeMsecs();
+
+		base._PhysicsProcess(delta);
+
 		if (sitting && loctomove.DistanceTo(GlobalTranslation) > 0.5)
 		{
 			StandUp();
 		}
 		if (anim.IsStanding())
 			return;
+		
 		moveloc.GlobalTranslation = loctomove;
-
 		var spd = Speed;
 
 		var direction = loctomove - GlobalTransform.origin;
@@ -234,52 +269,46 @@ public class Player : Character
 				}
 			}
 		}
-
-		
+		/////////////////////////////////////////////
+		//battery consumption
 		float coons = Consumption.Interpolate(rpm) * delta;
 		ConsumeEnergy(coons);
-		List<Item> batteries;
-		CharacterInventory.GetItemsByType(out batteries, ItemName.BATTERY);
-		
-		for (int i = batteries.Count() -1; i > -1; i--)
+
+		if (GetCurrentEnergy() < GetCharacterBatteryCap() / 10)
 		{
-			if (((Battery)batteries[i]).GetCurrentCap() < coons)
+			if (!ExpressedLowBattery)
 			{
-				batteries.RemoveAt(i);
+				TalkText.GetInst().Talk("Θα ξεμείνω από μπαταρία σε λίγο. Δεν νιώθω καλά.", this);
+				ExpressedLowBattery = true;
 			}
-		}
-		if (batteries.Count() == 0)
-		{
-			
 		}
 		else
 		{
-			float rechargeammount = Math.Min( GetCharacterBatteryCap() - GetCurrentCharacterEnergy() , 0.1f);
-			((Battery)batteries[0]).ConsumeEnergy(rechargeammount);
-			RechargeCharacter(rechargeammount);
+			ExpressedLowBattery = false;
 		}
-			
-
-		//GD.Print("Consuming energy :" + coons);
-		//Stamina_bar.Value = m_Stamina;
-
-		//if (m_Stamina < startingstaming / 10)
-			//GetNode<AudioStreamPlayer3D>("TiredSound").StreamPaused = false;
-		//else
-			//GetNode<AudioStreamPlayer3D>("TiredSound").StreamPaused = true;
-
-		//if (stam != m_Stamina)
-			//Stamina_bar.ChangeVisibility();
-		// Ground velocity
+		//List<Item> batteries;
+		//CharacterInventory.GetItemsByType(out batteries, ItemName.BATTERY);
 		
-		_velocity.x = direction.x * spd;
-		_velocity.z = direction.z * spd;
-		//_velocity.y = direction.y * spd;
-		// Vertical velocity
-		
+		//for (int i = batteries.Count() -1; i > -1; i--)
+		//{
+		//	if (((Battery)batteries[i]).GetCurrentCap() < coons)
+		//	{
+		//		batteries.RemoveAt(i);
+		//	}
+		//}
+		//if (batteries.Count() > 0)
+		//{
+		//	float rechargeammount = Math.Min( GetCharacterBatteryCap() - GetCurrentCharacterEnergy() , 0.1f);
+		//	((Battery)batteries[0]).ConsumeEnergy(rechargeammount);
+		//	RechargeCharacter(rechargeammount);
+		//}
+		/////////////////////////////////////////////
+
 		// Moving the character
 		if (!HasVecicle)
 		{
+			_velocity.x = direction.x * spd;
+			_velocity.z = direction.z * spd;
 			_velocity.y -= FallAcceleration * delta;
 			_velocity = MoveAndSlide(_velocity, Vector3.Up);
 		}
@@ -289,47 +318,16 @@ public class Player : Character
 				currveh.loctomove = loctomove;
 		}
 		
-		ulong msaf = OS.GetSystemTimeMsecs();
-		if (msaf - ms > 215)
-			GD.Print("Player processing took longer the 15 ms. Process time : " + (msaf - ms).ToString() + " ms");
+		//ulong msaf = OS.GetSystemTimeMsecs();
+		//if (msaf - ms > 215)
+			//GD.Print("Player processing took longer the 15 ms. Process time : " + (msaf - ms).ToString() + " ms");
 	}
 	//Handling of input
 	public override void _Input(InputEvent @event)
 	{
 		if (@event.IsActionPressed("Move"))
 		{
-			var spacestate = GetWorld().DirectSpaceState;
-			Vector2 mousepos = GetViewport().GetMousePosition();
-			Camera cam = GetTree().Root.GetCamera();
-			Vector3 rayor = cam.ProjectRayOrigin(mousepos);
-			Vector3 rayend = rayor + cam.ProjectRayNormal(mousepos) * 20000;
-			var rayar = new Dictionary();
-			if (HasVecicle)
-				rayar = spacestate.IntersectRay(rayor, rayend, new Godot.Collections.Array { this }, moveloc.VehicleMoveLayer);
-			else
-				rayar = spacestate.IntersectRay(rayor, rayend, new Godot.Collections.Array { this }, moveloc.MoveLayer);
-			//if ray finds nothiong return
-			if (rayar.Count == 0)
-				return;
-
-			bool ItsSea = ((CollisionObject)rayar["collider"]).GetCollisionLayerBit(8);
-			if (ItsSea && !HasVecicle)
-			{
-				//nada
-			}
-			else
-			{
-				loctomove = (Vector3)rayar["position"];
-				Vector3 norm = (Vector3)rayar["normal"];
-				var result = new Basis(norm.Cross(moveloc.GlobalTransform.basis.z), norm, moveloc.GlobalTransform.basis.x.Cross(norm));
-
-				result = result.Orthonormalized();
-				result.Scale = new Vector3(1, 1, 1);
-				Transform or = new Transform(result, Vector3.Zero);
-
-				moveloc.GlobalTransform = or;
-				moveloc.Show();
-			}
+			UpdateMoveLocation();
 		}
 		if (@event.IsActionPressed("jump"))
 		{

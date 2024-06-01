@@ -220,6 +220,7 @@ public class ActionMenu : Control
 		DeselectCurrent();
 		SelectedObj = obj;
 		SelectedObj.Call("HighLightObject", true);
+		PickButton.Show();
 		if (SelectedObj is Item)
 		{
 			PickButton.Text = "Πάρε";

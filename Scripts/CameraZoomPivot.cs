@@ -17,14 +17,21 @@ public class CameraZoomPivot : Position3D
 
 	//Camera cam;
 	CameraPanPivot panp;
+	
+	static CameraZoomPivot instance;
     public override void _Ready()
 	{
 		arm = (SpringArm)GetParent();
 		panp = (CameraPanPivot)GetParent().GetParent();
 		InitialTransforms = new Vector2(arm.SpringLength, panp.Translation.y);
+		instance = this;
 		//cam = GetNode<Camera>("Camera");
 		
     }
+	public static CameraZoomPivot GetInstance()
+	{
+		return instance;
+	}
 	public float GetZoomNormalised()
 	{
 		return panp.Translation.y / MaxDist;

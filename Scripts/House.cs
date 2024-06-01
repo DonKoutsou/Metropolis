@@ -33,37 +33,36 @@ public class House : Spatial
 		Island ile = (Island)parent;
 		ile.RegisterChild(this);
 	}
-	public void Touch(Node body)
+	public void Entered(Node body)
 	{
-		Vector3 forw = HouseDoor.GlobalTransform.basis.z;
-		Vector3 toOther = HouseDoor.GlobalTransform.origin - ((Spatial)body).GlobalTransform.origin;
-		var thing = forw.Dot(toOther);
-		if (thing > 0)
-		{
-			((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Disabled;
-			((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(2)).ParamsCullMode = SpatialMaterial.CullMode.Disabled;
-			GetNode<Occluder>("Occluder").Visible = true;
-			GetNode<Occluder>("Occluder2").Visible = true;
-			GetNode<Occluder>("Occluder3").Visible = true;
-			GetNode<Occluder>("Occluder4").Visible = true;
-			GetNode<Occluder>("Occluder5").Visible = true;
-			GetNode<Occluder>("Occluder6").Visible = true;
-			GetNode<Occluder>("Occluder7").Visible = true;
-			return;
-		}
-		else
-		{
-			((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Front;
-			((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(2)).ParamsCullMode = SpatialMaterial.CullMode.Front;
-			GetNode<Occluder>("Occluder").Visible = false;
-			GetNode<Occluder>("Occluder2").Visible = false;
-			GetNode<Occluder>("Occluder3").Visible = false;
-			GetNode<Occluder>("Occluder4").Visible = false;
-			GetNode<Occluder>("Occluder5").Visible = false;
-			GetNode<Occluder>("Occluder6").Visible = false;
-			GetNode<Occluder>("Occluder7").Visible = false;
-			return;
-		}
+		((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Front;
+		((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(2)).ParamsCullMode = SpatialMaterial.CullMode.Front;
+		GetNode<Occluder>("Occluder").Visible = false;
+		GetNode<Occluder>("Occluder2").Visible = false;
+		GetNode<Occluder>("Occluder3").Visible = false;
+		GetNode<Occluder>("Occluder4").Visible = false;
+		GetNode<Occluder>("Occluder5").Visible = false;
+		GetNode<Occluder>("Occluder6").Visible = false;
+		GetNode<Occluder>("Occluder7").Visible = false;
+
+		
+		return;
+
+	}
+	public void Left(Node body)
+	{
+		((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Disabled;
+		((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(2)).ParamsCullMode = SpatialMaterial.CullMode.Disabled;
+		GetNode<Occluder>("Occluder").Visible = true;
+		GetNode<Occluder>("Occluder2").Visible = true;
+		GetNode<Occluder>("Occluder3").Visible = true;
+		GetNode<Occluder>("Occluder4").Visible = true;
+		GetNode<Occluder>("Occluder5").Visible = true;
+		GetNode<Occluder>("Occluder6").Visible = true;
+		GetNode<Occluder>("Occluder7").Visible = true;
+		
+		return;
+
 	}
 	public void StartHouse(Random random)
 	{

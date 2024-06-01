@@ -36,8 +36,8 @@ public class DayNight : WorldEnvironment
     [Export]
     Curve WindStreangthCurve = null;
 
-    [Export]
-    Curve RainStreangthCurve = null;
+    //[Export]
+    //Curve RainStreangthCurve = null;
 
     [Signal]
     public delegate void DayEventHandler();

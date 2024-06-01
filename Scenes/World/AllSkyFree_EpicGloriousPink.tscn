@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/World/DayNightController.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/SIsilicon.vfx.godrays/GodRays.gd" type="Script" id=2]
@@ -23,10 +23,6 @@ _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.130519, 360 ), 0.0, 0.0, 0
 max_value = 100.0
 _data = [ Vector2( 0, 76.3804 ), 0.0, 0.0, 0, 0, Vector2( 0.0655844, 88.6503 ), 0.0, 0.0, 0, 0, Vector2( 0.117532, 56.7485 ), 0.0, 0.0, 0, 0, Vector2( 0.19026, 74.5399 ), 0.0, 0.0, 0, 0, Vector2( 0.25, 5.82822 ), 0.0, 0.0, 0, 0, Vector2( 0.266883, 100 ), 0.0, 0.0, 0, 0, Vector2( 0.477273, 82.5153 ), 0.0, 0.0, 0, 0, Vector2( 0.587662, 56.135 ), 0.0, 0.0, 0, 0, Vector2( 0.656493, 94.1718 ), 0.0, 0.0, 0, 0, Vector2( 0.782468, 12.5767 ), 0.0, 0.0, 0, 0, Vector2( 0.874675, 54.2945 ), 0.0, 0.0, 0, 0, Vector2( 1, 80.6749 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="Curve" id=6]
-max_value = 100.0
-_data = [ Vector2( 0, 100 ), 0.0, 0.0, 0, 0, Vector2( 0.01603, 26.6871 ), 0.0, 0.0, 0, 0, Vector2( 0.0351296, 78.8344 ), 0.0, 0.0, 0, 0, Vector2( 0.0624147, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.0896999, 41.411 ), 0.0, 0.0, 0, 0, Vector2( 0.136085, 35.8896 ), 0.0, 0.0, 0, 0, Vector2( 0.146317, 100 ), 0.0, 0.0, 0, 0, Vector2( 0.174284, 43.2515 ), 0.0, 0.0, 0, 0, Vector2( 0.265689, 80.0613 ), 0.0, 0.0, 0, 0, Vector2( 0.390518, 14.4172 ), 0.0, 0.0, 0, 0, Vector2( 0.436221, 81.9018 ), 0.0, 0.0, 0, 0, Vector2( 0.50307, 31.5951 ), 0.0, 0.0, 0, 0, Vector2( 0.560368, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.70839, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.729536, 100 ), 0.0, 0.0, 0, 0, Vector2( 0.825716, 100 ), 0.0, 0.0, 0, 0, Vector2( 0.870055, 2.14724 ), 0.0, 0.0, 0, 0, Vector2( 0.901432, 82.5153 ), 0.0, 0.0, 0, 0, Vector2( 0.939632, 34.6626 ), 0.0, 0.0, 0, 0, Vector2( 1, 100 ), 0.0, 0.0, 0, 0 ]
-
 [node name="Sky" type="Spatial"]
 
 [node name="DayNightController" parent="." instance=ExtResource( 1 )]
@@ -36,7 +32,6 @@ MoonColorGradient = SubResource( 5 )
 startinghour = 7
 WindDirCurve = SubResource( 1 )
 WindStreangthCurve = SubResource( 2 )
-RainStreangthCurve = SubResource( 6 )
 
 [node name="Sun" type="DirectionalLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.0171732, 0.999853, 0, -0.999853, 0.0171732, 0, 0, 0 )

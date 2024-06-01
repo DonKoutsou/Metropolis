@@ -762,7 +762,10 @@ public class ItemInfo
 		SceneData = it.Filename;
 		if (it is Battery)
 		{
-			CustomData.Add("CurrentEnergy", ((Battery)it).GetCurrentCap());
+			if (CustomData.ContainsKey("CurrentEnergy"))
+				CustomData["CurrentEnergy"] = ((Battery)it).GetCurrentCap();
+			else
+				CustomData.Add("CurrentEnergy", ((Battery)it).GetCurrentCap());
 		}
 	}
 	public Dictionary<string, object>GetPackedData(out bool HasData)

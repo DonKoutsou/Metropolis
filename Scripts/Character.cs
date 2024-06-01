@@ -100,9 +100,9 @@ public class Character : KinematicBody
 
 		CharacterSoundManager = GetNode<CharacterSoundManager>("CharacterSoundManager");
 
-		//AudioStreamPlayer3D walkingsound = CharacterSoundManager.GetSound("Walk");
-		//walkingsound.Play();
-		//walkingsound.StreamPaused = true;
+		AudioStreamPlayer3D walkingsound = CharacterSoundManager.GetSound("Walk");
+		walkingsound.Play();
+		walkingsound.StreamPaused = true;
 		//GetNode<AudioStreamPlayer3D>("TiredSound").Play();
 		//GetNode<AudioStreamPlayer3D>("TiredSound").StreamPaused = true;
 		
@@ -152,8 +152,9 @@ public class Character : KinematicBody
 	{
 		return lines[0];
 	}
-	public override void _PhysicsProcess(float delta)
-	{
+    public override void _Process(float delta)
+    {
+        base._Process(delta);
 		if (DayNight.IsDay())
 			NightLight.LightEnergy = 0;
 		else
@@ -161,8 +162,9 @@ public class Character : KinematicBody
 
 		if (CurrentEnergy <= 0)
 			Kill();
-
-		
+    }
+    public override void _PhysicsProcess(float delta)
+	{
 
 	}
     public void MoveTo(Vector3 loc)

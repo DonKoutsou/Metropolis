@@ -23,7 +23,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.28984, 0 )
 shape = SubResource( 2 )
 
 [node name="SpotLight" type="SpotLight" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 9.60165, 2.332 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 9.50636, 2.36651 )
 light_color = Color( 1, 0.992157, 0.537255, 1 )
 shadow_enabled = true
-spot_range = 18.4506
+spot_range = 39.9337
+spot_angle = 72.0236

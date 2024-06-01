@@ -131,7 +131,6 @@ size = Vector2( 50000, 50000 )
 [sub_resource type="SpatialMaterial" id=120]
 render_priority = -8
 flags_use_shadow_to_opacity = true
-flags_disable_ambient_light = true
 params_billboard_mode = 2
 
 [sub_resource type="SpatialMaterial" id=14]
@@ -478,6 +477,7 @@ mesh = SubResource( 85 )
 
 [node name="MeshInstance" type="MeshInstance" parent="SunMoonPivot/MeshInstance"]
 transform = Transform( -134.649, -5.72205e-06, 3.8147e-06, 3.8147e-06, 134.648, 3.8147e-06, 3.05176e-05, -7.15256e-07, -134.648, 812.71, 1662.37, 1759.88 )
+visible = false
 include_in_bound = false
 allow_merging = false
 cast_shadow = 0

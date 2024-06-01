@@ -22,6 +22,7 @@ public class NPC : Character
 			GetNode<Position3D>("TalkPosition").Translation = TalkPosPos;
 			return;
 		}
+		base._Process(delta);
     }
     public override void _Ready()
 	{
@@ -35,7 +36,7 @@ public class NPC : Character
 		if (Sitting)
 		{
 			
-			if (Chair != null && GetNode(Chair) != null)
+			if (Chair != null && GetNodeOrNull(Chair) != null)
 			{
 				SittingThing chair = (SittingThing)GetNode(Chair);
 				Sit(chair.GetSeat(), chair);

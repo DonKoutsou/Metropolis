@@ -20,7 +20,7 @@ image = SubResource( 13 )
 size = Vector2( 64, 64 )
 
 [sub_resource type="SpatialMaterial" id=5]
-albedo_color = Color( 0, 0.380392, 1, 1 )
+albedo_color = Color( 0.0666667, 0.380392, 1, 1 )
 
 [sub_resource type="CylinderMesh" id=6]
 material = SubResource( 5 )
