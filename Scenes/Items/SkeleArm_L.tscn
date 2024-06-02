@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Item.cs" type="Script" id=1]
 [ext_resource path="res://Assets/Skele_Arm/Arms_Mat.material" type="Material" id=2]
 [ext_resource path="res://Assets/Skele_Arm/SkeleArm_L.tres" type="ArrayMesh" id=3]
 [ext_resource path="res://Assets/Skele_Arm/SkeleArmL.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=5]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.541251, 0.407081, 2.10592 )
@@ -31,3 +32,6 @@ mesh = ExtResource( 3 )
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 0.783704, 0, -0.621134, 0, 1, 0, 0.621134, 0, 0.783704, 0.0334845, 0.41874, -0.0374186 )
 shape = SubResource( 1 )
+
+[node name="ActionComponent" parent="." instance=ExtResource( 5 )]
+ActionDistance = 5.0

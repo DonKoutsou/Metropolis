@@ -23,6 +23,7 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 script = ExtResource( 2 )
+SelectLayer = 4112
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchor_left = 0.5

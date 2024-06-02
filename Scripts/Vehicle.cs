@@ -25,6 +25,8 @@ public class Vehicle : RigidBody
     [Export]
     int JumpForce = 50;
     [Export]
+    public bool SpawnBroken = false;
+    [Export]
     Curve forcecurve = null;
     [Export]
     Curve Hoverforcecurve = null;

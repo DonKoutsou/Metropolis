@@ -1,17 +1,36 @@
 using Godot;
+using Godot.Collections;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+////////////////////////////////////////////////////////////////////////////////////////
+/*
+
+ █████╗  ██████╗████████╗██╗ ██████╗ ███╗   ██╗    ███╗   ███╗███████╗███╗   ██╗██╗   ██╗
+██╔══██╗██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║    ████╗ ████║██╔════╝████╗  ██║██║   ██║
+███████║██║        ██║   ██║██║   ██║██╔██╗ ██║    ██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║
+██╔══██║██║        ██║   ██║██║   ██║██║╚██╗██║    ██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║
+██║  ██║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║    ██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝
+╚═╝  ╚═╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝    ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝ 
+*/
+////////////////////////////////////////////////////////////////////////////////////////                                                                                         
 public class ActionMenu : Control
 {
-	static Spatial SelectedObj;
-
+	Spatial SelectedObj;
 	Player pl;
-
-    static bool selecting = false;
-
+    bool selecting = false;
     Button PickButton;
 	Button IntButton;
+	Button IntButton2;
 
+	bool PerformingAction = false;
+	//0 is Pickupaction
+	//1 is Int 1
+	//2 is Int 2
+	int ActionIndex = 0;
+
+	[Export(PropertyHint.Layers3dPhysics)]
+	public uint SelectLayer { get; set; }
 
 	public override void _Ready()
 	{
@@ -19,20 +38,41 @@ public class ActionMenu : Control
 		SetProcess(false);
 		VBoxContainer cont = GetNode<PanelContainer>("PanelContainer").GetNode<VBoxContainer>("VBoxContainer");
         PickButton = cont.GetNode<Button>("PickUp_Button");
-		IntButton = cont.GetNode<Button>("Interact_Button2");
+		IntButton = cont.GetNode<Button>("Interact_Button");
+		IntButton2 = cont.GetNode<Button>("Interact_Button2");
 		IntButton.Hide();
+		PickButton.Hide();
+		IntButton2.Hide();
 	}
-
-	public static bool IsSelecting()
+	public bool IsSelecting()
 	{
 		return SelectedObj != null;
 	}
-	public static bool IsSelected(Spatial obj)
+	public bool IsSelected(Spatial obj)
 	{
 		return SelectedObj == obj;
 	}
+	public void StartPerformingAction(int type)
+	{
+		pl.loctomove = SelectedObj.GlobalTranslation;
+		PerformingAction = true;
+		ActionIndex = type;
+	}
 	private void On_PickUp_Button_Down()
 	{
+		if (pl.HasVecicle && pl.currveh != SelectedObj)
+		{
+			TalkText.GetInst().Talk("Δεν μπορώ πάνω από την βάρκα", pl);
+		}
+		if (SelectedObj.GlobalTranslation.DistanceTo(pl.GlobalTranslation) > SelectedObj.GetNode<ActionComponent>("ActionComponent").ActionDistance)
+		{
+			if (!PerformingAction)
+			{
+				StartPerformingAction(0);
+			}
+			return;
+		}
+		
 		if (SelectedObj is Item)
 		{
 			Item it = (Item)SelectedObj;
@@ -53,8 +93,6 @@ public class ActionMenu : Control
 				}
 			}
 			
-			selecting = false;
-			Stop();
 		}
 		else if (SelectedObj is Character)
 		{
@@ -68,16 +106,12 @@ public class ActionMenu : Control
 			{
 				veh.BoardVehicle(pl);
 				pl.SetVehicle(veh);
-				selecting = false;
-				Stop();
 			}
 			else
 			{
 				if (!veh.UnBoardVehicle(pl))
 					return;
 				pl.SetVehicle(null);
-				selecting = false;
-				Stop();
 			}
 		}
 		else if (SelectedObj is Furniture)
@@ -92,8 +126,6 @@ public class ActionMenu : Control
 			}
 			else
 				TalkText.GetInst().Talk("Τίποτα", pl);
-			selecting = false;
-			Stop();
 		}
 		else if (SelectedObj is WindGenerator)
 		{
@@ -142,8 +174,11 @@ public class ActionMenu : Control
 			int days, hours, mins;
 			DayNight.MinsToTime(time, out days,out hours, out mins);
 			DayNight.ProgressTime(days, hours, mins);
-			selecting = false;
-			Stop();
+			
+		}
+		else if (SelectedObj is FireplaceLight)
+		{
+			((FireplaceLight)SelectedObj).ToggleFileplace();
 		}
 		else if (SelectedObj is SittingThing)
 		{
@@ -161,6 +196,8 @@ public class ActionMenu : Control
 			Position3D seat = sit.GetSeat();
 			pl.Sit(seat, sit);
 		}
+		selecting = false;
+		Stop();
 	}
 	private void On_Interact_Button2_Down()
 	{
@@ -180,12 +217,7 @@ public class ActionMenu : Control
 		{
 			TalkText.GetInst().Talk("Φίλος", pl);
 		}
-        else if (SelectedObj is FireplaceLight)
-		{
-			((FireplaceLight)SelectedObj).ToggleFileplace();
-			selecting = false;
-			Stop();
-		}
+        
 		else if (SelectedObj is Vehicle)
 		{
 			TalkText.GetInst().Talk("Βάρκα", pl);
@@ -221,6 +253,7 @@ public class ActionMenu : Control
 		SelectedObj = obj;
 		SelectedObj.Call("HighLightObject", true);
 		PickButton.Show();
+		IntButton.Show();
 		if (SelectedObj is Item)
 		{
 			PickButton.Text = "Πάρε";
@@ -231,7 +264,10 @@ public class ActionMenu : Control
 		}
 		else if (SelectedObj is Vehicle)
 		{
-			PickButton.Text = "Επιβιβάσου";
+			if (pl.HasVecicle && pl.currveh == SelectedObj)
+				PickButton.Text = "Αποβιβάση";
+			else
+				PickButton.Text = "Επιβιβάση";
 		}
 		else if (SelectedObj is Furniture)
 		{
@@ -247,7 +283,13 @@ public class ActionMenu : Control
 		}
 		else if (SelectedObj is FireplaceLight)
 		{
-			PickButton.Hide();
+			IntButton.Hide();
+			FireplaceLight fp = (FireplaceLight)SelectedObj;
+			if (fp.State)
+				PickButton.Text = "Σβήσε.";
+			else
+				PickButton.Text = "Άναψε.";
+			//PickButton.Hide();
 		}
 		Show();
 		SetProcess(true);
@@ -258,10 +300,15 @@ public class ActionMenu : Control
 			SelectedObj.Call("HighLightObject", false);
 
 		SelectedObj = null;
-		
 	}
 	public void Stop()
 	{
+		if (PerformingAction)
+		{
+			PerformingAction = false;
+			ActionIndex = 0;
+			pl.loctomove = pl.GlobalTranslation;
+		}
         if (selecting)
             return;
 		if (SelectedObj == null)
@@ -295,6 +342,36 @@ public class ActionMenu : Control
 
 		if (screenpos < Vector2.Zero || screenpos > GetViewport().Size)
 			Stop();
+
+		if (PerformingAction)
+		{
+			if (SelectedObj.GlobalTranslation.DistanceTo(pl.GlobalTranslation) <= SelectedObj.GetNode<ActionComponent>("ActionComponent").ActionDistance)
+			{
+				pl.loctomove = pl.GlobalTranslation;
+				if (ActionIndex == 0)
+				{
+					On_PickUp_Button_Down();
+				}
+				if (ActionIndex == 1)
+				{
+					On_Interact_Button_Down();
+				}
+				if (ActionIndex == 2)
+				{
+					On_Interact_Button2_Down();
+				}
+				PerformingAction = false;
+			}
+			//if (pl.loctomove != SelectedObj.GlobalTranslation)
+			//{
+			//	PerformingAction = false;
+			//}
+			//else
+			//{
+			//	pl.loctomove = SelectedObj.GlobalTranslation;
+			//}
+		}
+		
 		//GlobalTranslation =  new Vector3(itempos.x, itempos.y, itempos.z);
 	}
     private void Selecting_Action()
@@ -307,6 +384,28 @@ public class ActionMenu : Control
     }
 	public override void _Input(InputEvent @event)
 	{
+		if (@event.IsActionPressed("Select"))
+		{
+			var spacestate = GetTree().Root.World.DirectSpaceState;
+			Vector2 mousepos = GetViewport().GetMousePosition();
+			Camera cam = GetTree().Root.GetCamera();
+			Vector3 rayor = cam.ProjectRayOrigin(mousepos);
+			Vector3 rayend = rayor + cam.ProjectRayNormal(mousepos) * 10000;
+			var rayar = spacestate.IntersectRay(rayor, rayend, new Godot.Collections.Array { this }, SelectLayer);
+			//if ray finds nothiong return
+			if (rayar.Count == 0)
+			{
+				Stop();
+				return;
+			}
+			Spatial obj = (Spatial)rayar["collider"];
+			if (obj.GlobalTransform.origin.DistanceTo(pl.GlobalTransform.origin) > 100)
+			{
+				Stop();
+				return;
+			}
+			Start(obj);
+		}
 		if (@event.IsActionPressed("ActionCheck"))
 		{
 			var interactables = GetTree().GetNodesInGroup("Interactables");

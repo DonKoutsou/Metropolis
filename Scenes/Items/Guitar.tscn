@@ -1,15 +1,16 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/Guitar/Guitar.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Scripts/Item.cs" type="Script" id=2]
 [ext_resource path="res://Assets/Guitar/Guitar_Body.tres" type="Material" id=3]
 [ext_resource path="res://Assets/Guitar/Guitar_Neck.tres" type="Material" id=4]
 [ext_resource path="res://Assets/Guitar/GuitarIcon.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=6]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.952743, 2.24403, 0.223935 )
 
-[node name="Guitar" type="RigidBody"]
+[node name="Guitar" type="RigidBody" groups=["Interactables"]]
 collision_layer = 16
 collision_mask = 36
 mode = 1
@@ -24,7 +25,10 @@ stackable = false
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.24624, 0 )
 shape = SubResource( 1 )
 
-[node name="MeshInstance" type="MeshInstance" parent="." groups=["Interactables"]]
+[node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = ExtResource( 1 )
 material/0 = ExtResource( 3 )
 material/1 = ExtResource( 4 )
+
+[node name="ActionComponent" parent="." instance=ExtResource( 6 )]
+ActionDistance = 5.0

@@ -49,7 +49,7 @@ nodes/ChairBlend/position = Vector2( 186.667, 160 )
 nodes/IntrumentBlend/node = SubResource( 54 )
 nodes/IntrumentBlend/position = Vector2( 360, 266.667 )
 nodes/output/position = Vector2( 533.333, 160 )
-node_connections = [ "output", 0, "IntrumentBlend", "ChairBlend", 0, "Animation", "ChairBlend", 1, "Animation 3", "IntrumentBlend", 0, "ChairBlend", "IntrumentBlend", 1, "Animation 2" ]
+node_connections = [ "output", 0, "IntrumentBlend", "IntrumentBlend", 0, "ChairBlend", "IntrumentBlend", 1, "Animation 2", "ChairBlend", 0, "Animation", "ChairBlend", 1, "Animation 3" ]
 
 [sub_resource type="AnimationNodeAnimation" id=55]
 animation = "Standing"
@@ -147,7 +147,7 @@ material/0 = ExtResource( 1 )
 material/0 = ExtResource( 4 )
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton" index="7"]
-transform = Transform( 0.997248, -0.0530589, -0.0517909, 0.0457628, 0.990044, -0.133111, 0.058338, 0.130374, 0.989747, -0.596297, 265.499, 11.9352 )
+transform = Transform( 0.997441, -0.0638507, -0.032162, 0.0595702, 0.990991, -0.119948, 0.039531, 0.117725, 0.992259, -2.35058, 265.26, 12.2028 )
 bone_name = "mixamorig_Head"
 
 [node name="HeadPivot" type="Spatial" parent="Armature/Skeleton/BoneAttachment" index="0"]
@@ -169,7 +169,7 @@ spot_range = 58.3185
 spot_angle = 47.5769
 
 [node name="BoneAttachment2" type="BoneAttachment" parent="Armature/Skeleton" index="8"]
-transform = Transform( 0.992405, 0.0652078, -0.104306, -0.0729867, 0.994688, -0.0725843, 0.0990187, 0.079646, 0.991893, 0.584686, 184.008, -0.053938 )
+transform = Transform( 0.994332, 0.0570371, -0.0897197, -0.0625666, 0.996231, -0.0600749, 0.0859551, 0.0653479, 0.994154, -0.297212, 183.791, 0.716423 )
 bone_name = "mixamorig_Hips"
 
 [node name="RemoteTransform" type="RemoteTransform" parent="Armature/Skeleton/BoneAttachment2" index="0"]
@@ -210,7 +210,7 @@ process_material = SubResource( 34 )
 draw_pass_1 = SubResource( 35 )
 
 [node name="Bouzouki" parent="." index="3" instance=ExtResource( 7 )]
-transform = Transform( -0.0272753, 0.896328, -0.442218, -0.827402, 0.227855, 0.512926, 0.560608, 0.379958, 0.735556, -1.21789, 4.29825, 0.473818 )
+transform = Transform( -0.0272753, 0.896328, -0.442218, -0.827402, 0.227855, 0.512926, 0.560608, 0.379958, 0.735556, -1.23113, 4.28824, 0.511211 )
 visible = false
 sleeping = true
 RegisterOnIsland = false

@@ -10,6 +10,10 @@ public class CameraZoomPivot : Position3D
 
 	[Export]
 	public float MaxDist = 600;
+	[Export]
+	public float MaxFov = 75;
+	[Export]
+	public float MinFov = 25;
 
 	SpringArm arm;
 
@@ -43,18 +47,27 @@ public class CameraZoomPivot : Position3D
 		Vector3 prevpos = panp.Translation;
 		if (@event.IsActionPressed("ZoomOut"))
 		{
-			if (panp.Translation.y < MaxDist)
+			if (arm.SpringLength < MaxDist)
 			{
-				PlayerCamera.GetInstance().Fov *= 1.02f;
+				PlayerCamera cam = PlayerCamera.GetInstance();
+				if (cam.Fov < MaxFov)
+				{
+					cam.Fov *= 1.02f;
+				}
+				
 				arm.SpringLength = arm.SpringLength * 1.1f;
-				panp.Translation = new Vector3(prevpos.x, prevpos.y * 1.1f, prevpos.z);
+				panp.Translation = new Vector3(prevpos.x, prevpos.y * 1.10f, prevpos.z);
 			}
 		}
 		if (@event.IsActionPressed("ZoomIn"))
 		{
-			if (panp.Translation.y > 10)
+			if (arm.SpringLength > 50)
 			{
-				PlayerCamera.GetInstance().Fov *= 0.98f;
+				PlayerCamera cam = PlayerCamera.GetInstance();
+				if (cam.Fov > MinFov)
+				{
+					cam.Fov *= 0.98f;
+				}
 				arm.SpringLength = arm.SpringLength * 0.90f;
 				panp.Translation = new Vector3(prevpos.x, prevpos.y * 0.90f, prevpos.z);
 			}

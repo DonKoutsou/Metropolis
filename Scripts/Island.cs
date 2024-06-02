@@ -115,6 +115,7 @@ public class Island : Spatial
 				Char.SetData(inf);
 			}
 		}
+		
 
 		List <ItemInfo> I = new List<ItemInfo>();
 
@@ -189,17 +190,78 @@ public class Island : Spatial
 			}
 		}
 	}
-	public void InitialSpawn(Random r)
+	public void InitialSpawn(Random r, out int RandomUses)
 	{
+		RandomUses = 0;
+		int RandomUsedFromHouses = 0;
 		foreach(House h in Houses)
 		{
-			h.StartHouse(r);
+			h.StartHouse(r, out RandomUsedFromHouses);
 		}
+		RandomUses += RandomUsedFromHouses;
+		CharacterSpawnLocations Chars = GetNodeOrNull<CharacterSpawnLocations>("CharacterSpawnLocations");
+		if (Chars != null)
+		{
+			var Children = Chars.GetChildren();
+			if (Children.Count > 0)
+			{
+				if (Chars.HasChars())
+				{
+					//
+					foreach (Position3D pos in Children)
+					{
+						int Spawn = r.Next(0, 2);
+						RandomUses ++;
+						if (Spawn == 0)
+						{
+							int selection = r.Next(1, Chars.CharSpawns.Count());
+							RandomUses ++;
+							NPC chara = (NPC)Chars.CharSpawns[selection - 1].Instance();
+							chara.Set("spawnUncon", true);
+							AddChild(chara);
+							chara.Translation = pos.Translation;
+						}
+					}
+				}
+			}
+		}
+		
+		VehicleSpawnLocation Vehs = GetNodeOrNull<VehicleSpawnLocation>("VehicleSpawnLocation");
+		if (Vehs != null)
+		{
+			var VehChild = Vehs.GetChildren();
+			if (VehChild.Count > 0)
+			{
+				if (Vehs.HasVehicles())
+				{
+					//
+					foreach (Position3D pos in VehChild)
+					{
+						int Spawn = r.Next(0, 2);
+						RandomUses ++;
+						if (Spawn == 0)
+						{
+							int selection = r.Next(1, Vehs.VehSpawns.Count());
+							RandomUses ++;
+							Spatial veh = (Spatial)Vehs.VehSpawns[selection - 1].Instance();
+							AddChild(veh);
+							veh.Translation = pos.Translation;
+							Vehicle vehchild = veh.GetNode<Vehicle>("VehicleBody");
+							if (vehchild.SpawnBroken)
+							{
+								vehchild.OnLightDamaged();
+							}
+						}
+					}
+				}
+			}
+		}
+		
 	}
 	public void RegisterChild(Node child)
 	{
 		if (child is House)
-				Houses.Insert(Houses.Count, (House)child);
+			Houses.Insert(Houses.Count, (House)child);
 		else if (child is WindGenerator)
 			Generators.Insert(Generators.Count, (WindGenerator)child);
 		else if (child is Vehicle)

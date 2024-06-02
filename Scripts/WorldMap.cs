@@ -343,7 +343,11 @@ public class WorldMap : TileMap
 
 		Island ile = iletosave.ile;
 
-		ile.InitialSpawn(random);
+		int RandomUses;
+
+		ile.InitialSpawn(random, out RandomUses);
+
+		RandomTimes += RandomUses;
 
 		iletosave.SetInfo(ile);
 

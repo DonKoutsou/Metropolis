@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Assets/Compass/M_Compass.tres" type="Material" id=1]
 [ext_resource path="res://Assets/Compass/CompassItem.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Assets/Compass/Compass_Body.obj" type="ArrayMesh" id=4]
 [ext_resource path="res://Assets/Compass/Compass_Plate.obj" type="ArrayMesh" id=5]
 [ext_resource path="res://Assets/Compass/M_Compass_Item.tres" type="Material" id=6]
+[ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=7]
 
 [sub_resource type="CylinderShape" id=1]
 height = 0.179174
@@ -39,3 +40,6 @@ material/0 = ExtResource( 6 )
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0843687, 0 )
 shape = SubResource( 1 )
+
+[node name="ActionComponent" parent="." instance=ExtResource( 7 )]
+ActionDistance = 5.0

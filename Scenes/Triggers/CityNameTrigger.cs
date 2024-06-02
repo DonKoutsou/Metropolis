@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class CityNameTrigger : Spatial
 {
     [Export]
-    NodePath Collision;
+    NodePath Collision = null;
     bool IsIn = false;
 
     float dist;
@@ -27,8 +27,9 @@ public class CityNameTrigger : Spatial
             IsIn = true;
             
             Player pl = (Player)body;
-
-            CityNameUI.ShowName(((Island)GetParent()).IslandSpecialName);
+            CityNameUI UI = (CityNameUI)PlayerUI.GetInstance().GetUI(PlayerUIType.CITYNAME);
+            UI.ShowName(((Island)GetParent()).IslandSpecialName);
+            //
         }
     }
     private void On_Player_Left(object body)

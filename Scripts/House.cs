@@ -64,8 +64,9 @@ public class House : Spatial
 		return;
 
 	}
-	public void StartHouse(Random random)
+	public void StartHouse(Random random, out int RandomUses)
 	{
+		RandomUses = 0;
 		if (!spawnItems)
 			return;
 		if (ItemSpawnPool == null)
@@ -79,6 +80,7 @@ public class House : Spatial
 		for (int i = 0; i < FurnitureList.Count; i++)
 		{
 			int start = random.Next(0, ItemSpawnPool.Length * 2);
+			RandomUses ++;
 			if (start >= ItemSpawnPool.Length)
 				continue;
 

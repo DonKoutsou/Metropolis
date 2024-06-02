@@ -1,7 +1,8 @@
 {
   "profiles": {
     "Μητρόπολη": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "commandLineArgs": "--path, --verbose"
     },
     "Profile 1": {
       "commandName": "Executable",

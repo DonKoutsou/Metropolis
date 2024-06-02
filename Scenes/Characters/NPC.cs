@@ -5,9 +5,9 @@ using System;
 public class NPC : Character
 {
 	[Export]
-	bool spawnUncon = false;
+	public bool spawnUncon = false;
 	[Export]
-	bool Sitting = true;
+	public bool Sitting = true;
 	[Export]
 	NodePath Chair = null;
 	[Export]
@@ -60,7 +60,6 @@ public class NPC : Character
 			CurrentEnergy = 0;
 		}
 		GetNode<Position3D>("TalkPosition").Translation = TalkPosPos;
-		
 	}
     public override void _PhysicsProcess(float delta)
     {
@@ -69,5 +68,21 @@ public class NPC : Character
 			return;
 		}
         base._PhysicsProcess(delta);
+    }
+	public void HighLightObject(bool toggle)
+    {
+		Node skel = GetNode("Pivot").GetNode("Guy").GetNode("Armature").GetNode("Skeleton");
+		foreach (Node child in skel.GetChildren())
+		{
+			if (child is MeshInstance)
+			{
+				ShaderMaterial Mat = (ShaderMaterial)((MeshInstance)child).GetActiveMaterial(0).NextPass;
+				if (Mat != null)
+				{
+					Mat.SetShaderParam("enable",  toggle);
+				}
+				
+			}
+		}
     }
 }

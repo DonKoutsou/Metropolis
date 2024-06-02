@@ -64,9 +64,6 @@ material/1 = ExtResource( 3 )
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody2"]
 shape = SubResource( 2 )
 
-[node name="ItemSpawnPos" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.64988, 0 )
-
 [node name="Furniture" parent="." instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.03581, 3.531, -8.57244 )
 

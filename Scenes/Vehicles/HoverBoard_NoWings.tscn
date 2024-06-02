@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Assets/Boat/M_Boat.material" type="Material" id=1]
 [ext_resource path="res://Scripts/Vehicle.cs" type="Script" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Assets/Boat/BoatWingR.tres" type="ArrayMesh" id=11]
 [ext_resource path="res://Assets/Sounds/Engine/Engine.ogg" type="AudioStream" id=12]
 [ext_resource path="res://Assets/Sounds/Engine/Engine2.ogg" type="AudioStream" id=13]
+[ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=14]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0
@@ -23,7 +24,7 @@ max_value = 6.0
 _data = [ Vector2( 0, 6 ), 0.0, 0.0, 0, 0, Vector2( 0.355023, 5.96319 ), 0.0, 0.0, 0, 0, Vector2( 0.672374, -6 ), 0.0, 0.0, 0, 0, Vector2( 1, -6 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=9]
-_data = [ Vector2( 0, 0.1 ), 0.0, 0.0, 0, 0, Vector2( 0.5, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.119632 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0.1 ), 0.0, 0.0, 0, 0, Vector2( 0.5, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.1 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="CapsuleShape" id=8]
 radius = 3.11783
@@ -33,7 +34,7 @@ height = 10.1927
 extents = Vector3( 0.366748, 0.297252, 0.266781 )
 
 [sub_resource type="SphereShape" id=41]
-radius = 1.519
+radius = 2.5
 
 [sub_resource type="Curve" id=25]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.275, 0.745454 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.1 ), 0.0, 0.0, 0, 0 ]
@@ -172,7 +173,7 @@ transform = Transform( 1, -5.52518e-11, 5.82077e-11, 7.38964e-11, 1, 0, 0, 0, 1,
 script = ExtResource( 3 )
 
 [node name="VehicleBody" type="RigidBody" parent="." groups=["Interactables"]]
-transform = Transform( 1, -1.71667e-10, 1.74623e-10, 2.48519e-10, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform = Transform( 1, -2.29932e-10, 2.91038e-10, 3.64935e-10, 1, 0, 0, 0, 1, 0, 0, 0 )
 collision_layer = 16
 collision_mask = 292
 mass = 40.0
@@ -215,19 +216,19 @@ shape = SubResource( 32 )
 transform = Transform( 1, -5.51381e-11, 1.16415e-10, 1.32104e-10, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="CollisionShape3" type="CollisionShape" parent="VehicleBody"]
-transform = Transform( 0.999999, 1.19712e-10, 4.65661e-10, 2.49486e-10, 1, -3.49246e-10, -1.74623e-10, 3.49246e-10, 1, 2.9999, 0.644603, 7.99983 )
+transform = Transform( 0.999999, 1.19769e-10, 5.23869e-10, 2.49429e-10, 1, -8.14907e-10, -1.74623e-10, 8.14907e-10, 1, 2.99901, -0.698486, 7.9984 )
 shape = SubResource( 41 )
 
 [node name="CollisionShape4" type="CollisionShape" parent="VehicleBody"]
-transform = Transform( 0.999999, -1.21753e-09, 2.73576e-09, -3.24025e-09, 1, -5.82077e-09, -2.73576e-09, 2.91038e-09, 1, -3, 0.8, 8 )
+transform = Transform( 0.999999, -1.21736e-09, 2.79397e-09, -3.2403e-09, 1, -6.28643e-09, -2.73576e-09, 3.37604e-09, 1, -3.0009, -0.543089, 7.99856 )
 shape = SubResource( 41 )
 
 [node name="CollisionShape5" type="CollisionShape" parent="VehicleBody"]
-transform = Transform( 0.999999, -7.49765e-10, 4.01633e-09, -4.98534e-09, 1, -9.19681e-09, -3.84171e-09, 6.28643e-09, 1, -7, 0.8, -9 )
+transform = Transform( 0.999999, -7.49537e-10, 4.07454e-09, -4.98534e-09, 1, -9.66247e-09, -3.84171e-09, 6.75209e-09, 1, -7.0009, -0.543089, -9.00144 )
 shape = SubResource( 41 )
 
 [node name="CollisionShape6" type="CollisionShape" parent="VehicleBody"]
-transform = Transform( 0.999999, -9.82766e-10, 4.13274e-09, -4.63615e-09, 1, -8.96398e-09, -3.7835e-09, 6.0536e-09, 1, 7, 0.8, -9 )
+transform = Transform( 0.999999, -9.82538e-10, 4.19095e-09, -4.63615e-09, 1, -9.42964e-09, -3.7835e-09, 6.51926e-09, 1, 6.99911, -0.543089, -9.00144 )
 shape = SubResource( 41 )
 
 [node name="RemoteTransform" type="RemoteTransform" parent="VehicleBody"]
@@ -413,8 +414,11 @@ enabled = true
 cast_to = Vector3( 0, -30, 0 )
 collision_mask = 260
 
+[node name="ActionComponent" parent="VehicleBody" instance=ExtResource( 14 )]
+ActionDistance = 20.0
+
 [node name="RayFL" type="RayCast" parent="."]
-transform = Transform( 0.999999, -3.61966e-08, 2.24099e-08, 3.63035e-08, 1, -8.3819e-09, -2.23517e-08, 8.3819e-09, 1, 3, 0.8, 8 )
+transform = Transform( 0.999999, -3.74197e-08, 2.24099e-08, 3.74677e-08, 1, -7.68341e-09, -2.23517e-08, 7.68341e-09, 1, 3, 0.8, 8 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292
@@ -428,13 +432,13 @@ material/0 = ExtResource( 1 )
 transform = Transform( 1, 2.05701e-08, -1.85682e-08, -2.05223e-08, 1, 1.44355e-08, 1.90921e-08, -1.44355e-08, 1, -0.00278616, -4.17923, -0.00447226 )
 
 [node name="RayF" type="RayCast" parent="."]
-transform = Transform( 1, 1.77295e-10, 0, 5.39274e-10, 1, -4.65661e-10, 2.91038e-10, -4.65661e-10, 1, -0.00105671, -0.655451, 4.81077 )
+transform = Transform( 1, 1.18916e-10, 5.82077e-11, 6.55689e-10, 1, -4.65661e-10, 2.91038e-10, -4.65661e-10, 1, -0.00105671, -0.655451, 4.81077 )
 enabled = true
 cast_to = Vector3( 0, 0, 20 )
 collision_mask = 292
 
 [node name="RayFR" type="RayCast" parent="."]
-transform = Transform( 1, 2.71255e-07, 5.75674e-08, -2.71171e-07, 1, -9.70904e-08, -5.75092e-08, 9.70904e-08, 1, -3, 0.8, 8 )
+transform = Transform( 1, 2.70614e-07, 5.75674e-08, -2.70589e-07, 1, -9.63919e-08, -5.75092e-08, 9.63919e-08, 1, -3, 0.8, 8 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292
@@ -448,7 +452,7 @@ material/0 = ExtResource( 1 )
 transform = Transform( 1, 2.05701e-08, -1.85682e-08, -2.05223e-08, 1, 1.44355e-08, 1.90921e-08, -1.44355e-08, 1, -0.00278616, -4.17923, -0.00447226 )
 
 [node name="RayBR" type="RayCast" parent="."]
-transform = Transform( 1, 2.73463e-07, 5.82077e-08, -2.73382e-07, 1, -9.15024e-08, -5.81495e-08, 9.16189e-08, 1, -7, 0.8, -9 )
+transform = Transform( 1, 2.72823e-07, 5.82077e-08, -2.728e-07, 1, -9.1386e-08, -5.81495e-08, 9.1386e-08, 1, -7, 0.8, -9 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292
@@ -462,7 +466,7 @@ material/0 = ExtResource( 1 )
 transform = Transform( 1, 2.05701e-08, -1.85682e-08, -2.05223e-08, 1, 1.44355e-08, 1.90921e-08, -1.44355e-08, 1, -0.00278616, -4.17923, -0.00447226 )
 
 [node name="RayBL" type="RayCast" parent="."]
-transform = Transform( 1, 2.72999e-07, 5.67525e-08, -2.72918e-07, 1, -9.35979e-08, -5.66943e-08, 9.35979e-08, 1, 7, 0.8, -9 )
+transform = Transform( 1, 2.72358e-07, 5.67525e-08, -2.72336e-07, 1, -9.28994e-08, -5.66943e-08, 9.28994e-08, 1, 7, 0.8, -9 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 292

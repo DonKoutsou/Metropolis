@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Skampo/Skampo.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Skampo/M_Skampo.tres" type="Material" id=2]
 [ext_resource path="res://Scripts/SittingThing.cs" type="Script" id=3]
+[ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=4]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.762446, 0.900846, 0.741731 )
@@ -22,3 +23,6 @@ shape = SubResource( 1 )
 
 [node name="SittingPosition2" type="Position3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00925004, 1.80579, 0.00297302 )
+
+[node name="ActionComponent" parent="." instance=ExtResource( 4 )]
+ActionDistance = 5.0

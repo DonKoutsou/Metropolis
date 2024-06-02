@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Assets/Clutter/BoneFire/Fireplace.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Clutter/BoneFire/FireplaceMat.tres" type="Material" id=2]
 [ext_resource path="res://Scripts/FireplaceLight.cs" type="Script" id=3]
 [ext_resource path="res://Assets/Sounds/Torch_Sound.mp3" type="AudioStream" id=4]
+[ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=5]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1.37293, 0.547474, 1.36897 )
@@ -83,3 +84,6 @@ omni_range = 10.248
 stream = ExtResource( 4 )
 unit_db = 4.0
 area_mask = 0
+
+[node name="ActionComponent" parent="." instance=ExtResource( 5 )]
+ActionDistance = 5.0

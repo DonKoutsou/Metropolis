@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/Characters/NPC.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/CharacterSoundManager.cs" type="Script" id=2]
 [ext_resource path="res://Scenes/Characters/Gen3Machine/Body.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Sounds/PunchSound.mp3" type="AudioStream" id=8]
 [ext_resource path="res://Assets/Sounds/HeavyBreathing.mp3" type="AudioStream" id=9]
 [ext_resource path="res://Assets/Sounds/WalkingSound.mp3" type="AudioStream" id=10]
@@ -13,9 +14,9 @@ height = 5.16563
 [sub_resource type="CylinderShape" id=7]
 radius = 0.1
 
-[node name="Character" type="KinematicBody" groups=["player"]]
+[node name="Character" type="KinematicBody" groups=["Interactables", "player"]]
 pause_mode = 1
-collision_layer = 9
+collision_layer = 4105
 collision_mask = 55
 script = ExtResource( 1 )
 lines = [  ]
@@ -60,5 +61,7 @@ area_mask = 0
 
 [node name="TalkPosition" type="Position3D" parent="."]
 transform = Transform( -7.7783, 0, -1.17449e-06, 0, 7.7783, 0, 1.17449e-06, 0, -7.7783, 0, 0.5, 6 )
+
+[node name="ActionComponent" parent="." instance=ExtResource( 4 )]
 
 [connection signal="body_entered" from="KillFieldDetector" to="." method="OnKillFieldDetectorBodyEntered"]

@@ -3,47 +3,46 @@ using Godot.Collections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
+
+////////////////////////////////////////////////
+/*
+██████╗ ██╗      █████╗ ██╗   ██╗███████╗██████╗ 
+██╔══██╗██║     ██╔══██╗╚██╗ ██╔╝██╔════╝██╔══██╗
+██████╔╝██║     ███████║ ╚████╔╝ █████╗  ██████╔╝
+██╔═══╝ ██║     ██╔══██║  ╚██╔╝  ██╔══╝  ██╔══██╗
+██║     ███████╗██║  ██║   ██║   ███████╗██║  ██║
+╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝
+*/
+////////////////////////////////////////////////                                      
+
+
 public class Player : Character
 {
-	
+	////// Energy ///////
+	//Consumption curve
 	[Export]
 	Curve Consumption = null;
-
-	
-
-	//Stamina_Bar Stamina_bar = null;
-
-	//HP_Bar hp_bar = null;
-
-	//DialoguePanel DiagPan;
-
+	////// Rpm to base consumption on /////
+	public float rpm;
+	//Node Used to show where player is moving
 	MoveLocation moveloc;
-
+	//Toggle that makes character follow cursor without having to rightclick. Keybinding [TAB]
 	bool Autowalk = false;
-
 	public bool IsRunning = false;
 
-	ActionMenu actMen;
-
-	public float rpm;
+	Camera DialogueCam;
 
 	static Player instance;
-
-	Camera DialogueCam;
 	
 	public static Player GetInstance()
 	{
 		return instance;
 	}
-	[Export(PropertyHint.Layers3dPhysics)]
-	public uint SelectLayer { get; set; }
-
-	
 	public float GetCurrentEnergy()
 	{
 		return CurrentEnergy;
 	}
-	
 	public void Teleport(Vector3 pos)
 	{
 		GlobalTranslation = pos;
@@ -55,31 +54,15 @@ public class Player : Character
 	{
 		return HasVecicle;
 	}
-	
 	public override void _Ready()
 	{
 		base._Ready();
 
 		instance = this;
-		
-		Spatial plUI = GetNode<Spatial>("PlayerUI");
-		actMen = plUI.GetNode<ActionMenu>("ActionMenu");
-		
-		//var panels = GetTree().GetNodesInGroup("DialoguePanel");
-		//DiagPan = (DialoguePanel)panels[0];
 
 		moveloc = GetNode<MoveLocation>("MoveLoc");
-
-		
-		MainWorld world = (MainWorld)GetParent().GetParent();
-		MyWorld w = (MyWorld)GetParent();
 		
 		DialogueCam = GetNode<Spatial>("DialogueCameraPivot").GetNode<Camera>("DialogueCamera");
-		//Input.MouseMode = Input.MouseModeEnum.Visible;
-		//hp_bar = plUI.GetNode<HP_Bar>("HP_Bar");
-		//hp_bar.MaxValue = m_HP;
-		//Stamina_bar = plUI.GetNode<Stamina_Bar>("Stamina_Bar");
-		//Stamina_bar.MaxValue = m_Stamina;
 	}
 	private void UpdateMoveLocation()
 	{
@@ -121,7 +104,6 @@ public class Player : Character
 				moveloc.Show();
 			}
 		}
-		
 	}
 	bool ExpressedNoBatteries = false;
 	bool ExpressedLowBattery = false;
@@ -133,7 +115,6 @@ public class Player : Character
 		{
 			UpdateMoveLocation();
 		}
-
 		List<Item> batteries;
 		CharacterInventory.GetItemsByType(out batteries, ItemName.BATTERY);
 
@@ -159,7 +140,6 @@ public class Player : Character
 				ExpressedNoBatteries = true;
 			}
 		}
-
     }
     public override void _PhysicsProcess(float delta)
 	{
@@ -179,7 +159,6 @@ public class Player : Character
 
 		var direction = loctomove - GlobalTransform.origin;
 
-		
 		float dist = new Vector2(loctomove.x, loctomove.z).DistanceTo(new Vector2( GlobalTransform.origin.x, GlobalTransform.origin.z));
 
 		if (HasVecicle)
@@ -211,7 +190,6 @@ public class Player : Character
 		}
 		else
 		{
-			
 			if (dist < 1)
 			{
 				AudioStreamPlayer3D walk = CharacterSoundManager.GetSound("Walk");
@@ -279,6 +257,8 @@ public class Player : Character
 			if (!ExpressedLowBattery)
 			{
 				TalkText.GetInst().Talk("Θα ξεμείνω από μπαταρία σε λίγο. Δεν νιώθω καλά.", this);
+				ScreenEffects ui = (ScreenEffects)PlayerUI.GetInstance().GetUI(PlayerUIType.SCREENEFFECTS);
+				ui.PlayEffect(ScreenEffectTypes.DAMAGE);
 				ExpressedLowBattery = true;
 			}
 		}
@@ -286,23 +266,6 @@ public class Player : Character
 		{
 			ExpressedLowBattery = false;
 		}
-		//List<Item> batteries;
-		//CharacterInventory.GetItemsByType(out batteries, ItemName.BATTERY);
-		
-		//for (int i = batteries.Count() -1; i > -1; i--)
-		//{
-		//	if (((Battery)batteries[i]).GetCurrentCap() < coons)
-		//	{
-		//		batteries.RemoveAt(i);
-		//	}
-		//}
-		//if (batteries.Count() > 0)
-		//{
-		//	float rechargeammount = Math.Min( GetCharacterBatteryCap() - GetCurrentCharacterEnergy() , 0.1f);
-		//	((Battery)batteries[0]).ConsumeEnergy(rechargeammount);
-		//	RechargeCharacter(rechargeammount);
-		//}
-		/////////////////////////////////////////////
 
 		// Moving the character
 		if (!HasVecicle)
@@ -345,44 +308,16 @@ public class Player : Character
 		}
 		if (@event.IsActionPressed("AutoWalk"))
 		{
-			if (Autowalk)
-				Autowalk = false;
-			else
-				Autowalk = true;
+			Autowalk = !Autowalk;
 		}
 		if (@event.IsActionPressed("Run"))
 		{
 			if (!HasVecicle)
 			{
-				if (IsRunning)
-					IsRunning = false;
-				else
-					IsRunning = true;
+				IsRunning = !IsRunning;
 			}
-			
 		}
-		if (@event.IsActionPressed("Select"))
-		{
-			var spacestate = GetWorld().DirectSpaceState;
-			Vector2 mousepos = GetViewport().GetMousePosition();
-			Camera cam = GetTree().Root.GetCamera();
-			Vector3 rayor = cam.ProjectRayOrigin(mousepos);
-			Vector3 rayend = rayor + cam.ProjectRayNormal(mousepos) * 10000;
-			var rayar = spacestate.IntersectRay(rayor, rayend, new Godot.Collections.Array { this }, SelectLayer);
-			//if ray finds nothiong return
-			if (rayar.Count == 0)
-			{
-				actMen.Stop();
-				return;
-			}
-			Spatial obj = (Spatial)rayar["collider"];
-			if (obj.GlobalTransform.origin.DistanceTo(GlobalTransform.origin) > 100)
-			{
-				actMen.Stop();
-				return;
-			}
-			actMen.Start(obj);
-		}
+		
 		if (@event.IsActionPressed("Inventory"))
 		{
 			InventoryUI inv = InventoryUI.GetInstance();
@@ -447,7 +382,6 @@ public class Player : Character
 
 			CharacterInventory.DeleteItem(bats[0]);
 		}
-		
 	}
 	public void EndDialogue(string timeline_name)
 	{

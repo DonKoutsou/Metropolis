@@ -3,15 +3,17 @@ using System;
 
 public class CityNameUI : Control
 {
-    static Label lab;
-    static AnimationPlayer Apl;
+    [Export]
+    NodePath AnimationNode = null;
+    Label lab;
+    AnimationPlayer Apl;
     public override void _Ready()
     {
         base._Ready();
         lab = GetNode<Label>("Label2");
-        Apl = GetNode<AnimationPlayer>("AnimationPlayer");
+        Apl = GetNode<AnimationPlayer>(AnimationNode);
     }
-    public static void ShowName(string Name)
+    public void ShowName(string Name)
     {
         lab.Text = Name;
         Apl.Play("Show");

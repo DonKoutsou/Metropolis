@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Clock.cs" type="Script" id=1]
 [ext_resource path="res://Assets/Battery/M_Battery.material" type="Material" id=2]
 [ext_resource path="res://Assets/Battery/Battery.tres" type="ArrayMesh" id=3]
 [ext_resource path="res://Assets/Battery/BatteryIcon.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CylinderShape" id=1]
 height = 0.054156
@@ -29,3 +30,6 @@ mesh = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )
+
+[node name="ActionComponent" parent="." instance=ExtResource( 5 )]
+ActionDistance = 5.0

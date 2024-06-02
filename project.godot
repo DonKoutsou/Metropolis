@@ -331,10 +331,12 @@ common/enable_pause_aware_picking=true
 
 threads/thread_model=2
 quality/shadows/filter_mode=2
+quality/reflections/high_quality_ggx=false
 quality/subsurface_scattering/quality=0
 environment/default_clear_color=Color( 1, 1, 1, 1 )
 quality/filters/msaa=2
 quality/filters/use_fxaa=true
+quality/depth/use_32_bpc_depth=true
 environment/default_environment="res://new_environment2.tres"
 quality/godrays/sample_number=50
 quality/godrays/use_pcf5=true

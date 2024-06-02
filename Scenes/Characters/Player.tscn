@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/HUD/SplashScreenPanelTheme.tres" type="StyleBox" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Assets/Sounds/WalkingSound.mp3" type="AudioStream" id=10]
 [ext_resource path="res://Scripts/CharacterSoundManager.cs" type="Script" id=11]
 [ext_resource path="res://Scripts/CameraZoomPivot.cs" type="Script" id=12]
+[ext_resource path="res://Scripts/PlayerUI.cs" type="Script" id=13]
 [ext_resource path="res://Scripts/CameraPanPivot.cs" type="Script" id=14]
 [ext_resource path="res://Scripts/CameraMovePivot.cs" type="Script" id=15]
 [ext_resource path="res://Scenes/Characters/MoveLocation.tscn" type="PackedScene" id=16]
@@ -19,6 +20,7 @@
 [ext_resource path="res://Scripts/Time_UI.cs" type="Script" id=18]
 [ext_resource path="res://Scripts/TalkText.cs" type="Script" id=19]
 [ext_resource path="res://Scripts/PlayerCamera.cs" type="Script" id=20]
+[ext_resource path="res://Scripts/ScreenEffects.cs" type="Script" id=21]
 [ext_resource path="res://Scenes/HUD/ActionMenu.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Scenes/Items/Battery.tscn" type="PackedScene" id=25]
 [ext_resource path="res://Scenes/Items/Clock.tscn" type="PackedScene" id=27]
@@ -59,6 +61,22 @@ use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 3 )
 
+[sub_resource type="Animation" id=124]
+resource_name = "Damage"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("../ScreenEffects/DamageColor:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 1, 2, 6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.623529, 0.172549, 0.172549, 0 ), Color( 0.623529, 0.172549, 0.172549, 0.298039 ), Color( 0.623529, 0.172549, 0.172549, 0 ), Color( 0.623529, 0.172549, 0.172549, 0.509804 ), Color( 0.623529, 0.172549, 0.172549, 0 ) ]
+}
+
 [sub_resource type="Animation" id=123]
 length = 0.001
 tracks/0/type = "value"
@@ -84,6 +102,18 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../ScreenEffects/DamageColor:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.623529, 0.172549, 0.172549, 0 ) ]
 }
 
 [sub_resource type="Animation" id=122]
@@ -112,37 +142,6 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
-}
-
-[sub_resource type="Animation" id=124]
-resource_name = "Damage"
-length = 6.0
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 1, 2, 3, 6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 0.623529, 0.172549, 0.172549, 0 ), Color( 0.623529, 0.172549, 0.172549, 0.623529 ), Color( 0.623529, 0.172549, 0.172549, 0.117647 ), Color( 0.623529, 0.172549, 0.172549, 0.623529 ), Color( 0.623529, 0.172549, 0.172549, 0.117647 ), Color( 0.623529, 0.172549, 0.172549, 0 ) ]
-}
-
-[sub_resource type="Animation" id=125]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 0.623529, 0.172549, 0.172549, 0 ) ]
 }
 
 [sub_resource type="SphereShape" id=116]
@@ -413,7 +412,6 @@ collision_mask = 311
 script = ExtResource( 1 )
 JumpImpulse = 30
 RunSpeed = 30
-SelectLayer = 17
 Consumption = SubResource( 106 )
 
 [node name="Pivot" type="Spatial" parent="."]
@@ -445,6 +443,12 @@ Capacity = 40.0
 StartingItems = [ ExtResource( 25 ), ExtResource( 27 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 33 ), ExtResource( 34 ) ]
 
 [node name="PlayerUI" type="Spatial" parent="."]
+script = ExtResource( 13 )
+CityNameUI = NodePath("CityNameUI")
+TalkText = NodePath("TalkText")
+ActionMenu = NodePath("ActionMenu")
+ScreenEffects = NodePath("ScreenEffects")
+CheatMenu = NodePath("CheatMenu")
 
 [node name="Time_UI" type="RichTextLabel" parent="PlayerUI"]
 visible = false
@@ -491,6 +495,7 @@ margin_top = 162.0
 margin_right = 20.0
 margin_bottom = 202.0
 script = ExtResource( 5 )
+AnimationNode = NodePath("../UIAnimation")
 
 [node name="Label2" type="Label" parent="PlayerUI/CityNameUI"]
 modulate = Color( 1, 1, 1, 0 )
@@ -529,25 +534,30 @@ rect_clip_content = true
 mouse_filter = 2
 custom_styles/panel = ExtResource( 2 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerUI/CityNameUI"]
-anims/RESET = SubResource( 123 )
-anims/Show = SubResource( 122 )
+[node name="ScreenEffects" type="Control" parent="PlayerUI"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 21 )
+AnimationPlayer = NodePath("../UIAnimation")
 
-[node name="DamageColor" type="ColorRect" parent="PlayerUI"]
+[node name="DamageColor" type="ColorRect" parent="PlayerUI/ScreenEffects"]
 show_behind_parent = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -1024.0
-margin_top = -600.0
-margin_right = 1024.0
-margin_bottom = 600.0
+margin_left = -84.0
+margin_top = -80.0
+margin_right = 1964.0
+margin_bottom = 1120.0
+mouse_filter = 2
 color = Color( 0.623529, 0.172549, 0.172549, 0 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerUI/DamageColor"]
+[node name="UIAnimation" type="AnimationPlayer" parent="PlayerUI"]
+root_node = NodePath("../CityNameUI")
 anims/Damage = SubResource( 124 )
-anims/RESET = SubResource( 125 )
+anims/RESET = SubResource( 123 )
+anims/Show = SubResource( 122 )
 
 [node name="CameraMovePivot" type="Position3D" parent="."]
 pause_mode = 1
@@ -559,7 +569,7 @@ transform = Transform( 0.999998, 0, 0, 0, 1, 0, 0, 0, 0.999998, 0, 7.12469, 0.35
 current = true
 
 [node name="CameraPanPivot" type="Position3D" parent="CameraMovePivot"]
-transform = Transform( 0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 20, 0 )
+transform = Transform( 0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 14, 0 )
 script = ExtResource( 14 )
 
 [node name="SpringArm" type="SpringArm" parent="CameraMovePivot/CameraPanPivot"]
@@ -573,7 +583,7 @@ margin = 0.5
 transform = Transform( 1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0, 0, 40 )
 script = ExtResource( 12 )
 Speed = 5
-MaxDist = 150.0
+MaxDist = 250.0
 
 [node name="CameraPanXPivot" type="Position3D" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot"]
 transform = Transform( 1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0 )

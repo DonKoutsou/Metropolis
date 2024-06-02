@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Clutter/Rock/Rock.obj" type="ArrayMesh" id=2]
@@ -11,7 +11,6 @@
 [ext_resource path="res://Scenes/Env_Assets/CylinderThing.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Env_Assets/Antena2.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Env_Assets/WindGenerator.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Scenes/Env_Assets/PlatformWood.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Env_Assets/Rock2.tscn" type="PackedScene" id=13]
 
 [sub_resource type="MultiMesh" id=2]
@@ -52,23 +51,29 @@ transform = Transform( -0.614739, 0, 0.78873, 0, 1, 0, -0.78873, 0, -0.614739, 4
 [node name="StaticBody3" parent="." index="8" instance=ExtResource( 10 )]
 transform = Transform( 108.719, 49.5292, -0.583832, -14.3049, 30.0476, -114.743, -47.4221, 104.486, 33.2737, -584.823, -786.344, -1341.19 )
 
-[node name="StaticBody4" parent="." index="9" instance=ExtResource( 12 )]
-transform = Transform( 0.843251, 0, -0.53752, 0, 1, 0, 0.53752, 0, 0.843251, 45.4721, -30.579, -564.13 )
-
-[node name="StaticBody5" parent="." index="10" instance=ExtResource( 7 )]
+[node name="StaticBody5" parent="." index="9" instance=ExtResource( 7 )]
 transform = Transform( -0.590056, 0, 0.807362, 0, 1, 0, -0.807362, 0, -0.590056, 370.352, -22.2993, -1223.36 )
 
-[node name="WindGenerator" parent="." index="11" instance=ExtResource( 11 )]
+[node name="WindGenerator" parent="." index="10" instance=ExtResource( 11 )]
 transform = Transform( 0.173205, 0, -0.1, 0, 0.2, 0, 0.1, 0, 0.173205, 125.524, 126.98, -1126.73 )
 
-[node name="Rock1" parent="." index="12" instance=ExtResource( 6 )]
+[node name="Rock1" parent="." index="11" instance=ExtResource( 6 )]
 transform = Transform( 349.739, 0, 0, 0, 307.009, -167.519, 0, 167.519, 307.009, -1772.12, -576.583, 0 )
 
-[node name="Rock2" parent="." index="13" instance=ExtResource( 6 )]
+[node name="Rock2" parent="." index="12" instance=ExtResource( 6 )]
 transform = Transform( 327.15, -80.3001, 94.0307, 31.9923, 311.868, 155.021, -119.442, -136.408, 299.071, 2151.8, -497.95, -1620.48 )
 
-[node name="Rock3" parent="." index="14" instance=ExtResource( 6 )]
+[node name="Rock3" parent="." index="13" instance=ExtResource( 6 )]
 transform = Transform( 327.15, -80.3001, 94.0307, 118.746, 278.193, -175.57, -34.4842, 196.157, 287.49, 685.335, -561.906, 1666.89 )
 
-[node name="Rock4" parent="." index="15" instance=ExtResource( 13 )]
+[node name="Rock4" parent="." index="14" instance=ExtResource( 13 )]
 transform = Transform( -113.898, 0, 167.74, 0, 202.754, 0, -167.74, 0, -113.898, 285.047, -123.356, -1124.06 )
+
+[node name="Position3D" type="Position3D" parent="CharacterSpawnLocations" index="0"]
+transform = Transform( 0.172239, 0, 0.985055, 0, 1, 0, -0.985055, 0, 0.172239, 329.198, 4.87853, -1230.7 )
+
+[node name="Position3D2" type="Position3D" parent="CharacterSpawnLocations" index="1"]
+transform = Transform( 0.172239, 0, 0.985055, 0, 1, 0, -0.985055, 0, 0.172239, -1665.87, 6.12672, -461.095 )
+
+[node name="Position3D" type="Position3D" parent="VehicleSpawnLocation" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1769.83, 2.9972, -413.369 )
