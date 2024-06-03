@@ -209,7 +209,7 @@ public class MyWorld : Spatial
 			//MapGrid.GetInstance().OnIslandVisited(info);
 		for (int i = 0; i < closestfrom.Count; i ++)
 		{
-			if (closestfrom[i] == to)
+			/*if (closestfrom[i] == to)
 				continue;
 			if (closestto.Contains(closestfrom[i]))
 				continue;
@@ -221,14 +221,32 @@ public class MyWorld : Spatial
 
 				if (Orderedilestoenable.Contains(closestfrom[i]))
 					Orderedilestoenable.Remove(closestfrom[i]);
+			}*/
+			if (closestto.Contains(closestfrom[i]) || closestfrom[i] == to)
+			{
+				continue;
+			}
+			else
+			{
+				if (!ilestodissable.Contains(closestfrom[i]))
+				{
+					ilestodissable.Insert(ilestodissable.Count, closestfrom[i]);
+
+					if (Orderedilestoenable.Contains(closestfrom[i]))
+						Orderedilestoenable.Remove(closestfrom[i]);
+				}
 			}
 		}
 		for (int i = 0; i < closestto.Count; i ++)
 		{
+			if (closestfrom.Contains(closestfrom[i]) || closestto[i] == from)
+			{
+				continue;
+			}
 			if (!ilestoenable.Contains(closestto[i]) )
 				ilestoenable.Insert(ilestoenable.Count, closestto[i]);
-			if (ilestodissable.Contains(closestto[i]))
-				ilestodissable.Remove(closestto[i]);
+			//if (ilestodissable.Contains(closestto[i]))
+				//ilestodissable.Remove(closestto[i]);
 			if (Orderedilestodissable.Contains(closestto[i]))
 				Orderedilestodissable.Remove(closestto[i]);
 		}

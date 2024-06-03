@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
+[Tool]
 public partial class UniversalLodManager : Node
 {
   private static UniversalLodManager _instance;

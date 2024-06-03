@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+[Tool]
 public class LoddedObject : MeshInstance
 {   
     [Export]
@@ -8,7 +9,7 @@ public class LoddedObject : MeshInstance
 
     [Export]
     Mesh LOD1 = null;
-    public override void _Ready()
+    public override void _EnterTree()
     {
         AddToGroup("LODDEDOBJ");
     }

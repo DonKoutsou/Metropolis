@@ -4,10 +4,10 @@ using System;
 public class CameraPanPivot : Position3D
 {
 	//SpringArm
-	SpringArm zpivot;
-	CameraZoomPivot Zoom;
+	SpringArm SpringArm;
+	CameraZoomPivot ZoomPivot;
 	Position3D PanXPivot;
-	public Vector3 caminitpos;
+	public Vector3 CameraInitialPosition;
 	static CameraPanPivot instance;
 
 	InventoryUI inv;
@@ -20,12 +20,12 @@ public class CameraPanPivot : Position3D
 		//store instane
 		instance = this;
 
-		zpivot = GetNode<SpringArm>("SpringArm");
-		Zoom = zpivot.GetNode<CameraZoomPivot>("CameraZoomPivot");
-		PanXPivot = zpivot.GetNode<CameraZoomPivot>("CameraZoomPivot").GetNode<Position3D>("CameraPanXPivot");
+		SpringArm = GetNode<SpringArm>("SpringArm");
+		ZoomPivot = SpringArm.GetNode<CameraZoomPivot>("CameraZoomPivot");
+		PanXPivot = SpringArm.GetNode<CameraZoomPivot>("CameraZoomPivot").GetNode<Position3D>("CameraPanXPivot");
 
 		//store initial translation to snap back if needed
-		caminitpos = zpivot.Translation;
+		CameraInitialPosition = SpringArm.Translation;
 		
 		
 		inv = InventoryUI.GetInstance();
@@ -46,6 +46,7 @@ public class CameraPanPivot : Position3D
 
 		}
     }
+	float YOffset = 0;
 	public override void _Process(float delta)
 	{
 		if (inv.IsOpen)
@@ -54,48 +55,53 @@ public class CameraPanPivot : Position3D
 		Vector3 rot = new Vector3(PanXPivot.Rotation.x ,Rotation.y, 0);
 		Vector2 mousepos = GetViewport().GetMousePosition();
 		Vector2 screensize = GetViewport().Size;
-		Vector2 amm = screensize/7;
+		Vector2 ammx = screensize/3;
+		Vector2 ammy = screensize/6;
 		Vector2 pan = new Vector2();
-		if (mousepos.x < amm.x)
+
+		if (mousepos.x < ammx.x)
 		{
-			float ammount = amm.x - mousepos.x;
+			float ammount = ammx.x - mousepos.x;
 			rot.y += 0.00005f * ammount;
 			pan += new Vector2(-ammount * 0.02f, 0);
 			//Pan(new Vector2(-ammount * 0.05f, 0));
 		}
-		if (mousepos.x > screensize.x - amm.x)
+		if (mousepos.x > screensize.x - ammx.x)
 		{
-			float ammount = amm.x -(screensize.x - mousepos.x);
+			float ammount = ammx.x -(screensize.x - mousepos.x);
 			rot.y -= 0.00005f * ammount;
 			//Pan(new Vector2(ammount * 0.05f, 0));
 			pan += new Vector2(ammount * 0.02f, 0);
 		}
-        if (mousepos.y > screensize.y - amm.y)
+		//Down
+        if (mousepos.y > screensize.y - ammy.y)
 		{
-			float ammount = amm.y -(screensize.y - mousepos.y);
+			float ammount = ammy.y -(screensize.y - mousepos.y);
+			//limmit for down
 			if (Mathf.Rad2Deg(prevrot.x) > -30)
 			{
 				
-				rot.x -= 0.00003f * ammount;
-				caminitpos.y += ammount * 0.003f;
+				rot.x -= 0.0001f * ammount;
+				YOffset += ammount * 0.1f;
 				//Pan(new Vector2(0, -ammount * 0.01f));
 				
 			}
-			pan += new Vector2(0, -ammount * 0.02f);
+			pan += new Vector2(0, -ammount * 0.4f);
 			
 		}
-		if (mousepos.y < amm.y)
+		//UP
+		if (mousepos.y < ammy.y)
 		{
-			float ammount = amm.y - mousepos.y;
-			if (Mathf.Rad2Deg(prevrot.x) < 5)
+			float ammount = ammy.y - mousepos.y;
+			//limmit for Up
+			if (Mathf.Rad2Deg(prevrot.x) < 10)
 			{
 				
-				rot.x += 0.00003f * ammount;
-				caminitpos.y -= ammount * 0.003f;
+				rot.x += 0.0001f * ammount;
+				YOffset -= ammount * 0.1f;
 				//Pan(new Vector2(0, ammount * 0.01f));
-				
 			}
-			pan += new Vector2(0, ammount * 0.05f);
+			pan += new Vector2(0, ammount * 0.4f);
 			
         }
 		// might put it back
@@ -133,13 +139,16 @@ public class CameraPanPivot : Position3D
 			PanXPivot.Rotation = new Vector3(rot.x, 0, 0);
 		}
 		//pan.x  *= Zoom.GetZoomNormalised();
-		Pan(pan * Zoom.GetZoomNormalised());
+		//Pan(pan * ZoomPivot.GetZoomNormalised());
+		Vector3 sptrans = CameraInitialPosition;
+		sptrans.y += YOffset * ZoomPivot.GetZoomNormalised();
+		SpringArm.Translation = sptrans;
 		
 	}
 	private void Pan(Vector2 Pan)
 	{
         Vector3 offset = new Vector3(Pan.x, Pan.y, 0);
-		zpivot.Translation = caminitpos + offset;
+		SpringArm.Translation = CameraInitialPosition + offset;
 	}
     
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/HUD/SplashScreenPanelTheme.tres" type="StyleBox" id=2]
@@ -400,6 +400,11 @@ tracks/5/keys = {
 "values": [ true ]
 }
 
+[sub_resource type="CubeMesh" id=125]
+
+[sub_resource type="SpatialMaterial" id=126]
+albedo_color = Color( 1, 0, 0, 1 )
+
 [sub_resource type="SpatialMaterial" id=120]
 render_priority = 1
 flags_transparent = true
@@ -569,18 +574,18 @@ transform = Transform( 0.999998, 0, 0, 0, 1, 0, 0, 0, 0.999998, 0, 7.12469, 0.35
 current = true
 
 [node name="CameraPanPivot" type="Position3D" parent="CameraMovePivot"]
-transform = Transform( 0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 14, 0 )
+transform = Transform( 0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 6.52882, 0 )
 script = ExtResource( 14 )
 
 [node name="SpringArm" type="SpringArm" parent="CameraMovePivot/CameraPanPivot"]
 transform = Transform( 0.999999, 0, 5.32907e-15, 0, 1, 0, -5.32907e-15, 0, 0.999999, 0, 0, 0 )
 collision_mask = 4
 shape = SubResource( 116 )
-spring_length = 40.0
+spring_length = 20.0
 margin = 0.5
 
 [node name="CameraZoomPivot" type="Position3D" parent="CameraMovePivot/CameraPanPivot/SpringArm"]
-transform = Transform( 1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0, 0, 40 )
+transform = Transform( 1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0, 0, 20 )
 script = ExtResource( 12 )
 Speed = 5
 MaxDist = 250.0
@@ -589,7 +594,7 @@ MaxDist = 250.0
 transform = Transform( 1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0 )
 
 [node name="PlayerCamera" type="Camera" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot"]
-transform = Transform( 1, 0, 0, 0, 0.984808, 0.173649, 0, -0.173648, 0.98481, 0, 0, 0 )
+transform = Transform( 1, -3.76824e-15, -1.56085e-15, 3.76823e-15, 1, -1.2219e-06, 1.56086e-15, 1.2219e-06, 1, 0, 0, 0 )
 cull_mask = 769
 current = true
 fov = 45.0
@@ -614,10 +619,19 @@ anims/FadeOutDialogue = SubResource( 119 )
 anims/RESET = SubResource( 111 )
 script = ExtResource( 35 )
 
+[node name="MeshInstance" type="MeshInstance" parent="CameraMovePivot/CameraPanPivot/SpringArm"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.00321 )
+mesh = SubResource( 125 )
+material/0 = SubResource( 126 )
+
 [node name="RemoteTransform" type="RemoteTransform" parent="CameraMovePivot/CameraPanPivot"]
 remote_path = NodePath("../../Listener")
 update_position = false
 update_scale = false
+
+[node name="MeshInstance" type="MeshInstance" parent="CameraMovePivot/CameraPanPivot"]
+mesh = SubResource( 125 )
+material/0 = SubResource( 126 )
 
 [node name="MoveLoc" parent="." instance=ExtResource( 16 )]
 

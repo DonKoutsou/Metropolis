@@ -17,6 +17,11 @@ public class DayNight : WorldEnvironment
     [Export]
     Curve softlightnesscurve = null;
     [Export]
+    Curve SunGodRayCurve = null;
+
+    [Export]
+    Curve MoonGodRayCurve = null;
+    [Export]
     Curve sunrotcurve = null;
 
     [Export]
@@ -24,6 +29,8 @@ public class DayNight : WorldEnvironment
 
     [Export]
     Gradient MoonColorGradient = null;
+
+    
 
     [Export]
     int startinghour = 10;
@@ -36,8 +43,8 @@ public class DayNight : WorldEnvironment
     [Export]
     Curve WindStreangthCurve = null;
 
-    //[Export]
-    //Curve RainStreangthCurve = null;
+    [Export]
+    Curve RainStreangthCurve = null;
 
     [Signal]
     public delegate void DayEventHandler();
@@ -56,8 +63,9 @@ public class DayNight : WorldEnvironment
     static float Raintreangth = 100;
 
     DirectionalLight sun;
+    Node SunGodRays;
     DirectionalLight moon;
-
+    Node MoonGodRays;
     static bool day = true;
 
     public SunMoonPivot SunMoonMeshPivot;
@@ -101,11 +109,11 @@ public class DayNight : WorldEnvironment
     }
     private void UpdateRain()
     {
-        //float value = currentDay + ((currenthour  + (currentmins / 60))/ 24);
-        //while (value > 10)
-            //value -= 10;
-        //Raintreangth = RainStreangthCurve.Interpolate(value/ 10);
-        Raintreangth = 0;
+        float value = currentDay + ((currenthour  + (currentmins / 60))/ 24);
+        while (value > 10)
+            value -= 10;
+        Raintreangth = RainStreangthCurve.Interpolate(value/ 10);
+        //Raintreangth = 0;
     }
     private void UpdateCurveValues()
     {
@@ -129,8 +137,10 @@ public class DayNight : WorldEnvironment
 
         SunColor = SunColorGradient.Interpolate(HourValue);
         //SunColor = new Color(sunRcolorcurve.Interpolate(HourValue) , sunGcolorcurve.Interpolate(HourValue), sunBcolorcurve.Interpolate(HourValue));
+        SunGodRayBrightness = SunGodRayCurve.Interpolate(HourValue);
         MoonColor = MoonColorGradient.Interpolate(HourValue);
         //MoonColor = new Color(moonRcolorcurve.Interpolate(HourValue) , moonGcolorcurve.Interpolate(HourValue), moonBcolorcurve.Interpolate(HourValue));
+        MoonGodRayBrightness = MoonGodRayCurve.Interpolate(HourValue);
     }
     private void ToggleDay(int Phase)
     {
@@ -325,7 +335,9 @@ public class DayNight : WorldEnvironment
     float Softlight;
     float SunRot;
     Color SunColor;
+    float SunGodRayBrightness;
     Color MoonColor;
+    float MoonGodRayBrightness;
     public override void _Process(float delta)
     {
         base._Process(delta);
@@ -345,7 +357,11 @@ public class DayNight : WorldEnvironment
 
         sun.LightColor = SunColor;
 
+        SunGodRays.Set("exposure", SunGodRayBrightness);
+
         moon.LightColor = MoonColor;
+
+        MoonGodRays.Set("exposure", MoonGodRayBrightness);
 
         if (SunMoonMeshPivot != null)
         {
@@ -453,6 +469,8 @@ public class DayNight : WorldEnvironment
         currentDay = rand.Next(0, 10);
         sun = GetParent().GetNode<DirectionalLight>("Sun");
         moon = GetParent().GetNode<DirectionalLight>("Moon");
+        SunGodRays = sun.GetNode("GodRays");
+        MoonGodRays = moon.GetNode("GodRays");
         timeprogmultiplier = Settings.GetGameSettings().TimeProgression;
         Environment.FogEnabled = true;
     }

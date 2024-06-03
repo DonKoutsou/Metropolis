@@ -282,7 +282,7 @@ public class Vehicle : RigidBody
                     part.Emitting = true;
                     //Flame.Emitting = true;
                     float particleoffset = dist;
-                    if (((StaticBody)collisionobj).Name == "SeaBed")
+                    if (((Node)collisionobj).Name == "SeaBed")
                         particleoffset -= 4;
                     part.Translation = new Vector3(part.Translation.x, - particleoffset, part.Translation.z);
                 }

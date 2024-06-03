@@ -113,7 +113,14 @@ public class Character : KinematicBody
 
 		if (this is Player)
 			return;
-		Island ile = (Island)GetParent();
+		Node par = GetParent();
+		while (!(par is Island))
+		{
+            if (par == null)
+				return;
+			par = par.GetParent();
+		}
+		Island ile = (Island)par;
 		ile.RegisterChild(this);
 	}
 	public Character_Animations Anims()

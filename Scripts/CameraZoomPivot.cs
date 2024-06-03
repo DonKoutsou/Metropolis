@@ -40,37 +40,34 @@ public class CameraZoomPivot : Position3D
 	{
 		return panp.Translation.y / MaxDist;
 	}
+	float ZoomStage = 1;
 	public override void _Input(InputEvent @event)
 	{
 		if (MapGrid.GetInstance().IsMouseInMap())
 			return;
 		Vector3 prevpos = panp.Translation;
-		if (@event.IsActionPressed("ZoomOut"))
+		if (@event.IsActionPressed("ZoomOut") && ZoomStage < 19)
 		{
-			if (arm.SpringLength < MaxDist)
-			{
-				PlayerCamera cam = PlayerCamera.GetInstance();
-				if (cam.Fov < MaxFov)
-				{
-					cam.Fov *= 1.02f;
-				}
-				
-				arm.SpringLength = arm.SpringLength * 1.1f;
-				panp.Translation = new Vector3(prevpos.x, prevpos.y * 1.10f, prevpos.z);
-			}
+			ZoomStage += 1;
+			
+			PlayerCamera cam = PlayerCamera.GetInstance();
+			float fovvalue = ZoomStage/ 20;
+			cam.Fov = Mathf.Lerp(25, 75, fovvalue);
+			float value = Mathf.Lerp(5, 220, fovvalue);
+			arm.SpringLength = value;
+			panp.Translation = new Vector3(prevpos.x, value, prevpos.z);
 		}
-		if (@event.IsActionPressed("ZoomIn"))
+		if (@event.IsActionPressed("ZoomIn") && ZoomStage > 0)
 		{
-			if (arm.SpringLength > 50)
-			{
-				PlayerCamera cam = PlayerCamera.GetInstance();
-				if (cam.Fov > MinFov)
-				{
-					cam.Fov *= 0.98f;
-				}
-				arm.SpringLength = arm.SpringLength * 0.90f;
-				panp.Translation = new Vector3(prevpos.x, prevpos.y * 0.90f, prevpos.z);
-			}
+			ZoomStage -= 1;
+
+			PlayerCamera cam = PlayerCamera.GetInstance();
+
+			float fovvalue = ZoomStage/ 20;
+			cam.Fov = Mathf.Lerp(25, 75, fovvalue);
+			float value = Mathf.Lerp(5, 220, fovvalue);
+			arm.SpringLength = value;
+			panp.Translation = new Vector3(prevpos.x, value, prevpos.z);
 		}
 		if (@event.IsActionPressed("FrameCamera"))
 		{

@@ -16,8 +16,8 @@ radius = 0.1
 
 [node name="Character" type="KinematicBody" groups=["Interactables", "player"]]
 pause_mode = 1
-collision_layer = 4105
-collision_mask = 55
+collision_layer = 4104
+collision_mask = 54
 script = ExtResource( 1 )
 lines = [  ]
 Chair = NodePath("")

@@ -566,9 +566,13 @@ public class WorldMap : TileMap
 		float collumn = transform.z - offset;
 		for (int i = 0; i < ammount + 1; i++)
 		{
-			IslandInfo ile;
-			ilemap.TryGetValue(new Vector2(row, collumn), out ile);
-			closeIles.Insert(closeIles.Count, ile);
+			if (new Vector2(row, collumn) != info.pos)
+			{
+				IslandInfo ile;
+				ilemap.TryGetValue(new Vector2(row, collumn), out ile);
+				closeIles.Insert(closeIles.Count, ile);
+			}
+			
 			row += 1;
 			if (row > transform.x + offset)
 			{

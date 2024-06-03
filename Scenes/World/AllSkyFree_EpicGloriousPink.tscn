@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/World/DayNightController.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/SIsilicon.vfx.godrays/GodRays.gd" type="Script" id=2]
@@ -6,6 +6,14 @@
 [sub_resource type="Curve" id=3]
 max_value = 2.0
 _data = [ Vector2( 0, 2 ), 0.0, 0.0, 0, 0, Vector2( 0.38538, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.598246, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 2 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=6]
+max_value = 3.0
+_data = [ Vector2( 0, 0.3 ), 0.0, 0.0, 0, 0, Vector2( 0.0602717, 3 ), 0.0, 0.0, 0, 0, Vector2( 0.2, 0.3 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.3 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=7]
+max_value = 3.0
+_data = [ Vector2( 0, 0.2 ), 0.0, 0.0, 0, 0, Vector2( 0.241935, 3 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.3 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=4]
 offsets = PoolRealArray( 0, 0.250608, 0.274939, 0.352798, 0.372263, 0.653285, 0.755589, 0.883756, 1 )
@@ -27,11 +35,14 @@ _data = [ Vector2( 0, 76.3804 ), 0.0, 0.0, 0, 0, Vector2( 0.0655844, 88.6503 ), 
 
 [node name="DayNightController" parent="." instance=ExtResource( 1 )]
 AutoExposureCurve = SubResource( 3 )
+SunGodRayCurve = SubResource( 6 )
+MoonGodRayCurve = SubResource( 7 )
 SunColorGradient = SubResource( 4 )
 MoonColorGradient = SubResource( 5 )
-startinghour = 7
+startinghour = 8
 WindDirCurve = SubResource( 1 )
 WindStreangthCurve = SubResource( 2 )
+RainStreangthCurve = SubResource( 2 )
 
 [node name="Sun" type="DirectionalLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.0171732, 0.999853, 0, -0.999853, 0.0171732, 0, 0, 0 )
@@ -46,7 +57,7 @@ directional_shadow_max_distance = 1000.0
 
 [node name="GodRays" type="Spatial" parent="Sun"]
 script = ExtResource( 2 )
-attenuation = 1.6818
+attenuation = 1.1487
 
 [node name="Moon" type="DirectionalLight" parent="."]
 visible = false
@@ -60,6 +71,6 @@ directional_shadow_max_distance = 1000.0
 
 [node name="GodRays" type="Spatial" parent="Moon"]
 script = ExtResource( 2 )
-exposure = 2.0
+exposure = 2.93
 attenuation = 1.18
-light_size = 2.0
+light_size = 3.0

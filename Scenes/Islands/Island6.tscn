@@ -73,7 +73,7 @@ transform = Transform( -113.898, 0, 167.74, 0, 202.754, 0, -167.74, 0, -113.898,
 transform = Transform( 0.172239, 0, 0.985055, 0, 1, 0, -0.985055, 0, 0.172239, 329.198, 4.87853, -1230.7 )
 
 [node name="Position3D2" type="Position3D" parent="CharacterSpawnLocations" index="1"]
-transform = Transform( 0.172239, 0, 0.985055, 0, 1, 0, -0.985055, 0, 0.172239, -1665.87, 6.12672, -461.095 )
+transform = Transform( 0.172239, 0, 0.985055, 0, 1, 0, -0.985055, 0, 0.172239, -1665.87, 5.66242, -461.095 )
 
 [node name="Position3D" type="Position3D" parent="VehicleSpawnLocation" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1769.83, 2.9972, -413.369 )

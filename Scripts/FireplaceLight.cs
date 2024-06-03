@@ -9,6 +9,7 @@ public class FireplaceLight : StaticBody
 
     OmniLight light;
     Particles part;
+    bool covered = false;
     public override void _Ready()
     {
         light = GetNode<OmniLight>("FireplaceLight");
@@ -27,6 +28,9 @@ public class FireplaceLight : StaticBody
             part.Emitting = true;
             SetProcess(true);
         }
+        RayCast CoverCast = GetNode<RayCast>("RoofRayCast");
+        CoverCast.ForceRaycastUpdate();
+        covered = CoverCast.IsColliding();
         
     }
     public void ToggleFileplace()
@@ -57,7 +61,7 @@ public class FireplaceLight : StaticBody
             double sample = rand.NextDouble();
             double scaled = (sample * 1.2) + 0.6;
             light.LightEnergy = (float)scaled;
-            if (DayNight.GetRainStr() > 10)
+            if (DayNight.GetRainStr() > 10 && !covered)
                 ToggleFileplace();
             //double scaled1 = (sample * 0.5) + -0.5;
             //double scaled2 = (sample * 0.5) + -0.5;
