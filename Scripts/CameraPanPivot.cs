@@ -81,8 +81,8 @@ public class CameraPanPivot : Position3D
 			if (Mathf.Rad2Deg(prevrot.x) > -30)
 			{
 				
-				rot.x -= 0.0001f * ammount;
-				YOffset += ammount * 0.1f;
+				rot.x -= 0.00005f * ammount;
+				YOffset += ammount * 0.05f;
 				//Pan(new Vector2(0, -ammount * 0.01f));
 				
 			}
@@ -94,11 +94,11 @@ public class CameraPanPivot : Position3D
 		{
 			float ammount = ammy.y - mousepos.y;
 			//limmit for Up
-			if (Mathf.Rad2Deg(prevrot.x) < 10)
+			if (Mathf.Rad2Deg(prevrot.x) < 5)
 			{
 				
-				rot.x += 0.0001f * ammount;
-				YOffset -= ammount * 0.1f;
+				rot.x += 0.00005f * ammount;
+				YOffset -= ammount * 0.05f;
 				//Pan(new Vector2(0, ammount * 0.01f));
 			}
 			pan += new Vector2(0, ammount * 0.4f);

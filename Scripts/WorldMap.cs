@@ -207,6 +207,14 @@ public class WorldMap : TileMap
 			LoadSaveData(save);
 			IslandInfo CurIle;
 			ilemap.TryGetValue(WorldToMap(CurrentTile), out CurIle);
+			foreach (KeyValuePair<Vector2, IslandInfo> entry in ilemap)
+			{
+				if (entry.Value.KeepInstance == true)
+				{
+					MyWorld.GetInstance().ToggleIsland(entry.Value, true, false);
+					MyWorld.GetInstance().ToggleIsland(entry.Value, false, false);
+				}
+			}
 			//((MyWorld)GetParent()).ToggleIsland(CurIle, true, true);
 			Intro intro = SpawnIntro(CurIle);
 			intro.LoadStop((Vector3)save.Get("playerlocation"));
@@ -351,7 +359,16 @@ public class WorldMap : TileMap
 
 		iletosave.SetInfo(ile);
 
-		ile.QueueFree();
+		if (iletosave.KeepInstance == true)
+		{
+			ile.Visible = false;
+			ile.GetParent().RemoveChild(ile);
+		}
+		else
+		{
+			ile.QueueFree();
+		}
+			
 
 		MapGrid.GetInstance().UpdateIleInfo(iletosave.pos, iletosave.Type);
 

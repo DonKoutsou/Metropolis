@@ -597,8 +597,8 @@ public class Vehicle : RigidBody
         Spatial vehpar = (Spatial)GetParent();
         Spatial par = (Spatial)vehpar.GetParent();
         
-        par.RemoveChild(vehpar);
         from.UnRegisterChild(this);
+        par.RemoveChild(vehpar);
         ile.AddChild(vehpar);
         ile.RegisterChild(this);
         GlobalTranslation = orig;

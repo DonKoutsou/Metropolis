@@ -9,12 +9,10 @@ public class CameraZoomPivot : Position3D
 	public int Speed { get; set; } = 14; // How fast the player will move (pixels/sec).
 
 	[Export]
-	public float MaxDist = 600;
+	public float MaxDist = 460;
+	
 	[Export]
-	public float MaxFov = 75;
-	[Export]
-	public float MinFov = 25;
-
+	int zoomSteps = 39;
 	SpringArm arm;
 
 	Vector2 InitialTransforms;
@@ -45,29 +43,17 @@ public class CameraZoomPivot : Position3D
 	{
 		if (MapGrid.GetInstance().IsMouseInMap())
 			return;
-		Vector3 prevpos = panp.Translation;
-		if (@event.IsActionPressed("ZoomOut") && ZoomStage < 19)
+		if (@event.IsActionPressed("ZoomOut") && ZoomStage < zoomSteps)
 		{
 			ZoomStage += 1;
 			
-			PlayerCamera cam = PlayerCamera.GetInstance();
-			float fovvalue = ZoomStage/ 20;
-			cam.Fov = Mathf.Lerp(25, 75, fovvalue);
-			float value = Mathf.Lerp(5, 220, fovvalue);
-			arm.SpringLength = value;
-			panp.Translation = new Vector3(prevpos.x, value, prevpos.z);
+			UpdatePos();
 		}
 		if (@event.IsActionPressed("ZoomIn") && ZoomStage > 0)
 		{
 			ZoomStage -= 1;
-
-			PlayerCamera cam = PlayerCamera.GetInstance();
-
-			float fovvalue = ZoomStage/ 20;
-			cam.Fov = Mathf.Lerp(25, 75, fovvalue);
-			float value = Mathf.Lerp(5, 220, fovvalue);
-			arm.SpringLength = value;
-			panp.Translation = new Vector3(prevpos.x, value, prevpos.z);
+			UpdatePos();
+			
 		}
 		if (@event.IsActionPressed("FrameCamera"))
 		{
@@ -80,10 +66,23 @@ public class CameraZoomPivot : Position3D
 			//Translation = prevpos;
 		//panp.caminitpos = new Vector3(0, Translation.y, Translation.z);
 	}
+	public void UpdatePos()
+	{
+		Vector3 prevpos = panp.Translation;
+		PlayerCamera cam = PlayerCamera.GetInstance();
+
+		float fovvalue = ZoomStage/ (zoomSteps + 1);
+		cam.Fov = Mathf.Lerp(25, 75, fovvalue);
+		float value = Mathf.Lerp(4, MaxDist, fovvalue);
+		arm.SpringLength = value;
+		panp.Translation = new Vector3(prevpos.x, value / 4, prevpos.z);
+	}
 	public void Frame()
 	{
-		arm.SpringLength = InitialTransforms.x;
-		panp.Translation = new Vector3(panp.Translation.x, InitialTransforms.y, panp.Translation.z);
+		ZoomStage = 2;
+		UpdatePos();
+		//arm.SpringLength = InitialTransforms.x;
+		//panp.Translation = new Vector3(panp.Translation.x, InitialTransforms.y, panp.Translation.z);
 		//arm.Translation = new Vector3(arm.Translation.x, InitialTransforms.y, arm.Translation.z);
 	}
 	

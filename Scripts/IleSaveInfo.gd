@@ -12,6 +12,7 @@ func _SetData(data):
 	Characters = data["Characters"]
 	Items = data["Items"]
 	Rotation = data["Rotation"]
+	KeepInstance = data["KeepInstance"]
 
 
 export var Type:int = 0
@@ -24,3 +25,4 @@ export (Array, Resource)  var Vehicles
 export (Array, Resource)  var Items
 export (Array, Resource) var Characters
 export var Rotation:float
+export var KeepInstance:bool

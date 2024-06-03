@@ -54,4 +54,4 @@ nodes/TimeScale/position = Vector2( 241.076, 25.6959 )
 "nodes/TimeScale 2/node" = SubResource( 36 )
 "nodes/TimeScale 2/position" = Vector2( -186.667, 333.333 )
 nodes/output/position = Vector2( 1226.67, 266.667 )
-node_connections = [ "JumpShot", 0, "Idle_Run_Blend", "JumpShot", 1, "TimeScale", "Idle_Run_Blend", 0, "Idle_Walk_Blend", "Idle_Run_Blend", 1, "Animation 4", "TimeScale", 0, "Animation 2", "TimeScale 2", 0, "Animation 3", "IntrumentBlend", 0, "JumpShot", "IntrumentBlend", 1, "Animation 5", "Idle_Walk_Blend", 0, "Animation", "Idle_Walk_Blend", 1, "TimeScale 2", "output", 0, "IntrumentBlend" ]
+node_connections = [ "output", 0, "IntrumentBlend", "JumpShot", 0, "Idle_Run_Blend", "JumpShot", 1, "TimeScale", "Idle_Walk_Blend", 0, "Animation", "Idle_Walk_Blend", 1, "TimeScale 2", "Idle_Run_Blend", 0, "Idle_Walk_Blend", "Idle_Run_Blend", 1, "Animation 4", "IntrumentBlend", 0, "JumpShot", "IntrumentBlend", 1, "Animation 5", "TimeScale 2", 0, "Animation 3", "TimeScale", 0, "Animation 2" ]

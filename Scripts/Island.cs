@@ -9,6 +9,8 @@ public class Island : Spatial
 	public bool m_bOriginalIle = false;
 	[Export]
 	IleType type = IleType.LAND;
+	[Export]
+	public bool KeepInstance = false;
 
 	public string IslandSpecialName = null;
 
@@ -371,6 +373,7 @@ public class IslandInfo
 
 	public List<CharacterInfo> Characters = new List<CharacterInfo>();
 	public float rottospawn;
+	public bool KeepInstance;
 
     public void UnPackData(Godot.Object data)
     {
@@ -379,6 +382,7 @@ public class IslandInfo
 		SpecialName = (string)data.Get("SpecialName");
         IleType = (PackedScene)data.Get("Scene");
         rottospawn = (float)data.Get("Rotation");
+		KeepInstance = (bool)data.Get("KeepInstance");
 
         Godot.Collections.Array HouseData = ( Godot.Collections.Array)data.Get("Houses");
 		for (int i  = 0; i < HouseData.Count; i++)
@@ -496,7 +500,7 @@ public class IslandInfo
 			{"Items", ItemInfoobjects},
 			{"Vehicles", VehicleInfoobjects},
 			{"Characters", CharacterInfoobjects},
-
+			{"KeepInstance", KeepInstance},
         };
 
 		return data;
@@ -506,6 +510,7 @@ public class IslandInfo
 	{
 		ile = Ile;
 		Type = Ile.GetIslandType();
+		KeepInstance = Ile.KeepInstance;
 		//SpecialName = Ile.IslandSpecialName;
 		List<House> hous;
 		Ile.GetHouses(out hous);

@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/HUD/SplashScreenPanelTheme.tres" type="StyleBox" id=2]
@@ -400,11 +400,6 @@ tracks/5/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="CubeMesh" id=125]
-
-[sub_resource type="SpatialMaterial" id=126]
-albedo_color = Color( 1, 0, 0, 1 )
-
 [sub_resource type="SpatialMaterial" id=120]
 render_priority = 1
 flags_transparent = true
@@ -588,7 +583,6 @@ margin = 0.5
 transform = Transform( 1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0, 0, 20 )
 script = ExtResource( 12 )
 Speed = 5
-MaxDist = 250.0
 
 [node name="CameraPanXPivot" type="Position3D" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot"]
 transform = Transform( 1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0 )
@@ -619,19 +613,10 @@ anims/FadeOutDialogue = SubResource( 119 )
 anims/RESET = SubResource( 111 )
 script = ExtResource( 35 )
 
-[node name="MeshInstance" type="MeshInstance" parent="CameraMovePivot/CameraPanPivot/SpringArm"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.00321 )
-mesh = SubResource( 125 )
-material/0 = SubResource( 126 )
-
 [node name="RemoteTransform" type="RemoteTransform" parent="CameraMovePivot/CameraPanPivot"]
 remote_path = NodePath("../../Listener")
 update_position = false
 update_scale = false
-
-[node name="MeshInstance" type="MeshInstance" parent="CameraMovePivot/CameraPanPivot"]
-mesh = SubResource( 125 )
-material/0 = SubResource( 126 )
 
 [node name="MoveLoc" parent="." instance=ExtResource( 16 )]
 

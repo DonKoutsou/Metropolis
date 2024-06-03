@@ -13,6 +13,11 @@ public class LoddedObject : MeshInstance
     {
         AddToGroup("LODDEDOBJ");
     }
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+        RemoveFromGroup("LODDEDOBJ");
+    }
     public void SwitchLod(bool LOD)
     {
         switch (LOD)

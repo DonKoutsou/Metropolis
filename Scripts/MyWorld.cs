@@ -66,11 +66,11 @@ public class MyWorld : Spatial
 				{
 					IslandInfo ile = Orderedilestodissable[i];
 					Orderedilestodissable.Remove(ile);
-					if (ile.IsIslandSpawned())
-					{
-						ToggleIsland(ile, false, false);
-						break;
-					}	
+					//if (ile.IsIslandSpawned())
+					//{
+					ToggleIsland(ile, false, false);
+					break;
+					//}	
 				}
 			}
 			else if (EnableDissableBool)
@@ -80,11 +80,11 @@ public class MyWorld : Spatial
 				{
 					IslandInfo ile = Orderedilestoenable[i];
 					Orderedilestoenable.Remove(ile);
-					if (!ile.IsIslandSpawned())
-					{
-						ToggleIsland(ile, true, false);
-						break;
-					}	
+					//if (!ile.IsIslandSpawned())
+					//{
+					ToggleIsland(ile, true, false);
+					break;
+					//}	
 				}
 			}
 		}
@@ -209,7 +209,7 @@ public class MyWorld : Spatial
 			//MapGrid.GetInstance().OnIslandVisited(info);
 		for (int i = 0; i < closestfrom.Count; i ++)
 		{
-			/*if (closestfrom[i] == to)
+			if (closestfrom[i] == to)
 				continue;
 			if (closestto.Contains(closestfrom[i]))
 				continue;
@@ -221,8 +221,8 @@ public class MyWorld : Spatial
 
 				if (Orderedilestoenable.Contains(closestfrom[i]))
 					Orderedilestoenable.Remove(closestfrom[i]);
-			}*/
-			if (closestto.Contains(closestfrom[i]) || closestfrom[i] == to)
+			}
+			/*if (closestto.Contains(closestfrom[i]) || closestfrom[i] == to)
 			{
 				continue;
 			}
@@ -235,18 +235,18 @@ public class MyWorld : Spatial
 					if (Orderedilestoenable.Contains(closestfrom[i]))
 						Orderedilestoenable.Remove(closestfrom[i]);
 				}
-			}
+			}*/
 		}
 		for (int i = 0; i < closestto.Count; i ++)
 		{
-			if (closestfrom.Contains(closestfrom[i]) || closestto[i] == from)
-			{
-				continue;
-			}
+			//if (closestfrom.Contains(closestfrom[i]) || closestto[i] == from)
+			//{
+			//	continue;
+			//}
 			if (!ilestoenable.Contains(closestto[i]) )
 				ilestoenable.Insert(ilestoenable.Count, closestto[i]);
-			//if (ilestodissable.Contains(closestto[i]))
-				//ilestodissable.Remove(closestto[i]);
+			if (ilestodissable.Contains(closestto[i]))
+				ilestodissable.Remove(closestto[i]);
 			if (Orderedilestodissable.Contains(closestto[i]))
 				Orderedilestodissable.Remove(closestto[i]);
 		}
@@ -259,18 +259,34 @@ public class MyWorld : Spatial
 	{
 		if (toggle && !ileinfo.IsIslandSpawned())
 		{
-			if (!ActiveIles.Contains(ileinfo))
-				ActiveIles.Add(ileinfo);
-			Island ile = WorldMap.GetInstance().ReSpawnIsland(ileinfo);
-			ile.InputData(ileinfo);
+			//if (!ActiveIles.Contains(ileinfo))
+			ActiveIles.Add(ileinfo);
+			
+			
+			WorldMap.GetInstance().ReSpawnIsland(ileinfo).InputData(ileinfo);
+			//ile.InputData(ileinfo);
 		}
 		else if (!toggle && ileinfo.IsIslandSpawned())
 		{
-			if (ActiveIles.Contains(ileinfo))
-				ActiveIles.Remove(ileinfo);
+			//f (ActiveIles.Contains(ileinfo))
+			ActiveIles.Remove(ileinfo);
 			Island ile = ileinfo.ile;
 			ileinfo.UpdateInfo(ile);
-			ile.QueueFree();
+			if (ileinfo.KeepInstance == true)
+			{
+				RemoveChild(ile);
+				ile.Visible = false;
+			}
+			else
+				ile.QueueFree();
+		}
+		else if (toggle && ileinfo.KeepInstance == true && !ActiveIles.Contains(ileinfo))
+		{
+			//if (!ActiveIles.Contains(ileinfo))
+			ActiveIles.Add(ileinfo);
+			AddChild(ileinfo.ile);
+			ileinfo.ile.Visible = true;
+			ileinfo.ile.InputData(ileinfo);
 		}
 		if (affectneigh)
 		{
