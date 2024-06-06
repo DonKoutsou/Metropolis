@@ -234,7 +234,7 @@ update_rotation = false
 update_scale = false
 
 [node name="Planks" type="Spatial" parent="." index="1"]
-transform = Transform( 0.999942, 2.89036e-09, 2.32831e-09, 2.9011e-09, 0.999941, 2.60188e-08, 2.32831e-09, -3.10538e-08, 0.999941, 0, 0, 0 )
+transform = Transform( 0.999941, 2.91948e-09, 2.32831e-09, 2.9011e-09, 0.99994, 2.60479e-08, 2.35741e-09, -3.10829e-08, 0.99994, 0, 0, 0 )
 
 [node name="StaticBody6" parent="Planks" index="0" instance=ExtResource( 28 )]
 transform = Transform( 0.742315, 0, 0.670051, 0, 1, 0, -0.670051, 0, 0.742315, 87.941, -0.00652695, 2437.29 )
