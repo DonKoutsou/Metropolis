@@ -9,7 +9,7 @@ _data = [ Vector2( 0, 2 ), 0.0, 0.0, 0, 0, Vector2( 0.38538, 0 ), 0.0, 0.0, 0, 0
 
 [sub_resource type="Curve" id=6]
 max_value = 3.0
-_data = [ Vector2( 0, 0.3 ), 0.0, 0.0, 0, 0, Vector2( 0.0602717, 3 ), 0.0, 0.0, 0, 0, Vector2( 0.2, 0.3 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.3 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0.3 ), 0.0, 0.0, 0, 0, Vector2( 0.0669734, 3 ), 0.0, 0.0, 0, 0, Vector2( 0.133436, 0.211657 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.3 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=7]
 max_value = 3.0
@@ -39,7 +39,7 @@ SunGodRayCurve = SubResource( 6 )
 MoonGodRayCurve = SubResource( 7 )
 SunColorGradient = SubResource( 4 )
 MoonColorGradient = SubResource( 5 )
-startinghour = 8
+startinghour = 7
 WindDirCurve = SubResource( 1 )
 WindStreangthCurve = SubResource( 2 )
 RainStreangthCurve = SubResource( 2 )

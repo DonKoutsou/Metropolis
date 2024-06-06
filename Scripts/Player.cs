@@ -66,6 +66,8 @@ public class Player : Character
 	}
 	private void UpdateMoveLocation()
 	{
+		if (TalkText.IsTalking())
+			return;
 		var spacestate = GetWorld().DirectSpaceState;
 		Vector2 mousepos = GetViewport().GetMousePosition();
 		Camera cam = GetTree().Root.GetCamera();

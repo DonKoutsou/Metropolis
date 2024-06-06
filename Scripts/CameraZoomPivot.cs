@@ -49,7 +49,7 @@ public class CameraZoomPivot : Position3D
 			
 			UpdatePos();
 		}
-		if (@event.IsActionPressed("ZoomIn") && ZoomStage > 0)
+		if (@event.IsActionPressed("ZoomIn") && ZoomStage > 2)
 		{
 			ZoomStage -= 1;
 			UpdatePos();

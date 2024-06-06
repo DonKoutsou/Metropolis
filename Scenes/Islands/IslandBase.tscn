@@ -16,7 +16,15 @@
 
 [node name="SeaBed" parent="." index="0" instance=ExtResource( 8 )]
 
-[node name="SoundMap" type="GridMap" parent="." index="1"]
+[node name="CharacterSpawnLocations" type="Node" parent="." index="1"]
+script = ExtResource( 5 )
+CharSpawns = [ ExtResource( 6 ) ]
+
+[node name="VehicleSpawnLocation" type="Node" parent="." index="2"]
+script = ExtResource( 7 )
+VehSpawns = [ ExtResource( 11 ), ExtResource( 10 ), ExtResource( 9 ) ]
+
+[node name="SoundMap" type="GridMap" parent="." index="3"]
 visible = false
 mesh_library = ExtResource( 2 )
 cell_size = Vector3( 50, 50, 50 )
@@ -33,11 +41,3 @@ CheckLayer = 260
 SoundScenes = [ ExtResource( 4 ) ]
 
 [node name="PlayerLocator" type="Position3D" parent="SoundMap" index="0"]
-
-[node name="CharacterSpawnLocations" type="Node" parent="." index="2"]
-script = ExtResource( 5 )
-CharSpawns = [ ExtResource( 6 ) ]
-
-[node name="VehicleSpawnLocation" type="Node" parent="." index="3"]
-script = ExtResource( 7 )
-VehSpawns = [ ExtResource( 11 ), ExtResource( 10 ), ExtResource( 9 ) ]

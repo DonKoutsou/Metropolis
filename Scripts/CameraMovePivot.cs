@@ -3,15 +3,15 @@ using System;
 
 public class CameraMovePivot : Position3D
 {
-    CameraZoomPivot zpivot;
+    //CameraZoomPivot zpivot;
 
-    Camera cam;
+    //Camera cam;
 
     static CameraMovePivot instance;
 
     public bool shouldfollowpl = true;
 
-    Player pl;
+    //Player pl;
 
 	[Export]
 	public float MaxDist = 150;

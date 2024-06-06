@@ -1,0 +1,157 @@
+[gd_resource type="ShaderMaterial" load_steps=12 format=2]
+
+[ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_2K-PNG_Color.png" type="Texture" id=1]
+[ext_resource path="res://Assets/TerainTex/Rock029_2K-PNG/Rock029_2K-PNG_AmbientOcclusion.png" type="Texture" id=2]
+[ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_2K-PNG_NormalGL.png" type="Texture" id=3]
+[ext_resource path="res://Assets/TerainTex/Rock029_2K-PNG/Rock029_2K-PNG_Roughness.png" type="Texture" id=4]
+[ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_2K-PNG_AmbientOcclusion.png" type="Texture" id=5]
+[ext_resource path="res://Assets/TerainTex/Rock029_2K-PNG/Rock029_2K-PNG_Color.png" type="Texture" id=6]
+[ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_2K-PNG_Roughness.png" type="Texture" id=7]
+[ext_resource path="res://Assets/TerainTex/Rock029_2K-PNG/Rock029_2K-PNG_NormalGL.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Statue/Textures/testbake_initialShadingGroup_OcclusionRoughnessMetallic.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Statue/Textures/testbake_initialShadingGroup_Normal.png" type="Texture" id=10]
+
+[sub_resource type="Shader" id=1]
+code = "// 2022 Kasper Arnklit Frandsen - Public Domain - No Rights Reserved
+
+// WORLD NORMAL MIX SHADER
+// This shader can  be used to mix two PBR materials based on a world normal. This is useful for
+// effects such as snow on top of an object, or grass growing on top of an object.
+
+// COMMENTS:
+// LINE 43 - We unpack the background normal map.
+// LINE 44 - Recalculate z-component of the normal map with the Pythagorean theorem.
+// LINE 45 - Apply the tangent-space normal map to the view-space normals.
+// LINE 46 - Convert the world up vector into view-space with a matrix multiplication.
+// LINE 47 - Compare the up vector to the surface with the normal map applied using the dot product.
+// LINE 48 - Remap the dot-product to a clamped mask using the smoothstep function.
+// LINE 50 - Mix the various textures and apply them, using the mask.
+
+shader_type spatial;
+
+
+
+
+uniform sampler2D texture_normal : hint_normal;
+uniform sampler2D texture_ambient_occlusion : hint_white;
+uniform vec4 ao_texture_channel;
+
+uniform float offset : hint_range(-1.0, 1.0) = 0.5;
+uniform float fade : hint_range(0.0, 1.0) = 0.1;
+uniform float NormalForce;
+
+uniform sampler2D albedo_texture_fg : hint_albedo;
+uniform sampler2D Rough_texture_fg : hint_white;
+uniform sampler2D AO_texture_fg : hint_white;
+uniform vec4 roughness_texture_channel;
+uniform sampler2D normal_texture_fg : hint_normal;
+
+uniform sampler2D albedo_texture_bg : hint_albedo;
+uniform sampler2D Rough_texture_bg : hint_white;
+uniform sampler2D AO_texture_bg : hint_white;
+uniform sampler2D normal_texture_bg : hint_normal;
+
+varying vec3 uv1_triplanar_pos;
+varying vec3 uv2_triplanar_pos;
+uniform float uv1_blend_sharpness;
+varying vec3 uv1_power_normal;
+uniform vec3 uv1_scale;
+uniform vec3 uv2_scale;
+uniform vec3 uv1_offset;
+
+
+void vertex() {
+	TANGENT = vec3(0.0,0.0,-1.0) * abs(NORMAL.x);
+	TANGENT+= vec3(1.0,0.0,0.0) * abs(NORMAL.y);
+	TANGENT+= vec3(1.0,0.0,0.0) * abs(NORMAL.z);
+	TANGENT = normalize(TANGENT);
+	BINORMAL = vec3(0.0,1.0,0.0) * abs(NORMAL.x);
+	BINORMAL+= vec3(0.0,0.0,-1.0) * abs(NORMAL.y);
+	BINORMAL+= vec3(0.0,1.0,0.0) * abs(NORMAL.z);
+	BINORMAL = normalize(BINORMAL);
+	uv1_power_normal=pow(abs(NORMAL),vec3(uv1_blend_sharpness));
+	uv1_power_normal/=dot(uv1_power_normal,vec3(1.0));
+	uv1_triplanar_pos = VERTEX * uv1_scale + uv1_offset;
+	uv1_triplanar_pos *= vec3(1.0,-1.0, 1.0);
+	uv2_triplanar_pos = VERTEX * uv2_scale + uv1_offset;
+	uv2_triplanar_pos *= vec3(1.0,-1.0, 1.0);
+}
+
+
+vec4 triplanar_texture(sampler2D p_sampler,vec3 p_weights,vec3 p_triplanar_pos) {
+	vec4 samp=vec4(0.0);
+	samp+= texture(p_sampler,p_triplanar_pos.xy) * p_weights.z;
+	samp+= texture(p_sampler,p_triplanar_pos.xz) * p_weights.y;
+	samp+= texture(p_sampler,p_triplanar_pos.zy * vec2(-1.0,1.0)) * p_weights.x;
+	return samp;
+}
+
+	
+
+
+void fragment() {
+	vec3 albedo_tex_fg = triplanar_texture(albedo_texture_fg,uv1_power_normal,uv1_triplanar_pos).xyz;
+	vec3 normal_tex_fg = triplanar_texture(normal_texture_fg,uv1_power_normal,uv1_triplanar_pos).xyz;
+	
+	vec3 albedo_tex_bg = triplanar_texture(albedo_texture_bg,uv1_power_normal,uv2_triplanar_pos).xyz;
+	vec3 normal_tex_bg = triplanar_texture(normal_texture_bg,uv1_power_normal,uv2_triplanar_pos).xyz;
+	
+	//float rough = texture(Rough_texture_fg, bg_uv);
+	float roughness_texfg = dot(triplanar_texture(Rough_texture_fg,uv1_power_normal,uv1_triplanar_pos),roughness_texture_channel);
+	float roughness_texbg = dot(triplanar_texture(Rough_texture_bg,uv1_power_normal,uv2_triplanar_pos),roughness_texture_channel);
+	
+	float ao_texfg = dot(triplanar_texture(AO_texture_fg,uv1_power_normal,uv1_triplanar_pos),roughness_texture_channel);
+	float ao_texbg = dot(triplanar_texture(AO_texture_bg,uv1_power_normal,uv2_triplanar_pos),roughness_texture_channel);
+	
+	
+	vec3 bg_normal = normal_tex_bg * 2.0 - 1.0;
+	bg_normal.z = sqrt(1.0 - bg_normal.x * bg_normal.x - bg_normal.y * bg_normal.y);
+	vec3 normal_applied = bg_normal.x * TANGENT + bg_normal.y * BINORMAL + bg_normal.z * NORMAL;
+	
+	vec3 bg_normal2 = texture(texture_normal,UV).rgb * 2.0 - 1.0;
+	bg_normal.z = sqrt(1.0 - bg_normal.x * bg_normal.x - bg_normal.y * bg_normal.y);
+	vec3 normal_applied2 = bg_normal2.x * TANGENT + bg_normal2.y * BINORMAL + bg_normal2.z * NORMAL;
+	
+	vec3 up_vector_viewspace = mat3(INV_CAMERA_MATRIX) * vec3(0.0, 1.0, 0.0);
+	float dot_product = dot(up_vector_viewspace, normal_applied);
+	float dot_product2 = dot(up_vector_viewspace, normal_applied2);
+	float mask = smoothstep(offset - fade, offset + fade, dot_product);
+	float mask2 = smoothstep(offset - fade, offset + fade, dot_product2);
+	float mask3 = mix (mask, mask2, 0.5);
+	
+	vec2 base_uv = UV;
+	
+	//vec3 albedo_tex = triplanar_texture(texture_albedo,uv1_power_normal,uv1_triplanar_pos);
+
+	float aomixes = mix(mix(ao_texfg, ao_texbg, mask3), dot(texture(texture_ambient_occlusion,base_uv),ao_texture_channel), 0.5);
+	
+	ALBEDO = mix(albedo_tex_bg, albedo_tex_fg, mask3);
+	AO = aomixes;
+	AO_LIGHT_AFFECT = 2.0;
+	ROUGHNESS = mix(roughness_texfg, roughness_texbg, mask3);
+	METALLIC = 0.0;
+	NORMALMAP = mix(mix(normal_tex_bg, normal_tex_fg, mask3),  texture(texture_normal,base_uv).rgb, 0.5);
+	NORMALMAP_DEPTH = NormalForce;
+}"
+
+[resource]
+shader = SubResource( 1 )
+shader_param/ao_texture_channel = Plane( 1, 0, 0, 0 )
+shader_param/offset = 0.516
+shader_param/fade = 0.377
+shader_param/NormalForce = 2.0
+shader_param/roughness_texture_channel = Plane( 0, 0, 0, 1 )
+shader_param/uv1_blend_sharpness = 1.532
+shader_param/uv1_scale = Vector3( 0.005, 0.005, 0.005 )
+shader_param/uv2_scale = Vector3( 0.005, 0.005, 0.005 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/texture_normal = ExtResource( 10 )
+shader_param/texture_ambient_occlusion = ExtResource( 9 )
+shader_param/albedo_texture_fg = ExtResource( 1 )
+shader_param/Rough_texture_fg = ExtResource( 7 )
+shader_param/AO_texture_fg = ExtResource( 5 )
+shader_param/normal_texture_fg = ExtResource( 3 )
+shader_param/albedo_texture_bg = ExtResource( 6 )
+shader_param/Rough_texture_bg = ExtResource( 4 )
+shader_param/AO_texture_bg = ExtResource( 2 )
+shader_param/normal_texture_bg = ExtResource( 8 )

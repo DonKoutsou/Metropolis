@@ -6,7 +6,7 @@
 [ext_resource path="res://Scripts/Clouds.cs" type="Script" id=4]
 [ext_resource path="res://Scripts/WorldParticleManager.cs" type="Script" id=5]
 [ext_resource path="res://Scenes/World/SunMoonPivot.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Assets/Clouds/Textures/smoke_01.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Clouds/Textures/smoke_07.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Clouds/Textures/smoke_04.png" type="Texture" id=8]
 [ext_resource path="res://Scripts/WorldSoundManager.cs" type="Script" id=9]
 [ext_resource path="res://Assets/Sounds/RainSound.mp3" type="AudioStream" id=10]
@@ -50,11 +50,14 @@ scale = 0.5
 
 [sub_resource type="SpatialMaterial" id=112]
 flags_transparent = true
+params_blend_mode = 1
+params_cull_mode = 2
+params_depth_draw_mode = 2
 params_billboard_mode = 3
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
-albedo_color = Color( 1, 0.921569, 0.796078, 0.294118 )
+albedo_color = Color( 1, 0.980392, 0.952941, 0.0745098 )
 albedo_texture = ExtResource( 7 )
 
 [sub_resource type="Curve" id=113]
@@ -76,9 +79,8 @@ angular_velocity = 34.12
 angular_velocity_random = 1.0
 linear_accel = 100.0
 linear_accel_random = 0.35
-tangential_accel = 2.8
 tangential_accel_random = 1.0
-angle = 360.0
+angle_random = 1.0
 scale = 1.5
 scale_random = 0.53
 hue_variation = 1.0

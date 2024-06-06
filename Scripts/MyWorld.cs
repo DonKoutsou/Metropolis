@@ -62,29 +62,25 @@ public class MyWorld : Spatial
 			if (!EnableDissableBool)
 			{
 				EnableDissableBool = true;
-				for (int i = Orderedilestodissable.Count - 1; i >= 0; i--)
+				if (Orderedilestodissable.Count > 0)
 				{
-					IslandInfo ile = Orderedilestodissable[i];
+					IslandInfo ile = Orderedilestodissable[0];
 					Orderedilestodissable.Remove(ile);
 					//if (ile.IsIslandSpawned())
 					//{
 					ToggleIsland(ile, false, false);
-					break;
-					//}	
 				}
 			}
 			else if (EnableDissableBool)
 			{
 				EnableDissableBool = false;
-				for (int i = 0; i < Orderedilestoenable.Count; i++)
+				if (Orderedilestoenable.Count > 0)
 				{
-					IslandInfo ile = Orderedilestoenable[i];
+					IslandInfo ile = Orderedilestoenable[0];
 					Orderedilestoenable.Remove(ile);
 					//if (!ile.IsIslandSpawned())
 					//{
 					ToggleIsland(ile, true, false);
-					break;
-					//}	
 				}
 			}
 		}

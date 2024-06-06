@@ -105,18 +105,18 @@ spread = 9.06
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 1.0
 
-[sub_resource type="SpatialMaterial" id=28]
+[sub_resource type="SpatialMaterial" id=61]
 flags_transparent = true
-flags_unshaded = true
-flags_vertex_lighting = true
+params_blend_mode = 1
 params_billboard_mode = 3
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
+albedo_color = Color( 1, 1, 1, 0.380392 )
 albedo_texture = ExtResource( 9 )
 
-[sub_resource type="QuadMesh" id=35]
-material = SubResource( 28 )
+[sub_resource type="QuadMesh" id=62]
+material = SubResource( 61 )
 
 [node name="Gen3Machine" instance=ExtResource( 2 )]
 
@@ -147,7 +147,7 @@ material/0 = ExtResource( 1 )
 material/0 = ExtResource( 4 )
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton" index="7"]
-transform = Transform( 0.997441, -0.0638507, -0.032162, 0.0595702, 0.990991, -0.119948, 0.039531, 0.117725, 0.992259, -2.35058, 265.26, 12.2028 )
+transform = Transform( 0.997428, -0.0594475, -0.0400288, 0.0539254, 0.990413, -0.12718, 0.0472056, 0.124694, 0.991072, -0.614696, 265.489, 10.3813 )
 bone_name = "mixamorig_Head"
 
 [node name="HeadPivot" type="Spatial" parent="Armature/Skeleton/BoneAttachment" index="0"]
@@ -169,7 +169,7 @@ spot_range = 58.3185
 spot_angle = 47.5769
 
 [node name="BoneAttachment2" type="BoneAttachment" parent="Armature/Skeleton" index="8"]
-transform = Transform( 0.994332, 0.0570371, -0.0897197, -0.0625666, 0.996231, -0.0600749, 0.0859551, 0.0653479, 0.994154, -0.297212, 183.791, 0.716423 )
+transform = Transform( 0.993527, 0.0609696, -0.0958431, -0.0671569, 0.99577, -0.0627125, 0.0916141, 0.0687431, 0.993419, 0.980868, 183.903, -0.800167 )
 bone_name = "mixamorig_Hips"
 
 [node name="RemoteTransform" type="RemoteTransform" parent="Armature/Skeleton/BoneAttachment2" index="0"]
@@ -207,10 +207,10 @@ generate_lightmap = false
 local_coords = false
 draw_order = 2
 process_material = SubResource( 34 )
-draw_pass_1 = SubResource( 35 )
+draw_pass_1 = SubResource( 62 )
 
 [node name="Bouzouki" parent="." index="3" instance=ExtResource( 7 )]
-transform = Transform( -0.0272753, 0.896328, -0.442218, -0.827402, 0.227855, 0.512926, 0.560608, 0.379958, 0.735556, -1.23113, 4.28824, 0.511211 )
+transform = Transform( -0.0272753, 0.896328, -0.442218, -0.827402, 0.227855, 0.512926, 0.560608, 0.379958, 0.735556, -1.20387, 4.29475, 0.467219 )
 visible = false
 sleeping = true
 RegisterOnIsland = false

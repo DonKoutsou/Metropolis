@@ -247,6 +247,8 @@ public class ActionMenu : Control
 	}
 	public void Start(Spatial obj)
 	{
+		if (TalkText.IsTalking())
+			return;
 		if (selecting)
             return;
 		DeselectCurrent();

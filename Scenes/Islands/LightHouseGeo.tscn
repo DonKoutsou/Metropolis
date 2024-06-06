@@ -1262,7 +1262,7 @@ size = Vector3( 450, 400, 500 )
 [sub_resource type="ConcavePolygonShape" id=1698]
 data = PoolVector3Array( -225, 200, 250, 225, 200, 250, -225, -200, 250, 225, 200, 250, 225, -200, 250, -225, -200, 250, 225, 200, -250, -225, 200, -250, 225, -200, -250, -225, 200, -250, -225, -200, -250, 225, -200, -250, 225, 200, 250, 225, 200, -250, 225, -200, 250, 225, 200, -250, 225, -200, -250, 225, -200, 250, -225, 200, -250, -225, 200, 250, -225, -200, -250, -225, 200, 250, -225, -200, 250, -225, -200, -250, 225, 200, 250, -225, 200, 250, 225, 200, -250, -225, 200, 250, -225, 200, -250, 225, 200, -250, -225, -200, 250, 225, -200, 250, -225, -200, -250, 225, -200, 250, 225, -200, -250, -225, -200, -250 )
 
-[sub_resource type="SpatialMaterial" id=2117]
+[sub_resource type="SpatialMaterial" id=2742]
 flags_world_triplanar = true
 albedo_texture = ExtResource( 18 )
 roughness_texture = ExtResource( 23 )
@@ -1278,7 +1278,7 @@ ao_texture_channel = 0
 uv1_scale = Vector3( 50, 15, 15 )
 
 [sub_resource type="CubeMesh" id=862]
-material = SubResource( 2117 )
+material = SubResource( 2742 )
 size = Vector3( 1100, 500, 300 )
 
 [sub_resource type="ConcavePolygonShape" id=1279]

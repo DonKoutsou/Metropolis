@@ -1,0 +1,339 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Assets/Building/PlatformWood.material" type="Material" id=1]
+[ext_resource path="res://shaders/Outline.shader" type="Shader" id=2]
+
+[sub_resource type="CylinderShape" id=10]
+height = 72.4003
+radius = 0.941581
+
+[sub_resource type="CylinderMesh" id=1]
+material = ExtResource( 1 )
+height = 80.0
+
+[sub_resource type="ShaderMaterial" id=4]
+resource_local_to_scene = true
+shader = ExtResource( 2 )
+shader_param/enable = false
+shader_param/outline_thickness = 0.259
+shader_param/color2 = Color( 0, 0, 0, 0 )
+shader_param/color = Color( 0.882353, 0.898039, 0.360784, 0 )
+
+[sub_resource type="Shader" id=7]
+code = "/*
+void light() and corresponding variables and functions by (c) CaptainProton42's 
+Flexible Toon Shader under the MIT license 
+
+the rest was added by kmitt91; void fragment() + void vertex() and corresponding variables
+*/
+
+shader_type spatial;
+
+render_mode cull_disabled, depth_draw_alpha_prepass, diffuse_toon, specular_toon; 
+
+const float PI = 3.14159;
+
+uniform vec4 color : hint_color;
+uniform sampler2D cape_texture : hint_albedo;
+uniform sampler2D normalmap_texture : hint_normal;
+uniform sampler2D noise_texture : hint_black; 
+uniform sampler2D Gradient : hint_black;
+
+// variables from CaptainProton42
+
+uniform bool clamp_diffuse_to_max = false;
+
+uniform int cuts : hint_range(1, 8) = 3;
+uniform float wrap : hint_range(-2.0f, 2.0f) = 0.0f;
+uniform float steepness : hint_range(1.0f, 8.0f);
+
+uniform bool use_attenuation = true;
+
+uniform bool use_specular = true;
+uniform float specular_strength : hint_range(0.0f, 1.0f) = 1.0f;
+uniform float specular_shininess : hint_range(0.0f, 32.0f) = 16.0f;
+uniform sampler2D specular_map : hint_albedo;
+
+uniform bool use_rim = true;
+uniform float rim_width : hint_range(0.0f, 16.0f) = 8.0f;
+uniform vec4 rim_color : hint_color = vec4(1.0f);
+// end from CaptainProton42 variables
+
+
+uniform float strength = 1.0;
+uniform float speed = 1.0;
+
+uniform float substractuv = 0.1;
+
+uniform float inflation = 1.0;
+
+void vertex() {
+	
+	vec2 scaled_uv = UV * vec2(0.5);
+	float noise = texture(noise_texture, scaled_uv + vec2(TIME * speed, 0.0)).r;
+	
+	float displacement = (noise * 2.0 - 0.8) * strength;
+	//if (UV.y > substractuv && UV.y < 1.0 - substractuv)
+	//{
+		float disp2 = texture(Gradient, vec2(UV.y, 0.0)).r;
+		float disp = displacement * UV.y;
+		vec3 res;
+		if (NORMAL.x * disp2 > 0.0)
+			res = vec3(NORMAL.x * disp2 * inflation, res.y, res.z);
+		if (NORMAL.y * disp2 > 0.0)
+			res = vec3(res.x, (NORMAL.y * disp2 * inflation) , res.z);
+		if (NORMAL.z * disp2 > 0.0)
+			res = vec3(res.x, res.y , NORMAL.z * disp2 * inflation);
+
+		VERTEX.y += (noise -0.5) * disp2;
+		//else
+			//VERTEX += vec3(displacement, 0.0, displacement);
+	//}
+
+	
+		
+	
+}
+
+
+void fragment() {
+	
+	vec4 cape = texture(cape_texture, UV);
+	
+	ALBEDO = color.rgb * cape.rgb;
+	
+	//ALPHA = color.a * cape.a;
+	NORMALMAP = texture(normalmap_texture, UV).rgb;
+	
+}
+
+
+
+// functions from CaptainProton42
+
+/*float staircase(int n, float x) {
+	float res = 0.0f;
+	float inc = 1.0f / float(n+1);
+	for (float edge = 0.0f; edge < 1.0f - inc; edge+=inc) {
+		res += step(edge, x);
+	}
+	return res / float(n);
+}
+
+float split_diffuse(float diffuse) {
+	return staircase(cuts, diffuse * steepness);
+}
+
+float split_specular(float specular) {
+	return step(0.5f, specular);
+}
+
+
+void light() {
+	// Attenuation.
+	float attenuation = 1.0f;
+	if (use_attenuation) {
+		attenuation = ATTENUATION.x;
+	}
+	
+	// Diffuse lighting.
+	float NdotL = dot(NORMAL, LIGHT);
+	float diffuse_amount = NdotL + (attenuation - 1.0) + wrap;
+	//float diffuse_amount = NdotL * attenuation + wrap;
+	diffuse_amount *= steepness;
+	float cuts_inv = 1.0f / float(cuts);
+	float diffuse_stepped = clamp(diffuse_amount + mod(1.0f - diffuse_amount, cuts_inv), 0.0f, 1.0f);
+
+	// Calculate borders.
+	float border = 0.0f;
+	if (use_borders) {
+		float corr_border_width = length(cross(NORMAL, LIGHT)) * border_width * steepness;
+		border = step(diffuse_stepped - corr_border_width, diffuse_amount)
+				 - step(1.0 - corr_border_width, diffuse_amount);
+	}
+	
+	// Apply diffuse result to different styles.
+	vec3 diffuse = ALBEDO.rgb * LIGHT_COLOR / PI;
+	if (use_ramp) {
+		diffuse *= texture(ramp, vec2(diffuse_stepped * (1.0f - border), 0.0f)).rgb;
+	} else {
+		diffuse *= diffuse_stepped * (1.0f - border);
+	}
+	
+	if (clamp_diffuse_to_max) {
+		// Clamp diffuse to max for multiple light sources.
+		DIFFUSE_LIGHT = max(DIFFUSE_LIGHT, diffuse);
+	} else {
+		DIFFUSE_LIGHT += diffuse;
+	}
+	
+	// Specular lighting.
+	if (use_specular) {
+		vec3 H = normalize(LIGHT + VIEW);
+		float NdotH = dot(NORMAL, H);
+		float specular_amount = max(pow(NdotH, specular_shininess*specular_shininess), 0.0f)
+							    * texture(specular_map, UV).r
+								* attenuation;
+		specular_amount = split_specular(specular_amount);
+		SPECULAR_LIGHT += specular_strength * specular_amount * LIGHT_COLOR;
+	}
+	
+	// Simple rim lighting.
+	if (use_rim) {
+		float NdotV = dot(NORMAL, VIEW);
+		float rim_light = pow(1.0 - NdotV, rim_width);
+		DIFFUSE_LIGHT += rim_light * rim_color.rgb * rim_color.a * LIGHT_COLOR / PI;
+	}
+}"
+
+[sub_resource type="Gradient" id=9]
+offsets = PoolRealArray( 0, 0.0289855, 0.236343, 0.292085, 0.316611, 0.38573, 0.544036, 0.691193, 0.732441, 0.762542, 0.814939, 0.966555, 1 )
+colors = PoolColorArray( 0, 0, 0, 1, 0.960954, 0.960954, 0.960954, 1, 0.978099, 0.978099, 0.978099, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.970308, 0.970308, 0.970308, 1, 0.944954, 0.944954, 0.944954, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=12]
+gradient = SubResource( 9 )
+
+[sub_resource type="OpenSimplexNoise" id=3]
+seed = 1
+
+[sub_resource type="NoiseTexture" id=2]
+width = 256
+height = 256
+seamless = true
+bump_strength = 32.0
+noise = SubResource( 3 )
+
+[sub_resource type="ShaderMaterial" id=13]
+resource_local_to_scene = true
+next_pass = SubResource( 4 )
+shader = SubResource( 7 )
+shader_param/color = Color( 0.905882, 0.717647, 0.494118, 1 )
+shader_param/clamp_diffuse_to_max = false
+shader_param/cuts = 3
+shader_param/wrap = 0.0
+shader_param/steepness = 1.0
+shader_param/use_attenuation = false
+shader_param/use_specular = false
+shader_param/specular_strength = 1.0
+shader_param/specular_shininess = 16.0
+shader_param/use_rim = false
+shader_param/rim_width = 1.591
+shader_param/rim_color = Color( 1, 1, 1, 1 )
+shader_param/strength = 20.0
+shader_param/speed = 1.0
+shader_param/substractuv = 0.05
+shader_param/inflation = 0.046
+shader_param/noise_texture = SubResource( 2 )
+shader_param/Gradient = SubResource( 12 )
+
+[sub_resource type="PlaneMesh" id=14]
+material = SubResource( 13 )
+size = Vector2( 2, 2.096 )
+subdivide_width = 10
+subdivide_depth = 20
+
+[node name="StaticBody" type="StaticBody"]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 171.103, -31.0523, 74.1689 )
+shape = SubResource( 10 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -91.0328, -31.0523, 74.169 )
+shape = SubResource( 10 )
+
+[node name="CollisionShape4" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -172.839, -31.0524, 75.0982 )
+shape = SubResource( 10 )
+
+[node name="CollisionShape5" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 171.103, -31.0523, -75.0853 )
+shape = SubResource( 10 )
+
+[node name="CollisionShape6" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 72.0966, -31.0523, -75.0852 )
+shape = SubResource( 10 )
+
+[node name="CollisionShape7" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -91.0328, -31.0523, -75.0852 )
+shape = SubResource( 10 )
+
+[node name="CollisionShape8" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -172.839, -31.0524, -74.1561 )
+shape = SubResource( 10 )
+
+[node name="CollisionShape9" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 171.103, -31.0523, 1.08422 )
+shape = SubResource( 10 )
+
+[node name="CollisionShape10" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 72.0966, -31.0523, 1.0843 )
+shape = SubResource( 10 )
+
+[node name="CollisionShape11" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -91.0328, -31.0523, 1.0843 )
+shape = SubResource( 10 )
+
+[node name="CollisionShape12" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -172.839, -31.0524, 2.01344 )
+shape = SubResource( 10 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 171.103, -34.9144, 74.1689 )
+mesh = SubResource( 1 )
+
+[node name="MeshInstance5" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 72.0966, -34.9144, 74.169 )
+mesh = SubResource( 1 )
+
+[node name="MeshInstance6" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -91.0328, -34.9144, 74.169 )
+mesh = SubResource( 1 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -172.839, -34.9144, 75.0982 )
+mesh = SubResource( 1 )
+
+[node name="MeshInstance7" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 171.103, -34.9144, -75.0853 )
+mesh = SubResource( 1 )
+
+[node name="MeshInstance8" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 72.0966, -34.9144, -75.0852 )
+mesh = SubResource( 1 )
+
+[node name="MeshInstance9" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -91.0328, -34.9144, -75.0852 )
+mesh = SubResource( 1 )
+
+[node name="MeshInstance10" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -172.839, -34.9144, -74.1561 )
+mesh = SubResource( 1 )
+
+[node name="MeshInstance11" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 171.103, -34.9144, 1.08422 )
+mesh = SubResource( 1 )
+
+[node name="MeshInstance12" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 72.0966, -34.9144, 1.0843 )
+mesh = SubResource( 1 )
+
+[node name="MeshInstance13" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -91.0328, -34.9144, 1.0843 )
+mesh = SubResource( 1 )
+
+[node name="MeshInstance14" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -172.839, -34.9144, 2.01344 )
+mesh = SubResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 72.0834, -16.0348, 74.1877 )
+shape = SubResource( 10 )
+
+[node name="Fabric" type="Spatial" parent="."]
+transform = Transform( -7.34892e-06, 0, -168.124, 0, 108.738, 0, 78.3286, 0, -3.42385e-06, 0, 0, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Fabric"]
+mesh = SubResource( 14 )

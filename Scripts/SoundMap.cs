@@ -34,10 +34,13 @@ public class SoundMap : GridMap
     Dictionary<Vector3, Spatial> Sounds = new Dictionary<Vector3, Spatial>();
 
     Position3D PlLoc;
-    
+    private void ViZ_Changed()
+    {
+        
+    } 
+
     public override void _Ready()
     {
-        Visible = false;
         PlLoc = GetNode<Position3D>("PlayerLocator");
 
         SeekRandom = new RandomNumberGenerator();

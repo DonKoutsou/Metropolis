@@ -1,0 +1,16 @@
+[gd_resource type="SpatialMaterial" load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Statue/Textures/testbake_initialShadingGroup_OcclusionRoughnessMetallic.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Statue/Textures/testbake_initialShadingGroup_Normal.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Statue/Textures/testbake_initialShadingGroup_BaseColor.png" type="Texture" id=12]
+
+[resource]
+albedo_texture = ExtResource( 12 )
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 11 )
+ao_enabled = true
+ao_light_affect = 1.0
+ao_texture = ExtResource( 10 )
+ao_on_uv2 = false
+ao_texture_channel = 0
