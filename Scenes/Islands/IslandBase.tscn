@@ -25,7 +25,6 @@ script = ExtResource( 7 )
 VehSpawns = [ ExtResource( 11 ), ExtResource( 10 ), ExtResource( 9 ) ]
 
 [node name="SoundMap" type="GridMap" parent="." index="3"]
-visible = false
 mesh_library = ExtResource( 2 )
 cell_size = Vector3( 50, 50, 50 )
 cell_center_y = false

@@ -68,7 +68,7 @@ public class Item : RigidBody
     }
 	public void InputData(ItemInfo data)
 	{
-		GlobalTranslation = data.Position;
+		Translation = data.Position;
 		Name = data.Name;
 		if (this is Battery)
 		{

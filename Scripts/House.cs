@@ -12,7 +12,7 @@ public class House : Spatial
 	List<Furniture> FurnitureList = new List<Furniture>();
 
 	StaticBody HouseExterior;
-	Area HouseDoor;
+
 	public override void _Ready()
 	{
 		foreach (Node nd in GetChildren())
@@ -20,7 +20,6 @@ public class House : Spatial
 			if (nd is Furniture)
 				FurnitureList.Insert(FurnitureList.Count, (Furniture)nd);
 		}
-		HouseDoor = GetNode<Area>("HouseDoor");
 		HouseExterior = GetNode<StaticBody>("HouseExterior");
 		Node parent = GetParent();
 		
@@ -75,25 +74,23 @@ public class House : Spatial
 		foreach (Node nd in GetChildren())
 		{
 			if (nd is Furniture)
-				FurnitureList.Insert(FurnitureList.Count, (Furniture)nd);
-		}
-		for (int i = 0; i < FurnitureList.Count; i++)
-		{
-			int start = random.Next(0, ItemSpawnPool.Length * 2);
-			RandomUses ++;
-			if (start >= ItemSpawnPool.Length)
-				continue;
+			{
+				Furniture f = (Furniture)nd;
+				FurnitureList.Insert(FurnitureList.Count, f);
 
-			FurnitureList[i].SpawnItem(ItemSpawnPool[start]);
+				int start = random.Next(0, ItemSpawnPool.Length * 2);
+				RandomUses ++;
+
+				if (start >= ItemSpawnPool.Length)
+					continue;
+
+				f.SpawnItem(ItemSpawnPool[start]);
+			}
 		}
 	}
 	public void GetFurniture(out List<Furniture> furniture)
 	{
-		furniture = new List<Furniture>();
-		for (int i = 0; i < FurnitureList.Count; i++)
-		{
-			furniture.Insert(i, FurnitureList[i]);
-		}
+		furniture = FurnitureList;
 	}
 	public void InputData(HouseInfo data)
 	{

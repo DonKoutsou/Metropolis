@@ -17,20 +17,24 @@ public class NPC : Character
 
     public override void _Process(float delta)
     {
+		#if DEBUG
 		if (Engine.EditorHint)
 		{
 			GetNode<Position3D>("TalkPosition").Translation = TalkPosPos;
 			return;
 		}
+		#endif
 		base._Process(delta);
     }
     public override void _Ready()
 	{
+		#if DEBUG
+
 		if (Engine.EditorHint)
 		{
 			return;
 		}
-
+		#endif
 
 		base._Ready();
 		if (Sitting)
@@ -61,14 +65,17 @@ public class NPC : Character
 		}
 		GetNode<Position3D>("TalkPosition").Translation = TalkPosPos;
 	}
+	#if DEBUG
     public override void _PhysicsProcess(float delta)
     {
+		
 		if (Engine.EditorHint)
 		{
 			return;
 		}
         base._PhysicsProcess(delta);
     }
+	#endif
 	public void HighLightObject(bool toggle)
     {
 		Node skel = GetNode("Pivot").GetNode("Guy").GetNode("Armature").GetNode("Skeleton");

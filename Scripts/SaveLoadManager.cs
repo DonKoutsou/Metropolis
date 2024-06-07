@@ -30,28 +30,40 @@ public class SaveLoadManager : Control
 		if (world == null)
 			return;
 
-		foreach (IslandInfo ile in world.GetActiveIles())
-		{
-			world.ToggleIsland(ile, false, false);
-		}
+		
 
 		Player pl = Player.GetInstance();
 		if (pl == null)
 			return;
+
 		bool HasVecicle = pl.HasVecicle;
-		
-		Dictionary<string, object> data = map.GetSaveData();
-		data.Add("playerHasVehicle", HasVecicle);
+		Dictionary<string, object> pldata = new Dictionary<string, object>(){
+			
+		};
+		pldata.Add("playerHasVehicle", HasVecicle);
 		if (HasVecicle)
 		{
 			Vehicle veh = pl.currveh;
-			data.Add("VehicleName", veh.GetParent().Name);
-			data.Add("VehicleState", veh.IsRunning());
-			data.Add("WingState", veh.HasDeployedWings());
-			data.Add("LightState", veh.LightCondition());
+			pldata.Add("VehicleName", veh.GetParent().Name);
+			pldata.Add("VehicleState", veh.IsRunning());
+			pldata.Add("WingState", veh.HasDeployedWings());
+			pldata.Add("LightState", veh.LightCondition());
+			pldata.Add("PlayerLocation", ((Spatial)veh.GetParent()).GlobalTranslation);
 		}
-			
-		data.Add("PlayerLocation", pl.GlobalTranslation);
+		else
+			pldata.Add("PlayerLocation", pl.GlobalTranslation);
+
+		foreach (IslandInfo ile in world.GetActiveIles())
+		{
+			world.ToggleIsland(ile, false, false);
+		}
+		Dictionary<string, object> data = map.GetSaveData();
+		
+		foreach (KeyValuePair<string, object> dat in pldata)
+		{
+			data.Add(dat.Key, dat.Value);
+		}
+		
 		data.Add("PlayerEnergy", pl.GetCurrentEnergy());
 
 		int day, hour, mins;
@@ -121,6 +133,7 @@ public class SaveLoadManager : Control
 		save.finishedspawning = (bool)data["finishedspawning"];
 		save.playerlocation = pl.GlobalTranslation;
 		save.playerenergy = pl.GetCurrentEnergy();*/
+		
 
 		//File savef = new File();
 		ResourceSaver.Save("user://SavedGame.tres", (Resource)save);

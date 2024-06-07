@@ -17,10 +17,10 @@ public class Furniture : Spatial
 	public void SpawnItem(PackedScene it)
 	{
 		Item itemToDrop = (Item)it.Instance();
-		AddChild(itemToDrop);
-		itemToDrop.GlobalTranslation = GlobalTransform.origin;
+		//AddChild(itemToDrop);
+		//itemToDrop.GlobalTranslation = GlobalTransform.origin;
 		StashedItem = itemToDrop;
-		StashedItem.Hide();
+		//StashedItem.Hide();
 	}
 	public void RespawnItem(PackedScene it)
 	{

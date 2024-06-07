@@ -27,6 +27,9 @@ public class SoundMap : GridMap
     [Export(PropertyHint.Layers3dPhysics)]
     public uint CheckLayer { get; set; }
 
+    //[Export(PropertyHint.Layers3dPhysics)]
+    //public uint SeaLayer { get; set; }
+
     Vector3 currenttile = new Vector3(0,0,0);
 
     float scale;
@@ -41,29 +44,39 @@ public class SoundMap : GridMap
 
     public override void _Ready()
     {
-        PlLoc = GetNode<Position3D>("PlayerLocator");
-
-        SeekRandom = new RandomNumberGenerator();
-        SeekRandom.Seed = (ulong)Settings.GetGameSettings().Seed;
-
-        for (int i = 0; i < SoundScenes.Count; i++)
+        if (!Engine.EditorHint)
         {
+            CylinderMesh mesh = new CylinderMesh(){TopRadius = 0, BottomRadius = 0};
 
-            Spatial sound = SoundScenes[i].Instance<Spatial>();
+            MeshLibrary.SetItemMesh(0, mesh);
+            PlLoc = GetNode<Position3D>("PlayerLocator");
 
-            SampleLenghts.Add(sound.GetNode<AudioStreamPlayer3D>("AudioStreamPlayer3D").Stream.GetLength());
+            SeekRandom = new RandomNumberGenerator();
+            SeekRandom.Seed = (ulong)Settings.GetGameSettings().Seed;
 
-            AddChild(sound);
+            for (int i = 0; i < SoundScenes.Count; i++)
+            {
 
-            Vector3 offset = GlobalTranslation;
-            offset.y -= 1000;
-            sound.GlobalTranslation = offset;
+                Spatial sound = SoundScenes[i].Instance<Spatial>();
 
-            sound.GetNode<AudioStreamPlayer3D>("AudioStreamPlayer3D").Play();
+                SampleLenghts.Add(sound.GetNode<AudioStreamPlayer3D>("AudioStreamPlayer3D").Stream.GetLength());
+
+                AddChild(sound);
+
+                Vector3 offset = GlobalTranslation;
+                offset.y -= 1000;
+                sound.GlobalTranslation = offset;
+
+                sound.GetNode<AudioStreamPlayer3D>("AudioStreamPlayer3D").Play();
+            }
+            scale = 8000 / CellSize.x;
         }
         
 
-        scale = 8000 / CellSize.x;
+        
+        
+
+        
     }
     public void SpawnSoundAt(int sound, Vector3 at)
     {
@@ -156,7 +169,7 @@ public class SoundMap : GridMap
     public override void _Process(float delta)
     {
         base._Process(delta);
-        
+        #if DEBUG
         if (Engine.EditorHint)
         {
             if (RedoMapping)
@@ -184,6 +197,7 @@ public class SoundMap : GridMap
                     for (int r = 0; r < 9; r++)
                     {
                         var Groundresult = spaceState.IntersectRay(global + (Checking * (CellSize / 2)), RayTo + (Checking * (CellSize / 2)), null, CheckLayer);
+                        
 
                         if (Checking.x >= 1)
                         {
@@ -197,6 +211,8 @@ public class SoundMap : GridMap
 
                         if (Groundresult.Count == 0)
                             continue;
+
+                        //var Searesult = spaceState.IntersectRay(global + (Checking * (CellSize / 2)), RayTo + (Checking * (CellSize / 2)), null, SeaLayer);
 
                         bool ItsSea = ((CollisionObject)Groundresult["collider"]).GetCollisionLayerBit(8);
                         if (ItsSea)
@@ -232,6 +248,7 @@ public class SoundMap : GridMap
                 RedoMapping = false;
             }
         }
+        #endif
     }
     private void ClearChildren()
     {

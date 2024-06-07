@@ -201,76 +201,74 @@ public class Island : Spatial
 			h.StartHouse(r, out RandomUsedFromHouses);
 		}
 		RandomUses += RandomUsedFromHouses;
-		CharacterSpawnLocations Chars = GetNodeOrNull<CharacterSpawnLocations>("CharacterSpawnLocations");
-		if (Chars != null)
+		CharacterSpawnLocations Chars = GetNode<CharacterSpawnLocations>("CharacterSpawnLocations");
+		//if (Chars != null)
+		//{
+			
+			//if (Children.Count > 0)
+			//{
+		if (Chars.HasChars())
 		{
 			var Children = Chars.GetChildren();
-			if (Children.Count > 0)
+			foreach (Position3D pos in Children)
 			{
-				if (Chars.HasChars())
+				int Spawn = r.Next(0, 2);
+				RandomUses ++;
+				if (Spawn == 0)
 				{
-					//
-					foreach (Position3D pos in Children)
-					{
-						int Spawn = r.Next(0, 2);
-						RandomUses ++;
-						if (Spawn == 0)
-						{
-							int selection = r.Next(1, Chars.CharSpawns.Count());
-							RandomUses ++;
-							NPC chara = (NPC)Chars.CharSpawns[selection - 1].Instance();
-							chara.Set("spawnUncon", true);
-							AddChild(chara);
-							chara.Translation = pos.Translation;
-						}
-					}
+					int selection = r.Next(1, Chars.CharSpawns.Count());
+					RandomUses ++;
+					NPC chara = (NPC)Chars.CharSpawns[selection - 1].Instance();
+					chara.Set("spawnUncon", true);
+					AddChild(chara);
+					chara.Translation = pos.Translation;
 				}
 			}
 		}
+			//}
+		//}
 		
-		VehicleSpawnLocation Vehs = GetNodeOrNull<VehicleSpawnLocation>("VehicleSpawnLocation");
-		if (Vehs != null)
+		VehicleSpawnLocation Vehs = GetNode<VehicleSpawnLocation>("VehicleSpawnLocation");
+		//if (Vehs != null)
+		//{
+			
+			//if (VehChild.Count > 0)
+			//{
+		if (Vehs.HasVehicles())
 		{
 			var VehChild = Vehs.GetChildren();
-			if (VehChild.Count > 0)
+			foreach (Position3D pos in VehChild)
 			{
-				if (Vehs.HasVehicles())
+				int Spawn = r.Next(0, 2);
+				RandomUses ++;
+				if (Spawn == 0)
 				{
-					//
-					foreach (Position3D pos in VehChild)
-					{
-						int Spawn = r.Next(0, 2);
-						RandomUses ++;
-						if (Spawn == 0)
-						{
-							int selection = r.Next(1, Vehs.VehSpawns.Count());
-							RandomUses ++;
-							Spatial veh = (Spatial)Vehs.VehSpawns[selection - 1].Instance();
-							AddChild(veh);
-							veh.Translation = pos.Translation;
-							Vehicle vehchild = veh.GetNode<Vehicle>("VehicleBody");
-							if (vehchild.SpawnBroken)
-							{
-								vehchild.OnLightDamaged();
-							}
-						}
-					}
+					int selection = r.Next(1, Vehs.VehSpawns.Count());
+					RandomUses ++;
+					Spatial veh = (Spatial)Vehs.VehSpawns[selection - 1].Instance();
+					AddChild(veh);
+					veh.Translation = pos.Translation;
+					Vehicle vehchild = veh.GetNode<Vehicle>("VehicleBody");
+					if (vehchild.SpawnBroken)
+						vehchild.OnLightDamaged();
 				}
 			}
 		}
+			//}
+		//}
 		
 	}
 	public void RegisterChild(Node child)
 	{
-		if (child is House)
+		if (child is House && !Houses.Contains(child))
 			Houses.Insert(Houses.Count, (House)child);
-		else if (child is WindGenerator)
+		else if (child is WindGenerator && !Generators.Contains(child))
 			Generators.Insert(Generators.Count, (WindGenerator)child);
-		else if (child is Vehicle)
+		else if (child is Vehicle && !Vehicles.Contains(child))
 			Vehicles.Insert(Vehicles.Count, (Vehicle)child);
-		else if (child is Item)
+		else if (child is Item && !Items.Contains(child))
 			Items.Insert(Items.Count, (Item)child);
-		else if (child is Character)
+		else if (child is Character && !Characters.Contains(child))
 			Characters.Insert(Characters.Count, (Character)child);
 	}
 	public void UnRegisterChild(Node child)
@@ -286,7 +284,7 @@ public class Island : Spatial
 		else if (child is Character && Characters.Contains(child))
 			Characters.Remove((Character)child);
 	}
-	private void FindChildren(Node node)
+	public void FindChildren(Node node)
 	{
 		//ulong ms = OS.GetSystemTimeMsecs();
 		foreach (Node child in node.GetChildren())
@@ -299,6 +297,8 @@ public class Island : Spatial
 				Vehicles.Insert(Vehicles.Count, (Vehicle)child);
 			else if (child is Item)
 				Items.Insert(Items.Count, (Item)child);
+			else if (child is Character)
+				Characters.Insert(Characters.Count, (Character)child);
 			else
 				FindChildren(child);
 		}
@@ -825,7 +825,7 @@ public class ItemInfo
 	public void UpdateInfo(Item it)
 	{
 		Name = it.Name;
-		Position = it.GlobalTranslation;
+		Position = it.Translation;
 		SceneData = it.Filename;
 		if (it is Battery)
 		{

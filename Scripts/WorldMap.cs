@@ -289,6 +289,8 @@ public class WorldMap : TileMap
 		{
 			SaveIsland(GenerateIsland());
 
+				
+
 			if (currentile == LoadingScreen.GetWaitTime())
 			{
 				SpawnIntro();
@@ -306,8 +308,9 @@ public class WorldMap : TileMap
 	//spawning and
 	IslandInfo GenerateIsland()
 	{
-		//ulong ms = OS.GetSystemTimeMsecs();
-
+		#if DEBUG
+		ulong ms = OS.GetSystemTimeMsecs();
+		#endif
 		//Get Cell id
 		int id = GetCell((int)OrderedCells[currentile].x, (int)OrderedCells[currentile].y);
 		//Cell cords
@@ -338,11 +341,11 @@ public class WorldMap : TileMap
 		if (id == 0)
 			entry = ileinfo;
 
-
-		//ulong msaf = OS.GetSystemTimeMsecs();
-		//if (msaf - ms > 10)
-			//GD.Print("Island Generated. Process time : " + (msaf - ms).ToString() + " ms. Island scene =  " + ilescene.ResourcePath);
-
+		#if DEBUG
+		ulong msaf = OS.GetSystemTimeMsecs();
+		if (msaf - ms > 20)
+			GD.Print("Island Generated. Process time : " + (msaf - ms).ToString() + " ms. Island scene =  " + ilescene.ResourcePath);
+		#endif
 		return ileinfo;
 	}
 	public void SaveIsland(IslandInfo iletosave)
@@ -456,7 +459,7 @@ public class WorldMap : TileMap
 		info.ile = Ile;
 
 		MyWorld.GetInstance().AddChild(Ile);
-		
+		//Ile.FindChildren(Ile);
 		return Ile;
 	}
 	public Island ReSpawnIsland(IslandInfo info)

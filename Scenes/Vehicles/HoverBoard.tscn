@@ -305,28 +305,25 @@ anims/Wings = SubResource( 44 )
 anims/WingsOut = SubResource( 45 )
 
 [node name="RayFL" parent="." index="2"]
-transform = Transform( 0.999999, -3.56142e-08, 2.24099e-08, 3.57214e-08, 1, -8.96398e-09, -2.23517e-08, 8.96398e-09, 1, 3, 0.8, 8 )
+transform = Transform( 0.999999, -3.59636e-08, 2.24099e-08, 3.60707e-08, 1, -8.61473e-09, -2.23517e-08, 8.61473e-09, 1, 3, 0.8, 8 )
 
 [node name="MeshInstance" parent="RayFL" index="0"]
 material/0 = SubResource( 38 )
 
-[node name="RayF" parent="." index="3"]
-transform = Transform( 1, 1.77295e-10, 0, 5.39274e-10, 1, -4.65661e-10, 2.91038e-10, -4.65661e-10, 1, -0.00105671, -0.655451, 4.81077 )
-
-[node name="RayFR" parent="." index="4"]
-transform = Transform( 1, 2.71546e-07, 5.75674e-08, -2.71462e-07, 1, -9.76725e-08, -5.75092e-08, 9.76725e-08, 1, -3, 0.8, 8 )
+[node name="RayFR" parent="." index="3"]
+transform = Transform( 1, 2.71371e-07, 5.75674e-08, -2.71287e-07, 1, -9.73232e-08, -5.75092e-08, 9.73232e-08, 1, -3, 0.8, 8 )
 
 [node name="MeshInstance" parent="RayFR" index="0"]
 material/0 = SubResource( 38 )
 
-[node name="RayBR" parent="." index="5"]
-transform = Transform( 1, 2.73754e-07, 5.82077e-08, -2.73673e-07, 1, -9.15024e-08, -5.81495e-08, 9.16189e-08, 1, -7, 0.8, -9 )
+[node name="RayBR" parent="." index="4"]
+transform = Transform( 1, 2.7358e-07, 5.82077e-08, -2.73499e-07, 1, -9.15024e-08, -5.81495e-08, 9.16189e-08, 1, -7, 0.8, -9 )
 
 [node name="MeshInstance" parent="RayBR" index="0"]
 material/0 = SubResource( 38 )
 
-[node name="RayBL" parent="." index="6"]
-transform = Transform( 1, 2.7329e-07, 5.67525e-08, -2.73209e-07, 1, -9.39472e-08, -5.66943e-08, 9.40636e-08, 1, 7, 0.8, -9 )
+[node name="RayBL" parent="." index="5"]
+transform = Transform( 1, 2.73115e-07, 5.67525e-08, -2.73035e-07, 1, -9.38307e-08, -5.66943e-08, 9.38307e-08, 1, 7, 0.8, -9 )
 
 [node name="MeshInstance" parent="RayBL" index="0"]
 material/0 = SubResource( 38 )

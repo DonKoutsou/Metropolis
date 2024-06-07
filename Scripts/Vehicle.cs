@@ -48,7 +48,7 @@ public class Vehicle : RigidBody
 
     ///////////Hover Rays////////////////
     List<RayCast> Rays = new List<RayCast>();
-    RayCast frontray;
+    //RayCast frontray;
     /////////////////////////////////////
     public Vector3 loctomove;
 
@@ -90,12 +90,12 @@ public class Vehicle : RigidBody
         ExaustParticles[2].Emitting = false;
         ExaustParticles[3].Emitting = false;
         Spatial parent = (Spatial)GetParent();
-        frontray = parent.GetNode<RayCast>("RayF");
+        //frontray = parent.GetNode<RayCast>("RayF");
         Rays.Insert(0, parent.GetNode<RayCast>("RayFL"));
         Rays.Insert(1, parent.GetNode<RayCast>("RayFR"));
         Rays.Insert(2, parent.GetNode<RayCast>("RayBL"));
         Rays.Insert(3, parent.GetNode<RayCast>("RayBR"));
-        ((Spatial)GetParent()).GlobalRotation = Vector3.Zero;
+        //((Spatial)GetParent()).GlobalRotation = Vector3.Zero;
 
         DamageMan = GetParent().GetNode<VehicleDamageManager>("VehicleDamageManager");
         for (int i = 0; i < 4; i++)
@@ -226,22 +226,20 @@ public class Vehicle : RigidBody
         {
             for (int i = 0; i < WingMaterials.Count; i++)
             {
-                if (DamageMan.IsWingWorking(i))
-                    WingMaterials[i].SetShaderParam("strength", 0);
+                //if (DamageMan.IsWingWorking(i))
+                WingMaterials[i].SetShaderParam("strength", 0);
             }
-            WindOnWings = false;
         }
         else
         {
             float amm = DayNight.GetWindStr() / 10;
             for (int i = 0; i < WingMaterials.Count; i++)
             {
-                if (DamageMan.IsWingWorking(i))
-                    WingMaterials[i].SetShaderParam("strength", amm);
+                //if (DamageMan.IsWingWorking(i))
+                WingMaterials[i].SetShaderParam("strength", amm);
             }
-            WindOnWings = true;
         }
-        
+        WindOnWings = toggle;
     }
     public bool IsBoatFacingWind()
     {
@@ -253,19 +251,19 @@ public class Vehicle : RigidBody
     {
         float Force = Hoverforcecurve.Interpolate(latsspeed /(speed)) * HoverForce;
         float forcemulti = 1;
-        if (Working)
+        /*if (Working)
         {
-            frontray.ForceRaycastUpdate();
+            //frontray.ForceRaycastUpdate();
             if (frontray.IsColliding())
             {
                 forcemulti = 4;
             }
-        }
+        }*/
         for (int i = 0; i < Rays.Count; i ++)
         {
             
             RayCast ray = Rays[i];
-            ray.ForceRaycastUpdate();
+            //ray.ForceRaycastUpdate();
             
             if (ray.IsColliding())
             {
@@ -325,7 +323,7 @@ public class Vehicle : RigidBody
             AddTorque(torq * rotmulti * 0.2f);
         }
 
-        //keeping balance and casizing if to rotated in z
+        
         float rotz = Mathf.Rad2Deg(Rotation.z);
 
         if (rotz > 5 || rotz < -5)
@@ -335,7 +333,7 @@ public class Vehicle : RigidBody
             Vector3 torq = GlobalTransform.basis.z * -sign * turnspeed * delta;
             AddTorque(torq * rotmulti * 0.2f);
         }
-
+        //keeping balance and casizing if to rotated in z
         if (rotx > 100 || rotx < -100 || rotz < -100 || rotz > 100)
             Capsize();
     }
@@ -466,8 +464,8 @@ public class Vehicle : RigidBody
         if (!isthing)
         {
             Transform prevpos = ((Spatial)GetParent()).GlobalTransform;
-            GetParent().GetParent().RemoveChild(GetParent());
-            MyWorld.GetInstance().AddChild(GetParent());
+            //GetParent().GetParent().RemoveChild(GetParent());
+            //MyWorld.GetInstance().AddChild(GetParent());
             ((Spatial)GetParent()).GlobalTransform = prevpos;
         }
         
@@ -582,8 +580,8 @@ public class Vehicle : RigidBody
         //    GetParent().QueueFree();
         //    return;
         //}
-		GlobalTranslation = data.loc;
-        GlobalRotation = data.rot;
+		((Spatial)GetParent()).Translation = data.loc;
+        ((Spatial)GetParent()).Rotation = data.rot;
         GetParent().GetNode<VehicleDamageManager>("VehicleDamageManager").InputData(data.DamageInfo);
 	}
     public void ReparentVehicle(Island from, Island ile)
@@ -622,8 +620,8 @@ public class VehicleInfo
     public string scenedata;
     public void UpdateInfo(Vehicle veh)
     {
-        loc = veh.GlobalTranslation;
-        rot = veh.GlobalRotation;
+        loc = ((Spatial)veh.GetParent()).Translation;
+        rot = ((Spatial)veh.GetParent()).Rotation;
         VehicleDamageManager Damageman = veh.GetParent().GetNode<VehicleDamageManager>("VehicleDamageManager");
         DamageInfo = new VehicleDamageInfo();
         DamageInfo.UpdateInfo(veh);
@@ -631,8 +629,8 @@ public class VehicleInfo
     public void SetInfo(Vehicle veh)
     {
         VehName = veh.GetParent().Name;
-        loc = veh.GlobalTranslation;
-        rot = veh.GlobalRotation;
+        loc = ((Spatial)veh.GetParent()).Translation;
+        rot = ((Spatial)veh.GetParent()).Rotation;
         scenedata = veh.GetParent().Filename;
         VehicleDamageManager Damageman = veh.GetParent().GetNode<VehicleDamageManager>("VehicleDamageManager");
         DamageInfo = new VehicleDamageInfo();
