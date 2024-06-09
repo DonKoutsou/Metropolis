@@ -109,7 +109,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.755, 243.768 )
 material_override = SubResource( 2 )
 amount = 8000
 visibility_aabb = AABB( -138.138, -205.176, -393.492, 276.276, 410.353, 786.984 )
-local_coords = false
 draw_order = 2
 process_material = SubResource( 1 )
 draw_pass_1 = SubResource( 3 )

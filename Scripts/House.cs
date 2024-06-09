@@ -11,7 +11,7 @@ public class House : Spatial
 	public PackedScene[] ItemSpawnPool;
 	List<Furniture> FurnitureList = new List<Furniture>();
 
-	StaticBody HouseExterior;
+	public StaticBody HouseExterior;
 
 	public override void _Ready()
 	{
@@ -32,7 +32,7 @@ public class House : Spatial
 		Island ile = (Island)parent;
 		ile.RegisterChild(this);
 	}
-	public void Entered(Node body)
+	public virtual void Entered(Node body)
 	{
 		((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Front;
 		((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(2)).ParamsCullMode = SpatialMaterial.CullMode.Front;
@@ -48,7 +48,7 @@ public class House : Spatial
 		return;
 
 	}
-	public void Left(Node body)
+	public virtual void Left(Node body)
 	{
 		((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Disabled;
 		((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(2)).ParamsCullMode = SpatialMaterial.CullMode.Disabled;

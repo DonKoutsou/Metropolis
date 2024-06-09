@@ -30,31 +30,12 @@ uniform sampler2D normalmap_texture : hint_normal;
 uniform sampler2D noise_texture : hint_black; 
 uniform sampler2D Gradient : hint_black;
 
-// variables from CaptainProton42
-
-uniform bool clamp_diffuse_to_max = false;
-
-uniform int cuts : hint_range(1, 8) = 3;
-uniform float wrap : hint_range(-2.0f, 2.0f) = 0.0f;
-uniform float steepness : hint_range(1.0f, 8.0f);
-
-uniform bool use_attenuation = true;
-
-uniform bool use_specular = true;
-uniform float specular_strength : hint_range(0.0f, 1.0f) = 1.0f;
-uniform float specular_shininess : hint_range(0.0f, 32.0f) = 16.0f;
-uniform sampler2D specular_map : hint_albedo;
-
-uniform bool use_rim = true;
-uniform float rim_width : hint_range(0.0f, 16.0f) = 8.0f;
-uniform vec4 rim_color : hint_color = vec4(1.0f);
-// end from CaptainProton42 variables
 
 
 uniform float strength = 1.0;
 uniform float speed = 1.0;
 
-uniform float substractuv = 0.1;
+//uniform float substractuv = 0.1;
 
 uniform float inflation = 1.0;
 
@@ -199,20 +180,8 @@ resource_local_to_scene = true
 next_pass = SubResource( 4 )
 shader = SubResource( 7 )
 shader_param/color = Color( 0.905882, 0.717647, 0.494118, 1 )
-shader_param/clamp_diffuse_to_max = false
-shader_param/cuts = 3
-shader_param/wrap = 0.0
-shader_param/steepness = 1.0
-shader_param/use_attenuation = false
-shader_param/use_specular = false
-shader_param/specular_strength = 1.0
-shader_param/specular_shininess = 16.0
-shader_param/use_rim = false
-shader_param/rim_width = 1.591
-shader_param/rim_color = Color( 1, 1, 1, 1 )
 shader_param/strength = 20.0
 shader_param/speed = 1.0
-shader_param/substractuv = 0.05
 shader_param/inflation = 0.046
 shader_param/noise_texture = SubResource( 2 )
 shader_param/Gradient = SubResource( 12 )

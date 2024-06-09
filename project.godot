@@ -160,6 +160,7 @@ ResourceScriptDirectories=[ "res://", "res://Scripts/" ]
 
 config/name="Μητρόπολη"
 run/main_scene="res://Scenes/World/MainWorld.tscn"
+run/delta_sync_after_draw=true
 boot_splash/show_image=false
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://icon.png"
@@ -317,6 +318,10 @@ dialogic_default_action={
 3d_physics/layer_8="KillField"
 3d_physics/layer_9="Sea"
 
+[memory]
+
+limits/command_queue/multithreading_queue_size_kb=1024
+
 [mono]
 
 project/assembly_name="Μητρόπολη"
@@ -325,18 +330,21 @@ debugger_agent/wait_timeout=6000
 
 [physics]
 
+3d/smooth_trimesh_collision=true
 common/enable_pause_aware_picking=true
+3d/active_soft_world=false
 
 [rendering]
 
-threads/thread_model=2
 quality/shadows/filter_mode=2
-quality/reflections/high_quality_ggx=false
+misc/occlusion_culling/max_active_spheres=16
+misc/occlusion_culling/max_active_polygons=16
+gles3/shaders/shader_compilation_mode=2
+gles3/shaders/shader_cache_size_mb=1024
 quality/subsurface_scattering/quality=0
 environment/default_clear_color=Color( 1, 1, 1, 1 )
 quality/filters/msaa=2
 quality/filters/use_fxaa=true
-quality/depth/use_32_bpc_depth=true
 environment/default_environment="res://new_environment2.tres"
 quality/godrays/sample_number=50
 quality/godrays/use_pcf5=true

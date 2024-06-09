@@ -115,7 +115,7 @@ public class Inventory : Spatial
 
         RemoveChild(item);
         IslandInfo info = WorldMap.GetInstance().GetCurrentIleInfo();
-        Island ile = info.ile;
+        Island ile = info.Island;
         ile.AddChild(item);
         ile.RegisterChild(item);
         info.AddNewItem(item);

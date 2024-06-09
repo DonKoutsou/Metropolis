@@ -42,12 +42,22 @@ public class WindGenerator : StaticBody
 		while (!(parent is Island))
 		{
             if (parent == null)
-				return;
+            {
+                SetProcess(false);
+                return;
+            }
+				
 			parent = parent.GetParent();
 		}
 		Island ile = (Island)parent;
 		ile.RegisterChild(this);
+
+
+        //WindGenThread = new Thread();
+        //WindGenThread.Start(this, "UpdateGenerator", GlobalRotation);
     }
+    //Thread WindGenThread;
+    //Mutex mut = new Mutex();
     float d = 0.5f;
     public override void _Process(float delta)
     {
@@ -56,11 +66,27 @@ public class WindGenerator : StaticBody
 		if (d > 0)
             return;
         d = 0.5f;
+
+        UpdateGenerator();
+        /*if (!WindGenThread.IsAlive())
+        {
+            WindGenThread.WaitToFinish();
+            WindGenThread = new Thread();
+            WindGenThread.Start(this, "UpdateGenerator", GlobalRotation);
+                
+        }*/
+    }
+    public void UpdateGenerator()
+    {
+        //mut.Lock();
         float winddir = DayNight.GetWindDirection();
         float windstr = DayNight.GetWindStr();
+        //mut.Unlock();
         //Spatial rotorpivot = GetNode<Spatial>("Rotor_Pivot");
         float rot = winddir;
+        //mut.Lock();
         Vector3 originalRotation = GlobalRotation;
+        //mut.Unlock();
         rot += Mathf.Rad2Deg(originalRotation.y) + 180;
         if (rot > 360)
             rot = rot - 360;
@@ -74,7 +100,9 @@ public class WindGenerator : StaticBody
         
         if (CurrentEnergy + energy < EnergyCapacity)
         {
+            //mut.Lock();
             CurrentEnergy += energy;
+            //mut.Unlock();
         }
     }
     private void _on_Generator_visibility_changed()

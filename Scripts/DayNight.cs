@@ -305,7 +305,7 @@ public class DayNight : WorldEnvironment
     }
     private void UpdateTime()
     {
-        currentmins += 0.016f * timeprogmultiplier;
+        currentmins += 0.005f * timeprogmultiplier;
         
         if (currentmins > 60)
         {
@@ -338,13 +338,20 @@ public class DayNight : WorldEnvironment
     float SunGodRayBrightness;
     Color MoonColor;
     float MoonGodRayBrightness;
+
+    float d = 1;
     public override void _Process(float delta)
     {
         base._Process(delta);
+    
+        d -= delta;
+
+        if (d > 0)
+            return;
+        d = 1;
 
         UpdateTime();
-            
-        
+
         UpdateWind();
 
         UpdateRain();

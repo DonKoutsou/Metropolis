@@ -5,5 +5,17 @@
 
 [node name="StaticBody" instance=ExtResource( 1 )]
 
-[node name="MeshInstance" parent="." index="0"]
+[node name="MeshInstance2" parent="." index="0"]
+material/0 = ExtResource( 2 )
+
+[node name="MeshInstance3" parent="." index="1"]
+material/0 = ExtResource( 2 )
+
+[node name="MeshInstance4" parent="." index="2"]
+material/0 = ExtResource( 2 )
+
+[node name="MeshInstance5" parent="." index="3"]
+material/0 = ExtResource( 2 )
+
+[node name="MeshInstance6" parent="." index="4"]
 material/0 = ExtResource( 2 )

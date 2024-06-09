@@ -6,7 +6,9 @@
 [ext_resource path="res://Assets/TerainTex/Concrete004_1K-PNG/Concrete004_1K-PNG_AmbientOcclusion.png" type="Texture" id=4]
 
 [resource]
+resource_local_to_scene = true
 flags_world_triplanar = true
+params_cull_mode = 1
 albedo_texture = ExtResource( 1 )
 roughness_texture = ExtResource( 3 )
 roughness_texture_channel = 4

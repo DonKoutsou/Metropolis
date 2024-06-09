@@ -37,11 +37,8 @@ public class SoundMap : GridMap
     Dictionary<Vector3, Spatial> Sounds = new Dictionary<Vector3, Spatial>();
 
     Position3D PlLoc;
-    private void ViZ_Changed()
-    {
-        
-    } 
 
+    Godot.Collections.Array cells;
     public override void _Ready()
     {
         if (!Engine.EditorHint)
@@ -51,8 +48,9 @@ public class SoundMap : GridMap
             MeshLibrary.SetItemMesh(0, mesh);
             PlLoc = GetNode<Position3D>("PlayerLocator");
 
-            SeekRandom = new RandomNumberGenerator();
-            SeekRandom.Seed = (ulong)Settings.GetGameSettings().Seed;
+            SeekRandom = new RandomNumberGenerator(){
+                Seed = (ulong)Settings.GetGameSettings().Seed
+            };
 
             for (int i = 0; i < SoundScenes.Count; i++)
             {
@@ -70,13 +68,8 @@ public class SoundMap : GridMap
                 sound.GetNode<AudioStreamPlayer3D>("AudioStreamPlayer3D").Play();
             }
             scale = 8000 / CellSize.x;
+            cells = GetUsedCells();
         }
-        
-
-        
-        
-
-        
     }
     public void SpawnSoundAt(int sound, Vector3 at)
     {
@@ -90,7 +83,7 @@ public class SoundMap : GridMap
         
         SoundScene.GetNode<AudioStreamPlayer3D>("AudioStreamPlayer3D").Seek(SeekRandom.RandfRange(0, SampleLenghts[sound]));
 
-        //SoundScene.GetNode<AudioStreamPlayer3D>("AudioStreamPlayer3D").Play();
+        SoundScene.GetNode<AudioStreamPlayer3D>("AudioStreamPlayer3D").Play();
     }
     public void DespawnSoundAt(Vector3 at)
     {
@@ -104,15 +97,15 @@ public class SoundMap : GridMap
     {
         base._PhysicsProcess(delta);
         Player pl = Player.GetInstance();
+
         if (pl == null)
             return;
-        
         
         PlLoc.GlobalTranslation = pl.GlobalTranslation;
 
         Vector3 plpos = PlLoc.Translation;
 
-        plpos.y = 0; 
+        plpos.y = 0;
 
         Vector3 plposMap = WorldToMap(plpos);
 
@@ -124,9 +117,6 @@ public class SoundMap : GridMap
 
         if (Mathf.Abs(plposMap.x) > scale/2 || Mathf.Abs(plposMap.z) > scale/2)
             ClearChildren();
-
-        var cells = GetUsedCells();
-
 
         List <Vector3> Toremove = new List<Vector3>();
         foreach (KeyValuePair<Vector3, Spatial> sound in Sounds)
@@ -159,17 +149,18 @@ public class SoundMap : GridMap
                     SpawnSoundAt(GetCellItem((int)postocheck.x, (int)postocheck.y, (int)postocheck.z) ,postocheck);
             }
         }
-        foreach (KeyValuePair<Vector3, Spatial> sound in Sounds)
-        {
-            AudioStreamPlayer3D player = sound.Value.GetNode<AudioStreamPlayer3D>("AudioStreamPlayer3D");
-            if (!player.Playing)
-                player.Play();
-        }
+        //foreach (KeyValuePair<Vector3, Spatial> sound in Sounds)
+        //{
+        //    AudioStreamPlayer3D player = sound.Value.GetNode<AudioStreamPlayer3D>("AudioStreamPlayer3D");
+        //    if (!player.Playing)
+        //        player.Play();
+        //}
     }
+    #if DEBUG
     public override void _Process(float delta)
     {
         base._Process(delta);
-        #if DEBUG
+        
         if (Engine.EditorHint)
         {
             if (RedoMapping)
@@ -248,8 +239,8 @@ public class SoundMap : GridMap
                 RedoMapping = false;
             }
         }
-        #endif
     }
+    #endif
     private void ClearChildren()
     {
          foreach (KeyValuePair<Vector3, Spatial> sound in Sounds)

@@ -84,7 +84,7 @@ public class ActionMenu : Control
 			{
 				IslandInfo ileinfo = WorldMap.GetInstance().GetCurrentIleInfo();
 				ileinfo.RemoveItem(it);
-				ileinfo.ile.UnRegisterChild(it);
+				ileinfo.Island.UnRegisterChild(it);
 
 				if (it.GetItemType() == (int)ItemName.ROPE)
 				{

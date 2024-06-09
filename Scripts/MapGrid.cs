@@ -62,7 +62,7 @@ public class MapGrid : GridContainer
         MapGridx = par.GetParent().GetNode<Panel>("Panel3").GetNode<GridContainer>("MapGridX");
         MapGridy = par.GetParent().GetNode<Panel>("Panel2").GetNode<GridContainer>("MapGridY");
 
-       
+        SetProcessInput(false);
         //MarginLeft = -(RectSize.x / 2);
         //RectPosition = RectScale/2; 
     }
@@ -305,7 +305,7 @@ public class MapGrid : GridContainer
     public void OnIslandVisited(IslandInfo info)
     {
         MapTile MapIle;
-        MapIleList.TryGetValue(info.pos, out MapIle);
+        MapIleList.TryGetValue(info.Position, out MapIle);
         if (MapIle == null)
             return;
         Color col = MapIle.Modulate;

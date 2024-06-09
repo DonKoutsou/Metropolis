@@ -260,28 +260,28 @@ public class Island : Spatial
 	}
 	public void RegisterChild(Node child)
 	{
-		if (child is House && !Houses.Contains(child))
+		if (child is House)
 			Houses.Insert(Houses.Count, (House)child);
-		else if (child is WindGenerator && !Generators.Contains(child))
+		else if (child is WindGenerator)
 			Generators.Insert(Generators.Count, (WindGenerator)child);
-		else if (child is Vehicle && !Vehicles.Contains(child))
+		else if (child is Vehicle)
 			Vehicles.Insert(Vehicles.Count, (Vehicle)child);
-		else if (child is Item && !Items.Contains(child))
+		else if (child is Item)
 			Items.Insert(Items.Count, (Item)child);
-		else if (child is Character && !Characters.Contains(child))
+		else if (child is Character)
 			Characters.Insert(Characters.Count, (Character)child);
 	}
 	public void UnRegisterChild(Node child)
 	{
-		if (child is House && Houses.Contains(child))
+		if (child is House)
 			Houses.Remove((House)child);
-		else if (child is WindGenerator && Generators.Contains(child))
+		else if (child is WindGenerator)
 			Generators.Remove((WindGenerator)child);
-		else if (child is Vehicle && Vehicles.Contains(child))
+		else if (child is Vehicle)
 			Vehicles.Remove((Vehicle)child);
-		else if (child is Item && Items.Contains(child))
+		else if (child is Item)
 			Items.Remove((Item)child);
-		else if (child is Character && Characters.Contains(child))
+		else if (child is Character)
 			Characters.Remove((Character)child);
 	}
 	public void FindChildren(Node node)
@@ -360,9 +360,9 @@ public class Island : Spatial
 }
 public class IslandInfo
 {
-	public Island ile;
+	public Island Island;
 	public IleType Type;
-	public Vector2 pos;
+	public Vector2 Position;
 	public string SpecialName = null;
 	public PackedScene IleType;
 	public List<HouseInfo> Houses = new List<HouseInfo>();
@@ -372,16 +372,27 @@ public class IslandInfo
 	public List<ItemInfo> Items = new List<ItemInfo>();
 
 	public List<CharacterInfo> Characters = new List<CharacterInfo>();
-	public float rottospawn;
+	public float RotationToSpawn;
 	public bool KeepInstance;
 
+	public IslandInfo(float rotation, PackedScene scene, Vector2 cell, string specialn)
+	{
+		RotationToSpawn = rotation;
+		IleType = scene;
+		Position = cell;
+		SpecialName = specialn;
+	}
+	public IslandInfo(Godot.Object data)
+	{
+		UnPackData(data);
+	}
     public void UnPackData(Godot.Object data)
     {
         Type = (IleType)data.Get("Type");
-        pos = (Vector2)data.Get("Pos");
+        Position = (Vector2)data.Get("Pos");
 		SpecialName = (string)data.Get("SpecialName");
         IleType = (PackedScene)data.Get("Scene");
-        rottospawn = (float)data.Get("Rotation");
+        RotationToSpawn = (float)data.Get("Rotation");
 		KeepInstance = (bool)data.Get("KeepInstance");
 
         Godot.Collections.Array HouseData = ( Godot.Collections.Array)data.Get("Houses");
@@ -491,10 +502,10 @@ public class IslandInfo
 		Dictionary<string, object> data = new Dictionary<string, object>
         {
             { "Type", Type },
-            { "Pos", pos },
+            { "Pos", Position },
 			{ "SpecialName", SpecialName},
 			{"Scene", IleType},
-			{"Rotation", rottospawn},
+			{"Rotation", RotationToSpawn},
 			{"Houses", HouseInfoobjects},
 			{"Generators", GeneratorInfoobjects},
 			{"Items", ItemInfoobjects},
@@ -508,7 +519,7 @@ public class IslandInfo
     
 	public void SetInfo(Island Ile)
 	{
-		ile = Ile;
+		Island = Ile;
 		Type = Ile.GetIslandType();
 		KeepInstance = Ile.KeepInstance;
 		//SpecialName = Ile.IslandSpecialName;
@@ -768,11 +779,11 @@ public class IslandInfo
 	}
 	public bool IsIslandSpawned()
 	{
-		if (ile == null)
+		if (Island == null)
 			return false;
 		else
 		{
-			return Godot.Object.IsInstanceValid(ile);
+			return Godot.Object.IsInstanceValid(Island);
 		}
 		
 	}

@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Assets/TerainTex/MetalPlates013_1K-JPG/MetalPlates013_1K-JPG_Color.jpg" type="Texture" id=1]
 [ext_resource path="res://Assets/Clouds/Textures/smoke_01.png" type="Texture" id=2]
@@ -76,6 +76,9 @@ material = SubResource( 39 )
 
 [sub_resource type="ConcavePolygonShape" id=33]
 data = PoolVector3Array( -25, 30, 1, 25, 30, 1, -25, -30, 1, 25, 30, 1, 25, -30, 1, -25, -30, 1, 25, 30, -1, -25, 30, -1, 25, -30, -1, -25, 30, -1, -25, -30, -1, 25, -30, -1, 25, 30, 1, 25, 30, -1, 25, -30, 1, 25, 30, -1, 25, -30, -1, 25, -30, 1, -25, 30, -1, -25, 30, 1, -25, -30, -1, -25, 30, 1, -25, -30, 1, -25, -30, -1, 25, 30, 1, -25, 30, 1, 25, 30, -1, -25, 30, 1, -25, 30, -1, 25, 30, -1, -25, -30, 1, 25, -30, 1, -25, -30, -1, 25, -30, 1, 25, -30, -1, -25, -30, -1 )
+
+[sub_resource type="OccluderShapePolygon" id=46]
+polygon_points = PoolVector2Array( 25, -30, 25, 30, -25, 30, -25, -30 )
 
 [sub_resource type="QuadMesh" id=40]
 material = SubResource( 39 )
@@ -438,6 +441,9 @@ draw_order = 2
 process_material = SubResource( 29 )
 draw_pass_1 = SubResource( 41 )
 
+[node name="Occluder" type="Occluder" parent="MeshInstance"]
+shape = SubResource( 46 )
+
 [node name="MeshInstance2" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 0 )
 mesh = SubResource( 1 )
@@ -472,6 +478,9 @@ local_coords = false
 draw_order = 2
 process_material = SubResource( 29 )
 draw_pass_1 = SubResource( 40 )
+
+[node name="Occluder" type="Occluder" parent="MeshInstance2"]
+shape = SubResource( 46 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/CloseGate = SubResource( 36 )

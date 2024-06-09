@@ -87,7 +87,7 @@ public class MyWorld : Spatial
 	}
 	public static PackedScene GetItemByType(ItemName name)
 	{
-		PackedScene path = null;
+		PackedScene path;
 		GlobalItemList.TryGetValue((int)name, out path);
 		return path;
 	}
@@ -114,19 +114,22 @@ public class MyWorld : Spatial
 		{
 			foreach (IslandInfo IleArray in ilestoenable)
 			{
+				Vector2 ilepos = IleArray.Position;
 				if (Orderedilestoenable.Contains(IleArray))
 					continue;
-				float ind = Math.Abs(IleArray.pos.x) + Math.Abs(IleArray.pos.y);
+				float ind = Math.Abs(ilepos.x) + Math.Abs(ilepos.y);
 				if (Orderedilestoenable.Count == 0)
 				{
 					Orderedilestoenable.Insert(0, IleArray);
 					continue;
 				}
 				IslandInfo closest = Orderedilestoenable[0];
-				float dif = Math.Abs(Math.Abs(closest.pos.x) + Math.Abs(closest.pos.y) - ind);
+				Vector2 closestpos = closest.Position;
+				float dif = Math.Abs(Math.Abs(closestpos.x) + Math.Abs(closestpos.y) - ind);
 				for (int i = Orderedilestoenable.Count - 1; i > -1; i--)
 				{
-					float newdif = Math.Abs(Math.Abs(Orderedilestoenable[i].pos.x) + Math.Abs(Orderedilestoenable[i].pos.y) - ind);
+					Vector2 Orderedpos = Orderedilestoenable[i].Position;
+					float newdif = Math.Abs(Math.Abs(Orderedpos.x) + Math.Abs(Orderedpos.y) - ind);
 					if (dif > newdif)
 					{
 						closest = Orderedilestoenable[i];
@@ -134,7 +137,7 @@ public class MyWorld : Spatial
 					}
 				}
 
-				if (Math.Abs(closest.pos.x) + Math.Abs(closest.pos.y) < Math.Abs(IleArray.pos.x) + Math.Abs(IleArray.pos.y))
+				if (Math.Abs(closestpos.x) + Math.Abs(closestpos.y) < Math.Abs(ilepos.x) + Math.Abs(ilepos.y))
 				{
 					Orderedilestoenable.Insert(Orderedilestoenable.IndexOf(closest) + 1, IleArray);
 					continue;
@@ -153,24 +156,28 @@ public class MyWorld : Spatial
 			{
 				if (Orderedilestodissable.Contains(IleArray))
 					continue;
-				float ind = Math.Abs(IleArray.pos.x) + Math.Abs(IleArray.pos.y);
+
+				Vector2 ilepos = IleArray.Position;
+				float ind = Math.Abs(ilepos.x) + Math.Abs(ilepos.y);
 				if (Orderedilestodissable.Count == 0)
 				{
 					Orderedilestodissable.Insert(0, IleArray);
 					continue;
 				}
 				IslandInfo closest = Orderedilestodissable[0];
-				float dif = Math.Abs(Math.Abs(closest.pos.x) + Math.Abs(closest.pos.y) - ind);
+				Vector2 closestpos = closest.Position;
+				float dif = Math.Abs(Math.Abs(closestpos.x) + Math.Abs(closestpos.y) - ind);
 				for (int i = Orderedilestodissable.Count - 1; i > -1; i--)
 				{
-					float newdif = Math.Abs(Math.Abs(Orderedilestodissable[i].pos.x) + Math.Abs(Orderedilestodissable[i].pos.y) - ind);
+					Vector2 Orderedpos = Orderedilestoenable[i].Position;
+					float newdif = Math.Abs(Math.Abs(Orderedpos.x) + Math.Abs(Orderedpos.y) - ind);
 					if (dif > newdif)
 					{
 						closest = Orderedilestodissable[i];
 						dif = newdif;
 					}
 				}
-				if (Math.Abs(closest.pos.x) + Math.Abs(closest.pos.y) < Math.Abs(IleArray.pos.x) + Math.Abs(IleArray.pos.y))
+				if (Math.Abs(closestpos.x) + Math.Abs(closestpos.y) < Math.Abs(ilepos.x) + Math.Abs(ilepos.y))
 				{
 					Orderedilestodissable.Insert(Orderedilestodissable.IndexOf(closest) + 1, IleArray);
 					continue;
@@ -199,10 +206,7 @@ public class MyWorld : Spatial
 
 		List<IslandInfo> closestto;
 		map.GetClosestIles(to,out closestto, ViewDistance);
-		//List<IslandInfo> closestto2;
-		//WorldMap.GetInstance().GetClosestIles(to,out closestto2, 1);
-		//foreach(IslandInfo info in closestto2)
-			//MapGrid.GetInstance().OnIslandVisited(info);
+
 		for (int i = 0; i < closestfrom.Count; i ++)
 		{
 			if (closestfrom[i] == to)
@@ -218,27 +222,11 @@ public class MyWorld : Spatial
 				if (Orderedilestoenable.Contains(closestfrom[i]))
 					Orderedilestoenable.Remove(closestfrom[i]);
 			}
-			/*if (closestto.Contains(closestfrom[i]) || closestfrom[i] == to)
-			{
-				continue;
-			}
-			else
-			{
-				if (!ilestodissable.Contains(closestfrom[i]))
-				{
-					ilestodissable.Insert(ilestodissable.Count, closestfrom[i]);
 
-					if (Orderedilestoenable.Contains(closestfrom[i]))
-						Orderedilestoenable.Remove(closestfrom[i]);
-				}
-			}*/
 		}
 		for (int i = 0; i < closestto.Count; i ++)
 		{
-			//if (closestfrom.Contains(closestfrom[i]) || closestto[i] == from)
-			//{
-			//	continue;
-			//}
+
 			if (!ilestoenable.Contains(closestto[i]) )
 				ilestoenable.Insert(ilestoenable.Count, closestto[i]);
 			if (ilestodissable.Contains(closestto[i]))
@@ -255,18 +243,13 @@ public class MyWorld : Spatial
 	{
 		if (toggle && !ileinfo.IsIslandSpawned())
 		{
-			//if (!ActiveIles.Contains(ileinfo))
 			ActiveIles.Add(ileinfo);
-			
-			
 			WorldMap.GetInstance().ReSpawnIsland(ileinfo).InputData(ileinfo);
-			//ile.InputData(ileinfo);
 		}
 		else if (!toggle && ileinfo.IsIslandSpawned())
 		{
-			//f (ActiveIles.Contains(ileinfo))
 			ActiveIles.Remove(ileinfo);
-			Island ile = ileinfo.ile;
+			Island ile = ileinfo.Island;
 			ileinfo.UpdateInfo(ile);
 			if (ileinfo.KeepInstance == true)
 			{
@@ -278,11 +261,11 @@ public class MyWorld : Spatial
 		}
 		else if (toggle && ileinfo.KeepInstance == true && !ActiveIles.Contains(ileinfo))
 		{
-			//if (!ActiveIles.Contains(ileinfo))
 			ActiveIles.Add(ileinfo);
-			AddChild(ileinfo.ile);
-			ileinfo.ile.Visible = true;
-			ileinfo.ile.InputData(ileinfo);
+			Island i = ileinfo.Island;
+			AddChild(i);
+			i.Visible = true;
+			i.InputData(ileinfo);
 		}
 		if (affectneigh)
 		{
