@@ -182,7 +182,7 @@ public class DayNight : WorldEnvironment
     }
     private void CalculateDay(out Color FogColor, out Color FogSunColor, out Color AmbientLightColor, out Color BackgroundColor, out float AmbientLightEnergy)
     {
-        if (!day)
+        //if (!day)
             ToggleDay(0);
 
         sun.LightEnergy = SunBrightness;
@@ -203,7 +203,7 @@ public class DayNight : WorldEnvironment
     }
     private void CalculateNight(out Color FogColor, out Color FogSunColor, out Color AmbientLightColor, out Color BackgroundColor, out float AmbientLightEnergy)
     {
-        if (day)
+        //if (day)
             ToggleDay(1);
         
         moon.LightEnergy = MoonBrightness;
@@ -224,9 +224,9 @@ public class DayNight : WorldEnvironment
     }
     private void CalculateTransition(out Color FogColor, out Color FogSunColor, out Color AmbientLightColor, out Color BackgroundColor, out float AmbientLightEnergy)
     {
-        sun.Show();
-        moon.Show();
-            
+        //sun.Show();
+        //moon.Show();
+        ToggleDay(2);
         float multi;
 
         Color combination;
