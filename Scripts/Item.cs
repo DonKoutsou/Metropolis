@@ -27,6 +27,10 @@ public class Item : RigidBody
 	{
 		return ItemName;
 	}
+	public Vector3 GetActionPos(Vector3 PlayerPos)
+    {
+        return GlobalTranslation;
+    }
 	public virtual string GetItemDesc()
 	{
 		return ItemDesc;

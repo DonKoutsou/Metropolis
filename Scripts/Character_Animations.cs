@@ -13,6 +13,7 @@ public class Character_Animations : AnimationPlayer
     Particles walkpart;
     float currot;
     AnimationNodeStateMachinePlayback stateMachine;
+    AnimationPlayer AnimPlayer;
     public override void _Ready()
     {
         base._Ready();
@@ -27,6 +28,10 @@ public class Character_Animations : AnimationPlayer
     public bool IsStanding()
     {
         return stateMachine.GetCurrentNode() == "Standing";
+    }
+    public bool IsClimbing()
+    {
+        return CurrentAnimation == "ClimbUp" || CurrentAnimation == "ClimbDown";
     }
     public void ToggleInstrument(bool toggle)
     {
@@ -109,6 +114,18 @@ public class Character_Animations : AnimationPlayer
                     walkpart.Amount = 8;
                 break;
             }
+            case E_Animations.ClimbUp:
+            {
+                animtree.Set("parameters/Walking/ClimbUp/active", true);
+                walkpart.Emitting = false;
+                break;
+            }
+            case E_Animations.ClimbDown:
+            {
+                animtree.Set("parameters/Walking/ClimbDown/active", true);
+                walkpart.Emitting = false;
+                break;
+            }
             /*case E_Animations.Death:
             {
                 animtree.Set("parameters/SittingBlend/blend_amount", 0f);
@@ -143,4 +160,6 @@ public enum E_Animations
     Walk,
     Run,
     Jump,
+    ClimbUp,
+    ClimbDown
 }

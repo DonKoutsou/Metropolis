@@ -54,7 +54,7 @@ public class ActionMenu : Control
 	}
 	public void StartPerformingAction(int type)
 	{
-		pl.loctomove = SelectedObj.GlobalTranslation;
+		pl.loctomove = (Vector3)SelectedObj.Call("GetActionPos", pl.GlobalTranslation);;
 		PerformingAction = true;
 		ActionIndex = type;
 	}
@@ -64,7 +64,8 @@ public class ActionMenu : Control
 		{
 			TalkText.GetInst().Talk("Δεν μπορώ πάνω από την βάρκα", pl);
 		}
-		if (SelectedObj.GlobalTranslation.DistanceTo(pl.GlobalTranslation) > SelectedObj.GetNode<ActionComponent>("ActionComponent").ActionDistance)
+		Vector3 actionpos = (Vector3)SelectedObj.Call("GetActionPos", pl.GlobalTranslation);
+		if (actionpos.DistanceTo(pl.GlobalTranslation) > SelectedObj.GetNode<ActionComponent>("ActionComponent").ActionDistance)
 		{
 			if (!PerformingAction)
 			{
@@ -196,6 +197,10 @@ public class ActionMenu : Control
 			Position3D seat = sit.GetSeat();
 			pl.Sit(seat, sit);
 		}
+		else if (SelectedObj is Ladder)
+		{
+			((Ladder)SelectedObj).TraverseLadder(pl);
+		}
 		selecting = false;
 		Stop();
 	}
@@ -243,6 +248,10 @@ public class ActionMenu : Control
 				return;
 			}
 			TalkText.GetInst().Talk("Μπορώ να κάτσω.", pl);
+		}
+		else if (SelectedObj is Ladder)
+		{
+			TalkText.GetInst().Talk("Σκάλα", pl);
 		}
 	}
 	public void Start(Spatial obj)
@@ -293,6 +302,14 @@ public class ActionMenu : Control
 				PickButton.Text = "Άναψε.";
 			//PickButton.Hide();
 		}
+		else if (SelectedObj is Ladder)
+		{
+			//IntButton.Hide();
+			//FireplaceLight fp = (FireplaceLight)SelectedObj;
+
+			PickButton.Text = (string)SelectedObj.Call("GetActionName", pl.GlobalTranslation);
+			//PickButton.Hide();
+		}
 		Show();
 		SetProcess(true);
 	}
@@ -325,9 +342,10 @@ public class ActionMenu : Control
 	
 	public override void _Process(float delta)
 	{
-		var screenpos = GetTree().Root.GetCamera().UnprojectPosition(SelectedObj.GlobalTransform.origin);
+		Vector3 actionpos = (Vector3)SelectedObj.Call("GetActionPos", pl.GlobalTranslation);
+		var screenpos = GetTree().Root.GetCamera().UnprojectPosition(actionpos);
 
-		Vector3 pos = SelectedObj.GlobalTransform.origin;
+		//Vector3 pos = SelectedObj.GlobalTransform.origin;
 
 		//if (pl.GlobalTransform.origin.DistanceTo(pos) > 60 && selecting)
 			//PickButton.Hide();
@@ -347,7 +365,7 @@ public class ActionMenu : Control
 
 		if (PerformingAction)
 		{
-			if (SelectedObj.GlobalTranslation.DistanceTo(pl.GlobalTranslation) <= SelectedObj.GetNode<ActionComponent>("ActionComponent").ActionDistance)
+			if (actionpos.DistanceTo(pl.GlobalTranslation) <= SelectedObj.GetNode<ActionComponent>("ActionComponent").ActionDistance)
 			{
 				pl.loctomove = pl.GlobalTranslation;
 				if (ActionIndex == 0)
@@ -401,7 +419,8 @@ public class ActionMenu : Control
 				return;
 			}
 			Spatial obj = (Spatial)rayar["collider"];
-			if (obj.GlobalTransform.origin.DistanceTo(pl.GlobalTransform.origin) > 100)
+			Vector3 actionpos = (Vector3)obj.Call("GetActionPos", pl.GlobalTranslation);
+			if (actionpos.DistanceTo(pl.GlobalTransform.origin) > 100)
 			{
 				Stop();
 				return;

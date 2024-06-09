@@ -49,7 +49,7 @@ nodes/ChairBlend/position = Vector2( 186.667, 160 )
 nodes/IntrumentBlend/node = SubResource( 54 )
 nodes/IntrumentBlend/position = Vector2( 360, 266.667 )
 nodes/output/position = Vector2( 533.333, 160 )
-node_connections = [ "output", 0, "IntrumentBlend", "IntrumentBlend", 0, "ChairBlend", "IntrumentBlend", 1, "Animation 2", "ChairBlend", 0, "Animation", "ChairBlend", 1, "Animation 3" ]
+node_connections = [ "IntrumentBlend", 0, "ChairBlend", "IntrumentBlend", 1, "Animation 2", "output", 0, "IntrumentBlend", "ChairBlend", 0, "Animation", "ChairBlend", 1, "Animation 3" ]
 
 [sub_resource type="AnimationNodeAnimation" id=55]
 animation = "Standing"
@@ -121,12 +121,7 @@ material = SubResource( 61 )
 [node name="Gen3Machine" instance=ExtResource( 2 )]
 
 [node name="Armature" parent="." index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-
-[node name="Skeleton" parent="Armature" index="0"]
-transform = Transform( 0.024, 0, 0, 0, 0.024, 0, 0, 0, 0.024, 0, 0, 0 )
-bones/1/bound_children = [ NodePath("BoneAttachment2") ]
-bones/6/bound_children = [ NodePath("BoneAttachment") ]
+transform = Transform( 0.024, 0, 0, 0, 0.024, 6.77112e-09, 0, -6.77112e-09, 0.024, 0, 0, 0 )
 
 [node name="Arms" parent="Armature/Skeleton" index="0"]
 material/0 = ExtResource( 3 )
@@ -147,7 +142,7 @@ material/0 = ExtResource( 1 )
 material/0 = ExtResource( 4 )
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton" index="7"]
-transform = Transform( 0.997428, -0.0594475, -0.0400288, 0.0539254, 0.990413, -0.12718, 0.0472056, 0.124694, 0.991072, -0.614696, 265.489, 10.3813 )
+transform = Transform( 0.997587, -0.0633482, -0.0284133, 0.0596192, 0.99134, -0.117001, 0.035579, 0.115024, 0.992725, -2.41786, 265.235, 12.1414 )
 bone_name = "mixamorig_Head"
 
 [node name="HeadPivot" type="Spatial" parent="Armature/Skeleton/BoneAttachment" index="0"]
@@ -169,7 +164,7 @@ spot_range = 58.3185
 spot_angle = 47.5769
 
 [node name="BoneAttachment2" type="BoneAttachment" parent="Armature/Skeleton" index="8"]
-transform = Transform( 0.993527, 0.0609696, -0.0958431, -0.0671569, 0.99577, -0.0627125, 0.0916141, 0.0687431, 0.993419, 0.980868, 183.903, -0.800167 )
+transform = Transform( 0.994635, 0.0570976, -0.0862603, -0.0622686, 0.996344, -0.0584937, 0.0826051, 0.0635512, 0.994554, -0.38426, 183.751, 0.772516 )
 bone_name = "mixamorig_Hips"
 
 [node name="RemoteTransform" type="RemoteTransform" parent="Armature/Skeleton/BoneAttachment2" index="0"]
@@ -193,7 +188,9 @@ parameters/conditions/Idle = false
 parameters/conditions/Sitting = false
 parameters/Sitting/ChairBlend/blend_amount = 0.0
 parameters/Sitting/IntrumentBlend/blend_amount = 0.0
-parameters/Walking/Idle_Run_Blend/blend_amount = 0
+parameters/Walking/ClimbDown/active = false
+parameters/Walking/ClimbUp/active = false
+parameters/Walking/Idle_Run_Blend/blend_amount = 0.0
 parameters/Walking/Idle_Walk_Blend/blend_amount = 0.0
 parameters/Walking/IntrumentBlend/blend_amount = 0.0
 parameters/Walking/JumpShot/active = false
@@ -210,7 +207,7 @@ process_material = SubResource( 34 )
 draw_pass_1 = SubResource( 62 )
 
 [node name="Bouzouki" parent="." index="3" instance=ExtResource( 7 )]
-transform = Transform( -0.0272753, 0.896328, -0.442218, -0.827402, 0.227855, 0.512926, 0.560608, 0.379958, 0.735556, -1.20387, 4.29475, 0.467219 )
+transform = Transform( -0.0272753, 0.896328, -0.442218, -0.827402, 0.227855, 0.512926, 0.560608, 0.379958, 0.735556, -1.23148, 4.28788, 0.516995 )
 visible = false
 sleeping = true
 RegisterOnIsland = false

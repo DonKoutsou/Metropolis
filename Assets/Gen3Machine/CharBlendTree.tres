@@ -1,4 +1,4 @@
-[gd_resource type="AnimationNodeBlendTree" load_steps=12 format=2]
+[gd_resource type="AnimationNodeBlendTree" load_steps=16 format=2]
 
 [sub_resource type="AnimationNodeAnimation" id=14]
 animation = "Jump"
@@ -12,8 +12,18 @@ animation = "Run_loop"
 [sub_resource type="AnimationNodeAnimation" id=37]
 animation = "GuitarPlayer_loop"
 
+[sub_resource type="AnimationNodeAnimation" id=39]
+animation = "ClimbUp"
+
+[sub_resource type="AnimationNodeAnimation" id=43]
+animation = "ClimbDown"
+
 [sub_resource type="AnimationNodeAnimation" id=16]
 animation = "Idle_loop"
+
+[sub_resource type="AnimationNodeOneShot" id=42]
+
+[sub_resource type="AnimationNodeOneShot" id=44]
 
 [sub_resource type="AnimationNodeBlend2" id=32]
 
@@ -30,7 +40,7 @@ filters = [ "Armature/Skeleton:mixamorig_Head", "Armature/Skeleton:mixamorig_Hea
 [sub_resource type="AnimationNodeTimeScale" id=23]
 
 [resource]
-graph_offset = Vector2( -471.137, -27.9949 )
+graph_offset = Vector2( 406.259, 327.799 )
 nodes/Animation/node = SubResource( 16 )
 nodes/Animation/position = Vector2( -120, 120 )
 "nodes/Animation 2/node" = SubResource( 14 )
@@ -41,6 +51,14 @@ nodes/Animation/position = Vector2( -120, 120 )
 "nodes/Animation 4/position" = Vector2( 0, 533.333 )
 "nodes/Animation 5/node" = SubResource( 37 )
 "nodes/Animation 5/position" = Vector2( 613.333, 440 )
+"nodes/Animation 6/node" = SubResource( 39 )
+"nodes/Animation 6/position" = Vector2( 933.333, 600 )
+"nodes/Animation 8/node" = SubResource( 43 )
+"nodes/Animation 8/position" = Vector2( 1093.33, 826.667 )
+nodes/ClimbDown/node = SubResource( 42 )
+nodes/ClimbDown/position = Vector2( 1293.33, 613.333 )
+nodes/ClimbUp/node = SubResource( 44 )
+nodes/ClimbUp/position = Vector2( 1133.33, 426.667 )
 nodes/Idle_Run_Blend/node = SubResource( 32 )
 nodes/Idle_Run_Blend/position = Vector2( 320, 280 )
 nodes/Idle_Walk_Blend/node = SubResource( 17 )
@@ -53,5 +71,5 @@ nodes/TimeScale/node = SubResource( 23 )
 nodes/TimeScale/position = Vector2( 241.076, 25.6959 )
 "nodes/TimeScale 2/node" = SubResource( 36 )
 "nodes/TimeScale 2/position" = Vector2( -186.667, 333.333 )
-nodes/output/position = Vector2( 1226.67, 266.667 )
-node_connections = [ "Idle_Run_Blend", 0, "Idle_Walk_Blend", "Idle_Run_Blend", 1, "Animation 4", "TimeScale", 0, "Animation 2", "JumpShot", 0, "Idle_Run_Blend", "JumpShot", 1, "TimeScale", "Idle_Walk_Blend", 0, "Animation", "Idle_Walk_Blend", 1, "TimeScale 2", "TimeScale 2", 0, "Animation 3", "IntrumentBlend", 0, "JumpShot", "IntrumentBlend", 1, "Animation 5", "output", 0, "IntrumentBlend" ]
+nodes/output/position = Vector2( 1506.67, 640 )
+node_connections = [ "ClimbUp", 0, "IntrumentBlend", "ClimbUp", 1, "Animation 6", "ClimbDown", 0, "ClimbUp", "ClimbDown", 1, "Animation 8", "Idle_Run_Blend", 0, "Idle_Walk_Blend", "Idle_Run_Blend", 1, "Animation 4", "IntrumentBlend", 0, "JumpShot", "IntrumentBlend", 1, "Animation 5", "Idle_Walk_Blend", 0, "Animation", "Idle_Walk_Blend", 1, "TimeScale 2", "TimeScale", 0, "Animation 2", "JumpShot", 0, "Idle_Run_Blend", "JumpShot", 1, "TimeScale", "TimeScale 2", 0, "Animation 3", "output", 0, "ClimbDown" ]

@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 2, 0.1, 2 )
+
+[sub_resource type="CubeMesh" id=2]
+size = Vector3( 0.1, 1.127, 0.1 )
+
+[node name="StaticBody" type="StaticBody"]
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 2.8, 0, 0, 0, 2.8, 0, 0, 0, 2.8, 0, 0, 0 )
+mesh = SubResource( 1 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+transform = Transform( 2.8, 0, 0, 0, 2.8, 0, 0, 0, 2.8, -2, -1.52456, 2 )
+mesh = SubResource( 2 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="."]
+transform = Transform( 2.8, 0, 0, 0, 2.8, 0, 0, 0, 2.8, 2.23547, -1.52456, 2.12277 )
+mesh = SubResource( 2 )
+
+[node name="MeshInstance4" type="MeshInstance" parent="."]
+transform = Transform( 2.8, 0, 0, 0, 2.8, 0, 0, 0, 2.8, 2.22319, -1.52456, -2.28457 )
+mesh = SubResource( 2 )
+
+[node name="MeshInstance5" type="MeshInstance" parent="."]
+transform = Transform( 2.8, 0, 0, 0, 2.8, 0, 0, 0, 2.8, -2.30675, -1.52457, -2.36008 )
+mesh = SubResource( 2 )

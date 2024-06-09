@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Assets/UI/block.tres" type="Texture" id=1]
+[ext_resource path="res://Assets/Map/Maptile.tres" type="Texture" id=1]
 [ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Scripts/MapTile.cs" type="Script" id=3]
 
@@ -51,10 +51,12 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -8.0
-margin_top = -8.0
-margin_right = 8.0
-margin_bottom = 8.0
+margin_left = -6.0
+margin_top = -6.0
+margin_right = 6.0
+margin_bottom = 6.0
+rect_pivot_offset = Vector2( 6, 6 )
 theme = SubResource( 7 )
 texture = ExtResource( 1 )
 expand = true
+stretch_mode = 5

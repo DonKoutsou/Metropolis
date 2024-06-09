@@ -313,35 +313,41 @@ public class MapGrid : GridContainer
         MapIle.Modulate = col;
     }
     
-    public void UpdateIleInfo(Vector2 index, IleType type)
+    public void UpdateIleInfo(Vector2 index, IleType type, float rot = 0, ImageTexture img = null)
     {
         MapTile child;
         MapIleList.TryGetValue(index, out child);
         
         if (type == IleType.ENTRANCE)
         {
-            child.Modulate = ColorList[0];
+            //child.Modulate = ColorList[0];
             child.GetNode<TextureRect>("TextureRect").HintTooltip = "Η Μητρόπολη";
         }
         else if (type == IleType.EXIT)
         {
-            child.Modulate = ColorList[1];
+
+            //child.Modulate = ColorList[1];
             child.GetNode<TextureRect>("TextureRect").HintTooltip = "Σκάφος";
         }
         else if (type == IleType.LAND)
         {
-            child.Modulate = ColorList[2];
+            //child.Modulate = ColorList[2];
             child.GetNode<TextureRect>("TextureRect").HintTooltip = string.Empty;
         } 
         else if (type == IleType.LIGHTHOUSE)
         {
-            child.Modulate = ColorList[3];
+            //child.Modulate = ColorList[3];
             child.GetNode<TextureRect>("TextureRect").HintTooltip = "Φάρος";
         }
         else
         {
-            child.Modulate = ColorList[4];
+            //child.Modulate = ColorList[4];
             child.GetNode<TextureRect>("TextureRect").HintTooltip = string.Empty;
+        }
+        if (img != null)
+        {
+            child.GetNode<TextureRect>("TextureRect").Texture = img;
+            child.GetNode<TextureRect>("TextureRect").RectRotation = rot;
         }
         child.type = (int)type;
     }

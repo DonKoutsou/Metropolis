@@ -18,6 +18,12 @@ public class SaveLoadManager : Control
 	{
 		return Instance;
 	}
+	public void ClearSaves()
+	{
+		 Directory dir = new Directory();
+
+		dir.Remove("user://SavedGame.tres");
+	}
 	public void SaveGame()
 	{
 		GDScript SaveGD = GD.Load<GDScript>("res://Scripts/saved_game.gd");

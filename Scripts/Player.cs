@@ -47,6 +47,7 @@ public class Player : Character
 	{
 		GlobalTranslation = pos;
 		loctomove = pos;
+		GetNode<Spatial>("Pivot").Rotation = Vector3.Zero;
 		//NavAgent.SetTargetLocation(loctomove);
 		//CameraMovePivot.GetInstance().GlobalTranslation = pos;
 	}
@@ -153,7 +154,7 @@ public class Player : Character
 		{
 			StandUp();
 		}
-		if (anim.IsStanding())
+		if (anim.IsStanding() || anim.IsClimbing())
 			return;
 		
 		moveloc.GlobalTranslation = loctomove;
@@ -332,6 +333,11 @@ public class Player : Character
 	public override void OnKillFieldDetectorBodyEntered(Node body)
 	{
 		Kill();
+	}
+	public override void Kill()
+	{
+		base.Kill();
+		MyWorld.GetInstance().OnPlayerKilled();
 	}
 	public override void OnVehicleBoard(Vehicle Veh)
 	{

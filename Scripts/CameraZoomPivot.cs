@@ -75,7 +75,7 @@ public class CameraZoomPivot : Position3D
 		cam.Fov = Mathf.Lerp(25, 75, fovvalue);
 		float value = Mathf.Lerp(4, MaxDist, fovvalue);
 		arm.SpringLength = value;
-		panp.Translation = new Vector3(prevpos.x, value / 4, prevpos.z);
+		//panp.Translation = new Vector3(prevpos.x, value / 4, prevpos.z);
 	}
 	public void Frame()
 	{

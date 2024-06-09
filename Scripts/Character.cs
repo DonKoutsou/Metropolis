@@ -168,7 +168,14 @@ public class Character : KinematicBody
 			NightLight.LightEnergy = 0.2f;
 
 		if (CurrentEnergy <= 0)
+		{
 			Kill();
+			if (HasVecicle)
+			{
+				currveh.ToggleMachine(false);
+			}
+		}
+			
     }
     public override void _PhysicsProcess(float delta)
 	{

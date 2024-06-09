@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<materialx version="1.38" fileprefix="./">
+  <standard_surface name="Bricks019_1K_PNG_StandardSurface" ypos="-1.879310" type="surfaceshader" xpos="6.159420">
+    <input name="specular" type="float" value="0" />
+    <input name="coat" type="float" value="1" />
+    <input name="coat_color" type="color3" value="1, 1, 1" />
+    <input name="base" type="float" value="1" />
+    <input name="base_color" type="color3" nodename="Bricks019_1K_PNG_Color" />
+    <input name="normal" type="vector3" nodename="normalmap" />
+    <input name="coat_normal" type="vector3" nodename="normalmap" />
+    <input name="specular_roughness" type="float" nodename="Bricks019_1K_PNG_Roughness" />
+    <input name="coat_roughness" type="float" nodename="Bricks019_1K_PNG_Roughness" />
+  </standard_surface>
+  <surfacematerial name="Bricks019_1K_PNG" ypos="0.000000" type="material" xpos="8.695652">
+    <input name="surfaceshader" type="surfaceshader" nodename="Bricks019_1K_PNG_StandardSurface" />
+    <input name="displacementshader" type="displacementshader" nodename="displacement" />
+  </surfacematerial>
+  <tiledimage name="Bricks019_1K_PNG_Color" ypos="-3.103448" type="color3" xpos="3.623188">
+    <input colorspace="srgb_texture" name="file" type="filename" value="Bricks019_1K-PNG_Color.png" />
+    <input name="uvtiling" type="vector2" value="1.0, 1.0" />
+  </tiledimage>
+  <tiledimage name="Bricks019_1K_PNG_Displacement" ypos="5.163793" type="float" xpos="3.623188">
+    <input name="file" type="filename" value="Bricks019_1K-PNG_Displacement.png" />
+    <input name="uvtiling" type="vector2" value="1.0, 1.0" />
+  </tiledimage>
+  <displacement name="displacement" ypos="1.879310" type="displacementshader" xpos="6.159420">
+    <input name="displacement" type="float" nodename="Bricks019_1K_PNG_Displacement" />
+    <input name="scale" type="float" value="1.0" />
+  </displacement>
+  <tiledimage name="Bricks019_1K_PNG_NormalGL" ypos="0.879310" type="vector3" xpos="1.086957">
+    <input name="file" type="filename" value="Bricks019_1K-PNG_NormalGL.png" />
+    <input name="uvtiling" type="vector2" value="1.0, 1.0" />
+  </tiledimage>
+  <normalmap name="normalmap" ypos="3.586207" type="vector3" xpos="3.623188">
+    <input name="in" type="vector3" nodename="Bricks019_1K_PNG_NormalGL" />
+    <input name="scale" type="float" value="1.0" />
+  </normalmap>
+  <tiledimage name="Bricks019_1K_PNG_Roughness" ypos="-0.413793" type="float" xpos="3.623188">
+    <input name="file" type="filename" value="Bricks019_1K-PNG_Roughness.png" />
+    <input name="uvtiling" type="vector2" value="1.0, 1.0" />
+  </tiledimage>
+</materialx>

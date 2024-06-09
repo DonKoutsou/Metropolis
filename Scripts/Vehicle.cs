@@ -209,7 +209,10 @@ public class Vehicle : RigidBody
        // ulong msaf = OS.GetSystemTimeMsecs();
 		//GD.Print("Vehicle processing took " + (msaf - ms).ToString() + " ms");
     }
-
+    public Vector3 GetActionPos(Vector3 PlayerPos)
+    {
+        return GlobalTranslation;
+    }
     public bool ToggleWings(bool toggle)
     {
         if (Anim.IsPlaying())
@@ -275,6 +278,19 @@ public class Vehicle : RigidBody
     Thread thr = new Thread();
     Thread SteerThr;
     // return true if hovering up and false if down
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+        if (thr != null)
+        {
+            thr.WaitToFinish();
+        }
+        if (SteerThr != null)
+        {
+            SteerThr.WaitToFinish();
+        }
+    }
+    
     public void Hover(float delta)
     {
         float Force = Hoverforcecurve.Interpolate(latsspeed /(speed)) * HoverForce;
@@ -313,7 +329,7 @@ public class Vehicle : RigidBody
                     part.Translation = new Vector3(part.Translation.x, - particleoffset, part.Translation.z);
                 }
 
-                part.Emitting = dist >= 20;
+                part.Emitting = dist <= 20 && Working;
                 float multi = forcecurve.Interpolate(distmulti);
                 if (dist < 4)
                 {
@@ -453,11 +469,25 @@ public class Vehicle : RigidBody
     }
     public  void ToggleMachine(bool toggle)
     {
-        if (SteerThr == null)
+        if (toggle)
+        {
+            bool hasalive = false;
+            foreach (Character pas in passengers)
+            {
+                if (pas.IsAlive())
+                {
+                    hasalive = true;
+                }
+            }
+            if (!hasalive)
+                return;
+        }
+        if (toggle && SteerThr == null)
         {
             SteerThr = new Thread();
             SteerThr.Start(this, "Steer", 0.01);
         }
+        
         loctomove = GlobalTransform.origin;
         ExaustParticles[0].Emitting = toggle;
         ExaustParticles[0].GetNode<AudioStreamPlayer3D>("EngineSound").Playing = toggle;

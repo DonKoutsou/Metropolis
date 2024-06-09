@@ -27,6 +27,10 @@ public class SittingThing : StaticBody
     {
         
     }
+    public Vector3 GetActionPos(Vector3 PlayerPos)
+    {
+        return GlobalTranslation;
+    }
     public void UpdateOccupation(Position3D seat, bool occupanc)
     {
         for (int i = 0; i < Seats.Count; i++)

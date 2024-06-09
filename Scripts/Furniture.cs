@@ -33,6 +33,10 @@ public class Furniture : Spatial
 		StashedItem = itemToDrop;
 		StashedItem.Hide();
 	}
+	public Vector3 GetActionPos(Vector3 PlayerPos)
+    {
+        return GlobalTranslation;
+    }
 	public bool HasItem()
 	{
 		return StashedItem != null;

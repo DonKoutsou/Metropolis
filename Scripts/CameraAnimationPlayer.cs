@@ -4,6 +4,10 @@ using System;
 public class CameraAnimationPlayer : AnimationPlayer
 {
     static CameraAnimationPlayer instance;
+
+    [Signal]
+    public delegate void FadeOutFinished();
+
     public static CameraAnimationPlayer GetInstance()
     {
         return instance;
@@ -45,6 +49,8 @@ public class CameraAnimationPlayer : AnimationPlayer
 
         Play("FadeIn");
 
+        EmitSignal("FadeOutFinished");
+        
         SetProcess(false);
     }
 

@@ -26,6 +26,10 @@ public class NPC : Character
 		#endif
 		base._Process(delta);
     }
+	public Vector3 GetActionPos(Vector3 PlayerPos)
+    {
+        return GlobalTranslation;
+    }
     public override void _Ready()
 	{
 		#if DEBUG

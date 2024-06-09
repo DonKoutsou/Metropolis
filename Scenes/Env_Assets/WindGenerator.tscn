@@ -192,7 +192,7 @@ tracks/0/keys = {
 polygon_points = PoolVector2Array( 14, -44, 14, 45, -22, 45, -22, -44 )
 
 [node name="WindGenerator" type="StaticBody" groups=["Interactables"]]
-collision_layer = 20
+collision_layer = 48
 collision_mask = 0
 script = ExtResource( 3 )
 EnergyCapacity = 1000.0

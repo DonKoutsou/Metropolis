@@ -1,0 +1,52 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://Assets/TerainTex/WaterNorm.png" type="Texture" id=1]
+
+[sub_resource type="Shader" id=2146]
+code = "shader_type spatial;
+render_mode specular_schlick_ggx, ambient_light_disabled;
+
+uniform vec4 Color : hint_color;
+uniform sampler2D Norm : hint_normal;
+uniform float Shine = 0.2;
+uniform float Roughness = 0.2;
+uniform float UVScale = 1;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// ColorUniform:6
+	vec3 n_out6p0 = Color.rgb;
+	float n_out6p1 = Color.a;
+	
+// ScalarUniform:3
+	float n_out3p0 = Shine;
+
+// ScalarUniform:4
+	float n_out4p0 = Roughness;
+
+// Output:0
+	ALBEDO = n_out6p0;
+	ALPHA = n_out6p1;
+	METALLIC = n_out3p0;
+	ROUGHNESS = n_out4p0;
+	NORMALMAP = texture(Norm, UV * UVScale).rgb;
+}
+
+void light() {
+// Output:0
+
+}"
+
+[resource]
+shader = SubResource( 2146 )
+shader_param/Color = Color( 1, 1, 1, 0.447059 )
+shader_param/Shine = 0.689
+shader_param/Roughness = 0.363
+shader_param/UVScale = 1.0
+shader_param/Norm = ExtResource( 1 )

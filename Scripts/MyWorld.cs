@@ -106,6 +106,7 @@ public class MyWorld : Spatial
 	{
 		StartingScreen start = ((MainWorld)GetParent()).GetStartingScreen();
 		start.GameOver();
+		SaveLoadManager.GetInstance().ClearSaves();
 	}
 	
 	public static void ArrangeIlesBasedOnDistance(List<IslandInfo> ilestodissable, List<IslandInfo> ilestoenable)

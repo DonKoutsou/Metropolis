@@ -421,7 +421,7 @@ public class WorldMap : TileMap
 		}
 			
 
-		MapGrid.GetInstance().UpdateIleInfo(ilei.Position, ilei.Type);
+		MapGrid.GetInstance().UpdateIleInfo(ilei.Position, ilei.Type, ilei.RotationToSpawn - 180, ile.Image);
 
 		IleToSave = null;
 

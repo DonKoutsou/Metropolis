@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/Ladder.fbx-93e3f1a39104ef786c1c1b01c6a16bad.scn"
+path="res://.import/Ladder.fbx-7cf644c7acc5d1ee835cf13d225557dc.scn"
 
 [deps]
 
-source_file="res://Assets/Ladder/Ladder.fbx"
-dest_files=[ "res://.import/Ladder.fbx-93e3f1a39104ef786c1c1b01c6a16bad.scn" ]
+source_file="res://Assets/Ladder.fbx"
+dest_files=[ "res://.import/Ladder.fbx-7cf644c7acc5d1ee835cf13d225557dc.scn" ]
 
 [params]
 

@@ -21,6 +21,10 @@ public class WindGenerator : StaticBody
     {
         CurrentEnergy -= ammount;
     }
+    public Vector3 GetActionPos(Vector3 PlayerPos)
+    {
+        return GlobalTranslation;
+    }
     int scale;
     public override void _Ready()
     {

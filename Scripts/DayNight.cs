@@ -149,6 +149,11 @@ public class DayNight : WorldEnvironment
             EmitSignal("DayEventHandler");
             sun.Show();
             moon.Hide();
+            if (SunMoonMeshPivot != null)
+            {
+                SunMoonMeshPivot.GetNode<MeshInstance>("Sun").Show();
+                SunMoonMeshPivot.GetNode<MeshInstance>("Moon").Hide();
+            }
             day = true;
         }
         if (Phase == 1)
@@ -156,12 +161,23 @@ public class DayNight : WorldEnvironment
             EmitSignal("NightEventHandler");
             sun.Hide();
             moon.Show();
+            if (SunMoonMeshPivot != null)
+            {
+                 SunMoonMeshPivot.GetNode<MeshInstance>("Sun").Hide();
+                SunMoonMeshPivot.GetNode<MeshInstance>("Moon").Show();
+            }
+           
             day = false;
         }
         if (Phase == 2)
         {
             sun.Show();
             moon.Show();
+            if (SunMoonMeshPivot != null)
+            {
+                SunMoonMeshPivot.GetNode<MeshInstance>("Sun").Show();
+                SunMoonMeshPivot.GetNode<MeshInstance>("Moon").Show();
+            }
         }
     }
     private void CalculateDay(out Color FogColor, out Color FogSunColor, out Color AmbientLightColor, out Color BackgroundColor, out float AmbientLightEnergy)
@@ -305,7 +321,7 @@ public class DayNight : WorldEnvironment
     }
     private void UpdateTime()
     {
-        currentmins += 0.005f * timeprogmultiplier;
+        currentmins += 0.014f * timeprogmultiplier;
         
         if (currentmins > 60)
         {
