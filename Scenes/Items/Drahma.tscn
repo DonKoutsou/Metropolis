@@ -20,6 +20,7 @@ angular_damp = 1.22
 script = ExtResource( 1 )
 ItemWeight = 1.0
 ItemIcon = ExtResource( 4 )
+ItemPickupActionName = "Μιά δραχμή.."
 ItemName = "Δραχμή"
 ItemDesc = "Μια δραχμή. μπλά μπλά μπλά μπλά... μπλά"
 

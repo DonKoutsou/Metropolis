@@ -18,6 +18,7 @@ script = ExtResource( 2 )
 ItemWeight = 10.0
 ItemType = 7
 ItemIcon = ExtResource( 5 )
+ItemPickupActionName = "Μια κιθάρα..."
 ItemName = "Κιθάρα"
 stackable = false
 

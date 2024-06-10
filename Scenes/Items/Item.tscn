@@ -21,6 +21,7 @@ script = ExtResource( 1 )
 ItemWeight = 5.0
 ItemType = 1
 ItemIcon = ExtResource( 4 )
+ItemPickupActionName = "Ένα σκοινί"
 ItemName = "Σκοινί"
 ItemDesc = "Ένα σκοινί"
 

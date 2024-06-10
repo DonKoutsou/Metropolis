@@ -69,7 +69,7 @@ public class IleImageGenerator : Spatial
         Island par = (Island)Owner;
         ImageTexture t = new ImageTexture();
 		t.CreateFromImage(im);
-        par.Image = t;
+        //par.Image = t;
 		//im.SavePng("Ile.png");
 	}
 }

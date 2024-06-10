@@ -13,7 +13,7 @@ public class Island : Spatial
 	[Export]
 	public bool KeepInstance = false;
 	[Export]
-	public ImageTexture Image = null;
+	public string Image = null;
 
 	public string IslandSpecialName = null;
 
@@ -69,7 +69,7 @@ public class Island : Spatial
 		Vector2 res = new Vector2(32, 32);
 		int ilesize = 8000;
 		Image im = new Image();
-		im.Create((int)res.x, (int)res.y, true, Godot.Image.Format.Rgb8);
+		im.Create((int)res.x, (int)res.y, true, Godot.Image.Format.Rgbaf);
 		int row = 0;
 		int col = 0;
         float mult = ilesize/res.x;
@@ -92,11 +92,11 @@ public class Island : Spatial
             im.Lock();
 			if (ItsSea)
 			{
-				im.SetPixel(col, row, Colors.Blue);
+				im.SetPixel(col, row, new Color(r: 0.28f, g: 0.58f, b: 0.8f, a: 1));
 			}
             else
             {
-                im.SetPixel(col, row, Colors.Beige);
+                im.SetPixel(col, row, new Color(r: 0.83f, g: 0.7f, b: 0.49f, a: 1));
             }
             im.Unlock();
 			col ++;
@@ -110,10 +110,12 @@ public class Island : Spatial
 				}
 			}
 		}
-		ImageTexture t = new ImageTexture();
-		t.CreateFromImage(im, flags:4);
-        Image = t;
-		//im.SavePng("Ile.png");
+		//ImageTexture t = new ImageTexture();
+		//t.CreateFromImage(im, flags:4);
+        //Image = t;
+		
+		im.SavePng("res://Assets/IslandPics/" + Filename.GetFile().Substr(0, Filename.GetFile().Length - 5) + ".png");
+		Image = "res://Assets/IslandPics/" + Filename.GetFile().Substr(0, Filename.GetFile().Length - 5) + ".png";
 	}
 	#endif
 	public void SetSpawnInfo(Vector3 SpawnPos, float SpawnRot, string SpecialName)
@@ -438,6 +440,7 @@ public class IslandInfo
 	public Vector2 Position;
 	public string SpecialName = null;
 	public PackedScene IleType;
+	public string ImageFile = null;
 	public List<HouseInfo> Houses = new List<HouseInfo>();
 	public List<WindGeneratorInfo> Generators = new List<WindGeneratorInfo>();
 	public List<VehicleInfo> Vehicles = new List<VehicleInfo>();
@@ -452,6 +455,7 @@ public class IslandInfo
 	{
 		RotationToSpawn = rotation;
 		IleType = scene;
+		//ImageFile = Imag;
 		Position = cell;
 		SpecialName = specialn;
 	}
@@ -465,6 +469,7 @@ public class IslandInfo
         Position = (Vector2)data.Get("Pos");
 		SpecialName = (string)data.Get("SpecialName");
         IleType = (PackedScene)data.Get("Scene");
+		ImageFile = (string)data.Get("ImageFile");
         RotationToSpawn = (float)data.Get("Rotation");
 		KeepInstance = (bool)data.Get("KeepInstance");
 
@@ -578,6 +583,7 @@ public class IslandInfo
             { "Pos", Position },
 			{ "SpecialName", SpecialName},
 			{"Scene", IleType},
+			{"ImageFile", ImageFile},
 			{"Rotation", RotationToSpawn},
 			{"Houses", HouseInfoobjects},
 			{"Generators", GeneratorInfoobjects},

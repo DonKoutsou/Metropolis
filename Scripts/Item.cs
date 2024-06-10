@@ -13,6 +13,9 @@ public class Item : RigidBody
 	public Texture ItemIcon = null;
 
 	[Export]
+	string ItemPickupActionName;
+
+	[Export]
 	string ItemName = "Item";
 
 	[Export]
@@ -26,6 +29,10 @@ public class Item : RigidBody
 	public string GetItemName()
 	{
 		return ItemName;
+	}
+	public string GetItemPickUpText()
+	{
+		return ItemPickupActionName;
 	}
 	public Vector3 GetActionPos(Vector3 PlayerPos)
     {

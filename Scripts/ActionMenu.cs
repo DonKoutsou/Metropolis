@@ -123,7 +123,7 @@ public class ActionMenu : Control
 			if (foundit != null)
 			{
 				pl.CharacterInventory.InsertItem(foundit);
-				TalkText.GetInst().Talk("Ένα " + foundit.GetItemName(), pl);
+				TalkText.GetInst().Talk(foundit.GetItemPickUpText(), pl);
 			}
 			else
 				TalkText.GetInst().Talk("Τίποτα", pl);

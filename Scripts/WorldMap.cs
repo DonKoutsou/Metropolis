@@ -5,7 +5,6 @@ using System.Drawing;
 using System.Linq;
 using System.Security.Policy;
 
-
 public class WorldMap : TileMap
 {
 	[Export]
@@ -168,6 +167,12 @@ public class WorldMap : TileMap
 			IslandInfo info = new IslandInfo((Resource)Iles[i]);
 			//info.UnPackData((Resource)Iles[i]);
 			ilemap.Add(IleVectors[i], info);
+			ImageTexture tex = new ImageTexture();
+
+			tex.Load(ProjectSettings.GlobalizePath(info.ImageFile));
+			//tex.Load(ile.Image);
+
+			MapGrid.GetInstance().UpdateIleInfo(info.Position, info.Type, info.RotationToSpawn - 180, tex);
 		}
 	}
 	public static WorldMap GetInstance()
@@ -217,6 +222,9 @@ public class WorldMap : TileMap
 			}
 			int[] Date = (int[])save.Get("Date");
 			DayNight.GetInstance().SetTime(Date[0], Date[1], Date[2]);
+
+			MapGrid.GetInstance().InitMap();
+
 			LoadSaveData(save);
 			IslandInfo CurIle;
 			ilemap.TryGetValue(WorldToMap(CurrentTile), out CurIle);
@@ -241,7 +249,7 @@ public class WorldMap : TileMap
 			Godot.Collections.Array Items = (Godot.Collections.Array)save.Get("InventoryContents");
 			inv.LoadSavedInventory(Items);
 
-			MapGrid.GetInstance().InitMap();
+			
 
 			//returning data to inventory map
 			Vector2[] MapGridVectorData = (Vector2[])save.Get("MapGridVectors");
@@ -267,13 +275,15 @@ public class WorldMap : TileMap
 
 			
 
-			Dictionary<Vector2, int> MapGridData = new Dictionary<Vector2, int>();
+			//Dictionary<Vector2, int> MapGridData = new Dictionary<Vector2, int>();
+			//Dictionary<float, string> MapGridImageData = new Dictionary<float, string>();
 
-			for (int i = 0; i < MapGridVectorData.Count(); i++)
-			{
-				MapGridData.Add(MapGridVectorData[i], MapGridTypeData[i]);
-			}
-			MapGrid.GetInstance().LoadSaveData(MapGridData);
+			//for (int i = 0; i < MapGridVectorData.Count(); i++)
+			//{
+			//	MapGridData.Add(MapGridVectorData[i], MapGridTypeData[i]);
+			//	MapGridImageData.Add(ilemap[MapGridVectorData[i]].RotationToSpawn, ilemap[MapGridVectorData[i]].ImageFile);
+			//}
+			//MapGrid.GetInstance().LoadSaveData(MapGridData, MapGridImageData);
 
 		}
 		else
@@ -419,9 +429,12 @@ public class WorldMap : TileMap
 		{
 			ile.QueueFree();
 		}
-			
 
-		MapGrid.GetInstance().UpdateIleInfo(ilei.Position, ilei.Type, ilei.RotationToSpawn - 180, ile.Image);
+		ImageTexture tex = new ImageTexture();
+		tex.Load(ProjectSettings.GlobalizePath(ile.Image));
+		//tex.Load(ile.Image);
+
+		MapGrid.GetInstance().UpdateIleInfo(ilei.Position, ilei.Type, ilei.RotationToSpawn - 180, tex);
 
 		IleToSave = null;
 
@@ -514,7 +527,7 @@ public class WorldMap : TileMap
 		Ile.SetSpawnInfo(new Vector3(postoput.x, 0, postoput.y), info.RotationToSpawn, info.SpecialName);
 
 		info.Island = Ile;
-
+		info.ImageFile = Ile.Image;
 		//#if DEBUG
 		//ulong msaf = OS.GetSystemTimeMsecs();
 		//if (msaf - ms > 20)

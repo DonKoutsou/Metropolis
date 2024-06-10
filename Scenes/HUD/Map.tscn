@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Scripts/MapGrid.cs" type="Script" id=1]
 [ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Scripts/MagGridPanel.cs" type="Script" id=9]
 [ext_resource path="res://Assets/UI/panelstylegrey.tres" type="StyleBox" id=10]
 [ext_resource path="res://Assets/UI/panelstylebox.tres" type="StyleBox" id=11]
+[ext_resource path="res://Scenes/HUD/MapUIItems/MapGridUIStyle.tres" type="StyleBox" id=12]
 
 [sub_resource type="OpenSimplexNoise" id=22]
 octaves = 1
@@ -28,6 +29,18 @@ resource_local_to_scene = true
 resource_name = "normal"
 texture = SubResource( 6 )
 region_rect = Rect2( 0, 0, 512, 512 )
+
+[sub_resource type="Theme" id=26]
+
+[sub_resource type="StyleBoxFlat" id=27]
+bg_color = Color( 0.839216, 0.678431, 0.458824, 1 )
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0, 0, 0, 1 )
+border_blend = true
 
 [sub_resource type="StyleBoxFlat" id=23]
 bg_color = Color( 0.607843, 0.603922, 0.603922, 1 )
@@ -158,6 +171,40 @@ rect_clip_content = true
 mouse_filter = 2
 mouse_default_cursor_shape = 6
 custom_styles/panel = SubResource( 19 )
+
+[node name="Panel2" type="Panel" parent="MagGridPanel"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -1.5
+margin_right = 196.0
+margin_bottom = 1.5
+rect_pivot_offset = Vector2( 0, 1.5 )
+mouse_filter = 1
+custom_styles/panel = ExtResource( 12 )
+
+[node name="Panel7" type="Panel" parent="MagGridPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -4.5
+margin_top = -4.5
+margin_right = 4.5
+margin_bottom = 4.5
+rect_pivot_offset = Vector2( 0, 1.5 )
+mouse_filter = 1
+theme = SubResource( 26 )
+custom_styles/panel = SubResource( 27 )
+
+[node name="Panel6" type="Panel" parent="MagGridPanel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -1.5
+margin_right = 1.5
+margin_bottom = 212.0
+rect_pivot_offset = Vector2( 0, 1.5 )
+mouse_filter = 2
+custom_styles/panel = ExtResource( 12 )
 
 [node name="Panel2" type="Panel" parent="."]
 anchor_top = 1.0

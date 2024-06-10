@@ -20,6 +20,7 @@ script = ExtResource( 1 )
 ItemWeight = 2.0
 ItemType = 2
 ItemIcon = ExtResource( 4 )
+ItemPickupActionName = "Μιά μπαταρία."
 ItemName = "Μπαταρία μετριας χωρητικότητας."
 ItemDesc = "Μπαταρία μετριας χωρητικότητας."
 stackable = false

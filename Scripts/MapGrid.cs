@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class MapGrid : GridContainer
 {
@@ -23,7 +24,7 @@ public class MapGrid : GridContainer
 
     static MapGrid Instance;
 
-    bool MapActive = false;
+    public bool MapActive = false;
 
 
     MapUI mapui;
@@ -108,7 +109,7 @@ public class MapGrid : GridContainer
             MapIleList.Add((Vector2)cells[i], child);
         }
 
-        CallDeferred("FrameMap");
+        FrameMap();
     }
     public bool IsMouseInMap()
     {
@@ -360,11 +361,13 @@ public class MapGrid : GridContainer
         }
         return data;
     }
-    public void LoadSaveData(Dictionary<Vector2, int> Data)
+    public void LoadSaveData(Dictionary<Vector2, int> Data, Dictionary<float, string> ImageData)
     {
-        foreach (KeyValuePair<Vector2, int> entry in Data)
+        for (int i = 0; i < Data.Count; i++)
         {
-            UpdateIleInfo(entry.Key, (IleType)entry.Value);
+            ImageTexture tex = new ImageTexture();
+		    tex.Load(ProjectSettings.GlobalizePath(ImageData.ElementAt(i).Value));
+            UpdateIleInfo(Data.ElementAt(i).Key, (IleType)Data.ElementAt(i).Value, (float)ImageData.ElementAt(i).Key, tex);
         }
     }
 }

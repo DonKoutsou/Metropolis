@@ -245,7 +245,7 @@ public class InventoryUI : Control
         if (!ShowingMap)
         {
             ShowingMap = true;
-            
+            map.FrameMap();
         }
         else
         {

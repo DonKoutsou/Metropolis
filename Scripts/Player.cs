@@ -73,7 +73,7 @@ public class Player : Character
 		Vector2 mousepos = GetViewport().GetMousePosition();
 		Camera cam = GetTree().Root.GetCamera();
 		Vector3 rayor = cam.ProjectRayOrigin(mousepos);
-		Vector3 rayend = rayor + cam.ProjectRayNormal(mousepos) * 10000;
+		Vector3 rayend = rayor + cam.ProjectRayNormal(mousepos) * 30000;
 		var rayar = new Dictionary();
 
 		rayar = spacestate.IntersectRay(rayor, rayend, new Godot.Collections.Array { this }, moveloc.MoveLayer);
