@@ -85,6 +85,7 @@ item/2/preview = SubResource( 12 )
 
 [node name="Island" instance=ExtResource( 2 )]
 Image = "res://Assets/IslandPics/Island4.png"
+Resolution = 128
 
 [node name="StaticBody" parent="." index="1" instance=ExtResource( 10 )]
 transform = Transform( 2.15668, 0, 0, 0, 2.15668, 0, 0, 0, 2.15668, 0, 515.558, 0 )

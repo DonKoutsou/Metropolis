@@ -13,7 +13,7 @@ public class Item : RigidBody
 	public Texture ItemIcon = null;
 
 	[Export]
-	string ItemPickupActionName;
+	string ItemPickupActionName = null;
 
 	[Export]
 	string ItemName = "Item";

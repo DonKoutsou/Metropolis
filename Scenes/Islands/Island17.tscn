@@ -92,6 +92,7 @@ item/2/preview = SubResource( 455 )
 MoveLayer = 260
 type = 3
 Image = "res://Assets/IslandPics/Island17.png"
+Resolution = 128
 
 [node name="DestBuilding" parent="." index="1" instance=ExtResource( 4 )]
 transform = Transform( 0.777947, 0, 0.62833, 0, 1, 0, -0.62833, 0, 0.777947, 1203.49, -80.4238, 565.316 )

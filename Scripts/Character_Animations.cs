@@ -13,7 +13,7 @@ public class Character_Animations : AnimationPlayer
     Particles walkpart;
     float currot;
     AnimationNodeStateMachinePlayback stateMachine;
-    AnimationPlayer AnimPlayer;
+    //AnimationPlayer AnimPlayer;
     public override void _Ready()
     {
         base._Ready();

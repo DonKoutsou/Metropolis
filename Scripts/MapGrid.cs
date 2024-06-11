@@ -13,8 +13,6 @@ public class MapGrid : GridContainer
     PackedScene XGridTileScene = null;
     [Export]
     PackedScene YGridTileScene = null;
-    [Export]
-    List<Color> ColorList = null;
 
     List<ChildMapIleInfo> children = new List<ChildMapIleInfo>();
     Dictionary<Vector2, MapTile> MapIleList = new Dictionary<Vector2, MapTile>();
@@ -26,10 +24,9 @@ public class MapGrid : GridContainer
 
     public bool MapActive = false;
 
-
     MapUI mapui;
 
-    
+    Control PlayerIconPivot;
 
     public static MapGrid GetInstance()
     {
@@ -42,6 +39,7 @@ public class MapGrid : GridContainer
         {
             ((Control)GetParent().GetParent()).Show();
             SetProcessInput(true);
+            SetProcess(true);
             MapActive = true;
             mapui.OnMapOpened();
         }
@@ -49,6 +47,7 @@ public class MapGrid : GridContainer
         {
             ((Control)GetParent().GetParent()).Hide();
             SetProcessInput(false);
+            SetProcess(false);
             MapActive = false;
             mapui.OnMapClosed();
         }
@@ -62,8 +61,9 @@ public class MapGrid : GridContainer
         //Texture tex = (Texture)th.Texture;
         MapGridx = par.GetParent().GetNode<Panel>("Panel3").GetNode<GridContainer>("MapGridX");
         MapGridy = par.GetParent().GetNode<Panel>("Panel2").GetNode<GridContainer>("MapGridY");
-
+        PlayerIconPivot = par.GetNode<Control>("PlayerIconPivot");
         SetProcessInput(false);
+        SetProcess(false);
         //MarginLeft = -(RectSize.x / 2);
         //RectPosition = RectScale/2; 
     }
@@ -144,7 +144,7 @@ public class MapGrid : GridContainer
 
             MapGridy.RectPosition = new Vector2(8, pos.y);
             RectPosition = new Vector2(pos.x, pos.y);
-
+            PlayerIconPivot.RectPosition = RectPosition;
 		}
         Vector2 scale = RectScale;
         if (@event.IsActionPressed("ZoomIn"))
@@ -156,6 +156,8 @@ public class MapGrid : GridContainer
                 RectPosition *= 2;
                 Vector2 parentsize = ((Control)GetParent()).RectSize;
                 RectPosition -= parentsize /2;
+                //PlayerIconPivot.RectPosition -= parentsize /2;
+                PlayerIconPivot.RectPosition = RectPosition;
                 MapGridx.RectPosition = new Vector2(MapGridx.RectPosition.x * 2 - parentsize.x /2, MapGridx.RectPosition.y);
                 MapGridy.RectPosition  = new Vector2(MapGridy.RectPosition.x, MapGridy.RectPosition.y * 2 - parentsize.y /2);
                 MapGridx.AddConstantOverride("hseparation", (int)(12 * RectScale.x));
@@ -170,8 +172,11 @@ public class MapGrid : GridContainer
                 RectScale /= 2;
                 
                 RectPosition /= 2;
+                //PlayerIconPivot.RectPosition /= 2;
                 Vector2 parentsize = ((Control)GetParent()).RectSize;
                 RectPosition += parentsize /4;
+                //PlayerIconPivot.RectPosition += parentsize /4;
+                PlayerIconPivot.RectPosition = RectPosition;
                 MapGridx.RectPosition = new Vector2(MapGridx.RectPosition.x / 2 + parentsize.x /4, MapGridx.RectPosition.y);
                 MapGridy.RectPosition  = new Vector2(MapGridy.RectPosition.x, MapGridy.RectPosition.y / 2 + parentsize.y /4);
                 MapGridx.AddConstantOverride("hseparation", (int)(12 * RectScale.x));
@@ -195,7 +200,7 @@ public class MapGrid : GridContainer
     {
         Vector2 parentsize = ((Control)GetParent()).RectSize;
         RectPosition = new Vector2( (- RectSize.x / 2 * RectScale.x) + parentsize.x / 2,(- RectSize.y / 2 * RectScale.y) + parentsize.y / 2);
-
+        PlayerIconPivot.RectPosition = new Vector2( (- RectSize.x / 2 * RectScale.x) + parentsize.x / 2,(- RectSize.y / 2 * RectScale.y) + parentsize.y / 2);
         MapGridx.RectPosition = new Vector2(RectPosition.x, 8);
 
         MapGridy.RectPosition = new Vector2(8, RectPosition.y);
@@ -322,28 +327,28 @@ public class MapGrid : GridContainer
         if (type == IleType.ENTRANCE)
         {
             //child.Modulate = ColorList[0];
-            child.GetNode<TextureRect>("TextureRect").HintTooltip = "Η Μητρόπολη";
+            //child.GetNode<TextureRect>("TextureRect").HintTooltip = "Η Μητρόπολη";
         }
         else if (type == IleType.EXIT)
         {
 
             //child.Modulate = ColorList[1];
-            child.GetNode<TextureRect>("TextureRect").HintTooltip = "Σκάφος";
+            //child.GetNode<TextureRect>("TextureRect").HintTooltip = "Σκάφος";
         }
         else if (type == IleType.LAND)
         {
             //child.Modulate = ColorList[2];
-            child.GetNode<TextureRect>("TextureRect").HintTooltip = string.Empty;
+            //child.GetNode<TextureRect>("TextureRect").HintTooltip = string.Empty;
         } 
         else if (type == IleType.LIGHTHOUSE)
         {
             //child.Modulate = ColorList[3];
-            child.GetNode<TextureRect>("TextureRect").HintTooltip = "Φάρος";
+            //child.GetNode<TextureRect>("TextureRect").HintTooltip = "Φάρος";
         }
         else
         {
             //child.Modulate = ColorList[4];
-            child.GetNode<TextureRect>("TextureRect").HintTooltip = string.Empty;
+            //child.GetNode<TextureRect>("TextureRect").HintTooltip = string.Empty;
         }
         if (img != null)
         {
@@ -352,24 +357,18 @@ public class MapGrid : GridContainer
         }
         child.type = (int)type;
     }
-    public Dictionary<Vector2, int> GetSaveData()
+    public override void _Process(float delta)
     {
-        Dictionary<Vector2, int> data = new Dictionary<Vector2, int>();
-        foreach (KeyValuePair<Vector2, MapTile> entry in MapIleList)
-        {
-            data.Add(entry.Key, entry.Value.type);
-        }
-        return data;
-    }
-    public void LoadSaveData(Dictionary<Vector2, int> Data, Dictionary<float, string> ImageData)
-    {
-        for (int i = 0; i < Data.Count; i++)
-        {
-            ImageTexture tex = new ImageTexture();
-		    tex.Load(ProjectSettings.GlobalizePath(ImageData.ElementAt(i).Value));
-            UpdateIleInfo(Data.ElementAt(i).Key, (IleType)Data.ElementAt(i).Value, (float)ImageData.ElementAt(i).Key, tex);
-        }
-    }
+        base._Process(delta);
+        Player pl = Player.GetInstance();
+        if (pl == null)
+            return;
+
+        Vector2 parentsize = ((Control)GetParent()).RectSize;
+        //player icon location is at 0,0 in the grid wich is top left corner. Get location of center of grid and treat that as 0,0
+        Vector2 center = MapIleList[new Vector2(0,0)].RectPosition;
+        GetParent().GetNode<Control>("PlayerIconPivot").GetNode<Panel>("PlayerIcon").RectPosition = (center + new Vector2( (pl.GlobalTranslation.x - 4000) * 0.0015f,  (pl.GlobalTranslation.z - 4000) * 0.0015f)) * RectScale;
+    } 
 }
 class ChildMapIleInfo
 {

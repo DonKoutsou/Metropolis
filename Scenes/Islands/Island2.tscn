@@ -117,6 +117,7 @@ size = Vector2( 8000, 8000 )
 [node name="Island" instance=ExtResource( 5 )]
 MoveLayer = 260
 Image = "res://Assets/IslandPics/Island2.png"
+Resolution = 128
 
 [node name="MeshInstance5" type="MeshInstance" parent="." index="1"]
 transform = Transform( 4000, 0, 0, 0, 2000, 0, 0, 0, 4000, 0, -138.835, 0 )

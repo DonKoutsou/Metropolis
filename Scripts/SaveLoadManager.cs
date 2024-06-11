@@ -84,19 +84,19 @@ public class SaveLoadManager : Control
 		data.Add("Date", Date);
 
 
-		Dictionary<Vector2, int> MapData = MapGrid.GetInstance().GetSaveData();
-		Vector2[] MapGridVectorData = new Vector2[MapData.Count];
-		int[] MapGridTypeData = new int[MapData.Count];
-		int i = 0;
-		foreach (KeyValuePair<Vector2 , int> kvp in MapData)
-		{
-			MapGridVectorData[i] = kvp.Key;
-			MapGridTypeData[i] = kvp.Value;
-			i++;
+		//Dictionary<Vector2, int> MapData = MapGrid.GetInstance().GetSaveData();
+		//Vector2[] MapGridVectorData = new Vector2[MapData.Count];
+		//int[] MapGridTypeData = new int[MapData.Count];
+		//int i = 0;
+		//foreach (KeyValuePair<Vector2 , int> kvp in MapData)
+		//{
+		//	MapGridVectorData[i] = kvp.Key;
+		//	MapGridTypeData[i] = kvp.Value;
+		//	i++;
 
-		}
-		data.Add("MapGridVectors", MapGridVectorData);
-		data.Add("MapGridTypes", MapGridTypeData);
+		//}
+		//data.Add("MapGridVectors", MapGridVectorData);
+		//data.Add("MapGridTypes", MapGridTypeData);
 
 		GDScript InventorySaveGD = GD.Load<GDScript>("res://Scripts/InventoryItemInfo.gd");
 		

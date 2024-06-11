@@ -85,6 +85,7 @@ item/2/preview = SubResource( 455 )
 [node name="Island" instance=ExtResource( 1 )]
 MoveLayer = 260
 Image = "res://Assets/IslandPics/Island18.png"
+Resolution = 128
 
 [node name="SoundMap" parent="." index="3"]
 mesh_library = SubResource( 461 )

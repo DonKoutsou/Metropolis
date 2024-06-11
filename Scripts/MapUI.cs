@@ -30,10 +30,12 @@ public class MapUI : Control
     public void OnMapOpened()
     {
         GetNode<AnimationPlayer>("AnimationPlayer").Play("static");
+        GetNode<Panel>("MagGridPanel").GetNode<Control>("PlayerIconPivot").GetNode<AnimationPlayer>("PlayerIconAnim").Play("Blinking");
     }
     public void OnMapClosed()
     {
         GetNode<AnimationPlayer>("AnimationPlayer").Stop();
+        GetNode<Panel>("MagGridPanel").GetNode<Control>("PlayerIconPivot").GetNode<AnimationPlayer>("PlayerIconAnim").Stop();
     }
     public override void _Ready()
     {

@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Scripts/MapGrid.cs" type="Script" id=1]
 [ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=2]
@@ -12,6 +12,92 @@
 [ext_resource path="res://Assets/UI/panelstylegrey.tres" type="StyleBox" id=10]
 [ext_resource path="res://Assets/UI/panelstylebox.tres" type="StyleBox" id=11]
 [ext_resource path="res://Scenes/HUD/MapUIItems/MapGridUIStyle.tres" type="StyleBox" id=12]
+
+[sub_resource type="StyleBoxFlat" id=31]
+bg_color = Color( 0.262745, 0.403922, 0.486275, 1 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0, 0, 0, 1 )
+border_blend = true
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[sub_resource type="StyleBoxFlat" id=29]
+bg_color = Color( 0.541176, 0.737255, 0.435294, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0, 0, 0, 1 )
+border_blend = true
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[sub_resource type="Animation" id=28]
+resource_name = "Blinking"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("PlayerIconPivot/PlayerIcon:custom_styles/panel:bg_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.156863, 0.219608, 0.12549, 1 ), Color( 0.541176, 0.737255, 0.435294, 1 ) ]
+}
+
+[sub_resource type="Animation" id=30]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("PlayerIcon:custom_styles/panel:bg_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.172549, 0.207843, 0.152941, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("PlayerIconPivot/PlayerIcon:custom_styles/panel:bg_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.541176, 0.737255, 0.435294, 1 ) ]
+}
+
+[sub_resource type="Theme" id=26]
+
+[sub_resource type="StyleBoxFlat" id=27]
+bg_color = Color( 0.839216, 0.678431, 0.458824, 1 )
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0, 0, 0, 1 )
+border_blend = true
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
 
 [sub_resource type="OpenSimplexNoise" id=22]
 octaves = 1
@@ -29,18 +115,6 @@ resource_local_to_scene = true
 resource_name = "normal"
 texture = SubResource( 6 )
 region_rect = Rect2( 0, 0, 512, 512 )
-
-[sub_resource type="Theme" id=26]
-
-[sub_resource type="StyleBoxFlat" id=27]
-bg_color = Color( 0.839216, 0.678431, 0.458824, 1 )
-draw_center = false
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color( 0, 0, 0, 1 )
-border_blend = true
 
 [sub_resource type="StyleBoxFlat" id=23]
 bg_color = Color( 0.607843, 0.603922, 0.603922, 1 )
@@ -143,6 +217,7 @@ margin_bottom = 5.0
 rect_clip_content = true
 mouse_filter = 1
 mouse_default_cursor_shape = 6
+custom_styles/panel = SubResource( 31 )
 script = ExtResource( 9 )
 
 [node name="MapGrid" type="GridContainer" parent="MagGridPanel"]
@@ -151,26 +226,33 @@ custom_constants/vseparation = 12
 custom_constants/hseparation = 12
 columns = 81
 script = ExtResource( 1 )
-MaxZoomScale = 4.0
+MaxZoomScale = 10.0
 TileScene = ExtResource( 6 )
 XGridTileScene = ExtResource( 7 )
 YGridTileScene = ExtResource( 8 )
-ColorList = [ Color( 0, 0.0352941, 0.556863, 1 ), Color( 0, 0.537255, 0.0352941, 1 ), Color( 0.909804, 0.862745, 0.627451, 1 ), Color( 0.945098, 0.376471, 0.372549, 1 ), Color( 0.180392, 0.556863, 0.921569, 1 ) ]
 
-[node name="Panel" type="Panel" parent="MagGridPanel"]
-modulate = Color( 1, 1, 1, 0.27451 )
+[node name="PlayerIconPivot" type="Control" parent="MagGridPanel"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -200.5
-margin_top = -216.5
-margin_right = 200.5
-margin_bottom = 216.5
-rect_clip_content = true
-mouse_filter = 2
-mouse_default_cursor_shape = 6
-custom_styles/panel = SubResource( 19 )
+
+[node name="PlayerIcon" type="Panel" parent="MagGridPanel/PlayerIconPivot"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -2.5
+margin_top = -2.5
+margin_right = 2.5
+margin_bottom = 2.5
+rect_pivot_offset = Vector2( 2.5, 2.5 )
+custom_styles/panel = SubResource( 29 )
+
+[node name="PlayerIconAnim" type="AnimationPlayer" parent="MagGridPanel/PlayerIconPivot"]
+root_node = NodePath("../..")
+anims/Blinking = SubResource( 28 )
+anims/RESET = SubResource( 30 )
 
 [node name="Panel2" type="Panel" parent="MagGridPanel"]
 anchor_top = 0.5
@@ -205,6 +287,21 @@ margin_bottom = 212.0
 rect_pivot_offset = Vector2( 0, 1.5 )
 mouse_filter = 2
 custom_styles/panel = ExtResource( 12 )
+
+[node name="Panel" type="Panel" parent="MagGridPanel"]
+modulate = Color( 1, 1, 1, 0.321569 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -200.5
+margin_top = -216.5
+margin_right = 200.5
+margin_bottom = 216.5
+rect_clip_content = true
+mouse_filter = 2
+mouse_default_cursor_shape = 6
+custom_styles/panel = SubResource( 19 )
 
 [node name="Panel2" type="Panel" parent="."]
 anchor_top = 1.0

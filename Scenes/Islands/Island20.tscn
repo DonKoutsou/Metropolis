@@ -86,6 +86,7 @@ item/2/preview = SubResource( 455 )
 [node name="Island" instance=ExtResource( 1 )]
 MoveLayer = 260
 Image = "res://Assets/IslandPics/Island20.png"
+Resolution = 128
 
 [node name="Rock1" parent="." index="2" instance=ExtResource( 2 )]
 transform = Transform( -352.076, -1474.62, -75.2091, 1389.86, -357.078, 494.896, -498.468, 45.9252, 1433.02, 664.911, -2546.47, -999.256 )

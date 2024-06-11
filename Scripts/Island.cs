@@ -41,12 +41,15 @@ public class Island : Spatial
 		#endif
 		GlobalTranslation = SpawnGlobalLocation;
 
+
 		Rotate(new Vector3(0, 1, 0), Mathf.Deg2Rad(SpawnRotation));
 		//Transform.Rotated(new Vector3(0, 1, 0), SpawnRotation);
 		//FindHouses(this);
 		//FindGenerators(this);
 		//FindVehicles(this);
-		GetNode<StaticBody>("SeaBed").GetNode<MeshInstance>("Sea").QueueFree();
+		StaticBody sea = GetNode<StaticBody>("SeaBed");
+		sea.GlobalRotation = Vector3.Zero;
+		sea.GetNode<MeshInstance>("Sea").QueueFree();
 
 		//FindChildren(this);
 	}
@@ -64,12 +67,23 @@ public class Island : Spatial
             Update = false;
         }
     }
+	enum ImageRes
+	{
+		x16 = 16,
+		x32 = 32,
+		x64 = 64,
+		x128 = 128,
+		x256 = 256,
+	}
+	[Export]
+	ImageRes Resolution = ImageRes.x16; 
     public void GenerateImage()
 	{
-		Vector2 res = new Vector2(32, 32);
+		int resolution = (int)Resolution;
+		Vector2 res = new Vector2(resolution, resolution);
 		int ilesize = 8000;
 		Image im = new Image();
-		im.Create((int)res.x, (int)res.y, true, Godot.Image.Format.Rgbaf);
+		im.Create((int)res.x, (int)res.y, true, Godot.Image.Format.Rgba8);
 		int row = 0;
 		int col = 0;
         float mult = ilesize/res.x;
@@ -87,12 +101,31 @@ public class Island : Spatial
             {
                 continue;
             }
+			CollisionObject obj = (CollisionObject)rayar["collider"];
+			//MeshInstance instance;
+			//if (GetParent() is MeshInstance)
+			//{
+			//	instance = (MeshInstance)GetParent();
+			//}
+			//else
+			//{
+			//	instance = GetNode<MeshInstance>("MeshInstance");
+			//}
+			//Vector3 VectorLocalPos = instance.GlobalTransform.basis.XformInv((Vector3)rayar["position"]);
+			//MeshDataTool tool = new MeshDataTool();
+			//SurfaceTool tool2 = new SurfaceTool();
+			//tool2.CreateFrom(instance.Mesh, 0);
+			//tool.CreateFromSurface(tool2.Commit(), 0);
 
-            bool ItsSea = ((CollisionObject)rayar["collider"]).GetCollisionLayerBit(8);
+			//int VertexIndex = Get_Closest_Vertex(VectorLocalPos, tool);
+
+            bool ItsSea = obj.GetCollisionLayerBit(8);
+
             im.Lock();
+			//im.SetPixel(col, row, tool.GetVertexColor(VertexIndex));
 			if (ItsSea)
 			{
-				im.SetPixel(col, row, new Color(r: 0.28f, g: 0.58f, b: 0.8f, a: 1));
+				im.SetPixel(col, row, new Color(r: 0, g: 0, b: 0, a: 0));
 			}
             else
             {
@@ -100,11 +133,11 @@ public class Island : Spatial
             }
             im.Unlock();
 			col ++;
-			if (col >= 32)
+			if (col >= resolution)
 			{
 				col = 0;
 				row ++;
-				if (row >= 32)
+				if (row >= resolution)
 				{
 					break;
 				}
@@ -116,6 +149,24 @@ public class Island : Spatial
 		
 		im.SavePng("res://Assets/IslandPics/" + Filename.GetFile().Substr(0, Filename.GetFile().Length - 5) + ".png");
 		Image = "res://Assets/IslandPics/" + Filename.GetFile().Substr(0, Filename.GetFile().Length - 5) + ".png";
+	}
+	int Get_Closest_Vertex(Vector3 LocalPosition, MeshDataTool Tool)
+	{
+		float closest_dist_squared = float.MaxValue;
+		int closest_vertex_index = -1;
+
+		for (int i = 0; i < Tool.GetVertexCount(); i++)
+		{
+			Vector3 i_pos = Tool.GetVertex(i);
+			float DistTemp = LocalPosition.DistanceSquaredTo(i_pos);
+			if (DistTemp <= closest_dist_squared)
+			{
+				closest_dist_squared = DistTemp;
+				closest_vertex_index = i;
+
+			}
+		}
+		return closest_vertex_index;
 	}
 	#endif
 	public void SetSpawnInfo(Vector3 SpawnPos, float SpawnRot, string SpecialName)

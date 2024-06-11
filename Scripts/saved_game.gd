@@ -15,8 +15,6 @@ func _SetData(data):
 	ilemap = data["ilemap"]
 	playerlocation = data["PlayerLocation"]
 	playerenergy = data["PlayerEnergy"]
-	MapGridVectors = data["MapGridVectors"]
-	MapGridTypes = data["MapGridTypes"]
 	InventoryContents = data["InventoryContents"]
 	playerHasVehicle = data["playerHasVehicle"]
 	Date = data["Date"];
@@ -55,6 +53,3 @@ export var WingState:bool
 export var LightState:bool
 
 export (Array, int) var Date = []
-
-export (Array, Vector2) var MapGridVectors = []
-export (Array, int) var MapGridTypes = []

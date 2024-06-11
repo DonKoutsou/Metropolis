@@ -167,12 +167,13 @@ public class WorldMap : TileMap
 			IslandInfo info = new IslandInfo((Resource)Iles[i]);
 			//info.UnPackData((Resource)Iles[i]);
 			ilemap.Add(IleVectors[i], info);
-			ImageTexture tex = new ImageTexture();
 
-			tex.Load(ProjectSettings.GlobalizePath(info.ImageFile));
+			//Godot.Image im = new Godot.Image();
+			ImageTexture tex = new ImageTexture();
+			tex.CreateFromImage(IslandImageHolder.GetInstance().Images[0]);
 			//tex.Load(ile.Image);
 
-			MapGrid.GetInstance().UpdateIleInfo(info.Position, info.Type, info.RotationToSpawn - 180, tex);
+			MapGrid.GetInstance().UpdateIleInfo(info.Position, info.Type, - info.RotationToSpawn, tex);
 		}
 	}
 	public static WorldMap GetInstance()
@@ -368,9 +369,9 @@ public class WorldMap : TileMap
 		
 		//Spawndata to be used when spawning
 		float rot;
-		int index = random.Next(rots.Count);
+		//int index = random.Next(rots.Count);
 
-		rot = rots[index];
+		rot = random.Next(360);
 		
 		IslandInfo ileinfo = new IslandInfo(rot, ilescene, cell, SpecialName);
 
@@ -429,12 +430,13 @@ public class WorldMap : TileMap
 		{
 			ile.QueueFree();
 		}
-
+		//Godot.Image im = new Godot.Image();
 		ImageTexture tex = new ImageTexture();
-		tex.Load(ProjectSettings.GlobalizePath(ile.Image));
+		//im.Load(ile.Image);
+		tex.CreateFromImage(IslandImageHolder.GetInstance().Images[0]);
 		//tex.Load(ile.Image);
 
-		MapGrid.GetInstance().UpdateIleInfo(ilei.Position, ilei.Type, ilei.RotationToSpawn - 180, tex);
+		MapGrid.GetInstance().UpdateIleInfo(ilei.Position, ilei.Type, - ilei.RotationToSpawn, tex);
 
 		IleToSave = null;
 

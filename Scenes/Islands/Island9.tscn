@@ -88,6 +88,7 @@ item/2/preview = SubResource( 12 )
 MoveLayer = 260
 type = 3
 Image = "res://Assets/IslandPics/Island9.png"
+Resolution = 128
 
 [node name="StaticBody" parent="." index="1" instance=ExtResource( 2 )]
 transform = Transform( 0.98015, -0.0602962, -0.188865, 0, 0.95263, -0.304133, 0.198256, 0.298096, 0.93372, 478.928, 116.403, -433.837 )

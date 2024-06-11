@@ -435,6 +435,7 @@ MoveLayer = 260
 type = 0
 KeepInstance = true
 Image = "res://Assets/IslandPics/MotherCity.png"
+Resolution = 128
 
 [node name="RemoteTransform" type="RemoteTransform" parent="SeaBed" index="2"]
 remote_path = NodePath("../../Planks")
@@ -442,7 +443,7 @@ update_rotation = false
 update_scale = false
 
 [node name="Planks" type="Spatial" parent="." index="1"]
-transform = Transform( 0.999938, 3.6186e-09, 2.79397e-09, 3.19172e-09, 0.999937, 2.79688e-08, 2.64845e-09, -3.39642e-08, 0.999937, 0, 0, 0 )
+transform = Transform( 0.999939, 3.61861e-09, -1.49012e-08, 3.19172e-09, 0.999937, 2.79688e-08, -1.49012e-08, -3.39642e-08, 0.999938, 0, 0, 0 )
 
 [node name="StaticBody6" parent="Planks" index="0" instance=ExtResource( 28 )]
 transform = Transform( 0.742315, 0, 0.670051, 0, 1, 0, -0.670051, 0, 0.742315, 87.941, -0.00652695, 2437.29 )
