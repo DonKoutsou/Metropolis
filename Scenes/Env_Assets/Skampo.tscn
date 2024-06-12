@@ -9,7 +9,7 @@
 extents = Vector3( 0.762446, 0.900846, 0.741731 )
 
 [node name="StaticBody" type="StaticBody" groups=["Interactables"]]
-collision_layer = 20
+collision_layer = 48
 collision_mask = 0
 script = ExtResource( 3 )
 

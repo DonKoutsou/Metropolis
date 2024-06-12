@@ -146,7 +146,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="SphereShape" id=116]
-radius = 2.0
+radius = 4.0
 
 [sub_resource type="QuadMesh" id=107]
 size = Vector2( 4, 4 )

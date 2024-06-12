@@ -321,7 +321,7 @@ public class DayNight : WorldEnvironment
     }
     private void UpdateTime()
     {
-        currentmins += 0.014f * timeprogmultiplier;
+        currentmins += 0.022f * timeprogmultiplier;
         
         if (currentmins > 60)
         {

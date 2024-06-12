@@ -67,7 +67,7 @@ public class Player : Character
 	}
 	private void UpdateMoveLocation()
 	{
-		if (TalkText.IsTalking())
+		if (IsTalking)
 			return;
 		var spacestate = GetWorld().DirectSpaceState;
 		Vector2 mousepos = GetViewport().GetMousePosition();
@@ -345,6 +345,7 @@ public class Player : Character
 		IsRunning = false;
 	}
 	Character TalkingChar;
+	public bool IsTalking = false;
 	public void StartDialogue(Character character)
 	{
 		if (HasVehicle())
@@ -355,6 +356,7 @@ public class Player : Character
 		Position3D talkpos = character.GetNode<Position3D>("TalkPosition");
 
 		loctomove = talkpos.GlobalTranslation;
+
 		((Spatial)DialogueCam.GetParent()).GlobalRotation = talkpos.GlobalRotation;
 		CameraAnimationPlayer.GetInstance().PlayAnim("FadeInDialogue");
 		if (character.CurrentEnergy == 0)
@@ -372,7 +374,7 @@ public class Player : Character
 			dialogue.Connect("timeline_end", this, "EndDialogue");
 		}
 		TalkingChar = character;
-		
+		IsTalking = true;
 		//DialogueCam.Current = true;
 	}
 	public void EndUnconDialogue(string timeline_name)
@@ -390,9 +392,11 @@ public class Player : Character
 
 			CharacterInventory.DeleteItem(bats[0]);
 		}
+		IsTalking = false;
 	}
 	public void EndDialogue(string timeline_name)
 	{
 		CameraAnimationPlayer.GetInstance().PlayAnim("FadeOutDialogue");
+		IsTalking = false;
 	}
 }

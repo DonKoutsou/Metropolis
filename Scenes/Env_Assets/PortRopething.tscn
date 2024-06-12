@@ -31,7 +31,7 @@ mid_height = 0.5
 height = 5.00185
 
 [node name="StaticBody" type="StaticBody"]
-collision_layer = 4
+collision_layer = 32
 collision_mask = 0
 
 [node name="MeshInstance" type="MeshInstance" parent="."]

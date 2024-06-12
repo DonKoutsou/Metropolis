@@ -10,7 +10,7 @@ radius = 23.321
 extents = Vector3( 13.9236, 24.2215, 11.4336 )
 
 [node name="StaticBody" type="StaticBody"]
-collision_layer = 4
+collision_layer = 32
 collision_mask = 0
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
