@@ -91,7 +91,7 @@ item/2/preview = SubResource( 455 )
 [node name="Island" instance=ExtResource( 1 )]
 MoveLayer = 260
 type = 3
-Image = "res://Assets/IslandPics/Island17.png"
+ImageID = 15
 Resolution = 128
 
 [node name="DestBuilding" parent="." index="1" instance=ExtResource( 4 )]

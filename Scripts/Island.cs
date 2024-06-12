@@ -13,7 +13,7 @@ public class Island : Spatial
 	[Export]
 	public bool KeepInstance = false;
 	[Export]
-	public string Image = null;
+	public int ImageID = 0;
 
 	public string IslandSpecialName = null;
 
@@ -56,17 +56,7 @@ public class Island : Spatial
 	#if DEBUG
 	[Export(PropertyHint.Layers3dPhysics)]
     public uint MoveLayer { get; set; }
-    [Export]
-    bool Update = false;
-    public override void _Process(float delta)
-    {
-        base._Process(delta);
-        if (Update)
-        {
-            GenerateImage();
-            Update = false;
-        }
-    }
+
 	enum ImageRes
 	{
 		x16 = 16,
@@ -77,7 +67,7 @@ public class Island : Spatial
 	}
 	[Export]
 	ImageRes Resolution = ImageRes.x16; 
-    public void GenerateImage()
+    public Image GenerateImage()
 	{
 		int resolution = (int)Resolution;
 		Vector2 res = new Vector2(resolution, resolution);
@@ -147,8 +137,10 @@ public class Island : Spatial
 		//t.CreateFromImage(im, flags:4);
         //Image = t;
 		
-		im.SavePng("res://Assets/IslandPics/" + Filename.GetFile().Substr(0, Filename.GetFile().Length - 5) + ".png");
-		Image = "res://Assets/IslandPics/" + Filename.GetFile().Substr(0, Filename.GetFile().Length - 5) + ".png";
+		//im.SavePng("res://Assets/IslandPics/" + Filename.GetFile().Substr(0, Filename.GetFile().Length - 5) + ".png");
+		//Image = "res://Assets/IslandPics/" + Filename.GetFile().Substr(0, Filename.GetFile().Length - 5) + ".png";
+		im.ClearMipmaps();
+		return im;
 	}
 	int Get_Closest_Vertex(Vector3 LocalPosition, MeshDataTool Tool)
 	{
@@ -491,7 +483,7 @@ public class IslandInfo
 	public Vector2 Position;
 	public string SpecialName = null;
 	public PackedScene IleType;
-	public string ImageFile = null;
+	public int ImageIndex = 0;
 	public List<HouseInfo> Houses = new List<HouseInfo>();
 	public List<WindGeneratorInfo> Generators = new List<WindGeneratorInfo>();
 	public List<VehicleInfo> Vehicles = new List<VehicleInfo>();
@@ -520,7 +512,7 @@ public class IslandInfo
         Position = (Vector2)data.Get("Pos");
 		SpecialName = (string)data.Get("SpecialName");
         IleType = (PackedScene)data.Get("Scene");
-		ImageFile = (string)data.Get("ImageFile");
+		ImageIndex = (int)data.Get("ImageIndex");
         RotationToSpawn = (float)data.Get("Rotation");
 		KeepInstance = (bool)data.Get("KeepInstance");
 
@@ -634,7 +626,7 @@ public class IslandInfo
             { "Pos", Position },
 			{ "SpecialName", SpecialName},
 			{"Scene", IleType},
-			{"ImageFile", ImageFile},
+			{"ImageIndex", ImageIndex},
 			{"Rotation", RotationToSpawn},
 			{"Houses", HouseInfoobjects},
 			{"Generators", GeneratorInfoobjects},

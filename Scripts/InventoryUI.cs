@@ -235,7 +235,7 @@ public class InventoryUI : Control
             ShowingCompass = false;
     }
     
-    private void On_Map_Button_Down()
+    public void On_Map_Button_Down()
     {
         if (!hasmap)
         {

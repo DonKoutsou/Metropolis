@@ -170,7 +170,7 @@ public class WorldMap : TileMap
 
 			//Godot.Image im = new Godot.Image();
 			ImageTexture tex = new ImageTexture();
-			tex.CreateFromImage(IslandImageHolder.GetInstance().Images[0]);
+			tex.CreateFromImage(IslandImageHolder.GetInstance().Images[info.ImageIndex]);
 			//tex.Load(ile.Image);
 
 			MapGrid.GetInstance().UpdateIleInfo(info.Position, info.Type, - info.RotationToSpawn, tex);
@@ -433,7 +433,7 @@ public class WorldMap : TileMap
 		//Godot.Image im = new Godot.Image();
 		ImageTexture tex = new ImageTexture();
 		//im.Load(ile.Image);
-		tex.CreateFromImage(IslandImageHolder.GetInstance().Images[0]);
+		tex.CreateFromImage(IslandImageHolder.GetInstance().Images[ile.ImageID]);
 		//tex.Load(ile.Image);
 
 		MapGrid.GetInstance().UpdateIleInfo(ilei.Position, ilei.Type, - ilei.RotationToSpawn, tex);
@@ -529,7 +529,7 @@ public class WorldMap : TileMap
 		Ile.SetSpawnInfo(new Vector3(postoput.x, 0, postoput.y), info.RotationToSpawn, info.SpecialName);
 
 		info.Island = Ile;
-		info.ImageFile = Ile.Image;
+		info.ImageIndex = Ile.ImageID;
 		//#if DEBUG
 		//ulong msaf = OS.GetSystemTimeMsecs();
 		//if (msaf - ms > 20)

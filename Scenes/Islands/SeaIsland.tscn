@@ -14,7 +14,7 @@ pause_mode = 1
 script = ExtResource( 2 )
 MoveLayer = 260
 type = 3
-Image = "res://Assets/IslandPics/SeaIsland.png"
+ImageID = 23
 Resolution = 128
 
 [node name="SeaBed" parent="." instance=ExtResource( 1 )]

@@ -84,7 +84,7 @@ item/2/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/2/preview = SubResource( 12 )
 
 [node name="Island" instance=ExtResource( 2 )]
-Image = "res://Assets/IslandPics/Island4.png"
+ImageID = 3
 Resolution = 128
 
 [node name="StaticBody" parent="." index="1" instance=ExtResource( 10 )]

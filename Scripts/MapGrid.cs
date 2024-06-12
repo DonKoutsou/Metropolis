@@ -140,6 +140,19 @@ public class MapGrid : GridContainer
 
 			Vector2 pos = new Vector2(RectPosition.x + ((InputEventMouseMotion)@event).Relative.x, RectPosition.y + ((InputEventMouseMotion)@event).Relative.y);
 
+            Control parent = (Control)GetParent();
+
+            Vector2 size = RectSize * RectScale;
+
+            if (pos.x > 14)
+                pos.x = 14;
+            if (Mathf.Abs(pos.x) + parent.RectSize.x  > size.x + 14)
+                pos.x = -(size.x + 14 - parent.RectSize.x);
+            if (pos.y > 14)
+                pos.y = 14;
+            if (Mathf.Abs(pos.y) +  parent.RectSize.y> size.y + 14)
+                pos.y = -(size.y + 14 - parent.RectSize.y);
+
             MapGridx.RectPosition = new Vector2(pos.x, 8);
 
             MapGridy.RectPosition = new Vector2(8, pos.y);
@@ -167,7 +180,7 @@ public class MapGrid : GridContainer
 		}
 		if (@event.IsActionPressed("ZoomOut"))
 		{
-			if (RectScale.x > 0.25f)
+			if (RectScale.x > 0.5f)
             {
                 RectScale /= 2;
                 
@@ -326,12 +339,14 @@ public class MapGrid : GridContainer
         
         if (type == IleType.ENTRANCE)
         {
+            child.GetNode<Panel>("SignPanel").Visible = true;
+            //child.GetNode<Panel>("SignPanel").RectRotation = -rot;
             //child.Modulate = ColorList[0];
             //child.GetNode<TextureRect>("TextureRect").HintTooltip = "Η Μητρόπολη";
         }
         else if (type == IleType.EXIT)
         {
-
+            
             //child.Modulate = ColorList[1];
             //child.GetNode<TextureRect>("TextureRect").HintTooltip = "Σκάφος";
         }
@@ -342,6 +357,8 @@ public class MapGrid : GridContainer
         } 
         else if (type == IleType.LIGHTHOUSE)
         {
+            child.GetNode<Panel>("SignPanel").Visible = true;
+            //child.GetNode<Panel>("SignPanel").RectRotation = -rot;
             //child.Modulate = ColorList[3];
             //child.GetNode<TextureRect>("TextureRect").HintTooltip = "Φάρος";
         }
@@ -356,6 +373,7 @@ public class MapGrid : GridContainer
             child.GetNode<TextureRect>("TextureRect").RectRotation = rot;
         }
         child.type = (int)type;
+        child.Modulate = new Color(1,1,1,1);
     }
     public override void _Process(float delta)
     {

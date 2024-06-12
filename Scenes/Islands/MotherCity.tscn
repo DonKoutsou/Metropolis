@@ -434,7 +434,7 @@ _data = {
 MoveLayer = 260
 type = 0
 KeepInstance = true
-Image = "res://Assets/IslandPics/MotherCity.png"
+ImageID = 22
 Resolution = 128
 
 [node name="RemoteTransform" type="RemoteTransform" parent="SeaBed" index="2"]
