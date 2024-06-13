@@ -98,6 +98,7 @@ public class MyWorld : Spatial
 		pl.Teleport(pos);
 		WorldMap.GetInstance().pl = pl;
 		EmitSignal("PlayerSpawnedEventHandler", pl);
+		MapGrid.GetInstance().ConnectPlayer(pl);
 		VehicleHud.GetInstance().ConnectToPlayer(pl);
 		CameraAnimationPlayer.GetInstance().FadeIn(6);
 		return pl;

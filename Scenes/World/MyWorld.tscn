@@ -1,8 +1,9 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Scenes/Islands/Island23.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/MyWorld.cs" type="Script" id=2]
 [ext_resource path="res://Scenes/Islands/Island8.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/HUD/InventoryUI.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Characters/Player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/World/WorldMap.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Items/Drahma.tscn" type="PackedScene" id=8]
@@ -40,6 +41,11 @@ GlobalItemListConfiguration = {
 5: ExtResource( 25 )
 }
 PlayerScene = ExtResource( 6 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enable = true
+
+[node name="InvntoryUI" parent="CanvasLayer" instance=ExtResource( 4 )]
 
 [node name="WorldMap" parent="." instance=ExtResource( 7 )]
 pause_mode = 1

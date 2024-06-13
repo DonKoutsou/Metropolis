@@ -9,7 +9,7 @@
 [sub_resource type="Shader" id=10]
 code = "shader_type spatial;
 
-render_mode async_visible,blend_mix,depth_draw_always,cull_back,diffuse_lambert,specular_schlick_ggx;
+render_mode async_visible,blend_mix,depth_draw_always,cull_disabled,diffuse_lambert,specular_schlick_ggx;
 
 uniform bool IsRaining = false;
 

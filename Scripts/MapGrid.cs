@@ -67,6 +67,11 @@ public class MapGrid : GridContainer
         //MarginLeft = -(RectSize.x / 2);
         //RectPosition = RectScale/2; 
     }
+    Player pl;
+    public void ConnectPlayer(Player p)
+    {
+        pl = p;
+    }
     public void InitMap()
     {
          WorldMap map = WorldMap.GetInstance();
@@ -375,14 +380,18 @@ public class MapGrid : GridContainer
         child.type = (int)type;
         child.Modulate = new Color(1,1,1,1);
     }
+    float d = 0.2f;
     public override void _Process(float delta)
     {
         base._Process(delta);
-        Player pl = Player.GetInstance();
+        d -= delta;
+        if (d > 0)
+            return;
+        d = 0.2f;
+
         if (pl == null)
             return;
 
-        Vector2 parentsize = ((Control)GetParent()).RectSize;
         //player icon location is at 0,0 in the grid wich is top left corner. Get location of center of grid and treat that as 0,0
         Vector2 center = MapIleList[new Vector2(0,0)].RectPosition;
         GetParent().GetNode<Control>("PlayerIconPivot").GetNode<Panel>("PlayerIcon").RectPosition = (center + new Vector2( (pl.GlobalTranslation.x - 4000) * 0.0015f,  (pl.GlobalTranslation.z - 4000) * 0.0015f)) * RectScale;
