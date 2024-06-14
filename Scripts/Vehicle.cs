@@ -142,10 +142,10 @@ public class Vehicle : RigidBody
         base._PhysicsProcess(delta);
         //ulong ms = OS.GetSystemTimeMsecs();
 
-        if (!thr.IsAlive())
+        if (!thr.IsActive())
         {
             //if (thr.IsActive())
-            thr.WaitToFinish();
+            ;
             thr = new Thread();
             thr.Start(this, "Balance", delta);
         }
@@ -195,10 +195,10 @@ public class Vehicle : RigidBody
 
         
 
-        if (!SteerThr.IsAlive())
+        if (!SteerThr.IsActive())
         {
             //if (SteerThr.IsActive())
-            SteerThr.WaitToFinish();
+            
             SteerThr = new Thread();
             SteerThr.Start(this, "Steer", delta);
         }
@@ -281,11 +281,11 @@ public class Vehicle : RigidBody
     public override void _ExitTree()
     {
         base._ExitTree();
-        if (thr != null)
+        if (thr != null && thr.IsActive())
         {
             thr.WaitToFinish();
         }
-        if (SteerThr != null)
+        if (SteerThr != null && SteerThr.IsActive())
         {
             SteerThr.WaitToFinish();
         }
@@ -389,6 +389,7 @@ public class Vehicle : RigidBody
             if (rotz < -100 || rotz > 100)
                 CallDeferred("Capsize");
         }
+        thr.CallDeferred("wait_to_finish");
     }
     public void Steer(float delta)
     {
@@ -454,7 +455,7 @@ public class Vehicle : RigidBody
         torq.z = 1000 * mutli * eq;
         //AddTorque(torq);
         steert = torq;
-
+        SteerThr.CallDeferred("wait_to_finish");
     }
     private float GetWorkingSailMulti()
     {

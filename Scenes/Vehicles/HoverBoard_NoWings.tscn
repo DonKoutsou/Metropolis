@@ -1,9 +1,9 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://Assets/Boat/M_Boat.material" type="Material" id=1]
 [ext_resource path="res://Scripts/Vehicle.cs" type="Script" id=2]
 [ext_resource path="res://Scripts/VehicleDamageManager.cs" type="Script" id=3]
-[ext_resource path="res://Assets/Boat/Boat.obj" type="ArrayMesh" id=4]
+[ext_resource path="res://Assets/Boat/ΚαικιΗιγη_lambert1_Normal.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Boat/BoatWingL_Dest.tres" type="ArrayMesh" id=5]
 [ext_resource path="res://Assets/Boat/BoatWingR_Dest.tres" type="ArrayMesh" id=6]
 [ext_resource path="res://Assets/Boat/BoatWindDetector.obj" type="ArrayMesh" id=7]
@@ -14,6 +14,10 @@
 [ext_resource path="res://Assets/Sounds/Engine/Engine.ogg" type="AudioStream" id=12]
 [ext_resource path="res://Assets/Sounds/Engine/Engine2.ogg" type="AudioStream" id=13]
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Assets/Boat/Kaiki.obj" type="ArrayMesh" id=15]
+[ext_resource path="res://Assets/Boat/ΚαικιΗιγη_lambert1_BaseColor.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Boat/ΚαικιΗιγη_lambert1_OcclusionRoughnessMetallic.png" type="Texture" id=17]
+[ext_resource path="res://shaders/Outline.shader" type="Shader" id=18]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0
@@ -26,9 +30,32 @@ _data = [ Vector2( 0, 6 ), 0.0, 0.0, 0, 0, Vector2( 0.355023, 5.96319 ), 0.0, 0.
 [sub_resource type="Curve" id=9]
 _data = [ Vector2( 0, 0.1 ), 0.0, 0.0, 0, 0, Vector2( 0.5, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.1 ), 0.0, 0.0, 0, 0 ]
 
+[sub_resource type="ShaderMaterial" id=43]
+resource_local_to_scene = true
+shader = ExtResource( 18 )
+shader_param/enable = false
+shader_param/outline_thickness = 0.171
+shader_param/color2 = Color( 0, 0, 0, 0 )
+shader_param/color = Color( 1, 1, 0, 0 )
+
+[sub_resource type="SpatialMaterial" id=44]
+resource_local_to_scene = true
+next_pass = SubResource( 43 )
+albedo_texture = ExtResource( 16 )
+roughness_texture = ExtResource( 17 )
+roughness_texture_channel = 1
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 4 )
+ao_enabled = true
+ao_light_affect = 1.0
+ao_texture = ExtResource( 17 )
+ao_on_uv2 = false
+ao_texture_channel = 0
+
 [sub_resource type="CapsuleShape" id=8]
 radius = 3.11783
-height = 10.1927
+height = 13.472
 
 [sub_resource type="BoxShape" id=32]
 extents = Vector3( 0.366748, 0.297252, 0.302782 )
@@ -64,12 +91,13 @@ scale_random = 0.8
 scale_curve = SubResource( 35 )
 
 [sub_resource type="SpatialMaterial" id=36]
-flags_transparent = true
 flags_unshaded = true
 vertex_color_use_as_albedo = true
 params_blend_mode = 1
 params_depth_draw_mode = 3
 params_billboard_mode = 3
+params_use_alpha_scissor = true
+params_alpha_scissor_threshold = 0.98
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
@@ -197,11 +225,12 @@ RightWingMesh = ExtResource( 11 )
 RightDestWingMesh = ExtResource( 6 )
 
 [node name="MeshInstance" type="MeshInstance" parent="VehicleBody"]
-material_override = ExtResource( 1 )
-mesh = ExtResource( 4 )
+transform = Transform( 1, -5.50244e-11, 1.16415e-10, 1.32104e-10, 1, 0, 0, 0, 1, 0.00146545, 2.19858, 0.00235286 )
+material_override = SubResource( 44 )
+mesh = ExtResource( 15 )
 
 [node name="WindDetector" type="MeshInstance" parent="VehicleBody"]
-transform = Transform( 0.0239615, 0.00172045, -0.999713, -0.000419282, 1, 0.00171089, 0.999716, 0.000378179, 0.0239623, -0.000107468, 3.31787, 6.50101 )
+transform = Transform( 0.0239615, 0.00172045, -0.999714, -0.000419281, 1, 0.00171089, 0.999717, 0.000378179, 0.0239623, -0.0573806, 4.83131, 9.57226 )
 mesh = ExtResource( 7 )
 script = ExtResource( 9 )
 
@@ -217,11 +246,11 @@ shape = SubResource( 32 )
 transform = Transform( 1, -5.51381e-11, 1.16415e-10, 1.32104e-10, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="CollisionShape3" type="CollisionShape" parent="VehicleBody"]
-transform = Transform( 0.999999, 1.19769e-10, 5.23869e-10, 2.49429e-10, 1, -8.14907e-10, -1.74623e-10, 8.14907e-10, 1, 2.99901, -0.698486, 7.9984 )
+transform = Transform( 0.999999, 6.19025e-11, 6.40284e-10, 3.65787e-10, 1, -8.14907e-10, -1.74623e-10, 8.14907e-10, 1, 3, -0.700645, 10 )
 shape = SubResource( 41 )
 
 [node name="CollisionShape4" type="CollisionShape" parent="VehicleBody"]
-transform = Transform( 0.999999, -1.21736e-09, 2.79397e-09, -3.2403e-09, 1, -6.28643e-09, -2.73576e-09, 3.37604e-09, 1, -3.0009, -0.543089, 7.99856 )
+transform = Transform( 0.999999, -1.45013e-09, 3.0268e-09, -2.89123e-09, 1, -6.28643e-09, -2.73576e-09, 3.37604e-09, 1, -3, -0.544391, 10 )
 shape = SubResource( 41 )
 
 [node name="CollisionShape5" type="CollisionShape" parent="VehicleBody"]
@@ -233,12 +262,12 @@ transform = Transform( 0.999999, -9.82538e-10, 4.19095e-09, -4.63615e-09, 1, -9.
 shape = SubResource( 41 )
 
 [node name="RemoteTransform" type="RemoteTransform" parent="VehicleBody"]
-transform = Transform( 0.999999, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.8, 8 )
+transform = Transform( 0.999999, -5.50244e-11, 1.16415e-10, 1.32729e-10, 1, 0, 0, 0, 1, 3, 0.797841, 10 )
 remote_path = NodePath("../../RayFL")
 update_rotation = false
 
 [node name="RemoteTransform2" type="RemoteTransform" parent="VehicleBody"]
-transform = Transform( 1, -1.15949e-09, 2.73576e-09, -3.29919e-09, 1, -5.82077e-09, -2.73576e-09, 2.91038e-09, 1, -3, 0.8, 8 )
+transform = Transform( 1, -1.39221e-09, 2.96859e-09, -2.94995e-09, 1, -5.82077e-09, -2.73576e-09, 2.91038e-09, 1, -3, 0.798699, 10 )
 remote_path = NodePath("../../RayFR")
 update_rotation = false
 
@@ -256,12 +285,12 @@ update_rotation = false
 transform = Transform( 1, 4.09671e-10, -2.32831e-10, 2.48349e-10, 1, -4.65661e-10, 2.91038e-10, -4.65661e-10, 1, 0, 0, 0 )
 
 [node name="CharacterRemoteTransform" type="RemoteTransform" parent="VehicleBody"]
-transform = Transform( 1, 4.43379e-12, 0, -9.71454e-11, 1, -2.32831e-10, 0, 2.32831e-10, 1, -0.00156844, 2.60964, -5.16635 )
+transform = Transform( 1, 1.45854e-05, -1.55321e-05, -1.49394e-05, 0.999735, -0.0230712, 1.51924e-05, 0.0230712, 0.999735, -0.0029084, 3.75981, -8.45704 )
 update_rotation = false
 update_scale = false
 
 [node name="CharacterRemoteTransform2" type="RemoteTransform" parent="VehicleBody"]
-transform = Transform( 1, 2.55795e-12, 1.16415e-10, -3.33159e-10, 1, -4.65661e-10, -2.32831e-10, -2.32831e-10, 1, -0.00156844, 2.60964, -5.16635 )
+transform = Transform( 1, 1.45854e-05, -1.5532e-05, -1.49397e-05, 0.999735, -0.0230712, 1.51922e-05, 0.0230712, 0.999735, -0.0029084, 3.75981, -8.45704 )
 update_position = false
 update_scale = false
 
@@ -284,7 +313,8 @@ pitch_scale = 0.2
 area_mask = 4
 
 [node name="ExaustParticlesLSteer" type="Particles" parent="VehicleBody"]
-transform = Transform( 0.708031, 0.706183, 0.000970028, -0.000588456, -0.000783643, 1, 0.706184, -0.708031, -0.000139274, 3.72258, 2.16136, -0.278607 )
+transform = Transform( 0.708031, 0.706184, 0.000970028, -0.000588456, -0.000783644, 1, 0.706184, -0.708031, -0.000139274, 5.88695, -0.250126, -0.282572 )
+sorting_offset = -2.354
 emitting = false
 amount = 200
 lifetime = 0.5
@@ -302,7 +332,7 @@ pitch_scale = 1.2
 area_mask = 4
 
 [node name="ExaustParticlesRSteer" type="Particles" parent="VehicleBody"]
-transform = Transform( 0.706185, -0.70803, -0.000542905, 0.000926227, 0.00015703, 1, -0.708031, -0.706185, 0.000766692, -4.26507, 2.16669, -0.273496 )
+transform = Transform( 0.706186, -0.708031, -0.000542905, 0.000926228, 0.000157029, 1, -0.708031, -0.706186, 0.000766693, -6.29818, -0.332384, -0.274872 )
 emitting = false
 amount = 200
 lifetime = 0.5
@@ -344,7 +374,7 @@ anims/Wings = SubResource( 17 )
 anims/WingsOut = SubResource( 19 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="VehicleBody"]
-transform = Transform( 1, -0.00022008, -0.00144871, -0.00145632, -0.258818, -0.965925, -0.000162362, 0.965926, -0.258818, 0.00629711, 2.82431, 6.90431 )
+transform = Transform( 1, -0.00022008, -0.00144871, -0.00145632, -0.258818, -0.965926, -0.000162362, 0.965927, -0.258818, 0.0113567, 3.99657, 13.591 )
 mesh = SubResource( 31 )
 
 [node name="SpotLight" type="SpotLight" parent="VehicleBody/MeshInstance2"]
@@ -357,11 +387,11 @@ spot_attenuation = 2.37841
 spot_angle = 55.8586
 
 [node name="MeshInstance3" type="MeshInstance" parent="VehicleBody"]
-transform = Transform( 0.707088, -0.707125, -0.00187554, -0.00186727, 0.000785189, -0.999999, 0.707125, 0.70709, -0.000765205, 3.13465, 2.15318, 0.517327 )
+transform = Transform( 0.707088, -0.707125, -0.00187554, -0.00186727, 0.000785189, -0.999999, 0.707125, 0.70709, -0.000765205, 5.29902, -0.258306, 0.513362 )
 mesh = SubResource( 34 )
 
 [node name="MeshInstance4" type="MeshInstance" parent="VehicleBody"]
-transform = Transform( 0.707126, 0.707089, -0.000361575, -0.00035384, -0.0001575, -1, -0.70709, 0.707127, 0.000138825, -3.22737, 2.15742, 0.521399 )
+transform = Transform( 0.707127, 0.70709, -0.000361575, -0.00035384, -0.000157499, -1, -0.70709, 0.707128, 0.000138825, -5.26048, -0.341654, 0.520023 )
 mesh = SubResource( 34 )
 
 [node name="GroundChecks" type="Spatial" parent="VehicleBody"]
@@ -410,7 +440,7 @@ collision_mask = 260
 ActionDistance = 20.0
 
 [node name="RayFL" type="RayCast" parent="."]
-transform = Transform( 0.999999, -3.93416e-08, 2.24099e-08, 3.94467e-08, 1, -5.70435e-09, -2.23517e-08, 5.70435e-09, 1, 3, 0.8, 8 )
+transform = Transform( 0.999999, -5.29626e-08, 2.24099e-08, 5.30673e-08, 1, -5.00586e-09, -2.23517e-08, 5.00586e-09, 1, 3, 0.797841, 10 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 260
@@ -424,13 +454,13 @@ material/0 = ExtResource( 1 )
 transform = Transform( 1, 2.05701e-08, -1.85682e-08, -2.05223e-08, 1, 1.44355e-08, 1.90921e-08, -1.44355e-08, 1, -0.00278616, -4.17923, -0.00447226 )
 
 [node name="RayFR" type="RayCast" parent="."]
-transform = Transform( 1, 2.69681e-07, 5.75674e-08, -2.69599e-07, 1, -9.44128e-08, -5.75092e-08, 9.44128e-08, 1, -3, 0.8, 8 )
+transform = Transform( 1, 2.52044e-07, 5.75674e-08, -2.51962e-07, 1, -9.37143e-08, -5.75092e-08, 9.37143e-08, 1, -3, 0.798699, 10 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 260
 
 [node name="MeshInstance" type="MeshInstance" parent="RayFR"]
-transform = Transform( 1, -2.60343e-11, 0, 1.03796e-10, 1, 0, 0, 0, 1, -0.00133324, -2, -0.00213957 )
+transform = Transform( 1, 6.67342e-11, 0, 7.89555e-11, 1, 0, -5.82077e-11, 0, 1, -0.00133324, -2, -0.00214005 )
 mesh = SubResource( 33 )
 material/0 = ExtResource( 1 )
 
@@ -438,7 +468,7 @@ material/0 = ExtResource( 1 )
 transform = Transform( 1, 2.05701e-08, -1.85682e-08, -2.05223e-08, 1, 1.44355e-08, 1.90921e-08, -1.44355e-08, 1, -0.00278616, -4.17923, -0.00447226 )
 
 [node name="RayBR" type="RayCast" parent="."]
-transform = Transform( 1, 2.7189e-07, 5.82077e-08, -2.71811e-07, 1, -8.9407e-08, -5.81495e-08, 8.9407e-08, 1, -7, 0.8, -9 )
+transform = Transform( 1, 2.71541e-07, 5.82077e-08, -2.71461e-07, 1, -8.87085e-08, -5.81495e-08, 8.87085e-08, 1, -7, 0.8, -9 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 260
@@ -452,7 +482,7 @@ material/0 = ExtResource( 1 )
 transform = Transform( 1, 2.05701e-08, -1.85682e-08, -2.05223e-08, 1, 1.44355e-08, 1.90921e-08, -1.44355e-08, 1, -0.00278616, -4.17923, -0.00447226 )
 
 [node name="RayBL" type="RayCast" parent="."]
-transform = Transform( 1, 2.71426e-07, 5.67525e-08, -2.71346e-07, 1, -9.09204e-08, -5.66943e-08, 9.09204e-08, 1, 7, 0.8, -9 )
+transform = Transform( 1, 2.71076e-07, 5.67525e-08, -2.70997e-07, 1, -9.02219e-08, -5.66943e-08, 9.02219e-08, 1, 7, 0.8, -9 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 260

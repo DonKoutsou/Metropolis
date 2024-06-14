@@ -3,7 +3,7 @@
 [ext_resource path="res://AllSkyFree/AllSkyFree_Skyboxes/Cartoon Base NightSky Equirect.png" type="Texture" id=1]
 
 [sub_resource type="Gradient" id=2]
-offsets = PoolRealArray( 0, 0.381257, 1 )
+offsets = PoolRealArray( 0, 0.280576, 1 )
 colors = PoolColorArray( 0, 0, 0, 1, 0.568359, 0.535898, 0.508575, 1, 1, 1, 1, 1 )
 
 [sub_resource type="GradientTexture" id=3]

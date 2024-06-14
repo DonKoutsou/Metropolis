@@ -9,7 +9,7 @@
 [sub_resource type="Shader" id=10]
 code = "shader_type spatial;
 
-render_mode async_visible,blend_mix,depth_draw_always,cull_disabled,diffuse_lambert,specular_schlick_ggx;
+render_mode cull_disabled;
 
 uniform bool IsRaining = false;
 
@@ -131,7 +131,7 @@ void fragment() {
 	//normal_output /= 6.0;
 	
 	// DETAIL NORMAL
-	normal_output = mix(normal_output, vec3(0.5, 0.5, 1.0), smoothstep(COLOR[0], 0.0, normal_dist_fadeout) );
+	normal_output = vec3(0.5, 0.5, 1.0);
 	//normal_output += ( texture(detail_normal_map, uv_gerstner * detail_normal_tiling - vec2(gerstner_speed.x * TIME, gerstner_speed.y * TIME) * detail_normal_speed ).xyz - vec3(0.5, 0.5, 1.0) ) * detail_normal_intensity;
 	
 	// ADDING SECOND GERSTNER WAVE
