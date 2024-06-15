@@ -11,7 +11,6 @@ public class VehicleHud : Control
     {
         return Instance;
     }
-
     Dictionary<string, Button> ButtonList = new Dictionary<string, Button>();
     public override void _Ready()
     {
@@ -66,16 +65,12 @@ public class VehicleHud : Control
         }
             
     }
-    public override void _Process(float delta)
-    {
-        
-    }
+
+    ///Signals////
     private void On_Engine_Toggled(bool button_pressed)
     {
         CurrentVeh.ToggleMachine(button_pressed);
     }
-
-
     private void On_Sail_Toggle(bool button_pressed)
     {
         if (!CurrentVeh.ToggleWings(button_pressed))
@@ -84,13 +79,9 @@ public class VehicleHud : Control
             ButtonList.TryGetValue("Sail", out SailToggle);
             SailToggle.SetPressedNoSignal(!button_pressed);
         }
-        // Replace with function body.
     }
-
-
     private void On_Lights_Toggle(bool button_pressed)
     {
         CurrentVeh.ToggleLights(button_pressed);
-        // Replace with function body.
     }
 }

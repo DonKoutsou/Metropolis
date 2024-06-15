@@ -24,7 +24,7 @@ public class WorldParticleManager : Spatial
     {
         base._Process(delta);
 
-        Vector3 org = GlobalTransform.origin;
+        Vector3 org = GlobalTranslation;
         WindAllignedParticles.GlobalTranslation = new Vector3 (org.x, 120, org.z);
         float winddir = DayNight.GetWindDirection();
         float windstr = DayNight.GetWindStr();

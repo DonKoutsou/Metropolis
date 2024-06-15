@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/HUD/SplashScreenPanelTheme.tres" type="StyleBox" id=2]
@@ -7,10 +7,6 @@
 [ext_resource path="res://Scripts/CityNameUI.cs" type="Script" id=5]
 [ext_resource path="res://Scenes/HUD/CompassUi.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Inventory/Inventory.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Assets/Sounds/PunchSound.mp3" type="AudioStream" id=8]
-[ext_resource path="res://Assets/Sounds/HeavyBreathing.mp3" type="AudioStream" id=9]
-[ext_resource path="res://Assets/Sounds/WalkingSound.mp3" type="AudioStream" id=10]
-[ext_resource path="res://Scripts/CharacterSoundManager.cs" type="Script" id=11]
 [ext_resource path="res://Scripts/CameraZoomPivot.cs" type="Script" id=12]
 [ext_resource path="res://Scripts/PlayerUI.cs" type="Script" id=13]
 [ext_resource path="res://Scripts/CameraPanPivot.cs" type="Script" id=14]
@@ -21,7 +17,6 @@
 [ext_resource path="res://Scripts/TalkText.cs" type="Script" id=19]
 [ext_resource path="res://Scripts/PlayerCamera.cs" type="Script" id=20]
 [ext_resource path="res://Scripts/ScreenEffects.cs" type="Script" id=21]
-[ext_resource path="res://Assets/PostProcess/KuwaharaShader.gdshader" type="Shader" id=22]
 [ext_resource path="res://Scenes/HUD/ActionMenu.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Scenes/Items/Battery.tscn" type="PackedScene" id=25]
 [ext_resource path="res://Scenes/Items/Clock.tscn" type="PackedScene" id=27]
@@ -152,10 +147,6 @@ size = Vector2( 4, 4 )
 render_priority = 1
 flags_transparent = true
 albedo_color = Color( 0, 0, 0, 1 )
-
-[sub_resource type="ShaderMaterial" id=125]
-render_priority = -1
-shader = ExtResource( 22 )
 
 [sub_resource type="Animation" id=110]
 resource_name = "FadeIn"
@@ -417,7 +408,6 @@ RunSpeed = 30
 Consumption = SubResource( 106 )
 
 [node name="Pivot" type="Spatial" parent="."]
-pause_mode = 1
 
 [node name="Guy" parent="Pivot" instance=ExtResource( 17 )]
 
@@ -461,7 +451,7 @@ text = "24 : 00"
 script = ExtResource( 18 )
 
 [node name="TalkText" type="Label3D" parent="PlayerUI"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.74809, 0 )
 cast_shadow = 0
 pixel_size = 0.002
 billboard = 1
@@ -562,7 +552,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00875211, -0.0306139, -0.02
 script = ExtResource( 15 )
 
 [node name="Listener" type="Listener" parent="CameraMovePivot"]
-transform = Transform( 0.999998, 0, 0, 0, 1, 0, 0, 0, 0.999998, 0, 7.12469, 0.354646 )
+transform = Transform( 0.999998, 0, 0, 0, 1, 0, 0, 0, 0.999998, 0, 6.70394, 0.354646 )
 current = true
 
 [node name="CameraPanPivot" type="Position3D" parent="CameraMovePivot"]
@@ -602,11 +592,6 @@ transform = Transform( 1, -5.29396e-22, 0, -1.05879e-22, 1, 0, 2.11758e-21, 0, 1
 mesh = SubResource( 107 )
 material/0 = SubResource( 109 )
 
-[node name="MeshInstance3" type="MeshInstance" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/PlayerCamera"]
-transform = Transform( 1, -5.29396e-22, 0, -1.05879e-22, 1, 0, 2.11758e-21, 0, 1, 0, -0.0144858, -1.05511 )
-mesh = SubResource( 107 )
-material/0 = SubResource( 125 )
-
 [node name="CameraAnimationPlayer" type="AnimationPlayer" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/PlayerCamera"]
 anims/FadeIn = SubResource( 110 )
 anims/FadeInDialogue = SubResource( 118 )
@@ -625,22 +610,6 @@ update_scale = false
 [node name="WorldParticleRemoteTransform" type="RemoteTransform" parent="."]
 update_rotation = false
 update_scale = false
-
-[node name="CharacterSoundManager" type="Spatial" parent="."]
-script = ExtResource( 11 )
-
-[node name="Hit" type="AudioStreamPlayer3D" parent="CharacterSoundManager"]
-stream = ExtResource( 8 )
-area_mask = 0
-
-[node name="Tired" type="AudioStreamPlayer3D" parent="CharacterSoundManager"]
-stream = ExtResource( 9 )
-area_mask = 0
-
-[node name="Walk" type="AudioStreamPlayer3D" parent="CharacterSoundManager"]
-stream = ExtResource( 10 )
-unit_db = 10.0
-area_mask = 4
 
 [node name="DialogueCameraPivot" type="Spatial" parent="."]
 

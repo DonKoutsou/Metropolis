@@ -37,6 +37,7 @@ tracks/0/keys = {
 }
 
 [node name="Poseidon" type="Spatial"]
+pause_mode = 1
 script = ExtResource( 1 )
 
 [node name="Sea" type="MeshInstance" parent="."]

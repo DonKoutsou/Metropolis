@@ -78,15 +78,17 @@ public class Poseidon : Spatial
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
-        float str = DayNight.GetRainStr();
-
-        mat.SetShaderParam("RainInt", Mathf.Lerp(0.0f, 1.0f, str / 100));
+       
 
         d -= delta;
 		if (d <= 0)
 		{
 			d = 0.05f;
             UpdateRotation();
+            float str = DayNight.GetRainStr();
+
+            mat.SetShaderParam("RainInt", Mathf.Lerp(0.0f, 1.0f, str / 100));
+            mat.SetShaderParam("IsRaining", str > 0.1f);
         }
         Player pl = Player.GetInstance();
         if (pl != null)

@@ -1,14 +1,13 @@
-[gd_scene load_steps=54 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://Assets/AllSkyFree_Sky_OvercastLow_Equirect.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Env_Assets/Sea.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Islands/LightHouseGeo.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/Env_Assets/MotherCityGeo.tscn" type="PackedScene" id=4]
 [ext_resource path="res://addons/SIsilicon.vfx.godrays/GodRays.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Clouds/Clouds2.material" type="Material" id=6]
 [ext_resource path="res://Assets/Sounds/RainSound.mp3" type="AudioStream" id=7]
 [ext_resource path="res://Assets/Clutter/Antenna/Antenna.material" type="Material" id=8]
 [ext_resource path="res://Assets/Sounds/Cave_Ambient.mp3" type="AudioStream" id=9]
+[ext_resource path="res://Assets/Rocks/RockMat.tres" type="Material" id=10]
 [ext_resource path="res://Assets/Clutter/Powerline/PowerLine.obj" type="ArrayMesh" id=11]
 [ext_resource path="res://Assets/Clutter/Antenna/lambert1.material" type="Material" id=12]
 [ext_resource path="res://Assets/Clutter/Powerline/PowerLineMat.tres" type="Material" id=13]
@@ -20,11 +19,14 @@
 [ext_resource path="res://Assets/Building/Bulding_Dest3.obj" type="ArrayMesh" id=19]
 [ext_resource path="res://Assets/Building/BuildingExterior.material" type="Material" id=20]
 [ext_resource path="res://Assets/Clouds/Textures/smoke_01.png" type="Texture" id=21]
+[ext_resource path="res://Assets/Rocks/Rock1.tres" type="ArrayMesh" id=22]
 [ext_resource path="res://Assets/Clouds/Clouds4.material" type="Material" id=23]
 [ext_resource path="res://Assets/Clouds/Textures/smoke_04.png" type="Texture" id=24]
 [ext_resource path="res://Scenes/Env_Assets/SandParticles.tscn" type="PackedScene" id=25]
-[ext_resource path="res://Scenes/Env_Assets/Rock1.tscn" type="PackedScene" id=28]
-[ext_resource path="res://Scenes/Env_Assets/Rock4.tscn" type="PackedScene" id=29]
+[ext_resource path="res://Assets/Rocks/Rock4.tres" type="ArrayMesh" id=26]
+[ext_resource path="res://Assets/Rocks/Rock1_Lod.tres" type="ArrayMesh" id=27]
+[ext_resource path="res://Assets/Rocks/Rock4_Lod.tres" type="ArrayMesh" id=28]
+[ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=29]
 
 [sub_resource type="PanoramaSky" id=12]
 panorama = ExtResource( 1 )
@@ -280,6 +282,12 @@ hue_variation_random = 1.0
 
 [sub_resource type="QuadMesh" id=113]
 size = Vector2( 1000, 1000 )
+
+[sub_resource type="OccluderShapeSphere" id=2]
+spheres = [ Plane( 0, 0, 0, 1.547 ) ]
+
+[sub_resource type="OccluderShapeSphere" id=123]
+spheres = [ Plane( 0, 0, 0, 1.297 ) ]
 
 [node name="Spatial" type="Spatial"]
 
@@ -544,9 +552,6 @@ mesh = SubResource( 104 )
 skeleton = NodePath("")
 material/0 = ExtResource( 8 )
 
-[node name="Spatial2" parent="." instance=ExtResource( 3 )]
-transform = Transform( 0.744032, 0, -0.668144, 0, 1, 0, 0.668144, 0, 0.744032, -8917.03, 0, -36.4624 )
-
 [node name="SandParticles" parent="." instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -761.758, 616.459, 5486.98 )
 material_override = SubResource( 118 )
@@ -567,29 +572,96 @@ draw_order = 1
 process_material = SubResource( 112 )
 draw_pass_1 = SubResource( 113 )
 
-[node name="Rock1" parent="." instance=ExtResource( 28 )]
+[node name="Rock1" type="MeshInstance" parent="."]
 transform = Transform( 1530.56, -778.646, -883.21, -1075.21, -333.941, -1568.88, 479.875, 1735.27, -698.232, -3469.64, -1831.02, 7489.1 )
+material_override = ExtResource( 10 )
+lod_max_distance = 2000.0
+mesh = ExtResource( 22 )
 skeleton = NodePath("../..")
+material/0 = ExtResource( 10 )
+script = ExtResource( 29 )
+LOD0 = ExtResource( 22 )
+LOD1 = ExtResource( 27 )
 
-[node name="Rock3" parent="." instance=ExtResource( 28 )]
+[node name="Occluder" type="Occluder" parent="Rock1"]
+shape = SubResource( 2 )
+
+[node name="Rock3" type="MeshInstance" parent="."]
 transform = Transform( -1673.85, 847.243, -457.583, 873.21, 1722.34, -5.20087, 405.844, -211.423, -1876.05, 3811.41, -1774.46, -4541.52 )
+material_override = ExtResource( 10 )
+lod_max_distance = 2000.0
+mesh = ExtResource( 22 )
 skeleton = NodePath("../..")
+material/0 = ExtResource( 10 )
+script = ExtResource( 29 )
+LOD0 = ExtResource( 22 )
+LOD1 = ExtResource( 27 )
 
-[node name="Rock2" parent="." instance=ExtResource( 28 )]
+[node name="Occluder" type="Occluder" parent="Rock3"]
+shape = SubResource( 2 )
+
+[node name="Rock2" type="MeshInstance" parent="."]
 transform = Transform( 717.759, 823.09, 62.5131, 792.802, -710.452, 251.571, 229.896, -119.764, -1062.72, -1939.46, -23.7651, -8821.77 )
+material_override = ExtResource( 10 )
+lod_max_distance = 2000.0
+mesh = ExtResource( 22 )
 skeleton = NodePath("../..")
+material/0 = ExtResource( 10 )
+script = ExtResource( 29 )
+LOD0 = ExtResource( 22 )
+LOD1 = ExtResource( 27 )
 
-[node name="Rock4" parent="." instance=ExtResource( 29 )]
+[node name="Occluder" type="Occluder" parent="Rock2"]
+shape = SubResource( 2 )
+
+[node name="Rock4" type="MeshInstance" parent="."]
 transform = Transform( -1011.43, -2515, -904.43, 2651.29, -1066.24, 0, -337.459, -839.117, 2710.76, -7883.08, -3440.13, -4164.53 )
+lod_max_distance = 2000.0
+mesh = ExtResource( 26 )
+material/0 = ExtResource( 10 )
+script = ExtResource( 29 )
+LOD0 = ExtResource( 26 )
+LOD1 = ExtResource( 28 )
 
-[node name="Rock5" parent="." instance=ExtResource( 29 )]
+[node name="Occluder" type="Occluder" parent="Rock4"]
+transform = Transform( 0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, -0.139112, -0.0313549 )
+shape = SubResource( 123 )
+
+[node name="Rock5" type="MeshInstance" parent="."]
 transform = Transform( -76.6738, -190.655, -68.5623, 69.1477, -93.5301, 182.756, -190.444, 42.7993, 93.9601, -769.453, -269.103, 4868.48 )
+lod_max_distance = 2000.0
+mesh = ExtResource( 26 )
+material/0 = ExtResource( 10 )
+script = ExtResource( 29 )
+LOD0 = ExtResource( 26 )
+LOD1 = ExtResource( 28 )
 
-[node name="Rock6" parent="." instance=ExtResource( 29 )]
+[node name="Occluder" type="Occluder" parent="Rock5"]
+transform = Transform( 0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, -0.139112, -0.0313549 )
+shape = SubResource( 123 )
+
+[node name="Rock6" type="MeshInstance" parent="."]
 transform = Transform( 39.7805, 187.344, 101.237, 75.3157, -108.709, 171.578, 199.184, 3.68949, -85.096, -2637.72, -269.103, 5008.11 )
+lod_max_distance = 2000.0
+mesh = ExtResource( 26 )
+material/0 = ExtResource( 10 )
+script = ExtResource( 29 )
+LOD0 = ExtResource( 26 )
+LOD1 = ExtResource( 28 )
 
-[node name="Rock7" parent="." instance=ExtResource( 29 )]
+[node name="Occluder" type="Occluder" parent="Rock6"]
+transform = Transform( 0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, -0.139112, -0.0313549 )
+shape = SubResource( 123 )
+
+[node name="Rock7" type="MeshInstance" parent="."]
 transform = Transform( -49.2853, 103.142, -184.016, -195.715, 48.154, 79.4094, 78.7123, 184.315, 82.2279, 641.943, -269.103, 5484.48 )
+lod_max_distance = 2000.0
+mesh = ExtResource( 26 )
+material/0 = ExtResource( 10 )
+script = ExtResource( 29 )
+LOD0 = ExtResource( 26 )
+LOD1 = ExtResource( 28 )
 
-[node name="MotherCity" parent="." instance=ExtResource( 4 )]
-transform = Transform( 0.963993, 0, -0.265926, 0, 1, 0, 0.265926, 0, 0.963993, 1162.32, 0, 1128.44 )
+[node name="Occluder" type="Occluder" parent="Rock7"]
+transform = Transform( 0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, -0.139112, -0.0313549 )
+shape = SubResource( 123 )

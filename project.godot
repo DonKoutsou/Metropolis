@@ -158,7 +158,7 @@ ResourceScriptDirectories=[ "res://", "res://Scripts/" ]
 
 [application]
 
-config/name="Μητρόπολη"
+config/name="Metropolis"
 run/main_scene="res://Scenes/World/MainWorld.tscn"
 run/delta_sync_after_draw=true
 boot_splash/show_image=false
@@ -324,7 +324,7 @@ limits/command_queue/multithreading_queue_size_kb=1024
 
 [mono]
 
-project/assembly_name="Μητρόπολη"
+project/assembly_name="Metropolis"
 profiler/enabled=true
 debugger_agent/wait_timeout=6000
 

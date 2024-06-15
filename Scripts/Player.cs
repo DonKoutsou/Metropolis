@@ -65,6 +65,16 @@ public class Player : Character
 		
 		DialogueCam = GetNode<Spatial>("DialogueCameraPivot").GetNode<Camera>("DialogueCamera");
 	}
+	
+	private void CheckIfIdling()
+	{
+		if (sitting && !PlayingInstrument)
+		{
+			anim.ToggleInstrument(true);
+			GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Bouzouki>("Bouzouki").ToggleMusic(true);
+			PlayingInstrument = true;
+		}
+	}
 	private void UpdateMoveLocation()
 	{
 		if (IsTalking)
@@ -93,7 +103,7 @@ public class Player : Character
 
 				moveloc.Scale = new Vector3(1,1,1);
 				moveloc.Rotation = new Vector3(0,0,0);
-				Basis MoveLocBasis = moveloc.GlobalTransform.basis;
+				Basis MoveLocBasis = moveloc.Transform.basis;
 
 				var result = new Basis(norm.Cross(MoveLocBasis.z), norm, MoveLocBasis.x.Cross(norm));
 
@@ -113,6 +123,8 @@ public class Player : Character
     public override void _Process(float delta)
     {
         base._Process(delta);
+
+		CheckIfIdling();
 
 		if (Input.IsActionPressed("Move") || Autowalk)
 		{
@@ -160,18 +172,16 @@ public class Player : Character
 		moveloc.GlobalTranslation = loctomove;
 		var spd = Speed;
 
-		var direction = loctomove - GlobalTransform.origin;
+		var direction = loctomove - GlobalTranslation;
 
-		float dist = new Vector2(loctomove.x, loctomove.z).DistanceTo(new Vector2( GlobalTransform.origin.x, GlobalTransform.origin.z));
+		float dist = new Vector2(loctomove.x, loctomove.z).DistanceTo(new Vector2( GlobalTranslation.x, GlobalTranslation.z));
 
 		if (HasVecicle)
 		{
 			if (dist < 10)
 			{
-				AudioStreamPlayer3D walk = CharacterSoundManager.GetSound("Walk");
 				rpm = 0.05f;
-				if (!walk.StreamPaused)
-					walk.StreamPaused = true;
+				
 				anim.PlayAnimation(E_Animations.Idle);
 				moveloc.Hide();
 				HeadPivot.Rotation = new Vector3(0.0f,0.0f,0.0f);
@@ -182,10 +192,6 @@ public class Player : Character
 					rpm = 1;
 				else
 					rpm = 0.05f;
-
-				AudioStreamPlayer3D walk = CharacterSoundManager.GetSound("Walk");
-				if (!walk.StreamPaused)
-					walk.StreamPaused = true;
 				anim.PlayAnimation(E_Animations.Idle);
 				HeadPivot.Rotation = new Vector3(0.0f,0.0f,0.0f);
 				moveloc.Show();
@@ -195,9 +201,6 @@ public class Player : Character
 		{
 			if (dist < 1)
 			{
-				AudioStreamPlayer3D walk = CharacterSoundManager.GetSound("Walk");
-				if (!walk.StreamPaused)
-					walk.StreamPaused = true;
 				anim.PlayAnimation(E_Animations.Idle);
 				moveloc.Hide();
 				HeadPivot.Rotation = new Vector3(0.0f,0.0f,0.0f);
@@ -205,32 +208,23 @@ public class Player : Character
 			}
 			else
 			{
-				AudioStreamPlayer3D walk = CharacterSoundManager.GetSound("Walk");
 				direction = direction.Normalized();
 				Vector3 lookloc = new Vector3(direction.x, 0, direction.z);
 				if (!HasVecicle)
 					GetNode<Spatial>("Pivot").LookAt(Translation - lookloc, Vector3.Up);
 
-				if (walk.StreamPaused)
-				{
-					walk.StreamPaused = false;
-					walk.PitchScale = 0.7f;
-				}
 				if (!IsRunning)
 				{
 					rpm = 0.2f;
-					walk.PitchScale = 0.5f;
-					//GetNode<AudioStreamPlayer3D>("WalkingSound").db = 5f;
 					anim.PlayAnimation(E_Animations.Walk);
 				}
 				else
 				{
 					spd = RunSpeed;
 					rpm = 0.5f;
-					walk.PitchScale = 1f;
 					anim.PlayAnimation(E_Animations.Run);
 				}
-				float heightdif = GlobalTransform.origin.y - loctomove.y ;
+				float heightdif = GlobalTranslation.y - loctomove.y ;
 				float rot = heightdif / 45;
 				if (rot > 0)
 					HeadPivot.Rotation = new Vector3(Math.Min(rot, 0.3f) , 0.0f,0.0f);

@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Godot_Project\\Μητρόπολη\\Μητρόπολη.csproj",
-      "projectName": "Μητρόπολη",
-      "projectPath": "E:\\Godot_Project\\Μητρόπολη\\Μητρόπολη.csproj",
+      "projectUniqueName": "E:\\Godot_Project\\Metropolis\\Metropolis.csproj",
+      "projectName": "Metropolis",
+      "projectPath": "E:\\Godot_Project\\Metropolis\\Metropolis.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "E:\\Godot_Project\\Μητρόπολη\\.mono\\temp\\obj\\",
+      "outputPath": "E:\\Godot_Project\\Metropolis\\.mono\\temp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"

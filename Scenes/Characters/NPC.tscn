@@ -1,12 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/Characters/NPC.cs" type="Script" id=1]
-[ext_resource path="res://Scripts/CharacterSoundManager.cs" type="Script" id=2]
 [ext_resource path="res://Scenes/Characters/Gen3Machine/Body.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Assets/Sounds/PunchSound.mp3" type="AudioStream" id=8]
-[ext_resource path="res://Assets/Sounds/HeavyBreathing.mp3" type="AudioStream" id=9]
-[ext_resource path="res://Assets/Sounds/WalkingSound.mp3" type="AudioStream" id=10]
 
 [sub_resource type="CapsuleShape" id=6]
 height = 5.16563
@@ -14,7 +10,7 @@ height = 5.16563
 [sub_resource type="CylinderShape" id=7]
 radius = 0.1
 
-[node name="Character" type="KinematicBody" groups=["Interactables", "player"]]
+[node name="Character" type="KinematicBody" groups=["Interactables"]]
 pause_mode = 1
 collision_layer = 4104
 collision_mask = 54
@@ -42,26 +38,14 @@ monitorable = false
 transform = Transform( 1.47899, 0, 0, 0, 0.256205, 0, 0, 0, 1.68566, 0, 0, 0 )
 shape = SubResource( 7 )
 
-[node name="CharacterSoundManager" type="Spatial" parent="."]
-script = ExtResource( 2 )
-
-[node name="Hit" type="AudioStreamPlayer3D" parent="CharacterSoundManager"]
-stream = ExtResource( 8 )
-area_mask = 0
-
-[node name="Tired" type="AudioStreamPlayer3D" parent="CharacterSoundManager"]
-stream = ExtResource( 9 )
-area_mask = 0
-
-[node name="Walk" type="AudioStreamPlayer3D" parent="CharacterSoundManager"]
-stream = ExtResource( 10 )
-unit_db = 10.614
-max_db = -9.473
-area_mask = 0
-
 [node name="TalkPosition" type="Position3D" parent="."]
 transform = Transform( -7.7783, 0, -1.17449e-06, 0, 7.7783, 0, 1.17449e-06, 0, -7.7783, 0, 0.5, 6 )
 
 [node name="ActionComponent" parent="." instance=ExtResource( 4 )]
 
+[node name="IdleTimer" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
+
 [connection signal="body_entered" from="KillFieldDetector" to="." method="OnKillFieldDetectorBodyEntered"]
+[connection signal="timeout" from="IdleTimer" to="." method="Idle_Timer_Ended"]

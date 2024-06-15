@@ -1,11 +1,37 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Assets/Boat/M_Boat.material" type="Material" id=1]
 [ext_resource path="res://shaders/Outline.shader" type="Shader" id=2]
 [ext_resource path="res://Scenes/Vehicles/HoverBoard_NoWings.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Boat/ΚαικιΗιγη_lambert1_Normal.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Boat/ΚαικιΗιγη_lambert1_BaseColor.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Boat/ΚαικιΗιγη_lambert1_OcclusionRoughnessMetallic.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Boat/BoatFabric.material" type="Material" id=8]
 [ext_resource path="res://Assets/Boat/Boat_WingL.tres" type="ArrayMesh" id=10]
 [ext_resource path="res://Assets/Boat/BoatWingR.tres" type="ArrayMesh" id=11]
+
+[sub_resource type="ShaderMaterial" id=49]
+resource_local_to_scene = true
+shader = ExtResource( 2 )
+shader_param/enable = false
+shader_param/outline_thickness = 0.171
+shader_param/color2 = Color( 0, 0, 0, 0 )
+shader_param/color = Color( 1, 1, 0, 0 )
+
+[sub_resource type="SpatialMaterial" id=50]
+resource_local_to_scene = true
+next_pass = SubResource( 49 )
+albedo_texture = ExtResource( 5 )
+roughness_texture = ExtResource( 6 )
+roughness_texture_channel = 1
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 4 )
+ao_enabled = true
+ao_light_affect = 1.0
+ao_texture = ExtResource( 6 )
+ao_on_uv2 = false
+ao_texture_channel = 0
 
 [sub_resource type="Curve" id=25]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.275, 0.745454 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.1 ), 0.0, 0.0, 0, 0 ]
@@ -113,10 +139,6 @@ scale = 5.0
 scale_random = 0.8
 scale_curve = SubResource( 35 )
 
-[sub_resource type="CapsuleShape" id=46]
-radius = 2.02096
-height = 7.56251
-
 [sub_resource type="Animation" id=48]
 tracks/0/type = "value"
 tracks/0/path = NodePath("WingMesh1:rotation_degrees")
@@ -170,6 +192,10 @@ tracks/1/keys = {
 "values": [ Vector3( 0, 45, -60 ), Vector3( 0, 0, 0 ) ]
 }
 
+[sub_resource type="CapsuleShape" id=46]
+radius = 2.02096
+height = 7.56251
+
 [sub_resource type="ShaderMaterial" id=37]
 resource_local_to_scene = true
 shader = ExtResource( 2 )
@@ -189,21 +215,28 @@ roughness_texture_channel = 3
 
 [node name="Vehicle" instance=ExtResource( 3 )]
 
-[node name="ExaustParticlesL" parent="VehicleBody" index="16"]
+[node name="MeshInstance" parent="VehicleBody" index="0"]
+material_override = SubResource( 50 )
+
+[node name="ExaustParticlesL" parent="VehicleBody" index="15"]
 process_material = SubResource( 39 )
 draw_pass_1 = SubResource( 40 )
 
-[node name="ExaustParticlesLSteer" parent="VehicleBody" index="17"]
+[node name="ExaustParticlesLSteer" parent="VehicleBody" index="16"]
 process_material = SubResource( 41 )
 draw_pass_1 = SubResource( 40 )
 
-[node name="ExaustParticlesRSteer" parent="VehicleBody" index="18"]
+[node name="ExaustParticlesRSteer" parent="VehicleBody" index="17"]
 process_material = SubResource( 42 )
 draw_pass_1 = SubResource( 40 )
 
-[node name="ExaustParticlesR" parent="VehicleBody" index="19"]
+[node name="ExaustParticlesR" parent="VehicleBody" index="18"]
 process_material = SubResource( 47 )
 draw_pass_1 = SubResource( 40 )
+
+[node name="AnimationPlayer" parent="VehicleBody" index="19"]
+anims/Wings = SubResource( 48 )
+anims/WingsOut = SubResource( 45 )
 
 [node name="WingCollider0" type="CollisionShape" parent="VehicleBody" index="20"]
 transform = Transform( -0.731272, -0.546463, 0.408196, -1.74623e-10, 0.598453, 0.801162, -0.682089, 0.585867, -0.43763, 8, 10, 0 )
@@ -225,30 +258,26 @@ mesh = ExtResource( 10 )
 material/0 = ExtResource( 1 )
 material/1 = ExtResource( 8 )
 
-[node name="AnimationPlayer" parent="VehicleBody" index="24"]
-anims/Wings = SubResource( 48 )
-anims/WingsOut = SubResource( 45 )
-
 [node name="RayFL" parent="." index="2"]
-transform = Transform( 0.999999, -3.70121e-08, 2.24099e-08, 3.71184e-08, 1, -7.567e-09, -2.23517e-08, 7.567e-09, 1, 3, 0.797841, 10 )
+transform = Transform( 0.999999, -3.75945e-08, 2.24099e-08, 3.77005e-08, 1, -6.98492e-09, -2.23517e-08, 6.98492e-09, 1, 3, 0.797841, 10 )
 
 [node name="MeshInstance" parent="RayFL" index="0"]
 material/0 = SubResource( 38 )
 
 [node name="RayFR" parent="." index="3"]
-transform = Transform( 1, 2.70847e-07, 5.75674e-08, -2.70764e-07, 1, -9.62755e-08, -5.75092e-08, 9.62755e-08, 1, -3, 0.798699, 10 )
+transform = Transform( 1, 2.70555e-07, 5.75674e-08, -2.70472e-07, 1, -9.56934e-08, -5.75092e-08, 9.56934e-08, 1, -3, 0.798699, 10 )
 
 [node name="MeshInstance" parent="RayFR" index="0"]
 material/0 = SubResource( 38 )
 
 [node name="RayBR" parent="." index="4"]
-transform = Transform( 1, 2.73056e-07, 5.82077e-08, -2.72975e-07, 1, -9.12696e-08, -5.81495e-08, 9.12696e-08, 1, -7, 0.8, -9 )
+transform = Transform( 1, 2.72764e-07, 5.82077e-08, -2.72684e-07, 1, -9.06875e-08, -5.81495e-08, 9.06875e-08, 1, -7, 0.8, -9 )
 
 [node name="MeshInstance" parent="RayBR" index="0"]
 material/0 = SubResource( 38 )
 
 [node name="RayBL" parent="." index="5"]
-transform = Transform( 1, 2.72591e-07, 5.67525e-08, -2.72511e-07, 1, -9.2783e-08, -5.66943e-08, 9.2783e-08, 1, 7, 0.8, -9 )
+transform = Transform( 1, 2.72299e-07, 5.67525e-08, -2.7222e-07, 1, -9.22009e-08, -5.66943e-08, 9.22009e-08, 1, 7, 0.8, -9 )
 
 [node name="MeshInstance" parent="RayBL" index="0"]
 material/0 = SubResource( 38 )

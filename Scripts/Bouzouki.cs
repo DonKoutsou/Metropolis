@@ -1,11 +1,11 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
-public class Bouzouki : Item
+public class Bouzouki : Instrument
 {
-	public void ToggleMusic(bool Toggle)
-	{
-		Visible = Toggle;
-		GetNode<AudioStreamPlayer3D>("AudioStreamPlayer3D").Playing = Toggle;
-	}
+	
+
 }
+

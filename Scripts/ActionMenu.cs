@@ -420,7 +420,7 @@ public class ActionMenu : Control
 			}
 			Spatial obj = (Spatial)rayar["collider"];
 			Vector3 actionpos = (Vector3)obj.Call("GetActionPos", pl.GlobalTranslation);
-			if (actionpos.DistanceTo(pl.GlobalTransform.origin) > 100)
+			if (actionpos.DistanceTo(pl.GlobalTranslation) > 100)
 			{
 				Stop();
 				return;

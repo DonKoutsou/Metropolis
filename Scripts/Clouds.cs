@@ -11,7 +11,7 @@ public class Clouds : Spatial
 		if (d > 0)
             return;
         d = 0.5f;
-        Vector3 org = ((Spatial)GetParent()).GlobalTransform.origin;
+        Vector3 org = ((Spatial)GetParent()).GlobalTranslation;
         GlobalTranslation = new Vector3 (org.x, 2100, org.z);
     }
 }

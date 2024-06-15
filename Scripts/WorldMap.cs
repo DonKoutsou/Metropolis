@@ -332,7 +332,8 @@ public class WorldMap : TileMap
 			//
 			if (IleToSave == null)
 			{
-				GenerateIsland();
+				//IleGenThread.Start(this, "GenerateIsland", currentile);
+				GenerateIsland(currentile);
 			}
 			if (currentile == LoadingScreen.GetWaitTime())
 			{
@@ -346,8 +347,10 @@ public class WorldMap : TileMap
 		//if (msaf - ms > 10)
 			//GD.Print("World map processing took longer the 10 ms. Process time : " + (msaf - ms).ToString() + " ms. Island scene =  " + scene);
 	}
+	//Mutex mut = new Mutex();
+	//Thread IleGenThread = new Thread();
 	//spawning and
-	void GenerateIsland()
+	void GenerateIsland(int tilenum)
 	{
 		//sem.Wait();
 		//#if DEBUG
@@ -369,38 +372,72 @@ public class WorldMap : TileMap
 		
 		//Spawndata to be used when spawning
 		float rot;
-		//int index = random.Next(rots.Count);
-
 		rot = random.Next(360);
+		RandomTimes++;
 		
 		IslandInfo ileinfo = new IslandInfo(rot, ilescene, cell, SpecialName);
 
-		ilemap.Add(OrderedCells[currentile], ileinfo);
-		RandomTimes++;
+		//CallDeferred("AddInfoToMap", ileinfo, tilenum);
 
-		SpawnIsland(ileinfo);   
+		
+		//mut.Lock();
 
 		//SaveEntry
 		if (id == 0)
 			entry = ileinfo;
 
+		
+
+		
+		IleToSave = ileinfo;
+		ilemap.Add(OrderedCells[tilenum], ileinfo);
+
+		//IleGenThread.Start(this, "ThreadedInstance");
+		//SpawnIsland(ileinfo);
+		//spawning = false;
+		//mut.Unlock();
+		CallDeferred("ThreadedInstance");
+		//MyWorld.GetInstance().AddChild(ile);
+		
+		//IleGenThread.CallDeferred("wait_to_finish")
 		#if DEBUG
 		ulong msaf = OS.GetSystemTimeMsecs();
 		if (msaf - ms > 20)
 			GD.Print("Island Generated. Process time : " + (msaf - ms).ToString() + " ms. Island scene =  " + ilescene.ResourcePath);
 		#endif
-		//mute.Lock();
-		IleToSave = ileinfo;
-		//spawning = false;
-		//mute.Unlock();
-		MyWorld.GetInstance().AddChild(ileinfo.Island);
-		CallDeferred("SaveIsland");
 		return;
 	}
-	public void SaveIsland()
+	public void AddInfoToMap(IslandInfo info, int Cur)
 	{
-		//ulong ms = OS.GetSystemTimeMsecs();
-		//thre.WaitToFinish();
+		ilemap.Add(OrderedCells[Cur], info);
+	}
+	Island instancedile;
+	public void ThreadedInstance()
+	{
+		instancedile = (Island)IleToSave.IleType.Instance();
+		//IleGenThread.CallDeferred("wait_to_finish");
+		CallDeferred("AddSpawnInfo");
+	}
+	public void AddSpawnInfo()
+	{
+		
+		Vector2 postoput = MapToWorld(new Vector2(IleToSave.Position.x, IleToSave.Position.y));
+
+		//mute.Lock();
+		postoput += CellSize / 2;
+		//mute.Unlock();
+		
+
+		instancedile.SetSpawnInfo(new Vector3(postoput.x, 0, postoput.y), IleToSave.RotationToSpawn, IleToSave.SpecialName);
+
+		IleToSave.Island = instancedile;
+		IleToSave.ImageIndex = instancedile.ImageID;
+
+		instancedile = null;
+		CallDeferred("DoInitialSpawn");
+	}
+	public void DoInitialSpawn()
+	{
 		IslandInfo ilei = IleToSave;
 		//thre.Free();
 		//thre = null;
@@ -409,8 +446,6 @@ public class WorldMap : TileMap
 		if (currentile >= OrderedCells.Count)
 			finishedspawning = true; 
 
-		
-
 		Island ile = ilei.Island;
 
 		int RandomUses;
@@ -418,32 +453,50 @@ public class WorldMap : TileMap
 		ile.InitialSpawn(random, out RandomUses);
 
 		RandomTimes += RandomUses;
+		CallDeferred("SaveIsland");
+	}
+	public void SaveIsland()
+	{
+		IslandInfo ilei = IleToSave;
+		Island ile = ilei.Island;
+		//ulong ms = OS.GetSystemTimeMsecs();
+		//thre.WaitToFinish();
+		
 
 		ilei.SetInfo(ile);
 
-		if (ilei.KeepInstance == true)
+
+		IleToSave = null;
+		CallDeferred("DespawnIle", ilei.Island, ilei.KeepInstance);
+		CallDeferred("AddMapData", ilei.Position, ilei.Type, ilei.RotationToSpawn, ile.ImageID);
+		//IleGenThread.WaitToFinish();
+
+	}
+	void AddMapData(Vector2 position, IleType Type, float RotationToSpawn, int imageId)
+	{
+		ImageTexture tex = new ImageTexture();
+		//im.Load(ile.Image);
+		tex.CreateFromImage(IslandImageHolder.GetInstance().Images[imageId]);
+		//tex.Load(ile.Image);
+
+		MapGrid.GetInstance().UpdateIleInfo(position, Type, - RotationToSpawn, tex);
+	}
+	public void AddIslandToHierarchy(Island ile)
+	{
+		MyWorld.GetInstance().AddChild(ile);
+	}
+	void DespawnIle(Island ile, bool KeepInstance)
+	{
+		if (KeepInstance)
 		{
 			ile.Visible = false;
-			ile.GetParent().RemoveChild(ile);
+			if (ile.GetParent() != null)
+				ile.GetParent().RemoveChild(ile);
 		}
 		else
 		{
 			ile.QueueFree();
 		}
-		//Godot.Image im = new Godot.Image();
-		ImageTexture tex = new ImageTexture();
-		//im.Load(ile.Image);
-		tex.CreateFromImage(IslandImageHolder.GetInstance().Images[ile.ImageID]);
-		//tex.Load(ile.Image);
-
-		MapGrid.GetInstance().UpdateIleInfo(ilei.Position, ilei.Type, - ilei.RotationToSpawn, tex);
-
-		IleToSave = null;
-
-		//thre = null;
-
-		//ulong msaf = OS.GetSystemTimeMsecs();
-		//GD.Print("Island Saved. Process time : " + (msaf - ms).ToString() + " ms");
 	}
 	public Intro SpawnIntro(IslandInfo info = null)
 	{

@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 public class Character : KinematicBody
 {
-	[Signal]
-	public delegate void Hit();
 	[Export]
 	public int Speed { get; set; } = 14; // How fast the player will move (pixels/sec).
 
@@ -16,18 +14,9 @@ public class Character : KinematicBody
 	public int JumpImpulse = 20;
 
 	[Export]
-	public int BounceImpulse = 16;
-
-	[Export]
 	public int RunSpeed = 20;
 
-	[Export]
-	public float m_RunCost = 1;
-
 	public bool m_balive = true;
-
-	public Vector3 m_velocity = Vector3.Zero;
-
 
     public Vector3 _velocity = Vector3.Zero;
 
@@ -45,6 +34,7 @@ public class Character : KinematicBody
 	public float CurrentEnergy = 100;
 
 	public SpotLight NightLight;
+	SpatialMaterial BulbMat;
 
 	public Spatial HeadPivot;
 
@@ -56,12 +46,13 @@ public class Character : KinematicBody
 
 	public Vehicle currveh;
 
-	public CharacterSoundManager CharacterSoundManager;
 	public bool sitting = false;
 
 	SittingThing chair = null;
 
 	Position3D seat = null;
+
+	public bool PlayingInstrument = false;
 
 	public float GetCharacterBatteryCap()
 	{
@@ -97,31 +88,15 @@ public class Character : KinematicBody
 				CharacterInventory.OverrideWeight(InventoryWeightOverride);
 			}
 		}
-
-		CharacterSoundManager = GetNode<CharacterSoundManager>("CharacterSoundManager");
-
-		AudioStreamPlayer3D walkingsound = CharacterSoundManager.GetSound("Walk");
-		walkingsound.Play();
-		walkingsound.StreamPaused = true;
-		//GetNode<AudioStreamPlayer3D>("TiredSound").Play();
-		//GetNode<AudioStreamPlayer3D>("TiredSound").StreamPaused = true;
-		
 		anim = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Character_Animations>("AnimationPlayer");
 		HeadPivot = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("BoneAttachment").GetNode<Spatial>("HeadPivot");
 		NightLight = HeadPivot.GetNode<SpotLight>("NightLight");
+		BulbMat = (SpatialMaterial)HeadPivot.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0);
+	}
+	public override void _EnterTree()
+	{
+		base._EnterTree();
 		loctomove = GlobalTranslation;
-
-		if (this is Player)
-			return;
-		Node par = GetParent();
-		while (!(par is Island))
-		{
-            if (par == null)
-				return;
-			par = par.GetParent();
-		}
-		Island ile = (Island)par;
-		ile.RegisterChild(this);
 	}
 	public Character_Animations Anims()
 	{
@@ -130,7 +105,7 @@ public class Character : KinematicBody
 	public void SetData(CharacterInfo info)
 	{
         Name = info.Name;
-        GlobalTranslation = info.Position;
+        Translation = info.Position;
 		CurrentEnergy = info.CurrentEnergy;
 		m_balive = info.Alive;
 	}
@@ -163,9 +138,16 @@ public class Character : KinematicBody
     {
         base._Process(delta);
 		if (DayNight.IsDay())
+		{
 			NightLight.LightEnergy = 0;
+			BulbMat.EmissionEnabled = false;
+		}
 		else
+		{
 			NightLight.LightEnergy = 0.2f;
+			BulbMat.EmissionEnabled = true;
+		}
+			
 
 		if (CurrentEnergy <= 0)
 		{
@@ -177,10 +159,6 @@ public class Character : KinematicBody
 		}
 			
     }
-    public override void _PhysicsProcess(float delta)
-	{
-
-	}
     public void MoveTo(Vector3 loc)
 	{
         if (!m_balive)
@@ -194,22 +172,13 @@ public class Character : KinematicBody
 
 		if (dist < 1)
 		{
-			AudioStreamPlayer3D walkingsound = CharacterSoundManager.GetSound("Walk");
-			if (!walkingsound.StreamPaused)
-				walkingsound.StreamPaused = true;
 			anim.PlayAnimation(E_Animations.Idle);
 		}
 		else
 		{
-			AudioStreamPlayer3D walkingsound = CharacterSoundManager.GetSound("Walk");
 			direction = direction.Normalized();
 			Vector3 lookloc = new Vector3(direction.x, 0, direction.z);
 			GetNode<Spatial>("Pivot").LookAt(Translation - lookloc, Vector3.Up);
-			if (walkingsound.StreamPaused)
-			{
-				walkingsound.StreamPaused = false;
-				walkingsound.PitchScale = 0.7f;
-			}
 				
 		}
         _velocity.x = direction.x * spd;
@@ -222,7 +191,7 @@ public class Character : KinematicBody
 	}
 	public virtual void Start()
 	{
-		loctomove = Transform.origin;
+		loctomove = GlobalTransform.origin;
 		SetPhysicsProcess(true);
 	}
 	public virtual void Stop()
@@ -244,19 +213,16 @@ public class Character : KinematicBody
 	}
 	public virtual void Kill()
 	{
-		//GetNode<Character_Animations>("Character_Animations").ForceAnimation(E_Animations.Die);
-		//GetNode<AudioStreamPlayer2D>("WalkingSound").StreamPaused = true;
+
 		m_balive = false;
 		loctomove = GlobalTransform.origin;
 		anim.ToggleDeath();
-		//CharacterInventory.RemoveAllItems();
-		//AppliedForce = AppliedForce * 0;
+
 		Stop();
 		Die();
 	}
 	private void Die()
 	{
-		EmitSignal(nameof(Hit));
 		//QueueFree();
 	}
 	public virtual void OnKillFieldDetectorBodyEntered(Node body)
@@ -288,8 +254,14 @@ public class Character : KinematicBody
 			chair.UpdateOccupation(seat, false);
 			chair = null;
 			seat = null;
+			
 		}
-		
+		if (PlayingInstrument)
+		{
+			anim.ToggleInstrument(false);
+			GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Bouzouki>("Bouzouki").ToggleMusic(false);
+			PlayingInstrument = false;
+		}
 		anim.ToggleIdle();
 		sitting = false;
 	}
@@ -319,22 +291,37 @@ public class Character : KinematicBody
 		{
 			_velocity.y += 1;
 		}
-		//Rotation = 0;
-		//AddForce(velocity * ammount, velocity * ammount);
-		//AppliedForce = m_velocity * ammount;
 	}
 	[Signal]
     public delegate void VehicleBoardEventHandler(bool toggle, Vehicle veh);
 	public virtual void OnVehicleBoard(Vehicle veh)
 	{
 		EmitSignal("VehicleBoardEventHandler", true, veh);
+		PlayMusic();
 		//SetCollisionMaskBit(8, true);
 	}
 	public virtual void OnVehicleUnBoard(Vehicle veh)
 	{
 		EmitSignal("VehicleBoardEventHandler", false, veh);
 		loctomove = GlobalTranslation;
+		anim.ToggleInstrument(false);
+		GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Bouzouki>("Bouzouki").ToggleMusic(false);
+		PlayingInstrument = false;
 		//SetCollisionMaskBit(8, false);
+	}
+	public void PlayMusic()
+	{
+		anim.ToggleInstrument(true);
+		Bouzouki bouz = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Bouzouki>("Bouzouki");
+		bouz.ToggleMusic(true);
+		bouz.Connect("OnSongEnded", this, "OnSongEnded");
+		PlayingInstrument = true;
+	}
+	public virtual void OnSongEnded(Instrument inst)
+	{
+		//IdleTimer.Start();
+		inst.Disconnect("OnSongEnded", this, "OnSongEnded");
+		anim.ToggleInstrument(false);
 	}
 	private void On_DialogueButton_Button_Down()
 	{
@@ -353,7 +340,7 @@ public class CharacterInfo
 	public void UpdateInfo(Character it)
 	{
 		Name = it.Name;
-		Position = it.GlobalTranslation;
+		Position = it.Translation;
 		SceneData = it.Filename;
 		CurrentEnergy = it.GetCurrentCharacterEnergy();
 		Alive = it.m_balive;

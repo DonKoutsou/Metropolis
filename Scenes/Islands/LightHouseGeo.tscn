@@ -1,4 +1,4 @@
-[gd_scene load_steps=364 format=2]
+[gd_scene load_steps=363 format=2]
 
 [ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_AmbientOcclusio2n.jpg" type="Texture" id=1]
 [ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_Roughnes2s.jpg" type="Texture" id=2]
@@ -10,7 +10,6 @@
 [ext_resource path="res://Assets/TerainTex/Rock029_2K-PNG/Rock029_2K-PNG_AmbientOcclusion.png" type="Texture" id=8]
 [ext_resource path="res://Assets/TerainTex/Rock029_2K-PNG/Rock029_2K-PNG_NormalGL.png" type="Texture" id=9]
 [ext_resource path="res://Scenes/Env_Assets/Platform.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Assets/Building/BuildingComposition.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Env_Assets/WindGenerator.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Assets/TerainTest/new_arraymesh5.tres" type="ArrayMesh" id=13]
 [ext_resource path="res://Scripts/LighthouseAnimation.cs" type="Script" id=15]
@@ -3705,64 +3704,6 @@ collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance3/StaticBody"]
 shape = SubResource( 1279 )
-
-[node name="Houses" type="Spatial" parent="."]
-
-[node name="House" parent="Houses" instance=ExtResource( 11 )]
-transform = Transform( -0.866026, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866026, 391.988, 673.584, -417.872 )
-spawnItems = false
-
-[node name="House7" parent="Houses" instance=ExtResource( 11 )]
-transform = Transform( -0.841435, 0, -0.540358, 0, 1, 0, 0.540358, 0, -0.841435, 284.77, 671.584, -355.765 )
-spawnItems = false
-
-[node name="House8" parent="Houses" instance=ExtResource( 11 )]
-transform = Transform( -0.841435, 0, -0.540358, 0, 1, 0, 0.540358, 0, -0.841435, 357.77, 671.584, -395.765 )
-spawnItems = false
-
-[node name="House9" parent="Houses" instance=ExtResource( 11 )]
-transform = Transform( -0.841435, 0, -0.540358, 0, 1, 0, 0.540358, 0, -0.841435, 325.77, 671.584, -377.765 )
-spawnItems = false
-
-[node name="House14" parent="Houses" instance=ExtResource( 11 )]
-transform = Transform( -0.5, 0, 0.866026, 0, 1, 0, -0.866026, 0, -0.5, 893.756, 9.46204, -727.705 )
-spawnItems = false
-
-[node name="House5" parent="Houses" instance=ExtResource( 11 )]
-transform = Transform( -0.866025, -0.000533097, -0.5, -0.000300822, 1, -0.000545149, 0.5, -0.000321697, -0.866025, 1018.52, 10.7574, -907.121 )
-spawnItems = false
-
-[node name="House6" parent="Houses" instance=ExtResource( 11 )]
-transform = Transform( -0.866025, -0.000533097, -0.5, -0.000300822, 1, -0.000545149, 0.5, -0.000321697, -0.866025, 919.792, 10.703, -1078.9 )
-spawnItems = false
-
-[node name="House10" parent="Houses" instance=ExtResource( 11 )]
-transform = Transform( -0.866025, -0.000533097, -0.5, -0.000300822, 1, -0.000545149, 0.5, -0.000321697, -0.866025, 960.792, 9.703, -1103.9 )
-spawnItems = false
-
-[node name="House11" parent="Houses" instance=ExtResource( 11 )]
-transform = Transform( -0.866025, -0.000533097, -0.5, -0.000300822, 1, -0.000545149, 0.5, -0.000321697, -0.866025, 1065.79, 9.703, -933.901 )
-spawnItems = false
-
-[node name="House12" parent="Houses" instance=ExtResource( 11 )]
-transform = Transform( -0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866026, 945.1, 9.47736, -757.376 )
-spawnItems = false
-
-[node name="House13" parent="Houses" instance=ExtResource( 11 )]
-transform = Transform( -0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866026, 993.1, 9.47736, -785.376 )
-spawnItems = false
-
-[node name="House15" parent="Houses" instance=ExtResource( 11 )]
-transform = Transform( -0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866026, 1035.1, 9.47736, -809.376 )
-spawnItems = false
-
-[node name="House2" parent="Houses" instance=ExtResource( 11 )]
-transform = Transform( 0.841435, 0, 0.540358, 0, 1, 0, -0.540358, 0, 0.841435, -47.2297, 671.584, -599.765 )
-spawnItems = false
-
-[node name="House3" parent="Houses" instance=ExtResource( 11 )]
-transform = Transform( -0.5, 0, 0.866026, 0, 1, 0, -0.866026, 0, -0.5, 859.756, 9.46204, -783.705 )
-spawnItems = false
 
 [node name="Cables" type="Spatial" parent="."]
 

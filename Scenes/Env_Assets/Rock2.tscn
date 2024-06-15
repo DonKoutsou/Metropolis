@@ -12,7 +12,7 @@ data = PoolVector3Array( -1.7327, -0.3823, 1.2232, -1.8052, -0.46, 1.2018, -1.80
 spheres = [ Plane( 0, -5.96046e-08, 2.98023e-08, 0.786635 ) ]
 
 [node name="Rock1" type="MeshInstance"]
-lod_max_distance = 2000.0
+lod_max_distance = 200.0
 mesh = ExtResource( 1 )
 material/0 = ExtResource( 2 )
 script = ExtResource( 3 )
@@ -20,7 +20,6 @@ LOD0 = ExtResource( 1 )
 LOD1 = ExtResource( 4 )
 
 [node name="StaticBody" type="StaticBody" parent="."]
-visible = false
 collision_layer = 4
 collision_mask = 0
 

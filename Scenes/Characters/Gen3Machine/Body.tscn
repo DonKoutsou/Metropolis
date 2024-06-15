@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Assets/FastLegs/M_Legs.material" type="Material" id=1]
 [ext_resource path="res://Assets/Gen3Machine/Gen3Machine.glb" type="PackedScene" id=2]
@@ -7,8 +7,27 @@
 [ext_resource path="res://Assets/Gen3Machine/Body/FaceMat.tres" type="Material" id=5]
 [ext_resource path="res://Assets/Gen3Machine/CharBlendTree.tres" type="AnimationNodeBlendTree" id=6]
 [ext_resource path="res://Scenes/Items/Bouzouki.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Gen3Machine/Eye.material" type="Material" id=8]
 [ext_resource path="res://Assets/Clouds/Textures/smoke_01.png" type="Texture" id=9]
 [ext_resource path="res://Scripts/Character_Animations.cs" type="Script" id=10]
+[ext_resource path="res://Assets/Sounds/WalkingSound.mp3" type="AudioStream" id=11]
+[ext_resource path="res://Scripts/CharacterSoundManager.cs" type="Script" id=14]
+
+[sub_resource type="SpatialMaterial" id=63]
+albedo_color = Color( 0.952941, 0.921569, 0.831373, 1 )
+emission_enabled = true
+emission = Color( 1, 0.913725, 0.784314, 1 )
+emission_energy = 16.0
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="SphereMesh" id=64]
+resource_local_to_scene = true
+material = SubResource( 63 )
+radius = 2.0
+height = 4.0
+radial_segments = 4
+rings = 4
 
 [sub_resource type="AnimationNodeAnimation" id=36]
 animation = "Dead_loop"
@@ -37,7 +56,7 @@ filter_enabled = true
 filters = [ "Armature/Skeleton:mixamorig_Head", "Armature/Skeleton:mixamorig_LeftArm", "Armature/Skeleton:mixamorig_LeftForeArm", "Armature/Skeleton:mixamorig_LeftHand", "Armature/Skeleton:mixamorig_LeftHandIndex1", "Armature/Skeleton:mixamorig_LeftHandIndex2", "Armature/Skeleton:mixamorig_LeftHandIndex3", "Armature/Skeleton:mixamorig_LeftHandIndex4", "Armature/Skeleton:mixamorig_LeftHandMiddle1", "Armature/Skeleton:mixamorig_LeftHandMiddle2", "Armature/Skeleton:mixamorig_LeftHandMiddle3", "Armature/Skeleton:mixamorig_LeftHandMiddle4", "Armature/Skeleton:mixamorig_LeftHandPinky1", "Armature/Skeleton:mixamorig_LeftHandPinky2", "Armature/Skeleton:mixamorig_LeftHandPinky3", "Armature/Skeleton:mixamorig_LeftHandPinky4", "Armature/Skeleton:mixamorig_LeftHandRing1", "Armature/Skeleton:mixamorig_LeftHandRing2", "Armature/Skeleton:mixamorig_LeftHandRing3", "Armature/Skeleton:mixamorig_LeftHandRing4", "Armature/Skeleton:mixamorig_LeftHandThumb2", "Armature/Skeleton:mixamorig_LeftHandThumb3", "Armature/Skeleton:mixamorig_LeftHandThumb4", "Armature/Skeleton:mixamorig_LeftLeg", "Armature/Skeleton:mixamorig_LeftShoulder", "Armature/Skeleton:mixamorig_LeftUpLeg", "Armature/Skeleton:mixamorig_Neck", "Armature/Skeleton:mixamorig_RightArm", "Armature/Skeleton:mixamorig_RightForeArm", "Armature/Skeleton:mixamorig_RightHand", "Armature/Skeleton:mixamorig_RightHandIndex1", "Armature/Skeleton:mixamorig_RightHandIndex2", "Armature/Skeleton:mixamorig_RightHandIndex3", "Armature/Skeleton:mixamorig_RightHandIndex4", "Armature/Skeleton:mixamorig_RightHandMiddle1", "Armature/Skeleton:mixamorig_RightHandMiddle2", "Armature/Skeleton:mixamorig_RightHandMiddle3", "Armature/Skeleton:mixamorig_RightHandMiddle4", "Armature/Skeleton:mixamorig_RightHandPinky1", "Armature/Skeleton:mixamorig_RightHandPinky2", "Armature/Skeleton:mixamorig_RightHandPinky3", "Armature/Skeleton:mixamorig_RightHandPinky4", "Armature/Skeleton:mixamorig_RightHandRing1", "Armature/Skeleton:mixamorig_RightHandRing2", "Armature/Skeleton:mixamorig_RightHandRing3", "Armature/Skeleton:mixamorig_RightHandRing4", "Armature/Skeleton:mixamorig_RightHandThumb1", "Armature/Skeleton:mixamorig_RightHandThumb2", "Armature/Skeleton:mixamorig_RightHandThumb3", "Armature/Skeleton:mixamorig_RightHandThumb4", "Armature/Skeleton:mixamorig_RightShoulder" ]
 
 [sub_resource type="AnimationNodeBlendTree" id=38]
-graph_offset = Vector2( -409.173, -19.1213 )
+graph_offset = Vector2( -491.333, 136 )
 nodes/Animation/node = SubResource( 47 )
 nodes/Animation/position = Vector2( 0, 146.667 )
 "nodes/Animation 2/node" = SubResource( 53 )
@@ -49,7 +68,7 @@ nodes/ChairBlend/position = Vector2( 186.667, 160 )
 nodes/IntrumentBlend/node = SubResource( 54 )
 nodes/IntrumentBlend/position = Vector2( 360, 266.667 )
 nodes/output/position = Vector2( 533.333, 160 )
-node_connections = [ "IntrumentBlend", 0, "ChairBlend", "IntrumentBlend", 1, "Animation 2", "output", 0, "IntrumentBlend", "ChairBlend", 0, "Animation", "ChairBlend", 1, "Animation 3" ]
+node_connections = [ "ChairBlend", 0, "Animation", "ChairBlend", 1, "Animation 3", "IntrumentBlend", 0, "ChairBlend", "IntrumentBlend", 1, "Animation 2", "output", 0, "IntrumentBlend" ]
 
 [sub_resource type="AnimationNodeAnimation" id=55]
 animation = "Standing"
@@ -82,6 +101,7 @@ advance_condition = "Idle"
 advance_condition = "Idle"
 
 [sub_resource type="AnimationNodeStateMachine" id=45]
+resource_local_to_scene = true
 states/Dead/node = SubResource( 37 )
 states/Dead/position = Vector2( 707.333, 254.235 )
 states/Sitting/node = SubResource( 38 )
@@ -92,7 +112,7 @@ states/Walking/node = ExtResource( 6 )
 states/Walking/position = Vector2( 326, 235.866 )
 transitions = [ "Walking", "Dead", SubResource( 39 ), "Walking", "Sitting", SubResource( 42 ), "Sitting", "Dead", SubResource( 51 ), "Dead", "Sitting", SubResource( 52 ), "Standing", "Walking", SubResource( 57 ), "Sitting", "Standing", SubResource( 58 ), "Dead", "Standing", SubResource( 56 ) ]
 start_node = "Walking"
-graph_offset = Vector2( -234, -139 )
+graph_offset = Vector2( -248, 100 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=46]
 
@@ -123,11 +143,18 @@ material = SubResource( 61 )
 [node name="Armature" parent="." index="0"]
 transform = Transform( 0.024, 0, 0, 0, 0.024, 6.77112e-09, 0, -6.77112e-09, 0.024, 0, 0, 0 )
 
+[node name="Skeleton" parent="Armature" index="0"]
+bones/1/bound_children = [ NodePath("BoneAttachment2") ]
+bones/6/bound_children = [ NodePath("BoneAttachment") ]
+
 [node name="Arms" parent="Armature/Skeleton" index="0"]
 material/0 = ExtResource( 3 )
 
 [node name="Body" parent="Armature/Skeleton" index="1"]
 material/0 = ExtResource( 4 )
+
+[node name="eyes" parent="Armature/Skeleton" index="2"]
+material/0 = ExtResource( 8 )
 
 [node name="Face" parent="Armature/Skeleton" index="3"]
 material/0 = ExtResource( 5 )
@@ -142,19 +169,23 @@ material/0 = ExtResource( 1 )
 material/0 = ExtResource( 4 )
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton" index="7"]
-transform = Transform( 0.997587, -0.0633482, -0.0284133, 0.0596192, 0.99134, -0.117001, 0.035579, 0.115024, 0.992725, -2.41786, 265.235, 12.1414 )
+transform = Transform( 1, 0, 0, 0, 1, -4.38311e-08, 0, 4.38311e-08, 1, 0, 111.211, -1.42293 )
 bone_name = "mixamorig_Head"
 
 [node name="HeadPivot" type="Spatial" parent="Armature/Skeleton/BoneAttachment" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 23.077, 23.499 )
 
-[node name="NightLight" type="SpotLight" parent="Armature/Skeleton/BoneAttachment/HeadPivot" index="0"]
+[node name="MeshInstance" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment/HeadPivot" index="0"]
+transform = Transform( 1, -3.91155e-08, 7.45058e-09, 5.40167e-08, 1, 7.45058e-08, 7.45058e-09, -2.98023e-08, 1, 0.0186672, 1.31384, -2.99345 )
+mesh = SubResource( 64 )
+
+[node name="NightLight" type="SpotLight" parent="Armature/Skeleton/BoneAttachment/HeadPivot" index="1"]
 transform = Transform( -41.6571, 0.347552, 0.824382, 0.547541, 40.268, 10.6912, -0.707532, 10.6996, -40.2632, 0, 0, 7.62939e-06 )
 portal_mode = 1
 include_in_bound = false
 allow_merging = false
 layers = 3
-light_color = Color( 0.580392, 1, 0.619608, 1 )
+light_color = Color( 0.992157, 0.952941, 0.772549, 1 )
 light_energy = 0.5
 light_bake_mode = 0
 shadow_enabled = true
@@ -162,9 +193,10 @@ shadow_bias = 0.0
 shadow_reverse_cull_face = true
 spot_range = 58.3185
 spot_angle = 47.5769
+spot_angle_attenuation = 0.25
 
 [node name="BoneAttachment2" type="BoneAttachment" parent="Armature/Skeleton" index="8"]
-transform = Transform( 0.994635, 0.0570976, -0.0862603, -0.0622686, 0.996344, -0.0584937, 0.0826051, 0.0635512, 0.994554, -0.38426, 183.751, 0.772516 )
+transform = Transform( 1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 0, 27.7126, 1.21135e-06 )
 bone_name = "mixamorig_Hips"
 
 [node name="RemoteTransform" type="RemoteTransform" parent="Armature/Skeleton/BoneAttachment2" index="0"]
@@ -173,13 +205,23 @@ remote_path = NodePath("../../../../Bouzouki")
 update_rotation = false
 update_scale = false
 
-[node name="AnimationPlayer" parent="." index="1"]
+[node name="CharacterSoundManager" type="Spatial" parent="." index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.63771, 0 )
+script = ExtResource( 14 )
+
+[node name="Walk" type="AudioStreamPlayer3D" parent="CharacterSoundManager" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.23199, 0 )
+stream = ExtResource( 11 )
+unit_db = 20.988
+max_db = 6.0
+area_mask = 0
+
+[node name="AnimationPlayer" parent="." index="2"]
 script = ExtResource( 10 )
 
 [node name="AnimationTree" type="AnimationTree" parent="AnimationPlayer" index="0"]
 tree_root = SubResource( 45 )
 anim_player = NodePath("..")
-active = true
 process_mode = 0
 root_motion_track = NodePath("Armature/Skeleton:Bone")
 parameters/playback = SubResource( 46 )
@@ -197,7 +239,7 @@ parameters/Walking/JumpShot/active = false
 parameters/Walking/TimeScale/scale = 1.0
 "parameters/Walking/TimeScale 2/scale" = 1.0
 
-[node name="Particles" type="Particles" parent="." index="2"]
+[node name="Particles" type="Particles" parent="." index="3"]
 sorting_use_aabb_center = false
 cast_shadow = 0
 generate_lightmap = false
@@ -206,8 +248,8 @@ draw_order = 2
 process_material = SubResource( 34 )
 draw_pass_1 = SubResource( 62 )
 
-[node name="Bouzouki" parent="." index="3" instance=ExtResource( 7 )]
-transform = Transform( -0.0272753, 0.896328, -0.442218, -0.827402, 0.227855, 0.512926, 0.560608, 0.379958, 0.735556, -1.23148, 4.28788, 0.516995 )
+[node name="Bouzouki" parent="." index="4" instance=ExtResource( 7 )]
+transform = Transform( -0.0272753, 0.896328, -0.442218, -0.827402, 0.227855, 0.512926, 0.560608, 0.379958, 0.735556, -1.16692, 0.505295, 0.608318 )
 visible = false
 sleeping = true
 RegisterOnIsland = false

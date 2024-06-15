@@ -39,7 +39,7 @@ public class Island : Spatial
 		if (Engine.EditorHint)
 			return;
 		#endif
-		GlobalTranslation = SpawnGlobalLocation;
+		Translation = SpawnGlobalLocation;
 
 
 		Rotate(new Vector3(0, 1, 0), Mathf.Deg2Rad(SpawnRotation));
@@ -312,6 +312,7 @@ public class Island : Spatial
 	}
 	public void InitialSpawn(Random r, out int RandomUses)
 	{
+		FindChildren(this);
 		RandomUses = 0;
 		int RandomUsedFromHouses = 0;
 		foreach(House h in Houses)
@@ -365,8 +366,9 @@ public class Island : Spatial
 					RandomUses ++;
 					Spatial veh = (Spatial)Vehs.VehSpawns[selection - 1].Instance();
 					AddChild(veh);
-					veh.Translation = pos.Translation;
+					
 					Vehicle vehchild = veh.GetNode<Vehicle>("VehicleBody");
+					vehchild.Translation = pos.Translation;
 					if (vehchild.SpawnBroken)
 						vehchild.OnLightDamaged();
 				}
@@ -378,15 +380,15 @@ public class Island : Spatial
 	}
 	public void RegisterChild(Node child)
 	{
-		if (child is House)
+		if (child is House && !Houses.Contains(child))
 			Houses.Insert(Houses.Count, (House)child);
-		else if (child is WindGenerator)
+		else if (child is WindGenerator && !Generators.Contains(child))
 			Generators.Insert(Generators.Count, (WindGenerator)child);
-		else if (child is Vehicle)
+		else if (child is Vehicle && !Vehicles.Contains(child))
 			Vehicles.Insert(Vehicles.Count, (Vehicle)child);
-		else if (child is Item)
+		else if (child is Item && !Items.Contains(child))
 			Items.Insert(Items.Count, (Item)child);
-		else if (child is Character)
+		else if (child is Character && !Characters.Contains(child))
 			Characters.Insert(Characters.Count, (Character)child);
 	}
 	public void UnRegisterChild(Node child)

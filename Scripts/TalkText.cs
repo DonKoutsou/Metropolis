@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 
 public class TalkText : Label3D
 {
@@ -26,8 +27,10 @@ public class TalkText : Label3D
     }
     public override void _Process(float delta)
     {
-        Vector3 plpos = Talking.GlobalTransform.origin;
-        GlobalTranslation = new Vector3(plpos.x, plpos.y + (10 *  CameraZoomPivot.GetInstance().GetZoomNormalised()) + 10, plpos.z);
+       // Vector3 plpos = Talking.GlobalTransform.origin;
+        float zoo = CameraZoomPivot.GetInstance().GetZoomNormalised();
+        PixelSize = Mathf.Lerp(0.001f, 0.002f, zoo);
+        //GlobalTranslation = new Vector3(plpos.x, plpos.y + (5 *  CameraZoomPivot.GetInstance().GetZoomNormalised()) + 10, plpos.z);
     }
     public static TalkText GetInst()
     {

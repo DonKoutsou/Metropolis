@@ -11,9 +11,18 @@ public class NPC : Character
 	[Export]
 	NodePath Chair = null;
 	[Export]
-	bool PlayingInstrument = false;
+	bool PlayInstrument = false;
 	[Export]
 	Vector3 TalkPosPos = new Vector3(0, 0.5f, 6);
+
+	Node Skeleton;
+
+	Timer IdleTimer;
+
+	public void Idle_Timer_Ended()
+	{
+		PlayMusic();
+	}
 
     public override void _Process(float delta)
     {
@@ -41,6 +50,17 @@ public class NPC : Character
 		#endif
 
 		base._Ready();
+
+		Node par = GetParent();
+		while (!(par is Island))
+		{
+            if (par == null)
+				return;
+			par = par.GetParent();
+		}
+		Island ile = (Island)par;
+		ile.RegisterChild(this);
+
 		if (Sitting)
 		{
 			
@@ -60,30 +80,30 @@ public class NPC : Character
 				pos.QueueFree();
 			}
 		}
-		anim.ToggleInstrument(PlayingInstrument);
-		GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Bouzouki>("Bouzouki").ToggleMusic(PlayingInstrument);
+		if (PlayInstrument)
+		{
+			CallDeferred("PlayMusic");
+		}
 		
 		if (spawnUncon)
 		{
 			CurrentEnergy = 0;
 		}
 		GetNode<Position3D>("TalkPosition").Translation = TalkPosPos;
+
+		Skeleton = GetNode("Pivot").GetNode("Guy").GetNode("Armature").GetNode("Skeleton");
+
+		IdleTimer = GetNode<Timer>("IdleTimer");
 	}
-	#if DEBUG
-    public override void _PhysicsProcess(float delta)
-    {
-		
-		if (Engine.EditorHint)
-		{
-			return;
-		}
-        base._PhysicsProcess(delta);
-    }
-	#endif
+	
+	public override void OnSongEnded(Instrument inst)
+	{
+		base.OnSongEnded(inst);
+		IdleTimer.Start();
+	}
 	public void HighLightObject(bool toggle)
     {
-		Node skel = GetNode("Pivot").GetNode("Guy").GetNode("Armature").GetNode("Skeleton");
-		foreach (Node child in skel.GetChildren())
+		foreach (Node child in Skeleton.GetChildren())
 		{
 			if (child is MeshInstance)
 			{

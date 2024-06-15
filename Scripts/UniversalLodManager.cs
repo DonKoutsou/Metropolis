@@ -59,11 +59,11 @@ public partial class UniversalLodManager : Node
 
         Currentcheck += 1;
         
-        if (objtocheck != null && Godot.Object.IsInstanceValid(objtocheck))
+        if (objtocheck != null && Godot.Object.IsInstanceValid(objtocheck) && objtocheck.IsInsideTree())
         {
-          float dist = campos.DistanceTo(objtocheck.GlobalTranslation) * objtocheck.Scale.x;
+          float dist = campos.DistanceTo(objtocheck.GlobalTranslation);
         
-          if (dist > objtocheck.LodMaxDistance)
+          if (dist > objtocheck.GetTransformedAabb().GetLongestAxisSize() + 500)
               objtocheck.SwitchLod(true);
           else
               objtocheck.SwitchLod(false);

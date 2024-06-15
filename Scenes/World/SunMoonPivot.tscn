@@ -16,6 +16,7 @@ size = Vector2( 1000, 1000 )
 
 [sub_resource type="SpatialMaterial" id=88]
 flags_use_shadow_to_opacity = true
+params_blend_mode = 1
 transmission_enabled = true
 transmission = Color( 0, 0, 0, 1 )
 

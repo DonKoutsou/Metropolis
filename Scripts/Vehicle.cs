@@ -90,6 +90,7 @@ public class Vehicle : RigidBody
         ExaustParticles[2].Emitting = false;
         ExaustParticles[3].Emitting = false;
         Spatial parent = (Spatial)GetParent();
+        ZeroPos();
         //frontray = parent.GetNode<RayCast>("RayF");
         Rays.Insert(0, parent.GetNode<RayCast>("RayFL"));
         Rays.Insert(1, parent.GetNode<RayCast>("RayFR"));
@@ -123,6 +124,18 @@ public class Vehicle : RigidBody
         
         //SetProcessInput(false);
     }
+    public void ZeroPos()
+    {
+        Spatial parent = (Spatial)GetParent();
+        Vector3 prevpos = parent.Translation;
+        if (prevpos == Vector3.Zero)
+            return;
+        parent.Translation = Vector3.Zero;
+        
+        Translation += prevpos;
+        Rotation = parent.Rotation;
+        parent.Rotation = Vector3.Zero;
+    }
     public override void _Process(float delta)
     {
         base._Process(delta);
@@ -145,7 +158,6 @@ public class Vehicle : RigidBody
         if (!thr.IsActive())
         {
             //if (thr.IsActive())
-            ;
             thr = new Thread();
             thr.Start(this, "Balance", delta);
         }
@@ -153,7 +165,7 @@ public class Vehicle : RigidBody
         Hover(delta);
 
         
-        float distance = loctomove.DistanceTo(GlobalTransform.origin);
+        float distance = loctomove.DistanceTo(GlobalTranslation);
 
         float fmulti = 1;
         Vector3 force = Vector3.Zero;
@@ -293,16 +305,8 @@ public class Vehicle : RigidBody
     
     public void Hover(float delta)
     {
-        float Force = Hoverforcecurve.Interpolate(latsspeed /(speed)) * HoverForce;
-        //float forcemulti = 1;
-        /*if (Working)
-        {
-            //frontray.ForceRaycastUpdate();
-            if (frontray.IsColliding())
-            {
-                forcemulti = 4;
-            }
-        }*/
+        float Force = Hoverforcecurve.Interpolate(latsspeed /speed) * HoverForce;
+
         Vector3 f ;
         for (int i = 0; i < Rays.Count; i ++)
         {
@@ -314,13 +318,13 @@ public class Vehicle : RigidBody
             {
                 var collisionpoint = ray.GetCollisionPoint();
                 var collisionobj = ray.GetCollider();
-                var dist = collisionpoint.DistanceTo(ray.GlobalTransform.origin);
+                var dist = collisionpoint.DistanceTo(ray.GlobalTranslation);
                 float distmulti = dist / - ray.CastTo.y;
 
                 
                 //Particles Flame = ray.GetNode<Particles>("EngineParticles");
 
-                if (dist < 20 && Working)
+                if (dist <= 35 && Working)
                 {
                     //Flame.Emitting = true;
                     float particleoffset = dist;
@@ -329,7 +333,7 @@ public class Vehicle : RigidBody
                     part.Translation = new Vector3(part.Translation.x, - particleoffset, part.Translation.z);
                 }
 
-                part.Emitting = dist <= 20 && Working;
+                part.Emitting = dist <= 35 && Working;
                 float multi = forcecurve.Interpolate(distmulti);
                 if (dist < 4)
                 {
@@ -351,7 +355,7 @@ public class Vehicle : RigidBody
 
                 //AddForce(f * forcemulti, ray.GlobalTransform.origin - GlobalTransform.origin);
             }
-            AddForce(f, ray.GlobalTransform.origin - GlobalTransform.origin);
+            AddForce(f, ray.GlobalTranslation - GlobalTranslation);
         }
         //Balance(delta);
         //if (thr != null)
@@ -395,8 +399,8 @@ public class Vehicle : RigidBody
     {
         //if (SteeringWheel.GlobalTranslation.DistanceTo(loctomove) < 0.1f)
             //return;
-            
-        SteeringWheel.LookAt(loctomove, Vector3.Up);
+        if (loctomove.DistanceTo(SteeringWheel.GlobalTranslation) > 0.01f)
+            SteeringWheel.LookAt(loctomove, Vector3.Up);
         float steer = Mathf.Rad2Deg(SteeringWheel.Rotation.y);
         
 
@@ -488,8 +492,14 @@ public class Vehicle : RigidBody
             SteerThr = new Thread();
             SteerThr.Start(this, "Steer", 0.01);
         }
+        CallDeferred("ToggleEngineVFX", toggle);
+        loctomove = GlobalTranslation;
         
-        loctomove = GlobalTransform.origin;
+        Working = toggle;
+        SetProcess(toggle);
+    }
+    public void ToggleEngineVFX(bool toggle)
+    {
         ExaustParticles[0].Emitting = toggle;
         ExaustParticles[0].GetNode<AudioStreamPlayer3D>("EngineSound").Playing = toggle;
         ExaustParticles[1].Emitting = toggle;
@@ -498,8 +508,6 @@ public class Vehicle : RigidBody
         ExaustParticles[2].GetNode<AudioStreamPlayer3D>("EngineSound").Playing = toggle;
         ExaustParticles[3].Emitting = toggle;
         ExaustParticles[3].GetNode<AudioStreamPlayer3D>("EngineSound").Playing = toggle;
-        Working = toggle;
-        SetProcess(toggle);
     }
     public bool IsRunning()
     {
@@ -655,8 +663,9 @@ public class Vehicle : RigidBody
         //    GetParent().QueueFree();
         //    return;
         //}
-		GlobalTranslation = data.loc;
-        GlobalRotation = data.rot;
+        ZeroPos();
+		Translation = data.loc;
+        Rotation = data.rot;
         GetParent().GetNode<VehicleDamageManager>("VehicleDamageManager").InputData(data.DamageInfo);
 	}
     public void ReparentVehicle(Island from, Island ile)
@@ -674,6 +683,8 @@ public class Vehicle : RigidBody
         par.RemoveChild(vehpar);
         ile.AddChild(vehpar);
         ile.RegisterChild(this);
+        vehpar.Translation = Vector3.Zero;
+        vehpar.Rotation = Vector3.Zero;
         GlobalTranslation = orig;
         GlobalRotation = origrot;
 
@@ -695,17 +706,23 @@ public class VehicleInfo
     public string scenedata;
     public void UpdateInfo(Vehicle veh)
     {
-        loc = veh.GlobalTranslation;
-        rot = veh.GlobalRotation;
+        veh.ZeroPos();
+        Spatial par = (Spatial)veh.GetParent();
+
+        loc = veh.Translation;
+        rot = veh.Rotation;
         //VehicleDamageManager Damageman = veh.GetParent().GetNode<VehicleDamageManager>("VehicleDamageManager");
         DamageInfo = new VehicleDamageInfo();
         DamageInfo.UpdateInfo(veh);
     }
     public void SetInfo(Vehicle veh)
     {
+        veh.ZeroPos();
         VehName = veh.GetParent().Name;
-        loc = veh.GlobalTranslation;
-        rot = veh.GlobalRotation;
+
+        loc = veh.Translation;
+        rot = veh.Rotation;
+           
         scenedata = veh.GetParent().Filename;
         VehicleDamageManager Damageman = veh.GetParent().GetNode<VehicleDamageManager>("VehicleDamageManager");
         DamageInfo = new VehicleDamageInfo();

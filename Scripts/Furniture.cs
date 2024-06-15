@@ -29,7 +29,7 @@ public class Furniture : Spatial
 		
 		Item itemToDrop = (Item)it.Instance();
 		AddChild(itemToDrop);
-		itemToDrop.Translation = Translation;
+		itemToDrop.Translation = Vector3.Zero;
 		StashedItem = itemToDrop;
 		StashedItem.Hide();
 	}

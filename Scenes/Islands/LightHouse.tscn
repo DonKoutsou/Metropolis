@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Islands/LightHouseGeo.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Scenes/Env_Assets/Fireplace.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Env_Assets/Skampo.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Env_Assets/Table.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Assets/Building/BuildingComposition.tscn" type="PackedScene" id=12]
 
 [sub_resource type="SpatialMaterial" id=13]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -173,11 +174,9 @@ transform = Transform( 38.9538, 0, 22.49, 0, 44.98, 0, -22.49, 0, 38.9538, 295, 
 
 [node name="Character" parent="." index="25" instance=ExtResource( 8 )]
 transform = Transform( -0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, -0.965926, 924, 7, -1095 )
-PlayingInstrument = true
 
 [node name="Character2" parent="." index="26" instance=ExtResource( 8 )]
 transform = Transform( -0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, 595, 276, -961 )
-PlayingInstrument = true
 
 [node name="Fireplace" parent="." index="27" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 927, 7, -1098 )
@@ -194,3 +193,61 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 118, 832.285, -390 )
 
 [node name="StaticBody2" parent="." index="31" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 118, 829, -394 )
+
+[node name="Houses" type="Spatial" parent="." index="32"]
+
+[node name="House" parent="Houses" index="0" instance=ExtResource( 12 )]
+transform = Transform( -0.866026, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866026, 391.988, 673.584, -417.872 )
+spawnItems = false
+
+[node name="House7" parent="Houses" index="1" instance=ExtResource( 12 )]
+transform = Transform( -0.841435, 0, -0.540358, 0, 1, 0, 0.540358, 0, -0.841435, 284.77, 671.584, -355.765 )
+spawnItems = false
+
+[node name="House8" parent="Houses" index="2" instance=ExtResource( 12 )]
+transform = Transform( -0.841435, 0, -0.540358, 0, 1, 0, 0.540358, 0, -0.841435, 357.77, 671.584, -395.765 )
+spawnItems = false
+
+[node name="House9" parent="Houses" index="3" instance=ExtResource( 12 )]
+transform = Transform( -0.841435, 0, -0.540358, 0, 1, 0, 0.540358, 0, -0.841435, 325.77, 671.584, -377.765 )
+spawnItems = false
+
+[node name="House14" parent="Houses" index="4" instance=ExtResource( 12 )]
+transform = Transform( -0.5, 0, 0.866026, 0, 1, 0, -0.866026, 0, -0.5, 893.756, 9.46204, -727.705 )
+spawnItems = false
+
+[node name="House5" parent="Houses" index="5" instance=ExtResource( 12 )]
+transform = Transform( -0.866025, -0.000533097, -0.5, -0.000300822, 1, -0.000545149, 0.5, -0.000321697, -0.866025, 1018.52, 10.7574, -907.121 )
+spawnItems = false
+
+[node name="House6" parent="Houses" index="6" instance=ExtResource( 12 )]
+transform = Transform( -0.866025, -0.000533097, -0.5, -0.000300822, 1, -0.000545149, 0.5, -0.000321697, -0.866025, 919.792, 10.703, -1078.9 )
+spawnItems = false
+
+[node name="House10" parent="Houses" index="7" instance=ExtResource( 12 )]
+transform = Transform( -0.866025, -0.000533097, -0.5, -0.000300822, 1, -0.000545149, 0.5, -0.000321697, -0.866025, 960.792, 9.703, -1103.9 )
+spawnItems = false
+
+[node name="House11" parent="Houses" index="8" instance=ExtResource( 12 )]
+transform = Transform( -0.866025, -0.000533097, -0.5, -0.000300822, 1, -0.000545149, 0.5, -0.000321697, -0.866025, 1065.79, 9.703, -933.901 )
+spawnItems = false
+
+[node name="House12" parent="Houses" index="9" instance=ExtResource( 12 )]
+transform = Transform( -0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866026, 945.1, 9.47736, -757.376 )
+spawnItems = false
+
+[node name="House13" parent="Houses" index="10" instance=ExtResource( 12 )]
+transform = Transform( -0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866026, 993.1, 9.47736, -785.376 )
+spawnItems = false
+
+[node name="House15" parent="Houses" index="11" instance=ExtResource( 12 )]
+transform = Transform( -0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866026, 1035.1, 9.47736, -809.376 )
+spawnItems = false
+
+[node name="House2" parent="Houses" index="12" instance=ExtResource( 12 )]
+transform = Transform( 0.841435, 0, 0.540358, 0, 1, 0, -0.540358, 0, 0.841435, -47.2297, 671.584, -599.765 )
+spawnItems = false
+
+[node name="House3" parent="Houses" index="13" instance=ExtResource( 12 )]
+transform = Transform( -0.5, 0, 0.866026, 0, 1, 0, -0.866026, 0, -0.5, 859.756, 9.46204, -783.705 )
+spawnItems = false

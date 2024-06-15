@@ -21,7 +21,6 @@ LOD0 = ExtResource( 1 )
 LOD1 = ExtResource( 4 )
 
 [node name="StaticBody" type="StaticBody" parent="."]
-visible = false
 collision_layer = 4
 collision_mask = 0
 

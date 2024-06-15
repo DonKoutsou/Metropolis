@@ -13,6 +13,8 @@ public class Character_Animations : AnimationPlayer
     Particles walkpart;
     float currot;
     AnimationNodeStateMachinePlayback stateMachine;
+
+    CharacterSoundManager Sounds;
     //AnimationPlayer AnimPlayer;
     public override void _Ready()
     {
@@ -24,6 +26,7 @@ public class Character_Animations : AnimationPlayer
         walkpart = GetParent().GetNode<Particles>("Particles");
         walkpart.Emitting = false;
         parent = (Spatial)GetParent();
+        Sounds = parent.GetNode<CharacterSoundManager>("CharacterSoundManager");
     }
     public bool IsStanding()
     {
@@ -46,6 +49,7 @@ public class Character_Animations : AnimationPlayer
         animtree.Set("parameters/conditions/Dead", false);
         animtree.Set("parameters/conditions/Sitting", false);
         animtree.Set("parameters/conditions/Idle", true);
+        
     }
     public void ToggleDeath()
     {
@@ -60,6 +64,7 @@ public class Character_Animations : AnimationPlayer
         animtree.Set("parameters/conditions/Idle", false);
         animtree.Set("parameters/conditions/Dead", false);
         animtree.Set("parameters/conditions/Sitting", true);
+        Sounds.ToggleSound(false, "Walk");
         if (chair)
             animtree.Set("parameters/Sitting/ChairBlend/blend_amount", 1);
         else
@@ -76,6 +81,7 @@ public class Character_Animations : AnimationPlayer
                 Vector3 rot = new Vector3(0, 0, 0);
                 parent.Rotation = rot;
                 walkpart.Emitting = false;
+                Sounds.ToggleSound(false, "Walk");
                 break;
             }
             case E_Animations.Walk:
@@ -90,6 +96,7 @@ public class Character_Animations : AnimationPlayer
                 walkpart.Emitting = true;
                 if (walkpart.Amount != 4)
                     walkpart.Amount = 4;
+                Sounds.ToggleSound(true, "Walk", 0.5f, 3);
 
                 break;
             }
@@ -97,6 +104,7 @@ public class Character_Animations : AnimationPlayer
             {
                 animtree.Set("parameters/Walking/JumpShot/active", true);
                 walkpart.Emitting = false;
+                Sounds.ToggleSound(false, "Walk");
                 break;
             }
             case E_Animations.Run:
@@ -112,18 +120,21 @@ public class Character_Animations : AnimationPlayer
                 walkpart.Emitting = true;
                 if (walkpart.Amount != 8)
                     walkpart.Amount = 8;
+                Sounds.ToggleSound(true, "Walk", 1, 5);
                 break;
             }
             case E_Animations.ClimbUp:
             {
                 animtree.Set("parameters/Walking/ClimbUp/active", true);
                 walkpart.Emitting = false;
+                Sounds.ToggleSound(false, "Walk");
                 break;
             }
             case E_Animations.ClimbDown:
             {
                 animtree.Set("parameters/Walking/ClimbDown/active", true);
                 walkpart.Emitting = false;
+                Sounds.ToggleSound(false, "Walk");
                 break;
             }
             /*case E_Animations.Death:

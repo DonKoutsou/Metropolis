@@ -31,7 +31,7 @@ public class FireplaceLight : StaticBody
         RayCast CoverCast = GetNode<RayCast>("RoofRayCast");
         CoverCast.ForceRaycastUpdate();
         covered = CoverCast.IsColliding();
-        
+        CoverCast.QueueFree();
     }
     public Vector3 GetActionPos(Vector3 PlayerPos)
     {

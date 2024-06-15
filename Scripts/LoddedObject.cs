@@ -9,6 +9,19 @@ public class LoddedObject : MeshInstance
 
     [Export]
     Mesh LOD1 = null;
+   // public override void _Process(float delta)
+    //{
+//        base._Process(delta);
+     //   if (!Engine.EditorHint)
+     //       return;
+     //   if (GetTree().Root.GetCamera().GlobalTranslation.DistanceTo(GlobalTranslation) > 10)
+     //   {//            SwitchLod(true);
+     //   }
+     //   else
+     //   {
+//            SwitchLod(false);
+     //   }
+   // }
     public override void _EnterTree()
     {
         AddToGroup("LODDEDOBJ");
