@@ -259,7 +259,7 @@ public class Character : KinematicBody
 		if (PlayingInstrument)
 		{
 			anim.ToggleInstrument(false);
-			GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Bouzouki>("Bouzouki").ToggleMusic(false);
+			((Instrument)GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("InstrumentAtatchment").GetNode<Spatial>("Instrument").GetChild(0)).ToggleMusic(false);
 			PlayingInstrument = false;
 		}
 		anim.ToggleIdle();
@@ -312,16 +312,46 @@ public class Character : KinematicBody
 	public void PlayMusic()
 	{
 		anim.ToggleInstrument(true);
-		Bouzouki bouz = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Bouzouki>("Bouzouki");
+		
+		Spatial instrumentparent = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("InstrumentAtatchment").GetNode<Spatial>("Instrument");
+		Instrument bouz = (Instrument)instrumentparent.GetChild(0);
+		BoneAttachment instatatchment = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("InstrumentAtatchment");
+		instatatchment.GetNode<RemoteTransform>("HolsterAtatchment").RemotePath = instatatchment.GetNode<RemoteTransform>("HolsterAtatchment").GetPath();
+		instatatchment.GetNode<RemoteTransform>("PlayingAtatchment").RemotePath = instrumentparent.GetPath();
+		
 		bouz.ToggleMusic(true);
 		bouz.Connect("OnSongEnded", this, "OnSongEnded");
 		PlayingInstrument = true;
+	}
+	public bool HasInstrument()
+	{
+		return GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("InstrumentAtatchment").GetNode<Spatial>("Instrument").GetChildCount() > 0;
+	}
+	public void AddInstrument(Instrument inst)
+	{
+		Spatial instrumentspace = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("InstrumentAtatchment").GetNode<Spatial>("Instrument");
+		inst.GetNode<CollisionShape>("CollisionShape").Disabled = true;
+		inst.RegisterOnIsland = false;
+		instrumentspace.AddChild(inst);
+		//inst.Visible = true;
+		inst.Translation = Vector3.Zero;
+		inst.Rotation = Vector3.Zero;
+		//inst.Owner = Owner;
+		
 	}
 	public virtual void OnSongEnded(Instrument inst)
 	{
 		//IdleTimer.Start();
 		inst.Disconnect("OnSongEnded", this, "OnSongEnded");
 		anim.ToggleInstrument(false);
+
+		Spatial instrumentparent = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("InstrumentAtatchment").GetNode<Spatial>("Instrument");
+
+		BoneAttachment instatatchment = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("InstrumentAtatchment");
+		instatatchment.GetNode<RemoteTransform>("HolsterAtatchment").RemotePath = instrumentparent.GetPath();
+		instatatchment.GetNode<RemoteTransform>("PlayingAtatchment").RemotePath = instatatchment.GetNode<RemoteTransform>("PlayingAtatchment").GetPath();
+		//instatatchment.GetNode<RemoteTransform>("PlayingAtatchment").ForceUpdateCache(); 
+
 	}
 	private void On_DialogueButton_Button_Down()
 	{

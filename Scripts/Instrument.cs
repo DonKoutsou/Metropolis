@@ -13,7 +13,6 @@ public class Instrument : Item
 
     public virtual void ToggleMusic(bool Toggle)
 	{
-		Visible = Toggle;
 		Speaker.Playing = Toggle;
         Playing = Toggle;
         if (Toggle)
@@ -26,7 +25,6 @@ public class Instrument : Item
     public void SongEnded()
     {
         EmitSignal("OnSongEnded", this);
-        Visible = false;
         Playing = false;
     }
     // Declare member variables here. Examples:
@@ -60,8 +58,9 @@ public class Instrument : Item
 	}
     public float GetCurrentSongLoc()
     {
-		return Speaker.GetPlaybackPosition() + (float)AudioServer.GetTimeSinceLastMix() - 0.05f;
+		return Speaker.GetPlaybackPosition() + (float)AudioServer.GetTimeSinceLastMix() + 0.05f;
     }
+
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
 //  public override void _Process(float delta)
 //  {

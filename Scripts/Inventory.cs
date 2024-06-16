@@ -95,7 +95,14 @@ public class Inventory : Spatial
         {
             return false;
         }
-
+        if (item is Instrument)
+        {
+            var instparent = item.GetParent();
+            if (instparent != null)
+                instparent.RemoveChild(item);
+            ((Character)GetParent()).AddInstrument((Instrument)item);
+            return true;
+        }
         InventoryContents.Insert(InventoryContents.Count, item);
         currentweight += item.GetInventoryWeight();
         var parent = item.GetParent();

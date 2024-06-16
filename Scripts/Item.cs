@@ -24,7 +24,7 @@ public class Item : RigidBody
 	[Export]
 	public bool stackable = true;
 	[Export]
-	bool RegisterOnIsland = true;
+	public bool RegisterOnIsland = true;
 
 	public string GetItemName()
 	{
@@ -52,7 +52,7 @@ public class Item : RigidBody
 		if (RegisterOnIsland)
 		{
 			Node par = GetParent();
-			if (par is Inventory || par is Furniture)
+			if (par is Inventory || par is Furniture || par is Character)
 				return;
 			while (!(par is Island))
 			{

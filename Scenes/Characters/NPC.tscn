@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/Characters/NPC.cs" type="Script" id=1]
+[ext_resource path="res://Scenes/Items/Bouzouki.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Characters/Gen3Machine/Body.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=4]
 
@@ -17,6 +18,7 @@ collision_mask = 54
 script = ExtResource( 1 )
 lines = [  ]
 Chair = NodePath("")
+InstrumentToSpawnWith = ExtResource( 2 )
 
 [node name="Pivot" type="Spatial" parent="."]
 

@@ -41,7 +41,7 @@ public class MusicManager : Node
         {
             if (instru == inst)
                 continue;
-            if (pos.DistanceTo(instru.GlobalTranslation) <= 20 && instru.IsPlaying())
+            if (pos.DistanceTo(instru.GlobalTranslation) <= 50 && instru.IsPlaying())
             {
                 song = GetSongForInstrument(inst, (Song)SongToEnum(instru.GetCurrentSong()));
                 loc = instru.GetCurrentSongLoc();
@@ -86,6 +86,8 @@ public class MusicManager : Node
         AudioStream song = null;
         if (name is Bouzouki)
             song = BouzoukiSongs[s];
+        if (name is Guitar)
+            song = GuitarSongs[s];
 
         return song;
     }

@@ -10,7 +10,7 @@ extents = Vector3( 0.952743, 2.24403, 0.223935 )
 
 [node name="Bouzouki" type="RigidBody" groups=["Instrument"]]
 collision_layer = 16
-collision_mask = 36
+collision_mask = 0
 mode = 1
 script = ExtResource( 2 )
 ItemPickupActionName = "Ένα μπουζούκι.."

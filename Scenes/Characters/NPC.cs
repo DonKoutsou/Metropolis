@@ -14,6 +14,8 @@ public class NPC : Character
 	bool PlayInstrument = false;
 	[Export]
 	Vector3 TalkPosPos = new Vector3(0, 0.5f, 6);
+	[Export]
+	PackedScene InstrumentToSpawnWith = null;
 
 	Node Skeleton;
 
@@ -80,6 +82,8 @@ public class NPC : Character
 				pos.QueueFree();
 			}
 		}
+		Instrument inst = InstrumentToSpawnWith.Instance<Instrument>();
+		AddInstrument(inst);
 		if (PlayInstrument)
 		{
 			CallDeferred("PlayMusic");
@@ -92,6 +96,10 @@ public class NPC : Character
 		GetNode<Position3D>("TalkPosition").Translation = TalkPosPos;
 
 		Skeleton = GetNode("Pivot").GetNode("Guy").GetNode("Armature").GetNode("Skeleton");
+		
+		
+		
+		//Skeleton.GetNode<BoneAttachment>("InstrumentAtatchment").GetNode<RemoteTransform>("RemoteTransform").RemotePath = inst.GetPath();
 
 		IdleTimer = GetNode<Timer>("IdleTimer");
 	}

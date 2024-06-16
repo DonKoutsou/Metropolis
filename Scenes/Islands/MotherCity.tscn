@@ -1228,6 +1228,7 @@ TalkPosPos = Vector3( -3.91, 0.5, -6.137 )
 
 [node name="Character4" parent="Characters" index="3" instance=ExtResource( 23 )]
 transform = Transform( 0.949215, 0.000109431, -0.314621, -8.24728e-05, 0.999997, 9.89912e-05, 0.314621, -6.80107e-05, 0.949216, 38.2859, 0.716993, 2359.03 )
+PlayInstrument = true
 
 [node name="Character5" parent="Characters" index="4" instance=ExtResource( 23 )]
 transform = Transform( 0.440344, -0.000125293, 0.897824, 0.000422343, 0.999994, -6.76097e-05, -0.897824, 0.000408961, 0.440344, -206.784, 6.46647, -3529.37 )

@@ -68,11 +68,9 @@ public class Player : Character
 	
 	private void CheckIfIdling()
 	{
-		if (sitting && !PlayingInstrument)
+		if (sitting && !PlayingInstrument && HasInstrument())
 		{
-			anim.ToggleInstrument(true);
-			GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Bouzouki>("Bouzouki").ToggleMusic(true);
-			PlayingInstrument = true;
+			PlayMusic();
 		}
 	}
 	private void UpdateMoveLocation()
