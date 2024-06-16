@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/PaintedWood008C_1K-JPG_Roughness.jpg-539b81fa81a09408fb8181c7d6edf484.s3tc.stex"
-path.etc2="res://.import/PaintedWood008C_1K-JPG_Roughness.jpg-539b81fa81a09408fb8181c7d6edf484.etc2.stex"
+path.s3tc="res://.import/Fabric045_1K-JPG_AmbientOcclusion.jpg-433cca806ba641e339acb376ce4878dc.s3tc.stex"
+path.etc2="res://.import/Fabric045_1K-JPG_AmbientOcclusion.jpg-433cca806ba641e339acb376ce4878dc.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/TerainTex/PaintedWood008C_1K-JPG/PaintedWood008C_1K-JPG_Roughness.jpg"
-dest_files=[ "res://.import/PaintedWood008C_1K-JPG_Roughness.jpg-539b81fa81a09408fb8181c7d6edf484.s3tc.stex", "res://.import/PaintedWood008C_1K-JPG_Roughness.jpg-539b81fa81a09408fb8181c7d6edf484.etc2.stex" ]
+source_file="res://Assets/TerainTex/Fabric045_1K-JPG/Fabric045_1K-JPG_AmbientOcclusion.jpg"
+dest_files=[ "res://.import/Fabric045_1K-JPG_AmbientOcclusion.jpg-433cca806ba641e339acb376ce4878dc.s3tc.stex", "res://.import/Fabric045_1K-JPG_AmbientOcclusion.jpg-433cca806ba641e339acb376ce4878dc.etc2.stex" ]
 
 [params]
 

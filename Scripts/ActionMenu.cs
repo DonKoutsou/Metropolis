@@ -256,7 +256,7 @@ public class ActionMenu : Control
 	}
 	public void Start(Spatial obj)
 	{
-		if (TalkText.IsTalking())
+		if (pl.IsTalking)
 			return;
 		if (selecting)
             return;

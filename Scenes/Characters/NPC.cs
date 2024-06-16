@@ -23,7 +23,8 @@ public class NPC : Character
 
 	public void Idle_Timer_Ended()
 	{
-		PlayMusic();
+		if (IsInsideTree())
+			PlayMusic();
 	}
 
     public override void _Process(float delta)

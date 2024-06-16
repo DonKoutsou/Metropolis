@@ -27,6 +27,7 @@ public class Intro : Spatial
         RemoveChild(man);
         map.AddChild(man);
         pl.GetNode<RemoteTransform>("WorldParticleRemoteTransform").RemotePath = man.GetPath();
+        man.GlobalRotation = Vector3.Zero;
         PlayerCamera.GetInstance().Current = true;
         QueueFree();
     }
@@ -38,6 +39,7 @@ public class Intro : Spatial
         RemoveChild(man);
         map.AddChild(man);
         pl.GetNode<RemoteTransform>("WorldParticleRemoteTransform").RemotePath = man.GetPath();
+        man.GlobalRotation = Vector3.Zero;
         PlayerCamera.GetInstance().Current = true;
         QueueFree();
     }

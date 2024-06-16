@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Ile.png-34841414620bf1221569a615b1d3b8b7.stex"
+path="res://.import/Fabric045_1K-JPG_Displacement.jpg-07f3ce192875fb6a165da5f9c8b33794.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Ile.png"
-dest_files=[ "res://.import/Ile.png-34841414620bf1221569a615b1d3b8b7.stex" ]
+source_file="res://Assets/TerainTex/Fabric045_1K-JPG/Fabric045_1K-JPG_Displacement.jpg"
+dest_files=[ "res://.import/Fabric045_1K-JPG_Displacement.jpg-07f3ce192875fb6a165da5f9c8b33794.stex" ]
 
 [params]
 

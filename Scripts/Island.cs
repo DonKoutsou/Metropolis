@@ -665,13 +665,18 @@ public class IslandInfo
 	}
 	public void AddNewVehicle(Vehicle veh)
 	{
-		int vehammount = 0;
-		for(int i = 0; i < Vehicles.Count; i++)
+		int vehammount = Vehicles.Count;
+		List <string> names = new List<string>();
+		foreach (VehicleInfo d in Vehicles)
 		{
-			//if (!Vehicles[i].removed)
-				vehammount += 1;
+			names.Add(d.VehName);
 		}
-		veh.GetParent().Name = "Vehicle" + (vehammount + 1).ToString();
+		int add = 1;
+		while (names.Contains("Vehicle" + (vehammount * add).ToString()))
+		{
+			add ++;
+		}
+		veh.GetParent().Name = "Vehicle" + (vehammount * add).ToString();
 		VehicleInfo data = new VehicleInfo();
 		data.SetInfo(veh);
 		Vehicles.Insert(Vehicles.Count, data);

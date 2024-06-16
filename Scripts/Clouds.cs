@@ -14,4 +14,14 @@ public class Clouds : Spatial
         Vector3 org = ((Spatial)GetParent()).GlobalTranslation;
         GlobalTranslation = new Vector3 (org.x, 2100, org.z);
     }
+    public override void _EnterTree()
+    {
+        base._EnterTree();
+        GetNode<Particles>("Clouds3").Explosiveness = 1;
+        CallDeferred("ReduceExpl");
+    }
+    public void ReduceExpl()
+    {
+        GetNode<Particles>("Clouds3").Explosiveness = 0;
+    }
 }

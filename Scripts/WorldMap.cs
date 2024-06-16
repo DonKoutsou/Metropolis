@@ -233,8 +233,10 @@ public class WorldMap : TileMap
 			{
 				if (entry.Value.KeepInstance == true)
 				{
-					MyWorld.GetInstance().ToggleIsland(entry.Value, true, false);
-					MyWorld.GetInstance().ToggleIsland(entry.Value, false, false);
+					SpawnIsland(entry.Value).InputData(entry.Value);
+					
+					//MyWorld.GetInstance().ToggleIsland(entry.Value, true, false);
+					//MyWorld.GetInstance().ToggleIsland(entry.Value, false, false);
 				}
 			}
 			//((MyWorld)GetParent()).ToggleIsland(CurIle, true, true);
@@ -514,10 +516,12 @@ public class WorldMap : TileMap
 
 		EmitSignal("OnTransitionEventHandler", island);
 
-		island.AddChild(intr);
+		GetParent().AddChild(intr);
 		
-		intr.Translation = Vector3.Zero;
-		intr.GlobalRotation = Vector3.Zero;
+		intr.GlobalTranslation = island.GlobalTranslation;
+		intr.GlobalRotation = island.GlobalRotation;
+
+		intr.GetNode<WorldParticleManager>("WorldParticleManager").GlobalRotation = Vector3.Zero;
 
 		CurrentTile = new Vector2 (island.GlobalTranslation.x ,island.GlobalTranslation.z);
 		return intr;

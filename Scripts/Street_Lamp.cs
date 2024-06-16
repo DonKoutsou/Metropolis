@@ -5,11 +5,11 @@ public class Street_Lamp : StaticBody
 {
     [Export]
     bool Working = true;
-    SpotLight light;
+    Light light;
     SpatialMaterial LampMat;
     public override void _Ready()
     {
-        light = GetNode<SpotLight>("SpotLight");
+        light = GetNode<Light>("SpotLight");
         MeshInstance Lamp = GetNode<MeshInstance>("MeshInstance");
         LampMat = (SpatialMaterial)Lamp.GetActiveMaterial(0);
         DayNight dcont = DayNight.GetInstance();

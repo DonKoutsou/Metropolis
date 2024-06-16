@@ -44,10 +44,10 @@ public class Vehicle : RigidBody
     public bool Working = false;
 
     //Used to calculate steering
-    Position3D SteeringWheel;
+    Spatial SteeringWheel;
 
     ///////////Hover Rays////////////////
-    List<RayCast> Rays = new List<RayCast>();
+    List<Spatial> Rays = new List<Spatial>();
     //RayCast frontray;
     /////////////////////////////////////
     public Vector3 loctomove;
@@ -80,7 +80,7 @@ public class Vehicle : RigidBody
         FrontLight = GetNode<MeshInstance>("MeshInstance2").GetNode<SpotLight>("SpotLight");
         FrontLight.LightEnergy = 0;
         Anim = GetNode<AnimationPlayer>("AnimationPlayer");
-        SteeringWheel = GetNode<Position3D>("SteeringWheel");
+        SteeringWheel = GetNode<Spatial>("SteeringWheel");
         ExaustParticles.Insert(0, GetNode<Particles>("ExaustParticlesL"));
         ExaustParticles.Insert(1, GetNode<Particles>("ExaustParticlesR"));
         ExaustParticles.Insert(2, GetNode<Particles>("ExaustParticlesLSteer"));
@@ -92,10 +92,10 @@ public class Vehicle : RigidBody
         Spatial parent = (Spatial)GetParent();
         ZeroPos();
         //frontray = parent.GetNode<RayCast>("RayF");
-        Rays.Insert(0, parent.GetNode<RayCast>("RayFL"));
-        Rays.Insert(1, parent.GetNode<RayCast>("RayFR"));
-        Rays.Insert(2, parent.GetNode<RayCast>("RayBL"));
-        Rays.Insert(3, parent.GetNode<RayCast>("RayBR"));
+        Rays.Insert(0, GetNode<Spatial>("RemoteTransform"));
+        Rays.Insert(1, GetNode<Spatial>("RemoteTransform2"));
+        Rays.Insert(2, GetNode<Spatial>("RemoteTransform3"));
+        Rays.Insert(3, GetNode<Spatial>("RemoteTransform4"));
         //((Spatial)GetParent()).GlobalRotation = Vector3.Zero;
 
         DamageMan = GetParent().GetNode<VehicleDamageManager>("VehicleDamageManager");
@@ -310,10 +310,13 @@ public class Vehicle : RigidBody
         Vector3 f ;
         for (int i = 0; i < Rays.Count; i ++)
         {
-            
-            RayCast ray = Rays[i];
+            RemoteTransform rem = (RemoteTransform)Rays[i];
+           
+            RayCast ray = rem.GetNode<RayCast>(rem.RemotePath);
+
+            Spatial EnginePivot = ray.GetNode<Spatial>("EnginePivot");
             //ray.ForceRaycastUpdate();
-            Particles part = ray.GetNode<Particles>("Particles");
+            Particles part = EnginePivot.GetNode<Particles>("Particles");
             if (ray.IsColliding())
             {
                 var collisionpoint = ray.GetCollisionPoint();
@@ -355,6 +358,7 @@ public class Vehicle : RigidBody
 
                 //AddForce(f * forcemulti, ray.GlobalTransform.origin - GlobalTransform.origin);
             }
+            EnginePivot.Rotation = new Vector3(Mathf.Deg2Rad(Mathf.Lerp(0, 45, latsspeed /speed)), Rotation.y, 0);
             AddForce(f, ray.GlobalTranslation - GlobalTranslation);
         }
         //Balance(delta);
@@ -399,10 +403,17 @@ public class Vehicle : RigidBody
     {
         //if (SteeringWheel.GlobalTranslation.DistanceTo(loctomove) < 0.1f)
             //return;
-        if (loctomove.DistanceTo(SteeringWheel.GlobalTranslation) > 0.01f)
-            SteeringWheel.LookAt(loctomove, Vector3.Up);
-        float steer = Mathf.Rad2Deg(SteeringWheel.Rotation.y);
         
+        if (loctomove.DistanceTo(SteeringWheel.GlobalTranslation) > 0.01f)
+        {
+            Vector3 prevpos = SteeringWheel.Rotation;
+            SteeringWheel.LookAt(loctomove, Vector3.Up);
+            SteeringWheel.Rotation = new Vector3(prevpos.x, SteeringWheel.Rotation.y, prevpos.z);
+        }
+        //Vector3 dir = globalrota
+        float steer = Mathf.Rad2Deg(SteeringWheel.Rotation.y);
+        //Spatial SteerPad = GetNode<Spatial>("SteerPad");
+        //SteerPad.Rotation = new Vector3(SteerPad.Rotation.x, steer, SteerPad.Rotation.z);
 
         int mutli = - Math.Sign(steer);
 
@@ -535,7 +546,9 @@ public class Vehicle : RigidBody
     {
         for (int i = 0; i < Rays.Count; i ++)
         {
-            if (Rays[i].IsColliding())
+            RemoteTransform rem = (RemoteTransform)Rays[i];
+            RayCast ray = rem.GetNode<RayCast>(rem.RemotePath);
+            if (ray.IsColliding())
                 AddForce(Vector3.Up * (JumpForce), Rays[i].GlobalTransform.origin - GlobalTransform.origin);
         }
     }
@@ -681,7 +694,7 @@ public class Vehicle : RigidBody
         
         from.UnRegisterChild(this);
         par.RemoveChild(vehpar);
-        ile.AddChild(vehpar);
+        ile.AddChild(vehpar, true);
         ile.RegisterChild(this);
         vehpar.Translation = Vector3.Zero;
         vehpar.Rotation = Vector3.Zero;

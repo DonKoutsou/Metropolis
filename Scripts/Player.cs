@@ -73,6 +73,15 @@ public class Player : Character
 			PlayMusic();
 		}
 	}
+	public override void OnSongEnded(Instrument inst)
+	{
+		//IdleTimer.Start();
+		inst.Disconnect("OnSongEnded", this, "OnSongEnded");
+		StopMusic();
+		PlayMusic();
+		//instatatchment.GetNode<RemoteTransform>("PlayingAtatchment").ForceUpdateCache(); 
+
+	}
 	private void UpdateMoveLocation()
 	{
 		if (IsTalking)

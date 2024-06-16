@@ -21,11 +21,14 @@ public class Inventory : Spatial
     float currentweight = 0;
     InventoryUI ui;
 
+    Character CharacterOwner;
+
     public override void _Ready()
     {
         ui = InventoryUI.GetInstance();
         ui.CallDeferred("OnPlayerSpawned", (Player)GetParent());
         InventoryContents = new List<Item>();
+        CharacterOwner = (Character)GetParent();
         if (StartingItems == null)
             return;
         for (int i = 0; i < StartingItems.Count(); i ++)
@@ -95,23 +98,27 @@ public class Inventory : Spatial
         {
             return false;
         }
-        if (item is Instrument)
+        if (item is Instrument && !CharacterOwner.HasInstrument())
         {
             var instparent = item.GetParent();
             if (instparent != null)
                 instparent.RemoveChild(item);
-            ((Character)GetParent()).AddInstrument((Instrument)item);
+            CharacterOwner.AddInstrument((Instrument)item);
             return true;
         }
-        InventoryContents.Insert(InventoryContents.Count, item);
-        currentweight += item.GetInventoryWeight();
-        var parent = item.GetParent();
-        if (parent != null)
-            parent.RemoveChild(item);
-        AddChild(item);
-        item.Hide();
+        else
+        {
+            currentweight += item.GetInventoryWeight();
+            var parent = item.GetParent();
+            if (parent != null)
+                parent.RemoveChild(item);
+            AddChild(item);
+            item.Hide();
+            item.GetNode<CollisionShape>("CollisionShape").SetDeferred("disabled",true);
+        }
+        InventoryContents.Add(item);
         //EmitSignal(nameof(On_Item_Added), item);
-        item.GetNode<CollisionShape>("CollisionShape").SetDeferred("disabled",true);
+        
         //ui.UpdateInventory();
         return true;
     }
@@ -119,8 +126,12 @@ public class Inventory : Spatial
     {
         InventoryContents.Remove(item);
         currentweight -= item.GetInventoryWeight();
-
-        RemoveChild(item);
+        if (item is Instrument && ((Instrument)item).IsPlaying())
+            CharacterOwner.StopMusic();
+           
+        
+        item.GetParent().RemoveChild(item);
+        
         IslandInfo info = WorldMap.GetInstance().GetCurrentIleInfo();
         Island ile = info.Island;
         ile.AddChild(item);
@@ -165,8 +176,10 @@ public class Inventory : Spatial
         Items = new List<Item>();
         for (int i = InventoryContents.Count() - 1; i > -1; i--)
         {
-            Items.Insert(Items.Count(), InventoryContents[i]);
+            Items.Add(InventoryContents[i]);
         }
+        if (CharacterOwner.HasInstrument())
+            Items.Add(CharacterOwner.GetInstrument());
     }
     public void GetItemsByType(out List<Item> Items, ItemName Type)
     {
@@ -174,7 +187,7 @@ public class Inventory : Spatial
         for (int i = 0; i < InventoryContents.Count; i++)
         {
             if (InventoryContents[i].GetItemType() == (int)Type)
-                Items.Insert(Items.Count(), InventoryContents[i]);
+                Items.Add(InventoryContents[i]);
         }
     }
     public float GetAvailableCapacity()

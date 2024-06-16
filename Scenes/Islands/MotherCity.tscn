@@ -476,7 +476,7 @@ physics_material_override = SubResource( 3 )
 transform = Transform( 0.072246, 0, 0.997387, -0.679796, 0.731746, 0.0492412, -0.729834, -0.681577, 0.0528657, -419.853, 74.3224, 1898.78 )
 
 [node name="SpawnPosition" type="Position3D" parent="." index="3"]
-transform = Transform( -0.557528, 4.79616e-12, 0.830158, 0, 1, -1.45519e-11, -0.830158, -5.82077e-11, -0.557528, -16.9018, 7.23675, 2333.55 )
+transform = Transform( 0.798762, 1.45411e-11, -0.601647, 0, 1, -1.45519e-11, 0.601647, 5.65658e-11, 0.798762, -196.201, 14.8514, -3694.03 )
 script = ExtResource( 1 )
 
 [node name="Buildings" type="Spatial" parent="." index="4"]
@@ -710,7 +710,7 @@ transform = Transform( 0.999999, 1.21403e-10, 2.58675e-07, 1.31188e-10, 0.999999
 transform = Transform( 0.642785, -0.000138828, 0.766041, 0.000328425, 0.999996, -9.43723e-05, -0.766041, 0.000312244, 0.642785, -202.261, 8.98192, -3687.53 )
 
 [node name="Bench5" parent="Clutter" index="26" instance=ExtResource( 34 )]
-transform = Transform( 0.999997, 1.21453e-10, 2.58675e-07, 1.31017e-10, 0.999997, 1.22236e-09, -2.48227e-07, -1.42609e-09, 0.999997, -203.161, 6.09662, -3520.09 )
+transform = Transform( 0.999997, 1.21453e-10, 2.58675e-07, 1.31017e-10, 0.999997, 1.22236e-09, -2.48227e-07, -1.42609e-09, 0.999997, -203.161, 6.499, -3520.09 )
 
 [node name="Bench2" parent="Clutter" index="27" instance=ExtResource( 34 )]
 transform = Transform( 2.64059e-07, 0.000570376, -0.999999, -3.9563e-05, 0.999998, 0.000570375, 0.999997, 3.95888e-05, 3.18862e-07, -37.1799, 0.894777, 2344.79 )
@@ -1146,67 +1146,64 @@ transform = Transform( 48.5115, -0.0182824, 0.00922182, -0.00513663, 2.95173, -2
 [node name="StaticBody6" parent="Clutter" index="43" instance=ExtResource( 39 )]
 transform = Transform( 1.73561e-05, -4.05684e-07, 0.999997, 0.0233678, 0.999724, 0, -0.999727, 0.0233678, 1.73608e-05, 26.8787, 8.02261, 2343.1 )
 
-[node name="StaticBody5" parent="Clutter" index="44" instance=ExtResource( 33 )]
-transform = Transform( 0.999999, 4.88143e-12, 0, -2.65032e-12, 0.999999, 3.20142e-10, 0, -3.20142e-10, 0.999999, -203.708, 7.23925, -3556.85 )
-
-[node name="StaticBody2" parent="Clutter" index="45" instance=ExtResource( 2 )]
+[node name="StaticBody2" parent="Clutter" index="44" instance=ExtResource( 2 )]
 transform = Transform( 3.76313e-08, -3.95895e-05, 0.999999, 0.000570376, 0.999999, 3.95634e-05, -0.999999, 0.000570375, 3.84753e-08, -37.9483, -1.76955, 2352.74 )
 
-[node name="StaticBody11" parent="Clutter" index="46" instance=ExtResource( 2 )]
+[node name="StaticBody11" parent="Clutter" index="45" instance=ExtResource( 2 )]
 transform = Transform( -0.999998, 0.000530786, 7.47968e-08, 0.000530812, 0.999998, 0.000609939, 2.49274e-07, 0.000609965, -0.999998, -189.553, 5.31096, -3519.94 )
 
-[node name="StaticBody12" parent="Clutter" index="47" instance=ExtResource( 2 )]
+[node name="StaticBody12" parent="Clutter" index="46" instance=ExtResource( 2 )]
 transform = Transform( -0.999998, 0.000530786, 7.47968e-08, 0.000530812, 0.999998, 0.000609939, 2.49245e-07, 0.000609965, -0.999998, -160.739, 5.30331, -3519.93 )
 
-[node name="StaticBody13" parent="Clutter" index="48" instance=ExtResource( 2 )]
+[node name="StaticBody13" parent="Clutter" index="47" instance=ExtResource( 2 )]
 transform = Transform( -0.999998, 0.000530786, 7.47968e-08, 0.000530812, 0.999997, 0.000609939, 2.49245e-07, 0.000609965, -0.999998, -133.321, 5.29603, -3519.92 )
 
-[node name="StaticBody14" parent="Clutter" index="49" instance=ExtResource( 2 )]
+[node name="StaticBody14" parent="Clutter" index="48" instance=ExtResource( 2 )]
 transform = Transform( -0.999998, 0.000530786, 7.48259e-08, 0.000530812, 0.999997, 0.000609939, 2.49216e-07, 0.000609965, -0.999998, -101.526, 5.28759, -3519.91 )
 
-[node name="StaticBody15" parent="Clutter" index="50" instance=ExtResource( 2 )]
+[node name="StaticBody15" parent="Clutter" index="49" instance=ExtResource( 2 )]
 transform = Transform( -0.999998, 0.000530786, 7.48259e-08, 0.000530812, 0.999997, 0.000609939, 2.49187e-07, 0.000609965, -0.999998, -76.8273, 5.28103, -3519.9 )
 
-[node name="StaticBody16" parent="Clutter" index="51" instance=ExtResource( 2 )]
+[node name="StaticBody16" parent="Clutter" index="50" instance=ExtResource( 2 )]
 transform = Transform( -0.999998, 0.000530786, 7.48259e-08, 0.000530812, 0.999997, 0.000609939, 2.49158e-07, 0.000609965, -0.999997, -53.9151, 5.27494, -3519.89 )
 
-[node name="StaticBody17" parent="Clutter" index="52" instance=ExtResource( 2 )]
+[node name="StaticBody17" parent="Clutter" index="51" instance=ExtResource( 2 )]
 transform = Transform( -6.33299e-08, -3.95909e-05, 0.999997, 0.000570375, 0.999996, 3.9563e-05, -0.999997, 0.000570375, -7.29633e-08, -236.835, 5.32765, -3533.51 )
 
-[node name="StaticBody18" parent="Clutter" index="53" instance=ExtResource( 2 )]
+[node name="StaticBody18" parent="Clutter" index="52" instance=ExtResource( 2 )]
 transform = Transform( -6.33299e-08, -3.95909e-05, 0.999997, 0.000570375, 0.999996, 3.9563e-05, -0.999997, 0.000570375, -7.29051e-08, -236.827, 5.33487, -3557.21 )
 
-[node name="StaticBody19" parent="Clutter" index="54" instance=ExtResource( 2 )]
+[node name="StaticBody19" parent="Clutter" index="53" instance=ExtResource( 2 )]
 transform = Transform( -6.33299e-08, -3.95909e-05, 0.999997, 0.000570375, 0.999996, 3.9563e-05, -0.999997, 0.000570375, -7.28469e-08, -236.818, 5.34312, -3584.27 )
 
-[node name="StaticBody20" parent="Clutter" index="55" instance=ExtResource( 2 )]
+[node name="StaticBody20" parent="Clutter" index="54" instance=ExtResource( 2 )]
 transform = Transform( -6.33299e-08, -3.95909e-05, 0.999997, 0.000570375, 0.999996, 3.9563e-05, -0.999997, 0.000570375, -7.27887e-08, -236.81, 5.35053, -3608.58 )
 
-[node name="StaticBody21" parent="Clutter" index="56" instance=ExtResource( 2 )]
+[node name="StaticBody21" parent="Clutter" index="55" instance=ExtResource( 2 )]
 transform = Transform( -6.33299e-08, -3.95909e-05, 0.999997, 0.000570375, 0.999996, 3.9563e-05, -0.999997, 0.000570375, -7.27305e-08, -236.798, 5.36172, -3645.27 )
 
-[node name="StaticBody22" parent="Clutter" index="57" instance=ExtResource( 2 )]
+[node name="StaticBody22" parent="Clutter" index="56" instance=ExtResource( 2 )]
 transform = Transform( -6.33299e-08, -3.9591e-05, 0.999996, 0.000570375, 0.999995, 3.9563e-05, -0.999997, 0.000570375, -7.26723e-08, -236.789, 5.36979, -3671.74 )
 
-[node name="StaticBody23" parent="Clutter" index="58" instance=ExtResource( 2 )]
+[node name="StaticBody23" parent="Clutter" index="57" instance=ExtResource( 2 )]
 transform = Transform( -6.33299e-08, -3.9591e-05, 0.999996, 0.000570375, 0.999995, 3.9563e-05, -0.999997, 0.000570375, -7.2585e-08, -236.778, 5.37948, -3703.51 )
 
-[node name="StaticBody3" parent="Clutter" index="59" instance=ExtResource( 2 )]
+[node name="StaticBody3" parent="Clutter" index="58" instance=ExtResource( 2 )]
 transform = Transform( 3.76313e-08, -3.95895e-05, 0.999999, 0.000570376, 0.999998, 3.95634e-05, -0.999998, 0.000570375, 3.85917e-08, -37.9361, -0.616674, 2317.12 )
 
-[node name="StaticBody4" parent="Clutter" index="60" instance=ExtResource( 2 )]
+[node name="StaticBody4" parent="Clutter" index="59" instance=ExtResource( 2 )]
 transform = Transform( -0.819881, 0.000308372, 0.572532, 0.000657613, 0.999998, 0.000403055, -0.572531, 0.000706978, -0.819881, -37.9541, -1.77491, 2370.33 )
 
-[node name="StaticBody7" parent="Clutter" index="61" instance=ExtResource( 2 )]
+[node name="StaticBody7" parent="Clutter" index="60" instance=ExtResource( 2 )]
 transform = Transform( -0.999998, 0.000530786, 1.56229e-07, 0.000530813, 0.999998, 0.00060994, 1.72149e-07, 0.000609964, -0.999999, -6.94605, -1.78314, 2370.34 )
 
-[node name="StaticBody8" parent="Clutter" index="62" instance=ExtResource( 2 )]
+[node name="StaticBody8" parent="Clutter" index="61" instance=ExtResource( 2 )]
 transform = Transform( -0.999998, 0.000530786, 1.56229e-07, 0.000530813, 0.999997, 0.00060994, 1.7212e-07, 0.000609964, -0.999998, 14.5604, -1.78885, 2370.35 )
 
-[node name="StaticBody9" parent="Clutter" index="63" instance=ExtResource( 2 )]
+[node name="StaticBody9" parent="Clutter" index="62" instance=ExtResource( 2 )]
 transform = Transform( -0.999998, 0.000530786, 1.56229e-07, 0.000530813, 0.999997, 0.00060994, 1.72091e-07, 0.000609964, -0.999998, 38.6767, -1.79526, 2370.36 )
 
-[node name="StaticBody10" parent="Clutter" index="64" instance=ExtResource( 2 )]
+[node name="StaticBody10" parent="Clutter" index="63" instance=ExtResource( 2 )]
 transform = Transform( -0.0871555, 0.000592346, -0.996193, -1.52709e-05, 0.999997, 0.000595946, 0.996193, 6.71787e-05, -0.0871555, 38.6841, -1.78851, 2348.23 )
 
 [node name="Characters" type="Spatial" parent="." index="6"]
@@ -1231,7 +1228,8 @@ transform = Transform( 0.949215, 0.000109431, -0.314621, -8.24728e-05, 0.999997,
 PlayInstrument = true
 
 [node name="Character5" parent="Characters" index="4" instance=ExtResource( 23 )]
-transform = Transform( 0.440344, -0.000125293, 0.897824, 0.000422343, 0.999994, -6.76097e-05, -0.897824, 0.000408961, 0.440344, -206.784, 6.46647, -3529.37 )
+transform = Transform( 0.99846, -0.000425444, -0.055385, 0.000422343, 0.999994, -6.76097e-05, 0.055385, 4.40972e-05, 0.99846, -204.943, 8.32078, -3520.16 )
+Chair = NodePath("../../Clutter/Bench5")
 
 [node name="Character6" parent="Characters" index="5" instance=ExtResource( 23 )]
 transform = Transform( 0.440344, -0.000125293, 0.897823, 0.000422343, 0.999993, -6.76096e-05, -0.897824, 0.000408961, 0.440344, -202.476, 11.4266, -3687.82 )
@@ -1239,6 +1237,7 @@ Chair = NodePath("../../Clutter/Chair4")
 
 [node name="Character7" parent="Characters" index="6" instance=ExtResource( 23 )]
 transform = Transform( 0.650294, 0.000324495, -0.759676, -0.000138867, 0.999993, 0.000308274, 0.759675, -9.49619e-05, 0.650295, -73.4766, 43.3796, -3631.58 )
+PlayInstrument = true
 
 [node name="MotherCity" parent="." index="7" instance=ExtResource( 9 )]
 transform = Transform( 1, 4.85301e-12, 0, -2.66454e-12, 1, 2.61934e-10, 0, -2.61934e-10, 1, 0.00153928, 5.8, 0.0017689 )
@@ -1475,7 +1474,13 @@ transform = Transform( -0.0895723, 0, -0.99598, 0, 1, 0, 0.99598, 0, -0.0895723,
 transform = Transform( 0.0581107, 0.00102963, -0.998309, 0.000666553, 0.999999, 0.00107017, 0.99831, -0.000727605, 0.0581099, 25.4732, 0.00169277, 2383.4 )
 
 [node name="Vehicle3" parent="." index="16" instance=ExtResource( 20 )]
-transform = Transform( 0.947861, -0.000972836, 0.318683, 0.000666553, 0.999999, 0.00107017, -0.318684, -0.000801955, 0.94786, -53.749, 0.00169277, 2354.1 )
+transform = Transform( 0.999686, -0.000693141, 0.0250484, 0.000666553, 0.999999, 0.00107017, -0.0250491, -0.00105314, 0.999685, -250.147, 0.927559, -3538.21 )
+
+[node name="Vehicle4" parent="." index="17" instance=ExtResource( 20 )]
+transform = Transform( 0.999686, -0.000693141, 0.0250484, 0.000666553, 0.999999, 0.00107017, -0.0250491, -0.00105314, 0.999685, -251.007, 0.927559, -3629.82 )
+
+[node name="Vehicle5" parent="." index="18" instance=ExtResource( 20 )]
+transform = Transform( 0.999686, -0.000693141, 0.0250484, 0.000666553, 0.999999, 0.00107017, -0.0250491, -0.00105314, 0.999685, -251.007, 0.927559, -3589.74 )
 
 [connection signal="curve_changed" from="Clutter/Road" to="Clutter/Road" method="OnCurveChanged"]
 [connection signal="curve_changed" from="Clutter/Road2" to="Clutter/Road2" method="OnCurveChanged"]
