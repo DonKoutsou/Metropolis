@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Assets/Building/House_Ext.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Building/House_Int.obj" type="ArrayMesh" id=2]
@@ -27,11 +27,6 @@ polygon_points = PoolVector2Array( 10, 4, 10, 16, -10, 16, -10, 4 )
 
 [sub_resource type="OccluderShapePolygon" id=4]
 polygon_points = PoolVector2Array( -2, 4, -2, 12, -10, 12, -10, 4 )
-
-[sub_resource type="PlaneMesh" id=6]
-
-[sub_resource type="SpatialMaterial" id=7]
-albedo_color = Color( 0, 0, 0, 1 )
 
 [node name="House" type="Spatial" groups=["Clutter"]]
 script = ExtResource( 5 )
@@ -109,11 +104,6 @@ shape = SubResource( 4 )
 [node name="Occluder6" type="Occluder" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -0.738614, 10 )
 shape = SubResource( 4 )
-
-[node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 25.8095, 0, 0, 0, 25.8095, 0, 0, 0, 25.8095, 0, 0, 0 )
-mesh = SubResource( 6 )
-material/0 = SubResource( 7 )
 
 [connection signal="body_entered" from="HouseDoor" to="." method="Entered"]
 [connection signal="body_exited" from="HouseDoor" to="." method="Left"]

@@ -27,8 +27,13 @@ public class Inventory : Spatial
     {
         ui = InventoryUI.GetInstance();
         ui.CallDeferred("OnPlayerSpawned", (Player)GetParent());
+        
         InventoryContents = new List<Item>();
         CharacterOwner = (Character)GetParent();
+        CharacterOwner.ToggleLimb(LimbType.ARM_L, false);
+        CharacterOwner.ToggleLimb(LimbType.ARM_R, false);
+        CharacterOwner.ToggleLimb(LimbType.LEG_L, false);
+        CharacterOwner.ToggleLimb(LimbType.LEG_R, false);
         if (StartingItems == null)
             return;
         for (int i = 0; i < StartingItems.Count(); i ++)
@@ -98,20 +103,24 @@ public class Inventory : Spatial
         {
             return false;
         }
+        var parent = item.GetParent();
+        if (parent != null)
+            parent.RemoveChild(item);
+        currentweight += item.GetInventoryWeight();
         if (item is Instrument && !CharacterOwner.HasInstrument())
         {
-            var instparent = item.GetParent();
-            if (instparent != null)
-                instparent.RemoveChild(item);
             CharacterOwner.AddInstrument((Instrument)item);
             return true;
         }
         else
         {
-            currentweight += item.GetInventoryWeight();
-            var parent = item.GetParent();
-            if (parent != null)
-                parent.RemoveChild(item);
+            if (item is Limb && !CharacterOwner.HasLimbOfType(((Limb)item).GetLimbType()))
+            {
+                Limb limb = (Limb)item;
+                CharacterOwner.ToggleLimb(limb.GetLimbType(), true);
+                limb.Equiped = true;
+            }
+                
             AddChild(item);
             item.Hide();
             item.GetNode<CollisionShape>("CollisionShape").SetDeferred("disabled",true);
@@ -129,7 +138,12 @@ public class Inventory : Spatial
         if (item is Instrument && ((Instrument)item).IsPlaying())
             CharacterOwner.StopMusic();
            
-        
+        if (item is Limb && ((Limb)item).Equiped)
+        {
+            Limb limb = (Limb)item;
+            CharacterOwner.ToggleLimb(limb.GetLimbType(), false);
+            limb.Equiped = false;
+        }
         item.GetParent().RemoveChild(item);
         
         IslandInfo info = WorldMap.GetInstance().GetCurrentIleInfo();

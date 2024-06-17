@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Security.Cryptography.X509Certificates;
 public class Character : KinematicBody
 {
@@ -357,6 +358,15 @@ public class Character : KinematicBody
 		//inst.Owner = Owner;
 		
 	}
+	public bool HasLimbOfType(LimbType type)
+	{
+		return GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>(LimbTranslator.EnumToString(type)).Visible;
+	}
+	public void ToggleLimb(LimbType limb, bool toggle)
+	{
+		GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>(LimbTranslator.EnumToString(limb)).Visible = toggle;
+	}
+
 	public virtual void OnSongEnded(Instrument inst)
 	{
 		//IdleTimer.Start();

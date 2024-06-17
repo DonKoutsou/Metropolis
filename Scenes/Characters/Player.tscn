@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/HUD/SplashScreenPanelTheme.tres" type="StyleBox" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://Scripts/CityNameUI.cs" type="Script" id=5]
 [ext_resource path="res://Scenes/HUD/CompassUi.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Inventory/Inventory.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Items/FastLeg_L.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Items/FastLeg_R.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scripts/CameraZoomPivot.cs" type="Script" id=12]
 [ext_resource path="res://Scripts/PlayerUI.cs" type="Script" id=13]
 [ext_resource path="res://Scripts/CameraPanPivot.cs" type="Script" id=14]
@@ -432,7 +434,7 @@ shape = SubResource( 92 )
 
 [node name="Inventory" parent="." instance=ExtResource( 7 )]
 Capacity = 40.0
-StartingItems = [ ExtResource( 25 ), ExtResource( 27 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 33 ), ExtResource( 34 ) ]
+StartingItems = [ ExtResource( 25 ), ExtResource( 27 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 8 ), ExtResource( 9 ) ]
 
 [node name="PlayerUI" type="Spatial" parent="."]
 script = ExtResource( 13 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Assets/TerainTest/new_arraymesh2.tres" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Building/BuildingDust3.tscn" type="PackedScene" id=2]
@@ -19,6 +19,8 @@
 [ext_resource path="res://Assets/Building/SkyscraperMesh.tres" type="CubeMesh" id=17]
 [ext_resource path="res://Scenes/Env_Assets/House.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Assets/Building/MultistoryBuildingExterior.material" type="Material" id=19]
+[ext_resource path="res://Scenes/Env_Assets/Stick.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Scenes/Env_Assets/WindGenerator2.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Scenes/Env_Assets/Rock2.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Scenes/Env_Assets/Rock3.tscn" type="PackedScene" id=24]
 
@@ -335,3 +337,21 @@ transform = Transform( 1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, -117
 visible = false
 mesh = ExtResource( 17 )
 material/0 = ExtResource( 19 )
+
+[node name="Stick" parent="." index="7" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2116.58, -4.11366, 1974.26 )
+
+[node name="Stick2" parent="." index="8" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2941.97, -4.11366, -463.706 )
+
+[node name="Stick3" parent="." index="9" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -494.714, -4.11366, -3953.27 )
+
+[node name="Stick4" parent="." index="10" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2991.44, -4.11366, -2811.33 )
+
+[node name="WindGenerator" parent="." index="11" instance=ExtResource( 21 )]
+transform = Transform( 30, 0, 0, 0, 30, 0, 0, 0, 30, 2145.57, -4.11378, 1268.11 )
+
+[node name="Stick6" parent="." index="12" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -361.786, -314.126, 3888.91 )

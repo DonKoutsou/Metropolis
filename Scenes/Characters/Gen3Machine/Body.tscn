@@ -138,7 +138,6 @@ albedo_texture = ExtResource( 9 )
 material = SubResource( 61 )
 
 [node name="Gen3Machine" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="Armature" parent="." index="0"]
 transform = Transform( 0.024, 0, 0, 0, 0.024, 6.77112e-09, 0, -6.77112e-09, 0.024, 0, 0, 0 )
@@ -146,29 +145,29 @@ transform = Transform( 0.024, 0, 0, 0, 0.024, 6.77112e-09, 0, -6.77112e-09, 0.02
 [node name="Skeleton" parent="Armature" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 5.68434e-14, 0, -2.84217e-14, 1, -0.314196, 5.03759e-08, -0.178556 )
 
-[node name="Arms" parent="Armature/Skeleton" index="0"]
+[node name="Arm_L" parent="Armature/Skeleton" index="0"]
 material/0 = ExtResource( 3 )
 
-[node name="Body" parent="Armature/Skeleton" index="1"]
+[node name="Arm_R" parent="Armature/Skeleton" index="1"]
+material/0 = ExtResource( 3 )
+
+[node name="Body" parent="Armature/Skeleton" index="2"]
 material/0 = ExtResource( 4 )
 
-[node name="eyes" parent="Armature/Skeleton" index="2"]
+[node name="eyes" parent="Armature/Skeleton" index="3"]
 material/0 = ExtResource( 8 )
 
-[node name="Face" parent="Armature/Skeleton" index="3"]
+[node name="Face" parent="Armature/Skeleton" index="4"]
 material/0 = ExtResource( 5 )
 
-[node name="LegsBot" parent="Armature/Skeleton" index="4"]
+[node name="Leg_L" parent="Armature/Skeleton" index="5"]
 material/0 = ExtResource( 1 )
 
-[node name="LegsTop" parent="Armature/Skeleton" index="5"]
+[node name="Leg_R" parent="Armature/Skeleton" index="6"]
 material/0 = ExtResource( 1 )
-
-[node name="LegsUpper" parent="Armature/Skeleton" index="6"]
-material/0 = ExtResource( 4 )
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton" index="7"]
-transform = Transform( 0.997374, -0.0638846, -0.034122, 0.0591554, 0.990375, -0.125129, 0.0417875, 0.122782, 0.991553, -2.2898, 265.283, 12.4086 )
+transform = Transform( 0.997692, -0.0560442, -0.0383201, 0.0506371, 0.990237, -0.129874, 0.0452246, 0.127634, 0.990789, -0.438736, 265.477, 10.6203 )
 bone_name = "mixamorig_Head"
 
 [node name="HeadPivot" type="Spatial" parent="Armature/Skeleton/BoneAttachment" index="0"]
@@ -195,7 +194,7 @@ spot_angle = 47.5769
 spot_angle_attenuation = 0.25
 
 [node name="InstrumentAtatchment" type="BoneAttachment" parent="Armature/Skeleton" index="8"]
-transform = Transform( 0.998146, -0.0265816, -0.0547574, 0.0247883, 0.999142, -0.0331724, 0.0555923, 0.0317536, 0.997948, 0.769358, 213.177, 0.0486363 )
+transform = Transform( 0.997631, -0.0153186, -0.0670577, 0.0135928, 0.999566, -0.0261172, 0.0674287, 0.0251439, 0.997407, 2.15578, 213.221, -1.29225 )
 bone_name = "mixamorig_Spine1"
 
 [node name="PlayingAtatchment" type="RemoteTransform" parent="Armature/Skeleton/InstrumentAtatchment" index="0"]
@@ -210,7 +209,10 @@ use_global_coordinates = false
 update_scale = false
 
 [node name="Instrument" type="Spatial" parent="Armature/Skeleton/InstrumentAtatchment" index="2"]
-transform = Transform( -38.0157, 16.5795, -2.31542, 16.5302, 38.0858, 1.30515, 2.63621, 0.272264, -41.5737, -28.9433, -40.8903, -22.553 )
+transform = Transform( -38.0157, 16.5795, -2.31543, 16.5302, 38.0858, 1.30515, 2.63621, 0.272265, -41.5737, -28.9433, -40.8903, -22.553 )
+
+[node name="LegsUpper" parent="Armature/Skeleton" index="9"]
+material/0 = ExtResource( 4 )
 
 [node name="CharacterSoundManager" type="Spatial" parent="." index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.63771, 0 )

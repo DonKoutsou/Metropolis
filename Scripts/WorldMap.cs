@@ -22,7 +22,7 @@ public class WorldMap : TileMap
 	public PackedScene Exittospawn;
 
 	[Export]
-	public PackedScene Sea;
+	public PackedScene[] SeaVariations;
 
 	[Export]
 	public PackedScene LightHouse;
@@ -782,7 +782,8 @@ public class WorldMap : TileMap
 			}
 			case 3:
 			{
-				scene =  Sea;
+				scene =  SeaVariations[random.Next(0, SeaVariations.Count())];
+				RandomTimes++;
 				SpecialName = "Νησί";
 				break;
 			}

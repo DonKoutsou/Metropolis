@@ -1,4 +1,4 @@
-[gd_scene load_steps=125 format=2]
+[gd_scene load_steps=126 format=2]
 
 [ext_resource path="res://Scripts/SpawnPosition.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Env_Assets/PortRopething.tscn" type="PackedScene" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://Scenes/Env_Assets/Barrels/Barrel1.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Scenes/Triggers/CityNameTrigger.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Scenes/Vehicles/HoverBoard_NoWings.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Scenes/Env_Assets/WindGenerator2.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Scenes/Env_Assets/Barrels/Barrel2.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Scenes/Characters/NPC.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Scenes/Env_Assets/Rock5.tscn" type="PackedScene" id=24]
@@ -1481,6 +1482,9 @@ transform = Transform( 0.999686, -0.000693141, 0.0250484, 0.000666553, 0.999999,
 
 [node name="Vehicle5" parent="." index="18" instance=ExtResource( 20 )]
 transform = Transform( 0.999686, -0.000693141, 0.0250484, 0.000666553, 0.999999, 0.00107017, -0.0250491, -0.00105314, 0.999685, -251.007, 0.927559, -3589.74 )
+
+[node name="WindGenerator12" parent="." index="19" instance=ExtResource( 21 )]
+transform = Transform( 30, 0, 0, 0, 30, 0, 0, 0, 30, 3255.76, -393.955, -3630 )
 
 [connection signal="curve_changed" from="Clutter/Road" to="Clutter/Road" method="OnCurveChanged"]
 [connection signal="curve_changed" from="Clutter/Road2" to="Clutter/Road2" method="OnCurveChanged"]
