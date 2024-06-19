@@ -341,17 +341,11 @@ material/0 = ExtResource( 19 )
 [node name="Stick" parent="." index="7" instance=ExtResource( 20 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2116.58, -4.11366, 1974.26 )
 
-[node name="Stick2" parent="." index="8" instance=ExtResource( 20 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2941.97, -4.11366, -463.706 )
+[node name="Stick4" parent="." index="8" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1502.61, -4.11378, -1931.94 )
 
-[node name="Stick3" parent="." index="9" instance=ExtResource( 20 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -494.714, -4.11366, -3953.27 )
-
-[node name="Stick4" parent="." index="10" instance=ExtResource( 20 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2991.44, -4.11366, -2811.33 )
-
-[node name="WindGenerator" parent="." index="11" instance=ExtResource( 21 )]
+[node name="WindGenerator" parent="." index="9" instance=ExtResource( 21 )]
 transform = Transform( 30, 0, 0, 0, 30, 0, 0, 0, 30, 2145.57, -4.11378, 1268.11 )
 
-[node name="Stick6" parent="." index="12" instance=ExtResource( 20 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -361.786, -314.126, 3888.91 )
+[node name="Stick6" parent="." index="10" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -314.17, -314.126, 2699.75 )

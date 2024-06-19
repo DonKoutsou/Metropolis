@@ -11,8 +11,8 @@ uv1_triplanar = true
 [sub_resource type="CylinderMesh" id=1]
 material = SubResource( 2 )
 top_radius = 100.0
-bottom_radius = 100.0
-height = 15000.0
+bottom_radius = 150.0
+height = 50000.0
 
 [sub_resource type="CylinderShape" id=3]
 height = 15000.0

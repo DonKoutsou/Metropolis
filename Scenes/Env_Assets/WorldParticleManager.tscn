@@ -24,6 +24,7 @@ _data = [ Vector2( 0, -50 ), 0.0, 0.0, 0, 0, Vector2( 1, 69.65 ), 0.0, 0.0, 0, 0
 [sub_resource type="SpatialMaterial" id=2]
 flags_transparent = true
 flags_unshaded = true
+flags_do_not_receive_shadows = true
 params_cull_mode = 2
 params_billboard_mode = 3
 particles_anim_h_frames = 1
@@ -44,7 +45,7 @@ initial_velocity = 174.26
 angular_velocity = 553.85
 linear_accel = 98.3
 radial_accel = 100.0
-scale = 0.5
+scale = 0.8
 
 [sub_resource type="QuadMesh" id=3]
 
