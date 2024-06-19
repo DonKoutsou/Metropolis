@@ -143,11 +143,11 @@ public class Vehicle : RigidBody
         float engineforce = latsspeed / 500000;
         ((ParticlesMaterial)ExaustParticles[0].ProcessMaterial).Scale = engineforce * 5;
         ((ParticlesMaterial)ExaustParticles[0].ProcessMaterial).InitialVelocity = engineforce * 60 + 5;
-        ExaustParticles[0].GetNode<AudioStreamPlayer3D>("EngineSound").UnitDb = engineforce * 15;
+        //ExaustParticles[0].GetNode<AudioStreamPlayer3D>("EngineSound").UnitDb = engineforce * 15;
         ExaustParticles[0].GetNode<AudioStreamPlayer3D>("EngineSound").PitchScale = engineforce * 0.1f + 0.2f;
         ((ParticlesMaterial)ExaustParticles[1].ProcessMaterial).Scale = engineforce * 5;
         ((ParticlesMaterial)ExaustParticles[1].ProcessMaterial).InitialVelocity = engineforce * 60 + 5;
-        ExaustParticles[1].GetNode<AudioStreamPlayer3D>("EngineSound").UnitDb = engineforce * 15;
+        //ExaustParticles[1].GetNode<AudioStreamPlayer3D>("EngineSound").UnitDb = engineforce * 15;
         ExaustParticles[1].GetNode<AudioStreamPlayer3D>("EngineSound").PitchScale = engineforce * 0.1f + 0.2f;
     }
     public override void _PhysicsProcess(float delta)
@@ -441,28 +441,28 @@ public class Vehicle : RigidBody
         {
             ((ParticlesMaterial)ExaustParticles[3].ProcessMaterial).Scale = steeramm * 5;
             ((ParticlesMaterial)ExaustParticles[3].ProcessMaterial).InitialVelocity = steeramm* 60 + 5;
-            ExaustParticles[3].GetNode<AudioStreamPlayer3D>("EngineSound").UnitDb = steeramm * 15;
+            //ExaustParticles[3].GetNode<AudioStreamPlayer3D>("EngineSound").UnitDb = steeramm * 15;
             ((ParticlesMaterial)ExaustParticles[2].ProcessMaterial).Scale = 0;
             ((ParticlesMaterial)ExaustParticles[2].ProcessMaterial).InitialVelocity = 5;
-            ExaustParticles[2].GetNode<AudioStreamPlayer3D>("EngineSound").UnitDb = 0;
+            //ExaustParticles[2].GetNode<AudioStreamPlayer3D>("EngineSound").UnitDb = 0;
         }
         else if (steeramm < 0)
         {
             ((ParticlesMaterial)ExaustParticles[2].ProcessMaterial).Scale = Mathf.Abs(steeramm) * 5;
             ((ParticlesMaterial)ExaustParticles[2].ProcessMaterial).InitialVelocity = Mathf.Abs(steeramm) * 60 + 5;
-            ExaustParticles[2].GetNode<AudioStreamPlayer3D>("EngineSound").UnitDb = Mathf.Abs(steeramm) * 15;
+            //ExaustParticles[2].GetNode<AudioStreamPlayer3D>("EngineSound").UnitDb = Mathf.Abs(steeramm) * 15;
             ((ParticlesMaterial)ExaustParticles[3].ProcessMaterial).Scale = 0;
             ((ParticlesMaterial)ExaustParticles[3].ProcessMaterial).InitialVelocity = 5;
-            ExaustParticles[3].GetNode<AudioStreamPlayer3D>("EngineSound").UnitDb = 0;
+            //ExaustParticles[3].GetNode<AudioStreamPlayer3D>("EngineSound").UnitDb = 0;
         }
         else
         {
             ((ParticlesMaterial)ExaustParticles[3].ProcessMaterial).Scale = 0;
             ((ParticlesMaterial)ExaustParticles[3].ProcessMaterial).InitialVelocity = 5;
-            ExaustParticles[3].GetNode<AudioStreamPlayer3D>("EngineSound").UnitDb = 0;
+           //ExaustParticles[3].GetNode<AudioStreamPlayer3D>("EngineSound").UnitDb = 0;
             ((ParticlesMaterial)ExaustParticles[2].ProcessMaterial).Scale = 0;
             ((ParticlesMaterial)ExaustParticles[2].ProcessMaterial).InitialVelocity = 5;
-            ExaustParticles[2].GetNode<AudioStreamPlayer3D>("EngineSound").UnitDb = 0;
+            //ExaustParticles[2].GetNode<AudioStreamPlayer3D>("EngineSound").UnitDb = 0;
         }
 
         torq = basis * turnspeed * delta * eq;

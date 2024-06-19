@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/Rocks/RockBog_LOD.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://Assets/Rocks/RockMat.tres" type="Material" id=2]
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=3]
 [ext_resource path="res://Assets/Rocks/RockBog.obj" type="ArrayMesh" id=5]
 
@@ -14,6 +15,7 @@ data = PoolVector3Array( 0.3769, 1.4972, 0.6719, 0.431, 1.5994, 0.5734, 0.4047, 
 transform = Transform( 60.158, 0, 0, 0, 58.9045, 12.2167, 0, -12.2168, 58.9044, 0, 0, 31.4253 )
 lod_max_distance = 2000.0
 mesh = ExtResource( 5 )
+material/0 = ExtResource( 2 )
 script = ExtResource( 3 )
 LOD0 = ExtResource( 5 )
 LOD1 = ExtResource( 1 )

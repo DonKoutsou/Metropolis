@@ -45,7 +45,7 @@ initial_velocity = 174.26
 angular_velocity = 553.85
 linear_accel = 98.3
 radial_accel = 100.0
-scale = 0.8
+scale = 0.5
 
 [sub_resource type="QuadMesh" id=3]
 

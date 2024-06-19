@@ -201,6 +201,10 @@ public class ActionMenu : Control
 		{
 			((Ladder)SelectedObj).TraverseLadder(pl);
 		}
+		else if (SelectedObj is GeneratorDoor)
+		{
+			((GeneratorDoor)SelectedObj).ToggleDoor();
+		}
 		selecting = false;
 		Stop();
 	}
@@ -302,7 +306,7 @@ public class ActionMenu : Control
 				PickButton.Text = "Άναψε.";
 			//PickButton.Hide();
 		}
-		else if (SelectedObj is Ladder)
+		else if (SelectedObj is Ladder || SelectedObj is GeneratorDoor)
 		{
 			//IntButton.Hide();
 			//FireplaceLight fp = (FireplaceLight)SelectedObj;

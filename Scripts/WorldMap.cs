@@ -173,7 +173,7 @@ public class WorldMap : TileMap
 			tex.CreateFromImage(IslandImageHolder.GetInstance().Images[info.ImageIndex]);
 			//tex.Load(ile.Image);
 
-			MapGrid.GetInstance().UpdateIleInfo(info.Position, info.Type, - info.RotationToSpawn, tex);
+			MapGrid.GetInstance().UpdateIleInfo(info.Position, info.Type, - info.RotationToSpawn, tex, info.SpecialName);
 		}
 	}
 	public static WorldMap GetInstance()
@@ -470,18 +470,18 @@ public class WorldMap : TileMap
 
 		IleToSave = null;
 		CallDeferred("DespawnIle", ilei.Island, ilei.KeepInstance);
-		CallDeferred("AddMapData", ilei.Position, ilei.Type, ilei.RotationToSpawn, ile.ImageID);
+		CallDeferred("AddMapData", ilei.Position, ilei.Type, ilei.RotationToSpawn, ile.ImageID, ilei.SpecialName);
 		//IleGenThread.WaitToFinish();
 
 	}
-	void AddMapData(Vector2 position, IleType Type, float RotationToSpawn, int imageId)
+	void AddMapData(Vector2 position, IleType Type, float RotationToSpawn, int imageId, string name = null)
 	{
 		ImageTexture tex = new ImageTexture();
 		//im.Load(ile.Image);
 		tex.CreateFromImage(IslandImageHolder.GetInstance().Images[imageId]);
 		//tex.Load(ile.Image);
 
-		MapGrid.GetInstance().UpdateIleInfo(position, Type, - RotationToSpawn, tex);
+		MapGrid.GetInstance().UpdateIleInfo(position, Type, - RotationToSpawn, tex, name);
 	}
 	public void AddIslandToHierarchy(Island ile)
 	{

@@ -337,7 +337,7 @@ public class MapGrid : GridContainer
         MapIle.Modulate = col;
     }
     
-    public void UpdateIleInfo(Vector2 index, IleType type, float rot = 0, ImageTexture img = null)
+    public void UpdateIleInfo(Vector2 index, IleType type, float rot = 0, ImageTexture img = null, string name = null)
     {
         MapTile child;
         MapIleList.TryGetValue(index, out child);
@@ -345,6 +345,7 @@ public class MapGrid : GridContainer
         if (type == IleType.ENTRANCE)
         {
             child.GetNode<Panel>("SignPanel").Visible = true;
+            //child.GetNode<Panel>("SignPanel").HintTooltip = name;
             //child.GetNode<Panel>("SignPanel").RectRotation = -rot;
             //child.Modulate = ColorList[0];
             //child.GetNode<TextureRect>("TextureRect").HintTooltip = "Η Μητρόπολη";
@@ -363,6 +364,7 @@ public class MapGrid : GridContainer
         else if (type == IleType.LIGHTHOUSE)
         {
             child.GetNode<Panel>("SignPanel").Visible = true;
+            //child.GetNode<Panel>("SignPanel").HintTooltip = name;
             //child.GetNode<Panel>("SignPanel").RectRotation = -rot;
             //child.Modulate = ColorList[3];
             //child.GetNode<TextureRect>("TextureRect").HintTooltip = "Φάρος";

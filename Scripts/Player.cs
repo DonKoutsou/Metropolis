@@ -45,9 +45,12 @@ public class Player : Character
 	}
 	public void Teleport(Vector3 pos)
 	{
+		PhysicsServer.BodySetState(GetRid(), PhysicsServer.BodyState.Transform, Transform.Identity.Translated(pos - GlobalTranslation));
+		//GetNode<CollisionShape>("CollisionShape").Disabled = true;
 		GlobalTranslation = pos;
 		loctomove = pos;
 		GetNode<Spatial>("Pivot").Rotation = Vector3.Zero;
+		//GetNode<CollisionShape>("CollisionShape").Disabled = false;
 		//NavAgent.SetTargetLocation(loctomove);
 		//CameraMovePivot.GetInstance().GlobalTranslation = pos;
 	}

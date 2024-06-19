@@ -75,6 +75,14 @@ albedo_color = Color( 1, 0.301961, 0.027451, 1 )
 resource_local_to_scene = true
 material = SubResource( 36 )
 
+[sub_resource type="CapsuleShape" id=46]
+radius = 2.02096
+height = 9.36624
+
+[sub_resource type="CapsuleShape" id=47]
+radius = 2.02096
+height = 7.56251
+
 [sub_resource type="ParticlesMaterial" id=41]
 resource_local_to_scene = true
 lifetime_randomness = 0.46
@@ -137,14 +145,6 @@ angle_random = 1.0
 scale = 5.0
 scale_random = 0.8
 scale_curve = SubResource( 35 )
-
-[sub_resource type="CapsuleShape" id=46]
-radius = 2.02096
-height = 9.36624
-
-[sub_resource type="CapsuleShape" id=47]
-radius = 2.02096
-height = 7.56251
 
 [sub_resource type="Animation" id=44]
 resource_name = "Wings"
@@ -270,20 +270,8 @@ roughness_texture_channel = 3
 [node name="MeshInstance" parent="VehicleBody" index="0"]
 material_override = SubResource( 49 )
 
-[node name="ExaustParticlesL" parent="VehicleBody" index="16"]
+[node name="ExaustParticlesL" parent="VehicleBody" index="19"]
 process_material = SubResource( 39 )
-draw_pass_1 = SubResource( 40 )
-
-[node name="ExaustParticlesLSteer" parent="VehicleBody" index="17"]
-process_material = SubResource( 41 )
-draw_pass_1 = SubResource( 40 )
-
-[node name="ExaustParticlesRSteer" parent="VehicleBody" index="18"]
-process_material = SubResource( 42 )
-draw_pass_1 = SubResource( 40 )
-
-[node name="ExaustParticlesR" parent="VehicleBody" index="19"]
-process_material = SubResource( 43 )
 draw_pass_1 = SubResource( 40 )
 
 [node name="WingCollider0" type="CollisionShape" parent="VehicleBody" index="20"]
@@ -326,18 +314,30 @@ mesh = ExtResource( 10 )
 material/0 = ExtResource( 1 )
 material/1 = ExtResource( 8 )
 
-[node name="AnimationPlayer" parent="VehicleBody" index="28"]
+[node name="ExaustParticlesLSteer" parent="VehicleBody" index="28"]
+process_material = SubResource( 41 )
+draw_pass_1 = SubResource( 40 )
+
+[node name="ExaustParticlesRSteer" parent="VehicleBody" index="29"]
+process_material = SubResource( 42 )
+draw_pass_1 = SubResource( 40 )
+
+[node name="ExaustParticlesR" parent="VehicleBody" index="30"]
+process_material = SubResource( 43 )
+draw_pass_1 = SubResource( 40 )
+
+[node name="AnimationPlayer" parent="VehicleBody" index="31"]
 anims/Wings = SubResource( 44 )
 anims/WingsOut = SubResource( 45 )
 
 [node name="RayFL" parent="." index="2"]
-transform = Transform( 1, -3.67792e-08, 2.25264e-08, 3.70019e-08, 1, -7.91624e-09, -2.23517e-08, 7.91624e-09, 1, 3, 0.797841, 10 )
+transform = Transform( 1, -3.67792e-08, 2.25264e-08, 3.70019e-08, 1, -7.91624e-09, -2.23517e-08, 7.91624e-09, 1, 6.45562, 0.797841, 11.1725 )
 
 [node name="MeshInstance" parent="RayFL/EnginePivot" index="0"]
 material/0 = SubResource( 51 )
 
 [node name="RayFR" parent="." index="3"]
-transform = Transform( 1, 2.70905e-07, 5.76838e-08, -2.70822e-07, 1, -9.66247e-08, -5.75092e-08, 9.66247e-08, 1, -3, 0.798699, 10 )
+transform = Transform( 1, 2.70905e-07, 5.76838e-08, -2.70822e-07, 1, -9.66247e-08, -5.75092e-08, 9.66247e-08, 1, -6.33755, 0.798699, 11.0606 )
 
 [node name="MeshInstance" parent="RayFR/EnginePivot" index="1"]
 material/0 = SubResource( 51 )

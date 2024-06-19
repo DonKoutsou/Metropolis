@@ -10,6 +10,8 @@ public class House : Spatial
 	[Export]
 	public PackedScene[] ItemSpawnPool;
 	List<Furniture> FurnitureList = new List<Furniture>();
+	[Export]
+	bool HasPower = true;
 
 	public StaticBody HouseExterior;
 
@@ -31,6 +33,7 @@ public class House : Spatial
 		}
 		Island ile = (Island)parent;
 		ile.RegisterChild(this);
+		GetNode<Street_Lamp>("IndoorsLight").SetWorkingState(HasPower);
 	}
 	public virtual void Entered(Node body)
 	{

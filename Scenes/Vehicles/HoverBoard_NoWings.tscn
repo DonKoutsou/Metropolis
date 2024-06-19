@@ -38,7 +38,7 @@ max_value = 6.0
 _data = [ Vector2( 0, 6 ), 0.0, 0.0, 0, 0, Vector2( 0.355023, 5.96319 ), 0.0, 0.0, 0, 0, Vector2( 0.674242, -6 ), 0.0, 0.0, 0, 0, Vector2( 1, -6 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=9]
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.5, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.1 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.105482, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.1 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="ShaderMaterial" id=43]
 resource_local_to_scene = true
@@ -381,7 +381,7 @@ draw_pass_1 = SubResource( 28 )
 
 [node name="EngineSound" type="AudioStreamPlayer3D" parent="VehicleBody/ExaustParticlesL"]
 stream = ExtResource( 13 )
-unit_db = 25.0
+unit_db = -10.0
 max_db = -24.0
 pitch_scale = 0.2
 area_mask = 4
@@ -436,6 +436,7 @@ draw_pass_1 = SubResource( 28 )
 
 [node name="EngineSound" type="AudioStreamPlayer3D" parent="VehicleBody/ExaustParticlesR"]
 stream = ExtResource( 13 )
+unit_db = -10.0
 max_db = -24.0
 pitch_scale = 0.2
 area_mask = 4
@@ -455,6 +456,7 @@ mesh = SubResource( 31 )
 transform = Transform( 0.999998, -0.000111042, -0.00137818, -0.00138151, -0.12076, -0.992681, -5.62005e-05, 0.992682, -0.12076, 0.000247595, 0.441803, -0.0692534 )
 light_color = Color( 1, 0.956863, 0.815686, 1 )
 shadow_enabled = true
+shadow_bias = 0.22
 shadow_reverse_cull_face = true
 spot_range = 519.392
 spot_attenuation = 2.14354

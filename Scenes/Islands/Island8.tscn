@@ -158,4 +158,4 @@ data = {
 }
 
 [node name="WindGenerator2" parent="." index="18" instance=ExtResource( 9 )]
-transform = Transform( 30, 0, 0, 0, 30, 0, 0, 0, 30, -687.372, -4.11378, -1771.51 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -687.372, -4.11378, -1771.51 )

@@ -25,6 +25,10 @@ public class Street_Lamp : StaticBody
         dcont.Connect("DayEventHandler", this, "TurnOff");
         dcont.Connect("NightEventHandler", this, "TurnOn");
     }
+    public void SetWorkingState(bool toggle)
+    {
+        Working = toggle;
+    }
     public void TurnOn()
     {
         light.Visible = true;

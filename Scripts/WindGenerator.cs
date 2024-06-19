@@ -52,7 +52,7 @@ public class WindGenerator : StaticBody
         anim2.PlaybackSpeed = rand.Next(2500, 3000) / 1000;
         Spatial rotorpivot = GetNode<Spatial>("Rotor_Pivot");
         rotorpivot.LookAt(new Vector3(rotorpivot.Translation.x, rotorpivot.Translation.y, rotorpivot.Translation.z + 1), Vector3.Up);
-        scale = Math.Max((int)Scale.x, 1);
+        scale = Math.Max((int)(Scale.x * GetNode<MeshInstance>("MeshInstance").Scale.x), 1);
         Node parent = GetParent();
 		while (!(parent is Island))
 		{
@@ -155,4 +155,16 @@ public class WindGenerator : StaticBody
         }
 		CurrentEnergy = Math.Min(info.CurrentEnergy + hours, EnergyCapacity);
 	}
+    private void CharacterEntered(Node body)
+    {
+        if (!IsInsideTree())
+            return;
+        ((SpatialMaterial)GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Front;
+    }
+    private void CharacterLeft(Node body)
+    {
+        if (!IsInsideTree())
+            return;
+        ((SpatialMaterial)GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Disabled;
+    }
 }
