@@ -235,7 +235,7 @@ radial_segments = 20
 radius = 176.0
 
 [node name="WindGenerator" type="StaticBody"]
-collision_layer = 32
+collision_layer = 36
 collision_mask = 0
 script = ExtResource( 3 )
 EnergyCapacity = 1000.0

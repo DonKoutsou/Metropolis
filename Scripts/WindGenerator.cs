@@ -160,11 +160,13 @@ public class WindGenerator : StaticBody
         if (!IsInsideTree())
             return;
         ((SpatialMaterial)GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Front;
+        SetCollisionLayerBit(2, false);
     }
     private void CharacterLeft(Node body)
     {
         if (!IsInsideTree())
             return;
         ((SpatialMaterial)GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Disabled;
+        SetCollisionLayerBit(2, true);
     }
 }

@@ -136,6 +136,7 @@ public class Vehicle : RigidBody
         Rotation = parent.Rotation;
         parent.Rotation = Vector3.Zero;
     }
+    
     public override void _Process(float delta)
     {
         base._Process(delta);
@@ -144,12 +145,13 @@ public class Vehicle : RigidBody
         ((ParticlesMaterial)ExaustParticles[0].ProcessMaterial).Scale = engineforce * 5;
         ((ParticlesMaterial)ExaustParticles[0].ProcessMaterial).InitialVelocity = engineforce * 60 + 5;
         //ExaustParticles[0].GetNode<AudioStreamPlayer3D>("EngineSound").UnitDb = engineforce * 15;
-        ExaustParticles[0].GetNode<AudioStreamPlayer3D>("EngineSound").PitchScale = engineforce * 0.1f + 0.2f;
+        ExaustParticles[0].GetNode<AudioStreamPlayer3D>("EngineSound").PitchScale = (engineforce + 0.6f) * 2;
         ((ParticlesMaterial)ExaustParticles[1].ProcessMaterial).Scale = engineforce * 5;
         ((ParticlesMaterial)ExaustParticles[1].ProcessMaterial).InitialVelocity = engineforce * 60 + 5;
         //ExaustParticles[1].GetNode<AudioStreamPlayer3D>("EngineSound").UnitDb = engineforce * 15;
-        ExaustParticles[1].GetNode<AudioStreamPlayer3D>("EngineSound").PitchScale = engineforce * 0.1f + 0.2f;
+        ExaustParticles[1].GetNode<AudioStreamPlayer3D>("EngineSound").PitchScale = (engineforce + 0.6f) * 2;
     }
+    float SpeedBuildup = 0;
     public override void _PhysicsProcess(float delta)
     {
         base._PhysicsProcess(delta);
@@ -166,7 +168,8 @@ public class Vehicle : RigidBody
 
         
         float distance = loctomove.DistanceTo(GlobalTranslation);
-
+        float distmulti = Math.Min(500, distance)/ 500;
+        SpeedBuildup = Mathf.Max(Mathf.Min(SpeedBuildup + (distmulti * 2 - 1) / 700, 1), 0 );
         float fmulti = 1;
         Vector3 force = Vector3.Zero;
         
@@ -190,14 +193,15 @@ public class Vehicle : RigidBody
             if (WindOnWings)
                 EnableWindOnWings(false);
         }
-        latsspeed = speed * (Math.Min(500, distance)/ 500);
+        latsspeed = speed * (distmulti * SpeedBuildup);
         
 
         //sails
         AddCentralForce(wingforce * delta);
 
         if (!Working)
-        {   
+        {
+            loctomove = GlobalTranslation;   
             return;
         }
 
