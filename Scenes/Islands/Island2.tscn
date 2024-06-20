@@ -171,7 +171,7 @@ transform = Transform( -100.2, -183.287, -6.46588, -102.404, 62.0259, -171.296, 
 skeleton = NodePath("../..")
 
 [node name="Rock4" parent="Clutter" index="5" instance=ExtResource( 24 )]
-transform = Transform( -322.06, 118.209, 144.127, 121.469, 351.332, -16.7234, -141.39, 32.5735, -342.66, 1210.06, -588.962, 1304.65 )
+transform = Transform( -322.06, 118.209, 144.127, 121.469, 351.332, -16.7234, -141.39, 32.5735, -342.66, 3027.54, -588.962, 603.89 )
 skeleton = NodePath("../..")
 
 [node name="Rock5" parent="Clutter" index="6" instance=ExtResource( 24 )]
@@ -338,14 +338,8 @@ visible = false
 mesh = ExtResource( 17 )
 material/0 = ExtResource( 19 )
 
-[node name="Stick" parent="." index="7" instance=ExtResource( 20 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2116.58, -4.11366, 1974.26 )
-
-[node name="Stick4" parent="." index="8" instance=ExtResource( 20 )]
+[node name="Stick4" parent="." index="7" instance=ExtResource( 20 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1502.61, -4.11378, -1931.94 )
 
-[node name="WindGenerator" parent="." index="9" instance=ExtResource( 21 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2145.57, -4.11378, 1268.11 )
-
-[node name="Stick6" parent="." index="10" instance=ExtResource( 20 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -314.17, -314.126, 2699.75 )
+[node name="WindGenerator" parent="." index="8" instance=ExtResource( 21 )]
+transform = Transform( 0.268012, 0, 0.963416, 0, 1, 0, -0.963416, 0, 0.268012, 1454.48, -4.11378, 1268.93 )

@@ -18,6 +18,8 @@ public class LightHouse : House
 	}
     public override void Entered(Node body)
 	{
+		if (!IsInsideTree())
+            return;
 		((SpatialMaterial)GetNode<MeshInstance>("LightHouseBody").GetActiveMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Front;
 		((SpatialMaterial)GetNode<MeshInstance>("Walls").GetActiveMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Front;
 		GetNode<Occluder>("Occluder").Visible = false;
@@ -28,6 +30,8 @@ public class LightHouse : House
 	}
 	public override void Left(Node body)
 	{
+		if (!IsInsideTree())
+            return;
 		((SpatialMaterial)GetNode<MeshInstance>("LightHouseBody").GetActiveMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Disabled;
 		((SpatialMaterial)GetNode<MeshInstance>("Walls").GetActiveMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Disabled;
 		GetNode<Occluder>("Occluder").Visible = true;

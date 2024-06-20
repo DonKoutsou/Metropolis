@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://Assets/TerainTex/Bricks094_1K-PNG/Bricks094_1K-PNG_Roughness.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/LighthouseAnimation.cs" type="Script" id=2]
@@ -132,7 +132,6 @@ surfaces/0 = {
 
 [sub_resource type="SpatialMaterial" id=2139]
 resource_local_to_scene = true
-flags_world_triplanar = true
 params_cull_mode = 2
 albedo_texture = ExtResource( 9 )
 roughness_texture = ExtResource( 11 )
@@ -252,6 +251,9 @@ data = PoolVector3Array( 135.691, 8.9914, -78.3431, 110.795, 8.9914, -110.795, 1
 
 [sub_resource type="CubeMesh" id=2164]
 size = Vector3( 50, 10, 30 )
+
+[sub_resource type="ConcavePolygonShape" id=2165]
+data = PoolVector3Array( -25, 5, 15, 25, 5, 15, -25, -5, 15, 25, 5, 15, 25, -5, 15, -25, -5, 15, 25, 5, -15, -25, 5, -15, 25, -5, -15, -25, 5, -15, -25, -5, -15, 25, -5, -15, 25, 5, 15, 25, 5, -15, 25, -5, 15, 25, 5, -15, 25, -5, -15, 25, -5, 15, -25, 5, -15, -25, 5, 15, -25, -5, -15, -25, 5, 15, -25, -5, 15, -25, -5, -15, 25, 5, 15, -25, 5, 15, 25, 5, -15, -25, 5, 15, -25, 5, -15, 25, 5, -15, -25, -5, 15, 25, -5, 15, -25, -5, -15, 25, -5, 15, 25, -5, -15, -25, -5, -15 )
 
 [node name="LightHouse" type="Spatial"]
 script = ExtResource( 5 )
@@ -381,6 +383,13 @@ shape = SubResource( 2163 )
 transform = Transform( 1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0.377931, 166.519 )
 mesh = SubResource( 2164 )
 material/0 = ExtResource( 7 )
+
+[node name="StaticBody" type="StaticBody" parent="MeshInstance"]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance/StaticBody"]
+shape = SubResource( 2165 )
 
 [connection signal="body_entered" from="Door" to="." method="Entered"]
 [connection signal="body_exited" from="Door" to="." method="Left"]

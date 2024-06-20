@@ -145,11 +145,11 @@ public class Vehicle : RigidBody
         ((ParticlesMaterial)ExaustParticles[0].ProcessMaterial).Scale = engineforce * 5;
         ((ParticlesMaterial)ExaustParticles[0].ProcessMaterial).InitialVelocity = engineforce * 60 + 5;
         //ExaustParticles[0].GetNode<AudioStreamPlayer3D>("EngineSound").UnitDb = engineforce * 15;
-        ExaustParticles[0].GetNode<AudioStreamPlayer3D>("EngineSound").PitchScale = (engineforce + 0.6f) * 2;
+        ExaustParticles[0].GetNode<AudioStreamPlayer3D>("EngineSound").PitchScale = engineforce + 0.6f;
         ((ParticlesMaterial)ExaustParticles[1].ProcessMaterial).Scale = engineforce * 5;
         ((ParticlesMaterial)ExaustParticles[1].ProcessMaterial).InitialVelocity = engineforce * 60 + 5;
         //ExaustParticles[1].GetNode<AudioStreamPlayer3D>("EngineSound").UnitDb = engineforce * 15;
-        ExaustParticles[1].GetNode<AudioStreamPlayer3D>("EngineSound").PitchScale = (engineforce + 0.6f) * 2;
+        ExaustParticles[1].GetNode<AudioStreamPlayer3D>("EngineSound").PitchScale = engineforce + 0.6f;
     }
     float SpeedBuildup = 0;
     public override void _PhysicsProcess(float delta)
@@ -471,7 +471,7 @@ public class Vehicle : RigidBody
 
         torq = basis * turnspeed * delta * eq;
         torq.x *= -1;
-        torq.z = 1000 * mutli * eq;
+        //torq.z = 1000 * mutli * eq;
         //AddTorque(torq);
         steert = torq;
         SteerThr.CallDeferred("wait_to_finish");
