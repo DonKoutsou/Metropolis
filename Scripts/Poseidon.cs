@@ -78,8 +78,6 @@ public class Poseidon : Spatial
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
-       
-
         d -= delta;
 		if (d <= 0)
 		{
@@ -91,7 +89,7 @@ public class Poseidon : Spatial
             mat.SetShaderParam("IsRaining", str > 0.1f);
         }
         Player pl = Player.GetInstance();
-        if (pl != null)
+        if (pl != null && Godot.Object.IsInstanceValid(pl))
         {
             GlobalTranslation = new Vector3(pl.GlobalTranslation.x, GlobalTranslation.y, pl.GlobalTranslation.z);
         }

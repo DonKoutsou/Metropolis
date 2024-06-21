@@ -336,7 +336,12 @@ public class MapGrid : GridContainer
         col.a = 1;
         MapIle.Modulate = col;
     }
-    
+    public void OnIslandToggled(Vector2 index, bool toggle)
+    {
+        MapTile child;
+        MapIleList.TryGetValue(index, out child);
+        child.GetNode<Panel>("DebugPanel").Visible = toggle;
+    }
     public void UpdateIleInfo(Vector2 index, IleType type, float rot = 0, ImageTexture img = null, string name = null)
     {
         MapTile child;
@@ -345,6 +350,8 @@ public class MapGrid : GridContainer
         if (type == IleType.ENTRANCE)
         {
             child.GetNode<Panel>("SignPanel").Visible = true;
+            StyleBoxFlat theme = (StyleBoxFlat)child.GetNode<Panel>("SignPanel").GetStylebox("panel");
+            theme.BgColor = new Color(0,0,1);
             //child.GetNode<Panel>("SignPanel").HintTooltip = name;
             //child.GetNode<Panel>("SignPanel").RectRotation = -rot;
             //child.Modulate = ColorList[0];
@@ -352,7 +359,9 @@ public class MapGrid : GridContainer
         }
         else if (type == IleType.EXIT)
         {
-            
+            child.GetNode<Panel>("SignPanel").Visible = true;
+            StyleBoxFlat theme = (StyleBoxFlat)child.GetNode<Panel>("SignPanel").GetStylebox("panel");
+            theme.BgColor = new Color(1,0,0);
             //child.Modulate = ColorList[1];
             //child.GetNode<TextureRect>("TextureRect").HintTooltip = "Σκάφος";
         }
@@ -391,7 +400,7 @@ public class MapGrid : GridContainer
             return;
         d = 0.2f;
 
-        if (pl == null)
+        if (pl == null || !Godot.Object.IsInstanceValid(pl))
             return;
 
         //player icon location is at 0,0 in the grid wich is top left corner. Get location of center of grid and treat that as 0,0

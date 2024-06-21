@@ -74,8 +74,22 @@ public class CheatMenu : Control
 			FpsCounter.Show();
 		}
 	}
-	
-	
+	private void On_Kill_Button_Down()
+	{
+		Player.GetInstance().Kill();
+	}
+	private void On_TP_Button_Down()
+	{
+		int x = GetNode<Panel>("TeleportPanel").GetNode<TextEdit>("X_Text").Text.ToInt();
+		int y = GetNode<Panel>("TeleportPanel").GetNode<TextEdit>("Y_Text").Text.ToInt();
+		Vector2 loc = WorldMap.GetInstance().MapToWorld( new Vector2(x,y));
+		Player.GetInstance().Teleport(new Vector3 (loc.x, 2000, loc.y));
+	}
+	private void On_ToLoc_Button_Down()
+	{
+		Player pl = Player.GetInstance();
+		pl.Teleport(pl.loctomove);
+	} 
 	public void Start()
 	{
 		Show();

@@ -41,7 +41,7 @@ public class MainWorld : Spatial
 	}
 	public void StopGame()
 	{
-		m_myworld.QueueFree();
+		m_myworld.Free();
 		m_myworld = null;
 		intro = (Spatial)Intro.Instance();
 		AddChild(intro, true);

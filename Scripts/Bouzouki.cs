@@ -5,7 +5,10 @@ using System.Linq;
 
 public class Bouzouki : Instrument
 {
-	
+	public override void HighLightObject(bool toggle)
+    {
+		((ShaderMaterial)GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(1).NextPass).SetShaderParam("enable",  toggle);
+    }
 
 }
 

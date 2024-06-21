@@ -5,10 +5,10 @@
 [ext_resource path="res://Fonts/Caudex-Bold.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Scripts/CityNameUI.cs" type="Script" id=5]
-[ext_resource path="res://Scenes/HUD/CompassUi.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Inventory/Inventory.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Items/FastLeg_L.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Items/FastLeg_R.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Items/Bouzouki.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scripts/CameraZoomPivot.cs" type="Script" id=12]
 [ext_resource path="res://Scripts/PlayerUI.cs" type="Script" id=13]
 [ext_resource path="res://Scripts/CameraPanPivot.cs" type="Script" id=14]
@@ -434,7 +434,7 @@ shape = SubResource( 92 )
 
 [node name="Inventory" parent="." instance=ExtResource( 7 )]
 Capacity = 40.0
-StartingItems = [ ExtResource( 25 ), ExtResource( 27 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 8 ), ExtResource( 9 ) ]
+StartingItems = [ ExtResource( 25 ), ExtResource( 27 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ]
 
 [node name="PlayerUI" type="Spatial" parent="."]
 script = ExtResource( 13 )
@@ -555,7 +555,6 @@ script = ExtResource( 15 )
 
 [node name="Listener" type="Listener" parent="CameraMovePivot"]
 transform = Transform( 0.999998, 0, 0, 0, 1, 0, 0, 0, 0.999998, 0, 6.70394, 0.354646 )
-current = true
 
 [node name="CameraPanPivot" type="Position3D" parent="CameraMovePivot"]
 transform = Transform( 0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 6.52882, 0 )
@@ -577,7 +576,7 @@ MaxDist = 800.0
 transform = Transform( 1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0 )
 
 [node name="PlayerCamera" type="Camera" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot"]
-transform = Transform( 1, -3.86853e-15, -1.26476e-15, 4.08839e-15, 0.996634, -0.0819749, 1.8558e-15, 0.0819747, 0.996637, 0, 0, 0 )
+transform = Transform( 1, -3.86855e-15, -1.26477e-15, 4.0884e-15, 0.996634, -0.0819745, 1.85581e-15, 0.0819747, 0.996637, 0, 0, 0 )
 cull_mask = 769
 current = true
 fov = 45.0
@@ -585,9 +584,6 @@ size = 5.0
 near = 1.0
 far = 40000.0
 script = ExtResource( 20 )
-
-[node name="CompasUI" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/PlayerCamera" instance=ExtResource( 6 )]
-transform = Transform( 0.0880203, -0.0474596, 1.32888e-08, 0.0102406, 0.0189926, -0.0976442, 0.0463415, 0.0859472, 0.0215775, 1.24807, 0.617609, -2.18268 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/PlayerCamera"]
 transform = Transform( 1, -5.29396e-22, 0, -1.05879e-22, 1, 0, 2.11758e-21, 0, 1, 0, -0.0144858, -1.05511 )

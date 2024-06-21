@@ -34,8 +34,18 @@ public class Player : Character
 	Camera DialogueCam;
 
 	static Player instance;
-	
-	public static Player GetInstance()
+    public override void _EnterTree()
+    {
+        base._EnterTree();
+		instance = this;
+    }
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+		instance = null;
+    }
+
+    public static Player GetInstance()
 	{
 		return instance;
 	}
@@ -61,8 +71,6 @@ public class Player : Character
 	public override void _Ready()
 	{
 		base._Ready();
-
-		instance = this;
 
 		moveloc = GetNode<MoveLocation>("MoveLoc");
 		

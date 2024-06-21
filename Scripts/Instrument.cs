@@ -60,7 +60,7 @@ public class Instrument : Item
     {
 		return Speaker.GetPlaybackPosition() + (float)AudioServer.GetTimeSinceLastMix() + 0.05f;
     }
-
+    
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
 //  public override void _Process(float delta)
 //  {

@@ -21,20 +21,38 @@ public class StartingScreen : Control
 
 	public override void _Ready()
 	{
-		bool HasSave = ResourceLoader.Exists("user://SavedGame.tres");
-
+		FillButtonList();
 		world = (MainWorld)GetParent().GetParent();
 		intro = GetNode<Control>("Intro");
 		FadeInOut = GetNode<CanvasLayer>("FadeInOut").GetNode<MainMenuAnimation>("MainMenuAnimation");
+		Init();
+	}
+	private void FillButtonList()
+	{
+		if (ButtonList.Count == 0)
+		{
+			Control cont = GetNode<Control>("Settings");
+			ButtonList.Add("Start", cont.GetNode<Panel>("Panel").GetNode<Button>("Start_Button"));
+			ButtonList.Add("StartHalf", cont.GetNode<Panel>("Panel").GetNode<Button>("Start_Button_Half"));
+			ButtonList.Add("Continue", cont.GetNode<Panel>("Panel").GetNode<Button>("Continue_Button_Half"));
+			ButtonList.Add("Exit", cont.GetNode<Panel>("Panel").GetNode<Button>("Exit_Button"));
+			ButtonList.Add("SeedSetting", cont.GetNode<Panel>("Panel").GetNode<Panel>("SeedSetting"));
+		}
+	}
+	public void Init()
+	{
+		FadeInOut.FadeOut();
+		bool HasSave = ResourceLoader.Exists("user://SavedGame.tres");
+
+		intro.Show();
+
 		GetNode<CanvasLayer>("FadeInOut").Show();
 		Control cont = GetNode<Control>("Settings");
 		cont.Show();
-		ButtonList.Add("Start", cont.GetNode<Panel>("Panel").GetNode<Button>("Start_Button"));
-		ButtonList.Add("StartHalf", cont.GetNode<Panel>("Panel").GetNode<Button>("Start_Button_Half"));
-		ButtonList.Add("Continue", cont.GetNode<Panel>("Panel").GetNode<Button>("Continue_Button_Half"));
-		ButtonList.Add("Exit", cont.GetNode<Panel>("Panel").GetNode<Button>("Exit_Button"));
-		ButtonList.Add("SeedSetting", cont.GetNode<Panel>("Panel").GetNode<Panel>("SeedSetting"));
 
+		Control SeedSet = ButtonList["SeedSetting"];
+		SeedSet.GetNode<TextEdit>("SeedText").Readonly = false;
+		cont.GetNode<Panel>("Panel").GetNode<Button>("Start_Button").Text = "Έναρξη";
 		if (HasSave)
 			cont.GetNode<Panel>("Panel").GetNode<Button>("Start_Button").Hide();
 		else
@@ -123,9 +141,9 @@ public class StartingScreen : Control
 		world.StopGame();
 
 		GameIsRunning = false;
-		GetNode<Control>("Settings").Show();
+		Init();
 
-		GetNode<Timer>("RestartTimer").Stop();
+		//GetNode<Timer>("RestartTimer").Stop();
 	}
 }
 

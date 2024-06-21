@@ -41,8 +41,6 @@ public class WorldMap : TileMap
 	[Export]
 	List<string> LightHouseNames = null;
 
-	List <float> rots = new List<float>{0f, 90f, 180f, -90f};
-
 	//TO BE SAVED
 	//id of cells to be changed to events
 	List <int> RandomisedEntryID = new List<int>();
@@ -73,15 +71,27 @@ public class WorldMap : TileMap
 	//TO BE SAVED
 	bool finishedspawning = false;
 
-	
-
 	IslandInfo entry;
 
 	static WorldMap Instance;
 
 	public Player pl;
 
-	public Dictionary<string, object> GetSaveData()
+
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+		Instance = null;
+		ilemap.Clear();
+    }
+    public override void _EnterTree()
+    {
+        base._EnterTree();
+
+		Instance = this;
+		ilemap = new Dictionary<Vector2, IslandInfo>();
+    }
+    public Dictionary<string, object> GetSaveData()
 	{
 		if (IleToSave != null)
 		{
@@ -182,7 +192,6 @@ public class WorldMap : TileMap
 	}
 	public override void _Ready()
 	{
-		Instance = this;
 
 		//MapGrid.GetInstance().InitMap();
 
@@ -388,9 +397,6 @@ public class WorldMap : TileMap
 		if (id == 0)
 			entry = ileinfo;
 
-		
-
-		
 		IleToSave = ileinfo;
 		ilemap.Add(OrderedCells[tilenum], ileinfo);
 

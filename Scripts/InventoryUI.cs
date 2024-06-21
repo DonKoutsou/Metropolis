@@ -17,7 +17,6 @@ public class InventoryUI : Control
     Player pl;
 
     List <InventoryUISlot> slots = new List<InventoryUISlot>();
-    static InventoryUI inst;
 
     public bool IsOpen = false;
 
@@ -48,14 +47,21 @@ public class InventoryUI : Control
     Compass comp;
     MapGrid map;
     ProgressBar CharacterRPM;
-    public static InventoryUI GetInstance()
+
+    static InventoryUI Instance;
+
+    public override void _EnterTree()
     {
-        return inst;
+        base._EnterTree();
+        Instance = this;
+    }
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+        Instance = null;
     }
     public override void _Ready()
     {
-        inst = this;
-
         Capacity = GetNode<Panel>("CapPanel").GetNode<RichTextLabel>("CapAmmount");
         
         GridContainer gr = GetNode<GridContainer>("GridContainer");
@@ -86,8 +92,12 @@ public class InventoryUI : Control
         Capacity.BbcodeText = string.Format("[center]{0}/{1}", currentload, MaxLoad);
         CharacterBatteryCharge.MaxValue = pl.GetCharacterBatteryCap();
         CharacterBatteryCharge.Value = pl.GetCurrentCharacterEnergy();
-        comp = Compass.GetInstance();
+        comp = GetNode<Compass>("CompassUI");
         map = MapGrid.GetInstance();
+    }
+    static public InventoryUI GetInstance()
+    {
+        return Instance;
     }
     public void OpenInventory()
     {
@@ -103,8 +113,6 @@ public class InventoryUI : Control
         FocusedSlot = null;
         IsOpen = false;
         SetProcess(false);
-        comp = Compass.GetInstance();
-        //if (comp != null)
         comp.ToggleCompass(false);
     }
     float d = 0.5f;

@@ -97,7 +97,7 @@ public class Character : KinematicBody
 	public override void _EnterTree()
 	{
 		base._EnterTree();
-		loctomove = GlobalTranslation;
+		//loctomove = GlobalTranslation;
 	}
 	public Character_Animations Anims()
 	{

@@ -5,7 +5,7 @@ public class MainMenuAnimation : AnimationPlayer
 {
     public override void _Ready()
     {
-        Play("Start");
+        //Play("Start");
         SetProcess(false);
     }
     public void FadeIn()

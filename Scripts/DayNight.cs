@@ -70,7 +70,7 @@ public class DayNight : WorldEnvironment
 
     public SunMoonPivot SunMoonMeshPivot;
 
-    Time_UI UI;
+    //Time_UI UI;
 
     static DayNight instance;
 
@@ -336,10 +336,10 @@ public class DayNight : WorldEnvironment
             }
                 
         }
-        if (UI != null)
-            UI.UpdateTime(currenthour, currentmins);
-        else
-            UI = Time_UI.GetInstance();
+        //if (UI != null)
+         //   UI.UpdateTime(currenthour, currentmins);
+        //else
+            //UI = Time_UI.GetInstance();
     }
     //updating values
     float MinuteValue;

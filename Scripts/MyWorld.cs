@@ -1,11 +1,12 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class MyWorld : Spatial
 {
 	[Export]
-	Dictionary<int, PackedScene> GlobalItemListConfiguration = new Dictionary<int, PackedScene>();
+	PackedScene[] GlobalItemListConfiguration = null;
 
 	[Export]
 	PackedScene PlayerScene = null;
@@ -13,15 +14,25 @@ public class MyWorld : Spatial
 	[Signal]
     public delegate void PlayerSpawnedEventHandler(Player Pl);
 
-	static Dictionary<int, PackedScene> GlobalItemList = new Dictionary<int, PackedScene>();
+	static List<KeyValuePair<int, PackedScene>> GlobalItemList = new List<KeyValuePair<int, PackedScene>>();
 	
 	static List<IslandInfo> Orderedilestodissable = new List<IslandInfo>();
 	
 	static List<IslandInfo> Orderedilestoenable = new List<IslandInfo>();
 
-	List<IslandInfo> ActiveIles = new List<IslandInfo>();
-	
-	public List<IslandInfo> GetActiveIles()
+	static List<IslandInfo> ActiveIles = new List<IslandInfo>();
+    public override void _EnterTree()
+    {
+        base._EnterTree();
+    }
+	public override void _ExitTree()
+    {
+        base._ExitTree();
+		Orderedilestodissable.Clear();
+		Orderedilestoenable.Clear();
+		ActiveIles.Clear();
+    }
+    public List<IslandInfo> GetActiveIles()
 	{
 		List<IslandInfo> Active = new List<IslandInfo>();
 		foreach (IslandInfo info in ActiveIles)
@@ -40,11 +51,13 @@ public class MyWorld : Spatial
 	{
 		base._Ready();
 		//pl = GetNode<Player>("Player");
-		foreach (KeyValuePair<int, PackedScene> pair in GlobalItemListConfiguration)
+		foreach (PackedScene pair in GlobalItemListConfiguration)
 		{
-			PackedScene text = pair.Value;
-			int key = pair.Key;
-			GlobalItemList.Add(key, text);
+			Item it = pair.Instance<Item>();
+			
+			int key = (int)it.ItemType;
+			GlobalItemList.Add(new KeyValuePair<int, PackedScene>(key, pair));
+			it.Free();
 		}
 		
 		Instance = this;
@@ -87,8 +100,13 @@ public class MyWorld : Spatial
 	}
 	public static PackedScene GetItemByType(ItemName name)
 	{
-		PackedScene path;
-		GlobalItemList.TryGetValue((int)name, out path);
+		PackedScene path = null;
+		var lookup = GlobalItemList.ToLookup(kvp => (int)name, kvp => kvp.Value);
+		foreach (PackedScene x in lookup[(int)name])
+		{
+			path = x;
+			break;
+		}
 		return path;
 	}
 	public Player SpawnPlayer(Vector3 pos)
@@ -109,7 +127,10 @@ public class MyWorld : Spatial
 		start.GameOver();
 		SaveLoadManager.GetInstance().ClearSaves();
 	}
-	
+	public void AttemptDeathSave()
+	{
+
+	}
 	public static void ArrangeIlesBasedOnDistance(List<IslandInfo> ilestodissable, List<IslandInfo> ilestoenable)
     {
 		if (ilestoenable.Count > 0)
@@ -203,26 +224,26 @@ public class MyWorld : Spatial
 		
 		int ViewDistance = Settings.GetGameSettings().ViewDistance;
 
-		List<IslandInfo> closestfrom;
-		map.GetClosestIles(from ,out closestfrom, ViewDistance);
+		//List<IslandInfo> closestfrom;
+		//map.GetClosestIles(from ,out closestfrom, ViewDistance);
 
 		List<IslandInfo> closestto;
 		map.GetClosestIles(to,out closestto, ViewDistance);
 
-		for (int i = 0; i < closestfrom.Count; i ++)
+		for (int i = 0; i < ActiveIles.Count; i ++)
 		{
-			if (closestfrom[i] == to)
+			if (ActiveIles[i] == to)
 				continue;
-			if (closestto.Contains(closestfrom[i]))
+			if (closestto.Contains(ActiveIles[i]))
 				continue;
-			if (Orderedilestodissable.Contains(closestfrom[i]))
+			if (Orderedilestodissable.Contains(ActiveIles[i]))
 				continue;
-			if (!ilestodissable.Contains(closestfrom[i]))
+			if (!ilestodissable.Contains(ActiveIles[i]))
 			{
-				ilestodissable.Insert(ilestodissable.Count, closestfrom[i]);
+				ilestodissable.Insert(ilestodissable.Count, ActiveIles[i]);
 
-				if (Orderedilestoenable.Contains(closestfrom[i]))
-					Orderedilestoenable.Remove(closestfrom[i]);
+				if (Orderedilestoenable.Contains(ActiveIles[i]))
+					Orderedilestoenable.Remove(ActiveIles[i]);
 			}
 
 		}
@@ -268,6 +289,7 @@ public class MyWorld : Spatial
 			AddChild(i);
 			i.Visible = true;
 			i.InputData(ileinfo);
+			
 		}
 		if (affectneigh)
 		{
@@ -278,6 +300,9 @@ public class MyWorld : Spatial
 			for (int i = 0; i < closestto.Count; i ++)
 				ToggleIsland(closestto[i], toggle, false);
 		}
+		#if DEBUG
+		MapGrid.GetInstance().OnIslandToggled(ileinfo.Position, toggle);
+		#endif
 	}
 	static private void ToggleChildrenCollision(Node node, bool toggle, bool recursive)
 	{

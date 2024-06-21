@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/CheatMenu.cs" type="Script" id=1]
 [ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Assets/UI/ButtonRectTheme.tres" type="Theme" id=3]
+[ext_resource path="res://Assets/Themes/PanelTheme1.tres" type="Theme" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -10,6 +11,32 @@ font_data = ExtResource( 2 )
 
 [sub_resource type="Theme" id=2]
 default_font = SubResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.568627, 0.537255, 0.45098, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.713726, 0.67451, 0.568627, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [node name="CheatMenu" type="Control"]
 anchor_right = 1.0
@@ -43,6 +70,25 @@ theme = ExtResource( 3 )
 action_mode = 0
 text = "FPS"
 
+[node name="TestKill" type="Button" parent="."]
+margin_top = 167.0
+margin_right = 133.0
+margin_bottom = 218.0
+mouse_default_cursor_shape = 2
+theme = ExtResource( 3 )
+action_mode = 0
+text = "Test Kill"
+
+[node name="Tp_ToLoc" type="Button" parent="."]
+margin_top = 331.0
+margin_right = 142.0
+margin_bottom = 382.0
+mouse_default_cursor_shape = 2
+theme = ExtResource( 3 )
+action_mode = 0
+text = "To Move Loc"
+icon_align = 1
+
 [node name="FPS_Counter" type="Label" parent="."]
 anchor_left = 1.0
 anchor_right = 1.0
@@ -52,6 +98,76 @@ theme = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "60.0"
 
+[node name="TeleportPanel" type="Panel" parent="."]
+anchor_top = 0.208333
+anchor_right = 0.0738833
+anchor_bottom = 0.292061
+margin_right = 5.144
+margin_bottom = 4.57401
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="X_Text" type="TextEdit" parent="TeleportPanel"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -47.5
+margin_right = 53.0
+margin_bottom = 0.5
+theme = ExtResource( 4 )
+custom_styles/read_only = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/normal = SubResource( 3 )
+text = "69"
+v_scroll_speed = 0.0
+
+[node name="Y_Text" type="TextEdit" parent="TeleportPanel"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = 1.5
+margin_right = 53.0
+margin_bottom = 47.5
+theme = ExtResource( 4 )
+custom_styles/read_only = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/normal = SubResource( 3 )
+text = "40"
+v_scroll_speed = 0.0
+
+[node name="Label" type="Label" parent="TeleportPanel"]
+margin_left = 54.0
+margin_top = 14.0
+margin_right = 73.0
+margin_bottom = 28.0
+text = "X"
+align = 1
+valign = 1
+
+[node name="Label2" type="Label" parent="TeleportPanel"]
+margin_left = 54.0
+margin_top = 64.0
+margin_right = 73.0
+margin_bottom = 78.0
+text = "Y"
+align = 1
+valign = 1
+
+[node name="Tp" type="Button" parent="TeleportPanel"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -73.0
+margin_top = -47.5
+margin_bottom = 47.5
+mouse_default_cursor_shape = 2
+theme = ExtResource( 3 )
+action_mode = 0
+text = "TP"
+
 [connection signal="button_down" from="FastRun_Button" to="." method="On_FastRun_Button_Down"]
 [connection signal="button_down" from="InfCamera" to="." method="On_InfCamera_Button_Down"]
 [connection signal="button_down" from="FPS" to="." method="On_FPS_Button_Down"]
+[connection signal="button_down" from="TestKill" to="." method="On_Kill_Button_Down"]
+[connection signal="button_down" from="Tp_ToLoc" to="." method="On_ToLoc_Button_Down"]
+[connection signal="button_down" from="TeleportPanel/Tp" to="." method="On_TP_Button_Down"]

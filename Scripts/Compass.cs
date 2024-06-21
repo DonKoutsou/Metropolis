@@ -1,19 +1,13 @@
 using Godot;
 using System;
 
-public class Compass : Spatial
+public class Compass : Control
 {
-    Position3D pivot;
-    static Compass instance;
+    //Position3D pivot;
     public override void _Ready()
     {
-        pivot = GetNode<Position3D>("CompassNeedlePivot");
-        instance = this;
+        //pivot = GetNode<Position3D>("CompassNeedlePivot");
         ToggleCompass(false);
-    }
-    public static Compass GetInstance()
-    {
-        return instance;
     }
     public void ToggleCompass(bool toggle)
     {
@@ -31,8 +25,12 @@ public class Compass : Spatial
   // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
-        Vector3 globalrot = GlobalRotation;
-        if (globalrot.y != 0)
-            pivot.Rotation = new Vector3(pivot.Rotation.x, -globalrot.y, pivot.Rotation.z);
+        PlayerCamera cam = PlayerCamera.GetInstance();
+        if (cam == null || !Godot.Object.IsInstanceValid(cam))
+            return;
+        GetNode<Sprite>("Sprite2").RotationDegrees = Mathf.Rad2Deg(cam.GlobalRotation.y);
+        //Vector3 globalrot = GlobalRotation;
+        //if (globalrot.y != 0)
+            //pivot.Rotation = new Vector3(pivot.Rotation.x, -globalrot.y, pivot.Rotation.z);
     }
 }

@@ -39,7 +39,7 @@ public partial class UniversalLodManager : Node
   public override void _Process(float delta)
   {
       base._Process(delta);
-      if (CurrentCamera == null)
+      if (CurrentCamera == null || !Godot.Object.IsInstanceValid(CurrentCamera))
           return;
 
       if (Currentcheck == LODedObj.Count)

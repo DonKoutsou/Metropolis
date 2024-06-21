@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://Scenes/Islands/Island23.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/MyWorld.cs" type="Script" id=2]
@@ -26,29 +26,27 @@
 [ext_resource path="res://Scenes/Items/SkeleArm_L.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Scenes/Items/SkeleArm_R.tscn" type="PackedScene" id=25]
 [ext_resource path="res://Scenes/Islands/Island12.tscn" type="PackedScene" id=26]
+[ext_resource path="res://Scenes/Items/Bouzouki.tscn" type="PackedScene" id=27]
 [ext_resource path="res://Scenes/Islands/Island14.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Scenes/Islands/Island15.tscn" type="PackedScene" id=29]
 [ext_resource path="res://Scenes/Islands/Island18.tscn" type="PackedScene" id=30]
 [ext_resource path="res://Scenes/Islands/Island19.tscn" type="PackedScene" id=31]
 [ext_resource path="res://Scenes/Islands/Island20.tscn" type="PackedScene" id=32]
+[ext_resource path="res://Scenes/Items/FastLeg_L.tscn" type="PackedScene" id=33]
+[ext_resource path="res://Scenes/Items/MapItem.tscn" type="PackedScene" id=34]
+[ext_resource path="res://Scenes/Items/Guitar.tscn" type="PackedScene" id=35]
+[ext_resource path="res://Scenes/Items/FastLeg_R.tscn" type="PackedScene" id=36]
+[ext_resource path="res://Scenes/Items/Compass.tscn" type="PackedScene" id=37]
 
 [node name="MyWorld" type="Spatial" groups=["World"]]
 pause_mode = 2
 script = ExtResource( 2 )
-GlobalItemListConfiguration = {
-0: ExtResource( 8 ),
-1: ExtResource( 9 ),
-2: ExtResource( 11 ),
-3: ExtResource( 10 ),
-4: ExtResource( 24 ),
-5: ExtResource( 25 )
-}
+GlobalItemListConfiguration = [ ExtResource( 11 ), ExtResource( 27 ), ExtResource( 10 ), ExtResource( 37 ), ExtResource( 8 ), ExtResource( 33 ), ExtResource( 36 ), ExtResource( 35 ), ExtResource( 9 ), ExtResource( 34 ), ExtResource( 24 ), ExtResource( 25 ) ]
 PlayerScene = ExtResource( 6 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-follow_viewport_enable = true
 
-[node name="InvntoryUI" parent="CanvasLayer" instance=ExtResource( 4 )]
+[node name="InventoryUI" parent="CanvasLayer" instance=ExtResource( 4 )]
 
 [node name="WorldMap" parent="." instance=ExtResource( 7 )]
 pause_mode = 1

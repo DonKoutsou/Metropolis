@@ -9,5 +9,6 @@ public class MapTile : Control
         base._Ready();
         Modulate = new Color(1,1,1,0);
         GetNode<Panel>("SignPanel").Visible = false;
+
     }
 }

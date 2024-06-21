@@ -4,7 +4,16 @@ using System;
 public class Time_UI : RichTextLabel
 {
     static Time_UI instance;
-
+    public override void _EnterTree()
+    {
+        base._EnterTree();
+        instance = this;
+    }
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+        instance = null;
+    }
     public static Time_UI GetInstance()
     {
         return instance;
