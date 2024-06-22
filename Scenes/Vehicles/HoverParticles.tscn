@@ -20,7 +20,7 @@ gravity = Vector3( 0, 0, 0 )
 angular_velocity = 720.0
 radial_accel = 12.4
 radial_accel_random = 0.53
-scale = 12.0
+scale = 15.0
 scale_random = 1.0
 scale_curve = SubResource( 6 )
 

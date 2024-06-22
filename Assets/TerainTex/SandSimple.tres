@@ -1,24 +1,25 @@
 [gd_resource type="SpatialMaterial" load_steps=5 format=2]
 
 [ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_2K-PNG_Roughness.png" type="Texture" id=1]
-[ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_2K-PNG_Color.png" type="Texture" id=2]
-[ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_2K-PNG_AmbientOcclusion.png" type="Texture" id=3]
-[ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_2K-PNG_NormalGL.png" type="Texture" id=4]
+[ext_resource path="res://Assets/TerainTex/Ground059_1K-JPG/Ground059_1K-JPG_AmbientOcclusion.jpg" type="Texture" id=2]
+[ext_resource path="res://Assets/TerainTex/Ground059_1K-JPG/Ground059_1K-JPG_Color.jpg" type="Texture" id=3]
+[ext_resource path="res://Assets/TerainTex/Ground059_1K-JPG/Ground059_1K-JPG_NormalGL.jpg" type="Texture" id=4]
 
 [resource]
 flags_world_triplanar = true
 params_specular_mode = 4
-albedo_texture = ExtResource( 2 )
+albedo_texture = ExtResource( 3 )
 roughness = 0.83
 roughness_texture = ExtResource( 1 )
 roughness_texture_channel = 4
 normal_enabled = true
-normal_scale = 1.0
+normal_scale = 2.0
 normal_texture = ExtResource( 4 )
 ao_enabled = true
 ao_light_affect = 1.0
-ao_texture = ExtResource( 3 )
+ao_texture = ExtResource( 2 )
 ao_on_uv2 = false
 ao_texture_channel = 0
-uv1_scale = Vector3( 0.001, 0.001, 0.001 )
+uv1_scale = Vector3( 0.005, 0.005, 0.005 )
 uv1_triplanar = true
+uv1_triplanar_sharpness = 4.14106

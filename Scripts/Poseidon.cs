@@ -33,8 +33,13 @@ public class Poseidon : Spatial
         anim = GetNode<AnimationPlayer>("AnimationPlayer");
 
         anim.Play("Wave");
-        WorldMap map = (WorldMap)GetParent();
-        map.Connect("OnTransitionEventHandler", this, "SwitchPlaces");
+        
+        if (GetParent() is WorldMap)
+        {
+            WorldMap map = (WorldMap)GetParent();
+            map.Connect("OnTransitionEventHandler", this, "SwitchPlaces");
+        }
+        
         mat = (ShaderMaterial)SeaChild.GetActiveMaterial(0);
         if (mat == null)
             SetProcess(false);

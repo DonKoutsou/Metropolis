@@ -16,7 +16,7 @@ public class GeneratorDoor : StaticBody
     {
         Vector3 pos = Switch.GlobalTranslation;
         pos.y -= Switch.Translation.y;
-        return Switch.GlobalTranslation;
+        return pos;
     }
     public string GetActionName(Vector3 PlayerPos)
     {   

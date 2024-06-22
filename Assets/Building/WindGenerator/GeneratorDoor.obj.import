@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/GeneratorDoor.obj-ba93731ef0195b670eadf897cc79170a.mesh"
+
+[deps]
+
+files=[ "res://.import/GeneratorDoor.obj-ba93731ef0195b670eadf897cc79170a.mesh" ]
+
+source_file="res://Assets/Building/WindGenerator/GeneratorDoor.obj"
+dest_files=[ "res://.import/GeneratorDoor.obj-ba93731ef0195b670eadf897cc79170a.mesh", "res://.import/GeneratorDoor.obj-ba93731ef0195b670eadf897cc79170a.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 30, 30, 30 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

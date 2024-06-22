@@ -333,6 +333,7 @@ public class Character : KinematicBody
 
 		Spatial instrumentparent = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("InstrumentAtatchment").GetNode<Spatial>("Instrument");
 		Instrument bouz = (Instrument)instrumentparent.GetChild(0);
+		bouz.Disconnect("OnSongEnded", this, "OnSongEnded");
 		bouz.ToggleMusic(false);
 		BoneAttachment instatatchment = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("InstrumentAtatchment");
 		instatatchment.GetNode<RemoteTransform>("HolsterAtatchment").RemotePath = instrumentparent.GetPath();
@@ -370,7 +371,7 @@ public class Character : KinematicBody
 	public virtual void OnSongEnded(Instrument inst)
 	{
 		//IdleTimer.Start();
-		inst.Disconnect("OnSongEnded", this, "OnSongEnded");
+		
 		StopMusic();
 		//instatatchment.GetNode<RemoteTransform>("PlayingAtatchment").ForceUpdateCache(); 
 

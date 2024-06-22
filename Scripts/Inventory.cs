@@ -125,6 +125,21 @@ public class Inventory : Spatial
             item.Hide();
             item.GetNode<CollisionShape>("CollisionShape").SetDeferred("disabled",true);
         }
+
+        WorldMap map = WorldMap.GetInstance();
+        if (map != null)
+        {
+            IslandInfo ileinfo = WorldMap.GetInstance().GetCurrentIleInfo();
+            ileinfo.RemoveItem(item);
+            ileinfo.Island.UnRegisterChild(item);
+        }
+        
+
+        //if (item.GetItemType() == (int)ItemName.ROPE)
+        //{
+        //    MeshInstance rope = pl.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("BoneAttachment2").GetNode<MeshInstance>("Rope");
+        //    rope.Show();
+        //}
         InventoryContents.Add(item);
         //EmitSignal(nameof(On_Item_Added), item);
         
@@ -136,7 +151,7 @@ public class Inventory : Spatial
         InventoryContents.Remove(item);
         currentweight -= item.GetInventoryWeight();
         if (item is Instrument && ((Instrument)item).IsPlaying())
-            CharacterOwner.StopMusic();
+            CharacterOwner.OnSongEnded((Instrument)item);
            
         if (item is Limb && ((Limb)item).Equiped)
         {
@@ -146,11 +161,20 @@ public class Inventory : Spatial
         }
         item.GetParent().RemoveChild(item);
         
-        IslandInfo info = WorldMap.GetInstance().GetCurrentIleInfo();
-        Island ile = info.Island;
-        ile.AddChild(item);
-        ile.RegisterChild(item);
-        info.AddNewItem(item);
+        WorldMap map = WorldMap.GetInstance();
+        if (map != null)
+        {
+            IslandInfo info = WorldMap.GetInstance().GetCurrentIleInfo();
+            Island ile = info.Island;
+            ile.AddChild(item);
+            ile.RegisterChild(item);
+            info.AddNewItem(item);
+        }
+        else
+        {
+            CharacterOwner.GetParent().AddChild(item);
+        }
+        
         //WorldMap.GetInstance().AddChild(item);
         item.Show();
         Vector3 loc = ((Character)GetParent()).GlobalTranslation;

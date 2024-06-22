@@ -344,7 +344,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ true ]
+"values": [ false ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("../../../../../../DialogueCameraPivot/DialogueCamera:current")
@@ -356,7 +356,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ true ]
+"values": [ false ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("../../../../../../DialogueCameraPivot/DialogueCamera/DialogueCameraBox:material/0:albedo_color")
@@ -587,6 +587,7 @@ script = ExtResource( 20 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/PlayerCamera"]
 transform = Transform( 1, -5.29396e-22, 0, -1.05879e-22, 1, 0, 2.11758e-21, 0, 1, 0, -0.0144858, -1.05511 )
+visible = false
 mesh = SubResource( 107 )
 material/0 = SubResource( 109 )
 
@@ -613,7 +614,6 @@ update_scale = false
 
 [node name="DialogueCamera" type="Camera" parent="DialogueCameraPivot"]
 transform = Transform( -0.871077, 0, -0.491147, 0, 1, 0, 0.491147, 0, -0.871077, -7.8385, 2.82016, -5.82825 )
-current = true
 fov = 45.0
 near = 1.0
 far = 40000.0

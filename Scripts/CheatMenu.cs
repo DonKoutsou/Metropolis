@@ -89,7 +89,17 @@ public class CheatMenu : Control
 	{
 		Player pl = Player.GetInstance();
 		pl.Teleport(pl.loctomove);
-	} 
+	}
+	private void IncreaseTimeProgression()
+	{
+		Settings.GetGameSettings().IncreaseTimeProgression();
+		GetNode<Panel>("Panel").GetNode<Label>("Label").Text = "TimeProg" + Settings.GetGameSettings().TimeProgression.ToString();
+	}
+	private void DecreaseTimeProgression()
+	{
+		Settings.GetGameSettings().DecreaseTimeProgression();
+		GetNode<Panel>("Panel").GetNode<Label>("Label").Text = "TimeProg" + Settings.GetGameSettings().TimeProgression.ToString();
+	}
 	public void Start()
 	{
 		Show();

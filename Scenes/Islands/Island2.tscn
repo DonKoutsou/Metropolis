@@ -158,7 +158,7 @@ transform = Transform( 196.897, -55.8453, 42.2936, -62.676, -196.794, 31.9368, 3
 skeleton = NodePath("../..")
 
 [node name="Rock3" parent="Clutter" index="2" instance=ExtResource( 23 )]
-transform = Transform( -206.411, -11.3769, 30.6751, -7.10171, 206.854, 28.9314, -31.9368, 27.5324, -204.69, -284.08, 156.512, 344.386 )
+transform = Transform( 23.8061, -61.2137, 198.399, 13.4876, 199.733, 60.0068, -207.189, 5.96874, 26.7025, -1190.54, -162.355, 1662.57 )
 skeleton = NodePath("../..")
 
 [node name="Rock7" parent="Clutter" index="3" instance=ExtResource( 23 )]

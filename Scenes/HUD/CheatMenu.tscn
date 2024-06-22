@@ -165,9 +165,50 @@ theme = ExtResource( 3 )
 action_mode = 0
 text = "TP"
 
+[node name="Panel" type="Panel" parent="."]
+margin_top = 390.0
+margin_right = 141.0
+margin_bottom = 522.0
+
+[node name="Button" type="Button" parent="Panel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -33.5
+margin_top = 11.0
+margin_right = 33.5
+margin_bottom = 32.0
+text = "+"
+
+[node name="Button2" type="Button" parent="Panel"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -31.5
+margin_top = -37.0
+margin_right = 31.5
+margin_bottom = -16.0
+text = "-"
+
+[node name="Label" type="Label" parent="Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -32.5
+margin_top = -15.5
+margin_right = 32.5
+margin_bottom = 15.5
+text = "TimeProg 1"
+align = 1
+valign = 1
+autowrap = true
+
 [connection signal="button_down" from="FastRun_Button" to="." method="On_FastRun_Button_Down"]
 [connection signal="button_down" from="InfCamera" to="." method="On_InfCamera_Button_Down"]
 [connection signal="button_down" from="FPS" to="." method="On_FPS_Button_Down"]
 [connection signal="button_down" from="TestKill" to="." method="On_Kill_Button_Down"]
 [connection signal="button_down" from="Tp_ToLoc" to="." method="On_ToLoc_Button_Down"]
 [connection signal="button_down" from="TeleportPanel/Tp" to="." method="On_TP_Button_Down"]
+[connection signal="pressed" from="Panel/Button" to="." method="IncreaseTimeProgression"]
+[connection signal="pressed" from="Panel/Button2" to="." method="DecreaseTimeProgression"]

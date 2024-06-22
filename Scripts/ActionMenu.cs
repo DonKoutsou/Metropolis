@@ -83,15 +83,7 @@ public class ActionMenu : Control
 			}
 			else
 			{
-				IslandInfo ileinfo = WorldMap.GetInstance().GetCurrentIleInfo();
-				ileinfo.RemoveItem(it);
-				ileinfo.Island.UnRegisterChild(it);
-
-				if (it.GetItemType() == (int)ItemName.ROPE)
-				{
-					MeshInstance rope = pl.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("BoneAttachment2").GetNode<MeshInstance>("Rope");
-					rope.Show();
-				}
+				
 			}
 			
 		}

@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Assets/Clouds/Textures/smoke_01.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/Doors.cs" type="Script" id=3]
@@ -29,13 +29,13 @@ min_value = -360.0
 max_value = 360.0
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 150.184 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=32]
+[sub_resource type="CurveTexture" id=49]
 curve = SubResource( 31 )
 
 [sub_resource type="Curve" id=43]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.736022, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=44]
+[sub_resource type="CurveTexture" id=50]
 curve = SubResource( 43 )
 
 [sub_resource type="ParticlesMaterial" id=29]
@@ -46,12 +46,12 @@ direction = Vector3( 0, 5, -10 )
 spread = 9.06
 gravity = Vector3( 0, 10, 0 )
 initial_velocity = 1.0
-angular_velocity_curve = SubResource( 32 )
+angular_velocity_curve = SubResource( 49 )
 radial_accel = 8.26
 angle = 291.1
 angle_random = 0.95
 scale = 10.0
-scale_curve = SubResource( 44 )
+scale_curve = SubResource( 50 )
 
 [sub_resource type="SpatialMaterial" id=39]
 flags_transparent = true
@@ -72,8 +72,18 @@ data = PoolVector3Array( -25, 30, 1, 25, 30, 1, -25, -30, 1, 25, 30, 1, 25, -30,
 [sub_resource type="OccluderShapePolygon" id=46]
 polygon_points = PoolVector2Array( 25, -30, 25, 30, -25, 30, -25, -30 )
 
+[sub_resource type="SpatialMaterial" id=51]
+flags_transparent = true
+params_blend_mode = 1
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_color = Color( 1, 1, 1, 0.34902 )
+albedo_texture = ExtResource( 2 )
+
 [sub_resource type="QuadMesh" id=40]
-material = SubResource( 39 )
+material = SubResource( 51 )
 
 [sub_resource type="ConcavePolygonShape" id=34]
 data = PoolVector3Array( -25, 30, 1, 25, 30, 1, -25, -30, 1, 25, 30, 1, 25, -30, 1, -25, -30, 1, 25, 30, -1, -25, 30, -1, 25, -30, -1, -25, 30, -1, -25, -30, -1, 25, -30, -1, 25, 30, 1, 25, 30, -1, 25, -30, 1, 25, 30, -1, 25, -30, -1, 25, -30, 1, -25, 30, -1, -25, 30, 1, -25, -30, -1, -25, 30, 1, -25, -30, 1, -25, -30, -1, 25, 30, 1, -25, 30, 1, 25, 30, -1, -25, 30, 1, -25, 30, -1, 25, 30, -1, -25, -30, 1, 25, -30, 1, -25, -30, -1, 25, -30, 1, 25, -30, -1, -25, -30, -1 )
@@ -380,7 +390,21 @@ tracks/7/keys = {
 [sub_resource type="BoxShape" id=35]
 extents = Vector3( 49.9939, 42.7251, 62.294 )
 
-[sub_resource type="ParticlesMaterial" id=45]
+[sub_resource type="Curve" id=45]
+min_value = -360.0
+max_value = 360.0
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 150.184 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=32]
+curve = SubResource( 45 )
+
+[sub_resource type="Curve" id=52]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.736022, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=44]
+curve = SubResource( 52 )
+
+[sub_resource type="ParticlesMaterial" id=53]
 lifetime_randomness = 0.74
 emission_shape = 2
 emission_box_extents = Vector3( 1, 30, 0.2 )
@@ -496,7 +520,7 @@ generate_lightmap = false
 amount = 25
 local_coords = false
 draw_order = 2
-process_material = SubResource( 45 )
+process_material = SubResource( 53 )
 draw_pass_1 = SubResource( 42 )
 
 [node name="Particles2" type="Particles" parent="."]
@@ -507,7 +531,7 @@ generate_lightmap = false
 amount = 25
 local_coords = false
 draw_order = 2
-process_material = SubResource( 45 )
+process_material = SubResource( 53 )
 draw_pass_1 = SubResource( 42 )
 
 [connection signal="body_entered" from="Area" to="." method="Entered_Area"]

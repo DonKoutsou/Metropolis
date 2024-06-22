@@ -141,6 +141,7 @@ scale_random = 0.8
 scale_curve = SubResource( 105 )
 
 [sub_resource type="SpatialMaterial" id=109]
+render_priority = 1
 flags_unshaded = true
 vertex_color_use_as_albedo = true
 params_blend_mode = 1
@@ -528,7 +529,6 @@ skeleton = NodePath("../..")
 material/0 = ExtResource( 1 )
 
 [node name="Particles" parent="RayFL/EnginePivot" instance=ExtResource( 8 )]
-transform = Transform( 1, 2.05473e-08, -1.86265e-08, -2.05193e-08, 1, 1.42027e-08, 1.89757e-08, -1.42027e-08, 1, -0.00278616, -4.17923, -0.00447273 )
 
 [node name="RayFR" type="RayCast" parent="."]
 transform = Transform( 1, 2.14628e-07, 4.709e-08, -2.12491e-07, 1, -2.15368e-08, -6.36792e-08, 2.15368e-08, 1, -6.33755, 0.798699, 11.0606 )
@@ -539,14 +539,13 @@ collision_mask = 260
 [node name="EnginePivot" type="Spatial" parent="RayFR"]
 transform = Transform( 1, -5.11022e-11, 0, 7.73639e-11, 1, 1.16415e-10, 0, 0, 1, 0, 0, 0 )
 
-[node name="Particles" parent="RayFR/EnginePivot" instance=ExtResource( 8 )]
-transform = Transform( 1, 2.05187e-08, -1.86265e-08, -2.06256e-08, 1, 1.44355e-08, 1.91503e-08, -1.45519e-08, 1, -0.00278592, -4.17923, -0.00447178 )
-
 [node name="MeshInstance" type="MeshInstance" parent="RayFR/EnginePivot"]
 transform = Transform( 1, -5.12159e-11, 0, 2.52044e-10, 1, 3.49246e-10, -5.82077e-11, 0, 1, -0.00133324, -2, -0.00214005 )
 mesh = SubResource( 33 )
 skeleton = NodePath("../..")
 material/0 = ExtResource( 1 )
+
+[node name="Particles" parent="RayFR/EnginePivot" instance=ExtResource( 8 )]
 
 [node name="RayBR" type="RayCast" parent="."]
 transform = Transform( 1, 2.34124e-07, 4.52274e-08, -2.3199e-07, 1, -1.6531e-08, -6.43195e-08, 1.6531e-08, 1, -7, 0.8, -9 )
@@ -564,7 +563,6 @@ skeleton = NodePath("../..")
 material/0 = ExtResource( 1 )
 
 [node name="Particles" parent="RayBR/EnginePivot" instance=ExtResource( 8 )]
-transform = Transform( 1, 2.05744e-08, -1.86265e-08, -2.06348e-08, 1, 1.44355e-08, 1.90921e-08, -1.45519e-08, 1, -0.00278616, -4.17923, -0.00447273 )
 
 [node name="RayBL" type="RayCast" parent="."]
 transform = Transform( 1, 2.33601e-07, 4.45289e-08, -2.31526e-07, 1, -1.80444e-08, -6.28643e-08, 1.80444e-08, 1, 7, 0.8, -9 )
@@ -582,6 +580,5 @@ skeleton = NodePath("../..")
 material/0 = ExtResource( 1 )
 
 [node name="Particles" parent="RayBL/EnginePivot" instance=ExtResource( 8 )]
-transform = Transform( 1, 2.05738e-08, -1.86265e-08, -2.05772e-08, 1, 1.44355e-08, 1.90921e-08, -1.45519e-08, 1, -0.00278616, -4.17923, -0.00447273 )
 
 [connection signal="body_shape_exited" from="VehicleBody" to="VehicleDamageManager" method="On_Ship_Part_Collided"]

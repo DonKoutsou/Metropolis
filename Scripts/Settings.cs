@@ -49,12 +49,12 @@ public class Settings : Control
 		if (cam != null)
 			cam.Fov = FOVOverride;
 	}
-	private void IncreaseTimeProgression()
+	public void IncreaseTimeProgression()
 	{
 		TimeProgression += 1;
 		UpdateTimeProgression();
 	}
-	private void DecreaseTimeProgression()
+	public void DecreaseTimeProgression()
 	{
 		if (TimeProgression == 1)
 			return;
