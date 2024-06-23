@@ -14,7 +14,7 @@ public class CheatMenu : Control
 {
 	Player pl;
 
-	CameraMovePivot CamMove;
+	//CameraMovePivot CamMove;
 
 	CameraZoomPivot CamZoom;
 
@@ -45,7 +45,7 @@ public class CheatMenu : Control
 	{
 		if (HasInfCam)
 		{
-			CamMove.MaxDist = 150.0f;
+			//CamMove.MaxDist = 150.0f;
 			CamZoom.MaxDist = 150.0f;
 			//CamMove.Frame();
 			CamZoom.Frame();
@@ -53,7 +53,7 @@ public class CheatMenu : Control
 		}
 		else
 		{
-			CamMove.MaxDist = 9999999.0f;
+			//CamMove.MaxDist = 9999999.0f;
 			CamZoom.MaxDist = 9999999.0f;
 			HasInfCam = true;
 		}
@@ -121,8 +121,8 @@ public class CheatMenu : Control
 			return;
 		}
 		pl = (Player)GetParent().GetParent();
-		CamMove = pl.GetNode<CameraMovePivot>("CameraMovePivot");
-		CameraPanPivot pan = CamMove.GetNode<CameraPanPivot>("CameraPanPivot");
+		//CamMove = pl.GetNode<CameraMovePivot>("CameraMovePivot");
+		CameraPanPivot pan = pl.GetNode<Position3D>("CameraMovePivot").GetNode<CameraPanPivot>("CameraPanPivot");
 		CamZoom = pan.GetNode<SpringArm>("SpringArm").GetNode<CameraZoomPivot>("CameraZoomPivot");
 		FpsCounter = GetNode<Label>("FPS_Counter");
 	}

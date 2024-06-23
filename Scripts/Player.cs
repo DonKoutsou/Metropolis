@@ -23,6 +23,8 @@ public class Player : Character
 	//Consumption curve
 	[Export]
 	Curve Consumption = null;
+	[Export]
+	public float InventoryWeightOverride = -1;
 	////// Rpm to base consumption on /////
 	public float rpm;
 	//Node Used to show where player is moving
@@ -71,6 +73,13 @@ public class Player : Character
 	public override void _Ready()
 	{
 		base._Ready();
+
+		ToggleAllLimbs();
+		CharacterInventory = GetNode<Inventory>("Inventory");
+		if (InventoryWeightOverride != -1)
+		{
+			CharacterInventory.OverrideWeight(InventoryWeightOverride);
+		}
 
 		moveloc = GetNode<MoveLocation>("MoveLoc");
 		
@@ -344,12 +353,12 @@ public class Player : Character
 	}
 	public override void OnKillFieldDetectorBodyEntered(Node body)
 	{
-		Kill();
+		Kill("Πνίξιμο");
 	}
-	public override void Kill()
+	public override void Kill(string reason = null)
 	{
-		base.Kill();
-		MyWorld.GetInstance().OnPlayerKilled();
+		base.Kill(reason);
+		MyWorld.GetInstance().OnPlayerKilled(reason);
 	}
 	public override void OnVehicleBoard(Vehicle Veh)
 	{

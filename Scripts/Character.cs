@@ -24,8 +24,7 @@ public class Character : KinematicBody
 	[Export]
 	public DialogueLine[] lines;
 
-	[Export]
-	float InventoryWeightOverride = -1;
+	
 
 	public Inventory CharacterInventory;
 
@@ -81,18 +80,19 @@ public class Character : KinematicBody
     }
 	public override void _Ready()
 	{
-		if (this is Player)
-		{
-			CharacterInventory = GetNode<Inventory>("Inventory");
-			if (InventoryWeightOverride != -1)
-			{
-				CharacterInventory.OverrideWeight(InventoryWeightOverride);
-			}
-		}
+
 		anim = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Character_Animations>("AnimationPlayer");
 		HeadPivot = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("BoneAttachment").GetNode<Spatial>("HeadPivot");
 		NightLight = HeadPivot.GetNode<SpotLight>("NightLight");
 		BulbMat = (SpatialMaterial)HeadPivot.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0);
+	}
+	public void ToggleAllLimbs()
+	{
+		Spatial skel = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton");
+		for (int i = 0; i < 5; i++)
+		{
+			skel.GetNode<MeshInstance>(LimbTranslator.EnumToString((LimbType)0)).Visible = false;
+		}
 	}
 	public override void _EnterTree()
 	{
@@ -212,7 +212,7 @@ public class Character : KinematicBody
 		anim.ToggleIdle();
 		Start();
 	}
-	public virtual void Kill()
+	public virtual void Kill(string reason = null)
 	{
 
 		m_balive = false;

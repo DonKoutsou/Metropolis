@@ -121,10 +121,10 @@ public class MyWorld : Spatial
 		CameraAnimationPlayer.GetInstance().FadeIn(6);
 		return pl;
 	}
-	public void OnPlayerKilled()	
+	public void OnPlayerKilled(string reason = null)	
 	{
 		StartingScreen start = ((MainWorld)GetParent()).GetStartingScreen();
-		start.GameOver();
+		start.GameOver(reason);
 		SaveLoadManager.GetInstance().ClearSaves();
 	}
 	public void AttemptDeathSave()

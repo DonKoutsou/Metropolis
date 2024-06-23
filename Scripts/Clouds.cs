@@ -12,7 +12,7 @@ public class Clouds : Spatial
             return;
         d = 0.5f;
         Vector3 org = ((Spatial)GetParent()).GlobalTranslation;
-        GlobalTranslation = new Vector3 (org.x, 2100, org.z);
+        GlobalTranslation = new Vector3 (org.x, 2500, org.z);
     }
     public override void _EnterTree()
     {

@@ -21,7 +21,9 @@ public enum LimbType
     ARM_L,
     ARM_R,
     LEG_L,
-    LEG_R
+    LEG_R,
+    N01_LEG_L,
+    N01_Leg_R,
 }
 static public class LimbTranslator
 {
@@ -48,6 +50,16 @@ static public class LimbTranslator
             case LimbType.LEG_R:
             {
                 thing = "Leg_R";
+                break;
+            }
+            case LimbType.N01_LEG_L:
+            {
+                thing = "Leg2_L";
+                break;
+            }
+            case LimbType.N01_Leg_R:
+            {
+                thing = "Leg2_R";
                 break;
             }
         }

@@ -29,7 +29,7 @@ script = ExtResource( 3 )
 VehSpawns = [ ExtResource( 7 ), ExtResource( 6 ), ExtResource( 8 ) ]
 
 [node name="WindGenerator3" parent="." instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2564.12, -361.668, -2176.5 )
+transform = Transform( -0.39147, 0, 0.920191, 0, 1, 0, -0.920191, 0, -0.39147, 2564.12, -0.0667419, -2176.5 )
 
 [node name="WindGenerator8" parent="." instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1472.22, -361.668, 1736.73 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1472.22, 0.84626, 1736.73 )

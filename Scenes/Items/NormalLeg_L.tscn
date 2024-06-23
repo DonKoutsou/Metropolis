@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scripts/Limb.cs" type="Script" id=1]
+[ext_resource path="res://Assets/NormalLegs/NormalLeg_L_Item.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://Assets/FastLegs/FastLeg_L.png" type="Texture" id=3]
+[ext_resource path="res://Assets/NormalLegs/M_Legs.material" type="Material" id=4]
+[ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=5]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.795704, 0.238448, 2.07675 )
+
+[node name="Item" type="RigidBody" groups=["Interactables"]]
+collision_layer = 16
+collision_mask = 36
+mode = 1
+mass = 0.0346939
+linear_damp = 1.22
+angular_damp = 1.22
+script = ExtResource( 1 )
+ItemWeight = 3.0
+ItemType = 6
+ItemIcon = ExtResource( 3 )
+ItemPickupActionName = "Ένα χέρι.."
+ItemName = "Αριστερό άκρο ταχύτητας"
+ItemDesc = ""
+stackable = false
+Type = 4
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 0.790871, 0, -0.611983, 0, 1, 0, 0.611983, 0, 0.790871, 0, 0, 0 )
+mesh = ExtResource( 2 )
+material/0 = ExtResource( 4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( -0.621134, 0, -0.783704, 0, 1, 0, 0.783704, 0, -0.621134, 0.0334845, 0.291984, -0.0374186 )
+shape = SubResource( 1 )
+
+[node name="ActionComponent" parent="." instance=ExtResource( 5 )]
+ActionDistance = 5.0

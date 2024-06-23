@@ -114,7 +114,7 @@ public class StartingScreen : Control
 		SaveLoadManager.GetInstance().SaveGame();
 		GetTree().Quit();
 	}
-		public void Pause(bool toggle)
+	public void Pause(bool toggle)
 	{
 		if (toggle)
 			MouseFilter = MouseFilterEnum.Stop;
@@ -123,8 +123,9 @@ public class StartingScreen : Control
 
 		//GetNode<Control>("MainScreen").Visible = toggle;
 		GetNode<Control>("Settings").Visible = toggle;
+		GetNode<Label>("PauseLabel").Visible = toggle;	
 	}
-	public void GameOver()
+	public void GameOver(string reason = null)
 	{
 		GetNode<Timer>("RestartTimer").Start();
 		GetNode<Label>("GameOverLabel").Visible = true;

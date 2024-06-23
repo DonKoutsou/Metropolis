@@ -454,7 +454,6 @@ mesh = SubResource( 31 )
 transform = Transform( 0.999998, -0.000111042, -0.00137818, -0.00138151, -0.12076, -0.992681, -5.62005e-05, 0.992682, -0.12076, 0.000247595, 0.441803, -0.0692534 )
 light_color = Color( 1, 0.956863, 0.815686, 1 )
 shadow_enabled = true
-shadow_bias = 0.22
 shadow_reverse_cull_face = true
 spot_range = 519.392
 spot_attenuation = 2.14354

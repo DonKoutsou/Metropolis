@@ -1,18 +1,17 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/HUD/SplashScreenPanelTheme.tres" type="StyleBox" id=2]
 [ext_resource path="res://Fonts/Caudex-Bold.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Scripts/CityNameUI.cs" type="Script" id=5]
+[ext_resource path="res://Scenes/Items/NormalLeg_R.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Inventory/Inventory.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/Items/FastLeg_L.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Items/FastLeg_R.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Items/NormalLeg_L.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Items/Bouzouki.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scripts/CameraZoomPivot.cs" type="Script" id=12]
 [ext_resource path="res://Scripts/PlayerUI.cs" type="Script" id=13]
 [ext_resource path="res://Scripts/CameraPanPivot.cs" type="Script" id=14]
-[ext_resource path="res://Scripts/CameraMovePivot.cs" type="Script" id=15]
 [ext_resource path="res://Scenes/Characters/MoveLocation.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/Characters/Gen3Machine/Body.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scripts/Time_UI.cs" type="Script" id=18]
@@ -36,7 +35,7 @@ _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.5 ), 0.0, 0.0, 0, 0 ]
 height = 5.27483
 
 [sub_resource type="CapsuleShape" id=92]
-height = 1.963
+height = 1.97053
 
 [sub_resource type="DynamicFont" id=79]
 size = 54
@@ -403,7 +402,7 @@ albedo_color = Color( 0, 0, 0, 0 )
 [node name="Player" type="KinematicBody" groups=["player"]]
 pause_mode = 1
 collision_layer = 9
-collision_mask = 311
+collision_mask = 55
 script = ExtResource( 1 )
 JumpImpulse = 30
 RunSpeed = 50
@@ -424,17 +423,18 @@ transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3.64
 shape = SubResource( 6 )
 
 [node name="KillFieldDetector" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.57626, 0 )
 collision_layer = 0
-collision_mask = 128
+collision_mask = 256
 monitorable = false
 
 [node name="CollisionShape" type="CollisionShape" parent="KillFieldDetector"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.48264, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.72654, 0 )
 shape = SubResource( 92 )
 
 [node name="Inventory" parent="." instance=ExtResource( 7 )]
 Capacity = 40.0
-StartingItems = [ ExtResource( 25 ), ExtResource( 27 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ]
+StartingItems = [ ExtResource( 25 ), ExtResource( 27 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 10 ) ]
 
 [node name="PlayerUI" type="Spatial" parent="."]
 script = ExtResource( 13 )
@@ -551,7 +551,6 @@ anims/Show = SubResource( 122 )
 [node name="CameraMovePivot" type="Position3D" parent="."]
 pause_mode = 1
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00875211, -0.0306139, -0.0222187 )
-script = ExtResource( 15 )
 
 [node name="Listener" type="Listener" parent="CameraMovePivot"]
 transform = Transform( 0.999998, 0, 0, 0, 1, 0, 0, 0, 0.999998, 0, 6.70394, 0.354646 )
