@@ -242,10 +242,11 @@ public class WorldMap : TileMap
 			{
 				if (entry.Value.KeepInstance == true)
 				{
-					SpawnIsland(entry.Value).InputData(entry.Value);
+					Island ile = SpawnIsland(entry.Value);
 					
-					//MyWorld.GetInstance().ToggleIsland(entry.Value, true, false);
-					//MyWorld.GetInstance().ToggleIsland(entry.Value, false, false);
+					MyWorld.GetInstance().ToggleIsland(entry.Value, true, false);
+					MyWorld.GetInstance().ToggleIsland(entry.Value, false, false);
+					ile.InputData(entry.Value);
 				}
 			}
 			//((MyWorld)GetParent()).ToggleIsland(CurIle, true, true);

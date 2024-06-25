@@ -380,44 +380,44 @@ public class Island : Spatial
 	}
 	public void RegisterChild(Node child)
 	{
-		if (child is House && !Houses.Contains(child))
-			Houses.Insert(Houses.Count, (House)child);
-		else if (child is WindGenerator && !Generators.Contains(child))
-			Generators.Insert(Generators.Count, (WindGenerator)child);
-		else if (child is Vehicle && !Vehicles.Contains(child))
-			Vehicles.Insert(Vehicles.Count, (Vehicle)child);
-		else if (child is Item && !Items.Contains(child))
-			Items.Insert(Items.Count, (Item)child);
-		else if (child is Character && !Characters.Contains(child))
-			Characters.Insert(Characters.Count, (Character)child);
+		if (child is House house && !Houses.Contains(child))
+			Houses.Insert(Houses.Count, house);
+		else if (child is WindGenerator generator && !Generators.Contains(child))
+			Generators.Insert(Generators.Count, generator);
+		else if (child is Vehicle vehicle && !Vehicles.Contains(child))
+			Vehicles.Insert(Vehicles.Count, vehicle);
+		else if (child is Item item && !Items.Contains(child))
+			Items.Insert(Items.Count, item);
+		else if (child is Character character && !Characters.Contains(child))
+			Characters.Insert(Characters.Count, character);
 	}
 	public void UnRegisterChild(Node child)
 	{
-		if (child is House)
-			Houses.Remove((House)child);
-		else if (child is WindGenerator)
-			Generators.Remove((WindGenerator)child);
-		else if (child is Vehicle)
-			Vehicles.Remove((Vehicle)child);
-		else if (child is Item)
-			Items.Remove((Item)child);
-		else if (child is Character)
-			Characters.Remove((Character)child);
+		if (child is House house)
+			Houses.Remove(house);
+		else if (child is WindGenerator generator)
+			Generators.Remove(generator);
+		else if (child is Vehicle vehicle)
+			Vehicles.Remove(vehicle);
+		else if (child is Item item)
+			Items.Remove(item);
+		else if (child is Character character)
+			Characters.Remove(character);
 	}
 	public void FindChildren(Node node)
 	{
 		//ulong ms = OS.GetSystemTimeMsecs();
 		foreach (Node child in node.GetChildren())
 		{
-			if (child is House)
+			if (child is House && !Houses.Contains(child))
 				Houses.Insert(Houses.Count, (House)child);
-			else if (child is WindGenerator)
+			else if (child is WindGenerator && !Generators.Contains(child))
 				Generators.Insert(Generators.Count, (WindGenerator)child);
-			else if (child is Vehicle)
+			else if (child is Vehicle && !Vehicles.Contains(child))
 				Vehicles.Insert(Vehicles.Count, (Vehicle)child);
-			else if (child is Item)
+			else if (child is Item && !Items.Contains(child))
 				Items.Insert(Items.Count, (Item)child);
-			else if (child is Character)
+			else if (child is Character && !Houses.Contains(child))
 				Characters.Insert(Characters.Count, (Character)child);
 			else
 				FindChildren(child);
@@ -974,6 +974,13 @@ public class ItemInfo
 			else
 				CustomData.Add("CurrentEnergy", ((Battery)it).GetCurrentCap());
 		}
+		if (it is Limb)
+		{
+			if (CustomData.ContainsKey("LimbColor"))
+				CustomData["LimbColor"] = ((Limb)it).GetColor();
+			else
+				CustomData.Add("LimbColor", ((Limb)it).GetColor());
+		}
 	}
 	public Dictionary<string, object>GetPackedData(out bool HasData)
 	{
@@ -1004,12 +1011,17 @@ public class ItemInfo
         Position = (Vector3)data.Get("Position");
 		Name = (string)data.Get("Name");
 		SceneData = (string)data.Get("SceneData");
-		Godot.Collections.Array CustomDataKeys = (Godot.Collections.Array)data.Get("CustomDataKeys");
+		var thing = data.Get("CustomDataKeys");
+		if (thing is Godot.Collections.Array)
+		{
+			return;
+		}
+		string[] CustomDataKeys = (string[])data.Get("CustomDataKeys");
 		Godot.Collections.Array CustomDataValues = (Godot.Collections.Array)data.Get("CustomDataValues");
 
-		if (CustomDataKeys.Count > 0 && CustomDataValues.Count > 0)
+		if (CustomDataKeys.Count() > 0 && CustomDataValues.Count > 0)
 		{
-			for (int i = 0; i < CustomDataKeys.Count; i++)
+			for (int i = 0; i < CustomDataKeys.Count(); i++)
 			{
 				CustomData.Add((string)CustomDataKeys[i], CustomDataValues[i]);
 			}

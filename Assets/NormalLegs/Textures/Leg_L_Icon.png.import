@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Bouzouki.png-68439d36691816e6c6003d208c62951c.stex"
+path="res://.import/Leg_L_Icon.png-0c880be961ba77ba348013056fa53735.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Bouzouki/Bouzouki.png"
-dest_files=[ "res://.import/Bouzouki.png-68439d36691816e6c6003d208c62951c.stex" ]
+source_file="res://Assets/NormalLegs/Textures/Leg_L_Icon.png"
+dest_files=[ "res://.import/Leg_L_Icon.png-0c880be961ba77ba348013056fa53735.stex" ]
 
 [params]
 
@@ -22,7 +22,7 @@ compress/normal_map=0
 flags/repeat=0
 flags/filter=true
 flags/mipmaps=false
-flags/anisotropic=true
+flags/anisotropic=false
 flags/srgb=2
 process/fix_alpha_border=true
 process/premult_alpha=false

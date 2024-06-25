@@ -34,6 +34,8 @@ public class Inventory : Spatial
         CharacterOwner.ToggleLimb(LimbType.ARM_R, false);
         CharacterOwner.ToggleLimb(LimbType.LEG_L, false);
         CharacterOwner.ToggleLimb(LimbType.LEG_R, false);
+        CharacterOwner.ToggleLimb(LimbType.N01_LEG_R, false);
+        CharacterOwner.ToggleLimb(LimbType.N01_LEG_L, false);
         if (StartingItems == null)
             return;
         for (int i = 0; i < StartingItems.Count(); i ++)
@@ -88,6 +90,10 @@ public class Inventory : Spatial
                     {
                         ((Battery)newItem).SetCurrentCap((float)CustomDataValues[i]);
                     }
+                    if ((string)CustomDataKeys.GetValue(i) == "LimbColor")
+                    {
+                        ((Limb)newItem).SetColor((Color)CustomDataValues[i]);
+                    }
                 }
             }
             InsertItem(newItem);
@@ -118,6 +124,7 @@ public class Inventory : Spatial
             {
                 Limb limb = (Limb)item;
                 CharacterOwner.ToggleLimb(limb.GetLimbType(), true);
+                CharacterOwner.SetLimbColor(limb.GetLimbType(), limb.GetColor());
                 limb.Equiped = true;
             }
                 

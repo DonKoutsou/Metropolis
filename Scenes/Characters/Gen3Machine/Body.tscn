@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://Assets/FastLegs/M_Legs.material" type="Material" id=1]
 [ext_resource path="res://Assets/Gen3Machine/Gen3Machine.glb" type="PackedScene" id=2]
@@ -11,7 +11,69 @@
 [ext_resource path="res://Assets/Clouds/Textures/smoke_01.png" type="Texture" id=9]
 [ext_resource path="res://Scripts/Character_Animations.cs" type="Script" id=10]
 [ext_resource path="res://Assets/Sounds/WalkingSound.mp3" type="AudioStream" id=11]
+[ext_resource path="res://Assets/NormalLegs/Textures/Lowp_M_Legs_Normal.png" type="Texture" id=12]
+[ext_resource path="res://Assets/NormalLegs/Textures/Lowp_M_Legs_OcclusionRoughnessMetallic.png" type="Texture" id=13]
 [ext_resource path="res://Scripts/CharacterSoundManager.cs" type="Script" id=14]
+[ext_resource path="res://Assets/NormalLegs/Textures/Lowp_M_Legs_BaseColor.png" type="Texture" id=15]
+[ext_resource path="res://Assets/NormalLegs/Textures/Lowp_M_Legs_Mask.png" type="Texture" id=16]
+[ext_resource path="res://shaders/OutlineShader.tres" type="Material" id=17]
+
+[sub_resource type="Gradient" id=1]
+resource_local_to_scene = true
+offsets = PoolRealArray( 0 )
+colors = PoolColorArray( 0.0431373, 0.403922, 1, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+resource_local_to_scene = true
+gradient = SubResource( 1 )
+
+[sub_resource type="SpatialMaterial" id=65]
+resource_local_to_scene = true
+resource_name = "M_Legs"
+next_pass = ExtResource( 17 )
+albedo_texture = ExtResource( 15 )
+metallic = 1.0
+metallic_texture = ExtResource( 13 )
+metallic_texture_channel = 2
+roughness_texture = ExtResource( 13 )
+roughness_texture_channel = 1
+normal_enabled = true
+normal_scale = -1.0
+normal_texture = ExtResource( 12 )
+ao_enabled = true
+ao_light_affect = 1.0
+ao_texture = ExtResource( 13 )
+ao_on_uv2 = false
+ao_texture_channel = 0
+detail_enabled = true
+detail_mask = ExtResource( 16 )
+detail_blend_mode = 0
+detail_uv_layer = 0
+detail_albedo = SubResource( 2 )
+
+[sub_resource type="SpatialMaterial" id=66]
+resource_local_to_scene = true
+resource_name = "M_Legs"
+next_pass = ExtResource( 17 )
+albedo_texture = ExtResource( 15 )
+metallic = 1.0
+metallic_texture = ExtResource( 13 )
+metallic_texture_channel = 2
+roughness_texture = ExtResource( 13 )
+roughness_texture_channel = 1
+normal_enabled = true
+normal_scale = -1.0
+normal_texture = ExtResource( 12 )
+ao_enabled = true
+ao_light_affect = 1.0
+ao_texture = ExtResource( 13 )
+ao_on_uv2 = false
+ao_texture_channel = 0
+detail_enabled = true
+detail_mask = ExtResource( 16 )
+detail_blend_mode = 0
+detail_uv_layer = 0
+detail_albedo = SubResource( 2 )
 
 [sub_resource type="SpatialMaterial" id=63]
 albedo_color = Color( 0.952941, 0.921569, 0.831373, 1 )
@@ -68,7 +130,7 @@ nodes/ChairBlend/position = Vector2( 186.667, 160 )
 nodes/IntrumentBlend/node = SubResource( 54 )
 nodes/IntrumentBlend/position = Vector2( 360, 266.667 )
 nodes/output/position = Vector2( 533.333, 160 )
-node_connections = [ "output", 0, "IntrumentBlend", "IntrumentBlend", 0, "ChairBlend", "IntrumentBlend", 1, "Animation 2", "ChairBlend", 0, "Animation", "ChairBlend", 1, "Animation 3" ]
+node_connections = [ "IntrumentBlend", 0, "ChairBlend", "IntrumentBlend", 1, "Animation 2", "ChairBlend", 0, "Animation", "ChairBlend", 1, "Animation 3", "output", 0, "IntrumentBlend" ]
 
 [sub_resource type="AnimationNodeAnimation" id=55]
 animation = "Standing"
@@ -167,12 +229,11 @@ material/0 = ExtResource( 7 )
 material/1 = ExtResource( 7 )
 
 [node name="Leg2_R" parent="Armature/Skeleton" index="6"]
-visible = false
-material/0 = ExtResource( 7 )
-material/1 = ExtResource( 7 )
+material/0 = SubResource( 65 )
+material/1 = SubResource( 66 )
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton" index="7"]
-transform = Transform( 0.99684, -0.0687798, -0.0397278, 0.0636048, 0.990806, -0.119404, 0.047575, 0.116499, 0.992051, -2.55594, 265.607, 12.0724 )
+transform = Transform( 0.996721, -0.0698308, -0.0408694, 0.0644944, 0.990695, -0.119848, 0.0488582, 0.116819, 0.991951, -2.63909, 265.571, 12.2949 )
 bone_name = "mixamorig_Head"
 
 [node name="HeadPivot" type="Spatial" parent="Armature/Skeleton/BoneAttachment" index="0"]
@@ -199,7 +260,7 @@ spot_angle = 47.5769
 spot_angle_attenuation = 0.25
 
 [node name="InstrumentAtatchment" type="BoneAttachment" parent="Armature/Skeleton" index="8"]
-transform = Transform( 0.997481, -0.0254459, -0.0662057, 0.023992, 0.999455, -0.0226636, 0.0667463, 0.0210182, 0.997549, 0.611685, 213.301, 0.437155 )
+transform = Transform( 0.997427, -0.0261774, -0.0667297, 0.0245625, 0.999388, -0.0249089, 0.0673409, 0.0232057, 0.99746, 0.575972, 213.303, 0.532048 )
 bone_name = "mixamorig_Spine1"
 
 [node name="PlayingAtatchment" type="RemoteTransform" parent="Armature/Skeleton/InstrumentAtatchment" index="0"]

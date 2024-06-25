@@ -367,6 +367,11 @@ public class Character : KinematicBody
 	{
 		GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>(LimbTranslator.EnumToString(limb)).Visible = toggle;
 	}
+	public void SetLimbColor(LimbType limb, Color colorarion)
+	{
+		MeshInstance limbtocolor = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>(LimbTranslator.EnumToString(limb));
+		((GradientTexture)((SpatialMaterial)limbtocolor.GetActiveMaterial(0)).DetailAlbedo).Gradient.SetColor(0, colorarion);
+	}
 
 	public virtual void OnSongEnded(Instrument inst)
 	{

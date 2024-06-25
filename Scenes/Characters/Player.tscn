@@ -604,6 +604,7 @@ update_position = false
 update_scale = false
 
 [node name="MoveLoc" parent="." instance=ExtResource( 16 )]
+visible = false
 
 [node name="WorldParticleRemoteTransform" type="RemoteTransform" parent="."]
 update_rotation = false

@@ -81,10 +81,15 @@ public class Item : RigidBody
 	{
 		Translation = data.Position;
 		Name = data.Name;
-		if (this is Battery)
+		if (this is Battery battery)
 		{
 			float cap = (float)data.CustomData["CurrentEnergy"];
-			((Battery)this).SetCurrentCap(cap);
+			battery.SetCurrentCap(cap);
+		}
+		if (this is Limb limb)
+		{
+			Color cap = (Color)data.CustomData["LimbColor"];
+			limb.SetColor(cap);
 		}
 	}
 

@@ -7,6 +7,7 @@ public class Street_Lamp : StaticBody
     bool Working = true;
     Light light;
     SpatialMaterial LampMat;
+    bool connected = false;
     public override void _Ready()
     {
         light = GetNode<Light>("SpotLight");
@@ -26,8 +27,12 @@ public class Street_Lamp : StaticBody
             TurnOff();
         else
             TurnOn();
+
+        if (connected)
+            return;
         dcont.Connect("DayEventHandler", this, "TurnOff");
         dcont.Connect("NightEventHandler", this, "TurnOn");
+        connected = true;
     }
     public override void _ExitTree()
     {
@@ -35,9 +40,11 @@ public class Street_Lamp : StaticBody
         DayNight dcont = DayNight.GetInstance();
         if (dcont == null)
             return;
-        
+        if (!connected)
+            return;
         dcont.Disconnect("DayEventHandler", this, "TurnOff");
         dcont.Disconnect("NightEventHandler", this, "TurnOn");
+        connected = false;
     }
     public void SetWorkingState(bool toggle)
     {

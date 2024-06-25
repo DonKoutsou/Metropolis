@@ -120,6 +120,12 @@ public class SaveLoadManager : Control
 				Values[0] = ((Battery)it).GetCurrentCap();
 				HasData = true;
 			}
+			if (it is Limb)
+			{
+				Keys[0] = "LimbColor";
+				Values[0] = ((Limb)it).GetColor();
+				HasData = true;
+			}
 			Itemdata.Add("CustomDataKeys", Keys);
 			Itemdata.Add("CustomDataValues", Values);
 			Inventorysave.Call("_SetData", Itemdata, HasData);
