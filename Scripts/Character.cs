@@ -23,7 +23,6 @@ public class Character : KinematicBody
 
 	[Export]
 	public DialogueLine[] lines;
-
 	
 
 	public Inventory CharacterInventory;
@@ -89,9 +88,9 @@ public class Character : KinematicBody
 	public void ToggleAllLimbs()
 	{
 		Spatial skel = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton");
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < 6; i++)
 		{
-			skel.GetNode<MeshInstance>(LimbTranslator.EnumToString((LimbType)0)).Visible = false;
+			skel.GetNode<MeshInstance>(LimbTranslator.EnumToString((LimbType)i)).Visible = false;
 		}
 	}
 	public override void _EnterTree()
@@ -315,6 +314,12 @@ public class Character : KinematicBody
 	}
 	public void PlayMusic()
 	{
+		if (!HasLimbOfType(LimbType.ARM_L) || !HasLimbOfType(LimbType.ARM_R))
+		{
+			TalkText.GetInst().Talk("Δεν μπορώ να παίξω χωρίς χέρια", this);
+			return;
+		}
+			
 		anim.ToggleInstrument(true);
 		
 		Spatial instrumentparent = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("InstrumentAtatchment").GetNode<Spatial>("Instrument");

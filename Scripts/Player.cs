@@ -74,7 +74,7 @@ public class Player : Character
 	{
 		base._Ready();
 
-		ToggleAllLimbs();
+		//ToggleAllLimbs();
 		CharacterInventory = GetNode<Inventory>("Inventory");
 		if (InventoryWeightOverride != -1)
 		{

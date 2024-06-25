@@ -98,13 +98,21 @@ public class NPC : Character
 
 		Skeleton = GetNode("Pivot").GetNode("Guy").GetNode("Armature").GetNode("Skeleton");
 		
-		
-		
 		//Skeleton.GetNode<BoneAttachment>("InstrumentAtatchment").GetNode<RemoteTransform>("RemoteTransform").RemotePath = inst.GetPath();
 
 		IdleTimer = GetNode<Timer>("IdleTimer");
+
+		RandomiseLimbs();
 	}
-	
+	void RandomiseLimbs()
+	{
+		SetLimbColor(LimbType.ARM_L, LimbRandomColorProvider.GetRandomColor());
+		SetLimbColor(LimbType.ARM_R, LimbRandomColorProvider.GetRandomColor());
+		SetLimbColor(LimbType.LEG_L, LimbRandomColorProvider.GetRandomColor());
+		SetLimbColor(LimbType.LEG_R, LimbRandomColorProvider.GetRandomColor());
+		SetLimbColor(LimbType.N01_LEG_R, LimbRandomColorProvider.GetRandomColor());
+		SetLimbColor(LimbType.N01_LEG_L, LimbRandomColorProvider.GetRandomColor());
+	}
 	public override void OnSongEnded(Instrument inst)
 	{
 		base.OnSongEnded(inst);

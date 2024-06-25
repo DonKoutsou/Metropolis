@@ -19,9 +19,9 @@ script = ExtResource( 1 )
 ItemWeight = 3.0
 ItemType = 6
 ItemIcon = ExtResource( 3 )
-ItemPickupActionName = "Ένα χέρι.."
-ItemName = "Δεξί άκρο ταχύτητας"
-ItemDesc = "Τα άκρα σχεδιάσμένα για ελαφριές δουλειές που χρειάζοντε ακρίβια. Χειρισμός μικρός εργαλείων."
+ItemPickupActionName = "Ένα δεξιό πόδι.."
+ItemName = "Δεξιό πόδι ευκινησίας"
+ItemDesc = ""
 stackable = false
 Type = 3
 

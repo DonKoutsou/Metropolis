@@ -30,12 +30,12 @@ public class Inventory : Spatial
         
         InventoryContents = new List<Item>();
         CharacterOwner = (Character)GetParent();
-        CharacterOwner.ToggleLimb(LimbType.ARM_L, false);
-        CharacterOwner.ToggleLimb(LimbType.ARM_R, false);
-        CharacterOwner.ToggleLimb(LimbType.LEG_L, false);
-        CharacterOwner.ToggleLimb(LimbType.LEG_R, false);
-        CharacterOwner.ToggleLimb(LimbType.N01_LEG_R, false);
-        CharacterOwner.ToggleLimb(LimbType.N01_LEG_L, false);
+        CharacterOwner.ToggleAllLimbs();
+        //CharacterOwner.ToggleLimb(LimbType.ARM_R, false);
+        //CharacterOwner.ToggleLimb(LimbType.LEG_L, false);
+        //CharacterOwner.ToggleLimb(LimbType.LEG_R, false);
+        //CharacterOwner.ToggleLimb(LimbType.N01_LEG_R, false);
+        //CharacterOwner.ToggleLimb(LimbType.N01_LEG_L, false);
         if (StartingItems == null)
             return;
         for (int i = 0; i < StartingItems.Count(); i ++)
@@ -120,9 +120,8 @@ public class Inventory : Spatial
         }
         else
         {
-            if (item is Limb && !CharacterOwner.HasLimbOfType(((Limb)item).GetLimbType()))
+            if (item is Limb limb && !CharacterOwner.HasLimbOfType(limb.GetLimbType()))
             {
-                Limb limb = (Limb)item;
                 CharacterOwner.ToggleLimb(limb.GetLimbType(), true);
                 CharacterOwner.SetLimbColor(limb.GetLimbType(), limb.GetColor());
                 limb.Equiped = true;
