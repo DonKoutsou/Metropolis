@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class StartingScreen : Control
 {
 	
-	MainWorld world;
+	WorldRoot world;
 
 	Dictionary<string, Control> ButtonList = new Dictionary<string, Control>();
 
@@ -22,7 +22,7 @@ public class StartingScreen : Control
 	public override void _Ready()
 	{
 		FillButtonList();
-		world = (MainWorld)GetParent().GetParent();
+		world = (WorldRoot)GetParent().GetParent();
 		intro = GetNode<Control>("Intro");
 		FadeInOut = GetNode<CanvasLayer>("FadeInOut").GetNode<MainMenuAnimation>("MainMenuAnimation");
 		Init();

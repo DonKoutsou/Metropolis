@@ -46,12 +46,12 @@ public class WindGenerator : StaticBody
             
         anim3.CurrentAnimation = "LookDir";
         anim.Advance(rand.Next(0, 5000) / 1000);
-        anim.PlaybackSpeed = rand.Next(2500, 3000) / 1000;
+        //anim.PlaybackSpeed = rand.Next(2500, 3000) / 1000;
         anim3.Stop();
         anim2.Advance(rand.Next(0, 5000) / 1000);
-        anim2.PlaybackSpeed = rand.Next(2500, 3000) / 1000;
-        Spatial rotorpivot = GetNode<Spatial>("Rotor_Pivot");
-        rotorpivot.LookAt(new Vector3(rotorpivot.Translation.x, rotorpivot.Translation.y, rotorpivot.Translation.z + 1), Vector3.Up);
+        //anim2.PlaybackSpeed = rand.Next(2500, 3000) / 1000;
+        //Spatial rotorpivot = GetNode<Spatial>("Rotor_Pivot");
+        //rotorpivot.LookAt(new Vector3(rotorpivot.Translation.x, rotorpivot.Translation.y, rotorpivot.Translation.z + 1), Vector3.Up);
         scale = Math.Max((int)(Scale.x * GetNode<MeshInstance>("MeshInstance").Scale.x), 1);
         Node parent = GetParent();
 		while (!(parent is Island))

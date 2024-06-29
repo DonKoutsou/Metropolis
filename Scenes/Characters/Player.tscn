@@ -469,11 +469,6 @@ autowrap = true
 width = 5000.0
 script = ExtResource( 19 )
 
-[node name="UpdateTimer" type="Timer" parent="PlayerUI/TalkText"]
-wait_time = 3.0
-one_shot = true
-autostart = true
-
 [node name="ActionMenu" parent="PlayerUI" instance=ExtResource( 23 )]
 visible = false
 
@@ -609,6 +604,9 @@ visible = false
 [node name="WorldParticleRemoteTransform" type="RemoteTransform" parent="."]
 update_rotation = false
 update_scale = false
+__meta__ = {
+"_editor_description_": "World Particle manager is atatched here to avoid particles getting their rotation manipulated"
+}
 
 [node name="DialogueCameraPivot" type="Spatial" parent="."]
 
@@ -624,4 +622,3 @@ mesh = SubResource( 107 )
 material/0 = SubResource( 120 )
 
 [connection signal="body_entered" from="KillFieldDetector" to="." method="OnKillFieldDetectorBodyEntered"]
-[connection signal="timeout" from="PlayerUI/TalkText/UpdateTimer" to="PlayerUI/TalkText" method="TurnOff"]

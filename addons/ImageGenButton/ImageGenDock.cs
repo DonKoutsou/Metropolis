@@ -21,12 +21,13 @@ public class ImageGenDock : EditorPlugin
         IslandImageHolder holder = (IslandImageHolder)interf.GetSelection().GetSelectedNodes()[0];
         //Tabs scenetabs = (Tabs)interf.GetBaseControl().GetNode("@@49");
         //Node editornode = interf.GetBaseControl().GetNode("../..");
-        holder.ClearImages();
+        
         if (holder == null)
         {
             GD.Print("No Island Holder Selected. Aborting." + holder.GetClass().ToString());
             return;
         }
+        holder.ClearImages();
         string[] islandfiles = holder.GetIslandLocs();
         for (int i = 0; i < islandfiles.Count(); i++)
         {

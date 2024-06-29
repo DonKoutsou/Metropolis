@@ -7,11 +7,11 @@ public class TalkText : Label3D
 {
     static TalkText instance;
     static Timer TalkTimer;
-    Character Talking;
+    //Character Talking;
     public void Talk(string diag, Character Talker)
     {
         Text = diag;
-        Talking = Talker;
+        //Talking = Talker;
         TalkTimer.Start();
         Show();
         SetProcess(true);
@@ -39,7 +39,14 @@ public class TalkText : Label3D
     public override void _Ready()
     {
         base._Ready();
-        TalkTimer = GetNode<Timer>("UpdateTimer");
+        TalkTimer = new Timer()
+        {
+            OneShot = true,
+            Autostart = true,
+        };
+        TalkTimer.Connect("timeout", this, "TurnOff");
+        AddChild(TalkTimer);
+        //TalkTimer = GetNode<Timer>("UpdateTimer");
         SetProcess(false);
         Hide();
         instance = this;

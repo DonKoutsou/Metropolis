@@ -1,16 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/CheatMenu.cs" type="Script" id=1]
 [ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Assets/UI/ButtonRectTheme.tres" type="Theme" id=3]
 [ext_resource path="res://Assets/Themes/PanelTheme1.tres" type="Theme" id=4]
-
-[sub_resource type="DynamicFont" id=1]
-size = 32
-font_data = ExtResource( 2 )
-
-[sub_resource type="Theme" id=2]
-default_font = SubResource( 1 )
+[ext_resource path="res://Assets/UI/panelstylegrey.tres" type="StyleBox" id=5]
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.568627, 0.537255, 0.45098, 1 )
@@ -38,77 +32,102 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 2 )
+
+[sub_resource type="Theme" id=2]
+default_font = SubResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.360784, 0.337255, 0.270588, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+expand_margin_left = 8.0
+expand_margin_right = 8.0
+
 [node name="CheatMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 1
+mouse_filter = 2
 script = ExtResource( 1 )
 
-[node name="FastRun_Button" type="Button" parent="."]
-margin_right = 133.0
-margin_bottom = 51.0
+[node name="Buttons" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+mouse_filter = 2
+
+[node name="FastRun_Button" type="Button" parent="Buttons"]
+margin_left = -958.0
+margin_top = -538.0
+margin_right = -825.0
+margin_bottom = -487.0
 mouse_default_cursor_shape = 2
 theme = ExtResource( 3 )
 action_mode = 0
 text = "FastRun"
 
-[node name="InfCamera" type="Button" parent="."]
-margin_top = 55.0
-margin_right = 133.0
-margin_bottom = 106.0
+[node name="InfCamera" type="Button" parent="Buttons"]
+margin_left = -958.0
+margin_top = -483.0
+margin_right = -825.0
+margin_bottom = -432.0
 mouse_default_cursor_shape = 2
 theme = ExtResource( 3 )
 action_mode = 0
 text = "InfCam"
 
-[node name="FPS" type="Button" parent="."]
-margin_top = 111.0
-margin_right = 133.0
-margin_bottom = 162.0
+[node name="FPS" type="Button" parent="Buttons"]
+margin_left = -958.0
+margin_top = -427.0
+margin_right = -825.0
+margin_bottom = -376.0
 mouse_default_cursor_shape = 2
 theme = ExtResource( 3 )
 action_mode = 0
 text = "FPS"
 
-[node name="TestKill" type="Button" parent="."]
-margin_top = 167.0
-margin_right = 133.0
-margin_bottom = 218.0
+[node name="TestKill" type="Button" parent="Buttons"]
+margin_left = -958.0
+margin_top = -371.0
+margin_right = -825.0
+margin_bottom = -320.0
 mouse_default_cursor_shape = 2
 theme = ExtResource( 3 )
 action_mode = 0
 text = "Test Kill"
 
-[node name="Tp_ToLoc" type="Button" parent="."]
-margin_top = 331.0
-margin_right = 142.0
-margin_bottom = 382.0
+[node name="Tp_ToLoc" type="Button" parent="Buttons"]
+margin_left = -958.0
+margin_top = -207.0
+margin_right = -816.0
+margin_bottom = -156.0
 mouse_default_cursor_shape = 2
 theme = ExtResource( 3 )
 action_mode = 0
 text = "To Move Loc"
 icon_align = 1
 
-[node name="FPS_Counter" type="Label" parent="."]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -63.0
-margin_bottom = 45.0
-theme = SubResource( 2 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "60.0"
-
-[node name="TeleportPanel" type="Panel" parent="."]
+[node name="TeleportPanel" type="Panel" parent="Buttons"]
 anchor_top = 0.208333
 anchor_right = 0.0738833
 anchor_bottom = 0.292061
-margin_right = 5.144
-margin_bottom = 4.57401
-__meta__ = {
-"_edit_use_anchors_": true
-}
+margin_left = -957.0
+margin_top = -311.0
+margin_right = -804.0
+margin_bottom = -216.0
 
-[node name="X_Text" type="TextEdit" parent="TeleportPanel"]
+[node name="X_Text" type="TextEdit" parent="Buttons/TeleportPanel"]
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_top = -47.5
@@ -121,7 +140,7 @@ custom_styles/normal = SubResource( 3 )
 text = "69"
 v_scroll_speed = 0.0
 
-[node name="Y_Text" type="TextEdit" parent="TeleportPanel"]
+[node name="Y_Text" type="TextEdit" parent="Buttons/TeleportPanel"]
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_top = 1.5
@@ -134,7 +153,7 @@ custom_styles/normal = SubResource( 3 )
 text = "40"
 v_scroll_speed = 0.0
 
-[node name="Label" type="Label" parent="TeleportPanel"]
+[node name="Label" type="Label" parent="Buttons/TeleportPanel"]
 margin_left = 54.0
 margin_top = 14.0
 margin_right = 73.0
@@ -143,7 +162,7 @@ text = "X"
 align = 1
 valign = 1
 
-[node name="Label2" type="Label" parent="TeleportPanel"]
+[node name="Label2" type="Label" parent="Buttons/TeleportPanel"]
 margin_left = 54.0
 margin_top = 64.0
 margin_right = 73.0
@@ -152,7 +171,7 @@ text = "Y"
 align = 1
 valign = 1
 
-[node name="Tp" type="Button" parent="TeleportPanel"]
+[node name="Tp" type="Button" parent="Buttons/TeleportPanel"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -165,12 +184,13 @@ theme = ExtResource( 3 )
 action_mode = 0
 text = "TP"
 
-[node name="Panel" type="Panel" parent="."]
-margin_top = 390.0
-margin_right = 141.0
-margin_bottom = 522.0
+[node name="TimeProgressionSetting" type="Panel" parent="Buttons"]
+margin_left = -957.0
+margin_top = -151.0
+margin_right = -816.0
+margin_bottom = -19.0
 
-[node name="Button" type="Button" parent="Panel"]
+[node name="Button" type="Button" parent="Buttons/TimeProgressionSetting"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -33.5
@@ -179,7 +199,7 @@ margin_right = 33.5
 margin_bottom = 32.0
 text = "+"
 
-[node name="Button2" type="Button" parent="Panel"]
+[node name="Button2" type="Button" parent="Buttons/TimeProgressionSetting"]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -190,7 +210,7 @@ margin_right = 31.5
 margin_bottom = -16.0
 text = "-"
 
-[node name="Label" type="Label" parent="Panel"]
+[node name="TimeProgText" type="Label" parent="Buttons/TimeProgressionSetting"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -204,11 +224,103 @@ align = 1
 valign = 1
 autowrap = true
 
-[connection signal="button_down" from="FastRun_Button" to="." method="On_FastRun_Button_Down"]
-[connection signal="button_down" from="InfCamera" to="." method="On_InfCamera_Button_Down"]
-[connection signal="button_down" from="FPS" to="." method="On_FPS_Button_Down"]
-[connection signal="button_down" from="TestKill" to="." method="On_Kill_Button_Down"]
-[connection signal="button_down" from="Tp_ToLoc" to="." method="On_ToLoc_Button_Down"]
-[connection signal="button_down" from="TeleportPanel/Tp" to="." method="On_TP_Button_Down"]
-[connection signal="pressed" from="Panel/Button" to="." method="IncreaseTimeProgression"]
-[connection signal="pressed" from="Panel/Button2" to="." method="DecreaseTimeProgression"]
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -141.5
+margin_right = 141.5
+margin_bottom = 206.0
+custom_styles/panel = ExtResource( 5 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 281.0
+margin_bottom = 204.0
+custom_constants/separation = 13
+
+[node name="Names" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
+margin_right = 216.0
+margin_bottom = 202.0
+
+[node name="FPS_Counter" type="Label" parent="PanelContainer/HBoxContainer/Names"]
+margin_right = 216.0
+margin_bottom = 45.0
+theme = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "FPS"
+
+[node name="RainAmmount" type="Label" parent="PanelContainer/HBoxContainer/Names"]
+margin_top = 49.0
+margin_right = 216.0
+margin_bottom = 94.0
+theme = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "RainAmmount"
+
+[node name="WindDir" type="Label" parent="PanelContainer/HBoxContainer/Names"]
+margin_top = 98.0
+margin_right = 216.0
+margin_bottom = 143.0
+theme = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "WindDir"
+
+[node name="WindAmm" type="Label" parent="PanelContainer/HBoxContainer/Names"]
+margin_top = 147.0
+margin_right = 216.0
+margin_bottom = 192.0
+theme = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "WindAmm"
+
+[node name="Panel" type="Panel" parent="PanelContainer/HBoxContainer"]
+margin_left = 229.0
+margin_right = 229.0
+margin_bottom = 202.0
+custom_styles/panel = SubResource( 5 )
+
+[node name="Labels" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
+margin_left = 242.0
+margin_right = 278.0
+margin_bottom = 202.0
+
+[node name="FPS_Counter" type="Label" parent="PanelContainer/HBoxContainer/Labels"]
+margin_right = 36.0
+margin_bottom = 45.0
+theme = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "60"
+
+[node name="RainAmmount" type="Label" parent="PanelContainer/HBoxContainer/Labels"]
+margin_top = 49.0
+margin_right = 36.0
+margin_bottom = 94.0
+theme = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "60"
+
+[node name="WindDir" type="Label" parent="PanelContainer/HBoxContainer/Labels"]
+margin_top = 98.0
+margin_right = 36.0
+margin_bottom = 143.0
+theme = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "60"
+
+[node name="WindAmm" type="Label" parent="PanelContainer/HBoxContainer/Labels"]
+margin_top = 147.0
+margin_right = 36.0
+margin_bottom = 192.0
+theme = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "60"
+
+[connection signal="button_down" from="Buttons/FastRun_Button" to="." method="On_FastRun_Button_Down"]
+[connection signal="button_down" from="Buttons/InfCamera" to="." method="On_InfCamera_Button_Down"]
+[connection signal="button_down" from="Buttons/FPS" to="." method="On_FPS_Button_Down"]
+[connection signal="button_down" from="Buttons/TestKill" to="." method="On_Kill_Button_Down"]
+[connection signal="button_down" from="Buttons/Tp_ToLoc" to="." method="On_ToLoc_Button_Down"]
+[connection signal="button_down" from="Buttons/TeleportPanel/Tp" to="." method="On_TP_Button_Down"]
+[connection signal="pressed" from="Buttons/TimeProgressionSetting/Button" to="." method="IncreaseTimeProgression"]
+[connection signal="pressed" from="Buttons/TimeProgressionSetting/Button2" to="." method="DecreaseTimeProgression"]

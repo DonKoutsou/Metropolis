@@ -25,8 +25,14 @@ public class CheatMenu : Control
 	bool HasInfCam = false;
 
 	bool ShowingFPS = false;
+	Control Buttons;
+	Control TimeProgressionSetting;
+	Control TeleportPanel;
 
 	Label FpsCounter;
+	Label RainAmm;
+	Label WindDir;
+	Label WindAmm;
 	private void On_FastRun_Button_Down()
 	{
 		if (HasSpeed)
@@ -80,8 +86,8 @@ public class CheatMenu : Control
 	}
 	private void On_TP_Button_Down()
 	{
-		int x = GetNode<Panel>("TeleportPanel").GetNode<TextEdit>("X_Text").Text.ToInt();
-		int y = GetNode<Panel>("TeleportPanel").GetNode<TextEdit>("Y_Text").Text.ToInt();
+		int x = TeleportPanel.GetNode<TextEdit>("X_Text").Text.ToInt();
+		int y = TeleportPanel.GetNode<TextEdit>("Y_Text").Text.ToInt();
 		Vector2 loc = WorldMap.GetInstance().MapToWorld( new Vector2(x,y));
 		Player.GetInstance().Teleport(new Vector3 (loc.x, 2000, loc.y));
 	}
@@ -93,24 +99,26 @@ public class CheatMenu : Control
 	private void IncreaseTimeProgression()
 	{
 		Settings.GetGameSettings().IncreaseTimeProgression();
-		GetNode<Panel>("Panel").GetNode<Label>("Label").Text = "TimeProg" + Settings.GetGameSettings().TimeProgression.ToString();
+		TimeProgressionSetting.GetNode<Label>("TimeProgText").Text = "TimeProg" + Settings.GetGameSettings().TimeProgression.ToString();
 	}
 	private void DecreaseTimeProgression()
 	{
 		Settings.GetGameSettings().DecreaseTimeProgression();
-		GetNode<Panel>("Panel").GetNode<Label>("Label").Text = "TimeProg" + Settings.GetGameSettings().TimeProgression.ToString();
+		TimeProgressionSetting.GetNode<Label>("TimeProgText").Text = "TimeProg" + Settings.GetGameSettings().TimeProgression.ToString();
 	}
 	public void Start()
 	{
 		Show();
 		Showing = true;
-		MouseFilter = MouseFilterEnum.Stop;
+		Buttons.MouseFilter = MouseFilterEnum.Stop;
+		SetProcess(true);
 	}
 	public void Stop()
 	{
 		Hide();
 		Showing = false;
-		MouseFilter = MouseFilterEnum.Ignore;
+		Buttons.MouseFilter = MouseFilterEnum.Ignore;
+		SetProcess(false);
 	}
 	public override void _Ready()
 	{
@@ -120,16 +128,26 @@ public class CheatMenu : Control
 			SetProcess(false);
 			return;
 		}
+		Buttons = GetNode<Control>("Buttons");
+		TimeProgressionSetting = Buttons.GetNode<Panel>("TimeProgressionSetting");
+		TeleportPanel = Buttons.GetNode<Panel>("TeleportPanel");
 		pl = (Player)GetParent().GetParent();
 		//CamMove = pl.GetNode<CameraMovePivot>("CameraMovePivot");
 		CameraPanPivot pan = pl.GetNode<Position3D>("CameraMovePivot").GetNode<CameraPanPivot>("CameraPanPivot");
 		CamZoom = pan.GetNode<SpringArm>("SpringArm").GetNode<CameraZoomPivot>("CameraZoomPivot");
-		FpsCounter = GetNode<Label>("FPS_Counter");
+		Control labelcont = (Control)GetNode("PanelContainer").GetNode("HBoxContainer").GetNode("Labels");
+		FpsCounter = labelcont.GetNode<Label>("FPS_Counter");
+		RainAmm = labelcont.GetNode<Label>("RainAmmount");
+		WindDir = labelcont.GetNode<Label>("WindDir");
+		WindAmm = labelcont.GetNode<Label>("WindAmm");	
 	}
     public override void _Process(float delta)
     {
         base._Process(delta);
 		FpsCounter.Text = Engine.GetFramesPerSecond().ToString();
+		RainAmm.Text = Math.Round(DayNight.GetRainStr()).ToString();
+		WindDir.Text = Math.Round(DayNight.GetWindDirection()).ToString();
+		WindAmm.Text = Math.Round(DayNight.GetWindStr()).ToString();
     }
 
     public override void _Input(InputEvent @event)

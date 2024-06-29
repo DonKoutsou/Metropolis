@@ -1,4 +1,4 @@
-[gd_scene load_steps=356 format=2]
+[gd_scene load_steps=355 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/TerainTest/TerainShader5.tres" type="Shader" id=2]
@@ -11,11 +11,10 @@
 [ext_resource path="res://Assets/TerainTex/Ground033_1K-JPG/Ground033_1K-JPG_Roughnes2s.jpg" type="Texture" id=9]
 [ext_resource path="res://Assets/TerainTex/Rock029_1K-PNG/Rock029_1K-PNG_Roughness.png" type="Texture" id=10]
 [ext_resource path="res://Scenes/Env_Assets/Rock1.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Assets/Building/MotherCity/MotherCityTerLod.tres" type="ArrayMesh" id=12]
-[ext_resource path="res://Assets/Building/MotherCity/MotherCityTer.tres" type="ArrayMesh" id=13]
+[ext_resource path="res://Assets/Terains/Island1/Island1_LOD.tres" type="ArrayMesh" id=12]
 [ext_resource path="res://Assets/TerainTex/SandSimple.tres" type="Material" id=14]
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=15]
-[ext_resource path="res://Assets/TerainTest/new_arraymesh6.tres" type="ArrayMesh" id=16]
+[ext_resource path="res://Assets/Terains/Island1/Island1.tres" type="ArrayMesh" id=16]
 [ext_resource path="res://Assets/Clutter/WoodPlanks/WoodPlankMat.tres" type="Material" id=17]
 [ext_resource path="res://Assets/Clutter/WoodPlanks/WoodPlanksRot.obj" type="ArrayMesh" id=18]
 [ext_resource path="res://Scripts/Road.cs" type="Script" id=19]
@@ -1276,12 +1275,12 @@ transform = Transform( 970.532, 455.776, 96.5066, 9.97446, -243.285, 1048.66, 46
 material/0 = SubResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="." index="3"]
-transform = Transform( 4000, 0, 0, 0, 4000, 0, 0, 0, 4000, 0, -102.158, 0 )
+transform = Transform( 800, 0, 0, 0, 800, 0, 0, 0, 800, 0, -102.158, 0 )
 lod_max_distance = 6000.0
 mesh = ExtResource( 16 )
 material/0 = ExtResource( 14 )
 script = ExtResource( 15 )
-LOD0 = ExtResource( 13 )
+LOD0 = ExtResource( 16 )
 LOD1 = ExtResource( 12 )
 
 [node name="StaticBody" type="StaticBody" parent="MeshInstance" index="0"]

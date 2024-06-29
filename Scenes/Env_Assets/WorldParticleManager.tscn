@@ -22,43 +22,45 @@ max_value = 69.65
 _data = [ Vector2( 0, -50 ), 0.0, 0.0, 0, 0, Vector2( 1, 69.65 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="SpatialMaterial" id=2]
+render_priority = 1
 flags_transparent = true
 flags_unshaded = true
+flags_fixed_size = true
 flags_do_not_receive_shadows = true
+flags_disable_ambient_light = true
 params_cull_mode = 2
+params_depth_draw_mode = 1
 params_billboard_mode = 3
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
-albedo_color = Color( 1, 0.831373, 0.529412, 1 )
+albedo_color = Color( 1, 0.792157, 0.419608, 0.0392157 )
 albedo_texture = ExtResource( 8 )
-proximity_fade_enable = true
-proximity_fade_distance = 4096.0
 
 [sub_resource type="ParticlesMaterial" id=1]
 emission_shape = 2
-emission_box_extents = Vector3( 200, 200, 200 )
+emission_box_extents = Vector3( 800, 800, 800 )
 direction = Vector3( 0, 0, -1 )
-spread = 4.48
+spread = 5.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 174.26
 angular_velocity = 553.85
-linear_accel = 98.3
-radial_accel = 100.0
-scale = 0.5
+scale = 0.01
+scale_random = 0.05
 
 [sub_resource type="QuadMesh" id=3]
+size = Vector2( 0.1, 0.1 )
 
 [sub_resource type="SpatialMaterial" id=112]
 flags_transparent = true
-params_blend_mode = 1
+flags_do_not_receive_shadows = true
 params_cull_mode = 2
 params_depth_draw_mode = 2
 params_billboard_mode = 3
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
-albedo_color = Color( 1, 0.980392, 0.952941, 0.0745098 )
+albedo_color = Color( 1, 0.980392, 0.952941, 0.0784314 )
 albedo_texture = ExtResource( 7 )
 
 [sub_resource type="Curve" id=113]
@@ -75,10 +77,9 @@ emission_box_extents = Vector3( 5000, 10, 5000 )
 direction = Vector3( 0, 0, -1 )
 spread = 1.41
 gravity = Vector3( 0, 0, 0 )
-initial_velocity = 18.05
+initial_velocity = 969.33
 angular_velocity = 34.12
 angular_velocity_random = 1.0
-linear_accel = 100.0
 linear_accel_random = 0.35
 tangential_accel_random = 1.0
 angle_random = 1.0
@@ -106,16 +107,17 @@ PitchScaleCurve = SubResource( 4 )
 SoundScaleCurve = SubResource( 5 )
 
 [node name="SandParticles" parent="WindAllignedParticles" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.755, 243.768 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 500, 0 )
 material_override = SubResource( 2 )
-amount = 8000
-visibility_aabb = AABB( -138.138, -205.176, -393.492, 276.276, 410.353, 786.984 )
+cast_shadow = 0
+amount = 12000
+visibility_aabb = AABB( -1163.96, -976.849, -1014.37, 2327.92, 1953.7, 2028.74 )
 draw_order = 2
 process_material = SubResource( 1 )
 draw_pass_1 = SubResource( 3 )
 
 [node name="Particles" type="Particles" parent="WindAllignedParticles"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 118.329, 191 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 118.329, 0 )
 material_override = SubResource( 112 )
 cast_shadow = 0
 generate_lightmap = false

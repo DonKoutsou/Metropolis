@@ -14,15 +14,16 @@ _data = [ Vector2( 0, -80 ), 0.0, 0.0, 0, 0, Vector2( 1, 69.65 ), 0.0, 0.0, 0, 0
 
 [sub_resource type="ParticlesMaterial" id=2]
 emission_shape = 2
-emission_box_extents = Vector3( 500, 10, 500 )
+emission_box_extents = Vector3( 800, 10, 800 )
 direction = Vector3( 0, -10, 0 )
 spread = 5.03
 gravity = Vector3( 0, -100, 0 )
 initial_velocity = 2000.0
+scale = 732.7
 
 [sub_resource type="QuadMesh" id=3]
 material = ExtResource( 2 )
-size = Vector2( 0.5, 20 )
+size = Vector2( 0.001, 0.05 )
 
 [node name="Rain" type="Spatial"]
 script = ExtResource( 3 )
@@ -30,10 +31,12 @@ PitchScaleCurve = SubResource( 4 )
 SoundScaleCurve = SubResource( 5 )
 
 [node name="Clouds2" type="Particles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1000, 0 )
 sorting_use_aabb_center = false
 cast_shadow = 0
 generate_lightmap = false
 amount = 5000
+lifetime = 3.0
 visibility_aabb = AABB( -1293.38, -1000, -1158.37, 2586.77, 1000, 2316.74 )
 local_coords = false
 draw_order = 2

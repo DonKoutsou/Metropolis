@@ -123,7 +123,7 @@ public class MyWorld : Spatial
 	}
 	public void OnPlayerKilled(string reason = null)	
 	{
-		StartingScreen start = ((MainWorld)GetParent()).GetStartingScreen();
+		StartingScreen start = ((WorldRoot)GetParent()).GetStartingScreen();
 		start.GameOver(reason);
 		SaveLoadManager.GetInstance().ClearSaves();
 	}
@@ -327,7 +327,7 @@ public class MyWorld : Spatial
 	}
 	public void Pause()
 	{
-		StartingScreen start = ((MainWorld)GetParent()).GetStartingScreen();
+		StartingScreen start = ((WorldRoot)GetParent()).GetStartingScreen();
 
 		bool paused = GetTree().Paused;
 		

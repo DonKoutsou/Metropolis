@@ -1,6 +1,6 @@
 [gd_scene load_steps=39 format=2]
 
-[ext_resource path="res://Assets/TerainTest/new_arraymesh2.tres" type="ArrayMesh" id=1]
+[ext_resource path="res://Assets/Terains/Island3/Island3_LOD.tres" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Building/BuildingDust3.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Env_Assets/Antena2.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Building/BuildingDust2.tscn" type="PackedScene" id=4]
@@ -15,10 +15,10 @@
 [ext_resource path="res://Assets/TerainTex/SandSimple.tres" type="Material" id=13]
 [ext_resource path="res://Scenes/Env_Assets/Rock1.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=15]
-[ext_resource path="res://Assets/TerainTest/new_arraymesh2_LOD.tres" type="ArrayMesh" id=16]
 [ext_resource path="res://Assets/Building/SkyscraperMesh.tres" type="CubeMesh" id=17]
 [ext_resource path="res://Scenes/Env_Assets/House.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Assets/Building/MultistoryBuildingExterior.material" type="Material" id=19]
+[ext_resource path="res://Assets/Terains/Island3/Island3.tres" type="ArrayMesh" id=20]
 [ext_resource path="res://Scenes/Env_Assets/WindGenerator2.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Scenes/Env_Assets/Rock2.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Scenes/Env_Assets/Rock3.tscn" type="PackedScene" id=24]
@@ -121,13 +121,13 @@ ImageID = 1
 Resolution = 128
 
 [node name="MeshInstance5" type="MeshInstance" parent="." index="1"]
-transform = Transform( 4000, 0, 0, 0, 2000, 0, 0, 0, 4000, 0, -138.835, 0 )
+transform = Transform( 800, 0, 0, 0, 400, 0, 0, 0, 800, 0, -138.835, 0 )
 lod_max_distance = 6000.0
-mesh = ExtResource( 1 )
+mesh = ExtResource( 20 )
 material/0 = ExtResource( 13 )
 script = ExtResource( 15 )
-LOD0 = ExtResource( 1 )
-LOD1 = ExtResource( 16 )
+LOD0 = ExtResource( 20 )
+LOD1 = ExtResource( 1 )
 
 [node name="StaticBody" type="StaticBody" parent="MeshInstance5" index="0"]
 collision_layer = 4

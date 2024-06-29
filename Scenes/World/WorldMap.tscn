@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Scripts/WorldMap.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/World/World_Tileset.tres" type="TileSet" id=2]
@@ -7,7 +7,7 @@
 [ext_resource path="res://Scenes/Poseidon.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Islands/Island7.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Islands/Island2.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/Islands/SeaIsland.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Islands/Island23.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/World/AllSkyFree_EpicGloriousPink.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Islands/Island8.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Islands/Island1.tscn" type="PackedScene" id=11]
@@ -29,6 +29,12 @@
 [ext_resource path="res://Scenes/Islands/FinIslands.tscn" type="PackedScene" id=27]
 [ext_resource path="res://Scenes/Islands/Island13.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Scenes/Islands/Into.tscn" type="PackedScene" id=29]
+[ext_resource path="res://Scenes/Islands/Island24.tscn" type="PackedScene" id=30]
+[ext_resource path="res://Scenes/Islands/Island25.tscn" type="PackedScene" id=31]
+[ext_resource path="res://Scenes/Islands/Island26.tscn" type="PackedScene" id=32]
+[ext_resource path="res://Scenes/Islands/Island27.tscn" type="PackedScene" id=33]
+[ext_resource path="res://Scenes/Islands/Island29.tscn" type="PackedScene" id=34]
+[ext_resource path="res://Scenes/Islands/Island28.tscn" type="PackedScene" id=35]
 
 [node name="WorldMap" type="TileMap"]
 tile_set = ExtResource( 2 )
@@ -40,11 +46,10 @@ navigation_layers = 0
 occluder_light_mask = 0
 format = 1
 script = ExtResource( 1 )
-scenestospawn = [ ExtResource( 11 ), ExtResource( 7 ), ExtResource( 19 ), ExtResource( 6 ), ExtResource( 14 ), ExtResource( 20 ), ExtResource( 12 ), ExtResource( 22 ), ExtResource( 17 ), ExtResource( 13 ), ExtResource( 10 ), ExtResource( 24 ), ExtResource( 16 ), ExtResource( 23 ), ExtResource( 21 ), ExtResource( 15 ), ExtResource( 18 ), ExtResource( 13 ) ]
+scenestospawn = [ ExtResource( 11 ), ExtResource( 7 ), ExtResource( 19 ), ExtResource( 6 ), ExtResource( 14 ), ExtResource( 20 ), ExtResource( 12 ), ExtResource( 22 ), ExtResource( 17 ), ExtResource( 13 ), ExtResource( 10 ), ExtResource( 24 ), ExtResource( 16 ), ExtResource( 23 ), ExtResource( 21 ), ExtResource( 15 ), ExtResource( 18 ), ExtResource( 13 ), ExtResource( 8 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 35 ), ExtResource( 34 ) ]
 Eventscenestospawn = [ ExtResource( 26 ), ExtResource( 25 ) ]
 Entrytospawn = ExtResource( 4 )
 Exittospawn = ExtResource( 27 )
-Sea = ExtResource( 8 )
 LightHouse = ExtResource( 3 )
 "Μαχαλάς" = ExtResource( 28 )
 IntroScene = ExtResource( 29 )

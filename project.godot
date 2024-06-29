@@ -159,7 +159,7 @@ ResourceScriptDirectories=[ "res://", "res://Scripts/" ]
 [application]
 
 config/name="Metropolis"
-run/main_scene="res://Scenes/World/MainWorld.tscn"
+run/main_scene="res://Scenes/World/WorldRoot.tscn"
 run/delta_sync_after_draw=true
 boot_splash/show_image=false
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
