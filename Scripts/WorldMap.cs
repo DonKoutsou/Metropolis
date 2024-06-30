@@ -41,41 +41,38 @@ public class WorldMap : TileMap
 	[Export]
 	List<string> LightHouseNames = null;
 
-	//TO BE SAVED
-	//id of cells to be changed to events
 	List <int> RandomisedEntryID = new List<int>();
 
-	//TO BE SAVED
-	public int currentile;
 
-	//TO BE SAVED
+	// one of the lighthouses will become the 2nd town
 	int ΜαχαλάςEntryID;
+	//random stuff
+	Random random;
+	int RandomTimes = 0;
+	/////////////////////
 
+	// loc of island player is at atm
+	Vector2 CurrentTile;
+
+	/// index of next island to be spawned
+	public int IslandSpawnIndex;
+	/// islands to be spawned ordered by distance form center of map
+	List <Vector2> OrderedCells = new List<Vector2>();
+
+	// map of all islands
+	static Dictionary<Vector2, IslandInfo> ilemap = new Dictionary<Vector2, IslandInfo>();
+
+
+	// once all islands in map have been generated this will be true
+	bool finishedspawning = false;
+
+	Vector2 entry;
 	//TO BE SAVED
 	//id of exit
 	int ExitID = 0;
 
-	//TO BE SAVED
-	List <Vector2> OrderedCells = new List<Vector2>();
-
-	//TO BE SAVED
-	Random random;
-	int RandomTimes = 0;
-
-	//TO BE SAVED
-	Vector2 CurrentTile;
-
-	//TO BE SAVED
-	static Dictionary<Vector2, IslandInfo> ilemap = new Dictionary<Vector2, IslandInfo>();
-
-	//TO BE SAVED
-	bool finishedspawning = false;
-
-	IslandInfo entry;
-
 	static WorldMap Instance;
 
-	public Player pl;
 
 	public int GetIslandCount()
 	{
@@ -102,24 +99,15 @@ public class WorldMap : TileMap
 			SaveIsland();
 			IleToSave = null;
 
-			currentile += 1;
-			if (currentile >= OrderedCells.Count)
+			IslandSpawnIndex += 1;
+			if (IslandSpawnIndex >= OrderedCells.Count)
 				finishedspawning = true; 
 		}
-		
-		Dictionary<string, object> data = new Dictionary<string, object>();
-		data.Add("RandomisedEntryID", RandomisedEntryID);
-		data.Add("currentile", currentile);
-		data.Add("ΜαχαλάςEntryID", ΜαχαλάςEntryID);
-		data.Add("ExitID", ExitID);
+
+
 		Vector2[] OrdC = new Vector2[OrderedCells.Count];
 		OrderedCells.CopyTo(OrdC);
-		data.Add("OrderedCells", OrdC);
-		//data.Add("random", random);
-		data.Add("CurrentTile", CurrentTile);
-		data.Add("RandomTimes", RandomTimes);
-		data.Add("Seed", Settings.GetGameSettings().Seed);
-		//Dictionary<Vector2, Godot.Object> ilemapObj = new Dictionary<Vector2, Godot.Object>();
+
 
 		GDScript IleSaveScript = GD.Load<GDScript>("res://Scripts/IleSaveInfo.gd");
 
@@ -134,9 +122,21 @@ public class WorldMap : TileMap
 			Iles[i] = IleSaveInfo;
 			i +=1;
 		}
-		data.Add("ilemap", Iles);
-		data.Add("ilemapVectors", IleVectors);
-		data.Add("finishedspawning", finishedspawning);
+
+
+		Dictionary<string, object> data = new Dictionary<string, object>(){
+			{"RandomisedEntryID" , RandomisedEntryID},
+			{"currentile", IslandSpawnIndex},
+			{"ΜαχαλάςEntryID", ΜαχαλάςEntryID},
+			{"ExitID", ExitID},
+			{"OrderedCells", OrdC},
+			{"CurrentTile", CurrentTile},
+			{"RandomTimes", RandomTimes},
+			{"Seed", Settings.GetGameSettings().Seed},
+			{"ilemap", Iles},
+			{"ilemapVectors", IleVectors},
+			{"finishedspawning", finishedspawning}
+		};
 		return data;
 	}
 	
@@ -157,7 +157,7 @@ public class WorldMap : TileMap
 			random.NextDouble();
 		}
 
-		currentile = (int)data.Get("currentile");
+		IslandSpawnIndex = (int)data.Get("currentile");
 		ΜαχαλάςEntryID = (int)data.Get("MahalasEntryID");
 		ExitID = (int)data.Get("ExitID");
 
@@ -196,31 +196,17 @@ public class WorldMap : TileMap
 	}
 	public override void _Ready()
 	{
-
-		//MapGrid.GetInstance().InitMap();
-
-		//mute = new Mutex();
-		//sem = new Semaphore();
-		//thre = new Thread();
 		int seed = Settings.GetGameSettings().Seed;
 
 		random = new Random(seed);
 		
 			
 		CellSize = new Vector2(CellSizeOverride, CellSizeOverride);
-		
-		//ulong ms = OS.GetSystemTimeMsecs();
-		
-		//ulong msaf = OS.GetSystemTimeMsecs();
-		//GD.Print("Aranging cells took : " + (msaf - ms).ToString() + " ms");
+
 		for (int i = 0; i < scenestospawn.Count(); i++)
 		{
 			loadedscenes.Insert(i, scenestospawn[i]);
 		}
-		//ms = OS.GetSystemTimeMsecs();
-		
-		//msaf = OS.GetSystemTimeMsecs();
-		//GD.Print("Initialising map grid took : " + (msaf - ms).ToString() + " ms");
 	}
 	public void Init(bool LoadSave)
 	{
@@ -266,12 +252,6 @@ public class WorldMap : TileMap
 			Godot.Collections.Array Items = (Godot.Collections.Array)save.Get("InventoryContents");
 			inv.LoadSavedInventory(Items);
 
-			
-
-			//returning data to inventory map
-			Vector2[] MapGridVectorData = (Vector2[])save.Get("MapGridVectors");
-			int[] MapGridTypeData = (int[])save.Get("MapGridTypes");
-
 			bool HasVehicle = (bool)save.Get("playerHasVehicle");
 			if (HasVehicle)
 			{
@@ -289,24 +269,10 @@ public class WorldMap : TileMap
 				veh.ToggleWings(WingState);
 				veh.ToggleLights(LightState);
 			}
-
-			
-
-			//Dictionary<Vector2, int> MapGridData = new Dictionary<Vector2, int>();
-			//Dictionary<float, string> MapGridImageData = new Dictionary<float, string>();
-
-			//for (int i = 0; i < MapGridVectorData.Count(); i++)
-			//{
-			//	MapGridData.Add(MapGridVectorData[i], MapGridTypeData[i]);
-			//	MapGridImageData.Add(ilemap[MapGridVectorData[i]].RotationToSpawn, ilemap[MapGridVectorData[i]].ImageFile);
-			//}
-			//MapGrid.GetInstance().LoadSaveData(MapGridData, MapGridImageData);
-
 		}
 		else
 		{
 			ArrangeCellsBasedOnDistance();
-			//LoadingScreen.GetInstance().WaitTime = OrderedCells.Count;
 			MapGrid.GetInstance().InitMap();
 		}
 	}
@@ -323,40 +289,15 @@ public class WorldMap : TileMap
 		return CurIle.Island;
 	}
 	IslandInfo IleToSave;
-	//Thread thre;
-	//Mutex mute;
-	//Semaphore sem;
-	//bool spawning = false;
 	float d = 1;
 	public override void _Process(float delta)
 	{
-		//ulong ms = OS.GetSystemTimeMsecs();
 		if (!finishedspawning)
 		{
-			//if (thre == null)
-			//{
-			//	thre = new Thread();
-			//	thre.Start(this, "GenerateIsland");
-				//spawning = true;
-			//	sem.Post();
-				//thre = new Thread();
-				//int id = GetCell((int)OrderedCells[currentile].x, (int)OrderedCells[currentile].y);
-				//string name;
-				//PackedScene thing = GetSceneToSpawn(id, out name)
-				//thre.Start(this, "GenerateIsland");
-				
-				//IleToSave = GenerateIsland();
-			//	return;
-			//
 			if (IleToSave == null)
 			{
-				//IleGenThread.Start(this, "GenerateIsland", currentile);
-				GenerateIsland(currentile);
+				GenerateIsland(IslandSpawnIndex);
 			}
-			//if (currentile == LoadingScreen.GetWaitTime())
-			//{
-			//	SpawnIntro();
-			//}
 			
 		}
 		d -= delta;
@@ -365,33 +306,23 @@ public class WorldMap : TileMap
 			
 		d = 1;
 		CheckForTransition();
-		//ulong msaf = OS.GetSystemTimeMsecs();
-		//if (msaf - ms > 10)
-			//GD.Print("World map processing took longer the 10 ms. Process time : " + (msaf - ms).ToString() + " ms. Island scene =  " + scene);
 	}
-	//Mutex mut = new Mutex();
-	//Thread IleGenThread = new Thread();
-	//spawning and
+
 	void GenerateIsland(int tilenum)
 	{
-		//sem.Wait();
-		//#if DEBUG
-		ulong ms = OS.GetSystemTimeMsecs();
-		//#endif
 		//Get Cell id
 		
-		int id = GetCell((int)OrderedCells[currentile].x, (int)OrderedCells[currentile].y);
+		int id = GetCell((int)OrderedCells[IslandSpawnIndex].x, (int)OrderedCells[IslandSpawnIndex].y);
 		//Cell cords
-		Vector2 cell = OrderedCells[currentile];
+		Vector2 cell = OrderedCells[IslandSpawnIndex];
 
 		string SpecialName;
 
 		//Scene using ID from cell
-		//mute.Lock();
 		PackedScene ilescene = GetSceneToSpawn(id, out SpecialName);
-		//mute.Unlock();
+
+
 		//Start the Data saving
-		
 		//Spawndata to be used when spawning
 		float rot;
 		rot = random.Next(360);
@@ -399,74 +330,45 @@ public class WorldMap : TileMap
 		
 		IslandInfo ileinfo = new IslandInfo(rot, ilescene, cell, SpecialName);
 
-		//CallDeferred("AddInfoToMap", ileinfo, tilenum);
-
-		
-		//mut.Lock();
-
 		//SaveEntry
 		if (id == 0)
-			entry = ileinfo;
+			entry = cell;
 
 		IleToSave = ileinfo;
 		ilemap.Add(OrderedCells[tilenum], ileinfo);
 
-		//IleGenThread.Start(this, "ThreadedInstance");
-		//SpawnIsland(ileinfo);
-		//spawning = false;
-		//mut.Unlock();
 		CallDeferred("ThreadedInstance");
-		//MyWorld.GetInstance().AddChild(ile);
-		
-		//IleGenThread.CallDeferred("wait_to_finish")
-		#if DEBUG
-		ulong msaf = OS.GetSystemTimeMsecs();
-		if (msaf - ms > 20)
-			GD.Print("Island Generated. Process time : " + (msaf - ms).ToString() + " ms. Island scene =  " + ilescene.ResourcePath);
-		#endif
+
 		return;
 	}
-	public void AddInfoToMap(IslandInfo info, int Cur)
-	{
-		ilemap.Add(OrderedCells[Cur], info);
-	}
-	Island instancedile;
+
 	public void ThreadedInstance()
 	{
-		instancedile = (Island)IleToSave.IleType.Instance();
-		//IleGenThread.CallDeferred("wait_to_finish");
-		CallDeferred("AddSpawnInfo");
+		Island instancedile = (Island)IleToSave.IleType.Instance();
+		CallDeferred("AddSpawnInfo", instancedile);
 	}
-	public void AddSpawnInfo()
+	public void AddSpawnInfo(Island ile)
 	{
-		
 		Vector2 postoput = MapToWorld(new Vector2(IleToSave.Position.x, IleToSave.Position.y));
 
-		//mute.Lock();
 		postoput += CellSize / 2;
-		//mute.Unlock();
-		
 
-		instancedile.SetSpawnInfo(new Vector3(postoput.x, 0, postoput.y), IleToSave.RotationToSpawn, IleToSave.SpecialName);
+		ile.SetSpawnInfo(new Vector3(postoput.x, 0, postoput.y), IleToSave.RotationToSpawn, IleToSave.SpecialName);
 
-		IleToSave.Island = instancedile;
-		IleToSave.ImageIndex = instancedile.ImageID;
+		IleToSave.Island = ile;
+		IleToSave.ImageIndex = ile.ImageID;
 
-		instancedile = null;
 		CallDeferred("DoInitialSpawn");
 	}
 	public void DoInitialSpawn()
 	{
 		IslandInfo ilei = IleToSave;
-		//thre.Free();
-		//thre = null;
-		
-		currentile += 1;
-		if (currentile == OrderedCells.Count)
+
+		IslandSpawnIndex += 1;
+		if (IslandSpawnIndex == OrderedCells.Count)
 		{
 			finishedspawning = true; 
 		}
-			
 
 		Island ile = ilei.Island;
 
@@ -485,26 +387,17 @@ public class WorldMap : TileMap
 	{
 		IslandInfo ilei = IleToSave;
 		Island ile = ilei.Island;
-		//ulong ms = OS.GetSystemTimeMsecs();
-		//thre.WaitToFinish();
-		
 
 		ilei.SetInfo(ile);
-
 
 		IleToSave = null;
 		CallDeferred("DespawnIle", ilei.Island, ilei.KeepInstance);
 		CallDeferred("AddMapData", ilei.Position, ilei.Type, ilei.RotationToSpawn, ile.ImageID, ilei.SpecialName);
-		//IleGenThread.WaitToFinish();
-
 	}
 	void AddMapData(Vector2 position, IleType Type, float RotationToSpawn, int imageId, string name = null)
 	{
 		ImageTexture tex = new ImageTexture();
-		//im.Load(ile.Image);
 		tex.CreateFromImage(IslandImageHolder.GetInstance().Images[imageId]);
-		//tex.Load(ile.Image);
-
 		MapGrid.GetInstance().UpdateIleInfo(position, Type, - RotationToSpawn, tex, name);
 	}
 	public void AddIslandToHierarchy(Island ile)
@@ -530,7 +423,7 @@ public class WorldMap : TileMap
 		if (info != null)
 			start = info;
 		else
-			start = entry;
+			start = ilemap[entry];
 
 		MyWorld.GetInstance().ToggleIsland(start, true, true);
 			
@@ -554,8 +447,9 @@ public class WorldMap : TileMap
 	}
 	private void CheckForTransition()
 	{
-		if (pl == null)
+		if (!Player.IsSpawned())
 			return;
+		Player pl = Player.GetInstance();
 		Vector3 pos = pl.GlobalTranslation;
 		Vector2 plpos = new Vector2(pos.x, pos.z);
 		if (plpos.DistanceTo(CurrentTile) > CellSize.x/2)
@@ -564,9 +458,9 @@ public class WorldMap : TileMap
 
 			if (CurrentTile != curt)
 			{
-				IslandInfo ileinf = null;
+				IslandInfo ileinf;
 				ilemap.TryGetValue(WorldToMap(CurrentTile), out ileinf);
-				IslandInfo ileinfto = null;
+				IslandInfo ileinfto;
 				ilemap.TryGetValue(WorldToMap(curt), out ileinfto);
 				CurrentTile = curt;
 				if (pl.HasVehicle())
@@ -592,33 +486,16 @@ public class WorldMap : TileMap
 	}
 	public Island SpawnIsland(IslandInfo info)
 	{
-		
-		//#if DEBUG
-		//mute.Lock();
-		//ulong ms = OS.GetSystemTimeMsecs();
-		//mute.Unlock();
-		//#endif
-		
 		Island Ile = (Island)info.IleType.Instance();
 
-		
 		Vector2 postoput = MapToWorld(new Vector2(info.Position.x, info.Position.y));
 
-		//mute.Lock();
 		postoput += CellSize / 2;
-		//mute.Unlock();
-		
 
 		Ile.SetSpawnInfo(new Vector3(postoput.x, 0, postoput.y), info.RotationToSpawn, info.SpecialName);
 
 		info.Island = Ile;
 		info.ImageIndex = Ile.ImageID;
-		//#if DEBUG
-		//ulong msaf = OS.GetSystemTimeMsecs();
-		//if (msaf - ms > 20)
-		//	GD.Print("Island Generated. Process time : " + (msaf - ms).ToString() + " ms. Island scene =  " + info.IleType.ResourcePath);
-		//#endif
-		//mute.Unlock();
 		return Ile;
 	}
 	public Island ReSpawnIsland(IslandInfo info)
@@ -645,14 +522,12 @@ public class WorldMap : TileMap
 		List<int> absolutesums = new List<int>(cells.Count){
 			(int)(Math.Abs(OrderedCells[0].x) + Math.Abs(OrderedCells[0].y))
 		};
-		//absolutesums.Add((int)(Math.Abs(OrderedCells[0].x) + Math.Abs(OrderedCells[0].y)));
 
 		for (int x = 1; x < cells.Count; x++)
 		{
 			Vector2 cellArray = (Vector2)cells[x];
 			int ind = (int)(Math.Abs(cellArray.x) + Math.Abs(cellArray.y));
 
-			//Vector2 closest = OrderedCells[0];
 			int closestind = Math.Abs(absolutesums.BinarySearch(ind)) - 1;
 			closestind = Math.Max(0, closestind);
 			OrderedCells.Insert(closestind, cellArray);
@@ -667,16 +542,16 @@ public class WorldMap : TileMap
 			RandomTimes++;
 			RandomisedEntryID.Insert(i, SpawnIndex);
 		}
+
 		// μαχαλάς randomise
 		var lighthousecells = GetUsedCellsById(4);
-		int RandomLightHouseIndex = random.Next(0, lighthousecells.Count);
-		RandomTimes++;
+		int RandomLightHouseIndex = random.Next(0, lighthousecells.Count);	RandomTimes++;
 		Vector2 Μαχαλάςpalcement = (Vector2)lighthousecells[RandomLightHouseIndex];
 		ΜαχαλάςEntryID = OrderedCells.IndexOf(Μαχαλάςpalcement);
+
 		//exit randomise
 		var exitcells = GetUsedCellsById(2);
-		int RandomExitIndex = random.Next(0, exitcells.Count);
-		RandomTimes++;
+		int RandomExitIndex = random.Next(0, exitcells.Count);	RandomTimes++;
 		Vector2 Exitpalcement = (Vector2)exitcells[RandomExitIndex];
 		ExitID = OrderedCells.IndexOf(Exitpalcement);
 	}
@@ -760,17 +635,24 @@ public class WorldMap : TileMap
 			}
 		}
 	}
+	//
+    // Summary:
 	
-   
+	/// <summary>
+	/// 0 = entry /
+	///	1 = random or event /
+	///	2 = exit /
+	///	3 = sea /
+	///	4 = lighthouse /
+	/// </summary>
+	/// <param name="type"></param>
+	/// <param name="SpecialName"></param>
+	/// <returns></returns>
 	PackedScene GetSceneToSpawn(int type, out string SpecialName)
 	{
 		PackedScene scene = null;
 		SpecialName = null;
-		//0 entry
-		//1 random or event
-		//2 exit
-		//3 sea
-		//4 lighthouse
+		
 		switch (type)
 		{
 			case 0:
@@ -781,8 +663,8 @@ public class WorldMap : TileMap
 			}
 			case 1:
 			{
-				if (RandomisedEntryID.Contains(currentile))
-					scene = Eventscenestospawn[RandomisedEntryID.IndexOf(currentile)];
+				if (RandomisedEntryID.Contains(IslandSpawnIndex))
+					scene = Eventscenestospawn[RandomisedEntryID.IndexOf(IslandSpawnIndex)];
 				else
 				{
 					scene = loadedscenes[random.Next(0, loadedscenes.Count)];
@@ -795,7 +677,7 @@ public class WorldMap : TileMap
 			}
 			case 2:
 			{
-				if (currentile == ExitID)
+				if (IslandSpawnIndex == ExitID)
 				scene =  Exittospawn;
 				else
 				{
@@ -815,7 +697,7 @@ public class WorldMap : TileMap
 			}
 			case 4:
 			{
-				if (currentile == ΜαχαλάςEntryID)
+				if (IslandSpawnIndex == ΜαχαλάςEntryID)
 				{
 					SpecialName = "Μαχαλάς";
 					scene =  Μαχαλάς;

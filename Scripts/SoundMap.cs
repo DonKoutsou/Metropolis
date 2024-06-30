@@ -21,8 +21,7 @@ public class SoundMap : GridMap
 
     RandomNumberGenerator SeekRandom;
 
-    [Export]
-    bool RedoMapping = false;
+    
 
     [Export(PropertyHint.Layers3dPhysics)]
     public uint CheckLayer { get; set; }
@@ -163,6 +162,8 @@ public class SoundMap : GridMap
         //}
     }
     #if DEBUG
+    [Export]
+    bool RedoMapping = false;
     public override void _Process(float delta)
     {
         base._Process(delta);

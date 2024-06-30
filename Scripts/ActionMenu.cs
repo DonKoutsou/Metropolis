@@ -89,7 +89,7 @@ public class ActionMenu : Control
 		}
 		else if (SelectedObj is Character)
 		{
-			pl.StartDialogue((Character) SelectedObj);
+			DialogueManager.GetInstance().StartDialogue(pl, (Character) SelectedObj);
 			//TalkText.GetInst().Talk("Φίλος", (Character)SelectedObj);
 		}
 		else if (SelectedObj is Vehicle)
@@ -252,7 +252,7 @@ public class ActionMenu : Control
 	}
 	public void Start(Spatial obj)
 	{
-		if (pl.IsTalking)
+		if (DialogueManager.IsPlayerTalking())
 			return;
 		if (selecting)
             return;

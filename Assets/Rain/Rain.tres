@@ -7,4 +7,5 @@ flags_unshaded = true
 params_diffuse_mode = 1
 params_specular_mode = 1
 params_cull_mode = 2
-albedo_color = Color( 0.890196, 0.988235, 1, 0.0392157 )
+params_depth_draw_mode = 1
+albedo_color = Color( 0.890196, 0.988235, 1, 0.0196078 )

@@ -494,20 +494,17 @@ public class Vehicle : RigidBody
         }
         return count * 0.25f;
     }
-    public  void ToggleMachine(bool toggle)
+    public bool ToggleMachine(bool toggle)
     {
         if (toggle)
         {
-            bool hasalive = false;
-            foreach (Character pas in passengers)
-            {
-                if (pas.IsAlive())
-                {
-                    hasalive = true;
-                }
-            }
-            if (!hasalive)
-                return;
+            if (!HasAlive())
+                return false;
+        }
+        else
+        {
+            if (LightCondition())
+                ToggleLights(false);
         }
         if (toggle && SteerThr == null)
         {
@@ -519,6 +516,19 @@ public class Vehicle : RigidBody
         
         Working = toggle;
         SetProcess(toggle);
+        return true;
+    }
+    public bool HasAlive()
+    {
+        bool hasalive = false;
+        foreach (Character pas in passengers)
+        {
+            if (pas.IsAlive())
+            {
+                hasalive = true;
+            }
+        }
+        return hasalive;
     }
     public void ToggleEngineVFX(bool toggle)
     {
@@ -535,10 +545,15 @@ public class Vehicle : RigidBody
     {
         return Working;
     }
-    public  void ToggleLights(bool toggle)
+    public bool ToggleLights(bool toggle)
     {
+        if (toggle)
+        {
+            if (!HasAlive())
+                return false;
+        }
         if (DamageMan.GetLightCondition() == false)
-            return;
+            return false;
         if (toggle)
         {
             FrontLight.LightEnergy = 1;
@@ -547,6 +562,7 @@ public class Vehicle : RigidBody
         {
             FrontLight.LightEnergy = 0;
         }
+        return true;
     }
     public bool LightCondition()
     {
@@ -620,8 +636,12 @@ public class Vehicle : RigidBody
         chartothrowout.Rotation = new Vector3(0,0,0);
         chartothrowout.GlobalRotation = prevrot;
         chartothrowout.SetVehicle(null);
+        VehicleHud hud = VehicleHud.GetInstance();
+        
         ToggleMachine(false);
+        hud.GetButton("Engine").SetPressedNoSignal(false);
         ToggleLights(false);
+        hud.GetButton("Lights").SetPressedNoSignal(false);
         chartothrowout.OnVehicleUnBoard(this);
     }
      public bool UnBoardVehicle(Character cha)
@@ -648,8 +668,13 @@ public class Vehicle : RigidBody
         cha.GlobalRotation = prevrot;
         cha.Rotation = new Vector3(0,0,0);
         cha.Anims().ToggleIdle();
+        
+        VehicleHud hud = VehicleHud.GetInstance();
         ToggleMachine(false);
+        hud.GetButton("Engine").SetPressedNoSignal(false);
         ToggleLights(false);
+        hud.GetButton("Lights").SetPressedNoSignal(false);
+
         cha.OnVehicleUnBoard(this);
         return true;
     }

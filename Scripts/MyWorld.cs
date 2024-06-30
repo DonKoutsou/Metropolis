@@ -114,7 +114,7 @@ public class MyWorld : Spatial
 		Player pl = (Player)PlayerScene.Instance();
 		AddChild(pl);
 		pl.Teleport(pos);
-		WorldMap.GetInstance().pl = pl;
+		//WorldMap.GetInstance().pl = pl;
 		EmitSignal("PlayerSpawnedEventHandler", pl);
 		MapGrid.GetInstance().ConnectPlayer(pl);
 		VehicleHud.GetInstance().ConnectToPlayer(pl);
@@ -123,6 +123,8 @@ public class MyWorld : Spatial
 	}
 	public void OnPlayerKilled(string reason = null)	
 	{
+		WorldMap map = WorldMap.GetInstance();
+
 		StartingScreen start = ((WorldRoot)GetParent()).GetStartingScreen();
 		start.GameOver(reason);
 		SaveLoadManager.GetInstance().ClearSaves();
@@ -264,10 +266,22 @@ public class MyWorld : Spatial
 
 	public void ToggleIsland(IslandInfo ileinfo,bool toggle, bool affectneigh)
 	{
-		if (toggle && !ileinfo.IsIslandSpawned())
+		if (toggle)
 		{
-			ActiveIles.Add(ileinfo);
+			if (ileinfo.KeepInstance == true && !ActiveIles.Contains(ileinfo))
+			{
+				ActiveIles.Add(ileinfo);
+				Island i = ileinfo.Island;
+				AddChild(i);
+				i.Visible = true;
+				i.InputData(ileinfo);
+			}
+			else if (!ileinfo.IsIslandSpawned())
+			{
+				ActiveIles.Add(ileinfo);
 			WorldMap.GetInstance().ReSpawnIsland(ileinfo).InputData(ileinfo);
+			}
+			
 		}
 		else if (!toggle && ileinfo.IsIslandSpawned())
 		{
@@ -282,15 +296,8 @@ public class MyWorld : Spatial
 			else
 				ile.QueueFree();
 		}
-		else if (toggle && ileinfo.KeepInstance == true && !ActiveIles.Contains(ileinfo))
-		{
-			ActiveIles.Add(ileinfo);
-			Island i = ileinfo.Island;
-			AddChild(i);
-			i.Visible = true;
-			i.InputData(ileinfo);
-			
-		}
+
+
 		if (affectneigh)
 		{
 			List<IslandInfo> closestto;

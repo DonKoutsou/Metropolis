@@ -29,12 +29,12 @@ flags_fixed_size = true
 flags_do_not_receive_shadows = true
 flags_disable_ambient_light = true
 params_cull_mode = 2
-params_depth_draw_mode = 1
+params_depth_draw_mode = 3
 params_billboard_mode = 3
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
-albedo_color = Color( 1, 0.792157, 0.419608, 0.0392157 )
+albedo_color = Color( 1, 0.792157, 0.419608, 1 )
 albedo_texture = ExtResource( 8 )
 
 [sub_resource type="ParticlesMaterial" id=1]
@@ -49,7 +49,7 @@ scale = 0.01
 scale_random = 0.05
 
 [sub_resource type="QuadMesh" id=3]
-size = Vector2( 0.1, 0.1 )
+size = Vector2( 0.08, 0.08 )
 
 [sub_resource type="SpatialMaterial" id=112]
 flags_transparent = true
@@ -60,7 +60,7 @@ params_billboard_mode = 3
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
-albedo_color = Color( 1, 0.980392, 0.952941, 0.0784314 )
+albedo_color = Color( 1, 0.980392, 0.952941, 0.176471 )
 albedo_texture = ExtResource( 7 )
 
 [sub_resource type="Curve" id=113]
@@ -110,7 +110,7 @@ SoundScaleCurve = SubResource( 5 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 500, 0 )
 material_override = SubResource( 2 )
 cast_shadow = 0
-amount = 12000
+amount = 15000
 visibility_aabb = AABB( -1163.96, -976.849, -1014.37, 2327.92, 1953.7, 2028.74 )
 draw_order = 2
 process_material = SubResource( 1 )

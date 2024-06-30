@@ -4,11 +4,6 @@ using System.Collections.Generic;
 
 public class SaveLoadManager : Control
 {
-	// Declare member variables here. Examples:
-	// private int a = 2;
-	// private string b = "text";
-
-	// Called when the node enters the scene tree for the first time.
 	static SaveLoadManager Instance;
 	public override void _Ready()
 	{
@@ -24,6 +19,7 @@ public class SaveLoadManager : Control
 
 		dir.Remove("user://SavedGame.tres");
 	}
+	
 	public void SaveGame()
 	{
 		GDScript SaveGD = GD.Load<GDScript>("res://Scripts/saved_game.gd");
@@ -84,24 +80,10 @@ public class SaveLoadManager : Control
 		data.Add("Date", Date);
 
 
-		//Dictionary<Vector2, int> MapData = MapGrid.GetInstance().GetSaveData();
-		//Vector2[] MapGridVectorData = new Vector2[MapData.Count];
-		//int[] MapGridTypeData = new int[MapData.Count];
-		//int i = 0;
-		//foreach (KeyValuePair<Vector2 , int> kvp in MapData)
-		//{
-		//	MapGridVectorData[i] = kvp.Key;
-		//	MapGridTypeData[i] = kvp.Value;
-		//	i++;
-
-		//}
-		//data.Add("MapGridVectors", MapGridVectorData);
-		//data.Add("MapGridTypes", MapGridTypeData);
-
 		GDScript InventorySaveGD = GD.Load<GDScript>("res://Scripts/InventoryItemInfo.gd");
 		
 		
-		List<Item> InventoryContents = new List<Item>();
+		List<Item> InventoryContents;
 		pl.GetCharacterInventory().GetContents(out InventoryContents);
 		
 		Resource[] Inventorydata = new Resource[InventoryContents.Count];
@@ -134,54 +116,9 @@ public class SaveLoadManager : Control
 		}
 		data.Add("InventoryContents", Inventorydata);
 		save.Call("_SetData", data);
-		/*save.RandomisedEntryID = (List <int>)data["RandomisedEntryID"];
-		save.currentile = (int)data["currentile"];
-		save.ΜαχαλάςEntryID = (int)data["ΜαχαλάςEntryID"];
-		save.ExitID = (int)data["ExitID"];
-		save.OrderedCells = (List <Vector2> )data["OrderedCells"];
-		save.random = (Random)data["random"];
-		save.CurrentTile = (Vector2)data["CurrentTile"];
-		save.ilemap = (Dictionary<Vector2, IslandInfo>)data["ilemap"];
-		save.finishedspawning = (bool)data["finishedspawning"];
-		save.playerlocation = pl.GlobalTranslation;
-		save.playerenergy = pl.GetCurrentEnergy();*/
 		
 
 		//File savef = new File();
 		ResourceSaver.Save("user://SavedGame.tres", (Resource)save);
 	}
 }
-/*public class SavedGame : Resource
-{
-	[Export]
-	public List <int> RandomisedEntryID { get; set; }
-
-	[Export]
-	public int currentile { get; set; }
-
-	[Export]
-	public int ΜαχαλάςEntryID { get; set; }
-
-	[Export]
-	public int ExitID { get; set; }
-
-	[Export]
-	public List <Vector2> OrderedCells { get; set; }
-
-	[Export]
-	public Random random { get; set; }
-
-	[Export]
-	public Vector2 CurrentTile { get; set; }
-
-	[Export]
-	public Dictionary<Vector2, IslandInfo> ilemap { get; set; }
-
-	[Export]
-	public bool finishedspawning { get; set; }
-
-	[Export]
-	public Vector3 playerlocation  { get; set; }
-	[Export]
-	public float playerenergy { get; set; }
-}  */

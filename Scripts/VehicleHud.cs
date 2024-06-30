@@ -26,6 +26,7 @@ public class VehicleHud : Control
     {
         pl.Connect("VehicleBoardEventHandler", this, "OnBoarding");
     }
+
     public void OnBoarding(bool toggle, Vehicle Veh)
     {
         if (toggle)
@@ -47,6 +48,9 @@ public class VehicleHud : Control
             Button LightsToggle;
             ButtonList.TryGetValue("Lights", out LightsToggle);
             LightsToggle.SetPressedNoSignal(CurrentVeh.LightCondition());
+            Button EngineToggle;
+            ButtonList.TryGetValue("Engine", out EngineToggle);
+            EngineToggle.SetPressedNoSignal(false);
         }
         else
         {
@@ -69,7 +73,12 @@ public class VehicleHud : Control
     ///Signals////
     private void On_Engine_Toggled(bool button_pressed)
     {
-        CurrentVeh.ToggleMachine(button_pressed);
+        if (!CurrentVeh.ToggleMachine(button_pressed))
+        {
+            Button EngineToggle;
+            ButtonList.TryGetValue("Engine", out EngineToggle);
+            EngineToggle.SetPressedNoSignal(!button_pressed);
+        }
     }
     private void On_Sail_Toggle(bool button_pressed)
     {
@@ -83,5 +92,17 @@ public class VehicleHud : Control
     private void On_Lights_Toggle(bool button_pressed)
     {
         CurrentVeh.ToggleLights(button_pressed);
+        if (!CurrentVeh.ToggleLights(button_pressed))
+        {
+            Button LightsToggle;
+            ButtonList.TryGetValue("Lights", out LightsToggle);
+            LightsToggle.SetPressedNoSignal(!button_pressed);
+        }
+    }
+    public Button GetButton(string buttonname)
+    {
+        Button but;
+        ButtonList.TryGetValue(buttonname, out but);
+        return but;
     }
 }

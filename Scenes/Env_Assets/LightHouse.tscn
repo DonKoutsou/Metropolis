@@ -289,12 +289,10 @@ script = ExtResource( 2 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 511.863, 0 )
 
 [node name="Occluder" type="Occluder" parent="."]
-visible = false
 shape = SubResource( 2129 )
 
 [node name="Occluder2" type="Occluder" parent="."]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0 )
-visible = false
 shape = SubResource( 2129 )
 
 [node name="Roof" type="MeshInstance" parent="."]

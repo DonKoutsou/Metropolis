@@ -149,7 +149,7 @@ public class Character : KinematicBody
 		}
 			
 
-		if (CurrentEnergy <= 0)
+		if (CurrentEnergy <= 0 && IsAlive())
 		{
 			Kill();
 			if (HasVecicle)
@@ -304,6 +304,7 @@ public class Character : KinematicBody
 	public virtual void OnVehicleUnBoard(Vehicle veh)
 	{
 		EmitSignal("VehicleBoardEventHandler", false, veh);
+		
 		loctomove = GlobalTranslation;
 		if (PlayingInstrument)
 		{

@@ -129,6 +129,7 @@ public class StartingScreen : Control
 	{
 		GetNode<Timer>("RestartTimer").Start();
 		GetNode<Label>("GameOverLabel").Visible = true;
+		OS.VsyncEnabled = false;
 	}
 	public void GameWon(Character pl)
 	{

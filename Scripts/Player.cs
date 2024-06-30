@@ -33,7 +33,7 @@ public class Player : Character
 	bool Autowalk = false;
 	public bool IsRunning = false;
 
-	Camera DialogueCam;
+	public Camera DialogueCam;
 
 	static Player instance;
     public override void _EnterTree()
@@ -46,7 +46,10 @@ public class Player : Character
         base._ExitTree();
 		instance = null;
     }
-
+	public static bool IsSpawned()
+	{
+		return instance != null;
+	}
     public static Player GetInstance()
 	{
 		return instance;
@@ -58,13 +61,9 @@ public class Player : Character
 	public void Teleport(Vector3 pos)
 	{
 		PhysicsServer.BodySetState(GetRid(), PhysicsServer.BodyState.Transform, Transform.Identity.Translated(pos - GlobalTranslation));
-		//GetNode<CollisionShape>("CollisionShape").Disabled = true;
 		GlobalTranslation = pos;
 		loctomove = pos;
 		GetNode<Spatial>("Pivot").Rotation = Vector3.Zero;
-		//GetNode<CollisionShape>("CollisionShape").Disabled = false;
-		//NavAgent.SetTargetLocation(loctomove);
-		//CameraMovePivot.GetInstance().GlobalTranslation = pos;
 	}
 	public bool HasVehicle()
 	{
@@ -74,7 +73,6 @@ public class Player : Character
 	{
 		base._Ready();
 
-		//ToggleAllLimbs();
 		CharacterInventory = GetNode<Inventory>("Inventory");
 		if (InventoryWeightOverride != -1)
 		{
@@ -95,16 +93,13 @@ public class Player : Character
 	}
 	public override void OnSongEnded(Instrument inst)
 	{
-		//IdleTimer.Start();
 		inst.Disconnect("OnSongEnded", this, "OnSongEnded");
 		StopMusic();
 		PlayMusic();
-		//instatatchment.GetNode<RemoteTransform>("PlayingAtatchment").ForceUpdateCache(); 
-
 	}
 	private void UpdateMoveLocation()
 	{
-		if (IsTalking)
+		if (DialogueManager.IsPlayerTalking())
 			return;
 		var spacestate = GetWorld().DirectSpaceState;
 		Vector2 mousepos = GetViewport().GetMousePosition();
@@ -304,10 +299,6 @@ public class Player : Character
 			if (currveh.Working)
 				currveh.loctomove = loctomove;
 		}
-		
-		//ulong msaf = OS.GetSystemTimeMsecs();
-		//if (msaf - ms > 215)
-			//GD.Print("Player processing took longer the 15 ms. Process time : " + (msaf - ms).ToString() + " ms");
 	}
 	//Handling of input
 	public override void _Input(InputEvent @event)
@@ -365,59 +356,5 @@ public class Player : Character
 		base.OnVehicleBoard(Veh);
 		IsRunning = false;
 	}
-	Character TalkingChar;
-	public bool IsTalking = false;
-	public void StartDialogue(Character character)
-	{
-		if (HasVehicle())
-		{
-			if (!currveh.UnBoardVehicle(this))
-				return;
-		}
-		Position3D talkpos = character.GetNode<Position3D>("TalkPosition");
-
-		loctomove = talkpos.GlobalTranslation;
-
-		((Spatial)DialogueCam.GetParent()).GlobalRotation = talkpos.GlobalRotation;
-		CameraAnimationPlayer.GetInstance().PlayAnim("FadeInDialogue");
-		if (character.CurrentEnergy == 0)
-		{
-			bool HasBat = CharacterInventory.HasBatteries();
-			DialogicSharp.SetVariable("HasBatteries", HasBat.ToString().ToLower());
-			var dialogue = DialogicSharp.Start("UnConDialogue");
-			AddChild(dialogue);
-			dialogue.Connect("timeline_end", this, "EndUnconDialogue");
-		}
-		else
-		{
-			var dialogue =  DialogicSharp.Start("TestTimeline");
-			AddChild(dialogue);
-			dialogue.Connect("timeline_end", this, "EndDialogue");
-		}
-		TalkingChar = character;
-		IsTalking = true;
-		//DialogueCam.Current = true;
-	}
-	public void EndUnconDialogue(string timeline_name)
-	{
-		CameraAnimationPlayer.GetInstance().PlayAnim("FadeOutDialogue");
-		string saved = DialogicSharp.GetVariable("SavedCharacter");
-		if (saved == "true")
-		{
-			
-			List<Battery> bats;
-			CharacterInventory.GetBatteries(out bats);
-
-			TalkingChar.RechargeCharacter(bats[0].GetCurrentCap());
-			TalkingChar.Respawn();
-
-			CharacterInventory.DeleteItem(bats[0]);
-		}
-		IsTalking = false;
-	}
-	public void EndDialogue(string timeline_name)
-	{
-		CameraAnimationPlayer.GetInstance().PlayAnim("FadeOutDialogue");
-		IsTalking = false;
-	}
+	
 }

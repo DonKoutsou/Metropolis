@@ -3,8 +3,6 @@ using System;
 
 public class LoadingScreen : Control
 {
-	int WaitTime;
-
 	static int Wtime = 0;
 	static LoadingScreen Instance;
 	public override void _Ready()
@@ -28,8 +26,6 @@ public class LoadingScreen : Control
 		GetNode<AnimationPlayer>("AnimationPlayer").Play("FadeIn");
 		GetNode<AnimationPlayer>("AnimationPlayer2").Play("Spinner");
 		Show();
-		GetNode<ProgressBar>("ProgressBar").MaxValue = WaitTime;
-		Wtime = WaitTime;
 		SetProcess(true);
 	}
 	public override void _Process(float delta)
@@ -44,10 +40,11 @@ public class LoadingScreen : Control
 			GetNode<ProgressBar>("ProgressBar").MaxValue = map.GetIslandCount();
 			Wtime = map.GetIslandCount();
 		}
-		GetNode<ProgressBar>("ProgressBar").Value = map.currentile;
-		if (map.currentile == Wtime)
+		GetNode<ProgressBar>("ProgressBar").Value = map.IslandSpawnIndex;
+		if (map.IslandSpawnIndex == Wtime)
 		{
 			GetNode<AnimationPlayer>("AnimationPlayer").Play("FadeOut");
+			Hide();
 			SetProcess(false);
 		}
 	}
