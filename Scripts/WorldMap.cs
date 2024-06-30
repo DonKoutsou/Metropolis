@@ -77,6 +77,10 @@ public class WorldMap : TileMap
 
 	public Player pl;
 
+	public int GetIslandCount()
+	{
+		return OrderedCells.Count;
+	}
 
     public override void _ExitTree()
     {
@@ -302,6 +306,7 @@ public class WorldMap : TileMap
 		else
 		{
 			ArrangeCellsBasedOnDistance();
+			//LoadingScreen.GetInstance().WaitTime = OrderedCells.Count;
 			MapGrid.GetInstance().InitMap();
 		}
 	}
@@ -348,10 +353,10 @@ public class WorldMap : TileMap
 				//IleGenThread.Start(this, "GenerateIsland", currentile);
 				GenerateIsland(currentile);
 			}
-			if (currentile == LoadingScreen.GetWaitTime())
-			{
-				SpawnIntro();
-			}
+			//if (currentile == LoadingScreen.GetWaitTime())
+			//{
+			//	SpawnIntro();
+			//}
 			
 		}
 		d -= delta;
@@ -457,8 +462,11 @@ public class WorldMap : TileMap
 		//thre = null;
 		
 		currentile += 1;
-		if (currentile >= OrderedCells.Count)
+		if (currentile == OrderedCells.Count)
+		{
 			finishedspawning = true; 
+		}
+			
 
 		Island ile = ilei.Island;
 
@@ -468,6 +476,10 @@ public class WorldMap : TileMap
 
 		RandomTimes += RandomUses;
 		CallDeferred("SaveIsland");
+		if (finishedspawning == true)
+		{
+			SpawnIntro();
+		}
 	}
 	public void SaveIsland()
 	{
@@ -536,6 +548,8 @@ public class WorldMap : TileMap
 		intr.GetNode<WorldParticleManager>("WorldParticleManager").GlobalRotation = Vector3.Zero;
 
 		CurrentTile = new Vector2 (island.GlobalTranslation.x ,island.GlobalTranslation.z);
+
+		OS.VsyncEnabled = true;
 		return intr;
 	}
 	private void CheckForTransition()

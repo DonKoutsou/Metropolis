@@ -286,6 +286,7 @@ anims/RESET = SubResource( 2123 )
 script = ExtResource( 2 )
 
 [node name="Door" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 511.863, 0 )
 
 [node name="Occluder" type="Occluder" parent="."]
 visible = false

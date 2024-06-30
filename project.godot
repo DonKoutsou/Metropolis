@@ -176,6 +176,7 @@ UniversalLodManager="*res://Scripts/UniversalLodManager.cs"
 window/size/width=1920
 window/size/height=1080
 window/size/borderless=true
+window/vsync/use_vsync=false
 window/stretch/aspect="keep"
 
 [editor_plugins]
@@ -345,7 +346,6 @@ quality/subsurface_scattering/quality=0
 environment/default_clear_color=Color( 1, 1, 1, 1 )
 quality/filters/msaa=2
 quality/filters/use_fxaa=true
-environment/default_environment="res://new_environment2.tres"
 quality/godrays/sample_number=50
 quality/godrays/use_pcf5=true
 quality/godrays/dither_amount=1.0

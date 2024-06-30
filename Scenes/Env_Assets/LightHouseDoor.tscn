@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=2]
 
 [sub_resource type="CylinderShape" id=1]
-height = 1850.84
+height = 1013.55
 radius = 151.116
 
 [node name="Door" type="Area"]
