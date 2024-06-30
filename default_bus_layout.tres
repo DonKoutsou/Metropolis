@@ -39,6 +39,7 @@ resource_name = "PitchShift"
 pitch_scale = 0.6
 
 [resource]
+bus/0/volume_db = -80.0
 bus/0/effect/0/effect = SubResource( 1 )
 bus/0/effect/0/enabled = false
 bus/0/effect/1/effect = SubResource( 2 )

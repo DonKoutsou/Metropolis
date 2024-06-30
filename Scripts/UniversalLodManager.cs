@@ -9,18 +9,30 @@ public partial class UniversalLodManager : Node
   public static UniversalLodManager Instance => _instance;
   static Camera CurrentCamera;
   List<LoddedObject> LODedObj;
+  List<LoddedCharacter> LODedChar;
   int Currentcheck = 0;
+  int CurrentCharCheck = 0;
 
   public void UpdateLoddedObj()
   {
     LODedObj = new List<LoddedObject>();
+    
     var loded = GetTree().GetNodesInGroup("LODDEDOBJ");
     foreach(LoddedObject mesh in loded)
     {
         LODedObj.Add(mesh);
     }
+    
   }
-
+  public void UpdateLoddedChars()
+  {
+    LODedChar = new List<LoddedCharacter>();
+    var lodedC = GetTree().GetNodesInGroup("LODDEDCHAR");
+    foreach(LoddedCharacter character in lodedC)
+    {
+        LODedChar.Add(character);
+    }
+  }
   public static void UpdateCamera(Camera cam)
   {
     CurrentCamera = cam;
@@ -34,6 +46,7 @@ public partial class UniversalLodManager : Node
     _instance = this;
 
     LODedObj = new List<LoddedObject>();
+    LODedChar = new List<LoddedCharacter>();
     SetProcess(false);
   }
   public override void _Process(float delta)
@@ -42,37 +55,66 @@ public partial class UniversalLodManager : Node
       if (CurrentCamera == null || !Godot.Object.IsInstanceValid(CurrentCamera))
           return;
 
-      if (Currentcheck == LODedObj.Count)
+      if (Currentcheck >= LODedObj.Count)
       {
           Currentcheck = 0;
           UpdateLoddedObj();
-          return;
       }
-      int processed = 0;
-      Vector3 campos = CurrentCamera.GlobalTranslation;
-      while (processed < 20)
+      else
       {
-        if (Currentcheck == LODedObj.Count)
+        int processed = 0;
+        Vector3 campos = CurrentCamera.GlobalTranslation;
+        while (processed < 10)
+        {
+          if (Currentcheck >= LODedObj.Count)
+            break;
+
+          LoddedObject objtocheck = LODedObj[Currentcheck];
+
+          Currentcheck += 1;
+          
+          if (objtocheck != null && Godot.Object.IsInstanceValid(objtocheck) && objtocheck.IsInsideTree())
+          {
+            float dist = campos.DistanceTo(objtocheck.GlobalTranslation);
+            float abbsize = objtocheck.GetTransformedAabb().GetLongestAxisSize();
+
+            if (dist > abbsize + 1200 && objtocheck.HasLod(2))
+              objtocheck.SwitchLod(2);
+            else if (dist > objtocheck.GetTransformedAabb().GetLongestAxisSize() + 500 && objtocheck.HasLod(1))
+              objtocheck.SwitchLod(1);
+            else
+              objtocheck.SwitchLod(0);
+          }
+          processed += 1;
+
+        }
+      }
+      if (CurrentCharCheck >= LODedChar.Count)
+      {
+          CurrentCharCheck = 0;
+          UpdateLoddedChars();
+      }
+      else
+      {
+        Vector3 campos = CurrentCamera.GlobalTranslation;
+
+        if (CurrentCharCheck >= LODedChar.Count)
           return;
 
-        LoddedObject objtocheck = LODedObj[Currentcheck];
+        LoddedCharacter objtocheck = LODedChar[CurrentCharCheck];
 
-        Currentcheck += 1;
+        CurrentCharCheck += 1;
         
         if (objtocheck != null && Godot.Object.IsInstanceValid(objtocheck) && objtocheck.IsInsideTree())
         {
           float dist = campos.DistanceTo(objtocheck.GlobalTranslation);
         
-          if (dist > objtocheck.GetTransformedAabb().GetLongestAxisSize() + 500)
+          if (dist > 200)
               objtocheck.SwitchLod(true);
           else
               objtocheck.SwitchLod(false);
         }
-        processed += 1;
-
       }
-      
-
       
   }
 }

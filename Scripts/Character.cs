@@ -366,11 +366,20 @@ public class Character : KinematicBody
 	}
 	public bool HasLimbOfType(LimbType type)
 	{
-		return GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>(LimbTranslator.EnumToString(type)).Visible;
+		LoddedCharacter lod = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<LoddedCharacter>("Skeleton");
+		string name = LimbTranslator.EnumToString(type);
+		if (lod.GetCurrentLOD() == 1)
+			name += "_LOD"; 
+		return GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>(name).Visible;
 	}
 	public void ToggleLimb(LimbType limb, bool toggle)
 	{
-		GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>(LimbTranslator.EnumToString(limb)).Visible = toggle;
+		LoddedCharacter lod = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<LoddedCharacter>("Skeleton");
+		string limbname = LimbTranslator.EnumToString(limb);
+		if (lod.GetCurrentLOD() == 1)
+			limbname += "_LOD";
+
+		GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>(limbname).Visible = toggle;
 	}
 	public void SetLimbColor(LimbType limb, Color colorarion)
 	{

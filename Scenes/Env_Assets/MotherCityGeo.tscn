@@ -636,7 +636,7 @@ __meta__ = {
 transform = Transform( 330.455, -0.00216192, 41.1733, -4.89043, 330.651, 39.2676, -40.8819, -39.5711, 328.113, 488.55, -398.967, 1646.91 )
 
 [node name="Rock85" parent="Rocks" index="83" instance=ExtResource( 21 )]
-transform = Transform( 136.802, -9.2183e-09, 1.76951e-08, -4.27235e-10, 136.802, -1.86265e-09, 1.76951e-08, 0, 136.802, -338.022, -108.028, 1410.2 )
+transform = Transform( 136.802, -9.22142e-09, 1.95578e-08, -1.36191e-09, 136.802, -1.86265e-09, 1.76951e-08, -1.86265e-09, 136.802, -338.022, -108.028, 1410.2 )
 
 [node name="Rock86" parent="Rocks" index="84" instance=ExtResource( 25 )]
 transform = Transform( -117.47, -60.3811, 3.78061, 57.2797, -108.344, 49.3973, -19.473, 45.5542, 122.495, -784.025, -29.9761, 1060.93 )
@@ -647,7 +647,7 @@ transform = Transform( -111.443, -70.4818, 8.49601, 68.2694, -102.062, 48.8069, 
 [node name="Rock88" parent="Rocks" index="86" instance=ExtResource( 25 )]
 transform = Transform( 113.136, -68.1476, 3.93892, -68.237, -112.704, 10.045, -1.82094, -10.6349, -131.693, 837.283, -71.4338, 1086.15 )
 
-[node name="Rock89" parent="Rocks" index="87" instance=ExtResource( 25 )]
+[node name="q" parent="Rocks" index="87" instance=ExtResource( 25 )]
 transform = Transform( 387.008, -233.114, 13.4739, -233.42, -385.53, 34.3611, -6.22893, -36.379, -450.485, -362.377, -795.142, 1815.31 )
 
 [node name="Rock90" parent="Rocks" index="88" instance=ExtResource( 25 )]

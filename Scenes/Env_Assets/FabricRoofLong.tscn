@@ -8,9 +8,13 @@ material = ExtResource( 1 )
 top_radius = 0.1
 bottom_radius = 0.1
 height = 20.0
+radial_segments = 8
+rings = 0
 
 [sub_resource type="CylinderMesh" id=4]
 height = 0.2
+radial_segments = 12
+rings = 0
 
 [sub_resource type="CylinderShape" id=2]
 height = 20.2

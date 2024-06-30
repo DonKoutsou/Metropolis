@@ -22,10 +22,14 @@ material = SubResource( 4 )
 top_radius = 0.5
 bottom_radius = 0.5
 height = 5.0
+radial_segments = 8
+rings = 0
 
 [sub_resource type="CapsuleMesh" id=3]
 radius = 0.5
 mid_height = 0.5
+radial_segments = 8
+rings = 1
 
 [sub_resource type="CylinderShape" id=5]
 height = 5.00185

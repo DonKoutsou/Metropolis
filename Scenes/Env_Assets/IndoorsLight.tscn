@@ -3,6 +3,8 @@
 [ext_resource path="res://Scripts/Street_Lamp.cs" type="Script" id=1]
 
 [sub_resource type="SphereMesh" id=1]
+radial_segments = 8
+rings = 4
 
 [sub_resource type="SpatialMaterial" id=2]
 emission_enabled = true

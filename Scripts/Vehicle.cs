@@ -89,7 +89,7 @@ public class Vehicle : RigidBody
         ExaustParticles[1].Emitting = false;
         ExaustParticles[2].Emitting = false;
         ExaustParticles[3].Emitting = false;
-        Spatial parent = (Spatial)GetParent();
+        //Spatial parent = (Spatial)GetParent();
         ZeroPos();
         //frontray = parent.GetNode<RayCast>("RayF");
         Rays.Insert(0, GetNode<Spatial>("RemoteTransform"));
@@ -157,12 +157,16 @@ public class Vehicle : RigidBody
         base._PhysicsProcess(delta);
         //ulong ms = OS.GetSystemTimeMsecs();
 
-        if (!thr.IsActive())
+        if (passengers.Count > 0)
         {
-            //if (thr.IsActive())
-            thr = new Thread();
-            thr.Start(this, "Balance", delta);
+            if (!thr.IsActive())
+            {
+                //if (thr.IsActive())
+                thr = new Thread();
+                thr.Start(this, "Balance", delta);
+            }
         }
+        
 
         Hover(delta);
 
@@ -210,7 +214,10 @@ public class Vehicle : RigidBody
         
 
         
-
+        if (passengers.Count == 0)
+        {
+            return;
+        }
         if (!SteerThr.IsActive())
         {
             //if (SteerThr.IsActive())
