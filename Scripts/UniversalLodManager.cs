@@ -18,9 +18,9 @@ public partial class UniversalLodManager : Node
     LODedObj = new List<LoddedObject>();
     
     var loded = GetTree().GetNodesInGroup("LODDEDOBJ");
-    foreach(LoddedObject mesh in loded)
+    foreach(LoddedObject ObjectToLodCheck in loded)
     {
-        LODedObj.Add(mesh);
+        LODedObj.Add(ObjectToLodCheck);
     }
     
   }
@@ -41,7 +41,7 @@ public partial class UniversalLodManager : Node
   public override void _EnterTree()
   {
     if(_instance != null){
-       this.QueueFree(); // The Singletone is already loaded, kill this instance
+       QueueFree(); // The Singletone is already loaded, kill this instance
     }
     _instance = this;
 
@@ -63,7 +63,8 @@ public partial class UniversalLodManager : Node
       else
       {
         int processed = 0;
-        Vector3 campos = CurrentCamera.GlobalTranslation;
+        Player pl = Player.GetInstance();
+        Vector3 campos = new Vector3(pl.GlobalTranslation.x, CurrentCamera.GlobalTranslation.y, pl.GlobalTranslation.z);
         while (processed < 10)
         {
           if (Currentcheck >= LODedObj.Count)
@@ -96,7 +97,8 @@ public partial class UniversalLodManager : Node
       }
       else
       {
-        Vector3 campos = CurrentCamera.GlobalTranslation;
+        Player pl = Player.GetInstance();
+        Vector3 campos = new Vector3(pl.GlobalTranslation.x, CurrentCamera.GlobalTranslation.y, pl.GlobalTranslation.z);
 
         if (CurrentCharCheck >= LODedChar.Count)
           return;

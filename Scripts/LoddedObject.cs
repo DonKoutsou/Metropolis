@@ -6,27 +6,14 @@ public class LoddedObject : MeshInstance
 {   
     [Export]
     public Mesh LOD0 = null;
-
     [Export]
     public Mesh LOD1 = null;
-
     [Export]
     public Mesh LOD2 = null;
-   // public override void _Process(float delta)
-    //{
-//        base._Process(delta);
-     //   if (!Engine.EditorHint)
-     //       return;
-     //   if (GetTree().Root.GetCamera().GlobalTranslation.DistanceTo(GlobalTranslation) > 10)
-     //   {//            SwitchLod(true);
-     //   }
-     //   else
-     //   {
-//            SwitchLod(false);
-     //   }
-   // }
+
     public override void _EnterTree()
     {
+        base._EnterTree();
         AddToGroup("LODDEDOBJ");
     }
     public override void _ExitTree()
@@ -78,9 +65,5 @@ public class LoddedObject : MeshInstance
             }
         }
     }
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
+
 }

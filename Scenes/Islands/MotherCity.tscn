@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=2]
+[gd_scene load_steps=70 format=2]
 
 [ext_resource path="res://Scripts/SpawnPosition.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Env_Assets/PortRopething.tscn" type="PackedScene" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://Scenes/Env_Assets/Rock4.tscn" type="PackedScene" id=27]
 [ext_resource path="res://Scenes/Env_Assets/WoodPlanks.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Scenes/Items/Guitar.tscn" type="PackedScene" id=29]
+[ext_resource path="res://Assets/Clutter/Powerline/PowerLine.tscn" type="PackedScene" id=30]
 [ext_resource path="res://Scenes/Env_Assets/Skampo.tscn" type="PackedScene" id=33]
 [ext_resource path="res://Scenes/Env_Assets/Pagaki.tscn" type="PackedScene" id=34]
 [ext_resource path="res://Scenes/Env_Assets/Fabric/Spatial.tscn" type="PackedScene" id=35]
@@ -916,3 +917,6 @@ transform = Transform( 0.999686, -0.000693141, 0.0250484, 0.000666553, 0.999999,
 
 [node name="WindGenerator12" parent="." index="19" instance=ExtResource( 21 )]
 transform = Transform( 0.884255, 0, -0.467004, 0, 1, 0, 0.467004, 0, 0.884255, 2541.75, 0.80336, -3616.14 )
+
+[node name="StaticBody" parent="." index="20" instance=ExtResource( 30 )]
+transform = Transform( 0.921728, -0.363134, 0.136204, 0.387837, 0.863018, -0.3237, 0, 0.351188, 0.936305, 815.333, 99.5234, -6017.4 )

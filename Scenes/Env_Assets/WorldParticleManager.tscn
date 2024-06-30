@@ -36,10 +36,13 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 albedo_color = Color( 1, 0.792157, 0.419608, 1 )
 albedo_texture = ExtResource( 8 )
+distance_fade_mode = 1
+distance_fade_min_distance = 1944.57
+distance_fade_max_distance = 0.0
 
 [sub_resource type="ParticlesMaterial" id=1]
 emission_shape = 2
-emission_box_extents = Vector3( 800, 800, 800 )
+emission_box_extents = Vector3( 1500, 800, 1500 )
 direction = Vector3( 0, 0, -1 )
 spread = 5.0
 gravity = Vector3( 0, 0, 0 )

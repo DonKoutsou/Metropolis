@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Assets/TerainTex/Wood062_1K-PNG/Wood062_1K-PNG_Color.png" type="Texture" id=1]
 [ext_resource path="res://Assets/TerainTex/Metal047B_1K-JPG/Metal047B_1K-JPG_Color.jpg" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Assets/StreetLamp/M_StreetLamp.material" type="Material" id=7]
 [ext_resource path="res://Scripts/Street_Lamp.cs" type="Script" id=8]
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=9]
+[ext_resource path="res://Assets/StreetLamp/Street_Lamp_LOD.obj" type="ArrayMesh" id=10]
 
 [sub_resource type="CylinderMesh" id=1]
 height = 57.149
@@ -81,6 +82,9 @@ LOD1 = SubResource( 6 )
 transform = Transform( 2.97, 0, 0, 0, 2.97, 0, 0, 0, 2.97, 0, 13.6, 0 )
 mesh = ExtResource( 6 )
 material/0 = ExtResource( 7 )
+script = ExtResource( 9 )
+LOD0 = ExtResource( 6 )
+LOD1 = ExtResource( 10 )
 
 [node name="SpotLight" type="SpotLight" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 41.8064, 7.06651 )
