@@ -10,6 +10,8 @@ albedo_color = Color( 1, 0.882353, 0.709804, 1 )
 material = SubResource( 16 )
 radius = 1600.0
 height = 3200.0
+radial_segments = 16
+rings = 8
 
 [sub_resource type="QuadMesh" id=87]
 size = Vector2( 1000, 1000 )
@@ -27,6 +29,8 @@ albedo_color = Color( 0.890196, 1, 0.996078, 1 )
 material = SubResource( 14 )
 radius = 400.0
 height = 800.0
+radial_segments = 16
+rings = 8
 
 [node name="SunMoonPivot" type="Spatial"]
 script = ExtResource( 1 )

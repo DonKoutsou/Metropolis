@@ -92,6 +92,7 @@ hue_variation_random = 1.0
 size = Vector2( 1000, 1000 )
 
 [node name="WorldParticleManager" type="Spatial"]
+visible = false
 script = ExtResource( 5 )
 
 [node name="Spatial" parent="." instance=ExtResource( 2 )]
@@ -103,11 +104,13 @@ script = ExtResource( 4 )
 [node name="WindAllignedParticles" type="Spatial" parent="."]
 
 [node name="Rain" parent="WindAllignedParticles" instance=ExtResource( 3 )]
+visible = false
 PitchScaleCurve = SubResource( 4 )
 SoundScaleCurve = SubResource( 5 )
 
 [node name="SandParticles" parent="WindAllignedParticles" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 500, 0 )
+visible = false
 material_override = SubResource( 2 )
 cast_shadow = 0
 amount = 12000
@@ -118,6 +121,7 @@ draw_pass_1 = SubResource( 3 )
 
 [node name="Particles" type="Particles" parent="WindAllignedParticles"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 118.329, 0 )
+visible = false
 material_override = SubResource( 112 )
 cast_shadow = 0
 generate_lightmap = false

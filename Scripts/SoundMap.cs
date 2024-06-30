@@ -70,6 +70,12 @@ public class SoundMap : GridMap
             scale = 8000 / CellSize.x;
             cells = GetUsedCells();
         }
+        
+    }
+    public override void _EnterTree()
+    {
+        base._EnterTree();
+        Visible = false;
     }
     public void SpawnSoundAt(int sound, Vector3 at)
     {

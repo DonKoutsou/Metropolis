@@ -39,7 +39,12 @@ public class Poseidon : Spatial
             WorldMap map = (WorldMap)GetParent();
             map.Connect("OnTransitionEventHandler", this, "SwitchPlaces");
         }
-        
+        if (SeaChild == null)
+        {
+            SetProcess(false);
+            return;
+        }
+            
         mat = (ShaderMaterial)SeaChild.GetActiveMaterial(0);
         if (mat == null)
             SetProcess(false);

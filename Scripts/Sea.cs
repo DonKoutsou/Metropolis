@@ -7,7 +7,7 @@ public class Sea : StaticBody
 	//ShaderMaterial material;
 	public override void _Ready()
 	{
-		GetNode<MeshInstance>("Sea").QueueFree();
+		//GetNode<MeshInstance>("Sea").QueueFree();
 		AnimationPlayer anim = GetNode<AnimationPlayer>("AnimationPlayer");
 		anim.Play("Wave");
 	}

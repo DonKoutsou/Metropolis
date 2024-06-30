@@ -76,19 +76,6 @@ uniform float MAX_RADIUS = 2.0;
 uniform float HASHSCALE1 = 0.1031;
 uniform vec3 HASHSCALE3 = vec3(0.1031, 0.1030, 0.0973);
 
-float hash12(vec2 p)
-{
-	vec3 p3  = fract(vec3(p.xyx) * HASHSCALE1);
-	p3 += dot(p3, p3.yzx + 19.19);
-	return fract((p3.x + p3.y) * p3.z);
-}
-
-vec2 hash22(vec2 p)
-{
-	vec3 p3 = fract(vec3(p.xyx) * HASHSCALE3);
-	p3 += dot(p3, p3.yzx+19.19);
-	return fract((p3.xx+p3.yz)*p3.zy);
-}
 void vertex() {
 
 	//float height = texture(gerstner_height_map, WORLD_MATRIX[3].xz * TIME).r;

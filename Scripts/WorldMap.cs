@@ -322,6 +322,7 @@ public class WorldMap : TileMap
 	//Mutex mute;
 	//Semaphore sem;
 	//bool spawning = false;
+	float d = 1;
 	public override void _Process(float delta)
 	{
 		//ulong ms = OS.GetSystemTimeMsecs();
@@ -353,7 +354,11 @@ public class WorldMap : TileMap
 			}
 			
 		}
-		
+		d -= delta;
+		if (d > 0)
+			return;
+			
+		d = 1;
 		CheckForTransition();
 		//ulong msaf = OS.GetSystemTimeMsecs();
 		//if (msaf - ms > 10)

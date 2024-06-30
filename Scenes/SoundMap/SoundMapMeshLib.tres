@@ -7,6 +7,8 @@ albedo_color = Color( 1, 0, 0, 1 )
 material = SubResource( 13 )
 top_radius = 10.0
 bottom_radius = 10.0
+radial_segments = 5
+rings = 0
 
 [sub_resource type="Image" id=15]
 data = {
@@ -26,6 +28,8 @@ albedo_color = Color( 0.0666667, 0.380392, 1, 1 )
 
 [sub_resource type="CylinderMesh" id=6]
 material = SubResource( 5 )
+radial_segments = 5
+rings = 0
 
 [sub_resource type="Image" id=16]
 data = {

@@ -49,7 +49,7 @@ public class Island : Spatial
 		//FindVehicles(this);
 		StaticBody sea = GetNode<StaticBody>("SeaBed");
 		sea.GlobalRotation = Vector3.Zero;
-		sea.GetNode<MeshInstance>("Sea").QueueFree();
+		//sea.GetNode<MeshInstance>("Sea").QueueFree();
 
 		//FindChildren(this);
 	}
