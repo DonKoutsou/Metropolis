@@ -245,10 +245,14 @@ radial_segments = 10
 [sub_resource type="CylinderMesh" id=34]
 top_radius = 0.404
 height = 4.394
+radial_segments = 8
+rings = 0
 
 [sub_resource type="CylinderMesh" id=33]
 bottom_radius = 0.0
 height = 4.155
+radial_segments = 8
+rings = 0
 
 [node name="Vehicle" type="Spatial"]
 pause_mode = 1

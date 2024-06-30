@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Statue/afwf.tres" type="Material" id=1]
+[ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=2]
+[ext_resource path="res://Assets/Statue/Statue_LOD.obj" type="ArrayMesh" id=3]
 [ext_resource path="res://Assets/Statue/Statue.obj" type="ArrayMesh" id=13]
 
 [sub_resource type="ConcavePolygonShape" id=3]
@@ -13,6 +15,9 @@ collision_mask = 0
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = ExtResource( 13 )
 material/0 = ExtResource( 1 )
+script = ExtResource( 2 )
+LOD0 = ExtResource( 13 )
+LOD1 = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 visible = false
