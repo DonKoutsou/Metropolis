@@ -101,11 +101,13 @@ public class MyWorld : Spatial
 	public static PackedScene GetItemByType(ItemName name)
 	{
 		PackedScene path = null;
-		var lookup = GlobalItemList.ToLookup(kvp => (int)name, kvp => kvp.Value);
-		foreach (PackedScene x in lookup[(int)name])
+		//var lookup = GlobalItemList.ToLookup(kvp => (int)name, kvp => kvp.Value);
+		foreach (KeyValuePair<int, PackedScene> thing in GlobalItemList)
 		{
-			path = x;
-			break;
+			if (thing.Key == (int)name)
+			{
+				path = thing.Value;
+			}
 		}
 		return path;
 	}

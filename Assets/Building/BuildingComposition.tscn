@@ -30,7 +30,12 @@ polygon_points = PoolVector2Array( -2, 4, -2, 12, -10, 12, -10, 4 )
 
 [node name="House" type="Spatial" groups=["Clutter"]]
 script = ExtResource( 5 )
-ItemSpawnPool = [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ]
+SpawnPool = {
+2: ExtResource( 11 ),
+15: ExtResource( 10 ),
+20: ExtResource( 8 ),
+40: ExtResource( 9 )
+}
 
 [node name="IndoorsLight" parent="." instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.2561, 0 )

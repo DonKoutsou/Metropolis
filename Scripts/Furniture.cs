@@ -16,6 +16,8 @@ public class Furniture : Spatial
 	//}
 	public void SpawnItem(PackedScene it)
 	{
+		if (it == null)
+			return;
 		Item itemToDrop = (Item)it.Instance();
 		//AddChild(itemToDrop);
 		//itemToDrop.GlobalTranslation = GlobalTransform.origin;

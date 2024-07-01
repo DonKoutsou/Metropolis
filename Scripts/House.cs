@@ -7,8 +7,10 @@ public class House : Spatial
 {
 	[Export]
 	bool spawnItems = true;
-	[Export]
-	public PackedScene[] ItemSpawnPool;
+	//[Export]
+	//public PackedScene[] ItemSpawnPool;
+
+	
 	List<Furniture> FurnitureList = new List<Furniture>();
 	[Export]
 	bool HasPower = true;
@@ -71,8 +73,8 @@ public class House : Spatial
 		RandomUses = 0;
 		if (!spawnItems)
 			return;
-		if (ItemSpawnPool == null)
-			return;
+		//if (ItemSpawnPool == null)
+			//return;
 
 		foreach (Node nd in GetChildren())
 		{
@@ -81,15 +83,45 @@ public class House : Spatial
 				Furniture f = (Furniture)nd;
 				FurnitureList.Insert(FurnitureList.Count, f);
 
-				int start = random.Next(0, ItemSpawnPool.Length * 2);
-				RandomUses ++;
+				//int start = random.Next(0, ItemSpawnPool.Length * 2);
+				//RandomUses ++;
 
-				if (start >= ItemSpawnPool.Length)
-					continue;
+				//if (start >= ItemSpawnPool.Length)
+					//continue;
 
-				f.SpawnItem(ItemSpawnPool[start]);
+				//f.SpawnItem(ItemSpawnPool[start]);
+				f.SpawnItem(GetDrop(random, out RandomUses));
 			}
 		}
+	}
+
+	[Export]
+	Dictionary<int, PackedScene> SpawnPool;
+	PackedScene GetDrop(Random r, out int RandomUses)
+	{
+		RandomUses = 0;
+		PackedScene Drop = null;
+		int DropChance = 100;
+
+		foreach (KeyValuePair<int, PackedScene> item in SpawnPool)
+		{
+			int thing = r.Next(0,101);
+			//GD.Print("Trying to spawn item : " + item.Value.ResourceName + " with chance of " + item.Key + "%, ranodm came out " + thing);
+			RandomUses ++;
+			if (thing < item.Key)
+			{
+				if (item.Key < DropChance)
+				{
+					DropChance = item.Key;
+					Drop = item.Value;
+				}
+			}
+		}
+		if (Drop != null)
+			GD.Print("Picked item " + Drop.ResourceName);
+		else
+			GD.Print("No drop");
+		return Drop;
 	}
 	public void GetFurniture(out List<Furniture> furniture)
 	{
