@@ -24,6 +24,7 @@ ItemPickupActionName = "Ένα αριστερό πόδι.."
 ItemName = "Αριστερό άκρο Ν01"
 ItemDesc = ""
 stackable = false
+RegisterOnIsland = false
 Type = 4
 RandomiseColor = true
 LimbColor = Color( 0.0431373, 0.403922, 1, 1 )

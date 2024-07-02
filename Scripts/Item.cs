@@ -105,4 +105,5 @@ public enum ItemName
 	MAP,
 	LIMB,
 	GUITAR,
+	BOUZOUKI,
 }

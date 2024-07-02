@@ -77,11 +77,11 @@ public partial class UniversalLodManager : Node
           if (objtocheck != null && Godot.Object.IsInstanceValid(objtocheck) && objtocheck.IsInsideTree())
           {
             float dist = campos.DistanceTo(objtocheck.GlobalTranslation);
-            float abbsize = objtocheck.GetTransformedAabb().GetLongestAxisSize();
+            float abbsize = objtocheck.abbLeangth;
 
             if (dist > abbsize + 1200 && objtocheck.HasLod(2))
               objtocheck.SwitchLod(2);
-            else if (dist > objtocheck.GetTransformedAabb().GetLongestAxisSize() + 500 && objtocheck.HasLod(1))
+            else if (dist > objtocheck.abbLeangth + 500 && objtocheck.HasLod(1))
               objtocheck.SwitchLod(1);
             else
               objtocheck.SwitchLod(0);

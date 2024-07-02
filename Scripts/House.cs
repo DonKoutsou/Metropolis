@@ -117,10 +117,10 @@ public class House : Spatial
 				}
 			}
 		}
-		if (Drop != null)
-			GD.Print("Picked item " + Drop.ResourceName);
-		else
-			GD.Print("No drop");
+		//if (Drop != null)
+			//GD.Print("Picked item " + Drop.ResourceName);
+		//else
+			//GD.Print("No drop");
 		return Drop;
 	}
 	public void GetFurniture(out List<Furniture> furniture)

@@ -11,6 +11,14 @@ public class LoddedObject : MeshInstance
     [Export]
     public Mesh LOD2 = null;
 
+    public float abbLeangth = 0;
+
+    public override void _Ready()
+    {
+        base._Ready();
+        abbLeangth = GetTransformedAabb().GetLongestAxisSize();
+    }
+
     public override void _EnterTree()
     {
         base._EnterTree();
