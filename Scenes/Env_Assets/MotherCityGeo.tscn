@@ -733,6 +733,7 @@ shape = SubResource( 2137 )
 
 [node name="Statue" parent="." index="21" instance=ExtResource( 26 )]
 transform = Transform( 0.330276, 0, 0.167406, 0, 0.37028, 0, -0.167406, 0, 0.330276, -1.26682, 34.3449, -3712.46 )
+collision_layer = 4
 
 [node name="MeshInstance3" type="MeshInstance" parent="." index="22"]
 transform = Transform( 0.999998, 4.90274e-12, 0, -2.76401e-12, 0.999998, 6.98492e-10, 0, -6.98492e-10, 0.999998, -141.251, -252.723, -3612.26 )

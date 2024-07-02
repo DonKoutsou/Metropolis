@@ -421,7 +421,7 @@ public class DayNight : WorldEnvironment
         }
         Environment.FogSunColor = FogSunColor;
 
-        Environment.FogColor = FogColor;
+        //Environment.FogColor = FogColor;
 
         Environment.AmbientLightColor = AmbientLightColor;
 

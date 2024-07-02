@@ -109,7 +109,8 @@ item/2/preview = SubResource( 12 )
 [node name="Island" instance=ExtResource( 5 )]
 
 [node name="Spatial2" parent="." index="0" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1540.27, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3661.27, 0 )
+visible = false
 
 [node name="House" parent="." index="2" instance=ExtResource( 7 )]
 transform = Transform( 0.831925, 0, -0.554888, 0, 1, 0, 0.554888, 0, 0.831925, 173.684, -59.7745, -396.486 )
@@ -211,5 +212,4 @@ transform = Transform( -0.962722, 0.0241337, -0.269416, 0.266065, -0.0950264, -0
 transform = Transform( -0.962722, 0.0241337, -0.269416, 0.266065, -0.0950264, -0.95926, -0.048752, -0.995182, 0.085063, 241.827, 9.38228, 2608.97 )
 
 [node name="SoundMap" parent="." index="36"]
-visible = false
 mesh_library = SubResource( 18 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/SunMoonPivot.cs" type="Script" id=1]
 
@@ -32,6 +32,16 @@ height = 800.0
 radial_segments = 16
 rings = 16
 
+[sub_resource type="SphereMesh" id=89]
+radius = 22000.0
+height = 22000.0
+
+[sub_resource type="SpatialMaterial" id=90]
+flags_do_not_receive_shadows = true
+flags_disable_ambient_light = true
+params_specular_mode = 4
+params_cull_mode = 1
+
 [node name="SunMoonPivot" type="Spatial"]
 script = ExtResource( 1 )
 
@@ -58,3 +68,8 @@ cast_shadow = 0
 generate_lightmap = false
 mesh = SubResource( 87 )
 material/0 = SubResource( 88 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+cast_shadow = 0
+mesh = SubResource( 89 )
+material/0 = SubResource( 90 )
