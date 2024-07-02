@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Env_Assets/Table.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Env_Assets/Skampo.tscn" type="PackedScene" id=2]
+
+[node name="Spatial" type="Spatial"]
+
+[node name="StaticBody" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.11132, 0 )
+
+[node name="StaticBody2" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.187107, 0, 0.98234, 0, 1, 0, -0.98234, 0, 0.187107, -4.87572, 0, -0.778283 )
+
+[node name="StaticBody3" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.942133, 0, -0.335238, 0, 1, 0, 0.335238, 0, 0.942133, 1.89002, 0, -6.23752 )
+__meta__ = {
+"_editor_description_": ""
+}

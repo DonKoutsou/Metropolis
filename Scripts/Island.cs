@@ -850,7 +850,7 @@ public class IslandInfo
 		for (int i = 0; i < HouseToAdd.Count; i++)
 		{
 			HouseInfo info = new HouseInfo();
-			List<Furniture> furni = new List<Furniture>();
+			List<Furniture> furni;
 			House h = HouseToAdd[i];
 			h.GetFurniture(out furni);
 			List<FurnitureInfo> finfo = new List<FurnitureInfo>();
@@ -863,10 +863,24 @@ public class IslandInfo
 				{
 					itn = furn.GetItemName();
 				}
-				inf.SetInfo(furn.Name, furn.HasBeenSearched(), furn.HasItem(), itn);
+				inf.SetInfo(furn.Name, furn.HasBeenSearched(), furn.HasItem(), itn, furn.Filename, furn.Transform);
 				finfo.Insert(f, inf);
 			}
-			info.SetInfo(HouseToAdd[i].Name, finfo);
+
+			List<Spatial> Decos;
+			h.GetDecorations(out Decos);
+			List<DecorationInfo> dinfo = new List<DecorationInfo>();
+			for (int f = 0; f < Decos.Count; f++)
+			{
+				Spatial dec = Decos[f];
+				DecorationInfo inf = new DecorationInfo();
+
+				inf.SetInfo(dec.Filename, dec.Transform, dec.Name);
+				dinfo.Insert(f, inf);
+			}
+
+
+			info.SetInfo(HouseToAdd[i].Name, finfo, dinfo);
 			Houses.Insert(Houses.Count, info);
 		}
 	}

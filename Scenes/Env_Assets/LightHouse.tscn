@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Assets/TerainTex/Bricks094_1K-PNG/Bricks094_1K-PNG_Roughness.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/LighthouseAnimation.cs" type="Script" id=2]
@@ -15,7 +15,15 @@
 [ext_resource path="res://Assets/TerainTex/Bricks094_1K-PNG/Bricks094_1K-PNG_AmbientOcclusion.png" type="Texture" id=13]
 [ext_resource path="res://Assets/TerainTex/Bricks094_1K-PNG/Bricks094_1K-PNG_Color.png" type="Texture" id=14]
 [ext_resource path="res://Assets/TerainTex/Bricks094_1K-PNG/Bricks094_1K-PNG_NormalGL.png" type="Texture" id=15]
+[ext_resource path="res://Scenes/Items/Battery.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Assets/LightHouse/lambert1.material" type="Material" id=17]
+[ext_resource path="res://Scenes/Items/BatteryEmpty.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Scenes/Items/Item.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Scenes/Items/Drahma.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Scenes/Env_Assets/Furniture2.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Scenes/Env_Assets/Furniture.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Scenes/BuildingDecorations/Decorations2.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Scenes/BuildingDecorations/Decorations1.tscn" type="PackedScene" id=24]
 
 [sub_resource type="SpatialMaterial" id=2118]
 albedo_color = Color( 1, 0.858824, 0.65098, 1 )
@@ -257,6 +265,14 @@ data = PoolVector3Array( -25, 5, 15, 25, 5, 15, -25, -5, 15, 25, 5, 15, 25, -5, 
 
 [node name="LightHouse" type="Spatial"]
 script = ExtResource( 5 )
+PossibleFurni = [ ExtResource( 22 ), ExtResource( 21 ) ]
+PossibleDeco = [ ExtResource( 24 ), ExtResource( 23 ) ]
+SpawnPool = {
+2: ExtResource( 16 ),
+15: ExtResource( 18 ),
+20: ExtResource( 19 ),
+40: ExtResource( 20 )
+}
 
 [node name="Spatial" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1032, 20 )
@@ -374,6 +390,8 @@ mesh = SubResource( 2162 )
 material/0 = ExtResource( 7 )
 
 [node name="StaticBody" type="StaticBody" parent="BottomFloor"]
+collision_layer = 32
+collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="BottomFloor/StaticBody"]
 shape = SubResource( 2163 )
@@ -389,6 +407,52 @@ collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance/StaticBody"]
 shape = SubResource( 2165 )
+
+[node name="FurniturePlacements" type="Spatial" parent="."]
+
+[node name="Position1" type="Position3D" parent="FurniturePlacements"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.09318, 9.0083, -8.44417 )
+
+[node name="Position2" type="Position3D" parent="FurniturePlacements"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.64308, 9.0083, -8.44417 )
+
+[node name="Position3" type="Position3D" parent="FurniturePlacements"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.56345, 9.0083, -8.44417 )
+
+[node name="Position4" type="Position3D" parent="FurniturePlacements"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.27496, 9.0083, -8.44417 )
+
+[node name="Position5" type="Position3D" parent="FurniturePlacements"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.94297, 9.0083, -5.47204 )
+
+[node name="Position6" type="Position3D" parent="FurniturePlacements"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.94297, 9.0083, -0.474862 )
+
+[node name="Position7" type="Position3D" parent="FurniturePlacements"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.94297, 9.0083, 3.9347 )
+
+[node name="Position8" type="Position3D" parent="FurniturePlacements"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.94297, 9.0083, 7.85208 )
+
+[node name="Position9" type="Position3D" parent="FurniturePlacements"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.62304, 9.0083, 7.62047 )
+
+[node name="Position10" type="Position3D" parent="FurniturePlacements"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.62304, 9.0083, 3.10513 )
+
+[node name="Position11" type="Position3D" parent="FurniturePlacements"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.62304, 9.0083, -0.839575 )
+
+[node name="Position12" type="Position3D" parent="FurniturePlacements"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.62304, 9.0083, -5.38698 )
+
+[node name="DecorationPlacaments" type="Spatial" parent="."]
+
+[node name="Position3D" type="Position3D" parent="DecorationPlacaments"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.4956, 8.99512, 20.1219 )
+
+[node name="Position3D2" type="Position3D" parent="DecorationPlacaments"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.5544, 8.99512, 22.7412 )
 
 [connection signal="body_entered" from="Door" to="." method="Entered"]
 [connection signal="body_exited" from="Door" to="." method="Left"]

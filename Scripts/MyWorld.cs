@@ -281,7 +281,7 @@ public class MyWorld : Spatial
 			else if (!ileinfo.IsIslandSpawned())
 			{
 				ActiveIles.Add(ileinfo);
-			WorldMap.GetInstance().ReSpawnIsland(ileinfo).InputData(ileinfo);
+				WorldMap.GetInstance().ReSpawnIsland(ileinfo).InputData(ileinfo);
 			}
 			
 		}

@@ -431,7 +431,7 @@ public class ActionMenu : Control
 				inter.Call("HighLightObject", true);
 			}
 		}
-		else
+		else if (@event.IsActionReleased("ActionCheck"))
 		{
 			var interactables = GetTree().GetNodesInGroup("Interactables");
 			foreach (Node inter in interactables)

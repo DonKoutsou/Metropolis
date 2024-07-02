@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://shaders/Outline.shader" type="Shader" id=1]
+[ext_resource path="res://Scripts/Furniture.cs" type="Script" id=2]
+[ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=3]
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 3, 6, 2 )
+
+[sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
+shader = ExtResource( 1 )
+shader_param/enable = false
+shader_param/outline_thickness = 0.1
+shader_param/color2 = Color( 1, 0.976471, 0.517647, 0 )
+shader_param/color = Color( 1, 0.972549, 0.47451, 0 )
+
+[sub_resource type="SpatialMaterial" id=3]
+resource_local_to_scene = true
+next_pass = SubResource( 2 )
+albedo_color = Color( 0.486275, 0.486275, 0.486275, 1 )
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 1.50089, 3, 1 )
+
+[node name="Furniture" type="StaticBody" groups=["Interactables"]]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.00942, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
+shape = SubResource( 4 )
+
+[node name="ActionComponent" parent="." instance=ExtResource( 3 )]
+ActionDistance = 5.0

@@ -59,6 +59,8 @@ public class Furniture : Spatial
 	public void SetData(FurnitureInfo info)
 	{
 		Searched = info.Searched;
+		Transform = info.Placement;
+		Name = info.FunritureName;
 		if (!Searched)
 		{
 			if (info.HasItem)
@@ -81,9 +83,39 @@ public class Furniture : Spatial
 //      
 //  }
 }
+public class DecorationInfo
+{
+	public string SceneData;
+	public Transform Placement;
+	public string Name;
+
+	public void SetInfo(string SceneDt, Transform placement, string nam)
+	{
+		SceneData = SceneDt;
+		Placement = placement;
+		Name = nam;
+	}
+	public Dictionary<string, object>GetPackedData()
+	{
+		Dictionary<string, object> data = new Dictionary<string, object>(){
+			{"SceneData", SceneData},
+			{"Placement", Placement},
+			{"Name", Name}
+		};
+		return data;
+	}
+	public void UnPackData(Godot.Object data)
+    {
+		SceneData = (string)data.Get("SceneData");
+		Placement = (Transform)data.Get("Placement");
+		Name = (string)data.Get("Name");
+    }
+}
 public class FurnitureInfo
 {
 	public string FunritureName;
+	public string SceneData;
+	public Transform Placement;
 	public bool Searched;
 	public bool HasItem;
 	public ItemName item;
@@ -92,21 +124,25 @@ public class FurnitureInfo
 		Searched = furn.Searched;
 	}
 
-	public void SetInfo(string name, bool srch, bool hasI, ItemName it)
+	public void SetInfo(string name, bool srch, bool hasI, ItemName it, string SceneDt, Transform placement)
 	{
 		FunritureName = name;
 		Searched = srch;
 		HasItem = hasI;
 		item = it;
+		SceneData = SceneDt;
+		Placement = placement;
 	}
 	public Dictionary<string, object>GetPackedData()
 	{
-		Dictionary<string, object> data = new Dictionary<string, object>();
-
-		data.Add("Name", FunritureName);
-		data.Add("Searched", Searched);
-		data.Add("HasItem", HasItem);
-		data.Add("ItemType", (int)item);
+		Dictionary<string, object> data = new Dictionary<string, object>(){
+			{"Name", FunritureName},
+			{"Searched", Searched},
+			{"HasItem", HasItem},
+			{"ItemType", (int)item},
+			{"SceneData", SceneData},
+			{"Placement", Placement}
+		};
 		return data;
 	}
 	public void UnPackData(Godot.Object data)
@@ -115,5 +151,7 @@ public class FurnitureInfo
 		Searched = (bool)data.Get("Searched");
 		HasItem = (bool)data.Get("HasItem");
 		item = (ItemName)data.Get("ItemType");
+		SceneData = (string)data.Get("SceneData");
+		Placement = (Transform)data.Get("Placement");
     }
 }

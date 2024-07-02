@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Assets/Building/House_Ext.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Building/House_Int.obj" type="ArrayMesh" id=2]
@@ -12,6 +12,9 @@
 [ext_resource path="res://Scenes/Items/BatteryEmpty.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Items/Battery.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Env_Assets/IndoorsLight.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Env_Assets/Furniture2.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/BuildingDecorations/Decorations2.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/BuildingDecorations/Decorations1.tscn" type="PackedScene" id=15]
 
 [sub_resource type="ConcavePolygonShape" id=1]
 data = PoolVector3Array( 2.2757, 3.5748, 10.0835, 2.2757, 11.1083, 10.0835, 10.0835, 3.5748, 10.0835, -10.0835, 3.5748, 10.0835, -2.2757, 11.1083, 10.0835, -2.2757, 3.5748, 10.0835, 10.0835, 23.4394, 10.0835, 9.781, 23.7418, 9.781, 10.0835, 23.4394, -10.0835, 10.0835, 23.4394, -10.0835, 9.781, 23.7418, 9.781, 9.781, 23.7418, -9.781, 9.781, 23.7418, 9.781, 10.0835, 23.4394, 10.0835, -9.781, 23.7418, 9.781, -9.781, 23.7418, 9.781, 10.0835, 23.4394, 10.0835, -10.0835, 23.4394, 10.0835, -9.781, 23.7418, 9.781, -10.0835, 23.4394, 10.0835, -9.781, 23.7418, -9.781, -9.781, 23.7418, -9.781, -10.0835, 23.4394, 10.0835, -10.0835, 23.4394, -10.0835, 10.0835, 23.4394, -10.0835, 9.781, 23.7418, -9.781, -10.0835, 23.4394, -10.0835, -10.0835, 23.4394, -10.0835, 9.781, 23.7418, -9.781, -9.781, 23.7418, -9.781, 2.2757, 11.1083, 10.0835, -2.2757, 11.1083, 10.0835, -10.0835, 23.4394, 10.0835, 2.2757, 11.1083, 10.0835, -10.0835, 23.4394, 10.0835, 10.0835, 23.4394, 10.0835, 9.1858, 21.8758, -9.1858, 9.1858, 21.8758, 9.1858, -9.1858, 21.8758, 9.1858, 9.1858, 21.8758, -9.1858, -9.1858, 21.8758, 9.1858, -9.1858, 21.8758, -9.1858, 10.0835, 3.5748, -10.0835, 10.0835, 23.4394, -10.0835, -10.0835, 23.4394, -10.0835, 10.0835, 3.5748, -10.0835, -10.0835, 23.4394, -10.0835, -10.0835, 3.5748, -10.0835, 10.0835, 3.5748, -10.0835, 10.0835, 3.5748, 10.0835, 10.0835, 23.4394, 10.0835, 10.0835, 3.5748, -10.0835, 10.0835, 23.4394, 10.0835, 10.0835, 23.4394, -10.0835, 2.2757, 11.1083, 10.0835, 10.0835, 23.4394, 10.0835, 10.0835, 3.5748, 10.0835, -10.0835, 23.4394, 10.0835, -10.0835, 3.5748, 10.0835, -10.0835, 3.5748, -10.0835, -10.0835, 23.4394, 10.0835, -10.0835, 3.5748, -10.0835, -10.0835, 23.4394, -10.0835, -10.0835, 3.5748, 10.0835, -10.0835, 23.4394, 10.0835, -2.2757, 11.1083, 10.0835, 9.781, 23.7418, -9.781, 9.781, 23.7418, 9.781, 9.1858, 23.7418, -9.1858, 9.1858, 23.7418, -9.1858, 9.781, 23.7418, 9.781, 9.1858, 23.7418, 9.1858, 9.781, 23.7418, 9.781, -9.781, 23.7418, 9.781, 9.1858, 23.7418, 9.1858, 9.1858, 23.7418, 9.1858, -9.781, 23.7418, 9.781, -9.1858, 23.7418, 9.1858, -9.781, 23.7418, -9.781, 9.781, 23.7418, -9.781, -9.1858, 23.7418, -9.1858, -9.1858, 23.7418, -9.1858, 9.781, 23.7418, -9.781, 9.1858, 23.7418, -9.1858, -9.781, 23.7418, 9.781, -9.781, 23.7418, -9.781, -9.1858, 23.7418, 9.1858, -9.1858, 23.7418, 9.1858, -9.781, 23.7418, -9.781, -9.1858, 23.7418, -9.1858, 9.1858, 23.7418, -9.1858, 9.1858, 23.7418, 9.1858, 9.1858, 21.8758, -9.1858, 9.1858, 21.8758, -9.1858, 9.1858, 23.7418, 9.1858, 9.1858, 21.8758, 9.1858, 9.1858, 23.7418, 9.1858, -9.1858, 23.7418, 9.1858, 9.1858, 21.8758, 9.1858, 9.1858, 21.8758, 9.1858, -9.1858, 23.7418, 9.1858, -9.1858, 21.8758, 9.1858, -9.1858, 23.7418, -9.1858, 9.1858, 23.7418, -9.1858, -9.1858, 21.8758, -9.1858, -9.1858, 21.8758, -9.1858, 9.1858, 23.7418, -9.1858, 9.1858, 21.8758, -9.1858, -9.1858, 23.7418, 9.1858, -9.1858, 23.7418, -9.1858, -9.1858, 21.8758, 9.1858, -9.1858, 21.8758, 9.1858, -9.1858, 23.7418, -9.1858, -9.1858, 21.8758, -9.1858 )
@@ -23,13 +26,15 @@ data = PoolVector3Array( -2.2667, 3.531, 10.0572, -10.0572, 3.531, 10.0572, -10.
 polygon_points = PoolVector2Array( 10, -4, 10, 16, -10, 16, -10, -4 )
 
 [sub_resource type="OccluderShapePolygon" id=5]
-polygon_points = PoolVector2Array( 10, 4, 10, 16, -10, 16, -10, 4 )
+polygon_points = PoolVector2Array( 10.0677, 3.74074, 10, 16, -10, 16, -10.075, 3.71117 )
 
 [sub_resource type="OccluderShapePolygon" id=4]
-polygon_points = PoolVector2Array( -2, 4, -2, 12, -10, 12, -10, 4 )
+polygon_points = PoolVector2Array( -2.31076, 4.03563, -2.29597, 12.007, -10.0602, 12.0513, -10.075, 4.02084 )
 
 [node name="House" type="Spatial" groups=["Clutter"]]
 script = ExtResource( 5 )
+PossibleFurni = [ ExtResource( 7 ), ExtResource( 13 ) ]
+PossibleDeco = [ ExtResource( 15 ), ExtResource( 14 ) ]
 SpawnPool = {
 2: ExtResource( 11 ),
 15: ExtResource( 10 ),
@@ -73,15 +78,6 @@ material/1 = ExtResource( 3 )
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody2"]
 shape = SubResource( 2 )
 
-[node name="Furniture" parent="." instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.03581, 3.531, -8.57244 )
-
-[node name="Furniture2" parent="." instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.62998, 3.531, -8.57244 )
-
-[node name="Furniture3" parent="." instance=ExtResource( 7 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.99951, 3.531, -0.846078 )
-
 [node name="Occluder" type="Occluder" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.26139, -10 )
 shape = SubResource( 3 )
@@ -109,6 +105,52 @@ shape = SubResource( 4 )
 [node name="Occluder6" type="Occluder" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -0.738614, 10 )
 shape = SubResource( 4 )
+
+[node name="FurniturePlacements" type="Spatial" parent="."]
+
+[node name="Position1" type="Position3D" parent="FurniturePlacements"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.09318, 3.531, -8.44417 )
+
+[node name="Position2" type="Position3D" parent="FurniturePlacements"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.64308, 3.531, -8.44417 )
+
+[node name="Position3" type="Position3D" parent="FurniturePlacements"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.56345, 3.531, -8.44417 )
+
+[node name="Position4" type="Position3D" parent="FurniturePlacements"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.27496, 3.531, -8.44417 )
+
+[node name="Position5" type="Position3D" parent="FurniturePlacements"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.94297, 3.531, -5.47204 )
+
+[node name="Position6" type="Position3D" parent="FurniturePlacements"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.94297, 3.531, -0.474862 )
+
+[node name="Position7" type="Position3D" parent="FurniturePlacements"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.94297, 3.531, 3.9347 )
+
+[node name="Position8" type="Position3D" parent="FurniturePlacements"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.94297, 3.531, 7.85208 )
+
+[node name="Position9" type="Position3D" parent="FurniturePlacements"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.62304, 3.531, 7.62047 )
+
+[node name="Position10" type="Position3D" parent="FurniturePlacements"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.62304, 3.531, 3.10513 )
+
+[node name="Position11" type="Position3D" parent="FurniturePlacements"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.62304, 3.531, -0.839575 )
+
+[node name="Position12" type="Position3D" parent="FurniturePlacements"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.62304, 3.531, -5.38698 )
+
+[node name="DecorationPlacaments" type="Spatial" parent="."]
+
+[node name="Position3D" type="Position3D" parent="DecorationPlacaments"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.36304, 3.53325, -2.05728 )
+
+[node name="Position3D2" type="Position3D" parent="DecorationPlacaments"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.57816, 3.53325, 0.562021 )
 
 [connection signal="body_entered" from="HouseDoor" to="." method="Entered"]
 [connection signal="body_exited" from="HouseDoor" to="." method="Left"]
