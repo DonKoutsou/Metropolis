@@ -233,7 +233,7 @@ public class Player : Character
 				direction = direction.Normalized();
 				Vector3 lookloc = new Vector3(direction.x, 0, direction.z);
 				if (!HasVecicle)
-					GetNode<Spatial>("Pivot").LookAt(Translation - lookloc, Vector3.Up);
+					GetNode<Spatial>("Pivot").LookAt(GlobalTranslation - lookloc, Vector3.Up);
 
 				if (!IsRunning)
 				{

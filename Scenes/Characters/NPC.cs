@@ -54,34 +54,12 @@ public class NPC : Character
 
 		base._Ready();
 
-		Node par = GetParent();
-		while (!(par is Island))
-		{
-            if (par == null)
-				return;
-			par = par.GetParent();
-		}
-		Island ile = (Island)par;
-		ile.RegisterChild(this);
+		
 
 		if (Sitting)
 		{
+			CallDeferred("SpawnSit");
 			
-			if (Chair != null && GetNodeOrNull(Chair) != null)
-			{
-				SittingThing chair = (SittingThing)GetNode(Chair);
-				Sit(chair.GetSeat(), chair);
-			}
-				
-			else
-			{
-				Position3D pos = new Position3D();
-				AddChild(pos);
-				pos.Translation = Vector3.Zero;
-				pos.Rotation = Vector3.Zero;
-				Sit(pos);
-				pos.QueueFree();
-			}
 		}
 		Instrument inst = InstrumentToSpawnWith.Instance<Instrument>();
 		AddInstrument(inst);
@@ -103,6 +81,34 @@ public class NPC : Character
 		IdleTimer = GetNode<Timer>("IdleTimer");
 
 		RandomiseLimbs();
+
+		Node par = GetParent();
+		while (!(par is Island))
+		{
+            if (par == null)
+				return;
+			par = par.GetParent();
+		}
+		Island ile = (Island)par;
+		ile.RegisterChild(this);
+	}
+	private void SpawnSit()
+	{
+		if (Chair != null && GetNodeOrNull(Chair) != null)
+		{
+			SittingThing chair = (SittingThing)GetNode(Chair);
+			Sit(chair.GetSeat(), chair);
+		}
+			
+		else
+		{
+			Position3D pos = new Position3D();
+			AddChild(pos);
+			pos.Translation = Vector3.Zero;
+			pos.Rotation = Vector3.Zero;
+			Sit(pos);
+			pos.QueueFree();
+		}
 	}
 	void RandomiseLimbs()
 	{

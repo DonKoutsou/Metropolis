@@ -169,4 +169,16 @@ public class WindGenerator : StaticBody
         ((SpatialMaterial)GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Disabled;
         SetCollisionLayerBit(2, true);
     }
+    public override void _EnterTree()
+    {
+        base._EnterTree();
+        GetNode<Spatial>("GenInternals").GetNode<AnimationPlayer>("AnimationPlayer").Play("Gen");
+        GetNode<Spatial>("GenInternals2").GetNode<AnimationPlayer>("AnimationPlayer").Play("Gen");
+    }
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+        GetNode<Spatial>("GenInternals").GetNode<AnimationPlayer>("AnimationPlayer").Stop();
+        GetNode<Spatial>("GenInternals2").GetNode<AnimationPlayer>("AnimationPlayer").Stop();
+    }
 }

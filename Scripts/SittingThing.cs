@@ -7,9 +7,16 @@ public class SittingThing : StaticBody
     List<Position3D> Seats = new List<Position3D>();
     List<bool> Occupied = new List<bool>();
 
+    bool Inited = false;
     public override void _EnterTree()
     {
         base._EnterTree();
+        if (Inited)
+            return;
+        RegisterSeats();
+    }
+    private void RegisterSeats()
+    {
         foreach(Node Child in GetChildren())
         {
             if (Child is Position3D)
@@ -18,6 +25,7 @@ public class SittingThing : StaticBody
                 Occupied.Add(false);
             }
         }
+        Inited = true;
     }
     public void HighLightObject(bool toggle)
     {

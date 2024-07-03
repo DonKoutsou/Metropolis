@@ -258,9 +258,7 @@ public class Character : KinematicBody
 		}
 		if (PlayingInstrument)
 		{
-			anim.ToggleInstrument(false);
-			((Instrument)GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("InstrumentAtatchment").GetNode<Spatial>("Instrument").GetChild(0)).ToggleMusic(false);
-			PlayingInstrument = false;
+			StopMusic();
 		}
 		anim.ToggleIdle();
 		sitting = false;
@@ -344,6 +342,7 @@ public class Character : KinematicBody
 		BoneAttachment instatatchment = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("InstrumentAtatchment");
 		instatatchment.GetNode<RemoteTransform>("HolsterAtatchment").RemotePath = instrumentparent.GetPath();
 		instatatchment.GetNode<RemoteTransform>("PlayingAtatchment").RemotePath = instatatchment.GetNode<RemoteTransform>("PlayingAtatchment").GetPath();
+		PlayingInstrument = false;
 	}
 	public bool HasInstrument()
 	{
