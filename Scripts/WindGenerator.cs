@@ -15,6 +15,8 @@ public class WindGenerator : StaticBody
 
     [Export]
     bool Auto = false;
+    [Export]
+    bool HasInternals = false;
 
     public float GetCurrentEnergy()
     {
@@ -172,12 +174,16 @@ public class WindGenerator : StaticBody
     public override void _EnterTree()
     {
         base._EnterTree();
+        if (!HasInternals)
+            return;
         GetNode<Spatial>("GenInternals").GetNode<AnimationPlayer>("AnimationPlayer").Play("Gen");
         GetNode<Spatial>("GenInternals2").GetNode<AnimationPlayer>("AnimationPlayer").Play("Gen");
     }
     public override void _ExitTree()
     {
         base._ExitTree();
+        if (!HasInternals)
+            return;
         GetNode<Spatial>("GenInternals").GetNode<AnimationPlayer>("AnimationPlayer").Stop();
         GetNode<Spatial>("GenInternals2").GetNode<AnimationPlayer>("AnimationPlayer").Stop();
     }

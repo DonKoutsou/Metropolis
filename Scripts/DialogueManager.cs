@@ -18,6 +18,7 @@ public class DialogueManager : Node
     {
         return Instance;
     }
+
 	public void StartDialogue(Player pl, Character character)
 	{
 		if (pl.HasVehicle())
@@ -28,7 +29,7 @@ public class DialogueManager : Node
 		Position3D talkpos = character.GetNode<Position3D>("TalkPosition");
 
 		pl.loctomove = talkpos.GlobalTranslation;
-
+		DialogicSharp.SetVariable("GenericCharacter", character.CharacterName);
 		((Spatial)pl.DialogueCam.GetParent()).GlobalRotation = talkpos.GlobalRotation;
 		CameraAnimationPlayer.GetInstance().PlayAnim("FadeInDialogue");
 		if (character.CurrentEnergy == 0)
@@ -41,7 +42,9 @@ public class DialogueManager : Node
 		}
 		else
 		{
+			
 			var dialogue =  DialogicSharp.Start("TestTimeline");
+
 			AddChild(dialogue);
 			dialogue.Connect("timeline_end", this, "EndDialogue");
 		}

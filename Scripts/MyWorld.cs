@@ -125,11 +125,62 @@ public class MyWorld : Spatial
 	}
 	public void OnPlayerKilled(string reason = null)	
 	{
+		//try to find characters on islands around that can rescue you
 		WorldMap map = WorldMap.GetInstance();
+		IslandInfo currentile = map.GetCurrentIleInfo();
+		Island ile = currentile.Island;
+		Character rescuer;
+		if (ile.HasCharacters())
+		{
+			if (TryRescue(ile, out rescuer))
+			{
+				Rescue(rescuer);
+				return;
+			}
+
+			
+		}
+		List<IslandInfo> CloseIles;
+		map.GetClosestIles(currentile,  out CloseIles, 1);
+		foreach (IslandInfo island in CloseIles)
+		{
+			Island iletocheck = island.Island;
+			if (TryRescue(iletocheck, out rescuer))
+			{
+				Rescue(rescuer);
+				return;
+			}
+		}
 
 		StartingScreen start = ((WorldRoot)GetParent()).GetStartingScreen();
 		start.GameOver(reason);
 		SaveLoadManager.GetInstance().ClearSaves();
+	}
+	bool TryRescue(Island ile, out Character rescuer)
+	{
+		rescuer = null;
+		List<Character> chars;
+		ile.GetCharacters(out chars);
+		foreach (Character cha in chars)
+		{
+			if (!cha.IsUncon)
+			{
+				rescuer = cha;
+				return true;
+			}
+		}
+		return false;
+	}
+	void Rescue(Character rescuer)
+	{
+		Player pl = Player.GetInstance();
+		if (pl.HasVecicle)
+		{
+			pl.currveh.Capsize();
+		}
+		pl.RechargeCharacter(100);
+		pl.Respawn();
+		pl.Teleport(rescuer.GetNode<Position3D>("TalkPosition").GlobalTranslation);
 	}
 	public void AttemptDeathSave()
 	{

@@ -52,7 +52,7 @@ scale = 0.1
 scale_random = 0.05
 
 [sub_resource type="QuadMesh" id=3]
-size = Vector2( 0.08, 0.08 )
+size = Vector2( 0.05, 0.05 )
 
 [sub_resource type="SpatialMaterial" id=112]
 flags_transparent = true
@@ -118,6 +118,9 @@ visibility_aabb = AABB( -1163.96, -976.849, -1014.37, 2327.92, 1953.7, 2028.74 )
 draw_order = 2
 process_material = SubResource( 1 )
 draw_pass_1 = SubResource( 3 )
+__meta__ = {
+"apply_volumetrics": false
+}
 
 [node name="Particles" type="Particles" parent="WindAllignedParticles"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 118.329, 0 )

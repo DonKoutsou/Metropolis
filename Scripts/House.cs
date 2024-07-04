@@ -40,8 +40,6 @@ public class House : Spatial
 	}
 	public virtual void Entered(Node body)
 	{
-		if (!IsInsideTree())
-			return;
 		((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Front;
 		((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(2)).ParamsCullMode = SpatialMaterial.CullMode.Front;
 		GetNode<Occluder>("Occluder").Visible = false;
@@ -58,8 +56,6 @@ public class House : Spatial
 	}
 	public virtual void Left(Node body)
 	{
-		if (!IsInsideTree())
-			return;
 		((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Disabled;
 		((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(2)).ParamsCullMode = SpatialMaterial.CullMode.Disabled;
 		GetNode<Occluder>("Occluder").Visible = true;

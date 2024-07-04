@@ -1,11 +1,11 @@
 {
 	"color": "#ffffffff",
 	"description": "",
-	"display_name": "",
+	"display_name": "[GenericCharacter]",
 	"display_name_bool": false,
 	"id": "character-1715202846.json",
 	"mirror_portraits": false,
-	"name": "Quifsa",
+	"name": "[GenericCharacter]",
 	"nickname": "",
 	"nickname_bool": false,
 	"offset_x": 0,

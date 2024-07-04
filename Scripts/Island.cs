@@ -2,12 +2,8 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-[Tool]
 public class Island : Spatial
 {
-	[Export]
-	public bool m_bOriginalIle = false;
 	[Export]
 	IleType type = IleType.LAND;
 	[Export]
@@ -16,8 +12,6 @@ public class Island : Spatial
 	public int ImageID = 0;
 
 	public string IslandSpecialName = null;
-
-	public bool Inited = false;
 
 	private Vector3 SpawnGlobalLocation;
 
@@ -40,18 +34,13 @@ public class Island : Spatial
 			return;
 		#endif
 		Translation = SpawnGlobalLocation;
-
-
-		Rotate(new Vector3(0, 1, 0), Mathf.Deg2Rad(SpawnRotation));
-		//Transform.Rotated(new Vector3(0, 1, 0), SpawnRotation);
-		//FindHouses(this);
-		//FindGenerators(this);
-		//FindVehicles(this);
+		
 		StaticBody sea = GetNode<StaticBody>("SeaBed");
 		sea.GlobalRotation = Vector3.Zero;
-		//sea.GetNode<MeshInstance>("Sea").QueueFree();
+		
+		Rotate(new Vector3(0, 1, 0), Mathf.Deg2Rad(SpawnRotation));
 
-		//FindChildren(this);
+		
 	}
 	#if DEBUG
 	[Export(PropertyHint.Layers3dPhysics)]
@@ -465,6 +454,10 @@ public class Island : Spatial
 				
 			Itms.Insert(i, Items[i]);
 		}
+	}
+	public bool HasCharacters()
+	{
+		return Characters.Count > 0 ;
 	}
 	public void GetCharacters(out List<Character> Char)
 	{

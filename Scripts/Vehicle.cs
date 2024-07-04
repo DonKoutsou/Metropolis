@@ -347,7 +347,7 @@ public class Vehicle : RigidBody
                     part.Translation = new Vector3(part.Translation.x, - particleoffset, part.Translation.z);
                 }
 
-                part.Emitting = dist <= 35 && Working;
+                part.Emitting = dist <= 35 && dist > 6 && Working;
                 float multi = forcecurve.Interpolate(distmulti);
                 if (dist < 4)
                 {
@@ -615,7 +615,7 @@ public class Vehicle : RigidBody
         passengers.Insert(passengers.Count, cha);
         //ToggleMachine(true);
     }
-    private void Capsize()
+    public void Capsize()
     {
         if (passengers.Count == 0)
             return;

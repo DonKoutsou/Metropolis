@@ -170,6 +170,7 @@ public class SoundMap : GridMap
         
         if (Engine.EditorHint)
         {
+            
             if (RedoMapping)
             {
                 Clear();

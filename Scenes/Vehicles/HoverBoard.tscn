@@ -267,6 +267,9 @@ roughness_texture_channel = 3
 
 [node name="Vehicle" instance=ExtResource( 3 )]
 
+[node name="VehicleBody" parent="." index="1"]
+collision_layer = 528
+
 [node name="MeshInstance" parent="VehicleBody" index="0"]
 material_override = SubResource( 49 )
 
@@ -339,7 +342,7 @@ material/0 = SubResource( 51 )
 [node name="RayFR" parent="." index="3"]
 transform = Transform( 1, 2.70905e-07, 5.76838e-08, -2.70822e-07, 1, -9.66247e-08, -5.75092e-08, 9.66247e-08, 1, -6.33755, 0.798699, 11.0606 )
 
-[node name="MeshInstance" parent="RayFR/EnginePivot" index="1"]
+[node name="MeshInstance" parent="RayFR/EnginePivot" index="0"]
 material/0 = SubResource( 51 )
 
 [node name="RayBR" parent="." index="4"]

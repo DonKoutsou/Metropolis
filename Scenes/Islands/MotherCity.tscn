@@ -660,6 +660,7 @@ Chair = NodePath("../../Clutter/Bench5")
 
 [node name="Character6" parent="Characters" index="5" instance=ExtResource( 23 )]
 transform = Transform( 0.440344, -0.000125293, 0.897823, 0.000422343, 0.999993, -6.76096e-05, -0.897824, 0.000408961, 0.440344, -202.476, 3.05321, -3687.82 )
+CharacterName = "Τσάκας"
 Chair = NodePath("../../Clutter/Chair4")
 
 [node name="Character7" parent="Characters" index="6" instance=ExtResource( 23 )]

@@ -30,6 +30,9 @@ public class Character : KinematicBody
 	[Export]
 	float MaxEnergyAmmount = 100;
 
+	[Export]
+	public string CharacterName = "Βαλάντης";
+
 	public float CurrentEnergy = 100;
 
 	public SpotLight NightLight;
@@ -52,6 +55,8 @@ public class Character : KinematicBody
 	Position3D seat = null;
 
 	public bool PlayingInstrument = false;
+
+	public bool IsUncon = false;
 
 	public float GetCharacterBatteryCap()
 	{
@@ -208,6 +213,7 @@ public class Character : KinematicBody
 	public virtual void Respawn()
 	{
 		m_balive = true;
+		IsUncon = false;
 		anim.ToggleIdle();
 		Start();
 	}

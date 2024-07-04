@@ -16,6 +16,7 @@ public class NPC : Character
 	Vector3 TalkPosPos = new Vector3(0, 0.5f, 6);
 	[Export]
 	PackedScene InstrumentToSpawnWith = null;
+	
 
 	Node Skeleton;
 
@@ -71,6 +72,7 @@ public class NPC : Character
 		if (spawnUncon)
 		{
 			CurrentEnergy = 0;
+			IsUncon = true;
 		}
 		GetNode<Position3D>("TalkPosition").Translation = TalkPosPos;
 

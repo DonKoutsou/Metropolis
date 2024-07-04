@@ -16,16 +16,16 @@
 			"value": "true"
 		},
 		{
-			"id": "1715205409-366",
-			"name": "Quifsa",
-			"type": 0,
-			"value": ""
-		},
-		{
 			"id": "1716668448-192",
 			"name": "HasBatteries",
 			"type": 0,
 			"value": "0"
+		},
+		{
+			"id": "1715205409-366",
+			"name": "GenericCharacter",
+			"type": 0,
+			"value": "Βαλάντης"
 		}
 	]
 }
