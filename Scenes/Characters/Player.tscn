@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/HUD/SplashScreenPanelTheme.tres" type="StyleBox" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Scenes/Items/NormalLeg_R.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Inventory/Inventory.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Items/NormalLeg_L.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/PostProcess/KuwaharaShader.gdshader" type="Shader" id=9]
 [ext_resource path="res://Scenes/Items/Bouzouki.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scripts/CameraZoomPivot.cs" type="Script" id=12]
 [ext_resource path="res://Scripts/PlayerUI.cs" type="Script" id=13]
@@ -141,6 +142,8 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
+[sub_resource type="CapsuleShape" id=125]
+
 [sub_resource type="QuadMesh" id=107]
 size = Vector2( 4, 4 )
 
@@ -148,6 +151,10 @@ size = Vector2( 4, 4 )
 render_priority = 1
 flags_transparent = true
 albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="ShaderMaterial" id=126]
+render_priority = -1
+shader = ExtResource( 9 )
 
 [sub_resource type="Animation" id=110]
 resource_name = "FadeIn"
@@ -557,6 +564,7 @@ script = ExtResource( 14 )
 [node name="SpringArm" type="SpringArm" parent="CameraMovePivot/CameraPanPivot"]
 transform = Transform( 0.999998, 0, 5.32906e-15, -1.37926e-15, 0.965926, 0.258818, -5.14748e-15, -0.258819, 0.965924, 0, -4.16474, -3.72529e-09 )
 collision_mask = 260
+shape = SubResource( 125 )
 spring_length = 20.0
 margin = 0.5
 
@@ -584,6 +592,11 @@ transform = Transform( 1, -5.29396e-22, 0, -1.05879e-22, 1, 0, 2.11758e-21, 0, 1
 visible = false
 mesh = SubResource( 107 )
 material/0 = SubResource( 109 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/PlayerCamera"]
+transform = Transform( 1, -5.29396e-22, 0, -1.05879e-22, 1, 0, 2.11758e-21, 0, 1, 0, -0.0144858, -1.05511 )
+mesh = SubResource( 107 )
+material/0 = SubResource( 126 )
 
 [node name="CameraAnimationPlayer" type="AnimationPlayer" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/PlayerCamera"]
 anims/FadeIn = SubResource( 110 )

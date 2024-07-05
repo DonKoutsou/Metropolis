@@ -139,7 +139,7 @@ public class House : Spatial
 	}
 
 	[Export]
-	Dictionary<int, PackedScene> SpawnPool;
+	Dictionary<int, PackedScene> SpawnPool = null;
 	PackedScene GetDrop(Random r, out int RandomUses)
 	{
 		RandomUses = 0;

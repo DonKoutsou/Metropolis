@@ -24,7 +24,7 @@ LOD1 = ExtResource( 5 )
 LOD2 = ExtResource( 4 )
 
 [node name="StaticBody" type="StaticBody" parent="."]
-collision_layer = 4
+collision_layer = 1028
 collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody"]

@@ -199,7 +199,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/dialogic/plugin.cfg", "res://addons/octahedral_impostors/plugin.cfg", "res://addons/zylann.editor_light/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/ImageGenButton/plugin.cfg", "res://addons/dialogic/plugin.cfg", "res://addons/octahedral_impostors/plugin.cfg", "res://addons/zylann.editor_light/plugin.cfg" )
 
 [global]
 
@@ -336,6 +336,7 @@ dialogic_default_action={
 3d_physics/layer_8="KillField"
 3d_physics/layer_9="Sea"
 3d_physics/layer_10="Boat"
+3d_physics/layer_11="Rock"
 
 [memory]
 

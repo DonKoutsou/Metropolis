@@ -2,14 +2,14 @@ shader_type spatial;
 render_mode blend_mix, depth_draw_alpha_prepass, cull_back, diffuse_burley, specular_schlick_ggx;
 uniform vec4 albedo : hint_color = vec4(1, 1, 1, 1);
 uniform float specular = 0.5f;
-uniform float metallic = 0f;
-uniform float roughness : hint_range(0, 1) = 1f;
+uniform float metallic = 0.0f;
+uniform float roughness : hint_range(0, 1) = 1.0f;
 
 uniform sampler2DArray imposterBaseTexture : hint_albedo;
 uniform sampler2DArray imposterNormalDepthTexture : hint_albedo;
 uniform sampler2DArray imposterORMTexture : hint_albedo;
-uniform vec2 imposterFrames = vec2(16f, 16f);
-uniform vec3 positionOffset = vec3(0f);
+uniform vec2 imposterFrames = vec2(16.0f, 16.0f);
+uniform vec3 positionOffset = vec3(0.0f);
 uniform bool isFullSphere = true;
 uniform bool isTransparent = true;
 uniform float alpha_clamp = 0.5f;
@@ -28,7 +28,7 @@ vec2 VecToSphereOct(vec3 pivotToCamera)
 	float sum = dot(pivotToCamera, octant);
 	vec3 octahedron = pivotToCamera / sum;
 
-	if (octahedron.y < 0f)
+	if (octahedron.y < 0.0f)
 	{
 		vec3 absolute = abs(octahedron);
 		octahedron.xz = octant.xz * vec2(1.0f - absolute.z, 1.0f - absolute.x);
@@ -65,11 +65,11 @@ vec2 VectorToGrid(vec3 vec)
 vec3 OctaSphereEnc(vec2 coord)
 {
 	coord = (coord - 0.5) * 2.0;
-	vec3 position = vec3(coord.x, 0f, coord.y);
+	vec3 position = vec3(coord.x, 0.0f, coord.y);
 	vec2 absolute = abs(position.xz);
-	position.y = 1f - absolute.x - absolute.y;
+	position.y = 1.0f - absolute.x - absolute.y;
 
-	if (position.y < 0f)
+	if (position.y < 0.0f)
 	{
 		position.xz = sign(position.xz) * vec2(1.0f - absolute.y, 1.0f - absolute.x);
 	}
@@ -80,9 +80,9 @@ vec3 OctaSphereEnc(vec2 coord)
 //for hemisphere
 vec3 OctaHemiSphereEnc(vec2 coord)
 {
-	vec3 position = vec3(coord.x - coord.y, 0f, -1.0 + coord.x + coord.y);
+	vec3 position = vec3(coord.x - coord.y, 0.0f, -1.0 + coord.x + coord.y);
 	vec2 absolute = abs(position.xz);
-	position.y = 1f - absolute.x - absolute.y;
+	position.y = 1.0f - absolute.x - absolute.y;
 
 	return position;
 }
@@ -142,7 +142,7 @@ vec4 quadBlendWieghts(vec2 coords)
 	/* 0 0 0
 	0 0 0
 	1 0 0 */
-	res.x = min(1f - coords.x, 1f - coords.y);
+	res.x = min(1.0f - coords.x, 1.0f - coords.y);
 	/* 1 0 0
 	0 0 0
 	0 0 1 */
@@ -225,10 +225,10 @@ void fragment()
 	normalTex = blendedColor(base_uv, grid_classic, quad_blend_weights, imposterNormalDepthTexture);
 	ormTex = blendedColor(base_uv, grid_classic, quad_blend_weights, imposterORMTexture);
 
-	baseTex.a = clamp(pow(baseTex.a, alpha_clamp), 0f, 1f);
+	baseTex.a = clamp(pow(baseTex.a, alpha_clamp), 0.0f, 1.0f);
 
 	
-	if (baseTex.a - alpha_clamp < 0f)
+	if (baseTex.a - alpha_clamp < 0.0f)
 	{
 		discard;
 	}

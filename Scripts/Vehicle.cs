@@ -717,7 +717,7 @@ public class Vehicle : RigidBody
         Rotation = data.rot;
         GetParent().GetNode<VehicleDamageManager>("VehicleDamageManager").InputData(data.DamageInfo);
 	}
-    public void ReparentVehicle(Island from, Island ile)
+    public void ReparentVehicle(Island ile)
     {
         Vector3 orig = GlobalTranslation;
         Vector3 origrot = GlobalRotation;
@@ -726,9 +726,12 @@ public class Vehicle : RigidBody
         Vector3 prevrot = pl.GlobalRotation;
 
         Spatial vehpar = (Spatial)GetParent();
-        Spatial par = (Spatial)vehpar.GetParent();
+        Island par = (Island)vehpar.GetParent();
+
+        if (par == ile)
+            return;
         
-        from.UnRegisterChild(this);
+        par.UnRegisterChild(this);
         par.RemoveChild(vehpar);
         ile.AddChild(vehpar, true);
         ile.RegisterChild(this);

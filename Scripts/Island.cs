@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+[Tool]
 public class Island : Spatial
 {
 	[Export]
@@ -10,6 +11,8 @@ public class Island : Spatial
 	public bool KeepInstance = false;
 	[Export]
 	public int ImageID = 0;
+
+	List<Port> Ports = new List<Port>();
 
 	public string IslandSpecialName = null;
 
@@ -35,12 +38,32 @@ public class Island : Spatial
 		#endif
 		Translation = SpawnGlobalLocation;
 		
-		StaticBody sea = GetNode<StaticBody>("SeaBed");
-		sea.GlobalRotation = Vector3.Zero;
-		
 		Rotate(new Vector3(0, 1, 0), Mathf.Deg2Rad(SpawnRotation));
 
-		
+		StaticBody sea = GetNode<StaticBody>("SeaBed");
+		sea.GlobalRotation = Vector3.Zero;
+
+
+		//var kids = GetChildren();
+		//foreach (Node p in kids)
+		//{
+		//	if (p is Port)
+		//	{
+		///		Ports.Add((Port)p);
+		//	}
+		//}
+	}
+	public bool HasPort()
+	{
+		return Ports.Count > 0;
+	}
+	public Port GetPort(int index)
+	{
+		return Ports[0];
+	}
+	public List<Port> GetPorts()
+	{
+		return Ports;
 	}
 	#if DEBUG
 	[Export(PropertyHint.Layers3dPhysics)]
@@ -56,7 +79,7 @@ public class Island : Spatial
 	}
 	[Export]
 	ImageRes Resolution = ImageRes.x16; 
-    public Image GenerateImage()
+    public Image GenerateImage(Random r)
 	{
 		int resolution = (int)Resolution;
 		Vector2 res = new Vector2(resolution, resolution);
@@ -66,6 +89,7 @@ public class Island : Spatial
 		int row = 0;
 		int col = 0;
         float mult = ilesize/res.x;
+		List <Vector2> seapix = new List<Vector2>();
 		for (int i = 0; i < res.x * res.y; i++)
 		{
 			var spacestate = GetWorld().DirectSpaceState;
@@ -99,17 +123,28 @@ public class Island : Spatial
 			//int VertexIndex = Get_Closest_Vertex(VectorLocalPos, tool);
 
             bool ItsSea = obj.GetCollisionLayerBit(8);
-
-            im.Lock();
+			bool ITsRock = obj.GetCollisionLayerBit(10);
+            
 			//im.SetPixel(col, row, tool.GetVertexColor(VertexIndex));
+			Color color = new Color(r: 0, g: 0, b: 0, a: 0);
 			if (ItsSea)
 			{
-				im.SetPixel(col, row, new Color(r: 0, g: 0, b: 0, a: 0));
+				seapix.Add(new Vector2(col, row));
+			}
+			else if (ITsRock)
+			{
+				int t = r.Next(0,2);
+				if (t ==0)
+					color = new Color(r: 0.66f, g: 0.57f, b: 0.42f, a: 1);
+				else
+					color = new Color(r: 0.83f, g: 0.7f, b: 0.49f, a: 1);
 			}
             else
             {
-                im.SetPixel(col, row, new Color(r: 0.83f, g: 0.7f, b: 0.49f, a: 1));
+                color = new Color(r: 0.83f, g: 0.7f, b: 0.49f, a: 1);
             }
+			im.Lock();
+			im.SetPixel(col, row, color);
             im.Unlock();
 			col ++;
 			if (col >= resolution)
@@ -121,7 +156,73 @@ public class Island : Spatial
 					break;
 				}
 			}
+			
 		}
+		row = 0;
+		col = 0;
+		for (int i = 0; i < res.x * res.y; i++)
+		{
+			if (seapix.Contains(new Vector2(col, row)))
+			{
+				//bool outlineSet = false;
+				float minDistance = float.MaxValue;
+
+				for (int newr = row - 4; newr <= row + 4; newr++)
+				{
+					for (int newc = col - 4; newc <= col + 4; newc++)
+					{
+						// Skip the current pixel
+						if (newr == row && newc == col)
+							continue;
+
+						// Check bounds
+						if (newr < 0 || newr >= resolution || newc < 0 || newc >= resolution)
+							continue;
+
+						// If the adjacent pixel is not in seapix, set the outline
+						if (!seapix.Contains(new Vector2(newc, newr)))
+						{
+							// Calculate distance to the edge
+							float distance = Mathf.Sqrt(Mathf.Pow(newr - row, 2) + Mathf.Pow(newc - col, 2));
+							if (distance < minDistance)
+							{
+								minDistance = distance;
+							}
+						}
+					}
+				}
+
+				// Set the color based on the distance
+				if (minDistance < float.MaxValue)
+				{
+					float gradientFactor = minDistance / 4.0f; // Normalize the distance (0 to 1)
+					gradientFactor = Mathf.Clamp(gradientFactor, 0, 1); // Ensure it stays within 0 to 1
+
+					// Define the gradient colors (you can adjust these as needed)
+					Color startColor = new Color(r: 0.76f, g: 0.9f, b: 1, a: 1); // Near color
+					Color endColor = new Color(r: 0.2f, g: 0.4f, b: 0.8f, a: 1); // Far color
+
+					// Interpolate between the colors
+					Color outlineColor = startColor.LinearInterpolate(endColor, gradientFactor);
+
+					im.Lock();
+					im.SetPixel(col, row, outlineColor);
+					im.Unlock();
+					//outlineSet = true;
+				}
+			}
+
+			col++;
+			if (col >= resolution)
+			{
+				col = 0;
+				row++;
+				if (row >= resolution)
+				{
+					break;
+				}
+			}
+}
 		//ImageTexture t = new ImageTexture();
 		//t.CreateFromImage(im, flags:4);
         //Image = t;
@@ -370,15 +471,17 @@ public class Island : Spatial
 	public void RegisterChild(Node child)
 	{
 		if (child is House house && !Houses.Contains(child))
-			Houses.Insert(Houses.Count, house);
+			Houses.Add(house);
 		else if (child is WindGenerator generator && !Generators.Contains(child))
-			Generators.Insert(Generators.Count, generator);
+			Generators.Add(generator);
 		else if (child is Vehicle vehicle && !Vehicles.Contains(child))
-			Vehicles.Insert(Vehicles.Count, vehicle);
+			Vehicles.Add(vehicle);
 		else if (child is Item item && !Items.Contains(child))
-			Items.Insert(Items.Count, item);
+			Items.Add(item);
 		else if (child is Character character && !Characters.Contains(child))
-			Characters.Insert(Characters.Count, character);
+			Characters.Add(character);
+		else if (child is Port port && !Ports.Contains(child))
+			Ports.Add(port);
 	}
 	public void UnRegisterChild(Node child)
 	{
@@ -398,16 +501,18 @@ public class Island : Spatial
 		//ulong ms = OS.GetSystemTimeMsecs();
 		foreach (Node child in node.GetChildren())
 		{
-			if (child is House && !Houses.Contains(child))
-				Houses.Insert(Houses.Count, (House)child);
-			else if (child is WindGenerator && !Generators.Contains(child))
-				Generators.Insert(Generators.Count, (WindGenerator)child);
-			else if (child is Vehicle && !Vehicles.Contains(child))
-				Vehicles.Insert(Vehicles.Count, (Vehicle)child);
-			else if (child is Item && !Items.Contains(child))
-				Items.Insert(Items.Count, (Item)child);
-			else if (child is Character && !Houses.Contains(child))
-				Characters.Insert(Characters.Count, (Character)child);
+			if (child is House ho && !Houses.Contains(child))
+				Houses.Add(ho);
+			else if (child is WindGenerator windg && !Generators.Contains(child))
+				Generators.Add(windg);
+			else if (child is Vehicle veh && !Vehicles.Contains(child))
+				Vehicles.Add(veh);
+			else if (child is Item item && !Items.Contains(child))
+				Items.Add(item);
+			else if (child is Character cha && !Houses.Contains(child))
+				Characters.Add(cha);
+			else if (child is Port p && !Ports.Contains(child))
+				Ports.Add(p);
 			else
 				FindChildren(child);
 		}
@@ -476,13 +581,14 @@ public class IslandInfo
 	public Island Island;
 	public IleType Type;
 	public Vector2 Position;
+	public bool HasPort;
+	public List<Vector2> Ports = new List<Vector2>();
 	public string SpecialName = null;
 	public PackedScene IleType;
 	public int ImageIndex = 0;
 	public List<HouseInfo> Houses = new List<HouseInfo>();
 	public List<WindGeneratorInfo> Generators = new List<WindGeneratorInfo>();
 	public List<VehicleInfo> Vehicles = new List<VehicleInfo>();
-	
 	public List<ItemInfo> Items = new List<ItemInfo>();
 
 	public List<CharacterInfo> Characters = new List<CharacterInfo>();
@@ -510,6 +616,19 @@ public class IslandInfo
 		ImageIndex = (int)data.Get("ImageIndex");
         RotationToSpawn = (float)data.Get("Rotation");
 		KeepInstance = (bool)data.Get("KeepInstance");
+		HasPort = (bool)data.Get("HasPort");
+		if (HasPort)
+		{
+			var ports = data.Get("Ports");
+			Godot.Vector2[] PortData = ( Godot.Vector2[])data.Get("Ports");
+			for (int i  = 0; i < PortData.Count(); i++)
+			{
+				Vector2 info;
+				info = (Vector2)PortData[i];
+				Ports.Add(info);
+			}
+		}
+		
 
         Godot.Collections.Array HouseData = ( Godot.Collections.Array)data.Get("Houses");
 		for (int i  = 0; i < HouseData.Count; i++)
@@ -549,6 +668,12 @@ public class IslandInfo
     }
 	public Dictionary<string, object>GetPackedData()
 	{
+		Vector2[] Portobjects = new Vector2[Ports.Count];
+		for (int i = 0; i < Ports.Count; i ++)
+		{
+			Portobjects[i] = Ports[i];
+		}
+
 		//Houses
 		GDScript HouseSaveScript = GD.Load<GDScript>("res://Scripts/HouseSaveInfo.gd");
 
@@ -629,6 +754,8 @@ public class IslandInfo
 			{"Vehicles", VehicleInfoobjects},
 			{"Characters", CharacterInfoobjects},
 			{"KeepInstance", KeepInstance},
+			{"HasPort", HasPort},
+			{"Ports", Portobjects}
         };
 
 		return data;
@@ -639,6 +766,16 @@ public class IslandInfo
 		Island = Ile;
 		Type = Ile.GetIslandType();
 		KeepInstance = Ile.KeepInstance;
+		HasPort = Ile.HasPort();
+		if (HasPort)
+		{
+			List<Port> ppos = Ile.GetPorts();
+			foreach (Port p in ppos)
+			{
+				Ports.Add(new Vector2(p.Translation.x, p.Translation.z));
+			}
+			
+		}
 		//SpecialName = Ile.IslandSpecialName;
 		List<House> hous;
 		Ile.GetHouses(out hous);
@@ -857,7 +994,7 @@ public class IslandInfo
 					itn = furn.GetItemName();
 				}
 				inf.SetInfo(furn.Name, furn.HasBeenSearched(), furn.HasItem(), itn, furn.Filename, furn.Transform);
-				finfo.Insert(f, inf);
+				finfo.Add(inf);
 			}
 
 			List<Spatial> Decos;
@@ -869,12 +1006,12 @@ public class IslandInfo
 				DecorationInfo inf = new DecorationInfo();
 
 				inf.SetInfo(dec.Filename, dec.Transform, dec.Name);
-				dinfo.Insert(f, inf);
+				dinfo.Add(inf);
 			}
 
 
 			info.SetInfo(HouseToAdd[i].Name, finfo, dinfo);
-			Houses.Insert(Houses.Count, info);
+			Houses.Add(info);
 		}
 	}
 	public void AddGenerators(List<WindGenerator> GeneratorToAdd)
@@ -883,7 +1020,7 @@ public class IslandInfo
 		{
 			WindGeneratorInfo info = new WindGeneratorInfo();
 			info.SetInfo(GeneratorToAdd[i].Name, GeneratorToAdd[i].GetCurrentEnergy());
-			Generators.Insert(Generators.Count, info);
+			Generators.Add(info);
 		}
 	}
 	public void AddItems(List<Item> ItemsToAdd)
@@ -892,7 +1029,7 @@ public class IslandInfo
 		{
 			ItemInfo info = new ItemInfo();
 			info.UpdateInfo(ItemsToAdd[i]);
-			Items.Insert(Items.Count, info);
+			Items.Add(info);
 		}
 	}
 	public void AddVehicles(List<Vehicle> VehicleToAdd)
@@ -901,7 +1038,7 @@ public class IslandInfo
 		{
 			VehicleInfo info = new VehicleInfo();
 			info.SetInfo(VehicleToAdd[i]);
-			Vehicles.Insert(Vehicles.Count, info);
+			Vehicles.Add(info);
 		}
 	}
 	public void AddChars(List<Character> CharsToAdd)
@@ -910,7 +1047,7 @@ public class IslandInfo
 		{
 			CharacterInfo info = new CharacterInfo();
 			info.UpdateInfo(CharsToAdd[i]);
-			Characters.Insert(Characters.Count, info);
+			Characters.Add(info);
 		}
 	}
 	public bool IsIslandSpawned()

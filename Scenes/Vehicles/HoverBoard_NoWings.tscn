@@ -262,8 +262,8 @@ transform = Transform( 1, -5.52518e-11, 5.82077e-11, 7.38964e-11, 1, 0, 0, 0, 1,
 script = ExtResource( 3 )
 
 [node name="VehicleBody" type="RigidBody" parent="." groups=["Interactables"]]
-collision_layer = 16
-collision_mask = 292
+collision_layer = 528
+collision_mask = 804
 mass = 40.0
 physics_material_override = SubResource( 1 )
 contacts_reported = 4

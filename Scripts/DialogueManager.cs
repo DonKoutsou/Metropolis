@@ -19,7 +19,7 @@ public class DialogueManager : Node
         return Instance;
     }
 
-	public void StartDialogue(Player pl, Character character)
+	public void StartDialogue(Player pl, Character character, string Dialogue = "TestTimeline")
 	{
 		if (pl.HasVehicle())
 		{
@@ -43,7 +43,7 @@ public class DialogueManager : Node
 		else
 		{
 			
-			var dialogue =  DialogicSharp.Start("TestTimeline");
+			var dialogue =  DialogicSharp.Start(Dialogue);
 
 			AddChild(dialogue);
 			dialogue.Connect("timeline_end", this, "EndDialogue");

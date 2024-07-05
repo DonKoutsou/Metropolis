@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Scenes/HUD/InventoryUISlot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/InventoryUI.cs" type="Script" id=2]
@@ -15,6 +15,9 @@
 [ext_resource path="res://Assets/Compass/Compass/CompL2.png" type="Texture" id=13]
 [ext_resource path="res://Assets/Compass/Compass/CompL1.png" type="Texture" id=14]
 [ext_resource path="res://Scripts/Compass.cs" type="Script" id=15]
+[ext_resource path="res://Assets/MapIcons/Compass.png" type="Texture" id=16]
+[ext_resource path="res://Assets/MapIcons/Map.png" type="Texture" id=17]
+[ext_resource path="res://Assets/MapIcons/DropIcon.png" type="Texture" id=18]
 
 [sub_resource type="DynamicFont" id=27]
 size = 24
@@ -49,7 +52,7 @@ font_data = ExtResource( 5 )
 default_font = SubResource( 17 )
 
 [sub_resource type="StyleBoxFlat" id=23]
-bg_color = Color( 0.396078, 0.596078, 0.211765, 0.792157 )
+bg_color = Color( 1, 0.894118, 0.313726, 1 )
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -79,7 +82,7 @@ expand_margin_top = 1.0
 expand_margin_bottom = 1.0
 
 [sub_resource type="StyleBoxFlat" id=24]
-bg_color = Color( 0.596078, 0.458824, 0.211765, 0.792157 )
+bg_color = Color( 0.796078, 0.223529, 0.223529, 0.792157 )
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -108,15 +111,15 @@ expand_margin_right = 1.0
 expand_margin_top = 1.0
 expand_margin_bottom = 1.0
 
-[sub_resource type="DynamicFont" id=25]
-size = 8
+[sub_resource type="DynamicFont" id=34]
+size = 10
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 5 )
 
 [sub_resource type="Theme" id=26]
-default_font = SubResource( 25 )
+default_font = SubResource( 34 )
 
 [sub_resource type="StyleBoxFlat" id=30]
 bg_color = Color( 0.607843, 0.603922, 0.603922, 1 )
@@ -127,6 +130,32 @@ border_width_bottom = 2
 border_color = Color( 0, 0, 0, 1 )
 border_blend = true
 anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=33]
+bg_color = Color( 0.607843, 0.603922, 0.603922, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
+border_blend = true
+corner_radius_top_left = 164
+corner_detail = 20
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=31]
+bg_color = Color( 0.384314, 0.396078, 0.439216, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
+border_blend = true
+corner_radius_top_left = 164
+corner_detail = 16
+
+[sub_resource type="Theme" id=32]
+Panel/styles/panel = SubResource( 31 )
 
 [node name="InvntoryUI" type="Control"]
 anchor_right = 1.0
@@ -139,14 +168,14 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -459.0
+margin_left = -525.0
 margin_top = -470.0
-margin_right = -126.0
+margin_right = -135.0
 margin_bottom = -137.0
 grow_horizontal = 2
 grow_vertical = 2
 custom_constants/vseparation = 111
-custom_constants/hseparation = 111
+custom_constants/hseparation = 130
 columns = 4
 
 [node name="InventoryBox3" parent="GridContainer" instance=ExtResource( 1 )]
@@ -160,24 +189,24 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 111.0
-margin_right = 111.0
+margin_left = 130.0
+margin_right = 130.0
 
 [node name="InventoryBox14" parent="GridContainer" instance=ExtResource( 1 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 222.0
-margin_right = 222.0
+margin_left = 260.0
+margin_right = 260.0
 
 [node name="InventoryBox15" parent="GridContainer" instance=ExtResource( 1 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 333.0
-margin_right = 333.0
+margin_left = 390.0
+margin_right = 390.0
 
 [node name="InventoryBox16" parent="GridContainer" instance=ExtResource( 1 )]
 anchor_left = 0.0
@@ -192,9 +221,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 111.0
+margin_left = 130.0
 margin_top = 111.0
-margin_right = 111.0
+margin_right = 130.0
 margin_bottom = 111.0
 
 [node name="InventoryBox2" parent="GridContainer" instance=ExtResource( 1 )]
@@ -202,9 +231,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 222.0
+margin_left = 260.0
 margin_top = 111.0
-margin_right = 222.0
+margin_right = 260.0
 margin_bottom = 111.0
 
 [node name="InventoryBox6" parent="GridContainer" instance=ExtResource( 1 )]
@@ -212,9 +241,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 333.0
+margin_left = 390.0
 margin_top = 111.0
-margin_right = 333.0
+margin_right = 390.0
 margin_bottom = 111.0
 
 [node name="InventoryBox4" parent="GridContainer" instance=ExtResource( 1 )]
@@ -230,9 +259,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 111.0
+margin_left = 130.0
 margin_top = 222.0
-margin_right = 111.0
+margin_right = 130.0
 margin_bottom = 222.0
 
 [node name="InventoryBox7" parent="GridContainer" instance=ExtResource( 1 )]
@@ -240,9 +269,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 222.0
+margin_left = 260.0
 margin_top = 222.0
-margin_right = 222.0
+margin_right = 260.0
 margin_bottom = 222.0
 
 [node name="InventoryBox8" parent="GridContainer" instance=ExtResource( 1 )]
@@ -250,9 +279,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 333.0
+margin_left = 390.0
 margin_top = 222.0
-margin_right = 333.0
+margin_right = 390.0
 margin_bottom = 222.0
 
 [node name="InventoryBox9" parent="GridContainer" instance=ExtResource( 1 )]
@@ -268,9 +297,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 111.0
+margin_left = 130.0
 margin_top = 333.0
-margin_right = 111.0
+margin_right = 130.0
 margin_bottom = 333.0
 
 [node name="InventoryBox11" parent="GridContainer" instance=ExtResource( 1 )]
@@ -278,9 +307,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 222.0
+margin_left = 260.0
 margin_top = 333.0
-margin_right = 222.0
+margin_right = 260.0
 margin_bottom = 333.0
 
 [node name="InventoryBox12" parent="GridContainer" instance=ExtResource( 1 )]
@@ -288,9 +317,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 333.0
+margin_left = 390.0
 margin_top = 333.0
-margin_right = 333.0
+margin_right = 390.0
 margin_bottom = 333.0
 
 [node name="CapPanel" type="Panel" parent="."]
@@ -298,8 +327,8 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -515.0
-margin_top = -590.0
+margin_left = -589.0
+margin_top = -591.0
 margin_right = -70.0
 margin_bottom = -526.0
 theme = ExtResource( 4 )
@@ -347,10 +376,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -772.0
-margin_top = -590.0
-margin_right = -533.0
-margin_bottom = -85.0
+margin_left = -846.0
+margin_top = -591.0
+margin_right = -607.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
@@ -368,7 +396,7 @@ custom_constants/margin_bottom = 10
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 229.0
-margin_bottom = 495.0
+margin_bottom = 581.0
 custom_constants/separation = 10
 
 [node name="ItemName" type="RichTextLabel" parent="DescriptionPanel/MarginContainer/VBoxContainer"]
@@ -443,17 +471,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 9 )
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="DescriptionPanel"]
-anchor_right = 1.0
-stretch_mode = 3
-
 [node name="BatteryPanel" type="Panel" parent="."]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -70.0
-margin_top = -590.0
+margin_top = -591.0
 margin_right = -18.0
 margin_bottom = -17.0
 mouse_filter = 1
@@ -464,10 +488,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -24.0
-margin_top = -15.0
-margin_right = 529.0
-margin_bottom = 3.0
+margin_left = -34.0
+margin_top = -10.0
+margin_right = 504.0
+margin_bottom = 8.0
 rect_rotation = -89.9999
 custom_styles/fg = SubResource( 23 )
 custom_styles/bg = SubResource( 29 )
@@ -475,6 +499,7 @@ value = 93.63
 percent_visible = false
 
 [node name="RPMAmount" type="ProgressBar" parent="BatteryPanel"]
+visible = false
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -490,6 +515,7 @@ value = 89.54
 percent_visible = false
 
 [node name="w" type="RichTextLabel" parent="BatteryPanel"]
+visible = false
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_left = -3.0
@@ -504,73 +530,78 @@ text = "RPM"
 [node name="w2" type="RichTextLabel" parent="BatteryPanel"]
 anchor_top = 0.5
 anchor_bottom = 0.5
-margin_left = 20.0
-margin_top = 272.5
-margin_right = 54.0
-margin_bottom = 312.5
+margin_left = -1.0
+margin_top = -283.0
+margin_right = 53.0
+margin_bottom = -243.0
 theme = SubResource( 26 )
 bbcode_enabled = true
-bbcode_text = "[center]BAT"
-text = "BAT"
+bbcode_text = "[center]Ενέργεια"
+text = "Ενέργεια"
 
 [node name="ItemOptionPanel" type="Panel" parent="."]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -515.0
+margin_left = -589.0
 margin_top = -81.0
 margin_right = -70.0
 margin_bottom = -17.0
 theme = ExtResource( 4 )
 
-[node name="DropButton" type="Button" parent="ItemOptionPanel"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -104.5
-margin_top = -25.5
-margin_right = -6.5
-margin_bottom = 25.5
-focus_mode = 0
-mouse_default_cursor_shape = 2
-theme = ExtResource( 3 )
-action_mode = 0
-enabled_focus_mode = 0
-text = "Άφησε"
+[node name="HBoxContainer" type="HBoxContainer" parent="ItemOptionPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+alignment = 2
 
-[node name="MapButton" type="Button" parent="ItemOptionPanel"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = 6.5
-margin_top = -25.5
-margin_right = 104.5
-margin_bottom = 25.5
+[node name="DropButton" type="Button" parent="ItemOptionPanel/HBoxContainer"]
+margin_right = 167.0
+margin_bottom = 56.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = ExtResource( 3 )
 action_mode = 0
 enabled_focus_mode = 0
-text = "Χάρτης"
+icon = ExtResource( 18 )
+icon_align = 1
+expand_icon = true
 
-[node name="CompassButton" type="Button" parent="ItemOptionPanel"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = 117.5
-margin_top = -25.5
-margin_right = 215.5
-margin_bottom = 25.5
+[node name="MapButton" type="Button" parent="ItemOptionPanel/HBoxContainer"]
+margin_left = 171.0
+margin_right = 339.0
+margin_bottom = 56.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = ExtResource( 3 )
 action_mode = 0
 enabled_focus_mode = 0
-text = "Πυξίδα"
+icon = ExtResource( 17 )
+icon_align = 1
+expand_icon = true
+
+[node name="CompassButton" type="Button" parent="ItemOptionPanel/HBoxContainer"]
+margin_left = 343.0
+margin_right = 511.0
+margin_bottom = 56.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 3 )
+action_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 16 )
+icon_align = 1
+expand_icon = true
 
 [node name="Panel2" type="Panel" parent="."]
 anchor_left = 1.0
@@ -578,7 +609,7 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -18.0
-margin_top = -638.0
+margin_top = -639.0
 rect_clip_content = true
 mouse_filter = 1
 custom_styles/panel = SubResource( 30 )
@@ -588,9 +619,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -533.0
-margin_top = -590.0
-margin_right = -515.0
+margin_left = -607.0
+margin_top = -591.0
+margin_right = -589.0
 rect_clip_content = true
 mouse_filter = 1
 custom_styles/panel = SubResource( 30 )
@@ -600,10 +631,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -533.0
-margin_top = -638.0
+margin_left = -607.0
+margin_top = -639.0
 margin_right = -18.0
-margin_bottom = -590.0
+margin_bottom = -591.0
 rect_clip_content = true
 mouse_filter = 1
 custom_styles/panel = SubResource( 30 )
@@ -613,9 +644,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -255.5
+margin_left = -292.5
 margin_top = -22.0
-margin_right = 256.5
+margin_right = 292.5
 margin_bottom = 22.0
 theme = ExtResource( 4 )
 
@@ -647,7 +678,7 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -515.0
+margin_left = -589.0
 margin_top = -17.0
 margin_right = -18.0
 rect_clip_content = true
@@ -657,37 +688,76 @@ custom_styles/panel = SubResource( 30 )
 [node name="VehicleUI" parent="." instance=ExtResource( 10 )]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -755.0
-margin_top = -75.0
-margin_right = -533.0
-margin_bottom = -10.0
+margin_left = -595.0
+margin_top = -705.0
+margin_right = -373.0
+margin_bottom = -640.0
 
 [node name="CompassUI" type="Control" parent="."]
 anchor_left = 1.0
+anchor_top = 1.0
 anchor_right = 1.0
-margin_left = -194.0
-margin_top = 157.0
-margin_right = -154.0
-margin_bottom = 197.0
+anchor_bottom = 1.0
+margin_left = -213.0
+margin_top = -834.0
+margin_right = -173.0
+margin_bottom = -794.0
 script = ExtResource( 15 )
 
+[node name="Panel3" type="Panel" parent="CompassUI"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -155.0
+margin_top = -154.0
+margin_right = 176.0
+margin_bottom = 175.0
+rect_clip_content = true
+mouse_filter = 1
+custom_styles/panel = SubResource( 33 )
+
+[node name="ItemawfOptionPanel" type="Panel" parent="CompassUI"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -151.0
+margin_top = -151.0
+margin_right = 172.0
+margin_bottom = 172.0
+theme = SubResource( 32 )
+
 [node name="Sprite" type="Sprite" parent="CompassUI"]
-position = Vector2( 20.052, 17.158 )
-scale = Vector2( 0.212, 0.212 )
+position = Vector2( 31.2002, 31.3 )
+scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 14 )
 normal_map = ExtResource( 12 )
 
 [node name="Sprite2" type="Sprite" parent="CompassUI"]
-position = Vector2( 20.052, 17.158 )
-scale = Vector2( 0.212, 0.212 )
+position = Vector2( 31.2002, 31.3 )
+scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 13 )
 
 [node name="Sprite3" type="Sprite" parent="CompassUI"]
-position = Vector2( 20.052, 17.158 )
-scale = Vector2( 0.212, 0.212 )
+position = Vector2( 31.2002, 31.3 )
+scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 11 )
 
-[connection signal="button_down" from="ItemOptionPanel/DropButton" to="." method="On_Drop_Button_Down"]
-[connection signal="button_down" from="ItemOptionPanel/MapButton" to="." method="On_Map_Button_Down"]
-[connection signal="button_down" from="ItemOptionPanel/CompassButton" to="." method="On_Compass_Button_Down"]
+[node name="Panel2" type="Panel" parent="CompassUI"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 175.0
+margin_top = -154.0
+margin_right = 193.0
+margin_bottom = 175.0
+rect_clip_content = true
+mouse_filter = 1
+custom_styles/panel = SubResource( 30 )
+
+[connection signal="button_down" from="ItemOptionPanel/HBoxContainer/DropButton" to="." method="On_Drop_Button_Down"]
+[connection signal="button_down" from="ItemOptionPanel/HBoxContainer/MapButton" to="." method="On_Map_Button_Down"]
+[connection signal="button_down" from="ItemOptionPanel/HBoxContainer/CompassButton" to="." method="On_Compass_Button_Down"]
 [connection signal="button_down" from="Panel4/MarginContainer/RefreshCoords" to="." method="CloseInventory"]

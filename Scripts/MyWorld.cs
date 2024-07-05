@@ -132,22 +132,20 @@ public class MyWorld : Spatial
 		Character rescuer;
 		if (ile.HasCharacters())
 		{
-			if (TryRescue(ile, out rescuer))
+			if (TryRescue(ile, Player.GetInstance().GlobalTranslation, out rescuer))
 			{
-				Rescue(rescuer);
+				Rescue(rescuer, ile);
 				return;
 			}
-
-			
 		}
 		List<IslandInfo> CloseIles;
 		map.GetClosestIles(currentile,  out CloseIles, 1);
 		foreach (IslandInfo island in CloseIles)
 		{
 			Island iletocheck = island.Island;
-			if (TryRescue(iletocheck, out rescuer))
+			if (TryRescue(iletocheck, Player.GetInstance().GlobalTranslation, out rescuer))
 			{
-				Rescue(rescuer);
+				Rescue(rescuer, ile);
 				return;
 			}
 		}
@@ -156,7 +154,7 @@ public class MyWorld : Spatial
 		start.GameOver(reason);
 		SaveLoadManager.GetInstance().ClearSaves();
 	}
-	bool TryRescue(Island ile, out Character rescuer)
+	bool TryRescue(Island ile, Vector3 pos, out Character rescuer)
 	{
 		rescuer = null;
 		List<Character> chars;
@@ -165,22 +163,53 @@ public class MyWorld : Spatial
 		{
 			if (!cha.IsUncon)
 			{
+				if (rescuer != null && rescuer.GlobalTranslation.DistanceTo(pos) < cha.GlobalTranslation.DistanceTo(pos))
+					continue;
 				rescuer = cha;
-				return true;
 			}
 		}
+		if (rescuer != null)
+			return true;
 		return false;
 	}
-	void Rescue(Character rescuer)
+	void Rescue(Character rescuer, Island ile)
 	{
+		CameraAnimationPlayer CameraAnimation = CameraAnimationPlayer.GetInstance();
+        CameraAnimation.Connect("FadeOutFinished", this, "FinishRescue");
+        CameraAnimation.FadeInOut(3);
+		Rescuer = rescuer;
+		RescueIle = ile;
+	}
+	Character Rescuer;
+	Island RescueIle;
+	void FinishRescue()
+	{
+		CameraAnimationPlayer CameraAnimation = CameraAnimationPlayer.GetInstance();
+        CameraAnimation.Disconnect("FadeOutFinished", this, "FinishRescue");
 		Player pl = Player.GetInstance();
 		if (pl.HasVecicle)
 		{
+			Vehicle v = pl.currveh;
+			if (RescueIle.HasPort())
+			{
+				v.ReparentVehicle(RescueIle);
+				Port p = RescueIle.GetPort(0);
+				Vector3 spot;
+				if (p.HasSpot(out spot))
+				{
+					v.GlobalTranslation = spot;
+				}
+			}
 			pl.currveh.Capsize();
 		}
 		pl.RechargeCharacter(100);
 		pl.Respawn();
-		pl.Teleport(rescuer.GetNode<Position3D>("TalkPosition").GlobalTranslation);
+		pl.Teleport(Rescuer.GetNode<Position3D>("TalkPosition").GlobalTranslation);
+
+		DialogueManager.GetInstance().StartDialogue(pl, Rescuer, "RescueDialogue");
+
+		Rescuer = null;
+		RescueIle = null;
 	}
 	public void AttemptDeathSave()
 	{

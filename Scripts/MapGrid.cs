@@ -185,7 +185,7 @@ public class MapGrid : GridContainer
 		}
 		if (@event.IsActionPressed("ZoomOut"))
 		{
-			if (RectScale.x > 0.5f)
+			if (RectScale.x > 4f)
             {
                 RectScale /= 2;
                 
@@ -342,15 +342,30 @@ public class MapGrid : GridContainer
         MapIleList.TryGetValue(index, out child);
         child.GetNode<Panel>("DebugPanel").Visible = toggle;
     }
-    public void UpdateIleInfo(Vector2 index, IleType type, float rot = 0, ImageTexture img = null, string name = null)
+    public void UpdateIleInfo(Vector2 index, IleType type, bool HasPort, List<Vector2> portpos, float rot = 0, ImageTexture img = null, string name = null)
     {
         MapTile child;
         MapIleList.TryGetValue(index, out child);
-        
-        if (type == IleType.ENTRANCE)
+
+        for (int i = 0; i < 3; i++)
         {
-            child.GetNode<Panel>("SignPanel").Visible = true;
-            StyleBoxFlat theme = (StyleBoxFlat)child.GetNode<Panel>("SignPanel").GetStylebox("panel");
+            TextureRect t = child.GetNode<TextureRect>("TextureRect").GetNode<TextureRect>("PortTex" + i);
+            if (portpos.Count - 1 < i)
+            {
+                t.QueueFree();
+                continue;
+            }
+            Vector2 pos = new Vector2(6,6);
+            pos += portpos[i]/4000 * 6;
+            t.RectRotation = - rot;
+            //postoput.x += 6; postoput.y += 6;
+            t.RectPosition = pos;
+            //t.RectPosition = Vector2.Zero;
+        }
+        /*if (type == IleType.ENTRANCE)
+        {
+            child.GetNode<TextureRect>("TextureRect").GetNode<Panel>("SignPanel").Visible = true;
+            StyleBoxFlat theme = (StyleBoxFlat)child.GetNode<TextureRect>("TextureRect").GetNode<Panel>("SignPanel").GetStylebox("panel");
             theme.BgColor = new Color(0,0,1);
             //child.GetNode<Panel>("SignPanel").HintTooltip = name;
             //child.GetNode<Panel>("SignPanel").RectRotation = -rot;
@@ -359,8 +374,8 @@ public class MapGrid : GridContainer
         }
         else if (type == IleType.EXIT)
         {
-            child.GetNode<Panel>("SignPanel").Visible = true;
-            StyleBoxFlat theme = (StyleBoxFlat)child.GetNode<Panel>("SignPanel").GetStylebox("panel");
+            child.GetNode<TextureRect>("TextureRect").GetNode<Panel>("SignPanel").Visible = true;
+            StyleBoxFlat theme = (StyleBoxFlat)child.GetNode<TextureRect>("TextureRect").GetNode<Panel>("SignPanel").GetStylebox("panel");
             theme.BgColor = new Color(1,0,0);
             //child.Modulate = ColorList[1];
             //child.GetNode<TextureRect>("TextureRect").HintTooltip = "Σκάφος";
@@ -372,7 +387,7 @@ public class MapGrid : GridContainer
         } 
         else if (type == IleType.LIGHTHOUSE)
         {
-            child.GetNode<Panel>("SignPanel").Visible = true;
+            child.GetNode<TextureRect>("TextureRect").GetNode<Panel>("SignPanel").Visible = true;
             //child.GetNode<Panel>("SignPanel").HintTooltip = name;
             //child.GetNode<Panel>("SignPanel").RectRotation = -rot;
             //child.Modulate = ColorList[3];
@@ -382,7 +397,7 @@ public class MapGrid : GridContainer
         {
             //child.Modulate = ColorList[4];
             //child.GetNode<TextureRect>("TextureRect").HintTooltip = string.Empty;
-        }
+        }*/
         if (img != null)
         {
             child.GetNode<TextureRect>("TextureRect").Texture = img;

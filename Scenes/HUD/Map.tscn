@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://Scripts/MapGrid.cs" type="Script" id=1]
 [ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=2]
@@ -10,11 +10,13 @@
 [ext_resource path="res://Scenes/HUD/MapUIItems/MapYGridPoint.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scripts/MapGridPanel.cs" type="Script" id=9]
 [ext_resource path="res://Assets/UI/panelstylegrey.tres" type="StyleBox" id=10]
+[ext_resource path="res://Assets/MapIcons/Border.png" type="Texture" id=11]
 [ext_resource path="res://Scenes/HUD/MapUIItems/MapGridUIStyle.tres" type="StyleBox" id=12]
 
-[sub_resource type="StyleBoxFlat" id=31]
-bg_color = Color( 0.262745, 0.403922, 0.486275, 1 )
-border_color = Color( 0, 0, 0, 1 )
+[sub_resource type="StyleBoxFlat" id=39]
+
+[sub_resource type="StyleBoxFlat" id=40]
+bg_color = Color( 0.00392157, 0.141176, 0.415686, 1 )
 
 [sub_resource type="StyleBoxFlat" id=29]
 bg_color = Color( 0.541176, 0.737255, 0.435294, 1 )
@@ -73,6 +75,24 @@ tracks/1/keys = {
 "values": [ Color( 0.541176, 0.737255, 0.435294, 1 ) ]
 }
 
+[sub_resource type="OpenSimplexNoise" id=38]
+octaves = 1
+period = 0.1
+persistence = 0.0
+lacunarity = 1.65
+
+[sub_resource type="NoiseTexture" id=6]
+width = 256
+height = 256
+seamless = true
+noise = SubResource( 38 )
+
+[sub_resource type="StyleBoxTexture" id=19]
+resource_local_to_scene = true
+resource_name = "normal"
+texture = SubResource( 6 )
+region_rect = Rect2( 0, 0, 512, 512 )
+
 [sub_resource type="Theme" id=26]
 
 [sub_resource type="StyleBoxFlat" id=27]
@@ -89,23 +109,6 @@ corner_radius_top_right = 1
 corner_radius_bottom_right = 1
 corner_radius_bottom_left = 1
 
-[sub_resource type="OpenSimplexNoise" id=38]
-octaves = 1
-period = 1.5
-persistence = 0.0
-
-[sub_resource type="NoiseTexture" id=6]
-width = 256
-height = 256
-seamless = true
-noise = SubResource( 38 )
-
-[sub_resource type="StyleBoxTexture" id=19]
-resource_local_to_scene = true
-resource_name = "normal"
-texture = SubResource( 6 )
-region_rect = Rect2( 0, 0, 512, 512 )
-
 [sub_resource type="StyleBoxFlat" id=23]
 bg_color = Color( 0.607843, 0.603922, 0.603922, 1 )
 border_width_left = 2
@@ -117,11 +120,7 @@ border_blend = true
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id=21]
-bg_color = Color( 0.847059, 0.807843, 0.705882, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
+bg_color = Color( 0.384314, 0.396078, 0.439216, 1 )
 border_color = Color( 0, 0, 0, 1 )
 border_blend = true
 anti_aliasing = false
@@ -160,7 +159,7 @@ expand_margin_right = 2.0
 expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="Image" id=39]
+[sub_resource type="Image" id=41]
 data = {
 "data": PoolByteArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 14, 71, 140, 191, 57, 71, 140, 191, 104, 71, 140, 191, 122, 71, 140, 191, 123, 71, 140, 191, 123, 71, 140, 191, 123, 71, 140, 191, 123, 71, 140, 191, 122, 71, 140, 191, 104, 71, 140, 191, 57, 71, 140, 191, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 58, 71, 140, 191, 116, 71, 140, 191, 16, 71, 140, 191, 8, 71, 140, 191, 8, 71, 140, 191, 8, 71, 140, 191, 8, 71, 140, 191, 8, 71, 140, 191, 8, 71, 140, 191, 16, 71, 140, 191, 116, 71, 140, 191, 58, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 105, 71, 140, 191, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 15, 71, 140, 191, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 123, 71, 140, 191, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 6, 71, 140, 191, 123, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 123, 71, 140, 191, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 8, 71, 140, 191, 123, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 123, 71, 140, 191, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 8, 71, 140, 191, 123, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 123, 71, 140, 191, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 8, 71, 140, 191, 123, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 123, 71, 140, 191, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 8, 71, 140, 191, 123, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 123, 71, 140, 191, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 6, 71, 140, 191, 123, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 105, 71, 140, 191, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 14, 71, 140, 191, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 58, 71, 140, 191, 117, 71, 140, 191, 15, 71, 140, 191, 8, 71, 140, 191, 8, 71, 140, 191, 8, 71, 140, 191, 8, 71, 140, 191, 8, 71, 140, 191, 8, 71, 140, 191, 17, 71, 140, 191, 116, 71, 140, 191, 58, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 14, 71, 140, 191, 58, 71, 140, 191, 104, 71, 140, 191, 122, 71, 140, 191, 123, 71, 140, 191, 123, 71, 140, 191, 123, 71, 140, 191, 123, 71, 140, 191, 122, 71, 140, 191, 104, 71, 140, 191, 57, 71, 140, 191, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
 "format": "RGBA8",
@@ -172,7 +171,7 @@ data = {
 [sub_resource type="ImageTexture" id=8]
 flags = 4
 flags = 4
-image = SubResource( 39 )
+image = SubResource( 41 )
 size = Vector2( 16, 16 )
 
 [sub_resource type="StyleBoxTexture" id=9]
@@ -282,15 +281,22 @@ script = ExtResource( 3 )
 [node name="MapGridPanel" type="Panel" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 68.0
+margin_left = -6.0
 margin_top = -470.0
 margin_right = 469.0
 margin_bottom = 5.0
 rect_clip_content = true
 mouse_filter = 1
 mouse_default_cursor_shape = 6
-custom_styles/panel = SubResource( 31 )
+custom_styles/panel = SubResource( 39 )
 script = ExtResource( 9 )
+
+[node name="Sea" type="Panel" parent="MapGridPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 1.5 )
+mouse_filter = 1
+custom_styles/panel = SubResource( 40 )
 
 [node name="MapGrid" type="GridContainer" parent="MapGridPanel"]
 mouse_filter = 2
@@ -298,7 +304,7 @@ custom_constants/vseparation = 12
 custom_constants/hseparation = 12
 columns = 81
 script = ExtResource( 1 )
-MaxZoomScale = 16.0
+MaxZoomScale = 25.0
 TileScene = ExtResource( 6 )
 XGridTileScene = ExtResource( 7 )
 YGridTileScene = ExtResource( 8 )
@@ -326,11 +332,39 @@ root_node = NodePath("../..")
 anims/Blinking = SubResource( 28 )
 anims/RESET = SubResource( 30 )
 
+[node name="Panel" type="Panel" parent="MapGridPanel"]
+modulate = Color( 1, 1, 1, 0.380392 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -237.5
+margin_top = -237.5
+margin_right = 237.5
+margin_bottom = 237.5
+rect_clip_content = true
+mouse_filter = 2
+mouse_default_cursor_shape = 6
+custom_styles/panel = SubResource( 19 )
+
+[node name="TextureRect" type="TextureRect" parent="MapGridPanel"]
+modulate = Color( 1, 1, 1, 0.705882 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -237.5
+margin_top = -237.5
+margin_right = 237.5
+margin_bottom = 237.5
+texture = ExtResource( 11 )
+expand = true
+
 [node name="Panel2" type="Panel" parent="MapGridPanel"]
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_top = -1.5
-margin_right = 196.0
+margin_right = 233.0
 margin_bottom = 1.5
 rect_pivot_offset = Vector2( 0, 1.5 )
 mouse_filter = 1
@@ -360,27 +394,12 @@ mouse_filter = 1
 theme = SubResource( 26 )
 custom_styles/panel = SubResource( 27 )
 
-[node name="Panel" type="Panel" parent="MapGridPanel"]
-modulate = Color( 1, 1, 1, 0.321569 )
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -200.5
-margin_top = -237.5
-margin_right = 200.5
-margin_bottom = 237.5
-rect_clip_content = true
-mouse_filter = 2
-mouse_default_cursor_shape = 6
-custom_styles/panel = SubResource( 19 )
-
 [node name="Panel2" type="Panel" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 24.0
+margin_left = -50.0
 margin_top = -470.0
-margin_right = 68.0
+margin_right = -6.0
 margin_bottom = 5.0
 rect_clip_content = true
 mouse_filter = 1
@@ -427,7 +446,7 @@ valign = 1
 [node name="Panel3" type="Panel" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 68.0
+margin_left = -6.0
 margin_top = -505.0
 margin_right = 469.0
 margin_bottom = -470.0
@@ -439,7 +458,7 @@ custom_styles/panel = SubResource( 2 )
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_top = -31.0
-margin_right = 401.0
+margin_right = 475.0
 margin_bottom = -4.0
 rect_clip_content = true
 mouse_filter = 1
@@ -474,9 +493,9 @@ valign = 1
 [node name="Panel5" type="Panel" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 24.0
+margin_left = -50.0
 margin_top = -505.0
-margin_right = 68.0
+margin_right = -6.0
 margin_bottom = -470.0
 rect_clip_content = true
 mouse_filter = 1
