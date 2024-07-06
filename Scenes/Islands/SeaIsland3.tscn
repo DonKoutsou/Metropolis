@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/Env_Assets/Sea.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Island.cs" type="Script" id=2]
@@ -8,14 +8,15 @@
 [ext_resource path="res://Scenes/Vehicles/HoverBoard_Lite.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Vehicles/HoverBoard.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Vehicles/HoverBoard_NoWings.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Env_Assets/WindGenerator2.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Env_Assets/Rock3.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Env_Assets/Rock4.tscn" type="PackedScene" id=10]
 
 [node name="Island" type="Spatial" groups=["Islands"]]
 pause_mode = 1
 script = ExtResource( 2 )
 MoveLayer = 260
 type = 3
-ImageID = 23
+ImageID = 33
 Resolution = 128
 
 [node name="SeaBed" parent="." instance=ExtResource( 1 )]
@@ -28,5 +29,8 @@ CharSpawns = [ ExtResource( 5 ) ]
 script = ExtResource( 3 )
 VehSpawns = [ ExtResource( 7 ), ExtResource( 6 ), ExtResource( 8 ) ]
 
-[node name="WindGenerator3" parent="." instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1191.64, -3.2352, 678.159 )
+[node name="Rock1" parent="." instance=ExtResource( 9 )]
+transform = Transform( -129.527, 5.42881, 0, -4.88572, -116.57, 56.5195, 2.36679, 56.47, 116.672, -479.759, -169.947, 563.878 )
+
+[node name="Rock2" parent="." instance=ExtResource( 10 )]
+transform = Transform( 263.382, 0, 200.113, 0, 330.78, 0, -200.113, 0, 263.382, 618.796, -456.553, -1908.69 )

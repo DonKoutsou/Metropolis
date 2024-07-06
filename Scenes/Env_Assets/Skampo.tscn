@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/Skampo/Skampo.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Skampo/M_Skampo.tres" type="Material" id=2]
 [ext_resource path="res://Scripts/SittingThing.cs" type="Script" id=3]
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=4]
+[ext_resource path="res://shaders/OutlineShader.tres" type="Material" id=5]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.762446, 0.900846, 0.741731 )
@@ -14,6 +15,7 @@ collision_mask = 0
 script = ExtResource( 3 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
+material_overlay = ExtResource( 5 )
 mesh = ExtResource( 1 )
 material/0 = ExtResource( 2 )
 

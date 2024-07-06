@@ -5,10 +5,9 @@ using System.Collections.Generic;
 public class WorldRoot : Spatial
 {
 	[Export]
-	PackedScene WorldScene = null;
-
+	string WorldScene = "res://Scenes/World/MyWorld.tscn";
 	[Export]
-	PackedScene Intro = null;
+	string Intro = "res://Scenes/Islands/Test/IslandTestEscene.tscn";
 
 	Spatial intro;
 
@@ -23,7 +22,7 @@ public class WorldRoot : Spatial
 	{
 		screen = GetNode<CanvasLayer>("CanvasLayer").GetNode<StartingScreen>("StartScreen");
 
-		intro = (Spatial)Intro.Instance();
+		intro = (Spatial)ResourceLoader.Load<PackedScene>(Intro).Instance();
 		AddChild(intro, true);
 	}
 	public bool IsMapSpawned()
@@ -34,7 +33,7 @@ public class WorldRoot : Spatial
 	{
 		intro.Free();
 
-		m_myworld = (MyWorld)WorldScene.Instance();
+		m_myworld = (MyWorld)ResourceLoader.Load<PackedScene>(WorldScene).Instance();
 		m_myworld.LoadSave = LoadSave;
 		AddChild(m_myworld);
 
@@ -43,7 +42,7 @@ public class WorldRoot : Spatial
 	{
 		m_myworld.Free();
 		m_myworld = null;
-		intro = (Spatial)Intro.Instance();
+		intro = (Spatial)ResourceLoader.Load<PackedScene>(Intro).Instance();
 		AddChild(intro, true);
 	}
 }

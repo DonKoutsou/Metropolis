@@ -41,5 +41,3 @@ CheckLayer = 260
 SoundScenes = [ ExtResource( 4 ) ]
 
 [node name="PlayerLocator" type="Position3D" parent="SoundMap" index="0"]
-
-[node name="Ports" type="Node" parent="." index="4"]

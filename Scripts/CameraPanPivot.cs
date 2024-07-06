@@ -47,9 +47,14 @@ public class CameraPanPivot : Position3D
 		}
     }
 	float YOffset = 0;
+
+	float d = 0.01f;
 	public override void _Process(float delta)
 	{
-		
+		d -= delta;
+		if (d > 0)
+			return;
+		d = 0.01f;
 		Vector3 prevrot = new Vector3(PanXPivot.Rotation.x ,Rotation.y, 0);
 		Vector3 rot = new Vector3(PanXPivot.Rotation.x ,Rotation.y, 0);
 		

@@ -187,7 +187,8 @@ public class WorldMap : TileMap
 			tex.CreateFromImage(IslandImageHolder.GetInstance().Images[info.ImageIndex]);
 			//tex.Load(ile.Image);
 
-			MapGrid.GetInstance().UpdateIleInfo(info.Position, info.Type, info.HasPort, info.Ports, - info.RotationToSpawn, tex, info.SpecialName);
+			//MapGrid.GetInstance().UpdateIleInfo(info.Position, info.Type, info.HasPort, info.Ports, - info.RotationToSpawn, tex, info.SpecialName);
+			MapGrid.GetInstance().UpdateIleInfo(info.Position, info.HasPort, info.Ports, - info.RotationToSpawn, tex, info.SpecialName);
 		}
 	}
 	public static WorldMap GetInstance()
@@ -392,13 +393,15 @@ public class WorldMap : TileMap
 
 		IleToSave = null;
 		CallDeferred("DespawnIle", ilei.Island, ilei.KeepInstance);
-		CallDeferred("AddMapData", ilei.Position, ilei.Type, ilei.HasPort, ilei.Ports, ilei.RotationToSpawn, ile.ImageID, ilei.SpecialName);
+		//CallDeferred("AddMapData", ilei.Position, ilei.Type, ilei.HasPort, ilei.Ports, ilei.RotationToSpawn, ile.ImageID, ilei.SpecialName);
+		CallDeferred("AddMapData", ilei.Position, ilei.HasPort, ilei.Ports, ilei.RotationToSpawn, ile.ImageID, ilei.SpecialName);
 	}
-	void AddMapData(Vector2 position, IleType Type, bool HasPort, List<Vector2> Ports, float RotationToSpawn, int imageId, string name = null)
+	void AddMapData(Vector2 position, bool HasPort, List<Vector2> Ports, float RotationToSpawn, int imageId, string name = null)
 	{
 		ImageTexture tex = new ImageTexture();
 		tex.CreateFromImage(IslandImageHolder.GetInstance().Images[imageId]);
-		MapGrid.GetInstance().UpdateIleInfo(position, Type, HasPort, Ports, - RotationToSpawn, tex, name);
+		//MapGrid.GetInstance().UpdateIleInfo(position, Type, HasPort, Ports, - RotationToSpawn, tex, name);
+		MapGrid.GetInstance().UpdateIleInfo(position, HasPort, Ports, - RotationToSpawn, tex, name);
 	}
 	public void AddIslandToHierarchy(Island ile)
 	{

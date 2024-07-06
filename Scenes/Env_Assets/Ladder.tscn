@@ -1,7 +1,7 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Assets/Ladder/lambert1.material" type="Material" id=1]
-[ext_resource path="res://shaders/Outline.shader" type="Shader" id=2]
+[ext_resource path="res://shaders/OutlineShader.tres" type="Material" id=2]
 [ext_resource path="res://Assets/TerainTex/Planks037A_1K-JPG/Planks037A_1K-JPG_Metalness.jpg" type="Texture" id=3]
 [ext_resource path="res://Assets/TerainTex/Planks037A_1K-JPG/Planks037A_1K-JPG_NormalGL.jpg" type="Texture" id=4]
 [ext_resource path="res://Assets/TerainTex/Planks037A_1K-JPG/Planks037A_1K-JPG_Color.jpg" type="Texture" id=5]
@@ -26,18 +26,9 @@ surfaces/0 = {
 "vertex_count": 1796
 }
 
-[sub_resource type="ShaderMaterial" id=3]
-resource_local_to_scene = true
-shader = ExtResource( 2 )
-shader_param/enable = false
-shader_param/outline_thickness = 0.2
-shader_param/color2 = Color( 0, 0, 0, 0 )
-shader_param/color = Color( 1, 1, 0, 0 )
-
 [sub_resource type="SpatialMaterial" id=2]
 resource_local_to_scene = true
 resource_name = "BuildingInterior"
-next_pass = SubResource( 3 )
 flags_world_triplanar = true
 vertex_color_use_as_albedo = true
 params_cull_mode = 2
@@ -69,6 +60,7 @@ script = ExtResource( 8 )
 TopPossition = Vector3( 0, 200, 6 )
 
 [node name="Ladder" type="MeshInstance" parent="."]
+material_overlay = ExtResource( 2 )
 mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 

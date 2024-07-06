@@ -72,9 +72,9 @@ public class Furniture : Spatial
 	public void HighLightObject(bool toggle)
     {
 		if (Searched)
-        	((ShaderMaterial)GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable",  false);
+        	((ShaderMaterial)GetNode<MeshInstance>("MeshInstance").MaterialOverlay).SetShaderParam("enable",  false);
 		else
-			((ShaderMaterial)GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable",  toggle);
+			((ShaderMaterial)GetNode<MeshInstance>("MeshInstance").MaterialOverlay).SetShaderParam("enable",  toggle);
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.

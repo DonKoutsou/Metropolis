@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scenes/Env_Assets/Sea.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Island.cs" type="Script" id=2]
@@ -9,13 +9,16 @@
 [ext_resource path="res://Scenes/Vehicles/HoverBoard.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Vehicles/HoverBoard_NoWings.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Env_Assets/WindGenerator2.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Env_Assets/Rock2.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Env_Assets/Rock4.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Env_Assets/Rock5.tscn" type="PackedScene" id=12]
 
 [node name="Island" type="Spatial" groups=["Islands"]]
 pause_mode = 1
 script = ExtResource( 2 )
 MoveLayer = 260
 type = 3
-ImageID = 23
+ImageID = 32
 Resolution = 128
 
 [node name="SeaBed" parent="." instance=ExtResource( 1 )]
@@ -29,7 +32,13 @@ script = ExtResource( 3 )
 VehSpawns = [ ExtResource( 7 ), ExtResource( 6 ), ExtResource( 8 ) ]
 
 [node name="WindGenerator3" parent="." instance=ExtResource( 9 )]
-transform = Transform( -0.39147, 0, 0.920191, 0, 1, 0, -0.920191, 0, -0.39147, 2564.12, -0.0667419, -2176.5 )
+transform = Transform( -0.39147, 0, 0.920191, 0, 1, 0, -0.920191, 0, -0.39147, 966.209, -0.0667419, -1607.41 )
 
-[node name="WindGenerator8" parent="." instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1472.22, 0.84626, 1736.73 )
+[node name="Rock1" parent="." instance=ExtResource( 10 )]
+transform = Transform( -159.292, 47.2045, 153.42, -157.354, -3.22418, -162.385, -31.7088, -221.136, 35.1171, -1344.69, -310.968, 1246.2 )
+
+[node name="Rock2" parent="." instance=ExtResource( 11 )]
+transform = Transform( -518.28, 623.728, 242.02, -57.3198, 263.622, -802.148, -666.577, -507.634, -119.199, 1026.67, -1135.78, -1324.46 )
+
+[node name="Rock3" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1398.67, 0, 0, 0, 1398.67, 0, 0, 0, 1398.66, 2173.72, -2978.8, 1562.19 )

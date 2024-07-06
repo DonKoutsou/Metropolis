@@ -10,17 +10,8 @@
 [ext_resource path="res://Assets/Boat/Boat_WingL.tres" type="ArrayMesh" id=10]
 [ext_resource path="res://Assets/Boat/BoatWingR.tres" type="ArrayMesh" id=11]
 
-[sub_resource type="ShaderMaterial" id=48]
-resource_local_to_scene = true
-shader = ExtResource( 2 )
-shader_param/enable = false
-shader_param/outline_thickness = 0.171
-shader_param/color2 = Color( 0, 0, 0, 0 )
-shader_param/color = Color( 1, 1, 0, 0 )
-
 [sub_resource type="SpatialMaterial" id=49]
 resource_local_to_scene = true
-next_pass = SubResource( 48 )
 albedo_texture = ExtResource( 4 )
 roughness_texture = ExtResource( 5 )
 roughness_texture_channel = 1
@@ -32,6 +23,14 @@ ao_light_affect = 1.0
 ao_texture = ExtResource( 5 )
 ao_on_uv2 = false
 ao_texture_channel = 0
+
+[sub_resource type="ShaderMaterial" id=52]
+resource_local_to_scene = true
+shader = ExtResource( 2 )
+shader_param/enable = false
+shader_param/outline_thickness = 0.01
+shader_param/color2 = Color( 0, 0, 0, 0 )
+shader_param/color = Color( 1, 1, 0, 0 )
 
 [sub_resource type="Curve" id=25]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.275, 0.745454 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.1 ), 0.0, 0.0, 0, 0 ]
@@ -267,11 +266,9 @@ roughness_texture_channel = 3
 
 [node name="Vehicle" instance=ExtResource( 3 )]
 
-[node name="VehicleBody" parent="." index="1"]
-collision_layer = 528
-
 [node name="MeshInstance" parent="VehicleBody" index="0"]
 material_override = SubResource( 49 )
+material_overlay = SubResource( 52 )
 
 [node name="ExaustParticlesL" parent="VehicleBody" index="19"]
 process_material = SubResource( 39 )

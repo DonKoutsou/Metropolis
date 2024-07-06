@@ -301,18 +301,18 @@ public class Vehicle : RigidBody
     Thread thr = new Thread();
     Thread SteerThr;
     // return true if hovering up and false if down
-    public override void _ExitTree()
-    {
-        base._ExitTree();
-        if (thr != null && thr.IsActive())
-        {
-            thr.WaitToFinish();
-        }
-        if (SteerThr != null && SteerThr.IsActive())
-        {
-            SteerThr.WaitToFinish();
-        }
-    }
+    //public override void _ExitTree()
+    //{
+        //base._ExitTree();
+        //if (thr != null && thr.IsActive())
+        //{
+        //    thr.WaitToFinish();
+        //}
+        //if (SteerThr != null && SteerThr.IsActive())
+        //{
+        //    SteerThr.WaitToFinish();
+        //}
+    //}
     
     public void Hover(float delta)
     {
@@ -702,7 +702,7 @@ public class Vehicle : RigidBody
     ///////Action Menu////////
     public void HighLightObject(bool toggle)
     {
-        ((ShaderMaterial)GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", toggle);
+        ((ShaderMaterial)GetNode<MeshInstance>("MeshInstance").MaterialOverlay).SetShaderParam("enable", toggle);
     }
     //////Data Saving////////
     public void InputData(VehicleInfo data)

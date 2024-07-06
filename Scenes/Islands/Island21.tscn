@@ -99,7 +99,6 @@ item/2/preview = SubResource( 455 )
 
 [node name="Island" instance=ExtResource( 1 )]
 MoveLayer = 260
-type = 3
 ImageID = 19
 Resolution = 128
 

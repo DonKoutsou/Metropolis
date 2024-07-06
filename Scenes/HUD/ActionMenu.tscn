@@ -5,17 +5,17 @@
 [ext_resource path="res://Assets/UI/PanelTheme.tres" type="Theme" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.847059, 0.807843, 0.705882, 1 )
+bg_color = Color( 0.839216, 0.815686, 0.752941, 1 )
 border_width_left = 5
 border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
 border_color = Color( 0, 0, 0, 1 )
 border_blend = true
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [node name="ActionMenu" type="Control"]
 anchor_left = 0.5
@@ -38,13 +38,13 @@ custom_styles/panel = SubResource( 1 )
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 margin_left = 5.0
 margin_top = 5.0
-margin_right = 98.0
-margin_bottom = 127.0
+margin_right = 100.0
+margin_bottom = 145.0
 rect_pivot_offset = Vector2( 45, 0 )
 
 [node name="PickUp_Button" type="Button" parent="PanelContainer/VBoxContainer"]
-margin_right = 93.0
-margin_bottom = 38.0
+margin_right = 95.0
+margin_bottom = 44.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
 theme = ExtResource( 1 )
@@ -53,18 +53,18 @@ enabled_focus_mode = 0
 text = "Πάρε"
 
 [node name="Interact_Button" type="Button" parent="PanelContainer/VBoxContainer"]
-margin_top = 42.0
-margin_right = 93.0
-margin_bottom = 80.0
+margin_top = 48.0
+margin_right = 95.0
+margin_bottom = 92.0
 focus_mode = 0
 theme = ExtResource( 1 )
 enabled_focus_mode = 0
 text = "Interact"
 
 [node name="Interact_Button2" type="Button" parent="PanelContainer/VBoxContainer"]
-margin_top = 84.0
-margin_right = 93.0
-margin_bottom = 122.0
+margin_top = 96.0
+margin_right = 95.0
+margin_bottom = 140.0
 focus_mode = 0
 theme = ExtResource( 1 )
 enabled_focus_mode = 0

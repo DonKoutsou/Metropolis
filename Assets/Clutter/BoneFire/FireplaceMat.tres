@@ -1,21 +1,11 @@
-[gd_resource type="SpatialMaterial" load_steps=6 format=2]
+[gd_resource type="SpatialMaterial" load_steps=4 format=2]
 
 [ext_resource path="res://Assets/Clutter/BoneFire/Fireplace_Fireplace_BaseColor.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Clutter/BoneFire/Fireplace_Fireplace_OcclusionRoughnessMetallic.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Clutter/BoneFire/Fireplace_Fireplace_Normal.png" type="Texture" id=3]
-[ext_resource path="res://shaders/Outline.shader" type="Shader" id=4]
-
-[sub_resource type="ShaderMaterial" id=1]
-resource_local_to_scene = true
-shader = ExtResource( 4 )
-shader_param/enable = false
-shader_param/outline_thickness = 0.025
-shader_param/color2 = Color( 1, 0.839216, 0.207843, 1 )
-shader_param/color = Color( 0.952941, 1, 0.129412, 0 )
 
 [resource]
 resource_local_to_scene = true
-next_pass = SubResource( 1 )
 albedo_texture = ExtResource( 1 )
 roughness_texture = ExtResource( 2 )
 roughness_texture_channel = 1

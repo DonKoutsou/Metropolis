@@ -75,7 +75,7 @@ public class Item : RigidBody
 	}
 	public virtual void HighLightObject(bool toggle)
     {
-        ((ShaderMaterial)GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable", toggle);
+        ((ShaderMaterial)GetNode<MeshInstance>("MeshInstance").MaterialOverlay).SetShaderParam("enable", toggle);
     }
 	public void InputData(ItemInfo data)
 	{

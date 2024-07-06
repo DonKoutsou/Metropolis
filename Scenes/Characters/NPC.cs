@@ -132,7 +132,7 @@ public class NPC : Character
 		{
 			if (child is MeshInstance)
 			{
-				ShaderMaterial Mat = (ShaderMaterial)((MeshInstance)child).GetActiveMaterial(0).NextPass;
+				ShaderMaterial Mat = (ShaderMaterial)((MeshInstance)child).MaterialOverlay;
 				if (Mat != null)
 				{
 					Mat.SetShaderParam("enable",  toggle);

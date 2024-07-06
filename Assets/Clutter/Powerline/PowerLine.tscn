@@ -38,7 +38,7 @@ collision_mask = 0
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 cast_shadow = 0
-mesh = SubResource( 2 )
+mesh = ExtResource( 6 )
 script = ExtResource( 5 )
 LOD0 = ExtResource( 6 )
 LOD1 = SubResource( 2 )

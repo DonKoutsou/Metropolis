@@ -91,7 +91,7 @@ public class Ladder : Spatial
     }
     public void HighLightObject(bool toggle)
     {
-		((ShaderMaterial)GetNode<MeshInstance>("Ladder").GetActiveMaterial(0).NextPass).SetShaderParam("enable",  toggle);
+		((ShaderMaterial)GetNode<MeshInstance>("Ladder").MaterialOverlay).SetShaderParam("enable",  toggle);
     }
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
 //  public override void _Process(float delta)

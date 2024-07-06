@@ -181,13 +181,17 @@ run/main_scene="res://Scenes/World/WorldRoot.tscn"
 run/delta_sync_after_draw=true
 boot_splash/show_image=false
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
-config/icon="res://icon.png"
-config/windows_native_icon="res://icon.ico"
+config/icon="res://IconMetropolis.png"
+config/windows_native_icon="res://IconMetropolis.ico"
 
 [autoload]
 
 WindowCentering="*res://Scripts/WindowCentering.cs"
 UniversalLodManager="*res://Scripts/UniversalLodManager.cs"
+
+[debug]
+
+settings/stdout/verbose_stdout=true
 
 [display]
 
@@ -338,10 +342,6 @@ dialogic_default_action={
 3d_physics/layer_10="Boat"
 3d_physics/layer_11="Rock"
 
-[memory]
-
-limits/command_queue/multithreading_queue_size_kb=1024
-
 [mono]
 
 project/assembly_name="Metropolis"
@@ -357,16 +357,22 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+quality/filters/sharpen_intensity=0.2
+threads/thread_model=2
+threads/thread_safe_bvh=true
+quality/directional_shadow/size=2048
+quality/directional_shadow/size.mobile=1024
+quality/shadow_atlas/size=2048
+quality/shadow_atlas/size.mobile=1024
 quality/shadows/filter_mode=2
+quality/shading/use_physical_light_attenuation=true
+quality/filters/use_nearest_mipmap_filter=true
 misc/occlusion_culling/max_active_spheres=16
 misc/occlusion_culling/max_active_polygons=16
-gles3/shaders/shader_compilation_mode=2
-gles3/shaders/shader_cache_size_mb=1024
 quality/subsurface_scattering/quality=0
-environment/default_clear_color=Color( 1, 1, 1, 1 )
 quality/filters/msaa=2
 quality/filters/use_fxaa=true
 environment/default_environment="res://new_environment2.tres"
-quality/godrays/sample_number=50
 quality/godrays/use_pcf5=true
 quality/godrays/dither_amount=1.0
+quality/godrays/sample_number=50

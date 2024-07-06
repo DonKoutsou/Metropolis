@@ -94,6 +94,10 @@ MoveLayer = 260
 ImageID = 30
 Resolution = 128
 
+[node name="CharacterSpawnLocations" parent="." index="1"]
+Locations = PoolVector3Array(  )
+Rotations = PoolVector3Array(  )
+
 [node name="SoundMap" parent="." index="3"]
 mesh_library = SubResource( 18 )
 data = {

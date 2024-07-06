@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Assets/Bouzouki/Bouzouki.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Scripts/Bouzouki.cs" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Bouzouki/Bouzouki_LOD.obj" type="ArrayMesh" id=5]
 [ext_resource path="res://Assets/Bouzouki/BouzoukiMat.tres" type="Material" id=6]
+[ext_resource path="res://shaders/OutlineShader.tres" type="Material" id=7]
 [ext_resource path="res://Assets/Bouzouki/Bouzouki.png" type="Texture" id=9]
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=10]
 
@@ -28,6 +29,7 @@ shape = SubResource( 1 )
 disabled = true
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
+material_overlay = ExtResource( 7 )
 mesh = ExtResource( 1 )
 material/0 = ExtResource( 6 )
 script = ExtResource( 10 )

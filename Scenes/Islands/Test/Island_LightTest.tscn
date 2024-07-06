@@ -179,8 +179,7 @@ multimesh = SubResource( 1 )
 transform = Transform( 0.988958, 0.0529206, 0.138426, -0.141067, 0.0499427, 0.98874, 0.0454118, -0.997349, 0.0568568, 0, 0, 0 )
 
 [node name="Spatial" parent="." index="23" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -36.295, 900, -174.276 )
-visible = false
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -36.295, 2679.7, -174.276 )
 
 [node name="SunMoonPivot" parent="." index="24" instance=ExtResource( 16 )]
 transform = Transform( 0.83403, 0.551111, -0.0258837, 0, 0.0469147, 0.998899, 0.551719, -0.833112, 0.0391283, 0, 0, 0 )

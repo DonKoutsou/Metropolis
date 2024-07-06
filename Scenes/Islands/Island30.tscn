@@ -92,7 +92,7 @@ data = PoolVector3Array( -4.9025, -0.0201, -1.1792, -4.8819, -0.02, -0.3125, -5,
 
 [node name="Island" instance=ExtResource( 1 )]
 MoveLayer = 260
-ImageID = 31
+ImageID = 34
 Resolution = 128
 
 [node name="SoundMap" parent="." index="3"]

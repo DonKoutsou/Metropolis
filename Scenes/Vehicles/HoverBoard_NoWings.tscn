@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://Assets/Boat/M_Boat.material" type="Material" id=1]
 [ext_resource path="res://Scripts/Vehicle.cs" type="Script" id=2]
@@ -17,7 +17,7 @@
 [ext_resource path="res://Assets/Boat/Kaiki.obj" type="ArrayMesh" id=15]
 [ext_resource path="res://Assets/Boat/ΚαικιΗιγη_lambert1_BaseColor.png" type="Texture" id=16]
 [ext_resource path="res://Assets/Boat/ΚαικιΗιγη_lambert1_OcclusionRoughnessMetallic.png" type="Texture" id=17]
-[ext_resource path="res://shaders/Outline.shader" type="Shader" id=18]
+[ext_resource path="res://shaders/OutlineShader.tres" type="Material" id=18]
 [ext_resource path="res://Assets/TerainTex/Fabric045_1K-JPG/Fabric045_1K-JPG_AmbientOcclusion.jpg" type="Texture" id=19]
 [ext_resource path="res://Assets/Boat/Parts/Sails.obj" type="ArrayMesh" id=20]
 [ext_resource path="res://Assets/TerainTex/PaintedWood008C_1K-JPG/PaintedWood008C_1K-JPG_AmbientOcclusion.jpg" type="Texture" id=21]
@@ -40,17 +40,8 @@ _data = [ Vector2( 0, 6 ), 0.0, 0.0, 0, 0, Vector2( 0.355023, 5.96319 ), 0.0, 0.
 [sub_resource type="Curve" id=9]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.2201, 0.395705 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="ShaderMaterial" id=43]
-resource_local_to_scene = true
-shader = ExtResource( 18 )
-shader_param/enable = false
-shader_param/outline_thickness = 0.171
-shader_param/color2 = Color( 0, 0, 0, 0 )
-shader_param/color = Color( 1, 1, 0, 0 )
-
 [sub_resource type="SpatialMaterial" id=44]
 resource_local_to_scene = true
-next_pass = SubResource( 43 )
 albedo_texture = ExtResource( 16 )
 roughness_texture = ExtResource( 17 )
 roughness_texture_channel = 1
@@ -286,6 +277,7 @@ RightDestWingMesh = ExtResource( 6 )
 [node name="MeshInstance" type="MeshInstance" parent="VehicleBody"]
 transform = Transform( 1, -5.50244e-11, 0, 1.32104e-10, 1, 0, 0, -3.46945e-18, 1, 0, 2.199, 0 )
 material_override = SubResource( 44 )
+material_overlay = ExtResource( 18 )
 mesh = ExtResource( 15 )
 
 [node name="MeshInstance5" type="MeshInstance" parent="VehicleBody"]

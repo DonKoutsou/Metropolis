@@ -33,7 +33,7 @@ static func load(path:String) -> Resource:
 
 	# Use a regex to find any instance of an embedded GDScript resource.
 	var regex:RegEx = RegEx.new()
-	regex.compile("type\\s*=\\s*\"GDScript\"\\s*")	
+	var t = regex.compile("type\\s*=\\s*\"GDScript\"\\s*")	
 	
 	# If we found one, bail out.
 	if regex.search(file_as_text) != null:
@@ -51,7 +51,7 @@ static func load(path:String) -> Resource:
 	# scripts, so we flat-out refuse to load ANY resource that isn't in res://
 
 	var extResourceRegex:RegEx = RegEx.new()
-	extResourceRegex.compile("\\[\\s*ext_resource\\s*.*?path\\s*=\\s*\"([^\"]*)\".*?\\]")
+	var t2 = extResourceRegex.compile("\\[\\s*ext_resource\\s*.*?path\\s*=\\s*\"([^\"]*)\".*?\\]")
 	var matches:Array = extResourceRegex.search_all(file_as_text)
 	for Match in matches:
 		var resourcePath:String = Match.get_string(1)

@@ -45,6 +45,6 @@ public class GeneratorDoor : StaticBody
     }
     public void HighLightObject(bool toggle)
     {
-		((ShaderMaterial)GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0).NextPass).SetShaderParam("enable",  toggle);
+		((ShaderMaterial)GetNode<MeshInstance>("MeshInstance").MaterialOverlay).SetShaderParam("enable",  toggle);
     }
 }

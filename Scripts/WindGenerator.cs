@@ -140,7 +140,7 @@ public class WindGenerator : StaticBody
     }
     public void HighLightObject(bool toggle)
     {
-        ((ShaderMaterial)GetNode<MeshInstance>("MeshInstance2").GetActiveMaterial(0).NextPass).SetShaderParam("enable", toggle);
+        ((ShaderMaterial)GetNode<MeshInstance>("MeshInstance2").MaterialOverlay).SetShaderParam("enable", toggle);
     }
     public void SetData(WindGeneratorInfo info)
 	{

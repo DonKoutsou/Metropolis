@@ -19,7 +19,7 @@
 [ext_resource path="res://Scenes/Env_Assets/Rock5.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Assets/Building/MotherCity/ConcretePort.tres" type="Material" id=18]
 [ext_resource path="res://Assets/TerainTex/Metal041C_1K-JPG/Metal041C_1K-JPG_Roughness.jpg" type="Texture" id=19]
-[ext_resource path="res://Assets/TerainTex/Metal041C_1K-JPG/Metal041C_1K-JPG_Color.jpg" type="Texture" id=20]
+[ext_resource path="res://Assets/TerainTex/Metal041C_1K-JPG/Metal041C_1K-JPG_NormalGL.jpg" type="Texture" id=20]
 [ext_resource path="res://Scenes/Env_Assets/SandPile1.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Assets/Building/MotherCity/MotherCityTer.tres" type="ArrayMesh" id=22]
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=23]
@@ -32,12 +32,12 @@
 [ext_resource path="res://Assets/TerainTex/Concrete004_1K-PNG/Concrete004_1K-PNG_Roughness.png" type="Texture" id=30]
 [ext_resource path="res://Assets/Building/BuildingComposition.tscn" type="PackedScene" id=31]
 [ext_resource path="res://Scenes/Env_Assets/Doors.tscn" type="PackedScene" id=32]
-[ext_resource path="res://Assets/TerainTex/Metal041C_1K-JPG/Metal041C_1K-JPG_NormalGL.jpg" type="Texture" id=33]
+[ext_resource path="res://Assets/TerainTex/Metal041C_1K-JPG/Metal041C_1K-JPG_Color.jpg" type="Texture" id=33]
 [ext_resource path="res://Assets/TerainTex/Metal041C_1K-JPG/Metal041C_1K-JPG_Metalness.jpg" type="Texture" id=34]
 
 [sub_resource type="SpatialMaterial" id=2134]
 flags_world_triplanar = true
-albedo_texture = ExtResource( 20 )
+albedo_texture = ExtResource( 33 )
 metallic = 1.0
 metallic_specular = 1.0
 metallic_texture = ExtResource( 34 )
@@ -46,7 +46,12 @@ roughness_texture = ExtResource( 19 )
 roughness_texture_channel = 4
 normal_enabled = true
 normal_scale = 1.0
-normal_texture = ExtResource( 33 )
+normal_texture = ExtResource( 20 )
+ao_enabled = true
+ao_light_affect = 1.0
+ao_texture = ExtResource( 19 )
+ao_on_uv2 = false
+ao_texture_channel = 0
 uv1_scale = Vector3( 0.003, 0.003, 0.003 )
 uv1_triplanar = true
 

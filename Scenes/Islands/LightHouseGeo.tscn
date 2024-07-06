@@ -10,10 +10,10 @@
 [ext_resource path="res://Assets/TerainTex/Rock029_2K-PNG/Rock029_2K-PNG_AmbientOcclusion.png" type="Texture" id=8]
 [ext_resource path="res://Assets/TerainTex/Rock029_2K-PNG/Rock029_2K-PNG_NormalGL.png" type="Texture" id=9]
 [ext_resource path="res://Scenes/Env_Assets/Platform.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Assets/TerainTex/Bricks038_1K-PNG/Bricks038_1K-PNG_NormalGL.png" type="Texture" id=11]
+[ext_resource path="res://Assets/TerainTex/Bricks048_1K-PNG/Bricks048_1K-PNG_NormalGL.png" type="Texture" id=11]
 [ext_resource path="res://Scenes/Env_Assets/WindGenerator.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Assets/Terains/LightHouse/Lighthouse.tres" type="ArrayMesh" id=13]
-[ext_resource path="res://Assets/TerainTex/Bricks038_1K-PNG/Bricks038_1K-PNG_Color.png" type="Texture" id=14]
+[ext_resource path="res://Assets/TerainTex/Bricks048_1K-PNG/Bricks048_1K-PNG_Roughness.png" type="Texture" id=14]
 [ext_resource path="res://Scripts/LighthouseAnimation.cs" type="Script" id=15]
 [ext_resource path="res://Assets/Clutter/WoodPlanks/WoodStairst.tres" type="Material" id=16]
 [ext_resource path="res://Scripts/Road.cs" type="Script" id=17]
@@ -29,8 +29,8 @@
 [ext_resource path="res://Assets/Clutter/CylinderThing/CylinderThing_lambert1_BaseColor.png" type="Texture" id=27]
 [ext_resource path="res://Scenes/Env_Assets/Cable.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Scenes/Env_Assets/LightHouse.tscn" type="PackedScene" id=29]
-[ext_resource path="res://Assets/TerainTex/Bricks038_1K-PNG/Bricks038_1K-PNG_Roughness.png" type="Texture" id=30]
-[ext_resource path="res://Assets/TerainTex/Bricks038_1K-PNG/Bricks038_1K-PNG_AmbientOcclusion.png" type="Texture" id=31]
+[ext_resource path="res://Assets/TerainTex/Bricks048_1K-PNG/Bricks048_1K-PNG_Color.png" type="Texture" id=30]
+[ext_resource path="res://Assets/TerainTex/Bricks048_1K-PNG/Bricks048_1K-PNG_AmbientOcclusion.png" type="Texture" id=31]
 
 [sub_resource type="Animation" id=18]
 resource_name = "Light"
@@ -1379,8 +1379,8 @@ data = PoolVector3Array( -225, 200, 250, 225, 200, 250, -225, -200, 250, 225, 20
 [sub_resource type="SpatialMaterial" id=2139]
 resource_local_to_scene = true
 params_cull_mode = 2
-albedo_texture = ExtResource( 14 )
-roughness_texture = ExtResource( 30 )
+albedo_texture = ExtResource( 30 )
+roughness_texture = ExtResource( 14 )
 roughness_texture_channel = 4
 normal_enabled = true
 normal_scale = 1.0

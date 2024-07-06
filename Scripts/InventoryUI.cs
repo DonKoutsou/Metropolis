@@ -46,7 +46,7 @@ public class InventoryUI : Control
     
     Compass comp;
     MapGrid map;
-    ProgressBar CharacterRPM;
+    Panel CharacterRPM;
 
     static InventoryUI Instance;
 
@@ -67,7 +67,7 @@ public class InventoryUI : Control
         GridContainer gr = GetNode<GridContainer>("GridContainer");
         int childc = gr.GetChildCount();
         CharacterBatteryCharge = GetNode<Panel>("BatteryPanel").GetNode<ProgressBar>("CharacterBatteryCharge");
-        CharacterRPM = GetNode<Panel>("BatteryPanel").GetNode<ProgressBar>("RPMAmount");
+        CharacterRPM = GetNode<Panel>("BatteryPanel").GetNode<Panel>("RPMAmount");
         
         DescPan = GetNode<Panel>("DescriptionPanel");
         Description = DescPan.GetNode<MarginContainer>("MarginContainer").GetNode<VBoxContainer>("VBoxContainer").GetNode<RichTextLabel>("Description");
@@ -173,7 +173,14 @@ public class InventoryUI : Control
         }
 
         CharacterBatteryCharge.Value = pl.GetCurrentCharacterEnergy();
-        CharacterRPM.Value = pl.rpm * 100;
+        float rpm = pl.rpm;
+        if (rpm > 0.66f)
+            CharacterRPM.Modulate = new Color(1,0,0);
+        else if (rpm > 0.33f)
+            CharacterRPM.Modulate = new Color(1,1,0);
+        else
+            CharacterRPM.Modulate = new Color(0,1,0);
+
 
         if (showingDesc)
             Description.BbcodeText = "[center]" + ShowingDescSample.GetItemDesc();

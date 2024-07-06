@@ -5,8 +5,8 @@ using System.Linq;
 [Tool]
 public class Island : Spatial
 {
-	[Export]
-	IleType type = IleType.LAND;
+	//[Export]
+	//IleType type = IleType.LAND;
 	[Export]
 	public bool KeepInstance = false;
 	[Export]
@@ -53,6 +53,7 @@ public class Island : Spatial
 		//	}
 		//}
 	}
+
 	public bool HasPort()
 	{
 		return Ports.Count > 0;
@@ -77,21 +78,24 @@ public class Island : Spatial
 		x128 = 128,
 		x256 = 256,
 	}
-	[Export]
-	ImageRes Resolution = ImageRes.x16; 
-    public Image GenerateImage(Random r)
+	Image im = null;
+	int row = 0;
+	int col = 0;
+	Vector2 res;
+	List <Vector2> seapix = null;
+	float mult = 0;
+	int ilesize = 8000;
+
+	bool GeneratingImage = false;
+	bool OutliningImage = false;
+
+	ImageGenDock d;
+
+	void GeneratePixelRow()
 	{
-		int resolution = (int)Resolution;
-		Vector2 res = new Vector2(resolution, resolution);
-		int ilesize = 8000;
-		Image im = new Image();
-		im.Create((int)res.x, (int)res.y, true, Godot.Image.Format.Rgba8);
-		int row = 0;
-		int col = 0;
-        float mult = ilesize/res.x;
-		List <Vector2> seapix = new List<Vector2>();
-		for (int i = 0; i < res.x * res.y; i++)
+		for (int i = 0; i < res.x; i++)
 		{
+			GD.Print("Generating Pixel : X: " + row.ToString() + " Y: " + col.ToString() );
 			var spacestate = GetWorld().DirectSpaceState;
 
 			Vector3 rayor = new Vector3((mult * col) - (ilesize / 2), 5000, (mult * row)  - (ilesize / 2));
@@ -99,90 +103,98 @@ public class Island : Spatial
 			rayend.y = -1000; 
 
 			var rayar = spacestate.IntersectRay(rayor, rayend, new Godot.Collections.Array { this }, MoveLayer);
-
-            if (rayar.Count == 0)
-            {
-                continue;
-            }
-			CollisionObject obj = (CollisionObject)rayar["collider"];
-			//MeshInstance instance;
-			//if (GetParent() is MeshInstance)
-			//{
-			//	instance = (MeshInstance)GetParent();
-			//}
-			//else
-			//{
-			//	instance = GetNode<MeshInstance>("MeshInstance");
-			//}
-			//Vector3 VectorLocalPos = instance.GlobalTransform.basis.XformInv((Vector3)rayar["position"]);
-			//MeshDataTool tool = new MeshDataTool();
-			//SurfaceTool tool2 = new SurfaceTool();
-			//tool2.CreateFrom(instance.Mesh, 0);
-			//tool.CreateFromSurface(tool2.Commit(), 0);
-
-			//int VertexIndex = Get_Closest_Vertex(VectorLocalPos, tool);
-
-            bool ItsSea = obj.GetCollisionLayerBit(8);
-			bool ITsRock = obj.GetCollisionLayerBit(10);
-            
-			//im.SetPixel(col, row, tool.GetVertexColor(VertexIndex));
 			Color color = new Color(r: 0, g: 0, b: 0, a: 0);
-			if (ItsSea)
+			if (rayar.Count == 0)
 			{
 				seapix.Add(new Vector2(col, row));
 			}
-			else if (ITsRock)
+			else
 			{
-				int t = r.Next(0,2);
-				if (t ==0)
+				CollisionObject obj = (CollisionObject)rayar["collider"];
+				//MeshInstance instance;
+				//if (GetParent() is MeshInstance)
+				//{
+				//	instance = (MeshInstance)GetParent();
+				//}
+				//else
+				//{
+				//	instance = GetNode<MeshInstance>("MeshInstance");
+				//}
+				//Vector3 VectorLocalPos = instance.GlobalTransform.basis.XformInv((Vector3)rayar["position"]);
+				//MeshDataTool tool = new MeshDataTool();
+				//SurfaceTool tool2 = new SurfaceTool();
+				//tool2.CreateFrom(instance.Mesh, 0);
+				//tool.CreateFromSurface(tool2.Commit(), 0);
+
+				//int VertexIndex = Get_Closest_Vertex(VectorLocalPos, tool);
+
+				bool ItsSea = obj.GetCollisionLayerBit(8);
+				bool ITsRock = obj.GetCollisionLayerBit(10);
+				
+				//im.SetPixel(col, row, tool.GetVertexColor(VertexIndex));
+				
+				if (ItsSea)
+				{
+					seapix.Add(new Vector2(col, row));
+				}
+				else if (ITsRock)
+				{
 					color = new Color(r: 0.66f, g: 0.57f, b: 0.42f, a: 1);
+					//int t = r.Next(0,2);
+					//if (t ==0)
+						//
+					//else
+						//color = new Color(r: 0.83f, g: 0.7f, b: 0.49f, a: 1);
+				}
 				else
+				{
 					color = new Color(r: 0.83f, g: 0.7f, b: 0.49f, a: 1);
+				}
 			}
-            else
-            {
-                color = new Color(r: 0.83f, g: 0.7f, b: 0.49f, a: 1);
-            }
 			im.Lock();
 			im.SetPixel(col, row, color);
-            im.Unlock();
+			im.Unlock();
 			col ++;
-			if (col >= resolution)
+			if (col >= res.x)
 			{
 				col = 0;
 				row ++;
-				if (row >= resolution)
+				if (row >= res.x)
 				{
+					GeneratingImage = false;
+					row = 0;
+					col = 0;
+					OutliningImage = true;
 					break;
 				}
 			}
-			
 		}
-		row = 0;
-		col = 0;
-		for (int i = 0; i < res.x * res.y; i++)
+	}
+	void GenerateOulinePixel()
+	{
+		
+		//for (int i = 0; i < res.x * res.y; i++)
+		//{
+		for (int i = 0; i < res.x; i++)
 		{
+			GD.Print("Generating Outline Pixel : X: " + row.ToString() + " Y: " + col.ToString() );
 			if (seapix.Contains(new Vector2(col, row)))
 			{
-				//bool outlineSet = false;
 				float minDistance = float.MaxValue;
 
-				for (int newr = row - 4; newr <= row + 4; newr++)
+				for (int newr = row - 8; newr <= row + 8; newr++)
 				{
-					for (int newc = col - 4; newc <= col + 4; newc++)
+					for (int newc = col - 8; newc <= col + 8; newc++)
 					{
-						// Skip the current pixel
+
 						if (newr == row && newc == col)
 							continue;
 
-						// Check bounds
-						if (newr < 0 || newr >= resolution || newc < 0 || newc >= resolution)
+						if (newr < 0 || newr >= res.x || newc < 0 || newc >= res.x)
 							continue;
 
-						// If the adjacent pixel is not in seapix, set the outline
 						if (!seapix.Contains(new Vector2(newc, newr)))
 						{
-							// Calculate distance to the edge
 							float distance = Mathf.Sqrt(Mathf.Pow(newr - row, 2) + Mathf.Pow(newc - col, 2));
 							if (distance < minDistance)
 							{
@@ -192,45 +204,72 @@ public class Island : Spatial
 					}
 				}
 
-				// Set the color based on the distance
 				if (minDistance < float.MaxValue)
 				{
-					float gradientFactor = minDistance / 4.0f; // Normalize the distance (0 to 1)
-					gradientFactor = Mathf.Clamp(gradientFactor, 0, 1); // Ensure it stays within 0 to 1
+					float gradientFactor = minDistance /8.0f;
+					gradientFactor = Mathf.Clamp(gradientFactor, 0, 1); 
 
-					// Define the gradient colors (you can adjust these as needed)
-					Color startColor = new Color(r: 0.76f, g: 0.9f, b: 1, a: 1); // Near color
-					Color endColor = new Color(r: 0.2f, g: 0.4f, b: 0.8f, a: 1); // Far color
-
-					// Interpolate between the colors
+	
+					Color startColor = new Color(r: 0.76f, g: 0.9f, b: 1, a: 1); 
+					Color endColor = new Color(r: 0.2f, g: 0.4f, b: 0.8f, a: 1); 
 					Color outlineColor = startColor.LinearInterpolate(endColor, gradientFactor);
 
 					im.Lock();
 					im.SetPixel(col, row, outlineColor);
 					im.Unlock();
-					//outlineSet = true;
 				}
 			}
 
 			col++;
-			if (col >= resolution)
+			if (col >= res.x)
 			{
 				col = 0;
 				row++;
-				if (row >= resolution)
+				if (row >= res.x)
 				{
+					OutliningImage = false;
+					im.ClearMipmaps();
+					d.OnImageFinished(im, this);
 					break;
 				}
 			}
-}
+		}
+		//}
 		//ImageTexture t = new ImageTexture();
 		//t.CreateFromImage(im, flags:4);
         //Image = t;
 		
 		//im.SavePng("res://Assets/IslandPics/" + Filename.GetFile().Substr(0, Filename.GetFile().Length - 5) + ".png");
 		//Image = "res://Assets/IslandPics/" + Filename.GetFile().Substr(0, Filename.GetFile().Length - 5) + ".png";
-		im.ClearMipmaps();
-		return im;
+		
+	}
+    public override void _Process(float delta)
+    {
+        base._Process(delta);
+		if (GeneratingImage)
+		{
+			GeneratePixelRow();
+		}
+		if (OutliningImage)
+		{
+			GenerateOulinePixel();
+		}
+		
+    }
+    [Export]
+	ImageRes Resolution = ImageRes.x16; 
+    public void GenerateImage(ImageGenDock Gend)
+	{
+		d = Gend;
+		res = new Vector2((int)Resolution, (int)Resolution);
+		
+		im = new Image();
+		im.Create((int)res.x, (int)res.y, true, Godot.Image.Format.Rgba8);
+		row = 0;
+		col = 0;
+        mult = ilesize/res.x;
+		seapix = new List<Vector2>();
+		GeneratingImage = true;
 	}
 	int Get_Closest_Vertex(Vector3 LocalPosition, MeshDataTool Tool)
 	{
@@ -257,10 +296,10 @@ public class Island : Spatial
 		SpawnRotation = SpawnRot;
 		IslandSpecialName = SpecialName;
 	}
-	public IleType GetIslandType()
-	{
-		return type;
-	}
+	//public IleType GetIslandType()
+	//{
+		//return type;
+	//}
 	public void InputData(IslandInfo data)
 	{
 		foreach (House hou in Houses)
@@ -418,8 +457,7 @@ public class Island : Spatial
 			//{
 		if (Chars.HasChars())
 		{
-			var Children = Chars.GetChildren();
-			foreach (Position3D pos in Children)
+			for (int i = 0; i < Chars.Locations.Count(); i++)
 			{
 				int Spawn = r.Next(0, 2);
 				RandomUses ++;
@@ -428,9 +466,10 @@ public class Island : Spatial
 					int selection = r.Next(1, Chars.CharSpawns.Count());
 					RandomUses ++;
 					NPC chara = (NPC)Chars.CharSpawns[selection - 1].Instance();
-					chara.Set("spawnUncon", true);
+					//chara.Set("spawnUncon", true);
 					AddChild(chara);
-					chara.Translation = pos.Translation;
+					chara.Translation = Chars.Locations[i];
+					chara.Rotation = Chars.Rotations[i];
 				}
 			}
 		}
@@ -579,7 +618,7 @@ public class Island : Spatial
 public class IslandInfo
 {
 	public Island Island;
-	public IleType Type;
+	//public IleType Type;
 	public Vector2 Position;
 	public bool HasPort;
 	public List<Vector2> Ports = new List<Vector2>();
@@ -609,7 +648,7 @@ public class IslandInfo
 	}
     public void UnPackData(Godot.Object data)
     {
-        Type = (IleType)data.Get("Type");
+        //Type = (IleType)data.Get("Type");
         Position = (Vector2)data.Get("Pos");
 		SpecialName = (string)data.Get("SpecialName");
         IleType = (PackedScene)data.Get("Scene");
@@ -742,7 +781,7 @@ public class IslandInfo
 
 		Dictionary<string, object> data = new Dictionary<string, object>
         {
-            { "Type", Type },
+            //{ "Type", Type },
             { "Pos", Position },
 			{ "SpecialName", SpecialName},
 			{"Scene", IleType},
@@ -764,7 +803,7 @@ public class IslandInfo
 	public void SetInfo(Island Ile)
 	{
 		Island = Ile;
-		Type = Ile.GetIslandType();
+		//Type = Ile.GetIslandType();
 		KeepInstance = Ile.KeepInstance;
 		HasPort = Ile.HasPort();
 		if (HasPort)

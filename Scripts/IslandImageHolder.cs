@@ -6,6 +6,10 @@ using System.Collections.Generic;
 public class IslandImageHolder : Node
 {
     [Export]
+    public int ImageToGenerate = 0;
+    [Export]
+    public bool GenerateAll = false;
+    [Export]
     public List<Image> Images = null;
     [Export]
     public string[] Islands = null;
@@ -19,10 +23,10 @@ public class IslandImageHolder : Node
     {
         Images = new List<Image>();
     }
-    public int AddImage(Image im)
+    public int AddImage(int index, Image im)
     {
-        Images.Add(im);
-        return Images.Count - 1;
+        Images[index] = im;
+        return index;
     }
     static public IslandImageHolder GetInstance()
     {

@@ -595,6 +595,7 @@ material/0 = SubResource( 109 )
 
 [node name="MeshInstance3" type="MeshInstance" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/PlayerCamera"]
 transform = Transform( 1, -5.29396e-22, 0, -1.05879e-22, 1, 0, 2.11758e-21, 0, 1, 0, -0.0144858, -1.05511 )
+visible = false
 mesh = SubResource( 107 )
 material/0 = SubResource( 126 )
 

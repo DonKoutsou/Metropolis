@@ -342,7 +342,8 @@ public class MapGrid : GridContainer
         MapIleList.TryGetValue(index, out child);
         child.GetNode<Panel>("DebugPanel").Visible = toggle;
     }
-    public void UpdateIleInfo(Vector2 index, IleType type, bool HasPort, List<Vector2> portpos, float rot = 0, ImageTexture img = null, string name = null)
+    //public void UpdateIleInfo(Vector2 index, IleType type, bool HasPort, List<Vector2> portpos, float rot = 0, ImageTexture img = null, string name = null)
+    public void UpdateIleInfo(Vector2 index, bool HasPort, List<Vector2> portpos, float rot = 0, ImageTexture img = null, string name = null)
     {
         MapTile child;
         MapIleList.TryGetValue(index, out child);
@@ -403,7 +404,7 @@ public class MapGrid : GridContainer
             child.GetNode<TextureRect>("TextureRect").Texture = img;
             child.GetNode<TextureRect>("TextureRect").RectRotation = rot;
         }
-        child.type = (int)type;
+        //child.type = (int)type;
         child.Modulate = new Color(1,1,1,1);
     }
     float d = 0.2f;
