@@ -8,11 +8,13 @@ public class Limb : Item
     [Export]
     LimbType Type = 0;
     [Export]
-    bool RandomiseColor = false;
+    LimbSlotType SlotType = 0;
+    [Export]
+    public bool RandomiseColor = false;
     [Export]
     Color LimbColor = new Color(1,1,1);
 
-    public bool Equiped = false;
+    //public bool Equiped = false;
 
     public void SetColor(Color col)
     {
@@ -26,6 +28,10 @@ public class Limb : Item
     {
         return Type;
     }
+    public LimbSlotType GetSlotType()
+    {
+        return SlotType;
+    }
     public override void _Ready()
     {
         if(Engine.EditorHint)
@@ -34,8 +40,8 @@ public class Limb : Item
         if (RandomiseColor)
         {
             LimbColor = LimbRandomColorProvider.GetRandomColor();
-            ((GradientTexture)((SpatialMaterial)GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0)).DetailAlbedo).Gradient.SetColor(0, LimbColor);
         }
+        ((GradientTexture)((SpatialMaterial)GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0)).DetailAlbedo).Gradient.SetColor(0, LimbColor);
     }
     public override void _Process(float delta)
     {
@@ -54,6 +60,13 @@ public enum LimbType
     LEG_R,
     N01_LEG_L,
     N01_LEG_R,
+}
+public enum LimbSlotType
+{
+    ARM_L,
+    ARM_R,
+    LEG_L,
+    LEG_R
 }
 static public class LimbTranslator
 {
@@ -104,12 +117,14 @@ static public class LimbRandomColorProvider
         new Color(0.876953f, 0.834666f, 0.044227f,1),
         new Color(0.333729f, 0.876953f, 0.044227f,1),
         new Color(0.044227f, 0.145065f, 0.876953f,1),
-
+         new Color(0, 0, 0, 1),
     };
     static Random rand = new Random();
 
-    public static Color GetRandomColor()
+    public static Color GetRandomColor(Random r = null)
     {
+        if (r != null)
+            return Colors[r.Next(0, Colors.Count())];
         return Colors[rand.Next(0, Colors.Count())];
     }
 }

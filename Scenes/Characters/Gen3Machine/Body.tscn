@@ -1,23 +1,22 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=41 format=2]
 
-[ext_resource path="res://Assets/FastLegs/M_Legs.material" type="Material" id=1]
+[ext_resource path="res://Assets/FastLegs/M_Character_FastLegs_L.material" type="Material" id=1]
 [ext_resource path="res://Assets/Gen3Machine/Gen3Machine.glb" type="PackedScene" id=2]
-[ext_resource path="res://Assets/Skele_Arm/Arms_Mat.material" type="Material" id=3]
+[ext_resource path="res://Assets/Skele_Arm/Arms_Mat_Character_L.material" type="Material" id=3]
 [ext_resource path="res://Assets/Gen3Machine/Body/BodyMat.tres" type="Material" id=4]
 [ext_resource path="res://Assets/Gen3Machine/Body/FaceMat.tres" type="Material" id=5]
 [ext_resource path="res://Assets/Gen3Machine/CharBlendTree.tres" type="AnimationNodeBlendTree" id=6]
-[ext_resource path="res://Assets/NormalLegs/M_Legs.material" type="Material" id=7]
+[ext_resource path="res://Assets/NormalLegs/M_Character_Legs_L.material" type="Material" id=7]
 [ext_resource path="res://Assets/Gen3Machine/Eye.material" type="Material" id=8]
 [ext_resource path="res://Assets/Clouds/Textures/smoke_01.png" type="Texture" id=9]
 [ext_resource path="res://Scripts/Character_Animations.cs" type="Script" id=10]
 [ext_resource path="res://Assets/Sounds/WalkingSound.mp3" type="AudioStream" id=11]
-[ext_resource path="res://Assets/NormalLegs/Textures/Lowp_M_Legs_Normal.png" type="Texture" id=12]
-[ext_resource path="res://Assets/NormalLegs/Textures/Lowp_M_Legs_OcclusionRoughnessMetallic.png" type="Texture" id=13]
+[ext_resource path="res://Assets/NormalLegs/M_Character_Legs_R.material" type="Material" id=12]
+[ext_resource path="res://Assets/FastLegs/M_Character_FastLegs_R.material" type="Material" id=13]
 [ext_resource path="res://Scripts/CharacterSoundManager.cs" type="Script" id=14]
-[ext_resource path="res://Assets/NormalLegs/Textures/Lowp_M_Legs_BaseColor.png" type="Texture" id=15]
-[ext_resource path="res://Assets/NormalLegs/Textures/Lowp_M_Legs_Mask.png" type="Texture" id=16]
 [ext_resource path="res://shaders/OutlineShader.tres" type="Material" id=17]
 [ext_resource path="res://Scripts/LoddedCharacter.cs" type="Script" id=18]
+[ext_resource path="res://Assets/Skele_Arm/Arms_Mat_Character_R.material" type="Material" id=19]
 
 [sub_resource type="SpatialMaterial" id=63]
 albedo_color = Color( 0.952941, 0.921569, 0.831373, 1 )
@@ -34,61 +33,6 @@ radius = 2.0
 height = 4.0
 radial_segments = 4
 rings = 4
-
-[sub_resource type="Gradient" id=1]
-resource_local_to_scene = true
-offsets = PoolRealArray( 0 )
-colors = PoolColorArray( 0.0431373, 0.403922, 1, 1 )
-
-[sub_resource type="GradientTexture" id=2]
-resource_local_to_scene = true
-gradient = SubResource( 1 )
-
-[sub_resource type="SpatialMaterial" id=65]
-resource_local_to_scene = true
-resource_name = "M_Legs"
-albedo_texture = ExtResource( 15 )
-metallic = 1.0
-metallic_texture = ExtResource( 13 )
-metallic_texture_channel = 2
-roughness_texture = ExtResource( 13 )
-roughness_texture_channel = 1
-normal_enabled = true
-normal_scale = 1.0
-normal_texture = ExtResource( 12 )
-ao_enabled = true
-ao_light_affect = 1.0
-ao_texture = ExtResource( 13 )
-ao_on_uv2 = false
-ao_texture_channel = 0
-detail_enabled = true
-detail_mask = ExtResource( 16 )
-detail_blend_mode = 0
-detail_uv_layer = 0
-detail_albedo = SubResource( 2 )
-
-[sub_resource type="SpatialMaterial" id=66]
-resource_local_to_scene = true
-resource_name = "M_Legs"
-albedo_texture = ExtResource( 15 )
-metallic = 1.0
-metallic_texture = ExtResource( 13 )
-metallic_texture_channel = 2
-roughness_texture = ExtResource( 13 )
-roughness_texture_channel = 1
-normal_enabled = true
-normal_scale = -1.0
-normal_texture = ExtResource( 12 )
-ao_enabled = true
-ao_light_affect = 1.0
-ao_texture = ExtResource( 13 )
-ao_on_uv2 = false
-ao_texture_channel = 0
-detail_enabled = true
-detail_mask = ExtResource( 16 )
-detail_blend_mode = 0
-detail_uv_layer = 0
-detail_albedo = SubResource( 2 )
 
 [sub_resource type="AnimationNodeAnimation" id=36]
 animation = "Dead_loop"
@@ -129,7 +73,7 @@ nodes/ChairBlend/position = Vector2( 186.667, 160 )
 nodes/IntrumentBlend/node = SubResource( 54 )
 nodes/IntrumentBlend/position = Vector2( 360, 266.667 )
 nodes/output/position = Vector2( 533.333, 160 )
-node_connections = [ "IntrumentBlend", 0, "ChairBlend", "IntrumentBlend", 1, "Animation 2", "ChairBlend", 0, "Animation", "ChairBlend", 1, "Animation 3", "output", 0, "IntrumentBlend" ]
+node_connections = [ "output", 0, "IntrumentBlend", "IntrumentBlend", 0, "ChairBlend", "IntrumentBlend", 1, "Animation 2", "ChairBlend", 0, "Animation", "ChairBlend", 1, "Animation 3" ]
 
 [sub_resource type="AnimationNodeAnimation" id=55]
 animation = "Standing"
@@ -210,7 +154,7 @@ transform = Transform( 1, 0, 0, 0, 1, 5.68434e-14, 0, -2.84217e-14, 1, -0.314196
 script = ExtResource( 18 )
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton" index="0"]
-transform = Transform( 0.996566, -0.0764203, -0.0318844, 0.0710094, 0.986782, -0.145669, 0.042595, 0.142904, 0.98882, -3.08062, 264.828, 13.191 )
+transform = Transform( 0.996783, -0.0744472, -0.0296689, 0.0706252, 0.990984, -0.113854, 0.0378775, 0.111393, 0.993054, -3.23185, 265.421, 11.5983 )
 bone_name = "mixamorig_Head"
 
 [node name="HeadPivot" type="Spatial" parent="Armature/Skeleton/BoneAttachment" index="0"]
@@ -237,7 +181,7 @@ spot_angle = 47.5769
 spot_angle_attenuation = 0.25
 
 [node name="InstrumentAtatchment" type="BoneAttachment" parent="Armature/Skeleton" index="1"]
-transform = Transform( 0.997922, -0.034046, -0.0546942, 0.0317942, 0.998631, -0.0415257, 0.0560331, 0.0397005, 0.997639, 0.424291, 213.008, 0.164028 )
+transform = Transform( 0.998181, -0.0316644, -0.0512999, 0.0308198, 0.999377, -0.0171743, 0.0518118, 0.0155621, 0.998536, 0.151678, 213.118, 0.147214 )
 bone_name = "mixamorig_Spine1"
 
 [node name="PlayingAtatchment" type="RemoteTransform" parent="Armature/Skeleton/InstrumentAtatchment" index="0"]
@@ -264,12 +208,12 @@ material/0 = ExtResource( 3 )
 
 [node name="Arm_R" parent="Armature/Skeleton" index="4"]
 material_overlay = ExtResource( 17 )
-material/0 = ExtResource( 3 )
+material/0 = ExtResource( 19 )
 
 [node name="Arm_R_LOD" parent="Armature/Skeleton" index="5"]
 visible = false
 material_overlay = ExtResource( 17 )
-material/0 = ExtResource( 3 )
+material/0 = ExtResource( 19 )
 
 [node name="Body" parent="Armature/Skeleton" index="6"]
 material_overlay = ExtResource( 17 )
@@ -305,14 +249,14 @@ material/1 = ExtResource( 7 )
 
 [node name="Leg2_R" parent="Armature/Skeleton" index="13"]
 material_overlay = ExtResource( 17 )
-material/0 = SubResource( 65 )
-material/1 = SubResource( 66 )
+material/0 = ExtResource( 12 )
+material/1 = ExtResource( 12 )
 
 [node name="Leg2_R_LOD" parent="Armature/Skeleton" index="14"]
 visible = false
 material_overlay = ExtResource( 17 )
-material/0 = SubResource( 65 )
-material/1 = SubResource( 65 )
+material/0 = ExtResource( 12 )
+material/1 = ExtResource( 12 )
 
 [node name="Leg_L" parent="Armature/Skeleton" index="15"]
 visible = false
@@ -327,12 +271,12 @@ material/0 = ExtResource( 1 )
 [node name="Leg_R" parent="Armature/Skeleton" index="17"]
 visible = false
 material_overlay = ExtResource( 17 )
-material/0 = ExtResource( 1 )
+material/0 = ExtResource( 13 )
 
 [node name="Leg_R_LOD" parent="Armature/Skeleton" index="18"]
 visible = false
 material_overlay = ExtResource( 17 )
-material/0 = ExtResource( 1 )
+material/0 = ExtResource( 13 )
 
 [node name="LegsUpper" parent="Armature/Skeleton" index="19"]
 material_overlay = ExtResource( 17 )

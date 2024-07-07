@@ -27,6 +27,7 @@ ItemDesc = ""
 stackable = false
 RegisterOnIsland = false
 Type = 4
+SlotType = 2
 RandomiseColor = true
 LimbColor = Color( 0.0431373, 0.403922, 1, 1 )
 

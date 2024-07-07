@@ -45,6 +45,7 @@ shape = SubResource( 7 )
 transform = Transform( -7.7783, 0, -1.17449e-06, 0, 7.7783, 0, 1.17449e-06, 0, -7.7783, 0, 0.5, 6 )
 
 [node name="ActionComponent" parent="." instance=ExtResource( 4 )]
+ActionDistance = 5.0
 
 [node name="IdleTimer" type="Timer" parent="."]
 wait_time = 30.0

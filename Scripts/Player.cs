@@ -140,6 +140,15 @@ public class Player : Character
 			}
 		}
 	}
+	public override void PlayMusic()
+	{
+		if (!CharacterInventory.IsLimbSlotFilled(LimbSlotType.ARM_L) || !CharacterInventory.IsLimbSlotFilled(LimbSlotType.ARM_R))
+		{
+			TalkText.GetInst().Talk("Δεν μπορώ να παίξω χωρίς χέρια", this);
+			return;
+		}
+		base.PlayMusic();
+	}
 	bool ExpressedNoBatteries = false;
 	bool ExpressedLowBattery = false;
     public override void _Process(float delta)

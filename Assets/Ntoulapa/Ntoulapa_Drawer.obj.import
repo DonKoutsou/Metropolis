@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Ntoulapa_Drawer.obj-9f3f4111380d43bca44c2855f347d40d.mesh"
+
+[deps]
+
+files=[ "res://.import/Ntoulapa_Drawer.obj-9f3f4111380d43bca44c2855f347d40d.mesh" ]
+
+source_file="res://Assets/Ntoulapa/Ntoulapa_Drawer.obj"
+dest_files=[ "res://.import/Ntoulapa_Drawer.obj-9f3f4111380d43bca44c2855f347d40d.mesh", "res://.import/Ntoulapa_Drawer.obj-9f3f4111380d43bca44c2855f347d40d.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

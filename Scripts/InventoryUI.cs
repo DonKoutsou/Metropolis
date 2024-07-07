@@ -130,7 +130,7 @@ public class InventoryUI : Control
     {
         if (!ShowingMap)
         {
-            List<Item> Items = new List<Item>();
+            List<Item> Items;
             Inv.GetContents(out Items);
             List<int> itemcount = new List<int>();
             hascompass = false;
@@ -195,6 +195,10 @@ public class InventoryUI : Control
         map.ToggleMap(ShowingMap);
 
         GetNode<Panel>("ItemOptionPanel").GetNode<HBoxContainer>("HBoxContainer").GetNode<Button>("DropButton").Visible = !ShowingMap;
+        bool selectinginst = FocusedSlot != null && FocusedSlot.item is Instrument;
+        bool selectinglimb = FocusedSlot != null && FocusedSlot.item is Limb;
+        GetNode<Panel>("ItemOptionPanel").GetNode<HBoxContainer>("HBoxContainer").GetNode<Button>("SwitchButton").Visible = selectinginst;
+        GetNode<Panel>("ItemOptionPanel").GetNode<HBoxContainer>("HBoxContainer").GetNode<Button>("SwitchLimbButton").Visible = selectinglimb;
     }
     
     public void ItemHovered(Item it)
@@ -235,6 +239,35 @@ public class InventoryUI : Control
             
         Inv.RemoveItem(FocusedSlot.item);
         FocusedSlot = null;
+    }
+    private void On_Instrument_Button_Down()
+    {
+        if (FocusedSlot == null)
+            return;
+        if (!Inv.CharacterOwner.HasInstrument())
+            Inv.CharacterOwner.AddInstrument((Instrument)FocusedSlot.item);
+        else
+            Inv.ChangeInstrument((Instrument)FocusedSlot.item);
+    }
+    private void On_Limb_Button_Down()
+    {
+        if (FocusedSlot == null)
+            return;
+        Limb l = (Limb)FocusedSlot.item;
+        Character owner = Inv.CharacterOwner;
+        if (!Inv.IsLimbSlotFilled(l.GetSlotType()))
+        {
+            owner.ToggleLimb(l.GetLimbType(), true);
+            owner.SetLimbColor(l.GetLimbType(), l.GetColor());
+            Inv.EquipLimp(l);
+        }
+        else
+        {
+            Limb ltoremove = Inv.GetEquippedLimb(l.GetSlotType());
+            Inv.UnEquipLimp(ltoremove);
+            Inv.EquipLimp(l);
+        }
+
     }
     
     private void On_Compass_Button_Down()

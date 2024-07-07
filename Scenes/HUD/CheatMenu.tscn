@@ -118,6 +118,17 @@ action_mode = 0
 text = "To Move Loc"
 icon_align = 1
 
+[node name="RechargeCharacter" type="Button" parent="Buttons"]
+margin_left = -958.0
+margin_top = -12.0
+margin_right = -810.0
+margin_bottom = 39.0
+mouse_default_cursor_shape = 2
+theme = ExtResource( 3 )
+action_mode = 0
+text = "Recharge Character"
+icon_align = 1
+
 [node name="TeleportPanel" type="Panel" parent="Buttons"]
 anchor_top = 0.208333
 anchor_right = 0.0738833
@@ -321,6 +332,7 @@ text = "60"
 [connection signal="button_down" from="Buttons/FPS" to="." method="On_FPS_Button_Down"]
 [connection signal="button_down" from="Buttons/TestKill" to="." method="On_Kill_Button_Down"]
 [connection signal="button_down" from="Buttons/Tp_ToLoc" to="." method="On_ToLoc_Button_Down"]
+[connection signal="button_down" from="Buttons/RechargeCharacter" to="." method="Recharge_Character"]
 [connection signal="button_down" from="Buttons/TeleportPanel/Tp" to="." method="On_TP_Button_Down"]
 [connection signal="pressed" from="Buttons/TimeProgressionSetting/Button" to="." method="IncreaseTimeProgression"]
 [connection signal="pressed" from="Buttons/TimeProgressionSetting/Button2" to="." method="DecreaseTimeProgression"]

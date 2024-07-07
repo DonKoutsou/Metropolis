@@ -25,6 +25,8 @@ ItemPickupActionName = "Ένα χέρι.."
 ItemName = "Αριστερό άκρο ακρίβιας"
 ItemDesc = "Τα άκρα σχεδιάσμένα για ελαφριές δουλειές που χρειάζοντε ακρίβια. Χειρισμός μικρός εργαλείων."
 stackable = false
+RandomiseColor = true
+LimbColor = Color( 0.396078, 1, 0, 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0 )

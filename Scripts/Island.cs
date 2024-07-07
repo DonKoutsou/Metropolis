@@ -95,7 +95,7 @@ public class Island : Spatial
 	{
 		for (int i = 0; i < res.x; i++)
 		{
-			GD.Print("Generating Pixel : X: " + row.ToString() + " Y: " + col.ToString() );
+			//GD.Print("Generating Pixel : X: " + row.ToString() + " Y: " + col.ToString() );
 			var spacestate = GetWorld().DirectSpaceState;
 
 			Vector3 rayor = new Vector3((mult * col) - (ilesize / 2), 5000, (mult * row)  - (ilesize / 2));
@@ -177,7 +177,7 @@ public class Island : Spatial
 		//{
 		for (int i = 0; i < res.x; i++)
 		{
-			GD.Print("Generating Outline Pixel : X: " + row.ToString() + " Y: " + col.ToString() );
+			//GD.Print("Generating Outline Pixel : X: " + row.ToString() + " Y: " + col.ToString() );
 			if (seapix.Contains(new Vector2(col, row)))
 			{
 				float minDistance = float.MaxValue;
@@ -448,7 +448,13 @@ public class Island : Spatial
 		{
 			h.StartHouse(r, out RandomUsedFromHouses);
 		}
+		foreach(NPC c in Characters)
+		{
+			c.InitialSpawn(r);
+			RandomUses += 6;
+		}
 		RandomUses += RandomUsedFromHouses;
+		
 		CharacterSpawnLocations Chars = GetNode<CharacterSpawnLocations>("CharacterSpawnLocations");
 		//if (Chars != null)
 		//{
@@ -470,6 +476,9 @@ public class Island : Spatial
 					AddChild(chara);
 					chara.Translation = Chars.Locations[i];
 					chara.Rotation = Chars.Rotations[i];
+					chara.InitialSpawn(r);
+					RandomUses += 6;
+					Characters.Add(chara);
 				}
 			}
 		}
@@ -500,6 +509,7 @@ public class Island : Spatial
 					vehchild.Translation = pos.Translation;
 					if (vehchild.SpawnBroken)
 						vehchild.OnLightDamaged();
+					Vehicles.Add(vehchild);
 				}
 			}
 		}

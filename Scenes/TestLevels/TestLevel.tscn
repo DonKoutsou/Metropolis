@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Scenes/Characters/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/HUD/InventoryUI.tscn" type="PackedScene" id=2]
@@ -16,6 +16,13 @@
 [ext_resource path="res://Scenes/Items/NormalLeg_R.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/Env_Assets/Skampo.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Env_Assets/Pagaki.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/Items/Guitar.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Scenes/Items/FastLeg_L.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Scenes/Items/FastLeg_R.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Scenes/Items/SkeleArm_R.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Scenes/Items/SkeleArm_L.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Scenes/Env_Assets/Furniture2.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Scenes/Env_Assets/Furniture.tscn" type="PackedScene" id=23]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_texture = ExtResource( 6 )
@@ -144,8 +151,30 @@ transform = Transform( -0.102845, 0, 0.994697, 0, 1, 0, -0.994697, 0, -0.102845,
 
 [node name="Character" parent="." instance=ExtResource( 8 )]
 transform = Transform( -0.808401, 0, -0.588632, 0, 1, 0, 0.588632, 0, -0.808401, 20.5925, 13.5022, 5.28653 )
+Sitting = true
 Chair = NodePath("../StaticBody2")
 PlayInstrument = true
 
 [node name="StaticBody2" parent="." instance=ExtResource( 16 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 30.5423, 13.5021, 6.07819 )
+
+[node name="Guitar" parent="." instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.43115, 13.502, -10.6601 )
+
+[node name="Item6" parent="." instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.0009, 13.5021, -9.09402 )
+
+[node name="Item7" parent="." instance=ExtResource( 19 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.7731, 13.5021, -5.18317 )
+
+[node name="Item8" parent="." instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4302, 13.5021, -13.3863 )
+
+[node name="Item9" parent="." instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.3364, 13.5021, -12.1104 )
+
+[node name="Furniture" parent="." instance=ExtResource( 22 )]
+transform = Transform( 0.0405684, 0.000103376, 0.999177, 9.16135e-05, 1, -0.000107187, -0.999177, 9.58936e-05, 0.0405684, -2.04204, 13.5994, -5.00953 )
+
+[node name="Furniture2" parent="." instance=ExtResource( 23 )]
+transform = Transform( -0.999652, 0, 0.0263688, 0, 1, 0, -0.0263688, 0, -0.999652, 5.79053, 13.502, 8.79055 )

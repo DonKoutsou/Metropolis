@@ -1,6 +1,6 @@
 [gd_resource type="ArrayMesh" load_steps=2 format=2]
 
-[ext_resource path="res://Assets/Skele_Arm/Arms_Mat.material" type="Material" id=1]
+[ext_resource path="res://Assets/Skele_Arm/Arms_Mat_Character_L.material" type="Material" id=1]
 
 [resource]
 resource_name = "Arms_Mesh001"

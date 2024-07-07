@@ -106,6 +106,10 @@ public class CheatMenu : Control
 		Settings.GetGameSettings().DecreaseTimeProgression();
 		TimeProgressionSetting.GetNode<Label>("TimeProgText").Text = "TimeProg" + Settings.GetGameSettings().TimeProgression.ToString();
 	}
+	private void Recharge_Character()
+	{
+		Player.GetInstance().RechargeCharacter(100);
+	}
 	public void Start()
 	{
 		Show();

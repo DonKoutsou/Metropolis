@@ -24,7 +24,6 @@ public class Character : KinematicBody
 	[Export]
 	public DialogueLine[] lines;
 	
-
 	public Inventory CharacterInventory;
 
 	[Export]
@@ -92,10 +91,11 @@ public class Character : KinematicBody
 	}
 	public void ToggleAllLimbs()
 	{
-		Spatial skel = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton");
+		//Spatial skel = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton");
 		for (int i = 0; i < 6; i++)
 		{
-			skel.GetNode<MeshInstance>(LimbTranslator.EnumToString((LimbType)i)).Visible = false;
+			ToggleLimb((LimbType)i, false);
+			//skel.GetNode<MeshInstance>(LimbTranslator.EnumToString((LimbType)i)).Visible = false;
 		}
 	}
 	public override void _EnterTree()
@@ -113,6 +113,11 @@ public class Character : KinematicBody
         Translation = info.Position;
 		CurrentEnergy = info.CurrentEnergy;
 		m_balive = info.Alive;
+
+		for (int i = 0; i < 6; i++)
+		{
+			SetLimbColor((LimbType)i, info.LimbColors[i]);
+		}
 	}
 	public void SetVehicle(Vehicle veh)
 	{
@@ -317,14 +322,8 @@ public class Character : KinematicBody
 		
 		//SetCollisionMaskBit(8, false);
 	}
-	public void PlayMusic()
+	public virtual void PlayMusic()
 	{
-		if (!HasLimbOfType(LimbType.ARM_L) || !HasLimbOfType(LimbType.ARM_R))
-		{
-			TalkText.GetInst().Talk("Δεν μπορώ να παίξω χωρίς χέρια", this);
-			return;
-		}
-			
 		anim.ToggleInstrument(true);
 		
 		Spatial instrumentparent = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("InstrumentAtatchment").GetNode<Spatial>("Instrument");
@@ -362,22 +361,22 @@ public class Character : KinematicBody
 	{
 		Spatial instrumentspace = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("InstrumentAtatchment").GetNode<Spatial>("Instrument");
 		inst.GetNode<CollisionShape>("CollisionShape").Disabled = true;
-		inst.RegisterOnIsland = false;
+		//inst.RegisterOnIsland = false;
+		inst.Visible = true;
 		instrumentspace.AddChild(inst);
 		//inst.Visible = true;
 		inst.Translation = Vector3.Zero;
 		inst.Rotation = Vector3.Zero;
 		//inst.Owner = Owner;
-		
 	}
-	public bool HasLimbOfType(LimbType type)
+	/*public bool HasLimbOfType(LimbType type)
 	{
 		LoddedCharacter lod = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<LoddedCharacter>("Skeleton");
 		string name = LimbTranslator.EnumToString(type);
 		if (lod.GetCurrentLOD() == 1)
 			name += "_LOD"; 
 		return GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>(name).Visible;
-	}
+	}*/
 	public void ToggleLimb(LimbType limb, bool toggle)
 	{
 		LoddedCharacter lod = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<LoddedCharacter>("Skeleton");
@@ -390,9 +389,15 @@ public class Character : KinematicBody
 	public void SetLimbColor(LimbType limb, Color colorarion)
 	{
 		MeshInstance limbtocolor = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>(LimbTranslator.EnumToString(limb));
+		MeshInstance limbtocolorlod = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>(LimbTranslator.EnumToString(limb) + "_LOD");
 		((GradientTexture)((SpatialMaterial)limbtocolor.GetActiveMaterial(0)).DetailAlbedo).Gradient.SetColor(0, colorarion);
+		((GradientTexture)((SpatialMaterial)limbtocolorlod.GetActiveMaterial(0)).DetailAlbedo).Gradient.SetColor(0, colorarion);
 	}
-
+	public Color GetLimbColor(LimbType limb)
+	{
+		MeshInstance limbtocolor = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>(LimbTranslator.EnumToString(limb));
+		return ((GradientTexture)((SpatialMaterial)limbtocolor.GetActiveMaterial(0)).DetailAlbedo).Gradient.GetColor(0);
+	}
 	public virtual void OnSongEnded(Instrument inst)
 	{
 		//IdleTimer.Start();
@@ -414,7 +419,7 @@ public class CharacterInfo
 	public float CurrentEnergy = 0.0f;
 	public bool Alive = false;
 	public Dictionary<string, object> CustomData = new Dictionary<string, object>();
-
+	public List<Color> LimbColors = new List<Color>();
 	public void UpdateInfo(Character it)
 	{
 		Name = it.Name;
@@ -422,6 +427,10 @@ public class CharacterInfo
 		SceneData = it.Filename;
 		CurrentEnergy = it.GetCurrentCharacterEnergy();
 		Alive = it.m_balive;
+		for (int i = 0; i < 6; i++)
+		{
+			LimbColors.Add(it.GetLimbColor((LimbType)i));
+		}
 	}
 	public Dictionary<string, object>GetPackedData(out bool HasData)
 	{
@@ -434,7 +443,12 @@ public class CharacterInfo
 			{"Energy", CurrentEnergy},
 			{"Alive", Alive}
 		};
-		
+		Color[] LimbColorsAr = new Color[6];
+		for (int i = 0; i < 6; i++)
+		{
+			LimbColorsAr[i] = LimbColors[i];
+		}
+		data.Add("LimbColors", LimbColorsAr);
 		if (CustomData.Count > 0)
 		{
 			HasData = true;
@@ -459,6 +473,13 @@ public class CharacterInfo
 		SceneData = (string)data.Get("SceneData");
 		CurrentEnergy = (float)data.Get("Energy");
 		Alive = (bool)data.Get("Alive");
+
+		Godot.Color[] LimbCols = (Godot.Color[])data.Get("LimbColors");
+		for (int i = 0; i < 6; i++)
+		{
+			LimbColors.Add(LimbCols[i]);
+		}
+
 
 		Godot.Collections.Array CustomDataKeys = (Godot.Collections.Array)data.Get("CustomDataKeys");
 		Godot.Collections.Array CustomDataValues = (Godot.Collections.Array)data.Get("CustomDataValues");

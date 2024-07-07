@@ -21,7 +21,9 @@ public class Inventory : Spatial
     float currentweight = 0;
     InventoryUI ui;
 
-    Character CharacterOwner;
+    public Character CharacterOwner;
+
+    
 
     public override void _Ready()
     {
@@ -44,6 +46,55 @@ public class Inventory : Spatial
             InsertItem(it);
         }
     }
+
+    //LIMB stuff
+    List<Limb> EquippedLimbs = new List<Limb>();
+
+    public Limb GetEquippedLimb(LimbSlotType t)
+    {
+        Limb retlimp = null;
+        foreach (Limb l in EquippedLimbs)
+        {
+            if (l.GetSlotType() == t)
+            {
+                retlimp = l;
+                break;
+            }
+        }
+        return retlimp;
+    }
+    public bool IsLimbSlotFilled(LimbSlotType SlotType)
+    {
+        bool SlotFilled = false;
+
+         foreach (Limb l in EquippedLimbs)
+        {
+            if (l.GetSlotType() == SlotType)
+            {
+                SlotFilled = true;
+                break;
+            }
+        }
+        return SlotFilled;
+    }
+    public bool IsLimbEquipped(Limb l)
+    {
+        return EquippedLimbs.Contains(l);
+    }
+    public void EquipLimp(Limb l)
+    {
+        CharacterOwner.ToggleLimb(l.GetLimbType(), true);
+        CharacterOwner.SetLimbColor(l.GetLimbType(), l.GetColor());
+        EquippedLimbs.Add(l);
+    }
+    public void UnEquipLimp(Limb l)
+    {
+        CharacterOwner.ToggleLimb(l.GetLimbType(), false);
+        EquippedLimbs.Remove(l);
+    }
+
+
+
     public bool HasBatteries()
     {
         for (int i = InventoryContents.Count - 1; i > -1; i--)
@@ -75,6 +126,8 @@ public class Inventory : Spatial
     public void LoadSavedInventory(Godot.Collections.Array items)
     {
         DeleteContents();
+        CharacterOwner = (Character)GetParent();
+        CharacterOwner.ToggleAllLimbs();
         foreach(var It in items)
         {
             Resource res = (Resource)It;
@@ -90,11 +143,20 @@ public class Inventory : Spatial
                     {
                         ((Battery)newItem).SetCurrentCap((float)CustomDataValues[i]);
                     }
+                }
+            }
+            else if (newItem is Limb l)
+            {
+                Array CustomDataKeys = (Array)res.Get("CustomDataKeys");
+		        Godot.Collections.Array CustomDataValues = (Godot.Collections.Array)res.Get("CustomDataValues");
+                for (int i = 0; i < CustomDataKeys.Length; i++)
+                {
                     if ((string)CustomDataKeys.GetValue(i) == "LimbColor")
                     {
-                        ((Limb)newItem).SetColor((Color)CustomDataValues[i]);
+                        l.SetColor((Color)CustomDataValues[i]);
                     }
                 }
+                l.RandomiseColor = false;
             }
             InsertItem(newItem);
         }
@@ -116,20 +178,19 @@ public class Inventory : Spatial
         if (item is Instrument && !CharacterOwner.HasInstrument())
         {
             CharacterOwner.AddInstrument((Instrument)item);
-            return true;
         }
         else
         {
-            if (item is Limb limb && !CharacterOwner.HasLimbOfType(limb.GetLimbType()))
-            {
-                CharacterOwner.ToggleLimb(limb.GetLimbType(), true);
-                CharacterOwner.SetLimbColor(limb.GetLimbType(), limb.GetColor());
-                limb.Equiped = true;
-            }
                 
             AddChild(item);
             item.Hide();
             item.GetNode<CollisionShape>("CollisionShape").SetDeferred("disabled",true);
+
+            //if (item is Limb limb && !CharacterOwner.HasLimbOfType(limb.GetLimbType()))
+            if (item is Limb limb && !IsLimbSlotFilled(limb.GetSlotType()))
+            {
+                EquipLimp(limb);
+            }
         }
 
         WorldMap map = WorldMap.GetInstance();
@@ -152,6 +213,17 @@ public class Inventory : Spatial
         //ui.UpdateInventory();
         return true;
     }
+    public void ChangeInstrument(Instrument inst)
+    {
+        Instrument currentinst = CharacterOwner.GetInstrument();
+        if (currentinst == inst)
+            return;
+        currentinst.GetParent().RemoveChild(currentinst);
+        AddChild(currentinst);
+        currentinst.Visible = false;
+        RemoveChild(inst);
+        CharacterOwner.AddInstrument(inst);
+    }
     public bool RemoveItem(Item item)
     {
         InventoryContents.Remove(item);
@@ -159,11 +231,10 @@ public class Inventory : Spatial
         if (item is Instrument && ((Instrument)item).IsPlaying())
             CharacterOwner.OnSongEnded((Instrument)item);
            
-        if (item is Limb && ((Limb)item).Equiped)
+        if (item is Limb l && EquippedLimbs.Contains(l))
         {
-            Limb limb = (Limb)item;
-            CharacterOwner.ToggleLimb(limb.GetLimbType(), false);
-            limb.Equiped = false;
+            UnEquipLimp(l);
+            
         }
         item.GetParent().RemoveChild(item);
         
@@ -180,15 +251,13 @@ public class Inventory : Spatial
         {
             CharacterOwner.GetParent().AddChild(item);
         }
-        
-        //WorldMap.GetInstance().AddChild(item);
+
         item.Show();
         Vector3 loc = ((Character)GetParent()).GlobalTranslation;
         loc.y += 1;
-        //loc.origin.z += 1;
         item.GlobalTranslation= loc;
         item.Translation = new Vector3(item.Translation.x, item.Translation.y, item.Translation.z + 1);
-        //EmitSignal(nameof(On_Item_Removed), item);
+
         item.GetNode<CollisionShape>("CollisionShape").SetDeferred("disabled",false);
         
         ui.UpdateInventory();
@@ -222,8 +291,8 @@ public class Inventory : Spatial
         {
             Items.Add(InventoryContents[i]);
         }
-        if (CharacterOwner.HasInstrument())
-            Items.Add(CharacterOwner.GetInstrument());
+        //if (CharacterOwner.HasInstrument())
+            //Items.Add(CharacterOwner.GetInstrument());
     }
     public void GetItemsByType(out List<Item> Items, ItemName Type)
     {

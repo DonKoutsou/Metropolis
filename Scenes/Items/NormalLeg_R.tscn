@@ -26,6 +26,7 @@ ItemName = "Δεξιό άκρο Ν01"
 ItemDesc = ""
 stackable = false
 Type = 5
+SlotType = 3
 RandomiseColor = true
 LimbColor = Color( 0.494118, 0, 0, 1 )
 

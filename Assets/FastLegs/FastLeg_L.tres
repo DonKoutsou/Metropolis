@@ -1,6 +1,6 @@
 [gd_resource type="ArrayMesh" load_steps=2 format=2]
 
-[ext_resource path="res://Assets/FastLegs/M_Legs.material" type="Material" id=1]
+[ext_resource path="res://Assets/FastLegs/M_FastLegs.material" type="Material" id=1]
 
 [resource]
 blend_shape_mode = 0

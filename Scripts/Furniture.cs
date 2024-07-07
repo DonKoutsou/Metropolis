@@ -45,6 +45,11 @@ public class Furniture : Spatial
 	}
 	public void Search(out Item founditem)
 	{
+		AnimationPlayer anim = GetNodeOrNull<AnimationPlayer>("AnimationPlayer");
+		if (anim != null)
+		{
+			anim.Play("Open");
+		}
 		founditem = StashedItem;
 		Searched = true;
 	}

@@ -1,18 +1,44 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://shaders/OutlineShader.tres" type="Material" id=1]
 [ext_resource path="res://Scripts/Furniture.cs" type="Script" id=2]
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Chest/Chest_Body.obj" type="ArrayMesh" id=4]
+[ext_resource path="res://Assets/Chest/ChestMat.tres" type="Material" id=5]
+[ext_resource path="res://Assets/Chest/Chest_Cao.obj" type="ArrayMesh" id=6]
 
-[sub_resource type="CubeMesh" id=1]
-size = Vector3( 3, 2, 2 )
+[sub_resource type="BoxShape" id=7]
+extents = Vector3( 1.64172, 1.26362, 1.18064 )
 
-[sub_resource type="SpatialMaterial" id=3]
-resource_local_to_scene = true
-albedo_color = Color( 0.486275, 0.486275, 0.486275, 1 )
+[sub_resource type="Animation" id=5]
+resource_name = "Open"
+tracks/0/type = "value"
+tracks/0/path = NodePath("MeshInstance2:rotation_degrees")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( -60, 0, 0 ), Vector3( -60, 0, 0 ) ]
+}
 
-[sub_resource type="ConcavePolygonShape" id=4]
-data = PoolVector3Array( -1.5, 1, 1, 1.5, 1, 1, -1.5, -1, 1, 1.5, 1, 1, 1.5, -1, 1, -1.5, -1, 1, 1.5, 1, -1, -1.5, 1, -1, 1.5, -1, -1, -1.5, 1, -1, -1.5, -1, -1, 1.5, -1, -1, 1.5, 1, 1, 1.5, 1, -1, 1.5, -1, 1, 1.5, 1, -1, 1.5, -1, -1, 1.5, -1, 1, -1.5, 1, -1, -1.5, 1, 1, -1.5, -1, -1, -1.5, 1, 1, -1.5, -1, 1, -1.5, -1, -1, 1.5, 1, 1, -1.5, 1, 1, 1.5, 1, -1, -1.5, 1, 1, -1.5, 1, -1, 1.5, 1, -1, -1.5, -1, 1, 1.5, -1, 1, -1.5, -1, -1, 1.5, -1, 1, 1.5, -1, -1, -1.5, -1, -1 )
+[sub_resource type="Animation" id=6]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("MeshInstance2:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
 
 [node name="Furniture" type="StaticBody" groups=["Interactables"]]
 collision_layer = 16
@@ -22,12 +48,22 @@ script = ExtResource( 2 )
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 material_overlay = ExtResource( 1 )
-mesh = SubResource( 1 )
-material/0 = SubResource( 3 )
+mesh = ExtResource( 4 )
+material/0 = ExtResource( 5 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.90767, -1.14969 )
+material_overlay = ExtResource( 1 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 5 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
-shape = SubResource( 4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45066, 0 )
+shape = SubResource( 7 )
 
 [node name="ActionComponent" parent="." instance=ExtResource( 3 )]
 ActionDistance = 5.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Open = SubResource( 5 )
+anims/RESET = SubResource( 6 )

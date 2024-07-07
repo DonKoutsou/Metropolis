@@ -126,6 +126,8 @@ public class House : Spatial
 
 		DecorationList.Insert(0, dec);
 
+
+		Furiture.QueueFree();
 		/*foreach (Node nd in GetChildren())
 		{
 			if (nd is Furniture)
@@ -192,6 +194,7 @@ public class House : Spatial
 			AddChild(decor, true);
 			decor.Transform = Dinfo.Placement;
 		}
+		GetNode<Spatial>("FurniturePlacements").QueueFree();
 	}
 	public void InputData(HouseInfo data)
 	{
