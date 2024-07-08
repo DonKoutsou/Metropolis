@@ -68,6 +68,7 @@ tracks/1/keys = {
 collision_layer = 16
 collision_mask = 0
 script = ExtResource( 2 )
+ToHighLight = [ NodePath("MeshInstance"), NodePath("MeshInstance4"), NodePath("MeshInstance5") ]
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.81441, 0 )

@@ -7,6 +7,9 @@ public class Furniture : Spatial
 	[Export]
 	public string FurnitureDescription;
 
+	[Export]
+	List<NodePath> ToHighLight = new List<NodePath>();
+
 	public Item StashedItem;
 
 	bool Searched = false;
@@ -87,9 +90,20 @@ public class Furniture : Spatial
 	public void HighLightObject(bool toggle)
     {
 		if (Searched)
-        	((ShaderMaterial)GetNode<MeshInstance>("MeshInstance").MaterialOverlay).SetShaderParam("enable",  false);
+		{
+			foreach (NodePath path in ToHighLight)
+			{
+				((ShaderMaterial)GetNode<MeshInstance>(path).MaterialOverlay).SetShaderParam("enable",  false);
+			}
+		}
 		else
-			((ShaderMaterial)GetNode<MeshInstance>("MeshInstance").MaterialOverlay).SetShaderParam("enable",  toggle);
+		{
+			foreach (NodePath path in ToHighLight)
+			{
+				((ShaderMaterial)GetNode<MeshInstance>(path).MaterialOverlay).SetShaderParam("enable",  toggle);
+			}
+		}
+			
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
