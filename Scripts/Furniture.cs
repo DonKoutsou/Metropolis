@@ -9,11 +9,15 @@ public class Furniture : Spatial
 
 	public Item StashedItem;
 
-	public bool Searched = false;
+	bool Searched = false;
 
 	//public override void _Ready()
 	//{
 	//}
+	public bool GetIsSearched()
+	{
+		return Searched;
+	}
 	public void SpawnItem(PackedScene it)
 	{
 		if (it == null)
@@ -45,13 +49,17 @@ public class Furniture : Spatial
 	}
 	public void Search(out Item founditem)
 	{
+		PlayerSearchAnim();
+		founditem = StashedItem;
+		Searched = true;
+	}
+	private void PlayerSearchAnim()
+	{
 		AnimationPlayer anim = GetNodeOrNull<AnimationPlayer>("AnimationPlayer");
 		if (anim != null)
 		{
 			anim.Play("Open");
 		}
-		founditem = StashedItem;
-		Searched = true;
 	}
 	public bool HasBeenSearched()
 	{
@@ -73,6 +81,8 @@ public class Furniture : Spatial
 				RespawnItem(MyWorld.GetItemByType(info.item));
 			}
 		}
+		else
+			PlayerSearchAnim();
 	}
 	public void HighLightObject(bool toggle)
     {
@@ -126,7 +136,7 @@ public class FurnitureInfo
 	public ItemName item;
 	public void UpdateInfo(Furniture furn)
 	{
-		Searched = furn.Searched;
+		Searched = furn.GetIsSearched();
 	}
 
 	public void SetInfo(string name, bool srch, bool hasI, ItemName it, string SceneDt, Transform placement)

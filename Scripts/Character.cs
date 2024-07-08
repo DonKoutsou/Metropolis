@@ -83,7 +83,6 @@ public class Character : KinematicBody
     }
 	public override void _Ready()
 	{
-
 		anim = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Character_Animations>("AnimationPlayer");
 		HeadPivot = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("BoneAttachment").GetNode<Spatial>("HeadPivot");
 		NightLight = HeadPivot.GetNode<SpotLight>("NightLight");

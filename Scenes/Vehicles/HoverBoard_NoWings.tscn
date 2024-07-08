@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Assets/Boat/M_Boat.material" type="Material" id=1]
 [ext_resource path="res://Scripts/Vehicle.cs" type="Script" id=2]
@@ -18,16 +18,6 @@
 [ext_resource path="res://Assets/Boat/ΚαικιΗιγη_lambert1_BaseColor.png" type="Texture" id=16]
 [ext_resource path="res://Assets/Boat/ΚαικιΗιγη_lambert1_OcclusionRoughnessMetallic.png" type="Texture" id=17]
 [ext_resource path="res://shaders/OutlineShader.tres" type="Material" id=18]
-[ext_resource path="res://Assets/TerainTex/Fabric045_1K-JPG/Fabric045_1K-JPG_AmbientOcclusion.jpg" type="Texture" id=19]
-[ext_resource path="res://Assets/Boat/Parts/Sails.obj" type="ArrayMesh" id=20]
-[ext_resource path="res://Assets/TerainTex/PaintedWood008C_1K-JPG/PaintedWood008C_1K-JPG_AmbientOcclusion.jpg" type="Texture" id=21]
-[ext_resource path="res://Assets/TerainTex/PaintedWood008C_1K-JPG/PaintedWood008C_1K-JPG_NormalGL.jpg" type="Texture" id=22]
-[ext_resource path="res://Assets/TerainTex/PaintedWood008C_1K-JPG/PaintedWood008C_1K-JPG_Roughness.jpg" type="Texture" id=23]
-[ext_resource path="res://Assets/TerainTex/PaintedWood008C_1K-JPG/PaintedWood008C_1K-JPG_Color.jpg" type="Texture" id=24]
-[ext_resource path="res://Assets/TerainTex/Fabric045_1K-JPG/Fabric045_1K-JPG_Color.jpg" type="Texture" id=25]
-[ext_resource path="res://Assets/TerainTex/Fabric045_1K-JPG/Fabric045_1K-JPG_Roughness.jpg" type="Texture" id=26]
-[ext_resource path="res://Assets/TerainTex/Fabric045_1K-JPG/Fabric045_1K-JPG_NormalGL.jpg" type="Texture" id=27]
-[ext_resource path="res://Assets/Boat/BoatFabric2.tres" type="Material" id=28]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0
@@ -54,49 +44,9 @@ ao_texture = ExtResource( 17 )
 ao_on_uv2 = false
 ao_texture_channel = 0
 
-[sub_resource type="SpatialMaterial" id=111]
-params_cull_mode = 2
-albedo_color = Color( 0.631373, 0.564706, 0.34902, 1 )
-albedo_texture = ExtResource( 25 )
-roughness_texture = ExtResource( 26 )
-roughness_texture_channel = 4
-normal_enabled = true
-normal_scale = 1.0
-normal_texture = ExtResource( 27 )
-ao_enabled = true
-ao_light_affect = 1.0
-ao_texture = ExtResource( 19 )
-ao_on_uv2 = false
-ao_texture_channel = 0
-
-[sub_resource type="SpatialMaterial" id=112]
-albedo_texture = ExtResource( 24 )
-roughness_texture = ExtResource( 23 )
-roughness_texture_channel = 4
-normal_enabled = true
-normal_scale = 1.0
-normal_texture = ExtResource( 22 )
-ao_enabled = true
-ao_light_affect = 1.0
-ao_texture = ExtResource( 21 )
-ao_on_uv2 = false
-ao_texture_channel = 4
-
 [sub_resource type="CapsuleShape" id=8]
 radius = 3.11783
 height = 21.3571
-
-[sub_resource type="CylinderShape" id=113]
-height = 15.986
-radius = 0.530287
-
-[sub_resource type="CylinderShape" id=115]
-height = 10.3297
-radius = 0.274704
-
-[sub_resource type="CylinderShape" id=114]
-height = 8.90303
-radius = 0.530287
 
 [sub_resource type="BoxShape" id=32]
 extents = Vector3( 0.366748, 0.297252, 0.302782 )
@@ -280,13 +230,6 @@ material_override = SubResource( 44 )
 material_overlay = ExtResource( 18 )
 mesh = ExtResource( 15 )
 
-[node name="MeshInstance5" type="MeshInstance" parent="VehicleBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.199, 0 )
-mesh = ExtResource( 20 )
-material/0 = ExtResource( 28 )
-material/1 = SubResource( 111 )
-material/2 = SubResource( 112 )
-
 [node name="WindDetector" type="MeshInstance" parent="VehicleBody"]
 transform = Transform( 0.0239615, 0.00172045, -0.999714, -0.000419281, 1, 0.00171089, 0.999717, 0.000378179, 0.0239623, -0.0573806, 4.83131, 9.57226 )
 mesh = ExtResource( 7 )
@@ -295,18 +238,6 @@ script = ExtResource( 9 )
 [node name="CollisionShape" type="CollisionShape" parent="VehicleBody"]
 transform = Transform( 1, -2.88026e-10, 1.16415e-10, 1.56888e-11, 1, -4.65661e-10, 0, 4.65661e-10, 1, 0.000144172, 1.23038, -1.05494 )
 shape = SubResource( 8 )
-
-[node name="CollisionShape7" type="CollisionShape" parent="VehicleBody"]
-transform = Transform( 0.999993, 0.000780266, -0.00368827, -1.49438e-10, 0.978347, 0.206973, 0.0037699, -0.206971, 0.97834, 0.000144184, 12.4954, -2.76233 )
-shape = SubResource( 113 )
-
-[node name="CollisionShape9" type="CollisionShape" parent="VehicleBody"]
-transform = Transform( -0.999896, -0.0144333, 0, -0.00831198, 0.57583, 0.817527, -0.0117996, 0.817442, -0.57589, 0.000144184, 7.77133, 14.5198 )
-shape = SubResource( 115 )
-
-[node name="CollisionShape8" type="CollisionShape" parent="VehicleBody"]
-transform = Transform( 0.993677, 0.0492724, -0.10089, 0.0428084, 0.664434, 0.74612, 0.103798, -0.745721, 0.658123, -0.526399, 19.071, -8.20243 )
-shape = SubResource( 114 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="VehicleBody"]
 transform = Transform( 1, -7.55222e-10, 1.33878e-09, 1.91221e-10, 1, 1.74623e-09, -8.14907e-10, -1.74623e-09, 1, 0.00648252, 6.04512, 13.7507 )
@@ -442,11 +373,11 @@ anims/RESET = SubResource( 18 )
 anims/Wings = SubResource( 17 )
 anims/WingsOut = SubResource( 19 )
 
-[node name="MeshInstance2" type="MeshInstance" parent="VehicleBody"]
+[node name="LightMesh" type="MeshInstance" parent="VehicleBody"]
 transform = Transform( 1, -0.00022008, -0.00144871, -0.00145632, -0.258818, -0.965926, -0.000162362, 0.965927, -0.258818, 0.0113567, 6.12427, 13.7928 )
 mesh = SubResource( 31 )
 
-[node name="SpotLight" type="SpotLight" parent="VehicleBody/MeshInstance2"]
+[node name="SpotLight" type="SpotLight" parent="VehicleBody/LightMesh"]
 transform = Transform( 0.999998, -0.000111042, -0.00137818, -0.00138151, -0.12076, -0.992681, -5.62005e-05, 0.992682, -0.12076, 0.000247595, 0.441803, -0.0692534 )
 light_color = Color( 1, 0.956863, 0.815686, 1 )
 shadow_enabled = true
@@ -455,11 +386,11 @@ spot_range = 519.392
 spot_attenuation = 2.14354
 spot_angle = 55.8586
 
-[node name="MeshInstance3" type="MeshInstance" parent="VehicleBody"]
+[node name="SteerEngineL_Mesh" type="MeshInstance" parent="VehicleBody"]
 transform = Transform( 0.707088, -0.707125, -0.00187554, -0.00186727, 0.000785189, -0.999999, 0.707125, 0.70709, -0.000765205, 5.29902, -0.258306, 0.513362 )
 mesh = SubResource( 34 )
 
-[node name="MeshInstance4" type="MeshInstance" parent="VehicleBody"]
+[node name="SteerEngineR_Mesh" type="MeshInstance" parent="VehicleBody"]
 transform = Transform( 0.707127, 0.70709, -0.000361575, -0.00035384, -0.000157499, -1, -0.70709, 0.707128, 0.000138825, -5.26048, -0.341654, 0.520023 )
 mesh = SubResource( 34 )
 

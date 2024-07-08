@@ -77,7 +77,7 @@ public class Vehicle : RigidBody
     {
         base._Ready();
         WindD = GetNode<WindDetector>("WindDetector");
-        FrontLight = GetNode<MeshInstance>("MeshInstance2").GetNode<SpotLight>("SpotLight");
+        FrontLight = GetNode<MeshInstance>("LightMesh").GetNode<SpotLight>("SpotLight");
         FrontLight.LightEnergy = 0;
         Anim = GetNode<AnimationPlayer>("AnimationPlayer");
         SteeringWheel = GetNode<Spatial>("SteeringWheel");

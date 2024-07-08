@@ -126,8 +126,8 @@ public class Inventory : Spatial
     public void LoadSavedInventory(Godot.Collections.Array items)
     {
         DeleteContents();
-        CharacterOwner = (Character)GetParent();
-        CharacterOwner.ToggleAllLimbs();
+        //CharacterOwner = (Character)GetParent();
+        //CharacterOwner.ToggleAllLimbs();
         foreach(var It in items)
         {
             Resource res = (Resource)It;
@@ -181,7 +181,6 @@ public class Inventory : Spatial
         }
         else
         {
-                
             AddChild(item);
             item.Hide();
             item.GetNode<CollisionShape>("CollisionShape").SetDeferred("disabled",true);
@@ -267,8 +266,17 @@ public class Inventory : Spatial
     {
         InventoryContents.Remove(item);
         currentweight -= item.GetInventoryWeight();
+        if (item is Instrument && ((Instrument)item).IsPlaying())
+            CharacterOwner.OnSongEnded((Instrument)item);
+           
+        if (item is Limb l && EquippedLimbs.Contains(l))
+        {
+            UnEquipLimp(l);
+            
+        }
+        currentweight -= item.GetInventoryWeight();
         RemoveChild(item);
-        item.QueueFree();
+        item.Free();
     }
     public void RemoveAllItems()
     {

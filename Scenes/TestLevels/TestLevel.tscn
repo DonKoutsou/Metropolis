@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Scenes/Characters/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/HUD/InventoryUI.tscn" type="PackedScene" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://Scenes/Items/SkeleArm_L.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Scenes/Env_Assets/Furniture2.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Scenes/Env_Assets/Furniture.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Scenes/Env_Assets/Furniture3.tscn" type="PackedScene" id=24]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_texture = ExtResource( 6 )
@@ -178,3 +179,6 @@ transform = Transform( 0.0405684, 0.000103376, 0.999177, 9.16135e-05, 1, -0.0001
 
 [node name="Furniture2" parent="." instance=ExtResource( 23 )]
 transform = Transform( -0.999652, 0, 0.0263688, 0, 1, 0, -0.0263688, 0, -0.999652, 5.79053, 13.502, 8.79055 )
+
+[node name="Furniture3" parent="." instance=ExtResource( 24 )]
+transform = Transform( 0.377679, 0, 0.925937, 0, 1, 0, -0.925937, 0, 0.377679, -0.512348, 13.5022, -10.8216 )
