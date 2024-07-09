@@ -405,6 +405,11 @@ public class MapGrid : GridContainer
             child.GetNode<TextureRect>("TextureRect").RectRotation = rot;
         }
         //child.type = (int)type;
+        float thing = Math.Max(Math.Abs(index.x), Math.Abs(index.y)) / 40;
+        Panel fogp = child.GetNode<Panel>("FogPanel");
+        Color c = fogp.Modulate;
+        c.a = thing;
+        fogp.Modulate = c;
         child.Modulate = new Color(1,1,1,1);
     }
     float d = 0.2f;

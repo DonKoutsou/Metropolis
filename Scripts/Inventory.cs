@@ -143,6 +143,10 @@ public class Inventory : Spatial
                     {
                         ((Battery)newItem).SetCurrentCap((float)CustomDataValues[i]);
                     }
+                    if ((string)CustomDataKeys.GetValue(i) == "CurrentCondition")
+                    {
+                        ((Battery)newItem).SetCurrentCondition((float)CustomDataValues[i]);
+                    }
                 }
             }
             else if (newItem is Limb l)
@@ -344,17 +348,21 @@ public class Inventory : Spatial
 		Name = it.Name;
 		Position = it.GlobalTranslation;
 		SceneData = it.Filename;
-		if (it is Battery)
+		if (it is Battery bat)
 		{
-			CustomData.Add("CurrentEnergy", ((Battery)it).GetCurrentCap());
+			CustomData.Add("CurrentEnergy", bat.GetCurrentCap());
+            CustomData.Add("CurrentCondition", bat.GetCondition());
 		}
 	}
 	public Dictionary<string, object>GetPackedData()
 	{
-		Dictionary<string, object> data = new Dictionary<string, object>();
-		data.Add("Position", Position);
-		data.Add("Name", Name);
-		data.Add("SceneData", SceneData);
+		Dictionary<string, object> data = new Dictionary<string, object>()
+        {
+            {"Position", Position},
+            {"Name", Name},
+            {"SceneData", SceneData}
+        };
+
 		if (CustomData.Count > 0)
 		{
 			string[] CustomDataKeys = new string[CustomData.Count];

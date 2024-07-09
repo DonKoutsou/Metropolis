@@ -16,14 +16,17 @@ public class InventoryUISlot : Control
     ProgressBar Rbar;
 
     Panel LimbColor;
+
+    ConditionPanel Condition;
     
     public override void _Ready()
     {
         ItemIcon = GetNode<Button>("ItemIcon");
         Ammount = GetNode<RichTextLabel>("Ammount");
-        UI = (InventoryUI)(GetParent().GetParent());
+        UI = (InventoryUI)GetParent().GetParent();
         Rbar = GetNode<ProgressBar>("ItemResourceBar");
         LimbColor = GetNode<Panel>("LimbColor");
+        Condition = GetNode<ConditionPanel>("ConditionPanel");
     }
     public void SetItem(Item it, int ammount = 0)
     {
@@ -35,6 +38,7 @@ public class InventoryUISlot : Control
             ItemIcon.MouseFilter = MouseFilterEnum.Ignore;
             Rbar.Hide();
             LimbColor.Hide();
+            Condition.Hide();
         }
         else
         {
@@ -46,7 +50,9 @@ public class InventoryUISlot : Control
             {
                 Battery bat = (Battery)it;
                 Rbar.Value = bat.GetCurrentCap();
+                Condition.SetCondition(bat.GetCondition());
                 Rbar.Show();
+                Condition.Show();
                 LimbColor.Hide();
             }
             else if (it is Limb)
@@ -55,11 +61,13 @@ public class InventoryUISlot : Control
                 ((StyleBoxFlat)LimbColor.GetStylebox("panel")).BgColor = bat.GetColor();
                 LimbColor.Show();
                 Rbar.Hide();
+                Condition.Hide();
             }
             else
             {   
                 LimbColor.Hide();
                 Rbar.Hide();
+                Condition.Hide();
             }
                 
         }

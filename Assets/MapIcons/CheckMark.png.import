@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/anchor.png-99757efc1d490fc4b2f76cc76bc3e4d9.stex"
+path="res://.import/CheckMark.png-d8651c7bf6d75d5c78a3fad0c4b1e523.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI/Icon/anchor.png"
-dest_files=[ "res://.import/anchor.png-99757efc1d490fc4b2f76cc76bc3e4d9.stex" ]
+source_file="res://Assets/MapIcons/CheckMark.png"
+dest_files=[ "res://.import/CheckMark.png-d8651c7bf6d75d5c78a3fad0c4b1e523.stex" ]
 
 [params]
 
@@ -22,7 +22,7 @@ compress/normal_map=0
 flags/repeat=0
 flags/filter=true
 flags/mipmaps=false
-flags/anisotropic=true
+flags/anisotropic=false
 flags/srgb=2
 process/fix_alpha_border=true
 process/premult_alpha=false
@@ -30,6 +30,6 @@ process/HDR_as_SRGB=false
 process/invert_color=false
 process/normal_map_invert_y=false
 stream=false
-size_limit=32
+size_limit=0
 detect_3d=true
 svg/scale=1.0

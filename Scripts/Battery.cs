@@ -9,6 +9,9 @@ public class Battery : Item
     [Export]
     float CurrentEnergy = 0;
 
+    [Export]
+    float condition = 100;
+
     public override void _Ready()
     {
         base._Ready();
@@ -21,13 +24,22 @@ public class Battery : Item
             CurrentEnergy = Capacity;
         }
     }
+    public void Repair(float to)
+    {
+        condition = to;
+    }
     public void ConsumeEnergy(float ammount)
     {
-        CurrentEnergy -= ammount;
+        CurrentEnergy -= ammount * (1 - condition / 100 + 1);
+        condition -= ammount /10;
     }
     public float GetCapacity()
     {
         return Capacity;
+    }
+    public float GetCondition()
+    {
+        return condition;
     }
     public float GetCurrentCap()
     {
@@ -37,9 +49,13 @@ public class Battery : Item
     {
         CurrentEnergy = CurCap;
     }
+    public void SetCurrentCondition(float cond)
+    {
+        condition = cond;
+    }
     public override string GetItemDesc()
     {
-        return ItemDesc + " \n Capacity: " + CurrentEnergy + "/" + Capacity;
+        return ItemDesc + " \n Capacity: " + (int)CurrentEnergy + "/" + Capacity + "\n Condition " + (int)condition + "/" + 100;
     }
 
 }

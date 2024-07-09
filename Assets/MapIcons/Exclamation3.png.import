@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/anchor.png-99757efc1d490fc4b2f76cc76bc3e4d9.stex"
+path="res://.import/Exclamation3.png-7c8cd1cc866b1a22ea6fa73ddf700b3e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI/Icon/anchor.png"
-dest_files=[ "res://.import/anchor.png-99757efc1d490fc4b2f76cc76bc3e4d9.stex" ]
+source_file="res://Assets/MapIcons/Exclamation3.png"
+dest_files=[ "res://.import/Exclamation3.png-7c8cd1cc866b1a22ea6fa73ddf700b3e.stex" ]
 
 [params]
 
@@ -22,7 +22,7 @@ compress/normal_map=0
 flags/repeat=0
 flags/filter=true
 flags/mipmaps=false
-flags/anisotropic=true
+flags/anisotropic=false
 flags/srgb=2
 process/fix_alpha_border=true
 process/premult_alpha=false

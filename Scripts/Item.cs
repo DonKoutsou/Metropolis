@@ -52,7 +52,7 @@ public class Item : RigidBody
 		if (RegisterOnIsland)
 		{
 			Node par = GetParent();
-			if (par is Inventory || par is Furniture || par is Character)
+			if (par is Inventory || par is Furniture || par is Character || par is Player)
 				return;
 			while (!(par is Island))
 			{
