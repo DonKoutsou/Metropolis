@@ -475,7 +475,7 @@ public class WorldMap : TileMap
 					ileinfto.AddNewVehicle(veh);
 				}
 				
-				MyWorld.IleTransition(ileinf, ileinfto);
+				MyWorld.IleTransition(ileinfto);
 				
 				EmitSignal("OnTransitionEventHandler", ileinfto.Island);
 			}

@@ -30,8 +30,6 @@ public class DayNight : WorldEnvironment
     [Export]
     Gradient MoonColorGradient = null;
 
-    
-
     [Export]
     int startinghour = 10;
 
@@ -45,6 +43,19 @@ public class DayNight : WorldEnvironment
 
     [Export]
     Curve RainStreangthCurve = null;
+
+    [Export]
+    Curve FogDirstanceCurve = null;
+
+    [Export]
+    Color FogDistantColor = new Color(0.8f, 0.6f, 0.38f);
+
+    float CurrentDistance = 0;
+
+    public void UpdatePlayerDistance(float newdist)
+    {
+        CurrentDistance = newdist;
+    }
 
     [Signal]
     public delegate void DayEventHandler();
@@ -180,7 +191,8 @@ public class DayNight : WorldEnvironment
             }
         }
     }
-    private void CalculateDay(out Color FogColor, out Color FogSunColor, out Color AmbientLightColor, out Color BackgroundColor, out float AmbientLightEnergy)
+    //private void CalculateDay(out Color FogColor, out Color FogSunColor, out Color AmbientLightColor, out Color BackgroundColor, out float AmbientLightEnergy)
+    private void CalculateDay(out Color FogColor, out Color AmbientLightColor, out Color BackgroundColor, out float AmbientLightEnergy)
     {
         //if (!day)
             ToggleDay(0);
@@ -189,7 +201,7 @@ public class DayNight : WorldEnvironment
 
         Color backgroundcolor = new Color (0.0f, 0.0f,0.0f).LinearInterpolate(SunColor, Softlight);
 
-        FogSunColor = SunColor;
+        //FogSunColor = SunColor;
 
         FogColor = backgroundcolor;
 
@@ -201,14 +213,15 @@ public class DayNight : WorldEnvironment
 
         //Environment.FogSunAmount = 0.3f;
     }
-    private void CalculateNight(out Color FogColor, out Color FogSunColor, out Color AmbientLightColor, out Color BackgroundColor, out float AmbientLightEnergy)
+    //private void CalculateNight(out Color FogColor, out Color FogSunColor, out Color AmbientLightColor, out Color BackgroundColor, out float AmbientLightEnergy)
+    private void CalculateNight(out Color FogColor, out Color AmbientLightColor, out Color BackgroundColor, out float AmbientLightEnergy)
     {
         //if (day)
             ToggleDay(1);
         
         moon.LightEnergy = MoonBrightness;
 
-        FogSunColor = MoonColor;
+        //FogSunColor = MoonColor;
 
         Color backgroundcolor = new Color (0.0f, 0.0f,0.0f).LinearInterpolate(MoonColor, Softlight);
 
@@ -222,7 +235,8 @@ public class DayNight : WorldEnvironment
 
         //Environment.FogSunAmount = 0.05f;
     }
-    private void CalculateTransition(out Color FogColor, out Color FogSunColor, out Color AmbientLightColor, out Color BackgroundColor, out float AmbientLightEnergy)
+    //private void CalculateTransition(out Color FogColor, out Color FogSunColor, out Color AmbientLightColor, out Color BackgroundColor, out float AmbientLightEnergy)
+    private void CalculateTransition(out Color FogColor, out Color AmbientLightColor, out Color BackgroundColor, out float AmbientLightEnergy)
     {
         //sun.Show();
         //moon.Show();
@@ -299,7 +313,7 @@ public class DayNight : WorldEnvironment
 
         AmbientLightEnergy = Softlight;
 
-        FogSunColor = mix;
+        //FogSunColor = mix;
     }
     private void UpdateSunMoonPlacament()
     {
@@ -397,7 +411,7 @@ public class DayNight : WorldEnvironment
         /////
         Color FogColor;
 
-        Color FogSunColor;
+        //Color FogSunColor;
 
         Color AmbientLightColor;
 
@@ -409,19 +423,24 @@ public class DayNight : WorldEnvironment
 
         if (SunRot > 190 && SunRot < 350)
         {
-            CalculateDay(out FogColor, out FogSunColor, out AmbientLightColor, out BackgroundColor, out AmbientLightEnergy);
+            //CalculateDay(out FogColor, out FogSunColor, out AmbientLightColor, out BackgroundColor, out AmbientLightEnergy);
+            CalculateDay(out FogColor, out AmbientLightColor, out BackgroundColor, out AmbientLightEnergy);
         }
         else if (SunRot < 170 && SunRot > 10)
         {
-            CalculateNight(out FogColor, out FogSunColor, out AmbientLightColor, out BackgroundColor, out AmbientLightEnergy);
+            //CalculateNight(out FogColor, out FogSunColor, out AmbientLightColor, out BackgroundColor, out AmbientLightEnergy);
+            CalculateNight(out FogColor, out AmbientLightColor, out BackgroundColor, out AmbientLightEnergy);
         }
         else
         {
-            CalculateTransition(out FogColor, out FogSunColor, out AmbientLightColor, out BackgroundColor, out AmbientLightEnergy);
+            //CalculateTransition(out FogColor, out FogSunColor, out AmbientLightColor, out BackgroundColor, out AmbientLightEnergy);
+            CalculateTransition(out FogColor, out AmbientLightColor, out BackgroundColor, out AmbientLightEnergy);
         }
-        Environment.FogSunColor = FogSunColor;
+       //Environment.FogSunColor = FogSunColor;
 
-        //Environment.FogColor = FogColor;
+        Environment.FogColor = FogColor.LinearInterpolate(FogDistantColor, CurrentDistance);
+
+        Environment.FogDepthEnd = FogDirstanceCurve.Interpolate(CurrentDistance) * 1000;
 
         Environment.AmbientLightColor = AmbientLightColor;
 

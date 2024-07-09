@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://addons/SIsilicon.vfx.godrays/GodRays.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/World/DayNightController.tscn" type="PackedScene" id=2]
@@ -31,6 +31,11 @@ _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.130519, 360 ), 0.0, 0.0, 0
 max_value = 100.0
 _data = [ Vector2( 0, 76.3804 ), 0.0, 0.0, 0, 0, Vector2( 0.0655844, 88.6503 ), 0.0, 0.0, 0, 0, Vector2( 0.117532, 56.7485 ), 0.0, 0.0, 0, 0, Vector2( 0.19026, 74.5399 ), 0.0, 0.0, 0, 0, Vector2( 0.25, 5.82822 ), 0.0, 0.0, 0, 0, Vector2( 0.266883, 100 ), 0.0, 0.0, 0, 0, Vector2( 0.477273, 82.5153 ), 0.0, 0.0, 0, 0, Vector2( 0.587662, 56.135 ), 0.0, 0.0, 0, 0, Vector2( 0.656493, 94.1718 ), 0.0, 0.0, 0, 0, Vector2( 0.782468, 12.5767 ), 0.0, 0.0, 0, 0, Vector2( 0.874675, 54.2945 ), 0.0, 0.0, 0, 0, Vector2( 1, 80.6749 ), 0.0, 0.0, 0, 0 ]
 
+[sub_resource type="Curve" id=8]
+min_value = 2.0
+max_value = 20.0
+_data = [ Vector2( 0, 20 ), 0.0, -18.8306, 0, 0, Vector2( 1, 2 ), -16.2912, 0.0, 0, 0 ]
+
 [node name="Sky" type="Spatial"]
 
 [node name="DayNightController" parent="." instance=ExtResource( 2 )]
@@ -43,6 +48,7 @@ startinghour = 7
 WindDirCurve = SubResource( 1 )
 WindStreangthCurve = SubResource( 2 )
 RainStreangthCurve = SubResource( 2 )
+FogDirstanceCurve = SubResource( 8 )
 
 [node name="Sun" type="DirectionalLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.0171732, 0.999853, 0, -0.999853, 0.0171732, 0, 0, 0 )

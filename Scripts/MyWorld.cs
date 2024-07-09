@@ -298,13 +298,15 @@ public class MyWorld : Spatial
 		}
     }
 	
-	public static void IleTransition(IslandInfo from, IslandInfo to)
+	public static void IleTransition(IslandInfo to)
 	{
 		//GD.Print("Transitioning from : " + from.Name + " to " + to.Name);
 		WorldMap map = WorldMap.GetInstance();
 		map.SyncSeas();
 		List<IslandInfo> ilestodissable = new List<IslandInfo>();
 		List<IslandInfo> ilestoenable = new List<IslandInfo>();
+
+		DayNight.GetInstance().UpdatePlayerDistance(Math.Max(Math.Abs(to.Position.x), Math.Abs(to.Position.y)) / 40);
 		
 		int ViewDistance = Settings.GetGameSettings().ViewDistance;
 
