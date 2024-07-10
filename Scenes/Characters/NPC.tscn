@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/Characters/NPC.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Items/Bouzouki.tscn" type="PackedScene" id=2]
@@ -7,9 +7,6 @@
 
 [sub_resource type="CapsuleShape" id=6]
 height = 5.16563
-
-[sub_resource type="CylinderShape" id=7]
-radius = 0.1
 
 [node name="Character" type="KinematicBody" groups=["Interactables"]]
 pause_mode = 1
@@ -29,18 +26,6 @@ InstrumentToSpawnWith = ExtResource( 2 )
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3.3181, 0 )
 shape = SubResource( 6 )
 
-[node name="NavigationAgent" type="NavigationAgent" parent="."]
-
-[node name="KillFieldDetector" type="Area" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
-collision_layer = 0
-collision_mask = 64
-monitorable = false
-
-[node name="CollisionShape" type="CollisionShape" parent="KillFieldDetector"]
-transform = Transform( 1.47899, 0, 0, 0, 0.256205, 0, 0, 0, 1.68566, 0, 0, 0 )
-shape = SubResource( 7 )
-
 [node name="TalkPosition" type="Position3D" parent="."]
 transform = Transform( -7.7783, 0, -1.17449e-06, 0, 7.7783, 0, 1.17449e-06, 0, -7.7783, 0, 0.5, 6 )
 
@@ -51,5 +36,4 @@ ActionDistance = 5.0
 wait_time = 30.0
 one_shot = true
 
-[connection signal="body_entered" from="KillFieldDetector" to="." method="OnKillFieldDetectorBodyEntered"]
 [connection signal="timeout" from="IdleTimer" to="." method="Idle_Timer_Ended"]

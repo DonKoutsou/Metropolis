@@ -21,6 +21,7 @@ public class MyWorld : Spatial
 	static List<IslandInfo> Orderedilestoenable = new List<IslandInfo>();
 
 	static List<IslandInfo> ActiveIles = new List<IslandInfo>();
+	
     public override void _EnterTree()
     {
         base._EnterTree();

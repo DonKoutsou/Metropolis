@@ -1,0 +1,112 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Systems/Job.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/JobBoard.cs" type="Script" id=2]
+
+[node name="JobBoard" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="Panel" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -858.0
+margin_top = -486.0
+margin_right = 858.0
+margin_bottom = 486.0
+
+[node name="GridContainer" type="GridContainer" parent="Panel"]
+anchor_left = 0.5
+anchor_top = 0.567
+anchor_right = 0.5
+anchor_bottom = 0.567
+margin_left = -592.0
+margin_top = -288.0
+margin_right = 592.0
+margin_bottom = 288.0
+custom_constants/vseparation = 400
+custom_constants/hseparation = 400
+columns = 4
+
+[node name="Job" parent="Panel/GridContainer" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 0.0
+margin_bottom = 0.0
+
+[node name="Job2" parent="Panel/GridContainer" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 400.0
+margin_top = 0.0
+margin_right = 400.0
+margin_bottom = 0.0
+
+[node name="Job3" parent="Panel/GridContainer" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 800.0
+margin_top = 0.0
+margin_right = 800.0
+margin_bottom = 0.0
+
+[node name="Job4" parent="Panel/GridContainer" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1200.0
+margin_top = 0.0
+margin_right = 1200.0
+margin_bottom = 0.0
+
+[node name="Job5" parent="Panel/GridContainer" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 400.0
+margin_right = 0.0
+margin_bottom = 400.0
+
+[node name="Job6" parent="Panel/GridContainer" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 400.0
+margin_top = 400.0
+margin_right = 400.0
+margin_bottom = 400.0
+
+[node name="Job7" parent="Panel/GridContainer" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 800.0
+margin_top = 400.0
+margin_right = 800.0
+margin_bottom = 400.0
+
+[node name="Job8" parent="Panel/GridContainer" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1200.0
+margin_top = 400.0
+margin_right = 1200.0
+margin_bottom = 400.0

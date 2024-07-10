@@ -69,11 +69,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/dialogic/Other/DialogicUtil.gd"
 }, {
-"base": "Spatial",
-"class": "EnvironmentVolume",
-"language": "GDScript",
-"path": "res://addons/godot-environment-volume/environment_volume.gd"
-}, {
 "base": "Resource",
 "class": "FurnitureSaveInfo",
 "language": "GDScript",
@@ -152,7 +147,6 @@ _global_script_class_icons={
 "DialogicParser": "",
 "DialogicResources": "",
 "DialogicUtil": "",
-"EnvironmentVolume": "res://addons/godot-environment-volume/environment_volume.svg",
 "FurnitureSaveInfo": "",
 "GeneratorSaveInfo": "",
 "HistoryRow": "",
@@ -203,7 +197,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/ImageGenButton/plugin.cfg", "res://addons/dialogic/plugin.cfg", "res://addons/octahedral_impostors/plugin.cfg", "res://addons/zylann.editor_light/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/ImageGenButton/plugin.cfg", "res://addons/SIsilicon.vfx.godrays/plugin.cfg", "res://addons/dialogic/plugin.cfg", "res://addons/octahedral_impostors/plugin.cfg" )
 
 [global]
 

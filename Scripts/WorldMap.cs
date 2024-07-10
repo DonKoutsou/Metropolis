@@ -47,7 +47,7 @@ public class WorldMap : TileMap
 	// one of the lighthouses will become the 2nd town
 	int ΜαχαλάςEntryID;
 	//random stuff
-	Random random;
+	RandomNumberGenerator random;
 	int RandomTimes = 0;
 	/////////////////////
 
@@ -150,13 +150,16 @@ public class WorldMap : TileMap
 		int seed = (int)data.Get("Seed");
 		Settings.GetGameSettings().Seed = seed;
 
-		random = new Random(seed);
-
+		random = new RandomNumberGenerator();
+		random.Seed = (ulong)seed;
+		ulong ms = OS.GetSystemTimeMsecs();
 		for (int i = 0; i < RandomTimes; i++)
 		{
 			random.NextDouble();
 		}
+		ulong msafter = OS.GetSystemTimeMsecs();
 
+		GD.Print("Remaking random took " + (msafter - ms).ToString()+ " RandomTIme == " + RandomTimes);
 		IslandSpawnIndex = (int)data.Get("currentile");
 		ΜαχαλάςEntryID = (int)data.Get("MahalasEntryID");
 		ExitID = (int)data.Get("ExitID");
@@ -289,6 +292,10 @@ public class WorldMap : TileMap
 			return null;
 		return CurIle.Island;
 	}
+	public IslandInfo GetRandomIle(int dist)
+	{
+		
+	}
 	IslandInfo IleToSave;
 	float d = 1;
 	public override void _Process(float delta)
@@ -402,10 +409,6 @@ public class WorldMap : TileMap
 		tex.CreateFromImage(IslandImageHolder.GetInstance().Images[imageId]);
 		//MapGrid.GetInstance().UpdateIleInfo(position, Type, HasPort, Ports, - RotationToSpawn, tex, name);
 		MapGrid.GetInstance().UpdateIleInfo(position, HasPort, Ports, - RotationToSpawn, tex, name);
-	}
-	public void AddIslandToHierarchy(Island ile)
-	{
-		MyWorld.GetInstance().AddChild(ile);
 	}
 	void DespawnIle(Island ile, bool KeepInstance)
 	{

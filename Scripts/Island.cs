@@ -32,6 +32,9 @@ public class Island : Spatial
 	
 	public override void _Ready()
 	{
+		Node b = GetNodeOrNull("Bounds");
+		if (b != null)
+			b.QueueFree();
 		#if DEBUG
 		if (Engine.EditorHint)
 			return;
