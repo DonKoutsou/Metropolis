@@ -178,11 +178,6 @@ boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://IconMetropolis.png"
 config/windows_native_icon="res://IconMetropolis.ico"
 
-[autoload]
-
-WindowCentering="*res://Scripts/WindowCentering.cs"
-UniversalLodManager="*res://Scripts/UniversalLodManager.cs"
-
 [debug]
 
 settings/stdout/verbose_stdout=true
@@ -197,7 +192,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/SIsilicon.vfx.godrays/plugin.cfg", "res://addons/dialogic/plugin.cfg", "res://addons/octahedral_impostors/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/ImageGenButton/plugin.cfg", "res://addons/SIsilicon.vfx.godrays/plugin.cfg", "res://addons/dialogic/plugin.cfg", "res://addons/octahedral_impostors/plugin.cfg" )
 
 [global]
 
