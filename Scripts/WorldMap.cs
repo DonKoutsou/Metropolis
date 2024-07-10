@@ -291,10 +291,48 @@ public class WorldMap : TileMap
 			return null;
 		return CurIle.Island;
 	}
-	//public IslandInfo GetRandomIle(int dist)
+	//public Island TempSpawn(IslandInfo i)
 	//{
-	//	
+
 	//}
+	public IslandInfo GetRandomIle(int MinDist, int MaxDist)
+	{
+		Vector2 min = new Vector2(MinDist, MinDist);
+		Vector2 max = new Vector2(MaxDist, MaxDist);
+		List<IslandInfo> iles = new List<IslandInfo>();
+		foreach (KeyValuePair<Vector2, IslandInfo> i in ilemap)
+		{
+			Vector2 k = i.Key;
+			if (k > min && k < max)
+			{
+				iles.Add(i.Value);
+			}
+		}
+		int index = random.Next(0, iles.Count - 1);
+		RandomTimes ++;
+
+		return iles[index];
+	}
+	public IslandInfo GetRandomLightHouse(int MinDist, int MaxDist)
+	{
+		Vector2 min = new Vector2(MinDist, MinDist);
+		Vector2 max = new Vector2(MaxDist, MaxDist);
+		List<IslandInfo> iles = new List<IslandInfo>();
+		foreach (KeyValuePair<Vector2, IslandInfo> i in ilemap)
+		{
+			if (i.Value.Type != IleType.LIGHTHOUSE)
+				continue;
+			Vector2 k = i.Key;
+			if (k > min && k < max)
+			{
+				iles.Add(i.Value);
+			}
+		}
+		int index = random.Next(0, iles.Count - 1);
+		RandomTimes ++;
+
+		return iles[index];
+	}
 	IslandInfo IleToSave;
 	float d = 1;
 	public override void _Process(float delta)

@@ -85,7 +85,6 @@ public class ActionMenu : Control
 			{
 				
 			}
-			
 		}
 		else if (SelectedObj is Character)
 		{

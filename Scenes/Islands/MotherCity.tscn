@@ -250,6 +250,7 @@ _data = {
 
 [node name="Island" instance=ExtResource( 4 )]
 MoveLayer = 260
+type = 0
 KeepInstance = true
 ImageID = 22
 Resolution = 128

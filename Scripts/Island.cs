@@ -5,8 +5,8 @@ using System.Linq;
 [Tool]
 public class Island : Spatial
 {
-	//[Export]
-	//IleType type = IleType.LAND;
+	[Export]
+	IleType type = IleType.LAND;
 	[Export]
 	public bool KeepInstance = false;
 	[Export]
@@ -299,10 +299,10 @@ public class Island : Spatial
 		SpawnRotation = SpawnRot;
 		IslandSpecialName = SpecialName;
 	}
-	//public IleType GetIslandType()
-	//{
-		//return type;
-	//}
+	public IleType GetIslandType()
+	{
+		return type;
+	}
 	public void InputData(IslandInfo data)
 	{
 		foreach (House hou in Houses)
@@ -458,7 +458,7 @@ public class Island : Spatial
 		}
 		RandomUses += RandomUsedFromHouses;
 		
-		CharacterSpawnLocations Chars = GetNode<CharacterSpawnLocations>("CharacterSpawnLocations");
+		/*CharacterSpawnLocations Chars = GetNode<CharacterSpawnLocations>("CharacterSpawnLocations");
 		//if (Chars != null)
 		//{
 			
@@ -515,7 +515,7 @@ public class Island : Spatial
 					Vehicles.Add(vehchild);
 				}
 			}
-		}
+		}*/
 			//}
 		//}
 		
@@ -631,7 +631,7 @@ public class Island : Spatial
 public class IslandInfo
 {
 	public Island Island;
-	//public IleType Type;
+	public IleType Type;
 	public Vector2 Position;
 	public bool HasPort;
 	public List<Vector2> Ports = new List<Vector2>();
@@ -661,7 +661,7 @@ public class IslandInfo
 	}
     public void UnPackData(Godot.Object data)
     {
-        //Type = (IleType)data.Get("Type");
+        Type = (IleType)data.Get("Type");
         Position = (Vector2)data.Get("Pos");
 		SpecialName = (string)data.Get("SpecialName");
         IleType = (PackedScene)data.Get("Scene");
@@ -794,7 +794,7 @@ public class IslandInfo
 
 		Dictionary<string, object> data = new Dictionary<string, object>
         {
-            //{ "Type", Type },
+            { "Type", Type },
             { "Pos", Position },
 			{ "SpecialName", SpecialName},
 			{"Scene", IleType},
@@ -816,7 +816,7 @@ public class IslandInfo
 	public void SetInfo(Island Ile)
 	{
 		Island = Ile;
-		//Type = Ile.GetIslandType();
+		Type = Ile.GetIslandType();
 		KeepInstance = Ile.KeepInstance;
 		HasPort = Ile.HasPort();
 		if (HasPort)
@@ -1134,12 +1134,14 @@ public class WindGeneratorInfo
 	}
 	public Dictionary<string, object>GetPackedData()
 	{
-		Dictionary<string, object> data = new Dictionary<string, object>();
-		data.Add("Name", WindGeneratorName);
-		data.Add("CurrentEnergy", CurrentEnergy);
-		data.Add("DespawnDay", DespawnDay);
-		data.Add("DespawnHour", Despawnhour);
-		data.Add("DespawnMins", Despawnmins);
+		Dictionary<string, object> data = new Dictionary<string, object>()
+		{
+			{"Name", WindGeneratorName},
+			{"CurrentEnergy", CurrentEnergy},
+			{"DespawnDay", DespawnDay},
+			{"DespawnHour", Despawnhour},
+			{"DespawnMins", Despawnmins},
+		};
 		return data;
 	}
     public void UnPackData(Resource data)
@@ -1181,10 +1183,12 @@ public class ItemInfo
 	public Dictionary<string, object>GetPackedData(out bool HasData)
 	{
 		HasData = false;
-		Dictionary<string, object> data = new Dictionary<string, object>();
-		data.Add("Position", Position);
-		data.Add("Name", Name);
-		data.Add("SceneData", SceneData);
+		Dictionary<string, object> data = new Dictionary<string, object>()
+		{
+			{"Position", Position},
+			{"Name", Name},
+			{"SceneData", SceneData}
+		};
 		if (CustomData.Count > 0)
 		{
 			HasData = true;
