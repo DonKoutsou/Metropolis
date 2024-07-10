@@ -47,7 +47,7 @@ public class WorldMap : TileMap
 	// one of the lighthouses will become the 2nd town
 	int ΜαχαλάςEntryID;
 	//random stuff
-	RandomNumberGenerator random;
+	Random random;
 	int RandomTimes = 0;
 	/////////////////////
 
@@ -150,8 +150,7 @@ public class WorldMap : TileMap
 		int seed = (int)data.Get("Seed");
 		Settings.GetGameSettings().Seed = seed;
 
-		random = new RandomNumberGenerator();
-		random.Seed = (ulong)seed;
+		random = new Random(seed);
 		ulong ms = OS.GetSystemTimeMsecs();
 		for (int i = 0; i < RandomTimes; i++)
 		{
@@ -292,10 +291,10 @@ public class WorldMap : TileMap
 			return null;
 		return CurIle.Island;
 	}
-	public IslandInfo GetRandomIle(int dist)
-	{
-		
-	}
+	//public IslandInfo GetRandomIle(int dist)
+	//{
+	//	
+	//}
 	IslandInfo IleToSave;
 	float d = 1;
 	public override void _Process(float delta)
