@@ -74,9 +74,8 @@ public class ActionMenu : Control
 			return;
 		}
 		
-		if (SelectedObj is Item)
+		if (SelectedObj is Item it)
 		{
-			Item it = (Item)SelectedObj;
 			if (!pl.GetCharacterInventory().InsertItem(it))
 			{
 				TalkText.GetInst().Talk("Δέν έχω χώρο.", pl);
@@ -86,14 +85,13 @@ public class ActionMenu : Control
 				
 			}
 		}
-		else if (SelectedObj is Character)
+		else if (SelectedObj is Character chara)
 		{
-			DialogueManager.GetInstance().StartDialogue(pl, (Character) SelectedObj);
+			DialogueManager.GetInstance().StartDialogue(pl, chara);
 			//TalkText.GetInst().Talk("Φίλος", (Character)SelectedObj);
 		}
-		else if (SelectedObj is Vehicle)
+		else if (SelectedObj is Vehicle veh)
 		{
-			Vehicle veh = (Vehicle)SelectedObj;
 			if (!pl.HasVehicle())
 			{
 				veh.BoardVehicle(pl);
@@ -106,9 +104,8 @@ public class ActionMenu : Control
 				pl.SetVehicle(null);
 			}
 		}
-		else if (SelectedObj is Furniture)
+		else if (SelectedObj is Furniture furn)
 		{
-			Furniture furn = (Furniture)SelectedObj;
 			Item foundit;
 			furn.Search(out foundit);
 			if (foundit != null)
@@ -119,9 +116,8 @@ public class ActionMenu : Control
 			else
 				TalkText.GetInst().Talk("Τίποτα", pl);
 		}
-		else if (SelectedObj is WindGenerator)
+		else if (SelectedObj is WindGenerator generator)
 		{
-			WindGenerator generator = (WindGenerator)SelectedObj;
 			List<Item> batteries;
 			pl.CharacterInventory.GetItemsByType(out batteries, ItemName.BATTERY);
 			float availableenergy = generator.GetCurrentEnergy();
@@ -168,13 +164,12 @@ public class ActionMenu : Control
 			DayNight.ProgressTime(days, hours, mins);
 			
 		}
-		else if (SelectedObj is FireplaceLight)
+		else if (SelectedObj is FireplaceLight fire)
 		{
-			((FireplaceLight)SelectedObj).ToggleFileplace();
+			fire.ToggleFileplace();
 		}
-		else if (SelectedObj is SittingThing)
+		else if (SelectedObj is SittingThing sit)
 		{
-			SittingThing sit = (SittingThing)SelectedObj;
 			if (!sit.HasEmptySeat())
 			{
 				TalkText.GetInst().Talk("Δεν έχει χώρο.", pl);
@@ -188,13 +183,17 @@ public class ActionMenu : Control
 			Position3D seat = sit.GetSeat();
 			pl.Sit(seat, sit);
 		}
-		else if (SelectedObj is Ladder)
+		else if (SelectedObj is Ladder lad)
 		{
-			((Ladder)SelectedObj).TraverseLadder(pl);
+			lad.TraverseLadder(pl);
 		}
-		else if (SelectedObj is GeneratorDoor)
+		else if (SelectedObj is GeneratorDoor gen)
 		{
-			((GeneratorDoor)SelectedObj).ToggleDoor();
+			gen.ToggleDoor();
+		}
+		else if (SelectedObj is JobBoardPanel jobp)
+		{
+			jobp.ToggleUI(true);
 		}
 		selecting = false;
 		Stop();
@@ -247,6 +246,10 @@ public class ActionMenu : Control
 		else if (SelectedObj is Ladder)
 		{
 			TalkText.GetInst().Talk("Σκάλα", pl);
+		}
+		else if (SelectedObj is JobBoardPanel)
+		{
+			TalkText.GetInst().Talk("Πίνας αγγελιών", pl);
 		}
 	}
 	public void Start(Spatial obj)
@@ -304,6 +307,10 @@ public class ActionMenu : Control
 
 			PickButton.Text = (string)SelectedObj.Call("GetActionName", pl.GlobalTranslation);
 			//PickButton.Hide();
+		}
+		else if (SelectedObj is JobBoardPanel)
+		{
+			PickButton.Text = "Κοίτα";
 		}
 		Show();
 		SetProcess(true);

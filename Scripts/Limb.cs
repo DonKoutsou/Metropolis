@@ -119,12 +119,8 @@ static public class LimbRandomColorProvider
         new Color(0.044227f, 0.145065f, 0.876953f,1),
          new Color(0, 0, 0, 1),
     };
-    static Random rand = new Random();
-
-    public static Color GetRandomColor(Random r = null)
+    public static Color GetRandomColor()
     {
-        if (r != null)
-            return Colors[r.Next(0, Colors.Count())];
-        return Colors[rand.Next(0, Colors.Count())];
+        return Colors[RandomContainer.Next(0, Colors.Count())];
     }
 }

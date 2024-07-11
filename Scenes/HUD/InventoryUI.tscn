@@ -462,6 +462,7 @@ margin_right = -499.0
 margin_bottom = -86.0
 
 [node name="DescriptionPanel" type="Panel" parent="."]
+visible = false
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -556,6 +557,114 @@ fit_content_height = true
 scroll_active = false
 
 [node name="Panel" type="Panel" parent="DescriptionPanel/MarginContainer/VBoxContainer/WeightText"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 9 )
+
+[node name="JobPanel" type="Panel" parent="."]
+visible = false
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -846.0
+margin_top = -591.0
+margin_right = -607.0
+margin_bottom = -436.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = ExtResource( 4 )
+
+[node name="MarginContainer" type="MarginContainer" parent="JobPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="JobPanel/MarginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 229.0
+margin_bottom = 147.0
+custom_constants/separation = 10
+
+[node name="TaskName" type="RichTextLabel" parent="JobPanel/MarginContainer/VBoxContainer"]
+material = SubResource( 15 )
+margin_right = 219.0
+margin_bottom = 35.0
+rect_clip_content = false
+mouse_filter = 1
+theme = SubResource( 21 )
+bbcode_enabled = true
+bbcode_text = "[center] Μεταφορά"
+text = " Μεταφορά"
+fit_content_height = true
+
+[node name="Panel" type="Panel" parent="JobPanel/MarginContainer/VBoxContainer/TaskName"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 9 )
+
+[node name="Location" type="RichTextLabel" parent="JobPanel/MarginContainer/VBoxContainer"]
+material = SubResource( 15 )
+margin_top = 45.0
+margin_right = 219.0
+margin_bottom = 63.0
+rect_clip_content = false
+mouse_filter = 1
+theme = SubResource( 19 )
+bbcode_enabled = true
+bbcode_text = "[center]Προορισμός : x2 y2"
+text = "Προορισμός : x2 y2"
+fit_content_height = true
+scroll_active = false
+
+[node name="Panel" type="Panel" parent="JobPanel/MarginContainer/VBoxContainer/Location"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 8 )
+
+[node name="Description" type="RichTextLabel" parent="JobPanel/MarginContainer/VBoxContainer"]
+material = SubResource( 15 )
+margin_top = 73.0
+margin_right = 219.0
+margin_bottom = 109.0
+rect_clip_content = false
+mouse_filter = 1
+theme = SubResource( 19 )
+bbcode_enabled = true
+bbcode_text = "[center]Μεταφορά προμηθειών στον φάρο Χιτζάζ"
+text = "Μεταφορά προμηθειών στον φάρο Χιτζάζ"
+fit_content_height = true
+scroll_active = false
+
+[node name="Panel" type="Panel" parent="JobPanel/MarginContainer/VBoxContainer/Description"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 8 )
+
+[node name="Reward" type="RichTextLabel" parent="JobPanel/MarginContainer/VBoxContainer"]
+material = SubResource( 15 )
+margin_top = 119.0
+margin_right = 219.0
+margin_bottom = 137.0
+rect_clip_content = false
+mouse_filter = 1
+theme = SubResource( 19 )
+bbcode_enabled = true
+bbcode_text = "[center]Αμοιβή : 10 Δραχμές"
+text = "Αμοιβή : 10 Δραχμές"
+fit_content_height = true
+scroll_active = false
+
+[node name="Panel" type="Panel" parent="JobPanel/MarginContainer/VBoxContainer/Reward"]
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0

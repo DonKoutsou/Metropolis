@@ -94,9 +94,9 @@ public class NPC : Character
 		Island ile = (Island)par;
 		ile.RegisterChild(this);
 	}
-	public void InitialSpawn(Random r)
+	public void InitialSpawn()
 	{
-		RandomiseLimbs(r);
+		RandomiseLimbs();
 	}
 	private void SpawnSit()
 	{
@@ -116,14 +116,14 @@ public class NPC : Character
 			pos.QueueFree();
 		}
 	}
-	void RandomiseLimbs(Random r)
+	void RandomiseLimbs()
 	{
-		SetLimbColor(LimbType.ARM_L, LimbRandomColorProvider.GetRandomColor(r));
-		SetLimbColor(LimbType.ARM_R, LimbRandomColorProvider.GetRandomColor(r));
-		SetLimbColor(LimbType.LEG_L, LimbRandomColorProvider.GetRandomColor(r));
-		SetLimbColor(LimbType.LEG_R, LimbRandomColorProvider.GetRandomColor(r));
-		SetLimbColor(LimbType.N01_LEG_R, LimbRandomColorProvider.GetRandomColor(r));
-		SetLimbColor(LimbType.N01_LEG_L, LimbRandomColorProvider.GetRandomColor(r));
+		SetLimbColor(LimbType.ARM_L, LimbRandomColorProvider.GetRandomColor());
+		SetLimbColor(LimbType.ARM_R, LimbRandomColorProvider.GetRandomColor());
+		SetLimbColor(LimbType.LEG_L, LimbRandomColorProvider.GetRandomColor());
+		SetLimbColor(LimbType.LEG_R, LimbRandomColorProvider.GetRandomColor());
+		SetLimbColor(LimbType.N01_LEG_R, LimbRandomColorProvider.GetRandomColor());
+		SetLimbColor(LimbType.N01_LEG_L, LimbRandomColorProvider.GetRandomColor());
 	}
 	public override void OnSongEnded(Instrument inst)
 	{

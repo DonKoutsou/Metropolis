@@ -443,21 +443,17 @@ public class Island : Spatial
 			}
 		}
 	}
-	public void InitialSpawn(Random r, out int RandomUses)
+	public void InitialSpawn()
 	{
 		FindChildren(this);
-		RandomUses = 0;
-		int RandomUsedFromHouses = 0;
 		foreach(House h in Houses)
 		{
-			h.StartHouse(r, out RandomUsedFromHouses);
+			h.StartHouse();
 		}
 		foreach(NPC c in Characters)
 		{
-			c.InitialSpawn(r);
-			RandomUses += 6;
+			c.InitialSpawn();
 		}
-		RandomUses += RandomUsedFromHouses;
 		
 		/*CharacterSpawnLocations Chars = GetNode<CharacterSpawnLocations>("CharacterSpawnLocations");
 		//if (Chars != null)

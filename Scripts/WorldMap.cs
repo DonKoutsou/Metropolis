@@ -47,9 +47,9 @@ public class WorldMap : TileMap
 	// one of the lighthouses will become the 2nd town
 	int ΜαχαλάςEntryID;
 	//random stuff
-	Random random;
-	int RandomTimes = 0;
-	/////////////////////
+	//Random random;
+	//int RandomTimes = 0;
+	//////////////////////
 
 	// loc of island player is at atm
 	Vector2 CurrentTile;
@@ -131,7 +131,7 @@ public class WorldMap : TileMap
 			{"ExitID", ExitID},
 			{"OrderedCells", OrdC},
 			{"CurrentTile", CurrentTile},
-			{"RandomTimes", RandomTimes},
+			{"RandomTimes", RandomContainer.GetState()},
 			{"Seed", Settings.GetGameSettings().Seed},
 			{"ilemap", Iles},
 			{"ilemapVectors", IleVectors},
@@ -144,21 +144,15 @@ public class WorldMap : TileMap
 	{
 		finishedspawning = (bool)data.Get("finishedspawning");
 		CurrentTile = (Vector2)data.Get("CurrentTile");
-		RandomTimes = (int)data.Get("RandomTimes");
+
+		
 
 
 		int seed = (int)data.Get("Seed");
 		Settings.GetGameSettings().Seed = seed;
 
-		random = new Random(seed);
-		ulong ms = OS.GetSystemTimeMsecs();
-		for (int i = 0; i < RandomTimes; i++)
-		{
-			random.NextDouble();
-		}
-		ulong msafter = OS.GetSystemTimeMsecs();
+		RandomContainer.LoadState((int)data.Get("RandomTimes"), seed);
 
-		GD.Print("Remaking random took " + (msafter - ms).ToString()+ " RandomTIme == " + RandomTimes);
 		IslandSpawnIndex = (int)data.Get("currentile");
 		ΜαχαλάςEntryID = (int)data.Get("MahalasEntryID");
 		ExitID = (int)data.Get("ExitID");
@@ -200,10 +194,9 @@ public class WorldMap : TileMap
 	public override void _Ready()
 	{
 		int seed = Settings.GetGameSettings().Seed;
-
-		random = new Random(seed);
 		
-			
+		RandomContainer.OnGameStart(seed);
+
 		CellSize = new Vector2(CellSizeOverride, CellSizeOverride);
 
 		for (int i = 0; i < scenestospawn.Count(); i++)
@@ -303,33 +296,31 @@ public class WorldMap : TileMap
 		foreach (KeyValuePair<Vector2, IslandInfo> i in ilemap)
 		{
 			Vector2 k = i.Key;
-			if (k > min && k < max)
+			float dist = Math.Max(k.x, k.y);
+			if (dist > MinDist && dist < MaxDist)
 			{
 				iles.Add(i.Value);
 			}
 		}
-		int index = random.Next(0, iles.Count - 1);
-		RandomTimes ++;
+		int index = RandomContainer.Next(0, iles.Count - 1);
 
 		return iles[index];
 	}
 	public IslandInfo GetRandomLightHouse(int MinDist, int MaxDist)
 	{
-		Vector2 min = new Vector2(MinDist, MinDist);
-		Vector2 max = new Vector2(MaxDist, MaxDist);
 		List<IslandInfo> iles = new List<IslandInfo>();
 		foreach (KeyValuePair<Vector2, IslandInfo> i in ilemap)
 		{
 			if (i.Value.Type != IleType.LIGHTHOUSE)
 				continue;
 			Vector2 k = i.Key;
-			if (k > min && k < max)
+			float dist = Math.Max(k.x, k.y);
+			if (dist > MinDist && dist < MaxDist)
 			{
 				iles.Add(i.Value);
 			}
 		}
-		int index = random.Next(0, iles.Count - 1);
-		RandomTimes ++;
+		int index = RandomContainer.Next(0, iles.Count - 1);
 
 		return iles[index];
 	}
@@ -370,8 +361,7 @@ public class WorldMap : TileMap
 		//Start the Data saving
 		//Spawndata to be used when spawning
 		float rot;
-		rot = random.Next(360);
-		RandomTimes++;
+		rot = RandomContainer.Next(0, 360);
 		
 		IslandInfo ileinfo = new IslandInfo(rot, ilescene, cell, SpecialName);
 
@@ -417,11 +407,8 @@ public class WorldMap : TileMap
 
 		Island ile = ilei.Island;
 
-		int RandomUses;
+		ile.InitialSpawn();
 
-		ile.InitialSpawn(random, out RandomUses);
-
-		RandomTimes += RandomUses;
 		CallDeferred("SaveIsland");
 		if (finishedspawning == true)
 		{
@@ -468,6 +455,8 @@ public class WorldMap : TileMap
 		else
 			start = ilemap[entry];
 
+		
+
 		MyWorld.GetInstance().ToggleIsland(start, true, true);
 			
 		Island island = start.Island;
@@ -484,6 +473,8 @@ public class WorldMap : TileMap
 		intr.GetNode<WorldParticleManager>("WorldParticleManager").GlobalRotation = Vector3.Zero;
 
 		CurrentTile = new Vector2 (island.GlobalTranslation.x ,island.GlobalTranslation.z);
+
+		GlobalJobManager.GetInstance().OnNewDay();
 
 		OS.VsyncEnabled = true;
 		return intr;
@@ -581,20 +572,19 @@ public class WorldMap : TileMap
 		
 		for (int i = 0; i < Eventscenestospawn.Count(); i++)
 		{
-			int SpawnIndex = random.Next(0, OrderedCells.Count);
-			RandomTimes++;
+			int SpawnIndex = RandomContainer.Next(0, OrderedCells.Count);
 			RandomisedEntryID.Insert(i, SpawnIndex);
 		}
 
 		// μαχαλάς randomise
 		var lighthousecells = GetUsedCellsById(4);
-		int RandomLightHouseIndex = random.Next(0, lighthousecells.Count);	RandomTimes++;
+		int RandomLightHouseIndex = RandomContainer.Next(0, lighthousecells.Count);
 		Vector2 Μαχαλάςpalcement = (Vector2)lighthousecells[RandomLightHouseIndex];
 		ΜαχαλάςEntryID = OrderedCells.IndexOf(Μαχαλάςpalcement);
 
 		//exit randomise
 		var exitcells = GetUsedCellsById(2);
-		int RandomExitIndex = random.Next(0, exitcells.Count);	RandomTimes++;
+		int RandomExitIndex = RandomContainer.Next(0, exitcells.Count);
 		Vector2 Exitpalcement = (Vector2)exitcells[RandomExitIndex];
 		ExitID = OrderedCells.IndexOf(Exitpalcement);
 	}
@@ -710,8 +700,7 @@ public class WorldMap : TileMap
 					scene = Eventscenestospawn[RandomisedEntryID.IndexOf(IslandSpawnIndex)];
 				else
 				{
-					scene = loadedscenes[random.Next(0, loadedscenes.Count)];
-					RandomTimes++;
+					scene = loadedscenes[RandomContainer.Next(0, loadedscenes.Count)];
 				}
 					
 
@@ -724,8 +713,7 @@ public class WorldMap : TileMap
 				scene =  Exittospawn;
 				else
 				{
-					RandomTimes++;
-					scene = loadedscenes[random.Next(0, loadedscenes.Count)];
+					scene = loadedscenes[RandomContainer.Next(0, loadedscenes.Count)];
 				}
 					
 				SpecialName = "Νησί";
@@ -733,8 +721,7 @@ public class WorldMap : TileMap
 			}
 			case 3:
 			{
-				scene =  SeaVariations[random.Next(0, SeaVariations.Count())];
-				RandomTimes++;
+				scene =  SeaVariations[RandomContainer.Next(0, SeaVariations.Count())];
 				SpecialName = "Νησί";
 				break;
 			}

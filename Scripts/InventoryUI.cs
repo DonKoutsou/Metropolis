@@ -22,7 +22,7 @@ public class InventoryUI : Control
 
     float MaxLoad = 0;
     Panel DescPan;
-
+    Panel JobPan;
     RichTextLabel Capacity;
     RichTextLabel Description;
     RichTextLabel WeightText;
@@ -60,6 +60,13 @@ public class InventoryUI : Control
         base._ExitTree();
         Instance = null;
     }
+    public void ConfigureJob(Job j)
+    {
+        JobPan.GetNode<RichTextLabel>("MarginContainer/VBoxContainer/TaskName").BbcodeText = "[center]" + j.GetJobName();
+        JobPan.GetNode<RichTextLabel>("MarginContainer/VBoxContainer/Location").BbcodeText = "[center]" + string.Format("Προορισμός : X = {0} - Y = {1}", j.GetLocation().x, j.GetLocation().y);
+        JobPan.GetNode<RichTextLabel>("MarginContainer/VBoxContainer/Description").BbcodeText = "[center]" + string.Format("Μεταφορά προμηθειών στον φάρο {0}", j.GetOwnerName());
+        JobPan.GetNode<RichTextLabel>("MarginContainer/VBoxContainer/Reward").BbcodeText = "[center]" + string.Format("Αμοιβή : {0} Δραχμές", j.GetRewardAmmount());
+    }
     public override void _Ready()
     {
         Capacity = GetNode<Panel>("CapPanel").GetNode<RichTextLabel>("CapAmmount");
@@ -70,11 +77,13 @@ public class InventoryUI : Control
         CharacterRPM = GetNode<Panel>("BatteryPanel").GetNode<Panel>("RPMAmount");
         
         DescPan = GetNode<Panel>("DescriptionPanel");
+        JobPan = GetNode<Panel>("JobPanel");
         Description = DescPan.GetNode<MarginContainer>("MarginContainer").GetNode<VBoxContainer>("VBoxContainer").GetNode<RichTextLabel>("Description");
         WeightText =  DescPan.GetNode<MarginContainer>("MarginContainer").GetNode<VBoxContainer>("VBoxContainer").GetNode<RichTextLabel>("WeightText");
         ItemName = DescPan.GetNode<MarginContainer>("MarginContainer").GetNode<VBoxContainer>("VBoxContainer").GetNode<RichTextLabel>("ItemName");
         //ItemOptionPanel = GetNode<Panel>("ItemOptionPanel");
         DescPan.Hide();
+        JobPan.Hide();
         Hide();
 
         for (int i = 0; i < childc; i ++)
@@ -293,12 +302,14 @@ public class InventoryUI : Control
         if (!ShowingMap)
         {
             ShowingMap = true;
+            if (GlobalJobManager.GetInstance().HasJobAssigned())
+                JobPan.Visible = true;
             map.FrameMap();
         }
         else
         {
             ShowingMap = false;
-            
+            JobPan.Visible = false;
         }
             
     }

@@ -75,23 +75,20 @@ public class House : Spatial
 	List<PackedScene> PossibleDeco = null;
 	[Export]
 	int FurnitureAmmount = 3;
-	public void StartHouse(Random random, out int RandomUses)
+	public void StartHouse()
 	{
-		RandomUses = 0;
-		
+
 		Spatial Furiture = GetNode<Spatial>("FurniturePlacements");
 		var furniplacaments = Furiture.GetChildren();
 
 		//pick 3 places to place furniture
 		for (int i = 0; i < FurnitureAmmount; i++)
 		{
-			int index = random.Next(0, furniplacaments.Count);
-			RandomUses ++;
+			int index = RandomContainer.Next(0, furniplacaments.Count);
 			Position3D place = (Position3D)furniplacaments[index];
 			furniplacaments.Remove(place);
 
-			PackedScene furnitospawn = PossibleFurni[random.Next(0, PossibleFurni.Count)];
-			RandomUses ++;
+			PackedScene furnitospawn = PossibleFurni[RandomContainer.Next(0, PossibleFurni.Count)];
 
 			Furniture furn = furnitospawn.Instance<Furniture>();
 			AddChild(furn, true);
@@ -101,10 +98,7 @@ public class House : Spatial
 
 			if (!spawnItems)
 				continue;
-			int itRand;
-			furn.SpawnItem(GetDrop(random, out itRand));
-
-			RandomUses += itRand;
+			furn.SpawnItem(GetDrop());
 		}
 
 
@@ -113,12 +107,10 @@ public class House : Spatial
 
 		//pick 3 places to place furniture
 
-		int dindex = random.Next(0, decoplacaments.Count);
-		RandomUses ++;
+		int dindex = RandomContainer.Next(0, decoplacaments.Count);
 		Position3D decplace = (Position3D)decoplacaments[dindex];
 
-		PackedScene decotospawn = PossibleDeco[random.Next(0, PossibleDeco.Count)];
-		RandomUses ++;
+		PackedScene decotospawn = PossibleDeco[RandomContainer.Next(0, PossibleDeco.Count)];
 
 		Spatial dec = decotospawn.Instance<Spatial>();
 		AddChild(dec, true);
@@ -142,17 +134,15 @@ public class House : Spatial
 
 	[Export]
 	Dictionary<int, PackedScene> SpawnPool = null;
-	PackedScene GetDrop(Random r, out int RandomUses)
+	PackedScene GetDrop()
 	{
-		RandomUses = 0;
 		PackedScene Drop = null;
 		int DropChance = 100;
 
 		foreach (KeyValuePair<int, PackedScene> item in SpawnPool)
 		{
-			int thing = r.Next(0,101);
+			int thing = RandomContainer.Next(0,101);
 			//GD.Print("Trying to spawn item : " + item.Value.ResourceName + " with chance of " + item.Key + "%, ranodm came out " + thing);
-			RandomUses ++;
 			if (thing < item.Key)
 			{
 				if (item.Key < DropChance)

@@ -279,7 +279,7 @@ public class Inventory : Spatial
             
         }
         currentweight -= item.GetInventoryWeight();
-        RemoveChild(item);
+        item.GetParent().RemoveChild(item);
         item.Free();
     }
     public void RemoveAllItems()
