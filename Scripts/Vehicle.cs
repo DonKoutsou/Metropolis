@@ -331,7 +331,7 @@ public class Vehicle : RigidBody
             if (ray.IsColliding())
             {
                 var collisionpoint = ray.GetCollisionPoint();
-                var collisionobj = ray.GetCollider();
+               // var collisionobj = ray.GetCollider();
                 var dist = collisionpoint.DistanceTo(ray.GlobalTranslation);
                 float distmulti = dist / - ray.CastTo.y;
 
@@ -341,23 +341,24 @@ public class Vehicle : RigidBody
                 if (dist <= 35 && Working)
                 {
                     //Flame.Emitting = true;
-                    float particleoffset = dist;
-                    if (((Node)collisionobj).Name == "SeaBed")
-                        particleoffset -= 4;
+                    float particleoffset = dist - 4;
+                    //if (((Node)collisionobj).Name == "SeaBed")
+                    //particleoffset -= 4;
                     part.Translation = new Vector3(part.Translation.x, - particleoffset, part.Translation.z);
                 }
 
-                part.Emitting = dist <= 35 && dist > 6 && Working;
+                part.Emitting = Working;
                 float multi = forcecurve.Interpolate(distmulti);
-                if (dist < 4)
-                {
-                    multi *= 4;
-                }
+                //if (dist < 4)
+                //{
+                //    multi *= 4;
+                //}
                 //((ParticlesMaterial)Flame.ProcessMaterial).Scale = multi;
                 //((ParticlesMaterial)Flame.ProcessMaterial).InitialVelocity = multi * 10 + 5;
 
                 f= Vector3.Up * Force * delta * multi;
-
+                //f= Vector3.Up * Force * delta 
+                ;
                 //AddForce(f * forcemulti, ray.GlobalTransform.origin - GlobalTransform.origin);
                 
             }

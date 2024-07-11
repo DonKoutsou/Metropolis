@@ -140,7 +140,7 @@ public class MyWorld : Spatial
 			}
 		}
 		List<IslandInfo> CloseIles;
-		map.GetClosestIles(currentile,  out CloseIles, 1);
+		map.GetClosestIles(currentile,  out CloseIles, 2);
 		foreach (IslandInfo island in CloseIles)
 		{
 			Island iletocheck = island.Island;

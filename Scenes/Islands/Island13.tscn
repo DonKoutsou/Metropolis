@@ -1,4 +1,4 @@
-[gd_scene load_steps=293 format=2]
+[gd_scene load_steps=294 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/TerainTest/TerainShader5.tres" type="Shader" id=2]
@@ -805,6 +805,14 @@ item/2/mesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/2/shapes = [  ]
 item/2/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/2/preview = SubResource( 455 )
+
+[sub_resource type="ShaderMaterial" id=1037]
+resource_local_to_scene = true
+shader = ExtResource( 36 )
+shader_param/enable = false
+shader_param/outline_thickness = 0.06
+shader_param/color2 = Color( 0, 0, 0, 0 )
+shader_param/color = Color( 1, 0.435294, 0, 0 )
 
 [sub_resource type="ShaderMaterial" id=587]
 resource_local_to_scene = true
@@ -2687,6 +2695,7 @@ transform = Transform( 1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0 )
 
 [node name="MeshInstance2" parent="WindGenerator10" index="1"]
 transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, -240.605, -167.976, 32.9518 )
+material_overlay = SubResource( 1037 )
 material/0 = SubResource( 588 )
 
 [node name="AnimationPlayer" parent="WindGenerator10" index="5"]

@@ -2,7 +2,7 @@ class_name IleSaveInfo
 extends Resource
 
 func _SetData(data):
-	#Type = data["Type"]
+	Type = data["Type"]
 	Pos = data["Pos"]
 	Scene = data["Scene"]
 	SpecialName = data["SpecialName"]
@@ -19,7 +19,7 @@ func _SetData(data):
 		Ports = data["Ports"]
 
 
-#export var Type:int = 0
+export var Type:int = 0
 export var Pos:Vector2 = Vector2.ZERO
 export var Scene:PackedScene
 export var SpecialName: String

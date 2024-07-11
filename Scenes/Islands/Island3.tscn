@@ -139,12 +139,6 @@ collision_mask = 0
 [node name="CollisionShape" type="CollisionShape" parent="Landscape001/StaticBody" index="0"]
 shape = SubResource( 19 )
 
-[node name="Position3D" type="Position3D" parent="CharacterSpawnLocations" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2135.52, 0.739967, -1325.19 )
-
-[node name="Position3D2" type="Position3D" parent="CharacterSpawnLocations" index="1"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 149.056, 20.8329, 1928.42 )
-
 [node name="Position3D" type="Position3D" parent="VehicleSpawnLocation" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3374.12, 0.536177, -2933.91 )
 

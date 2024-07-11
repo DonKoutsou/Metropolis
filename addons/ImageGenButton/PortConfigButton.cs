@@ -8,7 +8,7 @@ public class PortConfigButton : Button
     public delegate void OnButtonClicked();
     public override void _EnterTree()
     {
-        //Connect("pressed", this, "clicked");
+        Connect("pressed", this, "clicked");
     }
 
     public void clicked()

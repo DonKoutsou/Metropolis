@@ -232,6 +232,7 @@ public class Island : Spatial
 				{
 					OutliningImage = false;
 					im.ClearMipmaps();
+					im.GenerateMipmaps();
 					d.OnImageFinished(im, this);
 					break;
 				}
