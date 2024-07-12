@@ -1,9 +1,9 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://Assets/Boat/M_Boat.material" type="Material" id=1]
 [ext_resource path="res://Scripts/Vehicle.cs" type="Script" id=2]
 [ext_resource path="res://Scripts/VehicleDamageManager.cs" type="Script" id=3]
-[ext_resource path="res://Assets/Boat/ΚαικιΗιγη_lambert1_Normal.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Boat/Καικι3Ματ.tres" type="Material" id=4]
 [ext_resource path="res://Assets/Boat/BoatWingL_Dest.tres" type="ArrayMesh" id=5]
 [ext_resource path="res://Assets/Boat/BoatWingR_Dest.tres" type="ArrayMesh" id=6]
 [ext_resource path="res://Assets/Boat/BoatWindDetector.obj" type="ArrayMesh" id=7]
@@ -15,8 +15,6 @@
 [ext_resource path="res://Assets/Sounds/Engine/Engine3.ogg" type="AudioStream" id=13]
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Assets/Boat/Kaiki.obj" type="ArrayMesh" id=15]
-[ext_resource path="res://Assets/Boat/ΚαικιΗιγη_lambert1_BaseColor.png" type="Texture" id=16]
-[ext_resource path="res://Assets/Boat/ΚαικιΗιγη_lambert1_OcclusionRoughnessMetallic.png" type="Texture" id=17]
 [ext_resource path="res://shaders/OutlineShader.tres" type="Material" id=18]
 
 [sub_resource type="PhysicsMaterial" id=1]
@@ -29,20 +27,6 @@ _data = [ Vector2( 0, 6 ), 0.0, 0.0, 0, 0, Vector2( 0.355023, 5.96319 ), 0.0, 0.
 
 [sub_resource type="Curve" id=9]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.2201, 0.395705 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.1 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="SpatialMaterial" id=44]
-resource_local_to_scene = true
-albedo_texture = ExtResource( 16 )
-roughness_texture = ExtResource( 17 )
-roughness_texture_channel = 1
-normal_enabled = true
-normal_scale = -1.0
-normal_texture = ExtResource( 4 )
-ao_enabled = true
-ao_light_affect = 1.0
-ao_texture = ExtResource( 17 )
-ao_on_uv2 = false
-ao_texture_channel = 0
 
 [sub_resource type="CapsuleShape" id=8]
 radius = 3.11783
@@ -226,7 +210,7 @@ RightDestWingMesh = ExtResource( 6 )
 
 [node name="MeshInstance" type="MeshInstance" parent="VehicleBody"]
 transform = Transform( 1, -5.50244e-11, 0, 1.32104e-10, 1, 0, 0, -3.46945e-18, 1, 0, 2.199, 0 )
-material_override = SubResource( 44 )
+material_override = ExtResource( 4 )
 material_overlay = ExtResource( 18 )
 mesh = ExtResource( 15 )
 

@@ -18,6 +18,8 @@ public class Inventory : Spatial
     float Capacity = 10;
     [Export]
     public PackedScene[] StartingItems;
+    [Export]
+    int StartingCurrency = 0;
     float currentweight = 0;
     InventoryUI ui;
 
@@ -38,6 +40,16 @@ public class Inventory : Spatial
         //CharacterOwner.ToggleLimb(LimbType.LEG_R, false);
         //CharacterOwner.ToggleLimb(LimbType.N01_LEG_R, false);
         //CharacterOwner.ToggleLimb(LimbType.N01_LEG_L, false);
+        if (StartingCurrency > 0)
+        {
+            PackedScene d = ResourceLoader.Load<PackedScene>("res://Scenes/Items/Drahma.tscn");
+            for (int i = 0; i < StartingCurrency; i++)
+            {
+                Item it = (Item)d.Instance();
+                InsertItem(it);
+            }
+        }
+        
         if (StartingItems == null)
             return;
         for (int i = 0; i < StartingItems.Count(); i ++)

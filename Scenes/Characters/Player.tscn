@@ -442,6 +442,7 @@ shape = SubResource( 92 )
 [node name="Inventory" parent="." instance=ExtResource( 7 )]
 Capacity = 40.0
 StartingItems = [ ExtResource( 25 ), ExtResource( 27 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 10 ) ]
+StartingCurrency = 40
 
 [node name="PlayerUI" type="Spatial" parent="."]
 script = ExtResource( 13 )

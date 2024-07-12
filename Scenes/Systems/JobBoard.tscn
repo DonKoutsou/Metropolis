@@ -275,6 +275,19 @@ window_title = "Προσοχή !"
 dialog_text = "Μπορείς να έχεις μόνο μία αποστολή.
 Ακύρωσε την προηγούμενη για να μπορείς να πάρεις άλλες."
 
+[node name="NoBoatDialogue" type="AcceptDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -139.0
+margin_top = -52.0
+margin_right = 139.0
+margin_bottom = 52.0
+theme = SubResource( 46 )
+window_title = "Προσοχή !"
+dialog_text = "Δεν έχεις βάρκα σε αυτό το λιμάνι."
+
 [connection signal="OnTaskPickedUp" from="Panel/GridContainer/Job" to="." method="OnTaskPicked"]
 [connection signal="OnTaskPickedUp" from="Panel/GridContainer/Job2" to="." method="OnTaskPicked"]
 [connection signal="OnTaskPickedUp" from="Panel/GridContainer/Job3" to="." method="OnTaskPicked"]

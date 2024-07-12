@@ -5,11 +5,15 @@ public class JobBoardPanel : StaticBody
 {
     JobBoard boardUI;
 
+    [Export]
+    NodePath Port = null;
+
     public override void _Ready()
     {
         base._Ready();
         boardUI = GetNode<JobBoard>("JobBoardUI");
         boardUI.Hide();
+        boardUI.SetPort(GetNode<Port>(Port));
     }
     public void ToggleUI(bool toggle)
     {

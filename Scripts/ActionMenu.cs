@@ -92,6 +92,10 @@ public class ActionMenu : Control
 		}
 		else if (SelectedObj is Vehicle veh)
 		{
+			if (!veh.PlayerOwned)
+			{
+				TalkText.GetInst().Talk("Δεν είναι δικιά μου. Δεν μπορώ να την χρησιμοποιήσω.", pl);
+			}
 			if (!pl.HasVehicle())
 			{
 				veh.BoardVehicle(pl);
@@ -217,9 +221,12 @@ public class ActionMenu : Control
 			TalkText.GetInst().Talk("Φίλος", pl);
 		}
         
-		else if (SelectedObj is Vehicle)
+		else if (SelectedObj is Vehicle veh)
 		{
-			TalkText.GetInst().Talk("Βάρκα", pl);
+			if (veh.PlayerOwned)
+				TalkText.GetInst().Talk("Καΐκάρα μου!", pl);
+			else
+				TalkText.GetInst().Talk("Καΐκι, δεν είμαι σίγουρος πιανού.", pl);
 		}
 		else if (SelectedObj is WindGenerator)
 		{
@@ -258,60 +265,60 @@ public class ActionMenu : Control
 			return;
 		if (selecting)
             return;
-		DeselectCurrent();
-		SelectedObj = obj;
-		SelectedObj.Call("HighLightObject", true);
-		PickButton.Show();
-		IntButton.Show();
-		if (SelectedObj is Item)
+		
+		if (obj is Item)
 		{
 			PickButton.Text = "Πάρε";
 		}
-		else if (SelectedObj is Character)
+		else if (obj is Character)
 		{
 			PickButton.Text = "Kουβέντα";
 		}
-		else if (SelectedObj is Vehicle)
+		else if (obj is Vehicle)
 		{
-			if (pl.HasVecicle && pl.currveh == SelectedObj)
+			if (pl.HasVecicle && pl.currveh == obj)
 				PickButton.Text = "Αποβιβάση";
 			else
 				PickButton.Text = "Επιβιβάση";
 		}
-		else if (SelectedObj is Furniture)
+		else if (obj is Furniture)
 		{
 			PickButton.Text = "Ψάξε";
 		}
-		else if (SelectedObj is WindGenerator)
+		else if (obj is WindGenerator)
 		{
 			PickButton.Text = "Φόρτιση";
 		}
-		else if (SelectedObj is SittingThing)
+		else if (obj is SittingThing)
 		{
 			PickButton.Text = "Κάτσε";
 		}
-		else if (SelectedObj is FireplaceLight)
+		else if (obj is FireplaceLight fp)
 		{
 			IntButton.Hide();
-			FireplaceLight fp = (FireplaceLight)SelectedObj;
 			if (fp.State)
 				PickButton.Text = "Σβήσε.";
 			else
 				PickButton.Text = "Άναψε.";
 			//PickButton.Hide();
 		}
-		else if (SelectedObj is Ladder || SelectedObj is GeneratorDoor)
+		else if (obj is Ladder || obj is GeneratorDoor)
 		{
 			//IntButton.Hide();
 			//FireplaceLight fp = (FireplaceLight)SelectedObj;
 
-			PickButton.Text = (string)SelectedObj.Call("GetActionName", pl.GlobalTranslation);
+			PickButton.Text = (string)obj.Call("GetActionName", pl.GlobalTranslation);
 			//PickButton.Hide();
 		}
-		else if (SelectedObj is JobBoardPanel)
+		else if (obj is JobBoardPanel)
 		{
 			PickButton.Text = "Κοίτα";
 		}
+		DeselectCurrent();
+		SelectedObj = obj;
+		SelectedObj.Call("HighLightObject", true);
+		PickButton.Show();
+		IntButton.Show();
 		Show();
 		SetProcess(true);
 	}

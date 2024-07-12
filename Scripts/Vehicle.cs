@@ -58,9 +58,9 @@ public class Vehicle : RigidBody
 
     List<Particles> ExaustParticles = new List<Particles>();
 
-     WindDetector WindD;
-    
-   
+    WindDetector WindD;
+
+    public bool PlayerOwned = false;
 
     ////////////Damage///////////////
     VehicleDamageManager DamageMan;
@@ -703,6 +703,8 @@ public class Vehicle : RigidBody
     ///////Action Menu////////
     public void HighLightObject(bool toggle)
     {
+        if (!PlayerOwned)
+            return;
         ((ShaderMaterial)GetNode<MeshInstance>("MeshInstance").MaterialOverlay).SetShaderParam("enable", toggle);
     }
     //////Data Saving////////

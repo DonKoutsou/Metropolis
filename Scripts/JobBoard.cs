@@ -27,11 +27,21 @@ public class JobBoard : Control
     }
     JobPaper Paper;
     Job JobToTake;
+    Port BoardPort;
+
+    public void SetPort(Port p)
+    {
+        BoardPort = p;
+    }
     private void OnTaskPicked(Control c)
     {
         if (GlobalJobManager.GetInstance().HasJobAssigned())
         {
             GetNode<AcceptDialog>("AcceptDialog").Popup_();
+        }
+        if (!BoardPort.PlayerHasBoatInPort())
+        {
+            GetNode<AcceptDialog>("NoBoatDialogue").Popup_();
         }
         else
         {

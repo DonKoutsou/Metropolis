@@ -13,7 +13,7 @@ public class Port : Area
 
     List <Position3D> Locations = new List<Position3D>();
 
-    List <Spatial> Boats = new List<Spatial>();
+    List <Vehicle> Boats = new List<Vehicle>();
     public override void _Ready()
     {
         if (!Engine.EditorHint)
@@ -58,15 +58,26 @@ public class Port : Area
     }
     private void OnShipEntered(Node body)
     {
-        Boats.Add((Spatial)body);
+        Boats.Add((Vehicle)body);
     }
     private void OnShipLeft(Node body)
     {
-        Boats.Remove((Spatial)body);
+        Boats.Remove((Vehicle)body);
     }
     public bool IsInPort(Vehicle boat)
     {
         return Boats.Contains(boat);
+    }
+    public bool PlayerHasBoatInPort()
+    {
+        for (int i = 0; i <Boats.Count; i++)
+        {
+            if (Boats[i].PlayerOwned)
+            {
+                return true;
+            }
+        }
+        return false;
     }
     public bool HasSpot(out Vector3 spot)
     {
