@@ -14,7 +14,7 @@ public class GlobalJobManager : Node
     public void OnJobAssigned(Job j)
     {
         AssignedJobs.Add(j);
-        InventoryUI.GetInstance().ConfigureJob(j);
+        PlayerUI.GetInstance().GetUI(PlayerUIType.INVENTORY).Call("ConfigureJob", j);
     }
     public void OnJobCanceled(Job j)
     {
@@ -24,9 +24,111 @@ public class GlobalJobManager : Node
     {
         return AssignedJobs.Count > 0;
     }
+    public List<Job> GetJobs()
+    {
+        return Jobs;
+    }
+    public List<Job> GetAssignedJobs()
+    {
+        return AssignedJobs;
+    }
+    public void LoadDeliverJobs(Vector2[] DJobs, int activeDJob)
+    {
+        for (int i = 0; i < DJobs.Count(); i++)
+        {
+            Vector2 pos = DJobs[i];
+            
+            float dist = Math.Max(pos.x, pos.y);
+
+            int reward = 20;
+            if (dist > 24)
+                reward = 100;
+            else if (dist > 10)
+                reward = 50;
+
+            IslandInfo ile = WorldMap.GetInstance().GetIle(pos);
+            
+            DeliverJob j = new DeliverJob(reward, ile.SpecialName, ile.Position);
+
+            Jobs.Add(j);
+            if (i == activeDJob)
+            {
+                AssignedJobs.Add(j);
+                PlayerUI.GetInstance().GetUI(PlayerUIType.INVENTORY).Call("ConfigureJob", j);
+                if (j is DeliverJob del)    
+                {
+                    var b = GetTree().GetNodesInGroup("PlayerBoat");
+                    
+                    Spatial cargo = del.GetDeliveryObj().Instance<Spatial>();
+                    ((Vehicle)b[0]).AddChild(cargo);
+                    cargo.Translation = Vector3.Zero;
+                    cargo.Rotation = Vector3.Zero;
+                }
+            }
+                
+        }
+    }
+    public void SetJobAmm(int ammount)
+    {
+        JobAmmount = ammount;
+    }
+    private DeliverJob CreateDeliver(Difficulty dif)
+    {
+        WorldMap map = WorldMap.GetInstance();
+        DeliverJob j = null;
+        if (dif == Difficulty.Easy)
+        {
+            IslandInfo ile = map.GetRandomLightHouse(1, 10);
+            j = new DeliverJob(20, ile.SpecialName, ile.Position);
+        }
+        else if (dif == Difficulty.Medium)
+        {
+            IslandInfo ile = map.GetRandomLightHouse(11, 25);
+            j = new DeliverJob(50, ile.SpecialName, ile.Position);
+        }
+        else if (dif == Difficulty.Hard)
+        {
+            IslandInfo ile = map.GetRandomLightHouse(25, 41);
+            j = new DeliverJob(100, ile.SpecialName, ile.Position);
+        }
+        return j;
+    }
+    public bool HasJobOnIsland(Vector2 pos, out List<Job> Jobs)
+    {
+        Jobs = new List<Job>();
+        foreach (Job j in AssignedJobs)
+        {
+            if (j.GetLocation() == pos)
+            {
+                Jobs.Add(j);
+            }
+        }
+        return Jobs.Count > 0;
+    }
+    //return reward ammount
+    public int OnJobFinished(Job j)
+    {
+        Player pl = Player.GetInstance();
+
+        Inventory inv = pl.GetCharacterInventory();
+
+        PackedScene rew = ResourceLoader.Load<PackedScene>(j.GetReward());
+
+        int rewamm = j.GetRewardAmmount();
+
+        for (int i = 0; i < rewamm; i++)
+        {
+            inv.InsertItem(rew.Instance<Item>());
+        }
+        AssignedJobs.Remove(j);
+        Jobs.Remove(j);
+
+        return rewamm;
+    }
     public override void _Ready()
     {
         Instance = this;
+        SetProcess(false);
     }
     public static GlobalJobManager GetInstance()
     {
@@ -34,7 +136,18 @@ public class GlobalJobManager : Node
     }
     public void OnNewDay()
     {
-        Jobs.Clear();
+        if (AssignedJobs.Count == 0)
+            Jobs.Clear();
+        else
+        {
+            foreach (Job j in Jobs)
+            {
+                if (AssignedJobs.Contains(j))
+                    continue;
+                Jobs.Remove(j);
+            }
+        }
+        
         JobAmmount = RandomContainer.Next(4, 9);
         SetProcess(true);
     }
@@ -59,35 +172,7 @@ public class GlobalJobManager : Node
             SetProcess(false);
         }
     }
-    public void GetJobs(out Job[] jobs)
-    {
-        jobs = new Job[Jobs.Count];
-        for(int i = 0; i < Jobs.Count; i++)
-        {
-            jobs[i] = Jobs[i];
-        }
-    }
-    private DeliverJob CreateDeliver(Difficulty dif)
-    {
-        WorldMap map = WorldMap.GetInstance();
-        DeliverJob j = null;
-        if (dif == Difficulty.Easy)
-        {
-            IslandInfo ile = map.GetRandomLightHouse(1, 10);
-            j = new DeliverJob(20, ile.SpecialName, ile.Position);
-        }
-        else if (dif == Difficulty.Medium)
-        {
-            IslandInfo ile = map.GetRandomLightHouse(11, 25);
-            j = new DeliverJob(50, ile.SpecialName, ile.Position);
-        }
-        else if (dif == Difficulty.Hard)
-        {
-            IslandInfo ile = map.GetRandomLightHouse(25, 41);
-            j = new DeliverJob(100, ile.SpecialName, ile.Position);
-        }
-        return j;
-    }
+    
     private void CreateEscort(Difficulty dif)
     {
         WorldMap map = WorldMap.GetInstance();
@@ -127,12 +212,11 @@ public class GlobalJobManager : Node
 }
 public class Job
 {
-    protected PackedScene Reward = ResourceLoader.Load<PackedScene>("res://Scenes/Items/Drahma.tscn");
+    protected string Reward = "res://Scenes/Items/Drahma.tscn";
     protected int RewardAmmount = 10;
-    protected NPC JobOwner = null;
     protected Vector2 Location;
     protected string owner;
-    public PackedScene GetReward()
+    public string GetReward()
     {
         return Reward;
     }
@@ -144,10 +228,6 @@ public class Job
     {
         return "Δουλειά";
     }
-   // public NPC GetJobOwner()
-    //{
-    //    return JobOwner;
-    //}
     public Job(int amm, string OwnerName, Vector2 loc)
     {
         RewardAmmount = amm;
@@ -178,7 +258,7 @@ public class RescueJob : Job
 }
 public class DeliverJob : Job
 {
-    PackedScene ObjectToDeliver = ResourceLoader.Load<PackedScene>("res://Scenes/Vehicles/BoatCargo.tscn");
+    readonly PackedScene ObjectToDeliver = ResourceLoader.Load<PackedScene>("res://Scenes/Vehicles/BoatCargo.tscn");
 
     public DeliverJob(int amm, string OwnerName, Vector2 loc) : base(amm, OwnerName, loc)
     {
@@ -190,7 +270,10 @@ public class DeliverJob : Job
     {
         return "Μεταφορά";
     }
-    
+    public PackedScene GetDeliveryObj()
+    {
+        return ObjectToDeliver;
+    }
 }
 public class EscortJob : Job
 {

@@ -1,0 +1,81 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://shaders/Outline.shader" type="Shader" id=1]
+
+[sub_resource type="Curve" id=5]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.011646, 0.00306749 ), 0.0, 0.0, 0, 0, Vector2( 0.0147516, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.0333851, 0.105828 ), 0.0, 0.0, 0, 0, Vector2( 0.0349379, 0.872699 ), 0.0, 0.0, 0, 0, Vector2( 0.0535714, 0.265337 ), 0.0, 0.0, 0, 0, Vector2( 0.0753106, 0.75 ), 0.0, 0.0, 0, 0, Vector2( 0.0923913, 0.430982 ), 0.0, 0.0, 0, 0, Vector2( 0.126553, 0.627301 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=6]
+curve = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 5
+emission_ring_radius = 2.0
+emission_ring_inner_radius = 0.0
+emission_ring_height = 0.0
+emission_ring_axis = Vector3( 0, 1, 0 )
+direction = Vector3( 0, -1, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+angular_velocity = 400.0
+radial_accel = 12.4
+radial_accel_random = 0.53
+scale = 30.0
+scale_random = 1.0
+scale_curve = SubResource( 6 )
+
+[sub_resource type="OpenSimplexNoise" id=113]
+seed = 875
+octaves = 1
+period = 221.1
+persistence = 0.733
+lacunarity = 0.1
+
+[sub_resource type="NoiseTexture" id=114]
+width = 128
+height = 128
+noise = SubResource( 113 )
+
+[sub_resource type="ShaderMaterial" id=115]
+resource_local_to_scene = true
+shader = ExtResource( 1 )
+shader_param/enable = true
+shader_param/outline_thickness = 0.01
+shader_param/color2 = Color( 0, 0, 0, 0 )
+shader_param/color = Color( 0.25098, 0.176471, 0.101961, 1 )
+
+[sub_resource type="SpatialMaterial" id=116]
+next_pass = SubResource( 115 )
+flags_world_triplanar = true
+params_diffuse_mode = 4
+params_specular_mode = 3
+params_depth_draw_mode = 1
+albedo_color = Color( 1, 0.921569, 0.705882, 1 )
+albedo_texture = SubResource( 114 )
+roughness = 0.0
+ao_enabled = true
+ao_light_affect = 1.0
+ao_texture = SubResource( 114 )
+ao_on_uv2 = false
+ao_texture_channel = 0
+uv1_triplanar = true
+
+[sub_resource type="SphereMesh" id=117]
+material = SubResource( 116 )
+radius = 0.1
+height = 0.2
+radial_segments = 6
+rings = 3
+
+[node name="ParticlesDirt" type="Particles"]
+cast_shadow = 0
+extra_cull_margin = 875.7
+generate_lightmap = false
+emitting = false
+amount = 600
+lifetime = 6.0
+visibility_aabb = AABB( -305.224, -131.173, -265.211, 610.447, 262.346, 530.422 )
+local_coords = false
+draw_order = 2
+process_material = SubResource( 3 )
+draw_pass_1 = SubResource( 117 )

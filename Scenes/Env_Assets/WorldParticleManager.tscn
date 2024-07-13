@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Scenes/Env_Assets/SandParticles.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Env_Assets/Clouds.tscn" type="PackedScene" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://Scripts/WorldParticleManager.cs" type="Script" id=5]
 [ext_resource path="res://Scenes/World/SunMoonPivot.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Clouds/Textures/smoke_07.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Clouds/Textures/smoke_04.png" type="Texture" id=8]
 [ext_resource path="res://Scripts/WorldSoundManager.cs" type="Script" id=9]
 [ext_resource path="res://Assets/Sounds/RainSound.mp3" type="AudioStream" id=10]
 [ext_resource path="res://Assets/Sounds/Cave_Ambient.mp3" type="AudioStream" id=11]
@@ -23,22 +22,20 @@ _data = [ Vector2( 0, -50 ), 0.0, 0.0, 0, 0, Vector2( 1, 69.65 ), 0.0, 0.0, 0, 0
 
 [sub_resource type="SpatialMaterial" id=2]
 render_priority = 1
-flags_transparent = true
-flags_unshaded = true
 flags_fixed_size = true
-flags_do_not_receive_shadows = true
-flags_disable_ambient_light = true
-params_cull_mode = 2
-params_depth_draw_mode = 3
-params_billboard_mode = 3
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
-albedo_color = Color( 1, 0.792157, 0.419608, 1 )
-albedo_texture = ExtResource( 8 )
+params_diffuse_mode = 4
+params_specular_mode = 3
+params_blend_mode = 1
+albedo_color = Color( 1, 0.839216, 0.552941, 1 )
 distance_fade_mode = 1
 distance_fade_min_distance = 500.0
 distance_fade_max_distance = 0.0
+
+[sub_resource type="Curve" id=120]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.20032, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=121]
+curve = SubResource( 120 )
 
 [sub_resource type="ParticlesMaterial" id=1]
 emission_shape = 2
@@ -48,11 +45,15 @@ spread = 5.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 174.26
 angular_velocity = 553.85
-scale = 0.1
+scale = 0.01
 scale_random = 0.05
+scale_curve = SubResource( 121 )
 
-[sub_resource type="QuadMesh" id=3]
-size = Vector2( 0.05, 0.05 )
+[sub_resource type="SphereMesh" id=119]
+radius = 0.05
+height = 0.1
+radial_segments = 4
+rings = 2
 
 [sub_resource type="SpatialMaterial" id=112]
 flags_transparent = true
@@ -117,7 +118,7 @@ amount = 6000
 visibility_aabb = AABB( -1163.96, -976.849, -1014.37, 2327.92, 1953.7, 2028.74 )
 draw_order = 2
 process_material = SubResource( 1 )
-draw_pass_1 = SubResource( 3 )
+draw_pass_1 = SubResource( 119 )
 __meta__ = {
 "apply_volumetrics": false
 }

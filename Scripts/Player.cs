@@ -91,6 +91,28 @@ public class Player : Character
 			PlayMusic();
 		}
 	}
+	public void ToggleLimbEffect(LimbType limb, bool toggle)
+	{
+		Godot.Collections.Dictionary<string, object> effects = LimbTranslator.GetLimbEffect(limb, toggle);
+		foreach (KeyValuePair<string, object> ef in effects)
+		{
+			if (toggle)
+			{
+				if (ef.Value is float val)
+					Set(ef.Key, (float)Get(ef.Key) * val);
+				else
+					Set(ef.Key, ef.Value);
+			}
+			else
+			{
+				if (ef.Value is float val)
+					Set(ef.Key, (float)Get(ef.Key) / val);
+				else
+					Set(ef.Key, ef.Value);
+			}
+				
+		}
+	}
 	public override void OnSongEnded(Instrument inst)
 	{
 		inst.Disconnect("OnSongEnded", this, "OnSongEnded");
@@ -102,8 +124,9 @@ public class Player : Character
 		if (DialogueManager.IsPlayerTalking())
 			return;
 		var spacestate = GetWorld().DirectSpaceState;
-		Vector2 mousepos = GetViewport().GetMousePosition();
-		Camera cam = GetTree().Root.GetCamera();
+		float mult = OS.WindowSize.x / DViewport.GetInstance().Size.x;
+		Vector2 mousepos = DViewport.GetInstance().GetMousePosition() / mult;
+		Camera cam = DViewport.GetInstance().GetCamera();
 		Vector3 rayor = cam.ProjectRayOrigin(mousepos);
 		Vector3 rayend = rayor + cam.ProjectRayNormal(mousepos) * 30000;
 		var rayar = new Dictionary();
@@ -201,7 +224,7 @@ public class Player : Character
 			return;
 		
 		moveloc.GlobalTranslation = loctomove;
-		var spd = Speed;
+		float spd = Speed;
 
 		var direction = loctomove - GlobalTranslation;
 
@@ -344,7 +367,7 @@ public class Player : Character
 		
 		if (@event.IsActionPressed("Inventory"))
 		{
-			InventoryUI inv = InventoryUI.GetInstance();
+			InventoryUI inv = (InventoryUI)PlayerUI.GetInstance().GetUI(PlayerUIType.INVENTORY);
 			if (inv.IsOpen)
 				inv.CloseInventory();
 			else

@@ -9,20 +9,17 @@ public class Character : KinematicBody
 	public int Speed { get; set; } = 14; // How fast the player will move (pixels/sec).
 
 	[Export]
-	public int FallAcceleration = 75;
+	public float FallAcceleration = 75;
 
 	[Export]
 	public int JumpImpulse = 20;
 
 	[Export]
-	public int RunSpeed = 20;
+	public float RunSpeed = 20;
 
 	public bool m_balive = true;
 
     public Vector3 _velocity = Vector3.Zero;
-
-	[Export]
-	public DialogueLine[] lines;
 	
 	public Inventory CharacterInventory;
 
@@ -134,14 +131,6 @@ public class Character : KinematicBody
 	public Inventory GetCharacterInventory()
 	{
 		return CharacterInventory;
-	}
-	public bool HasLines()
-	{
-		return lines != null;
-	}
-	public DialogueLine GetLine()
-	{
-		return lines[0];
 	}
     public override void _Process(float delta)
     {
@@ -360,13 +349,11 @@ public class Character : KinematicBody
 	{
 		Spatial instrumentspace = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("InstrumentAtatchment").GetNode<Spatial>("Instrument");
 		inst.GetNode<CollisionShape>("CollisionShape").Disabled = true;
-		//inst.RegisterOnIsland = false;
+		inst.RegisterOnIsland = false;
 		inst.Visible = true;
 		instrumentspace.AddChild(inst);
-		//inst.Visible = true;
 		inst.Translation = Vector3.Zero;
 		inst.Rotation = Vector3.Zero;
-		//inst.Owner = Owner;
 	}
 	/*public bool HasLimbOfType(LimbType type)
 	{
@@ -419,13 +406,15 @@ public class CharacterInfo
 	public bool Alive = false;
 	public Dictionary<string, object> CustomData = new Dictionary<string, object>();
 	public List<Color> LimbColors = new List<Color>();
-	public void UpdateInfo(Character it)
+	public bool Talked = false;
+	public void UpdateInfo(NPC it)
 	{
 		Name = it.Name;
 		Position = it.Translation;
 		SceneData = it.Filename;
 		CurrentEnergy = it.GetCurrentCharacterEnergy();
 		Alive = it.m_balive;
+		Talked = it.Talked;
 		for (int i = 0; i < 6; i++)
 		{
 			LimbColors.Add(it.GetLimbColor((LimbType)i));
@@ -440,7 +429,8 @@ public class CharacterInfo
 			{"Name", Name},
 			{"SceneData", SceneData},
 			{"Energy", CurrentEnergy},
-			{"Alive", Alive}
+			{"Alive", Alive},
+			{"Talked", Talked}
 		};
 		Color[] LimbColorsAr = new Color[6];
 		for (int i = 0; i < 6; i++)
@@ -472,7 +462,7 @@ public class CharacterInfo
 		SceneData = (string)data.Get("SceneData");
 		CurrentEnergy = (float)data.Get("Energy");
 		Alive = (bool)data.Get("Alive");
-
+		Talked = (bool)data.Get("Talked");
 		Godot.Color[] LimbCols = (Godot.Color[])data.Get("LimbColors");
 		for (int i = 0; i < 6; i++)
 		{

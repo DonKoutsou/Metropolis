@@ -15,7 +15,7 @@ public class MapUI : Control
         //CoordText.BbcodeText = "[center]X:" + tile.x + " / Y:" + tile.y;
         //XCordText.Text = tile.x.ToString();
         //YCordText.Text = tile.y.ToString();
-        InventoryUI.GetInstance().On_Map_Button_Down();
+        PlayerUI.GetInstance().GetUI(PlayerUIType.INVENTORY).Call("On_Map_Button_Down");
     }
     public static bool IsMouseInMap()
     {

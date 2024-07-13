@@ -23,17 +23,14 @@ public class Inventory : Spatial
     float currentweight = 0;
     InventoryUI ui;
 
-    public Character CharacterOwner;
+    public Player CharacterOwner;
 
     
 
     public override void _Ready()
     {
-        ui = InventoryUI.GetInstance();
-        ui.CallDeferred("OnPlayerSpawned", (Player)GetParent());
-        
         InventoryContents = new List<Item>();
-        CharacterOwner = (Character)GetParent();
+        CharacterOwner = (Player)GetParent();
         CharacterOwner.ToggleAllLimbs();
         //CharacterOwner.ToggleLimb(LimbType.ARM_R, false);
         //CharacterOwner.ToggleLimb(LimbType.LEG_L, false);
@@ -57,6 +54,8 @@ public class Inventory : Spatial
             Item it = (Item)StartingItems[i].Instance();
             InsertItem(it);
         }
+
+        ui = (InventoryUI)PlayerUI.GetInstance().GetUI(PlayerUIType.INVENTORY);
     }
 
     //LIMB stuff
@@ -96,12 +95,14 @@ public class Inventory : Spatial
     public void EquipLimp(Limb l)
     {
         CharacterOwner.ToggleLimb(l.GetLimbType(), true);
+        CharacterOwner.ToggleLimbEffect(l.GetLimbType(), true);
         CharacterOwner.SetLimbColor(l.GetLimbType(), l.GetColor());
         EquippedLimbs.Add(l);
     }
     public void UnEquipLimp(Limb l)
     {
         CharacterOwner.ToggleLimb(l.GetLimbType(), false);
+        CharacterOwner.ToggleLimbEffect(l.GetLimbType(), false);
         EquippedLimbs.Remove(l);
     }
 

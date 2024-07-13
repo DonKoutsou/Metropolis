@@ -146,7 +146,7 @@ public class MyWorld : Spatial
 			Island iletocheck = island.Island;
 			if (TryRescue(iletocheck, Player.GetInstance().GlobalTranslation, out rescuer))
 			{
-				Rescue(rescuer, ile);
+				Rescue(rescuer, iletocheck);
 				return;
 			}
 		}
@@ -158,7 +158,7 @@ public class MyWorld : Spatial
 	bool TryRescue(Island ile, Vector3 pos, out Character rescuer)
 	{
 		rescuer = null;
-		List<Character> chars;
+		List<NPC> chars;
 		ile.GetCharacters(out chars);
 		foreach (Character cha in chars)
 		{
@@ -207,7 +207,7 @@ public class MyWorld : Spatial
 		pl.Respawn();
 		pl.Teleport(Rescuer.GetNode<Position3D>("TalkPosition").GlobalTranslation);
 
-		DialogueManager.GetInstance().StartDialogue(pl, Rescuer, "RescueDialogue");
+		DialogueManager.GetInstance().StartDialogue(Rescuer, "RescueDialogue");
 
 		Rescuer = null;
 		RescueIle = null;
@@ -419,7 +419,7 @@ public class MyWorld : Spatial
 	}
 	public void Pause()
 	{
-		StartingScreen start = ((WorldRoot)GetParent()).GetStartingScreen();
+		StartingScreen start = WorldRoot.GetInstance().GetStartingScreen();
 
 		bool paused = GetTree().Paused;
 		

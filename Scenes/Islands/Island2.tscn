@@ -210,10 +210,10 @@ transform = Transform( -78.8389, -101.548, -162.564, -187.952, 6.48232, 87.1017,
 skeleton = NodePath("../..")
 
 [node name="House2" parent="Clutter" index="15" instance=ExtResource( 7 )]
-transform = Transform( 0.325172, 0, 0.945656, 0, 1, 0, -0.945656, 0, 0.325172, -2143.65, 6.07073, 931.446 )
+transform = Transform( 0.325172, 0, 0.945656, 0, 1, 0, -0.945656, 0, 0.325172, -2279.78, 1.48053, 680.574 )
 
 [node name="House3" parent="Clutter" index="16" instance=ExtResource( 7 )]
-transform = Transform( 0.97901, 0, 0.203813, 0, 1, 0, -0.203813, 0, 0.97901, -2095.05, 6.99362, 912.537 )
+transform = Transform( 0.97901, 0, 0.203813, 0, 1, 0, -0.203813, 0, 0.97901, -2231.18, 2.41687, 661.665 )
 
 [node name="StaticBody" parent="Clutter" index="17" instance=ExtResource( 12 )]
 transform = Transform( 22.0028, 6.80931, 0, -4.85224, 15.679, 16.159, 4.77728, -15.4368, 16.4126, 207.244, -0.315842, 348.216 )
@@ -252,7 +252,7 @@ transform = Transform( 0.353849, -0.867831, -0.3488, 0.542144, 0.494198, -0.6795
 transform = Transform( 0.178694, 0.109919, -0.977746, -0.0773157, 0.992236, 0.0974174, 0.980863, 0.0581866, 0.185805, -1525.57, -67.4212, 1249.71 )
 
 [node name="DestBuilding9" parent="Clutter" index="29" instance=ExtResource( 11 )]
-transform = Transform( 0.548747, -0.0392286, 0.835068, -0.402876, 0.862844, 0.305274, -0.732509, -0.503946, 0.457679, -2035.48, -8.81081, 864.321 )
+transform = Transform( 0.548747, -0.0392286, 0.835068, -0.402876, 0.862844, 0.305274, -0.732509, -0.503946, 0.457679, -2118.01, -3.54385, 651.847 )
 
 [node name="DestBuilding10" parent="Clutter" index="30" instance=ExtResource( 11 )]
 transform = Transform( -0.400488, -0.466105, 0.788896, -0.402876, 0.862844, 0.305274, -0.822984, -0.195568, -0.53334, -1944.34, -92.4983, 2498.16 )
@@ -273,7 +273,7 @@ transform = Transform( -11.6495, -2.59181, -18.8488, -6.27688, 21.3875, 0.93852,
 transform = Transform( 0.955729, 0.211014, -0.205074, -0.0175618, 0.736606, 0.676094, 0.293724, -0.642561, 0.707702, -2391.5, 10.5204, 1683.27 )
 
 [node name="DestBuilding13" parent="Clutter" index="36" instance=ExtResource( 6 )]
-transform = Transform( -0.942415, 0.272364, -0.19409, -0.0690117, 0.409476, 0.909707, 0.327247, 0.870716, -0.3671, -2181.86, 72.7364, 872.389 )
+transform = Transform( -0.942415, 0.272364, -0.19409, -0.0690117, 0.409476, 0.909707, 0.327247, 0.870716, -0.3671, -2282, 72.7364, 612.753 )
 
 [node name="StaticBody15" parent="Clutter" index="37" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -612.723, 11.2424, 1549.88 )
@@ -318,7 +318,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1231.27, -89.9059, 2426.53 )
 transform = Transform( 1, 0, 0, 0, 0.554873, 0.831935, 0, -0.831935, 0.554873, -614.091, -66.8198, 2743.07 )
 
 [node name="WindGenerator" parent="Clutter" index="51" instance=ExtResource( 9 )]
-transform = Transform( 0.166752, 0, -0.110425, 0, 0.2, 0, 0.110425, 0, 0.166752, -2039.74, 2.39765, 935.267 )
+transform = Transform( 0.166752, 0, -0.110425, 0, 0.2, 0, 0.110425, 0, 0.166752, -2175.87, 2.52253, 684.395 )
 EnergyCapacity = 100.0
 EnergyPerWindStreangth = 0.025
 

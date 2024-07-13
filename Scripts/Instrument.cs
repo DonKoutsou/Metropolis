@@ -17,7 +17,7 @@ public class Instrument : Item
         Playing = Toggle;
         if (Toggle)
 		{
-            float pos = 0;
+            float pos;
 			Speaker.Stream = MusicManager.GetSong(this, out pos);
 			Speaker.Play(pos);
 		}

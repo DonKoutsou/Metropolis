@@ -19,8 +19,9 @@ public class DialogueManager : Node
         return Instance;
     }
 
-	public void StartDialogue(Player pl, Character character, string Dialogue = "TestTimeline")
+	public void StartDialogue(Character character, string Dialogue = "TestTimeline")
 	{
+		Player pl = Player.GetInstance();
 		if (pl.HasVehicle())
 		{
 			if (!pl.currveh.UnBoardVehicle(pl))
@@ -42,7 +43,6 @@ public class DialogueManager : Node
 		}
 		else
 		{
-			
 			var dialogue =  DialogicSharp.Start(Dialogue);
 
 			AddChild(dialogue);
@@ -73,5 +73,11 @@ public class DialogueManager : Node
 	{
 		CameraAnimationPlayer.GetInstance().PlayAnim("FadeOutDialogue");
 		IsTalking = false;
+	}
+	public void GiveBoat()
+	{
+		PortWorker pw = (PortWorker)TalkingChar;
+		Port p = pw.GetPort();
+		p.GetBoatOfType(VehicleType.BASIC).SetPlayerOwned(true);
 	}
 }

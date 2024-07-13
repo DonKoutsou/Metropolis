@@ -224,6 +224,7 @@ public class House : Spatial
 		}
 	}
 }
+
 public class HouseInfo
 {
 	public string HouseName;

@@ -118,8 +118,6 @@ public class MapGrid : GridContainer
     }
     public bool IsMouseInMap()
     {
-        if (!InventoryUI.GetInstance().IsOpen)
-            return false;
         if (!MapActive)
             return false;
         bool mouseinmap = true;
@@ -338,15 +336,26 @@ public class MapGrid : GridContainer
     }
     public void OnIslandToggled(Vector2 index, bool toggle)
     {
-        MapTile child;
-        MapIleList.TryGetValue(index, out child);
-        child.GetNode<Panel>("DebugPanel").Visible = toggle;
+        MapIleList[index].GetNode<Panel>("DebugPanel").Visible = toggle;
+    }
+    public void SetPortVissible(Vector2 index, Vector2 portpos)
+    {
+        TextureRect child = MapIleList[index].GetNode<TextureRect>("TextureRect");
+        Vector2 pos = new Vector2(6,6);
+        pos += portpos/4000 * 6;
+        foreach (TextureRect r in child.GetChildren())
+        {
+            if (r.RectPosition == pos)
+            {
+                r.Visible = true;
+                return;
+            }
+        }
     }
     //public void UpdateIleInfo(Vector2 index, IleType type, bool HasPort, List<Vector2> portpos, float rot = 0, ImageTexture img = null, string name = null)
-    public void UpdateIleInfo(Vector2 index, bool HasPort, List<Vector2> portpos, float rot = 0, ImageTexture img = null, string name = null)
+    public void UpdateIleInfo(Vector2 index, bool HasPort, List<PortInfo> portpos, float rot = 0, ImageTexture img = null, string name = null)
     {
-        MapTile child;
-        MapIleList.TryGetValue(index, out child);
+        MapTile child = MapIleList[index];
 
         for (int i = 0; i < 3; i++)
         {
@@ -356,11 +365,14 @@ public class MapGrid : GridContainer
                 t.QueueFree();
                 continue;
             }
+            
             Vector2 pos = new Vector2(6,6);
-            pos += portpos[i]/4000 * 6;
+            pos += portpos[i].Location/4000 * 6;
             t.RectRotation = - rot;
             //postoput.x += 6; postoput.y += 6;
             t.RectPosition = pos;
+            if (!portpos[i].Visited)
+                t.Visible = false;
             //t.RectPosition = Vector2.Zero;
         }
         /*if (type == IleType.ENTRANCE)

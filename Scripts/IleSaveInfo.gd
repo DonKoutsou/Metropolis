@@ -30,6 +30,6 @@ export (Array, Resource)  var Vehicles
 export (Array, Resource)  var Items
 export (Array, Resource) var Characters
 export var HasPort :bool
-export (Array, Vector2) var Ports
+export (Array, Resource) var Ports
 export var Rotation:float
 export var KeepInstance:bool

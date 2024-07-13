@@ -1,0 +1,43 @@
+[gd_resource type="SphereMesh" load_steps=6 format=2]
+
+[ext_resource path="res://shaders/Outline.shader" type="Shader" id=1]
+
+[sub_resource type="OpenSimplexNoise" id=113]
+seed = 875
+octaves = 1
+period = 221.1
+
+[sub_resource type="NoiseTexture" id=114]
+width = 128
+height = 128
+noise = SubResource( 113 )
+
+[sub_resource type="ShaderMaterial" id=117]
+resource_local_to_scene = true
+shader = ExtResource( 1 )
+shader_param/enable = true
+shader_param/outline_thickness = 0.01
+shader_param/color = Color( 0.0235294, 0.0352941, 0.0392157, 1 )
+
+[sub_resource type="SpatialMaterial" id=116]
+next_pass = SubResource( 117 )
+flags_world_triplanar = true
+params_diffuse_mode = 4
+params_specular_mode = 3
+params_depth_draw_mode = 1
+albedo_color = Color( 0.882353, 0.984314, 1, 1 )
+albedo_texture = SubResource( 114 )
+roughness = 0.0
+ao_enabled = true
+ao_light_affect = 1.0
+ao_texture = SubResource( 114 )
+ao_on_uv2 = false
+ao_texture_channel = 0
+uv1_triplanar = true
+
+[resource]
+material = SubResource( 116 )
+radius = 0.1
+height = 0.2
+radial_segments = 6
+rings = 3

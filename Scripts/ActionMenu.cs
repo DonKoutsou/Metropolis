@@ -34,7 +34,6 @@ public class ActionMenu : Control
 
 	public override void _Ready()
 	{
-		pl = (Player)GetParent().GetParent();
 		SetProcess(false);
 		VBoxContainer cont = GetNode<PanelContainer>("PanelContainer").GetNode<VBoxContainer>("VBoxContainer");
         PickButton = cont.GetNode<Button>("PickUp_Button");
@@ -43,6 +42,7 @@ public class ActionMenu : Control
 		IntButton.Hide();
 		PickButton.Hide();
 		IntButton2.Hide();
+		pl = (Player)GetParent();
 	}
 	public bool IsSelecting()
 	{
@@ -85,16 +85,17 @@ public class ActionMenu : Control
 				
 			}
 		}
-		else if (SelectedObj is Character chara)
+		else if (SelectedObj is NPC chara)
 		{
-			DialogueManager.GetInstance().StartDialogue(pl, chara);
+			DialogueManager.GetInstance().StartDialogue(chara, chara.GetDialogue());
 			//TalkText.GetInst().Talk("Φίλος", (Character)SelectedObj);
 		}
 		else if (SelectedObj is Vehicle veh)
 		{
-			if (!veh.PlayerOwned)
+			if (!veh.IsPlayerOwned())
 			{
 				TalkText.GetInst().Talk("Δεν είναι δικιά μου. Δεν μπορώ να την χρησιμοποιήσω.", pl);
+				return;
 			}
 			if (!pl.HasVehicle())
 			{
@@ -223,7 +224,7 @@ public class ActionMenu : Control
         
 		else if (SelectedObj is Vehicle veh)
 		{
-			if (veh.PlayerOwned)
+			if (veh.IsPlayerOwned())
 				TalkText.GetInst().Talk("Καΐκάρα μου!", pl);
 			else
 				TalkText.GetInst().Talk("Καΐκι, δεν είμαι σίγουρος πιανού.", pl);
@@ -352,7 +353,7 @@ public class ActionMenu : Control
 	public override void _Process(float delta)
 	{
 		Vector3 actionpos = (Vector3)SelectedObj.Call("GetActionPos", pl.GlobalTranslation);
-		var screenpos = GetTree().Root.GetCamera().UnprojectPosition(actionpos);
+		var screenpos = DViewport.GetInstance().GetCamera().UnprojectPosition(actionpos);
 
 		//Vector3 pos = SelectedObj.GlobalTransform.origin;
 
@@ -369,7 +370,7 @@ public class ActionMenu : Control
 		}
 		RectPosition = new Vector2 (screenpos.x, screenpos.y +50);
 
-		if (screenpos < Vector2.Zero || screenpos > GetViewport().Size)
+		if (screenpos < Vector2.Zero || screenpos > DViewport.GetInstance().Size)
 			Stop();
 
 		if (PerformingAction)
@@ -416,8 +417,9 @@ public class ActionMenu : Control
 		if (@event.IsActionPressed("Select"))
 		{
 			var spacestate = GetTree().Root.World.DirectSpaceState;
-			Vector2 mousepos = GetViewport().GetMousePosition();
-			Camera cam = GetTree().Root.GetCamera();
+			float mult = OS.WindowSize.x / DViewport.GetInstance().Size.x;
+			Vector2 mousepos = DViewport.GetInstance().GetMousePosition() / mult;
+			Camera cam = DViewport.GetInstance().GetCamera();
 			Vector3 rayor = cam.ProjectRayOrigin(mousepos);
 			Vector3 rayend = rayor + cam.ProjectRayNormal(mousepos) * 10000;
 			var rayar = spacestate.IntersectRay(rayor, rayend, new Godot.Collections.Array { this }, SelectLayer);

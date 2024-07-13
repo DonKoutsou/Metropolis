@@ -10,7 +10,6 @@ public class CameraPanPivot : Position3D
 	public Vector3 CameraInitialPosition;
 	static CameraPanPivot instance;
 
-	InventoryUI inv;
 	public static CameraPanPivot GetInstance()
 	{
 		return instance;
@@ -26,9 +25,6 @@ public class CameraPanPivot : Position3D
 
 		//store initial translation to snap back if needed
 		CameraInitialPosition = SpringArm.Rotation;
-		
-		
-		inv = InventoryUI.GetInstance();
     }
     public override void _Input(InputEvent @event)
 	{
@@ -59,10 +55,11 @@ public class CameraPanPivot : Position3D
 		Vector3 rot = new Vector3(PanXPivot.Rotation.x ,Rotation.y, 0);
 		
 		//Vector2 pan = new Vector2();
-		if (!inv.IsOpen)
+		if (!PlayerUI.GetInstance().HasMenuOpen())
 		{
-			Vector2 mousepos = GetViewport().GetMousePosition();
-			Vector2 screensize = GetViewport().Size;
+			float mult = OS.WindowSize.x / DViewport.GetInstance().Size.x;
+			Vector2 mousepos = DViewport.GetInstance().GetMousePosition() / mult;
+			Vector2 screensize = DViewport.GetInstance().Size;
 			Vector2 ammx = screensize/3;
 			Vector2 ammy = screensize/6;
 			if (mousepos.x < ammx.x)

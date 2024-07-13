@@ -17,6 +17,8 @@ func _SetData(data):
 	playerenergy = data["PlayerEnergy"]
 	InventoryContents = data["InventoryContents"]
 	playerHasVehicle = data["playerHasVehicle"]
+	DeliverJobs = data["DeliverJobs"]
+	ActiveDeliveryJob = data["ActiveDeliveryJob"]
 	Date = data["Date"];
 	if (playerHasVehicle):
 		VehicleName = data["VehicleName"]
@@ -51,5 +53,9 @@ export var VehicleName:String
 export var VehicleState:bool
 export var WingState:bool
 export var LightState:bool
+
+export (Array, Vector2) var DeliverJobs = []
+export var ActiveDeliveryJob:int
+export (Array, Vector2) var EscortJobs = []
 
 export (Array, int) var Date = []

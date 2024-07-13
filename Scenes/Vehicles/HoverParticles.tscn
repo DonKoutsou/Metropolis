@@ -1,9 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Scenes/Vehicles/HoverPaericleMat.tres" type="Material" id=1]
+[ext_resource path="res://Scenes/Vehicles/HoverPaericleMa2t.tres" type="SphereMesh" id=1]
 
 [sub_resource type="Curve" id=5]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.0997286, 0.839724 ), 0.0, 0.0, 0, 0, Vector2( 0.216418, 0.67408 ), 0.0, 0.0, 0, 0, Vector2( 0.320896, 0.809049 ), 0.0, 0.0, 0, 0, Vector2( 0.384668, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.472863, 0.57592 ), 0.0, 0.0, 0, 0, Vector2( 0.590909, 0.391871 ), 0.0, 0.0, 0, 0, Vector2( 0.642469, 0.606595 ), 0.0, 0.0, 0, 0, Vector2( 0.708955, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.890773, 0.373466 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.490031 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.011646, 0.00306749 ), 0.0, 0.0, 0, 0, Vector2( 0.0147516, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.0333851, 0.105828 ), 0.0, 0.0, 0, 0, Vector2( 0.0349379, 0.872699 ), 0.0, 0.0, 0, 0, Vector2( 0.0535714, 0.265337 ), 0.0, 0.0, 0, 0, Vector2( 0.0753106, 0.75 ), 0.0, 0.0, 0, 0, Vector2( 0.0923913, 0.430982 ), 0.0, 0.0, 0, 0, Vector2( 0.126553, 0.627301 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=6]
 curve = SubResource( 5 )
@@ -17,25 +17,22 @@ emission_ring_axis = Vector3( 0, 1, 0 )
 direction = Vector3( 0, -1, 0 )
 spread = 0.0
 gravity = Vector3( 0, 0, 0 )
-angular_velocity = 720.0
-radial_accel = 12.4
+angular_velocity = 400.0
+radial_accel = 2.0
 radial_accel_random = 0.53
-scale = 15.0
+scale = 30.0
 scale_random = 1.0
 scale_curve = SubResource( 6 )
-
-[sub_resource type="QuadMesh" id=4]
-material = ExtResource( 1 )
 
 [node name="Particles" type="Particles"]
 cast_shadow = 0
 extra_cull_margin = 875.7
 generate_lightmap = false
 emitting = false
-amount = 300
-lifetime = 3.0
+amount = 600
+lifetime = 6.0
 visibility_aabb = AABB( -305.224, -131.173, -265.211, 610.447, 262.346, 530.422 )
 local_coords = false
 draw_order = 2
 process_material = SubResource( 3 )
-draw_pass_1 = SubResource( 4 )
+draw_pass_1 = ExtResource( 1 )

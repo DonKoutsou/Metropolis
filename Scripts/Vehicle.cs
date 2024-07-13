@@ -12,7 +12,12 @@ using System.Linq;
   ╚═══╝  ╚══════╝╚═╝  ╚═╝╚═╝ ╚═════╝╚══════╝╚══════╝
 */
 
-
+public enum VehicleType
+{
+    BASIC,
+    ADVANCED,
+    MASTERWORK
+}
 public class Vehicle : RigidBody
 {
     ///////////////////////////////////Exports///////////////////////////////////
@@ -38,6 +43,8 @@ public class Vehicle : RigidBody
     Mesh RightWingMesh = null;
     [Export]
     Mesh RightDestWingMesh = null;
+    [Export]
+    VehicleType VType = VehicleType.BASIC;
     ///////////////////////////////////////////////////////////////////////////
     
     //Engine is on
@@ -60,7 +67,24 @@ public class Vehicle : RigidBody
 
     WindDetector WindD;
 
-    public bool PlayerOwned = false;
+    public void SetPlayerOwned(bool toggle)
+    {
+        PlayerOwned = toggle;
+        if (toggle)
+            AddToGroup("PlayerBoat");
+        else
+        {
+            if (IsInGroup("PlayerBoat"))
+                RemoveFromGroup("PlayerBoat");
+        }
+            
+    }
+    public bool IsPlayerOwned()
+    {
+        return PlayerOwned;
+    }
+    [Export]
+    bool PlayerOwned = false;
 
     ////////////Damage///////////////
     VehicleDamageManager DamageMan;
@@ -124,6 +148,10 @@ public class Vehicle : RigidBody
         
         //SetProcessInput(false);
     }
+    public VehicleType GetVehicleType()
+    {
+        return VType;
+    }
     public void ZeroPos()
     {
         Spatial parent = (Spatial)GetParent();
@@ -141,7 +169,7 @@ public class Vehicle : RigidBody
     {
         base._Process(delta);
 
-        float engineforce = latsspeed / 500000;
+        float engineforce = latsspeed / speed;
         ((ParticlesMaterial)ExaustParticles[0].ProcessMaterial).Scale = engineforce * 5;
         ((ParticlesMaterial)ExaustParticles[0].ProcessMaterial).InitialVelocity = engineforce * 60 + 5;
         //ExaustParticles[0].GetNode<AudioStreamPlayer3D>("EngineSound").UnitDb = engineforce * 15;
@@ -156,7 +184,8 @@ public class Vehicle : RigidBody
     {
         base._PhysicsProcess(delta);
         //ulong ms = OS.GetSystemTimeMsecs();
-
+        if (!PlayerOwned)
+            return;
         if (passengers.Count > 0)
         {
             if (!thr.IsActive())
@@ -175,9 +204,8 @@ public class Vehicle : RigidBody
         float distmulti = Math.Min(500, distance)/ 500;
         SpeedBuildup = Mathf.Max(Mathf.Min(SpeedBuildup + (distmulti * 2 - 1) / 700, 1), 0 );
         float fmulti = 1;
-        Vector3 force = Vector3.Zero;
-        
-        force = GlobalTransform.basis.z;
+
+        Vector3 force = GlobalTransform.basis.z;
         force.y = 0;
         
         Vector3 wingforce = Vector3.Zero;
@@ -328,10 +356,11 @@ public class Vehicle : RigidBody
             Spatial EnginePivot = ray.GetNode<Spatial>("EnginePivot");
             //ray.ForceRaycastUpdate();
             Particles part = EnginePivot.GetNode<Particles>("Particles");
+            Particles partd = EnginePivot.GetNode<Particles>("ParticlesDirt");
             if (ray.IsColliding())
             {
                 var collisionpoint = ray.GetCollisionPoint();
-               // var collisionobj = ray.GetCollider();
+                var collisionobj = ray.GetCollider();
                 var dist = collisionpoint.DistanceTo(ray.GlobalTranslation);
                 float distmulti = dist / - ray.CastTo.y;
 
@@ -341,13 +370,22 @@ public class Vehicle : RigidBody
                 if (dist <= 35 && Working)
                 {
                     //Flame.Emitting = true;
-                    float particleoffset = dist - 4;
-                    //if (((Node)collisionobj).Name == "SeaBed")
+                    float particleoffset = dist;
+                    
                     //particleoffset -= 4;
                     part.Translation = new Vector3(part.Translation.x, - particleoffset, part.Translation.z);
+                    partd.Translation = new Vector3(partd.Translation.x, - particleoffset, partd.Translation.z);
                 }
-
-                part.Emitting = Working;
+                if (((Node)collisionobj).Name == "SeaBed")
+                {
+                    part.Emitting = Working;
+                    partd.Emitting = false;
+                }
+                else
+                {
+                    part.Emitting = false;
+                    partd.Emitting = Working;
+                }
                 float multi = forcecurve.Interpolate(distmulti);
                 //if (dist < 4)
                 //{
@@ -365,6 +403,7 @@ public class Vehicle : RigidBody
             else
             {
                 part.Emitting = false;
+                partd.Emitting = false;
                 //ray.GetNode<Particles>("EngineParticles").Emitting = false;
                 f = Vector3.Up * 8000 * delta * -8;
 
@@ -392,7 +431,7 @@ public class Vehicle : RigidBody
             float sign = Mathf.Sign(rotx);
             float rotmulti = rotx / (45 * sign);
             Vector3 torq = GlobalTransform.basis.x * - sign * turnspeed * delta;
-            torquebalance = torq * rotmulti * 0.2f;
+            torquebalance += torq * rotmulti;
             if (rotx > 100 || rotx < -100)
                 CallDeferred("Capsize");
         }
@@ -405,7 +444,7 @@ public class Vehicle : RigidBody
             float sign = Mathf.Sign(rotz);
             float rotmulti = rotz / (45 * sign);
             Vector3 torq = GlobalTransform.basis.z * -sign * turnspeed * delta;
-            torquebalance = torq * rotmulti * 0.2f;
+            torquebalance += torq * rotmulti;
             if (rotz < -100 || rotz > 100)
                 CallDeferred("Capsize");
         }
@@ -718,6 +757,7 @@ public class Vehicle : RigidBody
         ZeroPos();
 		Translation = data.loc;
         Rotation = data.rot;
+        SetPlayerOwned(data.PlayerOwned);
         GetParent().GetNode<VehicleDamageManager>("VehicleDamageManager").InputData(data.DamageInfo);
 	}
     public void ReparentVehicle(Island ile)
@@ -759,13 +799,15 @@ public class VehicleInfo
     public VehicleDamageInfo DamageInfo;
     //public bool removed = false;
     public string scenedata;
+    public bool PlayerOwned;
     public void UpdateInfo(Vehicle veh)
     {
         veh.ZeroPos();
-        Spatial par = (Spatial)veh.GetParent();
+        //Spatial par = (Spatial)veh.GetParent();
 
         loc = veh.Translation;
         rot = veh.Rotation;
+        PlayerOwned = veh.IsPlayerOwned();
         //VehicleDamageManager Damageman = veh.GetParent().GetNode<VehicleDamageManager>("VehicleDamageManager");
         DamageInfo = new VehicleDamageInfo();
         DamageInfo.UpdateInfo(veh);
@@ -781,6 +823,7 @@ public class VehicleInfo
         scenedata = veh.GetParent().Filename;
         VehicleDamageManager Damageman = veh.GetParent().GetNode<VehicleDamageManager>("VehicleDamageManager");
         DamageInfo = new VehicleDamageInfo();
+        PlayerOwned = veh.IsPlayerOwned();
         List<int> destw;
         Damageman.GetDestroyedWings(out destw);
         DamageInfo.SetInfo(veh);
@@ -795,7 +838,7 @@ public class VehicleInfo
         data.Add("Location", loc);
         data.Add("Rotation", rot);
         data.Add("DamageInfo", damageinfo);
-        //data.Add("Removed", removed);
+        data.Add("PlayerOwned", PlayerOwned);
         data.Add("SceneData", scenedata);
         return data;
     }
@@ -804,7 +847,7 @@ public class VehicleInfo
         VehName = (string)data.Get("Name");
         loc = (Vector3)data.Get("Location");
         rot = (Vector3)data.Get("Rotation");
-        //removed = (bool)data.Get("Removed");
+        PlayerOwned = (bool)data.Get("PlayerOwned");
         scenedata = (string)data.Get("SceneData");
 
         Resource DamageData = (Resource)data.Get("DamageInfo");

@@ -73,7 +73,7 @@ nodes/ChairBlend/position = Vector2( 186.667, 160 )
 nodes/IntrumentBlend/node = SubResource( 54 )
 nodes/IntrumentBlend/position = Vector2( 360, 266.667 )
 nodes/output/position = Vector2( 533.333, 160 )
-node_connections = [ "output", 0, "IntrumentBlend", "IntrumentBlend", 0, "ChairBlend", "IntrumentBlend", 1, "Animation 2", "ChairBlend", 0, "Animation", "ChairBlend", 1, "Animation 3" ]
+node_connections = [ "output", 0, "IntrumentBlend", "ChairBlend", 0, "Animation", "ChairBlend", 1, "Animation 3", "IntrumentBlend", 0, "ChairBlend", "IntrumentBlend", 1, "Animation 2" ]
 
 [sub_resource type="AnimationNodeAnimation" id=55]
 animation = "Standing"
@@ -154,7 +154,7 @@ transform = Transform( 1, 0, 0, 0, 1, 5.68434e-14, 0, -2.84217e-14, 1, -0.314196
 script = ExtResource( 18 )
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton" index="0"]
-transform = Transform( 0.996783, -0.0744472, -0.0296689, 0.0706252, 0.990984, -0.113854, 0.0378775, 0.111393, 0.993054, -3.23185, 265.421, 11.5983 )
+transform = Transform( 0.997062, -0.0711294, -0.0284158, 0.0673929, 0.990975, -0.11587, 0.0364011, 0.113614, 0.992858, -3.18167, 265.35, 11.8039 )
 bone_name = "mixamorig_Head"
 
 [node name="HeadPivot" type="Spatial" parent="Armature/Skeleton/BoneAttachment" index="0"]
@@ -181,7 +181,7 @@ spot_angle = 47.5769
 spot_angle_attenuation = 0.25
 
 [node name="InstrumentAtatchment" type="BoneAttachment" parent="Armature/Skeleton" index="1"]
-transform = Transform( 0.998181, -0.0316644, -0.0512999, 0.0308198, 0.999377, -0.0171743, 0.0518118, 0.0155621, 0.998536, 0.151678, 213.118, 0.147214 )
+transform = Transform( 0.998335, -0.0306336, -0.0488701, 0.0297865, 0.999395, -0.0179692, 0.049391, 0.0164836, 0.998643, 0.094711, 213.081, 0.253601 )
 bone_name = "mixamorig_Spine1"
 
 [node name="PlayingAtatchment" type="RemoteTransform" parent="Armature/Skeleton/InstrumentAtatchment" index="0"]

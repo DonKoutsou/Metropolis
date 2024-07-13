@@ -110,6 +110,11 @@ _global_script_classes=[ {
 "path": "res://Scripts/safe_resource_loader.gd"
 }, {
 "base": "Resource",
+"class": "PortSaveInfo",
+"language": "GDScript",
+"path": "res://Scripts/PortSaveInfo.gd"
+}, {
+"base": "Resource",
 "class": "SavedGame",
 "language": "GDScript",
 "path": "res://Scripts/saved_game.gd"
@@ -155,6 +160,7 @@ _global_script_class_icons={
 "InventoryItemSaveInfo": "",
 "ItemSaveInfo": "",
 "MySafeResourceLoader": "",
+"PortSaveInfo": "",
 "SavedGame": "",
 "Template": "",
 "TexturePacker": "",
@@ -186,8 +192,10 @@ settings/stdout/verbose_stdout=true
 
 window/size/width=1920
 window/size/height=1080
-window/size/borderless=true
+window/size/test_width=1920
+window/size/test_height=1080
 window/vsync/use_vsync=false
+window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
 [editor_plugins]
@@ -358,7 +366,7 @@ quality/filters/use_nearest_mipmap_filter=true
 misc/occlusion_culling/max_active_spheres=16
 misc/occlusion_culling/max_active_polygons=16
 quality/subsurface_scattering/quality=0
-quality/filters/msaa=2
+quality/filters/msaa=1
 quality/filters/use_fxaa=true
 environment/default_environment="res://new_environment2.tres"
 quality/godrays/use_pcf5=true

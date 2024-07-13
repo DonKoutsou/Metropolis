@@ -124,6 +124,11 @@ public class CheatMenu : Control
 		Buttons.MouseFilter = MouseFilterEnum.Ignore;
 		SetProcess(false);
 	}
+	public void OnPlayerSpawned(Player pl)
+	{
+		CameraPanPivot pan = pl.GetNode<Position3D>("CameraMovePivot").GetNode<CameraPanPivot>("CameraPanPivot");
+		CamZoom = pan.GetNode<SpringArm>("SpringArm").GetNode<CameraZoomPivot>("CameraZoomPivot");
+	}
 	public override void _Ready()
 	{
 		if (!OS.HasFeature("editor"))
@@ -135,10 +140,7 @@ public class CheatMenu : Control
 		Buttons = GetNode<Control>("Buttons");
 		TimeProgressionSetting = Buttons.GetNode<Panel>("TimeProgressionSetting");
 		TeleportPanel = Buttons.GetNode<Panel>("TeleportPanel");
-		pl = (Player)GetParent().GetParent();
-		//CamMove = pl.GetNode<CameraMovePivot>("CameraMovePivot");
-		CameraPanPivot pan = pl.GetNode<Position3D>("CameraMovePivot").GetNode<CameraPanPivot>("CameraPanPivot");
-		CamZoom = pan.GetNode<SpringArm>("SpringArm").GetNode<CameraZoomPivot>("CameraZoomPivot");
+		
 		Control labelcont = (Control)GetNode("PanelContainer").GetNode("HBoxContainer").GetNode("Labels");
 		FpsCounter = labelcont.GetNode<Label>("FPS_Counter");
 		RainAmm = labelcont.GetNode<Label>("RainAmmount");

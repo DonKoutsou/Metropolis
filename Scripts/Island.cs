@@ -28,7 +28,7 @@ public class Island : Spatial
 
 	List<Item> Items = new List<Item>();
 
-	List<Character> Characters = new List<Character>();
+	List<NPC> Characters = new List<NPC>();
 	
 	public override void _Ready()
 	{
@@ -65,10 +65,10 @@ public class Island : Spatial
 	{
 		return Ports[0];
 	}
-	public List<Port> GetPorts()
-	{
-		return Ports;
-	}
+	//public List<Port> GetPorts()
+	//{
+	//	return Ports;
+	//}
 	#if DEBUG
 	[Export(PropertyHint.Layers3dPhysics)]
     public uint MoveLayer { get; set; }
@@ -93,7 +93,6 @@ public class Island : Spatial
 	bool OutliningImage = false;
 
 	ImageGenDock d;
-
 	void GeneratePixelRow()
 	{
 		for (int i = 0; i < res.x; i++)
@@ -316,6 +315,16 @@ public class Island : Spatial
 				}
 			}
 		}
+		foreach (Port p in Ports)
+		{
+			foreach(PortInfo Pnfo in data.Ports)
+			{
+				if (new Vector2(p.Translation.x, p.Translation.z) == Pnfo.Location)
+				{
+					p.Visited = Pnfo.Visited;
+				}
+			}
+		}
 		foreach (WindGenerator gen in Generators)
 		{
 			foreach(WindGeneratorInfo GenInfo in data.Generators)
@@ -527,7 +536,7 @@ public class Island : Spatial
 			Vehicles.Add(vehicle);
 		else if (child is Item item && !Items.Contains(child))
 			Items.Add(item);
-		else if (child is Character character && !Characters.Contains(child))
+		else if (child is NPC character && !Characters.Contains(child))
 			Characters.Add(character);
 		else if (child is Port port && !Ports.Contains(child))
 			Ports.Add(port);
@@ -542,8 +551,10 @@ public class Island : Spatial
 			Vehicles.Remove(vehicle);
 		else if (child is Item item)
 			Items.Remove(item);
-		else if (child is Character character)
+		else if (child is NPC character)
 			Characters.Remove(character);
+		else if (child is Port p)
+			Ports.Remove(p);
 	}
 	public void FindChildren(Node node)
 	{
@@ -558,7 +569,7 @@ public class Island : Spatial
 				Vehicles.Add(veh);
 			else if (child is Item item && !Items.Contains(child))
 				Items.Add(item);
-			else if (child is Character cha && !Houses.Contains(child))
+			else if (child is NPC cha && !Houses.Contains(child))
 				Characters.Add(cha);
 			else if (child is Port p && !Ports.Contains(child))
 				Ports.Add(p);
@@ -574,7 +585,7 @@ public class Island : Spatial
 		hs = new List<House>();
 		for (int i = 0; i < Houses.Count; i++)
 		{
-			hs.Insert(i, Houses[i]);
+			hs.Add(Houses[i]);
 		}
 	}
 
@@ -583,10 +594,17 @@ public class Island : Spatial
 		wg = new List<WindGenerator>();
 		for (int i = 0; i < Generators.Count; i++)
 		{
-			wg.Insert(i, Generators[i]);
+			wg.Add(Generators[i]);
 		}
 	}
-
+	public void GetPorts(out List<Port> wg)
+	{
+		wg = new List<Port>();
+		for (int i = 0; i < Ports.Count; i++)
+		{
+			wg.Add(Ports[i]);
+		}
+	}
 	public void GetVehicles(out List<Vehicle> vhs)
 	{
 		vhs = new List<Vehicle>();
@@ -595,7 +613,7 @@ public class Island : Spatial
 			if (Vehicles[i] == null)
 				continue;
 				
-			vhs.Insert(i, Vehicles[i]);
+			vhs.Add(Vehicles[i]);
 		}
 	}
 	public void GetItems(out List<Item> Itms)
@@ -606,22 +624,22 @@ public class Island : Spatial
 			if (Items[i] == null)
 				continue;
 				
-			Itms.Insert(i, Items[i]);
+			Itms.Add(Items[i]);
 		}
 	}
 	public bool HasCharacters()
 	{
 		return Characters.Count > 0 ;
 	}
-	public void GetCharacters(out List<Character> Char)
+	public void GetCharacters(out List<NPC> Char)
 	{
-		Char = new List<Character>();
+		Char = new List<NPC>();
 		for (int i = 0; i < Characters.Count; i++)
 		{
 			if (Characters[i] == null)
 				continue;
 				
-			Char.Insert(i, Characters[i]);
+			Char.Add(Characters[i]);
 		}
 	}
 }
@@ -631,7 +649,7 @@ public class IslandInfo
 	public IleType Type;
 	public Vector2 Position;
 	public bool HasPort;
-	public List<Vector2> Ports = new List<Vector2>();
+	public List<PortInfo> Ports = new List<PortInfo>();
 	public string SpecialName = null;
 	public PackedScene IleType;
 	public int ImageIndex = 0;
@@ -666,14 +684,14 @@ public class IslandInfo
         RotationToSpawn = (float)data.Get("Rotation");
 		KeepInstance = (bool)data.Get("KeepInstance");
 		HasPort = (bool)data.Get("HasPort");
+
 		if (HasPort)
 		{
-			var ports = data.Get("Ports");
-			Godot.Vector2[] PortData = ( Godot.Vector2[])data.Get("Ports");
-			for (int i  = 0; i < PortData.Count(); i++)
+			Godot.Collections.Array PortData = ( Godot.Collections.Array)data.Get("Ports");
+			for (int i  = 0; i < PortData.Count; i++)
 			{
-				Vector2 info;
-				info = (Vector2)PortData[i];
+				PortInfo info = new PortInfo();
+				info.UnPackData((Resource)PortData[i]);
 				Ports.Add(info);
 			}
 		}
@@ -717,12 +735,18 @@ public class IslandInfo
     }
 	public Dictionary<string, object>GetPackedData()
 	{
-		Vector2[] Portobjects = new Vector2[Ports.Count];
+		GDScript PortSaveScript = GD.Load<GDScript>("res://Scripts/PortSaveInfo.gd");
+		Resource[] PortInfoobjects = new Resource[Ports.Count];
+
+
+		//Vector2[] Portobjects = new Vector2[Ports.Count];
 		for (int i = 0; i < Ports.Count; i ++)
 		{
-			Portobjects[i] = Ports[i];
+			Resource PortInfor = (Resource)PortSaveScript.New();
+			PortInfor.Call("_SetData", Ports[i].GetPackedData());
+			PortInfoobjects[i] = PortInfor;
 		}
-
+		
 		//Houses
 		GDScript HouseSaveScript = GD.Load<GDScript>("res://Scripts/HouseSaveInfo.gd");
 
@@ -804,7 +828,7 @@ public class IslandInfo
 			{"Characters", CharacterInfoobjects},
 			{"KeepInstance", KeepInstance},
 			{"HasPort", HasPort},
-			{"Ports", Portobjects}
+			{"Ports", PortInfoobjects}
         };
 
 		return data;
@@ -816,15 +840,7 @@ public class IslandInfo
 		Type = Ile.GetIslandType();
 		KeepInstance = Ile.KeepInstance;
 		HasPort = Ile.HasPort();
-		if (HasPort)
-		{
-			List<Port> ppos = Ile.GetPorts();
-			foreach (Port p in ppos)
-			{
-				Ports.Add(new Vector2(p.Translation.x, p.Translation.z));
-			}
-			
-		}
+		
 		//SpecialName = Ile.IslandSpecialName;
 		List<House> hous;
 		Ile.GetHouses(out hous);
@@ -834,13 +850,21 @@ public class IslandInfo
 		Ile.GetVehicles(out veh);
 		List <Item> Itms;
 		Ile.GetItems(out Itms);
-		List <Character> Chars;
+		List <NPC> Chars;
 		Ile.GetCharacters(out Chars);
+
 		AddHouses(hous);
 		AddGenerators(Gen);
 		AddVehicles(veh);
 		AddItems(Itms);
 		AddChars(Chars);
+		
+		if (HasPort)
+		{
+			List <Port> Ports;
+			Ile.GetPorts(out Ports);
+			AddPorts(Ports);
+		}
 	}
 	public void AddNewVehicle(Vehicle veh)
 	{
@@ -872,7 +896,7 @@ public class IslandInfo
 			}
 		}
 	}
-	public void AddNewCharacter(Character ch)
+	public void AddNewCharacter(NPC ch)
 	{
 		int Charammount = 0;
 		for(int i = 0; i < Characters.Count; i++)
@@ -1001,12 +1025,12 @@ public class IslandInfo
 			}
 			VHInfo.UpdateInfo(v);
 		}
-		List<Character> Chars;
+		List<NPC> Chars;
 		island.GetCharacters(out Chars);
 		foreach(CharacterInfo CHInfo in Characters)
 		{
-			Character c = null;
-			foreach (Character cha in Chars)
+			NPC c = null;
+			foreach (NPC cha in Chars)
 			{
 				if (cha == null || !Godot.Object.IsInstanceValid(cha))
 					continue;
@@ -1090,13 +1114,22 @@ public class IslandInfo
 			Vehicles.Add(info);
 		}
 	}
-	public void AddChars(List<Character> CharsToAdd)
+	public void AddChars(List<NPC> CharsToAdd)
 	{
 		for (int i = 0; i < CharsToAdd.Count; i++)
 		{
 			CharacterInfo info = new CharacterInfo();
 			info.UpdateInfo(CharsToAdd[i]);
 			Characters.Add(info);
+		}
+	}
+	public void AddPorts(List<Port> PortsToAdd)
+	{
+		for (int i = 0; i < PortsToAdd.Count; i++)
+		{
+			PortInfo info = new PortInfo();
+			info.SetInfo(new Vector2 (PortsToAdd[i].Translation.x, PortsToAdd[i].Translation.z), PortsToAdd[i].Visited);
+			Ports.Add(info);
 		}
 	}
 	public bool IsIslandSpawned()

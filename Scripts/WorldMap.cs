@@ -260,11 +260,17 @@ public class WorldMap : TileMap
 				Vehicle veh = GetCurrentIsland().GetNode<Spatial>(vehname).GetNode<Vehicle>("VehicleBody");
 				veh.BoardVehicle(pl);
 				pl.SetVehicle(veh);
-
+				//veh.PlayerOwned = true;
 				veh.ToggleMachine(MachineState);
 				veh.ToggleWings(WingState);
 				veh.ToggleLights(LightState);
 			}
+
+			Vector2[] DelJobs =  (Vector2[])save.Get("DeliverJobs");
+			int activeDJob = (int)save.Get("ActiveDeliveryJob");
+			GlobalJobManager jm = GlobalJobManager.GetInstance();
+			jm.LoadDeliverJobs(DelJobs, activeDJob);
+			jm.SetJobAmm(DelJobs.Count());
 		}
 		else
 		{
@@ -306,6 +312,10 @@ public class WorldMap : TileMap
 
 		return iles[index];
 	}
+	public Vector2 GlobalToMap(Vector3 pos)
+	{
+		return WorldToMap(new Vector2(pos.x, pos.z));
+	}
 	public IslandInfo GetRandomLightHouse(int MinDist, int MaxDist)
 	{
 		List<IslandInfo> iles = new List<IslandInfo>();
@@ -343,7 +353,10 @@ public class WorldMap : TileMap
 		d = 1;
 		CheckForTransition();
 	}
-
+	public IslandInfo GetIle(Vector2 pos)
+	{
+		return ilemap[pos];
+	}
 	void GenerateIsland(int tilenum)
 	{
 		//Get Cell id
@@ -425,9 +438,9 @@ public class WorldMap : TileMap
 		IleToSave = null;
 		CallDeferred("DespawnIle", ilei.Island, ilei.KeepInstance);
 		//CallDeferred("AddMapData", ilei.Position, ilei.Type, ilei.HasPort, ilei.Ports, ilei.RotationToSpawn, ile.ImageID, ilei.SpecialName);
-		CallDeferred("AddMapData", ilei.Position, ilei.HasPort, ilei.Ports, ilei.RotationToSpawn, ile.ImageID, ilei.SpecialName);
+		AddMapData(ilei.Position, ilei.HasPort, ilei.Ports, ilei.RotationToSpawn, ile.ImageID, ilei.SpecialName);
 	}
-	void AddMapData(Vector2 position, bool HasPort, List<Vector2> Ports, float RotationToSpawn, int imageId, string name = null)
+	void AddMapData(Vector2 position, bool HasPort, List<PortInfo> Ports, float RotationToSpawn, int imageId, string name = null)
 	{
 		ImageTexture tex = new ImageTexture();
 		tex.CreateFromImage(IslandImageHolder.GetInstance().Images[imageId]);

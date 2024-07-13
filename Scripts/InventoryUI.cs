@@ -48,18 +48,6 @@ public class InventoryUI : Control
     MapGrid map;
     Panel CharacterRPM;
 
-    static InventoryUI Instance;
-
-    public override void _EnterTree()
-    {
-        base._EnterTree();
-        Instance = this;
-    }
-    public override void _ExitTree()
-    {
-        base._ExitTree();
-        Instance = null;
-    }
     public void ConfigureJob(Job j)
     {
         JobPan.GetNode<RichTextLabel>("MarginContainer/VBoxContainer/TaskName").BbcodeText = "[center]" + j.GetJobName();
@@ -103,10 +91,6 @@ public class InventoryUI : Control
         CharacterBatteryCharge.Value = pl.GetCurrentCharacterEnergy();
         comp = GetNode<Compass>("CompassUI");
         map = MapGrid.GetInstance();
-    }
-    static public InventoryUI GetInstance()
-    {
-        return Instance;
     }
     public void OpenInventory()
     {

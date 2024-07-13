@@ -29,14 +29,20 @@ public class RandomContainer : Node
 			RandomInstance.NextDouble();
 		}
     }
+    public override void _Ready()
+    {
+        base._Ready();
+        //RandomInstance = new Random();
+    }
     /*public static double NextDouble(double from, double to)
     {
         RandomTimes++;
         return RandomInstance.NextDouble(from, to);
     }*/
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
+    //  // Called every frame. 'delta' is the elapsed time since the previous frame.
+    //  public override void _Process(float delta)
+    //  {
+    //      
+    //  }
+
 }

@@ -14,7 +14,7 @@ size = Vector3( 0.329, 1.521, 2 )
 [sub_resource type="BoxShape" id=3]
 extents = Vector3( 4.00219, 0.903319, 1 )
 
-[node name="StaticBody" type="StaticBody" groups=["Interactables"]]
+[node name="Pagaki" type="StaticBody" groups=["Interactables"]]
 collision_layer = 48
 collision_mask = 0
 script = ExtResource( 2 )

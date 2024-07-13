@@ -16,6 +16,25 @@ public class NPC : Character
 	Vector3 TalkPosPos = new Vector3(0, 0.5f, 6);
 	[Export]
 	PackedScene InstrumentToSpawnWith = null;
+
+	[Export]
+    string FirstDialogue = "TestTimeline";
+	[Export]
+	string RestDialogue = "TestTimeline";
+
+	public bool Talked;
+
+	public string GetDialogue()
+	{
+		if (Talked)
+			return RestDialogue;
+		else
+		{
+			Talked = true;
+			return FirstDialogue;
+		}
+			
+	}
 	
 
 	Node Skeleton;
@@ -62,8 +81,12 @@ public class NPC : Character
 			CallDeferred("SpawnSit");
 			
 		}
-		Instrument inst = InstrumentToSpawnWith.Instance<Instrument>();
-		AddInstrument(inst);
+		if (InstrumentToSpawnWith != null)
+		{
+			Instrument inst = InstrumentToSpawnWith.Instance<Instrument>();
+			AddInstrument(inst);
+		}
+		
 		if (PlayInstrument)
 		{
 			CallDeferred("PlayMusic");

@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 [Tool]
@@ -107,6 +108,40 @@ static public class LimbTranslator
             }
         }
         return thing;
+    }
+    public static Godot.Collections.Dictionary<string, object> GetLimbEffect(LimbType type, bool toggle)
+    {
+        Godot.Collections.Dictionary<string, object> effects = new Godot.Collections.Dictionary<string, object>();
+        switch(type)
+        {
+            case LimbType.ARM_L:
+            {
+                break;
+            }
+            case LimbType.ARM_R:
+            {
+                break;
+            }
+            case LimbType.LEG_L:
+            {
+                effects.Add("RunSpeed", 1.6);
+                break;
+            }
+            case LimbType.LEG_R:
+            {
+                effects.Add("RunSpeed", 1.6);
+                break;
+            }
+            case LimbType.N01_LEG_L:
+            {
+                break;
+            }
+            case LimbType.N01_LEG_R:
+            {
+                break;
+            }
+        }
+        return effects;
     }
 }
 static public class LimbRandomColorProvider

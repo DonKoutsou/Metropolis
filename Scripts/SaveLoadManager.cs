@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class SaveLoadManager : Control
 {
@@ -115,6 +116,32 @@ public class SaveLoadManager : Control
 			v ++;
 		}
 		data.Add("InventoryContents", Inventorydata);
+
+		GlobalJobManager man = GlobalJobManager.GetInstance();
+		
+
+
+		List <Job> jobs = man.GetJobs();
+		List <Job> Ajobs = man.GetAssignedJobs();
+		List <Job> DelJobs = new List<Job>();
+		int activeDJob = -1;
+
+		foreach (Job j in jobs)
+		{
+			if (j is DeliverJob)
+			{
+				DelJobs.Add(j);
+			}
+		}
+		Vector2[] DelArr = new Vector2[DelJobs.Count];
+		for (int i = 0; i < DelJobs.Count(); i++)
+		{
+			if (Ajobs.Contains(DelJobs[i]))
+				activeDJob = i;
+;			DelArr[i] = DelJobs[i].GetLocation();
+		}
+		data.Add("DeliverJobs", DelArr);
+		data.Add("ActiveDeliveryJob", activeDJob);
 		save.Call("_SetData", data);
 		
 

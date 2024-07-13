@@ -26,6 +26,12 @@
 			"name": "GenericCharacter",
 			"type": 0,
 			"value": "Βαλάντης"
+		},
+		{
+			"id": "1720810082-323",
+			"name": "RewardAmmount",
+			"type": 0,
+			"value": "0"
 		}
 	]
 }
