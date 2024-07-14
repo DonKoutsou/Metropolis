@@ -50,6 +50,8 @@ public class Character : KinematicBody
 
 	Position3D seat = null;
 
+	private TalkText TText = null;
+
 	public bool PlayingInstrument = false;
 
 	public bool IsUncon = false;
@@ -80,10 +82,15 @@ public class Character : KinematicBody
     }
 	public override void _Ready()
 	{
+		TText = GetNode<TalkText>("TalkText");
 		anim = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Character_Animations>("AnimationPlayer");
 		HeadPivot = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("BoneAttachment").GetNode<Spatial>("HeadPivot");
 		NightLight = HeadPivot.GetNode<SpotLight>("NightLight");
 		BulbMat = (SpatialMaterial)HeadPivot.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0);
+	}
+	public TalkText GetTalkText()
+	{
+		return TText;
 	}
 	public void ToggleAllLimbs()
 	{

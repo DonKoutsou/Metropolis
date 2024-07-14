@@ -18,6 +18,7 @@ collision_mask = 36
 mode = 1
 mass = 0.0346939
 script = ExtResource( 1 )
+ItemWeight = 30
 ItemType = 3
 ItemIcon = ExtResource( 4 )
 ItemPickupActionName = "Ένα ρολόι"

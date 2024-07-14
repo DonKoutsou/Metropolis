@@ -108,6 +108,7 @@ public class Port : Area
                         CameraAnimation.FadeInOut(2);
                     }
                 }
+                Worker.GetTalkText().Talk("Καλωσόρισες καϊκτσή μαγκίτη πρώτε");
             }
         }
         if (body is Player pl)
@@ -156,7 +157,12 @@ public class Port : Area
         if (body is Vehicle v)
         {
             Boats.Remove(v);
+            if (v.IsPlayerOwned())
+            {
+                Worker.GetTalkText().Talk("Καλό δρόμο καϊκτσή, καλή επιστροφή");
+            }
         }
+        
     }
     public bool IsInPort(Vehicle boat)
     {

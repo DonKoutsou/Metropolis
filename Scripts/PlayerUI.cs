@@ -13,6 +13,7 @@ public class PlayerUI : Control
     NodePath JobBoard = null;   
     [Export]
     NodePath Inventory = null;
+
     static PlayerUI instance;
     public override void _Ready()
     {
@@ -55,5 +56,5 @@ public enum PlayerUIType
     JOBBOARD,
     SCREENEFFECTS,
     CHEATMENU,
-    INVENTORY,
+    INVENTORY
 }

@@ -12,10 +12,6 @@ public class Battery : Item
     [Export]
     float condition = 100;
 
-    public override void _Ready()
-    {
-        base._Ready();
-    }
     public void Recharge(float ammount)
     {
         CurrentEnergy += ammount;
@@ -24,9 +20,9 @@ public class Battery : Item
             CurrentEnergy = Capacity;
         }
     }
-    public void Repair(float to)
+    public void Repair(float amm)
     {
-        condition = to;
+        condition += amm;
     }
     public void ConsumeEnergy(float ammount)
     {

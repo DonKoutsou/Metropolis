@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://Scenes/HUD/InventoryUISlot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/InventoryUI.cs" type="Script" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://Assets/Map/Maptile.tres" type="Texture" id=19]
 [ext_resource path="res://Assets/MapIcons/Switch_Instrument.png" type="Texture" id=20]
 [ext_resource path="res://Assets/MapIcons/LimpAction.png" type="Texture" id=21]
+[ext_resource path="res://Assets/MapIcons/RepairIcon.png" type="Texture" id=22]
 
 [sub_resource type="DynamicFont" id=27]
 size = 24
@@ -31,6 +32,42 @@ font_data = ExtResource( 5 )
 
 [sub_resource type="Theme" id=13]
 default_font = SubResource( 27 )
+
+[sub_resource type="StyleBoxFlat" id=33]
+bg_color = Color( 0.607843, 0.603922, 0.603922, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
+border_blend = true
+corner_radius_top_left = 164
+corner_detail = 20
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=31]
+bg_color = Color( 0.384314, 0.396078, 0.439216, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
+border_blend = true
+corner_radius_top_left = 164
+corner_detail = 16
+
+[sub_resource type="Theme" id=41]
+Panel/styles/panel = SubResource( 31 )
+
+[sub_resource type="StyleBoxFlat" id=30]
+bg_color = Color( 0.607843, 0.603922, 0.603922, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
+border_blend = true
+anti_aliasing = false
 
 [sub_resource type="CanvasItemMaterial" id=15]
 
@@ -110,16 +147,6 @@ shadow_size = 1
 
 [sub_resource type="DynamicFont" id=8]
 font_data = ExtResource( 5 )
-
-[sub_resource type="StyleBoxFlat" id=30]
-bg_color = Color( 0.607843, 0.603922, 0.603922, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
-border_blend = true
-anti_aliasing = false
 
 [sub_resource type="DynamicFont" id=35]
 size = 24
@@ -220,32 +247,6 @@ Button/styles/focus = SubResource( 9 )
 Button/styles/hover = SubResource( 37 )
 Button/styles/normal = SubResource( 38 )
 Button/styles/pressed = SubResource( 39 )
-
-[sub_resource type="StyleBoxFlat" id=33]
-bg_color = Color( 0.607843, 0.603922, 0.603922, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
-border_blend = true
-corner_radius_top_left = 164
-corner_detail = 20
-anti_aliasing = false
-
-[sub_resource type="StyleBoxFlat" id=31]
-bg_color = Color( 0.384314, 0.396078, 0.439216, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
-border_blend = true
-corner_radius_top_left = 164
-corner_detail = 16
-
-[sub_resource type="Theme" id=41]
-Panel/styles/panel = SubResource( 31 )
 
 [node name="InvntoryUI" type="Control"]
 anchor_right = 1.0
@@ -442,16 +443,17 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 75.5
-margin_top = -20.0
-margin_right = 198.5
-margin_bottom = 20.0
+margin_left = 63.5
+margin_top = -19.5
+margin_right = 210.5
+margin_bottom = 20.5
 theme = SubResource( 13 )
 bbcode_enabled = true
 bbcode_text = "[center]100/150"
 text = "100/150"
 
 [node name="MapUI" parent="." instance=ExtResource( 6 )]
+visible = false
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -460,6 +462,70 @@ margin_left = -539.0
 margin_top = -126.0
 margin_right = -499.0
 margin_bottom = -86.0
+
+[node name="CompassUI" type="Control" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -820.0
+margin_top = -195.0
+margin_right = -780.0
+margin_bottom = -155.0
+script = ExtResource( 15 )
+
+[node name="Panel3" type="Panel" parent="CompassUI"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -155.0
+margin_top = -154.0
+margin_right = 176.0
+margin_bottom = 175.0
+rect_clip_content = true
+mouse_filter = 1
+custom_styles/panel = SubResource( 33 )
+
+[node name="ItemawfOptionPanel" type="Panel" parent="CompassUI"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -151.0
+margin_top = -151.0
+margin_right = 172.0
+margin_bottom = 172.0
+theme = SubResource( 41 )
+
+[node name="Sprite" type="Sprite" parent="CompassUI"]
+position = Vector2( 31.2002, 31.3 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 14 )
+normal_map = ExtResource( 12 )
+
+[node name="Sprite2" type="Sprite" parent="CompassUI"]
+position = Vector2( 31.2002, 31.3 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 13 )
+
+[node name="Sprite3" type="Sprite" parent="CompassUI"]
+position = Vector2( 31.2002, 31.3 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 11 )
+
+[node name="Panel2" type="Panel" parent="CompassUI"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 175.0
+margin_top = -154.0
+margin_right = 193.0
+margin_bottom = 175.0
+rect_clip_content = true
+mouse_filter = 1
+custom_styles/panel = SubResource( 30 )
 
 [node name="DescriptionPanel" type="Panel" parent="."]
 visible = false
@@ -742,8 +808,24 @@ margin_right = -4.0
 margin_bottom = -4.0
 alignment = 2
 
+[node name="RepairButton" type="Button" parent="ItemOptionPanel/HBoxContainer"]
+margin_right = 81.0
+margin_bottom = 56.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 3 )
+custom_fonts/font = SubResource( 8 )
+action_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 22 )
+icon_align = 1
+expand_icon = true
+
 [node name="SwitchButton" type="Button" parent="ItemOptionPanel/HBoxContainer"]
-margin_right = 99.0
+margin_left = 85.0
+margin_right = 167.0
 margin_bottom = 56.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -758,8 +840,8 @@ icon_align = 1
 expand_icon = true
 
 [node name="SwitchLimbButton" type="Button" parent="ItemOptionPanel/HBoxContainer"]
-margin_left = 103.0
-margin_right = 202.0
+margin_left = 171.0
+margin_right = 253.0
 margin_bottom = 56.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -774,8 +856,8 @@ icon_align = 1
 expand_icon = true
 
 [node name="DropButton" type="Button" parent="ItemOptionPanel/HBoxContainer"]
-margin_left = 206.0
-margin_right = 305.0
+margin_left = 257.0
+margin_right = 339.0
 margin_bottom = 56.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -790,8 +872,8 @@ icon_align = 1
 expand_icon = true
 
 [node name="MapButton" type="Button" parent="ItemOptionPanel/HBoxContainer"]
-margin_left = 309.0
-margin_right = 408.0
+margin_left = 343.0
+margin_right = 425.0
 margin_bottom = 56.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -806,7 +888,7 @@ icon_align = 1
 expand_icon = true
 
 [node name="CompassButton" type="Button" parent="ItemOptionPanel/HBoxContainer"]
-margin_left = 412.0
+margin_left = 429.0
 margin_right = 511.0
 margin_bottom = 56.0
 focus_mode = 0
@@ -904,77 +986,16 @@ mouse_filter = 1
 custom_styles/panel = SubResource( 30 )
 
 [node name="VehicleUI" parent="." instance=ExtResource( 10 )]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -595.0
-margin_top = -705.0
-margin_right = -373.0
-margin_bottom = -640.0
-
-[node name="CompassUI" type="Control" parent="."]
-anchor_left = 1.0
+anchor_left = 0.0
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.0
 anchor_bottom = 1.0
-margin_left = -213.0
-margin_top = -834.0
-margin_right = -173.0
-margin_bottom = -794.0
-script = ExtResource( 15 )
+margin_left = 25.0
+margin_top = -388.0
+margin_right = 247.0
+margin_bottom = -323.0
 
-[node name="Panel3" type="Panel" parent="CompassUI"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -155.0
-margin_top = -154.0
-margin_right = 176.0
-margin_bottom = 175.0
-rect_clip_content = true
-mouse_filter = 1
-custom_styles/panel = SubResource( 33 )
-
-[node name="ItemawfOptionPanel" type="Panel" parent="CompassUI"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -151.0
-margin_top = -151.0
-margin_right = 172.0
-margin_bottom = 172.0
-theme = SubResource( 41 )
-
-[node name="Sprite" type="Sprite" parent="CompassUI"]
-position = Vector2( 31.2002, 31.3 )
-scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 14 )
-normal_map = ExtResource( 12 )
-
-[node name="Sprite2" type="Sprite" parent="CompassUI"]
-position = Vector2( 31.2002, 31.3 )
-scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 13 )
-
-[node name="Sprite3" type="Sprite" parent="CompassUI"]
-position = Vector2( 31.2002, 31.3 )
-scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 11 )
-
-[node name="Panel2" type="Panel" parent="CompassUI"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = 175.0
-margin_top = -154.0
-margin_right = 193.0
-margin_bottom = 175.0
-rect_clip_content = true
-mouse_filter = 1
-custom_styles/panel = SubResource( 30 )
-
+[connection signal="button_down" from="ItemOptionPanel/HBoxContainer/RepairButton" to="." method="On_Repair_Button_Down"]
 [connection signal="button_down" from="ItemOptionPanel/HBoxContainer/SwitchButton" to="." method="On_Instrument_Button_Down"]
 [connection signal="button_down" from="ItemOptionPanel/HBoxContainer/SwitchLimbButton" to="." method="On_Limb_Button_Down"]
 [connection signal="button_down" from="ItemOptionPanel/HBoxContainer/DropButton" to="." method="On_Drop_Button_Down"]

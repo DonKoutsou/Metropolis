@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
+[ext_resource path="res://Scenes/HUD/RepairMenu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/UI/panelstylegrey.tres" type="StyleBox" id=2]
 [ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://Scripts/VehicleHud.cs" type="Script" id=4]
@@ -35,14 +36,24 @@ anti_aliasing = false
 
 [node name="VehicleUI" type="Control"]
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
+anchor_bottom = 0.5
 margin_left = -111.0
-margin_top = -88.0
+margin_top = -32.5
 margin_right = 111.0
-margin_bottom = -23.0
+margin_bottom = 32.5
 script = ExtResource( 4 )
+
+[node name="RepairUI" parent="." instance=ExtResource( 1 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 26.0
+margin_top = 155.0
+margin_right = 248.0
+margin_bottom = 220.0
 
 [node name="Panel" type="Panel" parent="."]
 anchor_left = 0.5
@@ -128,15 +139,6 @@ anchor_right = 0.5
 margin_left = -111.0
 margin_top = -10.0
 margin_right = 111.0
-rect_clip_content = true
-mouse_filter = 1
-custom_styles/panel = SubResource( 35 )
-
-[node name="Panel7" type="Panel" parent="."]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_bottom = 10.0
 rect_clip_content = true
 mouse_filter = 1
 custom_styles/panel = SubResource( 35 )

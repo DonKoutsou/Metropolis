@@ -67,6 +67,10 @@ public class Vehicle : RigidBody
 
     WindDetector WindD;
 
+    public float GetLastSpeed()
+    {
+        return latsspeed / speed;
+    }
     public void SetPlayerOwned(bool toggle)
     {
         PlayerOwned = toggle;
@@ -96,7 +100,10 @@ public class Vehicle : RigidBody
     bool wingsdeployed = false;
     AnimationPlayer Anim;
     /////////////////////////////////////
-    
+    public VehicleDamageManager GetDamageManager()
+    {
+        return DamageMan;
+    }
     public override void _Ready()
     {
         base._Ready();
@@ -148,6 +155,10 @@ public class Vehicle : RigidBody
         
         //SetProcessInput(false);
     }
+    public bool HasWings()
+    {
+        return WingMaterials.Count > 0;
+    }
     public VehicleType GetVehicleType()
     {
         return VType;
@@ -186,14 +197,12 @@ public class Vehicle : RigidBody
         //ulong ms = OS.GetSystemTimeMsecs();
         if (!PlayerOwned)
             return;
-        if (passengers.Count > 0)
+
+        if (!thr.IsActive())
         {
-            if (!thr.IsActive())
-            {
-                //if (thr.IsActive())
-                thr = new Thread();
-                thr.Start(this, "Balance", delta);
-            }
+            //if (thr.IsActive())
+            thr = new Thread();
+            thr.Start(this, "Balance", delta);
         }
         
 
@@ -357,6 +366,7 @@ public class Vehicle : RigidBody
             //ray.ForceRaycastUpdate();
             Particles part = EnginePivot.GetNode<Particles>("Particles");
             Particles partd = EnginePivot.GetNode<Particles>("ParticlesDirt");
+            Vector3 engrot = new Vector3(Mathf.Deg2Rad(Mathf.Lerp(0, 45, latsspeed /speed)), Rotation.y, 0);
             if (ray.IsColliding())
             {
                 var collisionpoint = ray.GetCollisionPoint();
@@ -370,7 +380,7 @@ public class Vehicle : RigidBody
                 if (dist <= 35 && Working)
                 {
                     //Flame.Emitting = true;
-                    float particleoffset = dist;
+                    float particleoffset = dist + engrot.x / 10;
                     
                     //particleoffset -= 4;
                     part.Translation = new Vector3(part.Translation.x, - particleoffset, part.Translation.z);
@@ -396,7 +406,6 @@ public class Vehicle : RigidBody
 
                 f= Vector3.Up * Force * delta * multi;
                 //f= Vector3.Up * Force * delta 
-                ;
                 //AddForce(f * forcemulti, ray.GlobalTransform.origin - GlobalTransform.origin);
                 
             }
@@ -409,7 +418,7 @@ public class Vehicle : RigidBody
 
                 //AddForce(f * forcemulti, ray.GlobalTransform.origin - GlobalTransform.origin);
             }
-            EnginePivot.Rotation = new Vector3(Mathf.Deg2Rad(Mathf.Lerp(0, 45, latsspeed /speed)), Rotation.y, 0);
+            EnginePivot.Rotation = engrot;
             AddForce(f, ray.GlobalTranslation - GlobalTranslation);
         }
         //Balance(delta);
@@ -622,6 +631,7 @@ public class Vehicle : RigidBody
     
     public void BoardVehicle(Character cha)
     {
+        ContactMonitor = true;
         //SetProcessInput(true);
         bool isthing = GetParent().GetParent() is MyWorld;
         if (!isthing)
@@ -660,7 +670,7 @@ public class Vehicle : RigidBody
         if (passengers.Count == 0)
             return;
         //SetProcessInput(false);
-        
+        ContactMonitor = false;
         Character chartothrowout = passengers[0];
         chartothrowout.Anims().ToggleIdle();
         passengers.Clear();
@@ -693,9 +703,10 @@ public class Vehicle : RigidBody
         Vector3 postoput;
         if (!CheckForGround(out postoput))
         {
-            TalkText.GetInst().Talk("Πρέπει να πάω πιό κοντά στην στεριά.", cha);
+            cha.GetTalkText().Talk("Πρέπει να πάω πιό κοντά στην στεριά.");
             return false;
         }
+        ContactMonitor = false;
         passengers.Clear();
         RemoteTransform CharTrasn = GetNode<RemoteTransform>("CharacterRemoteTransform");
         CharTrasn.RemotePath = this.GetPath();
@@ -824,8 +835,8 @@ public class VehicleInfo
         VehicleDamageManager Damageman = veh.GetParent().GetNode<VehicleDamageManager>("VehicleDamageManager");
         DamageInfo = new VehicleDamageInfo();
         PlayerOwned = veh.IsPlayerOwned();
-        List<int> destw;
-        Damageman.GetDestroyedWings(out destw);
+        //List<int> destw;
+        //Damageman.GetWingStates(out destw);
         DamageInfo.SetInfo(veh);
     }
     public Dictionary<string, object>GetPackedData()

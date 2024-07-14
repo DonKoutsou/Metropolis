@@ -62,7 +62,7 @@ public class ActionMenu : Control
 	{
 		if (pl.HasVecicle && pl.currveh != SelectedObj)
 		{
-			TalkText.GetInst().Talk("Δεν μπορώ πάνω από την βάρκα", pl);
+			pl.GetTalkText().Talk("Δεν μπορώ πάνω από την βάρκα");
 		}
 		Vector3 actionpos = (Vector3)SelectedObj.Call("GetActionPos", pl.GlobalTranslation);
 		if (actionpos.DistanceTo(pl.GlobalTranslation) > SelectedObj.GetNode<ActionComponent>("ActionComponent").ActionDistance)
@@ -78,7 +78,7 @@ public class ActionMenu : Control
 		{
 			if (!pl.GetCharacterInventory().InsertItem(it))
 			{
-				TalkText.GetInst().Talk("Δέν έχω χώρο.", pl);
+				pl.GetTalkText().Talk("Δέν έχω χώρο.");
 			}
 			else
 			{
@@ -94,7 +94,7 @@ public class ActionMenu : Control
 		{
 			if (!veh.IsPlayerOwned())
 			{
-				TalkText.GetInst().Talk("Δεν είναι δικιά μου. Δεν μπορώ να την χρησιμοποιήσω.", pl);
+				pl.GetTalkText().Talk("Δεν είναι δικιά μου. Δεν μπορώ να την χρησιμοποιήσω.");
 				return;
 			}
 			if (!pl.HasVehicle())
@@ -116,10 +116,10 @@ public class ActionMenu : Control
 			if (foundit != null)
 			{
 				pl.CharacterInventory.InsertItem(foundit);
-				TalkText.GetInst().Talk(foundit.GetItemPickUpText(), pl);
+				pl.GetTalkText().Talk(foundit.GetItemPickUpText());
 			}
 			else
-				TalkText.GetInst().Talk("Τίποτα", pl);
+				pl.GetTalkText().Talk("Τίποτα");
 		}
 		else if (SelectedObj is WindGenerator generator)
 		{
@@ -177,7 +177,7 @@ public class ActionMenu : Control
 		{
 			if (!sit.HasEmptySeat())
 			{
-				TalkText.GetInst().Talk("Δεν έχει χώρο.", pl);
+				pl.GetTalkText().Talk("Δεν έχει χώρο.");
 				return;
 			}
 			if (pl.HasVecicle)
@@ -215,49 +215,49 @@ public class ActionMenu : Control
 	{
 		if (SelectedObj is Item)
 		{
-			TalkText.GetInst().Talk(((Item)SelectedObj).GetItemName(), pl);
+			pl.GetTalkText().Talk(((Item)SelectedObj).GetItemName());
 		}
 		else if (SelectedObj is Character)
 		{
-			TalkText.GetInst().Talk("Φίλος", pl);
+			pl.GetTalkText().Talk("Φίλος");
 		}
         
 		else if (SelectedObj is Vehicle veh)
 		{
 			if (veh.IsPlayerOwned())
-				TalkText.GetInst().Talk("Καΐκάρα μου!", pl);
+				pl.GetTalkText().Talk("Καΐκάρα μου!");
 			else
-				TalkText.GetInst().Talk("Καΐκι, δεν είμαι σίγουρος πιανού.", pl);
+				pl.GetTalkText().Talk("Καΐκι, δεν είμαι σίγουρος πιανού.");
 		}
 		else if (SelectedObj is WindGenerator)
 		{
-			TalkText.GetInst().Talk("Γεννήτρια", pl);
+			pl.GetTalkText().Talk("Γεννήτρια");
 		}
 		else if (SelectedObj is Furniture)
 		{
 			Furniture furni = (Furniture)SelectedObj;
 			if (furni.HasBeenSearched())
-				TalkText.GetInst().Talk("Το έψαξα, είναι άδειο", pl);
+				pl.GetTalkText().Talk("Το έψαξα, είναι άδειο");
 			else
-				TalkText.GetInst().Talk(furni.FurnitureDescription, pl);
+				pl.GetTalkText().Talk(furni.FurnitureDescription);
 		}
 		else if (SelectedObj is SittingThing)
 		{
 			SittingThing sit = (SittingThing)SelectedObj;
 			if (!sit.HasEmptySeat())
 			{
-				TalkText.GetInst().Talk("Δεν έχει χώρο.", pl);
+				pl.GetTalkText().Talk("Δεν έχει χώρο.");
 				return;
 			}
-			TalkText.GetInst().Talk("Μπορώ να κάτσω.", pl);
+			pl.GetTalkText().Talk("Μπορώ να κάτσω.");
 		}
 		else if (SelectedObj is Ladder)
 		{
-			TalkText.GetInst().Talk("Σκάλα", pl);
+			pl.GetTalkText().Talk("Σκάλα");
 		}
 		else if (SelectedObj is JobBoardPanel)
 		{
-			TalkText.GetInst().Talk("Πίνας αγγελιών", pl);
+			pl.GetTalkText().Talk("Πίνας αγγελιών");
 		}
 	}
 	public void Start(Spatial obj)

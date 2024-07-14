@@ -330,6 +330,8 @@ public class WorldMap : TileMap
 				iles.Add(i.Value);
 			}
 		}
+		if (iles.Count == 0)
+			return null;
 		int index = RandomContainer.Next(0, iles.Count - 1);
 
 		return iles[index];

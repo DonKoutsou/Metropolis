@@ -124,9 +124,10 @@ public class CheatMenu : Control
 		Buttons.MouseFilter = MouseFilterEnum.Ignore;
 		SetProcess(false);
 	}
-	public void OnPlayerSpawned(Player pl)
+	public void OnPlayerSpawned(Player play)
 	{
-		CameraPanPivot pan = pl.GetNode<Position3D>("CameraMovePivot").GetNode<CameraPanPivot>("CameraPanPivot");
+		pl = play;
+		CameraPanPivot pan = play.GetNode<Position3D>("CameraMovePivot").GetNode<CameraPanPivot>("CameraPanPivot");
 		CamZoom = pan.GetNode<SpringArm>("SpringArm").GetNode<CameraZoomPivot>("CameraZoomPivot");
 	}
 	public override void _Ready()

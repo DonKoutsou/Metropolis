@@ -76,21 +76,26 @@ public class GlobalJobManager : Node
     {
         WorldMap map = WorldMap.GetInstance();
         DeliverJob j = null;
+        int reward = 0;
+        IslandInfo ile = null;
         if (dif == Difficulty.Easy)
         {
-            IslandInfo ile = map.GetRandomLightHouse(1, 10);
-            j = new DeliverJob(20, ile.SpecialName, ile.Position);
+            ile = map.GetRandomLightHouse(1, 10);
+            reward = 20;
         }
         else if (dif == Difficulty.Medium)
         {
-            IslandInfo ile = map.GetRandomLightHouse(11, 25);
-            j = new DeliverJob(50, ile.SpecialName, ile.Position);
+            ile = map.GetRandomLightHouse(11, 25);
+            reward = 50;
         }
         else if (dif == Difficulty.Hard)
         {
-            IslandInfo ile = map.GetRandomLightHouse(25, 41);
-            j = new DeliverJob(100, ile.SpecialName, ile.Position);
+            ile = map.GetRandomLightHouse(25, 41);
+            reward = 100;
         }
+        if (ile == null)
+            return null;
+        j = new DeliverJob(reward, ile.SpecialName, ile.Position);
         return j;
     }
     public bool HasJobOnIsland(Vector2 pos, out List<Job> Jobs)
@@ -158,6 +163,8 @@ public class GlobalJobManager : Node
         {
             int dif = RandomContainer.Next(0,3);
             DeliverJob d = CreateDeliver((Difficulty)dif);
+            if (d == null)
+                return;
             foreach (Job j in Jobs)
             {
                 if (j.GetLocation() == d.GetLocation())

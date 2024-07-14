@@ -15,12 +15,12 @@ public class Inventory : Spatial
     List<Item> InventoryContents;
 
     [Export]
-    float Capacity = 10;
+    int Capacity = 10;
     [Export]
     public PackedScene[] StartingItems;
     [Export]
     int StartingCurrency = 0;
-    float currentweight = 0;
+    int currentweight = 0;
     InventoryUI ui;
 
     public Player CharacterOwner;
@@ -106,8 +106,6 @@ public class Inventory : Spatial
         EquippedLimbs.Remove(l);
     }
 
-
-
     public bool HasBatteries()
     {
         for (int i = InventoryContents.Count - 1; i > -1; i--)
@@ -146,7 +144,7 @@ public class Inventory : Spatial
             Resource res = (Resource)It;
             PackedScene it = GD.Load<PackedScene>((string)res.Get("SceneData"));
             Item newItem = it.Instance<Item>();
-            if (newItem is Battery)
+            if (newItem is Battery bat)
             {
                 Array CustomDataKeys = (Array)res.Get("CustomDataKeys");
 		        Godot.Collections.Array CustomDataValues = (Godot.Collections.Array)res.Get("CustomDataValues");
@@ -154,11 +152,23 @@ public class Inventory : Spatial
                 {
                     if ((string)CustomDataKeys.GetValue(i) == "CurrentEnergy")
                     {
-                        ((Battery)newItem).SetCurrentCap((float)CustomDataValues[i]);
+                        bat.SetCurrentCap((float)CustomDataValues[i]);
                     }
                     if ((string)CustomDataKeys.GetValue(i) == "CurrentCondition")
                     {
-                        ((Battery)newItem).SetCurrentCondition((float)CustomDataValues[i]);
+                        bat.SetCurrentCondition((float)CustomDataValues[i]);
+                    }
+                }
+            }
+            if (newItem is Toolbox box)
+            {
+                Array CustomDataKeys = (Array)res.Get("CustomDataKeys");
+		        Godot.Collections.Array CustomDataValues = (Godot.Collections.Array)res.Get("CustomDataValues");
+                for (int i = 0; i < CustomDataKeys.Length; i++)
+                {
+                    if ((string)CustomDataKeys.GetValue(i) == "CurrentSupplies")
+                    {
+                        box.SetCurrentSupplies((float)CustomDataValues[i]);
                     }
                 }
             }
@@ -184,14 +194,17 @@ public class Inventory : Spatial
     }
     public bool InsertItem(Item item)
     {
-        if (currentweight + item.GetInventoryWeight() > Capacity)
+        int itW = item.GetInventoryWeight();
+        if (currentweight + itW > Capacity)
         {
             return false;
         }
         var parent = item.GetParent();
         if (parent != null)
             parent.RemoveChild(item);
-        currentweight += item.GetInventoryWeight();
+
+        
+        currentweight += itW;
         if (item is Instrument && !CharacterOwner.HasInstrument())
         {
             CharacterOwner.AddInstrument((Instrument)item);
@@ -291,7 +304,6 @@ public class Inventory : Spatial
             UnEquipLimp(l);
             
         }
-        currentweight -= item.GetInventoryWeight();
         item.GetParent().RemoveChild(item);
         item.Free();
     }
@@ -324,7 +336,7 @@ public class Inventory : Spatial
         Items = new List<Item>();
         for (int i = 0; i < InventoryContents.Count; i++)
         {
-            if (InventoryContents[i].GetItemType() == (int)Type)
+            if (InventoryContents[i].GetItemType() == Type)
                 Items.Add(InventoryContents[i]);
         }
     }
@@ -340,7 +352,7 @@ public class Inventory : Spatial
     {
         return Capacity;
     }
-    public bool OverrideWeight(float NewWeight)
+    public bool OverrideWeight(int NewWeight)
     {
         if (currentweight > NewWeight)
         {

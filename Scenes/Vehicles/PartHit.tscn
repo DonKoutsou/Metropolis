@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Clouds/Textures/smoke_02.png" type="Texture" id=1]
+
+[sub_resource type="SpatialMaterial" id=2]
+flags_transparent = true
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_texture = ExtResource( 1 )
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=1]
+direction = Vector3( 0, 1, 0 )
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 4.0
+angular_velocity = 340.95
+scale = 2.0
+scale_curve = SubResource( 5 )
+
+[sub_resource type="QuadMesh" id=3]
+
+[node name="Particles" type="Particles"]
+material_override = SubResource( 2 )
+emitting = false
+amount = 40
+lifetime = 2.0
+one_shot = true
+explosiveness = 0.99
+process_material = SubResource( 1 )
+draw_pass_1 = SubResource( 3 )

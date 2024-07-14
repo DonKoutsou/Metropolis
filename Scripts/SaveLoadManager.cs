@@ -35,15 +35,21 @@ public class SaveLoadManager : Control
 
 		
 
+		
+
+		foreach (IslandInfo ile in world.GetActiveIles())
+		{
+			world.ToggleIsland(ile, false, false);
+		}
+
 		Player pl = Player.GetInstance();
 		if (pl == null)
 			return;
 
 		bool HasVecicle = pl.HasVecicle;
 		Dictionary<string, object> pldata = new Dictionary<string, object>(){
-			
+			{"playerHasVehicle", HasVecicle}
 		};
-		pldata.Add("playerHasVehicle", HasVecicle);
 		if (HasVecicle)
 		{
 			Vehicle veh = pl.currveh;
@@ -56,10 +62,6 @@ public class SaveLoadManager : Control
 		else
 			pldata.Add("PlayerLocation", pl.GlobalTranslation);
 
-		foreach (IslandInfo ile in world.GetActiveIles())
-		{
-			world.ToggleIsland(ile, false, false);
-		}
 		Dictionary<string, object> data = map.GetSaveData();
 		
 		foreach (KeyValuePair<string, object> dat in pldata)
@@ -97,16 +99,24 @@ public class SaveLoadManager : Control
 			object[] Values = new object[4];
 			Itemdata.Add("SceneData", it.Filename);
 			bool HasData = false;
-			if (it is Battery)
+			if (it is Battery bat)
 			{
 				Keys[0] = "CurrentEnergy";
-				Values[0] = ((Battery)it).GetCurrentCap();
+				Values[0] = bat.GetCurrentCap();
+				Keys[1] = "CurrentCondition";
+				Values[1] = bat.GetCondition();
 				HasData = true;
 			}
-			if (it is Limb)
+			else if (it is Toolbox box)
+			{
+				Keys[0] = "CurrentSupplies";
+				Values[0] = box.GetCurrentSupplyAmmount();
+				HasData = true;
+			}
+			else if (it is Limb l)
 			{
 				Keys[0] = "LimbColor";
-				Values[0] = ((Limb)it).GetColor();
+				Values[0] = l.GetColor();
 				HasData = true;
 			}
 			Itemdata.Add("CustomDataKeys", Keys);

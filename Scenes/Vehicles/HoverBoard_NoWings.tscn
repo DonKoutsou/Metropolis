@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://Assets/Boat/M_Boat.material" type="Material" id=1]
 [ext_resource path="res://Scripts/Vehicle.cs" type="Script" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://Assets/Boat/Kaiki.obj" type="ArrayMesh" id=15]
 [ext_resource path="res://Scenes/Vehicles/HoverParticlesDirt.tscn" type="PackedScene" id=16]
 [ext_resource path="res://shaders/Outline.shader" type="Shader" id=17]
+[ext_resource path="res://Scenes/Vehicles/PartHit.tscn" type="PackedScene" id=18]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0
@@ -24,10 +25,10 @@ friction = 0.0
 [sub_resource type="Curve" id=7]
 min_value = -6.0
 max_value = 6.0
-_data = [ Vector2( 0, 6 ), 0.0, 0.0, 0, 0, Vector2( 0.355023, 5.96319 ), 0.0, 0.0, 0, 0, Vector2( 0.674242, -6 ), 0.0, 0.0, 0, 0, Vector2( 1, -6 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 6 ), 0.0, 0.0, 0, 0, Vector2( 0.4, 6 ), 0.0, 0.0, 0, 0, Vector2( 0.7, -3.6 ), 0.0, 0.0, 0, 0, Vector2( 1, -3.6 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=9]
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.2201, 0.395705 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.1 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0.0950921 ), 0.0, -0.500221, 0, 0, Vector2( 0.0130494, 0.52454 ), 0.0, 0.0, 0, 0, Vector2( 0.572115, 0.51227 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.2 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="ShaderMaterial" id=111]
 resource_local_to_scene = true
@@ -41,7 +42,10 @@ radius = 3.11783
 height = 21.3571
 
 [sub_resource type="BoxShape" id=32]
-extents = Vector3( 0.366748, 0.297252, 0.302782 )
+extents = Vector3( 0.239454, 0.297252, 0.442663 )
+
+[sub_resource type="BoxShape" id=112]
+extents = Vector3( 6.7069, 0.486268, 10.8181 )
 
 [sub_resource type="SphereShape" id=41]
 radius = 2.5
@@ -200,7 +204,6 @@ collision_mask = 804
 mass = 40.0
 physics_material_override = SubResource( 1 )
 contacts_reported = 4
-contact_monitor = true
 can_sleep = false
 linear_damp = 1.0
 angular_damp = 10.0
@@ -235,24 +238,36 @@ shape = SubResource( 8 )
 transform = Transform( 1, -7.55222e-10, 1.33878e-09, 1.91221e-10, 1, 1.74623e-09, -8.14907e-10, -1.74623e-09, 1, 0.00648252, 6.04512, 13.7507 )
 shape = SubResource( 32 )
 
+[node name="CollisionShape3" type="CollisionShape" parent="VehicleBody"]
+transform = Transform( 1, -7.55222e-10, 1.33878e-09, 1.91221e-10, 1, 1.74623e-09, -8.14907e-10, -1.74623e-09, 1, 0.00648252, -3.95943, 0.512349 )
+shape = SubResource( 112 )
+
 [node name="SteeringWheel" type="Spatial" parent="VehicleBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.37488e-09, -1.81627e-19, -11.8102 )
 
-[node name="CollisionShape3" type="CollisionShape" parent="VehicleBody"]
+[node name="EngineCollider0" type="CollisionShape" parent="VehicleBody"]
 transform = Transform( 0.999999, 6.19025e-11, 6.40284e-10, 3.65787e-10, 1, -8.14907e-10, -1.74623e-10, 8.14907e-10, 1, 6.45562, -0.700645, 11.1725 )
 shape = SubResource( 41 )
 
-[node name="CollisionShape4" type="CollisionShape" parent="VehicleBody"]
+[node name="Particles" parent="VehicleBody/EngineCollider0" instance=ExtResource( 18 )]
+
+[node name="EngineCollider1" type="CollisionShape" parent="VehicleBody"]
 transform = Transform( 0.999999, -1.45013e-09, 3.0268e-09, -2.89123e-09, 1, -6.28643e-09, -2.73576e-09, 3.37604e-09, 1, -6.33755, -0.544391, 11.0606 )
 shape = SubResource( 41 )
 
-[node name="CollisionShape5" type="CollisionShape" parent="VehicleBody"]
+[node name="Particles" parent="VehicleBody/EngineCollider1" instance=ExtResource( 18 )]
+
+[node name="EngineCollider2" type="CollisionShape" parent="VehicleBody"]
 transform = Transform( 0.999999, -7.49537e-10, 4.07454e-09, -4.98534e-09, 1, -9.66247e-09, -3.84171e-09, 6.75209e-09, 1, -7.0009, -0.543089, -9.00144 )
 shape = SubResource( 41 )
 
-[node name="CollisionShape6" type="CollisionShape" parent="VehicleBody"]
+[node name="Particles" parent="VehicleBody/EngineCollider2" instance=ExtResource( 18 )]
+
+[node name="EngineCollider3" type="CollisionShape" parent="VehicleBody"]
 transform = Transform( 0.999999, -9.82538e-10, 4.19095e-09, -4.63615e-09, 1, -9.42964e-09, -3.7835e-09, 6.51926e-09, 1, 6.99911, -0.543089, -9.00144 )
 shape = SubResource( 41 )
+
+[node name="Particles" parent="VehicleBody/EngineCollider3" instance=ExtResource( 18 )]
 
 [node name="RemoteTransform" type="RemoteTransform" parent="VehicleBody"]
 transform = Transform( 0.999999, -5.50244e-11, 1.16415e-10, 1.32729e-10, 1, 0, 0, 0, 1, 6.45562, 0.797841, 11.1725 )
@@ -429,7 +444,6 @@ cast_to = Vector3( 0, -30, 0 )
 collision_mask = 260
 
 [node name="ActionComponent" parent="VehicleBody" instance=ExtResource( 14 )]
-ActionDistance = 20.0
 
 [node name="RayFL" type="RayCast" parent="."]
 transform = Transform( 1.00001, -0.000665933, -0.000639928, 0.000666589, 1, 0.00107025, 0.000639212, -0.00107067, 1.00001, 6.45562, 0.797841, 11.1725 )

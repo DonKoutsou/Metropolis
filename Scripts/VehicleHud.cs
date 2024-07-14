@@ -26,7 +26,6 @@ public class VehicleHud : Control
     {
         pl.Connect("VehicleBoardEventHandler", this, "OnBoarding");
     }
-
     public void OnBoarding(bool toggle, Vehicle Veh)
     {
         if (toggle)
@@ -51,6 +50,9 @@ public class VehicleHud : Control
             Button EngineToggle;
             ButtonList.TryGetValue("Engine", out EngineToggle);
             EngineToggle.SetPressedNoSignal(false);
+
+
+            GetNode<RepairUI>("RepairUI").StartUI(Veh);
         }
         else
         {
@@ -66,6 +68,8 @@ public class VehicleHud : Control
             Button LightsToggle;
             ButtonList.TryGetValue("Lights", out LightsToggle);
             LightsToggle.SetPressedNoSignal(false);
+
+            GetNode<RepairUI>("RepairUI").StopUI();
         }
             
     }

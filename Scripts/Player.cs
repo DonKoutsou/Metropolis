@@ -24,7 +24,7 @@ public class Player : Character
 	[Export]
 	Curve Consumption = null;
 	[Export]
-	public float InventoryWeightOverride = -1;
+	public int InventoryWeightOverride = -1;
 	////// Rpm to base consumption on /////
 	public float rpm;
 	//Node Used to show where player is moving
@@ -167,7 +167,7 @@ public class Player : Character
 	{
 		if (!CharacterInventory.IsLimbSlotFilled(LimbSlotType.ARM_L) || !CharacterInventory.IsLimbSlotFilled(LimbSlotType.ARM_R))
 		{
-			TalkText.GetInst().Talk("Δεν μπορώ να παίξω χωρίς χέρια", this);
+			GetTalkText().Talk("Δεν μπορώ να παίξω χωρίς χέρια");
 			return;
 		}
 		base.PlayMusic();
@@ -205,7 +205,7 @@ public class Player : Character
 		{
 			if (!ExpressedNoBatteries)
 			{
-				TalkText.GetInst().Talk("Ξέμεινα από μπαταρίες. Πρέπει να βρώ κάπου να φωρτήσω.", this);
+				GetTalkText().Talk("Ξέμεινα από μπαταρίες. Πρέπει να βρώ κάπου να φωρτήσω.");
 				ExpressedNoBatteries = true;
 			}
 		}
@@ -307,7 +307,7 @@ public class Player : Character
 		{
 			if (!ExpressedLowBattery)
 			{
-				TalkText.GetInst().Talk("Θα ξεμείνω από μπαταρία σε λίγο. Δεν νιώθω καλά.", this);
+				GetTalkText().Talk("Θα ξεμείνω από μπαταρία σε λίγο. Δεν νιώθω καλά.");
 				ScreenEffects ui = (ScreenEffects)PlayerUI.GetInstance().GetUI(PlayerUIType.SCREENEFFECTS);
 				ui.PlayEffect(ScreenEffectTypes.DAMAGE);
 				ExpressedLowBattery = true;

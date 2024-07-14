@@ -38,7 +38,7 @@ public class InventoryUI : Control
 
     bool hascompass = false;
     bool hasmap = false;
-
+    bool hastoolbox = false;
     bool ShowingCompass = false;
     bool ShowingMap = false;
 
@@ -128,6 +128,7 @@ public class InventoryUI : Control
             List<int> itemcount = new List<int>();
             hascompass = false;
             hasmap = false;
+            hastoolbox = false;
             for (int i = 0; i < slots.Count(); i++)
             {
                 Item sample = null;
@@ -137,10 +138,12 @@ public class InventoryUI : Control
                 {
                     if (sample == null)
                         sample = Items[v];
-                    if (Items[v].GetItemType() == 4)
+                    if (Items[v].GetItemType() ==  global::ItemName.COMPASS)
                         hascompass = true;
-                    if (Items[v].GetItemType() == 5)
+                    else if (Items[v].GetItemType() == global::ItemName.MAP)
                         hasmap = true;
+                    else if (Items[v].GetItemType() == global::ItemName.TOOLBOX)
+                        hastoolbox = true;
                     
                     if (Items[v].GetItemType() == sample.GetItemType())
                     {
@@ -187,11 +190,15 @@ public class InventoryUI : Control
 
         map.ToggleMap(ShowingMap);
 
-        GetNode<Panel>("ItemOptionPanel").GetNode<HBoxContainer>("HBoxContainer").GetNode<Button>("DropButton").Visible = !ShowingMap;
+        
+        GetNode<Button>("ItemOptionPanel/HBoxContainer/DropButton").Visible = !ShowingMap;
         bool selectinginst = FocusedSlot != null && FocusedSlot.item is Instrument;
+        bool selectingbat = FocusedSlot != null && FocusedSlot.item is Battery;
         bool selectinglimb = FocusedSlot != null && FocusedSlot.item is Limb;
-        GetNode<Panel>("ItemOptionPanel").GetNode<HBoxContainer>("HBoxContainer").GetNode<Button>("SwitchButton").Visible = selectinginst;
-        GetNode<Panel>("ItemOptionPanel").GetNode<HBoxContainer>("HBoxContainer").GetNode<Button>("SwitchLimbButton").Visible = selectinglimb;
+        //GetNode<Button>("ItemOptionPanel/HBoxContainer/RepairButton").Visible = selectinginst && hastoolbox || selectingbat && hastoolbox;
+        GetNode<Button>("ItemOptionPanel/HBoxContainer/RepairButton").Visible = selectingbat && hastoolbox;
+        GetNode<Button>("ItemOptionPanel/HBoxContainer/SwitchButton").Visible = selectinginst;
+        GetNode<Button>("ItemOptionPanel/HBoxContainer/SwitchLimbButton").Visible = selectinglimb;
     }
     
     public void ItemHovered(Item it)
@@ -221,12 +228,27 @@ public class InventoryUI : Control
             FocusedSlot = null;
     }
     
-
+    private void On_Repair_Button_Down()
+    {
+        List<Item> toolboxes;
+        Inv.GetItemsByType(out toolboxes, global::ItemName.TOOLBOX);
+        Battery ittorepair = (Battery)FocusedSlot.item;
+        if (ittorepair.GetCondition() == 100)
+            return;
+        float AmmountToRepair = 100 - ittorepair.GetCondition();
+        for (int i = 0; i < toolboxes.Count; i++)
+        {
+            Toolbox t = (Toolbox)toolboxes[i];
+            t.RepaiItem(ittorepair);
+            if (ittorepair.GetCondition() == 100)
+                break;
+        }
+    }
     private void On_Drop_Button_Down()
     {
         if (FocusedSlot == null)
         {
-            TalkText.GetInst().Talk(NoSelectionOnDropText, pl);
+            pl.GetTalkText().Talk(NoSelectionOnDropText);
             return;
         }
             
@@ -267,7 +289,7 @@ public class InventoryUI : Control
     {
         if (!hascompass)
         {
-            TalkText.GetInst().Talk(NoCompassText, pl);
+            pl.GetTalkText().Talk(NoCompassText);
             return;
         }
         if (!ShowingCompass)
@@ -280,7 +302,7 @@ public class InventoryUI : Control
     {
         if (!hasmap)
         {
-            TalkText.GetInst().Talk(NoMapText, pl);
+            pl.GetTalkText().Talk(NoMapText);
             return;
         }
         if (!ShowingMap)

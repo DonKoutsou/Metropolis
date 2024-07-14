@@ -40,7 +40,7 @@ public class DialogueTrigger : Spatial
         }
         Entered = true;
                 
-        TalkText.GetInst().Talk(EnterDialogues[TimesEntered], pl);
+        pl.GetTalkText().Talk(EnterDialogues[TimesEntered]);
                 
         TimesEntered += 1;
     }
@@ -54,7 +54,7 @@ public class DialogueTrigger : Spatial
         }
         Left = true;
 
-        TalkText.GetInst().Talk(LeaveDialogues[TimesLeft], pl);
+        pl.GetTalkText().Talk(LeaveDialogues[TimesLeft]);
 
         TimesLeft += 1;
     }

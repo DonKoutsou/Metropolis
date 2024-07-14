@@ -5,13 +5,12 @@ using System.Drawing.Drawing2D;
 
 public class TalkText : Label3D
 {
-    static TalkText instance;
-    static Timer TalkTimer;
+    //static TalkText instance;
+    Timer TalkTimer;
     //Character Talking;
-    public void Talk(string diag, Character Talker)
+    public void Talk(string diag)
     {
         Text = diag;
-        //Talking = Talker;
         TalkTimer.Start();
         Show();
         SetProcess(true);
@@ -21,7 +20,7 @@ public class TalkText : Label3D
         SetProcess(false);
         Hide();
     }
-    public static bool IsTalking()
+    public bool IsTalking()
     {
         return TalkTimer.TimeLeft > 0;
     }
@@ -32,10 +31,10 @@ public class TalkText : Label3D
         PixelSize = Mathf.Lerp(0.001f, 0.002f, zoo);
         //GlobalTranslation = new Vector3(plpos.x, plpos.y + (5 *  CameraZoomPivot.GetInstance().GetZoomNormalised()) + 10, plpos.z);
     }
-    public static TalkText GetInst()
-    {
-        return instance;
-    }
+    //public static TalkText GetInst()
+    //{
+    //    return instance;
+    //}
     public override void _Ready()
     {
         base._Ready();
@@ -49,7 +48,7 @@ public class TalkText : Label3D
         //TalkTimer = GetNode<Timer>("UpdateTimer");
         SetProcess(false);
         Hide();
-        instance = this;
+        //instance = this;
     }
     
 }

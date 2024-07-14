@@ -891,7 +891,7 @@ __meta__ = {
 [node name="CSGPolygon" parent="Cables/Path21" index="0" instance=ExtResource( 13 )]
 path_node = NodePath("..")
 
-[node name="Vehicle" parent="." index="14" instance=ExtResource( 20 )]
+[node name="Vehicle0" parent="." index="14" instance=ExtResource( 20 )]
 transform = Transform( -0.0895723, 0, -0.99598, 0, 1, 0, 0.99598, 0, -0.0895723, -19.866, 0, 2388.32 )
 
 [node name="Vehicle2" parent="." index="15" instance=ExtResource( 20 )]
