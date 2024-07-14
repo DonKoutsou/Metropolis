@@ -151,7 +151,7 @@ public class MyWorld : Spatial
 			}
 		}
 
-		StartingScreen start = ((WorldRoot)GetParent()).GetStartingScreen();
+		StartingScreen start = ((WorldRoot)GetParent().GetParent().GetParent().GetParent()).GetStartingScreen();
 		start.GameOver(reason);
 		SaveLoadManager.GetInstance().ClearSaves();
 	}
