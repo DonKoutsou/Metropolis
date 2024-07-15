@@ -25,7 +25,7 @@
 [ext_resource path="res://Assets/UI/ButtonGreen.tres" type="Theme" id=24]
 [ext_resource path="res://Assets/UI/Icon/ArrowRight-Thin@0.5x-1.png" type="Texture" id=25]
 
-[sub_resource type="StyleBoxFlat" id=42]
+[sub_resource type="StyleBoxFlat" id=50]
 bg_color = Color( 0.160784, 0.160784, 0.160784, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -291,7 +291,7 @@ margin_top = -344.0
 margin_right = -70.0
 margin_bottom = -297.0
 theme = ExtResource( 4 )
-custom_styles/panel = SubResource( 42 )
+custom_styles/panel = SubResource( 50 )
 
 [node name="w" type="RichTextLabel" parent="CapPanel"]
 anchor_left = 0.5
@@ -331,7 +331,7 @@ margin_top = -344.0
 margin_right = -460.0
 margin_bottom = -297.0
 theme = ExtResource( 4 )
-custom_styles/panel = SubResource( 42 )
+custom_styles/panel = SubResource( 50 )
 
 [node name="w" type="RichTextLabel" parent="CapPanel2"]
 anchor_left = 0.5
@@ -439,7 +439,7 @@ margin_right = 193.0
 margin_bottom = 175.0
 rect_clip_content = true
 mouse_filter = 1
-custom_styles/panel = SubResource( 42 )
+custom_styles/panel = SubResource( 50 )
 
 [node name="TextureRect2" type="TextureRect" parent="CompassUI"]
 visible = false
@@ -572,7 +572,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 theme = ExtResource( 4 )
-custom_styles/panel = SubResource( 42 )
+custom_styles/panel = SubResource( 50 )
 
 [node name="MarginContainer" type="MarginContainer" parent="JobPanel"]
 anchor_right = 1.0
@@ -682,7 +682,7 @@ margin_right = -18.0
 margin_bottom = -17.0
 mouse_filter = 1
 theme = ExtResource( 4 )
-custom_styles/panel = SubResource( 42 )
+custom_styles/panel = SubResource( 50 )
 
 [node name="CharacterBatteryCharge" type="ProgressBar" parent="BatteryPanel"]
 anchor_left = 1.0
@@ -848,7 +848,7 @@ margin_left = -18.0
 margin_top = -373.0
 rect_clip_content = true
 mouse_filter = 1
-custom_styles/panel = SubResource( 42 )
+custom_styles/panel = SubResource( 50 )
 
 [node name="Panel6" type="Panel" parent="."]
 anchor_left = 1.0
@@ -860,7 +860,7 @@ margin_top = -373.0
 margin_right = -590.0
 rect_clip_content = true
 mouse_filter = 1
-custom_styles/panel = SubResource( 42 )
+custom_styles/panel = SubResource( 50 )
 
 [node name="Panel4" type="Panel" parent="."]
 anchor_left = 1.0
@@ -873,7 +873,7 @@ margin_right = -18.0
 margin_bottom = -344.0
 rect_clip_content = true
 mouse_filter = 1
-custom_styles/panel = SubResource( 42 )
+custom_styles/panel = SubResource( 50 )
 
 [node name="ItemOptionPanel" type="Panel" parent="Panel4"]
 anchor_left = 0.5
@@ -885,7 +885,7 @@ margin_top = -11.5
 margin_right = 284.0
 margin_bottom = 11.5
 theme = ExtResource( 4 )
-custom_styles/panel = SubResource( 42 )
+custom_styles/panel = SubResource( 50 )
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel4"]
 anchor_left = 1.0
@@ -928,7 +928,7 @@ margin_top = -17.0
 margin_right = -1.0
 rect_clip_content = true
 mouse_filter = 1
-custom_styles/panel = SubResource( 42 )
+custom_styles/panel = SubResource( 50 )
 
 [node name="Control" type="Control" parent="."]
 anchor_left = 1.0
