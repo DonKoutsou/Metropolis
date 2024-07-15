@@ -48,12 +48,14 @@ public class InventoryUI : Control
     MapGrid map;
     Panel CharacterRPM;
 
-    public void ConfigureJob(Job j)
+    int currentpage = 0;
+    int maxpage = 0;
+    public void ConfigureJob(string JobName, Vector2 Jobloc, string JobOwner, int RewardAmmount)
     {
-        JobPan.GetNode<RichTextLabel>("MarginContainer/VBoxContainer/TaskName").BbcodeText = "[center]" + j.GetJobName();
-        JobPan.GetNode<RichTextLabel>("MarginContainer/VBoxContainer/Location").BbcodeText = "[center]" + string.Format("Προορισμός : X = {0} - Y = {1}", j.GetLocation().x, j.GetLocation().y);
-        JobPan.GetNode<RichTextLabel>("MarginContainer/VBoxContainer/Description").BbcodeText = "[center]" + string.Format("Μεταφορά προμηθειών στον φάρο {0}", j.GetOwnerName());
-        JobPan.GetNode<RichTextLabel>("MarginContainer/VBoxContainer/Reward").BbcodeText = "[center]" + string.Format("Αμοιβή : {0} Δραχμές", j.GetRewardAmmount());
+        JobPan.GetNode<RichTextLabel>("MarginContainer/VBoxContainer/TaskName").BbcodeText = "[center]" + JobName;
+        JobPan.GetNode<RichTextLabel>("MarginContainer/VBoxContainer/Location").BbcodeText = "[center]" + string.Format("Προορισμός : X = {0} - Y = {1}", Jobloc.x, Jobloc.y);
+        JobPan.GetNode<RichTextLabel>("MarginContainer/VBoxContainer/Description").BbcodeText = "[center]" + string.Format("Μεταφορά προμηθειών στον φάρο {0}", JobOwner);
+        JobPan.GetNode<RichTextLabel>("MarginContainer/VBoxContainer/Reward").BbcodeText = "[center]" + string.Format("Αμοιβή : {0} Δραχμές", RewardAmmount);
     }
     public override void _Ready()
     {
@@ -108,14 +110,14 @@ public class InventoryUI : Control
         SetProcess(false);
         comp.ToggleCompass(false);
     }
-    float d = 0.5f;
+    float d = 0.1f;
     public override void _Process(float delta)
     {
         base._Process(delta);
         d -= delta;
         if (d > 0)
             return;
-        d = 0.5f;
+        d = 0.1f;
 
         UpdateInventory();
     }
@@ -125,36 +127,83 @@ public class InventoryUI : Control
         {
             List<Item> Items;
             Inv.GetContents(out Items);
-            List<int> itemcount = new List<int>();
+
+            Dictionary <string, int> itemcatalogue = new Dictionary<string, int>();
+            Dictionary <string, Item> itemcat2 = new Dictionary<string, Item>();
+
             hascompass = false;
             hasmap = false;
             hastoolbox = false;
+
+            for (int v = Items.Count() - 1; v > -1; v --)
+            {
+                if (!itemcat2.ContainsKey(Items[v].GetItemName()))
+                    itemcat2.Add(Items[v].GetItemName(), Items[v]);
+
+                if (itemcatalogue.ContainsKey(Items[v].GetItemName()))
+                {
+                    itemcatalogue[Items[v].GetItemName()] += 1;
+                }
+                else
+                {
+                    itemcatalogue.Add(Items[v].GetItemName(), 1);
+                }
+
+                if (Items[v].GetItemType() ==  global::ItemName.COMPASS)
+                    hascompass = true;
+                else if (Items[v].GetItemType() == global::ItemName.MAP)
+                    hasmap = true;
+                else if (Items[v].GetItemType() == global::ItemName.TOOLBOX)
+                    hastoolbox = true;
+
+            }
+            maxpage = itemcatalogue.Count / 8;
+            int slottofill = 0;
+            int currentit = 0;
+            
+           
+            int min = 0;
+            for (int i = 0; i < currentpage; i++)
+                min += 7;
+
+            int max = min + 7;
+
+
+            foreach(KeyValuePair<string, int> it in itemcatalogue)
+            {
+                if (currentit > max)
+                    break;
+                if (currentit < min)
+                {
+                    currentit ++;
+                    continue;
+                }
+                if (!itemcat2[it.Key].stackable)
+                {
+                    for (int i = 0; i < it.Value; i++)
+                    {
+                        if (currentit > max)
+                            break;
+                        slots[slottofill].SetItem(itemcat2[it.Key], 1);
+                        currentit ++;
+                        slottofill++;
+                    }
+                }
+                else
+                {
+                    slots[slottofill].SetItem(itemcat2[it.Key], it.Value);
+                    currentit ++;
+                    slottofill++;
+                }
+                
+            }
+            
+
             for (int i = 0; i < slots.Count(); i++)
             {
-                Item sample = null;
-                int ammount = 0;
-                
-                for (int v = Items.Count() - 1; v > -1; v --)
-                {
-                    if (sample == null)
-                        sample = Items[v];
-                    if (Items[v].GetItemType() ==  global::ItemName.COMPASS)
-                        hascompass = true;
-                    else if (Items[v].GetItemType() == global::ItemName.MAP)
-                        hasmap = true;
-                    else if (Items[v].GetItemType() == global::ItemName.TOOLBOX)
-                        hastoolbox = true;
-                    
-                    if (Items[v].GetItemType() == sample.GetItemType())
-                    {
-                        ammount += 1;
-                        Items.RemoveAt(v);
-                    }
-                    if (!sample.stackable)
-                        break;
-                }
-                itemcount.Insert(i, ammount);
-                slots[i].SetItem(sample, ammount);
+                //itemcount.Insert(i, ammount);
+                if (i >= slottofill)
+                    slots[i].SetItem(null, 0);
                 if (FocusedSlot == slots[i])
                     slots[i].Toggle(true);
                 else
@@ -200,7 +249,22 @@ public class InventoryUI : Control
         GetNode<Button>("ItemOptionPanel/HBoxContainer/SwitchButton").Visible = selectinginst;
         GetNode<Button>("ItemOptionPanel/HBoxContainer/SwitchLimbButton").Visible = selectinglimb;
     }
-    
+    private void PageForw()
+    {
+        if (currentpage == maxpage)
+            return;
+        currentpage ++;
+        GetNode<RichTextLabel>("CapPanel2/w").BbcodeText = "[center]" + currentpage;
+    }
+    private void PageBack()
+    {
+        if (currentpage == 0)
+            return;
+
+        
+        currentpage --;
+        GetNode<RichTextLabel>("CapPanel2/w").BbcodeText = "[center]" + currentpage;
+    }
     public void ItemHovered(Item it)
     {
         if (it == null)

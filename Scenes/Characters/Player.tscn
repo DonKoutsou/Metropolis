@@ -4,10 +4,10 @@
 [ext_resource path="res://Scenes/HUD/ActionMenu.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Items/Toolbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Assets/PostProcess/KuwaharaShader.gdshader" type="Shader" id=5]
 [ext_resource path="res://Scenes/Items/NormalLeg_R.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Inventory/Inventory.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Items/NormalLeg_L.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Assets/PostProcess/PixelShader.gdshader" type="Shader" id=9]
 [ext_resource path="res://Scenes/Items/Bouzouki.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scripts/CameraZoomPivot.cs" type="Script" id=12]
 [ext_resource path="res://Scripts/CameraPanPivot.cs" type="Script" id=14]
@@ -50,7 +50,7 @@ albedo_color = Color( 0, 0, 0, 1 )
 
 [sub_resource type="ShaderMaterial" id=126]
 render_priority = -1
-shader = ExtResource( 9 )
+shader = ExtResource( 5 )
 
 [sub_resource type="Animation" id=110]
 resource_name = "FadeIn"

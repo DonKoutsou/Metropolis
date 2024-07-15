@@ -1,8 +1,8 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scripts/InventoryUISlot.cs" type="Script" id=1]
 [ext_resource path="res://Assets/Drachma/Drachma.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Map/Maptile.tres" type="Texture" id=3]
+[ext_resource path="res://Assets/UI/ButtonGreen.tres" type="Theme" id=3]
 [ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Assets/UI/PanelTheme.tres" type="Theme" id=5]
 [ext_resource path="res://Assets/MapIcons/CheckMark.png" type="Texture" id=6]
@@ -10,109 +10,10 @@
 [ext_resource path="res://Assets/MapIcons/Exclamation3.png" type="Texture" id=8]
 [ext_resource path="res://Scripts/ConditionPanel.cs" type="Script" id=9]
 
-[sub_resource type="DynamicFont" id=32]
-size = 24
-outline_size = 2
-outline_color = Color( 0, 0, 0, 1 )
-use_filter = true
-font_data = ExtResource( 4 )
-
-[sub_resource type="StyleBoxTexture" id=33]
-content_margin_left = 6.0
-content_margin_right = 6.0
-content_margin_top = 2.0
-content_margin_bottom = 2.0
-texture = ExtResource( 3 )
-region_rect = Rect2( 0, 0, 16, 16 )
-margin_left = 4.0
-margin_right = 4.0
-margin_top = 4.0
-margin_bottom = 4.0
-expand_margin_left = 2.0
-expand_margin_right = 2.0
-expand_margin_top = 2.0
-expand_margin_bottom = 2.0
-
-[sub_resource type="Image" id=42]
-data = {
-"data": PoolByteArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 14, 71, 140, 191, 57, 71, 140, 191, 104, 71, 140, 191, 122, 71, 140, 191, 123, 71, 140, 191, 123, 71, 140, 191, 123, 71, 140, 191, 123, 71, 140, 191, 122, 71, 140, 191, 104, 71, 140, 191, 57, 71, 140, 191, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 58, 71, 140, 191, 116, 71, 140, 191, 16, 71, 140, 191, 8, 71, 140, 191, 8, 71, 140, 191, 8, 71, 140, 191, 8, 71, 140, 191, 8, 71, 140, 191, 8, 71, 140, 191, 16, 71, 140, 191, 116, 71, 140, 191, 58, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 105, 71, 140, 191, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 15, 71, 140, 191, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 123, 71, 140, 191, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 6, 71, 140, 191, 123, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 123, 71, 140, 191, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 8, 71, 140, 191, 123, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 123, 71, 140, 191, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 8, 71, 140, 191, 123, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 123, 71, 140, 191, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 8, 71, 140, 191, 123, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 123, 71, 140, 191, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 8, 71, 140, 191, 123, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 123, 71, 140, 191, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 6, 71, 140, 191, 123, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 105, 71, 140, 191, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 14, 71, 140, 191, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 58, 71, 140, 191, 117, 71, 140, 191, 15, 71, 140, 191, 8, 71, 140, 191, 8, 71, 140, 191, 8, 71, 140, 191, 8, 71, 140, 191, 8, 71, 140, 191, 8, 71, 140, 191, 17, 71, 140, 191, 116, 71, 140, 191, 58, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 14, 71, 140, 191, 58, 71, 140, 191, 104, 71, 140, 191, 122, 71, 140, 191, 123, 71, 140, 191, 123, 71, 140, 191, 123, 71, 140, 191, 123, 71, 140, 191, 122, 71, 140, 191, 104, 71, 140, 191, 57, 71, 140, 191, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
-"format": "RGBA8",
-"height": 16,
-"mipmaps": false,
-"width": 16
-}
-
-[sub_resource type="ImageTexture" id=8]
-flags = 4
-flags = 4
-image = SubResource( 42 )
-size = Vector2( 16, 16 )
-
-[sub_resource type="StyleBoxTexture" id=9]
-content_margin_left = 6.0
-content_margin_right = 6.0
-content_margin_top = 2.0
-content_margin_bottom = 2.0
-texture = SubResource( 8 )
-region_rect = Rect2( 0, 0, 16, 16 )
-margin_left = 4.0
-margin_right = 4.0
-margin_top = 4.0
-margin_bottom = 4.0
-expand_margin_left = 2.0
-expand_margin_right = 2.0
-expand_margin_top = 2.0
-expand_margin_bottom = 2.0
-
-[sub_resource type="StyleBoxFlat" id=35]
-bg_color = Color( 1, 0.881924, 0.574928, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
-border_blend = true
-
-[sub_resource type="StyleBoxFlat" id=19]
-bg_color = Color( 0.607843, 0.603922, 0.603922, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
-border_blend = true
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-
-[sub_resource type="StyleBoxFlat" id=37]
-bg_color = Color( 0.576471, 0.545098, 0.462745, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
-border_blend = true
-
-[sub_resource type="Theme" id=30]
-Button/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
-Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
-Button/colors/font_color_focus = Color( 0.94, 0.94, 0.94, 1 )
-Button/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
-Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
-Button/constants/hseparation = 2
-Button/fonts/font = SubResource( 32 )
-Button/styles/disabled = SubResource( 33 )
-Button/styles/focus = SubResource( 9 )
-Button/styles/hover = SubResource( 35 )
-Button/styles/normal = SubResource( 19 )
-Button/styles/pressed = SubResource( 37 )
-
 [sub_resource type="DynamicFont" id=4]
 size = 24
 outline_size = 1
-outline_color = Color( 0, 0, 0, 1 )
+outline_color = Color( 0.133333, 0.384314, 0.121569, 1 )
 use_filter = true
 extra_spacing_top = -8
 font_data = ExtResource( 4 )
@@ -149,12 +50,12 @@ corner_radius_bottom_left = 1
 
 [sub_resource type="StyleBoxFlat" id=41]
 resource_local_to_scene = true
-bg_color = Color( 0.384314, 0.396078, 0.439216, 1 )
+bg_color = Color( 0.0196078, 0.054902, 0.0196078, 1 )
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color( 0, 0, 0, 1 )
+border_color = Color( 0.211765, 1, 0.172549, 1 )
 border_blend = true
 corner_radius_top_left = 1
 corner_radius_top_right = 1
@@ -193,7 +94,7 @@ margin_bottom = 45.0
 rect_scale = Vector2( 1, 1.06 )
 rect_clip_content = true
 focus_mode = 0
-theme = SubResource( 30 )
+theme = ExtResource( 3 )
 toggle_mode = true
 enabled_focus_mode = 0
 icon = ExtResource( 2 )
@@ -207,10 +108,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -64.0
-margin_top = 36.0
-margin_right = 48.0
-margin_bottom = 148.0
+margin_left = -56.0
+margin_top = 30.0
+margin_right = 56.0
+margin_bottom = 142.0
 mouse_filter = 2
 theme = SubResource( 5 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
@@ -218,23 +119,27 @@ text = "x0
 "
 
 [node name="ItemResourceBar" type="ProgressBar" parent="."]
-margin_left = 50.0
-margin_top = 49.0
-margin_right = 148.0
-margin_bottom = 56.0
+margin_left = 49.0
+margin_top = 48.0
+margin_right = 145.0
+margin_bottom = 55.0
 rect_rotation = -89.9999
 custom_styles/fg = SubResource( 6 )
 value = 100.0
 percent_visible = false
 
 [node name="LimbColor" type="Panel" parent="."]
-margin_left = 40.0
-margin_top = 32.0
-margin_right = 56.0
-margin_bottom = 48.0
+margin_left = 39.0
+margin_top = 31.0
+margin_right = 55.0
+margin_bottom = 47.0
 custom_styles/panel = SubResource( 39 )
 
 [node name="ConditionPanel" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 margin_left = -56.0
 margin_top = -48.0
 margin_right = -38.0

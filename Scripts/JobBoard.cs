@@ -15,6 +15,10 @@ public class JobBoard : Control
     {
         BoardPort = p;
     }
+    private void CloseUI()
+    {
+        ToggleUI(false);
+    }
     public void ToggleUI(bool toggle)
     {
         Open = toggle;

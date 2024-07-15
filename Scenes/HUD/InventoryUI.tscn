@@ -1,12 +1,12 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://Scenes/HUD/InventoryUISlot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/InventoryUI.cs" type="Script" id=2]
-[ext_resource path="res://Assets/UI/ButtonRectTheme.tres" type="Theme" id=3]
+[ext_resource path="res://Assets/MapIcons/RepairIcon2.png" type="Texture" id=3]
 [ext_resource path="res://Assets/UI/PanelTheme.tres" type="Theme" id=4]
 [ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://Scenes/HUD/Map.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Assets/UI/Icon/Cross@0.5x-1.png" type="Texture" id=7]
+[ext_resource path="res://Assets/UI/Icon/CrossGreen.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Themes/PanelTheme1.tres" type="Theme" id=8]
 [ext_resource path="res://Assets/Themes/PanelTheme2.tres" type="Theme" id=9]
 [ext_resource path="res://Scenes/HUD/VehicleHud.tscn" type="PackedScene" id=10]
@@ -15,13 +15,25 @@
 [ext_resource path="res://Assets/Compass/Compass/CompL2.png" type="Texture" id=13]
 [ext_resource path="res://Assets/Compass/Compass/CompL1.png" type="Texture" id=14]
 [ext_resource path="res://Scripts/Compass.cs" type="Script" id=15]
-[ext_resource path="res://Assets/MapIcons/Compass.png" type="Texture" id=16]
-[ext_resource path="res://Assets/MapIcons/Map.png" type="Texture" id=17]
-[ext_resource path="res://Assets/MapIcons/DropIcon.png" type="Texture" id=18]
-[ext_resource path="res://Assets/Map/Maptile.tres" type="Texture" id=19]
-[ext_resource path="res://Assets/MapIcons/Switch_Instrument.png" type="Texture" id=20]
-[ext_resource path="res://Assets/MapIcons/LimpAction.png" type="Texture" id=21]
-[ext_resource path="res://Assets/MapIcons/RepairIcon.png" type="Texture" id=22]
+[ext_resource path="res://Assets/MapIcons/Compass2.png" type="Texture" id=16]
+[ext_resource path="res://Assets/MapIcons/Map2.png" type="Texture" id=17]
+[ext_resource path="res://Assets/MapIcons/DropIcon2.png" type="Texture" id=18]
+[ext_resource path="res://Assets/MapIcons/Switch_Instrument2.png" type="Texture" id=20]
+[ext_resource path="res://Assets/MapIcons/LimpAction2.png" type="Texture" id=21]
+[ext_resource path="res://Assets/UI/Icon/ArrowLeft-Thin@0.5x-1.png" type="Texture" id=22]
+[ext_resource path="res://Assets/MapIcons/grid.png" type="Texture" id=23]
+[ext_resource path="res://Assets/UI/ButtonGreen.tres" type="Theme" id=24]
+[ext_resource path="res://Assets/UI/Icon/ArrowRight-Thin@0.5x-1.png" type="Texture" id=25]
+
+[sub_resource type="StyleBoxFlat" id=42]
+bg_color = Color( 0.160784, 0.160784, 0.160784, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
+border_blend = true
+anti_aliasing = false
 
 [sub_resource type="DynamicFont" id=27]
 size = 24
@@ -33,8 +45,11 @@ font_data = ExtResource( 5 )
 [sub_resource type="Theme" id=13]
 default_font = SubResource( 27 )
 
+[sub_resource type="DynamicFont" id=45]
+font_data = ExtResource( 5 )
+
 [sub_resource type="StyleBoxFlat" id=33]
-bg_color = Color( 0.607843, 0.603922, 0.603922, 1 )
+bg_color = Color( 0.160784, 0.160784, 0.160784, 1 )
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -59,14 +74,19 @@ corner_detail = 16
 [sub_resource type="Theme" id=41]
 Panel/styles/panel = SubResource( 31 )
 
-[sub_resource type="StyleBoxFlat" id=30]
-bg_color = Color( 0.607843, 0.603922, 0.603922, 1 )
+[sub_resource type="StyleBoxFlat" id=52]
+bg_color = Color( 0.109804, 0.419608, 0.0666667, 0.435294 )
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
+border_color = Color( 0.203922, 0.831373, 0.160784, 1 )
 border_blend = true
+corner_radius_top_left = 161
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+corner_detail = 15
 anti_aliasing = false
 
 [sub_resource type="CanvasItemMaterial" id=15]
@@ -81,6 +101,20 @@ font_data = ExtResource( 5 )
 [sub_resource type="Theme" id=21]
 default_font = SubResource( 20 )
 
+[sub_resource type="StyleBoxFlat" id=51]
+bg_color = Color( 0.109804, 0.419608, 0.0666667, 0.435294 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.203922, 0.831373, 0.160784, 1 )
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+anti_aliasing = false
+
 [sub_resource type="DynamicFont" id=17]
 size = 12
 outline_size = 2
@@ -90,6 +124,20 @@ font_data = ExtResource( 5 )
 
 [sub_resource type="Theme" id=19]
 default_font = SubResource( 17 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.192157, 0.705882, 0.121569, 0.435294 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.203922, 0.831373, 0.160784, 1 )
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id=23]
 bg_color = Color( 0.364706, 0.909804, 0.196078, 1 )
@@ -131,7 +179,7 @@ font_data = ExtResource( 5 )
 [sub_resource type="Theme" id=26]
 default_font = SubResource( 34 )
 
-[sub_resource type="StyleBoxFlat" id=42]
+[sub_resource type="StyleBoxFlat" id=46]
 bg_color = Color( 1, 1, 1, 1 )
 border_width_left = 1
 border_width_top = 1
@@ -148,106 +196,6 @@ shadow_size = 1
 [sub_resource type="DynamicFont" id=8]
 font_data = ExtResource( 5 )
 
-[sub_resource type="DynamicFont" id=35]
-size = 24
-outline_size = 2
-outline_color = Color( 0, 0, 0, 1 )
-use_filter = true
-font_data = ExtResource( 5 )
-
-[sub_resource type="StyleBoxTexture" id=32]
-content_margin_left = 6.0
-content_margin_right = 6.0
-content_margin_top = 2.0
-content_margin_bottom = 2.0
-texture = ExtResource( 19 )
-region_rect = Rect2( 0, 0, 16, 16 )
-margin_left = 4.0
-margin_right = 4.0
-margin_top = 4.0
-margin_bottom = 4.0
-expand_margin_left = 2.0
-expand_margin_right = 2.0
-expand_margin_top = 2.0
-expand_margin_bottom = 2.0
-
-[sub_resource type="Image" id=45]
-data = {
-"data": PoolByteArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 14, 71, 140, 191, 57, 71, 140, 191, 104, 71, 140, 191, 122, 71, 140, 191, 123, 71, 140, 191, 123, 71, 140, 191, 123, 71, 140, 191, 123, 71, 140, 191, 122, 71, 140, 191, 104, 71, 140, 191, 57, 71, 140, 191, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 58, 71, 140, 191, 116, 71, 140, 191, 16, 71, 140, 191, 8, 71, 140, 191, 8, 71, 140, 191, 8, 71, 140, 191, 8, 71, 140, 191, 8, 71, 140, 191, 8, 71, 140, 191, 16, 71, 140, 191, 116, 71, 140, 191, 58, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 105, 71, 140, 191, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 15, 71, 140, 191, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 123, 71, 140, 191, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 6, 71, 140, 191, 123, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 123, 71, 140, 191, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 8, 71, 140, 191, 123, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 123, 71, 140, 191, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 8, 71, 140, 191, 123, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 123, 71, 140, 191, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 8, 71, 140, 191, 123, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 123, 71, 140, 191, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 8, 71, 140, 191, 123, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 123, 71, 140, 191, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 6, 71, 140, 191, 123, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 105, 71, 140, 191, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 14, 71, 140, 191, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 58, 71, 140, 191, 117, 71, 140, 191, 15, 71, 140, 191, 8, 71, 140, 191, 8, 71, 140, 191, 8, 71, 140, 191, 8, 71, 140, 191, 8, 71, 140, 191, 8, 71, 140, 191, 17, 71, 140, 191, 116, 71, 140, 191, 58, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 140, 191, 14, 71, 140, 191, 58, 71, 140, 191, 104, 71, 140, 191, 122, 71, 140, 191, 123, 71, 140, 191, 123, 71, 140, 191, 123, 71, 140, 191, 123, 71, 140, 191, 122, 71, 140, 191, 104, 71, 140, 191, 57, 71, 140, 191, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
-"format": "RGBA8",
-"height": 16,
-"mipmaps": false,
-"width": 16
-}
-
-[sub_resource type="ImageTexture" id=44]
-flags = 4
-flags = 4
-image = SubResource( 45 )
-size = Vector2( 16, 16 )
-
-[sub_resource type="StyleBoxTexture" id=9]
-content_margin_left = 6.0
-content_margin_right = 6.0
-content_margin_top = 2.0
-content_margin_bottom = 2.0
-texture = SubResource( 44 )
-region_rect = Rect2( 0, 0, 16, 16 )
-margin_left = 4.0
-margin_right = 4.0
-margin_top = 4.0
-margin_bottom = 4.0
-expand_margin_left = 2.0
-expand_margin_right = 2.0
-expand_margin_top = 2.0
-expand_margin_bottom = 2.0
-
-[sub_resource type="StyleBoxFlat" id=37]
-bg_color = Color( 1, 0.881924, 0.574928, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
-border_blend = true
-
-[sub_resource type="StyleBoxFlat" id=38]
-bg_color = Color( 0.67451, 0.662745, 0.619608, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
-border_blend = true
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-shadow_size = 2
-
-[sub_resource type="StyleBoxFlat" id=39]
-bg_color = Color( 0.576471, 0.545098, 0.462745, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
-border_blend = true
-
-[sub_resource type="Theme" id=40]
-Button/colors/font_color = Color( 0.898039, 0.886275, 0.8, 1 )
-Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
-Button/colors/font_color_focus = Color( 0.94, 0.94, 0.94, 1 )
-Button/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
-Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
-Button/constants/hseparation = 2
-Button/fonts/font = SubResource( 35 )
-Button/styles/disabled = SubResource( 32 )
-Button/styles/focus = SubResource( 9 )
-Button/styles/hover = SubResource( 37 )
-Button/styles/normal = SubResource( 38 )
-Button/styles/pressed = SubResource( 39 )
-
 [node name="InvntoryUI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -255,17 +203,13 @@ mouse_filter = 2
 script = ExtResource( 2 )
 
 [node name="GridContainer" type="GridContainer" parent="."]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -525.0
-margin_top = -470.0
-margin_right = -135.0
-margin_bottom = -137.0
-grow_horizontal = 2
-grow_vertical = 2
-custom_constants/vseparation = 111
+margin_left = 1395.0
+margin_top = 839.0
+margin_right = 1785.0
+margin_bottom = 970.0
+size_flags_horizontal = 9
+size_flags_vertical = 15
+custom_constants/vseparation = 112
 custom_constants/hseparation = 130
 columns = 4
 
@@ -304,8 +248,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 111.0
-margin_bottom = 111.0
+margin_top = 112.0
+margin_bottom = 112.0
 
 [node name="InventoryBox" parent="GridContainer" instance=ExtResource( 1 )]
 anchor_left = 0.0
@@ -313,9 +257,9 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 130.0
-margin_top = 111.0
+margin_top = 112.0
 margin_right = 130.0
-margin_bottom = 111.0
+margin_bottom = 112.0
 
 [node name="InventoryBox2" parent="GridContainer" instance=ExtResource( 1 )]
 anchor_left = 0.0
@@ -323,9 +267,9 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 260.0
-margin_top = 111.0
+margin_top = 112.0
 margin_right = 260.0
-margin_bottom = 111.0
+margin_bottom = 112.0
 
 [node name="InventoryBox6" parent="GridContainer" instance=ExtResource( 1 )]
 anchor_left = 0.0
@@ -333,105 +277,30 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 390.0
-margin_top = 111.0
+margin_top = 112.0
 margin_right = 390.0
-margin_bottom = 111.0
-
-[node name="InventoryBox4" parent="GridContainer" instance=ExtResource( 1 )]
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 222.0
-margin_bottom = 222.0
-
-[node name="InventoryBox5" parent="GridContainer" instance=ExtResource( 1 )]
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 130.0
-margin_top = 222.0
-margin_right = 130.0
-margin_bottom = 222.0
-
-[node name="InventoryBox7" parent="GridContainer" instance=ExtResource( 1 )]
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 260.0
-margin_top = 222.0
-margin_right = 260.0
-margin_bottom = 222.0
-
-[node name="InventoryBox8" parent="GridContainer" instance=ExtResource( 1 )]
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 390.0
-margin_top = 222.0
-margin_right = 390.0
-margin_bottom = 222.0
-
-[node name="InventoryBox9" parent="GridContainer" instance=ExtResource( 1 )]
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 333.0
-margin_bottom = 333.0
-
-[node name="InventoryBox10" parent="GridContainer" instance=ExtResource( 1 )]
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 130.0
-margin_top = 333.0
-margin_right = 130.0
-margin_bottom = 333.0
-
-[node name="InventoryBox11" parent="GridContainer" instance=ExtResource( 1 )]
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 260.0
-margin_top = 333.0
-margin_right = 260.0
-margin_bottom = 333.0
-
-[node name="InventoryBox12" parent="GridContainer" instance=ExtResource( 1 )]
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 390.0
-margin_top = 333.0
-margin_right = 390.0
-margin_bottom = 333.0
+margin_bottom = 112.0
 
 [node name="CapPanel" type="Panel" parent="."]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -589.0
-margin_top = -591.0
+margin_left = -460.0
+margin_top = -344.0
 margin_right = -70.0
-margin_bottom = -526.0
+margin_bottom = -297.0
 theme = ExtResource( 4 )
+custom_styles/panel = SubResource( 42 )
 
 [node name="w" type="RichTextLabel" parent="CapPanel"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -194.5
+margin_left = -155.0
 margin_top = -20.0
-margin_right = -18.5
+margin_right = 21.0
 margin_bottom = 20.0
 theme = SubResource( 13 )
 bbcode_enabled = true
@@ -443,34 +312,78 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 63.5
+margin_left = 15.0
 margin_top = -19.5
-margin_right = 210.5
+margin_right = 162.0
 margin_bottom = 20.5
 theme = SubResource( 13 )
 bbcode_enabled = true
-bbcode_text = "[center]100/150"
-text = "100/150"
+bbcode_text = "[center]1000/1500"
+text = "1000/1500"
 
-[node name="MapUI" parent="." instance=ExtResource( 6 )]
-visible = false
+[node name="CapPanel2" type="Panel" parent="."]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -539.0
-margin_top = -126.0
-margin_right = -499.0
-margin_bottom = -86.0
+margin_left = -590.0
+margin_top = -344.0
+margin_right = -460.0
+margin_bottom = -297.0
+theme = ExtResource( 4 )
+custom_styles/panel = SubResource( 42 )
+
+[node name="w" type="RichTextLabel" parent="CapPanel2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -40.0
+margin_top = -20.0
+margin_right = 40.0
+margin_bottom = 20.0
+theme = SubResource( 13 )
+bbcode_enabled = true
+bbcode_text = "[center]0"
+text = "0"
+
+[node name="Repair" type="Button" parent="CapPanel2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -59.5
+margin_top = -17.5
+margin_right = -24.5
+margin_bottom = 17.5
+theme = ExtResource( 24 )
+custom_fonts/font = SubResource( 45 )
+icon = ExtResource( 22 )
+expand_icon = true
+
+[node name="Repair2" type="Button" parent="CapPanel2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 24.5
+margin_top = -17.5
+margin_right = 59.5
+margin_bottom = 17.5
+theme = ExtResource( 24 )
+custom_fonts/font = SubResource( 45 )
+icon = ExtResource( 25 )
+icon_align = 1
+expand_icon = true
 
 [node name="CompassUI" type="Control" parent="."]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -820.0
+margin_left = -821.0
 margin_top = -195.0
-margin_right = -780.0
+margin_right = -781.0
 margin_bottom = -155.0
 script = ExtResource( 15 )
 
@@ -479,8 +392,8 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -155.0
-margin_top = -154.0
+margin_left = -130.0
+margin_top = -129.0
 margin_right = 176.0
 margin_bottom = 175.0
 rect_clip_content = true
@@ -492,26 +405,27 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -151.0
-margin_top = -151.0
+margin_left = -126.0
+margin_top = -126.0
 margin_right = 172.0
 margin_bottom = 172.0
 theme = SubResource( 41 )
+custom_styles/panel = SubResource( 52 )
 
 [node name="Sprite" type="Sprite" parent="CompassUI"]
-position = Vector2( 31.2002, 31.3 )
-scale = Vector2( 0.2, 0.2 )
+position = Vector2( 46.2798, 44.3701 )
+scale = Vector2( 0.18, 0.18 )
 texture = ExtResource( 14 )
 normal_map = ExtResource( 12 )
 
 [node name="Sprite2" type="Sprite" parent="CompassUI"]
-position = Vector2( 31.2002, 31.3 )
-scale = Vector2( 0.2, 0.2 )
+position = Vector2( 46.2798, 44.3701 )
+scale = Vector2( 0.18, 0.18 )
 texture = ExtResource( 13 )
 
 [node name="Sprite3" type="Sprite" parent="CompassUI"]
-position = Vector2( 31.2002, 31.3 )
-scale = Vector2( 0.2, 0.2 )
+position = Vector2( 46.2798, 44.3701 )
+scale = Vector2( 0.18, 0.18 )
 texture = ExtResource( 11 )
 
 [node name="Panel2" type="Panel" parent="CompassUI"]
@@ -520,12 +434,26 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = 175.0
-margin_top = -154.0
+margin_top = -129.0
 margin_right = 193.0
 margin_bottom = 175.0
 rect_clip_content = true
 mouse_filter = 1
-custom_styles/panel = SubResource( 30 )
+custom_styles/panel = SubResource( 42 )
+
+[node name="TextureRect2" type="TextureRect" parent="CompassUI"]
+visible = false
+self_modulate = Color( 0.0901961, 1, 0, 0.227451 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -151.0
+margin_top = -151.0
+margin_right = 172.0
+margin_bottom = 172.0
+texture = ExtResource( 23 )
+expand = true
 
 [node name="DescriptionPanel" type="Panel" parent="."]
 visible = false
@@ -533,9 +461,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -846.0
-margin_top = -591.0
-margin_right = -607.0
+margin_left = -847.0
+margin_top = -373.0
+margin_right = -608.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
@@ -553,7 +481,7 @@ custom_constants/margin_bottom = 10
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 229.0
-margin_bottom = 581.0
+margin_bottom = 363.0
 custom_constants/separation = 10
 
 [node name="ItemName" type="RichTextLabel" parent="DescriptionPanel/MarginContainer/VBoxContainer"]
@@ -573,6 +501,7 @@ show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 9 )
+custom_styles/panel = SubResource( 51 )
 
 [node name="Description" type="RichTextLabel" parent="DescriptionPanel/MarginContainer/VBoxContainer"]
 material = SubResource( 15 )
@@ -607,6 +536,7 @@ show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 8 )
+custom_styles/panel = SubResource( 3 )
 
 [node name="WeightText" type="RichTextLabel" parent="DescriptionPanel/MarginContainer/VBoxContainer"]
 material = SubResource( 15 )
@@ -627,21 +557,22 @@ show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 9 )
+custom_styles/panel = SubResource( 51 )
 
 [node name="JobPanel" type="Panel" parent="."]
-visible = false
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -846.0
-margin_top = -591.0
-margin_right = -607.0
-margin_bottom = -436.0
+margin_left = -847.0
+margin_top = -373.0
+margin_right = -608.0
+margin_bottom = -218.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 theme = ExtResource( 4 )
+custom_styles/panel = SubResource( 42 )
 
 [node name="MarginContainer" type="MarginContainer" parent="JobPanel"]
 anchor_right = 1.0
@@ -675,6 +606,7 @@ show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 9 )
+custom_styles/panel = SubResource( 51 )
 
 [node name="Location" type="RichTextLabel" parent="JobPanel/MarginContainer/VBoxContainer"]
 material = SubResource( 15 )
@@ -695,6 +627,7 @@ show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 8 )
+custom_styles/panel = SubResource( 3 )
 
 [node name="Description" type="RichTextLabel" parent="JobPanel/MarginContainer/VBoxContainer"]
 material = SubResource( 15 )
@@ -715,6 +648,7 @@ show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 8 )
+custom_styles/panel = SubResource( 3 )
 
 [node name="Reward" type="RichTextLabel" parent="JobPanel/MarginContainer/VBoxContainer"]
 material = SubResource( 15 )
@@ -735,6 +669,7 @@ show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 9 )
+custom_styles/panel = SubResource( 51 )
 
 [node name="BatteryPanel" type="Panel" parent="."]
 anchor_left = 1.0
@@ -742,11 +677,12 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -70.0
-margin_top = -591.0
+margin_top = -344.0
 margin_right = -18.0
 margin_bottom = -17.0
 mouse_filter = 1
 theme = ExtResource( 4 )
+custom_styles/panel = SubResource( 42 )
 
 [node name="CharacterBatteryCharge" type="ProgressBar" parent="BatteryPanel"]
 anchor_left = 1.0
@@ -755,7 +691,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -41.0
 margin_top = -10.0
-margin_right = 493.0
+margin_right = 243.0
 margin_bottom = 22.0
 rect_rotation = -89.9999
 custom_styles/fg = SubResource( 23 )
@@ -767,9 +703,9 @@ percent_visible = false
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_left = -1.0
-margin_top = -278.0
+margin_top = -154.5
 margin_right = 53.0
-margin_bottom = -238.0
+margin_bottom = -114.5
 theme = SubResource( 26 )
 bbcode_enabled = true
 bbcode_text = "[center]Ενέργεια"
@@ -782,19 +718,19 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = 15.0
-margin_top = -284.0
+margin_top = -160.5
 margin_right = 23.0
-margin_bottom = -276.0
+margin_bottom = -152.5
 rect_pivot_offset = Vector2( 4, 4 )
-custom_styles/panel = SubResource( 42 )
+custom_styles/panel = SubResource( 46 )
 
 [node name="ItemOptionPanel" type="Panel" parent="."]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -589.0
-margin_top = -81.0
+margin_left = -590.0
+margin_top = -73.0
 margin_right = -70.0
 margin_bottom = -17.0
 theme = ExtResource( 4 )
@@ -809,29 +745,29 @@ margin_bottom = -4.0
 alignment = 2
 
 [node name="RepairButton" type="Button" parent="ItemOptionPanel/HBoxContainer"]
-margin_right = 81.0
-margin_bottom = 56.0
+margin_right = 82.0
+margin_bottom = 48.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource( 3 )
+theme = ExtResource( 24 )
 custom_fonts/font = SubResource( 8 )
 action_mode = 0
 enabled_focus_mode = 0
-icon = ExtResource( 22 )
+icon = ExtResource( 3 )
 icon_align = 1
 expand_icon = true
 
 [node name="SwitchButton" type="Button" parent="ItemOptionPanel/HBoxContainer"]
-margin_left = 85.0
-margin_right = 167.0
-margin_bottom = 56.0
+margin_left = 86.0
+margin_right = 168.0
+margin_bottom = 48.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource( 3 )
+theme = ExtResource( 24 )
 custom_fonts/font = SubResource( 8 )
 action_mode = 0
 enabled_focus_mode = 0
@@ -840,14 +776,14 @@ icon_align = 1
 expand_icon = true
 
 [node name="SwitchLimbButton" type="Button" parent="ItemOptionPanel/HBoxContainer"]
-margin_left = 171.0
-margin_right = 253.0
-margin_bottom = 56.0
+margin_left = 172.0
+margin_right = 254.0
+margin_bottom = 48.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource( 3 )
+theme = ExtResource( 24 )
 custom_fonts/font = SubResource( 8 )
 action_mode = 0
 enabled_focus_mode = 0
@@ -856,14 +792,14 @@ icon_align = 1
 expand_icon = true
 
 [node name="DropButton" type="Button" parent="ItemOptionPanel/HBoxContainer"]
-margin_left = 257.0
-margin_right = 339.0
-margin_bottom = 56.0
+margin_left = 258.0
+margin_right = 340.0
+margin_bottom = 48.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource( 3 )
+theme = ExtResource( 24 )
 custom_fonts/font = SubResource( 8 )
 action_mode = 0
 enabled_focus_mode = 0
@@ -872,14 +808,14 @@ icon_align = 1
 expand_icon = true
 
 [node name="MapButton" type="Button" parent="ItemOptionPanel/HBoxContainer"]
-margin_left = 343.0
-margin_right = 425.0
-margin_bottom = 56.0
+margin_left = 344.0
+margin_right = 426.0
+margin_bottom = 48.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource( 3 )
+theme = ExtResource( 24 )
 custom_fonts/font = SubResource( 8 )
 action_mode = 0
 enabled_focus_mode = 0
@@ -888,14 +824,14 @@ icon_align = 1
 expand_icon = true
 
 [node name="CompassButton" type="Button" parent="ItemOptionPanel/HBoxContainer"]
-margin_left = 429.0
-margin_right = 511.0
-margin_bottom = 56.0
+margin_left = 430.0
+margin_right = 512.0
+margin_bottom = 48.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource( 3 )
+theme = ExtResource( 24 )
 custom_fonts/font = SubResource( 8 )
 action_mode = 0
 enabled_focus_mode = 0
@@ -909,66 +845,75 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -18.0
-margin_top = -639.0
+margin_top = -373.0
 rect_clip_content = true
 mouse_filter = 1
-custom_styles/panel = SubResource( 30 )
+custom_styles/panel = SubResource( 42 )
 
 [node name="Panel6" type="Panel" parent="."]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -607.0
-margin_top = -591.0
-margin_right = -589.0
+margin_left = -608.0
+margin_top = -373.0
+margin_right = -590.0
 rect_clip_content = true
 mouse_filter = 1
-custom_styles/panel = SubResource( 30 )
+custom_styles/panel = SubResource( 42 )
 
 [node name="Panel4" type="Panel" parent="."]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -607.0
-margin_top = -639.0
+margin_left = -590.0
+margin_top = -373.0
 margin_right = -18.0
-margin_bottom = -591.0
+margin_bottom = -344.0
 rect_clip_content = true
 mouse_filter = 1
-custom_styles/panel = SubResource( 30 )
+custom_styles/panel = SubResource( 42 )
 
 [node name="ItemOptionPanel" type="Panel" parent="Panel4"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -292.5
-margin_top = -22.0
-margin_right = 292.5
-margin_bottom = 22.0
+margin_left = -284.0
+margin_top = -11.5
+margin_right = 284.0
+margin_bottom = 11.5
 theme = ExtResource( 4 )
+custom_styles/panel = SubResource( 42 )
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel4"]
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -48.0
+margin_bottom = 19.0
 custom_constants/margin_right = 5
 custom_constants/margin_top = 5
 custom_constants/margin_left = 5
 custom_constants/margin_bottom = 5
 
-[node name="RefreshCoords" type="Button" parent="Panel4/MarginContainer"]
-margin_left = 5.0
-margin_top = 5.0
-margin_right = 43.0
-margin_bottom = 43.0
+[node name="RefreshCoords" type="Button" parent="Panel4"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 264.0
+margin_top = -8.5
+margin_right = 297.0
+margin_bottom = 24.5
+rect_scale = Vector2( 0.5, 0.5 )
+focus_mode = 0
 mouse_default_cursor_shape = 2
-theme = SubResource( 40 )
+theme = ExtResource( 24 )
 shortcut_in_tooltip = false
 action_mode = 0
+enabled_focus_mode = 0
 icon = ExtResource( 7 )
 icon_align = 1
 expand_icon = true
@@ -978,12 +923,48 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -589.0
+margin_left = -608.0
 margin_top = -17.0
-margin_right = -18.0
+margin_right = -1.0
 rect_clip_content = true
 mouse_filter = 1
-custom_styles/panel = SubResource( 30 )
+custom_styles/panel = SubResource( 42 )
+
+[node name="Control" type="Control" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -589.0
+margin_top = -297.0
+margin_right = -70.0
+margin_bottom = -17.0
+rect_clip_content = true
+mouse_filter = 2
+
+[node name="TextureRect2" type="TextureRect" parent="Control"]
+self_modulate = Color( 0.682353, 0.682353, 0.682353, 0.227451 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -259.5
+margin_top = -259.5
+margin_right = 259.5
+margin_bottom = 259.5
+mouse_filter = 2
+texture = ExtResource( 23 )
+expand = true
+
+[node name="MapUI" parent="." instance=ExtResource( 6 )]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -540.0
+margin_top = 121.0
+margin_right = -500.0
+margin_bottom = 161.0
 
 [node name="VehicleUI" parent="." instance=ExtResource( 10 )]
 anchor_left = 0.0
@@ -995,10 +976,12 @@ margin_top = -388.0
 margin_right = 247.0
 margin_bottom = -323.0
 
+[connection signal="button_down" from="CapPanel2/Repair" to="." method="PageBack"]
+[connection signal="button_down" from="CapPanel2/Repair2" to="." method="PageForw"]
 [connection signal="button_down" from="ItemOptionPanel/HBoxContainer/RepairButton" to="." method="On_Repair_Button_Down"]
 [connection signal="button_down" from="ItemOptionPanel/HBoxContainer/SwitchButton" to="." method="On_Instrument_Button_Down"]
 [connection signal="button_down" from="ItemOptionPanel/HBoxContainer/SwitchLimbButton" to="." method="On_Limb_Button_Down"]
 [connection signal="button_down" from="ItemOptionPanel/HBoxContainer/DropButton" to="." method="On_Drop_Button_Down"]
 [connection signal="button_down" from="ItemOptionPanel/HBoxContainer/MapButton" to="." method="On_Map_Button_Down"]
 [connection signal="button_down" from="ItemOptionPanel/HBoxContainer/CompassButton" to="." method="On_Compass_Button_Down"]
-[connection signal="button_down" from="Panel4/MarginContainer/RefreshCoords" to="." method="CloseInventory"]
+[connection signal="button_down" from="Panel4/RefreshCoords" to="." method="CloseInventory"]

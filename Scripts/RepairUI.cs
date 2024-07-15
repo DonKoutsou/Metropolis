@@ -63,6 +63,8 @@ public class RepairUI : Control
         GetNode<Control>("Panel2/ShipPartPanel/Hull").Modulate = GetStateColor(damageman.GetHullState());
         GetNode<BoatPartRepairPanel>("Panel2/VBoxContainer/Hull").SetData("Hull", damageman.GetHullState());
 
+        
+
         /*if (v.HasWings())
         {
             List<int>_WingStates;
