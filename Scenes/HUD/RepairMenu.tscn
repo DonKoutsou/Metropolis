@@ -13,26 +13,28 @@
 [ext_resource path="res://Scenes/HUD/BoatPartRepairPanel.tscn" type="PackedScene" id=11]
 
 [sub_resource type="StyleBoxFlat" id=45]
-bg_color = Color( 0.0823529, 0.32549, 0.0705882, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
-border_blend = true
+bg_color = Color( 0.235294, 0.321569, 0.372549, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_color = Color( 0.431373, 0.717647, 0.937255, 1 )
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_detail = 1
 
 [sub_resource type="StyleBoxFlat" id=46]
-bg_color = Color( 0.192157, 0.705882, 0.121569, 0.435294 )
+bg_color = Color( 0.431373, 0.882353, 0.937255, 0.643137 )
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color( 0.203922, 0.831373, 0.160784, 1 )
+border_color = Color( 0.215686, 0.431373, 0.556863, 1 )
 border_blend = true
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+corner_detail = 1
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id=44]
@@ -54,14 +56,15 @@ HalfDamageColor = Color( 0.921569, 0.835294, 0.0745098, 1 )
 NoDamageColor = Color( 0.211765, 1, 0.172549, 1 )
 
 [node name="Panel2" type="Panel" parent="."]
+self_modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -273.0
-margin_top = -175.0
-margin_right = 273.0
-margin_bottom = 168.0
+margin_left = -260.0
+margin_top = -151.0
+margin_right = 259.0
+margin_bottom = 170.0
 custom_styles/panel = ExtResource( 10 )
 
 [node name="ShipPartPanel" type="Panel" parent="Panel2"]
@@ -71,9 +74,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -149.0
-margin_top = -150.5
+margin_top = -160.5
 margin_right = 178.0
-margin_bottom = 176.5
+margin_bottom = 166.5
 
 [node name="Panel" type="Panel" parent="Panel2/ShipPartPanel"]
 anchor_left = 0.5
@@ -167,6 +170,8 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+margin_top = -10.0
+margin_bottom = -10.0
 
 [node name="Sails" parent="Panel2/VBoxContainer" instance=ExtResource( 11 )]
 anchor_left = 0.5
@@ -180,9 +185,9 @@ margin_bottom = -100.5
 
 [node name="Panel16" type="Panel" parent="Panel2/VBoxContainer/Sails"]
 anchor_bottom = 1.0
-margin_left = 54.0
+margin_left = 59.0
 margin_top = 18.0
-margin_right = 119.0
+margin_right = 120.0
 margin_bottom = 23.0
 rect_clip_content = true
 mouse_filter = 1
@@ -231,9 +236,9 @@ margin_bottom = 122.5
 
 [node name="Panel11" type="Panel" parent="Panel2/VBoxContainer/Engine0"]
 anchor_bottom = 1.0
-margin_left = 54.0
+margin_left = 59.0
 margin_top = -23.0
-margin_right = 143.0
+margin_right = 144.0
 margin_bottom = -17.0
 rect_clip_content = true
 mouse_filter = 1
@@ -251,9 +256,9 @@ margin_bottom = 44.5
 
 [node name="Panel10" type="Panel" parent="Panel2/VBoxContainer/Engine1"]
 anchor_bottom = 1.0
-margin_left = 54.0
+margin_left = 59.0
 margin_top = 17.0
-margin_right = 141.0
+margin_right = 142.0
 margin_bottom = 23.0
 rect_clip_content = true
 mouse_filter = 1
@@ -331,6 +336,7 @@ texture = ExtResource( 9 )
 expand = true
 
 [node name="Panel6" type="Panel" parent="Panel2"]
+visible = false
 anchor_bottom = 1.0
 margin_right = 13.0
 rect_clip_content = true
@@ -338,6 +344,7 @@ mouse_filter = 1
 custom_styles/panel = SubResource( 44 )
 
 [node name="Panel7" type="Panel" parent="Panel2"]
+visible = false
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -347,6 +354,7 @@ mouse_filter = 1
 custom_styles/panel = SubResource( 44 )
 
 [node name="Panel8" type="Panel" parent="Panel2"]
+visible = false
 anchor_right = 1.0
 margin_bottom = 21.0
 rect_clip_content = true

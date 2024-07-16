@@ -157,16 +157,16 @@ public class InventoryUI : Control
                     hastoolbox = true;
 
             }
-            maxpage = itemcatalogue.Count / 8;
+            maxpage = itemcatalogue.Count / 12;
             int slottofill = 0;
             int currentit = 0;
             
            
             int min = 0;
             for (int i = 0; i < currentpage; i++)
-                min += 7;
+                min += 11;
 
-            int max = min + 7;
+            int max = min + 11;
 
 
             foreach(KeyValuePair<string, int> it in itemcatalogue)

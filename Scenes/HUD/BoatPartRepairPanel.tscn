@@ -6,22 +6,23 @@
 [ext_resource path="res://Scripts/BoatPartRepairPanel.cs" type="Script" id=4]
 
 [sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0.192157, 0.705882, 0.121569, 0.435294 )
+bg_color = Color( 0.235294, 0.321569, 0.372549, 1 )
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color( 0.203922, 0.831373, 0.160784, 1 )
+border_color = Color( 0.431373, 0.717647, 0.937255, 1 )
 border_blend = true
 corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
+corner_detail = 1
 anti_aliasing = false
 
 [sub_resource type="DynamicFont" id=1]
 outline_size = 1
-outline_color = Color( 0.0392157, 0.435294, 0, 1 )
+outline_color = Color( 0.431373, 0.717647, 0.937255, 1 )
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 2 )
@@ -50,9 +51,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -54.5
+margin_left = -52.5
 margin_top = -24.5
-margin_right = 4.5
+margin_right = 6.5
 margin_bottom = 24.5
 size_flags_vertical = 1
 custom_fonts/font = SubResource( 1 )

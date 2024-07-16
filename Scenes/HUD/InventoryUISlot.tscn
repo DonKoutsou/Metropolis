@@ -13,7 +13,7 @@
 [sub_resource type="DynamicFont" id=4]
 size = 24
 outline_size = 1
-outline_color = Color( 0.133333, 0.384314, 0.121569, 1 )
+outline_color = Color( 0.431373, 0.882353, 0.937255, 1 )
 use_filter = true
 extra_spacing_top = -8
 font_data = ExtResource( 4 )
@@ -50,17 +50,17 @@ corner_radius_bottom_left = 1
 
 [sub_resource type="StyleBoxFlat" id=41]
 resource_local_to_scene = true
-bg_color = Color( 0.0196078, 0.054902, 0.0196078, 1 )
+bg_color = Color( 0.141944, 0.280326, 0.36084, 1 )
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color( 0.211765, 1, 0.172549, 1 )
-border_blend = true
+border_color = Color( 0.431373, 0.882353, 0.937255, 1 )
 corner_radius_top_left = 1
 corner_radius_top_right = 1
 corner_radius_bottom_right = 1
 corner_radius_bottom_left = 1
+corner_detail = 1
 
 [node name="InventoryBox" type="Control"]
 light_mask = 0
@@ -77,9 +77,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -65.0
-margin_top = -56.0
+margin_top = -40.0
 margin_right = 65.0
-margin_bottom = 56.0
+margin_bottom = 40.0
 theme = ExtResource( 5 )
 
 [node name="ItemIcon" type="Button" parent="."]
@@ -88,9 +88,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -59.0
-margin_top = -51.0
+margin_top = -35.0
 margin_right = 59.0
-margin_bottom = 45.0
+margin_bottom = 30.0
 rect_scale = Vector2( 1, 1.06 )
 rect_clip_content = true
 focus_mode = 0
@@ -109,9 +109,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -56.0
-margin_top = 30.0
+margin_top = 13.0
 margin_right = 56.0
-margin_bottom = 142.0
+margin_bottom = 125.0
 mouse_filter = 2
 theme = SubResource( 5 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
@@ -120,9 +120,9 @@ text = "x0
 
 [node name="ItemResourceBar" type="ProgressBar" parent="."]
 margin_left = 49.0
-margin_top = 48.0
-margin_right = 145.0
-margin_bottom = 55.0
+margin_top = 32.0
+margin_right = 112.0
+margin_bottom = 39.0
 rect_rotation = -89.9999
 custom_styles/fg = SubResource( 6 )
 value = 100.0
@@ -130,9 +130,9 @@ percent_visible = false
 
 [node name="LimbColor" type="Panel" parent="."]
 margin_left = 39.0
-margin_top = 31.0
+margin_top = 15.0
 margin_right = 55.0
-margin_bottom = 47.0
+margin_bottom = 31.0
 custom_styles/panel = SubResource( 39 )
 
 [node name="ConditionPanel" type="Panel" parent="."]
@@ -141,9 +141,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -56.0
-margin_top = -48.0
+margin_top = -32.0
 margin_right = -38.0
-margin_bottom = -30.0
+margin_bottom = -14.0
 custom_styles/panel = SubResource( 41 )
 script = ExtResource( 9 )
 

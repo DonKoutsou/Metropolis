@@ -57,11 +57,11 @@ public class RepairUI : Control
             Color c = GetStateColor(_EngineStates[i]);
             
             GetNode<Control>("Panel2/ShipPartPanel/Engine" + i).Modulate = c;
-            GetNode<BoatPartRepairPanel>("Panel2/VBoxContainer/Engine" + i).SetData("Engine" + i, _EngineStates[i]);
+            GetNode<BoatPartRepairPanel>("Panel2/VBoxContainer/Engine" + i).SetData("Μηχανή" + i, _EngineStates[i]);
         }
         
         GetNode<Control>("Panel2/ShipPartPanel/Hull").Modulate = GetStateColor(damageman.GetHullState());
-        GetNode<BoatPartRepairPanel>("Panel2/VBoxContainer/Hull").SetData("Hull", damageman.GetHullState());
+        GetNode<BoatPartRepairPanel>("Panel2/VBoxContainer/Hull").SetData("Κουφάρι", damageman.GetHullState());
 
         
 
@@ -103,7 +103,7 @@ public class RepairUI : Control
         bool outofsupplies = true;
         VehicleDamageManager damageman = currentv.GetDamageManager();
         
-        if (PName.Substr(0, PName.Length - 1) == "Engine")
+        if (PName.Contains("Engine"))
         {
             int engineind = PName.Substring(PName.Length - 1).ToInt();
             int ammounttofix = 100 - damageman.GetEngineState(engineind);
