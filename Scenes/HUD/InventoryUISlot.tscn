@@ -3,19 +3,19 @@
 [ext_resource path="res://Scripts/InventoryUISlot.cs" type="Script" id=1]
 [ext_resource path="res://Assets/Drachma/Drachma.png" type="Texture" id=2]
 [ext_resource path="res://Assets/UI/ButtonGreen.tres" type="Theme" id=3]
-[ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://Assets/UI/PanelTheme.tres" type="Theme" id=5]
+[ext_resource path="res://Fonts/Play-Bold.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://UIThemes/Panel_Digital_Blue_NoCorner.tres" type="StyleBox" id=5]
 [ext_resource path="res://Assets/MapIcons/CheckMark.png" type="Texture" id=6]
 [ext_resource path="res://Assets/MapIcons/Exclamation.png" type="Texture" id=7]
 [ext_resource path="res://Assets/MapIcons/Exclamation3.png" type="Texture" id=8]
 [ext_resource path="res://Scripts/ConditionPanel.cs" type="Script" id=9]
+[ext_resource path="res://UIThemes/Panel_Blue_Digital_SMall.tres" type="StyleBox" id=10]
 
 [sub_resource type="DynamicFont" id=4]
 size = 24
 outline_size = 1
 outline_color = Color( 0.431373, 0.882353, 0.937255, 1 )
 use_filter = true
-extra_spacing_top = -8
 font_data = ExtResource( 4 )
 
 [sub_resource type="Theme" id=5]
@@ -48,20 +48,6 @@ corner_radius_top_right = 1
 corner_radius_bottom_right = 1
 corner_radius_bottom_left = 1
 
-[sub_resource type="StyleBoxFlat" id=41]
-resource_local_to_scene = true
-bg_color = Color( 0.141944, 0.280326, 0.36084, 1 )
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color( 0.431373, 0.882353, 0.937255, 1 )
-corner_radius_top_left = 1
-corner_radius_top_right = 1
-corner_radius_bottom_right = 1
-corner_radius_bottom_left = 1
-corner_detail = 1
-
 [node name="InventoryBox" type="Control"]
 light_mask = 0
 anchor_left = 0.5
@@ -80,7 +66,7 @@ margin_left = -65.0
 margin_top = -40.0
 margin_right = 65.0
 margin_bottom = 40.0
-theme = ExtResource( 5 )
+custom_styles/panel = ExtResource( 5 )
 
 [node name="ItemIcon" type="Button" parent="."]
 anchor_left = 0.5
@@ -109,9 +95,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -56.0
-margin_top = 13.0
+margin_top = 7.0
 margin_right = 56.0
-margin_bottom = 125.0
+margin_bottom = 119.0
 mouse_filter = 2
 theme = SubResource( 5 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
@@ -144,7 +130,7 @@ margin_left = -56.0
 margin_top = -32.0
 margin_right = -38.0
 margin_bottom = -14.0
-custom_styles/panel = SubResource( 41 )
+custom_styles/panel = ExtResource( 10 )
 script = ExtResource( 9 )
 
 [node name="Red" type="TextureRect" parent="ConditionPanel"]

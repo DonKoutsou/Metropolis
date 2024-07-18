@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Assets/Boat/M_Boat.material" type="Material" id=1]
 [ext_resource path="res://shaders/Outline.shader" type="Shader" id=2]
@@ -17,13 +17,6 @@
 [ext_resource path="res://Assets/TerainTex/PaintedWood008C_1K-JPG/PaintedWood008C_1K-JPG_NormalGL.jpg" type="Texture" id=17]
 [ext_resource path="res://Assets/Boat/BoatFabric2.tres" type="Material" id=18]
 [ext_resource path="res://Assets/TerainTex/PaintedWood008C_1K-JPG/PaintedWood008C_1K-JPG_Roughness.jpg" type="Texture" id=19]
-
-[sub_resource type="ShaderMaterial" id=59]
-resource_local_to_scene = true
-shader = ExtResource( 2 )
-shader_param/enable = false
-shader_param/outline_thickness = 0.06
-shader_param/color = Color( 1, 0.435294, 0, 0 )
 
 [sub_resource type="Curve" id=25]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.275, 0.745454 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.1 ), 0.0, 0.0, 0, 0 ]
@@ -131,6 +124,10 @@ scale = 5.0
 scale_random = 0.8
 scale_curve = SubResource( 35 )
 
+[sub_resource type="CapsuleShape" id=46]
+radius = 2.02096
+height = 7.56251
+
 [sub_resource type="Animation" id=48]
 tracks/0/type = "value"
 tracks/0/path = NodePath("WingMesh1:rotation_degrees")
@@ -183,10 +180,6 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector3( 0, 45, -60 ), Vector3( 0, 0, 0 ) ]
 }
-
-[sub_resource type="CapsuleShape" id=46]
-radius = 2.02096
-height = 7.56251
 
 [sub_resource type="SpatialMaterial" id=54]
 params_cull_mode = 2
@@ -251,27 +244,22 @@ VType = 1
 
 [node name="MeshInstance" parent="VehicleBody" index="0"]
 material_override = ExtResource( 4 )
-material_overlay = SubResource( 59 )
 
-[node name="ExaustParticlesL" parent="VehicleBody" index="15"]
+[node name="ExaustParticlesL" parent="VehicleBody" index="16"]
 process_material = SubResource( 39 )
 draw_pass_1 = SubResource( 40 )
 
-[node name="ExaustParticlesLSteer" parent="VehicleBody" index="16"]
+[node name="ExaustParticlesLSteer" parent="VehicleBody" index="17"]
 process_material = SubResource( 41 )
 draw_pass_1 = SubResource( 40 )
 
-[node name="ExaustParticlesRSteer" parent="VehicleBody" index="17"]
+[node name="ExaustParticlesRSteer" parent="VehicleBody" index="18"]
 process_material = SubResource( 42 )
 draw_pass_1 = SubResource( 40 )
 
-[node name="ExaustParticlesR" parent="VehicleBody" index="18"]
+[node name="ExaustParticlesR" parent="VehicleBody" index="19"]
 process_material = SubResource( 47 )
 draw_pass_1 = SubResource( 40 )
-
-[node name="AnimationPlayer" parent="VehicleBody" index="19"]
-anims/Wings = SubResource( 48 )
-anims/WingsOut = SubResource( 45 )
 
 [node name="WingCollider0" type="CollisionShape" parent="VehicleBody" index="20"]
 transform = Transform( -0.731272, -0.546463, 0.408196, -1.74623e-10, 0.598453, 0.801162, -0.682089, 0.585867, -0.43763, 8, 10, 0 )
@@ -292,6 +280,10 @@ transform = Transform( 0.353553, 0.612372, 0.707107, -0.866025, 0.5, 0, -0.35355
 mesh = ExtResource( 10 )
 material/0 = ExtResource( 1 )
 material/1 = ExtResource( 8 )
+
+[node name="AnimationPlayer" parent="VehicleBody" index="24"]
+anims/Wings = SubResource( 48 )
+anims/WingsOut = SubResource( 45 )
 
 [node name="MeshInstance5" type="MeshInstance" parent="VehicleBody" index="29"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.199, 0 )

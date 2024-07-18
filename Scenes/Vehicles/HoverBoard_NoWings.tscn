@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Assets/Boat/M_Boat.material" type="Material" id=1]
 [ext_resource path="res://Scripts/Vehicle.cs" type="Script" id=2]
@@ -16,7 +16,7 @@
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Assets/Boat/Kaiki.obj" type="ArrayMesh" id=15]
 [ext_resource path="res://Scenes/Vehicles/HoverParticlesDirt.tscn" type="PackedScene" id=16]
-[ext_resource path="res://shaders/Outline.shader" type="Shader" id=17]
+[ext_resource path="res://shaders/OutlineShader.tres" type="Material" id=17]
 [ext_resource path="res://Scenes/Vehicles/PartHit.tscn" type="PackedScene" id=18]
 
 [sub_resource type="PhysicsMaterial" id=1]
@@ -29,13 +29,6 @@ _data = [ Vector2( 0, 6 ), 0.0, 0.0, 0, 0, Vector2( 0.4, 6 ), 0.0, 0.0, 0, 0, Ve
 
 [sub_resource type="Curve" id=9]
 _data = [ Vector2( 0, 0.0950921 ), 0.0, -0.500221, 0, 0, Vector2( 0.0130494, 0.52454 ), 0.0, 0.0, 0, 0, Vector2( 0.572115, 0.51227 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.2 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="ShaderMaterial" id=111]
-resource_local_to_scene = true
-shader = ExtResource( 17 )
-shader_param/enable = false
-shader_param/outline_thickness = 0.15
-shader_param/color = Color( 1, 0.713726, 0.286275, 1 )
 
 [sub_resource type="CapsuleShape" id=8]
 radius = 3.11783
@@ -222,7 +215,7 @@ RightDestWingMesh = ExtResource( 6 )
 [node name="MeshInstance" type="MeshInstance" parent="VehicleBody"]
 transform = Transform( 1, -5.50244e-11, 0, 1.32104e-10, 1, 0, 0, -3.46945e-18, 1, 0, 2.199, 0 )
 material_override = ExtResource( 4 )
-material_overlay = SubResource( 111 )
+material_overlay = ExtResource( 17 )
 mesh = ExtResource( 15 )
 
 [node name="WindDetector" type="MeshInstance" parent="VehicleBody"]

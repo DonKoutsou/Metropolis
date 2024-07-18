@@ -297,19 +297,19 @@ PlayerOwned = true
 material_override = SubResource( 111 )
 material_overlay = SubResource( 112 )
 
-[node name="ExaustParticlesL" parent="Vehicle/VehicleBody" index="15"]
+[node name="ExaustParticlesL" parent="Vehicle/VehicleBody" index="16"]
 process_material = SubResource( 113 )
 draw_pass_1 = SubResource( 114 )
 
-[node name="ExaustParticlesLSteer" parent="Vehicle/VehicleBody" index="16"]
+[node name="ExaustParticlesLSteer" parent="Vehicle/VehicleBody" index="17"]
 process_material = SubResource( 115 )
 draw_pass_1 = SubResource( 114 )
 
-[node name="ExaustParticlesRSteer" parent="Vehicle/VehicleBody" index="17"]
+[node name="ExaustParticlesRSteer" parent="Vehicle/VehicleBody" index="18"]
 process_material = SubResource( 116 )
 draw_pass_1 = SubResource( 114 )
 
-[node name="ExaustParticlesR" parent="Vehicle/VehicleBody" index="18"]
+[node name="ExaustParticlesR" parent="Vehicle/VehicleBody" index="19"]
 process_material = SubResource( 117 )
 draw_pass_1 = SubResource( 114 )
 
@@ -386,7 +386,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4302, 13.5021, -13.3863 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.3364, 13.5021, -12.1104 )
 
 [node name="Furniture" parent="." instance=ExtResource( 22 )]
-transform = Transform( 0.0405684, 0.000103376, 0.999177, 9.16135e-05, 1, -0.000107187, -0.999177, 9.58936e-05, 0.0405684, -2.04204, 13.5994, -5.00953 )
+transform = Transform( 0.0405684, 0.000103376, 0.999177, 9.16135e-05, 1, -0.000107187, -0.999177, 9.58936e-05, 0.0405684, -2.04204, 13.5994, -20.2065 )
 
 [node name="Furniture2" parent="." instance=ExtResource( 23 )]
 transform = Transform( -0.999652, 0, 0.0263688, 0, 1, 0, -0.0263688, 0, -0.999652, 5.79053, 13.502, 8.79055 )

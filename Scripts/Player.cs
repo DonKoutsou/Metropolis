@@ -81,7 +81,7 @@ public class Player : Character
 
 		moveloc = GetNode<MoveLocation>("MoveLoc");
 		
-		DialogueCam = GetNode<Spatial>("DialogueCameraPivot").GetNode<Camera>("DialogueCamera");
+		DialogueCam = GetNode<Camera>("DialogueCameraPivot/DialogueCamera");
 	}
 	
 	private void CheckIfIdling()

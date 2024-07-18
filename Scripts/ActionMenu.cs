@@ -23,6 +23,8 @@ public class ActionMenu : Control
 	Button IntButton;
 	Button IntButton2;
 
+	[Export]
+	int VisibleInteractableDistance = 100;
 	bool PerformingAction = false;
 	//0 is Pickupaction
 	//1 is Int 1
@@ -440,10 +442,12 @@ public class ActionMenu : Control
 		}
 		if (@event.IsActionPressed("ActionCheck"))
 		{
+			Vector3 plpos = pl.GlobalTranslation;
 			var interactables = GetTree().GetNodesInGroup("Interactables");
-			foreach (Node inter in interactables)
+			foreach (Spatial inter in interactables)
 			{
-				inter.Call("HighLightObject", true);
+				if (plpos.DistanceTo(inter.GlobalTranslation) < VisibleInteractableDistance)
+					inter.Call("HighLightObject", true);
 			}
 		}
 		else if (@event.IsActionReleased("ActionCheck"))

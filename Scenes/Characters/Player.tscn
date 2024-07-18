@@ -3,7 +3,7 @@
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/HUD/ActionMenu.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Items/Toolbox.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Fonts/Play-Bold.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Assets/PostProcess/PixelShader.gdshader" type="Shader" id=5]
 [ext_resource path="res://Scenes/Items/NormalLeg_R.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Inventory/Inventory.tscn" type="PackedScene" id=7]
@@ -435,16 +435,24 @@ __meta__ = {
 }
 
 [node name="DialogueCameraPivot" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.49102, 0 )
 
 [node name="DialogueCamera" type="Camera" parent="DialogueCameraPivot"]
-transform = Transform( -0.871077, 0, -0.491147, 0, 1, 0, 0.491147, 0, -0.871077, -7.8385, 2.82016, -5.82825 )
+transform = Transform( -0.921308, 0, -0.388835, -0.0421153, 0.994117, 0.0997884, 0.386547, 0.108312, -0.915888, -3.41939, 2.60236, -0.622742 )
 fov = 45.0
 near = 1.0
 far = 40000.0
 
 [node name="DialogueCameraBox" type="MeshInstance" parent="DialogueCameraPivot/DialogueCamera"]
 transform = Transform( 1, -5.29396e-22, 0, -1.05879e-22, 1, 0, 2.11758e-21, 0, 1, 0, -0.0144858, -1.05511 )
+layers = 524288
 mesh = SubResource( 107 )
 material/0 = SubResource( 120 )
+
+[node name="DialogueCameraBox2" type="MeshInstance" parent="DialogueCameraPivot/DialogueCamera"]
+transform = Transform( 1, -5.29396e-22, 0, -1.05879e-22, 1, 0, 2.11758e-21, 0, 1, 0, -0.0144858, -1.05511 )
+layers = 524288
+mesh = SubResource( 107 )
+material/0 = SubResource( 126 )
 
 [connection signal="body_entered" from="KillFieldDetector" to="." method="OnKillFieldDetectorBodyEntered"]

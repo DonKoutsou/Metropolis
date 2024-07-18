@@ -31,7 +31,13 @@ public class DialogueManager : Node
 
 		pl.loctomove = talkpos.GlobalTranslation;
 		DialogicSharp.SetVariable("GenericCharacter", character.CharacterName);
-		((Spatial)pl.DialogueCam.GetParent()).GlobalRotation = talkpos.GlobalRotation;
+		Camera cam = pl.DialogueCam;
+		
+		Spatial Diagcampivot = (Spatial)cam.GetParent();
+		Diagcampivot.GlobalRotation = talkpos.GlobalRotation;
+		Diagcampivot.GlobalTranslation = talkpos.GlobalTranslation;
+		cam.LookAt(character.GlobalTranslation, Vector3.Up);
+		
 		CameraAnimationPlayer.GetInstance().PlayAnim("FadeInDialogue");
 		if (character.CurrentEnergy == 0)
 		{

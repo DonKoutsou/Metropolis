@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://Assets/Boat/M_Boat.material" type="Material" id=1]
 [ext_resource path="res://shaders/Outline.shader" type="Shader" id=2]
@@ -17,14 +17,6 @@
 [ext_resource path="res://Assets/TerainTex/Fabric045_1K-JPG/Fabric045_1K-JPG_Roughness.jpg" type="Texture" id=15]
 [ext_resource path="res://Assets/TerainTex/PaintedWood008C_1K-JPG/PaintedWood008C_1K-JPG_Roughness.jpg" type="Texture" id=16]
 [ext_resource path="res://Assets/TerainTex/Fabric045_1K-JPG/Fabric045_1K-JPG_NormalGL.jpg" type="Texture" id=17]
-
-[sub_resource type="ShaderMaterial" id=52]
-resource_local_to_scene = true
-shader = ExtResource( 2 )
-shader_param/enable = false
-shader_param/outline_thickness = 0.06
-shader_param/color2 = Color( 0, 0, 0, 0 )
-shader_param/color = Color( 1, 0.435294, 0, 0 )
 
 [sub_resource type="Curve" id=25]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.275, 0.745454 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.1 ), 0.0, 0.0, 0, 0 ]
@@ -131,6 +123,14 @@ scale = 5.0
 scale_random = 0.8
 scale_curve = SubResource( 35 )
 
+[sub_resource type="CapsuleShape" id=46]
+radius = 2.02096
+height = 9.36624
+
+[sub_resource type="CapsuleShape" id=47]
+radius = 2.02096
+height = 7.56251
+
 [sub_resource type="Animation" id=44]
 resource_name = "Wings"
 tracks/0/type = "value"
@@ -233,14 +233,6 @@ tracks/3/keys = {
 "values": [ Vector3( -1.11706e-05, 45, -60 ), Vector3( -10, -10, -40 ) ]
 }
 
-[sub_resource type="CapsuleShape" id=46]
-radius = 2.02096
-height = 9.36624
-
-[sub_resource type="CapsuleShape" id=47]
-radius = 2.02096
-height = 7.56251
-
 [sub_resource type="SpatialMaterial" id=53]
 params_cull_mode = 2
 albedo_color = Color( 0.631373, 0.564706, 0.34902, 1 )
@@ -286,7 +278,6 @@ resource_local_to_scene = true
 shader = ExtResource( 2 )
 shader_param/enable = false
 shader_param/outline_thickness = 0.132
-shader_param/color2 = Color( 0, 0, 0, 0 )
 shader_param/color = Color( 1, 0.984314, 0, 0 )
 
 [sub_resource type="SpatialMaterial" id=51]
@@ -305,27 +296,22 @@ VType = 2
 
 [node name="MeshInstance" parent="VehicleBody" index="0"]
 material_override = ExtResource( 4 )
-material_overlay = SubResource( 52 )
 
-[node name="ExaustParticlesL" parent="VehicleBody" index="15"]
+[node name="ExaustParticlesL" parent="VehicleBody" index="16"]
 process_material = SubResource( 39 )
 draw_pass_1 = SubResource( 40 )
 
-[node name="ExaustParticlesLSteer" parent="VehicleBody" index="16"]
+[node name="ExaustParticlesLSteer" parent="VehicleBody" index="17"]
 process_material = SubResource( 41 )
 draw_pass_1 = SubResource( 40 )
 
-[node name="ExaustParticlesRSteer" parent="VehicleBody" index="17"]
+[node name="ExaustParticlesRSteer" parent="VehicleBody" index="18"]
 process_material = SubResource( 42 )
 draw_pass_1 = SubResource( 40 )
 
-[node name="ExaustParticlesR" parent="VehicleBody" index="18"]
+[node name="ExaustParticlesR" parent="VehicleBody" index="19"]
 process_material = SubResource( 43 )
 draw_pass_1 = SubResource( 40 )
-
-[node name="AnimationPlayer" parent="VehicleBody" index="19"]
-anims/Wings = SubResource( 44 )
-anims/WingsOut = SubResource( 45 )
 
 [node name="WingCollider0" type="CollisionShape" parent="VehicleBody" index="20"]
 transform = Transform( -0.418248, -0.181947, 0.889925, -3.49246e-10, 0.979736, 0.200309, -0.908335, 0.0837789, -0.409772, 10, 1.883, 4.65661e-10 )
@@ -366,6 +352,10 @@ transform = Transform( 0.353554, 0.612374, 0.707108, -0.866027, 0.500001, 1.9496
 mesh = ExtResource( 10 )
 material/0 = ExtResource( 1 )
 material/1 = ExtResource( 8 )
+
+[node name="AnimationPlayer" parent="VehicleBody" index="28"]
+anims/Wings = SubResource( 44 )
+anims/WingsOut = SubResource( 45 )
 
 [node name="MeshInstance5" type="MeshInstance" parent="VehicleBody" index="33"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.199, 0 )

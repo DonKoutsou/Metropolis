@@ -4,7 +4,7 @@
 [ext_resource path="res://Scenes/Items/Bouzouki.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Characters/Gen3Machine/Body.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://Fonts/Play-Bold.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://Scripts/TalkText.cs" type="Script" id=6]
 
 [sub_resource type="CapsuleShape" id=6]

@@ -4,6 +4,12 @@ using System.Threading;
 
 public class InventoryUISlot : Control
 {
+    [Signal]
+    public delegate void Hovered(Item it, bool t);
+
+    [Signal]
+    public delegate void Focused(bool t, InventoryUISlot slot);
+
     public Button ItemIcon;
     public RichTextLabel Ammount;
 
@@ -11,7 +17,7 @@ public class InventoryUISlot : Control
 
     public Item item;
 
-    InventoryUI UI;
+    //InventoryUI UI;
 
     ProgressBar Rbar;
 
@@ -23,7 +29,7 @@ public class InventoryUISlot : Control
     {
         ItemIcon = GetNode<Button>("ItemIcon");
         Ammount = GetNode<RichTextLabel>("Ammount");
-        UI = (InventoryUI)GetParent().GetParent();
+        //UI = (InventoryUI)GetParent().GetParent().GetParent();
         Rbar = GetNode<ProgressBar>("ItemResourceBar");
         LimbColor = GetNode<Panel>("LimbColor");
         Condition = GetNode<ConditionPanel>("ConditionPanel");
@@ -91,22 +97,27 @@ public class InventoryUISlot : Control
     }
     private void On_Mouse_Entered()
     {
-        UI.ItemHovered(item);
+        EmitSignal("Hovered", item, true);
+        
+        //UI.ItemHovered(item);
     }
     private void On_Mouse_Exited()
     {
-        UI.ItemUnHovered(item);
+        EmitSignal("Hovered", item, false);
+
+        //UI.ItemUnHovered(item);
     }
     private void ItemIcon_Toggled(bool toggled)
     {
-        if (toggled)
+        EmitSignal("Focused",toggled, this);
+
+        /*if (toggled)
         {
             UI.SetFocused(this);
         }
         else
         {
             UI.UnFocus(this);
-        }
-            
+        }*/ 
     }
 }

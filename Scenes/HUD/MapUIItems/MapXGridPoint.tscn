@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Fonts/Play-Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scripts/MapGridPoint.cs" type="Script" id=2]
 [ext_resource path="res://Scenes/HUD/MapUIItems/MapGridUIStyle.tres" type="StyleBox" id=3]
 
