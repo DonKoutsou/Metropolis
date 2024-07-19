@@ -27,11 +27,6 @@ public class Instrument : Item
         EmitSignal("OnSongEnded", this);
         Playing = false;
     }
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
-
-    // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         base._Ready();
@@ -60,10 +55,4 @@ public class Instrument : Item
     {
 		return Speaker.GetPlaybackPosition() + (float)AudioServer.GetTimeSinceLastMix() + 0.05f;
     }
-    
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
 }

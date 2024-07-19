@@ -61,15 +61,15 @@ public class InventoryUI : Control
     }
     public override void _Ready()
     {
-        Capacity = GetNode<RichTextLabel>("InventoryContainer/CapPanel/CapAmmount");
+        Capacity = GetNode<RichTextLabel>("InventoryContainer/Inventory/CapPanel/CapAmmount");
         Anim = GetNode<AnimationPlayer>("InventoryContainer/InventoryAnimation");
-        GridContainer gr = GetNode<GridContainer>("InventoryContainer/GridContainer");
+        GridContainer gr = GetNode<GridContainer>("InventoryContainer/Inventory/GridContainer");
         int childc = gr.GetChildCount();
-        CharacterBatteryCharge = GetNode<ProgressBar>("InventoryContainer/BatteryPanel/CharacterBatteryCharge");
-        CharacterRPM = GetNode<Panel>("InventoryContainer/BatteryPanel/RPMAmount");
+        CharacterBatteryCharge = GetNode<ProgressBar>("InventoryContainer/Inventory/BatteryPanel/CharacterBatteryCharge");
+        CharacterRPM = GetNode<Panel>("InventoryContainer/Inventory/BatteryPanel/RPMAmount");
         
-        DescPan = GetNode<Panel>("InventoryContainer/DescriptionPanel");
-        JobPan = GetNode<Panel>("InventoryContainer/JobPanel");
+        DescPan = GetNode<Panel>("InventoryContainer/Inventory/DescriptionPanel");
+        JobPan = GetNode<Panel>("InventoryContainer/Inventory/JobPanel");
         Description = DescPan.GetNode<MarginContainer>("MarginContainer").GetNode<VBoxContainer>("VBoxContainer").GetNode<RichTextLabel>("Description");
         WeightText =  DescPan.GetNode<MarginContainer>("MarginContainer").GetNode<VBoxContainer>("VBoxContainer").GetNode<RichTextLabel>("WeightText");
         ItemName = DescPan.GetNode<MarginContainer>("MarginContainer").GetNode<VBoxContainer>("VBoxContainer").GetNode<RichTextLabel>("ItemName");
@@ -82,7 +82,7 @@ public class InventoryUI : Control
         {
             InventoryUISlot sl = (InventoryUISlot)gr.GetChild(i);
             slots.Insert(i, sl);
-            sl.Connect("Hovered", this, "ItemUnHovered");
+            sl.Connect("Hovered", this, "ItemHovered");
             sl.Connect("Focused", this, "SetFocused");
         }
         SetProcess(false);
@@ -96,7 +96,7 @@ public class InventoryUI : Control
         Capacity.BbcodeText = string.Format("[center]{0}/{1}", currentload, MaxLoad);
         CharacterBatteryCharge.MaxValue = pl.GetCharacterBatteryCap();
         CharacterBatteryCharge.Value = pl.GetCurrentCharacterEnergy();
-        comp = GetNode<Compass>("InventoryContainer/CompassUI");
+        comp = GetNode<Compass>("InventoryContainer/Inventory/CompassUI");
         map = MapGrid.GetInstance();
         Show();
     }
@@ -252,21 +252,21 @@ public class InventoryUI : Control
         map.ToggleMap(ShowingMap);
 
         
-        GetNode<Button>("InventoryContainer/ItemOptionPanel/HBoxContainer/DropButton").Visible = !ShowingMap;
+        GetNode<Button>("InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/DropButton").Visible = !ShowingMap;
         bool selectinginst = FocusedSlot != null && FocusedSlot.item is Instrument;
         bool selectingbat = FocusedSlot != null && FocusedSlot.item is Battery;
         bool selectinglimb = FocusedSlot != null && FocusedSlot.item is Limb;
         //GetNode<Button>("ItemOptionPanel/HBoxContainer/RepairButton").Visible = selectinginst && hastoolbox || selectingbat && hastoolbox;
-        GetNode<Button>("InventoryContainer/ItemOptionPanel/HBoxContainer/RepairButton").Visible = selectingbat && hastoolbox;
-        GetNode<Button>("InventoryContainer/ItemOptionPanel/HBoxContainer/SwitchButton").Visible = selectinginst;
-        GetNode<Button>("InventoryContainer/ItemOptionPanel/HBoxContainer/SwitchLimbButton").Visible = selectinglimb;
+        GetNode<Button>("InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/RepairButton").Visible = selectingbat && hastoolbox;
+        GetNode<Button>("InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/SwitchButton").Visible = selectinginst;
+        GetNode<Button>("InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/SwitchLimbButton").Visible = selectinglimb;
     }
     private void PageForw()
     {
         if (currentpage == maxpage)
             return;
         currentpage ++;
-        GetNode<RichTextLabel>("InventoryContainer/CapPanel2/w").BbcodeText = "[center]" + currentpage;
+        GetNode<RichTextLabel>("InventoryContainer/Inventory/CapPanel2/w").BbcodeText = "[center]" + currentpage;
     }
     private void PageBack()
     {
@@ -399,7 +399,7 @@ public class InventoryUI : Control
             ShowingMap = true;
             if (GlobalJobManager.GetInstance().HasJobAssigned())
                 JobPan.Visible = true;
-            map.FrameMap();
+            //map.FrameMap();
         }
         else
         {

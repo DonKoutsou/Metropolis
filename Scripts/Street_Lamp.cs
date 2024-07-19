@@ -23,15 +23,15 @@ public class Street_Lamp : StaticBody
         DayNight dcont = DayNight.GetInstance();
         if (dcont == null)
             return;
-        if (DayNight.IsDay())
-            TurnOff();
-        else
-            TurnOn();
+        Toggle(!DayNight.IsDay());
+           //TurnOff();
+        //else
+            //TurnOn();
 
         if (connected)
             return;
-        dcont.Connect("DayEventHandler", this, "TurnOff");
-        dcont.Connect("NightEventHandler", this, "TurnOn");
+        dcont.Connect("DayShift", this, "Toggle");
+        //dcont.Connect("NightEventHandler", this, "TurnOn");
         connected = true;
     }
     public override void _ExitTree()
@@ -42,13 +42,18 @@ public class Street_Lamp : StaticBody
             return;
         if (!connected)
             return;
-        dcont.Disconnect("DayEventHandler", this, "TurnOff");
-        dcont.Disconnect("NightEventHandler", this, "TurnOn");
+        dcont.Disconnect("DayShift", this, "Toggle");
+        //dcont.Disconnect("NightEventHandler", this, "TurnOn");
         connected = false;
     }
     public void SetWorkingState(bool toggle)
     {
         Working = toggle;
+    }
+    public void Toggle(bool t)
+    {
+        light.Visible = t;
+        LampMat.EmissionEnabled = t;
     }
     public void TurnOn()
     {

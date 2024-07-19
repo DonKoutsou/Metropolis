@@ -95,8 +95,8 @@ public class VehicleHud : Control
     }
     private void On_Lights_Toggle(bool button_pressed)
     {
-        CurrentVeh.ToggleLights(button_pressed);
-        if (!CurrentVeh.ToggleLights(button_pressed))
+        //CurrentVeh.ToggleLights(button_pressed);
+        if (!CurrentVeh.ToggleLights(button_pressed))   
         {
             Button LightsToggle;
             ButtonList.TryGetValue("Lights", out LightsToggle);

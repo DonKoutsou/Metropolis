@@ -605,7 +605,7 @@ public class Vehicle : RigidBody
             return false;
         if (toggle)
         {
-            FrontLight.LightEnergy = 1;
+            FrontLight.LightEnergy = 10;
         }
         else
         {

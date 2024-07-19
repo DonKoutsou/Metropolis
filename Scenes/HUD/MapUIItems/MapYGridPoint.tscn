@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Fonts/Play-Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scripts/MapGridPoint.cs" type="Script" id=2]
-[ext_resource path="res://Scenes/HUD/MapUIItems/MapGridUIStyle.tres" type="StyleBox" id=3]
+[ext_resource path="res://UIThemes/Panel_Blue_Digital_Line.tres" type="StyleBox" id=3]
 
 [sub_resource type="DynamicFont" id=16]
 outline_size = 1
@@ -25,8 +25,8 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 31.0
-margin_right = 64.0
+margin_left = 19.0
+margin_right = 52.0
 margin_bottom = 3.0
 mouse_filter = 1
 custom_styles/panel = ExtResource( 3 )
@@ -36,9 +36,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -84.5
+margin_left = -77.5
 margin_top = -10.5
-margin_right = 15.5
+margin_right = 22.5
 margin_bottom = 36.5
 mouse_filter = 1
 size_flags_horizontal = 5

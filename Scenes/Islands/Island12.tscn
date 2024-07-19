@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Env_Assets/Rock4.tscn" type="PackedScene" id=2]
@@ -7,7 +7,16 @@
 [ext_resource path="res://Assets/Building/BuildingComposition.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Env_Assets/Ladder.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Env_Assets/Rock6.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Env_Assets/Pagaki.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Characters/PortWorker.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Items/Guitar.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Env_Assets/Port.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Env_Assets/Rock1.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Env_Assets/PortRopething.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/Vehicles/HoverBoard_NoWings.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/Env_Assets/Rock7.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/Env_Assets/Rock8.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/Env_Assets/Rock9.tscn" type="PackedScene" id=17]
 
 [sub_resource type="SpatialMaterial" id=13]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -134,3 +143,40 @@ transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, -1219.4
 
 [node name="StaticBody2" parent="." index="13" instance=ExtResource( 4 )]
 transform = Transform( 0.341809, 0, 0, 0, 1, 0, 0, 0, 0.167167, -1210.85, -22.3933, 907.547 )
+
+[node name="PortWorker" parent="." index="14" instance=ExtResource( 9 )]
+transform = Transform( 0.78672, 0, 0.617311, 0, 1, 0, -0.617311, 0, 0.78672, -1210.84, 204.218, 862.98 )
+visible = false
+Chair = NodePath("../Pagaki")
+PlayInstrument = true
+InstrumentToSpawnWith = ExtResource( 10 )
+PortPath = NodePath("../Port")
+
+[node name="Pagaki" parent="." index="15" instance=ExtResource( 8 )]
+transform = Transform( 0.843954, 0, 0.536416, 0, 1, 0, -0.536416, 0, 0.843954, -1213.93, 204.134, 859.416 )
+
+[node name="Port" parent="." index="16" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1207.83, 102.779, 874.353 )
+RestLocations = PoolVector3Array( -1244.18, 1.14121, 907.325, -1176.93, 1.14121, 908.923, -1210.61, 1.14121, 932.219 )
+PortExtents = Vector3( 50, 150, 70.697 )
+
+[node name="StaticBody3" parent="." index="17" instance=ExtResource( 13 )]
+transform = Transform( 0.0329982, 0, 0.999455, 0, 1, 0, -0.999455, 0, 0.0329982, -1226.84, 1.14121, 908.029 )
+
+[node name="StaticBody4" parent="." index="18" instance=ExtResource( 13 )]
+transform = Transform( -0.999455, 0, 0.0329982, 0, 1, 0, -0.0329982, 0, -0.999455, -1210.31, 1.14121, 914.715 )
+
+[node name="StaticBody5" parent="." index="19" instance=ExtResource( 13 )]
+transform = Transform( -0.0329981, 0, -0.999455, 0, 1, 0, 0.999455, 0, -0.0329981, -1194.84, 1.14121, 908.463 )
+
+[node name="Vehicle0" parent="." index="20" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1237.23, 9.59352, 906.624 )
+
+[node name="Rock5" parent="." index="21" instance=ExtResource( 15 )]
+transform = Transform( 43.238, 40.8005, 9.20769, -41.3861, 39.8163, 17.9121, 6.05418, -19.2088, 56.6864, -937.791, -379.289, -520.361 )
+
+[node name="Rock6" parent="." index="22" instance=ExtResource( 16 )]
+transform = Transform( 23.1284, 43.1562, 34.9514, 19.7016, 29.0226, -48.8725, -51.9222, 30.2361, -2.97552, -415.258, -293.963, 1153.03 )
+
+[node name="Rock7" parent="." index="23" instance=ExtResource( 17 )]
+transform = Transform( -14.7586, -44.6501, 37.5172, -11.0718, 40.1412, 43.4174, -57.2589, 3.7468, -18.0655, -589.935, -185.082, -62.1287 )

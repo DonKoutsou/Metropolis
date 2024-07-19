@@ -58,10 +58,12 @@ public class DayNight : WorldEnvironment
     }
 
     [Signal]
-    public delegate void DayEventHandler();
+    public delegate void DayShift(bool day);
+    //[Signal]
+    //public delegate void DayEventHandler();
 
-    [Signal]
-    public delegate void NightEventHandler();
+    //[Signal]
+    //public delegate void NightEventHandler();
 
     static int currentDay;
 
@@ -157,7 +159,7 @@ public class DayNight : WorldEnvironment
     {
         if (Phase == 0)
         {
-            EmitSignal("DayEventHandler");
+            EmitSignal("DayShift", true);
             sun.Show();
             moon.Hide();
             if (SunMoonMeshPivot != null)
@@ -169,7 +171,7 @@ public class DayNight : WorldEnvironment
         }
         if (Phase == 1)
         {
-            EmitSignal("NightEventHandler");
+            EmitSignal("DayShift", false);
             sun.Hide();
             moon.Show();
             if (SunMoonMeshPivot != null)

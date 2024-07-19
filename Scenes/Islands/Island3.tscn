@@ -235,7 +235,7 @@ State = true
 [node name="StaticBody2" parent="." index="11" instance=ExtResource( 15 )]
 transform = Transform( 0.540041, -0.000430855, 0.0662449, 0.000362664, 0.544089, 0.000582267, -0.0662452, -0.000533783, 0.54004, -107.344, 179.243, 1149.9 )
 
-[node name="Vehicle" parent="." index="12" instance=ExtResource( 14 )]
+[node name="Vehicle0" parent="." index="12" instance=ExtResource( 14 )]
 transform = Transform( 1, -0.000665859, -0.000639929, 0.000666553, 0.999999, 0.00107017, 0.000639206, -0.0010706, 0.999999, -43.8424, 180.433, 1110.19 )
 
 [node name="StaticBody3" parent="." index="13" instance=ExtResource( 17 )]

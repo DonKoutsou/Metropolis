@@ -73,7 +73,7 @@ nodes/ChairBlend/position = Vector2( 186.667, 160 )
 nodes/IntrumentBlend/node = SubResource( 54 )
 nodes/IntrumentBlend/position = Vector2( 360, 266.667 )
 nodes/output/position = Vector2( 533.333, 160 )
-node_connections = [ "IntrumentBlend", 0, "ChairBlend", "IntrumentBlend", 1, "Animation 2", "ChairBlend", 0, "Animation", "ChairBlend", 1, "Animation 3", "output", 0, "IntrumentBlend" ]
+node_connections = [ "output", 0, "IntrumentBlend", "IntrumentBlend", 0, "ChairBlend", "IntrumentBlend", 1, "Animation 2", "ChairBlend", 0, "Animation", "ChairBlend", 1, "Animation 3" ]
 
 [sub_resource type="AnimationNodeAnimation" id=55]
 animation = "Standing"
@@ -154,7 +154,7 @@ transform = Transform( 1, 0, 0, 0, 1, 5.68434e-14, 0, -2.84217e-14, 1, -0.314196
 script = ExtResource( 18 )
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton" index="0"]
-transform = Transform( 0.996627, -0.070957, -0.0412172, 0.065378, 0.990156, -0.123761, 0.0495931, 0.120649, 0.991456, -2.7286, 265.447, 12.7494 )
+transform = Transform( 0.997224, -0.0530135, -0.0522813, 0.0456565, 0.990056, -0.133061, 0.0588154, 0.130305, 0.989728, -0.569442, 265.502, 11.8911 )
 bone_name = "mixamorig_Head"
 
 [node name="HeadPivot" type="Spatial" parent="Armature/Skeleton/BoneAttachment" index="0"]
@@ -171,7 +171,7 @@ include_in_bound = false
 allow_merging = false
 layers = 3
 light_color = Color( 0.992157, 0.952941, 0.772549, 1 )
-light_energy = 0.5
+light_energy = 20.0
 light_bake_mode = 0
 shadow_enabled = true
 shadow_bias = 0.0
@@ -181,7 +181,7 @@ spot_angle = 47.5769
 spot_angle_attenuation = 0.25
 
 [node name="InstrumentAtatchment" type="BoneAttachment" parent="Armature/Skeleton" index="1"]
-transform = Transform( 0.997396, -0.0276512, -0.0666128, 0.0258351, 0.999275, -0.027973, 0.067338, 0.0261792, 0.997387, 0.548958, 213.272, 0.740155 )
+transform = Transform( 0.996876, -0.0110725, -0.078207, 0.00847379, 0.999403, -0.0334825, 0.0785311, 0.0327152, 0.996375, 1.92462, 213.317, -0.385392 )
 bone_name = "mixamorig_Spine1"
 
 [node name="PlayingAtatchment" type="RemoteTransform" parent="Armature/Skeleton/InstrumentAtatchment" index="0"]

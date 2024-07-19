@@ -3,6 +3,8 @@ using System;
 
 public class Clouds : Spatial
 {
+    [Export]
+    float CloudHeight = 2500;
     float d = 0.5f;
     public override void _Process(float delta)
     {
@@ -12,7 +14,7 @@ public class Clouds : Spatial
             return;
         d = 0.5f;
         Vector3 org = ((Spatial)GetParent()).GlobalTranslation;
-        GlobalTranslation = new Vector3 (org.x, 2500, org.z);
+        GlobalTranslation = new Vector3 (org.x, CloudHeight, org.z);
     }
     public override void _EnterTree()
     {

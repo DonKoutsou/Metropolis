@@ -101,6 +101,7 @@ script = ExtResource( 5 )
 [node name="Spatial" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2200, 0 )
 script = ExtResource( 4 )
+CloudHeight = 3000.0
 
 [node name="SunMoonPivot" parent="." instance=ExtResource( 6 )]
 

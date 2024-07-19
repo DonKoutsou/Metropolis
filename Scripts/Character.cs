@@ -80,6 +80,7 @@ public class Character : KinematicBody
     {
         CurrentEnergy -= ammount;
     }
+
 	public override void _Ready()
 	{
 		TText = GetNode<TalkText>("TalkText");
@@ -87,6 +88,7 @@ public class Character : KinematicBody
 		HeadPivot = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("BoneAttachment").GetNode<Spatial>("HeadPivot");
 		NightLight = HeadPivot.GetNode<SpotLight>("NightLight");
 		BulbMat = (SpatialMaterial)HeadPivot.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0);
+		ToggleNightLight(DayNight.IsDay());
 	}
 	public TalkText GetTalkText()
 	{
@@ -104,9 +106,17 @@ public class Character : KinematicBody
 	public override void _EnterTree()
 	{
 		base._EnterTree();
+		
+
+		DayNight.GetInstance().Connect("DayShift", this, "ToggleNightLight");
 		//loctomove = GlobalTranslation;
 	}
-	public Character_Animations Anims()
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+		DayNight.GetInstance().Disconnect("DayShift", this, "ToggleNightLight");
+    }
+    public Character_Animations Anims()
 	{
 		return anim;
 	}
@@ -142,17 +152,6 @@ public class Character : KinematicBody
     public override void _Process(float delta)
     {
         base._Process(delta);
-		if (DayNight.IsDay())
-		{
-			NightLight.LightEnergy = 0;
-			BulbMat.EmissionEnabled = false;
-		}
-		else
-		{
-			NightLight.LightEnergy = 0.2f;
-			BulbMat.EmissionEnabled = true;
-		}
-			
 
 		if (CurrentEnergy <= 0 && IsAlive())
 		{
@@ -164,6 +163,18 @@ public class Character : KinematicBody
 		}
 			
     }
+	public void ToggleNightLight(bool toggle)
+	{
+		if (toggle)
+		{
+			NightLight.LightEnergy = 0;
+		}
+		else
+		{
+			NightLight.LightEnergy = 10f;
+		}
+		BulbMat.EmissionEnabled = !toggle;
+	}
     public void MoveTo(Vector3 loc)
 	{
         if (!m_balive)
