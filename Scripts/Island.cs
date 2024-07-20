@@ -1186,7 +1186,7 @@ public class WindGeneratorInfo
 
 public enum IleType
 {
-	ENTRANCE,
+	MOTHERCITY,
 	LAND,
 	EXIT,
 	SEA,

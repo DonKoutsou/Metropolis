@@ -1,9 +1,19 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Triggers/CityNameTrigger.cs" type="Script" id=1]
 
 [sub_resource type="SphereShape" id=1]
 radius = 3000.0
+
+[sub_resource type="SphereMesh" id=4]
+radius = 3000.0
+height = 6000.0
+radial_segments = 12
+rings = 6
+
+[sub_resource type="SpatialMaterial" id=3]
+flags_transparent = true
+albedo_color = Color( 0.764706, 0.188235, 0.188235, 0.321569 )
 
 [node name="CityNameTrigger" type="Spatial"]
 script = ExtResource( 1 )
@@ -16,6 +26,10 @@ gravity = 0.0
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = SubResource( 4 )
+material/0 = SubResource( 3 )
 
 [connection signal="body_entered" from="Area" to="." method="On_Player_Entered"]
 [connection signal="body_exited" from="Area" to="." method="On_Player_Left"]

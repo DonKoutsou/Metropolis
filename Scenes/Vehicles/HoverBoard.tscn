@@ -1,22 +1,143 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=33 format=2]
 
-[ext_resource path="res://Assets/Boat/M_Boat.material" type="Material" id=1]
 [ext_resource path="res://shaders/Outline.shader" type="Shader" id=2]
 [ext_resource path="res://Scenes/Vehicles/HoverBoard_NoWings.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Boat/ΚαικιΜατ.tres" type="Material" id=4]
 [ext_resource path="res://Assets/Boat/Parts/Sails.obj" type="ArrayMesh" id=5]
 [ext_resource path="res://Assets/TerainTex/Fabric045_1K-JPG/Fabric045_1K-JPG_AmbientOcclusion.jpg" type="Texture" id=6]
 [ext_resource path="res://Assets/TerainTex/PaintedWood008C_1K-JPG/PaintedWood008C_1K-JPG_Color.jpg" type="Texture" id=7]
-[ext_resource path="res://Assets/Boat/BoatFabric.material" type="Material" id=8]
 [ext_resource path="res://Assets/TerainTex/Fabric045_1K-JPG/Fabric045_1K-JPG_Color.jpg" type="Texture" id=9]
-[ext_resource path="res://Assets/Boat/Boat_WingL.tres" type="ArrayMesh" id=10]
-[ext_resource path="res://Assets/Boat/BoatWingR.tres" type="ArrayMesh" id=11]
 [ext_resource path="res://Assets/TerainTex/PaintedWood008C_1K-JPG/PaintedWood008C_1K-JPG_NormalGL.jpg" type="Texture" id=12]
 [ext_resource path="res://Assets/Boat/BoatFabric2.tres" type="Material" id=13]
 [ext_resource path="res://Assets/TerainTex/PaintedWood008C_1K-JPG/PaintedWood008C_1K-JPG_AmbientOcclusion.jpg" type="Texture" id=14]
 [ext_resource path="res://Assets/TerainTex/Fabric045_1K-JPG/Fabric045_1K-JPG_Roughness.jpg" type="Texture" id=15]
 [ext_resource path="res://Assets/TerainTex/PaintedWood008C_1K-JPG/PaintedWood008C_1K-JPG_Roughness.jpg" type="Texture" id=16]
 [ext_resource path="res://Assets/TerainTex/Fabric045_1K-JPG/Fabric045_1K-JPG_NormalGL.jpg" type="Texture" id=17]
+
+[sub_resource type="Shader" id=120]
+code = "/*
+	Sobel/Depth アウトラインシェーダー by あるる（きのもと 結衣）
+	Sobel/Depth Outline Shader by Yui Kinomoto @arlez80
+
+	MIT License
+*/
+
+shader_type spatial;
+render_mode unshaded;
+
+const vec3 MONOCHROME_SCALE = vec3( 0.298912, 0.586611, 0.114478 );
+
+uniform vec4 outline_color : hint_color = vec4( 0.0, 0.0, 0.0, 1.0 );
+uniform float luma_coef = 0.1;
+uniform float color_coef = 0.1;
+uniform float depth_coef = 0.8;
+uniform float cutoff = 0.2;
+uniform bool enable = true;
+
+float gaussian3x3( sampler2D tex, vec2 uv, vec2 pixel_size )
+{
+	float p = 0.0;
+	float coef[9] = {
+		0.0625, 0.125, 0.0625,
+		0.125, 0.25, 0.125,
+		0.0625, 0.125, 0.0625
+	};
+
+	for( int y=-1; y<=1; y++ ) {
+		for( int x=-1; x<=1; x ++ ) {
+			p += textureLod( tex, uv + vec2( float( x ), float( y ) ) * pixel_size, 0.0 ).r * coef[(y+1)*3 + (x+1)];
+		}
+	}
+
+	return p;
+}
+
+void fragment( )
+{
+	if (!enable) {
+		ALPHA = 0.0f;
+	}
+	else
+	{
+		vec3 color[9];
+		float depth[9];
+		vec2 pixel_size = ( vec2( 1.0, 1.0 ) / VIEWPORT_SIZE ) * 1.15;
+
+		// Gaussian FilterとSobel FilterでColor/Depthで取る
+		for( int y=0; y<3; y ++ ) {
+			for( int x=0; x<3; x ++ ) {
+				vec2 uv = SCREEN_UV + vec2( float( x-1 ), float( y-1 ) ) * pixel_size;
+				vec4 ndc = vec4( uv, gaussian3x3( DEPTH_TEXTURE, uv, pixel_size ), 1.0 ) * 2.0 - 1.0;
+				vec4 screen_pixel_coord = INV_PROJECTION_MATRIX * ndc;
+
+				color[y*3+x] = textureLod( SCREEN_TEXTURE, uv, 0.0 ).rgb;
+				depth[y*3+x] = -( screen_pixel_coord.z / screen_pixel_coord.w );
+			}
+		}
+
+		vec3 color_sobel_src_x = (
+			color[0] * -1.0
+		+	color[3] * -2.0
+		+	color[6] * -1.0
+		+	color[2] * 1.0
+		+	color[5] * 2.0
+		+	color[8] * 1.0
+		);
+		vec3 color_sobel_src_y = (
+			color[0] * -1.0
+		+	color[1] * -2.0
+		+	color[2] * -1.0
+		+	color[6] * 1.0
+		+	color[7] * 2.0
+		+	color[8] * 1.0
+		);
+		vec3 color_sobel = sqrt( color_sobel_src_x * color_sobel_src_x + color_sobel_src_y * color_sobel_src_y );
+
+		vec2 depth_sobel_src = vec2(
+			(
+				depth[0] * -1.0
+			+	depth[3] * -2.0
+			+	depth[6] * -1.0
+			+	depth[2] * 1.0
+			+	depth[5] * 2.0
+			+	depth[8] * 1.0
+			)
+		,	(
+				depth[0] * -1.0
+			+	depth[1] * -2.0
+			+	depth[2] * -1.0
+			+	depth[6] * 1.0
+			+	depth[7] * 2.0
+			+	depth[8] * 1.0
+			)
+		);
+		float depth_sobel = clamp( sqrt( dot( depth_sobel_src, depth_sobel_src ) ), 0.0, 1.0 );
+
+		// 
+		ALBEDO = outline_color.rgb;
+		ALPHA = clamp(
+			depth_sobel * depth_coef
+		+	depth_sobel * dot( color_sobel, MONOCHROME_SCALE ) * luma_coef
+		+	depth_sobel * length( color_sobel ) * color_coef
+		-	cutoff
+		,	0.0
+		,	1.0
+		);
+		//DEPTH = 0.0;
+	}
+	
+}
+"
+
+[sub_resource type="ShaderMaterial" id=121]
+resource_local_to_scene = true
+shader = SubResource( 120 )
+shader_param/outline_color = Color( 0.431373, 0.717647, 0.937255, 1 )
+shader_param/luma_coef = 0.1
+shader_param/color_coef = 0.1
+shader_param/depth_coef = 0.282
+shader_param/cutoff = 0.005
+shader_param/enable = false
 
 [sub_resource type="Curve" id=25]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.275, 0.745454 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.1 ), 0.0, 0.0, 0, 0 ]
@@ -123,115 +244,11 @@ scale = 5.0
 scale_random = 0.8
 scale_curve = SubResource( 35 )
 
-[sub_resource type="CapsuleShape" id=46]
-radius = 2.02096
-height = 9.36624
-
-[sub_resource type="CapsuleShape" id=47]
-radius = 2.02096
-height = 7.56251
-
 [sub_resource type="Animation" id=44]
 resource_name = "Wings"
-tracks/0/type = "value"
-tracks/0/path = NodePath("WingMesh2:rotation_degrees")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( -3.33505e-08, 0, 3.75845e-08 ), Vector3( -3.89567e-07, -45, 60 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("WingMesh1:rotation_degrees")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, -6.17937e-28, 1.42391e-08 ), Vector3( 0, 45, -60 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("WingMesh3:rotation_degrees")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( -10, 10, 40 ), Vector3( -1.17934e-06, -45, 60 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("WingMesh0:rotation_degrees")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( -10, -10, -40 ), Vector3( -1.11706e-05, 45, -60 ) ]
-}
 
 [sub_resource type="Animation" id=45]
 resource_name = "WingsOut"
-tracks/0/type = "value"
-tracks/0/path = NodePath("WingMesh2:rotation_degrees")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( -3.89567e-07, -45, 60 ), Vector3( 0, 0, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("WingMesh1:rotation_degrees")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 45, -60 ), Vector3( 0, 0, 0 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("WingMesh3:rotation_degrees")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( -1.17934e-06, -45, 60 ), Vector3( -10, 10, 40 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("WingMesh0:rotation_degrees")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( -1.11706e-05, 45, -60 ), Vector3( -10, -10, -40 ) ]
-}
 
 [sub_resource type="SpatialMaterial" id=53]
 params_cull_mode = 2
@@ -291,110 +308,71 @@ roughness_texture_channel = 3
 
 [node name="Vehicle" instance=ExtResource( 3 )]
 
-[node name="VehicleBody" parent="." index="1"]
+[node name="VehicleBody" parent="." index="0"]
 VType = 2
 
 [node name="MeshInstance" parent="VehicleBody" index="0"]
 material_override = ExtResource( 4 )
+material_overlay = SubResource( 121 )
 
-[node name="ExaustParticlesL" parent="VehicleBody" index="16"]
+[node name="ExaustParticlesL" parent="VehicleBody" index="14"]
 process_material = SubResource( 39 )
 draw_pass_1 = SubResource( 40 )
 
-[node name="ExaustParticlesLSteer" parent="VehicleBody" index="17"]
+[node name="ExaustParticlesLSteer" parent="VehicleBody" index="15"]
 process_material = SubResource( 41 )
 draw_pass_1 = SubResource( 40 )
 
-[node name="ExaustParticlesRSteer" parent="VehicleBody" index="18"]
+[node name="ExaustParticlesRSteer" parent="VehicleBody" index="16"]
 process_material = SubResource( 42 )
 draw_pass_1 = SubResource( 40 )
 
-[node name="ExaustParticlesR" parent="VehicleBody" index="19"]
+[node name="ExaustParticlesR" parent="VehicleBody" index="17"]
 process_material = SubResource( 43 )
 draw_pass_1 = SubResource( 40 )
 
-[node name="WingCollider0" type="CollisionShape" parent="VehicleBody" index="20"]
-transform = Transform( -0.418248, -0.181947, 0.889925, -3.49246e-10, 0.979736, 0.200309, -0.908335, 0.0837789, -0.409772, 10, 1.883, 4.65661e-10 )
-shape = SubResource( 46 )
-
-[node name="WingCollider1" type="CollisionShape" parent="VehicleBody" index="21"]
-transform = Transform( -0.731272, -0.546463, 0.408196, -1.74623e-10, 0.598453, 0.801162, -0.682089, 0.585867, -0.43763, 8, 10, 0 )
-shape = SubResource( 47 )
-
-[node name="WingCollider2" type="CollisionShape" parent="VehicleBody" index="22"]
-transform = Transform( 0.799571, 0.479641, 0.361435, 1.74623e-10, 0.601817, -0.798637, -0.600575, 0.638567, 0.481194, -8, 10, 0 )
-shape = SubResource( 47 )
-
-[node name="WingCollider3" type="CollisionShape" parent="VehicleBody" index="23"]
-transform = Transform( 0.398142, 0.182148, 0.899061, -2.32831e-10, 0.980092, -0.198565, -0.917327, 0.0790568, 0.390214, -10, 1.898, 0 )
-shape = SubResource( 46 )
-
-[node name="WingMesh2" type="MeshInstance" parent="VehicleBody" index="24"]
-transform = Transform( 0.353553, -0.612372, -0.707107, 0.866025, 0.5, 6.79923e-09, 0.353553, -0.612372, 0.707107, -1.70263, 2.99251, 6.70711 )
-mesh = ExtResource( 11 )
-material/0 = ExtResource( 1 )
-material/1 = ExtResource( 8 )
-
-[node name="WingMesh3" type="MeshInstance" parent="VehicleBody" index="25"]
-transform = Transform( 0.353554, -0.612374, -0.707109, 0.866027, 0.500001, 2.05834e-08, 0.353554, -0.612374, 0.707109, -1.297, 1.26, 3.879 )
-mesh = ExtResource( 11 )
-material/0 = ExtResource( 1 )
-material/1 = ExtResource( 8 )
-
-[node name="WingMesh1" type="MeshInstance" parent="VehicleBody" index="26"]
-transform = Transform( 0.353553, 0.612372, 0.707107, -0.866025, 0.5, 0, -0.353553, -0.612372, 0.707107, 2.00447, 2.99251, 6 )
-mesh = ExtResource( 10 )
-material/0 = ExtResource( 1 )
-material/1 = ExtResource( 8 )
-
-[node name="WingMesh0" type="MeshInstance" parent="VehicleBody" index="27"]
-transform = Transform( 0.353554, 0.612374, 0.707108, -0.866027, 0.500001, 1.94964e-07, -0.353554, -0.612374, 0.707108, 1.29737, 1.26046, 3.87868 )
-mesh = ExtResource( 10 )
-material/0 = ExtResource( 1 )
-material/1 = ExtResource( 8 )
-
-[node name="AnimationPlayer" parent="VehicleBody" index="28"]
+[node name="AnimationPlayer" parent="VehicleBody" index="18"]
 anims/Wings = SubResource( 44 )
 anims/WingsOut = SubResource( 45 )
 
-[node name="MeshInstance5" type="MeshInstance" parent="VehicleBody" index="33"]
+[node name="WingMesh0" type="MeshInstance" parent="VehicleBody" index="24"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.199, 0 )
 mesh = ExtResource( 5 )
 material/0 = ExtResource( 13 )
 material/1 = SubResource( 53 )
 material/2 = SubResource( 54 )
 
-[node name="CollisionShape7" type="CollisionShape" parent="VehicleBody" index="34"]
+[node name="CollisionShape7" type="CollisionShape" parent="VehicleBody" index="25"]
 transform = Transform( 0.999993, 0.000780266, -0.00368827, -1.49438e-10, 0.978347, 0.206973, 0.0037699, -0.206971, 0.97834, 0.000144184, 12.4954, -2.76233 )
 shape = SubResource( 55 )
 
-[node name="CollisionShape9" type="CollisionShape" parent="VehicleBody" index="35"]
+[node name="CollisionShape9" type="CollisionShape" parent="VehicleBody" index="26"]
 transform = Transform( -0.999896, -0.0144333, 0, -0.00831198, 0.57583, 0.817527, -0.0117996, 0.817442, -0.57589, 0.000144184, 7.77133, 14.5198 )
 shape = SubResource( 56 )
 
-[node name="CollisionShape8" type="CollisionShape" parent="VehicleBody" index="36"]
+[node name="CollisionShape8" type="CollisionShape" parent="VehicleBody" index="27"]
 transform = Transform( 0.993677, 0.0492724, -0.10089, 0.0428084, 0.664434, 0.74612, 0.103798, -0.745721, 0.658123, -0.526399, 19.071, -8.20243 )
 shape = SubResource( 57 )
 
-[node name="RayFL" parent="." index="2"]
+[node name="RayFL" parent="." index="1"]
 transform = Transform( 1, -3.67792e-08, 2.25264e-08, 3.70019e-08, 1, -7.91624e-09, -2.23517e-08, 7.91624e-09, 1, 6.45562, 0.797841, 11.1725 )
 
 [node name="MeshInstance" parent="RayFL/EnginePivot" index="0"]
 material/0 = SubResource( 51 )
 
-[node name="RayFR" parent="." index="3"]
+[node name="RayFR" parent="." index="2"]
 transform = Transform( 1, 2.70905e-07, 5.76838e-08, -2.70822e-07, 1, -9.66247e-08, -5.75092e-08, 9.66247e-08, 1, -6.33755, 0.798699, 11.0606 )
 
 [node name="MeshInstance" parent="RayFR/EnginePivot" index="0"]
 material/0 = SubResource( 51 )
 
-[node name="RayBR" parent="." index="4"]
+[node name="RayBR" parent="." index="3"]
 transform = Transform( 1, 2.73114e-07, 5.83241e-08, -2.73033e-07, 1, -9.15024e-08, -5.81495e-08, 9.17353e-08, 1, -7, 0.8, -9 )
 
 [node name="MeshInstance" parent="RayBR/EnginePivot" index="0"]
 material/0 = SubResource( 51 )
 
-[node name="RayBL" parent="." index="5"]
+[node name="RayBL" parent="." index="4"]
 transform = Transform( 1, 2.72649e-07, 5.68689e-08, -2.72569e-07, 1, -9.31323e-08, -5.66943e-08, 9.31323e-08, 1, 7, 0.8, -9 )
 
 [node name="MeshInstance" parent="RayBL/EnginePivot" index="0"]

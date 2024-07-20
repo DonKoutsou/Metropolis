@@ -35,14 +35,14 @@ public class Vehicle : RigidBody
     Curve forcecurve = null;
     [Export]
     Curve Hoverforcecurve = null;
-    [Export]
-    Mesh LeftWingMesh = null;
-    [Export]
-    Mesh LeftDestWingMesh = null;
-    [Export]
-    Mesh RightWingMesh = null;
-    [Export]
-    Mesh RightDestWingMesh = null;
+    //[Export]
+    //Mesh LeftWingMesh = null;
+    //[Export]
+    //Mesh LeftDestWingMesh = null;
+    //[Export]
+    //Mesh RightWingMesh = null;
+    //[Export]
+    //Mesh RightDestWingMesh = null;
     [Export]
     VehicleType VType = VehicleType.BASIC;
     ///////////////////////////////////////////////////////////////////////////
@@ -91,26 +91,26 @@ public class Vehicle : RigidBody
     bool PlayerOwned = false;
 
     ////////////Damage///////////////
-    VehicleDamageManager DamageMan;
+   // VehicleDamageManager DamageMan;
     SpotLight FrontLight;
     /////////////////////////////////////
     ////////////Wings////////////////
     bool WindOnWings = false;
     List<ShaderMaterial> WingMaterials = new List<ShaderMaterial>();
-    bool wingsdeployed = false;
+    //bool wingsdeployed = false;
     AnimationPlayer Anim;
     /////////////////////////////////////
-    public VehicleDamageManager GetDamageManager()
-    {
-        return DamageMan;
-    }
+    //public VehicleDamageManager GetDamageManager()
+    //{
+    //    return DamageMan;
+    //}
     public override void _Ready()
     {
         base._Ready();
         WindD = GetNode<WindDetector>("WindDetector");
         FrontLight = GetNode<MeshInstance>("LightMesh").GetNode<SpotLight>("SpotLight");
         FrontLight.LightEnergy = 0;
-        Anim = GetNode<AnimationPlayer>("AnimationPlayer");
+        //Anim = GetNode<AnimationPlayer>("AnimationPlayer");
         SteeringWheel = GetNode<Spatial>("SteeringWheel");
         ExaustParticles.Insert(0, GetNode<Particles>("ExaustParticlesL"));
         ExaustParticles.Insert(1, GetNode<Particles>("ExaustParticlesR"));
@@ -129,16 +129,16 @@ public class Vehicle : RigidBody
         Rays.Insert(3, GetNode<Spatial>("RemoteTransform4"));
         //((Spatial)GetParent()).GlobalRotation = Vector3.Zero;
 
-        DamageMan = GetParent().GetNode<VehicleDamageManager>("VehicleDamageManager");
+        //DamageMan = GetParent().GetNode<VehicleDamageManager>("VehicleDamageManager");
         for (int i = 0; i < 4; i++)
         {
             MeshInstance wing = GetNodeOrNull<MeshInstance>("WingMesh" + i);
             if (wing == null)
                 break;
-            WingMaterials.Insert(i, (ShaderMaterial)wing.GetActiveMaterial(1));
+            WingMaterials.Insert(i, (ShaderMaterial)wing.GetActiveMaterial(0));
         }
 
-        ToggleWings(false);
+        //ToggleWings(false);
         EnableWindOnWings(false);
 
         Node par = GetParent();
@@ -218,14 +218,16 @@ public class Vehicle : RigidBody
         force.y = 0;
         
         Vector3 wingforce = Vector3.Zero;
-        if (!IsBoatFacingWind() && wingsdeployed)
+        if (!IsBoatFacingWind() && HasWings())
         {
             Vector3 f = GlobalTransform.basis.z;
             f.y = 0;
-            float workingwingmulti = GetWorkingSailMulti();
-            fmulti += 0.01f *DayNight.GetWindStr();
+            //float workingwingmulti = GetWorkingSailMulti();
+            fmulti += DayNight.GetWindStr();
             //f *= workingwingmulti;
-            wingforce += f * fmulti * speed * workingwingmulti;
+            //wingforce += f * fmulti * speed * workingwingmulti;
+
+            wingforce += f * fmulti * speed;
             if (!WindOnWings)
                 EnableWindOnWings(true);
         }
@@ -273,43 +275,43 @@ public class Vehicle : RigidBody
     {
         return GlobalTranslation;
     }
-    public bool ToggleWings(bool toggle)
-    {
-        if (Anim.IsPlaying())
-            return false;
+    //public bool ToggleWings(bool toggle)
+    //{
+    //    if (Anim.IsPlaying())
+    //        return false;
         
-        if (toggle)
-        {
-            Anim.Play("WingsOut");
-        }
-        else
-        {
-            Anim.Play("Wings");
-            EnableWindOnWings(false);
-        }
-        wingsdeployed = toggle;
-        DamageMan.ToggleWingCollision(toggle);
-        return true;
-    }
-    public bool HasDeployedWings()
-    {
-        return wingsdeployed;
-    }
-    public void OnWingDamaged(int index)
-    {
-        if (GetNode<MeshInstance>("WingMesh" + index.ToString()).Mesh == LeftWingMesh)
-            GetNode<MeshInstance>("WingMesh" + index.ToString()).Mesh = LeftDestWingMesh;
-        else if (GetNode<MeshInstance>("WingMesh" + index.ToString()).Mesh == RightWingMesh)
-            GetNode<MeshInstance>("WingMesh" + index.ToString()).Mesh = RightDestWingMesh;
-    }
-    public int GetWingCount()
-    {
-        return WingMaterials.Count;
-    }
-    public void OnLightDamaged()
-    {
-        FrontLight.LightEnergy = 0;
-    }
+    //    if (toggle)
+    //    {
+    //        Anim.Play("WingsOut");
+    //    }
+    //    else
+    //    {
+    //        Anim.Play("Wings");
+    //        EnableWindOnWings(false);
+    //    }
+    //    wingsdeployed = toggle;
+     //   DamageMan.ToggleWingCollision(toggle);
+    //    return true;
+    //}
+    //public bool HasDeployedWings()
+    //{
+    //    return wingsdeployed;
+    //}
+    //public void OnWingDamaged(int index)
+    //{
+    //    if (GetNode<MeshInstance>("WingMesh" + index.ToString()).Mesh == LeftWingMesh)
+    //        GetNode<MeshInstance>("WingMesh" + index.ToString()).Mesh = LeftDestWingMesh;
+    //    else if (GetNode<MeshInstance>("WingMesh" + index.ToString()).Mesh == RightWingMesh)
+    //        GetNode<MeshInstance>("WingMesh" + index.ToString()).Mesh = RightDestWingMesh;
+    //}
+    //public int GetWingCount()
+    //{
+    //    return WingMaterials.Count;
+    //}
+    //public void OnLightDamaged()
+    //{
+    //    FrontLight.LightEnergy = 0;
+    //}
     private void EnableWindOnWings(bool toggle)
     {
         if (!toggle)
@@ -532,17 +534,17 @@ public class Vehicle : RigidBody
         steert = torq;
         SteerThr.CallDeferred("wait_to_finish");
     }
-    private float GetWorkingSailMulti()
-    {
-        int wingcount = WingMaterials.Count;
-        float count = 0;
-        for (int i = 0; i < wingcount; i++)
-        {
-            if (DamageMan.IsWingWorking(i))
-                count += 1;
-        }
-        return count * 0.25f;
-    }
+    //private float GetWorkingSailMulti()
+    //{
+    //    int wingcount = WingMaterials.Count;
+    //    float count = 0;
+    //    for (int i = 0; i < wingcount; i++)
+    //    {
+     //       if (DamageMan.IsWingWorking(i))
+     //           count += 1;
+     //   }
+     //  return count * 0.25f;
+    //}
     public bool ToggleMachine(bool toggle)
     {
         if (toggle)
@@ -601,8 +603,8 @@ public class Vehicle : RigidBody
             if (!HasAlive())
                 return false;
         }
-        if (DamageMan.GetLightCondition() == false)
-            return false;
+        //if (DamageMan.GetLightCondition() == false)
+            //return false;
         if (toggle)
         {
             FrontLight.LightEnergy = 10;
@@ -769,7 +771,7 @@ public class Vehicle : RigidBody
 		Translation = data.loc;
         Rotation = data.rot;
         SetPlayerOwned(data.PlayerOwned);
-        GetParent().GetNode<VehicleDamageManager>("VehicleDamageManager").InputData(data.DamageInfo);
+        //GetParent().GetNode<VehicleDamageManager>("VehicleDamageManager").InputData(data.DamageInfo);
 	}
     public void ReparentVehicle(Island ile)
     {
@@ -807,7 +809,7 @@ public class VehicleInfo
     public string VehName;
     public Vector3 loc;
     public Vector3 rot;
-    public VehicleDamageInfo DamageInfo;
+    //public VehicleDamageInfo DamageInfo;
     //public bool removed = false;
     public string scenedata;
     public bool PlayerOwned;
@@ -820,8 +822,8 @@ public class VehicleInfo
         rot = veh.Rotation;
         PlayerOwned = veh.IsPlayerOwned();
         //VehicleDamageManager Damageman = veh.GetParent().GetNode<VehicleDamageManager>("VehicleDamageManager");
-        DamageInfo = new VehicleDamageInfo();
-        DamageInfo.UpdateInfo(veh);
+        //DamageInfo = new VehicleDamageInfo();
+        //DamageInfo.UpdateInfo(veh);
     }
     public void SetInfo(Vehicle veh)
     {
@@ -832,25 +834,28 @@ public class VehicleInfo
         rot = veh.Rotation;
            
         scenedata = veh.GetParent().Filename;
-        VehicleDamageManager Damageman = veh.GetParent().GetNode<VehicleDamageManager>("VehicleDamageManager");
-        DamageInfo = new VehicleDamageInfo();
+        //VehicleDamageManager Damageman = veh.GetParent().GetNode<VehicleDamageManager>("VehicleDamageManager");
+        //DamageInfo = new VehicleDamageInfo();
         PlayerOwned = veh.IsPlayerOwned();
         //List<int> destw;
         //Damageman.GetWingStates(out destw);
-        DamageInfo.SetInfo(veh);
+        //DamageInfo.SetInfo(veh);
     }
     public Dictionary<string, object>GetPackedData()
     {
-        Dictionary<string, object> data = new Dictionary<string, object>();
-        GDScript SaveGD = GD.Load<GDScript>("res://Scripts/VehicleDamageSaveInfo.gd");
-		Resource damageinfo = (Resource)SaveGD.New();
-        damageinfo.Call("_SetData", DamageInfo.GetPackedData());
-        data.Add("Name", VehName);
-        data.Add("Location", loc);
-        data.Add("Rotation", rot);
-        data.Add("DamageInfo", damageinfo);
-        data.Add("PlayerOwned", PlayerOwned);
-        data.Add("SceneData", scenedata);
+        Dictionary<string, object> data = new Dictionary<string, object>()
+        {
+            {"Name", VehName},
+            {"Location", loc},
+            {"Rotation", rot},
+            {"PlayerOwned", PlayerOwned},
+            {"SceneData", scenedata},
+        };
+        //GDScript SaveGD = GD.Load<GDScript>("res://Scripts/VehicleDamageSaveInfo.gd");
+		//Resource damageinfo = (Resource)SaveGD.New();
+        //damageinfo.Call("_SetData", DamageInfo.GetPackedData());
+
+        //data.Add("DamageInfo", damageinfo);
         return data;
     }
     public void UnPackData(Godot.Object data)
@@ -861,10 +866,10 @@ public class VehicleInfo
         PlayerOwned = (bool)data.Get("PlayerOwned");
         scenedata = (string)data.Get("SceneData");
 
-        Resource DamageData = (Resource)data.Get("DamageInfo");
+       // Resource DamageData = (Resource)data.Get("DamageInfo");
 
-        VehicleDamageInfo info = new VehicleDamageInfo();
-        info.UnPackData(DamageData);
-        DamageInfo = info;
+        //VehicleDamageInfo info = new VehicleDamageInfo();
+        //info.UnPackData(DamageData);
+        //DamageInfo = info;
     }
 }

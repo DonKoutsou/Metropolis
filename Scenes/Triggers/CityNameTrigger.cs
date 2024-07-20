@@ -2,8 +2,11 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
+[Tool]
 public class CityNameTrigger : Spatial
 {
+    [Export]
+    float Radius = 3000;
     [Export]
     NodePath Collision = null;
     bool IsIn = false;
@@ -12,9 +15,14 @@ public class CityNameTrigger : Spatial
 
     public override void _Ready()
     {
-        base._Ready();
-        SphereShape sh = (SphereShape)((CollisionShape)GetNode(Collision)).Shape;
-        dist = sh.Radius;
+        if (!Engine.EditorHint)
+        {
+            base._Ready();
+            SphereShape sh = (SphereShape)((CollisionShape)GetNode(Collision)).Shape;
+            sh.Radius = Radius;
+            dist = sh.Radius;
+            GetNode<Spatial>("MeshInstance").QueueFree();
+        }
     }
 
     private void On_Player_Entered(object body)
@@ -36,6 +44,15 @@ public class CityNameTrigger : Spatial
     {
         if (((Spatial)body).GlobalTranslation.DistanceTo(GlobalTranslation) > dist)
             IsIn = false;
+    }
+    public override void _Process(float delta)
+    {
+        if (Engine.EditorHint)
+        {
+            SphereMesh sph = (SphereMesh)GetNode<MeshInstance>("MeshInstance").Mesh;
+            sph.Radius = Radius;
+            sph.Height = Radius * 2;
+        }
     }
 }
 

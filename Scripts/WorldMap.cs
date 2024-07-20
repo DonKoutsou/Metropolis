@@ -241,7 +241,7 @@ public class WorldMap : TileMap
 			Player pl = Player.GetInstance();
 
 			//setting player energy
-			Player.GetInstance().SetEnergy((float)save.Get("playerenergy"));
+			//Player.GetInstance().SetEnergy((float)save.Get("playerenergy"));
 
 			//loading inventory
 			Inventory inv = pl.GetCharacterInventory();
@@ -252,18 +252,18 @@ public class WorldMap : TileMap
 			if (HasVehicle)
 			{
 				string vehname = (string)save.Get("VehicleName");
-				bool MachineState = (bool)save.Get("VehicleState");
-				bool WingState = (bool)save.Get("WingState");
-				bool LightState = (bool)save.Get("LightState");
+				//bool MachineState = (bool)save.Get("VehicleState");
+				//bool WingState = (bool)save.Get("WingState");
+				//bool LightState = (bool)save.Get("LightState");
 
 
 				Vehicle veh = GetCurrentIsland().GetNode<Spatial>(vehname).GetNode<Vehicle>("VehicleBody");
 				veh.BoardVehicle(pl);
 				pl.SetVehicle(veh);
 				//veh.PlayerOwned = true;
-				veh.ToggleMachine(MachineState);
-				veh.ToggleWings(WingState);
-				veh.ToggleLights(LightState);
+				//veh.ToggleMachine(MachineState);
+				//veh.ToggleWings(WingState);
+				//veh.ToggleLights(LightState);
 			}
 
 			Vector2[] DelJobs =  (Vector2[])save.Get("DeliverJobs");
@@ -380,8 +380,9 @@ public class WorldMap : TileMap
 		
 		IslandInfo ileinfo = new IslandInfo(rot, ilescene, cell, SpecialName);
 
+		
 		//SaveEntry
-		if (id == 0)
+		if (id == 2 && IslandSpawnIndex == ExitID)
 			entry = cell;
 
 		IleToSave = ileinfo;
@@ -489,7 +490,7 @@ public class WorldMap : TileMap
 
 		CurrentTile = new Vector2 (island.GlobalTranslation.x ,island.GlobalTranslation.z);
 
-		GlobalJobManager.GetInstance().OnNewDay();
+		//GlobalJobManager.GetInstance().OnNewDay();
 
 		OS.VsyncEnabled = true;
 		return intr;
@@ -670,7 +671,8 @@ public class WorldMap : TileMap
 			{
 				IslandInfo ile;
 				ilemap.TryGetValue(new Vector2(row, collumn), out ile);
-				closeIles.Insert(closeIles.Count, ile);
+				if (ile != null)
+					closeIles.Insert(closeIles.Count, ile);
 			}
 			
 			row += 1;

@@ -47,7 +47,7 @@ public class RepairUI : Control
     }
     public void UpdateUI()
     {
-        VehicleDamageManager damageman = currentv.GetDamageManager();
+        /*VehicleDamageManager damageman = currentv.GetDamageManager();
 
         List<int>_EngineStates;
         damageman.GetEngineStates(out _EngineStates);
@@ -62,7 +62,7 @@ public class RepairUI : Control
         
         GetNode<Control>("Panel2/ShipPartPanel/Hull").Modulate = GetStateColor(damageman.GetHullState());
         GetNode<BoatPartRepairPanel>("Panel2/VBoxContainer/Hull").SetData("Κουφάρι", damageman.GetHullState());
-
+        */
         
 
         /*if (v.HasWings())
@@ -101,7 +101,7 @@ public class RepairUI : Control
             pl.GetTalkText().Talk("Δέν έχω προμήθειες για να το επισκευάσω");
         }
         bool outofsupplies = true;
-        VehicleDamageManager damageman = currentv.GetDamageManager();
+        /*VehicleDamageManager damageman = currentv.GetDamageManager();
         
         if (PName.Contains("Engine"))
         {
@@ -128,7 +128,7 @@ public class RepairUI : Control
                     outofsupplies = false;
                 }
             }
-        }
+        }*/
         if (outofsupplies)
         {
             pl.GetTalkText().Talk("Οι εργαλειοθήκες μου είναι άδειες");

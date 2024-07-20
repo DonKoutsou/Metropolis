@@ -94,7 +94,7 @@ public class NPC : Character
 		
 		if (spawnUncon)
 		{
-			CurrentEnergy = 0;
+			//CurrentEnergy = 0;
 			IsUncon = true;
 		}
 		GetNode<Position3D>("TalkPosition").Translation = TalkPosPos;

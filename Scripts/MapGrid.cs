@@ -199,10 +199,10 @@ public class MapGrid : GridContainer
                 MapGridy.AddConstantOverride("vseparation", (int)(12 * RectScale.y));
             }
 		}
-        if (@event.IsActionPressed("FrameCamera"))
-        {
-            FrameMap();
-        }
+        //if (@event.IsActionPressed("FrameCamera"))
+        //{
+            //FrameMap();
+        //}
         if (RectScale.x <= 0.25f)
             SwitchGridValues(0);
         else if (RectScale.x <= 0.5f)

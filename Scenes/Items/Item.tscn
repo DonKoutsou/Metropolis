@@ -19,7 +19,6 @@ mass = 0.0346939
 linear_damp = 1.22
 angular_damp = 1.22
 script = ExtResource( 1 )
-ItemWeight = 80
 ItemType = 1
 ItemIcon = ExtResource( 4 )
 ItemPickupActionName = "Ένα σκοινί"

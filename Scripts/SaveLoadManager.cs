@@ -54,9 +54,9 @@ public class SaveLoadManager : Control
 		{
 			Vehicle veh = pl.currveh;
 			pldata.Add("VehicleName", veh.GetParent().Name);
-			pldata.Add("VehicleState", veh.IsRunning());
-			pldata.Add("WingState", veh.HasDeployedWings());
-			pldata.Add("LightState", veh.LightCondition());
+			//pldata.Add("VehicleState", veh.IsRunning());
+			//pldata.Add("WingState", veh.HasDeployedWings());
+			//pldata.Add("LightState", veh.LightCondition());
 			pldata.Add("PlayerLocation", ((Spatial)veh.GetParent()).GlobalTranslation);
 		}
 		else
@@ -69,7 +69,7 @@ public class SaveLoadManager : Control
 			data.Add(dat.Key, dat.Value);
 		}
 		
-		data.Add("PlayerEnergy", pl.GetCurrentEnergy());
+		//data.Add("PlayerEnergy", pl.GetCurrentEnergy());
 
 		int day, hour, mins;
 		DayNight.GetDay(out day);
@@ -127,7 +127,7 @@ public class SaveLoadManager : Control
 		}
 		data.Add("InventoryContents", Inventorydata);
 
-		GlobalJobManager man = GlobalJobManager.GetInstance();
+		/*GlobalJobManager man = GlobalJobManager.GetInstance();
 		
 
 
@@ -151,7 +151,7 @@ public class SaveLoadManager : Control
 ;			DelArr[i] = DelJobs[i].GetLocation();
 		}
 		data.Add("DeliverJobs", DelArr);
-		data.Add("ActiveDeliveryJob", activeDJob);
+		data.Add("ActiveDeliveryJob", activeDJob);*/
 		save.Call("_SetData", data);
 		
 

@@ -5,7 +5,7 @@ using System.Linq;
 
 public class VehicleDamageManager : Spatial
 {
-
+    /*
 	List<CollisionShape> WingColliders = new List<CollisionShape>();
     List<CollisionShape> EngineColliders = new List<CollisionShape>();
     List<int> WingStates = new List<int>();
@@ -138,19 +138,20 @@ public class VehicleDamageManager : Spatial
         {
             EngineStates[i] = engines[i];
         }
-	}
+	}*/
 
 }
 public class VehicleDamageInfo
 {
-    public List<int> WingStates = new List<int>();
+    //public List<int> WingStates = new List<int>();
     public List<int> EngineStates = new List<int>();
     public int HullState;
     public bool LightCondition = true;
+    /*
     public void UpdateInfo(Vehicle veh)
     {
         VehicleDamageManager damman = veh.GetParent().GetNode<VehicleDamageManager>("VehicleDamageManager");
-        damman.GetWingStates(out WingStates);
+        //damman.GetWingStates(out WingStates);
         damman.GetEngineStates(out EngineStates);
         LightCondition = damman.GetLightCondition();
         HullState = damman.GetHullState();
@@ -158,7 +159,7 @@ public class VehicleDamageInfo
     public void SetInfo(Vehicle veh)
     {
         VehicleDamageManager damman = veh.GetParent().GetNode<VehicleDamageManager>("VehicleDamageManager");
-        damman.GetWingStates(out WingStates);
+        //damman.GetWingStates(out WingStates);
         damman.GetEngineStates(out EngineStates);
         LightCondition = damman.GetLightCondition();
         HullState = damman.GetHullState();
@@ -177,7 +178,7 @@ public class VehicleDamageInfo
 
         Dictionary<string, object> data = new Dictionary<string, object>()
         {
-            {"WingStates", wings},
+            //{"WingStates", wings},
             {"EngineStates", enginestates},
             {"LightCondition", LightCondition},
             {"HullState", HullState}
@@ -198,7 +199,7 @@ public class VehicleDamageInfo
         }
 		LightCondition = (bool)data.Get("LightCondition");
 		HullState = (int)data.Get("HullState");
-    }
+    }*/
 }
 
 

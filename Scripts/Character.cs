@@ -23,13 +23,13 @@ public class Character : KinematicBody
 	
 	public Inventory CharacterInventory;
 
-	[Export]
-	float MaxEnergyAmmount = 100;
+	//[Export]
+	//float MaxEnergyAmmount = 100;
 
 	[Export]
 	public string CharacterName = "Βαλάντης";
 
-	public float CurrentEnergy = 100;
+	//public float CurrentEnergy = 100;
 
 	public SpotLight NightLight;
 	SpatialMaterial BulbMat;
@@ -56,30 +56,30 @@ public class Character : KinematicBody
 
 	public bool IsUncon = false;
 
-	public float GetCharacterBatteryCap()
-	{
-		return MaxEnergyAmmount;
-	}
-	public float GetCurrentCharacterEnergy()
-	{
-		return CurrentEnergy;
-	}
-	public void RechargeCharacter(float ammount)
-	{
-		CurrentEnergy += ammount;
-        if (CurrentEnergy > MaxEnergyAmmount)
-        {
-            CurrentEnergy = MaxEnergyAmmount;
-        }
-	}
-	public void SetEnergy(float en)
-	{
-		CurrentEnergy = en;
-	}
-	public void ConsumeEnergy(float ammount)
-    {
-        CurrentEnergy -= ammount;
-    }
+	//public float GetCharacterBatteryCap()
+	//{
+	//	return MaxEnergyAmmount;
+	//}
+	//public float GetCurrentCharacterEnergy()
+	//{
+	//	return CurrentEnergy;
+	//}
+	//public void RechargeCharacter(float ammount)
+	//{
+	//	CurrentEnergy += ammount;
+    //    if (CurrentEnergy > MaxEnergyAmmount)
+    //    {
+    //        CurrentEnergy = MaxEnergyAmmount;
+    //    }
+	//}
+	//public void SetEnergy(float en)
+	//{
+	//	CurrentEnergy = en;
+	//}
+//	public void ConsumeEnergy(float ammount)
+    //{
+    //    CurrentEnergy -= ammount;
+    //}
 
 	public override void _Ready()
 	{
@@ -124,7 +124,7 @@ public class Character : KinematicBody
 	{
         Name = info.Name;
         Translation = info.Position;
-		CurrentEnergy = info.CurrentEnergy;
+		//CurrentEnergy = info.CurrentEnergy;
 		m_balive = info.Alive;
 
 		for (int i = 0; i < 6; i++)
@@ -149,7 +149,7 @@ public class Character : KinematicBody
 	{
 		return CharacterInventory;
 	}
-    public override void _Process(float delta)
+    /*public override void _Process(float delta)
     {
         base._Process(delta);
 
@@ -162,7 +162,7 @@ public class Character : KinematicBody
 			}
 		}
 			
-    }
+    }*/
 	public void ToggleNightLight(bool toggle)
 	{
 		if (toggle)
@@ -258,7 +258,7 @@ public class Character : KinematicBody
 			Sitter.UpdateOccupation(pos, true);
 		}
 		else
-			anim.ToggleSitting(false);
+			anim.ToggleSitting(true);
 		
 		GetNode<Spatial>("Pivot").GlobalRotation = pos.GlobalRotation;
 		sitting = true;
@@ -420,7 +420,7 @@ public class CharacterInfo
 	public string Name;
 	public Vector3 Position;
 	public string SceneData;
-	public float CurrentEnergy = 0.0f;
+	//public float CurrentEnergy = 0.0f;
 	public bool Alive = false;
 	public Dictionary<string, object> CustomData = new Dictionary<string, object>();
 	public List<Color> LimbColors = new List<Color>();
@@ -430,7 +430,7 @@ public class CharacterInfo
 		Name = it.Name;
 		Position = it.Translation;
 		SceneData = it.Filename;
-		CurrentEnergy = it.GetCurrentCharacterEnergy();
+		//CurrentEnergy = it.GetCurrentCharacterEnergy();
 		Alive = it.m_balive;
 		Talked = it.Talked;
 		for (int i = 0; i < 6; i++)
@@ -446,7 +446,7 @@ public class CharacterInfo
 			{"Position", Position},
 			{"Name", Name},
 			{"SceneData", SceneData},
-			{"Energy", CurrentEnergy},
+			//{"Energy", CurrentEnergy},
 			{"Alive", Alive},
 			{"Talked", Talked}
 		};
@@ -478,7 +478,7 @@ public class CharacterInfo
         Position = (Vector3)data.Get("Position");
 		Name = (string)data.Get("Name");
 		SceneData = (string)data.Get("SceneData");
-		CurrentEnergy = (float)data.Get("Energy");
+		//CurrentEnergy = (float)data.Get("Energy");
 		Alive = (bool)data.Get("Alive");
 		Talked = (bool)data.Get("Talked");
 		Godot.Color[] LimbCols = (Godot.Color[])data.Get("LimbColors");

@@ -203,7 +203,7 @@ public class MyWorld : Spatial
 			}
 			pl.currveh.Capsize();
 		}
-		pl.RechargeCharacter(100);
+		//pl.RechargeCharacter(100);
 		pl.Respawn();
 		pl.Teleport(Rescuer.GetNode<Position3D>("TalkPosition").GlobalTranslation);
 

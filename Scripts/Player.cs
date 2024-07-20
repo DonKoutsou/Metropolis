@@ -54,10 +54,10 @@ public class Player : Character
 	{
 		return instance;
 	}
-	public float GetCurrentEnergy()
-	{
-		return CurrentEnergy;
-	}
+	//public float GetCurrentEnergy()
+	//{
+	//	return CurrentEnergy;
+	//}
 	public void Teleport(Vector3 pos)
 	{
 		PhysicsServer.BodySetState(GetRid(), PhysicsServer.BodyState.Transform, Transform.Identity.Translated(pos - GlobalTranslation));
@@ -74,10 +74,10 @@ public class Player : Character
 		base._Ready();
 
 		CharacterInventory = GetNode<Inventory>("Inventory");
-		if (InventoryWeightOverride != -1)
-		{
-			CharacterInventory.OverrideWeight(InventoryWeightOverride);
-		}
+		//if (InventoryWeightOverride != -1)
+		//{
+		//	CharacterInventory.OverrideWeight(InventoryWeightOverride);
+		//}
 
 		moveloc = GetNode<MoveLocation>("MoveLoc");
 		
@@ -172,8 +172,8 @@ public class Player : Character
 		}
 		base.PlayMusic();
 	}
-	bool ExpressedNoBatteries = false;
-	bool ExpressedLowBattery = false;
+	//bool ExpressedNoBatteries = false;
+	//bool ExpressedLowBattery = false;
     public override void _Process(float delta)
     {
         base._Process(delta);
@@ -184,7 +184,7 @@ public class Player : Character
 		{
 			UpdateMoveLocation();
 		}
-		List<Item> batteries;
+		/*List<Item> batteries;
 		CharacterInventory.GetItemsByType(out batteries, ItemName.BATTERY);
 
 		for (int i = batteries.Count() -1; i > -1; i--)
@@ -208,7 +208,7 @@ public class Player : Character
 				GetTalkText().Talk("Ξέμεινα από μπαταρίες. Πρέπει να βρώ κάπου να φωρτήσω.");
 				ExpressedNoBatteries = true;
 			}
-		}
+		}*/
     }
     public override void _PhysicsProcess(float delta)
 	{
@@ -301,9 +301,9 @@ public class Player : Character
 		/////////////////////////////////////////////
 		//battery consumption
 		float coons = Consumption.Interpolate(rpm) * delta;
-		ConsumeEnergy(coons);
+		//ConsumeEnergy(coons);
 
-		if (GetCurrentEnergy() < GetCharacterBatteryCap() / 10)
+		/*if (GetCurrentEnergy() < GetCharacterBatteryCap() / 10)
 		{
 			if (!ExpressedLowBattery)
 			{
@@ -316,7 +316,7 @@ public class Player : Character
 		else
 		{
 			ExpressedLowBattery = false;
-		}
+		}*/
 
 		// Moving the character
 		if (!HasVecicle)

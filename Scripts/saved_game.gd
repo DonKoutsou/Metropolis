@@ -14,17 +14,17 @@ func _SetData(data):
 	ilemapvectors = data["ilemapVectors"]
 	ilemap = data["ilemap"]
 	playerlocation = data["PlayerLocation"]
-	playerenergy = data["PlayerEnergy"]
+	##playerenergy = data["PlayerEnergy"]
 	InventoryContents = data["InventoryContents"]
 	playerHasVehicle = data["playerHasVehicle"]
-	DeliverJobs = data["DeliverJobs"]
-	ActiveDeliveryJob = data["ActiveDeliveryJob"]
+	##DeliverJobs = data["DeliverJobs"]
+	##ActiveDeliveryJob = data["ActiveDeliveryJob"]
 	Date = data["Date"];
 	if (playerHasVehicle):
 		VehicleName = data["VehicleName"]
-		VehicleState = data["VehicleState"];
-		WingState = data["WingState"];
-		LightState = data["LightState"];
+		##VehicleState = data["VehicleState"];
+		##WingState = data["WingState"];
+		##LightState = data["LightState"];
 
 ## Path to the level that was loaded when the game was saved
 export var currentile:int
@@ -45,17 +45,17 @@ export  (Array, Resource) var ilemap = []
 export  (Array, Resource) var InventoryContents = []
 
 export var playerlocation:Vector3
-export var playerenergy:float
+##export var playerenergy:float
 export var playerHasVehicle:bool
 
 
 export var VehicleName:String
-export var VehicleState:bool
-export var WingState:bool
-export var LightState:bool
+##export var VehicleState:bool
+##export var WingState:bool
+##export var LightState:bool
 
-export (Array, Vector2) var DeliverJobs = []
-export var ActiveDeliveryJob:int
-export (Array, Vector2) var EscortJobs = []
+##export (Array, Vector2) var DeliverJobs = []
+##export var ActiveDeliveryJob:int
+##export (Array, Vector2) var EscortJobs = []
 
 export (Array, int) var Date = []

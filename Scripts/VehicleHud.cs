@@ -19,7 +19,7 @@ public class VehicleHud : Control
         Hide();
         HBoxContainer container = GetNode<Panel>("Panel").GetNode<MarginContainer>("MarginContainer").GetNode<HBoxContainer>("HBoxContainer");
         ButtonList.Add("Engine", container.GetNode<Label>("Label").GetNode<Button>("EngineToggle"));
-        ButtonList.Add("Sail", container.GetNode<Label>("Label2").GetNode<Button>("SailToggle"));
+        //ButtonList.Add("Sail", container.GetNode<Label>("Label2").GetNode<Button>("SailToggle"));
         ButtonList.Add("Lights", container.GetNode<Label>("Label3").GetNode<Button>("LightsToggle"));
     }
     public void ConnectToPlayer(Player pl)
@@ -33,17 +33,17 @@ public class VehicleHud : Control
             CurrentVeh = Veh;
             Show();
             SetProcess(true);
-            Button SailToggle;
-            ButtonList.TryGetValue("Sail", out SailToggle);
-            SailToggle.SetPressedNoSignal(CurrentVeh.HasDeployedWings());
-            if (CurrentVeh.GetWingCount() == 0)
-            {
-                ((Control)SailToggle.GetParent()).Hide();
-            }
-            else
-            {
-                ((Control)SailToggle.GetParent()).Show();
-            }
+            //Button SailToggle;
+            //ButtonList.TryGetValue("Sail", out SailToggle);
+            //SailToggle.SetPressedNoSignal(CurrentVeh.HasDeployedWings());
+            //if (CurrentVeh.GetWingCount() == 0)
+            //{
+            //    ((Control)SailToggle.GetParent()).Hide();
+            //}
+            //else
+            //{
+            //    ((Control)SailToggle.GetParent()).Show();
+            //}
             Button LightsToggle;
             ButtonList.TryGetValue("Lights", out LightsToggle);
             LightsToggle.SetPressedNoSignal(CurrentVeh.LightCondition());
@@ -52,7 +52,7 @@ public class VehicleHud : Control
             EngineToggle.SetPressedNoSignal(false);
 
 
-            GetNode<RepairUI>("RepairUI").StartUI(Veh);
+            //GetNode<RepairUI>("RepairUI").StartUI(Veh);
         }
         else
         {
@@ -62,14 +62,14 @@ public class VehicleHud : Control
             Button EngineToggle;
             ButtonList.TryGetValue("Engine", out EngineToggle);
             EngineToggle.SetPressedNoSignal(false);
-            Button SailToggle;
-            ButtonList.TryGetValue("Sail", out SailToggle);
-            SailToggle.SetPressedNoSignal(false);
+            //Button SailToggle;
+            //ButtonList.TryGetValue("Sail", out SailToggle);
+            //SailToggle.SetPressedNoSignal(false);
             Button LightsToggle;
             ButtonList.TryGetValue("Lights", out LightsToggle);
             LightsToggle.SetPressedNoSignal(false);
 
-            GetNode<RepairUI>("RepairUI").StopUI();
+            //GetNode<RepairUI>("RepairUI").StopUI();
         }
             
     }
@@ -84,7 +84,7 @@ public class VehicleHud : Control
             EngineToggle.SetPressedNoSignal(!button_pressed);
         }
     }
-    private void On_Sail_Toggle(bool button_pressed)
+    /*private void On_Sail_Toggle(bool button_pressed)
     {
         if (!CurrentVeh.ToggleWings(button_pressed))
         {
@@ -92,7 +92,7 @@ public class VehicleHud : Control
             ButtonList.TryGetValue("Sail", out SailToggle);
             SailToggle.SetPressedNoSignal(!button_pressed);
         }
-    }
+    }*/
     private void On_Lights_Toggle(bool button_pressed)
     {
         //CurrentVeh.ToggleLights(button_pressed);

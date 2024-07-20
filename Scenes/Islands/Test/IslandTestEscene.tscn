@@ -43,10 +43,9 @@ fog_enabled = true
 fog_color = Color( 0.262745, 0.25098, 0.239216, 1 )
 fog_sun_color = Color( 0.964706, 0.670588, 0.34902, 1 )
 fog_sun_amount = 0.2
-fog_depth_begin = 2014.6
+fog_depth_begin = 0.0
 fog_depth_end = 20000.0
 fog_depth_curve = 0.18301
-fog_transmit_enabled = true
 fog_transmit_curve = 0.0947323
 fog_height_enabled = true
 fog_height_min = 520.7
@@ -79,11 +78,11 @@ dof_blur_near_transition = 805.83
 dof_blur_near_amount = 0.12
 dof_blur_near_quality = 2
 glow_enabled = true
-glow_intensity = 1.63
-glow_strength = 1.05
+glow_levels/3 = false
+glow_intensity = 1.0
+glow_strength = 0.94
 glow_bloom = 1.0
 glow_bicubic_upscale = true
-adjustment_enabled = true
 adjustment_contrast = 1.12
 adjustment_saturation = 0.75
 
@@ -131,9 +130,7 @@ height = 1600.0
 size = Vector2( 50000, 50000 )
 
 [sub_resource type="SpatialMaterial" id=120]
-render_priority = -8
-flags_use_shadow_to_opacity = true
-params_billboard_mode = 2
+flags_transparent = true
 
 [sub_resource type="SpatialMaterial" id=14]
 emission_enabled = true
@@ -307,7 +304,6 @@ skeleton = NodePath("")
 material/0 = ExtResource( 13 )
 material/1 = ExtResource( 13 )
 material/2 = ExtResource( 13 )
-material/3 = ExtResource( 13 )
 
 [node name="MeshInstance5" type="MeshInstance" parent="Island10"]
 transform = Transform( 0.98015, -0.0602962, -0.188865, 0, 0.95263, -0.304133, 0.198256, 0.298096, 0.93372, -6828.38, 95.763, 3859.17 )
@@ -316,16 +312,22 @@ skeleton = NodePath("")
 material/0 = ExtResource( 13 )
 material/1 = ExtResource( 13 )
 material/2 = ExtResource( 13 )
-material/3 = ExtResource( 13 )
 
 [node name="MeshInstance6" type="MeshInstance" parent="Island10"]
-transform = Transform( 0.98015, -0.0602962, -0.188865, 0, 0.95263, -0.304133, 0.198256, 0.298096, 0.93372, -3282.07, 95.763, -2711.8 )
+transform = Transform( 0.955538, -0.270922, -0.116396, 0.218268, 0.915282, -0.338554, 0.198256, 0.298096, 0.93372, 1607.33, -226.355, 4132.39 )
 mesh = ExtResource( 11 )
 skeleton = NodePath("")
 material/0 = ExtResource( 13 )
 material/1 = ExtResource( 13 )
 material/2 = ExtResource( 13 )
-material/3 = ExtResource( 13 )
+
+[node name="MeshInstance7" type="MeshInstance" parent="Island10"]
+transform = Transform( 0.0256901, 0.341409, 0.939563, 0.218268, 0.915282, -0.338554, -0.97555, 0.213775, -0.0510047, -1657.88, -226.355, 4117.53 )
+mesh = ExtResource( 11 )
+skeleton = NodePath("")
+material/0 = ExtResource( 13 )
+material/1 = ExtResource( 13 )
+material/2 = ExtResource( 13 )
 
 [node name="MeshInstance3" type="MeshInstance" parent="Island10"]
 transform = Transform( -0.962375, -0.0826408, -0.258854, 0, 0.95263, -0.304133, 0.271726, -0.29269, -0.916787, -5065.7, -83.1826, 2264.95 )
@@ -334,7 +336,6 @@ skeleton = NodePath("")
 material/0 = ExtResource( 13 )
 material/1 = ExtResource( 13 )
 material/2 = ExtResource( 13 )
-material/3 = ExtResource( 13 )
 
 [node name="MeshInstance4" type="MeshInstance" parent="Island10"]
 transform = Transform( -0.930053, -0.102692, 0.352784, -0.354786, 0.00131676, -0.934947, 0.0955468, -0.994712, -0.0376582, 2816.3, -736.815, -127.711 )
@@ -343,7 +344,6 @@ skeleton = NodePath("")
 material/0 = ExtResource( 13 )
 material/1 = ExtResource( 13 )
 material/2 = ExtResource( 13 )
-material/3 = ExtResource( 13 )
 
 [node name="Bulding_Dest2" type="MeshInstance" parent="Island10"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -748.422, -71.0593, 5760.77 )
@@ -417,11 +417,11 @@ material/0 = ExtResource( 20 )
 environment = SubResource( 91 )
 
 [node name="Sun" type="DirectionalLight" parent="Sky"]
-transform = Transform( 0.725991, -0.0575908, -0.685289, -0.0607667, -0.997962, 0.0194915, -0.685015, 0.0274921, -0.72801, -0.00488281, 392.423, -0.00720215 )
-light_color = Color( 0.996078, 0.666667, 0.415686, 1 )
+transform = Transform( 0.743697, -0.0582916, -0.665971, -0.0607667, -0.997962, 0.0194915, -0.66575, 0.0259731, -0.745723, -0.00488281, 392.423, -0.00720215 )
+light_color = Color( 1, 0.756863, 0.619608, 1 )
 light_energy = 1.92
 light_indirect_energy = 0.0
-light_specular = 3.523
+light_specular = 2.288
 light_bake_mode = 0
 shadow_enabled = true
 shadow_reverse_cull_face = true
@@ -484,8 +484,7 @@ generate_lightmap = false
 mesh = SubResource( 85 )
 
 [node name="MeshInstance" type="MeshInstance" parent="SunMoonPivot/MeshInstance"]
-transform = Transform( -134.649, -5.72205e-06, 3.8147e-06, 3.8147e-06, 134.648, 3.8147e-06, 3.05176e-05, -7.15256e-07, -134.648, 812.71, 1662.37, 1759.88 )
-visible = false
+transform = Transform( -134.649, -8.58307e-06, 1.52588e-05, 5.72205e-06, 134.648, 5.48363e-06, 3.05176e-05, -7.15256e-07, -134.648, 824.021, 1867.47, 1764.94 )
 include_in_bound = false
 allow_merging = false
 cast_shadow = 0
@@ -615,7 +614,7 @@ LOD1 = ExtResource( 27 )
 shape = SubResource( 2 )
 
 [node name="Rock4" type="MeshInstance" parent="."]
-transform = Transform( -1011.43, -2515, -904.43, 2651.29, -1066.24, 0, -337.459, -839.117, 2710.76, -7883.08, -3440.13, -4164.53 )
+transform = Transform( -1011.43, -2515, -904.43, 2651.29, -1066.24, 0, -337.459, -839.117, 2710.76, -9963.02, -4696.9, -2392.73 )
 lod_max_distance = 2000.0
 mesh = ExtResource( 26 )
 material/0 = ExtResource( 10 )
@@ -624,6 +623,19 @@ LOD0 = ExtResource( 26 )
 LOD1 = ExtResource( 28 )
 
 [node name="Occluder" type="Occluder" parent="Rock4"]
+transform = Transform( 0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, -0.139112, -0.0313549 )
+shape = SubResource( 123 )
+
+[node name="Rock10" type="MeshInstance" parent="."]
+transform = Transform( 969.534, 2410.82, 1189.18, 2651.29, -1066.24, 0, 443.704, 1103.3, -2598.47, 2393.14, -5863.31, 1405.95 )
+lod_max_distance = 2000.0
+mesh = ExtResource( 26 )
+material/0 = ExtResource( 10 )
+script = ExtResource( 29 )
+LOD0 = ExtResource( 26 )
+LOD1 = ExtResource( 28 )
+
+[node name="Occluder" type="Occluder" parent="Rock10"]
 transform = Transform( 0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, -0.139112, -0.0313549 )
 shape = SubResource( 123 )
 
@@ -663,5 +675,31 @@ LOD0 = ExtResource( 26 )
 LOD1 = ExtResource( 28 )
 
 [node name="Occluder" type="Occluder" parent="Rock7"]
+transform = Transform( 0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, -0.139112, -0.0313549 )
+shape = SubResource( 123 )
+
+[node name="Rock8" type="MeshInstance" parent="."]
+transform = Transform( 158.366, 69.7133, -307.859, -288.395, 171.972, -109.412, 128.317, 300.471, 134.048, 1201.49, -214.889, 2758.08 )
+lod_max_distance = 2000.0
+mesh = ExtResource( 26 )
+material/0 = ExtResource( 10 )
+script = ExtResource( 29 )
+LOD0 = ExtResource( 26 )
+LOD1 = ExtResource( 28 )
+
+[node name="Occluder" type="Occluder" parent="Rock8"]
+transform = Transform( 0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, -0.139112, -0.0313549 )
+shape = SubResource( 123 )
+
+[node name="Rock9" type="MeshInstance" parent="."]
+transform = Transform( 93.1176, -171.165, 294.532, 315.564, -71.6717, -141.419, 128.317, 300.471, 134.048, -275.753, -443.321, 1301.62 )
+lod_max_distance = 2000.0
+mesh = ExtResource( 26 )
+material/0 = ExtResource( 10 )
+script = ExtResource( 29 )
+LOD0 = ExtResource( 26 )
+LOD1 = ExtResource( 28 )
+
+[node name="Occluder" type="Occluder" parent="Rock9"]
 transform = Transform( 0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, -0.139112, -0.0313549 )
 shape = SubResource( 123 )

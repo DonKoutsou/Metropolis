@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Assets/SpaceShip/Ship.tres" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Clouds/Textures/smoke_01.png" type="Texture" id=2]
@@ -9,18 +9,23 @@ data = PoolVector3Array( -8.1444, -3.9092, 20.99, -8.1361, 7.4611, 2.3851, 0, -3
 [sub_resource type="SpatialMaterial" id=2]
 render_priority = 1
 flags_transparent = true
-params_blend_mode = 3
+vertex_color_use_as_albedo = true
 params_billboard_mode = 3
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
-albedo_color = Color( 0, 0, 0, 1 )
 albedo_texture = ExtResource( 2 )
+
+[sub_resource type="Gradient" id=112]
+offsets = PoolRealArray( 0.0384047, 0.0694239 )
+
+[sub_resource type="GradientTexture" id=113]
+gradient = SubResource( 112 )
 
 [sub_resource type="Curve" id=5]
 min_value = 2.0
 max_value = 12.0
-_data = [ Vector2( 0, 2 ), 0.0, 0.0, 0, 0, Vector2( 1, 12 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 2 ), 0.0, 0.0, 0, 0, Vector2( 0.111972, 12 ), 0.0, 0.0, 0, 0, Vector2( 1, 12 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=6]
 curve = SubResource( 5 )
@@ -28,22 +33,23 @@ curve = SubResource( 5 )
 [sub_resource type="ParticlesMaterial" id=3]
 emission_shape = 1
 emission_sphere_radius = 2.84
-direction = Vector3( 0, 0, -10 )
+direction = Vector3( 0, 0, -1 )
 spread = 2.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 100.0
-angular_velocity = 113.96
+gravity = Vector3( 0, 10, 0 )
+initial_velocity = 27.81
 angular_velocity_random = 0.32
-scale = 6.0
+radial_accel = 7.48
+scale = 11.35
 scale_curve = SubResource( 6 )
+color_ramp = SubResource( 113 )
 
 [sub_resource type="QuadMesh" id=4]
 
-[sub_resource type="Curve" id=108]
+[sub_resource type="Curve" id=114]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.27535, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.1 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=105]
-curve = SubResource( 108 )
+curve = SubResource( 114 )
 
 [sub_resource type="ParticlesMaterial" id=109]
 resource_local_to_scene = true
@@ -113,15 +119,6 @@ draw_order = 2
 process_material = SubResource( 109 )
 draw_pass_1 = SubResource( 111 )
 
-[node name="Particles2" type="Particles" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 108.37, -19.2228, -25.0012 )
-material_override = SubResource( 2 )
-amount = 8000
-lifetime = 100.0
-local_coords = false
-process_material = SubResource( 3 )
-draw_pass_1 = SubResource( 4 )
-
 [node name="ExaustParticlesR2" type="Particles" parent="."]
 transform = Transform( 1, -0.00130579, 2.59312e-05, -2.59345e-05, 3.93833e-07, 1, -0.00130579, -1, 3.68338e-07, 107.823, -19.6391, -27.903 )
 amount = 200
@@ -131,15 +128,6 @@ visibility_aabb = AABB( -17.1728, -26.8771, -7.68229, 34.3456, 53.754, 15.3646 )
 draw_order = 2
 process_material = SubResource( 109 )
 draw_pass_1 = SubResource( 111 )
-
-[node name="Particles3" type="Particles" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -107.598, -19.2228, -25.0012 )
-material_override = SubResource( 2 )
-amount = 8000
-lifetime = 100.0
-local_coords = false
-process_material = SubResource( 3 )
-draw_pass_1 = SubResource( 4 )
 
 [node name="ExaustParticlesR3" type="Particles" parent="."]
 transform = Transform( 1, -0.00130579, 2.59312e-05, -2.59345e-05, 3.93833e-07, 1, -0.00130579, -1, 3.68338e-07, -108.146, -19.6391, -27.903 )

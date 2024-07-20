@@ -153,7 +153,7 @@ public class ActionMenu : Control
 					}
 				}
 			}
-			float charrechargeamm = pl.GetCharacterBatteryCap() - pl.GetCurrentCharacterEnergy();
+			/*float charrechargeamm = pl.GetCharacterBatteryCap() - pl.GetCurrentCharacterEnergy();
 			if (charrechargeamm > availableenergy)
 			{
 				pl.RechargeCharacter(charrechargeamm);
@@ -163,7 +163,7 @@ public class ActionMenu : Control
 			{
 				pl.RechargeCharacter(availableenergy);
 				rechargeamm += availableenergy;
-			}
+			}*/
 			generator.ConsumeEnergy(rechargeamm);
 			int time = (int)Math.Round(rechargeamm / 6);
 			int days, hours, mins;

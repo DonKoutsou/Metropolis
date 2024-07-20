@@ -39,7 +39,7 @@ public class DialogueManager : Node
 		cam.LookAt(character.GlobalTranslation, Vector3.Up);
 		
 		CameraAnimationPlayer.GetInstance().PlayAnim("FadeInDialogue");
-		if (character.CurrentEnergy == 0)
+		if (character.IsUncon)
 		{
 			bool HasBat = pl.CharacterInventory.HasBatteries();
 			DialogicSharp.SetVariable("HasBatteries", HasBat.ToString().ToLower());
@@ -68,7 +68,7 @@ public class DialogueManager : Node
 			List<Battery> bats;
 			inv.GetBatteries(out bats);
 
-			TalkingChar.RechargeCharacter(bats[0].GetCurrentCap());
+			//TalkingChar.RechargeCharacter(bats[0].GetCurrentCap());
 			TalkingChar.Respawn();
 
 			inv.DeleteItem(bats[0]);

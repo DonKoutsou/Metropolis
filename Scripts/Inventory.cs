@@ -14,13 +14,13 @@ public class Inventory : Spatial
 
     List<Item> InventoryContents;
 
-    [Export]
-    int Capacity = 10;
+    //[Export]
+    //int Capacity = 10;
     [Export]
     public PackedScene[] StartingItems;
-    [Export]
-    int StartingCurrency = 0;
-    int currentweight = 0;
+    //[Export]
+    //int StartingCurrency = 0;
+    //int currentweight = 0;
     InventoryUI ui;
 
     public Player CharacterOwner;
@@ -37,15 +37,15 @@ public class Inventory : Spatial
         //CharacterOwner.ToggleLimb(LimbType.LEG_R, false);
         //CharacterOwner.ToggleLimb(LimbType.N01_LEG_R, false);
         //CharacterOwner.ToggleLimb(LimbType.N01_LEG_L, false);
-        if (StartingCurrency > 0)
-        {
-            PackedScene d = ResourceLoader.Load<PackedScene>("res://Scenes/Items/Drahma.tscn");
-            for (int i = 0; i < StartingCurrency; i++)
-            {
-                Item it = (Item)d.Instance();
-                InsertItem(it);
-            }
-        }
+        //if (StartingCurrency > 0)
+        //{
+        //    PackedScene d = ResourceLoader.Load<PackedScene>("res://Scenes/Items/Drahma.tscn");
+        //    for (int i = 0; i < StartingCurrency; i++)
+        //    {
+        //        Item it = (Item)d.Instance();
+        //        InsertItem(it);
+        //    }
+        //}
         
         if (StartingItems == null)
             return;
@@ -188,23 +188,23 @@ public class Inventory : Spatial
             InsertItem(newItem);
         }
     }
-    public bool IsEmpty()
-    {
-        return currentweight <= 0;
-    }
+    //public bool IsEmpty()
+    //{
+    //    return currentweight <= 0;
+    //}
     public bool InsertItem(Item item)
     {
-        int itW = item.GetInventoryWeight();
-        if (currentweight + itW > Capacity)
-        {
-            return false;
-        }
+        //int itW = item.GetInventoryWeight();
+        //if (currentweight + itW > Capacity)
+        //{
+        //    return false;
+        //}
         var parent = item.GetParent();
         if (parent != null)
             parent.RemoveChild(item);
 
         
-        currentweight += itW;
+        //currentweight += itW;
         if (item is Instrument && !CharacterOwner.HasInstrument())
         {
             CharacterOwner.AddInstrument((Instrument)item);
@@ -256,7 +256,7 @@ public class Inventory : Spatial
     public bool RemoveItem(Item item)
     {
         InventoryContents.Remove(item);
-        currentweight -= item.GetInventoryWeight();
+        //currentweight -= item.GetInventoryWeight();
         if (item is Instrument && ((Instrument)item).IsPlaying())
             CharacterOwner.OnSongEnded((Instrument)item);
            
@@ -295,7 +295,7 @@ public class Inventory : Spatial
     public void DeleteItem(Item item)
     {
         InventoryContents.Remove(item);
-        currentweight -= item.GetInventoryWeight();
+        //currentweight -= item.GetInventoryWeight();
         if (item is Instrument && ((Instrument)item).IsPlaying())
             CharacterOwner.OnSongEnded((Instrument)item);
            
@@ -340,27 +340,27 @@ public class Inventory : Spatial
                 Items.Add(InventoryContents[i]);
         }
     }
-    public float GetAvailableCapacity()
-    {
-        return Capacity - currentweight;
-    }
-    public float GetCurrentWeight()
-    {
-        return currentweight;
-    }
-    public float GetMaxCap()
-    {
-        return Capacity;
-    }
-    public bool OverrideWeight(int NewWeight)
-    {
-        if (currentweight > NewWeight)
-        {
-            return false;
-        }
-        Capacity = NewWeight;
-        return true;
-    }
+    //public float GetAvailableCapacity()
+    //{
+    //    return Capacity - currentweight;
+    //}
+    //public float GetCurrentWeight()
+    //{
+    //    return currentweight;
+    //}
+    //public float GetMaxCap()
+    //{
+    //    return Capacity;
+    //}
+    //public bool OverrideWeight(int NewWeight)
+    //{
+    //    if (currentweight > NewWeight)
+    //    {
+    //        return false;
+    //    }
+    //    Capacity = NewWeight;
+    //    return true;
+    //}
     public class ItemInfo
 {
 	public string Name;

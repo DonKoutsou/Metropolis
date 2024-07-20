@@ -6,7 +6,7 @@ public class MapUI : Control
     //RichTextLabel CoordText;
     //Label XCordText;
     //Label YCordText;
-    MapGrid grid;
+    //MapGrid grid;
     static bool IsMouseInMapBool = false;
 
     public void UpdateCoordinates()
@@ -39,12 +39,12 @@ public class MapUI : Control
         GetNode<AnimationPlayer>("AnimationPlayer").Stop();
         GetNode<Panel>("MapGridPanel").GetNode<Control>("PlayerIconPivot").GetNode<AnimationPlayer>("PlayerIconAnim").Stop();
     }
-    public override void _Ready()
-    {
-        base._Ready();
-        grid = GetNode<MapGridPanel>("MapGridPanel").GetNode<MapGrid>("MapGrid");
+    //public override void _Ready()
+    //{
+    //    base._Ready();
+        //grid = GetNode<MapGrid>("MapGridPanel/MapGridPivot/MapGrid");
         //CoordText = GetNode<Panel>("Panel4").GetNode<RichTextLabel>("CoordText");
         //XCordText = GetNode<Panel>("Panel4").GetNode<Panel>("Panel").GetNode<HBoxContainer>("HBoxContainer").GetNode<Label>("XCordNumb");
         //YCordText = GetNode<Panel>("Panel4").GetNode<Panel>("Panel").GetNode<HBoxContainer>("HBoxContainer").GetNode<Label>("YCordNumb");
-    }
+    //}
 }

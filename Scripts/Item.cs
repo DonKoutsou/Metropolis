@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 public class Item : RigidBody
 {
-	[Export]
-	int ItemWeight = 0;
+	//[Export]
+	//int ItemWeight = 0;
 
 	[Export]
 	public ItemName ItemType;
@@ -70,10 +70,10 @@ public class Item : RigidBody
 	{
 		return ItemIcon;
 	}
-	public int GetInventoryWeight()
-	{
-		return ItemWeight;
-	}
+	//public int GetInventoryWeight()
+	//{
+		//return ItemWeight;
+	//}
 	public virtual void HighLightObject(bool toggle)
     {
         ((ShaderMaterial)GetNode<MeshInstance>("MeshInstance").MaterialOverlay).SetShaderParam("enable", toggle);

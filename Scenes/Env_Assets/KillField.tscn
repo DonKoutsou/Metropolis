@@ -5,7 +5,7 @@ render_priority = 1
 flags_unshaded = true
 albedo_color = Color( 0, 0, 0, 1 )
 proximity_fade_enable = true
-proximity_fade_distance = 1367.17
+proximity_fade_distance = 556.73
 
 [sub_resource type="CubeMesh" id=18]
 material = SubResource( 17 )
@@ -19,7 +19,7 @@ collision_layer = 128
 collision_mask = 0
 
 [node name="MeshInstance2" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -430.703, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -249.522, 0 )
 mesh = SubResource( 18 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]

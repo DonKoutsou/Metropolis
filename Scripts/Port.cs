@@ -5,7 +5,6 @@ using System.Collections.Generic;
 [Tool]
 public class Port : Area
 {
-    [Export]
     public bool Visited = false;
     [Export]
     List<Vector3> RestLocations = null;
@@ -96,7 +95,7 @@ public class Port : Area
                     Visited = true;
                 }
                 
-                GlobalJobManager jobm = GlobalJobManager.GetInstance();
+                /*GlobalJobManager jobm = GlobalJobManager.GetInstance();
                 if (jobm.HasJobAssigned())
                 {
                     Island ile = (Island)GetParent();
@@ -107,7 +106,7 @@ public class Port : Area
                         CameraAnimation.Connect("FadeOutFinished", this, "CompleteJobs");
                         CameraAnimation.FadeInOut(2);
                     }
-                }
+                }*/
                 Worker.GetTalkText().Talk("Καλωσόρισες καϊκτσή μαγκίτη πρώτε");
             }
         }

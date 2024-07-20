@@ -33,55 +33,16 @@
 [sub_resource type="Animation" id=57]
 resource_name = "MenuClose"
 tracks/0/type = "value"
-tracks/0/path = NodePath("InventoryContainer:visible")
-tracks/0/interp = 1
+tracks/0/path = NodePath("InventoryContainer:rect_size")
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("InventoryContainer:rect_position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, 404 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Panel4:rect_position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1807, 649 ), Vector2( 1807, 1051 ) ]
-}
-
-[sub_resource type="Animation" id=55]
-resource_name = "MenuOpen"
-tracks/0/type = "value"
-tracks/0/path = NodePath("InventoryContainer:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, true ]
+"values": [ Vector2( 1920, 1080 ), Vector2( 1920, 1482 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Panel4:rect_position")
@@ -93,25 +54,64 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1807, 1051 ), Vector2( 1807, 649 ) ]
+"values": [ Vector2( 1807, 649 ), Vector2( 1807, 1051 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("InventoryContainer:rect_position")
-tracks/2/interp = 2
+tracks/2/path = NodePath("InventoryContainer/Inventory:visible")
+tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=55]
+resource_name = "MenuOpen"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel4:rect_position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 402 ), Vector2( 0, 0 ) ]
+"values": [ Vector2( 1807, 1051 ), Vector2( 1807, 649 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("InventoryContainer:rect_size")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1920, 1482 ), Vector2( 1920, 1080 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("InventoryContainer/Inventory:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
 }
 
 [sub_resource type="Animation" id=56]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("InventoryContainer:visible")
+tracks/0/path = NodePath("InventoryContainer:rect_size")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -120,10 +120,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ true ]
+"values": [ Vector2( 1920, 1482 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("InventoryContainer:rect_position")
+tracks/1/path = NodePath("Panel4:rect_position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -132,10 +132,10 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, 402 ) ]
+"values": [ Vector2( 1807, 1051 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Panel4:rect_position")
+tracks/2/path = NodePath("InventoryContainer/Inventory:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -144,7 +144,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 1807, 1051 ) ]
+"values": [ true ]
 }
 
 [sub_resource type="DynamicFont" id=27]
@@ -310,11 +310,6 @@ mouse_filter = 2
 script = ExtResource( 2 )
 
 [node name="InventoryContainer" type="Control" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_top = 402.0
 margin_right = 1920.0
 margin_bottom = 1482.0
 mouse_filter = 2
@@ -324,16 +319,6 @@ root_node = NodePath("../..")
 anims/MenuClose = SubResource( 57 )
 anims/MenuOpen = SubResource( 55 )
 anims/RESET = SubResource( 56 )
-
-[node name="VehicleUI" parent="InventoryContainer" instance=ExtResource( 10 )]
-anchor_left = 0.0
-anchor_top = 1.0
-anchor_right = 0.0
-anchor_bottom = 1.0
-margin_left = 29.0
-margin_top = -373.0
-margin_right = 251.0
-margin_bottom = -308.0
 
 [node name="Inventory" type="Control" parent="InventoryContainer"]
 anchor_left = 1.0
@@ -348,9 +333,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -221.0
+margin_left = -169.0
 margin_top = -85.0
-margin_right = 169.0
+margin_right = 221.0
 margin_bottom = 85.0
 size_flags_horizontal = 9
 size_flags_vertical = 15
@@ -467,13 +452,14 @@ margin_bottom = 160.0
 [node name="CapPanel" type="Panel" parent="InventoryContainer/Inventory"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -156.0
+margin_left = -104.0
 margin_top = 29.0
-margin_right = 234.0
+margin_right = 286.0
 margin_bottom = 76.0
 custom_styles/panel = ExtResource( 8 )
 
 [node name="w" type="RichTextLabel" parent="InventoryContainer/Inventory/CapPanel"]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -488,6 +474,7 @@ bbcode_text = "[center]Χωρητικότητα:"
 text = "Χωρητικότητα:"
 
 [node name="CapAmmount" type="RichTextLabel" parent="InventoryContainer/Inventory/CapPanel"]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -502,12 +489,23 @@ bbcode_text = "[center]1000/1500"
 text = "1000/1500"
 
 [node name="CapPanel2" type="Panel" parent="InventoryContainer/Inventory"]
+margin_left = 52.0
 margin_top = 29.0
-margin_right = 130.0
+margin_right = 182.0
 margin_bottom = 76.0
 custom_styles/panel = ExtResource( 8 )
 
-[node name="w" type="RichTextLabel" parent="InventoryContainer/Inventory/CapPanel2"]
+[node name="InventoryPage" type="Control" parent="InventoryContainer/Inventory/CapPanel2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.5
+margin_right = 20.0
+margin_bottom = 19.5
+
+[node name="w" type="RichTextLabel" parent="InventoryContainer/Inventory/CapPanel2/InventoryPage"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -521,29 +519,29 @@ bbcode_enabled = true
 bbcode_text = "[center]0"
 text = "0"
 
-[node name="Repair" type="Button" parent="InventoryContainer/Inventory/CapPanel2"]
+[node name="Repair" type="Button" parent="InventoryContainer/Inventory/CapPanel2/InventoryPage"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -59.5
-margin_top = -17.5
-margin_right = -24.5
-margin_bottom = 17.5
+margin_left = -58.0
+margin_top = -16.0
+margin_right = -25.0
+margin_bottom = 17.0
 theme = ExtResource( 24 )
 custom_fonts/font = SubResource( 45 )
 icon = ExtResource( 22 )
 expand_icon = true
 
-[node name="Repair2" type="Button" parent="InventoryContainer/Inventory/CapPanel2"]
+[node name="Repair2" type="Button" parent="InventoryContainer/Inventory/CapPanel2/InventoryPage"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 24.5
-margin_top = -17.5
-margin_right = 59.5
-margin_bottom = 17.5
+margin_left = 24.0
+margin_top = -16.0
+margin_right = 57.0
+margin_bottom = 17.0
 theme = ExtResource( 24 )
 custom_fonts/font = SubResource( 45 )
 icon = ExtResource( 25 )
@@ -556,9 +554,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -482.0
+margin_left = -430.0
 margin_top = -23.0
-margin_right = -442.0
+margin_right = -390.0
 margin_bottom = 17.0
 script = ExtResource( 15 )
 
@@ -635,8 +633,9 @@ custom_styles/panel = ExtResource( 8 )
 
 [node name="DescriptionPanel" type="Panel" parent="InventoryContainer/Inventory"]
 visible = false
-margin_left = -239.0
+margin_left = -187.0
 margin_top = 29.0
+margin_right = 52.0
 margin_bottom = 373.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -732,8 +731,9 @@ custom_styles/panel = ExtResource( 29 )
 
 [node name="JobPanel" type="Panel" parent="InventoryContainer/Inventory"]
 visible = false
-margin_left = -239.0
+margin_left = -187.0
 margin_top = 29.0
+margin_right = 52.0
 margin_bottom = 184.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -834,6 +834,7 @@ anchor_bottom = 1.0
 custom_styles/panel = ExtResource( 29 )
 
 [node name="BatteryPanel" type="Panel" parent="InventoryContainer/Inventory"]
+visible = false
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -889,9 +890,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -286.0
+margin_left = -234.0
 margin_top = -86.0
-margin_right = 234.0
+margin_right = 286.0
 margin_bottom = -29.0
 theme = SubResource( 54 )
 
@@ -1002,32 +1003,21 @@ expand_icon = true
 [node name="Panel4" type="Panel" parent="InventoryContainer/Inventory"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -286.0
+margin_left = -234.0
 margin_right = 286.0
 margin_bottom = 29.0
 rect_clip_content = true
 mouse_filter = 1
 custom_styles/panel = ExtResource( 26 )
 
-[node name="MarginContainer" type="MarginContainer" parent="InventoryContainer/Inventory/Panel4"]
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -48.0
-margin_bottom = 19.0
-custom_constants/margin_right = 5
-custom_constants/margin_top = 5
-custom_constants/margin_left = 5
-custom_constants/margin_bottom = 5
-
 [node name="RefreshCoords" type="Button" parent="InventoryContainer/Inventory/Panel4"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 258.0
+margin_left = 230.0
 margin_top = -9.5
-margin_right = 298.0
+margin_right = 270.0
 margin_bottom = 29.5
 rect_scale = Vector2( 0.5, 0.5 )
 focus_mode = 0
@@ -1045,7 +1035,7 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -286.0
+margin_left = -234.0
 margin_top = -29.0
 margin_right = 286.0
 rect_clip_content = true
@@ -1053,13 +1043,14 @@ mouse_filter = 1
 custom_styles/panel = ExtResource( 27 )
 
 [node name="Control" type="Control" parent="InventoryContainer/Inventory"]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -286.0
+margin_left = -234.0
 margin_top = -125.0
-margin_right = 234.0
+margin_right = 286.0
 margin_bottom = 172.0
 rect_clip_content = true
 mouse_filter = 2
@@ -1080,10 +1071,20 @@ expand = true
 
 [node name="MapUI" parent="InventoryContainer/Inventory" instance=ExtResource( 6 )]
 visible = false
-margin_left = -30.0
+margin_left = 22.0
 margin_top = -34.0
-margin_right = 10.0
+margin_right = 62.0
 margin_bottom = 6.0
+
+[node name="VehicleUI" parent="InventoryContainer" instance=ExtResource( 10 )]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -347.0
+margin_top = -473.0
+margin_right = -125.0
+margin_bottom = -408.0
 
 [node name="Panel4" type="Panel" parent="."]
 anchor_left = 1.0
@@ -1127,8 +1128,8 @@ text = "NULL"
 align = 1
 valign = 1
 
-[connection signal="button_down" from="InventoryContainer/Inventory/CapPanel2/Repair" to="." method="PageBack"]
-[connection signal="button_down" from="InventoryContainer/Inventory/CapPanel2/Repair2" to="." method="PageForw"]
+[connection signal="button_down" from="InventoryContainer/Inventory/CapPanel2/InventoryPage/Repair" to="." method="PageBack"]
+[connection signal="button_down" from="InventoryContainer/Inventory/CapPanel2/InventoryPage/Repair2" to="." method="PageForw"]
 [connection signal="button_down" from="InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/RepairButton" to="." method="On_Repair_Button_Down"]
 [connection signal="button_down" from="InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/SwitchButton" to="." method="On_Instrument_Button_Down"]
 [connection signal="button_down" from="InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/SwitchLimbButton" to="." method="On_Limb_Button_Down"]

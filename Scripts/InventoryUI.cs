@@ -20,12 +20,12 @@ public class InventoryUI : Control
 
     public bool IsOpen = false;
 
-    float MaxLoad = 0;
+    //float MaxLoad = 0;
     Panel DescPan;
     Panel JobPan;
-    RichTextLabel Capacity;
+    //RichTextLabel Capacity;
     RichTextLabel Description;
-    RichTextLabel WeightText;
+    //RichTextLabel WeightText;
     RichTextLabel ItemName;
 
     InventoryUISlot FocusedSlot;
@@ -42,13 +42,13 @@ public class InventoryUI : Control
     bool ShowingCompass = false;
     bool ShowingMap = false;
 
-    ProgressBar CharacterBatteryCharge;
+    //ProgressBar CharacterBatteryCharge;
 
     AnimationPlayer Anim;
     
     Compass comp;
     MapGrid map;
-    Panel CharacterRPM;
+    //Panel CharacterRPM;
 
     int currentpage = 0;
     int maxpage = 0;
@@ -61,17 +61,17 @@ public class InventoryUI : Control
     }
     public override void _Ready()
     {
-        Capacity = GetNode<RichTextLabel>("InventoryContainer/Inventory/CapPanel/CapAmmount");
+        //Capacity = GetNode<RichTextLabel>("InventoryContainer/Inventory/CapPanel/CapAmmount");
         Anim = GetNode<AnimationPlayer>("InventoryContainer/InventoryAnimation");
         GridContainer gr = GetNode<GridContainer>("InventoryContainer/Inventory/GridContainer");
         int childc = gr.GetChildCount();
-        CharacterBatteryCharge = GetNode<ProgressBar>("InventoryContainer/Inventory/BatteryPanel/CharacterBatteryCharge");
-        CharacterRPM = GetNode<Panel>("InventoryContainer/Inventory/BatteryPanel/RPMAmount");
+        //CharacterBatteryCharge = GetNode<ProgressBar>("InventoryContainer/Inventory/BatteryPanel/CharacterBatteryCharge");
+        //CharacterRPM = GetNode<Panel>("InventoryContainer/Inventory/BatteryPanel/RPMAmount");
         
         DescPan = GetNode<Panel>("InventoryContainer/Inventory/DescriptionPanel");
         JobPan = GetNode<Panel>("InventoryContainer/Inventory/JobPanel");
         Description = DescPan.GetNode<MarginContainer>("MarginContainer").GetNode<VBoxContainer>("VBoxContainer").GetNode<RichTextLabel>("Description");
-        WeightText =  DescPan.GetNode<MarginContainer>("MarginContainer").GetNode<VBoxContainer>("VBoxContainer").GetNode<RichTextLabel>("WeightText");
+        //WeightText =  DescPan.GetNode<MarginContainer>("MarginContainer").GetNode<VBoxContainer>("VBoxContainer").GetNode<RichTextLabel>("WeightText");
         ItemName = DescPan.GetNode<MarginContainer>("MarginContainer").GetNode<VBoxContainer>("VBoxContainer").GetNode<RichTextLabel>("ItemName");
         //ItemOptionPanel = GetNode<Panel>("ItemOptionPanel");
         DescPan.Hide();
@@ -91,11 +91,11 @@ public class InventoryUI : Control
     {
         pl = play;
         Inv = pl.GetNode<Inventory>("Inventory");
-        MaxLoad = Inv.GetMaxCap();
-        float currentload = Inv.GetCurrentWeight();
-        Capacity.BbcodeText = string.Format("[center]{0}/{1}", currentload, MaxLoad);
-        CharacterBatteryCharge.MaxValue = pl.GetCharacterBatteryCap();
-        CharacterBatteryCharge.Value = pl.GetCurrentCharacterEnergy();
+        //MaxLoad = Inv.GetMaxCap();
+        //float currentload = Inv.GetCurrentWeight();
+        //Capacity.BbcodeText = string.Format("[center]{0}/{1}", currentload, MaxLoad);
+        //CharacterBatteryCharge.MaxValue = pl.GetCharacterBatteryCap();
+        //CharacterBatteryCharge.Value = pl.GetCurrentCharacterEnergy();
         comp = GetNode<Compass>("InventoryContainer/Inventory/CompassUI");
         map = MapGrid.GetInstance();
         Show();
@@ -149,6 +149,8 @@ public class InventoryUI : Control
 
             for (int v = Items.Count() - 1; v > -1; v --)
             {
+                if (Items[v].GetItemType() == global::ItemName.LIMB)
+                    continue;
                 if (!itemcat2.ContainsKey(Items[v].GetItemName()))
                     itemcat2.Add(Items[v].GetItemName(), Items[v]);
 
@@ -170,6 +172,7 @@ public class InventoryUI : Control
 
             }
             maxpage = itemcatalogue.Count / 12;
+            GetNode<Control>("InventoryContainer/Inventory/CapPanel2/InventoryPage").Visible = maxpage > 0;
             int slottofill = 0;
             int currentit = 0;
             
@@ -225,18 +228,18 @@ public class InventoryUI : Control
                 //ItemOptionPanel.Show();
             //else
                 //ItemOptionPanel.Hide();
-            float currentload = Inv.GetCurrentWeight();
-            Capacity.BbcodeText = string.Format("[center]{0}/{1}", currentload, MaxLoad);
+            //float currentload = Inv.GetCurrentWeight();
+            //Capacity.BbcodeText = string.Format("[center]{0}/{1}", currentload, MaxLoad);
         }
 
-        CharacterBatteryCharge.Value = pl.GetCurrentCharacterEnergy();
-        float rpm = pl.rpm;
-        if (rpm > 0.66f)
-            CharacterRPM.Modulate = new Color(1,0,0);
-        else if (rpm > 0.33f)
-            CharacterRPM.Modulate = new Color(1,1,0);
-        else
-            CharacterRPM.Modulate = new Color(0,1,0);
+        //CharacterBatteryCharge.Value = pl.GetCurrentCharacterEnergy();
+        //float rpm = pl.rpm;
+        //if (rpm > 0.66f)
+        //    CharacterRPM.Modulate = new Color(1,0,0);
+        //else if (rpm > 0.33f)
+        //    CharacterRPM.Modulate = new Color(1,1,0);
+        //else
+        //    CharacterRPM.Modulate = new Color(0,1,0);
 
 
         if (showingDesc)
@@ -246,6 +249,9 @@ public class InventoryUI : Control
             ShowingCompass = false;
         if (!hasmap)
             ShowingMap = false;
+
+
+        
 
         comp.ToggleCompass(ShowingCompass);
 
@@ -260,13 +266,16 @@ public class InventoryUI : Control
         GetNode<Button>("InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/RepairButton").Visible = selectingbat && hastoolbox;
         GetNode<Button>("InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/SwitchButton").Visible = selectinginst;
         GetNode<Button>("InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/SwitchLimbButton").Visible = selectinglimb;
+
+        GetNode<Control>("InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/CompassButton").Visible = hascompass;
+        GetNode<Control>("InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/MapButton").Visible = hasmap;
     }
     private void PageForw()
     {
         if (currentpage == maxpage)
             return;
         currentpage ++;
-        GetNode<RichTextLabel>("InventoryContainer/Inventory/CapPanel2/w").BbcodeText = "[center]" + currentpage;
+        GetNode<RichTextLabel>("InventoryContainer/Inventory/CapPanel2/InventoryPage/w").BbcodeText = "[center]" + currentpage;
     }
     private void PageBack()
     {
@@ -275,7 +284,7 @@ public class InventoryUI : Control
 
         
         currentpage --;
-        GetNode<RichTextLabel>("InventoryContainer/CapPanel2/w").BbcodeText = "[center]" + currentpage;
+        GetNode<RichTextLabel>("InventoryContainer/Inventory/CapPanel2/InventoryPage/w").BbcodeText = "[center]" + currentpage;
     }
     public void ItemHovered(Item it, bool t)
     {
@@ -288,7 +297,7 @@ public class InventoryUI : Control
             DescPan.Show();
             Description.BbcodeText = "[center]" + it.GetItemDesc();
             ItemName.BbcodeText = "[center]" + it.GetItemName();
-            WeightText.BbcodeText = "[center]Βάρος: " + ShowingDescSample.GetInventoryWeight();
+            //WeightText.BbcodeText = "[center]Βάρος: " + ShowingDescSample.GetInventoryWeight();
         }
         else
         {
@@ -397,8 +406,8 @@ public class InventoryUI : Control
         if (!ShowingMap)
         {
             ShowingMap = true;
-            if (GlobalJobManager.GetInstance().HasJobAssigned())
-                JobPan.Visible = true;
+            //if (GlobalJobManager.GetInstance().HasJobAssigned())
+                //JobPan.Visible = true;
             //map.FrameMap();
         }
         else

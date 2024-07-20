@@ -5,7 +5,7 @@ func _SetData(data):
 	Name = data["Name"]
 	Location = data["Location"]
 	Rotation = data["Rotation"]
-	DamageInfo = data["DamageInfo"]
+	##DamageInfo = data["DamageInfo"]
 	PlayerOwned = data["PlayerOwned"]
 	SceneData = data["SceneData"]
 
@@ -13,7 +13,7 @@ func _SetData(data):
 export var Name:String
 export var Location:Vector3
 export var Rotation:Vector3
-export var DamageInfo: Resource
+##export var DamageInfo: Resource
 export var PlayerOwned:bool
 export var SceneData:String
 
