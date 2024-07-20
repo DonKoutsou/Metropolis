@@ -41,7 +41,8 @@ public class Island : Spatial
 		#endif
 		Translation = SpawnGlobalLocation;
 		
-		Rotate(new Vector3(0, 1, 0), Mathf.Deg2Rad(SpawnRotation));
+		if (type != IleType.WALL)
+			Rotate(new Vector3(0, 1, 0), Mathf.Deg2Rad(SpawnRotation));
 
 		StaticBody sea = GetNode<StaticBody>("SeaBed");
 		sea.GlobalRotation = Vector3.Zero;
@@ -1190,5 +1191,6 @@ public enum IleType
 	LAND,
 	EXIT,
 	SEA,
-	LIGHTHOUSE
+	LIGHTHOUSE,
+	WALL,
 }

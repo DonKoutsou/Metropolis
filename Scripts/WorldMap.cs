@@ -20,6 +20,8 @@ public class WorldMap : TileMap
 
 	[Export]
 	public PackedScene Exittospawn;
+	[Export]
+	public PackedScene WallToSpawn;
 
 	[Export]
 	public PackedScene[] SeaVariations;
@@ -266,11 +268,11 @@ public class WorldMap : TileMap
 				//veh.ToggleLights(LightState);
 			}
 
-			Vector2[] DelJobs =  (Vector2[])save.Get("DeliverJobs");
-			int activeDJob = (int)save.Get("ActiveDeliveryJob");
-			GlobalJobManager jm = GlobalJobManager.GetInstance();
-			jm.LoadDeliverJobs(DelJobs, activeDJob);
-			jm.SetJobAmm(DelJobs.Count());
+			//Vector2[] DelJobs =  (Vector2[])save.Get("DeliverJobs");
+			//int activeDJob = (int)save.Get("ActiveDeliveryJob");
+			//GlobalJobManager jm = GlobalJobManager.GetInstance();
+			//jm.LoadDeliverJobs(DelJobs, activeDJob);
+			//jm.SetJobAmm(DelJobs.Count());
 		}
 		else
 		{
@@ -763,6 +765,13 @@ public class WorldMap : TileMap
 					scene = LightHouse;
 				}
 				break;
+			}
+			case 5:
+			{
+				scene =  WallToSpawn;
+				SpecialName = "Τύχος";
+				break;
+				
 			}
 		}
 			
