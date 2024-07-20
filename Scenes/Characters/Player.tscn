@@ -1,8 +1,7 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/HUD/ActionMenu.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Items/MapItem.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Fonts/Play-Bold.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Assets/PostProcess/PixelShader.gdshader" type="Shader" id=5]
 [ext_resource path="res://Scenes/Items/NormalLeg_R.tscn" type="PackedScene" id=6]
@@ -341,7 +340,7 @@ margin_right = 960.0
 margin_bottom = 540.0
 
 [node name="Inventory" parent="." instance=ExtResource( 7 )]
-StartingItems = [ ExtResource( 25 ), ExtResource( 27 ), ExtResource( 30 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 10 ), ExtResource( 3 ) ]
+StartingItems = [ ExtResource( 25 ), ExtResource( 27 ), ExtResource( 30 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 10 ) ]
 
 [node name="TalkText" type="Label3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.74809, 0 )
