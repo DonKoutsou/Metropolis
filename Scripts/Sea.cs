@@ -12,8 +12,12 @@ public class Sea : StaticBody
 		AnimationPlayer anim = GetNode<AnimationPlayer>("AnimationPlayer");
 		anim.Play("Wave");
 	}
-
-	/*public override void _Process(float delta)
+    public override void _PhysicsProcess(float delta)
+    {
+        base._PhysicsProcess(delta);
+		ForceUpdateTransform();
+    }
+    /*public override void _Process(float delta)
 	{
 		base._Process(delta);
 		float str = DayNight.GetRainStr();

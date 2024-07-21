@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Assets/Boat/M_Boat.material" type="Material" id=1]
 [ext_resource path="res://Scripts/Vehicle.cs" type="Script" id=2]
@@ -27,7 +27,7 @@ _data = [ Vector2( 0, 6 ), 0.0, 0.0, 0, 0, Vector2( 0.4, 6 ), 0.0, 0.0, 0, 0, Ve
 _data = [ Vector2( 0, 0.0950921 ), 0.0, -0.500221, 0, 0, Vector2( 0.0130494, 0.52454 ), 0.0, 0.0, 0, 0, Vector2( 0.572115, 0.51227 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.2 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="BoxShape" id=146]
-extents = Vector3( 7.22692, 3.99055, 13.3893 )
+extents = Vector3( 5.33413, 3.78827, 13.3893 )
 
 [sub_resource type="Curve" id=137]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.27535, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.1 ), 0.0, 0.0, 0, 0 ]
@@ -142,15 +142,6 @@ angle_random = 1.0
 scale = 5.0
 scale_random = 0.8
 scale_curve = SubResource( 110 )
-
-[sub_resource type="Animation" id=18]
-length = 0.001
-
-[sub_resource type="Animation" id=17]
-resource_name = "Wings"
-
-[sub_resource type="Animation" id=19]
-resource_name = "WingsOut"
 
 [sub_resource type="CylinderMesh" id=31]
 top_radius = 0.2
@@ -357,7 +348,7 @@ mesh = ExtResource( 7 )
 script = ExtResource( 9 )
 
 [node name="CollisionShape" type="CollisionShape" parent="VehicleBody"]
-transform = Transform( 1, -2.88026e-10, 1.16415e-10, 1.56888e-11, 1, -4.65661e-10, 0, 4.65661e-10, 1, 0.000144172, 0.780848, 0.309139 )
+transform = Transform( 1, -2.88026e-10, 1.16415e-10, 1.56888e-11, 1, -4.65661e-10, 0, 4.65661e-10, 1, 0.000144172, 1.88033, 0.309139 )
 shape = SubResource( 146 )
 
 [node name="SteeringWheel" type="Spatial" parent="VehicleBody"]
@@ -467,12 +458,6 @@ stream = ExtResource( 13 )
 unit_db = 10.0
 area_mask = 4
 attenuation_filter_db = 0.0
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="VehicleBody"]
-reset_on_save = false
-anims/RESET = SubResource( 18 )
-anims/Wings = SubResource( 17 )
-anims/WingsOut = SubResource( 19 )
 
 [node name="LightMesh" type="MeshInstance" parent="VehicleBody"]
 transform = Transform( 1, -0.00022008, -0.00144871, -0.00145632, -0.258818, -0.965926, -0.000162362, 0.965927, -0.258818, 0.0113567, 6.12427, 13.7928 )
