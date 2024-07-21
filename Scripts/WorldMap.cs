@@ -474,7 +474,7 @@ public class WorldMap : TileMap
 			start = ilemap[entry];
 
 		
-
+		DayNight.GetInstance().UpdatePlayerDistance(Math.Max(Math.Abs(start.Position.x), Math.Abs(start.Position.y)) / 40);
 		MyWorld.GetInstance().ToggleIsland(start, true, true);
 			
 		Island island = start.Island;

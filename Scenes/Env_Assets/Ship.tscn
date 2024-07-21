@@ -23,9 +23,8 @@ offsets = PoolRealArray( 0.0384047, 0.0694239 )
 gradient = SubResource( 112 )
 
 [sub_resource type="Curve" id=5]
-min_value = 2.0
 max_value = 12.0
-_data = [ Vector2( 0, 2 ), 0.0, 0.0, 0, 0, Vector2( 0.111972, 12 ), 0.0, 0.0, 0, 0, Vector2( 1, 12 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0.165645 ), 0.0, 0.0, 0, 0, Vector2( 0.336124, 12 ), 0.0, 0.0, 0, 0, Vector2( 1, 12 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=6]
 curve = SubResource( 5 )
@@ -39,7 +38,7 @@ gravity = Vector3( 0, 10, 0 )
 initial_velocity = 27.81
 angular_velocity_random = 0.32
 radial_accel = 7.48
-scale = 11.35
+scale = 150.0
 scale_curve = SubResource( 6 )
 color_ramp = SubResource( 113 )
 
@@ -100,8 +99,9 @@ mesh = ExtResource( 1 )
 [node name="Particles" type="Particles" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.46328, -99.9723 )
 material_override = SubResource( 2 )
-amount = 8000
+amount = 500
 lifetime = 100.0
+visibility_aabb = AABB( -1530.22, -3565.3, -876.523, 3060.44, 7130.6, 1753.05 )
 local_coords = false
 process_material = SubResource( 3 )
 draw_pass_1 = SubResource( 4 )
@@ -120,7 +120,7 @@ process_material = SubResource( 109 )
 draw_pass_1 = SubResource( 111 )
 
 [node name="ExaustParticlesR2" type="Particles" parent="."]
-transform = Transform( 1, -0.00130579, 2.59312e-05, -2.59345e-05, 3.93833e-07, 1, -0.00130579, -1, 3.68338e-07, 107.823, -19.6391, -27.903 )
+transform = Transform( 0.952917, 0.289889, -0.0889726, 0.000356931, 0.292339, 0.956315, 0.303235, -0.91132, 0.27847, 55.9207, -10.9782, -28.0159 )
 amount = 200
 lifetime = 0.5
 randomness = 1.0
@@ -130,7 +130,7 @@ process_material = SubResource( 109 )
 draw_pass_1 = SubResource( 111 )
 
 [node name="ExaustParticlesR3" type="Particles" parent="."]
-transform = Transform( 1, -0.00130579, 2.59312e-05, -2.59345e-05, 3.93833e-07, 1, -0.00130579, -1, 3.68338e-07, -108.146, -19.6391, -27.903 )
+transform = Transform( 0.825719, -0.497365, 0.266117, 0.000594176, 0.472536, 0.881312, -0.564083, -0.727557, 0.390476, -36.9046, -11.4597, -5.93602 )
 amount = 200
 lifetime = 0.5
 randomness = 1.0

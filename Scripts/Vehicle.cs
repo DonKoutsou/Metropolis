@@ -190,6 +190,13 @@ public class Vehicle : RigidBody
         //ExaustParticles[1].GetNode<AudioStreamPlayer3D>("EngineSound").UnitDb = engineforce * 15;
         ExaustParticles[1].GetNode<AudioStreamPlayer3D>("EngineSound").PitchScale = engineforce + 0.6f;
     }
+    public void Boost(int Ammount)
+    {
+        SpeedBuildup = 1;
+        LinearVelocity *= Ammount;
+        
+        GetNode<VehicleBoostTrails>("VehicleBoostTrails").StartBoost();
+    }
     float SpeedBuildup = 0;
     public override void _PhysicsProcess(float delta)
     {

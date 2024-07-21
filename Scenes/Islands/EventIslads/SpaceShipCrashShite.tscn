@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Assets/Terains/Island2/Island2_LOD.tres" type="ArrayMesh" id=7]
 [ext_resource path="res://Assets/Boat/ΚαικιΗιγη_Καικι1_Normal.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Boat/ΚαικιΗιγη_Καικι3_BaseColor.png" type="Texture" id=9]
+[ext_resource path="res://Scenes/Env_Assets/Portal.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Assets/Boat/ΚαικιΗιγη_Καικι1_OcclusionRoughnessMetallic.png" type="Texture" id=11]
 [ext_resource path="res://Scenes/Vehicles/HoverBoard_NoWings.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Env_Assets/Ship.tscn" type="PackedScene" id=13]
@@ -416,27 +417,27 @@ transform = Transform( 0.329246, 0, 0.944244, 0, 1, 0, -0.944244, 0, 0.329246, -
 PlayerOwned = true
 
 [node name="MeshInstance" parent="Vehicle0/VehicleBody" index="0"]
-transform = Transform( 1, -5.50244e-11, 0, 1.32104e-10, 1, 0, 0, -3.46945e-18, 1, 0, 2.199, 0 )
+transform = Transform( 1, -5.50244e-11, 2.98023e-08, 1.32104e-10, 1, 0, -2.98023e-08, -1.73472e-18, 1, 0, 2.19901, 0 )
 material_override = SubResource( 135 )
 material_overlay = SubResource( 136 )
 
-[node name="ExaustParticlesL" parent="Vehicle0/VehicleBody" index="14"]
+[node name="ExaustParticlesL" parent="Vehicle0/VehicleBody" index="10"]
 process_material = SubResource( 138 )
 draw_pass_1 = SubResource( 139 )
 
-[node name="ExaustParticlesLSteer" parent="Vehicle0/VehicleBody" index="15"]
+[node name="ExaustParticlesLSteer" parent="Vehicle0/VehicleBody" index="11"]
 process_material = SubResource( 140 )
 draw_pass_1 = SubResource( 139 )
 
-[node name="ExaustParticlesRSteer" parent="Vehicle0/VehicleBody" index="16"]
+[node name="ExaustParticlesRSteer" parent="Vehicle0/VehicleBody" index="12"]
 process_material = SubResource( 141 )
 draw_pass_1 = SubResource( 139 )
 
-[node name="ExaustParticlesR" parent="Vehicle0/VehicleBody" index="17"]
+[node name="ExaustParticlesR" parent="Vehicle0/VehicleBody" index="13"]
 process_material = SubResource( 143 )
 draw_pass_1 = SubResource( 139 )
 
-[node name="AnimationPlayer" parent="Vehicle0/VehicleBody" index="18"]
+[node name="AnimationPlayer" parent="Vehicle0/VehicleBody" index="14"]
 anims/RESET = SubResource( 144 )
 anims/Wings = SubResource( 145 )
 anims/WingsOut = SubResource( 146 )
@@ -448,21 +449,24 @@ transform = Transform( 1.00002, -0.000665937, -0.000639945, 0.000666589, 1, 0.00
 material/0 = SubResource( 147 )
 
 [node name="RayFR" parent="Vehicle0" index="2"]
-transform = Transform( 1.00001, 2.1463e-07, 1.46031e-06, -2.12491e-07, 1, -2.15368e-08, -1.46031e-06, 2.1537e-08, 1.00001, -6.33755, 0.798706, 11.0606 )
+transform = Transform( 1.00001, 2.1463e-07, 1.46031e-06, -2.12491e-07, 1, -2.15368e-08, -1.46031e-06, 2.1537e-08, 1.00001, -6.33755, 0.798706, 11.0607 )
 
 [node name="MeshInstance" parent="Vehicle0/RayFR/EnginePivot" index="0"]
 material/0 = SubResource( 147 )
 
 [node name="RayBR" parent="Vehicle0" index="3"]
-transform = Transform( 1.00001, 2.34127e-07, 1.46031e-06, -2.3199e-07, 1, -1.6531e-08, -1.46031e-06, 1.6531e-08, 1.00001, -6.99997, 0.800003, -8.99994 )
+transform = Transform( 1.00001, 2.34127e-07, 1.46031e-06, -2.3199e-07, 1, -1.6531e-08, -1.46031e-06, 1.6531e-08, 1.00001, -7, 0.800003, -8.99994 )
 
 [node name="MeshInstance" parent="Vehicle0/RayBR/EnginePivot" index="0"]
 material/0 = SubResource( 147 )
 
 [node name="RayBL" parent="Vehicle0" index="4"]
-transform = Transform( 1.00001, 2.33604e-07, 1.46031e-06, -2.31526e-07, 1, -1.80444e-08, -1.46031e-06, 1.80444e-08, 1.00001, 7.00003, 0.800003, -9 )
+transform = Transform( 1.00001, 2.33604e-07, 1.46031e-06, -2.31526e-07, 1, -1.80444e-08, -1.46031e-06, 1.80444e-08, 1.00001, 7, 0.800003, -9 )
 
 [node name="MeshInstance" parent="Vehicle0/RayBL/EnginePivot" index="0"]
 material/0 = SubResource( 147 )
+
+[node name="Protal" parent="." index="8" instance=ExtResource( 10 )]
+transform = Transform( 0.109671, -0.178047, 0.977892, 0.276374, 0.950492, 0.142062, -0.954772, 0.254684, 0.153449, 1401.89, -5.07962, -1278.58 )
 
 [editable path="Vehicle0"]

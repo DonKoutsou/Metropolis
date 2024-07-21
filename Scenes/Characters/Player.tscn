@@ -1,7 +1,8 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/HUD/ActionMenu.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Systems/Tutorial.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Fonts/Play-Bold.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Assets/PostProcess/PixelShader.gdshader" type="Shader" id=5]
 [ext_resource path="res://Scenes/Items/NormalLeg_R.tscn" type="PackedScene" id=6]
@@ -450,5 +451,7 @@ transform = Transform( 1, -5.29396e-22, 0, -1.05879e-22, 1, 0, 2.11758e-21, 0, 1
 layers = 524288
 mesh = SubResource( 107 )
 material/0 = SubResource( 126 )
+
+[node name="Tutorial" parent="." instance=ExtResource( 3 )]
 
 [connection signal="body_entered" from="KillFieldDetector" to="." method="OnKillFieldDetectorBodyEntered"]

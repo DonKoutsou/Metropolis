@@ -165,7 +165,9 @@ margin_bottom = 82.0
 focus_mode = 0
 theme = ExtResource( 1 )
 enabled_focus_mode = 0
-text = "Interact"
+text = "???"
+icon_align = 1
+expand_icon = true
 
 [node name="Interact_Button2" type="Button" parent="PanelContainer/VBoxContainer"]
 margin_top = 86.0
