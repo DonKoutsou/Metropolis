@@ -77,7 +77,7 @@ public class Port : Area
         RestLocations.Add(pos);
     }
     Vehicle incomingBoat;
-    List<Job> IncomingBoatJobs;
+    List<Job> IncomingBoatJobs = null;
     private void OnShipEntered(Node body)
     {
         if (body is Vehicle v)

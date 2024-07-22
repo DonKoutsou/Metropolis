@@ -98,7 +98,7 @@ public class Vehicle : RigidBody
     bool WindOnWings = false;
     List<ShaderMaterial> WingMaterials = new List<ShaderMaterial>();
     //bool wingsdeployed = false;
-    AnimationPlayer Anim;
+    //AnimationPlayer Anim;
     /////////////////////////////////////
     //public VehicleDamageManager GetDamageManager()
     //{

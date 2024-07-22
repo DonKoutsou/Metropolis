@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=2]
@@ -353,15 +353,6 @@ scale = 5.0
 scale_random = 0.8
 scale_curve = SubResource( 110 )
 
-[sub_resource type="Animation" id=144]
-length = 0.001
-
-[sub_resource type="Animation" id=145]
-resource_name = "Wings"
-
-[sub_resource type="Animation" id=146]
-resource_name = "WingsOut"
-
 [sub_resource type="ShaderMaterial" id=131]
 resource_local_to_scene = true
 shader = ExtResource( 4 )
@@ -381,7 +372,7 @@ roughness_texture_channel = 3
 [node name="Island" instance=ExtResource( 2 )]
 MoveLayer = 260
 type = 2
-ImageID = 4
+ImageID = 6
 Resolution = 128
 
 [node name="SoundMap" parent="." index="3"]
@@ -436,11 +427,6 @@ draw_pass_1 = SubResource( 139 )
 [node name="ExaustParticlesR" parent="Vehicle0/VehicleBody" index="13"]
 process_material = SubResource( 143 )
 draw_pass_1 = SubResource( 139 )
-
-[node name="AnimationPlayer" parent="Vehicle0/VehicleBody" index="14"]
-anims/RESET = SubResource( 144 )
-anims/Wings = SubResource( 145 )
-anims/WingsOut = SubResource( 146 )
 
 [node name="RayFL" parent="Vehicle0" index="1"]
 transform = Transform( 1.00002, -0.000665937, -0.000639945, 0.000666589, 1, 0.00107025, 0.000638634, -0.00107068, 1.00002, 6.45563, 0.797836, 11.1725 )

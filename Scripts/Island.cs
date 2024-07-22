@@ -29,7 +29,16 @@ public class Island : Spatial
 	List<Item> Items = new List<Item>();
 
 	List<NPC> Characters = new List<NPC>();
+	bool Visited = false;
 	
+	public void SetVisited()
+	{
+		Visited = true;
+	}
+	public bool IsVisited()
+	{
+		return Visited;
+	}
 	public override void _Ready()
 	{
 		Node b = GetNodeOrNull("Bounds");
@@ -306,6 +315,7 @@ public class Island : Spatial
 	}
 	public void InputData(IslandInfo data)
 	{
+		Visited = data.Visited;
 		foreach (House hou in Houses)
 		{
 			foreach(HouseInfo Hnfo in data.Houses)
@@ -662,7 +672,7 @@ public class IslandInfo
 	public List<CharacterInfo> Characters = new List<CharacterInfo>();
 	public float RotationToSpawn;
 	public bool KeepInstance;
-
+	public bool Visited;
 	public IslandInfo(float rotation, PackedScene scene, Vector2 cell, string specialn)
 	{
 		RotationToSpawn = rotation;
@@ -684,6 +694,7 @@ public class IslandInfo
 		ImageIndex = (int)data.Get("ImageIndex");
         RotationToSpawn = (float)data.Get("Rotation");
 		KeepInstance = (bool)data.Get("KeepInstance");
+		Visited = (bool)data.Get("Visited");
 		HasPort = (bool)data.Get("HasPort");
 
 		if (HasPort)
@@ -828,6 +839,7 @@ public class IslandInfo
 			{"Vehicles", VehicleInfoobjects},
 			{"Characters", CharacterInfoobjects},
 			{"KeepInstance", KeepInstance},
+			{"Visited", Visited},
 			{"HasPort", HasPort},
 			{"Ports", PortInfoobjects}
         };
@@ -840,6 +852,7 @@ public class IslandInfo
 		Island = Ile;
 		Type = Ile.GetIslandType();
 		KeepInstance = Ile.KeepInstance;
+		Visited = Ile.IsVisited();
 		HasPort = Ile.HasPort();
 		
 		//SpecialName = Ile.IslandSpecialName;
@@ -949,6 +962,7 @@ public class IslandInfo
 	}
 	public void UpdateInfo(Island island)
 	{
+		Visited = island.IsVisited();
 		List<House> hous;
 		island.GetHouses(out hous);
 		foreach(HouseInfo HInfo in Houses)

@@ -36,7 +36,7 @@ public class ActionMenu : Control
 
 	public override void _Ready()
 	{
-		SetProcess(false);
+		SetPhysicsProcess(false);
 		VBoxContainer cont = GetNode<PanelContainer>("PanelContainer").GetNode<VBoxContainer>("VBoxContainer");
         PickButton = cont.GetNode<Button>("PickUp_Button");
 		IntButton = cont.GetNode<Button>("Interact_Button");
@@ -317,13 +317,14 @@ public class ActionMenu : Control
 		{
 			PickButton.Text = "Κοίτα";
 		}
+		
 		DeselectCurrent();
 		SelectedObj = obj;
 		SelectedObj.Call("HighLightObject", true);
 		PickButton.Show();
 		IntButton.Show();
 		Show();
-		SetProcess(true);
+		SetPhysicsProcess(true);
 	}
 	void DeselectCurrent()
 	{
@@ -334,6 +335,7 @@ public class ActionMenu : Control
 	}
 	public void Stop()
 	{
+		pl.GetNode<LoddedCharacter>("Pivot/Guy/Armature/Skeleton").ResetHead();
 		if (PerformingAction)
 		{
 			PerformingAction = false;
@@ -347,16 +349,18 @@ public class ActionMenu : Control
 		DeselectCurrent();
 		
 		Hide();
-		SetProcess(false);
+		SetPhysicsProcess(false);
 		//WarpMouse(GetViewport().Size/2);
 		RectPosition = new Vector2 (0.0f, 0.0f);
 	}
 	
-	public override void _Process(float delta)
+	public override void _PhysicsProcess(float delta)
 	{
+		
 		Vector3 actionpos = (Vector3)SelectedObj.Call("GetActionPos", pl.GlobalTranslation);
 		var screenpos = DViewport.GetInstance().GetCamera().UnprojectPosition(actionpos);
 
+		pl.GetNode<LoddedCharacter>("Pivot/Guy/Armature/Skeleton").HeadLookAt(actionpos);
 		//Vector3 pos = SelectedObj.GlobalTransform.origin;
 
 		//if (pl.GlobalTransform.origin.DistanceTo(pos) > 60 && selecting)

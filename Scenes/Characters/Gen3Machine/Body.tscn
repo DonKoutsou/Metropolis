@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Assets/FastLegs/M_Character_FastLegs_L.material" type="Material" id=1]
 [ext_resource path="res://Assets/Gen3Machine/Gen3Machine.glb" type="PackedScene" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Assets/NormalLegs/M_Character_Legs_R.material" type="Material" id=12]
 [ext_resource path="res://Assets/FastLegs/M_Character_FastLegs_R.material" type="Material" id=13]
 [ext_resource path="res://Scripts/CharacterSoundManager.cs" type="Script" id=14]
+[ext_resource path="res://Assets/Gen3Machine/Textures/BabyMat.tres" type="Material" id=15]
 [ext_resource path="res://shaders/OutlineShader.tres" type="Material" id=17]
 [ext_resource path="res://Scripts/LoddedCharacter.cs" type="Script" id=18]
 [ext_resource path="res://Assets/Skele_Arm/Arms_Mat_Character_R.material" type="Material" id=19]
@@ -73,7 +74,7 @@ nodes/ChairBlend/position = Vector2( 186.667, 160 )
 nodes/IntrumentBlend/node = SubResource( 54 )
 nodes/IntrumentBlend/position = Vector2( 360, 266.667 )
 nodes/output/position = Vector2( 533.333, 160 )
-node_connections = [ "output", 0, "IntrumentBlend", "IntrumentBlend", 0, "ChairBlend", "IntrumentBlend", 1, "Animation 2", "ChairBlend", 0, "Animation", "ChairBlend", 1, "Animation 3" ]
+node_connections = [ "output", 0, "IntrumentBlend", "ChairBlend", 0, "Animation", "ChairBlend", 1, "Animation 3", "IntrumentBlend", 0, "ChairBlend", "IntrumentBlend", 1, "Animation 2" ]
 
 [sub_resource type="AnimationNodeAnimation" id=55]
 animation = "Standing"
@@ -151,10 +152,18 @@ transform = Transform( 0.024, 0, 0, 0, 0.024, 6.77112e-09, 0, -6.77112e-09, 0.02
 
 [node name="Skeleton" parent="Armature" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 5.68434e-14, 0, -2.84217e-14, 1, -0.314196, 5.03759e-08, -0.178556 )
+bones/3/bound_children = [ NodePath("InstrumentAtatchment") ]
+bones/6/bound_children = [ NodePath("BoneAttachment") ]
 script = ExtResource( 18 )
 
-[node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton" index="0"]
-transform = Transform( 0.997224, -0.0530135, -0.0522813, 0.0456565, 0.990056, -0.133061, 0.0588154, 0.130305, 0.989728, -0.569442, 265.502, 11.8911 )
+[node name="HeadRot2Pivot" type="Spatial" parent="Armature/Skeleton" index="0"]
+transform = Transform( -1, 0, -8.74228e-08, 6.75932e-19, 1, -4.34852e-12, 8.74228e-08, 0, -1, -4.47012, 280.939, 19.5395 )
+
+[node name="HeadRot2" type="Spatial" parent="Armature/Skeleton/HeadRot2Pivot" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, -2.84217e-14, 0, 2.84217e-14, 1, 0, 0, 0 )
+
+[node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton" index="1"]
+transform = Transform( 0.996637, -0.0753542, -0.0321782, 0.0713873, 0.991319, -0.110411, 0.0402188, 0.107742, 0.993365, -3.03405, 265.601, 11.1778 )
 bone_name = "mixamorig_Head"
 
 [node name="HeadPivot" type="Spatial" parent="Armature/Skeleton/BoneAttachment" index="0"]
@@ -180,8 +189,17 @@ spot_range = 58.3185
 spot_angle = 47.5769
 spot_angle_attenuation = 0.25
 
-[node name="InstrumentAtatchment" type="BoneAttachment" parent="Armature/Skeleton" index="1"]
-transform = Transform( 0.996876, -0.0110725, -0.078207, 0.00847379, 0.999403, -0.0334825, 0.0785311, 0.0327152, 0.996375, 1.92462, 213.317, -0.385392 )
+[node name="HeadRot" type="Spatial" parent="Armature/Skeleton/BoneAttachment" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.214, 6.659 )
+
+[node name="HeadRotT" type="RemoteTransform" parent="Armature/Skeleton/BoneAttachment" index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.214, 6.659 )
+remote_path = NodePath("../../HeadRot2Pivot")
+update_rotation = false
+update_scale = false
+
+[node name="InstrumentAtatchment" type="BoneAttachment" parent="Armature/Skeleton" index="2"]
+transform = Transform( 0.99801, -0.0311411, -0.0548267, 0.0303522, 0.999424, -0.015164, 0.0552673, 0.0134697, 0.998381, 0.377199, 213.211, -0.0501169 )
 bone_name = "mixamorig_Spine1"
 
 [node name="PlayingAtatchment" type="RemoteTransform" parent="Armature/Skeleton/InstrumentAtatchment" index="0"]
@@ -198,91 +216,93 @@ update_scale = false
 [node name="Instrument" type="Spatial" parent="Armature/Skeleton/InstrumentAtatchment" index="2"]
 transform = Transform( -37.9657, 16.6749, -2.44876, 16.6429, 38.0451, 1.02921, 2.64825, -0.040322, -41.5738, -29.2251, -41.0474, -25.1529 )
 
-[node name="Arm_L" parent="Armature/Skeleton" index="2"]
+[node name="Arm_L" parent="Armature/Skeleton" index="3"]
 material_overlay = ExtResource( 17 )
 material/0 = ExtResource( 3 )
 
-[node name="Arm_L_LOD" parent="Armature/Skeleton" index="3"]
+[node name="Arm_L_LOD" parent="Armature/Skeleton" index="4"]
 visible = false
 material/0 = ExtResource( 3 )
 
-[node name="Arm_R" parent="Armature/Skeleton" index="4"]
+[node name="Arm_R" parent="Armature/Skeleton" index="5"]
 material_overlay = ExtResource( 17 )
 material/0 = ExtResource( 19 )
 
-[node name="Arm_R_LOD" parent="Armature/Skeleton" index="5"]
+[node name="Arm_R_LOD" parent="Armature/Skeleton" index="6"]
 visible = false
 material_overlay = ExtResource( 17 )
 material/0 = ExtResource( 19 )
 
-[node name="Body" parent="Armature/Skeleton" index="6"]
+[node name="BabyLowpolySurface1" parent="Armature/Skeleton" index="7"]
+material/0 = ExtResource( 15 )
+
+[node name="Body" parent="Armature/Skeleton" index="8"]
 material_overlay = ExtResource( 17 )
 material/0 = ExtResource( 4 )
 
-[node name="BodyLOD" parent="Armature/Skeleton" index="7"]
+[node name="Body_LOD" parent="Armature/Skeleton" index="9"]
 visible = false
-material_overlay = ExtResource( 17 )
 material/0 = ExtResource( 4 )
 
-[node name="eyes" parent="Armature/Skeleton" index="8"]
+[node name="eyes" parent="Armature/Skeleton" index="10"]
 material/0 = ExtResource( 8 )
 
-[node name="Face" parent="Armature/Skeleton" index="9"]
+[node name="Face" parent="Armature/Skeleton" index="11"]
 material_overlay = ExtResource( 17 )
 material/0 = ExtResource( 5 )
 
-[node name="Face_LOD" parent="Armature/Skeleton" index="10"]
+[node name="Face_LOD" parent="Armature/Skeleton" index="12"]
 visible = false
 material_overlay = ExtResource( 17 )
 material/0 = ExtResource( 5 )
 
-[node name="Leg2_L" parent="Armature/Skeleton" index="11"]
+[node name="Leg2_L" parent="Armature/Skeleton" index="13"]
 material_overlay = ExtResource( 17 )
 material/0 = ExtResource( 7 )
 material/1 = ExtResource( 7 )
 
-[node name="Leg2_L_LOD" parent="Armature/Skeleton" index="12"]
+[node name="Leg2_L_LOD" parent="Armature/Skeleton" index="14"]
 visible = false
 material_overlay = ExtResource( 17 )
 material/0 = ExtResource( 7 )
 material/1 = ExtResource( 7 )
 
-[node name="Leg2_R" parent="Armature/Skeleton" index="13"]
+[node name="Leg2_R" parent="Armature/Skeleton" index="15"]
 material_overlay = ExtResource( 17 )
 material/0 = ExtResource( 12 )
 material/1 = ExtResource( 12 )
 
-[node name="Leg2_R_LOD" parent="Armature/Skeleton" index="14"]
+[node name="Leg2_R_LOD" parent="Armature/Skeleton" index="16"]
 visible = false
 material_overlay = ExtResource( 17 )
 material/0 = ExtResource( 12 )
 material/1 = ExtResource( 12 )
 
-[node name="Leg_L" parent="Armature/Skeleton" index="15"]
+[node name="Leg_L" parent="Armature/Skeleton" index="17"]
 visible = false
 material_overlay = ExtResource( 17 )
 material/0 = ExtResource( 1 )
 
-[node name="Leg_L_LOD" parent="Armature/Skeleton" index="16"]
+[node name="Leg_L_LOD" parent="Armature/Skeleton" index="18"]
 visible = false
 material_overlay = ExtResource( 17 )
 material/0 = ExtResource( 1 )
 
-[node name="Leg_R" parent="Armature/Skeleton" index="17"]
+[node name="Leg_R" parent="Armature/Skeleton" index="19"]
 visible = false
 material_overlay = ExtResource( 17 )
 material/0 = ExtResource( 13 )
 
-[node name="Leg_R_LOD" parent="Armature/Skeleton" index="18"]
+[node name="Leg_R_LOD" parent="Armature/Skeleton" index="20"]
 visible = false
 material_overlay = ExtResource( 17 )
 material/0 = ExtResource( 13 )
 
-[node name="LegsUpper" parent="Armature/Skeleton" index="19"]
+[node name="LegsUpper" parent="Armature/Skeleton" index="21"]
 material_overlay = ExtResource( 17 )
 material/0 = ExtResource( 4 )
 
-[node name="LegsUpper_LOD" parent="Armature/Skeleton" index="20"]
+[node name="LegsUpper_LOD" parent="Armature/Skeleton" index="22"]
 visible = false
 material_overlay = ExtResource( 17 )
 material/0 = ExtResource( 4 )

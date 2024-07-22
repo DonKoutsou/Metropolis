@@ -34,14 +34,17 @@ public class MapGrid : GridContainer
     }
     public void ToggleMap(bool toggle)
     {
-        
+        if (MapActive == toggle)
+            return;
         if (toggle)
         {
+            
             ((Control)GetParent().GetParent()).Show();
             SetProcessInput(true);
             SetProcess(true);
             MapActive = true;
             mapui.OnMapOpened();
+            FrameMap();
         }
         else
         {
@@ -199,10 +202,10 @@ public class MapGrid : GridContainer
                 MapGridy.AddConstantOverride("vseparation", (int)(12 * RectScale.y));
             }
 		}
-        //if (@event.IsActionPressed("FrameCamera"))
-        //{
-            //FrameMap();
-        //}
+        if (@event.IsActionPressed("FrameCamera"))
+        {
+            FrameMap();
+        }
         if (RectScale.x <= 0.25f)
             SwitchGridValues(0);
         else if (RectScale.x <= 0.5f)
@@ -352,8 +355,13 @@ public class MapGrid : GridContainer
             }
         }
     }
+    public void SetIslandVisited(Vector2 index)
+    {
+        TextureRect child = MapIleList[index].GetNode<TextureRect>("TextureRect");
+        child.Visible = true;
+    }
     //public void UpdateIleInfo(Vector2 index, IleType type, bool HasPort, List<Vector2> portpos, float rot = 0, ImageTexture img = null, string name = null)
-    public void UpdateIleInfo(Vector2 index, bool HasPort, List<PortInfo> portpos, float rot = 0, ImageTexture img = null, string name = null)
+    public void UpdateIleInfo(Vector2 index, bool Visited, bool HasPort, List<PortInfo> portpos, float rot = 0, ImageTexture img = null, string name = null)
     {
         MapTile child = MapIleList[index];
 
@@ -365,6 +373,7 @@ public class MapGrid : GridContainer
                 t.QueueFree();
                 continue;
             }
+            
             
             Vector2 pos = new Vector2(6,6);
             pos += portpos[i].Location/4000 * 6;
@@ -413,8 +422,10 @@ public class MapGrid : GridContainer
         }*/
         if (img != null)
         {
-            child.GetNode<TextureRect>("TextureRect").Texture = img;
-            child.GetNode<TextureRect>("TextureRect").RectRotation = rot;
+            TextureRect tex = child.GetNode<TextureRect>("TextureRect");
+            tex.Texture = img;
+            tex.RectRotation = rot;
+            tex.Visible = Visited;
         }
         //child.type = (int)type;
         //float thing = Math.Max(Math.Abs(index.x), Math.Abs(index.y)) / 40;

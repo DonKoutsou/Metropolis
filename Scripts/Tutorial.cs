@@ -4,21 +4,22 @@ using System;
 public class Tutorial : Control
 {
     [Export]
-    VideoStream WalkTutorial;
+    VideoStream WalkTutorial = null;
     [Export]
-    string WalkTutorialText;
+    string WalkTutorialText = null;
     [Export]
-    VideoStream SelectTutorial;
+    VideoStream SelectTutorial = null;
     [Export]
-    string SelectTutorialText;
+    string SelectTutorialText = null;
     [Export]
-    VideoStream InventoryTutorial;
+    VideoStream InventoryTutorial = null;
     [Export]
-    string InventoryTutorialText;
+    string InventoryTutorialText = null;
 
     int stage = 0;
     private void VidFinished()
     {
+        
         GetNode<VideoPlayer>("VideoPlayer").Play();
     }
     private void NextTurorial()
@@ -41,6 +42,7 @@ public class Tutorial : Control
     }
     public override void _Ready()
     {
+        GetNode<AnimationPlayer>("AnimationPlayer").Play("Start");
         GetNode<VideoPlayer>("VideoPlayer").Stream = WalkTutorial;
         GetNode<Label>("VideoPlayer/Panel/Label").Text = WalkTutorialText;
         GetNode<VideoPlayer>("VideoPlayer").Play();

@@ -7,6 +7,25 @@ public class LoddedCharacter : Skeleton
     public override void _EnterTree()
     {
         AddToGroup("LODDEDCHAR");
+        //SetBoneRest(FindBone("mixamorig_Head") ,GetNode<Spatial>("BoneAttachment/HeadRot").Transform);
+    }
+    public void HeadLookAt(Vector3 pos)
+    {
+        Spatial headrotp =  GetNode<Spatial>("BoneAttachment/HeadRot");
+        Spatial headrotp2 =  GetNode<Spatial>("HeadRot2Pivot/HeadRot2");
+        headrotp2.LookAt(pos, Vector3.Up);
+        Vector3 rot = headrotp2.Rotation;
+        Vector3 newrot = new Vector3(-rot.x, Mathf.Clamp(rot.y, -1, 1), -rot.z);
+        headrotp.Rotation = newrot;
+        SetBoneRest(FindBone("mixamorig_Head") ,headrotp.Transform);
+    }
+    public void ResetHead()
+    {
+        Spatial headrotp =  GetNode<Spatial>("BoneAttachment/HeadRot");
+        
+        headrotp.Rotation = new Vector3(0,0,0);
+
+        SetBoneRest(FindBone("mixamorig_Head") ,headrotp.Transform);
     }
     public override void _ExitTree()
     {

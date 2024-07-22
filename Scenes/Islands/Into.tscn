@@ -1,18 +1,19 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scripts/Intro.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Env_Assets/WorldParticleManager.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Sounds/RainSound.mp3" type="AudioStream" id=3]
-[ext_resource path="res://Scenes/Env_Assets/Ship.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Water/textures/post/waterplane_low.obj" type="ArrayMesh" id=4]
 [ext_resource path="res://Assets/UI/ButtonTheme.tres" type="Theme" id=5]
 [ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://Assets/Sounds/Cave_Ambient.mp3" type="AudioStream" id=7]
+[ext_resource path="res://Assets/Sea/OceanShader.tres" type="Material" id=8]
 
 [sub_resource type="QuadMesh" id=3]
 size = Vector2( 10, 10 )
 
 [sub_resource type="SpatialMaterial" id=4]
-render_priority = 1
+render_priority = 6
 flags_transparent = true
 albedo_color = Color( 0, 0, 0, 1 )
 
@@ -102,30 +103,6 @@ tracks/5/keys = {
 "update": 1,
 "values": [ true, false ]
 }
-tracks/6/type = "value"
-tracks/6/path = NodePath("Ship:translation")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 4.5, 25 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 881.644, 1367.41, 2641.83 ), Vector3( -3079.55, 954.643, -2055.56 ) ]
-}
-tracks/7/type = "value"
-tracks/7/path = NodePath("Ship:rotation_degrees")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
-"times": PoolRealArray( 4.5, 25 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, -135, 0 ), Vector3( 0, -135, 0 ) ]
-}
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -201,30 +178,6 @@ tracks/5/keys = {
 "update": 0,
 "values": [ true ]
 }
-tracks/6/type = "value"
-tracks/6/path = NodePath("Ship:translation")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( 881.644, 1367.41, 2641.83 ) ]
-}
-tracks/7/type = "value"
-tracks/7/path = NodePath("Ship:rotation_degrees")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( 0, -135, 0 ) ]
-}
 
 [node name="Intro" type="Spatial"]
 script = ExtResource( 1 )
@@ -293,7 +246,10 @@ autoplay = "Intro"
 anims/Intro = SubResource( 1 )
 anims/RESET = SubResource( 2 )
 
-[node name="Ship" parent="." instance=ExtResource( 4 )]
-transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 881.644, 1367.41, 2641.83 )
+[node name="Sea" type="MeshInstance" parent="."]
+transform = Transform( 60, 0, 0, 0, 60, 0, 0, 0, 60, 0, 0, 0 )
+cast_shadow = 0
+mesh = ExtResource( 4 )
+material/0 = ExtResource( 8 )
 
 [connection signal="button_down" from="Camera/Button" to="." method="On_Skip_Button_Down"]

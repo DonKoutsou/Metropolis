@@ -186,7 +186,7 @@ public class WorldMap : TileMap
 			//tex.Load(ile.Image);
 
 			//MapGrid.GetInstance().UpdateIleInfo(info.Position, info.Type, info.HasPort, info.Ports, - info.RotationToSpawn, tex, info.SpecialName);
-			MapGrid.GetInstance().UpdateIleInfo(info.Position, info.HasPort, info.Ports, - info.RotationToSpawn, tex, info.SpecialName);
+			MapGrid.GetInstance().UpdateIleInfo(info.Position, info.Visited, info.HasPort, info.Ports, - info.RotationToSpawn, tex, info.SpecialName);
 		}
 	}
 	public static WorldMap GetInstance()
@@ -384,7 +384,7 @@ public class WorldMap : TileMap
 
 		
 		//SaveEntry
-		if (id == 2 && IslandSpawnIndex == ExitID)
+		if (id == 0)
 			entry = cell;
 
 		IleToSave = ileinfo;
@@ -443,14 +443,14 @@ public class WorldMap : TileMap
 		IleToSave = null;
 		CallDeferred("DespawnIle", ilei.Island, ilei.KeepInstance);
 		//CallDeferred("AddMapData", ilei.Position, ilei.Type, ilei.HasPort, ilei.Ports, ilei.RotationToSpawn, ile.ImageID, ilei.SpecialName);
-		AddMapData(ilei.Position, ilei.HasPort, ilei.Ports, ilei.RotationToSpawn, ile.ImageID, ilei.SpecialName);
+		AddMapData(ilei.Position, ilei.Visited, ilei.HasPort, ilei.Ports, ilei.RotationToSpawn, ile.ImageID, ilei.SpecialName);
 	}
-	void AddMapData(Vector2 position, bool HasPort, List<PortInfo> Ports, float RotationToSpawn, int imageId, string name = null)
+	void AddMapData(Vector2 position, bool Visited, bool HasPort, List<PortInfo> Ports, float RotationToSpawn, int imageId, string name = null)
 	{
 		ImageTexture tex = new ImageTexture();
 		tex.CreateFromImage(IslandImageHolder.GetInstance().Images[imageId]);
 		//MapGrid.GetInstance().UpdateIleInfo(position, Type, HasPort, Ports, - RotationToSpawn, tex, name);
-		MapGrid.GetInstance().UpdateIleInfo(position, HasPort, Ports, - RotationToSpawn, tex, name);
+		MapGrid.GetInstance().UpdateIleInfo(position, Visited, HasPort, Ports, - RotationToSpawn, tex, name);
 	}
 	void DespawnIle(Island ile, bool KeepInstance)
 	{
@@ -478,6 +478,9 @@ public class WorldMap : TileMap
 		MyWorld.GetInstance().ToggleIsland(start, true, true);
 			
 		Island island = start.Island;
+		Vector2 pos = WorldMap.GetInstance().GlobalToMap(island.GlobalTranslation);
+		island.SetVisited();
+		MapGrid.GetInstance().SetIslandVisited(pos);
 
 		Intro intr = (Intro)IntroScene.Instance();
 
