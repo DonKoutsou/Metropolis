@@ -12,12 +12,6 @@ public class GeneratorDoor : StaticBody
         anim = GetParent().GetNode<AnimationPlayer>("AnimationPlayer");
         Switch = GetParent().GetNode<Spatial>("Switch");
     }
-    public Vector3 GetActionPos(Vector3 PlayerPos)
-    {
-        Vector3 pos = Switch.GlobalTranslation;
-        pos.y -= Switch.Translation.y;
-        return pos;
-    }
     public string GetActionName(Vector3 PlayerPos)
     {   
         string name = "Άνοιξε";

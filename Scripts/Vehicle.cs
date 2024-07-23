@@ -114,12 +114,12 @@ public class Vehicle : RigidBody
         SteeringWheel = GetNode<Spatial>("SteeringWheel");
         ExaustParticles.Insert(0, GetNode<Particles>("ExaustParticlesL"));
         ExaustParticles.Insert(1, GetNode<Particles>("ExaustParticlesR"));
-        ExaustParticles.Insert(2, GetNode<Particles>("ExaustParticlesLSteer"));
-        ExaustParticles.Insert(3, GetNode<Particles>("ExaustParticlesRSteer"));
+        //ExaustParticles.Insert(2, GetNode<Particles>("ExaustParticlesLSteer"));
+       // ExaustParticles.Insert(3, GetNode<Particles>("ExaustParticlesRSteer"));
         ExaustParticles[0].Emitting = false;
         ExaustParticles[1].Emitting = false;
-        ExaustParticles[2].Emitting = false;
-        ExaustParticles[3].Emitting = false;
+        //ExaustParticles[2].Emitting = false;
+        //ExaustParticles[3].Emitting = false;
         //Spatial parent = (Spatial)GetParent();
         ZeroPos();
         //frontray = parent.GetNode<RayCast>("RayF");
@@ -277,10 +277,6 @@ public class Vehicle : RigidBody
         steert = Vector3.Zero;
        // ulong msaf = OS.GetSystemTimeMsecs();
 		//GD.Print("Vehicle processing took " + (msaf - ms).ToString() + " ms");
-    }
-    public Vector3 GetActionPos(Vector3 PlayerPos)
-    {
-        return GlobalTranslation;
     }
     //public bool ToggleWings(bool toggle)
     //{
@@ -506,7 +502,7 @@ public class Vehicle : RigidBody
         }
 
         float steeramm = eq * mutli;
-        if (steeramm > 0)
+        /*if (steeramm > 0)
         {
             ((ParticlesMaterial)ExaustParticles[3].ProcessMaterial).Scale = steeramm * 5;
             ((ParticlesMaterial)ExaustParticles[3].ProcessMaterial).InitialVelocity = steeramm* 60 + 5;
@@ -532,7 +528,7 @@ public class Vehicle : RigidBody
             ((ParticlesMaterial)ExaustParticles[2].ProcessMaterial).Scale = 0;
             ((ParticlesMaterial)ExaustParticles[2].ProcessMaterial).InitialVelocity = 5;
             //ExaustParticles[2].GetNode<AudioStreamPlayer3D>("EngineSound").UnitDb = 0;
-        }
+        }*/
 
         torq = basis * turnspeed * delta * eq;
         torq.x *= -1;
@@ -594,10 +590,10 @@ public class Vehicle : RigidBody
         ExaustParticles[0].GetNode<AudioStreamPlayer3D>("EngineSound").Playing = toggle;
         ExaustParticles[1].Emitting = toggle;
         ExaustParticles[1].GetNode<AudioStreamPlayer3D>("EngineSound").Playing = toggle;
-        ExaustParticles[2].Emitting = toggle;
-        ExaustParticles[2].GetNode<AudioStreamPlayer3D>("EngineSound").Playing = toggle;
-        ExaustParticles[3].Emitting = toggle;
-        ExaustParticles[3].GetNode<AudioStreamPlayer3D>("EngineSound").Playing = toggle;
+        //ExaustParticles[2].Emitting = toggle;
+        //ExaustParticles[2].GetNode<AudioStreamPlayer3D>("EngineSound").Playing = toggle;
+        //ExaustParticles[3].Emitting = toggle;
+        //ExaustParticles[3].GetNode<AudioStreamPlayer3D>("EngineSound").Playing = toggle;
     }
     public bool IsRunning()
     {

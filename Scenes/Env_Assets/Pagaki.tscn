@@ -48,4 +48,5 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.55482, 1.80579, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.92119, 1.80579, 0 )
 
 [node name="ActionComponent" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.63113, 0 )
 ActionDistance = 10.0

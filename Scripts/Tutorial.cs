@@ -17,9 +17,9 @@ public class Tutorial : Control
     string InventoryTutorialText = null;
 
     int stage = 0;
+
     private void VidFinished()
     {
-        
         GetNode<VideoPlayer>("VideoPlayer").Play();
     }
     private void NextTurorial()
@@ -38,16 +38,20 @@ public class Tutorial : Control
             GetNode<VideoPlayer>("VideoPlayer").Play();
         }
         else
+        {
+            PlayerUI.OnMenuToggled(false);
             QueueFree();
+        }
+            
     }
     public override void _Ready()
     {
+        PlayerUI.OnMenuToggled(true);
         GetNode<AnimationPlayer>("AnimationPlayer").Play("Start");
         GetNode<VideoPlayer>("VideoPlayer").Stream = WalkTutorial;
         GetNode<Label>("VideoPlayer/Panel/Label").Text = WalkTutorialText;
         GetNode<VideoPlayer>("VideoPlayer").Play();
     }
-
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
 //  public override void _Process(float delta)
 //  {

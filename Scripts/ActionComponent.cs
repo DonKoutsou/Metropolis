@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class ActionComponent : Node
+public class ActionComponent : Spatial
 {
     [Export]
     public float ActionDistance = 30;
@@ -11,9 +11,16 @@ public class ActionComponent : Node
     string IntActionFunciton = null;
     [Export]
     string Int2ActionFunciton = null;
-    public override void _Ready()
+
+    [Export]
+    bool AskOwnerForPosition = false;
+
+    public Vector3 GetActionPos(Vector3 PlayerPos)
     {
-        
+        if (AskOwnerForPosition)
+            return (Vector3)GetParent().Call("GetActionPos", PlayerPos);
+        else
+            return GlobalTranslation;
     }
     public void OnActionPressed(int index, Player pl, bool CallOnPlayer)
     {

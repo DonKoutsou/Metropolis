@@ -1,14 +1,16 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=33 format=2]
 
-[ext_resource path="res://Assets/Boat/M_Boat.material" type="Material" id=1]
 [ext_resource path="res://Scripts/Vehicle.cs" type="Script" id=2]
 [ext_resource path="res://addons/MotionTrail/MotionTrail.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Boat/Καικι3Ματ.tres" type="Material" id=4]
 [ext_resource path="res://Scripts/VehicleBoostTrails.cs" type="Script" id=5]
+[ext_resource path="res://Assets/Boat/Parts/HoverEngine.obj" type="ArrayMesh" id=6]
 [ext_resource path="res://Assets/Boat/BoatWindDetector.obj" type="ArrayMesh" id=7]
 [ext_resource path="res://Scenes/Vehicles/HoverParticles.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scripts/WindDetector.cs" type="Script" id=9]
-[ext_resource path="res://Assets/Sounds/Engine/Engine.ogg" type="AudioStream" id=12]
+[ext_resource path="res://Assets/Boat/Parts/Engines.obj" type="ArrayMesh" id=10]
+[ext_resource path="res://Assets/Boat/Parts/Steer.obj" type="ArrayMesh" id=11]
+[ext_resource path="res://Assets/Boat/ΚαικιEngineMat.tres" type="Material" id=12]
 [ext_resource path="res://Assets/Sounds/Engine/Engine3.ogg" type="AudioStream" id=13]
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Assets/Boat/Kaiki.obj" type="ArrayMesh" id=15]
@@ -27,7 +29,7 @@ _data = [ Vector2( 0, 6 ), 0.0, 0.0, 0, 0, Vector2( 0.4, 6 ), 0.0, 0.0, 0, 0, Ve
 _data = [ Vector2( 0, 0.0950921 ), 0.0, -0.500221, 0, 0, Vector2( 0.0130494, 0.52454 ), 0.0, 0.0, 0, 0, Vector2( 0.572115, 0.51227 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.2 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="BoxShape" id=146]
-extents = Vector3( 5.33413, 3.78827, 13.3893 )
+extents = Vector3( 9.44625, 4.47208, 13.3893 )
 
 [sub_resource type="Curve" id=137]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.27535, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.1 ), 0.0, 0.0, 0, 0 ]
@@ -74,48 +76,6 @@ albedo_color = Color( 1, 0.301961, 0.027451, 1 )
 resource_local_to_scene = true
 material = SubResource( 109 )
 
-[sub_resource type="ParticlesMaterial" id=38]
-resource_local_to_scene = true
-lifetime_randomness = 0.46
-trail_divisor = 11
-emission_shape = 1
-emission_sphere_radius = 0.4
-direction = Vector3( 0, 1, 0 )
-spread = 0.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 60.0
-initial_velocity_random = 0.1
-angular_velocity = 40.0
-angular_velocity_random = 1.0
-linear_accel = 6.6
-linear_accel_random = 0.23
-angle = 360.0
-angle_random = 1.0
-scale = 5.0
-scale_random = 0.8
-scale_curve = SubResource( 105 )
-
-[sub_resource type="ParticlesMaterial" id=39]
-resource_local_to_scene = true
-lifetime_randomness = 0.46
-trail_divisor = 11
-emission_shape = 1
-emission_sphere_radius = 0.4
-direction = Vector3( 0, 1, 0 )
-spread = 0.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 60.0
-initial_velocity_random = 0.1
-angular_velocity = 40.0
-angular_velocity_random = 1.0
-linear_accel = 6.6
-linear_accel_random = 0.23
-angle = 360.0
-angle_random = 1.0
-scale = 5.0
-scale_random = 0.8
-scale_curve = SubResource( 105 )
-
 [sub_resource type="Curve" id=142]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.275, 0.745454 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.1 ), 0.0, 0.0, 0, 0 ]
 
@@ -148,12 +108,6 @@ top_radius = 0.2
 bottom_radius = 0.1
 height = 0.5
 radial_segments = 10
-
-[sub_resource type="CylinderMesh" id=34]
-top_radius = 0.404
-height = 4.394
-radial_segments = 8
-rings = 0
 
 [sub_resource type="Animation" id=144]
 length = 0.001
@@ -310,12 +264,6 @@ tracks/3/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="CylinderMesh" id=33]
-bottom_radius = 0.0
-height = 4.155
-radial_segments = 8
-rings = 0
-
 [node name="Vehicle" type="Spatial"]
 pause_mode = 1
 
@@ -342,38 +290,50 @@ material_override = ExtResource( 4 )
 material_overlay = ExtResource( 17 )
 mesh = ExtResource( 15 )
 
+[node name="MeshInstance2" type="MeshInstance" parent="VehicleBody"]
+transform = Transform( 1, -5.50244e-11, 0, 1.32104e-10, 1, 0, 0, -3.46945e-18, 1, 0, 2.199, 0 )
+material_overlay = ExtResource( 17 )
+mesh = ExtResource( 10 )
+material/0 = ExtResource( 12 )
+
 [node name="WindDetector" type="MeshInstance" parent="VehicleBody"]
 transform = Transform( 0.0239615, 0.00172045, -0.999714, -0.000419281, 1, 0.00171089, 0.999717, 0.000378179, 0.0239623, -0.0573806, 4.83131, 9.57226 )
 mesh = ExtResource( 7 )
 script = ExtResource( 9 )
 
 [node name="CollisionShape" type="CollisionShape" parent="VehicleBody"]
-transform = Transform( 1, -2.88026e-10, 1.16415e-10, 1.56888e-11, 1, -4.65661e-10, 0, 4.65661e-10, 1, 0.000144172, 1.88033, 0.309139 )
+transform = Transform( 1, -2.88026e-10, 1.16415e-10, 1.56888e-11, 1, -4.65661e-10, 0, 4.65661e-10, 1, 0.000144172, 0.696864, 0.309139 )
 shape = SubResource( 146 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="VehicleBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.37488e-09, 3.29814, -13.0061 )
+mesh = ExtResource( 11 )
+skeleton = NodePath("../SteeringWheel")
+material/0 = ExtResource( 12 )
 
 [node name="SteeringWheel" type="Spatial" parent="VehicleBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.37488e-09, -1.81627e-19, -11.8102 )
 
 [node name="RemoteTransform" type="RemoteTransform" parent="VehicleBody"]
-transform = Transform( 0.999999, -5.50244e-11, 1.16415e-10, 1.32729e-10, 1, 0, 0, 0, 1, 6.45562, 0.797841, 11.1725 )
+transform = Transform( 0.999999, -5.50244e-11, 1.16415e-10, 1.32729e-10, 1, 0, 0, 0, 1, 7.986, -0.53, 8.991 )
 remote_path = NodePath("../../RayFL")
 update_rotation = false
 update_scale = false
 
 [node name="RemoteTransform2" type="RemoteTransform" parent="VehicleBody"]
-transform = Transform( 1, -1.39221e-09, 2.96859e-09, -2.94995e-09, 1, -5.82077e-09, -2.73576e-09, 2.91038e-09, 1, -6.33755, 0.798699, 11.0606 )
+transform = Transform( 1, -1.39221e-09, 2.96859e-09, -2.94995e-09, 1, -5.82077e-09, -2.73576e-09, 2.91038e-09, 1, -8, -0.529522, 8.879 )
 remote_path = NodePath("../../RayFR")
 update_rotation = false
 update_scale = false
 
 [node name="RemoteTransform3" type="RemoteTransform" parent="VehicleBody"]
-transform = Transform( 1, 5.28928e-10, 1.22236e-09, -1.78755e-09, 1, -3.37604e-09, -1.10595e-09, 3.37604e-09, 1, -7, 0.8, -9 )
+transform = Transform( 1, 5.28928e-10, 1.22236e-09, -1.78755e-09, 1, -3.37604e-09, -1.10595e-09, 3.37604e-09, 1, -7.97745, -0.515682, -10.5644 )
 remote_path = NodePath("../../RayBR")
 update_rotation = false
 update_scale = false
 
 [node name="RemoteTransform4" type="RemoteTransform" parent="VehicleBody"]
-transform = Transform( 1, 2.95699e-10, 1.33878e-09, -1.43837e-09, 1, -3.14321e-09, -1.04774e-09, 3.14321e-09, 1, 7, 0.8, -9 )
+transform = Transform( 1, 2.95699e-10, 1.33878e-09, -1.43837e-09, 1, -3.14321e-09, -1.04774e-09, 3.14321e-09, 1, 8, -0.53, -10.5083 )
 remote_path = NodePath("../../RayBL")
 update_rotation = false
 update_scale = false
@@ -389,7 +349,7 @@ update_position = false
 update_scale = false
 
 [node name="ExaustParticlesL" type="Particles" parent="VehicleBody"]
-transform = Transform( 1, -0.00130579, 2.59311e-05, -2.59345e-05, 3.93833e-07, 1, -0.00130579, -1, 3.68571e-07, 3.67965, 1.35407, -9.74694 )
+transform = Transform( 1, -0.00130579, 2.59311e-05, -2.59345e-05, 3.93833e-07, 1, -0.00130579, -1, 3.68571e-07, 0, 0.375045, -16.1622 )
 emitting = false
 amount = 200
 lifetime = 0.5
@@ -405,45 +365,8 @@ unit_db = 10.0
 pitch_scale = 0.58
 area_mask = 4
 
-[node name="ExaustParticlesLSteer" type="Particles" parent="VehicleBody"]
-transform = Transform( 0.708031, 0.706184, 0.000970028, -0.000588456, -0.000783644, 1, 0.706184, -0.708031, -0.000139274, 5.88695, -0.250126, -0.282572 )
-sorting_offset = -2.354
-emitting = false
-amount = 200
-lifetime = 0.5
-randomness = 1.0
-visibility_aabb = AABB( -17.8206, -24.3812, -12.3799, 35.6412, 48.7623, 24.7598 )
-draw_order = 2
-process_material = SubResource( 38 )
-draw_pass_1 = SubResource( 28 )
-
-[node name="EngineSound" type="AudioStreamPlayer3D" parent="VehicleBody/ExaustParticlesLSteer"]
-stream = ExtResource( 12 )
-unit_db = 25.0
-max_db = -24.0
-pitch_scale = 1.2
-area_mask = 4
-
-[node name="ExaustParticlesRSteer" type="Particles" parent="VehicleBody"]
-transform = Transform( 0.706186, -0.708031, -0.000542905, 0.000926228, 0.000157029, 1, -0.708031, -0.706186, 0.000766693, -6.29818, -0.332384, -0.274872 )
-emitting = false
-amount = 200
-lifetime = 0.5
-randomness = 1.0
-visibility_aabb = AABB( -17.8206, -24.3812, -12.3799, 35.6412, 48.7623, 24.7598 )
-draw_order = 2
-process_material = SubResource( 39 )
-draw_pass_1 = SubResource( 28 )
-
-[node name="EngineSound" type="AudioStreamPlayer3D" parent="VehicleBody/ExaustParticlesRSteer"]
-stream = ExtResource( 12 )
-unit_db = 25.0
-max_db = -24.0
-pitch_scale = 1.2
-area_mask = 4
-
 [node name="ExaustParticlesR" type="Particles" parent="VehicleBody"]
-transform = Transform( 1, -0.00130579, 2.59312e-05, -2.59345e-05, 3.93833e-07, 1, -0.00130579, -1, 3.68338e-07, -3.733, 1.047, -9.747 )
+transform = Transform( 1, -0.00130579, 2.59312e-05, -2.59345e-05, 3.93833e-07, 1, -0.00130579, -1, 3.68338e-07, 0, 3.08137, -15.6795 )
 emitting = false
 amount = 200
 lifetime = 0.5
@@ -472,14 +395,6 @@ shadow_reverse_cull_face = true
 spot_range = 1101.51
 spot_attenuation = 0.406125
 spot_angle = 55.8586
-
-[node name="SteerEngineL_Mesh" type="MeshInstance" parent="VehicleBody"]
-transform = Transform( 0.707088, -0.707125, -0.00187554, -0.00186727, 0.000785189, -0.999999, 0.707125, 0.70709, -0.000765205, 5.29902, -0.258306, 0.513362 )
-mesh = SubResource( 34 )
-
-[node name="SteerEngineR_Mesh" type="MeshInstance" parent="VehicleBody"]
-transform = Transform( 0.707127, 0.70709, -0.000361575, -0.00035384, -0.000157499, -1, -0.70709, 0.707128, 0.000138825, -5.26048, -0.341654, 0.520023 )
-mesh = SubResource( 34 )
 
 [node name="GroundChecks" type="Spatial" parent="VehicleBody"]
 
@@ -524,6 +439,7 @@ cast_to = Vector3( 0, -60, 0 )
 collision_mask = 260
 
 [node name="ActionComponent" parent="VehicleBody" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.87733, 0 )
 
 [node name="VehicleBoostTrails" type="Spatial" parent="VehicleBody"]
 script = ExtResource( 5 )
@@ -548,7 +464,7 @@ anims/StartTrail = SubResource( 143 )
 anims/StopTrail = SubResource( 145 )
 
 [node name="RayFL" type="RayCast" parent="."]
-transform = Transform( 1.00001, -0.000665933, -0.000639928, 0.000666589, 1, 0.00107025, 0.000639212, -0.00107067, 1.00001, 6.45562, 0.797841, 11.1725 )
+transform = Transform( 1.00001, 0, 0, 0, 1, 0, 0, 0, 1.00001, 7.986, -0.53, 8.991 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 260
@@ -557,17 +473,18 @@ collision_mask = 260
 transform = Transform( 1, -2.93312e-11, 0, 1.58479e-10, 1, 1.16415e-10, 0, 0, 1, 0, 0, 0 )
 
 [node name="MeshInstance" type="MeshInstance" parent="RayFL/EnginePivot"]
-transform = Transform( 1, -5.12159e-11, 0, 2.52044e-10, 1, 3.49246e-10, -5.82077e-11, 0, 1, -0.00133324, -2, -0.00214005 )
-mesh = SubResource( 33 )
+transform = Transform( 1, -8.41283e-11, 0, -2.08217e-10, 1, 3.49246e-10, -5.82077e-11, -2.32831e-10, 1, -8.7738e-05, -0.131988, -0.000141144 )
+material_override = ExtResource( 12 )
+mesh = ExtResource( 6 )
 skeleton = NodePath("../..")
-material/0 = ExtResource( 1 )
+material/0 = ExtResource( 12 )
 
 [node name="Particles" parent="RayFL/EnginePivot" instance=ExtResource( 8 )]
 
 [node name="ParticlesDirt" parent="RayFL/EnginePivot" instance=ExtResource( 16 )]
 
 [node name="RayFR" type="RayCast" parent="."]
-transform = Transform( 1, 2.14628e-07, 4.709e-08, -2.12491e-07, 1, -2.15368e-08, -6.36792e-08, 2.15368e-08, 1, -6.33755, 0.798699, 11.0606 )
+transform = Transform( 1, 2.14628e-07, 4.709e-08, -2.12491e-07, 1, -2.15368e-08, -6.36792e-08, 2.15368e-08, 1, -8, -0.529522, 8.879 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 260
@@ -576,17 +493,18 @@ collision_mask = 260
 transform = Transform( 1, -5.11022e-11, 0, 7.73639e-11, 1, 1.16415e-10, 0, 0, 1, 0, 0, 0 )
 
 [node name="MeshInstance" type="MeshInstance" parent="RayFR/EnginePivot"]
-transform = Transform( 1, -5.12159e-11, 0, 2.52044e-10, 1, 3.49246e-10, -5.82077e-11, 0, 1, -0.00133324, -2, -0.00214005 )
-mesh = SubResource( 33 )
+transform = Transform( -1, -4.29103e-07, -8.74228e-08, -4.24575e-07, 1, -4.24915e-08, 8.7481e-08, -4.30736e-08, -1, 0, -0.132, 0 )
+material_override = ExtResource( 12 )
+mesh = ExtResource( 6 )
 skeleton = NodePath("../..")
-material/0 = ExtResource( 1 )
+material/0 = ExtResource( 12 )
 
 [node name="Particles" parent="RayFR/EnginePivot" instance=ExtResource( 8 )]
 
 [node name="ParticlesDirt" parent="RayFR/EnginePivot" instance=ExtResource( 16 )]
 
 [node name="RayBR" type="RayCast" parent="."]
-transform = Transform( 1, 2.34124e-07, 4.52274e-08, -2.3199e-07, 1, -1.6531e-08, -6.43195e-08, 1.6531e-08, 1, -7, 0.8, -9 )
+transform = Transform( 1, 2.34124e-07, 4.52274e-08, -2.3199e-07, 1, -1.6531e-08, -6.43195e-08, 1.6531e-08, 1, -7.97745, -0.515682, -10.5644 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 260
@@ -595,17 +513,18 @@ collision_mask = 260
 transform = Transform( 1, -5.11022e-11, 0, 7.73639e-11, 1, 1.16415e-10, 0, 0, 1, 0, 0, 0 )
 
 [node name="MeshInstance" type="MeshInstance" parent="RayBR/EnginePivot"]
-transform = Transform( 1, -5.12159e-11, 0, 2.52044e-10, 1, 3.49246e-10, -5.82077e-11, 0, 1, -0.00133324, -2, -0.00214005 )
-mesh = SubResource( 33 )
+transform = Transform( -1, -4.68095e-07, -8.74228e-08, -4.63573e-07, 1, -3.24799e-08, 8.7481e-08, -3.3062e-08, -1, 0, -0.132, 0 )
+material_override = ExtResource( 12 )
+mesh = ExtResource( 6 )
 skeleton = NodePath("../..")
-material/0 = ExtResource( 1 )
+material/0 = ExtResource( 12 )
 
 [node name="Particles" parent="RayBR/EnginePivot" instance=ExtResource( 8 )]
 
 [node name="ParticlesDirt" parent="RayBR/EnginePivot" instance=ExtResource( 16 )]
 
 [node name="RayBL" type="RayCast" parent="."]
-transform = Transform( 1, 2.33601e-07, 4.45289e-08, -2.31526e-07, 1, -1.80444e-08, -6.28643e-08, 1.80444e-08, 1, 7, 0.8, -9 )
+transform = Transform( 1, 2.33601e-07, 4.45289e-08, -2.31526e-07, 1, -1.80444e-08, -6.28643e-08, 1.80444e-08, 1, 8, -0.53, -10.5083 )
 enabled = true
 cast_to = Vector3( 0, -40, 0 )
 collision_mask = 260
@@ -614,10 +533,11 @@ collision_mask = 260
 transform = Transform( 1, -7.73639e-11, 0, 7.73639e-11, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="MeshInstance" type="MeshInstance" parent="RayBL/EnginePivot"]
-transform = Transform( 1, -5.12159e-11, 0, 2.52044e-10, 1, 3.49246e-10, -5.82077e-11, 0, 1, -0.00133324, -2, -0.00214005 )
-mesh = SubResource( 33 )
+transform = Transform( 1, -5.12159e-11, 0, 2.52044e-10, 1, 3.49246e-10, -5.82077e-11, 0, 1, 0, -0.132, 0 )
+material_override = ExtResource( 12 )
+mesh = ExtResource( 6 )
 skeleton = NodePath("../..")
-material/0 = ExtResource( 1 )
+material/0 = ExtResource( 12 )
 
 [node name="Particles" parent="RayBL/EnginePivot" instance=ExtResource( 8 )]
 

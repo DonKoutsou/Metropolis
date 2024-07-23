@@ -76,3 +76,4 @@ shape = SubResource( 4 )
 
 [node name="ActionComponent" parent="." instance=ExtResource( 9 )]
 ActionDistance = 5.0
+AskOwnerForPosition = true

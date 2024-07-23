@@ -11,7 +11,7 @@
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=10]
 
 [sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.952743, 2.24403, 0.223935 )
+extents = Vector3( 0.623246, 2.12822, 0.223935 )
 
 [node name="Bouzouki" type="RigidBody" groups=["Instrument", "Interactables"]]
 collision_layer = 16
@@ -24,7 +24,7 @@ ItemPickupActionName = "Ένα μπουζούκι.."
 ItemName = "Μπουζούκι"
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.24624, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.11878, 0 )
 shape = SubResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
@@ -43,6 +43,7 @@ max_distance = 4096.0
 attenuation_filter_db = -8.0
 
 [node name="ActionComponent" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1867, 0 )
 ActionDistance = 5.0
 
 [connection signal="finished" from="AudioStreamPlayer3D" to="." method="SongEnded"]

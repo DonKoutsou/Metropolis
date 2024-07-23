@@ -33,10 +33,6 @@ public class FireplaceLight : StaticBody
         covered = CoverCast.IsColliding();
         CoverCast.QueueFree();
     }
-    public Vector3 GetActionPos(Vector3 PlayerPos)
-    {
-        return GlobalTranslation;
-    }
     public void ToggleFileplace()
     {
         if (State)

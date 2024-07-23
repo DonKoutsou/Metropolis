@@ -63,6 +63,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45066, 0 )
 shape = SubResource( 7 )
 
 [node name="ActionComponent" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.52122, 0 )
 ActionDistance = 5.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

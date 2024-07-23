@@ -56,7 +56,8 @@ public class ActionMenu : Control
 	}
 	public void StartPerformingAction(int type)
 	{
-		pl.loctomove = (Vector3)SelectedObj.Call("GetActionPos", pl.GlobalTranslation);;
+		ActionComponent Acomp = SelectedObj.GetNode<ActionComponent>("ActionComponent");
+		pl.loctomove = Acomp.GetActionPos(pl.GlobalTranslation);
 		PerformingAction = true;
 		ActionIndex = type;
 	}
@@ -66,8 +67,9 @@ public class ActionMenu : Control
 		{
 			pl.GetTalkText().Talk("Δεν μπορώ πάνω από την βάρκα");
 		}
-		Vector3 actionpos = (Vector3)SelectedObj.Call("GetActionPos", pl.GlobalTranslation);
-		if (actionpos.DistanceTo(pl.GlobalTranslation) > SelectedObj.GetNode<ActionComponent>("ActionComponent").ActionDistance)
+		ActionComponent Acomp = SelectedObj.GetNode<ActionComponent>("ActionComponent");
+		Vector3 actionpos = Acomp.GetActionPos(pl.GlobalTranslation);
+		if (actionpos.DistanceTo(pl.GlobalTranslation) > Acomp.ActionDistance)
 		{
 			if (!PerformingAction)
 			{
@@ -356,8 +358,9 @@ public class ActionMenu : Control
 	
 	public override void _PhysicsProcess(float delta)
 	{
-		
-		Vector3 actionpos = (Vector3)SelectedObj.Call("GetActionPos", pl.GlobalTranslation);
+		ActionComponent Acomp = SelectedObj.GetNode<ActionComponent>("ActionComponent");
+		Vector3 actionpos = Acomp.GetActionPos(pl.GlobalTranslation);
+
 		var screenpos = DViewport.GetInstance().GetCamera().UnprojectPosition(actionpos);
 
 		pl.GetNode<LoddedCharacter>("Pivot/Guy/Armature/Skeleton").HeadLookAt(actionpos);
@@ -436,7 +439,10 @@ public class ActionMenu : Control
 				return;
 			}
 			Spatial obj = (Spatial)rayar["collider"];
-			Vector3 actionpos = (Vector3)obj.Call("GetActionPos", pl.GlobalTranslation);
+			
+			ActionComponent Acomp = obj.GetNode<ActionComponent>("ActionComponent");
+			Vector3 actionpos = Acomp.GetActionPos(pl.GlobalTranslation);
+
 			if (actionpos.DistanceTo(pl.GlobalTranslation) > 100)
 			{
 				Stop();

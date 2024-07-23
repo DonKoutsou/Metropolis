@@ -7,9 +7,9 @@ public class JobBoardPanel : StaticBody
     NodePath Port = null;
     public void ToggleUI(bool toggle)
     {
-        JobBoard boardUI = (JobBoard)PlayerUI.GetInstance().GetUI(PlayerUIType.JOBBOARD);
-        boardUI.ToggleUI(toggle);
-        boardUI.SetPort(GetNode<Port>(Port));
+       // JobBoard boardUI = (JobBoard)PlayerUI.GetInstance().GetUI(PlayerUIType.JOBBOARD);
+        //boardUI.ToggleUI(toggle);
+       //boardUI.SetPort(GetNode<Port>(Port));
     }
     public void HighLightObject(bool toggle)
     {
@@ -18,10 +18,6 @@ public class JobBoardPanel : StaticBody
         {
             Mat.SetShaderParam("enable",  toggle);
         }
-    }
-    public Vector3 GetActionPos(Vector3 PlayerPos)
-    {
-        return GlobalTranslation;
     }
 
 }

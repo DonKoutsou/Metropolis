@@ -93,6 +93,7 @@ unit_db = 4.0
 area_mask = 0
 
 [node name="ActionComponent" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.48796, 0 )
 ActionDistance = 5.0
 
 [node name="RoofRayCast" type="RayCast" parent="."]

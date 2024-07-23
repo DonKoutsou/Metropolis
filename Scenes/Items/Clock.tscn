@@ -7,9 +7,8 @@
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=5]
 [ext_resource path="res://shaders/OutlineShader.tres" type="Material" id=6]
 
-[sub_resource type="CylinderShape" id=1]
-height = 0.054156
-radius = 0.248144
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.0474887, 0.0765331, 0.122156 )
 
 [node name="Battery" type="RigidBody" groups=["Interactables"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00434375, 0.0105272, -0.0158259 )
@@ -18,7 +17,6 @@ collision_mask = 36
 mode = 1
 mass = 0.0346939
 script = ExtResource( 1 )
-ItemWeight = 30
 ItemType = 3
 ItemIcon = ExtResource( 4 )
 ItemPickupActionName = "Ένα ρολόι"
@@ -33,7 +31,9 @@ material_overlay = ExtResource( 6 )
 mesh = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0770529, 0 )
 shape = SubResource( 1 )
 
 [node name="ActionComponent" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0739877, 0 )
 ActionDistance = 5.0

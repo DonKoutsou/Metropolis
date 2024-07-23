@@ -9,12 +9,21 @@ public class PlayerUI : Control
     NodePath ScreenEffects = null;
     [Export]
     NodePath CheatMenu = null;
-    [Export]
-    NodePath JobBoard = null;   
+    //[Export]
+    //NodePath JobBoard = null;   
     [Export]
     NodePath Inventory = null;
 
     static PlayerUI instance;
+
+    static int OpenMenus = 0;
+    public static void OnMenuToggled(bool t)
+    {
+        if (t)
+            OpenMenus ++;
+        else
+            OpenMenus --;
+    }
     public override void _Ready()
     {
         instance = this;
@@ -33,8 +42,8 @@ public class PlayerUI : Control
             UIToReturn = GetNode(ScreenEffects);
         else if (type == PlayerUIType.CHEATMENU)
             UIToReturn = GetNode(CheatMenu);
-        else if (type == PlayerUIType.JOBBOARD)
-            UIToReturn = GetNode(JobBoard);
+        //else if (type == PlayerUIType.JOBBOARD)
+            //UIToReturn = GetNode(JobBoard);
         else if (type == PlayerUIType.INVENTORY)
             UIToReturn = GetNode(Inventory);
 
@@ -42,7 +51,9 @@ public class PlayerUI : Control
     }
     public bool HasMenuOpen()
     {
-        return GetNode<InventoryUI>(Inventory).IsOpen || GetNode<JobBoard>(JobBoard).IsOpen();
+        //return GetNode<InventoryUI>(Inventory).IsOpen || GetNode<JobBoard>(JobBoard).IsOpen();
+        //return GetNode<InventoryUI>(Inventory).IsOpen || Tutorial.IsRunning();
+        return OpenMenus > 0;
     }
     public void OnPlayerSpawned(Player pl)
     {
@@ -53,7 +64,7 @@ public class PlayerUI : Control
 public enum PlayerUIType
 {
     CITYNAME,
-    JOBBOARD,
+    //JOBBOARD,
     SCREENEFFECTS,
     CHEATMENU,
     INVENTORY

@@ -105,6 +105,7 @@ public class InventoryUI : Control
         if (Anim.IsPlaying())
             return;
         Anim.Play("MenuOpen");
+        PlayerUI.OnMenuToggled(true);
         UpdateInventory();
         //Show();
         IsOpen = true;
@@ -115,6 +116,7 @@ public class InventoryUI : Control
         if (Anim.IsPlaying())
             return;
         Anim.Play("MenuClose");
+        PlayerUI.OnMenuToggled(false);
         WarpMouse(GetViewport().Size/2);
         //Hide();
         FocusedSlot = null;

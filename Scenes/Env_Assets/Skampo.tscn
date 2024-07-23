@@ -27,4 +27,5 @@ shape = SubResource( 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00925004, 1.80579, 0.00297302 )
 
 [node name="ActionComponent" parent="." instance=ExtResource( 4 )]
-ActionDistance = 5.0
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.61493, 0 )
+ActionDistance = 2.0

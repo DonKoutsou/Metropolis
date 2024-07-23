@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/HoverEngine.obj-fc70d3ff8009846de45600e6b2943eda.mesh"
+
+[deps]
+
+files=[ "res://.import/HoverEngine.obj-fc70d3ff8009846de45600e6b2943eda.mesh" ]
+
+source_file="res://Assets/Boat/Parts/HoverEngine.obj"
+dest_files=[ "res://.import/HoverEngine.obj-fc70d3ff8009846de45600e6b2943eda.mesh", "res://.import/HoverEngine.obj-fc70d3ff8009846de45600e6b2943eda.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286
