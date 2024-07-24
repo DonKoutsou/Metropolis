@@ -196,4 +196,9 @@ public enum ItemName
 	GUITAR,
 	BOUZOUKI,
 	TOOLBOX,
+	CASSETTE,
+	VINYL,
+	LOG,
+	BOOK,
+	BLUEPRINT,
 }

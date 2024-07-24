@@ -57,13 +57,13 @@ public class ActionMenu : Control
 	public void StartPerformingAction(int type)
 	{
 		ActionComponent Acomp = SelectedObj.GetNode<ActionComponent>("ActionComponent");
-		pl.loctomove = Acomp.GetActionPos(pl.GlobalTranslation);
+		pl.UpdateLocationToMove(Acomp.GetActionPos(pl.GlobalTranslation));
 		PerformingAction = true;
 		ActionIndex = type;
 	}
 	private void On_PickUp_Button_Down()
 	{
-		if (pl.HasVecicle && pl.currveh != SelectedObj)
+		if (pl.HasVehicle() && pl.GetVehicle() != SelectedObj)
 		{
 			pl.GetTalkText().Talk("Δεν μπορώ πάνω από την βάρκα");
 		}
@@ -119,7 +119,7 @@ public class ActionMenu : Control
 			furn.Search(out foundit);
 			if (foundit != null)
 			{
-				pl.CharacterInventory.InsertItem(foundit);
+				pl.GetCharacterInventory().InsertItem(foundit);
 				pl.GetTalkText().Talk(foundit.GetItemPickUpText());
 			}
 			else
@@ -128,7 +128,7 @@ public class ActionMenu : Control
 		else if (SelectedObj is WindGenerator generator)
 		{
 			List<Item> batteries;
-			pl.CharacterInventory.GetItemsByType(out batteries, ItemName.BATTERY);
+			pl.GetCharacterInventory().GetItemsByType(out batteries, ItemName.BATTERY);
 			float availableenergy = generator.GetCurrentEnergy();
 			float rechargeamm = 0;
 			for (int i = batteries.Count - 1; i > -1; i--)
@@ -184,9 +184,9 @@ public class ActionMenu : Control
 				pl.GetTalkText().Talk("Δεν έχει χώρο.");
 				return;
 			}
-			if (pl.HasVecicle)
+			if (pl.HasVehicle())
 			{
-				if (!pl.currveh.UnBoardVehicle(pl))
+				if (!pl.GetVehicle().UnBoardVehicle(pl))
 					return;
 			}
 			Position3D seat = sit.GetSeat();
@@ -212,7 +212,7 @@ public class ActionMenu : Control
 		if (SelectedObj is Vehicle)
 		{
 			Vehicle veh = (Vehicle)SelectedObj;
-			veh.ToggleMachine(!veh.Working);
+			veh.ToggleMachine(!veh.IsRunning());
 		}
 	}
 	private void On_Interact_Button_Down()
@@ -281,7 +281,7 @@ public class ActionMenu : Control
 		}
 		else if (obj is Vehicle)
 		{
-			if (pl.HasVecicle && pl.currveh == obj)
+			if (pl.HasVehicle() && pl.GetVehicle() == obj)
 				PickButton.Text = "Αποβιβάση";
 			else
 				PickButton.Text = "Επιβιβάση";
@@ -342,7 +342,7 @@ public class ActionMenu : Control
 		{
 			PerformingAction = false;
 			ActionIndex = 0;
-			pl.loctomove = pl.GlobalTranslation;
+			pl.UpdateLocationToMove(pl.GlobalTranslation);
 		}
         if (selecting)
             return;
@@ -386,7 +386,8 @@ public class ActionMenu : Control
 		{
 			if (actionpos.DistanceTo(pl.GlobalTranslation) <= SelectedObj.GetNode<ActionComponent>("ActionComponent").ActionDistance)
 			{
-				pl.loctomove = pl.GlobalTranslation;
+				pl.UpdateLocationToMove(pl.GlobalTranslation);
+				
 				if (ActionIndex == 0)
 				{
 					On_PickUp_Button_Down();

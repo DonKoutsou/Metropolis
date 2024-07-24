@@ -520,7 +520,7 @@ public class WorldMap : TileMap
 				CurrentTile = curt;
 				if (pl.HasVehicle())
 				{
-					Vehicle veh = pl.currveh;
+					Vehicle veh = pl.GetVehicle();
 					
 					ileinf.RemoveVehicle(veh);
 					veh.ReparentVehicle(ileinfto.Island);

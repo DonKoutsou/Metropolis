@@ -6,7 +6,6 @@ public class Ladder : Spatial
 {
     [Export]
 	Vector3 TopPossition = new Vector3(0, 0.5f, 6);
-
     [Export]
 	Vector3 BottomPossition = new Vector3(0, 0.5f, 6);
     Position3D BottomPos;
@@ -73,7 +72,7 @@ public class Ladder : Spatial
         pl.Teleport(closest.GlobalTranslation);
         pl.GlobalRotation = rot;
 
-        pl.anim.PlayAnimation(anim);
+        pl.Anims().PlayAnimation(anim);
         //pl.global
     }
     public void EndTraversal()
@@ -93,9 +92,4 @@ public class Ladder : Spatial
     {
 		((ShaderMaterial)GetNode<MeshInstance>("Ladder").MaterialOverlay).SetShaderParam("enable",  toggle);
     }
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
 }

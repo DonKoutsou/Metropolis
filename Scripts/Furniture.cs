@@ -64,9 +64,9 @@ public class Furniture : Spatial
 	{
 		return Searched;
 	}
-	public ItemName GetItemName()
+	public string GetItemName()
 	{
-		return StashedItem.ItemType;
+		return StashedItem.GetItemName();
 	}
 	public void SetData(FurnitureInfo info)
 	{
@@ -143,13 +143,13 @@ public class FurnitureInfo
 	public Transform Placement;
 	public bool Searched;
 	public bool HasItem;
-	public ItemName item;
+	public string item;
 	public void UpdateInfo(Furniture furn)
 	{
 		Searched = furn.GetIsSearched();
 	}
 
-	public void SetInfo(string name, bool srch, bool hasI, ItemName it, string SceneDt, Transform placement)
+	public void SetInfo(string name, bool srch, bool hasI, string it, string SceneDt, Transform placement)
 	{
 		FunritureName = name;
 		Searched = srch;
@@ -164,7 +164,7 @@ public class FurnitureInfo
 			{"Name", FunritureName},
 			{"Searched", Searched},
 			{"HasItem", HasItem},
-			{"ItemType", (int)item},
+			{"ItemName", item},
 			{"SceneData", SceneData},
 			{"Placement", Placement}
 		};
@@ -175,7 +175,7 @@ public class FurnitureInfo
         FunritureName = (string)data.Get("Name");
 		Searched = (bool)data.Get("Searched");
 		HasItem = (bool)data.Get("HasItem");
-		item = (ItemName)data.Get("ItemType");
+		item = (string)data.Get("ItemName");
 		SceneData = (string)data.Get("SceneData");
 		Placement = (Transform)data.Get("Placement");
     }

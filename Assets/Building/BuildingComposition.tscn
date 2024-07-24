@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Assets/Building/House_Ext.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Building/House_Int.obj" type="ArrayMesh" id=2]
@@ -7,10 +7,6 @@
 [ext_resource path="res://Scripts/House.cs" type="Script" id=5]
 [ext_resource path="res://Assets/Building/BuildingExterior.material" type="Material" id=6]
 [ext_resource path="res://Scenes/Env_Assets/Furniture.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/Items/Item.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Items/Drahma.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Scenes/Items/BatteryEmpty.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Scenes/Items/Battery.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Env_Assets/IndoorsLight.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Env_Assets/Furniture2.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/BuildingDecorations/Decorations2.tscn" type="PackedScene" id=14]
@@ -40,10 +36,12 @@ script = ExtResource( 5 )
 PossibleFurni = [ ExtResource( 7 ), ExtResource( 13 ), ExtResource( 16 ) ]
 PossibleDeco = [ ExtResource( 15 ), ExtResource( 14 ) ]
 SpawnPool = {
-2: ExtResource( 11 ),
-15: ExtResource( 10 ),
-20: ExtResource( 8 ),
-40: ExtResource( 9 )
+Resource( "res://Scenes/Items/Battery.tscn" ): 2,
+Resource( "res://Scenes/Items/BatteryEmpty.tscn" ): 10,
+Resource( "res://Scenes/Items/Drahma.tscn" ): 40,
+Resource( "res://Scenes/Items/FastLeg_L.tscn" ): 1,
+Resource( "res://Scenes/Items/FastLeg_R.tscn" ): 1,
+Resource( "res://Scenes/Items/Guitar.tscn" ): 1
 }
 
 [node name="IndoorsLight" parent="." instance=ExtResource( 12 )]

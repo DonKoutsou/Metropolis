@@ -1076,7 +1076,7 @@ public class IslandInfo
 			{
 				Furniture furn = furni[f];
 				FurnitureInfo inf = new FurnitureInfo();
-				ItemName itn = 0;
+				string itn = string.Empty;
 				if (furn.HasItem())
 				{
 					itn = furn.GetItemName();

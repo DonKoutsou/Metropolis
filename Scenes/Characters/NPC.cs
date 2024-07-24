@@ -35,8 +35,6 @@ public class NPC : Character
 		}
 			
 	}
-	
-
 	Node Skeleton;
 
 	Timer IdleTimer;
@@ -73,13 +71,10 @@ public class NPC : Character
 		#endif
 
 		base._Ready();
-
-		
-
+		GetNode<MeshInstance>("Pivot/Guy/Armature/Skeleton/BabyLowpolySurface1").Visible = false;
 		if (Sitting)
 		{
-			CallDeferred("SpawnSit");
-			
+			SpawnSit();
 		}
 		if (InstrumentToSpawnWith != null)
 		{
@@ -87,9 +82,9 @@ public class NPC : Character
 			AddInstrument(inst);
 		}
 		
-		if (PlayInstrument)
+		if (PlayInstrument && HasInstrument())
 		{
-			CallDeferred("PlayMusic");
+			PlayMusic();
 		}
 		
 		if (spawnUncon)

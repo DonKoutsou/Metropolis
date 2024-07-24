@@ -5,82 +5,48 @@ using System.ComponentModel;
 using System.Security.Cryptography.X509Certificates;
 public class Character : KinematicBody
 {
-	[Export]
-	public int Speed { get; set; } = 14; // How fast the player will move (pixels/sec).
-
-	[Export]
-	public float FallAcceleration = 75;
-
-	[Export]
-	public int JumpImpulse = 20;
-
-	[Export]
-	public float RunSpeed = 20;
-
-	public bool m_balive = true;
-
-    public Vector3 _velocity = Vector3.Zero;
 	
-	public Inventory CharacterInventory;
+
+	[Export]
+	protected string CharacterName = "Βαλάντης";
+
+	protected bool m_balive = true;
+
+    protected Vector3 _velocity = Vector3.Zero;
+	
+	protected Inventory CharacterInventory;
 
 	//[Export]
 	//float MaxEnergyAmmount = 100;
-
-	[Export]
-	public string CharacterName = "Βαλάντης";
-
 	//public float CurrentEnergy = 100;
 
-	public SpotLight NightLight;
-	SpatialMaterial BulbMat;
+	protected SpotLight NightLight;
+	protected SpatialMaterial BulbMat;
 
-	public Spatial HeadPivot;
+	protected Spatial HeadPivot;
 
-	public Vector3 loctomove;
+	protected Vector3 loctomove;
 
-	public Character_Animations anim;
+	protected Character_Animations anim;
 
-	public bool HasVecicle = false;
+	protected bool HasVecicle = false;
 
-	public Vehicle currveh;
+	protected Vehicle currveh;
 
-	public bool sitting = false;
+	protected bool sitting = false;
 
-	SittingThing chair = null;
+	protected SittingThing chair = null;
 
-	Position3D seat = null;
+	protected Position3D seat = null;
 
-	private TalkText TText = null;
+	protected TalkText TText = null;
 
-	public bool PlayingInstrument = false;
+	protected bool PlayingInstrument = false;
 
-	public bool IsUncon = false;
+	protected bool IsUncon = false;
 
-	//public float GetCharacterBatteryCap()
-	//{
-	//	return MaxEnergyAmmount;
-	//}
-	//public float GetCurrentCharacterEnergy()
-	//{
-	//	return CurrentEnergy;
-	//}
-	//public void RechargeCharacter(float ammount)
-	//{
-	//	CurrentEnergy += ammount;
-    //    if (CurrentEnergy > MaxEnergyAmmount)
-    //    {
-    //        CurrentEnergy = MaxEnergyAmmount;
-    //    }
-	//}
-	//public void SetEnergy(float en)
-	//{
-	//	CurrentEnergy = en;
-	//}
-//	public void ConsumeEnergy(float ammount)
-    //{
-    //    CurrentEnergy -= ammount;
-    //}
-
+	
+	
 	public override void _Ready()
 	{
 		TText = GetNode<TalkText>("TalkText");
@@ -93,6 +59,10 @@ public class Character : KinematicBody
 	public TalkText GetTalkText()
 	{
 		return TText;
+	}
+	public bool GetUnconState()
+	{
+		return IsUncon;
 	}
 	public void ToggleAllLimbs()
 	{
@@ -120,35 +90,13 @@ public class Character : KinematicBody
 	{
 		return anim;
 	}
-	public void SetData(CharacterInfo info)
-	{
-        Name = info.Name;
-        Translation = info.Position;
-		//CurrentEnergy = info.CurrentEnergy;
-		m_balive = info.Alive;
+	public string GetCharacterName()	{	return CharacterName;	}
+	
+	public Inventory GetCharacterInventory()	{	return CharacterInventory;	}
 
-		for (int i = 0; i < 6; i++)
-		{
-			SetLimbColor((LimbType)i, info.LimbColors[i]);
-		}
-	}
-	public void SetVehicle(Vehicle veh)
-	{
-		if (veh == null)
-		{
-			HasVecicle = false;
-			currveh = null;
-		}
-		else
-		{
-			HasVecicle = true;
-			currveh = veh;
-		}
-	}
-	public Inventory GetCharacterInventory()
-	{
-		return CharacterInventory;
-	}
+	public void UpdateLocationToMove(Vector3 NewLoc) {	loctomove = NewLoc;	}
+	public Vector3 GetMovingLocation()	{	return loctomove;	}
+	public bool IsAlive()	{	return m_balive;	}
     /*public override void _Process(float delta)
     {
         base._Process(delta);
@@ -161,7 +109,6 @@ public class Character : KinematicBody
 				currveh.ToggleMachine(false);
 			}
 		}
-			
     }*/
 	public void ToggleNightLight(bool toggle)
 	{
@@ -175,36 +122,6 @@ public class Character : KinematicBody
 		}
 		BulbMat.EmissionEnabled = !toggle;
 	}
-    public void MoveTo(Vector3 loc)
-	{
-        if (!m_balive)
-			return;
-        _velocity = Vector3.Zero;
-		var cloc = GlobalTransform.origin;
-		var spd = RunSpeed;
-		var direction = loc - GlobalTransform.origin;
-		
-		float dist = new Vector2(loctomove.x, loctomove.z).DistanceTo(new Vector2( GlobalTransform.origin.x, GlobalTransform.origin.z));
-
-		if (dist < 1)
-		{
-			anim.PlayAnimation(E_Animations.Idle);
-		}
-		else
-		{
-			direction = direction.Normalized();
-			Vector3 lookloc = new Vector3(direction.x, 0, direction.z);
-			GetNode<Spatial>("Pivot").LookAt(Translation - lookloc, Vector3.Up);
-				
-		}
-        _velocity.x = direction.x * spd;
-		_velocity.z = direction.z * spd;
-		//_velocity.y = direction.y * spd;
-		// Vertical velocity
-		_velocity.y -= FallAcceleration * 0.01f;
-		// Moving the character
-		_velocity = MoveAndSlide(_velocity, Vector3.Up);
-	}
 	public virtual void Start()
 	{
 		loctomove = GlobalTransform.origin;
@@ -213,13 +130,6 @@ public class Character : KinematicBody
 	public virtual void Stop()
 	{
 		SetPhysicsProcess(false);
-	}
-	private void On_Body_Entered(object body)
-	{
-	}
-	public bool IsAlive()
-	{
-		return m_balive;
 	}
 	public virtual void Respawn()
 	{
@@ -230,7 +140,6 @@ public class Character : KinematicBody
 	}
 	public virtual void Kill(string reason = null)
 	{
-
 		m_balive = false;
 		loctomove = GlobalTransform.origin;
 		anim.ToggleDeath();
@@ -280,6 +189,36 @@ public class Character : KinematicBody
 		anim.ToggleIdle();
 		sitting = false;
 	}
+	/*public void MoveTo(Vector3 loc)
+	{
+        if (!m_balive)
+			return;
+        _velocity = Vector3.Zero;
+		var cloc = GlobalTransform.origin;
+		var spd = RunSpeed;
+		var direction = loc - GlobalTransform.origin;
+		
+		float dist = new Vector2(loctomove.x, loctomove.z).DistanceTo(new Vector2( GlobalTransform.origin.x, GlobalTransform.origin.z));
+
+		if (dist < 1)
+		{
+			anim.PlayAnimation(E_Animations.Idle);
+		}
+		else
+		{
+			direction = direction.Normalized();
+			Vector3 lookloc = new Vector3(direction.x, 0, direction.z);
+			GetNode<Spatial>("Pivot").LookAt(Translation - lookloc, Vector3.Up);
+				
+		}
+        _velocity.x = direction.x * spd;
+		_velocity.z = direction.z * spd;
+		//_velocity.y = direction.y * spd;
+		// Vertical velocity
+		_velocity.y -= FallAcceleration * 0.01f;
+		// Moving the character
+		_velocity = MoveAndSlide(_velocity, Vector3.Up);
+	}
 	public void Push(float degr, float ammount = 500)
 	{
 		if (!m_balive)
@@ -306,9 +245,16 @@ public class Character : KinematicBody
 		{
 			_velocity.y += 1;
 		}
-	}
+	}*/
+
+	//////////////////////////////////////////////////////////////////////////
+	//Vehicle stuff
 	[Signal]
     public delegate void VehicleBoardEventHandler(bool toggle, Vehicle veh);
+
+	public bool IsOnVehicle()	{	return HasVecicle;	}
+	public Vehicle GetVehicle()	{	return currveh;	}
+
 	public virtual void OnVehicleBoard(Vehicle veh)
 	{
 		EmitSignal("VehicleBoardEventHandler", true, veh);
@@ -328,6 +274,26 @@ public class Character : KinematicBody
 		
 		//SetCollisionMaskBit(8, false);
 	}
+	public void SetVehicle(Vehicle veh)
+	{
+		if (veh == null)
+		{
+			HasVecicle = false;
+			currveh = null;
+		}
+		else
+		{
+			HasVecicle = true;
+			currveh = veh;
+		}
+	}
+	public bool HasVehicle()
+	{
+		return HasVecicle;
+	}
+	//////////////////////////////////////////////////////////////////////////
+	//music stuff
+
 	public virtual void PlayMusic()
 	{
 		anim.ToggleInstrument(true);
@@ -373,14 +339,12 @@ public class Character : KinematicBody
 		inst.Translation = Vector3.Zero;
 		inst.Rotation = Vector3.Zero;
 	}
-	/*public bool HasLimbOfType(LimbType type)
+	public virtual void OnSongEnded(Instrument inst)
 	{
-		LoddedCharacter lod = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<LoddedCharacter>("Skeleton");
-		string name = LimbTranslator.EnumToString(type);
-		if (lod.GetCurrentLOD() == 1)
-			name += "_LOD"; 
-		return GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>(name).Visible;
-	}*/
+		StopMusic();
+	}
+	//////////////////////////////////////////////////////////////////////////
+	/////Limb stuff
 	public void ToggleLimb(LimbType limb, bool toggle)
 	{
 		LoddedCharacter lod = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<LoddedCharacter>("Skeleton");
@@ -402,18 +366,57 @@ public class Character : KinematicBody
 		MeshInstance limbtocolor = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>(LimbTranslator.EnumToString(limb));
 		return ((GradientTexture)((SpatialMaterial)limbtocolor.GetActiveMaterial(0)).DetailAlbedo).Gradient.GetColor(0);
 	}
-	public virtual void OnSongEnded(Instrument inst)
+	/*public bool HasLimbOfType(LimbType type)
 	{
-		//IdleTimer.Start();
-		
-		StopMusic();
-		//instatatchment.GetNode<RemoteTransform>("PlayingAtatchment").ForceUpdateCache(); 
-
-	}
+		LoddedCharacter lod = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<LoddedCharacter>("Skeleton");
+		string name = LimbTranslator.EnumToString(type);
+		if (lod.GetCurrentLOD() == 1)
+			name += "_LOD"; 
+		return GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>(name).Visible;
+	}*/
+	//////////////////////////////////////////////////////////////////////////
+	
 	private void On_DialogueButton_Button_Down()
 	{
 		
 	}
+	public void SetData(CharacterInfo info)
+	{
+        Name = info.Name;
+        Translation = info.Position;
+		//CurrentEnergy = info.CurrentEnergy;
+		m_balive = info.Alive;
+
+		for (int i = 0; i < 6; i++)
+		{
+			SetLimbColor((LimbType)i, info.LimbColors[i]);
+		}
+	}
+	////Old stuff
+	//public float GetCharacterBatteryCap()
+	//{
+	//	return MaxEnergyAmmount;
+	//}
+	//public float GetCurrentCharacterEnergy()
+	//{
+	//	return CurrentEnergy;
+	//}
+	//public void RechargeCharacter(float ammount)
+	//{
+	//	CurrentEnergy += ammount;
+    //    if (CurrentEnergy > MaxEnergyAmmount)
+    //    {
+    //        CurrentEnergy = MaxEnergyAmmount;
+    //    }
+	//}
+	//public void SetEnergy(float en)
+	//{
+	//	CurrentEnergy = en;
+	//}
+//	public void ConsumeEnergy(float ammount)
+    //{
+    //    CurrentEnergy -= ammount;
+    //}
 }
 public class CharacterInfo
 {
@@ -431,7 +434,7 @@ public class CharacterInfo
 		Position = it.Translation;
 		SceneData = it.Filename;
 		//CurrentEnergy = it.GetCurrentCharacterEnergy();
-		Alive = it.m_balive;
+		Alive = it.IsAlive();
 		Talked = it.Talked;
 		for (int i = 0; i < 6; i++)
 		{

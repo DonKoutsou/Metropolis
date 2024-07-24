@@ -68,6 +68,7 @@ tracks/1/keys = {
 collision_layer = 16
 collision_mask = 0
 script = ExtResource( 2 )
+FurnitureDescription = "Μια συρταριέρα..."
 ToHighLight = [ NodePath("MeshInstance"), NodePath("MeshInstance4"), NodePath("MeshInstance5") ]
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
@@ -94,7 +95,7 @@ shape = SubResource( 4 )
 
 [node name="ActionComponent" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.00101, 0.887023 )
-ActionDistance = 5.0
+ActionDistance = 10.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Open = SubResource( 5 )

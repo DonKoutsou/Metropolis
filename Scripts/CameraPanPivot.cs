@@ -21,7 +21,7 @@ public class CameraPanPivot : Position3D
 
 		SpringArm = GetNode<SpringArm>("SpringArm");
 		ZoomPivot = SpringArm.GetNode<CameraZoomPivot>("CameraZoomPivot");
-		PanXPivot = SpringArm.GetNode<CameraZoomPivot>("CameraZoomPivot").GetNode<Position3D>("CameraPanXPivot");
+		PanXPivot = ZoomPivot.GetNode<Position3D>("CameraPanXPivot");
 
 		//store initial translation to snap back if needed
 		CameraInitialPosition = SpringArm.Rotation;

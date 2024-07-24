@@ -151,7 +151,7 @@ public class InventoryUI : Control
 
             for (int v = Items.Count() - 1; v > -1; v --)
             {
-                if (Items[v].GetItemType() == global::ItemName.LIMB)
+                if (Items[v] is Limb l && Inv.IsLimbEquipped(l))
                     continue;
                 if (!itemcat2.ContainsKey(Items[v].GetItemName()))
                     itemcat2.Add(Items[v].GetItemName(), Items[v]);

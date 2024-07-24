@@ -14,7 +14,7 @@ public class MyWorld : Spatial
 	[Signal]
     public delegate void PlayerSpawnedEventHandler(Player Pl);
 
-	static List<KeyValuePair<int, PackedScene>> GlobalItemList = new List<KeyValuePair<int, PackedScene>>();
+	static List<KeyValuePair<string, PackedScene>> GlobalItemList = new List<KeyValuePair<string, PackedScene>>();
 	
 	static List<IslandInfo> Orderedilestodissable = new List<IslandInfo>();
 	
@@ -56,8 +56,8 @@ public class MyWorld : Spatial
 		{
 			Item it = pair.Instance<Item>();
 			
-			int key = (int)it.ItemType;
-			GlobalItemList.Add(new KeyValuePair<int, PackedScene>(key, pair));
+			string key = it.GetItemName();
+			GlobalItemList.Add(new KeyValuePair<string, PackedScene>(key, pair));
 			it.Free();
 		}
 		
@@ -99,13 +99,13 @@ public class MyWorld : Spatial
 			}
 		}
 	}
-	public static PackedScene GetItemByType(ItemName name)
+	public static PackedScene GetItemByType(string name)
 	{
 		PackedScene path = null;
 		//var lookup = GlobalItemList.ToLookup(kvp => (int)name, kvp => kvp.Value);
-		foreach (KeyValuePair<int, PackedScene> thing in GlobalItemList)
+		foreach (KeyValuePair<string, PackedScene> thing in GlobalItemList)
 		{
-			if (thing.Key == (int)name)
+			if (thing.Key == name)
 			{
 				path = thing.Value;
 			}
@@ -162,7 +162,7 @@ public class MyWorld : Spatial
 		ile.GetCharacters(out chars);
 		foreach (Character cha in chars)
 		{
-			if (!cha.IsUncon)
+			if (!cha.GetUnconState())
 			{
 				if (rescuer != null && rescuer.GlobalTranslation.DistanceTo(pos) < cha.GlobalTranslation.DistanceTo(pos))
 					continue;
@@ -188,9 +188,9 @@ public class MyWorld : Spatial
 		CameraAnimationPlayer CameraAnimation = CameraAnimationPlayer.GetInstance();
         CameraAnimation.Disconnect("FadeOutFinished", this, "FinishRescue");
 		Player pl = Player.GetInstance();
-		if (pl.HasVecicle)
+		if (pl.HasVehicle())
 		{
-			Vehicle v = pl.currveh;
+			Vehicle v = pl.GetVehicle();
 			if (RescueIle.HasPort())
 			{
 				v.ReparentVehicle(RescueIle);
@@ -201,7 +201,7 @@ public class MyWorld : Spatial
 					v.GlobalTranslation = spot;
 				}
 			}
-			pl.currveh.Capsize();
+			pl.GetVehicle().Capsize();
 		}
 		//pl.RechargeCharacter(100);
 		pl.Respawn();

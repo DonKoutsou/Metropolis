@@ -24,14 +24,14 @@ public class DialogueManager : Node
 		Player pl = Player.GetInstance();
 		if (pl.HasVehicle())
 		{
-			if (!pl.currveh.UnBoardVehicle(pl))
+			if (!pl.GetVehicle().UnBoardVehicle(pl))
 				return;
 		}
 		Position3D talkpos = character.GetNode<Position3D>("TalkPosition");
 
-		pl.loctomove = talkpos.GlobalTranslation;
-		DialogicSharp.SetVariable("GenericCharacter", character.CharacterName);
-		Camera cam = pl.DialogueCam;
+		pl.UpdateLocationToMove(talkpos.GlobalTranslation);
+		DialogicSharp.SetVariable("GenericCharacter", character.GetCharacterName());
+		Camera cam = pl.GetDialogueCamera();
 		
 		Spatial Diagcampivot = (Spatial)cam.GetParent();
 		Diagcampivot.GlobalRotation = talkpos.GlobalRotation;
@@ -39,9 +39,9 @@ public class DialogueManager : Node
 		cam.LookAt(character.GlobalTranslation, Vector3.Up);
 		
 		CameraAnimationPlayer.GetInstance().PlayAnim("FadeInDialogue");
-		if (character.IsUncon)
+		if (character.GetUnconState())
 		{
-			bool HasBat = pl.CharacterInventory.HasBatteries();
+			bool HasBat = pl.GetCharacterInventory().HasBatteries();
 			DialogicSharp.SetVariable("HasBatteries", HasBat.ToString().ToLower());
 			var dialogue = DialogicSharp.Start("UnConDialogue");
 			AddChild(dialogue);
@@ -64,7 +64,7 @@ public class DialogueManager : Node
 		string saved = DialogicSharp.GetVariable("SavedCharacter");
 		if (saved == "true")
 		{
-            Inventory inv = pl.CharacterInventory;
+            Inventory inv = pl.GetCharacterInventory();
 			List<Battery> bats;
 			inv.GetBatteries(out bats);
 

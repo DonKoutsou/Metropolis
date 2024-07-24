@@ -3,8 +3,8 @@ using System;
 
 public class JobBoardPanel : StaticBody
 {
-    [Export]
-    NodePath Port = null;
+    //[Export]
+   //NodePath Port = null;
     public void ToggleUI(bool toggle)
     {
        // JobBoard boardUI = (JobBoard)PlayerUI.GetInstance().GetUI(PlayerUIType.JOBBOARD);

@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-
 ////////////////////////////////////////////////
 /*
 ██████╗ ██╗      █████╗ ██╗   ██╗███████╗██████╗ 
@@ -15,27 +14,44 @@ using System.Linq;
 ╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝
 */
 ////////////////////////////////////////////////                                      
-
-
 public class Player : Character
 {
+	[Export]
+	protected int Speed { get; set; } = 14; // How fast the player will move (pixels/sec).
+
+	[Export]
+	protected float FallAcceleration = 75; //
+
+	[Export]
+	protected int JumpImpulse = 20;
+
+	[Export]
+	protected int RunSpeed = 20;
+
 	////// Energy ///////
 	//Consumption curve
-	[Export]
-	Curve Consumption = null;
-	[Export]
-	public int InventoryWeightOverride = -1;
+	//[Export]
+	//Curve Consumption = null;
+	//[Export]
+	//public int InventoryWeightOverride = -1;
 	////// Rpm to base consumption on /////
-	public float rpm;
+	//float rpm;
+
+
 	//Node Used to show where player is moving
 	MoveLocation moveloc;
 	//Toggle that makes character follow cursor without having to rightclick. Keybinding [TAB]
 	bool Autowalk = false;
-	public bool IsRunning = false;
+	bool IsRunning = false;
 
-	public Camera DialogueCam;
+	Camera DialogueCam;
 
 	static Player instance;
+
+	public void SetRunSpeed(int NewSpeed)
+	{
+		RunSpeed = NewSpeed;
+	}
     public override void _EnterTree()
     {
         base._EnterTree();
@@ -54,6 +70,10 @@ public class Player : Character
 	{
 		return instance;
 	}
+	public Camera GetDialogueCamera()
+	{
+		return DialogueCam;
+	}
 	//public float GetCurrentEnergy()
 	//{
 	//	return CurrentEnergy;
@@ -65,10 +85,7 @@ public class Player : Character
 		loctomove = pos;
 		GetNode<Spatial>("Pivot").Rotation = Vector3.Zero;
 	}
-	public bool HasVehicle()
-	{
-		return HasVecicle;
-	}
+	
 	public override void _Ready()
 	{
 		base._Ready();
@@ -128,8 +145,8 @@ public class Player : Character
 		Vector2 mousepos = DViewport.GetInstance().GetMousePosition() / mult;
 		Camera cam = DViewport.GetInstance().GetCamera();
 		Vector3 rayor = cam.ProjectRayOrigin(mousepos);
-		Vector3 rayend = rayor + cam.ProjectRayNormal(mousepos) * 30000;
-		var rayar = new Dictionary();
+		Vector3 rayend = rayor + cam.ProjectRayNormal(mousepos) * 20000;
+		Dictionary rayar;
 
 		rayar = spacestate.IntersectRay(rayor, rayend, new Godot.Collections.Array { this }, moveloc.MoveLayer);
 		//if ray finds nothiong return
@@ -137,9 +154,7 @@ public class Player : Character
 		{
 			bool ItsSea = ((CollisionObject)rayar["collider"]).GetCollisionLayerBit(8);
 			if (ItsSea && !HasVecicle)
-			{
-				
-			}
+				return;
 			else
 			{
 				//Spatial ob = (Spatial)rayar["collider"];
@@ -234,7 +249,7 @@ public class Player : Character
 		{
 			if (dist < 10)
 			{
-				rpm = 0.05f;
+				//rpm = 0.05f;
 				
 				anim.PlayAnimation(E_Animations.Idle);
 				moveloc.Hide();
@@ -242,10 +257,10 @@ public class Player : Character
 			}
 			else if (dist > 10)
 			{
-				if (currveh.Working)
+				/*if (currveh.IsRunning())
 					rpm = 1;
 				else
-					rpm = 0.05f;
+					rpm = 0.05f;*/
 				anim.PlayAnimation(E_Animations.Idle);
 				HeadPivot.Rotation = new Vector3(0.0f,0.0f,0.0f);
 				moveloc.Show();
@@ -258,7 +273,7 @@ public class Player : Character
 				anim.PlayAnimation(E_Animations.Idle);
 				moveloc.Hide();
 				HeadPivot.Rotation = new Vector3(0.0f,0.0f,0.0f);
-				rpm = 0.05f;
+				//rpm = 0.05f;
 			}
 			else
 			{
@@ -269,13 +284,13 @@ public class Player : Character
 
 				if (!IsRunning)
 				{
-					rpm = 0.2f;
+					//rpm = 0.2f;
 					anim.PlayAnimation(E_Animations.Walk);
 				}
 				else
 				{
 					spd = RunSpeed;
-					rpm = 0.5f;
+					//rpm = 0.5f;
 					anim.PlayAnimation(E_Animations.Run);
 				}
 				float heightdif = GlobalTranslation.y - loctomove.y ;
@@ -300,7 +315,7 @@ public class Player : Character
 		}
 		/////////////////////////////////////////////
 		//battery consumption
-		float coons = Consumption.Interpolate(rpm) * delta;
+		//float coons = Consumption.Interpolate(rpm) * delta;
 		//ConsumeEnergy(coons);
 
 		/*if (GetCurrentEnergy() < GetCharacterBatteryCap() / 10)
@@ -328,8 +343,8 @@ public class Player : Character
 		}
 		else
 		{
-			if (currveh.Working)
-				currveh.loctomove = loctomove;
+			if (currveh.IsRunning())
+				currveh.UpdateMoveLoc(loctomove);
 		}
 	}
 	//Handling of input

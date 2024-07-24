@@ -18,7 +18,6 @@ mass = 0.0346939
 linear_damp = 1.22
 angular_damp = 1.22
 script = ExtResource( 1 )
-ItemWeight = 300
 ItemType = 6
 ItemIcon = ExtResource( 3 )
 ItemPickupActionName = "Ένα δεξιό πόδι.."

@@ -80,43 +80,48 @@ public class House : Spatial
 
 		Spatial Furiture = GetNode<Spatial>("FurniturePlacements");
 		var furniplacaments = Furiture.GetChildren();
-
-		//pick 3 places to place furniture
-		for (int i = 0; i < FurnitureAmmount; i++)
+		if (furniplacaments.Count > 0)
 		{
-			int index = RandomContainer.Next(0, furniplacaments.Count);
-			Position3D place = (Position3D)furniplacaments[index];
-			furniplacaments.Remove(place);
+			//pick 3 places to place furniture
+			for (int i = 0; i < FurnitureAmmount; i++)
+			{
+				int index = RandomContainer.Next(0, furniplacaments.Count);
+				Position3D place = (Position3D)furniplacaments[index];
+				furniplacaments.Remove(place);
 
-			PackedScene furnitospawn = PossibleFurni[RandomContainer.Next(0, PossibleFurni.Count)];
+				PackedScene furnitospawn = PossibleFurni[RandomContainer.Next(0, PossibleFurni.Count)];
 
-			Furniture furn = furnitospawn.Instance<Furniture>();
-			AddChild(furn, true);
-			furn.Transform = place.Transform;
+				Furniture furn = furnitospawn.Instance<Furniture>();
+				AddChild(furn, true);
+				furn.Transform = place.Transform;
 
-			FurnitureList.Insert(i, furn);
+				FurnitureList.Insert(i, furn);
 
-			if (!spawnItems)
-				continue;
-			furn.SpawnItem(GetDrop());
+				if (!spawnItems)
+					continue;
+				furn.SpawnItem(GetDrop());
+			}
 		}
+		
 
 
 		Spatial decos = GetNode<Spatial>("DecorationPlacaments");
 		var decoplacaments = decos.GetChildren();
-
+		if (decoplacaments.Count > 0)
+		{
 		//pick 3 places to place furniture
 
-		int dindex = RandomContainer.Next(0, decoplacaments.Count);
-		Position3D decplace = (Position3D)decoplacaments[dindex];
+			int dindex = RandomContainer.Next(0, decoplacaments.Count);
+			Position3D decplace = (Position3D)decoplacaments[dindex];
 
-		PackedScene decotospawn = PossibleDeco[RandomContainer.Next(0, PossibleDeco.Count)];
+			PackedScene decotospawn = PossibleDeco[RandomContainer.Next(0, PossibleDeco.Count)];
 
-		Spatial dec = decotospawn.Instance<Spatial>();
-		AddChild(dec, true);
-		dec.Transform = decplace.Transform;
+			Spatial dec = decotospawn.Instance<Spatial>();
+			AddChild(dec, true);
+			dec.Transform = decplace.Transform;
 
-		DecorationList.Insert(0, dec);
+			DecorationList.Insert(0, dec);
+		}
 
 
 		Furiture.QueueFree();
@@ -133,22 +138,22 @@ public class House : Spatial
 	}
 
 	[Export]
-	Dictionary<int, PackedScene> SpawnPool = null;
+	Dictionary<object, int> SpawnPool = null;
 	PackedScene GetDrop()
 	{
 		PackedScene Drop = null;
 		int DropChance = 100;
 
-		foreach (KeyValuePair<int, PackedScene> item in SpawnPool)
+		foreach (KeyValuePair<object, int> item in SpawnPool)
 		{
 			int thing = RandomContainer.Next(0,101);
 			//GD.Print("Trying to spawn item : " + item.Value.ResourceName + " with chance of " + item.Key + "%, ranodm came out " + thing);
-			if (thing < item.Key)
+			if (thing < item.Value)
 			{
-				if (item.Key < DropChance)
+				if (item.Value < DropChance)
 				{
-					DropChance = item.Key;
-					Drop = item.Value;
+					DropChance = item.Value;
+					Drop = (PackedScene)item.Key;
 				}
 			}
 		}

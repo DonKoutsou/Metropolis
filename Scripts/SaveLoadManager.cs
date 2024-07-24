@@ -33,10 +33,6 @@ public class SaveLoadManager : Control
 		if (world == null)
 			return;
 
-		
-
-		
-
 		foreach (IslandInfo ile in world.GetActiveIles())
 		{
 			world.ToggleIsland(ile, false, false);
@@ -46,13 +42,13 @@ public class SaveLoadManager : Control
 		if (pl == null)
 			return;
 
-		bool HasVecicle = pl.HasVecicle;
+		bool HasVecicle = pl.HasVehicle();
 		Dictionary<string, object> pldata = new Dictionary<string, object>(){
 			{"playerHasVehicle", HasVecicle}
 		};
 		if (HasVecicle)
 		{
-			Vehicle veh = pl.currveh;
+			Vehicle veh = pl.GetVehicle();
 			pldata.Add("VehicleName", veh.GetParent().Name);
 			//pldata.Add("VehicleState", veh.IsRunning());
 			//pldata.Add("WingState", veh.HasDeployedWings());

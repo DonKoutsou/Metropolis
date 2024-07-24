@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Env_Assets/WindGenerator.tscn" type="PackedScene" id=2]
@@ -12,11 +12,9 @@
 [ext_resource path="res://Scenes/Env_Assets/CylinderThingHuge.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Assets/Building/BuildingComposition.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Env_Assets/Rock1.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scenes/Vehicles/HoverBoard_NoWings.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/Env_Assets/PlatformWood.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Env_Assets/Fireplace.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/Env_Assets/Skampo.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Scenes/Characters/NPC.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Scenes/Env_Assets/WindGenerator2.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Assets/Terains/Island2/Island2.tres" type="ArrayMesh" id=20]
 
@@ -115,7 +113,7 @@ transform = Transform( -0.992732, 0, -0.120345, 0, 1, 0, 0.120345, 0, -0.992732,
 transform = Transform( 0.684318, 0, -0.729183, 0, 1, 0, 0.729183, 0, 0.684318, -2.92456, 179.182, 1103.73 )
 
 [node name="WindGenerator" parent="." index="3" instance=ExtResource( 2 )]
-transform = Transform( 0.17466, 0, -0.178868, 0, 0.25, 0, 0.178868, 0, 0.17466, 23.0155, 173.12, 1173.43 )
+transform = Transform( 0.17466, 0, -0.178868, 0, 0.25, 0, 0.178868, 0, 0.17466, 21.3411, 172.348, 1180.68 )
 EnergyCapacity = 100.0
 EnergyPerWindStreangth = 0.025
 
@@ -230,23 +228,15 @@ transform = Transform( 168.617, 2.03609, 34.7701, -30.6164, -73.2818, 152.765, 1
 
 [node name="Fireplace" parent="." index="10" instance=ExtResource( 16 )]
 transform = Transform( 0.540041, -0.000430855, 0.0662448, 0.000362664, 0.544089, 0.000582267, -0.0662452, -0.000533783, 0.54004, -98.9476, 163.876, 1152.03 )
-State = true
 
 [node name="StaticBody2" parent="." index="11" instance=ExtResource( 15 )]
 transform = Transform( 0.540041, -0.000430855, 0.0662449, 0.000362664, 0.544089, 0.000582267, -0.0662452, -0.000533783, 0.54004, -107.344, 179.243, 1149.9 )
 
-[node name="Vehicle0" parent="." index="12" instance=ExtResource( 14 )]
-transform = Transform( 1, -0.000665859, -0.000639929, 0.000666553, 0.999999, 0.00107017, 0.000639206, -0.0010706, 0.999999, -43.8424, 180.433, 1110.19 )
+[node name="StaticBody3" parent="." index="12" instance=ExtResource( 17 )]
+transform = Transform( 0.972581, 0, 0.232563, 0, 1, 0, -0.232563, 0, 0.972581, -100.082, 163.535, 1145.42 )
 
-[node name="StaticBody3" parent="." index="13" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -100.082, 163.885, 1145.42 )
+[node name="StaticBody4" parent="." index="13" instance=ExtResource( 17 )]
+transform = Transform( 0.316013, 0, -0.948755, 0, 1, 0, 0.948755, 0, 0.316013, -91.6202, 164.575, 1150.94 )
 
-[node name="StaticBody4" parent="." index="14" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -92.604, 164.575, 1151.63 )
-
-[node name="Character" parent="." index="15" instance=ExtResource( 18 )]
-transform = Transform( 0.570714, 0, -0.821149, 0, 1, 0, 0.821149, 0, 0.570714, -93.7218, 164.47, 1151.64 )
-Chair = NodePath("../StaticBody4")
-
-[node name="WindGenerator2" parent="." index="16" instance=ExtResource( 19 )]
+[node name="WindGenerator2" parent="." index="14" instance=ExtResource( 19 )]
 transform = Transform( -0.995832, 0, 0.0912062, 0, 1, 0, -0.0912062, 0, -0.995832, 960, -8.08884, -1276.23 )

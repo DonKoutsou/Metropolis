@@ -37,13 +37,13 @@ public class CheatMenu : Control
 	{
 		if (HasSpeed)
 		{
-			pl.RunSpeed = 30;
+			pl.SetRunSpeed(30);
 			HasSpeed = false;
 		}
 		else
 		{
 			HasSpeed = true;
-			pl.RunSpeed = 1000;
+			pl.SetRunSpeed(1000);
 		}
 		
 	}
@@ -94,7 +94,7 @@ public class CheatMenu : Control
 	private void On_ToLoc_Button_Down()
 	{
 		Player pl = Player.GetInstance();
-		pl.Teleport(pl.loctomove);
+		pl.Teleport(pl.GetMovingLocation());
 	}
 	private void IncreaseTimeProgression()
 	{

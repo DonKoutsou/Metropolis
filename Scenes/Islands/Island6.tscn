@@ -108,6 +108,7 @@ Resolution = 128
 
 [node name="House" parent="." index="1" instance=ExtResource( 3 )]
 transform = Transform( 0.043742, 0, 0.999043, 0, 1, 0, -0.999043, 0, 0.043742, 327.726, 1.29846, -1233.01 )
+FurnitureAmmount = 4
 
 [node name="House2" parent="." index="2" instance=ExtResource( 3 )]
 transform = Transform( -0.99634, 0, 0.0854688, 0, 1, 0, -0.0854688, 0, -0.99634, 374.704, 0.80531, -1197.73 )
