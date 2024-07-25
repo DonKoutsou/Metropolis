@@ -364,7 +364,6 @@ misc/occlusion_culling/max_active_polygons=16
 quality/subsurface_scattering/quality=0
 quality/filters/msaa=1
 quality/filters/use_fxaa=true
-environment/default_environment="res://new_environment2.tres"
 quality/godrays/use_pcf5=true
 quality/godrays/dither_amount=1.0
 quality/godrays/sample_number=50

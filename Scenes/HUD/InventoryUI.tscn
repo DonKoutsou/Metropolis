@@ -710,6 +710,7 @@ anchor_bottom = 1.0
 custom_styles/panel = ExtResource( 28 )
 
 [node name="WeightText" type="RichTextLabel" parent="InventoryContainer/Inventory/DescriptionPanel/MarginContainer/VBoxContainer"]
+visible = false
 material = SubResource( 15 )
 margin_top = 194.0
 margin_right = 219.0
@@ -1041,32 +1042,6 @@ margin_right = 286.0
 rect_clip_content = true
 mouse_filter = 1
 custom_styles/panel = ExtResource( 27 )
-
-[node name="Control" type="Control" parent="InventoryContainer/Inventory"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -234.0
-margin_top = -125.0
-margin_right = 286.0
-margin_bottom = 172.0
-rect_clip_content = true
-mouse_filter = 2
-
-[node name="TextureRect2" type="TextureRect" parent="InventoryContainer/Inventory/Control"]
-self_modulate = Color( 0.682353, 0.682353, 0.682353, 0.227451 )
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -259.5
-margin_top = -259.5
-margin_right = 259.5
-margin_bottom = 259.5
-mouse_filter = 2
-texture = ExtResource( 23 )
-expand = true
 
 [node name="MapUI" parent="InventoryContainer/Inventory" instance=ExtResource( 6 )]
 visible = false

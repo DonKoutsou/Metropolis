@@ -27,7 +27,7 @@ public class Item : RigidBody
 	[Export]
 	public bool RegisterOnIsland = true;
 
-	public string GetItemName()
+	public virtual string GetItemName()
 	{
 		return ItemName;
 	}
@@ -201,4 +201,6 @@ public enum ItemName
 	LOG,
 	BOOK,
 	BLUEPRINT,
+	MEMORYSTICK,
+	DOSIER,
 }

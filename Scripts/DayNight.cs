@@ -504,10 +504,14 @@ public class DayNight : WorldEnvironment
         }
         mins = ammout;
     }
+    public DayNight()
+    {
+        instance = this;
+    }
     public override void _Ready()
     {
         base._Ready();
-        instance = this;
+        
         currenthour = startinghour;
         Random rand = new Random(Settings.GetGameSettings().Seed);
         currentDay = rand.Next(0, 10);

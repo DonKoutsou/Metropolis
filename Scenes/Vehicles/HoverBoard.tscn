@@ -415,7 +415,6 @@ radius = 0.530287
 [node name="Vehicle" instance=ExtResource( 3 )]
 
 [node name="VehicleBody" parent="." index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 VType = 2
 
 [node name="MeshInstance" parent="VehicleBody" index="0"]
@@ -423,7 +422,6 @@ material_override = ExtResource( 4 )
 material_overlay = SubResource( 121 )
 
 [node name="MeshInstance2" parent="VehicleBody" index="1"]
-transform = Transform( 1, -5.50244e-11, 0, 1.32104e-10, 1, 0, 0, -3.46945e-18, 1, 0, 2.199, 0 )
 material_override = SubResource( 143 )
 material_overlay = SubResource( 123 )
 material/0 = SubResource( 124 )
@@ -492,7 +490,6 @@ material_override = SubResource( 143 )
 material/0 = SubResource( 143 )
 
 [node name="MeshInstance" parent="RayBR/EnginePivot" index="0"]
-transform = Transform( -1, -4.68095e-07, -8.74228e-08, -4.63573e-07, 1, -3.24799e-08, 8.7481e-08, -3.3062e-08, -1, 0, -0.132, 0 )
 material_override = SubResource( 143 )
 material/0 = SubResource( 143 )
 

@@ -77,7 +77,7 @@ public class Character : KinematicBody
 	{
 		base._EnterTree();
 		
-
+		
 		DayNight.GetInstance().Connect("DayShift", this, "ToggleNightLight");
 		//loctomove = GlobalTranslation;
 	}

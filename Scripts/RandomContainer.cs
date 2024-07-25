@@ -29,10 +29,14 @@ public class RandomContainer : Node
 			RandomInstance.NextDouble();
 		}
     }
+    public RandomContainer()
+    {
+        RandomInstance = new Random();
+    }
     public override void _Ready()
     {
         base._Ready();
-        //RandomInstance = new Random();
+        //
     }
     /*public static double NextDouble(double from, double to)
     {
