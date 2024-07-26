@@ -80,8 +80,12 @@ public class Player : Character
 	//}
 	public void Teleport(Vector3 pos)
 	{
+		
 		PhysicsServer.BodySetState(GetRid(), PhysicsServer.BodyState.Transform, Transform.Identity.Translated(pos - GlobalTranslation));
-		GlobalTranslation = pos;
+		if (HasVecicle)
+			currveh.GlobalTranslation = pos;
+		else
+			GlobalTranslation = pos;
 		loctomove = pos;
 		GetNode<Spatial>("Pivot").Rotation = Vector3.Zero;
 	}

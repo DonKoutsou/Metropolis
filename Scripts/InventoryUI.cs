@@ -100,6 +100,13 @@ public class InventoryUI : Control
         map = MapGrid.GetInstance();
         Show();
     }
+    private void ToggleInventory()
+    {
+        if (!IsOpen)
+            OpenInventory();
+        else
+            CloseInventory();
+    }
     public void OpenInventory()
     {
         if (Anim.IsPlaying())

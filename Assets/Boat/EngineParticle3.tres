@@ -1,4 +1,16 @@
-[gd_resource type="ParticlesMaterial" load_steps=3 format=2]
+[gd_resource type="ParticlesMaterial" load_steps=7 format=2]
+
+[sub_resource type="Gradient" id=38]
+colors = PoolColorArray( 1, 1, 1, 1, 0.243164, 0.129656, 0, 1 )
+
+[sub_resource type="GradientTexture" id=39]
+gradient = SubResource( 38 )
+
+[sub_resource type="Gradient" id=36]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 0.580078, 0, 1 )
+
+[sub_resource type="GradientTexture" id=37]
+gradient = SubResource( 36 )
 
 [sub_resource type="Curve" id=25]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.275, 0.745454 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.1 ), 0.0, 0.0, 0, 0 ]
@@ -9,20 +21,18 @@ curve = SubResource( 25 )
 [resource]
 resource_local_to_scene = true
 lifetime_randomness = 0.46
-trail_divisor = 11
 emission_shape = 1
 emission_sphere_radius = 0.4
-direction = Vector3( 0, 1, 0 )
-spread = 0.0
+direction = Vector3( 0, 0, 0 )
+spread = 180.0
 gravity = Vector3( 0, 0, 0 )
-initial_velocity = 60.0
+initial_velocity = 48.48
 initial_velocity_random = 0.1
-angular_velocity = 40.0
 angular_velocity_random = 1.0
-linear_accel = 6.6
-linear_accel_random = 0.23
 angle = 360.0
 angle_random = 1.0
-scale = 5.0
+scale = 20.0
 scale_random = 0.8
 scale_curve = SubResource( 35 )
+color_ramp = SubResource( 37 )
+color_initial_ramp = SubResource( 39 )

@@ -84,10 +84,6 @@ public class ActionMenu : Control
 			{
 				pl.GetTalkText().Talk("Δέν έχω χώρο.");
 			}
-			else
-			{
-				
-			}
 		}
 		else if (SelectedObj is NPC chara)
 		{
@@ -204,6 +200,13 @@ public class ActionMenu : Control
 		{
 			jobp.ToggleUI(true);
 		}
+		else if (SelectedObj is Breakable br)
+		{
+			List<Item> items;
+			pl.GetCharacterInventory().GetItemsByType(out items, ItemName.EXPLOSIVE);
+			pl.GetCharacterInventory().RemoveItem(items[0]);
+			br.AtatchExplosive(pl, (Explosive)items[0]);
+		}
 		selecting = false;
 		Stop();
 	}
@@ -263,6 +266,10 @@ public class ActionMenu : Control
 		{
 			pl.GetTalkText().Talk("Πίνας αγγελιών");
 		}
+		else if (SelectedObj is Breakable)
+		{
+			pl.GetTalkText().Talk("Με ένα εκρηκτικό θα μπορούσα να το σπάσω");
+		}
 	}
 	public void Start(Spatial obj)
 	{
@@ -313,13 +320,21 @@ public class ActionMenu : Control
 			//FireplaceLight fp = (FireplaceLight)SelectedObj;
 
 			PickButton.Text = (string)obj.Call("GetActionName", pl.GlobalTranslation);
+			
 			//PickButton.Hide();
 		}
 		else if (obj is JobBoardPanel)
 		{
 			PickButton.Text = "Κοίτα";
 		}
-		
+		else if (obj is Breakable)
+		{
+			if (!pl.GetCharacterInventory().HasItemOfType(ItemName.EXPLOSIVE))
+				PickButton.Hide();
+			else
+				PickButton.Show();
+			PickButton.Text = "Τοποθέτησε εκρηκτικό.";
+		}
 		DeselectCurrent();
 		SelectedObj = obj;
 		SelectedObj.Call("HighLightObject", true);
@@ -371,12 +386,12 @@ public class ActionMenu : Control
 		//else
 			//PickButton.Show();
 
-		if (SelectedObj is Furniture)
+		if (SelectedObj is Furniture furn)
 		{
-			Furniture furni = (Furniture)SelectedObj;
-			if (furni.HasBeenSearched())
+			if (furn.HasBeenSearched())
 				PickButton.Hide();	
 		}
+
 		RectPosition = new Vector2 (screenpos.x, screenpos.y +50);
 
 		if (screenpos < Vector2.Zero || screenpos > DViewport.GetInstance().Size)

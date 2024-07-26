@@ -4,6 +4,7 @@ extends Resource
 func _SetData(data):
 	currentile = data["currentile"]
 	MahalasEntryID = data["ΜαχαλάςEntryID"]
+	EventWallID = data["EventWallID"]
 	ExitID = data["ExitID"]
 	OrderedCells = data["OrderedCells"]
 	CurrentTile = data["CurrentTile"]
@@ -29,6 +30,7 @@ func _SetData(data):
 ## Path to the level that was loaded when the game was saved
 export var currentile:int
 export var MahalasEntryID:int
+export var EventWallID:int
 export var ExitID:int
 export (Array, Vector2) var OrderedCells = []
 

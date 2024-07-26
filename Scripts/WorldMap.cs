@@ -22,6 +22,8 @@ public class WorldMap : TileMap
 	public PackedScene Exittospawn;
 	[Export]
 	public PackedScene WallToSpawn;
+	[Export]
+	public PackedScene EventWall;
 
 	[Export]
 	public PackedScene[] SeaVariations;
@@ -48,6 +50,8 @@ public class WorldMap : TileMap
 
 	// one of the lighthouses will become the 2nd town
 	int ΜαχαλάςEntryID;
+
+	int WallEventID;
 	//random stuff
 	//Random random;
 	//int RandomTimes = 0;
@@ -131,6 +135,7 @@ public class WorldMap : TileMap
 			{"currentile", IslandSpawnIndex},
 			{"ΜαχαλάςEntryID", ΜαχαλάςEntryID},
 			{"ExitID", ExitID},
+			{"EventWallID", WallEventID},
 			{"OrderedCells", OrdC},
 			{"CurrentTile", CurrentTile},
 			{"RandomTimes", RandomContainer.GetState()},
@@ -147,9 +152,6 @@ public class WorldMap : TileMap
 		finishedspawning = (bool)data.Get("finishedspawning");
 		CurrentTile = (Vector2)data.Get("CurrentTile");
 
-		
-
-
 		int seed = (int)data.Get("Seed");
 		Settings.GetGameSettings().Seed = seed;
 
@@ -157,6 +159,7 @@ public class WorldMap : TileMap
 
 		IslandSpawnIndex = (int)data.Get("currentile");
 		ΜαχαλάςEntryID = (int)data.Get("MahalasEntryID");
+		WallEventID = (int)data.Get("EventWallID");
 		ExitID = (int)data.Get("ExitID");
 
 		Vector2[] cells = (Vector2[])data.Get("OrderedCells");
@@ -474,7 +477,7 @@ public class WorldMap : TileMap
 			start = ilemap[entry];
 
 		
-		DayNight.GetInstance().UpdatePlayerDistance(Math.Max(Math.Abs(start.Position.x), Math.Abs(start.Position.y)) / 40);
+		DayNight.GetInstance().UpdatePlayerDistance(Math.Max(Math.Abs(start.Position.x), Math.Abs(start.Position.y)) / 20);
 		MyWorld.GetInstance().ToggleIsland(start, true, true);
 			
 		Island island = start.Island;
@@ -602,6 +605,20 @@ public class WorldMap : TileMap
 		int RandomLightHouseIndex = RandomContainer.Next(0, lighthousecells.Count);
 		Vector2 Μαχαλάςpalcement = (Vector2)lighthousecells[RandomLightHouseIndex];
 		ΜαχαλάςEntryID = OrderedCells.IndexOf(Μαχαλάςpalcement);
+
+		//wall even randomise
+
+		var Wallcells = GetUsedCellsById(5);
+		int RandomWallIndex = RandomContainer.Next(0, Wallcells.Count);
+		Vector2 WallEventpalcement = (Vector2)Wallcells[RandomWallIndex];
+
+		//while loop to avoid adding it to corners
+		while (Math.Abs(WallEventpalcement.x) == Math.Abs(WallEventpalcement.y))
+		{
+			RandomWallIndex = RandomContainer.Next(0, Wallcells.Count);
+			WallEventpalcement = (Vector2)Wallcells[RandomWallIndex];
+		}
+		WallEventID = OrderedCells.IndexOf(WallEventpalcement);
 
 		//exit randomise
 		var exitcells = GetUsedCellsById(2);
@@ -771,8 +788,16 @@ public class WorldMap : TileMap
 			}
 			case 5:
 			{
-				scene =  WallToSpawn;
-				SpecialName = "Τύχος";
+				if (IslandSpawnIndex == WallEventID)
+				{
+					SpecialName = "Τύχος";
+					scene =  EventWall;
+				}
+				else
+				{
+					scene =  WallToSpawn;
+					SpecialName = "Τύχος";
+				}
 				break;
 				
 			}

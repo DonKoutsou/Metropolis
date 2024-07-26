@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://Scenes/HUD/InventoryUISlot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/InventoryUI.cs" type="Script" id=2]
@@ -54,7 +54,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1807, 649 ), Vector2( 1807, 1051 ) ]
+"values": [ Vector2( 1738, 642 ), Vector2( 1738, 1044 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("InventoryContainer/Inventory:visible")
@@ -81,7 +81,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1807, 1051 ), Vector2( 1807, 649 ) ]
+"values": [ Vector2( 1739, 1044 ), Vector2( 1738, 642 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("InventoryContainer:rect_size")
@@ -132,7 +132,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 1807, 1051 ) ]
+"values": [ Vector2( 1738, 1044 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("InventoryContainer/Inventory:visible")
@@ -302,6 +302,14 @@ font_data = ExtResource( 19 )
 
 [sub_resource type="Theme" id=59]
 default_font = SubResource( 33 )
+
+[sub_resource type="DynamicFont" id=60]
+size = 12
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 19 )
 
 [node name="InvntoryUI" type="Control"]
 anchor_right = 1.0
@@ -1055,21 +1063,20 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -347.0
-margin_top = -473.0
-margin_right = -125.0
-margin_bottom = -408.0
+margin_left = -206.0
+margin_top = -545.0
+margin_right = 16.0
+margin_bottom = -480.0
 
 [node name="Panel4" type="Panel" parent="."]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -113.0
-margin_top = -29.0
+margin_left = -182.0
+margin_top = -36.0
 margin_right = -8.0
 rect_pivot_offset = Vector2( 167, 36 )
-rect_clip_content = true
 mouse_filter = 1
 custom_styles/panel = ExtResource( 26 )
 
@@ -1079,10 +1086,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 24.5
-margin_top = -10.5
-margin_right = 46.5
-margin_bottom = 11.5
+margin_left = 25.5
+margin_top = -11.0
+margin_right = 47.5
+margin_bottom = 11.0
 rect_pivot_offset = Vector2( 4, 4 )
 custom_styles/panel = SubResource( 58 )
 
@@ -1091,15 +1098,41 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -37.5
+margin_left = -44.5
 margin_top = -11.5
-margin_right = 11.5
+margin_right = 4.5
 margin_bottom = 11.5
 theme = SubResource( 59 )
 custom_styles/normal = ExtResource( 31 )
 text = "NULL"
 align = 1
 valign = 1
+
+[node name="Panel5" type="Panel" parent="Panel4"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -174.0
+margin_top = -72.0
+margin_bottom = -36.0
+rect_pivot_offset = Vector2( 167, 36 )
+rect_clip_content = true
+mouse_filter = 1
+custom_styles/panel = ExtResource( 27 )
+
+[node name="Button" type="Button" parent="Panel4/Panel5"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -52.5
+margin_top = 5.0
+margin_right = 52.5
+margin_bottom = 30.0
+theme = ExtResource( 24 )
+custom_fonts/font = SubResource( 60 )
+text = "Τσάντα"
+icon_align = 1
+expand_icon = true
 
 [connection signal="button_down" from="InventoryContainer/Inventory/CapPanel2/InventoryPage/Repair" to="." method="PageBack"]
 [connection signal="button_down" from="InventoryContainer/Inventory/CapPanel2/InventoryPage/Repair2" to="." method="PageForw"]
@@ -1110,3 +1143,4 @@ valign = 1
 [connection signal="button_down" from="InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/MapButton" to="." method="On_Map_Button_Down"]
 [connection signal="button_down" from="InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/CompassButton" to="." method="On_Compass_Button_Down"]
 [connection signal="button_down" from="InventoryContainer/Inventory/Panel4/RefreshCoords" to="." method="CloseInventory"]
+[connection signal="button_down" from="Panel4/Panel5/Button" to="." method="ToggleInventory"]

@@ -203,4 +203,5 @@ public enum ItemName
 	BLUEPRINT,
 	MEMORYSTICK,
 	DOSIER,
+	EXPLOSIVE,
 }

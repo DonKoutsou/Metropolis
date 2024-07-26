@@ -120,6 +120,17 @@ public class Inventory : Spatial
         }
         return false;
     }
+    public bool HasItemOfType(ItemName type)
+    {
+         for (int i = InventoryContents.Count - 1; i > -1; i--)
+        {
+            if (InventoryContents[i].GetItemType() == type)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
     public void GetBatteries(out List<Battery> batter)
     {
         batter = new List<Battery>();

@@ -307,10 +307,11 @@ public class MyWorld : Spatial
 		List<IslandInfo> ilestodissable = new List<IslandInfo>();
 		List<IslandInfo> ilestoenable = new List<IslandInfo>();
 
-		Vector2 pos = WorldMap.GetInstance().GlobalToMap(to.Island.GlobalTranslation);
+		//Vector2 pos = WorldMap.GetInstance().GlobalToMap();
 		to.Island.SetVisited();
-		MapGrid.GetInstance().SetIslandVisited(pos);
-		DayNight.GetInstance().UpdatePlayerDistance(Math.Max(Math.Abs(to.Position.x), Math.Abs(to.Position.y)) / 40);
+		//to.Visited = true;
+		MapGrid.GetInstance().SetIslandVisited(to.Position);
+		DayNight.GetInstance().UpdatePlayerDistance(Math.Max(Math.Abs(to.Position.x), Math.Abs(to.Position.y)) / 20);
 		
 		int ViewDistance = Settings.GetGameSettings().ViewDistance;
 

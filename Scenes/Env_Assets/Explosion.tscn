@@ -1,8 +1,7 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://Assets/Clouds/Textures/smoke_04.png" type="Texture" id=1]
-[ext_resource path="res://addons/kenney_particle_pack/star_08.png" type="Texture" id=2]
-[ext_resource path="res://addons/kenney_particle_pack/fire_01.png" type="Texture" id=3]
+[ext_resource path="res://shaders/Outline.shader" type="Shader" id=1]
+[ext_resource path="res://Assets/Boat/EngineParticle3.tres" type="Material" id=2]
 
 [sub_resource type="Gradient" id=16]
 
@@ -27,7 +26,6 @@ curve = SubResource( 18 )
 [sub_resource type="ParticlesMaterial" id=19]
 direction = Vector3( 0, 0, 10 )
 spread = 180.0
-flatness = 0.93
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 14.45
 initial_velocity_random = 1.0
@@ -37,76 +35,75 @@ tangential_accel = -40.46
 tangential_accel_random = 0.21
 damping = 56.94
 damping_random = 1.0
+scale = 2.0
 scale_curve = SubResource( 23 )
 color_ramp = SubResource( 21 )
 hue_variation_random = 0.34
-anim_speed = 128.0
 
-[sub_resource type="SpatialMaterial" id=24]
-flags_transparent = true
+[sub_resource type="OpenSimplexNoise" id=113]
+seed = 875
+octaves = 1
+period = 221.1
+persistence = 0.733
+lacunarity = 0.1
+
+[sub_resource type="NoiseTexture" id=114]
+width = 128
+height = 128
+noise = SubResource( 113 )
+
+[sub_resource type="ShaderMaterial" id=118]
+resource_local_to_scene = true
+shader = ExtResource( 1 )
+shader_param/enable = true
+shader_param/outline_thickness = 0.01
+shader_param/color = Color( 0.25098, 0.176471, 0.101961, 1 )
+
+[sub_resource type="SpatialMaterial" id=119]
+next_pass = SubResource( 118 )
+flags_world_triplanar = true
+params_diffuse_mode = 4
+params_specular_mode = 3
+params_depth_draw_mode = 1
+albedo_color = Color( 1, 0.921569, 0.705882, 1 )
+albedo_texture = SubResource( 114 )
+roughness = 0.0
+ao_enabled = true
+ao_light_affect = 1.0
+ao_texture = SubResource( 114 )
+ao_on_uv2 = false
+ao_texture_channel = 0
+uv1_triplanar = true
+
+[sub_resource type="SphereMesh" id=117]
+material = SubResource( 119 )
+radius = 0.1
+height = 0.2
+radial_segments = 6
+rings = 3
+
+[sub_resource type="SpatialMaterial" id=120]
+render_priority = 1
+flags_unshaded = true
 vertex_color_use_as_albedo = true
+params_blend_mode = 1
+params_depth_draw_mode = 3
 params_billboard_mode = 3
+params_use_alpha_scissor = true
+params_alpha_scissor_threshold = 0.98
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
-albedo_texture = ExtResource( 1 )
 
-[sub_resource type="QuadMesh" id=20]
-material = SubResource( 24 )
+[sub_resource type="QuadMesh" id=121]
+resource_local_to_scene = true
+material = SubResource( 120 )
 
-[sub_resource type="Gradient" id=31]
-offsets = PoolRealArray( 0.352071, 0.505917, 0.710059 )
-colors = PoolColorArray( 1, 0.94399, 0.537464, 1, 1, 1, 1, 1, 1, 0.698785, 0.445245, 1 )
-
-[sub_resource type="GradientTexture" id=32]
-gradient = SubResource( 31 )
-
-[sub_resource type="Curve" id=29]
-max_value = 50.0
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.504231, 20.7055 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=30]
-curve = SubResource( 29 )
-
-[sub_resource type="ParticlesMaterial" id=26]
-direction = Vector3( 0, 0, 0 )
-spread = 0.0
-gravity = Vector3( 0, 0, 0 )
-angle = 194.5
-angle_random = 1.0
-scale_curve = SubResource( 30 )
-color_ramp = SubResource( 32 )
-
-[sub_resource type="SpatialMaterial" id=28]
-flags_transparent = true
-vertex_color_use_as_albedo = true
-params_billboard_mode = 3
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
-albedo_texture = ExtResource( 2 )
-
-[sub_resource type="QuadMesh" id=27]
-material = SubResource( 28 )
-
-[sub_resource type="SpatialMaterial" id=35]
-flags_transparent = true
-vertex_color_use_as_albedo = true
-params_billboard_mode = 3
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
-albedo_texture = ExtResource( 3 )
-
-[sub_resource type="QuadMesh" id=34]
-material = SubResource( 35 )
-
-[sub_resource type="Animation" id=25]
+[sub_resource type="Animation" id=123]
 resource_name = "Exp"
-length = 3.0
-loop = true
+length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Particles:emitting")
+tracks/0/path = NodePath("Particles2:emitting")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -118,24 +115,12 @@ tracks/0/keys = {
 "values": [ true ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Particles2:emitting")
+tracks/1/path = NodePath("Particles4:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 1.8, 1.9 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Particles3:emitting")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
@@ -145,7 +130,7 @@ tracks/2/keys = {
 [sub_resource type="Animation" id=33]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Particles:emitting")
+tracks/0/path = NodePath("Particles2:emitting")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -157,7 +142,7 @@ tracks/0/keys = {
 "values": [ false ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Particles2:emitting")
+tracks/1/path = NodePath("Particles4:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -166,57 +151,31 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ true ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Particles3:emitting")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
 "values": [ false ]
 }
 
-[node name="Particles" type="Spatial"]
+[node name="Explosion" type="Spatial"]
 
 [node name="Particles2" type="Particles" parent="."]
 cast_shadow = 0
 extra_cull_margin = 16289.3
 generate_lightmap = false
+emitting = false
 amount = 200
 lifetime = 1.6
+one_shot = true
 explosiveness = 1.0
 process_material = SubResource( 19 )
-draw_pass_1 = SubResource( 20 )
-
-[node name="Particles" type="Particles" parent="."]
-emitting = false
-amount = 2
-lifetime = 0.5
-one_shot = true
-draw_order = 2
-process_material = SubResource( 26 )
-draw_pass_1 = SubResource( 27 )
-
-[node name="Particles3" type="Particles" parent="."]
-emitting = false
-amount = 2
-lifetime = 0.5
-one_shot = true
-process_material = SubResource( 26 )
-draw_pass_1 = SubResource( 34 )
+draw_pass_1 = SubResource( 117 )
 
 [node name="Particles4" type="Particles" parent="."]
-visible = false
-amount = 2
+emitting = false
+amount = 40
 lifetime = 0.5
-process_material = SubResource( 26 )
-draw_pass_1 = SubResource( 34 )
+one_shot = true
+process_material = ExtResource( 2 )
+draw_pass_1 = SubResource( 121 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Exp = SubResource( 25 )
+anims/Exp = SubResource( 123 )
 anims/RESET = SubResource( 33 )

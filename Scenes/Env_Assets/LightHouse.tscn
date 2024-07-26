@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://Assets/TerainTex/Bricks094_1K-PNG/Bricks094_1K-PNG_Roughness.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/LighthouseAnimation.cs" type="Script" id=2]
@@ -15,13 +15,8 @@
 [ext_resource path="res://Assets/TerainTex/Bricks094_1K-PNG/Bricks094_1K-PNG_AmbientOcclusion.png" type="Texture" id=13]
 [ext_resource path="res://Assets/TerainTex/Bricks094_1K-PNG/Bricks094_1K-PNG_Color.png" type="Texture" id=14]
 [ext_resource path="res://Assets/TerainTex/Bricks094_1K-PNG/Bricks094_1K-PNG_NormalGL.png" type="Texture" id=15]
-[ext_resource path="res://Scenes/Items/Battery.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/Env_Assets/Furniture4.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Assets/LightHouse/lambert1.material" type="Material" id=17]
-[ext_resource path="res://Scenes/Items/BatteryEmpty.tscn" type="PackedScene" id=18]
-[ext_resource path="res://Scenes/Items/Item.tscn" type="PackedScene" id=19]
-[ext_resource path="res://Scenes/Items/Drahma.tscn" type="PackedScene" id=20]
-[ext_resource path="res://Scenes/Env_Assets/Furniture2.tscn" type="PackedScene" id=21]
-[ext_resource path="res://Scenes/Env_Assets/Furniture.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Scenes/BuildingDecorations/Decorations2.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Scenes/BuildingDecorations/Decorations1.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Scenes/Env_Assets/Bookcase.tscn" type="PackedScene" id=25]
@@ -266,13 +261,12 @@ data = PoolVector3Array( -25, 5, 15, 25, 5, 15, -25, -5, 15, 25, 5, 15, 25, -5, 
 
 [node name="LightHouse" type="Spatial"]
 script = ExtResource( 5 )
-PossibleFurni = [ ExtResource( 22 ), ExtResource( 21 ) ]
+PossibleFurni = [ ExtResource( 16 ) ]
 PossibleDeco = [ ExtResource( 24 ), ExtResource( 23 ) ]
 SpawnPool = {
-2: ExtResource( 16 ),
-15: ExtResource( 18 ),
-20: ExtResource( 19 ),
-40: ExtResource( 20 )
+Resource( "res://Scenes/Items/Book2.tscn" ): 10,
+Resource( "res://Scenes/Items/Book1.tscn" ): 10,
+Resource( "res://Scenes/Items/Book3.tscn" ): 10
 }
 
 [node name="Spatial" type="Spatial" parent="."]

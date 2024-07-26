@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/TerainTex/Rock029_2K-PNG/Rock029_2K-PNG_NormalGL.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Assets/TerainTex/Ground059_1K-JPG/Ground059_1K-JPG_AmbientOcclusion.jpg" type="Texture" id=8]
 [ext_resource path="res://Assets/TerainTex/Ground059_1K-JPG/Ground059_1K-JPG_Color.jpg" type="Texture" id=9]
 [ext_resource path="res://Assets/TerainTest/TerainShader5.tres" type="Shader" id=10]
+[ext_resource path="res://Scripts/Wall.cs" type="Script" id=11]
 
 [sub_resource type="SpatialMaterial" id=13]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -117,10 +118,8 @@ shader_param/normal_texture_bg = ExtResource( 2 )
 extents = Vector3( 4000, 4000, 4000 )
 
 [node name="Island" instance=ExtResource( 1 )]
-MoveLayer = 260
-type = 5
-ImageID = 25
-Resolution = 128
+script = ExtResource( 11 )
+IsEventWall = false
 
 [node name="SoundMap" parent="." index="3"]
 mesh_library = SubResource( 20 )

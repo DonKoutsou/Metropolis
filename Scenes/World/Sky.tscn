@@ -34,7 +34,7 @@ _data = [ Vector2( 0, 76.3804 ), 0.0, 0.0, 0, 0, Vector2( 0.0655844, 88.6503 ), 
 [sub_resource type="Curve" id=8]
 min_value = 2.0
 max_value = 20.0
-_data = [ Vector2( 0, 20 ), 0.0, -18.8306, 0, 0, Vector2( 1, 2 ), -16.2912, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 20 ), 0.0, -19.3555, 0, 0, Vector2( 1, 2 ), -20.5764, 0.0, 0, 0 ]
 
 [node name="Sky" type="Spatial"]
 

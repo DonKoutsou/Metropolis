@@ -332,7 +332,7 @@ public class Vehicle : RigidBody
             ray.ForceRaycastUpdate();
             Particles part = EnginePivot.GetNode<Particles>("Particles");
             Particles partd = EnginePivot.GetNode<Particles>("ParticlesDirt");
-            Vector3 engrot = new Vector3(Mathf.Deg2Rad(Mathf.Lerp(0, 45, latsspeed /speed)), 0, 0);
+            Vector3 engrot = new Vector3(Mathf.Deg2Rad(Mathf.Lerp(0, 75, latsspeed /speed)), 0, 0);
             if (ray.IsColliding())
             {
                 var collisionpoint = ray.GetCollisionPoint();

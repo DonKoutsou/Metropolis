@@ -89,7 +89,7 @@ public class CheatMenu : Control
 		int x = TeleportPanel.GetNode<TextEdit>("X_Text").Text.ToInt();
 		int y = TeleportPanel.GetNode<TextEdit>("Y_Text").Text.ToInt();
 		Vector2 loc = WorldMap.GetInstance().MapToWorld( new Vector2(x,y));
-		Player.GetInstance().Teleport(new Vector3 (loc.x, 2000, loc.y));
+		Player.GetInstance().Teleport(new Vector3 (loc.x, 5000, loc.y));
 	}
 	private void On_ToLoc_Button_Down()
 	{

@@ -334,6 +334,7 @@ dialogic_default_action={
 3d_physics/layer_9="Sea"
 3d_physics/layer_10="Boat"
 3d_physics/layer_11="Rock"
+3d_physics/layer_12="Breakable"
 
 [mono]
 

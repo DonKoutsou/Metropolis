@@ -16,9 +16,9 @@ public class Island : Spatial
 
 	public string IslandSpecialName = null;
 
-	private Vector3 SpawnGlobalLocation;
+	protected Vector3 SpawnGlobalLocation;
 
-	private float SpawnRotation;
+	protected float SpawnRotation;
 
 	List<House> Houses = new List<House>();
 
@@ -49,9 +49,8 @@ public class Island : Spatial
 			return;
 		#endif
 		Translation = SpawnGlobalLocation;
-		
-		if (type != IleType.WALL)
-			Rotate(new Vector3(0, 1, 0), Mathf.Deg2Rad(SpawnRotation));
+
+		Rotate(new Vector3(0, 1, 0), Mathf.Deg2Rad(SpawnRotation));
 
 		StaticBody sea = GetNode<StaticBody>("SeaBed");
 		sea.GlobalRotation = Vector3.Zero;

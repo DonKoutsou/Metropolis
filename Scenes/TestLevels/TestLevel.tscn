@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://Scenes/Characters/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/HUD/InventoryUI.tscn" type="PackedScene" id=2]
@@ -41,6 +41,9 @@
 [ext_resource path="res://Assets/Boat/ΚαικιΗιγη_Engines_OcclusionRoughnessMetallic.png" type="Texture" id=39]
 [ext_resource path="res://Assets/Boat/ΚαικιΗιγη_Καικι1_OcclusionRoughnessMetallic.png" type="Texture" id=40]
 [ext_resource path="res://Assets/Boat/ΚαικιΗιγη_Engines_Normal.png" type="Texture" id=41]
+[ext_resource path="res://Scenes/Items/Explosive.tscn" type="PackedScene" id=42]
+[ext_resource path="res://Scenes/Systems/Breakable.tscn" type="PackedScene" id=43]
+[ext_resource path="res://Scripts/TestLevel.cs" type="Script" id=44]
 
 [sub_resource type="DynamicFont" id=4]
 size = 64
@@ -353,14 +356,18 @@ scale_curve = SubResource( 110 )
 
 [node name="TestLevel" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -17.0192 )
+script = ExtResource( 44 )
 
 [node name="RandomContainer" type="Node" parent="."]
 script = ExtResource( 26 )
 
-[node name="Settings" parent="." instance=ExtResource( 3 )]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 4
+
+[node name="Settings" parent="CanvasLayer" instance=ExtResource( 3 )]
 visible = false
 
-[node name="PlayerUI" type="Control" parent="."]
+[node name="PlayerUI" type="Control" parent="CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -370,23 +377,23 @@ ScreenEffects = NodePath("ScreenEffects")
 CheatMenu = NodePath("CheatMenu")
 Inventory = NodePath("InvntoryUI")
 
-[node name="ScreenEffects" type="Control" parent="PlayerUI"]
+[node name="ScreenEffects" type="Control" parent="CanvasLayer/PlayerUI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 32 )
 AnimationPlayer = NodePath("../UIAnimation")
 
-[node name="DamageColor" type="ColorRect" parent="PlayerUI/ScreenEffects"]
+[node name="DamageColor" type="ColorRect" parent="CanvasLayer/PlayerUI/ScreenEffects"]
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 color = Color( 0.623529, 0.172549, 0.172549, 0 )
 
-[node name="InvntoryUI" parent="PlayerUI" instance=ExtResource( 2 )]
+[node name="InvntoryUI" parent="CanvasLayer/PlayerUI" instance=ExtResource( 2 )]
 
-[node name="CityNameUI" type="Control" parent="PlayerUI"]
+[node name="CityNameUI" type="Control" parent="CanvasLayer/PlayerUI"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -18.0
@@ -397,7 +404,7 @@ mouse_filter = 2
 script = ExtResource( 33 )
 AnimationNode = NodePath("../UIAnimation")
 
-[node name="Label2" type="Label" parent="PlayerUI/CityNameUI"]
+[node name="Label2" type="Label" parent="CanvasLayer/PlayerUI/CityNameUI"]
 modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.5
 anchor_right = 0.5
@@ -411,7 +418,7 @@ text = "ΜΗΤΡΟΠΟΛΗ"
 align = 1
 valign = 1
 
-[node name="Panel7" type="Panel" parent="PlayerUI/CityNameUI/Label2"]
+[node name="Panel7" type="Panel" parent="CanvasLayer/PlayerUI/CityNameUI/Label2"]
 anchor_right = 1.0
 margin_left = 312.5
 margin_top = 46.0
@@ -421,7 +428,7 @@ rect_clip_content = true
 mouse_filter = 2
 custom_styles/panel = ExtResource( 30 )
 
-[node name="Panel8" type="Panel" parent="PlayerUI/CityNameUI/Label2"]
+[node name="Panel8" type="Panel" parent="CanvasLayer/PlayerUI/CityNameUI/Label2"]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -434,10 +441,10 @@ rect_clip_content = true
 mouse_filter = 2
 custom_styles/panel = ExtResource( 30 )
 
-[node name="CheatMenu" parent="PlayerUI" instance=ExtResource( 28 )]
+[node name="CheatMenu" parent="CanvasLayer/PlayerUI" instance=ExtResource( 28 )]
 visible = false
 
-[node name="UIAnimation" type="AnimationPlayer" parent="PlayerUI"]
+[node name="UIAnimation" type="AnimationPlayer" parent="CanvasLayer/PlayerUI"]
 anims/Damage = SubResource( 5 )
 anims/RESET = SubResource( 6 )
 anims/Show = SubResource( 7 )
@@ -636,5 +643,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -17.0192 )
 [node name="Island" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 35 )]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4189, 11.071, 25 )
 script = null
+
+[node name="Battery3" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 42 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.8817, 13.502, -8.76232 )
+
+[node name="Breakable" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 43 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -37.292, 16.426, -9.94378 )
 
 [editable path="Control/ViewportContainer/Viewport/Vehicle"]
