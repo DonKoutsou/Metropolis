@@ -332,7 +332,7 @@ public class Vehicle : RigidBody
             ray.ForceRaycastUpdate();
             Particles part = EnginePivot.GetNode<Particles>("Particles");
             Particles partd = EnginePivot.GetNode<Particles>("ParticlesDirt");
-            Vector3 engrot = new Vector3(Mathf.Deg2Rad(Mathf.Lerp(0, 75, latsspeed /speed)), 0, 0);
+            Vector3 engrot = new Vector3(Mathf.Deg2Rad(Mathf.Lerp(0, 60, latsspeed /speed)), 0, 0);
             if (ray.IsColliding())
             {
                 var collisionpoint = ray.GetCollisionPoint();
@@ -555,16 +555,17 @@ public class Vehicle : RigidBody
         cha.GetParent().RemoveChild(cha);
 
         Spatial guy = cha.GetNode<Spatial>("Pivot");
-
+        Spatial CamPiv = cha.GetNode<Spatial>("CameraMovePivot");
         cha.Anims().ToggleSitting();
 
         cha.SetCollisionMaskBit(4, false);
         GetParent().AddChild(cha);
         RemoteTransform CharTrasn = GetNode<RemoteTransform>("CharacterRemoteTransform");
         RemoteTransform CharTrasn2 = GetNode<RemoteTransform>("CharacterRemoteTransform2");
+        RemoteTransform CameraRemot = GetNode<RemoteTransform>("CharacterCameraRemoteTransform");
         CharTrasn.RemotePath = cha.GetPath();
         CharTrasn2.RemotePath = guy.GetPath();
-
+        CameraRemot.RemotePath = CamPiv.GetPath();
         cha.OnVehicleBoard(this);
 
         cha.GlobalRotation = prevrot;
@@ -586,6 +587,10 @@ public class Vehicle : RigidBody
         CharTrasn.RemotePath = this.GetPath();
         RemoteTransform CharTrasn2 = GetNode<RemoteTransform>("CharacterRemoteTransform2");
         CharTrasn2.RemotePath = this.GetPath();
+        RemoteTransform CamTrans = GetNode<RemoteTransform>("CharacterCameraRemoteTransform");
+        CamTrans.RemotePath = this.GetPath();
+
+        chartothrowout.GetNode<Spatial>("CameraMovePivot").Translation = Vector3.Zero;
         chartothrowout.GetParent().RemoveChild(chartothrowout);
         chartothrowout.SetCollisionMaskBit(4, true);
         MyWorld.GetInstance().AddChild(chartothrowout);
@@ -619,6 +624,10 @@ public class Vehicle : RigidBody
         CharTrasn.RemotePath = this.GetPath();
         RemoteTransform CharTrasn2 = GetNode<RemoteTransform>("CharacterRemoteTransform2");
         CharTrasn2.RemotePath = this.GetPath();
+        RemoteTransform CamTrans = GetNode<RemoteTransform>("CharacterCameraRemoteTransform");
+        CamTrans.RemotePath = this.GetPath();
+
+        cha.GetNode<Spatial>("CameraMovePivot").Translation = Vector3.Zero;
         cha.GetParent().RemoveChild(cha);
         cha.SetCollisionMaskBit(4, true);
         MyWorld.GetInstance().AddChild(cha);

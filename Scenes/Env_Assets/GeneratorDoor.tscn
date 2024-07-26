@@ -229,7 +229,7 @@ __meta__ = {
 
 [node name="ActionComponent" parent="StaticBody" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.1513, 7.70192, 0.208038 )
-ActionDistance = 5.0
+ActionDistance = 10.0
 
 [node name="Particles" type="Particles" parent="StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.31382, 0, 1.38679 )

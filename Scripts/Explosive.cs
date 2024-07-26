@@ -16,5 +16,10 @@ public class Explosive : Item
     private void LightFlickerEnded(string Name)
     {
         GetNode<AnimationPlayer>("Explosion/AnimationPlayer").Play("Exp");
+        GetNode<AudioStreamPlayer3D>("BombSound").Playing = true;
+    }
+    private void BombSoundFinished()
+    {
+        GetNode<AudioStreamPlayer3D>("BombSound").Playing = false;
     }
 }

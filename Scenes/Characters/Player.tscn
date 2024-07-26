@@ -360,7 +360,6 @@ script = ExtResource( 19 )
 
 [node name="CameraMovePivot" type="Position3D" parent="."]
 pause_mode = 1
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00875211, -0.0306139, -0.0222187 )
 
 [node name="Listener" type="Listener" parent="CameraMovePivot"]
 transform = Transform( 0.999998, 0, 0, 0, 1, 0, 0, 0, 0.999998, 0, 6.70394, 0.354646 )

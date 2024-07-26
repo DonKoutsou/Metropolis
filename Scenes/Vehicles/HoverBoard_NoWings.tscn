@@ -28,13 +28,14 @@ max_value = 150.0
 _data = [ Vector2( 0, 150 ), 0.0, -401.416, 0, 0, Vector2( 0.5, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, -46.0123 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=9]
-_data = [ Vector2( 0, 0 ), 0.0, -0.500221, 0, 0, Vector2( 0.212474, 0.506135 ), 0.0, 0.0, 0, 0, Vector2( 0.572115, 0.51227 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.2 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0.0234658 ), 0.0, -0.500221, 0, 0, Vector2( 0.212474, 0.506135 ), 0.0, 0.0, 0, 0, Vector2( 0.572115, 0.51227 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.2 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=147]
 max_value = 4.0
 _data = [ Vector2( 0, 4 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.101227 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="BoxShape" id=146]
+margin = 0.2
 extents = Vector3( 9.44625, 4.47208, 13.3893 )
 
 [sub_resource type="Curve" id=137]
@@ -407,6 +408,11 @@ transform = Transform( 1, 1.45854e-05, -1.5532e-05, -1.49397e-05, 0.999735, -0.0
 update_position = false
 update_scale = false
 
+[node name="CharacterCameraRemoteTransform" type="RemoteTransform" parent="VehicleBody"]
+transform = Transform( 1, 1.45854e-05, -1.5532e-05, -1.49397e-05, 0.999735, -0.0230712, 1.51922e-05, 0.0230712, 0.999735, -0.0029084, -0.934084, -8.45704 )
+update_rotation = false
+update_scale = false
+
 [node name="LightMesh" type="MeshInstance" parent="VehicleBody"]
 transform = Transform( 1, -0.00022008, -0.00144871, -0.00145632, -0.258818, -0.965926, -0.000162362, 0.965927, -0.258818, 0.0113567, 6.12427, 13.7928 )
 mesh = SubResource( 31 )
@@ -587,7 +593,7 @@ skeleton = NodePath("../..")
 material/0 = ExtResource( 12 )
 
 [node name="EnginePivot" type="Spatial" parent="RayBL"]
-transform = Transform( 1, -7.73639e-11, 0, 7.73639e-11, 1, 0, 0, 0, 1, 1, 0, 0 )
+transform = Transform( 1, -7.73674e-11, 0, 7.73674e-11, 1, 0, 0, 0, 1, 1, 0, 0 )
 
 [node name="MeshInstance" type="MeshInstance" parent="RayBL/EnginePivot"]
 transform = Transform( 1, -5.12159e-11, 0, 2.52044e-10, 1, 3.49246e-10, -5.82077e-11, 0, 1, 0, -0.132, 0 )
