@@ -24,6 +24,7 @@ ItemType = 12
 ItemIcon = ExtResource( 4 )
 ItemPickupActionName = "Μια καταγραφή"
 ItemName = "Ερευνητική καταγραφή"
+InventoryItemName = "Ερευνητική καταγραφή"
 ItemDesc = "Μια καταγραφή"
 
 [node name="MeshInstance" type="MeshInstance" parent="."]

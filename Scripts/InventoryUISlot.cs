@@ -61,10 +61,16 @@ public class InventoryUISlot : Control
                 Condition.Show();
                 LimbColor.Hide();
             }
-            else if (it is Limb)
+            else if (it is Limb limbitem)
             {
-                Limb bat = (Limb)it;
-                ((StyleBoxFlat)LimbColor.GetStylebox("panel")).BgColor = bat.GetColor();
+                ((StyleBoxFlat)LimbColor.GetStylebox("panel")).BgColor = limbitem.GetColor();
+                LimbColor.Show();
+                Rbar.Hide();
+                Condition.Hide();
+            }
+            else if (it is PaintCan paintc)
+            {
+                ((StyleBoxFlat)LimbColor.GetStylebox("panel")).BgColor = paintc.GetColor();
                 LimbColor.Show();
                 Rbar.Hide();
                 Condition.Hide();

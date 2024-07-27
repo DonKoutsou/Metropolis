@@ -16,7 +16,6 @@ public class House : Spatial
 	[Export]
 	bool HasPower = true;
 
-	public StaticBody HouseExterior;
 
 	public override void _Ready()
 	{
@@ -25,7 +24,6 @@ public class House : Spatial
 			if (nd is Furniture)
 				FurnitureList.Insert(FurnitureList.Count, (Furniture)nd);
 		}*/
-		HouseExterior = GetNode<StaticBody>("HouseExterior");
 		Node parent = GetParent();
 		
 		while (!(parent is Island))
@@ -40,6 +38,7 @@ public class House : Spatial
 	}
 	public virtual void Entered(Node body)
 	{
+		StaticBody HouseExterior  = GetNode<StaticBody>("HouseExterior");
 		((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Front;
 		((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(2)).ParamsCullMode = SpatialMaterial.CullMode.Front;
 		GetNode<Occluder>("Occluder").Visible = false;
@@ -56,6 +55,7 @@ public class House : Spatial
 	}
 	public virtual void Left(Node body)
 	{
+		StaticBody HouseExterior  = GetNode<StaticBody>("HouseExterior");
 		((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Disabled;
 		((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(2)).ParamsCullMode = SpatialMaterial.CullMode.Disabled;
 		GetNode<Occluder>("Occluder").Visible = true;

@@ -36,8 +36,8 @@ public class DialogueManager : Node
 		Spatial Diagcampivot = (Spatial)cam.GetParent();
 		Diagcampivot.GlobalRotation = talkpos.GlobalRotation;
 		Diagcampivot.GlobalTranslation = talkpos.GlobalTranslation;
-		cam.LookAt(character.GlobalTranslation, Vector3.Up);
-		
+		cam.LookAt(character.GetHeadGlobalPos(), Vector3.Up);
+		character.HeadLook(pl.GetHeadGlobalPos());
 		CameraAnimationPlayer.GetInstance().PlayAnim("FadeInDialogue");
 		if (character.GetUnconState())
 		{
@@ -73,12 +73,14 @@ public class DialogueManager : Node
 
 			inv.DeleteItem(bats[0]);
 		}
+		TalkingChar.ResetLook();
 		IsTalking = false;
 	}
 	public void EndDialogue(string timeline_name)
 	{
 		CameraAnimationPlayer.GetInstance().PlayAnim("FadeOutDialogue");
 		IsTalking = false;
+		TalkingChar.ResetLook();
 	}
 	public void GiveBoat()
 	{

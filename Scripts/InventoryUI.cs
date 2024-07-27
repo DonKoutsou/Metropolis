@@ -160,16 +160,16 @@ public class InventoryUI : Control
             {
                 if (Items[v] is Limb l && Inv.IsLimbEquipped(l))
                     continue;
-                if (!itemcat2.ContainsKey(Items[v].GetItemName()))
-                    itemcat2.Add(Items[v].GetItemName(), Items[v]);
+                if (!itemcat2.ContainsKey(Items[v].GetInventoryItemName()))
+                    itemcat2.Add(Items[v].GetInventoryItemName(), Items[v]);
 
-                if (itemcatalogue.ContainsKey(Items[v].GetItemName()))
+                if (itemcatalogue.ContainsKey(Items[v].GetInventoryItemName()))
                 {
-                    itemcatalogue[Items[v].GetItemName()] += 1;
+                    itemcatalogue[Items[v].GetInventoryItemName()] += 1;
                 }
                 else
                 {
-                    itemcatalogue.Add(Items[v].GetItemName(), 1);
+                    itemcatalogue.Add(Items[v].GetInventoryItemName(), 1);
                 }
 
                 if (Items[v].GetItemType() ==  global::ItemName.COMPASS)
@@ -305,7 +305,7 @@ public class InventoryUI : Control
             ShowingDescSample = it;
             DescPan.Show();
             Description.BbcodeText = "[center]" + it.GetItemDesc();
-            ItemName.BbcodeText = "[center]" + it.GetItemName();
+            ItemName.BbcodeText = "[center]" + it.GetInventoryItemName();
             //WeightText.BbcodeText = "[center]Βάρος: " + ShowingDescSample.GetInventoryWeight();
         }
         else

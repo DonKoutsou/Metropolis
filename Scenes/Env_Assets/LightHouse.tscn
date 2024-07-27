@@ -19,7 +19,6 @@
 [ext_resource path="res://Assets/LightHouse/lambert1.material" type="Material" id=17]
 [ext_resource path="res://Scenes/BuildingDecorations/Decorations2.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Scenes/BuildingDecorations/Decorations1.tscn" type="PackedScene" id=24]
-[ext_resource path="res://Scenes/Env_Assets/Bookcase.tscn" type="PackedScene" id=25]
 
 [sub_resource type="SpatialMaterial" id=2118]
 albedo_color = Color( 1, 0.858824, 0.65098, 1 )
@@ -259,13 +258,16 @@ size = Vector3( 50, 10, 30 )
 [sub_resource type="ConcavePolygonShape" id=2165]
 data = PoolVector3Array( -25, 5, 15, 25, 5, 15, -25, -5, 15, 25, 5, 15, 25, -5, 15, -25, -5, 15, 25, 5, -15, -25, 5, -15, 25, -5, -15, -25, 5, -15, -25, -5, -15, 25, -5, -15, 25, 5, 15, 25, 5, -15, 25, -5, 15, 25, 5, -15, 25, -5, -15, 25, -5, 15, -25, 5, -15, -25, 5, 15, -25, -5, -15, -25, 5, 15, -25, -5, 15, -25, -5, -15, 25, 5, 15, -25, 5, 15, 25, 5, -15, -25, 5, 15, -25, 5, -15, 25, 5, -15, -25, -5, 15, 25, -5, 15, -25, -5, -15, 25, -5, 15, 25, -5, -15, -25, -5, -15 )
 
+[sub_resource type="CubeMesh" id=2166]
+size = Vector3( 60, 60, 10 )
+
 [node name="LightHouse" type="Spatial"]
 script = ExtResource( 5 )
 PossibleFurni = [ ExtResource( 16 ) ]
 PossibleDeco = [ ExtResource( 24 ), ExtResource( 23 ) ]
 SpawnPool = {
-Resource( "res://Scenes/Items/Book2.tscn" ): 10,
 Resource( "res://Scenes/Items/Book1.tscn" ): 10,
+Resource( "res://Scenes/Items/Book2.tscn" ): 10,
 Resource( "res://Scenes/Items/Book3.tscn" ): 10
 }
 
@@ -411,85 +413,189 @@ shape = SubResource( 2165 )
 
 [node name="FurniturePlacements" type="Spatial" parent="."]
 
-[node name="DecorationPlacaments" type="Spatial" parent="."]
-
-[node name="Spatial2" parent="." instance=ExtResource( 25 )]
+[node name="Position2" type="Position3D" parent="FurniturePlacements"]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -99.3855, 8.99139, -64.0116 )
 
-[node name="Spatial5" parent="." instance=ExtResource( 25 )]
+[node name="MeshInstance12" type="MeshInstance" parent="FurniturePlacements/Position2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 4.71089 )
+mesh = SubResource( 2166 )
+
+[node name="Position3" type="Position3D" parent="FurniturePlacements"]
 transform = Transform( 1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, -56.2113, 8.99139, -102.841 )
 
-[node name="Spatial3" parent="." instance=ExtResource( 25 )]
+[node name="MeshInstance12" type="MeshInstance" parent="FurniturePlacements/Position3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 4.71089 )
+mesh = SubResource( 2166 )
+
+[node name="Position4" type="Position3D" parent="FurniturePlacements"]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -99.3855, 8.99139, 2.95065 )
 
-[node name="Spatial4" parent="." instance=ExtResource( 25 )]
+[node name="MeshInstance12" type="MeshInstance" parent="FurniturePlacements/Position4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 4.71089 )
+mesh = SubResource( 2166 )
+
+[node name="Position5" type="Position3D" parent="FurniturePlacements"]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -99.3855, 8.99139, 66.6382 )
 
-[node name="Spatial6" parent="." instance=ExtResource( 25 )]
+[node name="MeshInstance12" type="MeshInstance" parent="FurniturePlacements/Position5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 4.71089 )
+mesh = SubResource( 2166 )
+
+[node name="Position6" type="Position3D" parent="FurniturePlacements"]
 transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -17.0326, 8.99139, -2.80117 )
 
-[node name="Spatial7" parent="." instance=ExtResource( 25 )]
+[node name="MeshInstance12" type="MeshInstance" parent="FurniturePlacements/Position6"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 4.71089 )
+mesh = SubResource( 2166 )
+
+[node name="Position7" type="Position3D" parent="FurniturePlacements"]
 transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -17.0326, 8.99139, -71.0666 )
 
-[node name="Spatial8" parent="." instance=ExtResource( 25 )]
+[node name="MeshInstance12" type="MeshInstance" parent="FurniturePlacements/Position7"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 4.71089 )
+mesh = SubResource( 2166 )
+
+[node name="Position8" type="Position3D" parent="FurniturePlacements"]
 transform = Transform( -2.18557e-07, 0, 1, 0, 1, 0, -1, 0, -2.18557e-07, -15.4281, 8.99139, -71.0666 )
 
-[node name="Spatial9" parent="." instance=ExtResource( 25 )]
+[node name="MeshInstance12" type="MeshInstance" parent="FurniturePlacements/Position8"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 4.71089 )
+mesh = SubResource( 2166 )
+
+[node name="Position9" type="Position3D" parent="FurniturePlacements"]
 transform = Transform( -2.18557e-07, 0, 1, 0, 1, 0, -1, 0, -2.18557e-07, -15.4281, 8.99139, -2.80118 )
 
-[node name="Spatial10" parent="." instance=ExtResource( 25 )]
+[node name="MeshInstance12" type="MeshInstance" parent="FurniturePlacements/Position9"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 4.71089 )
+mesh = SubResource( 2166 )
+
+[node name="Position10" type="Position3D" parent="FurniturePlacements"]
 transform = Transform( 3.0598e-07, 0, -1, 0, 1, 0, 1, 0, 3.0598e-07, 102.121, 8.99139, -2.80118 )
 
-[node name="Spatial12" parent="." instance=ExtResource( 25 )]
+[node name="MeshInstance12" type="MeshInstance" parent="FurniturePlacements/Position10"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 4.71089 )
+mesh = SubResource( 2166 )
+
+[node name="Position11" type="Position3D" parent="FurniturePlacements"]
 transform = Transform( 3.0598e-07, 0, -1, 0, 1, 0, 1, 0, 3.0598e-07, 102.121, 8.99139, 63.1865 )
 
-[node name="Spatial13" parent="." instance=ExtResource( 25 )]
+[node name="MeshInstance12" type="MeshInstance" parent="FurniturePlacements/Position11"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 4.71089 )
+mesh = SubResource( 2166 )
+
+[node name="Position12" type="Position3D" parent="FurniturePlacements"]
 transform = Transform( -1, 0, -2.62268e-07, 0, 1, 0, 2.62268e-07, 0, -1, 60.1504, 8.99139, 104.181 )
 
-[node name="Spatial14" parent="." instance=ExtResource( 25 )]
+[node name="MeshInstance12" type="MeshInstance" parent="FurniturePlacements/Position12"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 4.71089 )
+mesh = SubResource( 2166 )
+
+[node name="Position13" type="Position3D" parent="FurniturePlacements"]
 transform = Transform( -2.18557e-07, 0, 1, 0, 1, 0, -1, 0, -2.18557e-07, 19.721, 8.99139, 64.092 )
 
-[node name="Spatial15" parent="." instance=ExtResource( 25 )]
+[node name="MeshInstance12" type="MeshInstance" parent="FurniturePlacements/Position13"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 4.71089 )
+mesh = SubResource( 2166 )
+
+[node name="Position14" type="Position3D" parent="FurniturePlacements"]
 transform = Transform( -2.18557e-07, 0, 1, 0, 1, 0, -1, 0, -2.18557e-07, 19.721, 8.99139, 2.32883 )
 
-[node name="Spatial11" parent="." instance=ExtResource( 25 )]
+[node name="MeshInstance12" type="MeshInstance" parent="FurniturePlacements/Position14"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 4.71089 )
+mesh = SubResource( 2166 )
+
+[node name="Position15" type="Position3D" parent="FurniturePlacements"]
 transform = Transform( 3.0598e-07, 0, -1, 0, 1, 0, 1, 0, 3.0598e-07, 102.121, 8.99139, -71.0666 )
 
-[node name="Spatial16" parent="." instance=ExtResource( 25 )]
+[node name="MeshInstance12" type="MeshInstance" parent="FurniturePlacements/Position15"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 4.71089 )
+mesh = SubResource( 2166 )
+
+[node name="Position16" type="Position3D" parent="FurniturePlacements"]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -94.3531, 155.541, -64.0116 )
 
-[node name="Spatial18" parent="." instance=ExtResource( 25 )]
+[node name="MeshInstance12" type="MeshInstance" parent="FurniturePlacements/Position16"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 4.71089 )
+mesh = SubResource( 2166 )
+
+[node name="Position17" type="Position3D" parent="FurniturePlacements"]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -94.3531, 155.541, 2.95065 )
 
-[node name="Spatial19" parent="." instance=ExtResource( 25 )]
+[node name="MeshInstance12" type="MeshInstance" parent="FurniturePlacements/Position17"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 4.71089 )
+mesh = SubResource( 2166 )
+
+[node name="Position18" type="Position3D" parent="FurniturePlacements"]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -94.3531, 155.541, 66.6382 )
 
-[node name="Spatial20" parent="." instance=ExtResource( 25 )]
+[node name="MeshInstance12" type="MeshInstance" parent="FurniturePlacements/Position18"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 4.71089 )
+mesh = SubResource( 2166 )
+
+[node name="Position19" type="Position3D" parent="FurniturePlacements"]
 transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -17.0326, 155.541, 5.08359 )
 
-[node name="Spatial21" parent="." instance=ExtResource( 25 )]
+[node name="MeshInstance12" type="MeshInstance" parent="FurniturePlacements/Position19"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 4.71089 )
+mesh = SubResource( 2166 )
+
+[node name="Position20" type="Position3D" parent="FurniturePlacements"]
 transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -17.0326, 155.541, -63.1818 )
 
-[node name="Spatial22" parent="." instance=ExtResource( 25 )]
+[node name="MeshInstance12" type="MeshInstance" parent="FurniturePlacements/Position20"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 4.71089 )
+mesh = SubResource( 2166 )
+
+[node name="Position21" type="Position3D" parent="FurniturePlacements"]
 transform = Transform( -2.18557e-07, 0, 1, 0, 1, 0, -1, 0, -2.18557e-07, -15.4281, 155.541, -63.1818 )
 
-[node name="Spatial23" parent="." instance=ExtResource( 25 )]
+[node name="MeshInstance12" type="MeshInstance" parent="FurniturePlacements/Position21"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 4.71089 )
+mesh = SubResource( 2166 )
+
+[node name="Position22" type="Position3D" parent="FurniturePlacements"]
 transform = Transform( -2.18557e-07, 0, 1, 0, 1, 0, -1, 0, -2.18557e-07, -15.4281, 155.541, 5.08358 )
 
-[node name="Spatial24" parent="." instance=ExtResource( 25 )]
+[node name="MeshInstance12" type="MeshInstance" parent="FurniturePlacements/Position22"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 4.71089 )
+mesh = SubResource( 2166 )
+
+[node name="Position23" type="Position3D" parent="FurniturePlacements"]
 transform = Transform( 3.0598e-07, 0, -1, 0, 1, 0, 1, 0, 3.0598e-07, 94.4052, 155.541, -0.219793 )
 
-[node name="Spatial25" parent="." instance=ExtResource( 25 )]
+[node name="MeshInstance12" type="MeshInstance" parent="FurniturePlacements/Position23"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 4.71089 )
+mesh = SubResource( 2166 )
+
+[node name="Position24" type="Position3D" parent="FurniturePlacements"]
 transform = Transform( 3.0598e-07, 0, -1, 0, 1, 0, 1, 0, 3.0598e-07, 94.4052, 155.541, 63.604 )
 
-[node name="Spatial26" parent="." instance=ExtResource( 25 )]
+[node name="MeshInstance12" type="MeshInstance" parent="FurniturePlacements/Position24"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 4.71089 )
+mesh = SubResource( 2166 )
+
+[node name="Position25" type="Position3D" parent="FurniturePlacements"]
 transform = Transform( -1, 0, -2.62268e-07, 0, 1, 0, 2.62268e-07, 0, -1, 39.9517, 155.541, 94.7653 )
 
-[node name="Spatial27" parent="." instance=ExtResource( 25 )]
+[node name="MeshInstance12" type="MeshInstance" parent="FurniturePlacements/Position25"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 4.71089 )
+mesh = SubResource( 2166 )
+
+[node name="Position26" type="Position3D" parent="FurniturePlacements"]
 transform = Transform( -1, 0, -2.62268e-07, 0, 1, 0, 2.62268e-07, 0, -1, -36.3302, 155.541, 94.7653 )
 
-[node name="Spatial29" parent="." instance=ExtResource( 25 )]
+[node name="MeshInstance12" type="MeshInstance" parent="FurniturePlacements/Position26"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 4.71089 )
+mesh = SubResource( 2166 )
+
+[node name="Position27" type="Position3D" parent="FurniturePlacements"]
 transform = Transform( 3.0598e-07, 0, -1, 0, 1, 0, 1, 0, 3.0598e-07, 94.4052, 155.541, -64.7079 )
+
+[node name="MeshInstance12" type="MeshInstance" parent="FurniturePlacements/Position27"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 4.71089 )
+mesh = SubResource( 2166 )
+
+[node name="DecorationPlacaments" type="Spatial" parent="."]
 
 [connection signal="body_entered" from="Door" to="." method="Entered"]
 [connection signal="body_exited" from="Door" to="." method="Left"]

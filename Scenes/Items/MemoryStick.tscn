@@ -22,6 +22,7 @@ ItemType = 15
 ItemIcon = ExtResource( 3 )
 ItemPickupActionName = "Μια καταγραφή"
 ItemName = "Κάρτα μνήμης"
+InventoryItemName = "Κάρτα μνήμης"
 ItemDesc = "Μια καταγραφή"
 stackable = false
 

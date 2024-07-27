@@ -16,7 +16,10 @@ public class Limb : Item
     Color LimbColor = new Color(1,1,1);
 
     //public bool Equiped = false;
-
+    public override string GetInventoryItemName()
+	{
+		return string.Format(InventoryItemName, LimbRandomColorProvider.TranslateColor(LimbColor));
+	}
     public void SetColor(Color col)
     {
         LimbColor = col;
@@ -147,13 +150,49 @@ static public class LimbTranslator
 static public class LimbRandomColorProvider
 {
     static Color[] Colors = {
-        new Color(0.670588f, 0.05098f, 0.05098f,1),
-        new Color(0.05098f, 0.532629f, 0.670588f,1),
-        new Color(0.876953f, 0.834666f, 0.044227f,1),
-        new Color(0.333729f, 0.876953f, 0.044227f,1),
-        new Color(0.044227f, 0.145065f, 0.876953f,1),
-         new Color(0, 0, 0, 1),
+        new Color(0.67f, 0.05f, 0.05f,1),
+        new Color(0.05f, 0.53f, 0.67f,1),
+        new Color(0.87f, 0.83f, 0.04f,1),
+        new Color(0.33f, 0.87f, 0.04f,1),
+        new Color(0.04f, 0.14f, 0.87f,1),
+        new Color(0, 0, 0, 1),
+        new Color(1, 1, 1, 1),
     };
+    public static string TranslateColor(Color c)
+    {
+        string ColorName = string.Empty;
+
+        if (c == new Color(0.67f, 0.05f, 0.05f,1))
+        {
+            ColorName = "Κόκκινο";
+        }
+        else if (c == new Color(0.05f, 0.53f, 0.67f,1))
+        {
+            ColorName = "Ανοιχτό μπλε";
+        }
+        else if (c == new Color(0.87f, 0.83f, 0.04f,1))
+        {
+            ColorName = "Κίτρινο";
+        }
+        else if (c == new Color(0.33f, 0.87f, 0.04f,1))
+        {
+            ColorName = "Πράσινο";
+        }
+        else if (c == new Color(0.04f, 0.14f, 0.87f,1))
+        {
+            ColorName = "Μπλέ";
+        }
+        else if (c == new Color(0, 0, 0, 1))
+        {
+            ColorName = "Μαύρο";
+        }
+        else if (c == new Color(1, 1, 1, 1))
+        {
+            ColorName = "Λευκό";
+        }
+
+        return ColorName;
+    }
     public static Color GetRandomColor()
     {
         return Colors[RandomContainer.Next(0, Colors.Count())];

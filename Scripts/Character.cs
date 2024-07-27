@@ -64,6 +64,18 @@ public class Character : KinematicBody
 	{
 		return IsUncon;
 	}
+	public Vector3 GetHeadGlobalPos()
+	{
+		return GetNode<Spatial>("Pivot/Guy/Armature/Skeleton/HeadRot2Pivot").GlobalTranslation;
+	}
+	public void HeadLook(Vector3 Pos)
+	{
+		GetNode<LoddedCharacter>("Pivot/Guy/Armature/Skeleton").HeadLookAt(Pos);
+	}
+	public void ResetLook()
+	{
+		GetNode<LoddedCharacter>("Pivot/Guy/Armature/Skeleton").ResetHead();
+	}
 	public void ToggleAllLimbs()
 	{
 		//Spatial skel = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton");

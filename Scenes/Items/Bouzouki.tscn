@@ -22,6 +22,7 @@ ItemType = 8
 ItemIcon = ExtResource( 9 )
 ItemPickupActionName = "Ένα μπουζούκι.."
 ItemName = "Μπουζούκι"
+InventoryItemName = "Μπουζούκι"
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.11878, 0 )

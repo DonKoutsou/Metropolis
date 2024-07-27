@@ -18,10 +18,10 @@ mass = 0.0346939
 linear_damp = 1.22
 angular_damp = 1.22
 script = ExtResource( 1 )
-ItemWeight = 500
 ItemType = 9
 ItemIcon = ExtResource( 2 )
 ItemName = "Εργαλειοθήκη"
+InventoryItemName = "Εργαλειοθήκη"
 stackable = false
 CurrentSupplies = 20.0
 

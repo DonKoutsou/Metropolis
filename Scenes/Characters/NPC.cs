@@ -91,6 +91,7 @@ public class NPC : Character
 		{
 			//CurrentEnergy = 0;
 			IsUncon = true;
+			Kill();
 		}
 		GetNode<Position3D>("TalkPosition").Translation = TalkPosPos;
 
@@ -123,7 +124,6 @@ public class NPC : Character
 			SittingThing chair = (SittingThing)GetNode(Chair);
 			Sit(chair.GetSeat(), chair);
 		}
-			
 		else
 		{
 			Position3D pos = new Position3D();

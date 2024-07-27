@@ -252,6 +252,7 @@ ItemType = 17
 ItemIcon = ExtResource( 7 )
 ItemPickupActionName = "Ένα εκρηκτικό.."
 ItemName = "Εκρηκτικό"
+InventoryItemName = "Εκρηκτικό"
 ItemDesc = "Ένα εκρηκτικό"
 
 [node name="MeshInstance" type="MeshInstance" parent="."]

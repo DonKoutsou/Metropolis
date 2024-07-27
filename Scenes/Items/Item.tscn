@@ -23,6 +23,7 @@ ItemType = 1
 ItemIcon = ExtResource( 4 )
 ItemPickupActionName = "Ένα σκοινί"
 ItemName = "Σκοινί"
+InventoryItemName = "Σκοινί"
 ItemDesc = "Ένα σκοινί"
 
 [node name="MeshInstance" type="MeshInstance" parent="."]

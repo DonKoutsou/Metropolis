@@ -196,6 +196,32 @@ public class Inventory : Spatial
                 }
                 l.RandomiseColor = false;
             }
+            else if (newItem is PaintCan p)
+            {
+                Array CustomDataKeys = (Array)res.Get("CustomDataKeys");
+		        Godot.Collections.Array CustomDataValues = (Godot.Collections.Array)res.Get("CustomDataValues");
+                for (int i = 0; i < CustomDataKeys.Length; i++)
+                {
+                    if ((string)CustomDataKeys.GetValue(i) == "CanColor")
+                    {
+                        p.SetColor((Color)CustomDataValues[i]);
+                    }
+                }
+                p.RandomiseColor = false;
+            }
+            else if (newItem is Book b)
+            {
+                Array CustomDataKeys = (Array)res.Get("CustomDataKeys");
+		        Godot.Collections.Array CustomDataValues = (Godot.Collections.Array)res.Get("CustomDataValues");
+                for (int i = 0; i < CustomDataKeys.Length; i++)
+                {
+                    if ((string)CustomDataKeys.GetValue(i) == "VolumeNumber")
+                    {
+                        b.SetVoluemeNumber((int)CustomDataValues[i]);
+                        BookVolumeHolder.OnVolumeFound(b.GetSeries(), (int)CustomDataValues[i]);
+                    }
+                }
+            }
             InsertItem(newItem);
         }
     }

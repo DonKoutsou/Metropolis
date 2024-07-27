@@ -153,6 +153,7 @@ transform = Transform( -0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, 61.364, 1
 
 [node name="Character" parent="." index="17" instance=ExtResource( 8 )]
 transform = Transform( -0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, -0.965926, 583.136, 10.2546, -672.599 )
+Sitting = true
 PlayInstrument = true
 InstrumentToSpawnWith = ExtResource( 13 )
 
@@ -281,4 +282,4 @@ Chair = NodePath("../StaticBody10")
 PortPath = NodePath("../Port")
 
 [node name="StaticBody10" parent="." index="36" instance=ExtResource( 18 )]
-transform = Transform( -0.875296, 0, -0.483588, 0, 1, 0, 0.483588, 0, -0.875296, 594.097, 9.97896, -673.696 )
+transform = Transform( -0.875296, 0, -0.483588, 0, 1, 0, 0.483588, 0, -0.875296, 594.097, 10.1844, -673.696 )

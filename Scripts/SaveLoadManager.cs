@@ -115,6 +115,18 @@ public class SaveLoadManager : Control
 				Values[0] = l.GetColor();
 				HasData = true;
 			}
+			else if (it is PaintCan p)
+			{
+				Keys[0] = "CanColor";
+				Values[0] = p.GetColor();
+				HasData = true;
+			}
+			else if (it is Book b)
+			{
+				Keys[0] = "VolumeNumber";
+				Values[0] = b.GetVolumeNumber();
+				HasData = true;
+			}
 			Itemdata.Add("CustomDataKeys", Keys);
 			Itemdata.Add("CustomDataValues", Values);
 			Inventorysave.Call("_SetData", Itemdata, HasData);

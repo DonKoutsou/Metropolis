@@ -49,6 +49,12 @@ public class Furniture : Spatial
 	public void Search(out Item founditem)
 	{
 		PlayerSearchAnim();
+		if (StashedItem is Book b)
+		{
+			int volume = BookVolumeHolder.GetRandomUnfoundVolume(b.GetSeries());
+			b.SetVoluemeNumber(volume);
+			BookVolumeHolder.IsVolumeFound(b.GetSeries(), volume);
+		}
 		founditem = StashedItem;
 		Searched = true;
 	}

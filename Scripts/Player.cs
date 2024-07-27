@@ -26,7 +26,7 @@ public class Player : Character
 	protected int JumpImpulse = 20;
 
 	[Export]
-	protected int RunSpeed = 20;
+	protected float RunSpeed = 20;
 
 	////// Energy ///////
 	//Consumption curve

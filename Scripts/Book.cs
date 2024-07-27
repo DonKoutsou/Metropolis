@@ -9,11 +9,26 @@ public class Book : Item
     [Export]
     int VolumeNumber = 1;
 
-
+    public void SetVoluemeNumber(int Num)
+    {
+        VolumeNumber = Num;
+    }
+    public int GetVolumeNumber()
+    {
+        return VolumeNumber;
+    }
+    public BookSeries GetSeries()
+    {
+        return Series;
+    }
     public override string GetItemName()
 	{
-		return BookEnumTranslator.TranslateBookEnum(Series) + "\n Τόμος : " + VolumeNumber.ToString();
+		return BookEnumTranslator.TranslateBookEnum(Series);
 	}
+    public override string GetInventoryItemName()
+    {
+        return BookEnumTranslator.TranslateBookEnum(Series) + "\n Τόμος : " + VolumeNumber.ToString();
+    }
     /*public override string GetItemDesc()
     {
         return BookEnumTranslator.TranslateBookEnum(Series) + "\n Τόμος : " + VolumeNumber.ToString();
@@ -25,7 +40,7 @@ public class BookVolumeHolder
     static List<int> HistoryVolumesFound = new List<int>();
     static List<int> MotherCityVolumesFound = new List<int>();
 
-    public static void OnVolueFound(BookSeries Serie, int Volume)
+    public static void OnVolumeFound(BookSeries Serie, int Volume)
     {
         switch(Serie)
         {

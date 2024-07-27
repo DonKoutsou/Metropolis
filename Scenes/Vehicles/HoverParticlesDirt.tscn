@@ -1,6 +1,4 @@
-[gd_scene load_steps=10 format=2]
-
-[ext_resource path="res://shaders/Outline.shader" type="Shader" id=1]
+[gd_scene load_steps=8 format=2]
 
 [sub_resource type="Curve" id=5]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.011646, 0.00306749 ), 0.0, 0.0, 0, 0, Vector2( 0.0147516, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.0333851, 0.105828 ), 0.0, 0.0, 0, 0, Vector2( 0.0349379, 0.872699 ), 0.0, 0.0, 0, 0, Vector2( 0.0535714, 0.265337 ), 0.0, 0.0, 0, 0, Vector2( 0.0753106, 0.75 ), 0.0, 0.0, 0, 0, Vector2( 0.0923913, 0.430982 ), 0.0, 0.0, 0, 0, Vector2( 0.126553, 0.627301 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
@@ -36,15 +34,7 @@ width = 128
 height = 128
 noise = SubResource( 113 )
 
-[sub_resource type="ShaderMaterial" id=115]
-resource_local_to_scene = true
-shader = ExtResource( 1 )
-shader_param/enable = true
-shader_param/outline_thickness = 0.01
-shader_param/color = Color( 0.25098, 0.176471, 0.101961, 1 )
-
 [sub_resource type="SpatialMaterial" id=116]
-next_pass = SubResource( 115 )
 flags_world_triplanar = true
 params_diffuse_mode = 4
 params_specular_mode = 3

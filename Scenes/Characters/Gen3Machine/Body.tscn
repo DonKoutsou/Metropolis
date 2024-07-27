@@ -59,10 +59,10 @@ filters = [ "Armature/Skeleton:Bone", "Armature/Skeleton:mixamorig_Hips", "Armat
 
 [sub_resource type="AnimationNodeBlend2" id=54]
 filter_enabled = true
-filters = [ "Armature/Skeleton:mixamorig_Head", "Armature/Skeleton:mixamorig_LeftArm", "Armature/Skeleton:mixamorig_LeftForeArm", "Armature/Skeleton:mixamorig_LeftHand", "Armature/Skeleton:mixamorig_LeftHandIndex1", "Armature/Skeleton:mixamorig_LeftHandIndex2", "Armature/Skeleton:mixamorig_LeftHandIndex3", "Armature/Skeleton:mixamorig_LeftHandIndex4", "Armature/Skeleton:mixamorig_LeftHandMiddle1", "Armature/Skeleton:mixamorig_LeftHandMiddle2", "Armature/Skeleton:mixamorig_LeftHandMiddle3", "Armature/Skeleton:mixamorig_LeftHandMiddle4", "Armature/Skeleton:mixamorig_LeftHandPinky1", "Armature/Skeleton:mixamorig_LeftHandPinky2", "Armature/Skeleton:mixamorig_LeftHandPinky3", "Armature/Skeleton:mixamorig_LeftHandPinky4", "Armature/Skeleton:mixamorig_LeftHandRing1", "Armature/Skeleton:mixamorig_LeftHandRing2", "Armature/Skeleton:mixamorig_LeftHandRing3", "Armature/Skeleton:mixamorig_LeftHandRing4", "Armature/Skeleton:mixamorig_LeftHandThumb2", "Armature/Skeleton:mixamorig_LeftHandThumb3", "Armature/Skeleton:mixamorig_LeftHandThumb4", "Armature/Skeleton:mixamorig_LeftLeg", "Armature/Skeleton:mixamorig_LeftShoulder", "Armature/Skeleton:mixamorig_LeftUpLeg", "Armature/Skeleton:mixamorig_Neck", "Armature/Skeleton:mixamorig_RightArm", "Armature/Skeleton:mixamorig_RightForeArm", "Armature/Skeleton:mixamorig_RightHand", "Armature/Skeleton:mixamorig_RightHandIndex1", "Armature/Skeleton:mixamorig_RightHandIndex2", "Armature/Skeleton:mixamorig_RightHandIndex3", "Armature/Skeleton:mixamorig_RightHandIndex4", "Armature/Skeleton:mixamorig_RightHandMiddle1", "Armature/Skeleton:mixamorig_RightHandMiddle2", "Armature/Skeleton:mixamorig_RightHandMiddle3", "Armature/Skeleton:mixamorig_RightHandMiddle4", "Armature/Skeleton:mixamorig_RightHandPinky1", "Armature/Skeleton:mixamorig_RightHandPinky2", "Armature/Skeleton:mixamorig_RightHandPinky3", "Armature/Skeleton:mixamorig_RightHandPinky4", "Armature/Skeleton:mixamorig_RightHandRing1", "Armature/Skeleton:mixamorig_RightHandRing2", "Armature/Skeleton:mixamorig_RightHandRing3", "Armature/Skeleton:mixamorig_RightHandRing4", "Armature/Skeleton:mixamorig_RightHandThumb1", "Armature/Skeleton:mixamorig_RightHandThumb2", "Armature/Skeleton:mixamorig_RightHandThumb3", "Armature/Skeleton:mixamorig_RightHandThumb4", "Armature/Skeleton:mixamorig_RightShoulder" ]
+filters = [ "Armature/Skeleton:mixamorig_LeftArm", "Armature/Skeleton:mixamorig_LeftForeArm", "Armature/Skeleton:mixamorig_LeftHand", "Armature/Skeleton:mixamorig_LeftHandIndex1", "Armature/Skeleton:mixamorig_LeftHandIndex2", "Armature/Skeleton:mixamorig_LeftHandIndex3", "Armature/Skeleton:mixamorig_LeftHandIndex4", "Armature/Skeleton:mixamorig_LeftHandMiddle1", "Armature/Skeleton:mixamorig_LeftHandMiddle2", "Armature/Skeleton:mixamorig_LeftHandMiddle3", "Armature/Skeleton:mixamorig_LeftHandMiddle4", "Armature/Skeleton:mixamorig_LeftHandPinky1", "Armature/Skeleton:mixamorig_LeftHandPinky2", "Armature/Skeleton:mixamorig_LeftHandPinky3", "Armature/Skeleton:mixamorig_LeftHandPinky4", "Armature/Skeleton:mixamorig_LeftHandRing1", "Armature/Skeleton:mixamorig_LeftHandRing2", "Armature/Skeleton:mixamorig_LeftHandRing3", "Armature/Skeleton:mixamorig_LeftHandRing4", "Armature/Skeleton:mixamorig_LeftHandThumb2", "Armature/Skeleton:mixamorig_LeftHandThumb3", "Armature/Skeleton:mixamorig_LeftHandThumb4", "Armature/Skeleton:mixamorig_LeftLeg", "Armature/Skeleton:mixamorig_LeftShoulder", "Armature/Skeleton:mixamorig_LeftUpLeg", "Armature/Skeleton:mixamorig_RightArm", "Armature/Skeleton:mixamorig_RightForeArm", "Armature/Skeleton:mixamorig_RightHand", "Armature/Skeleton:mixamorig_RightHandIndex1", "Armature/Skeleton:mixamorig_RightHandIndex2", "Armature/Skeleton:mixamorig_RightHandIndex3", "Armature/Skeleton:mixamorig_RightHandIndex4", "Armature/Skeleton:mixamorig_RightHandMiddle1", "Armature/Skeleton:mixamorig_RightHandMiddle2", "Armature/Skeleton:mixamorig_RightHandMiddle3", "Armature/Skeleton:mixamorig_RightHandMiddle4", "Armature/Skeleton:mixamorig_RightHandPinky1", "Armature/Skeleton:mixamorig_RightHandPinky2", "Armature/Skeleton:mixamorig_RightHandPinky3", "Armature/Skeleton:mixamorig_RightHandPinky4", "Armature/Skeleton:mixamorig_RightHandRing1", "Armature/Skeleton:mixamorig_RightHandRing2", "Armature/Skeleton:mixamorig_RightHandRing3", "Armature/Skeleton:mixamorig_RightHandRing4", "Armature/Skeleton:mixamorig_RightHandThumb1", "Armature/Skeleton:mixamorig_RightHandThumb2", "Armature/Skeleton:mixamorig_RightHandThumb3", "Armature/Skeleton:mixamorig_RightHandThumb4", "Armature/Skeleton:mixamorig_RightShoulder" ]
 
 [sub_resource type="AnimationNodeBlendTree" id=38]
-graph_offset = Vector2( -213.112, 136.858 )
+graph_offset = Vector2( -656.822, 51.8444 )
 nodes/Animation/node = SubResource( 47 )
 nodes/Animation/position = Vector2( 0, 146.667 )
 "nodes/Animation 2/node" = SubResource( 53 )
@@ -74,7 +74,7 @@ nodes/ChairBlend/position = Vector2( 186.667, 160 )
 nodes/IntrumentBlend/node = SubResource( 54 )
 nodes/IntrumentBlend/position = Vector2( 360, 266.667 )
 nodes/output/position = Vector2( 533.333, 160 )
-node_connections = [ "ChairBlend", 0, "Animation", "ChairBlend", 1, "Animation 3", "IntrumentBlend", 0, "ChairBlend", "IntrumentBlend", 1, "Animation 2", "output", 0, "IntrumentBlend" ]
+node_connections = [ "output", 0, "IntrumentBlend", "IntrumentBlend", 0, "ChairBlend", "IntrumentBlend", 1, "Animation 2", "ChairBlend", 0, "Animation", "ChairBlend", 1, "Animation 3" ]
 
 [sub_resource type="AnimationNodeAnimation" id=55]
 animation = "Standing"
@@ -111,14 +111,14 @@ resource_local_to_scene = true
 states/Dead/node = SubResource( 37 )
 states/Dead/position = Vector2( 707.333, 254.235 )
 states/Sitting/node = SubResource( 38 )
-states/Sitting/position = Vector2( 520.667, 48 )
+states/Sitting/position = Vector2( 522.267, 48 )
 states/Standing/node = SubResource( 55 )
 states/Standing/position = Vector2( 509.111, 171.334 )
 states/Walking/node = ExtResource( 6 )
 states/Walking/position = Vector2( 326, 235.866 )
 transitions = [ "Walking", "Dead", SubResource( 39 ), "Walking", "Sitting", SubResource( 42 ), "Sitting", "Dead", SubResource( 51 ), "Dead", "Sitting", SubResource( 52 ), "Standing", "Walking", SubResource( 57 ), "Sitting", "Standing", SubResource( 58 ), "Dead", "Standing", SubResource( 56 ) ]
 start_node = "Walking"
-graph_offset = Vector2( -196, -4 )
+graph_offset = Vector2( -352, -31 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=46]
 
@@ -152,18 +152,16 @@ transform = Transform( 0.024, 0, 0, 0, 0.024, 6.77112e-09, 0, -6.77112e-09, 0.02
 
 [node name="Skeleton" parent="Armature" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 5.68434e-14, 0, -2.84217e-14, 1, -0.314196, 5.03759e-08, -0.178556 )
-bones/3/bound_children = [ NodePath("InstrumentAtatchment") ]
-bones/6/bound_children = [ NodePath("BoneAttachment") ]
 script = ExtResource( 18 )
 
 [node name="HeadRot2Pivot" type="Spatial" parent="Armature/Skeleton" index="0"]
-transform = Transform( -1, 0, -8.74228e-08, 1.05611e-16, 1, -1.20806e-09, 8.74228e-08, -2.27374e-13, -1, -3.65925, 281.359, 18.8662 )
+transform = Transform( -1, 0, -8.74228e-08, 1.36838e-16, 1, -1.56626e-09, 8.74228e-08, -2.27374e-13, -1, -3.69636, 284.494, 19.8283 )
 
 [node name="HeadRot2" type="Spatial" parent="Armature/Skeleton/HeadRot2Pivot" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, -2.84217e-14, 0, 2.84217e-14, 1, 0, 0, 0 )
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton" index="1"]
-transform = Transform( 0.997229, -0.0671855, -0.0319321, 0.063667, 0.992875, -0.100721, 0.0384716, 0.0984095, 0.994402, -2.35726, 265.932, 10.6489 )
+transform = Transform( 0.997054, -0.0676523, -0.0361414, 0.0632615, 0.991776, -0.111254, 0.0433707, 0.10864, 0.993135, -2.35878, 269.154, 11.4535 )
 bone_name = "mixamorig_Head"
 
 [node name="HeadPivot" type="Spatial" parent="Armature/Skeleton/BoneAttachment" index="0"]
@@ -199,7 +197,7 @@ update_rotation = false
 update_scale = false
 
 [node name="InstrumentAtatchment" type="BoneAttachment" parent="Armature/Skeleton" index="2"]
-transform = Transform( 0.997841, -0.0269307, -0.0598944, 0.0265067, 0.999617, -0.00786161, 0.0600832, 0.00625702, 0.998174, 0.82904, 213.377, -0.0687053 )
+transform = Transform( 0.997769, -0.0248639, -0.0619615, 0.0239244, 0.999588, -0.0158584, 0.0623303, 0.0143406, 0.997953, 0.715882, 216.788, 0.149562 )
 bone_name = "mixamorig_Spine1"
 
 [node name="PlayingAtatchment" type="RemoteTransform" parent="Armature/Skeleton/InstrumentAtatchment" index="0"]

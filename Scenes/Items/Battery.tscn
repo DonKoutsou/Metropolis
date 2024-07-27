@@ -22,6 +22,7 @@ ItemType = 2
 ItemIcon = ExtResource( 4 )
 ItemPickupActionName = "Μιά μπαταρία."
 ItemName = "Μπαταρία μετριας χωρητικότητας."
+InventoryItemName = "Μπαταρία μετριας χωρητικότητας."
 ItemDesc = "Μπαταρία μετριας χωρητικότητας."
 stackable = false
 CurrentEnergy = 100.0

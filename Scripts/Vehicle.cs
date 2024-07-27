@@ -198,8 +198,8 @@ public class Vehicle : RigidBody
 
         ExaustParticles[0].GetNode<AudioStreamPlayer3D>("EngineSound").PitchScale = engineforce + 0.6f;
 
-        ((ParticlesMaterial)ExaustParticles[1].ProcessMaterial).Scale = engineforce * 5;
-        ((ParticlesMaterial)ExaustParticles[1].ProcessMaterial).InitialVelocity = engineforce * 60 + 5;
+        ((ParticlesMaterial)ExaustParticles[1].ProcessMaterial).Scale = engineforce * 2.5f;
+        ((ParticlesMaterial)ExaustParticles[1].ProcessMaterial).InitialVelocity = engineforce * 60 + 5 * 2.5f;
 
         ExaustParticles[1].GetNode<AudioStreamPlayer3D>("EngineSound").PitchScale = engineforce + 0.6f;
 
@@ -332,6 +332,7 @@ public class Vehicle : RigidBody
             ray.ForceRaycastUpdate();
             Particles part = EnginePivot.GetNode<Particles>("Particles");
             Particles partd = EnginePivot.GetNode<Particles>("ParticlesDirt");
+            Particles partHover = EnginePivot.GetNode<Particles>("HoverEngineParticles");
             Vector3 engrot = new Vector3(Mathf.Deg2Rad(Mathf.Lerp(0, 60, latsspeed /speed)), 0, 0);
             if (ray.IsColliding())
             {
@@ -365,14 +366,14 @@ public class Vehicle : RigidBody
                 float multi = forcecurve.Interpolate(distmulti);
 
                 f= Vector3.Up * Force * delta * multi;
-
+                partHover.Emitting = true;
             }
             else
             {
                 part.Emitting = false;
                 partd.Emitting = false;
+                partHover.Emitting = false;
                 f = Vector3.Up * 8000 * delta * -8;
-
             }
             EnginePivot.Rotation = engrot;
             AddForce(f, ray.GlobalTranslation - GlobalTranslation);

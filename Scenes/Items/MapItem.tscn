@@ -22,6 +22,7 @@ ItemType = 5
 ItemIcon = ExtResource( 3 )
 ItemPickupActionName = "Ένας χάρτης.."
 ItemName = "Μονάδα συντεταγμένων"
+InventoryItemName = "Μονάδα συντεταγμένων"
 ItemDesc = "Μονάδα αποθήκευσης συντεταγμένων, ένδειξη συντεταγμένων χρήστη, και αποθήκευση πορείας."
 stackable = false
 

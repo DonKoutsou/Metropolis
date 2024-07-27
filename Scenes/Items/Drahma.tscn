@@ -19,10 +19,10 @@ mass = 0.0346939
 linear_damp = 1.22
 angular_damp = 1.22
 script = ExtResource( 1 )
-ItemWeight = 5
 ItemIcon = ExtResource( 4 )
 ItemPickupActionName = "Μιά δραχμή.."
 ItemName = "Δραχμή"
+InventoryItemName = "Δραχμή"
 ItemDesc = "Μια δραχμή. μπλά μπλά μπλά μπλά... μπλά"
 
 [node name="MeshInstance" type="MeshInstance" parent="."]

@@ -18,6 +18,9 @@ public class Item : RigidBody
 
 	[Export]
 	string ItemName = "Item";
+	
+	[Export]
+	protected string InventoryItemName = "Item";
 
 	[Export]
 	public string ItemDesc = "Quifsa";
@@ -28,6 +31,10 @@ public class Item : RigidBody
 	public bool RegisterOnIsland = true;
 
 	public virtual string GetItemName()
+	{
+		return ItemName;
+	}
+	public virtual string GetInventoryItemName()
 	{
 		return ItemName;
 	}
@@ -85,15 +92,26 @@ public class Item : RigidBody
 			float cond = (float)data.CustomData["CurrentCondition"];
 			battery.SetCurrentCondition(cond);
 		}
-		if (this is Toolbox box)
+		else if (this is Toolbox box)
 		{
 			float cap = (float)data.CustomData["CurrentSupplies"];
 			box.SetCurrentSupplies(cap);
 		}
-		if (this is Limb limb)
+		else if (this is Limb limb)
 		{
 			Color cap = (Color)data.CustomData["LimbColor"];
 			limb.SetColor(cap);
+		}
+		else if (this is PaintCan Can)
+		{
+			Color cap = (Color)data.CustomData["CanColor"];
+			Can.SetColor(cap);
+		}
+		else if (this is Book b)
+		{
+			int cap = (int)data.CustomData["VolumeNumber"];
+			b.SetVoluemeNumber(cap);
+			BookVolumeHolder.OnVolumeFound(b.GetSeries(), cap);
 		}
 	}
 
@@ -121,19 +139,33 @@ public class ItemInfo
 			else
 				CustomData.Add("CurrentCondition", bat.GetCondition());
 		}
-		if (it is Toolbox box)
+		else if (it is Toolbox box)
 		{
 			if (CustomData.ContainsKey("CurrentSupplies"))
 				CustomData["CurrentSupplies"] = box.GetCurrentSupplyAmmount();
 			else
 				CustomData.Add("CurrentSupplies", box.GetCurrentSupplyAmmount());
 		}
-		if (it is Limb l)
+		else if (it is Limb l)
 		{
 			if (CustomData.ContainsKey("LimbColor"))
 				CustomData["LimbColor"] = l.GetColor();
 			else
 				CustomData.Add("LimbColor", l.GetColor());
+		}
+		else if (it is PaintCan p)
+		{
+			if (CustomData.ContainsKey("CanColor"))
+				CustomData["CanColor"] = p.GetColor();
+			else
+				CustomData.Add("CanColor", p.GetColor());
+		}
+		else if (it is Book b)
+		{
+			if (CustomData.ContainsKey("VolumeNumber"))
+				CustomData["VolumeNumber"] = b.GetVolumeNumber();
+			else
+				CustomData.Add("VolumeNumber", b.GetVolumeNumber());
 		}
 	}
 	public Dictionary<string, object>GetPackedData(out bool HasData)
@@ -204,4 +236,5 @@ public enum ItemName
 	MEMORYSTICK,
 	DOSIER,
 	EXPLOSIVE,
+	PAINTCAN,
 }

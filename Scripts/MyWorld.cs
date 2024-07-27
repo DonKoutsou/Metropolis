@@ -303,7 +303,7 @@ public class MyWorld : Spatial
 	{
 		//GD.Print("Transitioning from : " + from.Name + " to " + to.Name);
 		WorldMap map = WorldMap.GetInstance();
-		map.SyncSeas();
+		//map.SyncSeas();
 		List<IslandInfo> ilestodissable = new List<IslandInfo>();
 		List<IslandInfo> ilestoenable = new List<IslandInfo>();
 
