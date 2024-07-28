@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Islands/LightHouseGeo.tscn" type="PackedScene" id=2]
@@ -7,18 +7,16 @@
 [ext_resource path="res://Scenes/Env_Assets/Barrels/Barrel_Base.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Env_Assets/Street_Lamp.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Triggers/CityNameTrigger.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/Characters/NPC.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/Building/BuildingComposition2.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Env_Assets/Fireplace.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Env_Assets/Skampo.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Env_Assets/Table.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Assets/Building/BuildingComposition.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Scenes/Items/Guitar.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/Env_Assets/WindGenerator2.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/Env_Assets/PortRopething.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Items/Bouzouki.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/Env_Assets/Port.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scenes/Env_Assets/Pagaki.tscn" type="PackedScene" id=18]
-[ext_resource path="res://Scenes/Characters/PortWorker.tscn" type="PackedScene" id=19]
 
 [sub_resource type="SpatialMaterial" id=13]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -132,155 +130,73 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 325, 209.651, -352.371 )
 [node name="Barrel3" parent="." index="9" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 338.989, 209.651, -356.747 )
 
-[node name="StreetLamp8" parent="." index="10" instance=ExtResource( 6 )]
-transform = Transform( -0.831421, 0, -0.555643, 0, 1, 0, 0.555643, 0, -0.831421, 389.837, 207.116, -349.793 )
-
-[node name="StreetLamp15" parent="." index="11" instance=ExtResource( 6 )]
-transform = Transform( -0.508831, 0, 0.860866, 0, 1, 0, -0.860866, 0, -0.508831, 370.764, 207.116, -474.585 )
-
-[node name="StreetLamp16" parent="." index="12" instance=ExtResource( 6 )]
-transform = Transform( -0.965609, 0, 0.259999, 0, 1, 0, -0.259999, 0, -0.965609, 262.849, 207.116, -467.449 )
-
-[node name="StreetLamp9" parent="." index="13" instance=ExtResource( 6 )]
+[node name="StreetLamp9" parent="." index="10" instance=ExtResource( 6 )]
 transform = Transform( -1, 0, -2.68221e-07, 0, 1, 0, 2.68221e-07, 0, -1, 35.364, 829, -286.775 )
 
-[node name="StreetLamp10" parent="." index="14" instance=ExtResource( 6 )]
+[node name="StreetLamp10" parent="." index="11" instance=ExtResource( 6 )]
 transform = Transform( -0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, 80.364, 828, -282.775 )
 
-[node name="StreetLamp11" parent="." index="15" instance=ExtResource( 6 )]
+[node name="StreetLamp11" parent="." index="12" instance=ExtResource( 6 )]
 transform = Transform( -0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, 61.364, 1011, -280.775 )
 
-[node name="DialogueTrigger" parent="." index="16" instance=ExtResource( 7 )]
+[node name="DialogueTrigger" parent="." index="13" instance=ExtResource( 7 )]
 
-[node name="Character" parent="." index="17" instance=ExtResource( 8 )]
-transform = Transform( -0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, -0.965926, 583.136, 10.2546, -672.599 )
-Sitting = true
-PlayInstrument = true
-InstrumentToSpawnWith = ExtResource( 13 )
+[node name="Fireplace" parent="." index="14" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 587.239, 10.2546, -675.599 )
 
-[node name="Character2" parent="." index="18" instance=ExtResource( 8 )]
-transform = Transform( -0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, 248.814, 208.053, -763.745 )
-PlayInstrument = true
-
-[node name="Fireplace" parent="." index="19" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 586.136, 10.2546, -675.599 )
-State = true
-
-[node name="SoundMap" parent="." index="21"]
+[node name="SoundMap" parent="." index="16"]
 mesh_library = SubResource( 18 )
 data = {
 "cells": PoolIntArray( 24, 0, 0, 65513, 0, 0, 23, 1, 0, 24, 1, 0, 65512, 1, 0, 65513, 1, 0, 23, 2, 0, 65513, 2, 0, 14, 3, 0, 15, 3, 0, 22, 3, 0, 23, 3, 0, 65513, 3, 0, 65514, 3, 0, 13, 4, 0, 14, 4, 0, 15, 4, 0, 16, 4, 0, 17, 4, 0, 18, 4, 0, 19, 4, 0, 20, 4, 0, 21, 4, 0, 22, 4, 0, 65514, 4, 0, 13, 5, 0, 18, 5, 0, 19, 5, 0, 65514, 5, 0, 13, 6, 0, 14, 6, 0, 65514, 6, 0, 14, 7, 0, 65514, 7, 0, 14, 8, 0, 65514, 8, 0, 65515, 8, 0, 14, 9, 0, 65515, 9, 0, 13, 10, 0, 14, 10, 0, 65515, 10, 0, 13, 11, 0, 65515, 11, 0, 65516, 11, 0, 65517, 11, 0, 13, 12, 0, 65517, 12, 0, 12, 13, 0, 13, 13, 0, 65517, 13, 0, 12, 14, 0, 65517, 14, 0, 65518, 14, 0, 11, 15, 0, 12, 15, 0, 65518, 15, 0, 6, 16, 0, 7, 16, 0, 8, 16, 0, 10, 16, 0, 11, 16, 0, 65518, 16, 0, 65519, 16, 0, 65520, 16, 0, 6, 17, 0, 8, 17, 0, 9, 17, 0, 10, 17, 0, 65520, 17, 0, 6, 18, 0, 65520, 18, 0, 65521, 18, 0, 5, 19, 0, 6, 19, 0, 65521, 19, 0, 65522, 19, 0, 5, 20, 0, 65522, 20, 0, 65523, 20, 0, 0, 21, 0, 1, 21, 0, 2, 21, 0, 3, 21, 0, 4, 21, 0, 5, 21, 0, 65523, 21, 0, 65524, 21, 0, 65525, 21, 0, 65526, 21, 0, 65534, 21, 0, 65535, 21, 0, 65526, 22, 0, 65527, 22, 0, 65528, 22, 0, 65529, 22, 0, 65530, 22, 0, 65531, 22, 0, 65532, 22, 0, 65533, 22, 0, 65534, 22, 0, 65528, 23, 0, 65529, 23, 0, 1, 65517, 0, 2, 65517, 0, 3, 65517, 0, 4, 65517, 0, 5, 65517, 0, 10, 65517, 0, 1, 65518, 0, 5, 65518, 0, 8, 65518, 0, 9, 65518, 0, 10, 65518, 0, 11, 65518, 0, 65531, 65518, 0, 65532, 65518, 0, 65533, 65518, 0, 65534, 65518, 0, 0, 65519, 0, 1, 65519, 0, 5, 65519, 0, 6, 65519, 0, 7, 65519, 0, 8, 65519, 0, 11, 65519, 0, 65529, 65519, 0, 65530, 65519, 0, 65531, 65519, 0, 65534, 65519, 0, 65535, 65519, 0, 5, 65520, 0, 6, 65520, 0, 11, 65520, 0, 12, 65520, 0, 65526, 65520, 0, 65527, 65520, 0, 65528, 65520, 0, 65529, 65520, 0, 12, 65521, 0, 65523, 65521, 0, 65524, 65521, 0, 65525, 65521, 0, 65526, 65521, 0, 12, 65522, 0, 13, 65522, 0, 65521, 65522, 0, 65522, 65522, 0, 65523, 65522, 0, 11, 65523, 0, 12, 65523, 0, 13, 65523, 0, 65520, 65523, 0, 65521, 65523, 0, 10, 65524, 0, 11, 65524, 0, 65519, 65524, 0, 65520, 65524, 0, 10, 65525, 0, 11, 65525, 0, 12, 65525, 0, 65518, 65525, 0, 65519, 65525, 0, 12, 65526, 0, 13, 65526, 0, 14, 65526, 0, 65517, 65526, 0, 65518, 65526, 0, 14, 65527, 0, 15, 65527, 0, 65516, 65527, 0, 65517, 65527, 0, 15, 65528, 0, 16, 65528, 0, 65515, 65528, 0, 65516, 65528, 0, 16, 65529, 0, 65515, 65529, 0, 16, 65530, 0, 17, 65530, 0, 18, 65530, 0, 19, 65530, 0, 20, 65530, 0, 21, 65530, 0, 65514, 65530, 0, 65515, 65530, 0, 21, 65531, 0, 22, 65531, 0, 65514, 65531, 0, 14, 65532, 0, 22, 65532, 0, 23, 65532, 0, 65514, 65532, 0, 14, 65533, 0, 23, 65533, 0, 24, 65533, 0, 65514, 65533, 0, 24, 65534, 0, 65513, 65534, 0, 65514, 65534, 0, 24, 65535, 0, 65513, 65535, 0 )
 }
 
-[node name="StaticBody" parent="." index="22" instance=ExtResource( 11 )]
+[node name="StaticBody" parent="." index="17" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 118, 737.291, -390 )
 
-[node name="Bouzouki" parent="." index="23" instance=ExtResource( 16 )]
-transform = Transform( -0.911762, 0, -0.410719, -0.0552508, 0.990911, 0.122652, 0.406986, 0.134522, -0.903475, 587.783, 10.2318, -670.198 )
+[node name="Bouzouki" parent="." index="18" instance=ExtResource( 16 )]
+transform = Transform( -0.911762, 0, -0.410719, -0.10287, 0.968126, 0.228364, 0.397628, 0.250464, -0.882701, 587.783, 10.2318, -670.198 )
 
-[node name="StaticBody2" parent="." index="24" instance=ExtResource( 10 )]
+[node name="StaticBody2" parent="." index="19" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 118, 734.823, -394 )
 
-[node name="Houses" type="Spatial" parent="." index="25"]
+[node name="Houses" type="Spatial" parent="." index="20"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.695, 0 )
 
-[node name="House" parent="Houses" index="0" instance=ExtResource( 12 )]
-transform = Transform( -1.73205, 0, -0.5, 0, 1, 0, 1, 0, -0.866026, 387.695, 212.582, -312.371 )
-spawnItems = false
-
-[node name="House4" parent="Houses" index="1" instance=ExtResource( 12 )]
-transform = Transform( 0.99416, 0, -0.867705, 0, 1, 0, 1.73541, 0, 0.49708, 444.6, 211.349, -402.358 )
-spawnItems = false
-
-[node name="House7" parent="Houses" index="2" instance=ExtResource( 12 )]
-transform = Transform( -0.853395, -0.0118867, -0.521129, -0.0141838, 0.999899, 0.000420111, 0.521072, 0.00775011, -0.853478, 218.393, 211.607, -705.82 )
-spawnItems = false
-
-[node name="House17" parent="Houses" index="3" instance=ExtResource( 12 )]
-transform = Transform( 0.868426, 0.0121106, 0.495671, -0.0141838, 0.999899, 0.000420111, -0.495616, -0.00739534, 0.86851, 29.3029, 211.398, -647.308 )
-spawnItems = false
-
-[node name="House18" parent="Houses" index="4" instance=ExtResource( 12 )]
-transform = Transform( -0.870239, -0.00655055, 0.900349, -0.0283676, 0.999899, 0.000420104, -1.80052, -0.0125876, -0.435169, 316.571, 211.607, -398.107 )
-spawnItems = false
-
-[node name="House19" parent="Houses" index="5" instance=ExtResource( 12 )]
-transform = Transform( 1.05486, 0.00783869, -0.849561, -0.0283676, 0.999899, 0.000420104, 1.69896, 0.0118284, 0.52749, 220.028, 211.607, -743.359 )
-spawnItems = false
-
-[node name="House20" parent="Houses" index="6" instance=ExtResource( 12 )]
-transform = Transform( -0.859539, -0.00647575, 0.902915, -0.0283676, 0.999899, 0.000420104, -1.80566, -0.0126262, -0.429819, 297.206, 211.607, -437.877 )
-spawnItems = false
-
-[node name="House16" parent="Houses" index="7" instance=ExtResource( 12 )]
-transform = Transform( 0.853395, 0.0118867, 0.521129, -0.0141838, 0.999899, 0.000420111, -0.521072, -0.00775011, 0.853478, 233.898, 211.607, -763.325 )
-spawnItems = false
-
-[node name="House21" parent="Houses" index="8" instance=ExtResource( 12 )]
-transform = Transform( 0.886384, 0.0123792, 0.462786, -0.0141838, 0.999899, 0.000420111, -0.462734, -0.00693644, 0.88647, 305.129, 211.607, -476.651 )
-spawnItems = false
-
-[node name="House22" parent="Houses" index="9" instance=ExtResource( 12 )]
-transform = Transform( 0.886384, 0.0123792, 0.462786, -0.0141838, 0.999899, 0.000420111, -0.462734, -0.00693644, 0.88647, 324.13, 211.607, -486.38 )
-spawnItems = false
-
-[node name="House23" parent="Houses" index="10" instance=ExtResource( 12 )]
-transform = Transform( 0.463399, 0.00694573, -0.886123, -0.0141838, 0.999899, 0.000420111, 0.886036, 0.012374, 0.463451, 355.227, 211.607, -476.243 )
-spawnItems = false
-
-[node name="House24" parent="Houses" index="11" instance=ExtResource( 12 )]
-transform = Transform( -0.885729, -0.0123693, -0.464039, -0.0141838, 0.999899, 0.000420111, 0.463987, 0.00695393, -0.885815, 345.116, 211.607, -496.865 )
-spawnItems = false
-
-[node name="House8" parent="Houses" index="12" instance=ExtResource( 12 )]
-transform = Transform( -2.61634, 0, -0.978614, 0, 1, 0, 1.46792, 0, -1.74423, 428.743, 211.632, -346.537 )
-spawnItems = false
-
-[node name="House9" parent="Houses" index="13" instance=ExtResource( 12 )]
-transform = Transform( -0.515143, 0, 0.857104, 0, 1, 0, -0.857104, 0, -0.515143, 340.461, 212.184, -324.465 )
-spawnItems = false
-
-[node name="House5" parent="Houses" index="14" instance=ExtResource( 12 )]
+[node name="House5" parent="Houses" index="0" instance=ExtResource( 12 )]
 transform = Transform( -0.866025, -0.000533097, -0.5, -0.000300822, 1, -0.000545149, 0.5, -0.000321697, -0.866025, 616.317, 14.4648, -673.931 )
 spawnItems = false
 
-[node name="House6" parent="Houses" index="15" instance=ExtResource( 12 )]
-transform = Transform( -1.73205, -0.000533093, -0.5, -0.000601644, 1, -0.000545146, 1, -0.000321699, -0.866025, 576.267, 14.7923, -651.283 )
-spawnItems = false
+[node name="House" parent="Houses" index="1" instance=ExtResource( 8 )]
+transform = Transform( -0.880907, 0, -0.473289, 0, 1, 0, 0.473289, 0, -0.880907, 590.092, 14.9264, -658.76 )
 
-[node name="WindGenerator" parent="." index="26" instance=ExtResource( 14 )]
+[node name="WindGenerator" parent="." index="21" instance=ExtResource( 14 )]
 transform = Transform( 0.608152, 0, 0.793821, 0, 1, 0, -0.793821, 0, 0.608152, 929.28, -4.1785, -39.0756 )
 
-[node name="StaticBody3" parent="." index="27" instance=ExtResource( 15 )]
+[node name="StaticBody3" parent="." index="22" instance=ExtResource( 15 )]
 transform = Transform( 0.929834, 0, -0.367978, 0, 1, 0, 0.367978, 0, 0.929834, 498.013, 10.179, -931.769 )
 
-[node name="StaticBody4" parent="." index="28" instance=ExtResource( 15 )]
+[node name="StaticBody4" parent="." index="23" instance=ExtResource( 15 )]
 transform = Transform( 0.553392, 0, -0.832921, 0, 1, 0, 0.832921, 0, 0.553392, 524.092, 10.179, -884.897 )
 
-[node name="StaticBody5" parent="." index="29" instance=ExtResource( 15 )]
+[node name="StaticBody5" parent="." index="24" instance=ExtResource( 15 )]
 transform = Transform( 0.553392, 0, -0.832921, 0, 1, 0, 0.832921, 0, 0.553392, 547.594, 10.179, -845.423 )
 
-[node name="StaticBody6" parent="." index="30" instance=ExtResource( 15 )]
+[node name="StaticBody6" parent="." index="25" instance=ExtResource( 15 )]
 transform = Transform( 0.553392, 0, -0.832921, 0, 1, 0, 0.832921, 0, 0.553392, 567.798, 10.179, -811.623 )
 
-[node name="StaticBody7" parent="." index="31" instance=ExtResource( 15 )]
+[node name="StaticBody7" parent="." index="26" instance=ExtResource( 15 )]
 transform = Transform( 0.553392, 0, -0.832921, 0, 1, 0, 0.832921, 0, 0.553392, 589.125, 10.179, -776.585 )
 
-[node name="StaticBody8" parent="." index="32" instance=ExtResource( 15 )]
+[node name="StaticBody8" parent="." index="27" instance=ExtResource( 15 )]
 transform = Transform( 0.553392, 0, -0.832921, 0, 1, 0, 0.832921, 0, 0.553392, 621.287, 10.179, -717.775 )
 
-[node name="StaticBody9" parent="." index="33" instance=ExtResource( 15 )]
+[node name="StaticBody9" parent="." index="28" instance=ExtResource( 15 )]
 transform = Transform( -0.0629299, 0, -0.998018, 0, 1, 0, 0.998018, 0, -0.0629299, 644.605, 10.179, -676.425 )
 
-[node name="Port" parent="." index="34" instance=ExtResource( 17 )]
+[node name="Port" parent="." index="29" instance=ExtResource( 17 )]
 transform = Transform( 0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 551.702, -1.52588e-05, -788.475 )
 RestLocations = PoolVector3Array( 538.781, 10.179, -894.656, 582.487, 10.179, -821.382, 504.503, 10.179, -948.167, 562.283, 10.179, -855.182, 603.814, 10.179, -786.344, 662.206, 10.179, -675.315, 635.976, 10.179, -727.534 )
 PortExtents = Vector3( 80, 80, 200 )
 
-[node name="PortWorker" parent="." index="35" instance=ExtResource( 19 )]
-transform = Transform( -0.89613, 0, -0.443791, 0, 1, 0, 0.443791, 0, -0.89613, 593.071, 10.2319, -676.663 )
-Chair = NodePath("../StaticBody10")
-PortPath = NodePath("../Port")
-
-[node name="StaticBody10" parent="." index="36" instance=ExtResource( 18 )]
-transform = Transform( -0.875296, 0, -0.483588, 0, 1, 0, 0.483588, 0, -0.875296, 594.097, 10.1844, -673.696 )
+[node name="StaticBody10" parent="." index="30" instance=ExtResource( 18 )]
+transform = Transform( -0.875296, 0, -0.483588, 0, 1, 0, 0.483588, 0, -0.875296, 594.353, 10.1844, -675.016 )

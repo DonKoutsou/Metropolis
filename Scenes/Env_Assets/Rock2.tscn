@@ -13,6 +13,7 @@ data = PoolVector3Array( -1.7327, -0.3823, 1.2232, -1.8052, -0.46, 1.2018, -1.80
 spheres = [ Plane( 0, -5.96046e-08, 2.98023e-08, 0.786635 ) ]
 
 [node name="Rock1" type="MeshInstance"]
+transform = Transform( 2.6, 0, 0, 0, 2.6, 0, 0, 0, 2.6, 0, 0, 0 )
 lod_max_distance = 200.0
 mesh = ExtResource( 1 )
 material/0 = ExtResource( 2 )

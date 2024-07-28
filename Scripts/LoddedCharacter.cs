@@ -15,7 +15,7 @@ public class LoddedCharacter : Skeleton
         Spatial headrotp2 =  GetNode<Spatial>("HeadRot2Pivot/HeadRot2");
         headrotp2.LookAt(pos, Vector3.Up);
         Vector3 rot = headrotp2.Rotation;
-        Vector3 newrot = new Vector3(-rot.x, Mathf.Clamp(rot.y, -1, 1), -rot.z);
+        Vector3 newrot = new Vector3(-Mathf.Clamp(rot.x, -1, 1), Mathf.Clamp(rot.y, -1, 1), -Mathf.Clamp(rot.z, -1, 1));
         headrotp.Rotation = newrot;
         SetBoneRest(FindBone("mixamorig_Head") ,headrotp.Transform);
     }

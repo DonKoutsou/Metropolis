@@ -550,7 +550,7 @@ public class Vehicle : RigidBody
             ((Spatial)GetParent()).GlobalTransform = prevpos;
         }
         
-        Rotation = new Vector3(0,Rotation.y,0);
+        //Rotation = new Vector3(0,Rotation.y,0);
         Vector3 prevrot = cha.GlobalRotation;
 
         cha.GetParent().RemoveChild(cha);
@@ -568,6 +568,7 @@ public class Vehicle : RigidBody
         CharTrasn2.RemotePath = guy.GetPath();
         CameraRemot.RemotePath = CamPiv.GetPath();
         cha.OnVehicleBoard(this);
+
         cha.GlobalRotation = prevrot;
         
         passengers.Insert(passengers.Count, cha);

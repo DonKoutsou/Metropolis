@@ -86,6 +86,7 @@ public class Ladder : Spatial
         {
             furthest = TopPos;
         }
+        pl.Rotation = Vector3.Zero;
         pl.Teleport(furthest.GlobalTranslation);
     }
     public void HighLightObject(bool toggle)

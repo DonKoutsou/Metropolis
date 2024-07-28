@@ -36,12 +36,12 @@ script = ExtResource( 5 )
 PossibleFurni = [ ExtResource( 7 ), ExtResource( 13 ), ExtResource( 16 ) ]
 PossibleDeco = [ ExtResource( 15 ), ExtResource( 14 ) ]
 SpawnPool = {
-Resource( "res://Scenes/Items/Guitar.tscn" ): 1,
 Resource( "res://Scenes/Items/FastLeg_L.tscn" ): 1,
 Resource( "res://Scenes/Items/FastLeg_R.tscn" ): 1,
+Resource( "res://Scenes/Items/Guitar.tscn" ): 1,
 Resource( "res://Scenes/Items/BatteryEmpty.tscn" ): 10,
-Resource( "res://Scenes/Items/Drahma.tscn" ): 40,
-Resource( "res://Scenes/Items/Battery.tscn" ): 2
+Resource( "res://Scenes/Items/Battery.tscn" ): 2,
+Resource( "res://Scenes/Items/Drahma.tscn" ): 40
 }
 
 [node name="IndoorsLight" parent="." instance=ExtResource( 12 )]
@@ -80,31 +80,33 @@ material/1 = ExtResource( 3 )
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody2"]
 shape = SubResource( 2 )
 
-[node name="Occluder" type="Occluder" parent="."]
+[node name="Occluders" type="Spatial" parent="."]
+
+[node name="Occluder" type="Occluder" parent="Occluders"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.26139, -10 )
 shape = SubResource( 3 )
 
-[node name="Occluder2" type="Occluder" parent="."]
+[node name="Occluder2" type="Occluder" parent="Occluders"]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 10, 7.26139, 0 )
 shape = SubResource( 3 )
 
-[node name="Occluder3" type="Occluder" parent="."]
+[node name="Occluder3" type="Occluder" parent="Occluders"]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -10, 7.26139, 0 )
 shape = SubResource( 3 )
 
-[node name="Occluder7" type="Occluder" parent="."]
+[node name="Occluder7" type="Occluder" parent="Occluders"]
 transform = Transform( 1.91069e-15, 1, 4.37114e-08, 4.37114e-08, -4.37114e-08, 1, 1, 0, -4.37114e-08, -6, 23.2614, 0 )
 shape = SubResource( 3 )
 
-[node name="Occluder4" type="Occluder" parent="."]
+[node name="Occluder4" type="Occluder" parent="Occluders"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.26139, 10 )
 shape = SubResource( 5 )
 
-[node name="Occluder5" type="Occluder" parent="."]
+[node name="Occluder5" type="Occluder" parent="Occluders"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.738614, 10 )
 shape = SubResource( 4 )
 
-[node name="Occluder6" type="Occluder" parent="."]
+[node name="Occluder6" type="Occluder" parent="Occluders"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -0.738614, 10 )
 shape = SubResource( 4 )
 

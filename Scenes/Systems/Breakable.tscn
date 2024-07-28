@@ -17,15 +17,15 @@
 [ext_resource path="res://Assets/TerainTex/Rock029_2K-PNG/plane_RockCracks_Roughness.png" type="Texture" id=15]
 [ext_resource path="res://Assets/TerainTest/TerainShader5.tres" type="Shader" id=16]
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 16 )
 shader_param/offset = 0.516
 shader_param/fade = 0.176
 shader_param/NormalForce = 2.0
 shader_param/roughness_texture_channel = Plane( 0, 0, 0, 1 )
 shader_param/uv1_blend_sharpness = 10.03
-shader_param/uv1_scale = Vector3( 0.5, 0.5, 0.5 )
-shader_param/uv2_scale = Vector3( 0.5, 0.5, 0.5 )
+shader_param/uv1_scale = 0.003
+shader_param/uv2_scale = 0.048
 shader_param/uv1_offset = Vector3( 0, 0, 0 )
 shader_param/albedo_texture_fg = ExtResource( 13 )
 shader_param/Rough_texture_fg = ExtResource( 12 )
@@ -50,7 +50,7 @@ transform = Transform( 4.67318, 0, 0, 0, 4.67318, 0, 0, 0, 4.67318, 0, 0, 0 )
 material_overlay = ExtResource( 1 )
 lod_max_distance = 2000.0
 mesh = ExtResource( 5 )
-material/0 = SubResource( 2 )
+material/0 = SubResource( 4 )
 script = ExtResource( 4 )
 LOD0 = ExtResource( 5 )
 LOD1 = ExtResource( 6 )
