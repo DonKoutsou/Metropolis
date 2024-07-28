@@ -167,6 +167,7 @@ void fragment() {
 	ROUGHNESS = Roughness;
 	METALLIC = 0.0;
 	ALPHA = alpha_output;
+	
 	/*if (IsRaining)
 	{
 	    // Calculate resolution based on the ring width
@@ -260,11 +261,11 @@ shader_param/ring_width = 450.0
 shader_param/gerstner_value = 1.0
 shader_param/TextureRot = 0.0
 shader_param/TextureRot2 = 0.0
-shader_param/Roughness = 0.941
+shader_param/Roughness = 0.88
 shader_param/Spec = 0.5
-shader_param/gerstner_normal = 0.606
+shader_param/gerstner_normal = 1.0
 shader_param/gerstner_tiling = 0.3
-shader_param/gerstner_2_normal = 0.267
+shader_param/gerstner_2_normal = 2.0
 shader_param/gerstner_2_tiling = 0.3
 shader_param/gerstner_distance_fadeout = 9.561
 shader_param/RainInt = 0.487889

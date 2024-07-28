@@ -17,10 +17,6 @@ public class Furniture : Spatial
 	//public override void _Ready()
 	//{
 	//}
-	public bool GetIsSearched()
-	{
-		return Searched;
-	}
 	public void SpawnItem(PackedScene it)
 	{
 		if (it == null)
@@ -73,6 +69,10 @@ public class Furniture : Spatial
 	public string GetItemName()
 	{
 		return StashedItem.GetItemName();
+	}
+	public void SetSearched(bool IsSearched)
+	{
+		Searched = IsSearched;
 	}
 	public void SetData(FurnitureInfo info)
 	{
@@ -152,7 +152,7 @@ public class FurnitureInfo
 	public string item;
 	public void UpdateInfo(Furniture furn)
 	{
-		Searched = furn.GetIsSearched();
+		Searched = furn.HasBeenSearched();
 	}
 
 	public void SetInfo(string name, bool srch, bool hasI, string it, string SceneDt, Transform placement)

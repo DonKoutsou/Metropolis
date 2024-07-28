@@ -104,6 +104,7 @@ item/2/preview = SubResource( 12 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0985718, 0.272583, 0.248657 )
 MoveLayer = 260
 type = 4
+KeepInstance = true
 ImageID = 21
 Resolution = 128
 

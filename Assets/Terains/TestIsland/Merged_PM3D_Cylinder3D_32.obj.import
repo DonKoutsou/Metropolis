@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Merged_PM3D_Cylinder3D_32.obj-8e95e9a46369de8a321b479709809b20.mesh"
+
+[deps]
+
+files=[ "res://.import/Merged_PM3D_Cylinder3D_32.obj-8e95e9a46369de8a321b479709809b20.mesh" ]
+
+source_file="res://Assets/Terains/TestIsland/Merged_PM3D_Cylinder3D_32.obj"
+dest_files=[ "res://.import/Merged_PM3D_Cylinder3D_32.obj-8e95e9a46369de8a321b479709809b20.mesh", "res://.import/Merged_PM3D_Cylinder3D_32.obj-8e95e9a46369de8a321b479709809b20.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

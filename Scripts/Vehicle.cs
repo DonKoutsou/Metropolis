@@ -568,7 +568,6 @@ public class Vehicle : RigidBody
         CharTrasn2.RemotePath = guy.GetPath();
         CameraRemot.RemotePath = CamPiv.GetPath();
         cha.OnVehicleBoard(this);
-
         cha.GlobalRotation = prevrot;
         
         passengers.Insert(passengers.Count, cha);

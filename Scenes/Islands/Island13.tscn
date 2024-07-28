@@ -27,7 +27,7 @@
 [ext_resource path="res://Assets/TerainTex/Rock029_2K-PNG/Rock029_2K-PNG_AmbientOcclusion.png" type="Texture" id=25]
 [ext_resource path="res://Assets/TerainTex/Rock029_2K-PNG/Rock029_2K-PNG_Color.png" type="Texture" id=26]
 [ext_resource path="res://Scenes/Env_Assets/Rock4.tscn" type="PackedScene" id=27]
-[ext_resource path="res://Scenes/Env_Assets/LightHouse.tscn" type="PackedScene" id=28]
+[ext_resource path="res://Assets/Building/BuildingComposition2.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Assets/TerainTex/Concrete004_1K-PNG/Concrete004_1K-PNG_Color.png" type="Texture" id=29]
 [ext_resource path="res://Scenes/Env_Assets/SandPile1.tscn" type="PackedScene" id=30]
 [ext_resource path="res://Assets/Clutter/WoodPlanks/WoodStairst.tres" type="Material" id=31]
@@ -1086,12 +1086,15 @@ shape = SubResource( 919 )
 
 [node name="House11" parent="." index="3" instance=ExtResource( 21 )]
 transform = Transform( -0.816128, 6.95113e-05, 0.577872, -0.000300822, 1, -0.000545149, -0.577872, -0.000618748, -0.816128, 2454.87, 6.70094, -2019.81 )
+spawnItems = false
 
 [node name="House12" parent="." index="4" instance=ExtResource( 21 )]
 transform = Transform( 0.94052, 0.000468141, 0.339739, -0.000300822, 1, -0.000545149, -0.33974, 0.000410518, 0.94052, 1046.91, 6.70094, 1955.84 )
+spawnItems = false
 
 [node name="House13" parent="." index="5" instance=ExtResource( 21 )]
 transform = Transform( 0.00860444, -0.000542537, -0.999963, -0.000300822, 1, -0.000545149, 0.999963, 0.000305506, 0.00860426, -3364, 6.70094, 383.639 )
+spawnItems = false
 
 [node name="House14" parent="." index="6" instance=ExtResource( 21 )]
 transform = Transform( -0.998174, -0.000267349, 0.0604045, -0.000300822, 1, -0.000545149, -0.0604035, -0.000562322, -0.998174, -519.972, 195.322, 422.577 )
@@ -2726,10 +2729,7 @@ EnergyPerWindStreangth = 0.2
 transform = Transform( 3.82793, 0, 1.1606, 0, 4, 0, -1.1606, 0, 3.82793, -1631.06, 484.82, -1916.33 )
 EnergyPerWindStreangth = 0.2
 
-[node name="LightHouse" parent="." index="20" instance=ExtResource( 28 )]
-transform = Transform( -0.368643, 0, 0.929571, 0, 1, 0, -0.929571, 0, -0.368643, -1255.66, 1021.43, 1509.02 )
-
-[node name="Clutter" type="Spatial" parent="." index="21"]
+[node name="Clutter" type="Spatial" parent="." index="20"]
 
 [node name="Rock4" parent="Clutter" index="0" instance=ExtResource( 30 )]
 transform = Transform( -13.8618, -0.197175, 17.8424, -6.03446, 21.3143, -4.45263, -16.7921, -7.49678, -13.1286, -707.311, 168.901, -419.254 )
@@ -2849,29 +2849,32 @@ transform = Transform( -0.0276076, 0, 0.999619, 0, 1, 0, -0.999619, 0, -0.027607
 [node name="StaticBody11" parent="Clutter" index="25" instance=ExtResource( 13 )]
 transform = Transform( -0.0276076, 0, 0.999619, 0, 1, 0, -0.999619, 0, -0.0276076, -3447.14, 7.81181, 357.171 )
 
-[node name="Port" parent="." index="22" instance=ExtResource( 17 )]
+[node name="Port" parent="." index="21" instance=ExtResource( 17 )]
 transform = Transform( 0.809191, 0, -0.587545, 0, 1, 0, 0.587545, 0, 0.809191, 2482.01, 7.8097, -2083.29 )
 RestLocations = PoolVector3Array( 2536.95, 7.81181, -2086.6, 2489.2, 7.81181, -2119.21, 2516.24, 7.81181, -2100.94, 2461.73, 7.81181, -2138.7 )
 PortExtents = Vector3( 80, 30, 50 )
 
-[node name="Port2" parent="." index="23" instance=ExtResource( 17 )]
+[node name="Port2" parent="." index="22" instance=ExtResource( 17 )]
 transform = Transform( 0.93398, 0, 0.357325, 0, 1, 0, -0.357325, 0, 0.93398, 1086.04, 7.81766, 2012.25 )
 RestLocations = PoolVector3Array( 1107.47, 7.81181, 2041.89, 1131.18, 7.81181, 2032.42, 1086.26, 7.81181, 2049.3, 1056.09, 7.81181, 2059.33 )
 PortExtents = Vector3( 80, 20, 50 )
 
-[node name="Port3" parent="." index="24" instance=ExtResource( 17 )]
+[node name="Port3" parent="." index="23" instance=ExtResource( 17 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3430.97, 7.80901, 402.072 )
 RestLocations = PoolVector3Array( -3464.4, 7.81181, 421.551, -3464.76, 7.81181, 357.658, -3464.4, 7.81181, 447.833, -3464.4, 7.81181, 390.005 )
 PortExtents = Vector3( 80, 20, 50 )
 
-[node name="Character" parent="." index="25" instance=ExtResource( 18 )]
+[node name="Character" parent="." index="24" instance=ExtResource( 18 )]
 transform = Transform( 0.98617, 0, 0.165736, 0, 1, 0, -0.165736, 0, 0.98617, 1058.13, 7.81001, 1965.57 )
 PlayInstrument = true
 
-[node name="Character2" parent="." index="26" instance=ExtResource( 18 )]
+[node name="Character2" parent="." index="25" instance=ExtResource( 18 )]
 transform = Transform( 0.450613, 0, 0.89272, 0, 1, 0, -0.89272, 0, 0.450613, 1047.11, 7.81001, 1970.81 )
 PlayInstrument = true
 InstrumentToSpawnWith = ExtResource( 38 )
+
+[node name="House" parent="." index="26" instance=ExtResource( 28 )]
+transform = Transform( -0.993682, 0, 0.112232, 0, 1, 0, -0.112232, 0, -0.993682, -942.391, 196.163, 359.611 )
 
 [connection signal="curve_changed" from="Road" to="Road" method="OnCurveChanged"]
 [connection signal="curve_changed" from="Road4" to="Road4" method="OnCurveChanged"]

@@ -40,7 +40,7 @@ filters = [ "Armature/Skeleton:mixamorig_Head", "Armature/Skeleton:mixamorig_Hea
 [sub_resource type="AnimationNodeTimeScale" id=23]
 
 [resource]
-graph_offset = Vector2( -695.878, -10.3909 )
+graph_offset = Vector2( -417.221, 37.4123 )
 nodes/Animation/node = SubResource( 16 )
 nodes/Animation/position = Vector2( -120, 120 )
 "nodes/Animation 2/node" = SubResource( 14 )
@@ -72,4 +72,4 @@ nodes/TimeScale/position = Vector2( 241.076, 25.6959 )
 "nodes/TimeScale 2/node" = SubResource( 36 )
 "nodes/TimeScale 2/position" = Vector2( -186.667, 333.333 )
 nodes/output/position = Vector2( 1506.67, 640 )
-node_connections = [ "output", 0, "ClimbDown", "ClimbDown", 0, "ClimbUp", "ClimbDown", 1, "Animation 8", "ClimbUp", 0, "IntrumentBlend", "ClimbUp", 1, "Animation 6", "TimeScale 2", 0, "Animation 3", "Idle_Run_Blend", 0, "Idle_Walk_Blend", "Idle_Run_Blend", 1, "Animation 4", "Idle_Walk_Blend", 0, "Animation", "Idle_Walk_Blend", 1, "TimeScale 2", "IntrumentBlend", 0, "JumpShot", "IntrumentBlend", 1, "Animation 5", "JumpShot", 0, "Idle_Run_Blend", "JumpShot", 1, "TimeScale", "TimeScale", 0, "Animation 2" ]
+node_connections = [ "ClimbDown", 0, "ClimbUp", "ClimbDown", 1, "Animation 8", "ClimbUp", 0, "IntrumentBlend", "ClimbUp", 1, "Animation 6", "IntrumentBlend", 0, "JumpShot", "IntrumentBlend", 1, "Animation 5", "Idle_Walk_Blend", 0, "Animation", "Idle_Walk_Blend", 1, "TimeScale 2", "TimeScale", 0, "Animation 2", "JumpShot", 0, "Idle_Run_Blend", "JumpShot", 1, "TimeScale", "TimeScale 2", 0, "Animation 3", "Idle_Run_Blend", 0, "Idle_Walk_Blend", "Idle_Run_Blend", 1, "Animation 4", "output", 0, "ClimbDown" ]

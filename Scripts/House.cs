@@ -75,6 +75,8 @@ public class House : Spatial
 	List<PackedScene> PossibleDeco = null;
 	[Export]
 	int FurnitureAmmount = 3;
+	[Export]
+	int DecorationAmmount = 1;
 	public void StartHouse()
 	{
 
@@ -98,8 +100,9 @@ public class House : Spatial
 				FurnitureList.Insert(i, furn);
 
 				if (!spawnItems)
-					continue;
-				furn.SpawnItem(GetDrop());
+					furn.SetSearched(true);
+				else
+					furn.SpawnItem(GetDrop());
 			}
 		}
 		
@@ -109,18 +112,20 @@ public class House : Spatial
 		var decoplacaments = decos.GetChildren();
 		if (decoplacaments.Count > 0)
 		{
-		//pick 3 places to place furniture
+			for (int i = 0; i < DecorationAmmount; i++)
+			{
+				int dindex = RandomContainer.Next(0, decoplacaments.Count);
+				Position3D decplace = (Position3D)decoplacaments[dindex];
+				decoplacaments.Remove(decplace);
+				
+				PackedScene decotospawn = PossibleDeco[RandomContainer.Next(0, PossibleDeco.Count)];
 
-			int dindex = RandomContainer.Next(0, decoplacaments.Count);
-			Position3D decplace = (Position3D)decoplacaments[dindex];
+				Spatial dec = decotospawn.Instance<Spatial>();
+				AddChild(dec, true);
+				dec.Transform = decplace.Transform;
 
-			PackedScene decotospawn = PossibleDeco[RandomContainer.Next(0, PossibleDeco.Count)];
-
-			Spatial dec = decotospawn.Instance<Spatial>();
-			AddChild(dec, true);
-			dec.Transform = decplace.Transform;
-
-			DecorationList.Insert(0, dec);
+				DecorationList.Insert(0, dec);
+			}
 		}
 
 

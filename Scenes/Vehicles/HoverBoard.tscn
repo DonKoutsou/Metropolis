@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://Assets/Boat/ΚαικιΗιγη_Engines_OcclusionRoughnessMetallic.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Vehicles/HoverBoard_NoWings.tscn" type="PackedScene" id=3]
@@ -412,6 +412,26 @@ radius = 0.274704
 height = 8.90303
 radius = 0.530287
 
+[sub_resource type="Curve" id=149]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.520965, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=150]
+curve = SubResource( 149 )
+
+[sub_resource type="ParticlesMaterial" id=151]
+resource_local_to_scene = true
+trail_divisor = 11
+direction = Vector3( 0, 1, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 10.0
+angular_velocity = 40.0
+angular_velocity_random = 1.0
+linear_accel = 6.6
+angle = 360.0
+scale = 0.5
+scale_curve = SubResource( 150 )
+
 [node name="Vehicle" instance=ExtResource( 3 )]
 
 [node name="VehicleBody" parent="." index="0"]
@@ -471,6 +491,9 @@ material/0 = SubResource( 143 )
 material_override = SubResource( 143 )
 material/0 = SubResource( 143 )
 
+[node name="HoverEngineParticles" parent="RayFL/EnginePivot" index="3"]
+process_material = SubResource( 151 )
+
 [node name="RayFR" parent="." index="2"]
 transform = Transform( 1, 2.70905e-07, 5.76838e-08, -2.70822e-07, 1, -9.66247e-08, -5.75092e-08, 9.66247e-08, 1, -6.8, -0.48, 8.879 )
 
@@ -481,6 +504,9 @@ material/0 = SubResource( 143 )
 [node name="MeshInstance" parent="RayFR/EnginePivot" index="0"]
 material_override = SubResource( 143 )
 material/0 = SubResource( 143 )
+
+[node name="HoverEngineParticles" parent="RayFR/EnginePivot" index="3"]
+process_material = SubResource( 151 )
 
 [node name="RayBR" parent="." index="3"]
 transform = Transform( 1, 2.73114e-07, 5.83241e-08, -2.73033e-07, 1, -9.15024e-08, -5.81495e-08, 9.17353e-08, 1, -6.8, -0.48, -10.564 )
@@ -493,6 +519,9 @@ material/0 = SubResource( 143 )
 material_override = SubResource( 143 )
 material/0 = SubResource( 143 )
 
+[node name="HoverEngineParticles" parent="RayBR/EnginePivot" index="3"]
+process_material = SubResource( 151 )
+
 [node name="RayBL" parent="." index="4"]
 transform = Transform( 1, 2.72649e-07, 5.68689e-08, -2.72569e-07, 1, -9.31323e-08, -5.66943e-08, 9.31323e-08, 1, 6.8, -0.48, -10.508 )
 
@@ -503,3 +532,6 @@ material/0 = SubResource( 143 )
 [node name="MeshInstance" parent="RayBL/EnginePivot" index="0"]
 material_override = SubResource( 143 )
 material/0 = SubResource( 143 )
+
+[node name="HoverEngineParticles" parent="RayBL/EnginePivot" index="3"]
+process_material = SubResource( 151 )

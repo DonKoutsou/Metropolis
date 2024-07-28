@@ -67,7 +67,7 @@ public class Ladder : Spatial
             closest = TopPos;
             anim = E_Animations.ClimbDown;
             rot = TopPos.GlobalRotation;
-            rot.y = -TopPos.GlobalRotation.y;
+            //rot.y = -TopPos.GlobalRotation.y;
         }
         pl.Teleport(closest.GlobalTranslation);
         pl.GlobalRotation = rot;
