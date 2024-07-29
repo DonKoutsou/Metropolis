@@ -10,8 +10,6 @@ public class MusicManager : Node
 	static Dictionary<Song, AudioStream> BouzoukiSongs = new Dictionary<Song, AudioStream>();
     static Dictionary<Song, AudioStream> GuitarSongs = new Dictionary<Song, AudioStream>();
 
-    static Random rand = new Random();
-
     static List <object> Instruments = new List<object>();
     public override void _Ready()
     {
@@ -50,7 +48,7 @@ public class MusicManager : Node
         }
         if (song == null)
         {
-            song = GetSongForInstrument(inst, (Song)rand.Next(0, BouzoukiSongs.Count));
+            song = GetSongForInstrument(inst, (Song)RandomContainer.Next(0, BouzoukiSongs.Count));
         }
         return song;
     }

@@ -217,6 +217,7 @@ public class Vehicle : RigidBody
         GetNode<VehicleBoostTrails>("VehicleBoostTrails").StartBoost();
     }
     float SpeedBuildup = 0;
+    
     public override void _PhysicsProcess(float delta)
     {
         base._PhysicsProcess(delta);

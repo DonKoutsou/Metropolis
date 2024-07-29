@@ -17,8 +17,8 @@ _data = [ Vector2( 0, 0.9 ), 0.0, 0.0, 0, 0, Vector2( 1, 2.4 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=5]
 min_value = -50.0
-max_value = 69.65
-_data = [ Vector2( 0, -50 ), 0.0, 0.0, 0, 0, Vector2( 1, 69.65 ), 0.0, 0.0, 0, 0 ]
+max_value = 90.0
+_data = [ Vector2( 0, 90 ), 0.0, 0.0, 0, 0, Vector2( 1, 90 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="SpatialMaterial" id=2]
 render_priority = 1
@@ -144,15 +144,17 @@ script = ExtResource( 9 )
 
 [node name="Rain" type="AudioStreamPlayer3D" parent="WorldSoundManager"]
 stream = ExtResource( 10 )
-unit_db = -80.0
+unit_db = 65.995
 unit_size = 100.0
 max_db = 6.0
 pitch_scale = 1.97
 autoplay = true
+area_mask = 0
 
 [node name="Enviroment" type="AudioStreamPlayer3D" parent="WorldSoundManager"]
 stream = ExtResource( 11 )
 unit_db = 8.0
-max_db = -0.606
+unit_size = 100.0
+max_db = 6.0
 autoplay = true
 area_mask = 0

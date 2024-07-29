@@ -17,7 +17,7 @@ code = "// 2022 Kasper Arnklit Frandsen - Public Domain - No Rights Reserved
 // LINE 50 - Mix the various textures and apply them, using the mask.
 
 shader_type spatial;
-render_mode world_vertex_coords;
+render_mode world_vertex_coords, cull_disabled;
 uniform float offset : hint_range(-1.0, 1.0) = 0.5;
 uniform float fade : hint_range(0.0, 1.0) = 0.1;
 uniform float NormalForce;

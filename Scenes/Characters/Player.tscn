@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=99 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/HUD/ActionMenu.tscn" type="PackedScene" id=2]
@@ -10,18 +10,508 @@
 [ext_resource path="res://Scenes/Items/NormalLeg_L.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Items/MapItem.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Items/Bouzouki.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Assets/Gen3Machine/CharBlendTree.tres" type="AnimationNodeBlendTree" id=11]
 [ext_resource path="res://Scripts/CameraZoomPivot.cs" type="Script" id=12]
+[ext_resource path="res://Assets/NormalLegs/Textures/Lowp_M_Legs_Mask.png" type="Texture" id=13]
 [ext_resource path="res://Scripts/CameraPanPivot.cs" type="Script" id=14]
+[ext_resource path="res://Assets/NormalLegs/Textures/Lowp_M_Legs_Normal.png" type="Texture" id=15]
 [ext_resource path="res://Scenes/Characters/MoveLocation.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/Characters/Gen3Machine/Body.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Assets/NormalLegs/Textures/Lowp_M_Legs_BaseColor.png" type="Texture" id=18]
 [ext_resource path="res://Scripts/TalkText.cs" type="Script" id=19]
 [ext_resource path="res://Scripts/PlayerCamera.cs" type="Script" id=20]
+[ext_resource path="res://Assets/Skele_Arm/Arm_Skel_ArmSkele_BaseColor.png" type="Texture" id=21]
+[ext_resource path="res://Assets/NormalLegs/Textures/Lowp_M_Legs_OcclusionRoughnessMetallic.png" type="Texture" id=22]
+[ext_resource path="res://Assets/Skele_Arm/SkeleArm_ColorMask.png" type="Texture" id=23]
+[ext_resource path="res://Assets/Skele_Arm/Arm_Skel_ArmSkele_OcclusionRoughnessMetallic.png" type="Texture" id=24]
 [ext_resource path="res://Scenes/Items/Battery.tscn" type="PackedScene" id=25]
+[ext_resource path="res://Assets/FastLegs/Textures/Body_Texture_M_Legs_BaseColor.png" type="Texture" id=26]
 [ext_resource path="res://Scenes/Items/Clock.tscn" type="PackedScene" id=27]
+[ext_resource path="res://Assets/FastLegs/Textures/Body_Texture_M_Legs_OcclusionRoughnessMetallic.png" type="Texture" id=28]
+[ext_resource path="res://Assets/FastLegs/Textures/Body_Texture_M_Legs_Normal.png" type="Texture" id=29]
 [ext_resource path="res://Scenes/Items/Compass.tscn" type="PackedScene" id=30]
+[ext_resource path="res://Assets/FastLegs/Textures/FastLeg_ColorMask.png" type="Texture" id=31]
+[ext_resource path="res://Assets/Gen3Machine/Body/Textures/Body_Texture_Body_OcclusionRoughnessMetallic.png" type="Texture" id=32]
 [ext_resource path="res://Scenes/Items/SkeleArm_L.tscn" type="PackedScene" id=33]
 [ext_resource path="res://Scenes/Items/SkeleArm_R.tscn" type="PackedScene" id=34]
 [ext_resource path="res://Scripts/CameraAnimationPlayer.cs" type="Script" id=35]
+[ext_resource path="res://Assets/Gen3Machine/Body/Textures/Body_Texture_Head_Normal.png" type="Texture" id=36]
+[ext_resource path="res://Assets/Gen3Machine/Body/Textures/Body_Texture_Head_BaseColor.png" type="Texture" id=37]
+[ext_resource path="res://Assets/Gen3Machine/Body/Textures/Body_Texture_Body_BaseColor.png" type="Texture" id=38]
+[ext_resource path="res://Assets/Gen3Machine/Body/Textures/Body_ColorMask.png" type="Texture" id=39]
+[ext_resource path="res://Assets/Gen3Machine/Body/Textures/Body_Texture_Body_Normal.png" type="Texture" id=40]
+[ext_resource path="res://Assets/Gen3Machine/Body/Textures/Body_Texture_Head_OcclusionRoughnessMetallic.png" type="Texture" id=41]
+
+[sub_resource type="SpatialMaterial" id=63]
+albedo_color = Color( 0.952941, 0.921569, 0.831373, 1 )
+emission_enabled = true
+emission = Color( 1, 0.913725, 0.784314, 1 )
+emission_energy = 16.0
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="SphereMesh" id=127]
+resource_local_to_scene = true
+material = SubResource( 63 )
+radius = 2.0
+height = 4.0
+radial_segments = 4
+rings = 4
+
+[sub_resource type="Shader" id=120]
+code = "/*
+	Sobel/Depth アウトラインシェーダー by あるる（きのもと 結衣）
+	Sobel/Depth Outline Shader by Yui Kinomoto @arlez80
+
+	MIT License
+*/
+
+shader_type spatial;
+render_mode unshaded;
+
+const vec3 MONOCHROME_SCALE = vec3( 0.298912, 0.586611, 0.114478 );
+
+uniform vec4 outline_color : hint_color = vec4( 0.0, 0.0, 0.0, 1.0 );
+uniform float luma_coef = 0.1;
+uniform float color_coef = 0.1;
+uniform float depth_coef = 0.8;
+uniform float cutoff = 0.2;
+uniform bool enable = true;
+
+float gaussian3x3( sampler2D tex, vec2 uv, vec2 pixel_size )
+{
+	float p = 0.0;
+	float coef[9] = {
+		0.0625, 0.125, 0.0625,
+		0.125, 0.25, 0.125,
+		0.0625, 0.125, 0.0625
+	};
+
+	for( int y=-1; y<=1; y++ ) {
+		for( int x=-1; x<=1; x ++ ) {
+			p += textureLod( tex, uv + vec2( float( x ), float( y ) ) * pixel_size, 0.0 ).r * coef[(y+1)*3 + (x+1)];
+		}
+	}
+
+	return p;
+}
+
+void fragment( )
+{
+	if (!enable) {
+		ALPHA = 0.0f;
+	}
+	else
+	{
+		vec3 color[9];
+		float depth[9];
+		vec2 pixel_size = ( vec2( 1.0, 1.0 ) / VIEWPORT_SIZE ) * 1.15;
+
+		// Gaussian FilterとSobel FilterでColor/Depthで取る
+		for( int y=0; y<3; y ++ ) {
+			for( int x=0; x<3; x ++ ) {
+				vec2 uv = SCREEN_UV + vec2( float( x-1 ), float( y-1 ) ) * pixel_size;
+				vec4 ndc = vec4( uv, gaussian3x3( DEPTH_TEXTURE, uv, pixel_size ), 1.0 ) * 2.0 - 1.0;
+				vec4 screen_pixel_coord = INV_PROJECTION_MATRIX * ndc;
+
+				color[y*3+x] = textureLod( SCREEN_TEXTURE, uv, 0.0 ).rgb;
+				depth[y*3+x] = -( screen_pixel_coord.z / screen_pixel_coord.w );
+			}
+		}
+
+		vec3 color_sobel_src_x = (
+			color[0] * -1.0
+		+	color[3] * -2.0
+		+	color[6] * -1.0
+		+	color[2] * 1.0
+		+	color[5] * 2.0
+		+	color[8] * 1.0
+		);
+		vec3 color_sobel_src_y = (
+			color[0] * -1.0
+		+	color[1] * -2.0
+		+	color[2] * -1.0
+		+	color[6] * 1.0
+		+	color[7] * 2.0
+		+	color[8] * 1.0
+		);
+		vec3 color_sobel = sqrt( color_sobel_src_x * color_sobel_src_x + color_sobel_src_y * color_sobel_src_y );
+
+		vec2 depth_sobel_src = vec2(
+			(
+				depth[0] * -1.0
+			+	depth[3] * -2.0
+			+	depth[6] * -1.0
+			+	depth[2] * 1.0
+			+	depth[5] * 2.0
+			+	depth[8] * 1.0
+			)
+		,	(
+				depth[0] * -1.0
+			+	depth[1] * -2.0
+			+	depth[2] * -1.0
+			+	depth[6] * 1.0
+			+	depth[7] * 2.0
+			+	depth[8] * 1.0
+			)
+		);
+		float depth_sobel = clamp( sqrt( dot( depth_sobel_src, depth_sobel_src ) ), 0.0, 1.0 );
+
+		// 
+		ALBEDO = outline_color.rgb;
+		ALPHA = clamp(
+			depth_sobel * depth_coef
+		+	depth_sobel * dot( color_sobel, MONOCHROME_SCALE ) * luma_coef
+		+	depth_sobel * length( color_sobel ) * color_coef
+		-	cutoff
+		,	0.0
+		,	1.0
+		);
+		//DEPTH = 0.0;
+	}
+	
+}
+"
+
+[sub_resource type="ShaderMaterial" id=128]
+resource_local_to_scene = true
+shader = SubResource( 120 )
+shader_param/outline_color = Color( 0.431373, 0.717647, 0.937255, 1 )
+shader_param/luma_coef = 0.1
+shader_param/color_coef = 0.1
+shader_param/depth_coef = 0.282
+shader_param/cutoff = 0.005
+shader_param/enable = false
+
+[sub_resource type="Gradient" id=129]
+resource_local_to_scene = true
+offsets = PoolRealArray( 0.442815 )
+colors = PoolColorArray( 1, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=130]
+resource_local_to_scene = true
+gradient = SubResource( 129 )
+width = 8
+
+[sub_resource type="SpatialMaterial" id=131]
+resource_local_to_scene = true
+resource_name = "Arms_Mat"
+vertex_color_use_as_albedo = true
+params_cull_mode = 2
+albedo_texture = ExtResource( 21 )
+metallic = 1.0
+metallic_texture = ExtResource( 24 )
+metallic_texture_channel = 2
+roughness_texture = ExtResource( 24 )
+roughness_texture_channel = 1
+ao_enabled = true
+ao_light_affect = 1.0
+ao_texture = ExtResource( 24 )
+ao_on_uv2 = false
+ao_texture_channel = 0
+detail_enabled = true
+detail_mask = ExtResource( 23 )
+detail_blend_mode = 1
+detail_uv_layer = 0
+detail_albedo = SubResource( 130 )
+
+[sub_resource type="Gradient" id=132]
+resource_local_to_scene = true
+offsets = PoolRealArray( 0.442815 )
+colors = PoolColorArray( 0.67, 0.05, 0.05, 1 )
+
+[sub_resource type="GradientTexture" id=133]
+resource_local_to_scene = true
+gradient = SubResource( 132 )
+width = 8
+
+[sub_resource type="SpatialMaterial" id=134]
+resource_local_to_scene = true
+resource_name = "Arms_Mat"
+vertex_color_use_as_albedo = true
+params_cull_mode = 2
+albedo_texture = ExtResource( 21 )
+metallic = 1.0
+metallic_texture = ExtResource( 24 )
+metallic_texture_channel = 2
+roughness_texture = ExtResource( 24 )
+roughness_texture_channel = 1
+ao_enabled = true
+ao_light_affect = 1.0
+ao_texture = ExtResource( 24 )
+ao_on_uv2 = false
+ao_texture_channel = 0
+detail_enabled = true
+detail_mask = ExtResource( 23 )
+detail_blend_mode = 1
+detail_uv_layer = 0
+detail_albedo = SubResource( 133 )
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0.542522 )
+colors = PoolColorArray( 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 3 )
+width = 8
+
+[sub_resource type="SpatialMaterial" id=135]
+resource_local_to_scene = true
+albedo_texture = ExtResource( 38 )
+metallic = 1.0
+metallic_texture = ExtResource( 32 )
+metallic_texture_channel = 2
+roughness_texture = ExtResource( 32 )
+roughness_texture_channel = 1
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 40 )
+ao_enabled = true
+ao_light_affect = 1.0
+ao_texture = ExtResource( 32 )
+ao_on_uv2 = false
+ao_texture_channel = 0
+detail_enabled = true
+detail_mask = ExtResource( 39 )
+detail_blend_mode = 1
+detail_uv_layer = 0
+detail_albedo = SubResource( 2 )
+
+[sub_resource type="SpatialMaterial" id=136]
+resource_local_to_scene = true
+albedo_texture = ExtResource( 37 )
+metallic = 1.0
+metallic_texture = ExtResource( 41 )
+metallic_texture_channel = 2
+roughness_texture = ExtResource( 41 )
+roughness_texture_channel = 1
+normal_enabled = true
+normal_scale = -1.0
+normal_texture = ExtResource( 36 )
+ao_enabled = true
+ao_light_affect = 1.0
+ao_texture = ExtResource( 41 )
+ao_on_uv2 = false
+ao_texture_channel = 0
+
+[sub_resource type="Gradient" id=137]
+resource_local_to_scene = true
+offsets = PoolRealArray( 0.426346 )
+colors = PoolColorArray( 0, 0.0273438, 1, 1 )
+
+[sub_resource type="GradientTexture" id=138]
+resource_local_to_scene = true
+gradient = SubResource( 137 )
+width = 8
+
+[sub_resource type="SpatialMaterial" id=139]
+resource_local_to_scene = true
+resource_name = "M_Legs"
+albedo_texture = ExtResource( 18 )
+metallic = 1.0
+metallic_texture = ExtResource( 22 )
+metallic_texture_channel = 2
+roughness_texture = ExtResource( 22 )
+roughness_texture_channel = 1
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 15 )
+ao_enabled = true
+ao_light_affect = 1.0
+ao_texture = ExtResource( 22 )
+ao_on_uv2 = false
+ao_texture_channel = 0
+detail_enabled = true
+detail_mask = ExtResource( 13 )
+detail_blend_mode = 1
+detail_uv_layer = 0
+detail_albedo = SubResource( 138 )
+
+[sub_resource type="Gradient" id=140]
+resource_local_to_scene = true
+offsets = PoolRealArray( 0 )
+colors = PoolColorArray( 1, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=141]
+resource_local_to_scene = true
+gradient = SubResource( 140 )
+width = 8
+
+[sub_resource type="SpatialMaterial" id=142]
+resource_local_to_scene = true
+resource_name = "M_Legs"
+albedo_texture = ExtResource( 18 )
+metallic = 1.0
+metallic_texture = ExtResource( 22 )
+metallic_texture_channel = 2
+roughness_texture = ExtResource( 22 )
+roughness_texture_channel = 1
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 15 )
+ao_enabled = true
+ao_light_affect = 1.0
+ao_texture = ExtResource( 22 )
+ao_on_uv2 = false
+ao_texture_channel = 0
+detail_enabled = true
+detail_mask = ExtResource( 13 )
+detail_blend_mode = 1
+detail_uv_layer = 0
+detail_albedo = SubResource( 141 )
+
+[sub_resource type="Gradient" id=143]
+resource_local_to_scene = true
+offsets = PoolRealArray( 0.489736 )
+colors = PoolColorArray( 0.0664063, 1, 0, 1 )
+
+[sub_resource type="GradientTexture" id=144]
+resource_local_to_scene = true
+gradient = SubResource( 143 )
+width = 8
+
+[sub_resource type="SpatialMaterial" id=145]
+resource_local_to_scene = true
+resource_name = "M_Legs"
+albedo_texture = ExtResource( 26 )
+metallic = 1.0
+metallic_texture = ExtResource( 28 )
+metallic_texture_channel = 2
+roughness_texture = ExtResource( 28 )
+roughness_texture_channel = 1
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 29 )
+ao_enabled = true
+ao_light_affect = 1.0
+ao_texture = ExtResource( 28 )
+ao_on_uv2 = false
+ao_texture_channel = 0
+detail_enabled = true
+detail_mask = ExtResource( 31 )
+detail_blend_mode = 1
+detail_uv_layer = 0
+detail_albedo = SubResource( 144 )
+
+[sub_resource type="Gradient" id=146]
+resource_local_to_scene = true
+offsets = PoolRealArray( 0.489736 )
+colors = PoolColorArray( 0, 0.375977, 1, 1 )
+
+[sub_resource type="GradientTexture" id=147]
+resource_local_to_scene = true
+gradient = SubResource( 146 )
+width = 8
+
+[sub_resource type="SpatialMaterial" id=148]
+resource_local_to_scene = true
+resource_name = "M_Legs"
+albedo_texture = ExtResource( 26 )
+metallic = 1.0
+metallic_texture = ExtResource( 28 )
+metallic_texture_channel = 2
+roughness_texture = ExtResource( 28 )
+roughness_texture_channel = 1
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 29 )
+ao_enabled = true
+ao_light_affect = 1.0
+ao_texture = ExtResource( 28 )
+ao_on_uv2 = false
+ao_texture_channel = 0
+detail_enabled = true
+detail_mask = ExtResource( 31 )
+detail_blend_mode = 1
+detail_uv_layer = 0
+detail_albedo = SubResource( 147 )
+
+[sub_resource type="AnimationNodeAnimation" id=36]
+animation = "Dead_loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=37]
+graph_offset = Vector2( -376.098, -84.9461 )
+nodes/Animation/node = SubResource( 36 )
+nodes/Animation/position = Vector2( -53.3333, 160 )
+node_connections = [ "output", 0, "Animation" ]
+
+[sub_resource type="AnimationNodeAnimation" id=53]
+animation = "GuitarPlayer_loop"
+
+[sub_resource type="AnimationNodeAnimation" id=59]
+animation = "SititngChair_loop"
+
+[sub_resource type="AnimationNodeAnimation" id=47]
+animation = "Sitting_loop"
+
+[sub_resource type="AnimationNodeBlend2" id=60]
+filter_enabled = true
+filters = [ "Armature/Skeleton:Bone", "Armature/Skeleton:mixamorig_Hips", "Armature/Skeleton:mixamorig_LeftArm", "Armature/Skeleton:mixamorig_LeftFoot", "Armature/Skeleton:mixamorig_LeftForeArm", "Armature/Skeleton:mixamorig_LeftHand", "Armature/Skeleton:mixamorig_LeftHandIndex1", "Armature/Skeleton:mixamorig_LeftHandIndex2", "Armature/Skeleton:mixamorig_LeftHandIndex3", "Armature/Skeleton:mixamorig_LeftHandIndex4", "Armature/Skeleton:mixamorig_LeftHandMiddle1", "Armature/Skeleton:mixamorig_LeftHandMiddle2", "Armature/Skeleton:mixamorig_LeftHandMiddle3", "Armature/Skeleton:mixamorig_LeftHandMiddle4", "Armature/Skeleton:mixamorig_LeftHandPinky1", "Armature/Skeleton:mixamorig_LeftHandPinky2", "Armature/Skeleton:mixamorig_LeftHandPinky3", "Armature/Skeleton:mixamorig_LeftHandPinky4", "Armature/Skeleton:mixamorig_LeftHandRing1", "Armature/Skeleton:mixamorig_LeftHandRing2", "Armature/Skeleton:mixamorig_LeftHandRing3", "Armature/Skeleton:mixamorig_LeftHandRing4", "Armature/Skeleton:mixamorig_LeftHandThumb1", "Armature/Skeleton:mixamorig_LeftHandThumb2", "Armature/Skeleton:mixamorig_LeftHandThumb3", "Armature/Skeleton:mixamorig_LeftHandThumb4", "Armature/Skeleton:mixamorig_LeftLeg", "Armature/Skeleton:mixamorig_LeftShoulder", "Armature/Skeleton:mixamorig_LeftToeBase", "Armature/Skeleton:mixamorig_LeftToe_End", "Armature/Skeleton:mixamorig_LeftUpLeg", "Armature/Skeleton:mixamorig_Neck", "Armature/Skeleton:mixamorig_RightArm", "Armature/Skeleton:mixamorig_RightFoot", "Armature/Skeleton:mixamorig_RightForeArm", "Armature/Skeleton:mixamorig_RightHand", "Armature/Skeleton:mixamorig_RightHandIndex1", "Armature/Skeleton:mixamorig_RightHandIndex2", "Armature/Skeleton:mixamorig_RightHandIndex3", "Armature/Skeleton:mixamorig_RightHandIndex4", "Armature/Skeleton:mixamorig_RightHandMiddle1", "Armature/Skeleton:mixamorig_RightHandMiddle2", "Armature/Skeleton:mixamorig_RightHandMiddle3", "Armature/Skeleton:mixamorig_RightHandMiddle4", "Armature/Skeleton:mixamorig_RightHandPinky1", "Armature/Skeleton:mixamorig_RightHandPinky2", "Armature/Skeleton:mixamorig_RightHandPinky3", "Armature/Skeleton:mixamorig_RightHandPinky4", "Armature/Skeleton:mixamorig_RightHandRing1", "Armature/Skeleton:mixamorig_RightHandRing2", "Armature/Skeleton:mixamorig_RightHandRing3", "Armature/Skeleton:mixamorig_RightHandRing4", "Armature/Skeleton:mixamorig_RightHandThumb1", "Armature/Skeleton:mixamorig_RightHandThumb2", "Armature/Skeleton:mixamorig_RightHandThumb3", "Armature/Skeleton:mixamorig_RightHandThumb4", "Armature/Skeleton:mixamorig_RightLeg", "Armature/Skeleton:mixamorig_RightShoulder", "Armature/Skeleton:mixamorig_RightToeBase", "Armature/Skeleton:mixamorig_RightToe_End", "Armature/Skeleton:mixamorig_RightUpLeg", "Armature/Skeleton:mixamorig_Spine", "Armature/Skeleton:mixamorig_Spine1", "Armature/Skeleton:mixamorig_Spine2" ]
+
+[sub_resource type="AnimationNodeBlend2" id=54]
+filter_enabled = true
+filters = [ "Armature/Skeleton:mixamorig_LeftArm", "Armature/Skeleton:mixamorig_LeftForeArm", "Armature/Skeleton:mixamorig_LeftHand", "Armature/Skeleton:mixamorig_LeftHandIndex1", "Armature/Skeleton:mixamorig_LeftHandIndex2", "Armature/Skeleton:mixamorig_LeftHandIndex3", "Armature/Skeleton:mixamorig_LeftHandIndex4", "Armature/Skeleton:mixamorig_LeftHandMiddle1", "Armature/Skeleton:mixamorig_LeftHandMiddle2", "Armature/Skeleton:mixamorig_LeftHandMiddle3", "Armature/Skeleton:mixamorig_LeftHandMiddle4", "Armature/Skeleton:mixamorig_LeftHandPinky1", "Armature/Skeleton:mixamorig_LeftHandPinky2", "Armature/Skeleton:mixamorig_LeftHandPinky3", "Armature/Skeleton:mixamorig_LeftHandPinky4", "Armature/Skeleton:mixamorig_LeftHandRing1", "Armature/Skeleton:mixamorig_LeftHandRing2", "Armature/Skeleton:mixamorig_LeftHandRing3", "Armature/Skeleton:mixamorig_LeftHandRing4", "Armature/Skeleton:mixamorig_LeftHandThumb2", "Armature/Skeleton:mixamorig_LeftHandThumb3", "Armature/Skeleton:mixamorig_LeftHandThumb4", "Armature/Skeleton:mixamorig_LeftLeg", "Armature/Skeleton:mixamorig_LeftShoulder", "Armature/Skeleton:mixamorig_LeftUpLeg", "Armature/Skeleton:mixamorig_RightArm", "Armature/Skeleton:mixamorig_RightForeArm", "Armature/Skeleton:mixamorig_RightHand", "Armature/Skeleton:mixamorig_RightHandIndex1", "Armature/Skeleton:mixamorig_RightHandIndex2", "Armature/Skeleton:mixamorig_RightHandIndex3", "Armature/Skeleton:mixamorig_RightHandIndex4", "Armature/Skeleton:mixamorig_RightHandMiddle1", "Armature/Skeleton:mixamorig_RightHandMiddle2", "Armature/Skeleton:mixamorig_RightHandMiddle3", "Armature/Skeleton:mixamorig_RightHandMiddle4", "Armature/Skeleton:mixamorig_RightHandPinky1", "Armature/Skeleton:mixamorig_RightHandPinky2", "Armature/Skeleton:mixamorig_RightHandPinky3", "Armature/Skeleton:mixamorig_RightHandPinky4", "Armature/Skeleton:mixamorig_RightHandRing1", "Armature/Skeleton:mixamorig_RightHandRing2", "Armature/Skeleton:mixamorig_RightHandRing3", "Armature/Skeleton:mixamorig_RightHandRing4", "Armature/Skeleton:mixamorig_RightHandThumb1", "Armature/Skeleton:mixamorig_RightHandThumb2", "Armature/Skeleton:mixamorig_RightHandThumb3", "Armature/Skeleton:mixamorig_RightHandThumb4", "Armature/Skeleton:mixamorig_RightShoulder" ]
+
+[sub_resource type="AnimationNodeBlendTree" id=38]
+graph_offset = Vector2( -656.822, 51.8444 )
+nodes/Animation/node = SubResource( 47 )
+nodes/Animation/position = Vector2( 0, 146.667 )
+"nodes/Animation 2/node" = SubResource( 53 )
+"nodes/Animation 2/position" = Vector2( -26.6667, 386.667 )
+"nodes/Animation 3/node" = SubResource( 59 )
+"nodes/Animation 3/position" = Vector2( -66.6667, 266.667 )
+nodes/ChairBlend/node = SubResource( 60 )
+nodes/ChairBlend/position = Vector2( 186.667, 160 )
+nodes/IntrumentBlend/node = SubResource( 54 )
+nodes/IntrumentBlend/position = Vector2( 360, 266.667 )
+nodes/output/position = Vector2( 533.333, 160 )
+node_connections = [ "output", 0, "IntrumentBlend", "ChairBlend", 0, "Animation", "ChairBlend", 1, "Animation 3", "IntrumentBlend", 0, "ChairBlend", "IntrumentBlend", 1, "Animation 2" ]
+
+[sub_resource type="AnimationNodeAnimation" id=55]
+animation = "Standing"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=39]
+advance_condition = "Dead"
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=42]
+advance_condition = "Sitting"
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=51]
+advance_condition = "Dead"
+xfade_time = 1.0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=52]
+advance_condition = "Sitting"
+xfade_time = 1.0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=57]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=58]
+advance_condition = "Idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=56]
+advance_condition = "Idle"
+
+[sub_resource type="AnimationNodeStateMachine" id=149]
+resource_local_to_scene = true
+states/Dead/node = SubResource( 37 )
+states/Dead/position = Vector2( 707.333, 254.235 )
+states/Sitting/node = SubResource( 38 )
+states/Sitting/position = Vector2( 522.267, 48 )
+states/Standing/node = SubResource( 55 )
+states/Standing/position = Vector2( 509.111, 171.334 )
+states/Walking/node = ExtResource( 11 )
+states/Walking/position = Vector2( 329.2, 235.866 )
+transitions = [ "Walking", "Dead", SubResource( 39 ), "Walking", "Sitting", SubResource( 42 ), "Sitting", "Dead", SubResource( 51 ), "Dead", "Sitting", SubResource( 52 ), "Standing", "Walking", SubResource( 57 ), "Sitting", "Standing", SubResource( 58 ), "Dead", "Standing", SubResource( 56 ) ]
+start_node = "Walking"
+graph_offset = Vector2( -352, -31 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=150]
 
 [sub_resource type="CapsuleShape" id=6]
 height = 5.27483
@@ -294,7 +784,7 @@ tracks/5/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="SpatialMaterial" id=120]
+[sub_resource type="SpatialMaterial" id=151]
 render_priority = 1
 flags_transparent = true
 albedo_color = Color( 0, 0, 0, 0 )
@@ -309,6 +799,104 @@ JumpImpulse = 30
 [node name="Pivot" type="Spatial" parent="."]
 
 [node name="Guy" parent="Pivot" instance=ExtResource( 17 )]
+
+[node name="Skeleton" parent="Pivot/Guy/Armature" index="0"]
+bones/3/bound_children = [  ]
+bones/6/bound_children = [  ]
+
+[node name="HeadRot2Pivot" parent="Pivot/Guy/Armature/Skeleton" index="0"]
+transform = Transform( -1, 0, -8.74228e-08, 2.31465e-16, 1, -2.6518e-09, 8.74228e-08, -2.27374e-13, -1, -3.3563, 280.504, 20.9995 )
+
+[node name="Listener" type="Listener" parent="Pivot/Guy/Armature/Skeleton/HeadRot2Pivot" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.05176e-05, 1.90735e-06 )
+current = true
+
+[node name="BoneAttachment" parent="Pivot/Guy/Armature/Skeleton" index="1"]
+transform = Transform( 0.997547, -0.0627462, -0.0310463, 0.0584074, 0.990432, -0.125031, 0.0385945, 0.12291, 0.991667, -2.1322, 265.278, 12.4031 )
+
+[node name="MeshInstance" parent="Pivot/Guy/Armature/Skeleton/BoneAttachment/HeadPivot" index="0"]
+mesh = SubResource( 127 )
+
+[node name="InstrumentAtatchment" parent="Pivot/Guy/Armature/Skeleton" index="2"]
+transform = Transform( 0.998314, -0.0257701, -0.0520036, 0.0239902, 0.999114, -0.0345647, 0.0528483, 0.0332589, 0.998048, 0.858564, 213.177, -0.0302759 )
+
+[node name="Arm_L" parent="Pivot/Guy/Armature/Skeleton" index="3"]
+material_overlay = SubResource( 128 )
+material/0 = SubResource( 131 )
+
+[node name="Arm_L_LOD" parent="Pivot/Guy/Armature/Skeleton" index="4"]
+material/0 = SubResource( 131 )
+
+[node name="Arm_R" parent="Pivot/Guy/Armature/Skeleton" index="5"]
+material_overlay = SubResource( 128 )
+material/0 = SubResource( 134 )
+
+[node name="Arm_R_LOD" parent="Pivot/Guy/Armature/Skeleton" index="6"]
+material_overlay = SubResource( 128 )
+material/0 = SubResource( 134 )
+
+[node name="Body" parent="Pivot/Guy/Armature/Skeleton" index="8"]
+material_overlay = SubResource( 128 )
+material/0 = SubResource( 135 )
+
+[node name="Body_LOD" parent="Pivot/Guy/Armature/Skeleton" index="9"]
+material/0 = SubResource( 135 )
+
+[node name="Face" parent="Pivot/Guy/Armature/Skeleton" index="11"]
+material_overlay = SubResource( 128 )
+material/0 = SubResource( 136 )
+
+[node name="Face_LOD" parent="Pivot/Guy/Armature/Skeleton" index="12"]
+material_overlay = SubResource( 128 )
+material/0 = SubResource( 136 )
+
+[node name="Leg2_L" parent="Pivot/Guy/Armature/Skeleton" index="13"]
+material_overlay = SubResource( 128 )
+material/0 = SubResource( 139 )
+material/1 = SubResource( 139 )
+
+[node name="Leg2_L_LOD" parent="Pivot/Guy/Armature/Skeleton" index="14"]
+material_overlay = SubResource( 128 )
+material/0 = SubResource( 139 )
+material/1 = SubResource( 139 )
+
+[node name="Leg2_R" parent="Pivot/Guy/Armature/Skeleton" index="15"]
+material_overlay = SubResource( 128 )
+material/0 = SubResource( 142 )
+material/1 = SubResource( 142 )
+
+[node name="Leg2_R_LOD" parent="Pivot/Guy/Armature/Skeleton" index="16"]
+material_overlay = SubResource( 128 )
+material/0 = SubResource( 142 )
+material/1 = SubResource( 142 )
+
+[node name="Leg_L" parent="Pivot/Guy/Armature/Skeleton" index="17"]
+material_overlay = SubResource( 128 )
+material/0 = SubResource( 145 )
+
+[node name="Leg_L_LOD" parent="Pivot/Guy/Armature/Skeleton" index="18"]
+material_overlay = SubResource( 128 )
+material/0 = SubResource( 145 )
+
+[node name="Leg_R" parent="Pivot/Guy/Armature/Skeleton" index="19"]
+material_overlay = SubResource( 128 )
+material/0 = SubResource( 148 )
+
+[node name="Leg_R_LOD" parent="Pivot/Guy/Armature/Skeleton" index="20"]
+material_overlay = SubResource( 128 )
+material/0 = SubResource( 148 )
+
+[node name="LegsUpper" parent="Pivot/Guy/Armature/Skeleton" index="21"]
+material_overlay = SubResource( 128 )
+material/0 = SubResource( 135 )
+
+[node name="LegsUpper_LOD" parent="Pivot/Guy/Armature/Skeleton" index="22"]
+material_overlay = SubResource( 128 )
+material/0 = SubResource( 135 )
+
+[node name="AnimationTree" parent="Pivot/Guy/AnimationPlayer" index="0"]
+tree_root = SubResource( 149 )
+parameters/playback = SubResource( 150 )
 
 [node name="RayCast" type="RayCast" parent="Pivot/Guy"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00875211, 6.36644, 2.8713 )
@@ -410,12 +998,8 @@ anims/FadeOutDialogue = SubResource( 119 )
 anims/RESET = SubResource( 111 )
 script = ExtResource( 35 )
 
-[node name="Listener" type="Listener" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/PlayerCamera"]
-transform = Transform( 0.999998, 2.75286e-21, -1.27055e-21, 1.58819e-22, 1, 1.04308e-07, 4.23516e-21, 0, 0.999999, 0, 0, -2 )
-current = true
-
 [node name="RemoteTransform" type="RemoteTransform" parent="CameraMovePivot/CameraPanPivot"]
-remote_path = NodePath("../SpringArm/CameraZoomPivot/CameraPanXPivot/PlayerCamera/Listener")
+remote_path = NodePath("../../../Pivot/Guy/Armature/Skeleton/HeadRot2Pivot/Listener")
 update_position = false
 update_scale = false
 
@@ -442,7 +1026,7 @@ far = 40000.0
 transform = Transform( 1, -5.29396e-22, 0, -1.05879e-22, 1, 0, 2.11758e-21, 0, 1, 0, -0.0144858, -1.05511 )
 layers = 524288
 mesh = SubResource( 107 )
-material/0 = SubResource( 120 )
+material/0 = SubResource( 151 )
 
 [node name="DialogueCameraBox2" type="MeshInstance" parent="DialogueCameraPivot/DialogueCamera"]
 transform = Transform( 1, -5.29396e-22, 0, -1.05879e-22, 1, 0, 2.11758e-21, 0, 1, 0, -0.0144858, -1.05511 )
@@ -453,3 +1037,5 @@ material/0 = SubResource( 126 )
 [node name="Tutorial" parent="." instance=ExtResource( 3 )]
 
 [connection signal="body_entered" from="KillFieldDetector" to="." method="OnKillFieldDetectorBodyEntered"]
+
+[editable path="Pivot/Guy"]

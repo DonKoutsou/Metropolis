@@ -24,10 +24,10 @@ DecorationAmmount = 2
 SpawnPool = {
 Resource( "res://Scenes/Items/FastLeg_L.tscn" ): 1,
 Resource( "res://Scenes/Items/FastLeg_R.tscn" ): 1,
-Resource( "res://Scenes/Items/Guitar.tscn" ): 1,
-Resource( "res://Scenes/Items/BatteryEmpty.tscn" ): 10,
 Resource( "res://Scenes/Items/Battery.tscn" ): 2,
-Resource( "res://Scenes/Items/Drahma.tscn" ): 40
+Resource( "res://Scenes/Items/Guitar.tscn" ): 1,
+Resource( "res://Scenes/Items/Drahma.tscn" ): 40,
+Resource( "res://Scenes/Items/BatteryEmpty.tscn" ): 10
 }
 
 [node name="IndoorsLight" parent="." instance=ExtResource( 12 )]

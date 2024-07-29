@@ -10,6 +10,8 @@ public class LoddedObject : MeshInstance
     public Mesh LOD1 = null;
     [Export]
     public Mesh LOD2 = null;
+    [Export]
+    public bool HideIfNoLod = false;
 
     public float abbLeangth = 0;
 
@@ -63,12 +65,20 @@ public class LoddedObject : MeshInstance
             }
             case 1:
             {
-                Mesh = LOD1;
+                if (LOD1 == null)
+                    if (HideIfNoLod)
+                        Hide();
+                else
+                    Mesh = LOD1;
                 break;
             }
             case 2:
             {
-                Mesh = LOD2;
+                if (LOD2 == null)
+                    if (HideIfNoLod)
+                        Hide();
+                else
+                    Mesh = LOD2;
                 break;
             }
         }

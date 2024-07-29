@@ -32,7 +32,7 @@ public class Breakable : StaticBody
         Vector3 AttatchPos = (Vector3)rayar["position"];
 
         ex.GlobalTranslation = AttatchPos;
-
+        ex.LookAt(rayor, Vector3.Up);
         ex.StartExplosive();
         ex.Connect("OnExploded", this, "AtatchedExplosiveGoneBoom");
 

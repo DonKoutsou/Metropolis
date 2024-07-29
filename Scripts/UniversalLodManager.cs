@@ -79,9 +79,9 @@ public partial class UniversalLodManager : Node
             float dist = campos.DistanceTo(objtocheck.GlobalTranslation);
             float abbsize = objtocheck.abbLeangth;
 
-            if (dist > abbsize + 1200 && objtocheck.HasLod(2))
+            if (dist > abbsize + 1200)
               objtocheck.SwitchLod(2);
-            else if (dist > objtocheck.abbLeangth + 500 && objtocheck.HasLod(1))
+            else if (dist > objtocheck.abbLeangth + 500)
               objtocheck.SwitchLod(1);
             else
               objtocheck.SwitchLod(0);

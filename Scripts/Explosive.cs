@@ -7,6 +7,7 @@ public class Explosive : Item
     public delegate void OnExploded();
     public void StartExplosive()
     {
+        GetNode<MeshInstance>("MeshInstance").Rotate(new Vector3(1,0,0) ,-Mathf.Pi/2);
         GetNode<AnimationPlayer>("AnimationPlayer").Play("LightFlicker");
     }
     private void Exploded(string Name)

@@ -52,8 +52,8 @@ public class Street_Lamp : StaticBody
     }
     public void Toggle(bool t)
     {
-        light.Visible = t;
-        LampMat.EmissionEnabled = t;
+        light.Visible = !t;
+        LampMat.EmissionEnabled = !t;
     }
     public void TurnOn()
     {
