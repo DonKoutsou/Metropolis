@@ -6,14 +6,13 @@ using System.Linq;
 public class CharacterSpawnLocations : Node
 {
     [Export]
-    public Vector3[] Locations = new Vector3[0];
+    Vector3[] Locations = new Vector3[0];
     [Export]
-    public Vector3[] Rotations = new Vector3[0];
-    [Export]
-    public PackedScene[] CharSpawns = new PackedScene[0];
+    Vector3[] Rotations = new Vector3[0];
+    
     public bool HasChars()
     {
-        return Locations != null && CharSpawns.Count() > 0;
+        return Locations != null && Locations.Count() > 0;
     }
     public override void _Process(float delta)
     {

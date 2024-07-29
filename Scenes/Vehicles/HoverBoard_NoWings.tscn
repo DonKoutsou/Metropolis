@@ -430,7 +430,7 @@ update_position = false
 update_scale = false
 
 [node name="CharacterCameraRemoteTransform" type="RemoteTransform" parent="VehicleBody"]
-transform = Transform( 1, 1.45854e-05, -1.5532e-05, -1.49397e-05, 0.999735, -0.0230712, 1.51922e-05, 0.0230712, 0.999735, -0.0029084, -0.934084, -8.45704 )
+transform = Transform( 1, 1.45854e-05, -1.5532e-05, -1.49397e-05, 0.999735, -0.0230712, 1.51922e-05, 0.0230712, 0.999735, -0.0029084, -0.934084, -4.24579 )
 update_rotation = false
 update_scale = false
 

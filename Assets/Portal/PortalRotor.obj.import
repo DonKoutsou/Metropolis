@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/PortalRotor.obj-f0e6724ab33d59555254c0e7ebf4d066.mesh"
+
+[deps]
+
+files=[ "res://.import/PortalRotor.obj-f0e6724ab33d59555254c0e7ebf4d066.mesh" ]
+
+source_file="res://Assets/Portal/PortalRotor.obj"
+dest_files=[ "res://.import/PortalRotor.obj-f0e6724ab33d59555254c0e7ebf4d066.mesh", "res://.import/PortalRotor.obj-f0e6724ab33d59555254c0e7ebf4d066.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

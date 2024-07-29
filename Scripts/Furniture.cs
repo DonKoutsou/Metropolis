@@ -83,7 +83,7 @@ public class Furniture : Spatial
 		{
 			if (info.HasItem)
 			{
-				RespawnItem(MyWorld.GetItemByType(info.item));
+				RespawnItem(GlobalItemCatalogue.GetItemByType(info.item));
 			}
 		}
 		else

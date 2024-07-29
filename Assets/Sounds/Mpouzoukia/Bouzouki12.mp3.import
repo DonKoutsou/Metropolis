@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Bouzouki12.mp3-8083eb47e299f3716b636e8e38658a7c.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/Mpouzoukia/Bouzouki12.mp3"
+dest_files=[ "res://.import/Bouzouki12.mp3-8083eb47e299f3716b636e8e38658a7c.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

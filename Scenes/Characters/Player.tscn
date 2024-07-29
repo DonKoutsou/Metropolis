@@ -360,9 +360,6 @@ script = ExtResource( 19 )
 [node name="CameraMovePivot" type="Position3D" parent="."]
 pause_mode = 1
 
-[node name="Listener" type="Listener" parent="CameraMovePivot"]
-transform = Transform( 0.999998, 0, 0, 0, 1, 0, 0, 0, 0.999998, 0, 6.70394, 0.354646 )
-
 [node name="CameraPanPivot" type="Position3D" parent="CameraMovePivot"]
 transform = Transform( 0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 6.52882, 0 )
 script = ExtResource( 14 )
@@ -413,8 +410,12 @@ anims/FadeOutDialogue = SubResource( 119 )
 anims/RESET = SubResource( 111 )
 script = ExtResource( 35 )
 
+[node name="Listener" type="Listener" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/PlayerCamera"]
+transform = Transform( 0.999998, 2.75286e-21, -1.27055e-21, 1.58819e-22, 1, 1.04308e-07, 4.23516e-21, 0, 0.999999, 0, 0, -2 )
+current = true
+
 [node name="RemoteTransform" type="RemoteTransform" parent="CameraMovePivot/CameraPanPivot"]
-remote_path = NodePath("../../Listener")
+remote_path = NodePath("../SpringArm/CameraZoomPivot/CameraPanXPivot/PlayerCamera/Listener")
 update_position = false
 update_scale = false
 

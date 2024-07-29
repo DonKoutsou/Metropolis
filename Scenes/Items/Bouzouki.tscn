@@ -37,11 +37,15 @@ LOD0 = ExtResource( 1 )
 LOD1 = ExtResource( 5 )
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.939455, 0.0404539 )
 stream = ExtResource( 3 )
+unit_db = 10.0
 unit_size = 3.0
-max_db = -15.0
+max_db = -10.0
 max_distance = 4096.0
-attenuation_filter_db = -8.0
+area_mask = 0
+attenuation_filter_cutoff_hz = 10000.0
+attenuation_filter_db = 0.0
 
 [node name="ActionComponent" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1867, 0 )

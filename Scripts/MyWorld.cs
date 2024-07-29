@@ -6,15 +6,10 @@ using System.Linq;
 public class MyWorld : Spatial
 {
 	[Export]
-	PackedScene[] GlobalItemListConfiguration = null;
-
-	[Export]
 	PackedScene PlayerScene = null;
 
 	[Signal]
     public delegate void PlayerSpawnedEventHandler(Player Pl);
-
-	static List<KeyValuePair<string, PackedScene>> GlobalItemList = new List<KeyValuePair<string, PackedScene>>();
 	
 	static List<IslandInfo> Orderedilestodissable = new List<IslandInfo>();
 	
@@ -51,15 +46,6 @@ public class MyWorld : Spatial
 	public override void _Ready()
 	{
 		base._Ready();
-		//pl = GetNode<Player>("Player");
-		foreach (PackedScene pair in GlobalItemListConfiguration)
-		{
-			Item it = pair.Instance<Item>();
-			
-			string key = it.GetItemName();
-			GlobalItemList.Add(new KeyValuePair<string, PackedScene>(key, pair));
-			it.Free();
-		}
 		
 		Instance = this;
 		GetNode<WorldMap>("WorldMap").Init(LoadSave);
@@ -99,19 +85,7 @@ public class MyWorld : Spatial
 			}
 		}
 	}
-	public static PackedScene GetItemByType(string name)
-	{
-		PackedScene path = null;
-		//var lookup = GlobalItemList.ToLookup(kvp => (int)name, kvp => kvp.Value);
-		foreach (KeyValuePair<string, PackedScene> thing in GlobalItemList)
-		{
-			if (thing.Key == name)
-			{
-				path = thing.Value;
-			}
-		}
-		return path;
-	}
+	
 	public Player SpawnPlayer(Vector3 pos)
 	{
 		Player pl = (Player)PlayerScene.Instance();

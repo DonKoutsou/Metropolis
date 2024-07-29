@@ -41,13 +41,14 @@ public class Island : Spatial
 	}
 	public override void _Ready()
 	{
-		Node b = GetNodeOrNull("Bounds");
-		if (b != null)
-			b.QueueFree();
+		
 		#if DEBUG
 		if (Engine.EditorHint)
 			return;
 		#endif
+		Node b = GetNodeOrNull("Bounds");
+		if (b != null)
+			b.QueueFree();
 		Translation = SpawnGlobalLocation;
 
 		Rotate(new Vector3(0, 1, 0), Mathf.Deg2Rad(SpawnRotation));
