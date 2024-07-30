@@ -5,7 +5,7 @@ func _SetData(data, HasData):
 	Name = data["Name"]
 	Position = data["Position"]
 	SceneData = data["SceneData"]
-	##Energy = data["Energy"]
+	Energy = data["Energy"]
 	Alive = data["Alive"]
 	Talked = data["Talked"]
 	LimbColors = data["LimbColors"]
@@ -16,7 +16,7 @@ func _SetData(data, HasData):
 export var Name:String
 export var Position:Vector3
 export var SceneData:String
-##export var Energy:float
+export var Energy:float
 export var Alive:bool
 export var Talked:bool
 export (Array, Color) var LimbColors = []

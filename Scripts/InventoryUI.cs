@@ -42,13 +42,13 @@ public class InventoryUI : Control
     bool ShowingCompass = false;
     bool ShowingMap = false;
 
-    //ProgressBar CharacterBatteryCharge;
+    ProgressBar CharacterBatteryCharge;
 
     AnimationPlayer Anim;
     
     Compass comp;
     MapGrid map;
-    //Panel CharacterRPM;
+    Panel CharacterRPM;
 
     int currentpage = 0;
     int maxpage = 0;
@@ -65,8 +65,8 @@ public class InventoryUI : Control
         Anim = GetNode<AnimationPlayer>("InventoryContainer/InventoryAnimation");
         GridContainer gr = GetNode<GridContainer>("InventoryContainer/Inventory/GridContainer");
         int childc = gr.GetChildCount();
-        //CharacterBatteryCharge = GetNode<ProgressBar>("InventoryContainer/Inventory/BatteryPanel/CharacterBatteryCharge");
-        //CharacterRPM = GetNode<Panel>("InventoryContainer/Inventory/BatteryPanel/RPMAmount");
+        CharacterBatteryCharge = GetNode<ProgressBar>("InventoryContainer/Inventory/BatteryPanel/CharacterBatteryCharge");
+        CharacterRPM = GetNode<Panel>("InventoryContainer/Inventory/BatteryPanel/RPMAmount");
         
         DescPan = GetNode<Panel>("InventoryContainer/Inventory/DescriptionPanel");
         JobPan = GetNode<Panel>("InventoryContainer/Inventory/JobPanel");
@@ -94,8 +94,8 @@ public class InventoryUI : Control
         //MaxLoad = Inv.GetMaxCap();
         //float currentload = Inv.GetCurrentWeight();
         //Capacity.BbcodeText = string.Format("[center]{0}/{1}", currentload, MaxLoad);
-        //CharacterBatteryCharge.MaxValue = pl.GetCharacterBatteryCap();
-        //CharacterBatteryCharge.Value = pl.GetCurrentCharacterEnergy();
+        CharacterBatteryCharge.MaxValue = pl.GetCharacterBatteryCap();
+        CharacterBatteryCharge.Value = pl.GetCurrentCharacterEnergy();
         comp = GetNode<Compass>("InventoryContainer/Inventory/CompassUI");
         map = MapGrid.GetInstance();
         Show();
@@ -241,14 +241,14 @@ public class InventoryUI : Control
             //Capacity.BbcodeText = string.Format("[center]{0}/{1}", currentload, MaxLoad);
         }
 
-        //CharacterBatteryCharge.Value = pl.GetCurrentCharacterEnergy();
-        //float rpm = pl.rpm;
-        //if (rpm > 0.66f)
-        //    CharacterRPM.Modulate = new Color(1,0,0);
-        //else if (rpm > 0.33f)
-        //    CharacterRPM.Modulate = new Color(1,1,0);
-        //else
-        //    CharacterRPM.Modulate = new Color(0,1,0);
+        CharacterBatteryCharge.Value = pl.GetCurrentCharacterEnergy();
+        float rpm = pl.GetRPM();
+        if (rpm > 0.66f)
+            CharacterRPM.Modulate = new Color(1,0,0);
+        else if (rpm > 0.33f)
+            CharacterRPM.Modulate = new Color(1,1,0);
+        else
+            CharacterRPM.Modulate = new Color(0,1,0);
 
 
         if (showingDesc)
@@ -315,11 +315,6 @@ public class InventoryUI : Control
             ShowingDescSample = null;
         }
     }
-    //public void ItemUnHovered(Item it, bool t)
-    //{
-        
-        
-    //}
     public void SetFocused(bool t, InventoryUISlot slot)
     {
         if (t)
@@ -330,10 +325,6 @@ public class InventoryUI : Control
                 FocusedSlot = null;
         }
     }
-    //public void UnFocus(InventoryUISlot slot)
-    //{
-        
-    //}
     
     private void On_Repair_Button_Down()
     {

@@ -9,14 +9,31 @@ public class Furniture : Spatial
 
 	[Export]
 	List<NodePath> ToHighLight = new List<NodePath>();
+	[Export]
+	PackedScene ItemToSpawnWith = null;
 
 	public Item StashedItem;
 
+	[Export]
 	bool Searched = false;
 
-	//public override void _Ready()
-	//{
-	//}
+	public override void _Ready()
+	{
+		if (ItemToSpawnWith != null)
+		{
+			SpawnItem(ItemToSpawnWith);
+		}
+		Node parent = GetParent();
+		
+		while (!(parent is Island))
+		{
+			if (parent == null || parent is House)
+				return;
+			parent = parent.GetParent();
+		}
+		Island ile = (Island)parent;
+		ile.RegisterChild(this);
+	}
 	public void SpawnItem(PackedScene it)
 	{
 		if (it == null)

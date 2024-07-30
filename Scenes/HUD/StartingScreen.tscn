@@ -663,6 +663,7 @@ anims/ShowPic = SubResource( 64 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 9 )
+ViewDistance = 1
 FOVOverride = 40
 
 [node name="ColorRect" type="ColorRect" parent="Settings"]

@@ -23,9 +23,10 @@ angular_damp = 1.22
 script = ExtResource( 3 )
 ItemType = 4
 ItemIcon = ExtResource( 2 )
+ItemPickupActionName = "Μια πυξίδα..."
 ItemName = "Πυξίδα"
 InventoryItemName = "Πυξίδα"
-ItemDesc = ""
+ItemDesc = "Η τρίτη γενιά πυξίδων πλέον ικανή να ενημερώνει μόνη τις την θέση του βορά έθεσε του οδηγούς πλέον \"άχρηστους\". Οι οδηγοί έμειναν ένα από τα πιο σπάνια μοντέλα μηχανών μιάς και η χρησιμότητα τους έκλειψε σε διάστημα λίγων ετών."
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.145963, 0 )

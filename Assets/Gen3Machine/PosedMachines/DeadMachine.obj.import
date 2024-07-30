@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/DeadMachine.obj-0d7ff8f9c02144dcbeca362f973b6c30.mesh"
+
+[deps]
+
+files=[ "res://.import/DeadMachine.obj-0d7ff8f9c02144dcbeca362f973b6c30.mesh" ]
+
+source_file="res://Assets/Gen3Machine/PosedMachines/DeadMachine.obj"
+dest_files=[ "res://.import/DeadMachine.obj-0d7ff8f9c02144dcbeca362f973b6c30.mesh", "res://.import/DeadMachine.obj-0d7ff8f9c02144dcbeca362f973b6c30.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=54

@@ -6,6 +6,7 @@ public class Intro : Spatial
 
     public override void _Ready()
     {
+        
         GetNode<AnimationPlayer>("AnimationPlayer").Play("Intro");
         GetNode<Camera>("Camera").MakeCurrent();
     }

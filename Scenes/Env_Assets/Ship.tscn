@@ -38,7 +38,7 @@ gravity = Vector3( 0, 10, 0 )
 initial_velocity = 27.81
 angular_velocity_random = 0.32
 radial_accel = 7.48
-scale = 150.0
+scale = 14.94
 scale_curve = SubResource( 6 )
 color_ramp = SubResource( 113 )
 
@@ -89,6 +89,8 @@ resource_local_to_scene = true
 material = SubResource( 110 )
 
 [node name="Ship" type="StaticBody"]
+collision_layer = 4
+collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )
@@ -100,7 +102,7 @@ mesh = ExtResource( 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.46328, -99.9723 )
 material_override = SubResource( 2 )
 amount = 500
-lifetime = 100.0
+lifetime = 40.0
 visibility_aabb = AABB( -1530.22, -3565.3, -876.523, 3060.44, 7130.6, 1753.05 )
 local_coords = false
 process_material = SubResource( 3 )
@@ -111,26 +113,6 @@ __meta__ = {
 
 [node name="ExaustParticlesR" type="Particles" parent="."]
 transform = Transform( 1, -0.00130579, 2.59312e-05, -2.59345e-05, 3.93833e-07, 1, -0.00130579, -1, 3.68338e-07, -0.54766, 1.047, -102.874 )
-amount = 200
-lifetime = 0.5
-randomness = 1.0
-visibility_aabb = AABB( -17.1728, -26.8771, -7.68229, 34.3456, 53.754, 15.3646 )
-draw_order = 2
-process_material = SubResource( 109 )
-draw_pass_1 = SubResource( 111 )
-
-[node name="ExaustParticlesR2" type="Particles" parent="."]
-transform = Transform( 0.952917, 0.289889, -0.0889726, 0.000356931, 0.292339, 0.956315, 0.303235, -0.91132, 0.27847, 55.9207, -10.9782, -28.0159 )
-amount = 200
-lifetime = 0.5
-randomness = 1.0
-visibility_aabb = AABB( -17.1728, -26.8771, -7.68229, 34.3456, 53.754, 15.3646 )
-draw_order = 2
-process_material = SubResource( 109 )
-draw_pass_1 = SubResource( 111 )
-
-[node name="ExaustParticlesR3" type="Particles" parent="."]
-transform = Transform( 0.825719, -0.497365, 0.266117, 0.000594176, 0.472536, 0.881312, -0.564083, -0.727557, 0.390476, -36.9046, -11.4597, -5.93602 )
 amount = 200
 lifetime = 0.5
 randomness = 1.0

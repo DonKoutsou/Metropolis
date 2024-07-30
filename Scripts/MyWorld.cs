@@ -282,9 +282,9 @@ public class MyWorld : Spatial
 		List<IslandInfo> ilestoenable = new List<IslandInfo>();
 
 		//Vector2 pos = WorldMap.GetInstance().GlobalToMap();
-		to.Island.SetVisited();
+		
 		//to.Visited = true;
-		MapGrid.GetInstance().SetIslandVisited(to.Position);
+		MapGrid.GetInstance().SetIslandVisited(to);
 		DayNight.GetInstance().UpdatePlayerDistance(Math.Max(Math.Abs(to.Position.x), Math.Abs(to.Position.y)) / 20);
 		
 		int ViewDistance = Settings.GetGameSettings().ViewDistance;

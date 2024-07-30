@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://shaders/OutlineShader.tres" type="Material" id=1]
 [ext_resource path="res://Scripts/Furniture.cs" type="Script" id=2]
@@ -6,35 +6,61 @@
 [ext_resource path="res://Assets/Sirtariera/Sirtariera.tres" type="Material" id=4]
 [ext_resource path="res://Assets/Sirtariera/Sirtariera_Body.obj" type="ArrayMesh" id=5]
 [ext_resource path="res://Assets/Sirtariera/Sirtariera_Drawer.obj" type="ArrayMesh" id=6]
+[ext_resource path="res://Assets/Sounds/Drawers.mp3" type="AudioStream" id=7]
 
 [sub_resource type="BoxShape" id=4]
 extents = Vector3( 2.51766, 1.75106, 1.36546 )
 
 [sub_resource type="Animation" id=5]
 resource_name = "Open"
+length = 2.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("MeshInstance5:translation")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3, 0.9 ),
+"times": PoolRealArray( 0.2, 0.9, 2.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector3( 0, 2.81403, 0.217855 ), Vector3( 0, 2.81403, 0.217855 ), Vector3( 0, 2.81403, 1.18387 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("MeshInstance4:translation")
-tracks/1/interp = 1
+tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.6 ),
+"times": PoolRealArray( 0.2, 1.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector3( 0, 1.41559, 0.195289 ), Vector3( 0, 1.41559, 1.80137 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AudioStreamPlayer3D:stream_paused")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -62,6 +88,30 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector3( 0, 1.41559, 0.195289 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AudioStreamPlayer3D:stream_paused")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
 }
 
 [node name="Furniture" type="StaticBody" groups=["Interactables"]]
@@ -100,3 +150,11 @@ ActionDistance = 10.0
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Open = SubResource( 5 )
 anims/RESET = SubResource( 6 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 1 )
+stream = ExtResource( 7 )
+unit_size = 25.6
+autoplay = true
+max_distance = 4096.0
+area_mask = 0

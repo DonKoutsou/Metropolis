@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://shaders/OutlineShader.tres" type="Material" id=1]
 [ext_resource path="res://Scripts/Furniture.cs" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Assets/Chest/Chest_Body.obj" type="ArrayMesh" id=4]
 [ext_resource path="res://Assets/Chest/ChestMat.tres" type="Material" id=5]
 [ext_resource path="res://Assets/Chest/Chest_Cao.obj" type="ArrayMesh" id=6]
+[ext_resource path="res://Assets/Sounds/Chest.mp3" type="AudioStream" id=7]
 
 [sub_resource type="BoxShape" id=7]
 extents = Vector3( 1.64172, 1.26362, 1.18064 )
@@ -19,10 +20,34 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.7, 1 ),
+"times": PoolRealArray( 0.2, 0.7, 1 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ), Vector3( -60, 0, 0 ), Vector3( -60, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( -0.3 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AudioStreamPlayer3D:stream_paused")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -38,6 +63,30 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AudioStreamPlayer3D:stream_paused")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
 }
 
 [node name="Furniture" type="StaticBody" groups=["Interactables"]]
@@ -70,3 +119,11 @@ ActionDistance = 5.0
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Open = SubResource( 5 )
 anims/RESET = SubResource( 6 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.76859, 1.04502 )
+stream = ExtResource( 7 )
+unit_size = 4.0
+autoplay = true
+stream_paused = true
+max_distance = 4096.0

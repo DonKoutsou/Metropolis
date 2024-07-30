@@ -358,6 +358,7 @@ quality/directional_shadow/size.mobile=1024
 quality/shadow_atlas/size=2048
 quality/shadow_atlas/size.mobile=1024
 quality/shadows/filter_mode=2
+quality/reflections/high_quality_ggx=false
 quality/shading/use_physical_light_attenuation=true
 quality/filters/use_nearest_mipmap_filter=true
 misc/occlusion_culling/max_active_spheres=16

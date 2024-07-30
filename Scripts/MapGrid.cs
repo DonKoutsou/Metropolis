@@ -355,9 +355,12 @@ public class MapGrid : GridContainer
             }
         }
     }
-    public void SetIslandVisited(Vector2 index)
+    public void SetIslandVisited(IslandInfo ile)
     {
-        TextureRect child = MapIleList[index].GetNode<TextureRect>("TextureRect");
+        if (!pl.GetCharacterInventory().HasItemOfType(ItemName.MAP))
+            return;
+        ile.Island.SetVisited();
+        TextureRect child = MapIleList[ile.Position].GetNode<TextureRect>("TextureRect");
         child.Visible = true;
     }
     //public void UpdateIleInfo(Vector2 index, IleType type, bool HasPort, List<Vector2> portpos, float rot = 0, ImageTexture img = null, string name = null)

@@ -30,14 +30,12 @@ public class Player : Character
 
 	////// Energy ///////
 	//Consumption curve
-	//[Export]
-	//Curve Consumption = null;
+	[Export]
+	Curve Consumption = null;
 	//[Export]
 	//public int InventoryWeightOverride = -1;
 	////// Rpm to base consumption on /////
-	//float rpm;
-
-
+	float rpm;
 	//Node Used to show where player is moving
 	MoveLocation moveloc;
 	//Toggle that makes character follow cursor without having to rightclick. Keybinding [TAB]
@@ -74,10 +72,14 @@ public class Player : Character
 	{
 		return DialogueCam;
 	}
-	//public float GetCurrentEnergy()
-	//{
-	//	return CurrentEnergy;
-	//}
+	public float GetCurrentEnergy()
+	{
+		return CurrentEnergy;
+	}
+	public float GetRPM()
+	{
+		return rpm;
+	}
 	public void Teleport(Vector3 pos)
 	{
 		
@@ -134,11 +136,6 @@ public class Player : Character
 				
 		}
 	}
-	//public override void OnSongEnded(Instrument inst)
-	//{
-	//	StopMusic();
-	//	PlayMusic();
-	//}
 	private void UpdateMoveLocation()
 	{
 		if (DialogueManager.IsPlayerTalking())
@@ -190,8 +187,8 @@ public class Player : Character
 		}
 		base.PlayMusic();
 	}
-	//bool ExpressedNoBatteries = false;
-	//bool ExpressedLowBattery = false;
+	bool ExpressedNoBatteries = true;
+	bool ExpressedLowBattery = false;
     public override void _Process(float delta)
     {
         base._Process(delta);
@@ -202,7 +199,7 @@ public class Player : Character
 		{
 			UpdateMoveLocation();
 		}
-		/*List<Item> batteries;
+		List<Item> batteries;
 		CharacterInventory.GetItemsByType(out batteries, ItemName.BATTERY);
 
 		for (int i = batteries.Count() -1; i > -1; i--)
@@ -226,7 +223,7 @@ public class Player : Character
 				GetTalkText().Talk("Ξέμεινα από μπαταρίες. Πρέπει να βρώ κάπου να φωρτήσω.");
 				ExpressedNoBatteries = true;
 			}
-		}*/
+		}
     }
     public override void _PhysicsProcess(float delta)
 	{
@@ -252,7 +249,7 @@ public class Player : Character
 		{
 			if (dist < 10)
 			{
-				//rpm = 0.05f;
+				rpm = 0.05f;
 				
 				anim.PlayAnimation(E_Animations.Idle);
 				moveloc.Hide();
@@ -260,10 +257,10 @@ public class Player : Character
 			}
 			else if (dist > 10)
 			{
-				/*if (currveh.IsRunning())
+				if (currveh.IsRunning())
 					rpm = 1;
 				else
-					rpm = 0.05f;*/
+					rpm = 0.05f;
 				anim.PlayAnimation(E_Animations.Idle);
 				HeadPivot.Rotation = new Vector3(0.0f,0.0f,0.0f);
 				moveloc.Show();
@@ -276,7 +273,7 @@ public class Player : Character
 				anim.PlayAnimation(E_Animations.Idle);
 				moveloc.Hide();
 				HeadPivot.Rotation = new Vector3(0.0f,0.0f,0.0f);
-				//rpm = 0.05f;
+				rpm = 0.05f;
 			}
 			else
 			{
@@ -287,13 +284,13 @@ public class Player : Character
 
 				if (!IsRunning)
 				{
-					//rpm = 0.2f;
+					rpm = 0.2f;
 					anim.PlayAnimation(E_Animations.Walk);
 				}
 				else
 				{
 					spd = RunSpeed;
-					//rpm = 0.5f;
+					rpm = 0.5f;
 					anim.PlayAnimation(E_Animations.Run);
 				}
 				float heightdif = GlobalTranslation.y - loctomove.y ;
@@ -318,10 +315,10 @@ public class Player : Character
 		}
 		/////////////////////////////////////////////
 		//battery consumption
-		//float coons = Consumption.Interpolate(rpm) * delta;
-		//ConsumeEnergy(coons);
+		float coons = Consumption.Interpolate(rpm) * delta;
+		ConsumeEnergy(coons);
 
-		/*if (GetCurrentEnergy() < GetCharacterBatteryCap() / 10)
+		if (GetCurrentEnergy() < GetCharacterBatteryCap() / 10)
 		{
 			if (!ExpressedLowBattery)
 			{
@@ -334,7 +331,7 @@ public class Player : Character
 		else
 		{
 			ExpressedLowBattery = false;
-		}*/
+		}
 
 		// Moving the character
 		if (!HasVecicle)
@@ -399,12 +396,7 @@ public class Player : Character
 	public override void Kill(string reason = null)
 	{
 		base.Kill(reason);
-		MyWorld.GetInstance().OnPlayerKilled(reason);
-	}
-	public override void OnVehicleBoard(Vehicle Veh)
-	{
-		base.OnVehicleBoard(Veh);
-		IsRunning = false;
+		//MyWorld.GetInstance().OnPlayerKilled(reason);
 	}
 	
 }

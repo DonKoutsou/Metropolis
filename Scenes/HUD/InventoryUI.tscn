@@ -214,16 +214,16 @@ default_font = SubResource( 17 )
 [sub_resource type="StyleBoxFlat" id=23]
 bg_color = Color( 0.431373, 0.717647, 0.937255, 1 )
 border_width_left = 2
-border_width_top = 15
+border_width_top = 8
 border_width_right = 2
-border_width_bottom = 15
-border_color = Color( 0.117647, 0.145098, 0.341176, 1 )
+border_width_bottom = 8
+border_color = Color( 0.235294, 0.321569, 0.372549, 1 )
 border_blend = true
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
-corner_detail = 1
+corner_detail = 2
 
 [sub_resource type="StyleBoxFlat" id=29]
 border_width_left = 3
@@ -261,10 +261,10 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color( 0, 0, 0, 1 )
 border_blend = true
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 shadow_size = 1
 
 [sub_resource type="StyleBoxFlat" id=53]
@@ -458,6 +458,7 @@ margin_right = 390.0
 margin_bottom = 160.0
 
 [node name="CapPanel" type="Panel" parent="InventoryContainer/Inventory"]
+visible = false
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -104.0
@@ -843,39 +844,39 @@ anchor_bottom = 1.0
 custom_styles/panel = ExtResource( 29 )
 
 [node name="BatteryPanel" type="Panel" parent="InventoryContainer/Inventory"]
-visible = false
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -52.0
+margin_left = -390.0
 margin_top = -172.0
-margin_bottom = 172.0
+margin_bottom = -125.0
 mouse_filter = 1
 custom_styles/panel = ExtResource( 8 )
 
 [node name="CharacterBatteryCharge" type="ProgressBar" parent="InventoryContainer/Inventory/BatteryPanel"]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -41.0
-margin_top = -10.0
-margin_right = 260.0
-margin_bottom = 22.0
-rect_rotation = -89.9999
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -181.0
+margin_top = -14.5
+margin_right = 155.0
+margin_bottom = 15.5
 custom_styles/fg = SubResource( 23 )
 custom_styles/bg = SubResource( 29 )
 value = 93.63
 percent_visible = false
 
-[node name="w2" type="RichTextLabel" parent="InventoryContainer/Inventory/BatteryPanel"]
+[node name="w2" type="RichTextLabel" parent="InventoryContainer/Inventory/BatteryPanel/CharacterBatteryCharge"]
+anchor_left = 0.5
 anchor_top = 0.5
+anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -1.0
-margin_top = -163.0
-margin_right = 53.0
-margin_bottom = -123.0
+margin_left = -27.0
+margin_top = -7.5
+margin_right = 27.0
+margin_bottom = 7.5
 theme = SubResource( 26 )
 bbcode_enabled = true
 bbcode_text = "[center]Ενέργεια"
@@ -887,10 +888,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 15.0
-margin_top = -169.0
-margin_right = 23.0
-margin_bottom = -161.0
+margin_left = 163.0
+margin_top = -11.5
+margin_right = 187.0
+margin_bottom = 12.5
 rect_pivot_offset = Vector2( 4, 4 )
 custom_styles/panel = SubResource( 46 )
 
@@ -1024,10 +1025,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 230.0
-margin_top = -9.5
-margin_right = 270.0
-margin_bottom = 29.5
+margin_left = 227.0
+margin_top = -12.5
+margin_right = 277.0
+margin_bottom = 36.5
 rect_scale = Vector2( 0.5, 0.5 )
 focus_mode = 0
 mouse_default_cursor_shape = 2

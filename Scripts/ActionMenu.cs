@@ -119,7 +119,7 @@ public class ActionMenu : Control
 				pl.GetTalkText().Talk(foundit.GetItemPickUpText());
 			}
 			else
-				pl.GetTalkText().Talk("Τίποτα");
+				pl.GetTalkText().Talk("Άδειο...");
 		}
 		else if (SelectedObj is WindGenerator generator)
 		{

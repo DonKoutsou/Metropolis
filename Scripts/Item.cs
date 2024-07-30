@@ -50,6 +50,10 @@ public class Item : RigidBody
 	{
 		return ItemType;
 	}
+	public virtual void OnItemPickedUp()
+	{
+
+	}
 	public override void _Ready()
 	{
 		//GetNode<CollisionShape>("CollisionShape").SetDeferred("disabled",false);

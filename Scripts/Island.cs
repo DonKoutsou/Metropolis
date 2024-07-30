@@ -21,7 +21,7 @@ public class Island : Spatial
 	protected float SpawnRotation;
 
 	List<House> Houses = new List<House>();
-
+	List<Furniture> Furnitures = new List<Furniture>();
 	List<Vehicle> Vehicles = new List<Vehicle>();
 
 	List<WindGenerator> Generators = new List<WindGenerator>();
@@ -177,7 +177,7 @@ public class Island : Spatial
 					row = 0;
 					col = 0;
 					im.ClearMipmaps();
-					im.GenerateMipmaps();
+					im.GenerateMipmaps(true);
 					d.OnImageFinished(im, this);
 					//OutliningImage = true;
 					break;
@@ -328,6 +328,16 @@ public class Island : Spatial
 				if (hou.Name == Hnfo.HouseName)
 				{
 					hou.InputData(Hnfo);
+				}
+			}
+		}
+		foreach (Furniture furn in Furnitures)
+		{
+			foreach(FurnitureInfo Fnfo in data.Furnitures)
+			{
+				if (furn.Name == Fnfo.FunritureName)
+				{
+					furn.SetData(Fnfo);
 				}
 			}
 		}
@@ -546,6 +556,8 @@ public class Island : Spatial
 	{
 		if (child is House house && !Houses.Contains(child))
 			Houses.Add(house);
+		else if (child is Furniture fourn && !Furnitures.Contains(child))
+			Furnitures.Add(fourn);
 		else if (child is WindGenerator generator && !Generators.Contains(child))
 			Generators.Add(generator);
 		else if (child is Vehicle vehicle && !Vehicles.Contains(child))
@@ -561,6 +573,8 @@ public class Island : Spatial
 	{
 		if (child is House house)
 			Houses.Remove(house);
+		else if (child is Furniture fourn)
+			Furnitures.Remove(fourn);
 		else if (child is WindGenerator generator)
 			Generators.Remove(generator);
 		else if (child is Vehicle vehicle)
@@ -579,6 +593,8 @@ public class Island : Spatial
 		{
 			if (child is House ho && !Houses.Contains(child))
 				Houses.Add(ho);
+			if (child is Furniture furn && !Furnitures.Contains(child))
+				Furnitures.Add(furn);
 			else if (child is WindGenerator windg && !Generators.Contains(child))
 				Generators.Add(windg);
 			else if (child is Vehicle veh && !Vehicles.Contains(child))
@@ -604,7 +620,14 @@ public class Island : Spatial
 			hs.Add(Houses[i]);
 		}
 	}
-
+	public void GetFurniture(out List<Furniture> fs)
+	{
+		fs = new List<Furniture>();
+		for (int i = 0; i < Furnitures.Count; i++)
+		{
+			fs.Add(Furnitures[i]);
+		}
+	}
 	public void GetGenerator(out List<WindGenerator> wg)
 	{
 		wg = new List<WindGenerator>();
@@ -670,6 +693,7 @@ public class IslandInfo
 	public PackedScene IleType;
 	public int ImageIndex = 0;
 	public List<HouseInfo> Houses = new List<HouseInfo>();
+	public List<FurnitureInfo> Furnitures = new List<FurnitureInfo>();
 	public List<WindGeneratorInfo> Generators = new List<WindGeneratorInfo>();
 	public List<VehicleInfo> Vehicles = new List<VehicleInfo>();
 	public List<ItemInfo> Items = new List<ItemInfo>();
@@ -721,7 +745,14 @@ public class IslandInfo
 			info.UnPackData((Resource)HouseData[i]);
             Houses.Add(info);
 		}
-         Godot.Collections.Array GeneratorData = ( Godot.Collections.Array)data.Get("Generators");
+		Godot.Collections.Array FurnitureData = ( Godot.Collections.Array)data.Get("Furnitures");
+		for (int i  = 0; i < FurnitureData.Count; i++)
+		{
+			FurnitureInfo info = new FurnitureInfo();
+			info.UnPackData((Resource)FurnitureData[i]);
+            Furnitures.Add(info);
+		}
+        Godot.Collections.Array GeneratorData = ( Godot.Collections.Array)data.Get("Generators");
         for (int i  = 0; i < GeneratorData.Count; i++)
 		{
 			WindGeneratorInfo info = new WindGeneratorInfo();
@@ -776,6 +807,15 @@ public class IslandInfo
 		}
 		//data.Add("Houses", HouseInfoobjects);
 
+		GDScript FurnitureSaveScript = GD.Load<GDScript>("res://Scripts/FurnitureSaveInfo.gd");
+
+		Resource[] FurnitureInfoobjects = new Resource[Furnitures.Count];
+		for (int i = 0; i < Furnitures.Count; i ++)
+		{
+			Resource FurnitureInfor = (Resource)FurnitureSaveScript.New();
+			FurnitureInfor.Call("_SetData", Furnitures[i].GetPackedData());
+			FurnitureInfoobjects[i] = FurnitureInfor;
+		}
 
 		//generators
 		GDScript GeneratorSaveScript = GD.Load<GDScript>("res://Scripts/GeneratorSaveInfo.gd");
@@ -839,6 +879,7 @@ public class IslandInfo
 			{"ImageIndex", ImageIndex},
 			{"Rotation", RotationToSpawn},
 			{"Houses", HouseInfoobjects},
+			{"Furnitures", FurnitureInfoobjects},
 			{"Generators", GeneratorInfoobjects},
 			{"Items", ItemInfoobjects},
 			{"Vehicles", VehicleInfoobjects},
@@ -863,6 +904,8 @@ public class IslandInfo
 		//SpecialName = Ile.IslandSpecialName;
 		List<House> hous;
 		Ile.GetHouses(out hous);
+		List<Furniture> fourns;
+		Ile.GetFurniture(out fourns);
 		List<WindGenerator> Gen;
 		Ile.GetGenerator(out Gen);
 		List<Vehicle> veh;
@@ -873,6 +916,7 @@ public class IslandInfo
 		Ile.GetCharacters(out Chars);
 
 		AddHouses(hous);
+		AddFurnitures(fourns);
 		AddGenerators(Gen);
 		AddVehicles(veh);
 		AddItems(Itms);
@@ -985,6 +1029,23 @@ public class IslandInfo
 			h.GetFurniture(out funriture);
 			HInfo.UpdateInfo(funriture);
 		}
+
+		List<Furniture> furs;
+		island.GetFurniture(out furs);
+		foreach(FurnitureInfo FInfo in Furnitures)
+		{
+			Furniture f = null;
+			foreach (Furniture furn in furs)
+			{
+				if (furn.Name == FInfo.FunritureName)
+				{
+					f = furn;
+					break;
+				}
+			}
+			FInfo.UpdateInfo(f);
+		}
+
 		List<WindGenerator> gens;
 		island.GetGenerator(out gens);
 		foreach(WindGeneratorInfo WGInfo in Generators)
@@ -1105,6 +1166,20 @@ public class IslandInfo
 
 			info.SetInfo(HouseToAdd[i].Name, finfo, dinfo);
 			Houses.Add(info);
+		}
+	}
+	public void AddFurnitures(List<Furniture> FurnitureToAdd)
+	{
+		for (int i = 0; i < FurnitureToAdd.Count; i++)
+		{
+			FurnitureInfo info = new FurnitureInfo();
+			string itn = string.Empty;
+			if (FurnitureToAdd[i].HasItem())
+			{
+				itn = FurnitureToAdd[i].GetItemName();
+			}
+			info.SetInfo(FurnitureToAdd[i].Name, FurnitureToAdd[i].HasBeenSearched(), FurnitureToAdd[i].HasItem(), itn, FurnitureToAdd[i].Filename, FurnitureToAdd[i].Transform);
+			Furnitures.Add(info);
 		}
 	}
 	public void AddGenerators(List<WindGenerator> GeneratorToAdd)

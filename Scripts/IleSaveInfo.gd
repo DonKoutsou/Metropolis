@@ -8,6 +8,7 @@ func _SetData(data):
 	SpecialName = data["SpecialName"]
 	ImageIndex = data["ImageIndex"]
 	Houses = data["Houses"]
+	Furnitures = data["Furnitures"]
 	Generators = data["Generators"]
 	Vehicles = data["Vehicles"]
 	Characters = data["Characters"]
@@ -26,6 +27,7 @@ export var Scene:PackedScene
 export var SpecialName: String
 export var ImageIndex:int = 0
 export (Array, Resource) var Houses
+export (Array, Resource) var Furnitures
 export (Array, Resource)  var Generators
 export (Array, Resource)  var Vehicles
 export (Array, Resource)  var Items

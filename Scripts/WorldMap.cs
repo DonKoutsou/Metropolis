@@ -480,12 +480,13 @@ public class WorldMap : TileMap
 
 		
 		DayNight.GetInstance().UpdatePlayerDistance(Math.Max(Math.Abs(start.Position.x), Math.Abs(start.Position.y)) / 20);
+
+		//MyWorld.IleTransition(start);
 		MyWorld.GetInstance().ToggleIsland(start, true, true);
-			
+				
 		Island island = start.Island;
-		Vector2 pos = WorldMap.GetInstance().GlobalToMap(island.GlobalTranslation);
-		island.SetVisited();
-		MapGrid.GetInstance().SetIslandVisited(pos);
+
+		//MapGrid.GetInstance().SetIslandVisited(start);
 
 		Intro intr = (Intro)IntroScene.Instance();
 

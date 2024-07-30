@@ -67,8 +67,12 @@ public class LoddedObject : MeshInstance
             case 1:
             {
                 if (LOD1 == null)
+                {
                     if (HideIfNoLod)
+                    {
                         Hide();
+                    }
+                }    
                 else
                 {
                     Mesh = LOD1;
@@ -80,8 +84,12 @@ public class LoddedObject : MeshInstance
             case 2:
             {
                 if (LOD2 == null)
+                {
                     if (HideIfNoLod)
+                    {
                         Hide();
+                    }
+                }     
                 else
                 {
                     Mesh = LOD2;

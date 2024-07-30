@@ -274,6 +274,7 @@ public class Inventory : Spatial
         //    rope.Show();
         //}
         InventoryContents.Add(item);
+        item.OnItemPickedUp();
         //EmitSignal(nameof(On_Item_Added), item);
         
         //ui.UpdateInventory();

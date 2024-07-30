@@ -16,9 +16,9 @@ public class Character : KinematicBody
 	
 	protected Inventory CharacterInventory;
 
-	//[Export]
-	//float MaxEnergyAmmount = 100;
-	//public float CurrentEnergy = 100;
+	[Export]
+	float MaxEnergyAmmount = 100;
+	protected float CurrentEnergy = 100;
 
 	protected SpotLight NightLight;
 	protected SpatialMaterial BulbMat;
@@ -110,7 +110,7 @@ public class Character : KinematicBody
 	public void UpdateLocationToMove(Vector3 NewLoc) {	loctomove = NewLoc;	}
 	public Vector3 GetMovingLocation()	{	return loctomove;	}
 	public bool IsAlive()	{	return m_balive;	}
-    /*public override void _Process(float delta)
+    public override void _Process(float delta)
     {
         base._Process(delta);
 
@@ -122,7 +122,7 @@ public class Character : KinematicBody
 				currveh.ToggleMachine(false);
 			}
 		}
-    }*/
+    }
 	public void ToggleNightLight(bool toggle)
 	{
 		if (toggle)
@@ -283,11 +283,9 @@ public class Character : KinematicBody
 		
 		loctomove = GlobalTranslation;
 		if (PlayingInstrument)
-		{
 			StopMusic();
-			IdleTimer.Stop();
-		}
-		
+
+		IdleTimer.Stop();
 		//SetCollisionMaskBit(8, false);
 	}
 	public void SetVehicle(Vehicle veh)
@@ -417,37 +415,37 @@ public class Character : KinematicBody
 		}
 	}
 	////Old stuff
-	//public float GetCharacterBatteryCap()
-	//{
-	//	return MaxEnergyAmmount;
-	//}
-	//public float GetCurrentCharacterEnergy()
-	//{
-	//	return CurrentEnergy;
-	//}
-	//public void RechargeCharacter(float ammount)
-	//{
-	//	CurrentEnergy += ammount;
-    //    if (CurrentEnergy > MaxEnergyAmmount)
-    //    {
-    //        CurrentEnergy = MaxEnergyAmmount;
-    //    }
-	//}
-	//public void SetEnergy(float en)
-	//{
-	//	CurrentEnergy = en;
-	//}
-//	public void ConsumeEnergy(float ammount)
-    //{
-    //    CurrentEnergy -= ammount;
-    //}
+	public float GetCharacterBatteryCap()
+	{
+		return MaxEnergyAmmount;
+	}
+	public float GetCurrentCharacterEnergy()
+	{
+		return CurrentEnergy;
+	}
+	public void RechargeCharacter(float ammount)
+	{
+		CurrentEnergy += ammount;
+        if (CurrentEnergy > MaxEnergyAmmount)
+        {
+            CurrentEnergy = MaxEnergyAmmount;
+        }
+	}
+	public void SetEnergy(float en)
+	{
+		CurrentEnergy = en;
+	}
+	public void ConsumeEnergy(float ammount)
+    {
+        CurrentEnergy -= ammount;
+    }
 }
 public class CharacterInfo
 {
 	public string Name;
 	public Vector3 Position;
 	public string SceneData;
-	//public float CurrentEnergy = 0.0f;
+	public float CurrentEnergy = 0.0f;
 	public bool Alive = false;
 	public Dictionary<string, object> CustomData = new Dictionary<string, object>();
 	public List<Color> LimbColors = new List<Color>();
@@ -457,7 +455,7 @@ public class CharacterInfo
 		Name = it.Name;
 		Position = it.Translation;
 		SceneData = it.Filename;
-		//CurrentEnergy = it.GetCurrentCharacterEnergy();
+		CurrentEnergy = it.GetCurrentCharacterEnergy();
 		Alive = it.IsAlive();
 		Talked = it.Talked;
 		for (int i = 0; i < 6; i++)
@@ -473,7 +471,7 @@ public class CharacterInfo
 			{"Position", Position},
 			{"Name", Name},
 			{"SceneData", SceneData},
-			//{"Energy", CurrentEnergy},
+			{"Energy", CurrentEnergy},
 			{"Alive", Alive},
 			{"Talked", Talked}
 		};
@@ -505,7 +503,7 @@ public class CharacterInfo
         Position = (Vector3)data.Get("Position");
 		Name = (string)data.Get("Name");
 		SceneData = (string)data.Get("SceneData");
-		//CurrentEnergy = (float)data.Get("Energy");
+		CurrentEnergy = (float)data.Get("Energy");
 		Alive = (bool)data.Get("Alive");
 		Talked = (bool)data.Get("Talked");
 		Godot.Color[] LimbCols = (Godot.Color[])data.Get("LimbColors");

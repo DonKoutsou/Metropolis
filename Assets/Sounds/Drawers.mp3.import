@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Drawers.mp3-4471c446d96c3a9f2881cb9b71fb1804.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/Drawers.mp3"
+dest_files=[ "res://.import/Drawers.mp3-4471c446d96c3a9f2881cb9b71fb1804.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

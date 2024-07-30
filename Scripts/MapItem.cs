@@ -3,10 +3,10 @@ using System;
 
 public class MapItem : Item
 {
-    
-    public override void _Ready()
-    {
-        
-    }
 
+    public override void OnItemPickedUp()
+    {
+        base.OnItemPickedUp();
+        MapGrid.GetInstance().SetIslandVisited(WorldMap.GetInstance().GetCurrentIleInfo());
+    }
 }
