@@ -9,11 +9,10 @@
 flags_world_triplanar = true
 params_specular_mode = 4
 albedo_texture = ExtResource( 3 )
-roughness = 0.83
 roughness_texture = ExtResource( 1 )
 roughness_texture_channel = 4
 normal_enabled = true
-normal_scale = -2.0
+normal_scale = 2.0
 normal_texture = ExtResource( 4 )
 ao_enabled = true
 ao_light_affect = 1.0

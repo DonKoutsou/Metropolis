@@ -86,10 +86,8 @@ item/2/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/2/preview = SubResource( 12 )
 
 [node name="Island" instance=ExtResource( 1 )]
-MoveLayer = 260
 type = 3
 ImageID = 9
-Resolution = 128
 
 [node name="StaticBody" parent="." index="1" instance=ExtResource( 2 )]
 transform = Transform( 0.831098, 0.462539, 0.308762, -0.319864, 0.851751, -0.414979, -0.454932, 0.246127, 0.855838, 205.24, -161.988, 0 )

@@ -1,12 +1,7 @@
-[gd_resource type="Environment" load_steps=2 format=2]
-
-[sub_resource type="ProceduralSky" id=1]
-sky_top_color = Color( 0.498039, 0.207843, 0.12549, 1 )
-sun_latitude = -180.0
+[gd_resource type="Environment" format=2]
 
 [resource]
 background_mode = 1
-background_sky = SubResource( 1 )
 background_sky_custom_fov = 42.8
 background_color = Color( 0.47998, 0.47998, 0.47998, 1 )
 ambient_light_color = Color( 0.623529, 0.564706, 0.505882, 1 )

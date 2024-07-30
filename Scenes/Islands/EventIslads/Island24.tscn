@@ -104,7 +104,6 @@ data = PoolVector3Array( -4.8534, -0.3896, 2.6254, -5, -0.3896, 5, -5, -0.3896, 
 
 [node name="Island" instance=ExtResource( 5 )]
 ImageID = 26
-Resolution = 128
 
 [node name="SoundMap" parent="." index="3"]
 mesh_library = SubResource( 18 )
@@ -117,7 +116,7 @@ __meta__ = {
 }
 
 [node name="MeshInstance5" type="MeshInstance" parent="." index="4"]
-transform = Transform( 391.94, 0, 0, 0, 391.94, 0, 0, 0, 391.94, 0, 13.1831, 0 )
+transform = Transform( 391.94, 0, 0, 0, 391.94, 0, 0, 0, 391.94, -1122.88, 166.518, 2893.13 )
 lod_max_distance = 6000.0
 mesh = ExtResource( 7 )
 material/0 = ExtResource( 1 )
@@ -134,7 +133,7 @@ collision_mask = 0
 shape = SubResource( 22 )
 
 [node name="MeshInstance6" type="MeshInstance" parent="." index="5"]
-transform = Transform( 800, 0, 0, 0, 800, 0, 0, 0, 800, 60.9326, 28.4559, 34.9678 )
+transform = Transform( 1451.45, 0, 0, 0, 1451.45, 0, 0, 0, 1451.45, 60.933, 232.693, 34.968 )
 lod_max_distance = 6000.0
 mesh = ExtResource( 10 )
 material/0 = ExtResource( 1 )
@@ -150,43 +149,43 @@ collision_mask = 0
 shape = SubResource( 26 )
 
 [node name="House" parent="." index="6" instance=ExtResource( 3 )]
-transform = Transform( -0.976609, 0, 0.215025, 0, 1, 0, -0.215025, 0, -0.976609, 823.61, 1205.94, 197.498 )
+transform = Transform( -0.976609, 0, 0.215025, 0, 1, 0, -0.215025, 0, -0.976609, -299.268, 1359.27, 3090.63 )
 
 [node name="WindGenerator" parent="." index="7" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 907.785, 1202.26, -326.582 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -215.093, 1355.59, 2566.55 )
 
 [node name="WindGenerator2" parent="." index="8" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 662.201, 1199.95, -3.80675 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -460.677, 1353.28, 2889.32 )
 
 [node name="WindGenerator3" parent="." index="9" instance=ExtResource( 2 )]
-transform = Transform( -0.872078, 0, -0.489367, 0, 1, 0, 0.489367, 0, -0.872078, 1078.45, 1197.49, -171.702 )
+transform = Transform( -0.872078, 0, -0.489367, 0, 1, 0, 0.489367, 0, -0.872078, -44.4279, 1350.82, 2721.43 )
 
 [node name="WindGenerator5" parent="." index="10" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 937.545, 1199.85, 199.728 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -185.333, 1353.18, 3092.86 )
 
 [node name="WindGenerator6" parent="." index="11" instance=ExtResource( 2 )]
-transform = Transform( 0.174989, 0, 0.98457, 0, 1, 0, -0.98457, 0, 0.174989, -577.417, 996.9, 22.4694 )
+transform = Transform( 0.174989, 0, 0.98457, 0, 1, 0, -0.98457, 0, 0.174989, -1700.29, 1150.23, 2915.6 )
 
 [node name="StaticBody" parent="." index="12" instance=ExtResource( 4 )]
-transform = Transform( -0.061549, -0.0123566, -0.998028, -0.000760596, 0.999924, -0.0123332, 0.998104, -2.32831e-10, -0.0615537, -595.733, 1007.67, -18.6482 )
+transform = Transform( -0.061549, -0.0123566, -0.998028, -0.000760596, 0.999924, -0.0123332, 0.998104, -2.32831e-10, -0.0615537, -1718.61, 1161, 2874.48 )
 
 [node name="House2" parent="." index="13" instance=ExtResource( 3 )]
-transform = Transform( -0.0615537, 0, -0.998104, 0, 1, 0, 0.998104, 0, -0.0615537, -572.077, 1000.56, -26.3649 )
+transform = Transform( -0.0615537, 0, -0.998104, 0, 1, 0, 0.998104, 0, -0.0615537, -1694.95, 1153.89, 2866.77 )
 
 [node name="Rock1" parent="." index="14" instance=ExtResource( 9 )]
-transform = Transform( 293.597, -44.6645, -252.111, 58.5886, 385.125, 0, 249.244, -37.9171, 296.974, 1218.11, -483.978, 1984.1 )
+transform = Transform( 293.597, -44.6645, -252.111, 58.5886, 385.125, 0, 249.244, -37.9171, 296.974, 1218.11, -330.686, 1984.1 )
 
 [node name="Rock2" parent="." index="15" instance=ExtResource( 9 )]
-transform = Transform( 201.595, -30.6685, -412.373, 69.1885, 454.803, 0, 407.683, -62.0201, 203.915, 2751.45, -490.72, -2695.25 )
+transform = Transform( 201.595, -30.6685, -412.373, 69.1885, 454.803, 0, 407.683, -62.0201, 203.915, 2751.45, -62.4325, -2695.25 )
 
 [node name="Rock3" parent="." index="17" instance=ExtResource( 15 )]
-transform = Transform( -84.7957, -38.8514, -107.887, 13.1716, 129.993, -57.1643, 113.91, -43.9525, -73.7018, 780.584, 19.2171, 1989.3 )
+transform = Transform( -84.7957, -38.8514, -107.887, 13.1716, 129.993, -57.1643, 113.91, -43.9525, -73.7018, 780.584, 172.509, 1989.3 )
 
 [node name="Rock4" parent="." index="18" instance=ExtResource( 14 )]
-transform = Transform( 44.7723, 1.01524, 0, -1.01524, 44.7723, 0, 0, 0, 44.7838, 930.307, 4.69, 2146.89 )
+transform = Transform( 44.7723, 1.01524, 0, -1.01524, 44.7723, 0, 0, 0, 44.7838, 930.307, 157.982, 2146.89 )
 
 [node name="Rock5" parent="." index="19" instance=ExtResource( 12 )]
-transform = Transform( -21.7006, -8.21597, 17.4935, 10.2893, -27.1767, 0, 16.3603, 6.1941, 23.2038, 974.22, 10.3746, 2022.48 )
+transform = Transform( -21.7006, -8.21597, 17.4935, 10.2893, -27.1767, 0, 16.3603, 6.1941, 23.2038, 974.22, 163.667, 2022.48 )
 
 [node name="Breakable" parent="." index="20" instance=ExtResource( 13 )]
-transform = Transform( 0.57404, -0.40381, 0.712331, 0.589854, -0.399457, -0.701788, 0.567935, 0.823026, 0.00888436, 951.766, 12.7344, 2062.13 )
+transform = Transform( 0.57404, -0.40381, 0.712331, 0.589854, -0.399457, -0.701788, 0.567935, 0.823026, 0.00888436, 951.766, 166.026, 2062.13 )

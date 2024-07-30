@@ -97,7 +97,7 @@ public class Island : Spatial
 	Vector2 res;
 	List <Vector2> seapix = null;
 	float mult = 0;
-	int ilesize = 8000;
+	int ilesize = 12000;
 
 	bool GeneratingImage = false;
 	bool OutliningImage = false;
@@ -112,7 +112,7 @@ public class Island : Spatial
 
 			Vector3 rayor = new Vector3((mult * col) - (ilesize / 2), 5000, (mult * row)  - (ilesize / 2));
 			Vector3 rayend = rayor;
-			rayend.y = -1000; 
+			rayend.y = -5; 
 
 			var rayar = spacestate.IntersectRay(rayor, rayend, new Godot.Collections.Array { this }, MoveLayer);
 			Color color = new Color(r: 0, g: 0, b: 0, a: 0);
@@ -176,7 +176,10 @@ public class Island : Spatial
 					GeneratingImage = false;
 					row = 0;
 					col = 0;
-					OutliningImage = true;
+					im.ClearMipmaps();
+					im.GenerateMipmaps();
+					d.OnImageFinished(im, this);
+					//OutliningImage = true;
 					break;
 				}
 			}
@@ -222,8 +225,10 @@ public class Island : Spatial
 					gradientFactor = Mathf.Clamp(gradientFactor, 0, 1); 
 
 	
-					Color startColor = new Color(r: 0.76f, g: 0.9f, b: 1, a: 1); 
-					Color endColor = new Color(r: 0.2f, g: 0.4f, b: 0.8f, a: 1); 
+					//Color startColor = new Color(r: 0.76f, g: 0.9f, b: 1, a: 1);
+					Color startColor = new Color(r: 0.83f, g: 0.7f, b: 0.49f, a: 1);
+					//Color endColor = new Color(r: 0.2f, g: 0.4f, b: 0.8f, a: 1); 
+					Color endColor = new Color(r: 0.66f, g: 0.57f, b: 0.42f, a: 1);
 					Color outlineColor = startColor.LinearInterpolate(endColor, gradientFactor);
 
 					im.Lock();

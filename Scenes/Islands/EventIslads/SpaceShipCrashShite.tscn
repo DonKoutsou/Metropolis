@@ -495,7 +495,6 @@ scale_curve = SubResource( 150 )
 [node name="Island" instance=ExtResource( 2 )]
 type = 2
 ImageID = 35
-Resolution = 128
 
 [node name="SoundMap" parent="." index="3"]
 mesh_library = SubResource( 25 )

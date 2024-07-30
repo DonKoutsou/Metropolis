@@ -57,6 +57,7 @@ public class ImageGenDock : EditorPlugin
             //editornode.Call("SceneTabClosed", scenetabs.CurrentTab);
         //}
         interf.OpenSceneFromPath(islandfiles[holder.ImageToGenerate]);
+        
         Island ile = (Island)interf.GetEditedSceneRoot();
         ile.GenerateImage(this);
         //interf.OpenSceneFromPath("res://Scenes/World/WorldRoot.tscn");

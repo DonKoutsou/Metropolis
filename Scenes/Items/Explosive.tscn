@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Scripts/Explosive.cs" type="Script" id=1]
 [ext_resource path="res://Assets/Explosive/ExplosiveMay.tres" type="Material" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://shaders/OutlineShader.tres" type="Material" id=6]
 [ext_resource path="res://Assets/Explosive/ExplosiveIcon.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Sounds/Bomb.mp3" type="AudioStream" id=8]
+[ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=9]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.742531, 0.206897, 0.404095 )
@@ -249,6 +250,8 @@ transform = Transform( -1.94389, 0, -1.6994e-07, 0, 1.94389, 0, 1.6994e-07, 0, -
 material_override = ExtResource( 2 )
 material_overlay = ExtResource( 6 )
 mesh = ExtResource( 3 )
+script = ExtResource( 9 )
+HideIfNoLod = true
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.232099, 0 )

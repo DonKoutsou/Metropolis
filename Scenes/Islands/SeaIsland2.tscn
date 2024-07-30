@@ -1,13 +1,9 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Env_Assets/Sea.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Island.cs" type="Script" id=2]
 [ext_resource path="res://Scripts/VehicleSpawnLocation.cs" type="Script" id=3]
 [ext_resource path="res://Scripts/CharacterSpawnLocations.cs" type="Script" id=4]
-[ext_resource path="res://Scenes/Characters/NPC.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Vehicles/HoverBoard_Lite.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Vehicles/HoverBoard.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/Vehicles/HoverBoard_NoWings.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Env_Assets/WindGenerator2.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Env_Assets/Rock2.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Env_Assets/Rock4.tscn" type="PackedScene" id=11]
@@ -25,11 +21,9 @@ Resolution = 128
 
 [node name="CharacterSpawnLocations" type="Node" parent="."]
 script = ExtResource( 4 )
-CharSpawns = [ ExtResource( 5 ) ]
 
 [node name="VehicleSpawnLocation" type="Node" parent="."]
 script = ExtResource( 3 )
-VehSpawns = [ ExtResource( 7 ), ExtResource( 6 ), ExtResource( 8 ) ]
 
 [node name="WindGenerator3" parent="." instance=ExtResource( 9 )]
 transform = Transform( -0.39147, 0, 0.920191, 0, 1, 0, -0.920191, 0, -0.39147, 966.209, -0.0667419, -1607.41 )

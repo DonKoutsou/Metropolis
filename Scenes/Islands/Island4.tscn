@@ -91,13 +91,12 @@ data = PoolVector3Array( -4.8917, -0.5673, 3.093, -4.6698, -0.5672, 3.5206, -5, 
 
 [node name="Island" instance=ExtResource( 1 )]
 ImageID = 3
-Resolution = 128
 
 [node name="SoundMap" parent="." index="3"]
 mesh_library = SubResource( 18 )
 
 [node name="Terain" type="MeshInstance" parent="." index="4"]
-transform = Transform( 800, 0, 0, 0, 800, 0, 0, 0, 800, 0, -114.132, 0 )
+transform = Transform( 1802.97, 0, 0, 0, 1802.97, 0, 0, 0, 1802.97, 0, -187.876, 0 )
 lod_max_distance = 6000.0
 mesh = ExtResource( 5 )
 material/0 = ExtResource( 4 )

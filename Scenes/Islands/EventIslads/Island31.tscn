@@ -93,7 +93,6 @@ data = PoolVector3Array( 2.1737, 1.0181, 0.797, 2.2412, 1.0099, 0.8208, 2.2225, 
 
 [node name="Island" instance=ExtResource( 5 )]
 ImageID = 36
-Resolution = 128
 
 [node name="SoundMap" parent="." index="3"]
 mesh_library = SubResource( 461 )

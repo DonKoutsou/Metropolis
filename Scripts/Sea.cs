@@ -9,14 +9,14 @@ public class Sea : StaticBody
 	{
 		GlobalRotation = Vector3.Zero;
 		GetNode<MeshInstance>("Sea").QueueFree();
-		//AnimationPlayer anim = GetNode<AnimationPlayer>("AnimationPlayer");
-		//anim.Play("Wave");
+		AnimationPlayer anim = GetNode<AnimationPlayer>("AnimationPlayer");
+		anim.Play("Wave");
 	}
-    public override void _PhysicsProcess(float delta)
-    {
-        base._PhysicsProcess(delta);
-		ForceUpdateTransform();
-    }
+    //public override void _PhysicsProcess(float delta)
+    //{
+       //base._PhysicsProcess(delta);
+		//ForceUpdateTransform();
+    //}
     /*public override void _Process(float delta)
 	{
 		base._Process(delta);

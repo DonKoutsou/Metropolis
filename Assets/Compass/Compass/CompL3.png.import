@@ -2,19 +2,21 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/CompL3.png-89e69b6de68ed41cbd369c72e3c8f21d.stex"
+path.s3tc="res://.import/CompL3.png-89e69b6de68ed41cbd369c72e3c8f21d.s3tc.stex"
+path.etc2="res://.import/CompL3.png-89e69b6de68ed41cbd369c72e3c8f21d.etc2.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc2" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Compass/Compass/CompL3.png"
-dest_files=[ "res://.import/CompL3.png-89e69b6de68ed41cbd369c72e3c8f21d.stex" ]
+dest_files=[ "res://.import/CompL3.png-89e69b6de68ed41cbd369c72e3c8f21d.s3tc.stex", "res://.import/CompL3.png-89e69b6de68ed41cbd369c72e3c8f21d.etc2.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

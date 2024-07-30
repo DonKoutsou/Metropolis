@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Bouzouki13.mp3-74452ee825a605bbb439f11d8f836268.mp3s
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
