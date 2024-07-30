@@ -76,7 +76,6 @@ public class InventoryUI : Control
         //ItemOptionPanel = GetNode<Panel>("ItemOptionPanel");
         DescPan.Hide();
         JobPan.Hide();
-        Hide();
 
         for (int i = 0; i < childc; i ++)
         {

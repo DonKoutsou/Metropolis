@@ -57,6 +57,7 @@ public class PlayerUI : Control
     }
     public void OnPlayerSpawned(Player pl)
     {
+        Show();
         GetNode(Inventory).CallDeferred("OnPlayerSpawned", pl);
         GetNode(CheatMenu).CallDeferred("OnPlayerSpawned", pl);
     }

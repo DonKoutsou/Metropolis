@@ -396,7 +396,7 @@ public class Player : Character
 	public override void Kill(string reason = null)
 	{
 		base.Kill(reason);
-		//MyWorld.GetInstance().OnPlayerKilled(reason);
+		MyWorld.GetInstance().OnPlayerKilled(reason);
 	}
 	
 }

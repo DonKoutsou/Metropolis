@@ -101,7 +101,7 @@ public class MyWorld : Spatial
 	public void OnPlayerKilled(string reason = null)	
 	{
 		//try to find characters on islands around that can rescue you
-		WorldMap map = WorldMap.GetInstance();
+		/*WorldMap map = WorldMap.GetInstance();
 		IslandInfo currentile = map.GetCurrentIleInfo();
 		Island ile = currentile.Island;
 		Character rescuer;
@@ -123,7 +123,7 @@ public class MyWorld : Spatial
 				Rescue(rescuer, iletocheck);
 				return;
 			}
-		}
+		}*/
 
 		StartingScreen start = ((WorldRoot)GetParent().GetParent().GetParent().GetParent()).GetStartingScreen();
 		start.GameOver(reason);

@@ -32,6 +32,8 @@ public class WorldRoot : Spatial
 		intro = (Spatial)ResourceLoader.Load<PackedScene>(Intro).Instance();
 
 		GetNode("Control/ViewportContainer/Viewport").AddChild(intro, true);
+
+		GetNode<Control>("CanvasLayer/PlayerUI").Hide();
 	}
 	public bool IsMapSpawned()
 	{
@@ -40,8 +42,6 @@ public class WorldRoot : Spatial
 	public void SpawnMap(bool LoadSave)
 	{
 		intro.Free();
-
-		
 		m_myworld = (MyWorld)ResourceLoader.Load<PackedScene>(WorldScene).Instance();
 		m_myworld.LoadSave = LoadSave;
 		m_myworld.Connect("PlayerSpawnedEventHandler", PlayerUI.GetInstance(), "OnPlayerSpawned");
@@ -55,5 +55,8 @@ public class WorldRoot : Spatial
 		m_myworld = null;
 		intro = (Spatial)ResourceLoader.Load<PackedScene>(Intro).Instance();
 		GetNode("Control/ViewportContainer/Viewport").AddChild(intro, true);
+		OS.VsyncEnabled = false;
+		MapGrid.GetInstance().ResetMap();
+		GetNode<Control>("CanvasLayer/PlayerUI").Hide();
 	}
 }

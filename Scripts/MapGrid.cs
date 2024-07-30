@@ -14,7 +14,7 @@ public class MapGrid : GridContainer
     [Export]
     PackedScene YGridTileScene = null;
 
-    List<ChildMapIleInfo> children = new List<ChildMapIleInfo>();
+    
     Dictionary<Vector2, MapTile> MapIleList = new Dictionary<Vector2, MapTile>();
 
     GridContainer MapGridx;
@@ -75,13 +75,23 @@ public class MapGrid : GridContainer
     {
         pl = p;
     }
+    public void ResetMap()
+    {
+        MapIleList.Clear();
+        foreach(MapTile child in GetChildren())
+        {
+            child.QueueFree();
+        }
+    }
     public void InitMap()
     {
-         WorldMap map = WorldMap.GetInstance();
+        WorldMap map = WorldMap.GetInstance();
 
         var cells = map.GetUsedCells();
 
         int times = cells.Count;
+
+        List<ChildMapIleInfo> children = new List<ChildMapIleInfo>();
 
         while (times > 0)
         {
