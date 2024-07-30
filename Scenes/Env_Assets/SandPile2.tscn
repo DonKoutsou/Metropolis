@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/Rocks/Rock2_Lod.tres" type="ArrayMesh" id=1]
+[ext_resource path="res://Assets/Rocks/Rock2_Lod2.tres" type="ArrayMesh" id=2]
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=3]
 [ext_resource path="res://Assets/Rocks/Rock2.tres" type="ArrayMesh" id=4]
 [ext_resource path="res://Assets/TerainTex/SandSimple.tres" type="Material" id=5]
@@ -19,6 +20,7 @@ material/0 = ExtResource( 5 )
 script = ExtResource( 3 )
 LOD0 = ExtResource( 4 )
 LOD1 = ExtResource( 1 )
+LOD2 = ExtResource( 2 )
 
 [node name="Occluder" type="Occluder" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.50983, -0.185978, 0.0828953 )

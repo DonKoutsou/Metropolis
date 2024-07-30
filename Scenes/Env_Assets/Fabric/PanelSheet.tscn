@@ -1,13 +1,13 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://shaders/Outline.shader" type="Shader" id=1]
+[ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=2]
 
 [sub_resource type="ShaderMaterial" id=4]
 resource_local_to_scene = true
 shader = ExtResource( 1 )
 shader_param/enable = false
 shader_param/outline_thickness = 0.259
-shader_param/color2 = Color( 0, 0, 0, 0 )
 shader_param/color = Color( 0.882353, 0.898039, 0.360784, 0 )
 
 [sub_resource type="Shader" id=7]
@@ -187,12 +187,26 @@ shader_param/noise_texture = SubResource( 2 )
 shader_param/Gradient = SubResource( 12 )
 
 [sub_resource type="PlaneMesh" id=6]
-material = SubResource( 8 )
 size = Vector2( 2, 2.096 )
 subdivide_width = 10
 subdivide_depth = 20
 
+[sub_resource type="PlaneMesh" id=13]
+size = Vector2( 2, 2.096 )
+subdivide_width = 5
+subdivide_depth = 10
+
+[sub_resource type="PlaneMesh" id=14]
+size = Vector2( 2, 2.096 )
+subdivide_width = 2
+subdivide_depth = 5
+
 [node name="Fabric" type="Spatial"]
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
+material_override = SubResource( 8 )
 mesh = SubResource( 6 )
+script = ExtResource( 2 )
+LOD0 = SubResource( 6 )
+LOD1 = SubResource( 13 )
+LOD2 = SubResource( 14 )

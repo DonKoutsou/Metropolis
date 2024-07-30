@@ -244,7 +244,9 @@ public class WorldMap : TileMap
 			Intro intro = SpawnIntro(CurIle);
 			intro.LoadStop((Vector3)save.Get("playerlocation"));
 			Player pl = Player.GetInstance();
-
+			
+			PlayerUI.OnMenuToggled(false);
+			pl.GetNode<Control>("Tutorial").Free();
 			//setting player energy
 			//Player.GetInstance().SetEnergy((float)save.Get("playerenergy"));
 

@@ -109,7 +109,7 @@ public class Player : Character
 	{
 		if (sitting && !PlayingInstrument && HasInstrument())
 		{
-			PlayMusic();
+			IdleTimer.Start();
 		}
 	}
 	public void ToggleLimbEffect(LimbType limb, bool toggle)
@@ -134,12 +134,11 @@ public class Player : Character
 				
 		}
 	}
-	public override void OnSongEnded(Instrument inst)
-	{
-		inst.Disconnect("OnSongEnded", this, "OnSongEnded");
-		StopMusic();
-		PlayMusic();
-	}
+	//public override void OnSongEnded(Instrument inst)
+	//{
+	//	StopMusic();
+	//	PlayMusic();
+	//}
 	private void UpdateMoveLocation()
 	{
 		if (DialogueManager.IsPlayerTalking())

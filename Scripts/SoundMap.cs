@@ -26,6 +26,9 @@ public class SoundMap : GridMap
     [Export(PropertyHint.Layers3dPhysics)]
     public uint CheckLayer { get; set; }
 
+    [Export]
+    int MapScale = 12000;
+
     //[Export(PropertyHint.Layers3dPhysics)]
     //public uint SeaLayer { get; set; }
 
@@ -66,7 +69,7 @@ public class SoundMap : GridMap
 
                 sound.GetNode<AudioStreamPlayer3D>("AudioStreamPlayer3D").Play();
             }
-            scale = 8000 / CellSize.x;
+            scale = MapScale / CellSize.x;
             cells = GetUsedCells();
         }
         
@@ -74,7 +77,10 @@ public class SoundMap : GridMap
     public override void _EnterTree()
     {
         base._EnterTree();
-        Visible = false;
+        if (!Engine.EditorHint)
+            Visible = false;
+        else
+             Visible = true;
     }
     public void SpawnSoundAt(int sound, Vector3 at)
     {
@@ -174,13 +180,16 @@ public class SoundMap : GridMap
             if (RedoMapping)
             {
                 Clear();
-                scale = 8000 / CellSize.x;
+                scale = MapScale / CellSize.x;
                 Vector3 startingpoint = new Vector3(- (scale / 2), 0, - (scale / 2));
 
                 for (int i = 0; i < scale * scale; i ++)
                 {
-                    bool HasGround = false;
-                    bool HasSea = false;
+                    //bool HasGround = false;
+                    //bool HasSea = false;
+
+                    bool IsAboveSeaLevel = false;
+                    bool IsBellowSeaLevel = false;
                     Vector3 global = MapToWorld((int)startingpoint.x, (int)startingpoint.y, (int)startingpoint.z);
                     
                     global.y += 2000;
@@ -190,7 +199,7 @@ public class SoundMap : GridMap
                     
 
                     Vector3 RayTo = global;
-                    RayTo.y -= 2100;
+                    RayTo.y -= 2500;
 
                     Vector3 Checking = new Vector3(-1, 0 ,-1);
                     for (int r = 0; r < 9; r++)
@@ -209,11 +218,22 @@ public class SoundMap : GridMap
                         }
 
                         if (Groundresult.Count == 0)
+                        {
+                            IsBellowSeaLevel = true;
                             continue;
+                        }
+                            
+
+                        Vector3 pos = (Vector3)Groundresult["position"];
+                        
+                        if (pos.y >= 0)
+                            IsAboveSeaLevel = true;
+                        else
+                            IsBellowSeaLevel = true;
 
                         //var Searesult = spaceState.IntersectRay(global + (Checking * (CellSize / 2)), RayTo + (Checking * (CellSize / 2)), null, SeaLayer);
 
-                        bool ItsSea = ((CollisionObject)Groundresult["collider"]).GetCollisionLayerBit(8);
+                        /*bool ItsSea = ((CollisionObject)Groundresult["collider"]).GetCollisionLayerBit(8);
                         if (ItsSea)
                         {
                             HasSea = true;
@@ -225,17 +245,18 @@ public class SoundMap : GridMap
                         //var SeaResault = spaceState.IntersectRay(global + (OffsetsToCheck[r] * CellSize), RayTo + (OffsetsToCheck[r] * CellSize), null, SeaLayer);
 
                         if (HasGround && HasSea)
-                            break;
+                            break;*/
                     }
 
-                    if (HasGround && HasSea)
+                    //if (HasGround && HasSea)
+                    if (IsBellowSeaLevel && IsAboveSeaLevel)
                         SetCellItem((int)startingpoint.x, (int)startingpoint.y, (int)startingpoint.z, 0);
                     else
                         SetCellItem((int)startingpoint.x, (int)startingpoint.y, (int)startingpoint.z, InvalidCellItem);
                     
-                    if (startingpoint.x >= 80)
+                    if (startingpoint.x >= MapScale/ 100)
                     {
-                        startingpoint.x = -80;
+                        startingpoint.x = -MapScale/100;
                         startingpoint.z += 1;
                     }
                     else

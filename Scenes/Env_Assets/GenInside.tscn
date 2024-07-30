@@ -7,6 +7,8 @@
 
 [sub_resource type="CylinderMesh" id=23]
 height = 0.1
+radial_segments = 12
+rings = 0
 
 [sub_resource type="SpatialMaterial" id=22]
 resource_local_to_scene = true
@@ -28,20 +30,28 @@ uv1_triplanar = true
 top_radius = 0.5
 bottom_radius = 0.5
 height = 0.1
+radial_segments = 12
+rings = 0
 
 [sub_resource type="CylinderMesh" id=25]
 top_radius = 0.1
 bottom_radius = 0.1
 height = 20.0
+radial_segments = 8
+rings = 0
 
 [sub_resource type="CylinderMesh" id=26]
 top_radius = 0.4
 bottom_radius = 0.4
+radial_segments = 8
+rings = 0
 
 [sub_resource type="CylinderMesh" id=27]
 top_radius = 0.1
 bottom_radius = 0.1
 height = 4.0
+radial_segments = 8
+rings = 0
 
 [sub_resource type="Animation" id=28]
 resource_name = "Gen"
@@ -202,7 +212,7 @@ mesh = SubResource( 26 )
 material/0 = SubResource( 22 )
 
 [node name="Spatial" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.965783, 0.258781, 0, -0.258781, 0.965783, 2.67349, -1.04186, -0.330644 )
+transform = Transform( 1, 0, 0, 0, 0.965783, 0.258781, 0, -0.258781, 0.965783, 1.89467, -1.76723, -0.0471065 )
 
 [node name="MeshInstance8" type="MeshInstance" parent="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.161479, -1.96383, 0 )

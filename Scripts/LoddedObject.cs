@@ -61,6 +61,7 @@ public class LoddedObject : MeshInstance
             case 0:
             {
                 Mesh = LOD0;
+                Show();
                 break;
             }
             case 1:
@@ -69,7 +70,11 @@ public class LoddedObject : MeshInstance
                     if (HideIfNoLod)
                         Hide();
                 else
+                {
                     Mesh = LOD1;
+                    Show();
+                }
+                    
                 break;
             }
             case 2:
@@ -78,7 +83,11 @@ public class LoddedObject : MeshInstance
                     if (HideIfNoLod)
                         Hide();
                 else
+                {
                     Mesh = LOD2;
+                    Show();
+                }
+                    
                 break;
             }
         }

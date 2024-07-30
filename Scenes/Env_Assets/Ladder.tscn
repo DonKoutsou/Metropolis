@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Assets/Ladder/lambert1.material" type="Material" id=1]
 [ext_resource path="res://shaders/OutlineShader.tres" type="Material" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Assets/TerainTex/Planks037A_1K-JPG/Planks037A_1K-JPG_Roughness.jpg" type="Texture" id=7]
 [ext_resource path="res://Scripts/Ladder.cs" type="Script" id=8]
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=10]
 
 [sub_resource type="ArrayMesh" id=1]
 blend_shape_mode = 0
@@ -63,6 +64,9 @@ TopPossition = Vector3( 0, 200, 6 )
 material_overlay = ExtResource( 2 )
 mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
+script = ExtResource( 10 )
+LOD0 = SubResource( 1 )
+HideIfNoLod = true
 
 [node name="Point1" type="Position3D" parent="."]
 transform = Transform( 94.7855, 0, 0, 0, 94.7855, 0, 0, 0, 94.7855, 0, 200, 6 )

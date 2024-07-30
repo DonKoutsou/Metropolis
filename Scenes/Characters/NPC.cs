@@ -36,13 +36,7 @@ public class NPC : Character
 	}
 	Node Skeleton;
 
-	Timer IdleTimer;
-
-	public void Idle_Timer_Ended()
-	{
-		if (IsInsideTree())
-			PlayMusic();
-	}
+	
 
     public override void _Process(float delta)
     {
@@ -98,7 +92,7 @@ public class NPC : Character
 		
 		//Skeleton.GetNode<BoneAttachment>("InstrumentAtatchment").GetNode<RemoteTransform>("RemoteTransform").RemotePath = inst.GetPath();
 
-		IdleTimer = GetNode<Timer>("IdleTimer");
+		
 
 		//RandomiseLimbs();
 
@@ -141,11 +135,6 @@ public class NPC : Character
 		SetLimbColor(LimbType.LEG_R, LimbRandomColorProvider.GetRandomColor());
 		SetLimbColor(LimbType.N01_LEG_R, LimbRandomColorProvider.GetRandomColor());
 		SetLimbColor(LimbType.N01_LEG_L, LimbRandomColorProvider.GetRandomColor());
-	}
-	public override void OnSongEnded(Instrument inst)
-	{
-		base.OnSongEnded(inst);
-		IdleTimer.Start();
 	}
 	public void HighLightObject(bool toggle)
     {

@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Assets/TerainTex/Metal041C_1K-JPG/Metal041C_1K-JPG_Roughness.jpg" type="Texture" id=1]
 [ext_resource path="res://Assets/TerainTex/Metal041C_1K-JPG/Metal041C_1K-JPG_NormalGL.jpg" type="Texture" id=2]
 [ext_resource path="res://Assets/TerainTex/Metal041C_1K-JPG/Metal041C_1K-JPG_Color.jpg" type="Texture" id=3]
 [ext_resource path="res://Assets/TerainTex/Metal041C_1K-JPG/Metal041C_1K-JPG_Metalness.jpg" type="Texture" id=4]
+[ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=5]
 
 [sub_resource type="SpatialMaterial" id=4]
 albedo_color = Color( 0.678431, 0.756863, 0.588235, 1 )
@@ -41,11 +42,17 @@ collision_mask = 0
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.50582, 0 )
 mesh = SubResource( 1 )
+script = ExtResource( 5 )
+LOD0 = SubResource( 1 )
+HideIfNoLod = true
 
 [node name="MeshInstance2" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.49869, 0.536065 )
 mesh = SubResource( 3 )
 material/0 = SubResource( 4 )
+script = ExtResource( 5 )
+LOD0 = SubResource( 3 )
+HideIfNoLod = true
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.51305, 0 )

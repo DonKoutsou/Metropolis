@@ -81,7 +81,7 @@ public partial class UniversalLodManager : Node
 
             if (dist > abbsize + 1200)
               objtocheck.SwitchLod(2);
-            else if (dist > objtocheck.abbLeangth + 500)
+            else if (dist > abbsize + 500)
               objtocheck.SwitchLod(1);
             else
               objtocheck.SwitchLod(0);

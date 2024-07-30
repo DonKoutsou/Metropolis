@@ -45,7 +45,7 @@ public class Character : KinematicBody
 
 	protected bool IsUncon = false;
 
-	
+	protected Timer IdleTimer;
 	
 	public override void _Ready()
 	{
@@ -55,6 +55,7 @@ public class Character : KinematicBody
 		NightLight = HeadPivot.GetNode<SpotLight>("NightLight");
 		BulbMat = (SpatialMaterial)HeadPivot.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0);
 		ToggleNightLight(DayNight.IsDay());
+		IdleTimer = GetNode<Timer>("IdleTimer");
 	}
 	public TalkText GetTalkText()
 	{
@@ -179,7 +180,7 @@ public class Character : KinematicBody
 			Sitter.UpdateOccupation(pos, true);
 		}
 		else
-			anim.ToggleSitting(true);
+			anim.ToggleSitting(false);
 		
 		GetNode<Spatial>("Pivot").GlobalRotation = pos.GlobalRotation;
 		sitting = true;
@@ -271,7 +272,9 @@ public class Character : KinematicBody
 	{
 		EmitSignal("VehicleBoardEventHandler", true, veh);
 		if (HasInstrument())
-			PlayMusic();
+		{
+			IdleTimer.Start();
+		}
 		//SetCollisionMaskBit(8, true);
 	}
 	public virtual void OnVehicleUnBoard(Vehicle veh)
@@ -282,6 +285,7 @@ public class Character : KinematicBody
 		if (PlayingInstrument)
 		{
 			StopMusic();
+			IdleTimer.Stop();
 		}
 		
 		//SetCollisionMaskBit(8, false);
@@ -354,6 +358,14 @@ public class Character : KinematicBody
 	public virtual void OnSongEnded(Instrument inst)
 	{
 		StopMusic();
+		IdleTimer.Start();
+	}
+	
+
+	public void Idle_Timer_Ended()
+	{
+		if (IsInsideTree())
+			PlayMusic();
 	}
 	//////////////////////////////////////////////////////////////////////////
 	/////Limb stuff

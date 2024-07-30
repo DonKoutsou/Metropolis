@@ -1,10 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/Building/PlatformWood.material" type="Material" id=1]
 [ext_resource path="res://Scenes/Env_Assets/Fabric/PanelSheet.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=3]
 
 [sub_resource type="CylinderMesh" id=1]
-material = ExtResource( 1 )
 top_radius = 0.1
 bottom_radius = 0.1
 height = 20.0
@@ -29,35 +29,63 @@ collision_mask = 0
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.2, 2.5, 10.7 )
+material_override = ExtResource( 1 )
 mesh = SubResource( 1 )
+script = ExtResource( 3 )
+LOD0 = SubResource( 1 )
+HideIfNoLod = true
 
 [node name="MeshInstance" type="MeshInstance" parent="MeshInstance"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.1, 0 )
 mesh = SubResource( 4 )
+script = ExtResource( 3 )
+LOD0 = SubResource( 4 )
+HideIfNoLod = true
 
 [node name="MeshInstance2" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.3, 2.5, 10.8 )
+material_override = ExtResource( 1 )
 mesh = SubResource( 1 )
+script = ExtResource( 3 )
+LOD0 = SubResource( 1 )
+HideIfNoLod = true
 
 [node name="MeshInstance" type="MeshInstance" parent="MeshInstance2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.1, 0 )
 mesh = SubResource( 4 )
+script = ExtResource( 3 )
+LOD0 = SubResource( 4 )
+HideIfNoLod = true
 
 [node name="MeshInstance3" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.3, 2.5, -10.8 )
+material_override = ExtResource( 1 )
 mesh = SubResource( 1 )
+script = ExtResource( 3 )
+LOD0 = SubResource( 1 )
+HideIfNoLod = true
 
 [node name="MeshInstance" type="MeshInstance" parent="MeshInstance3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.1, 0 )
 mesh = SubResource( 4 )
+script = ExtResource( 3 )
+LOD0 = SubResource( 4 )
+HideIfNoLod = true
 
 [node name="MeshInstance4" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.2, 2.5, -10.8 )
+material_override = ExtResource( 1 )
 mesh = SubResource( 1 )
+script = ExtResource( 3 )
+LOD0 = SubResource( 1 )
+HideIfNoLod = true
 
 [node name="MeshInstance" type="MeshInstance" parent="MeshInstance4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.1, 0 )
 mesh = SubResource( 4 )
+script = ExtResource( 3 )
+LOD0 = SubResource( 4 )
+HideIfNoLod = true
 
 [node name="Fabric" parent="." instance=ExtResource( 2 )]
 transform = Transform( -8.15436e-07, 0, 18.655, 0, 14.35, 0, -12.1975, 0, -5.3317e-07, 0, 11.6, 0 )
