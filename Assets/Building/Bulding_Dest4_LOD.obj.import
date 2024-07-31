@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Bulding_Dest4_LOD.obj-6c2655a33f15d25e609df5da3e1d20cc.mesh"
+
+[deps]
+
+files=[ "res://.import/Bulding_Dest4_LOD.obj-6c2655a33f15d25e609df5da3e1d20cc.mesh" ]
+
+source_file="res://Assets/Building/Bulding_Dest4_LOD.obj"
+dest_files=[ "res://.import/Bulding_Dest4_LOD.obj-6c2655a33f15d25e609df5da3e1d20cc.mesh", "res://.import/Bulding_Dest4_LOD.obj-6c2655a33f15d25e609df5da3e1d20cc.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

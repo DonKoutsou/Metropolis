@@ -103,11 +103,14 @@ void fragment() {
 	//float fadeFactor = smoothstep(FADE_START, FADE_END, distanceFromCamera);
 	
 	vec4 uv_base = vec4(UV.x, UV.y, UV.y, 1.0) * 6.0;
-	vec2 world_offset = WORLD_MATRIX[3].xz * 0.025;
-	vec2 uv_gerstner = (uv_base.xz + world_offset) * gerstner_tiling + TIME * rotateUV(gerstner_speed, vec2(0.0, 0.0), radians(-TextureRot));
-	vec2 uv_gerstner_2 = (uv_base.xz + world_offset) * gerstner_2_tiling + TIME * rotateUV(gerstner_2_speed, vec2(0.0, 0.0), radians(-TextureRot2));
+	//vec2 world_offset = WORLD_MATRIX[3].xz * 0.025;
+	//vec2 uv_gerstner = (uv_base.xz + world_offset) * gerstner_tiling + TIME * rotateUV(gerstner_speed, vec2(0.0, 0.0), radians(-TextureRot));
+	//vec2 uv_gerstner_2 = (uv_base.xz + world_offset) * gerstner_2_tiling + TIME * rotateUV(gerstner_2_speed, vec2(0.0, 0.0), radians(-TextureRot2));
+	vec2 uv_gerstner = uv_base.xz * gerstner_tiling + TIME * rotateUV(gerstner_speed, vec2(0.0, 0.0), radians(-TextureRot));
+	vec2 uv_gerstner_2 = uv_base.xz * gerstner_2_tiling + TIME * rotateUV(gerstner_2_speed, vec2(0.0, 0.0), radians(-TextureRot2));
 	
-	vec2 uv = fract(uv_base.xz + world_offset);
+	//vec2 uv = fract(uv_base.xz + world_offset);
+	vec2 uv = fract(uv_base.xz);
 	uv_gerstner = rotateUV(uv_gerstner, vec2(60.0, -59.5), radians(TextureRot));
 	uv_gerstner_2 = rotateUV(uv_gerstner_2, vec2(60.0, -59.5), radians(TextureRot2));
 	uv = rotateUV(uv, vec2(60.0, -60.0), radians(-TextureRot));
@@ -227,9 +230,10 @@ void fragment() {
 void light() {
 	// LAMBER DIFFUSE LIGHTING
 	float pi = 3.14159265358979323846;
-	float water_highlight_mask_1 = texture(water_highlight_map, fract( UV + (WORLD_MATRIX[3].xz * 0.00415) + TIME * 0.051031 ) ).x;
-	float water_highlight_mask_2 = texture(water_highlight_map, fract( UV + (WORLD_MATRIX[3].xz * 0.00415) + TIME * -0.047854) * 2.0 ).x;
-	
+	//float water_highlight_mask_1 = texture(water_highlight_map, fract( (UV / 8.0f) + (WORLD_MATRIX[3].xz * 0.00415) + TIME * 0.051031 ) ).x;
+	//float water_highlight_mask_2 = texture(water_highlight_map, fract( (UV / 8.0f) + (WORLD_MATRIX[3].xz * 0.00415) + TIME * -0.047854) * 2.0 ).x;
+	float water_highlight_mask_1 = texture(water_highlight_map, fract(UV / 8.0f + TIME * 0.051031 ) ).x;
+	float water_highlight_mask_2 = texture(water_highlight_map, fract( UV / 8.0f  + TIME * -0.047854) * 2.0 ).x;
 	// SUBSURFACE SCATTERING
 	float sss = clamp( smoothstep(0.65, 0.7, dot(NORMAL , VIEW) * 0.5 + 0.5 ) * smoothstep(0.5, 1.0, (dot(-LIGHT, VIEW) * 0.5 + 0.5) ) * ( dot (-CAMERA_MATRIX[2].xyz, vec3(0.0, 1.0, 0.0)) * 0.5 + 0.5), 0.0, 1.0) * sss_strength;
 		
@@ -264,9 +268,9 @@ shader_param/TextureRot2 = 0.0
 shader_param/Roughness = 0.88
 shader_param/Spec = 0.5
 shader_param/gerstner_normal = 0.5
-shader_param/gerstner_tiling = 0.3
+shader_param/gerstner_tiling = 0.05
 shader_param/gerstner_2_normal = 0.5
-shader_param/gerstner_2_tiling = 0.3
+shader_param/gerstner_2_tiling = 0.1
 shader_param/gerstner_distance_fadeout = 9.561
 shader_param/RainInt = 0.487889
 shader_param/normal_dist_fadeout = 0.015

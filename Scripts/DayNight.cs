@@ -371,18 +371,18 @@ public class DayNight : WorldEnvironment
     Color MoonColor;
     float MoonGodRayBrightness;
 
-    //float d = 1;
+    float d = 0.1f;
     public override void _Process(float delta)
     {
         base._Process(delta);
     
-        //d -= delta;
+        d -= delta;
 
-        //if (d > 0)
-            //return;
-        //d = 1;
+        if (d > 0)
+            return;
+        d = 0.1f;
 
-        UpdateTime(delta);
+        UpdateTime(d);
 
         UpdateWind();
 

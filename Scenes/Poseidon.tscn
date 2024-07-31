@@ -42,6 +42,7 @@ script = ExtResource( 1 )
 
 [node name="Sea" type="MeshInstance" parent="."]
 transform = Transform( 60, 0, 0, 0, 60, 0, 0, 0, 60, 0, 0, 0 )
+visible = false
 cast_shadow = 0
 extra_cull_margin = 16384.0
 mesh = ExtResource( 3 )

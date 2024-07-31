@@ -38,6 +38,7 @@ rings = 0
 
 [node name="HoverEngineParticles" type="Particles"]
 transform = Transform( 1, -8.74228e-08, -8.74228e-08, -8.74228e-08, -1, 0, -8.74228e-08, 7.64275e-15, -1, 0, 0, 0 )
+cast_shadow = 0
 emitting = false
 amount = 10
 lifetime = 0.5

@@ -32,7 +32,7 @@ size = Vector2( 1500, 1500 )
 
 [node name="Clouds3" type="Particles" parent="."]
 layers = 256
-cast_shadow = 2
+cast_shadow = 0
 generate_lightmap = false
 amount = 1000
 lifetime = 40.0

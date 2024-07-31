@@ -20,8 +20,7 @@ script = ExtResource( 1 )
 ItemType = 3
 ItemIcon = ExtResource( 4 )
 ItemPickupActionName = "Ένα ρολόι"
-ItemName = "Ορολόι"
-InventoryItemName = "Ορολόι"
+ItemName = "Ρολόι"
 ItemDesc = ""
 stackable = false
 

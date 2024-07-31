@@ -113,7 +113,6 @@ public class InventoryUI : Control
         Anim.Play("MenuOpen");
         PlayerUI.OnMenuToggled(true);
         UpdateInventory();
-        //Show();
         IsOpen = true;
         SetProcess(true);
     }
@@ -124,11 +123,11 @@ public class InventoryUI : Control
         Anim.Play("MenuClose");
         PlayerUI.OnMenuToggled(false);
         WarpMouse(GetViewport().Size/2);
-        //Hide();
-        FocusedSlot = null;
         IsOpen = false;
         SetProcess(false);
-        //comp.ToggleCompass(false);
+
+        if (FocusedSlot != null)
+            SetFocused(false, FocusedSlot);
     }
     float d = 0.1f;
     public override void _Process(float delta)
@@ -141,6 +140,7 @@ public class InventoryUI : Control
 
         UpdateInventory();
     }
+
     public void UpdateInventory()
     {
         if (!ShowingMap)
@@ -151,9 +151,11 @@ public class InventoryUI : Control
             Dictionary <string, int> itemcatalogue = new Dictionary<string, int>();
             Dictionary <string, Item> itemcat2 = new Dictionary<string, Item>();
 
+
             hascompass = false;
             hasmap = false;
             hastoolbox = false;
+            int Itamm = 0;
 
             for (int v = Items.Count() - 1; v > -1; v --)
             {
@@ -171,6 +173,8 @@ public class InventoryUI : Control
                     itemcatalogue.Add(Items[v].GetInventoryItemName(), 1);
                 }
 
+                Itamm ++;
+
                 if (Items[v].GetItemType() ==  global::ItemName.COMPASS)
                     hascompass = true;
                 else if (Items[v].GetItemType() == global::ItemName.MAP)
@@ -179,63 +183,57 @@ public class InventoryUI : Control
                     hastoolbox = true;
 
             }
-            maxpage = itemcatalogue.Count / 12;
+            maxpage = Itamm / 12;
             GetNode<Control>("InventoryContainer/Inventory/CapPanel2/InventoryPage").Visible = maxpage > 0;
             int slottofill = 0;
             int currentit = 0;
-            
-           
+
             int min = 0;
             for (int i = 0; i < currentpage; i++)
-                min += 11;
+                min += 12;
 
             int max = min + 11;
 
 
             foreach(KeyValuePair<string, int> it in itemcatalogue)
             {
+                if (itemcat2[it.Key] is Limb l && Inv.IsLimbEquipped(l))
+                    continue;
+
                 if (currentit > max)
                     break;
-                if (currentit < min)
-                {
-                    currentit ++;
-                    continue;
-                }
                 if (!itemcat2[it.Key].stackable)
                 {
                     for (int i = 0; i < it.Value; i++)
                     {
                         if (currentit > max)
                             break;
-                        slots[slottofill].SetItem(itemcat2[it.Key], 1);
+                        if (currentit >= min)
+                        {
+                            slots[slottofill].SetItem(itemcat2[it.Key], 1);
+                            slottofill++;
+                        }
                         currentit ++;
-                        slottofill++;
                     }
                 }
                 else
                 {
-                    slots[slottofill].SetItem(itemcat2[it.Key], it.Value);
+                    if (currentit >= min)
+                    {
+                        slots[slottofill].SetItem(itemcat2[it.Key], it.Value);
+                        slottofill++;
+                    }
                     currentit ++;
-                    slottofill++;
                 }
-                
             }
-            
-
+ 
             for (int i = 0; i < slots.Count(); i++)
             {
-                //itemcount.Insert(i, ammount);
                 if (i >= slottofill)
                     slots[i].SetItem(null, 0);
-                if (FocusedSlot == slots[i])
-                    slots[i].Toggle(true);
-                else
-                    slots[i].Toggle(false);
+
             }
-            //if (FocusedSlot != null)
-                //ItemOptionPanel.Show();
-            //else
-                //ItemOptionPanel.Hide();
+
             //float currentload = Inv.GetCurrentWeight();
             //Capacity.BbcodeText = string.Format("[center]{0}/{1}", currentload, MaxLoad);
         }
@@ -249,32 +247,27 @@ public class InventoryUI : Control
         else
             CharacterRPM.Modulate = new Color(0,1,0);
 
-
         if (showingDesc)
             Description.BbcodeText = "[center]" + ShowingDescSample.GetItemDesc();
 
         if (!hascompass)
             ShowingCompass = false;
-        if (!hasmap)
-            ShowingMap = false;
-
-
-        
+        //if (!hasmap)
+            //ShowingMap = false;
 
         comp.ToggleCompass(ShowingCompass);
 
         map.ToggleMap(ShowingMap);
 
         
-        GetNode<Button>("InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/DropButton").Visible = !ShowingMap;
         bool selectinginst = FocusedSlot != null && FocusedSlot.item is Instrument;
         bool selectingbat = FocusedSlot != null && FocusedSlot.item is Battery;
         bool selectinglimb = FocusedSlot != null && FocusedSlot.item is Limb;
-        //GetNode<Button>("ItemOptionPanel/HBoxContainer/RepairButton").Visible = selectinginst && hastoolbox || selectingbat && hastoolbox;
+
+        GetNode<Button>("InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/DropButton").Visible = !ShowingMap;
         GetNode<Button>("InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/RepairButton").Visible = selectingbat && hastoolbox;
         GetNode<Button>("InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/SwitchButton").Visible = selectinginst;
         GetNode<Button>("InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/SwitchLimbButton").Visible = selectinglimb;
-
         GetNode<Control>("InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/CompassButton").Visible = hascompass;
         GetNode<Control>("InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/MapButton").Visible = hasmap;
     }
@@ -284,15 +277,18 @@ public class InventoryUI : Control
             return;
         currentpage ++;
         GetNode<RichTextLabel>("InventoryContainer/Inventory/CapPanel2/InventoryPage/w").BbcodeText = "[center]" + currentpage;
+        if (FocusedSlot != null)
+            SetFocused(false, FocusedSlot);
     }
     private void PageBack()
     {
         if (currentpage == 0)
             return;
 
-        
         currentpage --;
         GetNode<RichTextLabel>("InventoryContainer/Inventory/CapPanel2/InventoryPage/w").BbcodeText = "[center]" + currentpage;
+        if (FocusedSlot != null)
+            SetFocused(false, FocusedSlot);
     }
     public void ItemHovered(Item it, bool t)
     {
@@ -304,7 +300,7 @@ public class InventoryUI : Control
             ShowingDescSample = it;
             DescPan.Show();
             Description.BbcodeText = "[center]" + it.GetItemDesc();
-            ItemName.BbcodeText = "[center]" + it.GetInventoryItemName();
+            ItemName.BbcodeText = "[center]" + it.GetItemName();
             //WeightText.BbcodeText = "[center]Βάρος: " + ShowingDescSample.GetInventoryWeight();
         }
         else
@@ -316,15 +312,13 @@ public class InventoryUI : Control
     }
     public void SetFocused(bool t, InventoryUISlot slot)
     {
-        if (t)
-            FocusedSlot = slot;
-        else
-        {
-            if (slot == FocusedSlot)
-                FocusedSlot = null;
-        }
+        if (FocusedSlot != null)
+            FocusedSlot.Toggle(false);
+
+        FocusedSlot = slot;
+
+        slot.Toggle(t);
     }
-    
     private void On_Repair_Button_Down()
     {
         List<Item> toolboxes;
@@ -348,9 +342,8 @@ public class InventoryUI : Control
             pl.GetTalkText().Talk(NoSelectionOnDropText);
             return;
         }
-            
         Inv.RemoveItem(FocusedSlot.item);
-        FocusedSlot = null;
+        SetFocused(false, FocusedSlot);
     }
     private void On_Instrument_Button_Down()
     {
@@ -379,9 +372,7 @@ public class InventoryUI : Control
             Inv.UnEquipLimp(ltoremove);
             Inv.EquipLimp(l);
         }
-
     }
-    
     private void On_Compass_Button_Down()
     {
         if (!hascompass)

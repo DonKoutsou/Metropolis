@@ -15,13 +15,13 @@ func _SetData(data):
 	ilemapvectors = data["ilemapVectors"]
 	ilemap = data["ilemap"]
 	playerlocation = data["PlayerLocation"]
-	##playerenergy = data["PlayerEnergy"]
+	PlayerEnergy = data["PlayerEnergy"]
 	InventoryContents = data["InventoryContents"]
-	playerHasVehicle = data["playerHasVehicle"]
+	PlayerHasVehicle = data["PlayerHasVehicle"]
 	##DeliverJobs = data["DeliverJobs"]
 	##ActiveDeliveryJob = data["ActiveDeliveryJob"]
 	Date = data["Date"];
-	if (playerHasVehicle):
+	if (PlayerHasVehicle):
 		VehicleName = data["VehicleName"]
 		##VehicleState = data["VehicleState"];
 		##WingState = data["WingState"];
@@ -47,8 +47,8 @@ export  (Array, Resource) var ilemap = []
 export  (Array, Resource) var InventoryContents = []
 
 export var playerlocation:Vector3
-##export var playerenergy:float
-export var playerHasVehicle:bool
+export var PlayerEnergy:float
+export var PlayerHasVehicle:bool
 
 
 export var VehicleName:String

@@ -18,7 +18,7 @@ public class Limb : Item
     //public bool Equiped = false;
     public override string GetInventoryItemName()
 	{
-		return string.Format(InventoryItemName, LimbRandomColorProvider.TranslateColor(LimbColor));
+		return LimbRandomColorProvider.TranslateColor(LimbColor) + ItemName;
 	}
     public void SetColor(Color col)
     {

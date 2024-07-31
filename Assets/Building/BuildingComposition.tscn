@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Assets/Building/House_Ext.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Building/House_Int.obj" type="ArrayMesh" id=2]
@@ -7,11 +7,16 @@
 [ext_resource path="res://Scripts/House.cs" type="Script" id=5]
 [ext_resource path="res://Assets/Building/BuildingExterior.material" type="Material" id=6]
 [ext_resource path="res://Scenes/Env_Assets/Furniture.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=8]
+[ext_resource path="res://Assets/Building/House_Ext_LOD.obj" type="ArrayMesh" id=9]
 [ext_resource path="res://Scenes/Env_Assets/IndoorsLight.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Env_Assets/Furniture2.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/BuildingDecorations/Decorations2.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/BuildingDecorations/Decorations1.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Env_Assets/Furniture3.tscn" type="PackedScene" id=16]
+
+[sub_resource type="CubeMesh" id=6]
+size = Vector3( 5.109, 8.214, 2.727 )
 
 [sub_resource type="ConcavePolygonShape" id=1]
 data = PoolVector3Array( 2.2757, 3.5748, 10.0835, 2.2757, 11.1083, 10.0835, 10.0835, 3.5748, 10.0835, -10.0835, 3.5748, 10.0835, -2.2757, 11.1083, 10.0835, -2.2757, 3.5748, 10.0835, 10.0835, 23.4394, 10.0835, 9.781, 23.7418, 9.781, 10.0835, 23.4394, -10.0835, 10.0835, 23.4394, -10.0835, 9.781, 23.7418, 9.781, 9.781, 23.7418, -9.781, 9.781, 23.7418, 9.781, 10.0835, 23.4394, 10.0835, -9.781, 23.7418, 9.781, -9.781, 23.7418, 9.781, 10.0835, 23.4394, 10.0835, -10.0835, 23.4394, 10.0835, -9.781, 23.7418, 9.781, -10.0835, 23.4394, 10.0835, -9.781, 23.7418, -9.781, -9.781, 23.7418, -9.781, -10.0835, 23.4394, 10.0835, -10.0835, 23.4394, -10.0835, 10.0835, 23.4394, -10.0835, 9.781, 23.7418, -9.781, -10.0835, 23.4394, -10.0835, -10.0835, 23.4394, -10.0835, 9.781, 23.7418, -9.781, -9.781, 23.7418, -9.781, 2.2757, 11.1083, 10.0835, -2.2757, 11.1083, 10.0835, -10.0835, 23.4394, 10.0835, 2.2757, 11.1083, 10.0835, -10.0835, 23.4394, 10.0835, 10.0835, 23.4394, 10.0835, 9.1858, 21.8758, -9.1858, 9.1858, 21.8758, 9.1858, -9.1858, 21.8758, 9.1858, 9.1858, 21.8758, -9.1858, -9.1858, 21.8758, 9.1858, -9.1858, 21.8758, -9.1858, 10.0835, 3.5748, -10.0835, 10.0835, 23.4394, -10.0835, -10.0835, 23.4394, -10.0835, 10.0835, 3.5748, -10.0835, -10.0835, 23.4394, -10.0835, -10.0835, 3.5748, -10.0835, 10.0835, 3.5748, -10.0835, 10.0835, 3.5748, 10.0835, 10.0835, 23.4394, 10.0835, 10.0835, 3.5748, -10.0835, 10.0835, 23.4394, 10.0835, 10.0835, 23.4394, -10.0835, 2.2757, 11.1083, 10.0835, 10.0835, 23.4394, 10.0835, 10.0835, 3.5748, 10.0835, -10.0835, 23.4394, 10.0835, -10.0835, 3.5748, 10.0835, -10.0835, 3.5748, -10.0835, -10.0835, 23.4394, 10.0835, -10.0835, 3.5748, -10.0835, -10.0835, 23.4394, -10.0835, -10.0835, 3.5748, 10.0835, -10.0835, 23.4394, 10.0835, -2.2757, 11.1083, 10.0835, 9.781, 23.7418, -9.781, 9.781, 23.7418, 9.781, 9.1858, 23.7418, -9.1858, 9.1858, 23.7418, -9.1858, 9.781, 23.7418, 9.781, 9.1858, 23.7418, 9.1858, 9.781, 23.7418, 9.781, -9.781, 23.7418, 9.781, 9.1858, 23.7418, 9.1858, 9.1858, 23.7418, 9.1858, -9.781, 23.7418, 9.781, -9.1858, 23.7418, 9.1858, -9.781, 23.7418, -9.781, 9.781, 23.7418, -9.781, -9.1858, 23.7418, -9.1858, -9.1858, 23.7418, -9.1858, 9.781, 23.7418, -9.781, 9.1858, 23.7418, -9.1858, -9.781, 23.7418, 9.781, -9.781, 23.7418, -9.781, -9.1858, 23.7418, 9.1858, -9.1858, 23.7418, 9.1858, -9.781, 23.7418, -9.781, -9.1858, 23.7418, -9.1858, 9.1858, 23.7418, -9.1858, 9.1858, 23.7418, 9.1858, 9.1858, 21.8758, -9.1858, 9.1858, 21.8758, -9.1858, 9.1858, 23.7418, 9.1858, 9.1858, 21.8758, 9.1858, 9.1858, 23.7418, 9.1858, -9.1858, 23.7418, 9.1858, 9.1858, 21.8758, 9.1858, 9.1858, 21.8758, 9.1858, -9.1858, 23.7418, 9.1858, -9.1858, 21.8758, 9.1858, -9.1858, 23.7418, -9.1858, 9.1858, 23.7418, -9.1858, -9.1858, 21.8758, -9.1858, -9.1858, 21.8758, -9.1858, 9.1858, 23.7418, -9.1858, 9.1858, 21.8758, -9.1858, -9.1858, 23.7418, 9.1858, -9.1858, 23.7418, -9.1858, -9.1858, 21.8758, 9.1858, -9.1858, 21.8758, 9.1858, -9.1858, 23.7418, -9.1858, -9.1858, 21.8758, -9.1858 )
@@ -28,87 +33,21 @@ polygon_points = PoolVector2Array( 10.0677, 3.74074, 10, 16, -10, 16, -10.075, 3
 [sub_resource type="OccluderShapePolygon" id=4]
 polygon_points = PoolVector2Array( -2.31076, 4.03563, -2.29597, 12.007, -10.0602, 12.0513, -10.075, 4.02084 )
 
-[sub_resource type="CubeMesh" id=6]
-size = Vector3( 5.109, 8.214, 2.727 )
-
 [node name="House" type="Spatial" groups=["Clutter"]]
 script = ExtResource( 5 )
 PossibleFurni = [ ExtResource( 7 ), ExtResource( 13 ), ExtResource( 16 ) ]
 PossibleDeco = [ ExtResource( 15 ), ExtResource( 14 ) ]
 SpawnPool = {
 Resource( "res://Scenes/Items/FastLeg_L.tscn" ): 1,
-Resource( "res://Scenes/Items/Battery.tscn" ): 0,
-Resource( "res://Scenes/Items/FastLeg_R.tscn" ): 1,
-Resource( "res://Scenes/Items/Guitar.tscn" ): 1,
 Resource( "res://Scenes/Items/Item.tscn" ): 10,
+Resource( "res://Scenes/Items/Battery.tscn" ): 0,
+Resource( "res://Scenes/Items/Guitar.tscn" ): 1,
+Resource( "res://Scenes/Items/FastLeg_R.tscn" ): 1,
 Resource( "res://Scenes/Items/BatteryEmpty.tscn" ): 10
 }
 
-[node name="IndoorsLight" parent="." instance=ExtResource( 12 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.2561, 0 )
-
-[node name="HouseExterior" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0691166, 0 )
-collision_layer = 32
-collision_mask = 0
-
-[node name="MeshInstance" type="MeshInstance" parent="HouseExterior"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0338049, 0 )
-generate_lightmap = false
-mesh = ExtResource( 1 )
-material/0 = ExtResource( 6 )
-material/1 = ExtResource( 3 )
-material/2 = ExtResource( 6 )
-
-[node name="CollisionShape" type="CollisionShape" parent="HouseExterior"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0338049, 0 )
-shape = SubResource( 1 )
-
 [node name="HouseDoor" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13.568, 0 )
-
-[node name="StaticBody2" type="StaticBody" parent="."]
-collision_layer = 4
-collision_mask = 0
-
-[node name="BuildingInterior" type="MeshInstance" parent="StaticBody2"]
-mesh = ExtResource( 2 )
-skeleton = NodePath("../..")
-material/0 = ExtResource( 3 )
-material/1 = ExtResource( 3 )
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody2"]
-shape = SubResource( 2 )
-
-[node name="Occluders" type="Spatial" parent="."]
-
-[node name="Occluder" type="Occluder" parent="Occluders"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.26139, -10 )
-shape = SubResource( 3 )
-
-[node name="Occluder2" type="Occluder" parent="Occluders"]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 10, 7.26139, 0 )
-shape = SubResource( 3 )
-
-[node name="Occluder3" type="Occluder" parent="Occluders"]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -10, 7.26139, 0 )
-shape = SubResource( 3 )
-
-[node name="Occluder7" type="Occluder" parent="Occluders"]
-transform = Transform( 1.91069e-15, 1, 4.37114e-08, 4.37114e-08, -4.37114e-08, 1, 1, 0, -4.37114e-08, -6, 23.2614, 0 )
-shape = SubResource( 3 )
-
-[node name="Occluder4" type="Occluder" parent="Occluders"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.26139, 10 )
-shape = SubResource( 5 )
-
-[node name="Occluder5" type="Occluder" parent="Occluders"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.738614, 10 )
-shape = SubResource( 4 )
-
-[node name="Occluder6" type="Occluder" parent="Occluders"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -0.738614, 10 )
-shape = SubResource( 4 )
 
 [node name="FurniturePlacements" type="Spatial" parent="."]
 
@@ -167,6 +106,72 @@ transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.6230
 [node name="MeshInstance5" type="MeshInstance" parent="FurniturePlacements/Position11"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.26692, 0 )
 mesh = SubResource( 6 )
+
+[node name="IndoorsLight" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.2561, 0 )
+
+[node name="HouseExterior" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0691166, 0 )
+collision_layer = 32
+collision_mask = 0
+
+[node name="MeshInstance" type="MeshInstance" parent="HouseExterior"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0338049, 0 )
+generate_lightmap = false
+mesh = ExtResource( 1 )
+material/0 = ExtResource( 6 )
+material/1 = ExtResource( 3 )
+material/2 = ExtResource( 6 )
+script = ExtResource( 8 )
+LOD0 = ExtResource( 1 )
+LOD1 = ExtResource( 9 )
+
+[node name="CollisionShape" type="CollisionShape" parent="HouseExterior"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0338049, 0 )
+shape = SubResource( 1 )
+
+[node name="StaticBody2" type="StaticBody" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="BuildingInterior" type="MeshInstance" parent="StaticBody2"]
+mesh = ExtResource( 2 )
+skeleton = NodePath("../..")
+material/0 = ExtResource( 3 )
+material/1 = ExtResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody2"]
+shape = SubResource( 2 )
+
+[node name="Occluders" type="Spatial" parent="."]
+
+[node name="Occluder" type="Occluder" parent="Occluders"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.26139, -10 )
+shape = SubResource( 3 )
+
+[node name="Occluder2" type="Occluder" parent="Occluders"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 10, 7.26139, 0 )
+shape = SubResource( 3 )
+
+[node name="Occluder3" type="Occluder" parent="Occluders"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -10, 7.26139, 0 )
+shape = SubResource( 3 )
+
+[node name="Occluder7" type="Occluder" parent="Occluders"]
+transform = Transform( 1.91069e-15, 1, 4.37114e-08, 4.37114e-08, -4.37114e-08, 1, 1, 0, -4.37114e-08, -6, 23.2614, 0 )
+shape = SubResource( 3 )
+
+[node name="Occluder4" type="Occluder" parent="Occluders"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.26139, 10 )
+shape = SubResource( 5 )
+
+[node name="Occluder5" type="Occluder" parent="Occluders"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.738614, 10 )
+shape = SubResource( 4 )
+
+[node name="Occluder6" type="Occluder" parent="Occluders"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -0.738614, 10 )
+shape = SubResource( 4 )
 
 [node name="DecorationPlacaments" type="Spatial" parent="."]
 

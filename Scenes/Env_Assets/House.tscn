@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Building/SkyscraperMesh.tres" type="CubeMesh" id=1]
 [ext_resource path="res://Assets/Building/MultistoryBuildingExterior.material" type="Material" id=2]
@@ -8,6 +8,9 @@ extents = Vector3( 50, 100, 50 )
 
 [sub_resource type="OccluderShapePolygon" id=2]
 polygon_points = PoolVector2Array( 50, -103, 50, 96, -50, 97, -50, -103 )
+
+[sub_resource type="OccluderShapePolygon" id=3]
+polygon_points = PoolVector2Array( 50.0511, -43.7494, 50.4418, 55.8485, -50.1461, 55.957, -50.3354, -43.9398 )
 
 [node name="StaticBody" type="StaticBody"]
 collision_layer = 4
@@ -32,9 +35,17 @@ transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 78, 
 shape = SubResource( 2 )
 
 [node name="Occluder3" type="Occluder" parent="."]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 49.5737, 78, 1.90735e-06 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 50.0695, 78, 1.90735e-06 )
 shape = SubResource( 2 )
 
 [node name="Occluder4" type="Occluder" parent="."]
 transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -50.1594, 78, 1.90735e-06 )
 shape = SubResource( 2 )
+
+[node name="Occluder5" type="Occluder" parent="."]
+transform = Transform( -5.73205e-15, 1, 4.37114e-08, -1.31134e-07, -4.37114e-08, 1, 1, 0, 1.31134e-07, -6.00677, 175.232, 1.90735e-06 )
+shape = SubResource( 3 )
+
+[node name="Occluder6" type="Occluder" parent="."]
+transform = Transform( -5.73205e-15, -1, 4.37114e-08, 1.31134e-07, -4.37114e-08, -1, 1, 0, 1.31134e-07, 6.07393, -25.0662, 1.90735e-06 )
+shape = SubResource( 3 )

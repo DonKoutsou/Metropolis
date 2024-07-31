@@ -248,14 +248,14 @@ public class WorldMap : TileMap
 			PlayerUI.OnMenuToggled(false);
 			pl.GetNode<Control>("Tutorial").Free();
 			//setting player energy
-			//Player.GetInstance().SetEnergy((float)save.Get("playerenergy"));
+			Player.GetInstance().SetEnergy((float)save.Get("PlayerEnergy"));
 
 			//loading inventory
 			Inventory inv = pl.GetCharacterInventory();
 			Godot.Collections.Array Items = (Godot.Collections.Array)save.Get("InventoryContents");
 			inv.LoadSavedInventory(Items);
 
-			bool HasVehicle = (bool)save.Get("playerHasVehicle");
+			bool HasVehicle = (bool)save.Get("PlayerHasVehicle");
 			if (HasVehicle)
 			{
 				string vehname = (string)save.Get("VehicleName");

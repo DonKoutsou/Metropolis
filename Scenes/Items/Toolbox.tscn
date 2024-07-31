@@ -20,8 +20,8 @@ angular_damp = 1.22
 script = ExtResource( 1 )
 ItemType = 9
 ItemIcon = ExtResource( 2 )
+ItemPickupActionName = "Μια εργαλειοθήκη"
 ItemName = "Εργαλειοθήκη"
-InventoryItemName = "Εργαλειοθήκη"
 stackable = false
 CurrentSupplies = 20.0
 

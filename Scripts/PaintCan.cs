@@ -39,10 +39,10 @@ public class PaintCan : Item
     }
     public override string GetInventoryItemName()
 	{
-		return string.Format(InventoryItemName, LimbRandomColorProvider.TranslateColor(CanColor));
+		return LimbRandomColorProvider.TranslateColor(CanColor) + ItemName;
 	}
     public override string GetItemDesc()
     {
-        return "Χρώμα :" + LimbRandomColorProvider.TranslateColor(CanColor);
+        return ItemDesc + "\n Χρώμα :" + LimbRandomColorProvider.TranslateColor(CanColor);
     }
 }

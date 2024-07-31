@@ -2,7 +2,6 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-[Tool]
 public partial class UniversalLodManager : Node
 {
   private static UniversalLodManager _instance;
@@ -40,14 +39,11 @@ public partial class UniversalLodManager : Node
 
   public override void _EnterTree()
   {
-    if(_instance != null){
-       QueueFree(); // The Singletone is already loaded, kill this instance
-    }
     _instance = this;
 
     LODedObj = new List<LoddedObject>();
     LODedChar = new List<LoddedCharacter>();
-    SetProcess(false);
+    //SetProcess(false);
   }
   public override void _Process(float delta)
   {
@@ -79,9 +75,9 @@ public partial class UniversalLodManager : Node
             float dist = campos.DistanceTo(objtocheck.GlobalTranslation);
             float abbsize = objtocheck.abbLeangth;
 
-            if (dist > abbsize + 1200)
+            if (dist > abbsize * 8)
               objtocheck.SwitchLod(2);
-            else if (dist > abbsize + 500)
+            else if (dist > abbsize * 4)
               objtocheck.SwitchLod(1);
             else
               objtocheck.SwitchLod(0);

@@ -49,6 +49,11 @@ public class Island : Spatial
 		Node b = GetNodeOrNull("Bounds");
 		if (b != null)
 			b.QueueFree();
+
+		Node bi = GetNodeOrNull("InnerBounds");
+		if (bi != null)
+			bi.QueueFree();
+			
 		Translation = SpawnGlobalLocation;
 
 		Rotate(new Vector3(0, 1, 0), Mathf.Deg2Rad(SpawnRotation));

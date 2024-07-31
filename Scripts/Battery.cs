@@ -20,6 +20,10 @@ public class Battery : Item
             CurrentEnergy = Capacity;
         }
     }
+    public override string GetInventoryItemName()
+	{
+		return ItemName + CurrentEnergy.ToString() + condition;
+	}
     public void Repair(float amm)
     {
         condition += amm;

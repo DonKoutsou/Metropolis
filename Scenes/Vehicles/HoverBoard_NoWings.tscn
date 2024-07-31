@@ -360,6 +360,7 @@ material/0 = ExtResource( 12 )
 
 [node name="ExaustParticlesL" type="Particles" parent="VehicleBody/Position3D/MeshInstance3"]
 transform = Transform( 1, -0.00130579, 2.59311e-05, -2.59345e-05, 4.08734e-07, 1, -0.00130579, -1, 3.83472e-07, 0.077344, -2.91552, -3.16902 )
+cast_shadow = 0
 emitting = false
 amount = 200
 lifetime = 0.5
@@ -379,6 +380,7 @@ area_mask = 4
 
 [node name="ExaustParticlesR" type="Particles" parent="VehicleBody/Position3D/MeshInstance3"]
 transform = Transform( 1, -0.00130579, 2.59312e-05, -2.59345e-05, 4.08734e-07, 1, -0.00130579, -1, 3.83239e-07, 0.077344, -0.209198, -2.68632 )
+cast_shadow = 0
 emitting = false
 amount = 200
 lifetime = 0.5

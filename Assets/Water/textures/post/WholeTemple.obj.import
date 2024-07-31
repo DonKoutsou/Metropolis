@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/WholeTemple.obj-4464b11fda77a9ff2cf11f96a14c851b.mesh"
+
+[deps]
+
+files=[ "res://.import/WholeTemple.obj-4464b11fda77a9ff2cf11f96a14c851b.mesh" ]
+
+source_file="res://Assets/Water/textures/post/WholeTemple.obj"
+dest_files=[ "res://.import/WholeTemple.obj-4464b11fda77a9ff2cf11f96a14c851b.mesh", "res://.import/WholeTemple.obj-4464b11fda77a9ff2cf11f96a14c851b.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

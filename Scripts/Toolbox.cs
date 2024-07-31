@@ -32,4 +32,8 @@ public class Toolbox : Item
         ConsumeSupplies(AmmountThatCaneBeRepaired);
         it.Repair(AmmountThatCaneBeRepaired);
     }
+    public override string GetInventoryItemName()
+	{
+		return ItemName + CurrentSupplies.ToString();
+	}
 }

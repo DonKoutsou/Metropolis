@@ -120,7 +120,7 @@ __meta__ = {
 }
 
 [node name="MeshInstance5" type="MeshInstance" parent="." index="4"]
-transform = Transform( 391.94, 0, 0, 0, 391.94, 0, 0, 0, 391.94, -1122.88, 166.518, 2893.13 )
+transform = Transform( 391.94, 0, 0, 0, 391.94, 0, 0, 0, 391.94, -774.232, 166.518, 1348.63 )
 lod_max_distance = 6000.0
 mesh = ExtResource( 7 )
 material/0 = ExtResource( 1 )
@@ -153,60 +153,60 @@ collision_mask = 0
 shape = SubResource( 26 )
 
 [node name="House" parent="." index="6" instance=ExtResource( 3 )]
-transform = Transform( -0.976609, 0, 0.215025, 0, 1, 0, -0.215025, 0, -0.976609, -299.268, 1359.27, 3090.63 )
+transform = Transform( -0.976609, 0, 0.215025, 0, 1, 0, -0.215025, 0, -0.976609, 49.3804, 1359.27, 1546.13 )
 
 [node name="WindGenerator" parent="." index="7" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -215.093, 1355.59, 2566.55 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 133.555, 1355.59, 1022.05 )
 
 [node name="WindGenerator2" parent="." index="8" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -460.677, 1353.28, 2889.32 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -112.029, 1353.28, 1344.82 )
 
 [node name="WindGenerator3" parent="." index="9" instance=ExtResource( 2 )]
-transform = Transform( -0.872078, 0, -0.489367, 0, 1, 0, 0.489367, 0, -0.872078, -44.4279, 1350.82, 2721.43 )
+transform = Transform( -0.872078, 0, -0.489367, 0, 1, 0, 0.489367, 0, -0.872078, 304.22, 1350.82, 1176.93 )
 
 [node name="WindGenerator5" parent="." index="10" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -185.333, 1353.18, 3092.86 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 163.315, 1353.18, 1548.36 )
 
 [node name="WindGenerator6" parent="." index="11" instance=ExtResource( 2 )]
-transform = Transform( 0.174989, 0, 0.98457, 0, 1, 0, -0.98457, 0, 0.174989, -1700.29, 1150.23, 2915.6 )
+transform = Transform( 0.174989, 0, 0.98457, 0, 1, 0, -0.98457, 0, 0.174989, -1351.64, 1150.23, 1371.1 )
 
 [node name="StaticBody" parent="." index="12" instance=ExtResource( 4 )]
-transform = Transform( -0.061549, -0.0123566, -0.998028, -0.000760596, 0.999924, -0.0123332, 0.998104, -2.32831e-10, -0.0615537, -1786.06, 1161.68, 2874.48 )
+transform = Transform( -0.061549, -0.0123566, -0.998028, -0.000760596, 0.999924, -0.0123332, 0.998104, -2.32831e-10, -0.0615537, -1437.41, 1161.68, 1329.98 )
 
 [node name="House2" parent="." index="13" instance=ExtResource( 3 )]
-transform = Transform( -0.0615537, 0, -0.998104, 0, 1, 0, 0.998104, 0, -0.0615537, -1762.4, 1154.57, 2866.77 )
+transform = Transform( -0.0615537, 0, -0.998104, 0, 1, 0, 0.998104, 0, -0.0615537, -1413.75, 1154.57, 1322.27 )
 spawnItems = false
 
 [node name="Rock1" parent="." index="14" instance=ExtResource( 9 )]
-transform = Transform( 293.597, -44.6645, -252.111, 58.5886, 385.125, 0, 249.244, -37.9171, 296.974, 1218.11, -330.686, 1984.1 )
+transform = Transform( -231.183, 35.1696, 311.563, 58.5886, 385.125, 0, -308.019, 46.8585, -233.843, 251.177, -483.545, 330.511 )
 
 [node name="Rock2" parent="." index="15" instance=ExtResource( 9 )]
 transform = Transform( 201.595, -30.6685, -412.373, 69.1885, 454.803, 0, 407.683, -62.0201, 203.915, 2751.45, -62.4325, -2695.25 )
 
 [node name="Rock3" parent="." index="17" instance=ExtResource( 15 )]
-transform = Transform( -84.7957, -38.8514, -107.887, 13.1716, 129.993, -57.1643, 113.91, -43.9525, -73.7018, 780.584, 172.509, 1989.3 )
+transform = Transform( 107.894, 28.1654, 88.9092, 13.1716, 129.993, -57.1643, -92.3287, 51.4584, 95.743, 679.012, 19.65, 422.232 )
 
 [node name="Rock4" parent="." index="18" instance=ExtResource( 14 )]
-transform = Transform( 44.7723, 1.01524, 0, -1.01524, 44.7723, 0, 0, 0, 44.7838, 930.307, 157.982, 2146.89 )
+transform = Transform( -43.663, -0.990085, 9.9073, -1.01524, 44.7723, 0, -9.90476, -0.224597, -43.6742, 567.862, 5.12296, 235.424 )
 
 [node name="Rock5" parent="." index="19" instance=ExtResource( 12 )]
-transform = Transform( -21.7006, -8.21597, 17.4935, 10.2893, -27.1767, 0, 16.3603, 6.1941, 23.2038, 974.22, 163.667, 2022.48 )
+transform = Transform( 24.7822, 9.38269, -11.9268, 10.2893, -27.1767, 0, -11.1542, -4.22305, -26.4989, 497.514, 10.808, 347.037 )
 
 [node name="Breakable" parent="." index="20" instance=ExtResource( 13 )]
-transform = Transform( 0.57404, -0.40381, 0.712331, 0.589854, -0.399457, -0.701788, 0.567935, 0.823026, 0.00888436, 951.766, 166.026, 2062.13 )
+transform = Transform( -0.434175, 0.575879, -0.692716, 0.589854, -0.399457, -0.701788, -0.680855, -0.713301, -0.16625, 528.183, 13.167, 313.337 )
 
 [node name="Character" parent="." index="21" instance=ExtResource( 16 )]
-transform = Transform( -0.0817646, 0, -0.996652, 0, 1, 0, 0.996652, 0, -0.0817646, -1792.83, 1155.6, 2863.85 )
+transform = Transform( -0.0817646, 0, -0.996652, 0, 1, 0, 0.996652, 0, -0.0817646, -1444.18, 1155.6, 1319.35 )
 Sitting = true
 Chair = NodePath("../StaticBody2")
 PlayInstrument = true
 InstrumentToSpawnWith = ExtResource( 18 )
 
 [node name="StaticBody2" parent="." index="22" instance=ExtResource( 17 )]
-transform = Transform( 0.0307479, 0, -0.999527, 0, 1, 0, 0.999527, 0, 0.0307479, -1791.4, 1155.39, 2863.72 )
+transform = Transform( 0.0307479, 0, -0.999527, 0, 1, 0, 0.999527, 0, 0.0307479, -1442.75, 1155.39, 1319.22 )
 
 [node name="StaticBody3" parent="." index="23" instance=ExtResource( 17 )]
-transform = Transform( -0.313976, 0, -0.949431, 0, 1, 0, 0.949431, 0, -0.313976, -1791.4, 1155.39, 2869.77 )
+transform = Transform( -0.313976, 0, -0.949431, 0, 1, 0, 0.949431, 0, -0.313976, -1442.75, 1155.39, 1325.27 )
 
 [node name="Vehicle" parent="." index="24" instance=ExtResource( 19 )]
-transform = Transform( -0.487616, 0, -0.873058, 0, 1, 0, 0.873058, 0, -0.487616, -1744.61, 1163.89, 2840.96 )
+transform = Transform( -0.487616, 0, -0.873058, 0, 1, 0, 0.873058, 0, -0.487616, -1395.96, 1163.89, 1296.46 )

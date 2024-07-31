@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Terains/Island4/Island4.tres" type="ArrayMesh" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Assets/TerainTex/SandSimple.tres" type="Material" id=10]
 [ext_resource path="res://Assets/Terains/Island4/Island4_LOD.tres" type="ArrayMesh" id=11]
 [ext_resource path="res://Scenes/Env_Assets/Rock2.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Env_Assets/FabricRoofLong.tscn" type="PackedScene" id=13]
 
 [sub_resource type="SpatialMaterial" id=447]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -136,13 +137,13 @@ transform = Transform( 0.876902, -0.00466019, -0.480647, 0.364881, 0.657385, 0.6
 transform = Transform( -0.339621, -0.0151676, -0.94044, -0.0621629, 0.998046, 0.00635212, 0.938506, 0.0606178, -0.3399, 1255.9, -92.2685, 823.582 )
 
 [node name="House2" parent="." index="13" instance=ExtResource( 7 )]
-transform = Transform( 0.992989, 0, 0.118213, 0, 1, 0, -0.118213, 0, 0.992989, 1093.25, 5.97708, -2448.3 )
+transform = Transform( 0.382265, 0, 0.924054, 0, 1, 0, -0.924054, 0, 0.382265, -552.604, 128.564, -483.756 )
 
 [node name="House3" parent="." index="14" instance=ExtResource( 7 )]
-transform = Transform( 0.677775, 0, 0.735269, 0, 1, 0, -0.735269, 0, 0.677775, 1026.75, 6.01462, -2409.02 )
+transform = Transform( -0.310128, 0, 0.950695, 0, 1, 0, -0.950695, 0, -0.310128, -550.843, 129.7, -406.542 )
 
 [node name="Fireplace" parent="." index="15" instance=ExtResource( 8 )]
-transform = Transform( 0.206836, 0, 0.978376, 0, 1, 0, -0.978376, 0, 0.206836, 1077.72, 8.15495, -2423.24 )
+transform = Transform( -0.752415, 0, 0.65869, 0, 1, 0, -0.65869, 0, -0.752415, -538.906, 130.09, -449.332 )
 
 [node name="SoundMap" parent="." index="18"]
 mesh_library = SubResource( 461 )
@@ -174,3 +175,6 @@ transform = Transform( 62.7025, -95.6254, 598.548, 141.675, -582.762, -107.945, 
 
 [node name="Rock2" parent="." index="22" instance=ExtResource( 12 )]
 transform = Transform( -293.787, -166.023, 1039.19, 0, 1078.92, 172.371, -1052.37, 46.3483, -290.107, -2289.9, -1027.94, 2887.58 )
+
+[node name="StaticBody" parent="." index="25" instance=ExtResource( 13 )]
+transform = Transform( -0.0206458, 0, -0.999787, 0, 1, 0, 0.999787, 0, -0.0206458, -538.23, 136.187, -448.459 )

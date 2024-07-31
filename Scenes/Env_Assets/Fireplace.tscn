@@ -64,6 +64,7 @@ material/0 = ExtResource( 2 )
 script = ExtResource( 6 )
 LOD0 = ExtResource( 1 )
 LOD1 = ExtResource( 7 )
+HideIfNoLod = true
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.543886, 0 )

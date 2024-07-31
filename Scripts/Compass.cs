@@ -3,6 +3,7 @@ using System;
 
 public class Compass : Control
 {
+    bool ShowingCompass = false;
     //Position3D pivot;
     public override void _Ready()
     {
@@ -11,16 +12,12 @@ public class Compass : Control
     }
     public void ToggleCompass(bool toggle)
     {
-        if (toggle)
-        {
-            Show();
-            SetProcess(true);
-        }
-        else
-        {
-            Hide();
-            SetProcess(false);
-        }
+        if (ShowingCompass == toggle)
+            return;
+
+        Visible = toggle;
+        SetProcess(toggle);
+        ShowingCompass = toggle;
     }
   // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)

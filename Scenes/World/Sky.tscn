@@ -56,11 +56,11 @@ visible = false
 light_color = Color( 0.996078, 0.745098, 0.745098, 1 )
 light_size = 1.0
 light_bake_mode = 0
-shadow_enabled = true
 shadow_color = Color( 0.607843, 0.603922, 0.603922, 1 )
 shadow_bias = 1.5
 shadow_reverse_cull_face = true
-directional_shadow_max_distance = 1000.0
+directional_shadow_mode = 1
+directional_shadow_max_distance = 400.0
 
 [node name="GodRays" type="Spatial" parent="Sun"]
 script = ExtResource( 1 )
@@ -70,10 +70,10 @@ attenuation = 1.1487
 light_color = Color( 0.862745, 0.905882, 1, 1 )
 light_energy = 0.417
 light_bake_mode = 0
-shadow_enabled = true
 shadow_color = Color( 0.737255, 0.737255, 0.737255, 1 )
 shadow_bias = 1.5
-directional_shadow_max_distance = 1000.0
+directional_shadow_mode = 1
+directional_shadow_max_distance = 400.0
 
 [node name="GodRays" type="Spatial" parent="Moon"]
 script = ExtResource( 1 )

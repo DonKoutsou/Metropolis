@@ -44,7 +44,7 @@ public class SaveLoadManager : Control
 
 		bool HasVecicle = pl.HasVehicle();
 		Dictionary<string, object> pldata = new Dictionary<string, object>(){
-			{"playerHasVehicle", HasVecicle}
+			{"PlayerHasVehicle", HasVecicle}
 		};
 		if (HasVecicle)
 		{
@@ -65,7 +65,7 @@ public class SaveLoadManager : Control
 			data.Add(dat.Key, dat.Value);
 		}
 		
-		//data.Add("PlayerEnergy", pl.GetCurrentEnergy());
+		data.Add("PlayerEnergy", pl.GetCurrentEnergy());
 
 		int day, hour, mins;
 		DayNight.GetDay(out day);

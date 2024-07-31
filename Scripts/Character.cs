@@ -356,13 +356,14 @@ public class Character : KinematicBody
 	public virtual void OnSongEnded(Instrument inst)
 	{
 		StopMusic();
-		IdleTimer.Start();
+		if (HasInstrument())
+		{
+			IdleTimer.Start();
+		}
 	}
-	
-
 	public void Idle_Timer_Ended()
 	{
-		if (IsInsideTree())
+		if (IsInsideTree() && HasInstrument())
 			PlayMusic();
 	}
 	//////////////////////////////////////////////////////////////////////////

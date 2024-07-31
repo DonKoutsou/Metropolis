@@ -17,10 +17,7 @@ public class Item : RigidBody
 	string ItemPickupActionName = null;
 
 	[Export]
-	string ItemName = "Item";
-	
-	[Export]
-	protected string InventoryItemName = "Item";
+	protected string ItemName = "Item";
 
 	[Export]
 	public string ItemDesc = "Quifsa";

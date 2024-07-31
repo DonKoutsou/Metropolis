@@ -8,9 +8,9 @@ public class Sea : StaticBody
 	public override void _Ready()
 	{
 		GlobalRotation = Vector3.Zero;
-		GetNode<MeshInstance>("Sea").QueueFree();
-		AnimationPlayer anim = GetNode<AnimationPlayer>("AnimationPlayer");
-		anim.Play("Wave");
+		//GetNode<MeshInstance>("Sea").QueueFree();
+		//AnimationPlayer anim = GetNode<AnimationPlayer>("AnimationPlayer");
+		//anim.Play("Wave");
 	}
     //public override void _PhysicsProcess(float delta)
     //{

@@ -25,7 +25,6 @@ ItemType = 16
 ItemIcon = ExtResource( 3 )
 ItemPickupActionName = "Μια καταγραφή"
 ItemName = "Φάκελος"
-InventoryItemName = "Φάκελος"
 ItemDesc = "Μια καταγραφή"
 stackable = false
 
