@@ -26,8 +26,6 @@ ItemDesc = ""
 stackable = false
 Type = 2
 SlotType = 2
-RandomiseColor = true
-LimbColor = Color( 0.956863, 1, 0, 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0 )

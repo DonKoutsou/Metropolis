@@ -1,14 +1,14 @@
 [gd_scene load_steps=21 format=2]
 
-[ext_resource path="res://Assets/Building/House_Ext.obj" type="ArrayMesh" id=1]
-[ext_resource path="res://Assets/Building/House_Int.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://Assets/Building/Assets/House_Exterior.tres" type="ArrayMesh" id=1]
+[ext_resource path="res://Assets/Building/Assets/House_Interior.tres" type="ArrayMesh" id=2]
 [ext_resource path="res://Assets/Building/BuildingInterior.material" type="Material" id=3]
 [ext_resource path="res://Scenes/Env_Assets/HouseDoor.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scripts/House.cs" type="Script" id=5]
 [ext_resource path="res://Assets/Building/BuildingExterior.material" type="Material" id=6]
 [ext_resource path="res://Scenes/Env_Assets/Furniture.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=8]
-[ext_resource path="res://Assets/Building/House_Ext_LOD.obj" type="ArrayMesh" id=9]
+[ext_resource path="res://Assets/Building/Assets/House_ExteriorLOD.tres" type="ArrayMesh" id=9]
 [ext_resource path="res://Scenes/Env_Assets/IndoorsLight.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Env_Assets/Furniture2.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/BuildingDecorations/Decorations2.tscn" type="PackedScene" id=14]
@@ -39,11 +39,11 @@ PossibleFurni = [ ExtResource( 7 ), ExtResource( 13 ), ExtResource( 16 ) ]
 PossibleDeco = [ ExtResource( 15 ), ExtResource( 14 ) ]
 SpawnPool = {
 Resource( "res://Scenes/Items/FastLeg_L.tscn" ): 1,
-Resource( "res://Scenes/Items/Item.tscn" ): 10,
-Resource( "res://Scenes/Items/Battery.tscn" ): 0,
-Resource( "res://Scenes/Items/Guitar.tscn" ): 1,
 Resource( "res://Scenes/Items/FastLeg_R.tscn" ): 1,
-Resource( "res://Scenes/Items/BatteryEmpty.tscn" ): 10
+Resource( "res://Scenes/Items/BatteryEmpty.tscn" ): 10,
+Resource( "res://Scenes/Items/Item.tscn" ): 10,
+Resource( "res://Scenes/Items/Guitar.tscn" ): 1,
+Resource( "res://Scenes/Items/Battery.tscn" ): 0
 }
 
 [node name="HouseDoor" parent="." instance=ExtResource( 4 )]
@@ -120,8 +120,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0338049, 0 )
 generate_lightmap = false
 mesh = ExtResource( 1 )
 material/0 = ExtResource( 6 )
-material/1 = ExtResource( 3 )
-material/2 = ExtResource( 6 )
 script = ExtResource( 8 )
 LOD0 = ExtResource( 1 )
 LOD1 = ExtResource( 9 )
@@ -138,7 +136,6 @@ collision_mask = 0
 mesh = ExtResource( 2 )
 skeleton = NodePath("../..")
 material/0 = ExtResource( 3 )
-material/1 = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody2"]
 shape = SubResource( 2 )

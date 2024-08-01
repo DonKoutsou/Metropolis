@@ -363,7 +363,7 @@ public class InventoryUI : Control
         if (!Inv.IsLimbSlotFilled(l.GetSlotType()))
         {
             owner.ToggleLimb(l.GetLimbType(), true);
-            owner.SetLimbColor(l.GetLimbType(), l.GetColor());
+            //owner.SetLimbColor(l.GetLimbType(), l.GetColor());
             Inv.EquipLimp(l);
         }
         else

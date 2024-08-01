@@ -108,7 +108,7 @@ public class NPC : Character
 	}
 	public void InitialSpawn()
 	{
-		RandomiseLimbs();
+		//RandomiseLimbs();
 	}
 	private void SpawnSit()
 	{
@@ -127,7 +127,7 @@ public class NPC : Character
 			pos.QueueFree();
 		}
 	}
-	void RandomiseLimbs()
+	/*void RandomiseLimbs()
 	{
 		SetLimbColor(LimbType.ARM_L, LimbRandomColorProvider.GetRandomColor());
 		SetLimbColor(LimbType.ARM_R, LimbRandomColorProvider.GetRandomColor());
@@ -135,7 +135,7 @@ public class NPC : Character
 		SetLimbColor(LimbType.LEG_R, LimbRandomColorProvider.GetRandomColor());
 		SetLimbColor(LimbType.N01_LEG_R, LimbRandomColorProvider.GetRandomColor());
 		SetLimbColor(LimbType.N01_LEG_L, LimbRandomColorProvider.GetRandomColor());
-	}
+	}*/
 	public void HighLightObject(bool toggle)
     {
 		foreach (Node child in Skeleton.GetChildren())

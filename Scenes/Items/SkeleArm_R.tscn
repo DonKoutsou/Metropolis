@@ -26,8 +26,6 @@ ItemDesc = "Τα άκρα σχεδιάσμένα για ελαφριές δου�
 stackable = false
 Type = 1
 SlotType = 1
-RandomiseColor = true
-LimbColor = Color( 1, 0, 0, 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0 )

@@ -1,10 +1,10 @@
 [gd_scene load_steps=25 format=2]
 
-[ext_resource path="res://Assets/Building/WindGenerator_Blade.obj" type="ArrayMesh" id=1]
-[ext_resource path="res://Assets/Building/WindGenerator_Base.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://Assets/Building/Assets/WindGen_Base.tres" type="ArrayMesh" id=1]
+[ext_resource path="res://Assets/Building/Assets/WindGeN_Blade.tres" type="ArrayMesh" id=2]
 [ext_resource path="res://Scripts/WindGenerator.cs" type="Script" id=3]
 [ext_resource path="res://Assets/Building/WindGenerator/WindGen.tres" type="Material" id=4]
-[ext_resource path="res://Assets/Building/WindGenerator_BladeHolder.obj" type="ArrayMesh" id=5]
+[ext_resource path="res://Assets/Building/Assets/WindGen_BladeHolder.tres" type="ArrayMesh" id=5]
 [ext_resource path="res://Assets/Clutter/CylinderThing/CylThingyMat.material" type="Material" id=6]
 [ext_resource path="res://Assets/Clutter/CylinderThing/CylinderThingy.tres" type="ArrayMesh" id=7]
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=8]
@@ -217,10 +217,10 @@ script = ExtResource( 3 )
 EnergyCapacity = 1000.0
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-mesh = ExtResource( 2 )
+mesh = ExtResource( 1 )
 material/0 = ExtResource( 4 )
 script = ExtResource( 10 )
-LOD0 = ExtResource( 2 )
+LOD0 = ExtResource( 1 )
 LOD1 = SubResource( 13 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="."]
@@ -254,7 +254,7 @@ collision_mask = 0
 [node name="MeshInstance" type="MeshInstance" parent="Rotor_Pivot/BladePivot/StaticBody"]
 transform = Transform( 1, -1.74846e-07, 0, 1.74846e-07, 1, 0, 0, 0, 1, 0, 0, 0 )
 material_override = ExtResource( 4 )
-mesh = ExtResource( 1 )
+mesh = ExtResource( 2 )
 skeleton = NodePath("../..")
 
 [node name="CollisionShape" type="CollisionShape" parent="Rotor_Pivot/BladePivot/StaticBody"]
@@ -268,7 +268,7 @@ collision_mask = 0
 
 [node name="MeshInstance2" type="MeshInstance" parent="Rotor_Pivot/BladePivot/StaticBody2"]
 transform = Transform( -1, 1.86265e-09, -1.50996e-07, 1.86265e-09, 1, 1.62838e-16, 1.50996e-07, -1.18414e-16, -1, 0, 0, 0 )
-mesh = ExtResource( 1 )
+mesh = ExtResource( 2 )
 skeleton = NodePath("../..")
 material/0 = ExtResource( 4 )
 

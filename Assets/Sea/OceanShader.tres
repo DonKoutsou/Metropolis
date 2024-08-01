@@ -76,6 +76,21 @@ uniform float MAX_RADIUS = 2.0;
 uniform float HASHSCALE1 = 0.1031;
 uniform vec3 HASHSCALE3 = vec3(0.1031, 0.1030, 0.0973);
 
+
+float hash12(vec2 p)
+{
+	vec3 p3  = fract(vec3(p.xyx) * HASHSCALE1);
+	p3 += dot(p3, p3.yzx + 19.19);
+	return fract((p3.x + p3.y) * p3.z);
+}
+
+vec2 hash22(vec2 p)
+{
+	vec3 p3 = fract(vec3(p.xyx) * HASHSCALE3);
+	p3 += dot(p3, p3.yzx+19.19);
+	return fract((p3.xx+p3.yz)*p3.zy);
+}
+
 void vertex() {
 
 	//float height = texture(gerstner_height_map, WORLD_MATRIX[3].xz * TIME).r;
@@ -171,7 +186,7 @@ void fragment() {
 	METALLIC = 0.0;
 	ALPHA = alpha_output;
 	
-	/*if (IsRaining)
+	if (IsRaining)
 	{
 	    // Calculate resolution based on the ring width
 	    float resolution = 10.0 * exp2(-3.0 / (1.0 / vec2(2.0, 2.0)).x);
@@ -221,9 +236,9 @@ void fragment() {
 	    //n.z += 2.0;
 
 	    // Mix the calculated normal and albedo with the rain effect
-	    //NORMALMAP = mix(normal_output, n, RainInt * fadeFactor);
+	    //NORMALMAP = mix(normal_output, n, RainInt);
 	    ALBEDO = mix(albedo_output, color, RainInt);
-	}*/
+	}
 
 }
 
@@ -250,8 +265,8 @@ void light() {
 [sub_resource type="OpenSimplexNoise" id=11]
 
 [sub_resource type="NoiseTexture" id=12]
-width = 1024
-height = 1024
+width = 256
+height = 256
 seamless = true
 noise = SubResource( 11 )
 
@@ -261,7 +276,7 @@ gradient = ExtResource( 12 )
 [resource]
 shader = SubResource( 10 )
 shader_param/IsRaining = true
-shader_param/ring_width = 450.0
+shader_param/ring_width = 40.0
 shader_param/gerstner_value = 1.0
 shader_param/TextureRot = 0.0
 shader_param/TextureRot2 = 0.0

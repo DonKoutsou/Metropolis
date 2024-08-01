@@ -96,7 +96,7 @@ public class Inventory : Spatial
     {
         CharacterOwner.ToggleLimb(l.GetLimbType(), true);
         CharacterOwner.ToggleLimbEffect(l.GetLimbType(), true);
-        CharacterOwner.SetLimbColor(l.GetLimbType(), l.GetColor());
+        //CharacterOwner.SetLimbColor(l.GetLimbType(), l.GetColor());
         EquippedLimbs.Add(l);
     }
     public void UnEquipLimp(Limb l)
@@ -183,7 +183,7 @@ public class Inventory : Spatial
                     }
                 }
             }
-            else if (newItem is Limb l)
+            /*else if (newItem is Limb l)
             {
                 Array CustomDataKeys = (Array)res.Get("CustomDataKeys");
 		        Godot.Collections.Array CustomDataValues = (Godot.Collections.Array)res.Get("CustomDataValues");
@@ -195,7 +195,7 @@ public class Inventory : Spatial
                     }
                 }
                 l.RandomiseColor = false;
-            }
+            }*/
             else if (newItem is PaintCan p)
             {
                 Array CustomDataKeys = (Array)res.Get("CustomDataKeys");

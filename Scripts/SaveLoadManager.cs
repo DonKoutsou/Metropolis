@@ -109,12 +109,12 @@ public class SaveLoadManager : Control
 				Values[0] = box.GetCurrentSupplyAmmount();
 				HasData = true;
 			}
-			else if (it is Limb l)
+			/*else if (it is Limb l)
 			{
 				Keys[0] = "LimbColor";
 				Values[0] = l.GetColor();
 				HasData = true;
-			}
+			}*/
 			else if (it is PaintCan p)
 			{
 				Keys[0] = "CanColor";

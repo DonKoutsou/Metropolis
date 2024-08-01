@@ -3,31 +3,31 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-[Tool]
 public class Limb : Item
 {
     [Export]
     LimbType Type = 0;
     [Export]
     LimbSlotType SlotType = 0;
-    [Export]
-    public bool RandomiseColor = false;
-    [Export]
-    Color LimbColor = new Color(1,1,1);
+    //[Export]
+    //public bool RandomiseColor = false;
+    //[Export]
+    //Color LimbColor = new Color(1,1,1);
 
     //public bool Equiped = false;
     public override string GetInventoryItemName()
 	{
-		return LimbRandomColorProvider.TranslateColor(LimbColor) + ItemName;
+		//return LimbRandomColorProvider.TranslateColor(LimbColor) + ItemName;
+        return ItemName;
 	}
-    public void SetColor(Color col)
+    /*public void SetColor(Color col)
     {
         LimbColor = col;
     }
     public Color GetColor()
     {
         return LimbColor;
-    }
+    }*/
     public LimbType GetLimbType()
     {
         return Type;
@@ -41,20 +41,20 @@ public class Limb : Item
         if(Engine.EditorHint)
             return;
         base._Ready();
-        if (RandomiseColor)
+        /*if (RandomiseColor)
         {
             LimbColor = LimbRandomColorProvider.GetRandomColor();
         }
-        ((GradientTexture)((SpatialMaterial)GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0)).DetailAlbedo).Gradient.SetColor(0, LimbColor);
+        ((GradientTexture)((SpatialMaterial)GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0)).DetailAlbedo).Gradient.SetColor(0, LimbColor);*/
     }
-    public override void _Process(float delta)
+    /*public override void _Process(float delta)
     {
         base._Process(delta);
         if(!Engine.EditorHint)
             return;
         
         ((GradientTexture)((SpatialMaterial)GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0)).DetailAlbedo).Gradient.SetColor(0, LimbColor);
-    }
+    }*/
 }
 public enum LimbType
 {

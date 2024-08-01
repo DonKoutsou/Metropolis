@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/SunMoonPivot.cs" type="Script" id=1]
 
@@ -13,14 +13,6 @@ height = 3200.0
 radial_segments = 16
 rings = 16
 
-[sub_resource type="QuadMesh" id=87]
-size = Vector2( 1000, 1000 )
-
-[sub_resource type="SpatialMaterial" id=88]
-flags_use_shadow_to_opacity = true
-transmission_enabled = true
-transmission = Color( 0, 0, 0, 1 )
-
 [sub_resource type="SpatialMaterial" id=14]
 flags_unshaded = true
 albedo_color = Color( 0.890196, 1, 0.996078, 1 )
@@ -32,15 +24,16 @@ height = 800.0
 radial_segments = 16
 rings = 16
 
-[sub_resource type="SphereMesh" id=89]
+[sub_resource type="SphereMesh" id=87]
 radius = 22000.0
-height = 22000.0
+height = 44000.0
 
-[sub_resource type="SpatialMaterial" id=90]
+[sub_resource type="SpatialMaterial" id=88]
 flags_do_not_receive_shadows = true
 flags_disable_ambient_light = true
 params_specular_mode = 4
 params_cull_mode = 1
+params_depth_draw_mode = 2
 
 [node name="SunMoonPivot" type="Spatial"]
 script = ExtResource( 1 )
@@ -50,26 +43,12 @@ transform = Transform( 1, 5.96046e-08, -7.45058e-08, 1.15591e-07, 1, 2.08616e-07
 cast_shadow = 0
 mesh = SubResource( 85 )
 
-[node name="MeshInstance3" type="MeshInstance" parent="Sun"]
-transform = Transform( -134.648, -4.76835e-07, -1.14441e-05, 9.53674e-07, 134.648, 0, 2.28882e-05, 1.33514e-05, -134.648, 0.000295556, -0.000827556, 3966.89 )
-cast_shadow = 0
-generate_lightmap = false
-mesh = SubResource( 87 )
-material/0 = SubResource( 88 )
-
 [node name="Moon" type="MeshInstance" parent="."]
 transform = Transform( 1, 1.64334e-08, 6.58151e-09, -7.64833e-08, 1, 2.08616e-07, 1.41731e-07, 1.49012e-07, 1, 0, 0, -20000 )
 cast_shadow = 0
 mesh = SubResource( 86 )
 
-[node name="MeshInstance3" type="MeshInstance" parent="Moon"]
-transform = Transform( 134.648, 9.53209e-14, 2.27374e-13, 3.29476e-12, 134.648, 0, 0, 0, 134.648, 1.58773e-05, 0.000503268, -2412.41 )
-cast_shadow = 0
-generate_lightmap = false
-mesh = SubResource( 87 )
-material/0 = SubResource( 88 )
-
 [node name="MeshInstance" type="MeshInstance" parent="."]
 cast_shadow = 0
-mesh = SubResource( 89 )
-material/0 = SubResource( 90 )
+mesh = SubResource( 87 )
+material/0 = SubResource( 88 )

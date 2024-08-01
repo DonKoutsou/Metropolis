@@ -24,7 +24,7 @@ _data = [ Vector2( 0, 90 ), 0.0, 0.0, 0, 0, Vector2( 1, 90 ), 0.0, 0.0, 0, 0 ]
 render_priority = 1
 flags_fixed_size = true
 params_diffuse_mode = 4
-params_specular_mode = 3
+params_specular_mode = 4
 params_blend_mode = 1
 albedo_color = Color( 1, 0.839216, 0.552941, 1 )
 distance_fade_mode = 1
@@ -59,6 +59,7 @@ rings = 2
 render_priority = 1
 flags_transparent = true
 flags_do_not_receive_shadows = true
+params_specular_mode = 4
 params_depth_draw_mode = 2
 params_billboard_mode = 3
 particles_anim_h_frames = 1
@@ -98,8 +99,8 @@ size = Vector2( 1000, 1000 )
 [node name="WorldParticleManager" type="Spatial"]
 script = ExtResource( 5 )
 
-[node name="Spatial" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2200, 0 )
+[node name="Clouds" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5000, 0 )
 script = ExtResource( 4 )
 CloudHeight = 5000.0
 

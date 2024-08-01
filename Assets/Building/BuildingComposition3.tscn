@@ -1,7 +1,6 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://Assets/Building/House_Ext3.obj" type="ArrayMesh" id=1]
-[ext_resource path="res://Assets/Building/BuildingInterior.material" type="Material" id=3]
+[ext_resource path="res://Assets/Building/Assets/House_Exterior3.tres" type="ArrayMesh" id=1]
 [ext_resource path="res://Scenes/Env_Assets/HouseDoor.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scripts/House.cs" type="Script" id=5]
 [ext_resource path="res://Assets/Building/BuildingExterior.material" type="Material" id=6]
@@ -23,11 +22,11 @@ FurnitureAmmount = 6
 DecorationAmmount = 2
 SpawnPool = {
 Resource( "res://Scenes/Items/FastLeg_L.tscn" ): 1,
-Resource( "res://Scenes/Items/Battery.tscn" ): 2,
 Resource( "res://Scenes/Items/FastLeg_R.tscn" ): 1,
+Resource( "res://Scenes/Items/BatteryEmpty.tscn" ): 10,
 Resource( "res://Scenes/Items/Guitar.tscn" ): 1,
 Resource( "res://Scenes/Items/Drahma.tscn" ): 40,
-Resource( "res://Scenes/Items/BatteryEmpty.tscn" ): 10
+Resource( "res://Scenes/Items/Battery.tscn" ): 2
 }
 
 [node name="IndoorsLight" parent="." instance=ExtResource( 12 )]
@@ -43,7 +42,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0338049, 0 )
 generate_lightmap = false
 mesh = ExtResource( 1 )
 material/0 = ExtResource( 6 )
-material/1 = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="HouseExterior"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0338049, 0 )

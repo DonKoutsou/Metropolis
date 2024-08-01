@@ -1,17 +1,8 @@
-[gd_resource type="SpatialMaterial" load_steps=7 format=2]
+[gd_resource type="SpatialMaterial" load_steps=4 format=2]
 
 [ext_resource path="res://Assets/Gen3Machine/Body/Textures/Body_Texture_Body_BaseColor.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Gen3Machine/Body/Textures/Body_Texture_Body_Normal.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Gen3Machine/Body/Textures/Body_Texture_Body_OcclusionRoughnessMetallic.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Gen3Machine/Body/Textures/Body_ColorMask.png" type="Texture" id=4]
-
-[sub_resource type="Gradient" id=3]
-offsets = PoolRealArray( 0.542522 )
-colors = PoolColorArray( 0, 0, 0, 1 )
-
-[sub_resource type="GradientTexture" id=2]
-gradient = SubResource( 3 )
-width = 8
 
 [resource]
 resource_local_to_scene = true
@@ -29,8 +20,3 @@ ao_light_affect = 1.0
 ao_texture = ExtResource( 3 )
 ao_on_uv2 = false
 ao_texture_channel = 0
-detail_enabled = true
-detail_mask = ExtResource( 4 )
-detail_blend_mode = 1
-detail_uv_layer = 0
-detail_albedo = SubResource( 2 )

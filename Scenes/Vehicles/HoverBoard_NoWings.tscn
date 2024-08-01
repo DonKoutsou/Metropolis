@@ -1,27 +1,24 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=40 format=2]
 
-[ext_resource path="res://Assets/Boat/Parts/EnginesJoint.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://Assets/Boat/Parts/EngineJoint.tres" type="ArrayMesh" id=1]
 [ext_resource path="res://Scripts/Vehicle.cs" type="Script" id=2]
 [ext_resource path="res://addons/MotionTrail/MotionTrail.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Boat/Καικι3Ματ.tres" type="Material" id=4]
 [ext_resource path="res://Scripts/VehicleBoostTrails.cs" type="Script" id=5]
-[ext_resource path="res://Assets/Boat/Parts/HoverEngine.obj" type="ArrayMesh" id=6]
-[ext_resource path="res://Assets/Boat/BoatWindDetector.obj" type="ArrayMesh" id=7]
+[ext_resource path="res://Assets/Boat/Parts/HoverEngine.tres" type="ArrayMesh" id=6]
+[ext_resource path="res://Assets/Boat/Parts/WindDetector.tres" type="ArrayMesh" id=7]
 [ext_resource path="res://Scenes/Vehicles/HoverParticles.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scripts/WindDetector.cs" type="Script" id=9]
-[ext_resource path="res://Assets/Boat/Parts/Engines.obj" type="ArrayMesh" id=10]
-[ext_resource path="res://Assets/Boat/Parts/Steer.obj" type="ArrayMesh" id=11]
+[ext_resource path="res://Assets/Boat/Parts/Engines.tres" type="ArrayMesh" id=10]
+[ext_resource path="res://Assets/Boat/Parts/Steer.tres" type="ArrayMesh" id=11]
 [ext_resource path="res://Assets/Boat/ΚαικιEngineMat.tres" type="Material" id=12]
 [ext_resource path="res://Assets/Sounds/Engine/Engine3.ogg" type="AudioStream" id=13]
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Assets/Boat/Kaiki.obj" type="ArrayMesh" id=15]
+[ext_resource path="res://Assets/Boat/Parts/Body.tres" type="ArrayMesh" id=15]
 [ext_resource path="res://Scenes/Vehicles/HoverParticlesDirt.tscn" type="PackedScene" id=16]
 [ext_resource path="res://shaders/OutlineShader.tres" type="Material" id=17]
 [ext_resource path="res://Assets/GodotPlushie/godot_plush.material" type="Material" id=18]
 [ext_resource path="res://Scenes/Vehicles/HoverEngineParticles.tscn" type="PackedScene" id=19]
-
-[sub_resource type="PhysicsMaterial" id=1]
-friction = 0.0
 
 [sub_resource type="Curve" id=7]
 min_value = -150.0
@@ -314,7 +311,6 @@ pause_mode = 1
 collision_layer = 528
 collision_mask = 804
 mass = 40.0
-physics_material_override = SubResource( 1 )
 linear_damp = 1.0
 angular_damp = 10.0
 script = ExtResource( 2 )
@@ -337,10 +333,11 @@ transform = Transform( 1, -5.50244e-11, 0, 1.32104e-10, 1, 0, 0, -3.46945e-18, 1
 material_override = ExtResource( 12 )
 material_overlay = ExtResource( 17 )
 mesh = ExtResource( 10 )
-material/0 = ExtResource( 12 )
 
 [node name="WindDetector" type="MeshInstance" parent="VehicleBody"]
 transform = Transform( 0.0239615, 0.00172045, -0.999714, -0.000419281, 1, 0.00171089, 0.999717, 0.000378179, 0.0239623, -0.0573806, 4.83131, 9.57226 )
+cast_shadow = 0
+generate_lightmap = false
 mesh = ExtResource( 7 )
 script = ExtResource( 9 )
 
@@ -442,6 +439,7 @@ update_scale = false
 
 [node name="LightMesh" type="MeshInstance" parent="VehicleBody"]
 transform = Transform( 1, -0.00022008, -0.00144871, -0.00145632, -0.258818, -0.965926, -0.000162362, 0.965927, -0.258818, 0.0113567, 6.12427, 13.7928 )
+cast_shadow = 0
 mesh = SubResource( 31 )
 
 [node name="SpotLight" type="SpotLight" parent="VehicleBody/LightMesh"]
@@ -449,6 +447,7 @@ transform = Transform( 0.999998, -0.000111042, -0.00137818, -0.00138151, -0.1207
 light_color = Color( 1, 0.956863, 0.815686, 1 )
 light_energy = 10.0
 shadow_enabled = true
+shadow_bias = 2.0
 shadow_reverse_cull_face = true
 spot_range = 1101.51
 spot_attenuation = 0.406125
@@ -523,6 +522,7 @@ anims/StopTrail = SubResource( 145 )
 
 [node name="godot_plush_sitted" type="MeshInstance" parent="VehicleBody"]
 transform = Transform( 2.01621, 1.28624, 3.12714, -0.49628, 3.714, -1.20765, -3.34472, 0.224279, 2.06424, 3.26234, 2.27878, 0.0313188 )
+cast_shadow = 0
 mesh = SubResource( 148 )
 
 [node name="RayFL" type="RayCast" parent="."]
@@ -564,7 +564,6 @@ collision_mask = 260
 
 [node name="MeshInstance" type="MeshInstance" parent="RayFR"]
 transform = Transform( -1, -4.29172e-07, -8.74228e-08, -4.2519e-07, 1, -4.27244e-08, 8.7481e-08, -4.28408e-08, -1, -8.7738e-05, -0.131988, -0.000142097 )
-material_override = ExtResource( 12 )
 mesh = ExtResource( 1 )
 skeleton = NodePath("../..")
 material/0 = ExtResource( 12 )

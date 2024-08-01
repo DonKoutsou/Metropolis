@@ -98,11 +98,11 @@ public class Item : RigidBody
 			float cap = (float)data.CustomData["CurrentSupplies"];
 			box.SetCurrentSupplies(cap);
 		}
-		else if (this is Limb limb)
+		/*else if (this is Limb limb)
 		{
 			Color cap = (Color)data.CustomData["LimbColor"];
 			limb.SetColor(cap);
-		}
+		}*/
 		else if (this is PaintCan Can)
 		{
 			Color cap = (Color)data.CustomData["CanColor"];
@@ -147,13 +147,13 @@ public class ItemInfo
 			else
 				CustomData.Add("CurrentSupplies", box.GetCurrentSupplyAmmount());
 		}
-		else if (it is Limb l)
+		/*else if (it is Limb l)
 		{
 			if (CustomData.ContainsKey("LimbColor"))
 				CustomData["LimbColor"] = l.GetColor();
 			else
 				CustomData.Add("LimbColor", l.GetColor());
-		}
+		}*/
 		else if (it is PaintCan p)
 		{
 			if (CustomData.ContainsKey("CanColor"))

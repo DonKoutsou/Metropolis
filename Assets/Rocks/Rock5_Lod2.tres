@@ -1,11 +1,4 @@
-[gd_resource type="ArrayMesh" load_steps=2 format=2]
-
-[sub_resource type="SpatialMaterial" id=1]
-resource_name = "RockMat.002"
-vertex_color_use_as_albedo = true
-params_cull_mode = 2
-albedo_color = Color( 0.735357, 0.735357, 0.735357, 1 )
-roughness = 0.552786
+[gd_resource type="ArrayMesh" format=2]
 
 [resource]
 resource_name = "Rocks2_Mesh008"
@@ -16,7 +9,6 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 2194691,
 "index_count": 402,
-"material": SubResource( 1 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 69

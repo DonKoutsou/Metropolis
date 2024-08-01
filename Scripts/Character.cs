@@ -377,7 +377,7 @@ public class Character : KinematicBody
 
 		GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>(limbname).Visible = toggle;
 	}
-	public void SetLimbColor(LimbType limb, Color colorarion)
+	/*public void SetLimbColor(LimbType limb, Color colorarion)
 	{
 		MeshInstance limbtocolor = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>(LimbTranslator.EnumToString(limb));
 		MeshInstance limbtocolorlod = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>(LimbTranslator.EnumToString(limb) + "_LOD");
@@ -388,7 +388,7 @@ public class Character : KinematicBody
 	{
 		MeshInstance limbtocolor = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>(LimbTranslator.EnumToString(limb));
 		return ((GradientTexture)((SpatialMaterial)limbtocolor.GetActiveMaterial(0)).DetailAlbedo).Gradient.GetColor(0);
-	}
+	}*/
 	/*public bool HasLimbOfType(LimbType type)
 	{
 		LoddedCharacter lod = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<LoddedCharacter>("Skeleton");
@@ -410,10 +410,10 @@ public class Character : KinematicBody
 		//CurrentEnergy = info.CurrentEnergy;
 		m_balive = info.Alive;
 
-		for (int i = 0; i < 6; i++)
+		/*for (int i = 0; i < 6; i++)
 		{
 			SetLimbColor((LimbType)i, info.LimbColors[i]);
-		}
+		}*/
 	}
 	////Old stuff
 	public float GetCharacterBatteryCap()
@@ -449,7 +449,7 @@ public class CharacterInfo
 	public float CurrentEnergy = 0.0f;
 	public bool Alive = false;
 	public Dictionary<string, object> CustomData = new Dictionary<string, object>();
-	public List<Color> LimbColors = new List<Color>();
+	//public List<Color> LimbColors = new List<Color>();
 	public bool Talked = false;
 	public void UpdateInfo(NPC it)
 	{
@@ -459,10 +459,10 @@ public class CharacterInfo
 		CurrentEnergy = it.GetCurrentCharacterEnergy();
 		Alive = it.IsAlive();
 		Talked = it.Talked;
-		for (int i = 0; i < 6; i++)
+		/*for (int i = 0; i < 6; i++)
 		{
 			LimbColors.Add(it.GetLimbColor((LimbType)i));
-		}
+		}*/
 	}
 	public Dictionary<string, object>GetPackedData(out bool HasData)
 	{
@@ -476,12 +476,12 @@ public class CharacterInfo
 			{"Alive", Alive},
 			{"Talked", Talked}
 		};
-		Color[] LimbColorsAr = new Color[6];
+		/*Color[] LimbColorsAr = new Color[6];
 		for (int i = 0; i < 6; i++)
 		{
 			LimbColorsAr[i] = LimbColors[i];
 		}
-		data.Add("LimbColors", LimbColorsAr);
+		data.Add("LimbColors", LimbColorsAr);*/
 		if (CustomData.Count > 0)
 		{
 			HasData = true;
@@ -507,11 +507,11 @@ public class CharacterInfo
 		CurrentEnergy = (float)data.Get("Energy");
 		Alive = (bool)data.Get("Alive");
 		Talked = (bool)data.Get("Talked");
-		Godot.Color[] LimbCols = (Godot.Color[])data.Get("LimbColors");
+		/*Godot.Color[] LimbCols = (Godot.Color[])data.Get("LimbColors");
 		for (int i = 0; i < 6; i++)
 		{
 			LimbColors.Add(LimbCols[i]);
-		}
+		}*/
 
 
 		Godot.Collections.Array CustomDataKeys = (Godot.Collections.Array)data.Get("CustomDataKeys");
