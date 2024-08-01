@@ -20,8 +20,8 @@ THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMP
 
 // For this shader min. GODOT 3.1.1 is required, because 3.1 has a depth buffer bug!
 shader_type 	spatial;
-render_mode 	cull_back,diffuse_burley,specular_schlick_ggx, blend_mix;
-
+render_mode 	cull_back,diffuse_burley,specular_schlick_ggx, blend_mix, depth_draw_always;
+//render_mode async_visible,blend_mix,depth_draw_always,cull_disabled,diffuse_lambert,specular_schlick_ggx;
 
 // Wave settings:
 uniform float	wave_speed		 = 0.5; // Speed scale for the waves
@@ -188,15 +188,15 @@ shader_param/wave_speed = 0.5
 shader_param/wave_a = Plane( 1, 1, 0, 3 )
 shader_param/wave_b = Plane( 1, 0.6, 0, 1.55 )
 shader_param/wave_c = Plane( 1, 1.3, 0, 0.9 )
-shader_param/sampler_scale = Vector2( 0.2, 0.2 )
+shader_param/sampler_scale = Vector2( 0.05, 0.05 )
 shader_param/sampler_direction = Vector2( 0.05, 0.04 )
 shader_param/uv_sampler_scale = Vector2( 0.25, 0.25 )
 shader_param/uv_sampler_strength = 0.023
 shader_param/foam_level = 0.5
-shader_param/refraction = 0.075
-shader_param/color_deep = Color( 0.513726, 0.533333, 0.552941, 1 )
-shader_param/color_shallow = Color( 0.458824, 0, 0, 1 )
-shader_param/beers_law = 2.0
+shader_param/refraction = 2.2
+shader_param/color_deep = Color( 0, 0, 0, 1 )
+shader_param/color_shallow = Color( 0.494118, 0.717647, 1, 1 )
+shader_param/beers_law = 0.009
 shader_param/depth_offset = -0.75
 shader_param/projector = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 shader_param/proximity_fade_distance = 26.034

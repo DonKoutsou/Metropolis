@@ -161,7 +161,7 @@ data = {
 }
 __meta__ = {
 "_editor_clip_": 0,
-"_editor_floor_": Vector3( 0, -1, 0 )
+"_editor_floor_": Vector3( 0, -2, 0 )
 }
 
 [node name="Bounds" parent="." index="4"]
@@ -246,7 +246,7 @@ transform = Transform( -6.14889, 9.15108, -59.139, -51.0355, 30.243, 9.98596, 31
 transform = Transform( 39.8105, 44.8232, -4.99947, -42.1778, 39.3624, 17.0474, 15.9732, -7.77627, 57.4749, -668.973, -3469.36, -135.741 )
 
 [node name="Cemetary_Temple" parent="." index="25" instance=ExtResource( 16 )]
-transform = Transform( 9.90567, 0, 1.3703, 0, 10, 0, -1.3703, 0, 9.90567, -386.899, -60.3714, -210.83 )
+transform = Transform( 9.90567, 0, 1.3703, 0, 10, 0, -1.3703, 0, 9.90567, -386.899, -39.9966, -210.83 )
 
 [node name="Particles" parent="." index="26" instance=ExtResource( 14 )]
 transform = Transform( 0.690718, 0, -0.723124, 0, 1, 0, 0.723124, 0, 0.690718, 966.743, -653.007, 338.462 )

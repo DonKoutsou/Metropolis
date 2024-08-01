@@ -46,7 +46,7 @@ public class LoddedCharacter : Skeleton
                     return;
                 GetNode<MeshInstance>("Body").Visible = true;
                 GetNode<MeshInstance>("Body_LOD").Visible = false;
-                GetNode<MeshInstance>("eyes").Visible = true;
+                GetNode<MeshInstance>("eyes001").Visible = true;
                 GetNode<MeshInstance>("Face").Visible = true;
                 GetNode<MeshInstance>("Face_LOD").Visible = false;
                 GetNode<MeshInstance>("LegsUpper").Visible = true;
@@ -79,7 +79,7 @@ public class LoddedCharacter : Skeleton
                 
                 GetNode<MeshInstance>("Body").Visible = false;
                 GetNode<MeshInstance>("Body_LOD").Visible = true;
-                GetNode<MeshInstance>("eyes").Visible = false;
+                GetNode<MeshInstance>("eyes001").Visible = false;
                 GetNode<MeshInstance>("Face").Visible = false;
                 GetNode<MeshInstance>("Face_LOD").Visible = true;
                 GetNode<MeshInstance>("LegsUpper").Visible = false;

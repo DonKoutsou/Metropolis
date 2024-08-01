@@ -275,7 +275,7 @@ gradient = ExtResource( 12 )
 
 [resource]
 shader = SubResource( 10 )
-shader_param/IsRaining = true
+shader_param/IsRaining = false
 shader_param/ring_width = 40.0
 shader_param/gerstner_value = 1.0
 shader_param/TextureRot = 0.0

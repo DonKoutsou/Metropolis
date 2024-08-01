@@ -641,21 +641,25 @@ Consumption = SubResource( 165 )
 
 [node name="Guy" parent="Pivot" instance=ExtResource( 17 )]
 
+[node name="Skeleton" parent="Pivot/Guy/Armature" index="1"]
+bones/3/bound_children = [  ]
+bones/6/bound_children = [  ]
+
 [node name="HeadRot2Pivot" parent="Pivot/Guy/Armature/Skeleton" index="0"]
-transform = Transform( -1, 0, -8.74228e-08, 3.14519e-16, 1, -3.6047e-09, 8.74228e-08, -2.27374e-13, -1, -1.70762, 280.709, 19.629 )
+transform = Transform( -1, 0, -8.74228e-08, 3.14612e-16, 1, -3.60583e-09, 8.74228e-08, -2.27374e-13, -1, -1.71338, 280.684, 20.3467 )
 
 [node name="Listener" type="Listener" parent="Pivot/Guy/Armature/Skeleton/HeadRot2Pivot" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.93238, 0.188751, 0.52549 )
 current = true
 
 [node name="BoneAttachment" parent="Pivot/Guy/Armature/Skeleton" index="1"]
-transform = Transform( 0.997532, -0.0541584, -0.0446859, 0.0479576, 0.990385, -0.12976, 0.0512839, 0.127297, 0.990538, -0.531937, 265.515, 10.969 )
+transform = Transform( 0.997145, -0.053086, -0.0537065, 0.0455955, 0.990175, -0.132186, 0.0601962, 0.12936, 0.989769, -0.495013, 265.509, 11.6584 )
 
 [node name="MeshInstance" parent="Pivot/Guy/Armature/Skeleton/BoneAttachment/HeadPivot" index="0"]
 mesh = SubResource( 166 )
 
 [node name="InstrumentAtatchment" parent="Pivot/Guy/Armature/Skeleton" index="2"]
-transform = Transform( 0.997264, -0.0131355, -0.0727432, 0.0112752, 0.9996, -0.0259253, 0.0730546, 0.0250341, 0.997014, 2.00357, 213.249, -0.914778 )
+transform = Transform( 0.996782, -0.0104695, -0.0794769, 0.00796916, 0.999465, -0.0317132, 0.0797664, 0.0309778, 0.996332, 1.98456, 213.298, -0.517386 )
 
 [node name="Arm_L" parent="Pivot/Guy/Armature/Skeleton" index="3"]
 material_overlay = SubResource( 167 )

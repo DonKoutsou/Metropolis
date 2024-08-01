@@ -39,10 +39,9 @@ rings = 0
 [node name="HoverEngineParticles" type="Particles"]
 transform = Transform( 1, -8.74228e-08, -8.74228e-08, -8.74228e-08, -1, 0, -8.74228e-08, 7.64275e-15, -1, 0, 0, 0 )
 cast_shadow = 0
-emitting = false
 amount = 10
 lifetime = 0.5
-visibility_aabb = AABB( -17.8206, -24.3812, -12.3799, 35.6412, 48.7623, 24.7598 )
+visibility_aabb = AABB( -0.72, -0.0496562, -0.61, 1.44, 3.12131, 1.219 )
 draw_order = 2
 process_material = SubResource( 152 )
 draw_pass_1 = SubResource( 153 )

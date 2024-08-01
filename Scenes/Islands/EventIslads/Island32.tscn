@@ -1,10 +1,9 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Rocks/RockMat.tres" type="Material" id=3]
-[ext_resource path="res://Assets/Terains/Island11/Island11.tres" type="ArrayMesh" id=4]
-[ext_resource path="res://Assets/Terains/Island11/Island11_LOD.tres" type="ArrayMesh" id=5]
+[ext_resource path="res://Assets/Terains/Island22/Island22_LOD.tres" type="ArrayMesh" id=4]
 [ext_resource path="res://Assets/Terains/Island22/Island22.tres" type="ArrayMesh" id=6]
 [ext_resource path="res://Scenes/Env_Assets/Rock9.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Env_Assets/Rock7.tscn" type="PackedScene" id=8]
@@ -107,13 +106,13 @@ data = PoolVector3Array( -4.8917, -0.5673, 3.093, -4.6698, -0.5672, 3.5206, -5, 
 
 [sub_resource type="Curve3D" id=33]
 _data = {
-"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 675.219, 9.36737, 655.124, 67.3186, -22.7962, 77.0685, -67.3186, 22.7962, -77.0685, 309.544, 68.8467, 514.153, 0, 0, 0, 0, 0, 0, 36.5658, 142.078, 322.232, 16.6945, -14.7893, 7.15305, -16.6945, 14.7893, -7.15305, -172.242, 182.246, 278.124, 0, 0, 0, 0, 0, 0, -177.416, 920.782, 255.504 ),
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 541.853, 21.1869, -802.961, 73.8321, -20.4722, 31.0354, -73.8321, 20.4722, -31.0354, 288.862, 61.6613, -902.826, 0, 0, 0, 0, 0, 0, -47.1379, 159.543, -1040.83, 16.6945, -14.7893, 7.15305, -16.6945, 14.7893, -7.15305, -207.484, 167.111, -1096.96, 0, 0, 0, 0, 0, 0, -215.801, 909.973, -1104.98 ),
 "tilts": PoolRealArray( 0, 0, 0, 0, 0 )
 }
 
 [sub_resource type="Curve3D" id=37]
 _data = {
-"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 532.17, 20.259, 648.357, 67.3186, -22.7962, 77.0685, -67.3186, 22.7962, -77.0685, 304.707, 67.5545, 519.529, 0, 0, 0, 0, 0, 0, 29.477, 141.132, 339.971, 16.6945, -14.7893, 7.15305, -16.6945, 14.7893, -7.15305, -173.35, 182.286, 282.356, 0, 0, 0, 0, 0, 0, -179.961, 924.767, 263.057 ),
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 664.885, 15.9862, -798.853, 75.4529, -20.0741, 32.2263, -75.4529, 20.0741, -32.2263, 312.948, 67.7781, -923.317, 0, 0, 0, 0, 0, 0, -41.8741, 160.615, -1059.15, 16.6945, -14.7893, 7.15305, -16.6945, 14.7893, -7.15305, -194.12, 166.936, -1118.09, 0, 0, 0, 0, 0, 0, -202.883, 911, -1117.5 ),
 "tilts": PoolRealArray( 0, 0, 0, 0, 0 )
 }
 
@@ -132,8 +131,8 @@ lod_max_distance = 6000.0
 mesh = ExtResource( 6 )
 material/0 = ExtResource( 3 )
 script = ExtResource( 1 )
-LOD0 = ExtResource( 4 )
-LOD1 = ExtResource( 5 )
+LOD0 = ExtResource( 6 )
+LOD1 = ExtResource( 4 )
 
 [node name="StaticBody" type="StaticBody" parent="MeshInstance6" index="0"]
 collision_layer = 4
@@ -202,7 +201,6 @@ transform = Transform( 0.99225, 0, 0.12426, 0, 1, 0, -0.12426, 0, 0.99225, -351.
 transform = Transform( 131.908, 171.52, 113.005, -203.727, 92.1393, 97.9544, 26.1725, -147.243, 192.935, -313.532, -268.426, -779.626 )
 
 [node name="Cables" type="Spatial" parent="." index="24"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1443.87 )
 
 [node name="Path" type="Path" parent="Cables" index="0"]
 curve = SubResource( 33 )
