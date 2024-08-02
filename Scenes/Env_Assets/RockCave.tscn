@@ -18,6 +18,7 @@ script = ExtResource( 3 )
 LOD0 = ExtResource( 5 )
 LOD1 = ExtResource( 4 )
 LOD2 = ExtResource( 1 )
+HideIfNoLod = true
 
 [node name="StaticBody" type="StaticBody" parent="."]
 collision_layer = 1028

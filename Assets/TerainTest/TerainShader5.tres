@@ -88,7 +88,7 @@ void fragment() {
 	
 	vec3 bg_normal = normal_tex_bg * 2.0 - 1.0;
 	bg_normal.z = sqrt(1.0 - bg_normal.x * bg_normal.x - bg_normal.y * bg_normal.y);
-	vec3 normal_applied = bg_normal.x * TANGENT + bg_normal.y * BINORMAL + bg_normal.z * NORMAL;
+	vec3 normal_applied = bg_normal.x * TANGENT + bg_normal.y * BINORMAL * NormalForce + bg_normal.z * NORMAL;
 	vec3 up_vector_viewspace = mat3(INV_CAMERA_MATRIX) * vec3(0.0, 1.0, 0.0);
 	float dot_product = dot(up_vector_viewspace, normal_applied);
 	float mask = smoothstep(offset - fade, offset + fade, dot_product);

@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Resource",
+"class": "BreakableSaveInfo",
+"language": "GDScript",
+"path": "res://Scripts/BreakableSaveInfo.gd"
+}, {
+"base": "Resource",
 "class": "CharacterSaveInfo",
 "language": "GDScript",
 "path": "res://Scripts/CharacterSaveInfo.gd"
@@ -140,6 +145,7 @@ _global_script_classes=[ {
 "path": "res://Scripts/VehicleSaveInfo.gd"
 } ]
 _global_script_class_icons={
+"BreakableSaveInfo": "",
 "CharacterSaveInfo": "",
 "DTS": "",
 "DecoSaveInfo": "",

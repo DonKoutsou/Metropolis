@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=2]
+[gd_scene load_steps=75 format=2]
 
 [ext_resource path="res://Scenes/Characters/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/HUD/InventoryUI.tscn" type="PackedScene" id=2]
@@ -50,7 +50,6 @@
 [ext_resource path="res://Assets/Rocks/RockMat.tres" type="Material" id=48]
 [ext_resource path="res://Assets/Terains/Island24/Island24.tres" type="ArrayMesh" id=49]
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=50]
-[ext_resource path="res://Assets/Building/BuildingComposition3.tscn" type="PackedScene" id=51]
 [ext_resource path="res://Scenes/Env_Assets/Ladder.tscn" type="PackedScene" id=52]
 
 [sub_resource type="DynamicFont" id=4]
@@ -625,7 +624,6 @@ GuitarSongExports = [ ExtResource( 10 ), ExtResource( 12 ) ]
 
 [node name="Item" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.52578, 13.5021, -17.7839 )
-LimbColor = Color( 0.615686, 0, 0, 1 )
 
 [node name="Item2" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.96927, 13.6174, -21.8801 )
@@ -765,9 +763,6 @@ collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="Control/ViewportContainer/Viewport/MeshInstance5/StaticBody"]
 shape = SubResource( 152 )
-
-[node name="House2" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 51 )]
-transform = Transform( 0.230288, 0, 0.973123, 0, 1, 0, -0.973123, 0, 0.230288, -616.653, 725.908, -42.1551 )
 
 [node name="Ladder" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 52 )]
 transform = Transform( 0.230288, 0, 0.973123, 0, 4.69358, 0, -0.973123, 0, 0.230288, -606.508, -70.234, -42.4389 )

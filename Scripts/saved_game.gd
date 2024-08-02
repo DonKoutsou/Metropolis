@@ -6,6 +6,7 @@ func _SetData(data):
 	MahalasEntryID = data["ΜαχαλάςEntryID"]
 	EventWallID = data["EventWallID"]
 	ExitID = data["ExitID"]
+	Exitpalcement = data["Exitpalcement"]
 	OrderedCells = data["OrderedCells"]
 	CurrentTile = data["CurrentTile"]
 	finishedspawning = data["finishedspawning"]
@@ -32,6 +33,7 @@ export var currentile:int
 export var MahalasEntryID:int
 export var EventWallID:int
 export var ExitID:int
+export var Exitpalcement:Vector2
 export (Array, Vector2) var OrderedCells = []
 
 export var CurrentTile:Vector2

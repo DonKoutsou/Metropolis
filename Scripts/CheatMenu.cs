@@ -124,6 +124,10 @@ public class CheatMenu : Control
 		Buttons.MouseFilter = MouseFilterEnum.Ignore;
 		SetProcess(false);
 	}
+	public void Print_ExitDir()
+	{
+		GD.Print(WorldMap.GetInstance().GetExitDirection());
+	}
 	public void OnPlayerSpawned(Player play)
 	{
 		pl = play;

@@ -19,6 +19,8 @@ material/0 = ExtResource( 2 )
 script = ExtResource( 3 )
 LOD0 = ExtResource( 4 )
 LOD1 = ExtResource( 1 )
+LOD2 = ExtResource( 1 )
+HideIfNoLod = true
 
 [node name="Occluder" type="Occluder" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 5.96046e-08, 1, -0.905219, 0.213746, -1.39666 )

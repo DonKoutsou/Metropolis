@@ -5,16 +5,12 @@ public class LightHouse : House
 {
 	public override void _Ready()
 	{
-		Node parent = GetParent();
-		
-		while (!(parent is Island))
+		base._Ready();
+
+		foreach(Particles p in GetNode<Spatial>("LightHouse_Particles").GetChildren())
 		{
-			if (parent == null)
-				return;
-			parent = parent.GetParent();
+			p.Emitting = false;
 		}
-		Island ile = (Island)parent;
-		ile.RegisterChild(this);
 	}
     public override void Entered(Node body)
 	{
@@ -39,5 +35,12 @@ public class LightHouse : House
 		
 		return;
 
+	}
+	public void EnableLightHouse()
+	{
+		foreach(Particles p in GetNode<Spatial>("LightHouse_Particles").GetChildren())
+		{
+			p.Emitting = true;
+		}
 	}
 }

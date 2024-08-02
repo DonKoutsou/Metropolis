@@ -291,7 +291,7 @@ public class Inventory : Spatial
         RemoveChild(inst);
         CharacterOwner.AddInstrument(inst);
     }
-    public bool RemoveItem(Item item)
+    public bool RemoveItem(Item item, bool RegisterToIsle = true)
     {
         InventoryContents.Remove(item);
         //currentweight -= item.GetInventoryWeight();
@@ -311,8 +311,12 @@ public class Inventory : Spatial
             IslandInfo info = WorldMap.GetInstance().GetCurrentIleInfo();
             Island ile = info.Island;
             ile.AddChild(item);
-            ile.RegisterChild(item);
-            info.AddNewItem(item);
+            if (RegisterToIsle)
+            {
+                ile.RegisterChild(item);
+                info.AddNewItem(item);
+            }
+                
         }
         else
         {

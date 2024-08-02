@@ -27,9 +27,12 @@ public class SittingThing : StaticBody
         }
         Inited = true;
     }
-    public void HighLightObject(bool toggle)
+    public void HighLightObject(bool toggle, Material OutlineMat)
     {
-        ((ShaderMaterial)GetNode<MeshInstance>("MeshInstance").MaterialOverlay).SetShaderParam("enable", toggle);
+        if (toggle)
+            GetNode<MeshInstance>("MeshInstance").MaterialOverlay = OutlineMat;
+        else
+            GetNode<MeshInstance>("MeshInstance").MaterialOverlay = null;
     }
     public override void _Ready()
     {

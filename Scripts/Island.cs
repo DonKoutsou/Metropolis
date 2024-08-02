@@ -29,6 +29,8 @@ public class Island : Spatial
 	List<Item> Items = new List<Item>();
 
 	List<NPC> Characters = new List<NPC>();
+
+	List<Breakable> Breakables = new List<Breakable>();
 	bool Visited = false;
 	
 	public void SetVisited()
@@ -366,6 +368,17 @@ public class Island : Spatial
 				}
 			}
 		}
+		foreach (Breakable br in Breakables)
+		{
+			foreach(BreakableInfo BrInfo in data.Breakables)
+			{
+				if (br.Name == BrInfo.BreakableName)
+				{
+					if (BrInfo.Destroyed)
+						br.QueueFree();
+				}
+			}
+		}
 		/*foreach (Character Ch in Characters)
 		{
 			foreach(CharacterInfo CgarInfo in data.Characters)
@@ -573,6 +586,8 @@ public class Island : Spatial
 			Characters.Add(character);
 		else if (child is Port port && !Ports.Contains(child))
 			Ports.Add(port);
+		else if (child is Breakable br && !Breakables.Contains(child))
+			Breakables.Add(br);
 	}
 	public void UnRegisterChild(Node child)
 	{
@@ -590,6 +605,8 @@ public class Island : Spatial
 			Characters.Remove(character);
 		else if (child is Port p)
 			Ports.Remove(p);
+		else if (child is Breakable br)
+			Breakables.Remove(br);
 	}
 	public void FindChildren(Node node)
 	{
@@ -610,6 +627,8 @@ public class Island : Spatial
 				Characters.Add(cha);
 			else if (child is Port p && !Ports.Contains(child))
 				Ports.Add(p);
+			else if (child is Breakable br && !Breakables.Contains(child))
+				Breakables.Add(br);
 			else
 				FindChildren(child);
 		}
@@ -660,6 +679,17 @@ public class Island : Spatial
 			vhs.Add(Vehicles[i]);
 		}
 	}
+	public void GetBreakables(out List<Breakable> brs)
+	{
+		brs = new List<Breakable>();
+		for (int i = 0; i < Breakables.Count; i++)
+		{
+			if (Breakables[i] == null)
+				continue;
+				
+			brs.Add(Breakables[i]);
+		}
+	}
 	public void GetItems(out List<Item> Itms)
 	{
 		Itms = new List<Item>();
@@ -700,6 +730,7 @@ public class IslandInfo
 	public List<HouseInfo> Houses = new List<HouseInfo>();
 	public List<FurnitureInfo> Furnitures = new List<FurnitureInfo>();
 	public List<WindGeneratorInfo> Generators = new List<WindGeneratorInfo>();
+	public List<BreakableInfo> Breakables = new List<BreakableInfo>();
 	public List<VehicleInfo> Vehicles = new List<VehicleInfo>();
 	public List<ItemInfo> Items = new List<ItemInfo>();
 
@@ -763,6 +794,13 @@ public class IslandInfo
 			WindGeneratorInfo info = new WindGeneratorInfo();
 			info.UnPackData((Resource)GeneratorData[i]);
             Generators.Add(info);
+		}
+		Godot.Collections.Array BreakableData = ( Godot.Collections.Array)data.Get("Breakables");
+        for (int i  = 0; i < BreakableData.Count; i++)
+		{
+			BreakableInfo info = new BreakableInfo();
+			info.UnPackData((Resource)BreakableData[i]);
+            Breakables.Add(info);
 		}
         Godot.Collections.Array VehicleData = ( Godot.Collections.Array)data.Get("Vehicles");
         for (int i  = 0; i < VehicleData.Count; i++)
@@ -833,6 +871,19 @@ public class IslandInfo
 			GeneratorInfo.Call("_SetData", Generators[i].GetPackedData());
 			GeneratorInfoobjects[i] = GeneratorInfo;
 		}
+
+
+		GDScript BreakableSaveScript = GD.Load<GDScript>("res://Scripts/BreakableSaveInfo.gd");
+
+		Resource[] BreakableInfoobjects = new Resource[Breakables.Count];
+
+		for (int i = 0; i < Breakables.Count; i ++)
+		{
+			Resource BreakableInfo = (Resource)BreakableSaveScript.New();
+			BreakableInfo.Call("_SetData", Breakables[i].GetPackedData());
+			BreakableInfoobjects[i] = BreakableInfo;
+		}
+		
 		//data.Add("Generators", GeneratorInfoobjects);
 
 
@@ -886,6 +937,7 @@ public class IslandInfo
 			{"Houses", HouseInfoobjects},
 			{"Furnitures", FurnitureInfoobjects},
 			{"Generators", GeneratorInfoobjects},
+			{"Breakables", BreakableInfoobjects},
 			{"Items", ItemInfoobjects},
 			{"Vehicles", VehicleInfoobjects},
 			{"Characters", CharacterInfoobjects},
@@ -919,6 +971,8 @@ public class IslandInfo
 		Ile.GetItems(out Itms);
 		List <NPC> Chars;
 		Ile.GetCharacters(out Chars);
+		List <Breakable> Breaks;
+		Ile.GetBreakables(out Breaks);
 
 		AddHouses(hous);
 		AddFurnitures(fourns);
@@ -926,7 +980,8 @@ public class IslandInfo
 		AddVehicles(veh);
 		AddItems(Itms);
 		AddChars(Chars);
-		
+		AddBreakables(Breaks);
+
 		if (HasPort)
 		{
 			List <Port> Ports;
@@ -1066,6 +1121,25 @@ public class IslandInfo
 			}
 			WGInfo.UpdateInfo(g);
 		}
+
+		List<Breakable> breaks;
+		island.GetBreakables(out breaks);
+		foreach(BreakableInfo BRInfo in Breakables)
+		{
+			Breakable br = null;
+			foreach (Breakable breakab in breaks)
+			{
+				if (breakab == null || !Godot.Object.IsInstanceValid(breakab))
+					continue;
+				if (breakab.Name == BRInfo.BreakableName)
+				{
+					br = breakab;
+					break;
+				}
+			}
+			BRInfo.UpdateInfo(br == null);
+		}
+
 		List<Item> Its;
 		island.GetItems(out Its);
 		foreach(ItemInfo ItInfo in Items)
@@ -1196,6 +1270,15 @@ public class IslandInfo
 			Generators.Add(info);
 		}
 	}
+	public void AddBreakables(List<Breakable> BreakablesToAdd)
+	{
+		for (int i = 0; i < BreakablesToAdd.Count; i++)
+		{
+			BreakableInfo info = new BreakableInfo();
+			info.SetInfo(BreakablesToAdd[i].Name, false);
+			Breakables.Add(info);
+		}
+	}	
 	public void AddItems(List<Item> ItemsToAdd)
 	{
 		for (int i = 0; i < ItemsToAdd.Count; i++)

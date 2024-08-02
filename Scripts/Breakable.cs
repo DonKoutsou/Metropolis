@@ -11,8 +11,25 @@ public class Breakable : StaticBody
     public override void _Ready()
     {
         base._Ready();
+
+        Node parent = GetParent();
+		while (!(parent is Island))
+		{
+            if (parent == null)
+            {
+                SetProcess(false);
+                return;
+            }
+				
+			parent = parent.GetParent();
+		}
+		Island ile = (Island)parent;
+		ile.RegisterChild(this);
+
         SetProcess(false);
+        
     }
+    
     public void AtatchExplosive(Player pl, Explosive ex)
     {
 
@@ -41,7 +58,7 @@ public class Breakable : StaticBody
     public void AtatchedExplosiveGoneBoom()
     {
         AtatchedEx.GetNode<MeshInstance>("MeshInstance").Hide();    
-        GetNode<MeshInstance>("MeshInstance").Hide();
+        GetNode<Spatial>("RockParent").Hide();
         SetProcess(true);
     }
     public override void _Process(float delta)
@@ -49,11 +66,60 @@ public class Breakable : StaticBody
         base._Process(delta);
         if (!AtatchedEx.GetNode<Particles>("Explosion/Particles2").Emitting)
         {
-            QueueFree();
+            RemoveBreakable();
         }
     }
-    public virtual void HighLightObject(bool toggle)
+    public void RemoveBreakable()
     {
-        ((ShaderMaterial)GetNode<MeshInstance>("MeshInstance").MaterialOverlay).SetShaderParam("enable", toggle);
+        Node parent = GetParent();
+        while (!(parent is Island))
+        {
+            if (parent == null)
+            {
+                SetProcess(false);
+                return;
+            }
+                
+            parent = parent.GetParent();
+        }
+        Island ile = (Island)parent;
+
+        ile.UnRegisterChild(this);
+        QueueFree();
+    }
+    public void HighLightObject(bool toggle, Material OutlineMat)
+    {
+        if (toggle)
+            GetNode<MeshInstance>("RockParent/MeshInstance").MaterialOverlay = OutlineMat;
+        else
+            GetNode<MeshInstance>("RockParent/MeshInstance").MaterialOverlay = null;
+    }
+}
+public class BreakableInfo
+{
+	public string BreakableName;
+	public bool Destroyed;
+	public void UpdateInfo(bool Dest)
+	{
+		Destroyed = Dest;
+	}
+	public void SetInfo(string name, bool Dest)
+	{
+		BreakableName = name;
+		Destroyed = Dest;
+	}
+	public Dictionary<string, object>GetPackedData()
+	{
+		Dictionary<string, object> data = new Dictionary<string, object>()
+		{
+			{"Name", BreakableName},
+			{"Destroyed", Destroyed}
+		};
+		return data;
+	}
+    public void UnPackData(Resource data)
+    {
+        BreakableName = (string)data.Get("Name");
+		Destroyed = (bool)data.Get("Destroyed");
     }
 }

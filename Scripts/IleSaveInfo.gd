@@ -10,6 +10,7 @@ func _SetData(data):
 	Houses = data["Houses"]
 	Furnitures = data["Furnitures"]
 	Generators = data["Generators"]
+	Breakables = data["Breakables"]
 	Vehicles = data["Vehicles"]
 	Characters = data["Characters"]
 	Items = data["Items"]
@@ -29,6 +30,7 @@ export var ImageIndex:int = 0
 export (Array, Resource) var Houses
 export (Array, Resource) var Furnitures
 export (Array, Resource)  var Generators
+export (Array, Resource)  var Breakables
 export (Array, Resource)  var Vehicles
 export (Array, Resource)  var Items
 export (Array, Resource) var Characters

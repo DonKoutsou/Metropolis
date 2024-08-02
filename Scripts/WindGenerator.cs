@@ -66,7 +66,11 @@ public class WindGenerator : StaticBody
 		Island ile = (Island)parent;
 		ile.RegisterChild(this);
 
-
+        if (HasInternals)
+        {
+            GetNode<Spatial>("GenInternals").Hide();
+            GetNode<Spatial>("GenInternals2").Hide();
+        }
         //WindGenThread = new Thread();
         //WindGenThread.Start(this, "UpdateGenerator", GlobalRotation);
     }
@@ -119,7 +123,7 @@ public class WindGenerator : StaticBody
             //mut.Unlock();
         }
     }
-    private void _on_Generator_visibility_changed()
+    /*private void _on_Generator_visibility_changed()
     {
         if (Visible)
         {
@@ -134,12 +138,16 @@ public class WindGenerator : StaticBody
             anim2.Stop();
             SetProcess(false);
         }
-    }
-    public void HighLightObject(bool toggle)
+    }*/
+    public void HighLightObject(bool toggle, Material OutlineMat)
     {
         if (HasInternals)
             return;
-        ((ShaderMaterial)GetNode<MeshInstance>("MeshInstance2").MaterialOverlay).SetShaderParam("enable", toggle);
+
+        if (toggle)
+            GetNode<MeshInstance>("MeshInstance2").MaterialOverlay = OutlineMat;
+        else
+            GetNode<MeshInstance>("MeshInstance2").MaterialOverlay = null;
     }
     public void SetData(WindGeneratorInfo info)
 	{
@@ -156,7 +164,7 @@ public class WindGenerator : StaticBody
         }
 		CurrentEnergy = Math.Min(info.CurrentEnergy + hours, EnergyCapacity);
 	}
-    private void CharacterEntered(Node body)
+    /*private void CharacterEntered(Node body)
     {
         if (!IsInsideTree())
             return;
@@ -169,6 +177,16 @@ public class WindGenerator : StaticBody
             return;
         ((SpatialMaterial)GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Disabled;
         SetCollisionLayerBit(2, true);
+    }*/
+    private void CharacterEntered(Node body)
+    {
+        GetNode<Spatial>("GenInternals").Show();
+        GetNode<Spatial>("GenInternals2").Show();
+    }
+    private void CharacterLeft(Node body)
+    {
+        GetNode<Spatial>("GenInternals").Hide();
+        GetNode<Spatial>("GenInternals2").Hide();
     }
     public override void _EnterTree()
     {

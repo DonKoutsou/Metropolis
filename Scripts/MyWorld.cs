@@ -147,7 +147,7 @@ public class MyWorld : Spatial
 			return true;
 		return false;
 	}
-	void Rescue(Character rescuer, Island ile)
+	void Rescue(NPC rescuer, Island ile)
 	{
 		CameraAnimationPlayer CameraAnimation = CameraAnimationPlayer.GetInstance();
         CameraAnimation.Connect("FadeOutFinished", this, "FinishRescue");
@@ -155,7 +155,7 @@ public class MyWorld : Spatial
 		Rescuer = rescuer;
 		RescueIle = ile;
 	}
-	Character Rescuer;
+	NPC Rescuer;
 	Island RescueIle;
 	void FinishRescue()
 	{

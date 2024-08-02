@@ -68,9 +68,12 @@ public class FireplaceLight : StaticBody
             //light.Translation = new Vector3( (float)scaled1, 1.3f, (float)scaled2);
         }
     }
-    public void HighLightObject(bool toggle)
+    public void HighLightObject(bool toggle, Material OutlineMat)
     {
-        ((ShaderMaterial)GetNode<MeshInstance>("MeshInstance").MaterialOverlay).SetShaderParam("enable", toggle);
+        if (toggle)
+            GetNode<MeshInstance>("MeshInstance").MaterialOverlay = OutlineMat;
+        else
+            GetNode<MeshInstance>("MeshInstance").MaterialOverlay = null;
     }
 
 }

@@ -524,6 +524,7 @@ material/0 = ExtResource( 6 )
 script = ExtResource( 1 )
 LOD0 = ExtResource( 3 )
 LOD1 = ExtResource( 7 )
+HideIfNoLod = true
 
 [node name="StaticBody" type="StaticBody" parent="Terain" index="0"]
 collision_layer = 4

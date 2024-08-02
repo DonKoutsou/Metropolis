@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Limb.cs" type="Script" id=1]
 [ext_resource path="res://Assets/FastLegs/FastLeg_L.tres" type="ArrayMesh" id=2]
 [ext_resource path="res://Assets/FastLegs/FastLeg_L.png" type="Texture" id=3]
-[ext_resource path="res://shaders/OutlineShader.tres" type="Material" id=4]
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/FastLegs/M_FastLegs.material" type="Material" id=6]
 
@@ -29,7 +28,6 @@ SlotType = 2
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0 )
-material_overlay = ExtResource( 4 )
 mesh = ExtResource( 2 )
 material/0 = ExtResource( 6 )
 

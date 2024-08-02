@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Assets/Guitar/Guitar.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Scripts/Guitar.cs" type="Script" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://Assets/Guitar/GuitarIcon.png" type="Texture" id=7]
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=8]
 [ext_resource path="res://Assets/Guitar/Guitar_LOD.obj" type="ArrayMesh" id=9]
-[ext_resource path="res://shaders/OutlineShader.tres" type="Material" id=10]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.952743, 2.24403, 0.223935 )
@@ -23,7 +22,6 @@ ItemType = 7
 ItemIcon = ExtResource( 7 )
 ItemPickupActionName = "Μια κιθάρα"
 ItemName = "Κιθάρα"
-InventoryItemName = "Κιθάρα"
 stackable = false
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
@@ -31,7 +29,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.24624, 0 )
 shape = SubResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-material_overlay = ExtResource( 10 )
 mesh = ExtResource( 1 )
 material/0 = ExtResource( 3 )
 material/1 = ExtResource( 4 )

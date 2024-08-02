@@ -116,11 +116,10 @@ void fragment( )
 "
 
 [resource]
-resource_local_to_scene = true
 shader = SubResource( 120 )
 shader_param/outline_color = Color( 0.431373, 0.717647, 0.937255, 1 )
 shader_param/luma_coef = 0.1
 shader_param/color_coef = 0.1
 shader_param/depth_coef = 0.282
 shader_param/cutoff = 0.005
-shader_param/enable = false
+shader_param/enable = true

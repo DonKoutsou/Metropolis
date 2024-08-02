@@ -669,11 +669,15 @@ public class Vehicle : RigidBody
         return HasFloor;
     }
     ///////Action Menu////////
-    public void HighLightObject(bool toggle)
+    public void HighLightObject(bool toggle, Material OutlineMat)
     {
         if (!PlayerOwned)
             return;
-        ((ShaderMaterial)GetNode<MeshInstance>("MeshInstance").MaterialOverlay).SetShaderParam("enable", toggle);
+
+        if (toggle)
+            GetNode<MeshInstance>("MeshInstance").MaterialOverlay = OutlineMat;
+        else
+            GetNode<MeshInstance>("MeshInstance").MaterialOverlay = null;
     }
     //////Data Saving////////
     public void InputData(VehicleInfo data)

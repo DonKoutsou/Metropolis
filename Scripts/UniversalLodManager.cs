@@ -5,13 +5,18 @@ using System.Collections.Generic;
 public partial class UniversalLodManager : Node
 {
   private static UniversalLodManager _instance;
-  public static UniversalLodManager Instance => _instance;
-  static Camera CurrentCamera;
+  Camera CurrentCamera;
+  Player pl;
   List<LoddedObject> LODedObj;
   List<LoddedCharacter> LODedChar;
   int Currentcheck = 0;
   int CurrentCharCheck = 0;
 
+
+  public static UniversalLodManager GetInstance()
+  {
+    return _instance;
+  }
   public void UpdateLoddedObj()
   {
     LODedObj = new List<LoddedObject>();
@@ -32,9 +37,17 @@ public partial class UniversalLodManager : Node
         LODedChar.Add(character);
     }
   }
-  public static void UpdateCamera(Camera cam)
+  public void UpdateCamera(Camera cam)
   {
-    CurrentCamera = cam;
+      CurrentCamera = cam;
+      if (cam == null)
+        SetProcess(false);
+      else
+      {
+        SetProcess(true);
+        pl = (Player)cam.Owner;
+      }
+        
   }
 
   public override void _EnterTree()
@@ -43,13 +56,16 @@ public partial class UniversalLodManager : Node
 
     LODedObj = new List<LoddedObject>();
     LODedChar = new List<LoddedCharacter>();
-    //SetProcess(false);
+    SetProcess(false);
   }
-  public override void _Process(float delta)
+    public override void _Ready()
+    {
+        base._Ready();
+        SetProcess(false);
+    }
+    public override void _Process(float delta)
   {
       base._Process(delta);
-      if (CurrentCamera == null || !Godot.Object.IsInstanceValid(CurrentCamera))
-          return;
 
       if (Currentcheck >= LODedObj.Count)
       {
@@ -59,7 +75,6 @@ public partial class UniversalLodManager : Node
       else
       {
         int processed = 0;
-        Player pl = Player.GetInstance();
         Vector3 campos = new Vector3(pl.GlobalTranslation.x, CurrentCamera.GlobalTranslation.y, pl.GlobalTranslation.z);
         while (processed < 10)
         {
@@ -75,12 +90,25 @@ public partial class UniversalLodManager : Node
             float dist = campos.DistanceTo(objtocheck.GlobalTranslation);
             float abbsize = objtocheck.abbLeangth;
 
-            if (dist > abbsize * 8)
+          
+            if (dist > abbsize + 5000)
+              objtocheck.SwitchLod(3);
+            else if (dist > abbsize + 2500)
               objtocheck.SwitchLod(2);
-            else if (dist > abbsize * 4)
+            else if (dist > abbsize + 500)
               objtocheck.SwitchLod(1);
             else
               objtocheck.SwitchLod(0);
+            /*float DistTest = Mathf.Max(abbsize, 200);
+
+            if (dist > DistTest * 8)
+              objtocheck.SwitchLod(3);
+            else if (dist > DistTest * 4)
+              objtocheck.SwitchLod(2);
+            else if (dist > DistTest * 2)
+              objtocheck.SwitchLod(1);
+            else
+              objtocheck.SwitchLod(0);*/
           }
           processed += 1;
 
@@ -93,7 +121,6 @@ public partial class UniversalLodManager : Node
       }
       else
       {
-        Player pl = Player.GetInstance();
         Vector3 campos = new Vector3(pl.GlobalTranslation.x, CurrentCamera.GlobalTranslation.y, pl.GlobalTranslation.z);
 
         if (CurrentCharCheck >= LODedChar.Count)

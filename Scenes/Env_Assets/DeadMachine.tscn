@@ -1,6 +1,5 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=23 format=2]
 
-[ext_resource path="res://shaders/OutlineShader.tres" type="Material" id=1]
 [ext_resource path="res://Scripts/Furniture.cs" type="Script" id=2]
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/FastLegs/Textures/Body_Texture_M_Legs_BaseColor.png" type="Texture" id=4]
@@ -187,7 +186,7 @@ collision_layer = 16
 collision_mask = 0
 script = ExtResource( 2 )
 FurnitureDescription = "Μια ντουλάπα..."
-ToHighLight = [ NodePath("DeadMachine/Arm_L001"), NodePath("DeadMachine/Body001"), NodePath("DeadMachine/Face001"), NodePath("DeadMachine/Leg_L001"), NodePath("DeadMachine/LegsUpper001") ]
+ToHighLight = [ NodePath("DeadMachine/Body001") ]
 ItemToSpawnWith = ExtResource( 6 )
 
 [node name="ActionComponent" parent="." instance=ExtResource( 3 )]
@@ -204,29 +203,14 @@ shape = SubResource( 7 )
 
 [node name="DeadMachine" parent="." instance=ExtResource( 8 )]
 
-[node name="Arm_L001" parent="DeadMachine" index="0"]
-material_overlay = ExtResource( 1 )
-
 [node name="Arm_R001" parent="DeadMachine" index="1"]
-material_overlay = ExtResource( 1 )
 material/0 = SubResource( 10 )
-
-[node name="Body001" parent="DeadMachine" index="2"]
-material_overlay = ExtResource( 1 )
-
-[node name="Face001" parent="DeadMachine" index="4"]
-material_overlay = ExtResource( 1 )
 
 [node name="Leg_L001" parent="DeadMachine" index="5"]
 visible = false
-material_overlay = ExtResource( 1 )
 
 [node name="Leg_R001" parent="DeadMachine" index="6"]
 visible = true
-material_overlay = ExtResource( 1 )
 material/0 = SubResource( 4 )
-
-[node name="LegsUpper001" parent="DeadMachine" index="7"]
-material_overlay = ExtResource( 1 )
 
 [editable path="DeadMachine"]

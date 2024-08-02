@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Assets/Boat/Parts/EngineJoint.tres" type="ArrayMesh" id=1]
 [ext_resource path="res://Scripts/Vehicle.cs" type="Script" id=2]
@@ -16,9 +16,11 @@
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Assets/Boat/Parts/Body.tres" type="ArrayMesh" id=15]
 [ext_resource path="res://Scenes/Vehicles/HoverParticlesDirt.tscn" type="PackedScene" id=16]
-[ext_resource path="res://shaders/OutlineShader.tres" type="Material" id=17]
+[ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=17]
 [ext_resource path="res://Assets/GodotPlushie/godot_plush.material" type="Material" id=18]
 [ext_resource path="res://Scenes/Vehicles/HoverEngineParticles.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Assets/Boat/Parts/Body_LOD.tres" type="ArrayMesh" id=20]
+[ext_resource path="res://Assets/Boat/Parts/Body_LOD1.tres" type="ArrayMesh" id=21]
 
 [sub_resource type="Curve" id=7]
 min_value = -150.0
@@ -325,13 +327,15 @@ AccelerationCurve = SubResource( 147 )
 [node name="MeshInstance" type="MeshInstance" parent="VehicleBody"]
 transform = Transform( 1, -5.50244e-11, 0, 1.32104e-10, 1, 0, 0, -3.46945e-18, 1, 0, 2.199, 0 )
 material_override = ExtResource( 4 )
-material_overlay = ExtResource( 17 )
 mesh = ExtResource( 15 )
+script = ExtResource( 17 )
+LOD0 = ExtResource( 15 )
+LOD1 = ExtResource( 20 )
+LOD2 = ExtResource( 21 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="VehicleBody"]
 transform = Transform( 1, -5.50244e-11, 0, 1.32104e-10, 1, 0, 0, -3.46945e-18, 1, 0, 2.199, 0 )
 material_override = ExtResource( 12 )
-material_overlay = ExtResource( 17 )
 mesh = ExtResource( 10 )
 
 [node name="WindDetector" type="MeshInstance" parent="VehicleBody"]

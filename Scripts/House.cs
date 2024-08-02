@@ -34,17 +34,33 @@ public class House : Spatial
 		}
 		Island ile = (Island)parent;
 		ile.RegisterChild(this);
-		GetNode<Street_Lamp>("IndoorsLight").SetWorkingState(HasPower);
+
+		GetNode<Spatial>("Furnitures").Hide();
+		GetNode<Spatial>("Decorations").Hide();
+
+		Spatial l = GetNode<Spatial>("Lights");
+		if (l.GetChildCount() == 0)
+			return;
+
+		foreach (Street_Lamp Light in GetNode<Spatial>("Lights").GetChildren())
+		{
+			Light.SetWorkingState(HasPower);
+		}
 	}
 	public virtual void Entered(Node body)
 	{
 		StaticBody HouseExterior  = GetNode<StaticBody>("HouseExterior");
 		((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Front;
+		GetNode<Spatial>("Furnitures").Show();
+		GetNode<Spatial>("Decorations").Show();
+
+		AnimationPlayer Anim = GetNode<AnimationPlayer>("AnimationPlayer");
+		Anim.Play("Open");
 		//((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(2)).ParamsCullMode = SpatialMaterial.CullMode.Front;
-		foreach (Spatial Oclude in GetNode<Spatial>("Occluders").GetChildren()) 
+		/*foreach (Spatial Oclude in GetNode<Spatial>("Occluders").GetChildren()) 
 		{
 			Oclude.Visible = false;
-		}
+		}*/
 		
 		return;
 
@@ -53,11 +69,16 @@ public class House : Spatial
 	{
 		StaticBody HouseExterior  = GetNode<StaticBody>("HouseExterior");
 		((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Disabled;
+		GetNode<Spatial>("Furnitures").Hide();
+		GetNode<Spatial>("Decorations").Hide();
+		AnimationPlayer Anim = GetNode<AnimationPlayer>("AnimationPlayer");
+		Anim.Play("Close");
 		//((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(2)).ParamsCullMode = SpatialMaterial.CullMode.Disabled;
-		foreach (Spatial Oclude in GetNode<Spatial>("Occluders").GetChildren()) 
+		/*foreach (Spatial Oclude in GetNode<Spatial>("Occluders").GetChildren()) 
 		{
 			Oclude.Visible = true;
-		}
+		}*/
+
 		return;
 
 	}
@@ -73,6 +94,7 @@ public class House : Spatial
 	{
 
 		Spatial Furiture = GetNode<Spatial>("FurniturePlacements");
+		Spatial RealFurnitures = GetNode<Spatial>("Furnitures");
 		var furniplacaments = Furiture.GetChildren();
 		if (furniplacaments.Count > 0)
 		{
@@ -86,7 +108,7 @@ public class House : Spatial
 				PackedScene furnitospawn = PossibleFurni[RandomContainer.Next(0, PossibleFurni.Count)];
 
 				Furniture furn = furnitospawn.Instance<Furniture>();
-				AddChild(furn, true);
+				RealFurnitures.AddChild(furn, true);
 				furn.Transform = place.Transform;
 
 				FurnitureList.Insert(i, furn);
@@ -101,6 +123,7 @@ public class House : Spatial
 
 
 		Spatial decos = GetNode<Spatial>("DecorationPlacaments");
+		Spatial RealDecorations = GetNode<Spatial>("Decorations");
 		var decoplacaments = decos.GetChildren();
 		if (decoplacaments.Count > 0)
 		{
@@ -113,7 +136,7 @@ public class House : Spatial
 				PackedScene decotospawn = PossibleDeco[RandomContainer.Next(0, PossibleDeco.Count)];
 
 				Spatial dec = decotospawn.Instance<Spatial>();
-				AddChild(dec, true);
+				RealDecorations.AddChild(dec, true);
 				dec.Transform = decplace.Transform;
 
 				DecorationList.Insert(0, dec);
@@ -166,24 +189,26 @@ public class House : Spatial
 	}
 	public void RespawnHouseInterion(HouseInfo data)
 	{
+		Spatial RealFurnitures = GetNode<Spatial>("Furnitures");
 		foreach(FurnitureInfo Finfo in data.furni)
 		{
 			PackedScene scene = GD.Load<PackedScene>(Finfo.SceneData);
 			Furniture furn = scene.Instance<Furniture>();
 			FurnitureList.Add(furn);
-			AddChild(furn, true);
+			RealFurnitures.AddChild(furn, true);
 			furn.SetData(Finfo);
 			//if (furni.Name == Finfo.FunritureName)
 			//{
 			//	furni.SetData(Finfo);
 			//}
 		}
+		Spatial RealDecorations = GetNode<Spatial>("Decorations");
 		foreach(DecorationInfo Dinfo in data.Deco)
 		{
 			PackedScene scene = GD.Load<PackedScene>(Dinfo.SceneData);
 			Spatial decor = scene.Instance<Spatial>();
 			DecorationList.Add(decor);
-			AddChild(decor, true);
+			RealDecorations.AddChild(decor, true);
 			decor.Transform = Dinfo.Placement;
 		}
 		Spatial furnpl = GetNodeOrNull<Spatial>("FurniturePlacements");

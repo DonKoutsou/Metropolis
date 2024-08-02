@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Assets/Building/Assets/House_Exterior.tres" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Building/Assets/House_Interior.tres" type="ArrayMesh" id=2]
@@ -15,8 +15,13 @@
 [ext_resource path="res://Scenes/BuildingDecorations/Decorations1.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Env_Assets/Furniture3.tscn" type="PackedScene" id=16]
 
-[sub_resource type="CubeMesh" id=6]
-size = Vector3( 5.109, 8.214, 2.727 )
+[sub_resource type="BoxShape" id=7]
+margin = 0.001
+extents = Vector3( 10.1187, 10.058, 9.97446 )
+
+[sub_resource type="BoxShape" id=9]
+margin = 0.001
+extents = Vector3( 2.21593, 4.3787, 3.44931 )
 
 [sub_resource type="ConcavePolygonShape" id=1]
 data = PoolVector3Array( 2.2757, 3.5748, 10.0835, 2.2757, 11.1083, 10.0835, 10.0835, 3.5748, 10.0835, -10.0835, 3.5748, 10.0835, -2.2757, 11.1083, 10.0835, -2.2757, 3.5748, 10.0835, 10.0835, 23.4394, 10.0835, 9.781, 23.7418, 9.781, 10.0835, 23.4394, -10.0835, 10.0835, 23.4394, -10.0835, 9.781, 23.7418, 9.781, 9.781, 23.7418, -9.781, 9.781, 23.7418, 9.781, 10.0835, 23.4394, 10.0835, -9.781, 23.7418, 9.781, -9.781, 23.7418, 9.781, 10.0835, 23.4394, 10.0835, -10.0835, 23.4394, 10.0835, -9.781, 23.7418, 9.781, -10.0835, 23.4394, 10.0835, -9.781, 23.7418, -9.781, -9.781, 23.7418, -9.781, -10.0835, 23.4394, 10.0835, -10.0835, 23.4394, -10.0835, 10.0835, 23.4394, -10.0835, 9.781, 23.7418, -9.781, -10.0835, 23.4394, -10.0835, -10.0835, 23.4394, -10.0835, 9.781, 23.7418, -9.781, -9.781, 23.7418, -9.781, 2.2757, 11.1083, 10.0835, -2.2757, 11.1083, 10.0835, -10.0835, 23.4394, 10.0835, 2.2757, 11.1083, 10.0835, -10.0835, 23.4394, 10.0835, 10.0835, 23.4394, 10.0835, 9.1858, 21.8758, -9.1858, 9.1858, 21.8758, 9.1858, -9.1858, 21.8758, 9.1858, 9.1858, 21.8758, -9.1858, -9.1858, 21.8758, 9.1858, -9.1858, 21.8758, -9.1858, 10.0835, 3.5748, -10.0835, 10.0835, 23.4394, -10.0835, -10.0835, 23.4394, -10.0835, 10.0835, 3.5748, -10.0835, -10.0835, 23.4394, -10.0835, -10.0835, 3.5748, -10.0835, 10.0835, 3.5748, -10.0835, 10.0835, 3.5748, 10.0835, 10.0835, 23.4394, 10.0835, 10.0835, 3.5748, -10.0835, 10.0835, 23.4394, 10.0835, 10.0835, 23.4394, -10.0835, 2.2757, 11.1083, 10.0835, 10.0835, 23.4394, 10.0835, 10.0835, 3.5748, 10.0835, -10.0835, 23.4394, 10.0835, -10.0835, 3.5748, 10.0835, -10.0835, 3.5748, -10.0835, -10.0835, 23.4394, 10.0835, -10.0835, 3.5748, -10.0835, -10.0835, 23.4394, -10.0835, -10.0835, 3.5748, 10.0835, -10.0835, 23.4394, 10.0835, -2.2757, 11.1083, 10.0835, 9.781, 23.7418, -9.781, 9.781, 23.7418, 9.781, 9.1858, 23.7418, -9.1858, 9.1858, 23.7418, -9.1858, 9.781, 23.7418, 9.781, 9.1858, 23.7418, 9.1858, 9.781, 23.7418, 9.781, -9.781, 23.7418, 9.781, 9.1858, 23.7418, 9.1858, 9.1858, 23.7418, 9.1858, -9.781, 23.7418, 9.781, -9.1858, 23.7418, 9.1858, -9.781, 23.7418, -9.781, 9.781, 23.7418, -9.781, -9.1858, 23.7418, -9.1858, -9.1858, 23.7418, -9.1858, 9.781, 23.7418, -9.781, 9.1858, 23.7418, -9.1858, -9.781, 23.7418, 9.781, -9.781, 23.7418, -9.781, -9.1858, 23.7418, 9.1858, -9.1858, 23.7418, 9.1858, -9.781, 23.7418, -9.781, -9.1858, 23.7418, -9.1858, 9.1858, 23.7418, -9.1858, 9.1858, 23.7418, 9.1858, 9.1858, 21.8758, -9.1858, 9.1858, 21.8758, -9.1858, 9.1858, 23.7418, 9.1858, 9.1858, 21.8758, 9.1858, 9.1858, 23.7418, 9.1858, -9.1858, 23.7418, 9.1858, 9.1858, 21.8758, 9.1858, 9.1858, 21.8758, 9.1858, -9.1858, 23.7418, 9.1858, -9.1858, 21.8758, 9.1858, -9.1858, 23.7418, -9.1858, 9.1858, 23.7418, -9.1858, -9.1858, 21.8758, -9.1858, -9.1858, 21.8758, -9.1858, 9.1858, 23.7418, -9.1858, 9.1858, 21.8758, -9.1858, -9.1858, 23.7418, 9.1858, -9.1858, 23.7418, -9.1858, -9.1858, 21.8758, 9.1858, -9.1858, 21.8758, 9.1858, -9.1858, 23.7418, -9.1858, -9.1858, 21.8758, -9.1858 )
@@ -24,14 +29,56 @@ data = PoolVector3Array( 2.2757, 3.5748, 10.0835, 2.2757, 11.1083, 10.0835, 10.0
 [sub_resource type="ConcavePolygonShape" id=2]
 data = PoolVector3Array( -2.2667, 3.531, 10.0572, -10.0572, 3.531, 10.0572, -10.0572, 3.531, -10.0572, 2.2667, 3.531, 10.0572, 10.0572, 3.531, -10.0572, 10.0572, 3.531, 10.0572, -2.2667, 3.531, 10.0572, -10.0572, 3.531, -10.0572, 10.0572, 3.531, -10.0572, -2.2667, 3.531, 10.0572, 10.0572, 3.531, -10.0572, 2.2667, 3.531, 10.0572, 2.2667, -0.179, 16.4832, -2.2667, -0.179, 16.4832, -2.2667, 3.531, 10.0572, 2.2667, -0.179, 16.4832, -2.2667, 3.531, 10.0572, 2.2667, 3.531, 10.0572, -6.3677, 0.0346, 7.4429, -7.4429, 0.0346, 7.4429, -7.4429, 3.5246, 7.4429, -6.3677, 0.0346, 7.4429, -7.4429, 3.5246, 7.4429, -6.3677, 3.5246, 7.4429, -6.3677, 3.5246, 7.4429, -7.4429, 3.5246, 7.4429, -7.4429, 3.5246, 6.3677, -6.3677, 3.5246, 7.4429, -7.4429, 3.5246, 6.3677, -6.3677, 3.5246, 6.3677, -6.3677, 3.5246, 6.3677, -7.4429, 3.5246, 6.3677, -7.4429, 0.0346, 6.3677, -6.3677, 3.5246, 6.3677, -7.4429, 0.0346, 6.3677, -6.3677, 0.0346, 6.3677, -6.3677, 0.0346, 6.3677, -7.4429, 0.0346, 6.3677, -7.4429, 0.0346, 7.4429, -6.3677, 0.0346, 6.3677, -7.4429, 0.0346, 7.4429, -6.3677, 0.0346, 7.4429, -6.3677, 0.0346, 6.3677, -6.3677, 0.0346, 7.4429, -6.3677, 3.5246, 7.4429, -6.3677, 0.0346, 6.3677, -6.3677, 3.5246, 7.4429, -6.3677, 3.5246, 6.3677, -7.4429, 0.0346, 7.4429, -7.4429, 0.0346, 6.3677, -7.4429, 3.5246, 6.3677, -7.4429, 0.0346, 7.4429, -7.4429, 3.5246, 6.3677, -7.4429, 3.5246, 7.4429, 7.4429, 3.5246, 7.4429, 7.4429, 0.0346, 7.4429, 6.3677, 0.0346, 7.4429, 7.4429, 3.5246, 7.4429, 6.3677, 0.0346, 7.4429, 6.3677, 3.5246, 7.4429, 7.4429, 3.5246, 6.3677, 7.4429, 3.5246, 7.4429, 6.3677, 3.5246, 7.4429, 7.4429, 3.5246, 6.3677, 6.3677, 3.5246, 7.4429, 6.3677, 3.5246, 6.3677, 7.4429, 0.0346, 6.3677, 7.4429, 3.5246, 6.3677, 6.3677, 3.5246, 6.3677, 7.4429, 0.0346, 6.3677, 6.3677, 3.5246, 6.3677, 6.3677, 0.0346, 6.3677, 7.4429, 0.0346, 7.4429, 7.4429, 0.0346, 6.3677, 6.3677, 0.0346, 6.3677, 7.4429, 0.0346, 7.4429, 6.3677, 0.0346, 6.3677, 6.3677, 0.0346, 7.4429, 6.3677, 3.5246, 7.4429, 6.3677, 0.0346, 7.4429, 6.3677, 0.0346, 6.3677, 6.3677, 3.5246, 7.4429, 6.3677, 0.0346, 6.3677, 6.3677, 3.5246, 6.3677, 7.4429, 3.5246, 6.3677, 7.4429, 0.0346, 6.3677, 7.4429, 0.0346, 7.4429, 7.4429, 3.5246, 6.3677, 7.4429, 0.0346, 7.4429, 7.4429, 3.5246, 7.4429, -7.4429, 3.5246, -7.4429, -7.4429, 0.0346, -7.4429, -6.3677, 0.0346, -7.4429, -7.4429, 3.5246, -7.4429, -6.3677, 0.0346, -7.4429, -6.3677, 3.5246, -7.4429, -7.4429, 3.5246, -6.3677, -7.4429, 3.5246, -7.4429, -6.3677, 3.5246, -7.4429, -7.4429, 3.5246, -6.3677, -6.3677, 3.5246, -7.4429, -6.3677, 3.5246, -6.3677, -7.4429, 0.0346, -6.3677, -7.4429, 3.5246, -6.3677, -6.3677, 3.5246, -6.3677, -7.4429, 0.0346, -6.3677, -6.3677, 3.5246, -6.3677, -6.3677, 0.0346, -6.3677, -7.4429, 0.0346, -7.4429, -7.4429, 0.0346, -6.3677, -6.3677, 0.0346, -6.3677, -7.4429, 0.0346, -7.4429, -6.3677, 0.0346, -6.3677, -6.3677, 0.0346, -7.4429, -6.3677, 3.5246, -7.4429, -6.3677, 0.0346, -7.4429, -6.3677, 0.0346, -6.3677, -6.3677, 3.5246, -7.4429, -6.3677, 0.0346, -6.3677, -6.3677, 3.5246, -6.3677, -7.4429, 3.5246, -6.3677, -7.4429, 0.0346, -6.3677, -7.4429, 0.0346, -7.4429, -7.4429, 3.5246, -6.3677, -7.4429, 0.0346, -7.4429, -7.4429, 3.5246, -7.4429, 6.3677, 0.0346, -7.4429, 7.4429, 0.0346, -7.4429, 7.4429, 3.5246, -7.4429, 6.3677, 0.0346, -7.4429, 7.4429, 3.5246, -7.4429, 6.3677, 3.5246, -7.4429, 6.3677, 3.5246, -7.4429, 7.4429, 3.5246, -7.4429, 7.4429, 3.5246, -6.3677, 6.3677, 3.5246, -7.4429, 7.4429, 3.5246, -6.3677, 6.3677, 3.5246, -6.3677, 6.3677, 3.5246, -6.3677, 7.4429, 3.5246, -6.3677, 7.4429, 0.0346, -6.3677, 6.3677, 3.5246, -6.3677, 7.4429, 0.0346, -6.3677, 6.3677, 0.0346, -6.3677, 6.3677, 0.0346, -6.3677, 7.4429, 0.0346, -6.3677, 7.4429, 0.0346, -7.4429, 6.3677, 0.0346, -6.3677, 7.4429, 0.0346, -7.4429, 6.3677, 0.0346, -7.4429, 6.3677, 0.0346, -6.3677, 6.3677, 0.0346, -7.4429, 6.3677, 3.5246, -7.4429, 6.3677, 0.0346, -6.3677, 6.3677, 3.5246, -7.4429, 6.3677, 3.5246, -6.3677, 7.4429, 0.0346, -7.4429, 7.4429, 0.0346, -6.3677, 7.4429, 3.5246, -6.3677, 7.4429, 0.0346, -7.4429, 7.4429, 3.5246, -6.3677, 7.4429, 3.5246, -7.4429 )
 
-[sub_resource type="OccluderShapePolygon" id=3]
-polygon_points = PoolVector2Array( 10, -4, 10, 16, -10, 16, -10, -4 )
+[sub_resource type="CubeMesh" id=6]
+size = Vector3( 5.109, 8.214, 2.727 )
 
-[sub_resource type="OccluderShapePolygon" id=5]
-polygon_points = PoolVector2Array( 10.0677, 3.74074, 10, 16, -10, 16, -10.075, 3.71117 )
+[sub_resource type="Animation" id=11]
+resource_name = "Close"
+tracks/0/type = "value"
+tracks/0/path = NodePath("DoorPivot:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 171.119, 0 ), Vector3( 0, 0, 0 ) ]
+}
 
-[sub_resource type="OccluderShapePolygon" id=4]
-polygon_points = PoolVector2Array( -2.31076, 4.03563, -2.29597, 12.007, -10.0602, 12.0513, -10.075, 4.02084 )
+[sub_resource type="Animation" id=10]
+resource_name = "Open"
+tracks/0/type = "value"
+tracks/0/path = NodePath("DoorPivot:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 171.119, 0 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("DoorPivot:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="CubeMesh" id=8]
+size = Vector3( 7.563, 4.743, 0.12 )
 
 [node name="House" type="Spatial" groups=["Clutter"]]
 script = ExtResource( 5 )
@@ -39,15 +86,61 @@ PossibleFurni = [ ExtResource( 7 ), ExtResource( 13 ), ExtResource( 16 ) ]
 PossibleDeco = [ ExtResource( 15 ), ExtResource( 14 ) ]
 SpawnPool = {
 Resource( "res://Scenes/Items/FastLeg_L.tscn" ): 1,
-Resource( "res://Scenes/Items/FastLeg_R.tscn" ): 1,
-Resource( "res://Scenes/Items/BatteryEmpty.tscn" ): 10,
-Resource( "res://Scenes/Items/Item.tscn" ): 10,
 Resource( "res://Scenes/Items/Guitar.tscn" ): 1,
-Resource( "res://Scenes/Items/Battery.tscn" ): 0
+Resource( "res://Scenes/Items/Battery.tscn" ): 0,
+Resource( "res://Scenes/Items/FastLeg_R.tscn" ): 1,
+Resource( "res://Scenes/Items/Item.tscn" ): 10,
+Resource( "res://Scenes/Items/BatteryEmpty.tscn" ): 10
 }
 
 [node name="HouseDoor" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13.568, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="HouseDoor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0673904, 0 )
+shape = SubResource( 7 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="HouseDoor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.10408, 10.9461 )
+shape = SubResource( 9 )
+
+[node name="HouseExterior" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0691166, 0 )
+collision_layer = 32
+collision_mask = 0
+
+[node name="MeshInstance" type="MeshInstance" parent="HouseExterior"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0338049, 0 )
+generate_lightmap = false
+mesh = ExtResource( 1 )
+material/0 = ExtResource( 6 )
+script = ExtResource( 8 )
+LOD0 = ExtResource( 1 )
+LOD1 = ExtResource( 9 )
+
+[node name="CollisionShape" type="CollisionShape" parent="HouseExterior"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0338049, 0 )
+shape = SubResource( 1 )
+
+[node name="StaticBody2" type="StaticBody" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="BuildingInterior" type="MeshInstance" parent="StaticBody2"]
+mesh = ExtResource( 2 )
+skeleton = NodePath("../..")
+material/0 = ExtResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody2"]
+shape = SubResource( 2 )
+
+[node name="DecorationPlacaments" type="Spatial" parent="."]
+
+[node name="Position3D" type="Position3D" parent="DecorationPlacaments"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.36304, 3.53325, -2.05728 )
+
+[node name="Position3D2" type="Position3D" parent="DecorationPlacaments"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.57816, 3.53325, 0.562021 )
 
 [node name="FurniturePlacements" type="Spatial" parent="."]
 
@@ -107,76 +200,28 @@ transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.6230
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.26692, 0 )
 mesh = SubResource( 6 )
 
-[node name="IndoorsLight" parent="." instance=ExtResource( 12 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.2561, 0 )
+[node name="Furnitures" type="Spatial" parent="."]
 
-[node name="HouseExterior" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0691166, 0 )
-collision_layer = 32
-collision_mask = 0
+[node name="Decorations" type="Spatial" parent="."]
 
-[node name="MeshInstance" type="MeshInstance" parent="HouseExterior"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0338049, 0 )
-generate_lightmap = false
-mesh = ExtResource( 1 )
-material/0 = ExtResource( 6 )
-script = ExtResource( 8 )
-LOD0 = ExtResource( 1 )
-LOD1 = ExtResource( 9 )
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Close = SubResource( 11 )
+anims/Open = SubResource( 10 )
+anims/RESET = SubResource( 12 )
 
-[node name="CollisionShape" type="CollisionShape" parent="HouseExterior"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0338049, 0 )
-shape = SubResource( 1 )
+[node name="DoorPivot" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.25, 7.26628, 10.0431 )
 
-[node name="StaticBody2" type="StaticBody" parent="."]
-collision_layer = 4
-collision_mask = 0
-
-[node name="BuildingInterior" type="MeshInstance" parent="StaticBody2"]
-mesh = ExtResource( 2 )
+[node name="Door" type="MeshInstance" parent="DoorPivot"]
+transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 2.25, 0, 0 )
+mesh = SubResource( 8 )
 skeleton = NodePath("../..")
 material/0 = ExtResource( 3 )
 
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody2"]
-shape = SubResource( 2 )
+[node name="Lights" type="Spatial" parent="."]
 
-[node name="Occluders" type="Spatial" parent="."]
-
-[node name="Occluder" type="Occluder" parent="Occluders"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.26139, -10 )
-shape = SubResource( 3 )
-
-[node name="Occluder2" type="Occluder" parent="Occluders"]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 10, 7.26139, 0 )
-shape = SubResource( 3 )
-
-[node name="Occluder3" type="Occluder" parent="Occluders"]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -10, 7.26139, 0 )
-shape = SubResource( 3 )
-
-[node name="Occluder7" type="Occluder" parent="Occluders"]
-transform = Transform( 1.91069e-15, 1, 4.37114e-08, 4.37114e-08, -4.37114e-08, 1, 1, 0, -4.37114e-08, -6, 23.2614, 0 )
-shape = SubResource( 3 )
-
-[node name="Occluder4" type="Occluder" parent="Occluders"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.26139, 10 )
-shape = SubResource( 5 )
-
-[node name="Occluder5" type="Occluder" parent="Occluders"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.738614, 10 )
-shape = SubResource( 4 )
-
-[node name="Occluder6" type="Occluder" parent="Occluders"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -0.738614, 10 )
-shape = SubResource( 4 )
-
-[node name="DecorationPlacaments" type="Spatial" parent="."]
-
-[node name="Position3D" type="Position3D" parent="DecorationPlacaments"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.36304, 3.53325, -2.05728 )
-
-[node name="Position3D2" type="Position3D" parent="DecorationPlacaments"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.57816, 3.53325, 0.562021 )
+[node name="IndoorsLight" parent="Lights" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.2561, 0 )
 
 [connection signal="body_entered" from="HouseDoor" to="." method="Entered"]
 [connection signal="body_exited" from="HouseDoor" to="." method="Left"]

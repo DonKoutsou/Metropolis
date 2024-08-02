@@ -1,0 +1,18 @@
+[gd_resource type="SpatialMaterial" load_steps=5 format=2]
+
+[ext_resource path="res://Assets/TerainTex/Metal041C_1K-JPG/Metal041C_1K-JPG_Color.jpg" type="Texture" id=1]
+[ext_resource path="res://Assets/TerainTex/Metal041C_1K-JPG/Metal041C_1K-JPG_Roughness.jpg" type="Texture" id=2]
+[ext_resource path="res://Assets/TerainTex/Metal041C_1K-JPG/Metal041C_1K-JPG_NormalGL.jpg" type="Texture" id=3]
+[ext_resource path="res://Assets/TerainTex/Metal041C_1K-JPG/Metal041C_1K-JPG_Metalness.jpg" type="Texture" id=4]
+
+[resource]
+albedo_color = Color( 0.678431, 0.756863, 0.588235, 1 )
+albedo_texture = ExtResource( 1 )
+metallic = 1.0
+metallic_texture = ExtResource( 4 )
+metallic_texture_channel = 4
+roughness_texture = ExtResource( 2 )
+roughness_texture_channel = 4
+normal_enabled = true
+normal_scale = 6.72
+normal_texture = ExtResource( 3 )

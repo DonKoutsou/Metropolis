@@ -108,13 +108,13 @@ emission_on_uv2 = false
 [sub_resource type="Curve" id=9]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.207055 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=10]
+[sub_resource type="CurveTexture" id=14]
 curve = SubResource( 9 )
 
 [sub_resource type="ParticlesMaterial" id=7]
 emission_shape = 5
-emission_ring_radius = 80.0
-emission_ring_inner_radius = 79.0
+emission_ring_radius = 70.0
+emission_ring_inner_radius = 65.0
 emission_ring_height = 1.0
 emission_ring_axis = Vector3( 0, 0, 1 )
 flag_disable_z = true
@@ -123,8 +123,7 @@ angular_velocity = 322.11
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 radial_accel = -100.0
-tangential_accel = 47.37
-scale_curve = SubResource( 10 )
+scale_curve = SubResource( 14 )
 
 [sub_resource type="SphereMesh" id=11]
 
@@ -170,7 +169,7 @@ shape = SubResource( 4 )
 material_override = SubResource( 6 )
 cast_shadow = 0
 emitting = false
-amount = 400
+amount = 100
 process_material = SubResource( 7 )
 draw_pass_1 = SubResource( 11 )
 

@@ -29,10 +29,9 @@ public class NPC : Character
 			return RestDialogue;
 		else
 		{
-			Talked = true;
+			//Talked = true;
 			return FirstDialogue;
-		}
-			
+		}	
 	}
 	Node Skeleton;
 
@@ -136,18 +135,13 @@ public class NPC : Character
 		SetLimbColor(LimbType.N01_LEG_R, LimbRandomColorProvider.GetRandomColor());
 		SetLimbColor(LimbType.N01_LEG_L, LimbRandomColorProvider.GetRandomColor());
 	}*/
-	public void HighLightObject(bool toggle)
+	public void HighLightObject(Material OutlineMat)
     {
 		foreach (Node child in Skeleton.GetChildren())
 		{
-			if (child is MeshInstance)
+			if (child is MeshInstance mesh)
 			{
-				ShaderMaterial Mat = (ShaderMaterial)((MeshInstance)child).MaterialOverlay;
-				if (Mat != null)
-				{
-					Mat.SetShaderParam("enable",  toggle);
-				}
-				
+				mesh.MaterialOverlay = OutlineMat;
 			}
 		}
     }

@@ -25,6 +25,10 @@ public class ActionMenu : Control
 
 	[Export]
 	int VisibleInteractableDistance = 100;
+
+	[Export]
+	Material OutLineMat = null;
+	
 	bool PerformingAction = false;
 	//0 is Pickupaction
 	//1 is Int 1
@@ -151,7 +155,7 @@ public class ActionMenu : Control
 					}
 				}
 			}
-			/*float charrechargeamm = pl.GetCharacterBatteryCap() - pl.GetCurrentCharacterEnergy();
+			float charrechargeamm = pl.GetCharacterBatteryCap() - pl.GetCurrentCharacterEnergy();
 			if (charrechargeamm > availableenergy)
 			{
 				pl.RechargeCharacter(charrechargeamm);
@@ -161,7 +165,7 @@ public class ActionMenu : Control
 			{
 				pl.RechargeCharacter(availableenergy);
 				rechargeamm += availableenergy;
-			}*/
+			}
 			generator.ConsumeEnergy(rechargeamm);
 			int time = (int)Math.Round(rechargeamm / 6);
 			int days, hours, mins;
@@ -204,7 +208,7 @@ public class ActionMenu : Control
 		{
 			List<Item> items;
 			pl.GetCharacterInventory().GetItemsByType(out items, ItemName.EXPLOSIVE);
-			pl.GetCharacterInventory().RemoveItem(items[0]);
+			pl.GetCharacterInventory().RemoveItem(items[0], false);
 			br.AtatchExplosive(pl, (Explosive)items[0]);
 		}
 		selecting = false;
@@ -337,7 +341,7 @@ public class ActionMenu : Control
 		}
 		DeselectCurrent();
 		SelectedObj = obj;
-		SelectedObj.Call("HighLightObject", true);
+		SelectedObj.Call("HighLightObject", true, OutLineMat);
 		PickButton.Show();
 		IntButton.Show();
 		Show();
@@ -346,7 +350,7 @@ public class ActionMenu : Control
 	void DeselectCurrent()
 	{
 		if (SelectedObj != null)
-			SelectedObj.Call("HighLightObject", false);
+			SelectedObj.Call("HighLightObject", false, OutLineMat);
 
 		SelectedObj = null;
 	}
@@ -473,7 +477,7 @@ public class ActionMenu : Control
 			foreach (Spatial inter in interactables)
 			{
 				if (plpos.DistanceTo(inter.GlobalTranslation) < VisibleInteractableDistance)
-					inter.Call("HighLightObject", true);
+					inter.Call("HighLightObject", true, OutLineMat);
 			}
 		}
 		else if (@event.IsActionReleased("ActionCheck"))
@@ -482,7 +486,7 @@ public class ActionMenu : Control
 			foreach (Node inter in interactables)
 			{
 				if (inter != SelectedObj)
-					inter.Call("HighLightObject", false);
+					inter.Call("HighLightObject", false, OutLineMat);
 			}
 		}
 	}

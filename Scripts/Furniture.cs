@@ -106,20 +106,23 @@ public class Furniture : Spatial
 		else
 			PlayerSearchAnim();
 	}
-	public void HighLightObject(bool toggle)
+	public void HighLightObject(bool toggle, Material OutlineMat)
     {
 		if (Searched)
 		{
 			foreach (NodePath path in ToHighLight)
 			{
-				((ShaderMaterial)GetNode<MeshInstance>(path).MaterialOverlay).SetShaderParam("enable",  false);
+				GetNode<MeshInstance>(path).MaterialOverlay = null;
 			}
 		}
 		else
 		{
 			foreach (NodePath path in ToHighLight)
 			{
-				((ShaderMaterial)GetNode<MeshInstance>(path).MaterialOverlay).SetShaderParam("enable",  toggle);
+				if (toggle)
+					GetNode<MeshInstance>(path).MaterialOverlay = OutlineMat;
+				else
+					GetNode<MeshInstance>(path).MaterialOverlay = null;
 			}
 		}
 			

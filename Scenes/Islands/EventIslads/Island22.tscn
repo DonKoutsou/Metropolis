@@ -99,7 +99,7 @@ transform = Transform( 328.356, 691.82, -147.148, 669.366, -251.535, 311.07, 228
 transform = Transform( 567.513, 0, 0, 0, 130.026, -552.416, 0, 552.417, 130.026, 1639.69, -184.102, 1774.61 )
 
 [node name="Character" parent="." index="5" instance=ExtResource( 14 )]
-transform = Transform( 0.910077, 0, -0.414439, 0, 1, 0, 0.414439, 0, 0.910077, 747.156, 37.8282, 1228.23 )
+transform = Transform( 0.910077, 0, -0.414439, 0, 1, 0, 0.414439, 0, 0.910077, 747.156, 38.9333, 1228.23 )
 
 [node name="SoundMap" parent="." index="7"]
 mesh_library = SubResource( 461 )

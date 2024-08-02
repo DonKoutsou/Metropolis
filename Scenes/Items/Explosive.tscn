@@ -1,11 +1,10 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Scripts/Explosive.cs" type="Script" id=1]
 [ext_resource path="res://Assets/Explosive/ExplosiveMay.tres" type="Material" id=2]
 [ext_resource path="res://Assets/Explosive/Explosive.obj" type="ArrayMesh" id=3]
 [ext_resource path="res://shaders/Outline.shader" type="Shader" id=4]
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=5]
-[ext_resource path="res://shaders/OutlineShader.tres" type="Material" id=6]
 [ext_resource path="res://Assets/Explosive/ExplosiveIcon.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Sounds/Bomb.mp3" type="AudioStream" id=8]
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=9]
@@ -242,15 +241,15 @@ ItemType = 17
 ItemIcon = ExtResource( 7 )
 ItemPickupActionName = "Ένα εκρηκτικό.."
 ItemName = "Εκρηκτικό"
-InventoryItemName = "Εκρηκτικό"
 ItemDesc = "Ένα εκρηκτικό"
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( -1.94389, 0, -1.6994e-07, 0, 1.94389, 0, 1.6994e-07, 0, -1.94389, 0, 0.177693, 0 )
 material_override = ExtResource( 2 )
-material_overlay = ExtResource( 6 )
 mesh = ExtResource( 3 )
 script = ExtResource( 9 )
+LOD0 = ExtResource( 3 )
+LOD1 = ExtResource( 3 )
 HideIfNoLod = true
 
 [node name="CollisionShape" type="CollisionShape" parent="."]

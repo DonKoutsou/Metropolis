@@ -17,8 +17,8 @@
 [ext_resource path="res://Scenes/Env_Assets/RockCave.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Characters/NPC.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/Env_Assets/Skampo.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Scenes/Items/Bouzouki.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Scenes/Vehicles/HoverBoard.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Scenes/Env_Assets/Easel.tscn" type="PackedScene" id=20]
 
 [sub_resource type="SpatialMaterial" id=13]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -199,8 +199,8 @@ transform = Transform( -0.434175, 0.575879, -0.692716, 0.589854, -0.399457, -0.7
 transform = Transform( -0.0817646, 0, -0.996652, 0, 1, 0, 0.996652, 0, -0.0817646, -1444.18, 1155.6, 1319.35 )
 Sitting = true
 Chair = NodePath("../StaticBody2")
-PlayInstrument = true
-InstrumentToSpawnWith = ExtResource( 18 )
+FirstDialogue = "PainterDialogue"
+RestDialogue = "PainterDialogue2"
 
 [node name="StaticBody2" parent="." index="22" instance=ExtResource( 17 )]
 transform = Transform( 0.0307479, 0, -0.999527, 0, 1, 0, 0.999527, 0, 0.0307479, -1442.75, 1155.39, 1319.22 )
@@ -210,3 +210,6 @@ transform = Transform( -0.313976, 0, -0.949431, 0, 1, 0, 0.949431, 0, -0.313976,
 
 [node name="Vehicle" parent="." index="24" instance=ExtResource( 19 )]
 transform = Transform( -0.487616, 0, -0.873058, 0, 1, 0, 0.873058, 0, -0.487616, -1395.96, 1163.89, 1296.46 )
+
+[node name="StaticBody4" parent="." index="26" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1447.2, 1154.99, 1319.33 )

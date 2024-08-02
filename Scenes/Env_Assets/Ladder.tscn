@@ -1,12 +1,7 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/Ladder/lambert1.material" type="Material" id=1]
-[ext_resource path="res://shaders/OutlineShader.tres" type="Material" id=2]
-[ext_resource path="res://Assets/TerainTex/Planks037A_1K-JPG/Planks037A_1K-JPG_Metalness.jpg" type="Texture" id=3]
-[ext_resource path="res://Assets/TerainTex/Planks037A_1K-JPG/Planks037A_1K-JPG_NormalGL.jpg" type="Texture" id=4]
-[ext_resource path="res://Assets/TerainTex/Planks037A_1K-JPG/Planks037A_1K-JPG_Color.jpg" type="Texture" id=5]
-[ext_resource path="res://Assets/TerainTex/Planks037A_1K-JPG/Planks037A_1K-JPG_AmbientOcclusion.jpg" type="Texture" id=6]
-[ext_resource path="res://Assets/TerainTex/Planks037A_1K-JPG/Planks037A_1K-JPG_Roughness.jpg" type="Texture" id=7]
+[ext_resource path="res://Assets/Building/PlatformWood.material" type="Material" id=3]
 [ext_resource path="res://Scripts/Ladder.cs" type="Script" id=8]
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=10]
@@ -27,30 +22,6 @@ surfaces/0 = {
 "vertex_count": 1796
 }
 
-[sub_resource type="SpatialMaterial" id=2]
-resource_local_to_scene = true
-resource_name = "BuildingInterior"
-flags_world_triplanar = true
-vertex_color_use_as_albedo = true
-params_cull_mode = 2
-albedo_texture = ExtResource( 5 )
-metallic = 1.0
-metallic_specular = 0.0
-metallic_texture = ExtResource( 3 )
-metallic_texture_channel = 4
-roughness_texture = ExtResource( 7 )
-roughness_texture_channel = 4
-normal_enabled = true
-normal_scale = -1.0
-normal_texture = ExtResource( 4 )
-ao_enabled = true
-ao_light_affect = 1.0
-ao_texture = ExtResource( 6 )
-ao_on_uv2 = true
-ao_texture_channel = 4
-uv1_scale = Vector3( 0.1, 0.1, 0.1 )
-uv1_triplanar = true
-
 [sub_resource type="BoxShape" id=4]
 extents = Vector3( 13.2283, 70.4496, 1.91424 )
 
@@ -61,9 +32,8 @@ script = ExtResource( 8 )
 TopPossition = Vector3( 0, 200, 6 )
 
 [node name="Ladder" type="MeshInstance" parent="."]
-material_overlay = ExtResource( 2 )
 mesh = SubResource( 1 )
-material/0 = SubResource( 2 )
+material/0 = ExtResource( 3 )
 script = ExtResource( 10 )
 LOD0 = SubResource( 1 )
 HideIfNoLod = true

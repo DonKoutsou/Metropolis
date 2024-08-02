@@ -76,7 +76,7 @@ public class WorldMap : TileMap
 	//TO BE SAVED
 	//id of exit
 	int ExitID = 0;
-
+	Vector2 Exitpalcement;
 	static WorldMap Instance;
 
 
@@ -135,6 +135,7 @@ public class WorldMap : TileMap
 			{"currentile", IslandSpawnIndex},
 			{"ΜαχαλάςEntryID", ΜαχαλάςEntryID},
 			{"ExitID", ExitID},
+			{"Exitpalcement", Exitpalcement},
 			{"EventWallID", WallEventID},
 			{"OrderedCells", OrdC},
 			{"CurrentTile", CurrentTile},
@@ -146,7 +147,68 @@ public class WorldMap : TileMap
 		};
 		return data;
 	}
-	
+	public string GetExitDirection()
+	{
+		string direction = GetCompassDirection(CurrentTile, Exitpalcement);
+		return direction;
+	}
+	public static void Main()
+    {
+        Vector2 vector1 = new Vector2(1, 0); // Example vector
+        Vector2 vector2 = new Vector2(0, 1); // Example vector
+
+        string direction = GetCompassDirection(vector1, vector2);
+        Console.WriteLine($"The direction from vector1 to vector2 is: {direction}");
+    }
+
+    public static string GetCompassDirection(Vector2 vector1, Vector2 vector2)
+    {
+        float angle = CalculateAngle(vector1, vector2);
+
+        return AngleToCompassDirection(angle);
+    }
+
+    private static float CalculateAngle(Vector2 vector1, Vector2 vector2)
+    {
+        float dotProduct = vector1.x * vector2.x + vector1.y * vector2.y;
+        float magnitude1 = Mathf.Sqrt(vector1.x * vector1.x + vector1.y * vector1.y);
+        float magnitude2 = Mathf.Sqrt(vector2.x * vector2.x + vector2.y * vector2.y);
+
+        float cosTheta = dotProduct / (magnitude1 * magnitude2);
+
+        float angleRadians = Mathf.Acos(cosTheta);
+
+        float angleDegrees = angleRadians * (180 / Mathf.Pi);
+
+        if (vector1.x * vector2.y - vector1.y * vector2.x < 0)
+        {
+            angleDegrees = 360 - angleDegrees;
+        }
+        
+        return angleDegrees;
+    }
+
+    private static string AngleToCompassDirection(float angle)
+    {
+        if (angle >= 337.5 || angle < 22.5)
+            return "Βόρεια";
+        else if (angle >= 22.5 && angle < 67.5)
+            return "Βορειοανατολικά";
+        else if (angle >= 67.5 && angle < 112.5)
+            return "Ανατολικά";
+        else if (angle >= 112.5 && angle < 157.5)
+            return "Νοτιοανατολικά";
+        else if (angle >= 157.5 && angle < 202.5)
+            return "Νότια";
+        else if (angle >= 202.5 && angle < 247.5)
+            return "Νοτιοδυτικά";
+        else if (angle >= 247.5 && angle < 292.5)
+            return "Δυτικά";
+        else if (angle >= 292.5 && angle < 337.5)
+            return "Βορειοδυτικά";
+        else
+            return "Unknown";
+    }
 	public void LoadSaveData(Resource data)
 	{
 		finishedspawning = (bool)data.Get("finishedspawning");
@@ -159,6 +221,7 @@ public class WorldMap : TileMap
 
 		IslandSpawnIndex = (int)data.Get("currentile");
 		ΜαχαλάςEntryID = (int)data.Get("MahalasEntryID");
+		Exitpalcement = (Vector2)data.Get("Exitpalcement");
 		WallEventID = (int)data.Get("EventWallID");
 		ExitID = (int)data.Get("ExitID");
 
@@ -626,7 +689,7 @@ public class WorldMap : TileMap
 		//exit randomise
 		var exitcells = GetUsedCellsById(2);
 		int RandomExitIndex = RandomContainer.Next(0, exitcells.Count);
-		Vector2 Exitpalcement = (Vector2)exitcells[RandomExitIndex];
+		Exitpalcement = (Vector2)exitcells[RandomExitIndex];
 		ExitID = OrderedCells.IndexOf(Exitpalcement);
 	}
 	
@@ -744,8 +807,6 @@ public class WorldMap : TileMap
 				{
 					scene = loadedscenes[RandomContainer.Next(0, loadedscenes.Count)];
 				}
-					
-
 				SpecialName = "Νησί";
 				break;
 			}

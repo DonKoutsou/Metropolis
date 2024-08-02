@@ -1,6 +1,13 @@
 {
 	"glossary": [
-
+		{
+			"extra": "",
+			"id": "1722594359-151",
+			"name": "Μητρόπολη",
+			"text": "Η πρώτη πολητεία τον ανθρώπων στην επιφάνεια.",
+			"title": "Μητρόπολη",
+			"type": 1
+		}
 	],
 	"variables": [
 		{
@@ -32,6 +39,24 @@
 			"name": "RewardAmmount",
 			"type": 0,
 			"value": "0"
+		},
+		{
+			"id": "1722596149-566",
+			"name": "DialogueProgressed",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1722594718-465",
+			"name": "CharacterSeenBaby",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1722594282-270",
+			"name": "MetropolisDirection",
+			"type": 0,
+			"value": "Βόρεια"
 		}
 	]
 }

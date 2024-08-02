@@ -89,8 +89,11 @@ public class Ladder : Spatial
         pl.Rotation = Vector3.Zero;
         pl.Teleport(furthest.GlobalTranslation);
     }
-    public void HighLightObject(bool toggle)
+    public void HighLightObject(bool toggle, Material OutlineMat)
     {
-		((ShaderMaterial)GetNode<MeshInstance>("Ladder").MaterialOverlay).SetShaderParam("enable",  toggle);
+        if (toggle)
+            GetNode<MeshInstance>("Ladder").MaterialOverlay = OutlineMat;
+        else
+            GetNode<MeshInstance>("Ladder").MaterialOverlay = null;
     }
 }

@@ -8,7 +8,7 @@ public class DialogueManager : Node
     {
         Instance = this;
     }
-    Character TalkingChar;
+    NPC TalkingChar;
 	static bool IsTalking = false;
     public static bool IsPlayerTalking()
     {
@@ -19,7 +19,7 @@ public class DialogueManager : Node
         return Instance;
     }
 
-	public void StartDialogue(Character character, string Dialogue = "TestTimeline")
+	public void StartDialogue(NPC character, string Dialogue = "TestTimeline")
 	{
 		Player pl = Player.GetInstance();
 		if (pl.HasVehicle())
@@ -29,7 +29,11 @@ public class DialogueManager : Node
 		}
 		Position3D talkpos = character.GetNode<Position3D>("TalkPosition");
 
+
+
 		pl.UpdateLocationToMove(talkpos.GlobalTranslation);
+		
+		DialogicSharp.SetVariable("MetropolisDirection", WorldMap.GetInstance().GetExitDirection());
 		DialogicSharp.SetVariable("GenericCharacter", character.GetCharacterName());
 		Camera cam = pl.GetDialogueCamera();
 		
@@ -78,6 +82,11 @@ public class DialogueManager : Node
 	}
 	public void EndDialogue(string timeline_name)
 	{
+		string dialogueprog = DialogicSharp.GetVariable("DialogueProgressed");
+		if (dialogueprog == "true")
+			TalkingChar.Talked = true;
+		if (dialogueprog == "false")
+			TalkingChar.Talked = false;
 		CameraAnimationPlayer.GetInstance().PlayAnim("FadeOutDialogue");
 		IsTalking = false;
 		TalkingChar.ResetLook();

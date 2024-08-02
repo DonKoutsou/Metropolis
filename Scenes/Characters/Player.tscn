@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=2]
+[gd_scene load_steps=73 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/HUD/ActionMenu.tscn" type="PackedScene" id=2]
@@ -52,131 +52,6 @@ radius = 2.0
 height = 4.0
 radial_segments = 4
 rings = 4
-
-[sub_resource type="Shader" id=120]
-code = "/*
-	Sobel/Depth アウトラインシェーダー by あるる（きのもと 結衣）
-	Sobel/Depth Outline Shader by Yui Kinomoto @arlez80
-
-	MIT License
-*/
-
-shader_type spatial;
-render_mode unshaded;
-
-const vec3 MONOCHROME_SCALE = vec3( 0.298912, 0.586611, 0.114478 );
-
-uniform vec4 outline_color : hint_color = vec4( 0.0, 0.0, 0.0, 1.0 );
-uniform float luma_coef = 0.1;
-uniform float color_coef = 0.1;
-uniform float depth_coef = 0.8;
-uniform float cutoff = 0.2;
-uniform bool enable = true;
-
-float gaussian3x3( sampler2D tex, vec2 uv, vec2 pixel_size )
-{
-	float p = 0.0;
-	float coef[9] = {
-		0.0625, 0.125, 0.0625,
-		0.125, 0.25, 0.125,
-		0.0625, 0.125, 0.0625
-	};
-
-	for( int y=-1; y<=1; y++ ) {
-		for( int x=-1; x<=1; x ++ ) {
-			p += textureLod( tex, uv + vec2( float( x ), float( y ) ) * pixel_size, 0.0 ).r * coef[(y+1)*3 + (x+1)];
-		}
-	}
-
-	return p;
-}
-
-void fragment( )
-{
-	if (!enable) {
-		ALPHA = 0.0f;
-	}
-	else
-	{
-		vec3 color[9];
-		float depth[9];
-		vec2 pixel_size = ( vec2( 1.0, 1.0 ) / VIEWPORT_SIZE ) * 1.15;
-
-		// Gaussian FilterとSobel FilterでColor/Depthで取る
-		for( int y=0; y<3; y ++ ) {
-			for( int x=0; x<3; x ++ ) {
-				vec2 uv = SCREEN_UV + vec2( float( x-1 ), float( y-1 ) ) * pixel_size;
-				vec4 ndc = vec4( uv, gaussian3x3( DEPTH_TEXTURE, uv, pixel_size ), 1.0 ) * 2.0 - 1.0;
-				vec4 screen_pixel_coord = INV_PROJECTION_MATRIX * ndc;
-
-				color[y*3+x] = textureLod( SCREEN_TEXTURE, uv, 0.0 ).rgb;
-				depth[y*3+x] = -( screen_pixel_coord.z / screen_pixel_coord.w );
-			}
-		}
-
-		vec3 color_sobel_src_x = (
-			color[0] * -1.0
-		+	color[3] * -2.0
-		+	color[6] * -1.0
-		+	color[2] * 1.0
-		+	color[5] * 2.0
-		+	color[8] * 1.0
-		);
-		vec3 color_sobel_src_y = (
-			color[0] * -1.0
-		+	color[1] * -2.0
-		+	color[2] * -1.0
-		+	color[6] * 1.0
-		+	color[7] * 2.0
-		+	color[8] * 1.0
-		);
-		vec3 color_sobel = sqrt( color_sobel_src_x * color_sobel_src_x + color_sobel_src_y * color_sobel_src_y );
-
-		vec2 depth_sobel_src = vec2(
-			(
-				depth[0] * -1.0
-			+	depth[3] * -2.0
-			+	depth[6] * -1.0
-			+	depth[2] * 1.0
-			+	depth[5] * 2.0
-			+	depth[8] * 1.0
-			)
-		,	(
-				depth[0] * -1.0
-			+	depth[1] * -2.0
-			+	depth[2] * -1.0
-			+	depth[6] * 1.0
-			+	depth[7] * 2.0
-			+	depth[8] * 1.0
-			)
-		);
-		float depth_sobel = clamp( sqrt( dot( depth_sobel_src, depth_sobel_src ) ), 0.0, 1.0 );
-
-		// 
-		ALBEDO = outline_color.rgb;
-		ALPHA = clamp(
-			depth_sobel * depth_coef
-		+	depth_sobel * dot( color_sobel, MONOCHROME_SCALE ) * luma_coef
-		+	depth_sobel * length( color_sobel ) * color_coef
-		-	cutoff
-		,	0.0
-		,	1.0
-		);
-		//DEPTH = 0.0;
-	}
-	
-}
-"
-
-[sub_resource type="ShaderMaterial" id=167]
-resource_local_to_scene = true
-shader = SubResource( 120 )
-shader_param/outline_color = Color( 0.431373, 0.717647, 0.937255, 1 )
-shader_param/luma_coef = 0.1
-shader_param/color_coef = 0.1
-shader_param/depth_coef = 0.282
-shader_param/cutoff = 0.005
-shader_param/enable = false
 
 [sub_resource type="SpatialMaterial" id=168]
 resource_local_to_scene = true
@@ -642,93 +517,80 @@ Consumption = SubResource( 165 )
 [node name="Guy" parent="Pivot" instance=ExtResource( 17 )]
 
 [node name="Skeleton" parent="Pivot/Guy/Armature" index="1"]
-bones/3/bound_children = [  ]
-bones/6/bound_children = [  ]
+bones/3/bound_children = [ NodePath("InstrumentAtatchment") ]
+bones/6/bound_children = [ NodePath("BoneAttachment") ]
 
 [node name="HeadRot2Pivot" parent="Pivot/Guy/Armature/Skeleton" index="0"]
-transform = Transform( -1, 0, -8.74228e-08, 3.14612e-16, 1, -3.60583e-09, 8.74228e-08, -2.27374e-13, -1, -1.71338, 280.684, 20.3467 )
+transform = Transform( -1, 0, -8.74228e-08, 3.58771e-16, 1, -4.11302e-09, 8.74228e-08, -2.27374e-13, -1, -3.81941, 281.365, 18.7891 )
 
 [node name="Listener" type="Listener" parent="Pivot/Guy/Armature/Skeleton/HeadRot2Pivot" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.93238, 0.188751, 0.52549 )
 current = true
 
 [node name="BoneAttachment" parent="Pivot/Guy/Armature/Skeleton" index="1"]
-transform = Transform( 0.997145, -0.053086, -0.0537065, 0.0455955, 0.990175, -0.132186, 0.0601962, 0.12936, 0.989769, -0.495013, 265.509, 11.6584 )
+transform = Transform( 0.99706, -0.069626, -0.0319891, 0.0660471, 0.992604, -0.101853, 0.0388441, 0.0994405, 0.994285, -2.47747, 265.949, 10.5559 )
 
 [node name="MeshInstance" parent="Pivot/Guy/Armature/Skeleton/BoneAttachment/HeadPivot" index="0"]
 mesh = SubResource( 166 )
 
 [node name="InstrumentAtatchment" parent="Pivot/Guy/Armature/Skeleton" index="2"]
-transform = Transform( 0.996782, -0.0104695, -0.0794769, 0.00796916, 0.999465, -0.0317132, 0.0797664, 0.0309778, 0.996332, 1.98456, 213.298, -0.517386 )
+transform = Transform( 0.997824, -0.0283743, -0.0595178, 0.0280227, 0.999584, -0.00673519, 0.0596842, 0.00505268, 0.998204, 0.796876, 213.387, -0.0965772 )
+
+[node name="Instrument" parent="Pivot/Guy/Armature/Skeleton/InstrumentAtatchment" index="2"]
+transform = Transform( -37.9657, 16.6749, -2.44876, 16.6429, 38.0451, 1.02921, 2.64825, -0.040322, -41.5738, -29.2251, -41.0474, -25.1529 )
 
 [node name="Arm_L" parent="Pivot/Guy/Armature/Skeleton" index="3"]
-material_overlay = SubResource( 167 )
 material/0 = SubResource( 168 )
 
 [node name="Arm_L_LOD" parent="Pivot/Guy/Armature/Skeleton" index="4"]
 material/0 = SubResource( 168 )
 
 [node name="Arm_R" parent="Pivot/Guy/Armature/Skeleton" index="5"]
-material_overlay = SubResource( 167 )
 material/0 = SubResource( 168 )
 
 [node name="Arm_R_LOD" parent="Pivot/Guy/Armature/Skeleton" index="6"]
-material_overlay = SubResource( 167 )
 material/0 = SubResource( 168 )
 
 [node name="Body" parent="Pivot/Guy/Armature/Skeleton" index="8"]
-material_overlay = SubResource( 167 )
 material/0 = SubResource( 169 )
 
 [node name="Body_LOD" parent="Pivot/Guy/Armature/Skeleton" index="9"]
 material/0 = SubResource( 169 )
 
 [node name="Face" parent="Pivot/Guy/Armature/Skeleton" index="11"]
-material_overlay = SubResource( 167 )
 material/0 = SubResource( 170 )
 
 [node name="Face_LOD" parent="Pivot/Guy/Armature/Skeleton" index="12"]
-material_overlay = SubResource( 167 )
 material/0 = SubResource( 170 )
 
 [node name="Leg2_L" parent="Pivot/Guy/Armature/Skeleton" index="13"]
-material_overlay = SubResource( 167 )
 material/0 = SubResource( 171 )
 
 [node name="Leg2_L_LOD" parent="Pivot/Guy/Armature/Skeleton" index="14"]
-material_overlay = SubResource( 167 )
 material/0 = SubResource( 171 )
 
 [node name="Leg2_R" parent="Pivot/Guy/Armature/Skeleton" index="15"]
-material_overlay = SubResource( 167 )
 material/0 = SubResource( 171 )
 
 [node name="Leg2_R_LOD" parent="Pivot/Guy/Armature/Skeleton" index="16"]
 material_override = SubResource( 171 )
-material_overlay = SubResource( 167 )
 
 [node name="Leg_L" parent="Pivot/Guy/Armature/Skeleton" index="17"]
-material_overlay = SubResource( 167 )
 material/0 = SubResource( 172 )
 
 [node name="Leg_L_LOD" parent="Pivot/Guy/Armature/Skeleton" index="18"]
-material_overlay = SubResource( 167 )
 material/0 = SubResource( 172 )
 
 [node name="Leg_R" parent="Pivot/Guy/Armature/Skeleton" index="19"]
-material_overlay = SubResource( 167 )
 material/0 = SubResource( 172 )
 
 [node name="Leg_R_LOD" parent="Pivot/Guy/Armature/Skeleton" index="20"]
-material_overlay = SubResource( 167 )
 material/0 = SubResource( 172 )
 
 [node name="LegsUpper" parent="Pivot/Guy/Armature/Skeleton" index="21"]
-material_overlay = SubResource( 167 )
 material/0 = SubResource( 169 )
 
 [node name="LegsUpper_LOD" parent="Pivot/Guy/Armature/Skeleton" index="22"]
-material_overlay = SubResource( 167 )
 material/0 = SubResource( 169 )
 
 [node name="AnimationTree" parent="Pivot/Guy/AnimationPlayer" index="0"]
@@ -813,7 +675,7 @@ current = true
 fov = 45.0
 size = 5.0
 near = 1.0
-far = 40000.0
+far = 11000.0
 script = ExtResource( 20 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/PlayerCamera"]
