@@ -35,7 +35,7 @@
 [ext_resource path="res://Assets/Gen3Machine/Body/Textures/Body_Texture_Head_OcclusionRoughnessMetallic.png" type="Texture" id=41]
 
 [sub_resource type="Curve" id=165]
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.102888 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.247292 ), 0.817004, 0.0, 0, 0 ]
 
 [sub_resource type="SpatialMaterial" id=63]
 albedo_color = Color( 0.952941, 0.921569, 0.831373, 1 )
@@ -179,7 +179,7 @@ nodes/ChairBlend/position = Vector2( 186.667, 160 )
 nodes/IntrumentBlend/node = SubResource( 54 )
 nodes/IntrumentBlend/position = Vector2( 360, 266.667 )
 nodes/output/position = Vector2( 533.333, 160 )
-node_connections = [ "IntrumentBlend", 0, "ChairBlend", "IntrumentBlend", 1, "Animation 2", "ChairBlend", 0, "Animation", "ChairBlend", 1, "Animation 3", "output", 0, "IntrumentBlend" ]
+node_connections = [ "output", 0, "IntrumentBlend", "ChairBlend", 0, "Animation", "ChairBlend", 1, "Animation 3", "IntrumentBlend", 0, "ChairBlend", "IntrumentBlend", 1, "Animation 2" ]
 
 [sub_resource type="AnimationNodeAnimation" id=55]
 animation = "Standing"
@@ -516,25 +516,21 @@ Consumption = SubResource( 165 )
 
 [node name="Guy" parent="Pivot" instance=ExtResource( 17 )]
 
-[node name="Skeleton" parent="Pivot/Guy/Armature" index="1"]
-bones/3/bound_children = [ NodePath("InstrumentAtatchment") ]
-bones/6/bound_children = [ NodePath("BoneAttachment") ]
-
 [node name="HeadRot2Pivot" parent="Pivot/Guy/Armature/Skeleton" index="0"]
-transform = Transform( -1, 0, -8.74228e-08, 3.58771e-16, 1, -4.11302e-09, 8.74228e-08, -2.27374e-13, -1, -3.81941, 281.365, 18.7891 )
+transform = Transform( -1, 0, -8.74228e-08, 3.71575e-16, 1, -4.26144e-09, 8.74228e-08, -2.27374e-13, -1, -1.74285, 280.689, 19.1152 )
 
 [node name="Listener" type="Listener" parent="Pivot/Guy/Armature/Skeleton/HeadRot2Pivot" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.93238, 0.188751, 0.52549 )
 current = true
 
 [node name="BoneAttachment" parent="Pivot/Guy/Armature/Skeleton" index="1"]
-transform = Transform( 0.99706, -0.069626, -0.0319891, 0.0660471, 0.992604, -0.101853, 0.0388441, 0.0994405, 0.994285, -2.47747, 265.949, 10.5559 )
+transform = Transform( 0.997542, -0.0580043, -0.039306, 0.0525342, 0.990354, -0.128216, 0.046364, 0.125836, 0.990966, -0.540633, 265.485, 10.4761 )
 
 [node name="MeshInstance" parent="Pivot/Guy/Armature/Skeleton/BoneAttachment/HeadPivot" index="0"]
 mesh = SubResource( 166 )
 
 [node name="InstrumentAtatchment" parent="Pivot/Guy/Armature/Skeleton" index="2"]
-transform = Transform( 0.997824, -0.0283743, -0.0595178, 0.0280227, 0.999584, -0.00673519, 0.0596842, 0.00505268, 0.998204, 0.796876, 213.387, -0.0965772 )
+transform = Transform( 0.997558, -0.0167222, -0.0678002, 0.0150709, 0.999579, -0.0247935, 0.0681863, 0.0237112, 0.997391, 2.14703, 213.217, -1.3647 )
 
 [node name="Instrument" parent="Pivot/Guy/Armature/Skeleton/InstrumentAtatchment" index="2"]
 transform = Transform( -37.9657, 16.6749, -2.44876, 16.6429, 38.0451, 1.02921, 2.64825, -0.040322, -41.5738, -29.2251, -41.0474, -25.1529 )
@@ -686,7 +682,6 @@ material/0 = SubResource( 109 )
 
 [node name="MeshInstance3" type="MeshInstance" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/PlayerCamera"]
 transform = Transform( 1, -5.29396e-22, 0, -1.05879e-22, 1, 0, 2.11758e-21, 0, 1, 0, -0.0144858, -1.05511 )
-visible = false
 mesh = SubResource( 107 )
 material/0 = SubResource( 126 )
 

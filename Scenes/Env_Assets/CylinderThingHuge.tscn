@@ -28,7 +28,8 @@ material_override = ExtResource( 3 )
 mesh = ExtResource( 1 )
 script = ExtResource( 2 )
 LOD0 = ExtResource( 1 )
-LOD1 = SubResource( 4 )
+LOD1 = ExtResource( 1 )
+LOD2 = SubResource( 4 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 119.163, 0 )

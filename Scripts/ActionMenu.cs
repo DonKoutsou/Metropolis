@@ -41,7 +41,7 @@ public class ActionMenu : Control
 	public override void _Ready()
 	{
 		SetPhysicsProcess(false);
-		VBoxContainer cont = GetNode<PanelContainer>("PanelContainer").GetNode<VBoxContainer>("VBoxContainer");
+		VBoxContainer cont = GetNode<VBoxContainer>("VBoxContainer/PanelContainer/VBoxContainer");
         PickButton = cont.GetNode<Button>("PickUp_Button");
 		IntButton = cont.GetNode<Button>("Interact_Button");
 		IntButton2 = cont.GetNode<Button>("Interact_Button2");
@@ -282,6 +282,7 @@ public class ActionMenu : Control
 		if (selecting)
             return;
 		
+		GetNode<VehicleHud>("VBoxContainer/VehicleUI").Hide();
 		if (obj is Item)
 		{
 			PickButton.Text = "Πάρε";
@@ -293,9 +294,14 @@ public class ActionMenu : Control
 		else if (obj is Vehicle)
 		{
 			if (pl.HasVehicle() && pl.GetVehicle() == obj)
+			{
 				PickButton.Text = "Αποβιβάση";
+				GetNode<VehicleHud>("VBoxContainer/VehicleUI").Show();
+			}
+				
 			else
 				PickButton.Text = "Επιβιβάση";
+			
 		}
 		else if (obj is Furniture)
 		{

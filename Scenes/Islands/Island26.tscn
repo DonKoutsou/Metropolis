@@ -1,10 +1,13 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Terains/Island17/Island17.tres" type="ArrayMesh" id=2]
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=3]
 [ext_resource path="res://Assets/Terains/Island17/Island17_LOD.tres" type="ArrayMesh" id=4]
+[ext_resource path="res://Scenes/Env_Assets/Rock3.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/TerainTex/SandSimple.tres" type="Material" id=6]
+[ext_resource path="res://Scenes/Env_Assets/Rock4.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Env_Assets/Rock5.tscn" type="PackedScene" id=8]
 
 [sub_resource type="SpatialMaterial" id=13]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -103,7 +106,7 @@ __meta__ = {
 }
 
 [node name="MeshInstance5" type="MeshInstance" parent="." index="4"]
-transform = Transform( 2530.1, 0, 0, 0, 480.448, 0, 0, 0, 2530.1, 0, -95.895, 0 )
+transform = Transform( 2530.1, 0, 0, 0, 908.235, 0, 0, 0, 2530.1, 0, -195.613, 0 )
 lod_max_distance = 6000.0
 mesh = ExtResource( 2 )
 material/0 = ExtResource( 6 )
@@ -117,3 +120,15 @@ collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance5/StaticBody" index="0"]
 shape = SubResource( 22 )
+
+[node name="Rock1" parent="." index="7" instance=ExtResource( 5 )]
+transform = Transform( -118.96, 0, 476.202, 0, 490.837, 0, -476.203, 0, -118.96, 1976.4, -181.586, 1917.83 )
+
+[node name="Rock2" parent="." index="8" instance=ExtResource( 7 )]
+transform = Transform( -267.445, -413.244, 248.852, 476.665, -270.09, 63.7681, 74.0813, 245.98, 488.088, -2288.57, -318.632, 477.238 )
+
+[node name="Rock3" parent="." index="9" instance=ExtResource( 8 )]
+transform = Transform( 330.227, -311.68, 0, 294.676, 312.211, -147.933, 101.54, 107.582, 429.312, 346.041, -567.622, -716.05 )
+
+[node name="Rock4" parent="." index="10" instance=ExtResource( 8 )]
+transform = Transform( 330.227, -311.68, 0, 294.676, 312.211, -147.933, 101.54, 107.582, 429.312, -2768.99, -790.057, -2913.63 )

@@ -1045,6 +1045,7 @@ collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="Terain/StaticBody" index="0"]
+visible = false
 shape = SubResource( 919 )
 
 [node name="House11" parent="." index="3" instance=ExtResource( 21 )]

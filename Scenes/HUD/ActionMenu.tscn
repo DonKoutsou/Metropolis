@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Assets/UI/ButtonGreen.tres" type="Theme" id=1]
 [ext_resource path="res://Scripts/ActionMenu.cs" type="Script" id=2]
 [ext_resource path="res://Assets/UI/PanelTheme.tres" type="Theme" id=3]
 [ext_resource path="res://Fonts/Play-Bold.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://shaders/OutlineShader.tres" type="Material" id=5]
+[ext_resource path="res://Scenes/HUD/VehicleHud.tscn" type="PackedScene" id=6]
 
 [sub_resource type="StyleBoxFlat" id=52]
 content_margin_left = 8.0
@@ -133,24 +134,32 @@ script = ExtResource( 2 )
 SelectLayer = 4112
 OutLineMat = ExtResource( 5 )
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -51.0
-margin_right = 65.0
-margin_bottom = 55.0
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+custom_constants/separation = 20
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+margin_right = 116.0
+margin_bottom = 141.0
 theme = ExtResource( 3 )
 custom_styles/panel = SubResource( 52 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer"]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 108.0
 margin_bottom = 133.0
 rect_pivot_offset = Vector2( 45, 0 )
 
-[node name="PickUp_Button" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="PickUp_Button" type="Button" parent="VBoxContainer/PanelContainer/VBoxContainer"]
 margin_right = 100.0
 margin_bottom = 39.0
 focus_mode = 0
@@ -160,32 +169,46 @@ action_mode = 0
 enabled_focus_mode = 0
 text = "Πάρε"
 
-[node name="Interact_Button" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="Interact_Button" type="Button" parent="VBoxContainer/PanelContainer/VBoxContainer"]
 margin_top = 43.0
 margin_right = 100.0
 margin_bottom = 82.0
 focus_mode = 0
+mouse_default_cursor_shape = 2
 theme = ExtResource( 1 )
 enabled_focus_mode = 0
 text = "???"
 icon_align = 1
 expand_icon = true
 
-[node name="Interact_Button2" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="Interact_Button2" type="Button" parent="VBoxContainer/PanelContainer/VBoxContainer"]
 margin_top = 86.0
 margin_right = 100.0
 margin_bottom = 125.0
 focus_mode = 0
+mouse_default_cursor_shape = 2
 theme = SubResource( 27 )
 enabled_focus_mode = 0
 text = "Interact"
 
-[connection signal="button_down" from="PanelContainer/VBoxContainer/PickUp_Button" to="." method="On_PickUp_Button_Down"]
-[connection signal="mouse_entered" from="PanelContainer/VBoxContainer/PickUp_Button" to="." method="Selecting_Action"]
-[connection signal="mouse_exited" from="PanelContainer/VBoxContainer/PickUp_Button" to="." method="Stoped_Selecting_Action"]
-[connection signal="button_down" from="PanelContainer/VBoxContainer/Interact_Button" to="." method="On_Interact_Button_Down"]
-[connection signal="mouse_entered" from="PanelContainer/VBoxContainer/Interact_Button" to="." method="Selecting_Action"]
-[connection signal="mouse_exited" from="PanelContainer/VBoxContainer/Interact_Button" to="." method="Stoped_Selecting_Action"]
-[connection signal="button_down" from="PanelContainer/VBoxContainer/Interact_Button2" to="." method="On_Interact_Button2_Down"]
-[connection signal="mouse_entered" from="PanelContainer/VBoxContainer/Interact_Button2" to="." method="Selecting_Action"]
-[connection signal="mouse_exited" from="PanelContainer/VBoxContainer/Interact_Button2" to="." method="Stoped_Selecting_Action"]
+[node name="VehicleUI" parent="VBoxContainer" instance=ExtResource( 6 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 161.0
+margin_right = 116.0
+margin_bottom = 161.0
+
+[connection signal="button_down" from="VBoxContainer/PanelContainer/VBoxContainer/PickUp_Button" to="." method="On_PickUp_Button_Down"]
+[connection signal="mouse_entered" from="VBoxContainer/PanelContainer/VBoxContainer/PickUp_Button" to="." method="Selecting_Action"]
+[connection signal="mouse_exited" from="VBoxContainer/PanelContainer/VBoxContainer/PickUp_Button" to="." method="Stoped_Selecting_Action"]
+[connection signal="button_down" from="VBoxContainer/PanelContainer/VBoxContainer/Interact_Button" to="." method="On_Interact_Button_Down"]
+[connection signal="mouse_entered" from="VBoxContainer/PanelContainer/VBoxContainer/Interact_Button" to="." method="Selecting_Action"]
+[connection signal="mouse_exited" from="VBoxContainer/PanelContainer/VBoxContainer/Interact_Button" to="." method="Stoped_Selecting_Action"]
+[connection signal="button_down" from="VBoxContainer/PanelContainer/VBoxContainer/Interact_Button2" to="." method="On_Interact_Button2_Down"]
+[connection signal="mouse_entered" from="VBoxContainer/PanelContainer/VBoxContainer/Interact_Button2" to="." method="Selecting_Action"]
+[connection signal="mouse_exited" from="VBoxContainer/PanelContainer/VBoxContainer/Interact_Button2" to="." method="Stoped_Selecting_Action"]
+[connection signal="MouseEtered" from="VBoxContainer/VehicleUI" to="." method="Selecting_Action"]
+[connection signal="MouseLeft" from="VBoxContainer/VehicleUI" to="." method="Stoped_Selecting_Action"]

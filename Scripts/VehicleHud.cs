@@ -4,6 +4,10 @@ using System.Collections.Generic;
 
 public class VehicleHud : Control
 {
+    [Signal]
+    public delegate void MouseEtered();
+    [Signal]
+    public delegate void MouseLeft();
     Vehicle CurrentVeh;
     static VehicleHud Instance;
 
@@ -108,5 +112,13 @@ public class VehicleHud : Control
         Button but;
         ButtonList.TryGetValue(buttonname, out but);
         return but;
+    }
+    private void Selecting_Action()
+    {
+        EmitSignal("MouseEtered");
+    }
+    private void Stoped_Selecting_Action()
+    {
+        EmitSignal("MouseLeft");
     }
 }

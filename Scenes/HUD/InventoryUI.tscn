@@ -3,11 +3,11 @@
 [ext_resource path="res://Scenes/HUD/InventoryUISlot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/InventoryUI.cs" type="Script" id=2]
 [ext_resource path="res://Assets/MapIcons/RepairIcon2.png" type="Texture" id=3]
+[ext_resource path="res://UIThemes/Panel_Black_Top-BottomCorner.tres" type="StyleBox" id=4]
 [ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://Scenes/HUD/Map.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/UI/Icon/CrossGreen.png" type="Texture" id=7]
 [ext_resource path="res://UIThemes/Panel_Black_NoCorner.tres" type="StyleBox" id=8]
-[ext_resource path="res://Scenes/HUD/VehicleHud.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Assets/Compass/Compass/CompL3.png" type="Texture" id=11]
 [ext_resource path="res://Assets/Compass/Compass/CompL1N.png" type="Texture" id=12]
 [ext_resource path="res://Assets/Compass/Compass/CompL2.png" type="Texture" id=13]
@@ -146,6 +146,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [ true ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("Panel4:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="DynamicFont" id=27]
 size = 24
@@ -212,12 +224,12 @@ font_data = ExtResource( 19 )
 default_font = SubResource( 17 )
 
 [sub_resource type="StyleBoxFlat" id=23]
-bg_color = Color( 0.431373, 0.717647, 0.937255, 1 )
+bg_color = Color( 0.327855, 0.456318, 0.532227, 1 )
 border_width_left = 2
 border_width_top = 8
 border_width_right = 2
 border_width_bottom = 8
-border_color = Color( 0.235294, 0.321569, 0.372549, 1 )
+border_color = Color( 0.05857, 0.0996002, 0.125977, 1 )
 border_blend = true
 corner_radius_top_left = 3
 corner_radius_top_right = 3
@@ -1059,25 +1071,14 @@ margin_top = -34.0
 margin_right = 62.0
 margin_bottom = 6.0
 
-[node name="VehicleUI" parent="InventoryContainer" instance=ExtResource( 10 )]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -206.0
-margin_top = -545.0
-margin_right = 16.0
-margin_bottom = -480.0
-
 [node name="Panel4" type="Panel" parent="."]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 1738.0
-margin_top = 1044.0
-margin_right = 1912.0
-margin_bottom = 1080.0
+margin_left = -182.0
+margin_top = -36.0
+margin_right = -8.0
 rect_pivot_offset = Vector2( 167, 36 )
 mouse_filter = 1
 custom_styles/panel = ExtResource( 26 )
@@ -1115,13 +1116,14 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -174.0
+margin_left = -176.0
 margin_top = -72.0
+margin_right = 2.0
 margin_bottom = -36.0
 rect_pivot_offset = Vector2( 167, 36 )
 rect_clip_content = true
 mouse_filter = 1
-custom_styles/panel = ExtResource( 27 )
+custom_styles/panel = ExtResource( 4 )
 
 [node name="Button" type="Button" parent="Panel4/Panel5"]
 anchor_left = 0.5
