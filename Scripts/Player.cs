@@ -46,6 +46,8 @@ public class Player : Character
 
 	static Player instance;
 
+	public bool HasBaby = false;
+
 	public void SetRunSpeed(int NewSpeed)
 	{
 		RunSpeed = NewSpeed;
@@ -105,6 +107,8 @@ public class Player : Character
 		moveloc = GetNode<MoveLocation>("MoveLoc");
 		
 		DialogueCam = GetNode<Camera>("DialogueCameraPivot/DialogueCamera");
+
+		GetNode<MeshInstance>("Pivot/Guy/Armature/Skeleton/BabyLowpolySurface1").Visible = HasBaby;
 	}
 	
 	private void CheckIfIdling()
@@ -392,6 +396,11 @@ public class Player : Character
 	public override void OnKillFieldDetectorBodyEntered(Node body)
 	{
 		Kill("Πνίξιμο");
+	}
+	public void OnBabyGot()
+	{
+		HasBaby = true;
+		GetNode<MeshInstance>("Pivot/Guy/Armature/Skeleton/BabyLowpolySurface1").Visible = true;
 	}
 	public override void Kill(string reason = null)
 	{

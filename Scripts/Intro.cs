@@ -22,7 +22,7 @@ public class Intro : Spatial
     }
     private void Stop()
     {
-        Player pl = MyWorld.GetInstance().SpawnPlayer(SpawnPosition.GetInstance().GlobalTranslation);
+        Player pl = MyWorld.GetInstance().SpawnPlayer(SpawnPosition.GetInstance().GlobalTranslation, SpawnPosition.GetInstance().GlobalRotation);
         WorldMap map = WorldMap.GetInstance();
         WorldParticleManager man = GetNode<WorldParticleManager>("WorldParticleManager");
         RemoveChild(man);
@@ -34,7 +34,7 @@ public class Intro : Spatial
     }
     public void LoadStop(Vector3 spawnpos)
     {
-        Player pl = MyWorld.GetInstance().SpawnPlayer(spawnpos);
+        Player pl = MyWorld.GetInstance().SpawnPlayer(spawnpos, Vector3.Zero);
         WorldMap map = WorldMap.GetInstance();
         WorldParticleManager man = GetNode<WorldParticleManager>("WorldParticleManager");
         RemoveChild(man);

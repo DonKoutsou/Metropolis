@@ -86,11 +86,12 @@ public class MyWorld : Spatial
 		}
 	}
 	
-	public Player SpawnPlayer(Vector3 pos)
+	public Player SpawnPlayer(Vector3 pos, Vector3 rot)
 	{
 		Player pl = (Player)PlayerScene.Instance();
 		AddChild(pl);
 		pl.Teleport(pos);
+		pl.GlobalRotation = rot;
 		//WorldMap.GetInstance().pl = pl;
 		EmitSignal("PlayerSpawnedEventHandler", pl);
 		MapGrid.GetInstance().ConnectPlayer(pl);

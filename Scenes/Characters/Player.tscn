@@ -516,24 +516,25 @@ Consumption = SubResource( 165 )
 
 [node name="Guy" parent="Pivot" instance=ExtResource( 17 )]
 
+[node name="Skeleton" parent="Pivot/Guy/Armature" index="1"]
+bones/3/bound_children = [ NodePath("InstrumentAtatchment") ]
+bones/6/bound_children = [ NodePath("BoneAttachment") ]
+
 [node name="HeadRot2Pivot" parent="Pivot/Guy/Armature/Skeleton" index="0"]
-transform = Transform( -1, 0, -8.74228e-08, 3.71575e-16, 1, -4.26144e-09, 8.74228e-08, -2.27374e-13, -1, -1.74285, 280.689, 19.1152 )
+transform = Transform( -1, 0, -8.74228e-08, 4.52161e-16, 1, -5.19537e-09, 8.74228e-08, -2.27374e-13, -1, -4.44436, 280.123, 21.8578 )
 
 [node name="Listener" type="Listener" parent="Pivot/Guy/Armature/Skeleton/HeadRot2Pivot" index="1"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.93238, 0.188751, 0.52549 )
+transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, -1.93238, 0.188751, 0.52549 )
 current = true
 
 [node name="BoneAttachment" parent="Pivot/Guy/Armature/Skeleton" index="1"]
-transform = Transform( 0.997542, -0.0580043, -0.039306, 0.0525342, 0.990354, -0.128216, 0.046364, 0.125836, 0.990966, -0.540633, 265.485, 10.4761 )
+transform = Transform( 0.997114, -0.0715391, -0.025424, 0.0676699, 0.989251, -0.129625, 0.034424, 0.127531, 0.991236, -3.11513, 264.946, 13.1894 )
 
 [node name="MeshInstance" parent="Pivot/Guy/Armature/Skeleton/BoneAttachment/HeadPivot" index="0"]
 mesh = SubResource( 166 )
 
 [node name="InstrumentAtatchment" parent="Pivot/Guy/Armature/Skeleton" index="2"]
-transform = Transform( 0.997558, -0.0167222, -0.0678002, 0.0150709, 0.999579, -0.0247935, 0.0681863, 0.0237112, 0.997391, 2.14703, 213.217, -1.3647 )
-
-[node name="Instrument" parent="Pivot/Guy/Armature/Skeleton/InstrumentAtatchment" index="2"]
-transform = Transform( -37.9657, 16.6749, -2.44876, 16.6429, 38.0451, 1.02921, 2.64825, -0.040322, -41.5738, -29.2251, -41.0474, -25.1529 )
+transform = Transform( 0.998214, -0.0329177, -0.0498547, 0.0312319, 0.998926, -0.0342253, 0.0509277, 0.0326071, 0.99817, 0.246685, 212.991, 0.591696 )
 
 [node name="Arm_L" parent="Pivot/Guy/Armature/Skeleton" index="3"]
 material/0 = SubResource( 168 )
@@ -625,7 +626,6 @@ StartingItems = [ ExtResource( 33 ), ExtResource( 34 ), ExtResource( 8 ), ExtRes
 
 [node name="TalkText" type="Label3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.74809, 0 )
-visible = false
 cast_shadow = 0
 pixel_size = 0.002
 billboard = 1
@@ -645,7 +645,7 @@ script = ExtResource( 19 )
 pause_mode = 1
 
 [node name="CameraPanPivot" type="Position3D" parent="CameraMovePivot"]
-transform = Transform( 0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 6.52882, 0 )
+transform = Transform( -0.999999, 0, -8.74227e-08, 0, 1, 0, 8.74227e-08, 0, -0.999999, 0, 6.52882, 0 )
 script = ExtResource( 14 )
 
 [node name="SpringArm" type="SpringArm" parent="CameraMovePivot/CameraPanPivot"]

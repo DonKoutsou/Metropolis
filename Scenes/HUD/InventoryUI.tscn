@@ -146,18 +146,6 @@ tracks/2/keys = {
 "update": 0,
 "values": [ true ]
 }
-tracks/3/type = "value"
-tracks/3/path = NodePath("Panel4:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
 
 [sub_resource type="DynamicFont" id=27]
 size = 24
@@ -1072,6 +1060,7 @@ margin_right = 62.0
 margin_bottom = 6.0
 
 [node name="Panel4" type="Panel" parent="."]
+visible = false
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0

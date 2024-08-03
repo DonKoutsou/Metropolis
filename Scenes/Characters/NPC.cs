@@ -63,7 +63,7 @@ public class NPC : Character
 		#endif
 
 		base._Ready();
-		GetNode<MeshInstance>("Pivot/Guy/Armature/Skeleton/BabyLowpolySurface1").Visible = false;
+		//GetNode<MeshInstance>("Pivot/Guy/Armature/Skeleton/BabyLowpolySurface1").Visible = false;
 		if (Sitting)
 		{
 			SpawnSit();

@@ -211,6 +211,10 @@ public class ActionMenu : Control
 			pl.GetCharacterInventory().RemoveItem(items[0], false);
 			br.AtatchExplosive(pl, (Explosive)items[0]);
 		}
+		else if (SelectedObj is Pod p)
+		{
+			p.OpenPod();
+		}
 		selecting = false;
 		Stop();
 	}
@@ -273,6 +277,15 @@ public class ActionMenu : Control
 		else if (SelectedObj is Breakable)
 		{
 			pl.GetTalkText().Talk("Με ένα εκρηκτικό θα μπορούσα να το σπάσω");
+		}
+		else if (SelectedObj is Pod p)
+		{
+			if (p.IsDestroyed())
+				pl.GetTalkText().Talk("Ένα σκάφος διαφυγής, δυστυχώς δεν τα κατάφερε.");
+			else if (p.IsOpen())
+				pl.GetTalkText().Talk("Ένα σκάφος διαφυγής.");
+			else
+				pl.GetTalkText().Talk("Το σκάφος που επέζησε, μπορώ να το ανοίξω.");
 		}
 	}
 	public void Start(Spatial obj)
@@ -344,6 +357,14 @@ public class ActionMenu : Control
 			else
 				PickButton.Show();
 			PickButton.Text = "Τοποθέτησε εκρηκτικό.";
+		}
+		else if (obj is Pod p)
+		{
+			if (p.IsOpen() || p.IsDestroyed())
+				PickButton.Hide();
+			else
+				PickButton.Show();
+			PickButton.Text = "Άνοιξε";
 		}
 		DeselectCurrent();
 		SelectedObj = obj;

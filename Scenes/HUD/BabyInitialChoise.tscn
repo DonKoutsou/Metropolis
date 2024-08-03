@@ -1,0 +1,122 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scenes/HUD/StartingScreenFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Assets/UI/ButtonGreen.tres" type="Theme" id=2]
+[ext_resource path="res://Scenes/HUD/tbrender_019.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/BabyInitialChoise.cs" type="Script" id=4]
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect2:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.0392157, 0.0392157, 0.0392157, 1 ) ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "Start"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect2:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.0392157, 0.0392157, 0.0392157, 1 ), Color( 0.0392157, 0.0392157, 0.0392157, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Stop"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect2:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.0392157, 0.0392157, 0.0392157, 0 ), Color( 0.0392157, 0.0392157, 0.0392157, 1 ) ]
+}
+
+[node name="InitialChoice" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0392157, 0.0392157, 0.0392157, 0.909804 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 40
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_top = 438.0
+margin_right = 1920.0
+margin_bottom = 563.0
+custom_fonts/font = ExtResource( 1 )
+text = "Ανοιγόντας το σκάφος βρήσκεις ένα βρέφος, ακόμη ζωντανό... 
+Δίπλα του σε μια οθόνη βλέπεις 2 λέξεις.
+
+Προορισμός : Μητρόπολη."
+align = 1
+valign = 1
+autowrap = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 603.0
+margin_right = 1920.0
+margin_bottom = 642.0
+custom_constants/separation = 136
+alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_left = 584.0
+margin_right = 865.0
+margin_bottom = 39.0
+theme = ExtResource( 2 )
+text = "Πάρε το μωρο μαζί σου."
+
+[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_left = 1001.0
+margin_right = 1335.0
+margin_bottom = 39.0
+theme = ExtResource( 2 )
+text = "Άφησε το μωρό στο σκάφος."
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0.0392157, 0.0392157, 0.0392157, 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+anims/Start = SubResource( 1 )
+anims/Stop = SubResource( 3 )
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Button" to="." method="BabyTaken"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Button2" to="." method="BabyLeft"]

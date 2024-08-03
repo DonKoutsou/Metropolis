@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://Scenes/Items/MapItem.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Scenes/Env_Assets/Furniture.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Scenes/Items/Compass.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Scenes/Env_Assets/ShipBroken.tscn" type="PackedScene" id=26]
 
 [sub_resource type="SpatialMaterial" id=13]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -534,20 +535,20 @@ collision_mask = 0
 shape = SubResource( 151 )
 
 [node name="Ship" parent="." index="5" instance=ExtResource( 13 )]
-transform = Transform( 0.809483, 0.423364, 0.406816, 0.0825954, 0.603876, -0.792788, -0.581304, 0.675349, 0.453859, 553.189, -3.40322, 738.023 )
+transform = Transform( -0.970187, 0.0471729, -0.237719, -0.102165, 0.809853, 0.577666, 0.219768, 0.584732, -0.780892, 578.806, 1.56258, 785.703 )
 
 [node name="SpawnPosition" type="Position3D" parent="." index="6"]
 transform = Transform( 0.684228, 5.78035e-11, 0.729268, 0, 1, -1.45519e-11, -0.729268, -8.36009e-12, 0.684228, -784.215, 146.057, -678.294 )
 script = ExtResource( 5 )
 
 [node name="Vehicle0" parent="." index="7" instance=ExtResource( 12 )]
-transform = Transform( -0.840935, 0, -0.541135, 0, 1, 0, 0.541135, 0, -0.840935, -774.065, 150.598, -700.853 )
+transform = Transform( 0.873865, 0, 0.486167, 0, 1, 0, -0.486167, 0, 0.873865, -766.878, 150.598, -687.572 )
 
 [node name="VehicleBody" parent="Vehicle0" index="0"]
 PlayerOwned = true
 
 [node name="MeshInstance" parent="Vehicle0/VehicleBody" index="0"]
-transform = Transform( 1, -5.50244e-11, 2.98023e-08, 1.32104e-10, 1, 0, -2.98023e-08, -1.73472e-18, 1, 0, 2.19901, 0 )
+transform = Transform( 1, -5.50244e-11, 0, 1.32104e-10, 1, 0, 0, 0, 1, 0, 2.19901, 0 )
 material_override = SubResource( 135 )
 material_overlay = SubResource( 136 )
 
@@ -568,7 +569,7 @@ process_material = SubResource( 160 )
 draw_pass_1 = SubResource( 159 )
 
 [node name="RayFL" parent="Vehicle0" index="1"]
-transform = Transform( 1.00002, -0.000666084, -0.000639975, 0.000666142, 1, 0.00107026, 0.000638753, -0.00107062, 1.00002, 6.79999, -0.479996, 8.99097 )
+transform = Transform( 1.00002, -0.000666086, -0.000640094, 0.000666142, 1, 0.00107026, 0.000639498, -0.00107062, 1.00002, 6.79999, -0.479996, 8.99097 )
 
 [node name="MeshInstance" parent="Vehicle0/RayFL" index="0"]
 material_override = SubResource( 155 )
@@ -582,7 +583,7 @@ material/0 = SubResource( 147 )
 process_material = SubResource( 164 )
 
 [node name="RayFR" parent="Vehicle0" index="2"]
-transform = Transform( 1.00001, 3.27826e-07, 1.2219e-06, -3.57628e-07, 1, 8.9407e-08, -1.54972e-06, 1.19209e-07, 1.00001, -6.80002, -0.479996, 8.87903 )
+transform = Transform( 1.00001, 3.27827e-07, 8.34465e-07, -3.57628e-07, 1, 8.9407e-08, -9.83477e-07, 1.1921e-07, 1.00001, -6.80005, -0.479996, 8.87897 )
 
 [node name="MeshInstance" parent="Vehicle0/RayFR" index="0"]
 material_override = SubResource( 155 )
@@ -596,7 +597,7 @@ material/0 = SubResource( 147 )
 process_material = SubResource( 164 )
 
 [node name="RayBR" parent="Vehicle0" index="3"]
-transform = Transform( 1.00001, 3.27826e-07, 1.3411e-06, -1.49012e-07, 1, -1.49012e-07, -1.04308e-06, 1.19209e-07, 1.00001, -6.80008, -0.479996, -10.564 )
+transform = Transform( 1.00001, 3.27827e-07, 7.45058e-07, -1.49012e-07, 1, -1.49012e-07, -1.19209e-07, 1.1921e-07, 1.00001, -6.80002, -0.479996, -10.564 )
 
 [node name="MeshInstance" parent="Vehicle0/RayBR" index="0"]
 material_override = SubResource( 155 )
@@ -610,7 +611,7 @@ material/0 = SubResource( 147 )
 process_material = SubResource( 164 )
 
 [node name="RayBL" parent="Vehicle0" index="4"]
-transform = Transform( 1.00001, -9.9476e-14, 1.3411e-06, -1.49012e-07, 1, -1.49012e-07, -1.04308e-06, 4.76837e-07, 1.00001, 6.79996, -0.479996, -10.508 )
+transform = Transform( 1.00001, -1.7053e-13, 7.45058e-07, -1.49012e-07, 1, -1.49012e-07, -1.19209e-07, 4.76839e-07, 1.00001, 6.79996, -0.479996, -10.5081 )
 
 [node name="MeshInstance" parent="Vehicle0/RayBL" index="0"]
 material_override = SubResource( 155 )
@@ -667,5 +668,11 @@ shape = SubResource( 172 )
 [node name="Occluder3" type="Occluder" parent="." index="22"]
 transform = Transform( -0.164773, 0.305213, -0.93792, 0.0528109, 0.952284, 0.30061, 0.984917, 0, -0.173029, -1375.15, 0, -1880.15 )
 shape = SubResource( 173 )
+
+[node name="Ship2" parent="." index="23" instance=ExtResource( 26 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1012.34, 29.067, 793.269 )
+
+[node name="Ship3" parent="." index="24" instance=ExtResource( 26 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1459.31, 227.266, 47.5458 )
 
 [editable path="Vehicle0"]

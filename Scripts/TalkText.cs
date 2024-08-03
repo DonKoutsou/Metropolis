@@ -11,6 +11,7 @@ public class TalkText : Label3D
     public void Talk(string diag)
     {
         Text = diag;
+        TalkTimer.WaitTime = diag.Length / 8;
         TalkTimer.Start();
         Show();
         SetProcess(true);

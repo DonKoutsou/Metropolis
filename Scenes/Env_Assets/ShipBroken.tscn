@@ -1,0 +1,101 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Assets/Pod/Pod_Door.tres" type="ArrayMesh" id=1]
+[ext_resource path="res://Scripts/Pod.cs" type="Script" id=2]
+[ext_resource path="res://Assets/Pod/PoD_Body.tres" type="ArrayMesh" id=3]
+[ext_resource path="res://Assets/Pod/PoD_engines.tres" type="ArrayMesh" id=4]
+[ext_resource path="res://Assets/Pod/PodMat.tres" type="Material" id=5]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 1.31025, 1.46657, 1.30524 )
+
+[sub_resource type="SphereShape" id=2]
+radius = 2.59804
+
+[sub_resource type="Curve" id=118]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.27535, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=105]
+curve = SubResource( 118 )
+
+[sub_resource type="ParticlesMaterial" id=119]
+resource_local_to_scene = true
+lifetime_randomness = 0.46
+trail_divisor = 11
+emission_shape = 1
+emission_sphere_radius = 0.4
+direction = Vector3( 0, 1, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 15.0
+initial_velocity_random = 0.1
+angular_velocity = 40.0
+angular_velocity_random = 1.0
+linear_accel = 6.6
+linear_accel_random = 0.23
+angle = 360.0
+angle_random = 1.0
+scale = 5.0
+scale_random = 0.8
+scale_curve = SubResource( 105 )
+
+[sub_resource type="SpatialMaterial" id=110]
+render_priority = 1
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_blend_mode = 1
+params_depth_draw_mode = 3
+params_billboard_mode = 3
+params_use_alpha_scissor = true
+params_alpha_scissor_threshold = 0.98
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_color = Color( 1, 0.301961, 0.027451, 1 )
+
+[sub_resource type="QuadMesh" id=120]
+resource_local_to_scene = true
+material = SubResource( 110 )
+
+[node name="Ship" type="StaticBody"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource( 2 )
+Destroyed = true
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+cast_shadow = 0
+mesh = ExtResource( 3 )
+material/0 = ExtResource( 5 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+cast_shadow = 0
+mesh = ExtResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="."]
+cast_shadow = 0
+mesh = ExtResource( 4 )
+material/0 = ExtResource( 5 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.89878, -0.510761, 0 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.82612, -0.510761, 0 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="."]
+shape = SubResource( 2 )
+
+[node name="ExaustParticlesR" type="Particles" parent="."]
+transform = Transform( 1, -0.00130579, 2.59312e-05, 0.00103085, 0.801327, 0.598226, -0.000801941, -0.598226, 0.801327, 0.608166, 1.047, 1.27103 )
+cast_shadow = 0
+amount = 200
+lifetime = 0.5
+randomness = 1.0
+visibility_aabb = AABB( -17.1728, -26.8771, -7.68229, 34.3456, 53.754, 15.3646 )
+draw_order = 2
+process_material = SubResource( 119 )
+draw_pass_1 = SubResource( 120 )
