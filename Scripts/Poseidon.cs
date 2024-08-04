@@ -95,6 +95,9 @@ public class Poseidon : Spatial
         {
             GlobalTranslation = new Vector3(pl.GlobalTranslation.x, GlobalTranslation.y, pl.GlobalTranslation.z);
         }
-
+        if (GetTree().Paused)
+            mat.SetShaderParam("ProgressTime", false);
+        else
+            mat.SetShaderParam("ProgressTime", true);
     }
 }

@@ -107,10 +107,10 @@ FurnitureAmmount = 6
 DecorationAmmount = 2
 SpawnPool = {
 Resource( "res://Scenes/Items/FastLeg_L.tscn" ): 1,
-Resource( "res://Scenes/Items/Guitar.tscn" ): 1,
 Resource( "res://Scenes/Items/Drahma.tscn" ): 0,
-Resource( "res://Scenes/Items/Battery.tscn" ): 0,
+Resource( "res://Scenes/Items/Guitar.tscn" ): 1,
 Resource( "res://Scenes/Items/FastLeg_R.tscn" ): 1,
+Resource( "res://Scenes/Items/Battery.tscn" ): 0,
 Resource( "res://Scenes/Items/BatteryEmpty.tscn" ): 10
 }
 
@@ -301,5 +301,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.2561, 0 )
 
 [connection signal="body_entered" from="HouseDoor" to="." method="Entered"]
 [connection signal="body_exited" from="HouseDoor" to="." method="Left"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="On_Door_Animation_Finished"]
 
 [editable path="HouseDoor"]

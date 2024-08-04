@@ -127,7 +127,7 @@ public class Port : Area
         CameraAnimationPlayer CameraAnimation = CameraAnimationPlayer.GetInstance();
         CameraAnimation.Disconnect("FadeOutFinished", this, "CompleteJobs");
         incomingBoat.Capsize();
-        Player.GetInstance().Teleport(Worker.GetNode<Position3D>("TalkPosition").GlobalTranslation);
+        Player.GetInstance().Teleport(Worker.GetNode<Position3D>("TalkPosition").GlobalTranslation, Vector3.Zero);
         Vector3 spot;
         if (HasSpot(out spot))
         {

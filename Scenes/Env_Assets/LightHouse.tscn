@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://Assets/TerainTex/Bricks094_1K-PNG/Bricks094_1K-PNG_Roughness.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/LighthouseAnimation.cs" type="Script" id=2]
@@ -48,6 +48,9 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ) ]
 }
+
+[sub_resource type="BoxShape" id=2179]
+extents = Vector3( 22.8037, 24.3708, 8.80931 )
 
 [sub_resource type="OccluderShapePolygon" id=2129]
 polygon_points = PoolVector2Array( 151.47, -8.48864, 92.8349, 978.649, -93.2184, 979.166, -151.926, -8.91566 )
@@ -317,6 +320,10 @@ script = ExtResource( 2 )
 
 [node name="Door" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 511.863, 0 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="Door"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -484.875, 159.032 )
+shape = SubResource( 2179 )
 
 [node name="Occluder" type="Occluder" parent="."]
 visible = false
@@ -693,3 +700,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 149.566, 0 )
 
 [connection signal="body_entered" from="Door" to="." method="Entered"]
 [connection signal="body_exited" from="Door" to="." method="Left"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="On_Door_Animation_Finished"]
+
+[editable path="Door"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://Scripts/Intro.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Env_Assets/WorldParticleManager.tscn" type="PackedScene" id=2]
@@ -26,14 +26,6 @@
 [ext_resource path="res://Assets/Gen3Machine/Body/Textures/Body_Texture_Head_BaseColor.png" type="Texture" id=24]
 [ext_resource path="res://Assets/Gen3Machine/Body/Textures/Body_Texture_Head_OcclusionRoughnessMetallic.png" type="Texture" id=25]
 
-[sub_resource type="QuadMesh" id=3]
-size = Vector2( 10, 10 )
-
-[sub_resource type="SpatialMaterial" id=4]
-render_priority = 6
-flags_transparent = true
-albedo_color = Color( 0, 0, 0, 1 )
-
 [sub_resource type="DynamicFont" id=9]
 size = 13
 extra_spacing_space = 7
@@ -56,76 +48,76 @@ shader = ExtResource( 9 )
 resource_name = "Intro"
 length = 20.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("Camera/MeshInstance:material/0:albedo_color")
+tracks/0/path = NodePath("Camera:fov")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 5.1, 8.8, 11.7, 12.8, 15.2, 20 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Camera:fov")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
 "times": PoolRealArray( 5, 12.8 ),
 "transitions": PoolRealArray( 1, 1.02213 ),
 "update": 0,
 "values": [ 75.0, 45.0 ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("Camera/LoadingScreen/Label:custom_colors/font_color")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
+tracks/1/type = "value"
+tracks/1/path = NodePath("Camera/LoadingScreen/Label:custom_colors/font_color")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
 "times": PoolRealArray( 0, 0.7, 2.4, 3.5, 5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
-tracks/3/type = "value"
-tracks/3/path = NodePath("Camera/LoadingScreen/Label:visible")
-tracks/3/interp = 2
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
+tracks/2/type = "value"
+tracks/2/path = NodePath("Camera/LoadingScreen/Label:visible")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
 "times": PoolRealArray( 0, 5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("Camera:translation")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 4.5, 6.1, 7.4, 11.8, 12.3, 12.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 0.000226274 ),
+"update": 0,
+"values": [ Vector3( 569.601, 1.67293, 770.867 ), Vector3( 569.601, 1.67293, 770.867 ), Vector3( 569.601, 1.67293, 770.867 ), Vector3( 569.601, 1.67293, 770.867 ), Vector3( 569.601, 1.67293, 770.867 ), Vector3( 68.1989, 96.5707, 1061.99 ) ]
+}
 tracks/4/type = "value"
-tracks/4/path = NodePath("Camera:translation")
-tracks/4/interp = 2
+tracks/4/path = NodePath("Camera:rotation_degrees")
+tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 4.5, 6.1, 7.4, 11.8, 12.3, 12.8 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 0.000226274 ),
+"times": PoolRealArray( 0, 12.3, 12.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( 569.601, 1.67293, 770.867 ), Vector3( 569.601, 1.67293, 770.867 ), Vector3( 569.601, 1.67293, 770.867 ), Vector3( 569.601, 1.67293, 770.867 ), Vector3( 569.601, 1.67293, 770.867 ), Vector3( -788.906, 148.521, -688.287 ) ]
+"values": [ Vector3( 4.0593, -133.515, 0 ), Vector3( 4.0593, -133.515, 0 ), Vector3( 4.0593, -55.682, 0 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Camera:rotation_degrees")
+tracks/5/path = NodePath("Camera/ColorRect:color")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 5.1, 8.8, 11.6, 13, 15.2, 20 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( 4.0593, -133.515, 0 ) ]
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -155,7 +147,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0, 0, 0 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Camera/MeshInstance:material/0:albedo_color")
+tracks/2/path = NodePath("Camera:fov")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -164,10 +156,10 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 0, 0, 0, 1 ) ]
+"values": [ 75.0 ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Camera:fov")
+tracks/3/path = NodePath("Camera/LoadingScreen/Label:custom_colors/font_color")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -176,10 +168,10 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 75.0 ]
+"values": [ Color( 0, 0, 0, 1 ) ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("Camera/LoadingScreen/Label:custom_colors/font_color")
+tracks/4/path = NodePath("Camera/LoadingScreen/Label:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -188,10 +180,10 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 0, 0, 0, 1 ) ]
+"values": [ true ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Camera/LoadingScreen/Label:visible")
+tracks/5/path = NodePath("Camera/ColorRect:color")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -200,7 +192,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ true ]
+"values": [ Color( 0, 0, 0, 1 ) ]
 }
 
 [sub_resource type="SpatialMaterial" id=63]
@@ -345,7 +337,7 @@ nodes/ChairBlend/position = Vector2( 186.667, 160 )
 nodes/IntrumentBlend/node = SubResource( 54 )
 nodes/IntrumentBlend/position = Vector2( 360, 266.667 )
 nodes/output/position = Vector2( 533.333, 160 )
-node_connections = [ "output", 0, "IntrumentBlend", "ChairBlend", 0, "Animation", "ChairBlend", 1, "Animation 3", "IntrumentBlend", 0, "ChairBlend", "IntrumentBlend", 1, "Animation 2" ]
+node_connections = [ "output", 0, "IntrumentBlend", "IntrumentBlend", 0, "ChairBlend", "IntrumentBlend", 1, "Animation 2", "ChairBlend", 0, "Animation", "ChairBlend", 1, "Animation 3" ]
 
 [sub_resource type="AnimationNodeAnimation" id=55]
 animation = "Standing"
@@ -404,10 +396,10 @@ fov = 75.0
 near = 1.0
 far = 40000.0
 
-[node name="MeshInstance" type="MeshInstance" parent="Camera"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.0271 )
-mesh = SubResource( 3 )
-material/0 = SubResource( 4 )
+[node name="ColorRect" type="ColorRect" parent="Camera"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
 
 [node name="Button" type="Button" parent="Camera"]
 anchor_left = 1.0
@@ -422,7 +414,7 @@ theme = ExtResource( 5 )
 text = "Skip"
 
 [node name="LoadingScreen" type="CanvasLayer" parent="Camera"]
-layer = -1
+layer = 0
 
 [node name="Label" type="Label" parent="Camera/LoadingScreen"]
 anchor_left = 0.5
@@ -472,23 +464,22 @@ mesh = ExtResource( 4 )
 material/0 = ExtResource( 8 )
 
 [node name="Gen3Machine" parent="." instance=ExtResource( 19 )]
-transform = Transform( 0.746661, 0, 0.665204, 0, 1, 0, -0.665204, 0, 0.746661, -786.017, 143.25, -680.89 )
-
-[node name="Skeleton" parent="Gen3Machine/Armature" index="1"]
-bones/3/bound_children = [ NodePath("InstrumentAtatchment") ]
-bones/6/bound_children = [ NodePath("BoneAttachment") ]
+transform = Transform( -0.492894, 0, 0.870089, 0, 1, 0, -0.870089, 0, -0.492894, 76.0386, 91.2997, 1060.73 )
 
 [node name="HeadRot2Pivot" parent="Gen3Machine/Armature/Skeleton" index="0"]
-transform = Transform( -1, -7.45079e-09, -1.60933e-06, 2.08617e-07, 1.00003, 2.19968e-07, 1.60933e-06, -7.07803e-08, -1, -2.04688, 280.688, 19.0859 )
+transform = Transform( -1, -7.45079e-09, -1.63913e-06, 2.08323e-07, 1.00003, 2.19968e-07, 1.63913e-06, -7.07796e-08, -1, -4.07813, 280.281, 21.6895 )
 
 [node name="BoneAttachment" parent="Gen3Machine/Armature/Skeleton" index="1"]
-transform = Transform( 0.99728, -0.0612179, -0.0410201, 0.0555578, 0.990317, -0.127218, 0.048411, 0.124594, 0.991025, -0.782253, 265.478, 10.4689 )
+transform = Transform( 0.997183, -0.0687942, -0.0298713, 0.0643398, 0.98934, -0.130639, 0.0385401, 0.128349, 0.990979, -2.76454, 265.11, 13.0096 )
 
 [node name="MeshInstance" parent="Gen3Machine/Armature/Skeleton/BoneAttachment/HeadPivot" index="0"]
 mesh = SubResource( 64 )
 
 [node name="InstrumentAtatchment" parent="Gen3Machine/Armature/Skeleton" index="2"]
-transform = Transform( 0.997445, -0.018971, -0.068862, 0.0172917, 0.99954, -0.0249029, 0.0693028, 0.0236485, 0.997315, 2.05375, 213.221, -1.37644 )
+transform = Transform( 0.997976, -0.0297879, -0.0561787, 0.0280913, 0.999132, -0.0307518, 0.0570459, 0.0291115, 0.997947, 0.494616, 213.057, 0.683485 )
+
+[node name="Instrument" parent="Gen3Machine/Armature/Skeleton/InstrumentAtatchment" index="2"]
+transform = Transform( -37.9657, 16.6749, -2.44876, 16.6429, 38.0451, 1.02921, 2.64825, -0.040322, -41.5738, -29.2251, -41.0474, -25.1529 )
 
 [node name="Arm_L" parent="Gen3Machine/Armature/Skeleton" index="3"]
 material/0 = SubResource( 65 )
@@ -501,9 +492,6 @@ material/0 = SubResource( 65 )
 
 [node name="Arm_R_LOD" parent="Gen3Machine/Armature/Skeleton" index="6"]
 material/0 = SubResource( 65 )
-
-[node name="BabyLowpolySurface1" parent="Gen3Machine/Armature/Skeleton" index="7"]
-visible = false
 
 [node name="Body" parent="Gen3Machine/Armature/Skeleton" index="8"]
 material/0 = SubResource( 66 )

@@ -12,7 +12,8 @@ code = "shader_type spatial;
 render_mode async_visible,blend_mix,depth_draw_always,cull_disabled,diffuse_lambert,specular_schlick_ggx;
 
 uniform bool IsRaining = false;
-
+uniform bool ProgressTime = true;
+varying float CurrentTime;
 uniform float ring_width : hint_range(0.0, 500.0) = 50.0f;
 //uniform float fadeout : hint_range(0.0, 1.0) = 0.2;
 //uniform sampler2D pattern;
@@ -116,13 +117,14 @@ void fragment() {
 
 	// Calculate the fade factor based on the distance
 	//float fadeFactor = smoothstep(FADE_START, FADE_END, distanceFromCamera);
-	
+	if (ProgressTime)
+		CurrentTime = TIME;
 	vec4 uv_base = vec4(UV.x, UV.y, UV.y, 1.0) * 6.0;
 	//vec2 world_offset = WORLD_MATRIX[3].xz * 0.025;
 	//vec2 uv_gerstner = (uv_base.xz + world_offset) * gerstner_tiling + TIME * rotateUV(gerstner_speed, vec2(0.0, 0.0), radians(-TextureRot));
 	//vec2 uv_gerstner_2 = (uv_base.xz + world_offset) * gerstner_2_tiling + TIME * rotateUV(gerstner_2_speed, vec2(0.0, 0.0), radians(-TextureRot2));
-	vec2 uv_gerstner = uv_base.xz * gerstner_tiling + TIME * rotateUV(gerstner_speed, vec2(0.0, 0.0), radians(-TextureRot));
-	vec2 uv_gerstner_2 = uv_base.xz * gerstner_2_tiling + TIME * rotateUV(gerstner_2_speed, vec2(0.0, 0.0), radians(-TextureRot2));
+	vec2 uv_gerstner = uv_base.xz * gerstner_tiling + CurrentTime * rotateUV(gerstner_speed, vec2(0.0, 0.0), radians(-TextureRot));
+	vec2 uv_gerstner_2 = uv_base.xz * gerstner_2_tiling + CurrentTime * rotateUV(gerstner_2_speed, vec2(0.0, 0.0), radians(-TextureRot2));
 	
 	//vec2 uv = fract(uv_base.xz + world_offset);
 	vec2 uv = fract(uv_base.xz);
@@ -146,7 +148,7 @@ void fragment() {
 	normal_output = mix(normal_output, vec3(0.5, 0.5, 1.0), smoothstep(COLOR[0], 0.0, gerstner_distance_fadeout) );
 	
 	// FLOW TIMING FOR FLOW MAPS (USED IN FOAM AND BUBBLES) 2 UVs BLENDED TOGETHER
-	float flow_timing = TIME * flow_blend_timing;
+	float flow_timing = CurrentTime * flow_blend_timing;
 	float flow_timing_a = fract(flow_timing);
 
 	
@@ -211,7 +213,7 @@ void fragment() {
 	            vec2 hsh = hash22(pi);
 	            vec2 p = pi + hash22(hsh);
 
-	            float t = fract(0.3 * TIME + hash12(hsh));
+	            float t = fract(0.3 * CurrentTime + hash12(hsh));
 	            vec2 v = p - uv2;
 	            float d = length(v) - (float(maxRadiusInt) + 1.0) * t;
 
@@ -230,7 +232,7 @@ void fragment() {
 	    circles /= float((maxRadiusInt * 2 + 1) * (maxRadiusInt * 2 + 1));
 
 	    // Calculate rain intensity and normal map perturbation
-	    float intensity = mix(0.01, 0.15, smoothstep(0.1, 0.6, abs(fract(0.05 * TIME + 0.5) * 2.0 - 1.0)));
+	    float intensity = mix(0.01, 0.15, smoothstep(0.1, 0.6, abs(fract(0.05 * CurrentTime + 0.5) * 2.0 - 1.0)));
 	    vec3 n = vec3(circles, sqrt(1.0 - dot(circles, circles)));
 	    vec3 color = texture(water_color, uv2 / resolution - n.xy).rgb + 5.0 * pow(clamp(dot(n, normalize(vec3(1.0, 0.7, 0.5))), 0.0, 1.0), 6.0);
 	    //n.z += 2.0;
@@ -247,8 +249,8 @@ void light() {
 	float pi = 3.14159265358979323846;
 	//float water_highlight_mask_1 = texture(water_highlight_map, fract( (UV / 8.0f) + (WORLD_MATRIX[3].xz * 0.00415) + TIME * 0.051031 ) ).x;
 	//float water_highlight_mask_2 = texture(water_highlight_map, fract( (UV / 8.0f) + (WORLD_MATRIX[3].xz * 0.00415) + TIME * -0.047854) * 2.0 ).x;
-	float water_highlight_mask_1 = texture(water_highlight_map, fract(UV / 8.0f + TIME * 0.051031 ) ).x;
-	float water_highlight_mask_2 = texture(water_highlight_map, fract( UV / 8.0f  + TIME * -0.047854) * 2.0 ).x;
+	float water_highlight_mask_1 = texture(water_highlight_map, fract(UV / 8.0f + CurrentTime * 0.051031 ) ).x;
+	float water_highlight_mask_2 = texture(water_highlight_map, fract( UV / 8.0f  + CurrentTime * -0.047854) * 2.0 ).x;
 	// SUBSURFACE SCATTERING
 	float sss = clamp( smoothstep(0.65, 0.7, dot(NORMAL , VIEW) * 0.5 + 0.5 ) * smoothstep(0.5, 1.0, (dot(-LIGHT, VIEW) * 0.5 + 0.5) ) * ( dot (-CAMERA_MATRIX[2].xyz, vec3(0.0, 1.0, 0.0)) * 0.5 + 0.5), 0.0, 1.0) * sss_strength;
 		
@@ -276,6 +278,7 @@ gradient = ExtResource( 12 )
 [resource]
 shader = SubResource( 10 )
 shader_param/IsRaining = false
+shader_param/ProgressTime = true
 shader_param/ring_width = 40.0
 shader_param/gerstner_value = 1.0
 shader_param/TextureRot = 0.0

@@ -164,12 +164,6 @@ __meta__ = {
 "_editor_floor_": Vector3( 0, -2, 0 )
 }
 
-[node name="Bounds" parent="." index="4"]
-visible = false
-
-[node name="InnerBounds" parent="." index="5"]
-visible = false
-
 [node name="Rock15" parent="." index="6" instance=ExtResource( 3 )]
 transform = Transform( -197.654, 40.1357, -37.5713, -47.7599, -55.911, 191.526, 27.2299, 193.268, 63.2096, -1527.82, 20.6306, 557.353 )
 
@@ -279,19 +273,19 @@ transform = Transform( 243.563, -197.15, 73.1198, 115.058, 31.3007, -298.863, 17
 transform = Transform( 61.8087, -129.081, 117.046, -8.36687, -126.247, -134.81, 174.046, 39.7716, -48.0469, -1184.86, -158.408, -703.031 )
 
 [node name="Character" parent="." index="36" instance=ExtResource( 6 )]
-transform = Transform( -0.111867, 0, -0.993723, 0, 1, 0, 0.993723, 0, -0.111867, -295.92, 39.8808, -221.623 )
+transform = Transform( -0.111867, 0, -0.993723, 0, 1, 0, 0.993723, 0, -0.111867, -295.92, 60.1981, -221.623 )
 Sitting = true
 Chair = NodePath("../StaticBody3")
 PlayInstrument = true
 InstrumentToSpawnWith = ExtResource( 27 )
 
 [node name="StaticBody3" parent="." index="37" instance=ExtResource( 28 )]
-transform = Transform( -0.134367, 0, -0.990932, 0, 1, 0, 0.990932, 0, -0.134367, -294.415, 39.8401, -221.297 )
+transform = Transform( -0.134367, 0, -0.990932, 0, 1, 0, 0.990932, 0, -0.134367, -294.415, 60.1574, -221.297 )
 
 [node name="StaticBody4" parent="." index="38" instance=ExtResource( 28 )]
-transform = Transform( -0.875717, 0, -0.482824, 0, 1, 0, 0.482824, 0, -0.875717, -297.564, 39.8544, -214.376 )
+transform = Transform( -0.875717, 0, -0.482824, 0, 1, 0, 0.482824, 0, -0.875717, -297.564, 60.1717, -214.376 )
 
 [node name="StaticBody5" parent="." index="39" instance=ExtResource( 29 )]
-transform = Transform( -0.447478, 0, 0.894295, 0, 1, 0, -0.894295, 0, -0.447478, -300.442, 42.9518, -219.491 )
+transform = Transform( -0.447478, 0, 0.894295, 0, 1, 0, -0.894295, 0, -0.447478, -300.442, 63.2691, -219.491 )
 
 [editable path="SeaBed"]

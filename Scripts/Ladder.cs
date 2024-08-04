@@ -69,8 +69,8 @@ public class Ladder : Spatial
             rot = TopPos.GlobalRotation;
             //rot.y = -TopPos.GlobalRotation.y;
         }
-        pl.Teleport(closest.GlobalTranslation);
-        pl.GlobalRotation = rot;
+        pl.Teleport(closest.GlobalTranslation, rot);
+        //pl.GlobalRotation = rot;
 
         pl.Anims().PlayAnimation(anim);
         //pl.global
@@ -86,8 +86,8 @@ public class Ladder : Spatial
         {
             furthest = TopPos;
         }
-        pl.Rotation = Vector3.Zero;
-        pl.Teleport(furthest.GlobalTranslation);
+        //pl.Rotation = Vector3.Zero;
+        pl.Teleport(furthest.GlobalTranslation, Vector3.Zero);
     }
     public void HighLightObject(bool toggle, Material OutlineMat)
     {

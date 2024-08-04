@@ -3,6 +3,8 @@ using System;
 
 public class MainMenuAnimation : AnimationPlayer
 {
+    [Signal]
+    public delegate void FadeOutFinished();
     public override void _Ready()
     {
         //Play("Start");
@@ -29,12 +31,12 @@ public class MainMenuAnimation : AnimationPlayer
         {
             return;
         }
-        StartingScreen screen = (StartingScreen)GetParent().GetParent();
-
-        screen.StartGame();
+        
 
         Play("Start");
 
+        EmitSignal("FadeOutFinished");
+        
         SetProcess(false);
     }
 }

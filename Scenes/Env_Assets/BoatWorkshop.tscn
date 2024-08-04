@@ -1,10 +1,11 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Assets/TerainTex/Concrete004_1K-PNG/Concrete004_1K-PNG_Color.png" type="Texture" id=1]
 [ext_resource path="res://Assets/BoatWorkshop/BoatWorkShop.obj" type="ArrayMesh" id=2]
 [ext_resource path="res://Assets/BoatWorkshop/BoatWorkShopMat.tres" type="Material" id=3]
 [ext_resource path="res://Scenes/Env_Assets/BoatClutter.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/BoatStand/BoatStand.obj" type="ArrayMesh" id=5]
+[ext_resource path="res://Assets/Building/BuildingInterior.material" type="Material" id=6]
 [ext_resource path="res://Scripts/House.cs" type="Script" id=7]
 [ext_resource path="res://Scenes/BuildingDecorations/Decorations1.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/BuildingDecorations/Decorations2.tscn" type="PackedScene" id=9]
@@ -53,6 +54,102 @@ extents = Vector3( 27, 10, 10 )
 [sub_resource type="CylinderShape" id=3377]
 height = 96.1516
 radius = 24.577
+
+[sub_resource type="Animation" id=3378]
+resource_name = "Close"
+tracks/0/type = "value"
+tracks/0/path = NodePath("DoorPivot/Door2:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 11.6878, 7.479, 0 ), Vector3( 9, 7.479, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DoorPivot/Door:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( -12.0089, 7.479, 0 ), Vector3( -9, 7.479, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3379]
+resource_name = "Open"
+tracks/0/type = "value"
+tracks/0/path = NodePath("DoorPivot/Door:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( -9, 7.479, 0 ), Vector3( -12.0089, 7.479, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DoorPivot/Door2:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 9, 7.479, 0 ), Vector3( 11.6878, 7.479, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3380]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("DoorPivot:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DoorPivot/Door:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -9.768, 7.479, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("DoorPivot/Door2:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 9, 7.479, 0 ) ]
+}
+
+[sub_resource type="CubeMesh" id=3381]
+size = Vector3( 15.196, 18, 0.3 )
 
 [node name="BoatWorkshop" type="Spatial"]
 script = ExtResource( 7 )
@@ -277,5 +374,29 @@ shape = SubResource( 3377 )
 
 [node name="IndoorsLight" parent="Lights" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.2561, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Close = SubResource( 3378 )
+anims/Open = SubResource( 3379 )
+anims/RESET = SubResource( 3380 )
+
+[node name="DoorPivot" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.332, 46.6977 )
+
+[node name="Door" type="MeshInstance" parent="DoorPivot"]
+transform = Transform( -4.37113e-08, 0.999998, 0, -1, -4.37114e-08, 0, 0, 0, 0.999998, -9.768, 7.479, 0 )
+mesh = SubResource( 3381 )
+skeleton = NodePath("../..")
+material/0 = ExtResource( 6 )
+
+[node name="Door2" type="MeshInstance" parent="DoorPivot"]
+transform = Transform( -4.37113e-08, 0.999999, 0, -1, -4.37114e-08, 0, 0, 0, 0.999999, 9, 7.479, 0 )
+mesh = SubResource( 3381 )
+skeleton = NodePath("../..")
+material/0 = ExtResource( 6 )
+
+[connection signal="body_entered" from="HouseDoor" to="." method="Entered"]
+[connection signal="body_exited" from="HouseDoor" to="." method="Left"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="On_Door_Animation_Finished"]
 
 [editable path="HouseDoor"]

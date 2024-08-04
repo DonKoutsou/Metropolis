@@ -212,6 +212,8 @@ public class WorldMap : TileMap
 	public void LoadSaveData(Resource data)
 	{
 		finishedspawning = (bool)data.Get("finishedspawning");
+		if (finishedspawning)
+			SetProcess(false);
 		CurrentTile = (Vector2)data.Get("CurrentTile");
 
 		int seed = (int)data.Get("Seed");
@@ -311,7 +313,16 @@ public class WorldMap : TileMap
 			PlayerUI.OnMenuToggled(false);
 			pl.GetNode<Control>("Tutorial").Free();
 			//setting player energy
-			Player.GetInstance().SetEnergy((float)save.Get("PlayerEnergy"));
+			pl.SetEnergy((float)save.Get("PlayerEnergy"));
+			if ((bool)save.Get("HasBaby"))
+			{
+				pl.OnBabyGot();
+			}
+			else
+			{
+				DepartureSystemPosition.GetInstance().SpawnSystem();
+			}
+				
 
 			//loading inventory
 			Inventory inv = pl.GetCharacterInventory();
@@ -408,16 +419,8 @@ public class WorldMap : TileMap
 	}
 	IslandInfo IleToSave;
 	float d = 1;
-	public override void _Process(float delta)
+	public override void _PhysicsProcess(float delta)
 	{
-		if (!finishedspawning)
-		{
-			if (IleToSave == null)
-			{
-				GenerateIsland(IslandSpawnIndex);
-			}
-			
-		}
 		d -= delta;
 		if (d > 0)
 			return;
@@ -425,7 +428,14 @@ public class WorldMap : TileMap
 		d = 1;
 		CheckForTransition();
 	}
-	public IslandInfo GetIle(Vector2 pos)
+    public override void _Process(float delta)
+    {
+		if (IleToSave == null)
+		{
+			GenerateIsland(IslandSpawnIndex);
+		}
+    }
+    public IslandInfo GetIle(Vector2 pos)
 	{
 		return ilemap[pos];
 	}
@@ -489,6 +499,7 @@ public class WorldMap : TileMap
 		if (IslandSpawnIndex == OrderedCells.Count)
 		{
 			finishedspawning = true; 
+			SetProcess(false);
 		}
 
 		Island ile = ilei.Island;

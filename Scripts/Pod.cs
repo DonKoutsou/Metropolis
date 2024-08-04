@@ -16,6 +16,14 @@ public class Pod : StaticBody
     }
     public void OpenPod()
     {
+        Player pl = Player.GetInstance();
+        if (pl.HasBaby)
+        {
+            AnimationPlayer anim = GetNode<AnimationPlayer>("AnimationPlayer");
+            anim.Play("PodOpen");
+            Opened = true;
+            pl.GetTalkText().Talk("Δεν έχει κάτι άλλο μέσα...");
+        }
         CameraAnimationPlayer CameraAnimation = CameraAnimationPlayer.GetInstance();
         CameraAnimation.Connect("FadeOutFinished", this, "InitialChoice");
         CameraAnimation.FadeInOut(1);
@@ -41,6 +49,8 @@ public class Pod : StaticBody
 
         anim.Play("PodOpen");
 
+        Opened = true;
+
         Player.GetInstance().OnBabyGot();
     }
     public void Leave()
@@ -65,7 +75,7 @@ public class Pod : StaticBody
             CameraAnimation.Connect("FadeOutFinished", this, "Leave");
             CameraAnimation.FadeInOut(1);
         }
-            
+        DepartureSystem.GetInstance().OnChoiceMade(b); 
     }
     public void HighLightObject(bool toggle, Material OutlineMat)
     {

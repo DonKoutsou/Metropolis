@@ -65,12 +65,12 @@ public class CameraPanPivot : Position3D
 			if (mousepos.x < ammx.x)
 			{
 				float ammount = ammx.x - mousepos.x;
-				rot.y += 0.00005f * ammount;
+				rot.y += 0.00008f * ammount;
 			}
 			if (mousepos.x > screensize.x - ammx.x)
 			{
 				float ammount = ammx.x -(screensize.x - mousepos.x);
-				rot.y -= 0.00005f * ammount;
+				rot.y -= 0.00008f * ammount;
 			}
 			//Down
 			if (mousepos.y > screensize.y - ammy.y)
@@ -79,7 +79,7 @@ public class CameraPanPivot : Position3D
 				//limmit for down
 				if (Mathf.Rad2Deg(prevrot.x) > -20)
 				{
-					rot.x -= 0.00002f * ammount;
+					rot.x -= 0.00004f * ammount;
 					YOffset += ammount * 0.15f;
 				}
 			}
@@ -90,7 +90,7 @@ public class CameraPanPivot : Position3D
 				//limmit for Up
 				if (Mathf.Rad2Deg(prevrot.x) < 10)
 				{
-					rot.x += 0.00002f * ammount;
+					rot.x += 0.00004f * ammount;
 					YOffset -= ammount * 0.15f;
 				}
 			}

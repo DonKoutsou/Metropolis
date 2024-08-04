@@ -28,8 +28,12 @@ public class Intro : Spatial
         RemoveChild(man);
         map.AddChild(man);
         pl.GetNode<RemoteTransform>("WorldParticleRemoteTransform").RemotePath = man.GetPath();
+
+        pl.GetTalkText().Talk("Ένα από τα σκάφη επέζησε. Τι μπορεί να έχει μέσα;...");
+        pl.MoveTo(PodPosition.GetInstance().GlobalTranslation, true, true);
         man.GlobalRotation = Vector3.Zero;
         PlayerCamera.GetInstance().Current = true;
+        DepartureSystemPosition.GetInstance().SpawnSystem();
         QueueFree();
     }
     public void LoadStop(Vector3 spawnpos)

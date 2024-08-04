@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Assets/Pod/Pod_Door.tres" type="ArrayMesh" id=1]
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Assets/Pod/PoD_engines.tres" type="ArrayMesh" id=4]
 [ext_resource path="res://Assets/Pod/PodMat.tres" type="Material" id=5]
 [ext_resource path="res://Scripts/Pod.cs" type="Script" id=6]
+[ext_resource path="res://Scenes/Effects/Smoke.tscn" type="PackedScene" id=7]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1.31025, 1.46657, 1.30524 )
@@ -79,7 +80,6 @@ mesh = ExtResource( 3 )
 material/0 = ExtResource( 5 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 cast_shadow = 0
 mesh = ExtResource( 1 )
 material/0 = ExtResource( 5 )
@@ -101,7 +101,11 @@ shape = SubResource( 1 )
 shape = SubResource( 2 )
 
 [node name="ActionComponent" parent="." instance=ExtResource( 2 )]
+ActionDistance = 10.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/PodOpen = SubResource( 3 )
 anims/RESET = SubResource( 4 )
+
+[node name="Smoke" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 0.83748, -0.546467, 0, 0.546467, 0.83748, 0.251497, 2.09612, -0.52287 )

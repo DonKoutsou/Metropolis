@@ -268,6 +268,7 @@ public class Character : KinematicBody
 	public bool IsOnVehicle()	{	return HasVecicle;	}
 	public Vehicle GetVehicle()	{	return currveh;	}
 
+	public bool GettingInVehicle = false;
 	public virtual void OnVehicleBoard(Vehicle veh)
 	{
 		EmitSignal("VehicleBoardEventHandler", true, veh);
@@ -275,6 +276,7 @@ public class Character : KinematicBody
 		{
 			IdleTimer.Start();
 		}
+		GettingInVehicle = false;
 		//SetCollisionMaskBit(8, true);
 	}
 	public virtual void OnVehicleUnBoard(Vehicle veh)
@@ -286,6 +288,7 @@ public class Character : KinematicBody
 			StopMusic();
 
 		IdleTimer.Stop();
+		GettingInVehicle = false;
 		//SetCollisionMaskBit(8, false);
 	}
 	public void SetVehicle(Vehicle veh)

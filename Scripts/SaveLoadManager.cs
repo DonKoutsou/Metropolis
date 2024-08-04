@@ -23,6 +23,8 @@ public class SaveLoadManager : Control
 	
 	public void SaveGame()
 	{
+		GameOverTrigger.ToggleTriggers(false);
+		
 		GDScript SaveGD = GD.Load<GDScript>("res://Scripts/saved_game.gd");
 		Godot.Object save = (Godot.Object)SaveGD.New();
 		
@@ -66,6 +68,8 @@ public class SaveLoadManager : Control
 		}
 		
 		data.Add("PlayerEnergy", pl.GetCurrentEnergy());
+
+		data.Add("HasBaby", pl.HasBaby);
 
 		int day, hour, mins;
 		DayNight.GetDay(out day);

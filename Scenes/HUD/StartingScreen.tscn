@@ -1,10 +1,11 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=56 format=2]
 
-[ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Scenes/HUD/CreditName.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/StartingScreen.cs" type="Script" id=2]
 [ext_resource path="res://Fonts/Play-Bold.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://Scripts/LoadingScreen.cs" type="Script" id=4]
 [ext_resource path="res://UIThemes/Panel_LightGray_BottomCorner.tres" type="StyleBox" id=5]
+[ext_resource path="res://Scripts/Credits.cs" type="Script" id=6]
 [ext_resource path="res://Assets/Themes/PanelTheme1.tres" type="Theme" id=7]
 [ext_resource path="res://UIThemes/Panel_LightGray_LeftCorner.tres" type="StyleBox" id=8]
 [ext_resource path="res://Scripts/Settings.cs" type="Script" id=9]
@@ -424,6 +425,37 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
+[sub_resource type="Animation" id=67]
+resource_name = "Credit Roll"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("VBoxContainer:rect_position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 10 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -659, 214 ), Vector2( -659, -1047 ) ]
+}
+
+[sub_resource type="Animation" id=68]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("VBoxContainer:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -659, 214 ) ]
+}
+
 [sub_resource type="DynamicFont" id=65]
 size = 140
 outline_size = 4
@@ -440,6 +472,14 @@ use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 3 )
 
+[sub_resource type="DynamicFont" id=66]
+size = 140
+outline_size = 4
+outline_color = Color( 0.160784, 0.215686, 0.25098, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 3 )
+
 [sub_resource type="DynamicFont" id=60]
 size = 64
 outline_size = 4
@@ -447,14 +487,6 @@ outline_color = Color( 0.235294, 0.321569, 0.372549, 1 )
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 3 )
-
-[sub_resource type="DynamicFont" id=3]
-size = 60
-outline_size = 1
-outline_color = Color( 0, 0, 0, 1 )
-use_mipmaps = true
-use_filter = true
-font_data = ExtResource( 1 )
 
 [sub_resource type="Animation" id=30]
 length = 0.001
@@ -468,7 +500,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 0, 0, 0, 1 ) ]
+"values": [ Color( 0, 0, 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=31]
@@ -885,6 +917,111 @@ margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 17 )
 
+[node name="Credits" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -659.0
+margin_top = -259.0
+margin_right = 659.0
+margin_bottom = 457.0
+rect_clip_content = true
+script = ExtResource( 6 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Credits"]
+"anims/Credit Roll" = SubResource( 67 )
+anims/RESET = SubResource( 68 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Credits"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -1318.0
+margin_top = -144.0
+margin_right = 1318.0
+margin_bottom = 1288.0
+rect_pivot_offset = Vector2( 1318, 752 )
+custom_constants/separation = 78
+alignment = 1
+
+[node name="CreditName" parent="Credits/VBoxContainer" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 560.0
+margin_right = 2636.0
+margin_bottom = 560.0
+
+[node name="CreditName2" parent="Credits/VBoxContainer" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 638.0
+margin_right = 2636.0
+margin_bottom = 638.0
+
+[node name="VBoxContainer" parent="Credits/VBoxContainer/CreditName2" index="0"]
+margin_left = -162.5
+margin_right = 162.5
+
+[node name="DevTitle" parent="Credits/VBoxContainer/CreditName2/VBoxContainer" index="0"]
+margin_right = 325.0
+text = "Character Animations"
+
+[node name="DevName" parent="Credits/VBoxContainer/CreditName2/VBoxContainer" index="1"]
+margin_right = 325.0
+text = "Samuel Sandoval"
+
+[node name="CreditName3" parent="Credits/VBoxContainer" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 716.0
+margin_right = 2636.0
+margin_bottom = 716.0
+
+[node name="DevTitle" parent="Credits/VBoxContainer/CreditName3/VBoxContainer" index="0"]
+text = "Μπουζούκι"
+
+[node name="DevName" parent="Credits/VBoxContainer/CreditName3/VBoxContainer" index="1"]
+text = "Λευτέρης Σκλάβος"
+
+[node name="CreditName4" parent="Credits/VBoxContainer" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 794.0
+margin_right = 2636.0
+margin_bottom = 794.0
+
+[node name="CreditName5" parent="Credits/VBoxContainer" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 872.0
+margin_right = 2636.0
+margin_bottom = 872.0
+
+[node name="DevTitle" parent="Credits/VBoxContainer/CreditName5/VBoxContainer" index="0"]
+visible = false
+
+[node name="DevName" parent="Credits/VBoxContainer/CreditName5/VBoxContainer" index="1"]
+margin_top = 5.0
+margin_bottom = 66.0
+text = "Κουτσουράδης Αντώνης"
+
 [node name="Intro" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1054,6 +1191,64 @@ rect_clip_content = true
 mouse_filter = 2
 custom_styles/panel = ExtResource( 12 )
 
+[node name="GameOverLabel2" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -346.5
+margin_top = -480.0
+margin_right = 346.5
+margin_bottom = 72.0
+custom_colors/font_color = Color( 0.431373, 0.717647, 0.937255, 1 )
+custom_fonts/font = SubResource( 66 )
+text = "ΤΕΛΟΣ"
+align = 1
+valign = 1
+
+[node name="Panel7" type="Panel" parent="GameOverLabel2"]
+show_behind_parent = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -351.5
+margin_top = -77.0
+margin_right = 352.5
+margin_bottom = -63.0
+rect_clip_content = true
+mouse_filter = 2
+custom_styles/panel = ExtResource( 10 )
+
+[node name="Panel8" type="Panel" parent="GameOverLabel2"]
+show_behind_parent = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -349.5
+margin_top = 65.0
+margin_right = 352.5
+margin_bottom = 79.0
+rect_clip_content = true
+mouse_filter = 2
+custom_styles/panel = ExtResource( 5 )
+
+[node name="Panel9" type="Panel" parent="GameOverLabel2"]
+show_behind_parent = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -358.5
+margin_top = -71.0
+margin_right = 359.5
+margin_bottom = 72.0
+rect_clip_content = true
+mouse_filter = 2
+custom_styles/panel = ExtResource( 12 )
+
 [node name="PauseLabel" type="Label" parent="."]
 visible = false
 anchor_left = 0.5
@@ -1115,34 +1310,14 @@ rect_clip_content = true
 mouse_filter = 2
 custom_styles/panel = ExtResource( 12 )
 
-[node name="GameWonLabel" type="Label" parent="."]
-visible = false
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -122.0
-margin_top = -170.5
-margin_right = 122.0
-margin_bottom = 170.5
-custom_colors/font_color = Color( 0.827451, 0.784314, 0.494118, 1 )
-custom_fonts/font = SubResource( 3 )
-text = "ΞΕΦΥΓΕΣ
-
-
-"
-align = 1
-valign = 1
-
 [node name="FadeInOut" type="CanvasLayer" parent="."]
 layer = 10
-visible = false
 
 [node name="ColorRect" type="ColorRect" parent="FadeInOut"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-color = Color( 0, 0, 0, 1 )
+color = Color( 0, 0, 0, 0 )
 
 [node name="MainMenuAnimation" type="AnimationPlayer" parent="FadeInOut"]
 root_node = NodePath("../../Intro")
@@ -1156,4 +1331,9 @@ script = ExtResource( 16 )
 [connection signal="button_down" from="Settings/Panel/Start_Button" to="." method="On_Start_Button_Down"]
 [connection signal="button_down" from="Settings/Panel/Exit_Button" to="." method="On_Exit_Button_Down"]
 [connection signal="toggled" from="Settings/Panel/SeedSetting2/Full_Screen_Checkbox" to="." method="On_Full_Screen_Toggled"]
+[connection signal="animation_finished" from="Credits/AnimationPlayer" to="Credits" method="Credits_Finished"]
 [connection signal="timeout" from="RestartTimer" to="." method="StopGame"]
+
+[editable path="Credits/VBoxContainer/CreditName2"]
+[editable path="Credits/VBoxContainer/CreditName3"]
+[editable path="Credits/VBoxContainer/CreditName5"]

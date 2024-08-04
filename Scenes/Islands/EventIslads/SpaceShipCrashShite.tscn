@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=2]
+[gd_scene load_steps=66 format=2]
 
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=2]
@@ -24,7 +24,11 @@
 [ext_resource path="res://Scenes/Items/MapItem.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Scenes/Env_Assets/Furniture.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Scenes/Items/Compass.tscn" type="PackedScene" id=24]
-[ext_resource path="res://Scenes/Env_Assets/ShipBroken.tscn" type="PackedScene" id=26]
+[ext_resource path="res://Scripts/PodPosition.cs" type="Script" id=25]
+[ext_resource path="res://Scenes/Triggers/DialogueTrigger.tscn" type="PackedScene" id=26]
+[ext_resource path="res://Scripts/DepartureSystemPosition.cs" type="Script" id=27]
+[ext_resource path="res://Scenes/Systems/DepartureSystem.tscn" type="PackedScene" id=28]
+[ext_resource path="res://Scenes/Env_Assets/SandPile1.tscn" type="PackedScene" id=29]
 
 [sub_resource type="SpatialMaterial" id=13]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -535,14 +539,23 @@ collision_mask = 0
 shape = SubResource( 151 )
 
 [node name="Ship" parent="." index="5" instance=ExtResource( 13 )]
-transform = Transform( -0.970187, 0.0471729, -0.237719, -0.102165, 0.809853, 0.577666, 0.219768, 0.584732, -0.780892, 578.806, 1.56258, 785.703 )
+transform = Transform( -0.937003, 0.102627, -0.333902, -0.0747332, 0.874842, 0.478606, 0.34123, 0.473411, -0.812063, 578.806, 2.13214, 785.703 )
 
 [node name="SpawnPosition" type="Position3D" parent="." index="6"]
-transform = Transform( 0.684228, 5.78035e-11, 0.729268, 0, 1, -1.45519e-11, -0.729268, -8.36009e-12, 0.684228, -784.215, 146.057, -678.294 )
+transform = Transform( -0.49367, 9.15004e-12, 0.869649, 0, 1, -1.45519e-11, -0.869649, -5.76837e-11, -0.49367, 76.3623, 92.1052, 1060.73 )
 script = ExtResource( 5 )
 
-[node name="Vehicle0" parent="." index="7" instance=ExtResource( 12 )]
-transform = Transform( 0.873865, 0, 0.486167, 0, 1, 0, -0.486167, 0, 0.873865, -766.878, 150.598, -687.572 )
+[node name="PodPisition" type="Position3D" parent="." index="7"]
+transform = Transform( -0.49367, 9.15004e-12, 0.869649, 0, 1, -1.45519e-11, -0.869649, -5.76837e-11, -0.49367, 569.874, 0.714658, 783.499 )
+script = ExtResource( 25 )
+
+[node name="DepartureSystemPosition" type="Position3D" parent="." index="8"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 407.528, 21.2394, 836.781 )
+script = ExtResource( 27 )
+DepartureSystemScene = ExtResource( 28 )
+
+[node name="Vehicle0" parent="." index="9" instance=ExtResource( 12 )]
+transform = Transform( -0.032492, 0, 0.999471, 0, 1, 0, -0.999471, 0, -0.032492, 66.069, 97.3326, 1044.06 )
 
 [node name="VehicleBody" parent="Vehicle0" index="0"]
 PlayerOwned = true
@@ -569,7 +582,7 @@ process_material = SubResource( 160 )
 draw_pass_1 = SubResource( 159 )
 
 [node name="RayFL" parent="Vehicle0" index="1"]
-transform = Transform( 1.00002, -0.000666086, -0.000640094, 0.000666142, 1, 0.00107026, 0.000639498, -0.00107062, 1.00002, 6.79999, -0.479996, 8.99097 )
+transform = Transform( 1.00006, -0.000666104, -0.000640355, 0.000666142, 1, 0.00107026, 0.00063993, -0.00107066, 1.00002, 6.79993, -0.480003, 8.99099 )
 
 [node name="MeshInstance" parent="Vehicle0/RayFL" index="0"]
 material_override = SubResource( 155 )
@@ -583,7 +596,7 @@ material/0 = SubResource( 147 )
 process_material = SubResource( 164 )
 
 [node name="RayFR" parent="Vehicle0" index="2"]
-transform = Transform( 1.00001, 3.27827e-07, 8.34465e-07, -3.57628e-07, 1, 8.9407e-08, -9.83477e-07, 1.1921e-07, 1.00001, -6.80005, -0.479996, 8.87897 )
+transform = Transform( 1.00002, 3.27827e-07, 6.18398e-07, -3.57628e-07, 1, 8.9407e-08, -7.1153e-07, 1.1921e-07, 1.00002, -6.80005, -0.480003, 8.87899 )
 
 [node name="MeshInstance" parent="Vehicle0/RayFR" index="0"]
 material_override = SubResource( 155 )
@@ -597,7 +610,7 @@ material/0 = SubResource( 147 )
 process_material = SubResource( 164 )
 
 [node name="RayBR" parent="Vehicle0" index="3"]
-transform = Transform( 1.00001, 3.27827e-07, 7.45058e-07, -1.49012e-07, 1, -1.49012e-07, -1.19209e-07, 1.1921e-07, 1.00001, -6.80002, -0.479996, -10.564 )
+transform = Transform( 1.00002, 3.27827e-07, 5.10365e-07, -1.49012e-07, 1, -1.49012e-07, -6.70552e-08, 1.1921e-07, 1.00002, -6.79993, -0.480003, -10.564 )
 
 [node name="MeshInstance" parent="Vehicle0/RayBR" index="0"]
 material_override = SubResource( 155 )
@@ -611,7 +624,7 @@ material/0 = SubResource( 147 )
 process_material = SubResource( 164 )
 
 [node name="RayBL" parent="Vehicle0" index="4"]
-transform = Transform( 1.00001, -1.7053e-13, 7.45058e-07, -1.49012e-07, 1, -1.49012e-07, -1.19209e-07, 4.76839e-07, 1.00001, 6.79996, -0.479996, -10.5081 )
+transform = Transform( 1.00002, -3.69482e-13, 5.10365e-07, -1.49012e-07, 1, -1.49012e-07, -6.70552e-08, 4.76847e-07, 1.00002, 6.79993, -0.480003, -10.508 )
 
 [node name="MeshInstance" parent="Vehicle0/RayBL" index="0"]
 material_override = SubResource( 155 )
@@ -624,55 +637,57 @@ material/0 = SubResource( 147 )
 [node name="HoverEngineParticles" parent="Vehicle0/RayBL/EnginePivot" index="3"]
 process_material = SubResource( 164 )
 
-[node name="Protal" parent="." index="8" instance=ExtResource( 10 )]
+[node name="Protal" parent="." index="10" instance=ExtResource( 10 )]
 transform = Transform( 0.109671, -0.178047, 0.977892, 0.276374, 0.950492, 0.142062, -0.954772, 0.254684, 0.153449, 1401.89, -5.07962, -1278.58 )
 
-[node name="Rock1" parent="." index="10" instance=ExtResource( 17 )]
+[node name="Rock1" parent="." index="12" instance=ExtResource( 17 )]
 transform = Transform( 228.161, 33.3393, 152.32, -151.851, 108.821, 203.641, -35.4124, -251.827, 108.164, 1637.5, -135.422, 319.109 )
 
-[node name="Rock2" parent="." index="11" instance=ExtResource( 17 )]
+[node name="Rock2" parent="." index="13" instance=ExtResource( 17 )]
 transform = Transform( -317.85, 329.468, 663.005, -733.121, -39.4467, -331.861, -103.245, -734.2, 315.35, 3158.34, -887.083, -2649.68 )
 
-[node name="Rock3" parent="." index="12" instance=ExtResource( 17 )]
+[node name="Rock3" parent="." index="14" instance=ExtResource( 17 )]
 transform = Transform( -741.699, -87.8214, -302.198, 94.0747, 676.442, -427.47, 300.311, -428.799, -612.452, -1567.45, -872.751, -1226.36 )
 
-[node name="Furniture" parent="." index="13" instance=ExtResource( 18 )]
+[node name="Furniture" parent="." index="15" instance=ExtResource( 18 )]
 transform = Transform( -0.93772, 0.293089, 0.186496, 0.347035, 0.814676, 0.464618, -0.0157594, 0.500402, -0.865649, -1365.76, 3.31067, -1825.15 )
 FurnitureDescription = "Μια νεκρή μηχανή.."
 ItemToSpawnWith = ExtResource( 24 )
 
-[node name="Rock4" parent="." index="14" instance=ExtResource( 19 )]
+[node name="Rock4" parent="." index="16" instance=ExtResource( 19 )]
 transform = Transform( 0.951482, -13.7125, 100.943, 93.3002, 40.6441, 4.64179, -40.8972, 92.4037, 12.9379, -1276.66, 80.6259, -1767.12 )
 
-[node name="Rock5" parent="." index="15" instance=ExtResource( 20 )]
+[node name="Rock5" parent="." index="17" instance=ExtResource( 20 )]
 transform = Transform( 60.158, 0, 0, 0, 30.3632, -51.9332, 0, 51.9333, 30.3631, -1386.24, 41.013, -1956.36 )
 
-[node name="Rock6" parent="." index="16" instance=ExtResource( 20 )]
+[node name="Rock6" parent="." index="18" instance=ExtResource( 20 )]
 transform = Transform( 44.3727, 3.03159, -17.3316, -3.29448, -44.7567, -16.2633, -17.2836, 16.3144, -41.396, -1405.77, 9.00671, -1737.31 )
 
-[node name="StaticBody" parent="." index="17" instance=ExtResource( 21 )]
+[node name="StaticBody" parent="." index="19" instance=ExtResource( 21 )]
 transform = Transform( 0.916878, -0.399128, 0.00566314, 0.371864, 0.848918, -0.375573, 0.145094, 0.34646, 0.926776, -1352.17, 2.49847, -1826.35 )
 
-[node name="Furniture2" parent="." index="18" instance=ExtResource( 23 )]
+[node name="Furniture2" parent="." index="20" instance=ExtResource( 23 )]
 transform = Transform( 0.952635, -0.300539, 0.0465045, 0.304116, 0.941431, -0.145674, 0, 0.152917, 0.988239, -1351.78, 1.42351, -1829.24 )
 ItemToSpawnWith = ExtResource( 22 )
 
-[node name="Occluder" type="Occluder" parent="." index="20"]
+[node name="Occluder" type="Occluder" parent="." index="22"]
 transform = Transform( 0.998215, 0, -0.0597245, 0, 1, 0, 0.0597245, 0, 0.998215, -1326.15, 0, -1726.62 )
 shape = SubResource( 168 )
 
-[node name="Occluder2" type="Occluder" parent="." index="21"]
+[node name="Occluder2" type="Occluder" parent="." index="23"]
 transform = Transform( -0.826, 0, 0.56367, 0, 1, 0, -0.56367, 0, -0.826, -1238.5, 0, -1843.36 )
 shape = SubResource( 172 )
 
-[node name="Occluder3" type="Occluder" parent="." index="22"]
+[node name="Occluder3" type="Occluder" parent="." index="24"]
 transform = Transform( -0.164773, 0.305213, -0.93792, 0.0528109, 0.952284, 0.30061, 0.984917, 0, -0.173029, -1375.15, 0, -1880.15 )
 shape = SubResource( 173 )
 
-[node name="Ship2" parent="." index="23" instance=ExtResource( 26 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1012.34, 29.067, 793.269 )
+[node name="DialogueTrigger" parent="." index="25" instance=ExtResource( 26 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 569.279, 0.482145, 786.914 )
+EnterDialogues = [ "Από κάπου πρέπει να ανοίγει..." ]
+LeaveDialogues = [  ]
 
-[node name="Ship3" parent="." index="24" instance=ExtResource( 26 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1459.31, 227.266, 47.5458 )
+[node name="Rock7" parent="." index="26" instance=ExtResource( 29 )]
+transform = Transform( 9.14328, -12.3972, 7.99113, 1.80301, -8.39207, -15.0821, 14.6389, 8.77674, -3.13358, 587.943, -23.3848, 786.028 )
 
 [editable path="Vehicle0"]

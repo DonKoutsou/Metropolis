@@ -25,6 +25,7 @@ public class StartingScreen : Control
 		world = (WorldRoot)GetParent().GetParent();
 		intro = GetNode<Control>("Intro");
 		FadeInOut = GetNode<CanvasLayer>("FadeInOut").GetNode<MainMenuAnimation>("MainMenuAnimation");
+		FadeInOut.FadeOut();
 		Init();
 	}
 	private void FillButtonList()
@@ -41,12 +42,11 @@ public class StartingScreen : Control
 	}
 	public void Init()
 	{
-		FadeInOut.FadeOut();
 		bool HasSave = ResourceLoader.Exists("user://SavedGame.tres");
 
 		intro.Show();
 
-		GetNode<CanvasLayer>("FadeInOut").Show();
+		//GetNode<CanvasLayer>("FadeInOut").Show();
 		Control cont = GetNode<Control>("Settings");
 		cont.Show();
 
@@ -67,6 +67,7 @@ public class StartingScreen : Control
 		{
 			FadeInOut.FadeInOut();
 			LoadingScreen.GetInstance().Start();
+			FadeInOut.Connect("FadeOutFinished", this, "StartGame");
 		}
 		else
 		{
@@ -79,10 +80,14 @@ public class StartingScreen : Control
 		LoadSave = true;
 		FadeInOut.FadeInOut();
 		LoadingScreen.GetInstance().Start();
+		
+		FadeInOut.Connect("FadeOutFinished", this, "StartGame");
 	}
-
+	
 	public void StartGame()
 	{
+		FadeInOut.Disconnect("FadeOutFinished", this, "StartGame");
+
 		intro.Hide();
 
 		GetNode<Control>("Settings").Hide();
@@ -129,21 +134,47 @@ public class StartingScreen : Control
 	{
 		GetNode<Timer>("RestartTimer").Start();
 		GetNode<Label>("GameOverLabel").Visible = true;
-		
+		CameraAnimationPlayer.GetInstance().FadeOut(5);
 	}
-	public void GameWon(Character pl)
+	public void GameEnded()
 	{
 		GetNode<Timer>("RestartTimer").Start();
-		GetNode<Label>("GameWonLabel").Visible = true;
+		GetNode<Label>("GameOverLabel2").Visible = true;
+		CameraAnimationPlayer.GetInstance().FadeOut(5);
+	}
+	public void ShowCredits()
+	{
+		FadeInOut.FadeOut();
+
+		intro.Show();
+
+		//GetNode<CanvasLayer>("FadeInOut").Show();
+
+		Credits cr = GetNode<Credits>("Credits");
+		cr.Connect("OnCreditsEnded", this, "CreditEnded");
+		GetNode<Credits>("Credits").PlayCredits();
+	}
+	public void CreditEnded()
+	{
+		Credits cr = GetNode<Credits>("Credits");
+		cr.Disconnect("OnCreditsEnded", this, "CreditEnded");
+		FadeInOut.FadeInOut();
+		FadeInOut.Connect("FadeOutFinished", this, "ReInit");
+	}
+	public void ReInit()
+	{
+		FadeInOut.Disconnect("FadeOutFinished", this, "ReInit");
+		Init();
 	}
 	private void StopGame()
 	{
 		GetNode<Label>("GameOverLabel").Visible = false;
-		GetNode<Label>("GameWonLabel").Visible = false;
+		GetNode<Label>("GameOverLabel2").Visible = false;
+		GetNode<Control>("Settings").GetNode<ColorRect>("ColorRect").Visible = false;
 		world.StopGame();
 
 		GameIsRunning = false;
-		Init();
+		ShowCredits();
 
 		//GetNode<Timer>("RestartTimer").Stop();
 	}

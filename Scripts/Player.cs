@@ -82,7 +82,7 @@ public class Player : Character
 	{
 		return rpm;
 	}
-	public void Teleport(Vector3 pos)
+	public void Teleport(Vector3 pos, Vector3 rot)
 	{
 		
 		PhysicsServer.BodySetState(GetRid(), PhysicsServer.BodyState.Transform, Transform.Identity.Translated(pos - GlobalTranslation));
@@ -91,7 +91,11 @@ public class Player : Character
 		else
 			GlobalTranslation = pos;
 		loctomove = pos;
-		GetNode<Spatial>("Pivot").Rotation = Vector3.Zero;
+		GetNode<Spatial>("Pivot").GlobalRotation = rot;
+
+		Vector3 rota = new Vector3(0, rot.y, 0);
+
+		CameraPanPivot.GetInstance().GlobalRotation = rota;
 	}
 	
 	public override void _Ready()
@@ -139,6 +143,17 @@ public class Player : Character
 			}
 				
 		}
+	}
+	public void MoveTo(Vector3 loc, bool Running = false, bool ResetLook = false)
+	{
+		loctomove = loc;
+		IsRunning = Running;
+		if (ResetLook)
+		{
+			Vector3 rot = GetNode<Spatial>("Pivot").Rotation;
+			CameraPanPivot.GetInstance().Rotation = new Vector3(0, rot.y, 0);
+		}
+			
 	}
 	private void UpdateMoveLocation()
 	{
@@ -253,22 +268,17 @@ public class Player : Character
 		{
 			if (dist < 10)
 			{
-				rpm = 0.05f;
-				
 				anim.PlayAnimation(E_Animations.Idle);
 				moveloc.Hide();
 				HeadPivot.Rotation = new Vector3(0.0f,0.0f,0.0f);
 			}
 			else if (dist > 10)
 			{
-				if (currveh.IsRunning())
-					rpm = 1;
-				else
-					rpm = 0.05f;
 				anim.PlayAnimation(E_Animations.Idle);
 				HeadPivot.Rotation = new Vector3(0.0f,0.0f,0.0f);
 				moveloc.Show();
 			}
+			rpm = currveh.GetRPM();
 		}
 		else
 		{

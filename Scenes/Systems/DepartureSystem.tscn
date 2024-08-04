@@ -1,0 +1,90 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Scenes/Triggers/DialogueTrigger.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Triggers/GameOverTrigger.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/DepartureSystem.cs" type="Script" id=3]
+
+[sub_resource type="SphereShape" id=1]
+radius = 1000.0
+
+[sub_resource type="SphereShape" id=2]
+radius = 1500.0
+
+[sub_resource type="SphereShape" id=6]
+radius = 2200.0
+
+[sub_resource type="SphereShape" id=4]
+radius = 500.0
+
+[sub_resource type="SphereShape" id=5]
+radius = 1200.0
+
+[sub_resource type="SphereShape" id=3]
+radius = 2200.0
+
+[node name="DepartureSystem" type="Spatial"]
+script = ExtResource( 3 )
+
+[node name="WithoutMakingChoise" type="Spatial" parent="."]
+
+[node name="DialogueTrigger2" parent="WithoutMakingChoise" instance=ExtResource( 1 )]
+EnterDialogues = [  ]
+LeaveDialogues = [ "Μίπως να γυρίσω...." ]
+
+[node name="CollisionShape" parent="WithoutMakingChoise/DialogueTrigger2/Area" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -32.9641, 0 )
+shape = SubResource( 1 )
+
+[node name="DialogueTrigger3" parent="WithoutMakingChoise" instance=ExtResource( 1 )]
+EnterDialogues = [  ]
+LeaveDialogues = [ "Μπορεί να υπάρχει κάποιος μέσα στο σκάφος...." ]
+
+[node name="CollisionShape" parent="WithoutMakingChoise/DialogueTrigger3/Area" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -32.9641, 0 )
+shape = SubResource( 2 )
+
+[node name="DialogueTrigger4" parent="WithoutMakingChoise" instance=ExtResource( 1 )]
+EnterDialogues = [  ]
+LeaveDialogues = [ "Δέν είναι δικό μου πρόβλημα..." ]
+
+[node name="CollisionShape" parent="WithoutMakingChoise/DialogueTrigger4/Area" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -32.9641, 0 )
+shape = SubResource( 6 )
+
+[node name="AfterLeavingBaby" type="Spatial" parent="."]
+
+[node name="DialogueTrigger2" parent="AfterLeavingBaby" instance=ExtResource( 1 )]
+EnterDialogues = [  ]
+LeaveDialogues = [ "Μίπως να γυρίσω...." ]
+
+[node name="CollisionShape" parent="AfterLeavingBaby/DialogueTrigger2/Area" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -32.9641, 0 )
+shape = SubResource( 4 )
+disabled = true
+
+[node name="DialogueTrigger3" parent="AfterLeavingBaby" instance=ExtResource( 1 )]
+EnterDialogues = [  ]
+LeaveDialogues = [ "Το μωρό δεν θα τα καταφέρει μόνο του..." ]
+
+[node name="CollisionShape" parent="AfterLeavingBaby/DialogueTrigger3/Area" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -32.9641, 0 )
+shape = SubResource( 5 )
+disabled = true
+
+[node name="DialogueTrigger4" parent="AfterLeavingBaby" instance=ExtResource( 1 )]
+EnterDialogues = [  ]
+LeaveDialogues = [ "Δέν είναι δικό μου πρόβλημα..." ]
+
+[node name="CollisionShape" parent="AfterLeavingBaby/DialogueTrigger4/Area" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -32.9641, 0 )
+shape = SubResource( 3 )
+disabled = true
+
+[node name="GameOverTrigger" parent="." instance=ExtResource( 2 )]
+
+[editable path="WithoutMakingChoise/DialogueTrigger2"]
+[editable path="WithoutMakingChoise/DialogueTrigger3"]
+[editable path="WithoutMakingChoise/DialogueTrigger4"]
+[editable path="AfterLeavingBaby/DialogueTrigger2"]
+[editable path="AfterLeavingBaby/DialogueTrigger3"]
+[editable path="AfterLeavingBaby/DialogueTrigger4"]

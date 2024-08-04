@@ -110,11 +110,20 @@ data = {
 [node name="Rock2" parent="." index="7" instance=ExtResource( 4 )]
 transform = Transform( -1.19357, -50.6304, 32.4673, -1.21887, 32.4874, 50.6168, -60.1338, 0.346442, -1.6704, -49.0629, -288.508, -41.6633 )
 
-[node name="Rock3" parent="." index="8" instance=ExtResource( 4 )]
+[node name="Rock6" parent="." index="8" instance=ExtResource( 4 )]
+transform = Transform( 53.8489, 23.1412, -13.556, -1.21887, 32.4874, 50.6168, 26.7917, -45.0338, 29.5491, -995.573, -288.508, 2386.36 )
+
+[node name="Rock7" parent="." index="9" instance=ExtResource( 4 )]
+transform = Transform( -37.3092, -40.1181, 24.8505, -1.21887, 32.4874, 50.6168, -47.1754, 30.8885, -20.9611, 2920.04, -288.508, 1186.81 )
+
+[node name="Rock8" parent="." index="10" instance=ExtResource( 4 )]
+transform = Transform( 55.835, -18.2099, 13.0322, -1.21887, 32.4874, 50.6168, -22.3596, -47.2436, 29.7839, -1064.08, -288.508, -3182.1 )
+
+[node name="Rock3" parent="." index="11" instance=ExtResource( 4 )]
 transform = Transform( -46.6918, -32.424, 19.6863, 4.51146, 26.2526, 53.9391, -37.6631, 43.3414, -17.9444, -897.527, -272.89, -403.259 )
 
-[node name="Rock4" parent="." index="9" instance=ExtResource( 4 )]
+[node name="Rock4" parent="." index="12" instance=ExtResource( 4 )]
 transform = Transform( 9.71765, 57.8688, -13.2575, 39.6905, 3.65765, 45.0584, 44.1499, -16.0255, -37.5892, 289.233, -228.862, 760.386 )
 
-[node name="Rock5" parent="." index="10" instance=ExtResource( 4 )]
+[node name="Rock5" parent="." index="13" instance=ExtResource( 4 )]
 transform = Transform( -42.8702, 27.2125, 32.2584, 36.3535, 0.454193, 47.9291, 21.4372, 53.6495, -16.7682, -1748.56, -216.429, 1505.45 )

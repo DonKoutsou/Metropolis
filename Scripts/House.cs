@@ -61,16 +61,21 @@ public class House : Spatial
 		{
 			Oclude.Visible = false;
 		}*/
-		
 		return;
-
+	}
+	protected virtual void On_Door_Animation_Finished(string anim)
+	{
+		if (anim == "Close")
+		{	
+			StaticBody HouseExterior  = GetNode<StaticBody>("HouseExterior");
+			((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Disabled;
+			GetNode<Spatial>("Furnitures").Hide();
+			GetNode<Spatial>("Decorations").Hide();
+		}
 	}
 	public virtual void Left(Node body)
 	{
-		StaticBody HouseExterior  = GetNode<StaticBody>("HouseExterior");
-		((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Disabled;
-		GetNode<Spatial>("Furnitures").Hide();
-		GetNode<Spatial>("Decorations").Hide();
+		
 		AnimationPlayer Anim = GetNode<AnimationPlayer>("AnimationPlayer");
 		Anim.Play("Close");
 		//((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(2)).ParamsCullMode = SpatialMaterial.CullMode.Disabled;
@@ -80,7 +85,6 @@ public class House : Spatial
 		}*/
 
 		return;
-
 	}
 	[Export]
 	List<PackedScene> PossibleFurni = null;

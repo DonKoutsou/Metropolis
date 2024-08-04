@@ -90,8 +90,8 @@ public class MyWorld : Spatial
 	{
 		Player pl = (Player)PlayerScene.Instance();
 		AddChild(pl);
-		pl.Teleport(pos);
-		pl.GlobalRotation = rot;
+		pl.Teleport(pos, rot);
+		//pl.GlobalRotation = rot;
 		//WorldMap.GetInstance().pl = pl;
 		EmitSignal("PlayerSpawnedEventHandler", pl);
 		MapGrid.GetInstance().ConnectPlayer(pl);
@@ -180,7 +180,7 @@ public class MyWorld : Spatial
 		}
 		//pl.RechargeCharacter(100);
 		pl.Respawn();
-		pl.Teleport(Rescuer.GetNode<Position3D>("TalkPosition").GlobalTranslation);
+		pl.Teleport(Rescuer.GetNode<Position3D>("TalkPosition").GlobalTranslation, Vector3.Zero);
 
 		DialogueManager.GetInstance().StartDialogue(Rescuer, "RescueDialogue");
 

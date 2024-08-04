@@ -216,6 +216,10 @@ public class Vehicle : RigidBody
         
         GetNode<VehicleBoostTrails>("VehicleBoostTrails").StartBoost();
     }
+    public float GetRPM()
+    {
+        return SpeedBuildup;
+    }
     float SpeedBuildup = 0;
     
     public override void _PhysicsProcess(float delta)
@@ -264,7 +268,7 @@ public class Vehicle : RigidBody
                 if (WindOnWings)
                     EnableWindOnWings(false);
             }
-            AddCentralForce(wingforce * delta);
+            AddCentralForce(wingforce * (delta * 2));
         }
         
         latsspeed = speed * (distmulti * SpeedBuildup);
@@ -275,7 +279,7 @@ public class Vehicle : RigidBody
             return;
         }
         //engine
-        AddCentralForce(force * latsspeed * delta);
+        AddCentralForce(force * latsspeed * (delta * 2));
 
         if (!SteerThr.IsActive())
         {
@@ -540,6 +544,7 @@ public class Vehicle : RigidBody
     
     public void BoardVehicle(Character cha)
     {
+        cha.GettingInVehicle = true;
         ContactMonitor = true;
         //SetProcessInput(true);
         bool isthing = GetParent().GetParent() is MyWorld;
@@ -579,9 +584,14 @@ public class Vehicle : RigidBody
     {
         if (passengers.Count == 0)
             return;
+
+        
         //SetProcessInput(false);
         ContactMonitor = false;
         Character chartothrowout = passengers[0];
+
+        chartothrowout.GettingInVehicle = true;
+
         chartothrowout.Anims().ToggleIdle();
         passengers.Clear();
         Vector3 prevrot = chartothrowout.GlobalRotation;
@@ -612,6 +622,7 @@ public class Vehicle : RigidBody
     {
         
         //SetProcessInput(false);
+        cha.GettingInVehicle = true;
         Vector3 prevrot = cha.GlobalRotation;
         
         Vector3 postoput;

@@ -17,6 +17,7 @@ func _SetData(data):
 	ilemap = data["ilemap"]
 	playerlocation = data["PlayerLocation"]
 	PlayerEnergy = data["PlayerEnergy"]
+	HasBaby = data["HasBaby"]
 	InventoryContents = data["InventoryContents"]
 	PlayerHasVehicle = data["PlayerHasVehicle"]
 	##DeliverJobs = data["DeliverJobs"]
@@ -50,6 +51,7 @@ export  (Array, Resource) var InventoryContents = []
 
 export var playerlocation:Vector3
 export var PlayerEnergy:float
+export var HasBaby:bool
 export var PlayerHasVehicle:bool
 
 
