@@ -296,6 +296,9 @@ public class ActionMenu : Control
             return;
 		
 		GetNode<VehicleHud>("VBoxContainer/VehicleUI").Hide();
+
+		
+
 		if (obj is Item)
 		{
 			PickButton.Text = "Πάρε";
@@ -316,8 +319,10 @@ public class ActionMenu : Control
 				PickButton.Text = "Επιβιβάση";
 			
 		}
-		else if (obj is Furniture)
+		else if (obj is Furniture f)
 		{
+			if (f.HasBeenSearched())
+				PickButton.Hide();	
 			PickButton.Text = "Ψάξε";
 		}
 		else if (obj is WindGenerator)
@@ -360,10 +365,6 @@ public class ActionMenu : Control
 		}
 		else if (obj is Pod p)
 		{
-			if (p.IsOpen() || p.IsDestroyed())
-				PickButton.Hide();
-			else
-				PickButton.Show();
 			PickButton.Text = "Άνοιξε";
 		}
 		DeselectCurrent();
@@ -383,6 +384,8 @@ public class ActionMenu : Control
 	}
 	public void Stop()
 	{
+		if (SelectedObj == null)
+			return;
 		pl.GetNode<LoddedCharacter>("Pivot/Guy/Armature/Skeleton").ResetHead();
 		if (PerformingAction)
 		{
@@ -390,10 +393,11 @@ public class ActionMenu : Control
 			ActionIndex = 0;
 			pl.UpdateLocationToMove(pl.GlobalTranslation);
 		}
-        if (selecting)
+		if (selecting)
+		{
             return;
-		if (SelectedObj == null)
-			return;
+		}
+
 		DeselectCurrent();
 		
 		Hide();
@@ -417,10 +421,10 @@ public class ActionMenu : Control
 		//else
 			//PickButton.Show();
 
-		if (SelectedObj is Furniture furn)
+		if (SelectedObj is Pod p)
 		{
-			if (furn.HasBeenSearched())
-				PickButton.Hide();	
+			if (p.IsOpen())
+				PickButton.Hide();
 		}
 
 		RectPosition = new Vector2 (screenpos.x, screenpos.y +50);

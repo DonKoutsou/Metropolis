@@ -6,6 +6,23 @@ public class Pod : StaticBody
     bool Opened = false;
     [Export]
     bool Destroyed = false;
+
+    public override void _EnterTree()
+    {
+        base._EnterTree();
+        Player pl = Player.GetInstance();
+        if (pl == null)
+            return;
+
+        if (pl.HasBaby)
+        {
+            AnimationPlayer anim = GetNode<AnimationPlayer>("AnimationPlayer");
+
+            anim.Play("PodOpen");
+
+            Opened = true;
+        }
+    }
     public bool IsOpen()
     {
         return Opened;
