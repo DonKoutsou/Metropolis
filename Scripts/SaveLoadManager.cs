@@ -27,26 +27,15 @@ public class SaveLoadManager : Control
 		
 		GDScript SaveGD = GD.Load<GDScript>("res://Scripts/saved_game.gd");
 		Godot.Object save = (Godot.Object)SaveGD.New();
-		
-
-		WorldMap map = WorldMap.GetInstance();
-		MyWorld world = MyWorld.GetInstance();
-
-		if (world == null)
-			return;
-
-		foreach (IslandInfo ile in world.GetActiveIles())
-		{
-			world.ToggleIsland(ile, false, false);
-		}
 
 		Player pl = Player.GetInstance();
-		if (pl == null)
-			return;
 
 		bool HasVecicle = pl.HasVehicle();
 		Dictionary<string, object> pldata = new Dictionary<string, object>(){
-			{"PlayerHasVehicle", HasVecicle}
+			{"PlayerHasVehicle", HasVecicle},
+			{"PlayerEnergy", pl.GetCurrentEnergy()},
+			{"HasBaby", pl.HasBaby}
+
 		};
 		if (HasVecicle)
 		{
@@ -60,16 +49,21 @@ public class SaveLoadManager : Control
 		else
 			pldata.Add("PlayerLocation", pl.GlobalTranslation);
 
+
+		WorldMap map = WorldMap.GetInstance();
+		MyWorld world = MyWorld.GetInstance();
+
+		foreach (IslandInfo ile in world.GetActiveIles())
+		{
+			world.ToggleIsland(ile, false, false);
+		}
+
 		Dictionary<string, object> data = map.GetSaveData();
 		
 		foreach (KeyValuePair<string, object> dat in pldata)
 		{
 			data.Add(dat.Key, dat.Value);
 		}
-		
-		data.Add("PlayerEnergy", pl.GetCurrentEnergy());
-
-		data.Add("HasBaby", pl.HasBaby);
 
 		int day, hour, mins;
 		DayNight.GetDay(out day);

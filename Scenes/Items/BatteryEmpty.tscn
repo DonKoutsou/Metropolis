@@ -28,6 +28,7 @@ shader_param/color = Color( 1, 1, 0, 0 )
 
 [node name="Battery" instance=ExtResource( 1 )]
 CurrentEnergy = 0.0
+condition = 50.0
 
 [node name="MeshInstance" parent="." index="0"]
 material_override = SubResource( 2 )

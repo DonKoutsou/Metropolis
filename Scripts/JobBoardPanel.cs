@@ -19,5 +19,20 @@ public class JobBoardPanel : StaticBody
             Mat.SetShaderParam("enable",  toggle);
         }
     }
-
+    public void DoAction(Player pl)
+	{
+        ToggleUI(true);
+    }
+    public string GetActionName(Player pl)
+    {
+        return "Κοίτα";
+    }
+    public bool ShowActionName(Player pl)
+    {
+        return true;
+    }
+    public string GetObjectDescription()
+    {
+        return "Πίνακας αγγελιών";
+    }
 }

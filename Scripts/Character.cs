@@ -5,7 +5,11 @@ using System.ComponentModel;
 using System.Security.Cryptography.X509Certificates;
 public class Character : KinematicBody
 {
-	
+	[Export]
+	protected ClothingType ClothToWear = ClothingType.HOODIE;
+
+	[Export]
+	protected Material ClothMaterial = GD.Load<Material>("res://Assets/Gen3Machine/Hoodie/HoodieMat.tres");
 
 	[Export]
 	protected string CharacterName = "Βαλάντης";
@@ -56,6 +60,8 @@ public class Character : KinematicBody
 		BulbMat = (SpatialMaterial)HeadPivot.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0);
 		ToggleNightLight(DayNight.IsDay());
 		IdleTimer = GetNode<Timer>("IdleTimer");
+		SetClothing();
+
 	}
 	public TalkText GetTalkText()
 	{
@@ -380,6 +386,23 @@ public class Character : KinematicBody
 
 		GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>(limbname).Visible = toggle;
 	}
+	public void SetClothing ()
+	{
+		Spatial clothpar = GetNode<Spatial>("Pivot/Guy/Armature/Skeleton");
+
+		if (ClothToWear == ClothingType.HOODIE)
+		{
+			clothpar.GetNode<MeshInstance>("Hoodie").Visible = true;
+			clothpar.GetNode<MeshInstance>("Hoodie").MaterialOverride = ClothMaterial;
+			clothpar.GetNode<MeshInstance>("Hoodie_SleeveLess").Visible = false;
+		}
+		else if (ClothToWear == ClothingType.HOODIE_SLEEVELESS)
+		{
+			clothpar.GetNode<MeshInstance>("Hoodie_SleeveLess").Visible = true;
+			clothpar.GetNode<MeshInstance>("Hoodie_SleeveLess").MaterialOverride = ClothMaterial;
+			clothpar.GetNode<MeshInstance>("Hoodie").Visible = false;
+		}
+	}
 	/*public void SetLimbColor(LimbType limb, Color colorarion)
 	{
 		MeshInstance limbtocolor = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>(LimbTranslator.EnumToString(limb));
@@ -529,7 +552,12 @@ public class CharacterInfo
 		}
     }
 }
-
+public enum ClothingType
+{
+	HOODIE,
+	HOODIE_SLEEVELESS,
+	
+}
 
 
 

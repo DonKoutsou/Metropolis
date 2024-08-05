@@ -3,7 +3,7 @@ extends Resource
 
 func _SetData(data):
 	currentile = data["currentile"]
-	MahalasEntryID = data["ΜαχαλάςEntryID"]
+	##MahalasEntryID = data["ΜαχαλάςEntryID"]
 	EventWallID = data["EventWallID"]
 	ExitID = data["ExitID"]
 	Exitpalcement = data["Exitpalcement"]
@@ -14,6 +14,7 @@ func _SetData(data):
 	RandomTimes = data["RandomTimes"]
 	Seed = data["Seed"]
 	ilemapvectors = data["ilemapVectors"]
+	UnlockedLightHouses = data["UnlockedLightHouses"]
 	ilemap = data["ilemap"]
 	playerlocation = data["PlayerLocation"]
 	PlayerEnergy = data["PlayerEnergy"]
@@ -31,7 +32,7 @@ func _SetData(data):
 
 ## Path to the level that was loaded when the game was saved
 export var currentile:int
-export var MahalasEntryID:int
+##export var MahalasEntryID:int
 export var EventWallID:int
 export var ExitID:int
 export var Exitpalcement:Vector2
@@ -46,6 +47,7 @@ export var RandomTimes:int
 export var Seed:int
 
 export (Array, Vector2) var ilemapvectors = []
+export (Array, Vector2) var UnlockedLightHouses = []
 export  (Array, Resource) var ilemap = []
 export  (Array, Resource) var InventoryContents = []
 

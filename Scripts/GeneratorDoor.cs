@@ -12,7 +12,7 @@ public class GeneratorDoor : StaticBody
         anim = GetParent().GetNode<AnimationPlayer>("AnimationPlayer");
         Switch = GetParent().GetNode<Spatial>("Switch");
     }
-    public string GetActionName(Vector3 PlayerPos)
+    public string GetActionName(Player pl)
     {   
         string name = "Άνοιξε";
         if (Open)
@@ -20,6 +20,14 @@ public class GeneratorDoor : StaticBody
             name = "Κλείσε";
         }
         return name;
+    }
+    public bool ShowActionName(Player pl)
+    {
+        return true;
+    }
+    public string GetObjectDescription()
+    {
+        return "Με ένα εκρηκτικό θα μπορούσα να το σπάσω";
     }
     public void ToggleDoor()
     {
@@ -44,4 +52,9 @@ public class GeneratorDoor : StaticBody
         else
             GetNode<MeshInstance>("MeshInstance").MaterialOverlay = null;
     }
+    public void DoAction(Player pl)
+	{
+        ToggleDoor();
+    }
+
 }

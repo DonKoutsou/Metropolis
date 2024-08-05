@@ -199,10 +199,11 @@ mouse_filter = 1
 custom_styles/panel = SubResource( 40 )
 
 [node name="MapGrid" type="GridContainer" parent="MapGridPanel"]
+rect_scale = Vector2( 4, 4 )
 mouse_filter = 2
 custom_constants/vseparation = 12
 custom_constants/hseparation = 12
-columns = 41
+columns = 31
 script = ExtResource( 1 )
 MaxZoomScale = 25.0
 TileScene = ExtResource( 6 )
@@ -325,8 +326,8 @@ custom_styles/panel = SubResource( 42 )
 [node name="MapGridY" type="GridContainer" parent="Panel2"]
 margin_right = 10.0
 margin_bottom = 1000.0
-custom_constants/vseparation = 12
-custom_constants/hseparation = 12
+custom_constants/vseparation = 48
+custom_constants/hseparation = 48
 
 [node name="PanelContainer" type="PanelContainer" parent="Panel2"]
 anchor_left = 0.5
@@ -363,8 +364,8 @@ custom_styles/panel = SubResource( 42 )
 [node name="MapGridX" type="GridContainer" parent="Panel3"]
 margin_right = 1000.0
 margin_bottom = 10.0
-custom_constants/vseparation = 12
-custom_constants/hseparation = 12
+custom_constants/vseparation = 48
+custom_constants/hseparation = 48
 columns = 81
 
 [node name="PanelContainer" type="PanelContainer" parent="Panel3"]

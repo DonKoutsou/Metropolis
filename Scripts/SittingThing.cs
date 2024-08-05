@@ -34,6 +34,39 @@ public class SittingThing : StaticBody
         else
             GetNode<MeshInstance>("MeshInstance").MaterialOverlay = null;
     }
+    public void DoAction(Player pl)
+	{
+        if (!HasEmptySeat())
+        {
+            pl.GetTalkText().Talk("Δεν έχει χώρο.");
+            return;
+        }
+        if (pl.HasVehicle())
+        {
+            if (!pl.GetVehicle().UnBoardVehicle(pl))
+                return;
+        }
+        Position3D seat = GetSeat();
+        pl.Sit(seat, this);
+    }
+    public string GetActionName(Player pl)
+    {
+        return "Κάτσε";
+    }
+    public bool ShowActionName(Player pl)
+    {
+        return true;
+    }
+    public string GetObjectDescription()
+    {
+        string desc;
+        if (HasEmptySeat())
+            desc = "Μπορώ να κάτσω.";
+        else
+            desc = "Δεν έχει χώρο.";
+        return desc;
+    }
+    
     public override void _Ready()
     {
         

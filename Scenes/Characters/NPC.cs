@@ -145,4 +145,21 @@ public class NPC : Character
 			}
 		}
     }
+	public void DoAction(Player pl)
+	{
+		DialogueManager.GetInstance().StartDialogue(this, GetDialogue());
+	}
+	public string GetActionName()
+    {
+        return "Kουβέντα";
+    }
+	public bool ShowActionName()
+    {
+        return true;
+    }
+	public string GetObjectDescription()
+    {
+        return "Φίλος";
+    }
+	
 }

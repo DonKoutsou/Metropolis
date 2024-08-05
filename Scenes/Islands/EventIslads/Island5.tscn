@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Scenes/Env_Assets/PitCity.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Env_Assets/Ladder.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Terains/Island19/Island19.tres" type="ArrayMesh" id=10]
+[ext_resource path="res://Assets/Gen3Machine/Hoodie/HoodieMat5.tres" type="Material" id=11]
 
 [sub_resource type="ParticlesMaterial" id=18]
 emission_shape = 2
@@ -123,6 +124,7 @@ transform = Transform( 1.79251, 0, 0, 0, 1.79251, 0, 0, 0, 1.79251, 0, 710.233, 
 
 [node name="Character" parent="." index="4" instance=ExtResource( 3 )]
 transform = Transform( -0.883864, 0, -0.467745, 0, 1, 0, 0.467745, 0, -0.883864, 1231.12, 916.964, -213.349 )
+ClothMaterial = ExtResource( 11 )
 Sitting = true
 PlayInstrument = true
 

@@ -14,7 +14,7 @@ resource_name = "Open"
 length = 0.001
 
 [node name="Furniture" type="StaticBody" groups=["Interactables"]]
-collision_layer = 16
+collision_layer = 4
 collision_mask = 0
 script = ExtResource( 2 )
 FurnitureDescription = "Μια συρταριέρα..."

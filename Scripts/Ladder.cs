@@ -34,14 +34,23 @@ public class Ladder : Spatial
 		base._Process(delta);
         
     }
-    public string GetActionName(Vector3 PlayerPos)
+    public string GetActionName(Player pl)
     {   
         string name = "Ανέβα";
+        Vector3 PlayerPos = pl.GlobalTranslation;
         if (BottomPos.GlobalTranslation.DistanceTo(PlayerPos) > TopPos.GlobalTranslation.DistanceTo(PlayerPos))
         {
             name = "Κατέβα";
         }
         return name;
+    }
+    public bool ShowActionName(Player pl)
+    {
+        return true;
+    }
+    public string GetObjectDescription()
+    {
+        return "Σκάλα";
     }
     public Vector3 GetActionPos(Vector3 PlayerPos)
     {
@@ -95,5 +104,9 @@ public class Ladder : Spatial
             GetNode<MeshInstance>("Ladder").MaterialOverlay = OutlineMat;
         else
             GetNode<MeshInstance>("Ladder").MaterialOverlay = null;
+    }
+    public void DoAction(Player pl)
+	{
+        TraverseLadder(pl);
     }
 }

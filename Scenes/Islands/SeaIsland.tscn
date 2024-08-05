@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/Env_Assets/Sea.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Island.cs" type="Script" id=2]
 [ext_resource path="res://Scripts/VehicleSpawnLocation.cs" type="Script" id=3]
 [ext_resource path="res://Scripts/CharacterSpawnLocations.cs" type="Script" id=4]
+
+[sub_resource type="CylinderShape" id=1]
+height = 2000.0
+radius = 6000.0
 
 [node name="Island" type="Spatial" groups=["Islands"]]
 pause_mode = 1
@@ -20,3 +24,10 @@ script = ExtResource( 4 )
 
 [node name="VehicleSpawnLocation" type="Node" parent="."]
 script = ExtResource( 3 )
+
+[node name="VisitTrigger" type="Area" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="VisitTrigger"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1000, 0 )
+shape = SubResource( 1 )

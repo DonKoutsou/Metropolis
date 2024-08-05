@@ -310,6 +310,3 @@ shape = SubResource( 11 )
 
 [node name="ActionComponent" parent="." instance=ExtResource( 8 )]
 ActionDistance = 60.0
-
-[connection signal="visibility_changed" from="MeshInstance" to="." method="_on_Generator_visibility_changed"]
-[connection signal="visibility_changed" from="MeshInstance2" to="." method="_on_Generator_visibility_changed"]

@@ -75,5 +75,26 @@ public class FireplaceLight : StaticBody
         else
             GetNode<MeshInstance>("MeshInstance").MaterialOverlay = null;
     }
+    public void DoAction(Player pl)
+	{
+        ToggleFileplace();
+    }
+    public string GetActionName(Player pl)
+    {
+        string actiontex;
+        if (State)
+            actiontex = "Σβήσε.";
+        else
+            actiontex = "Άναψε.";
 
+        return actiontex;
+    }
+    public bool ShowActionName(Player pl)
+    {
+        return true;
+    }
+    public string GetObjectDescription()
+    {
+        return "Με ένα εκρηκτικό θα μπορούσα να το σπάσω";
+    }
 }

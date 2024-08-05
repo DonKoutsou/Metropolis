@@ -31,8 +31,8 @@ public class WorldMap : TileMap
 	[Export]
 	public PackedScene LightHouse;
 
-	[Export]
-	public PackedScene Μαχαλάς;
+	//[Export]
+	//public PackedScene Μαχαλάς;
 
 	[Export]
 	int CellSizeOverride = 8000;
@@ -47,9 +47,10 @@ public class WorldMap : TileMap
 
 	List <int> RandomisedEntryID = new List<int>();
 
+	List<Vector2> UnlockedLightHouses = new List<Vector2>();
 
 	// one of the lighthouses will become the 2nd town
-	int ΜαχαλάςEntryID;
+	//int ΜαχαλάςEntryID;
 
 	int WallEventID;
 	//random stuff
@@ -67,7 +68,6 @@ public class WorldMap : TileMap
 
 	// map of all islands
 	static Dictionary<Vector2, IslandInfo> ilemap = new Dictionary<Vector2, IslandInfo>();
-
 
 	// once all islands in map have been generated this will be true
 	bool finishedspawning = false;
@@ -98,6 +98,18 @@ public class WorldMap : TileMap
 		Instance = this;
 		ilemap = new Dictionary<Vector2, IslandInfo>();
     }
+	public void UnlockLightHouse(IslandInfo Info)
+	{
+		UnlockedLightHouses.Add(Info.Position);
+	}
+	public bool IsLightHouseUnlocked(IslandInfo Info)
+	{
+		return UnlockedLightHouses.Contains(Info.Position);
+	}
+	public int GetUnlockedLightHouseCount()
+	{
+		return UnlockedLightHouses.Count;
+	}
     public Dictionary<string, object> GetSaveData()
 	{
 		if (IleToSave != null)
@@ -128,12 +140,22 @@ public class WorldMap : TileMap
 			Iles[i] = IleSaveInfo;
 			i +=1;
 		}
+		Vector2[] UnlockedLs = new Vector2[UnlockedLightHouses.Count];
 
+		if (UnlockedLightHouses.Count > 0)
+		{
+			int v = 0;			
+			foreach (Vector2 unLockedLight in UnlockedLightHouses)
+			{
+				UnlockedLs[v] = unLockedLight;
+				v +=1;
+			}
+		}
 
 		Dictionary<string, object> data = new Dictionary<string, object>(){
 			{"RandomisedEntryID" , RandomisedEntryID},
 			{"currentile", IslandSpawnIndex},
-			{"ΜαχαλάςEntryID", ΜαχαλάςEntryID},
+			//{"ΜαχαλάςEntryID", ΜαχαλάςEntryID},
 			{"ExitID", ExitID},
 			{"Exitpalcement", Exitpalcement},
 			{"EventWallID", WallEventID},
@@ -141,6 +163,7 @@ public class WorldMap : TileMap
 			{"CurrentTile", CurrentTile},
 			{"RandomTimes", RandomContainer.GetState()},
 			{"Seed", Settings.GetGameSettings().Seed},
+			{"UnlockedLightHouses", UnlockedLs},
 			{"ilemap", Iles},
 			{"ilemapVectors", IleVectors},
 			{"finishedspawning", finishedspawning}
@@ -222,7 +245,7 @@ public class WorldMap : TileMap
 		RandomContainer.LoadState((int)data.Get("RandomTimes"), seed);
 
 		IslandSpawnIndex = (int)data.Get("currentile");
-		ΜαχαλάςEntryID = (int)data.Get("MahalasEntryID");
+		//ΜαχαλάςEntryID = (int)data.Get("MahalasEntryID");
 		Exitpalcement = (Vector2)data.Get("Exitpalcement");
 		WallEventID = (int)data.Get("EventWallID");
 		ExitID = (int)data.Get("ExitID");
@@ -256,6 +279,14 @@ public class WorldMap : TileMap
 			//MapGrid.GetInstance().UpdateIleInfo(info.Position, info.Type, info.HasPort, info.Ports, - info.RotationToSpawn, tex, info.SpecialName);
 			MapGrid.GetInstance().UpdateIleInfo(info.Position, info.Visited, info.HasPort, info.Ports, - info.RotationToSpawn, tex, info.SpecialName);
 		}
+
+		Vector2[] UnlockedLs = (Vector2[])data.Get("UnlockedLightHouses");
+
+		for (int i = 0; i < UnlockedLs.Count(); i++)
+		{
+			UnlockedLightHouses.Add(UnlockedLs[i]);
+		}
+
 	}
 	public static WorldMap GetInstance()
 	{
@@ -553,7 +584,7 @@ public class WorldMap : TileMap
 			start = ilemap[entry];
 
 		
-		DayNight.GetInstance().UpdatePlayerDistance(Math.Max(Math.Abs(start.Position.x), Math.Abs(start.Position.y)) / 20);
+		DayNight.GetInstance().UpdatePlayerDistance(Math.Max(Math.Abs(start.Position.x), Math.Abs(start.Position.y)) / 15);
 
 		//MyWorld.IleTransition(start);
 		MyWorld.GetInstance().ToggleIsland(start, true, true);
@@ -619,6 +650,15 @@ public class WorldMap : TileMap
 		ilemap.TryGetValue(WorldToMap(CurrentTile), out info);
 		return info;
 	}
+	public IslandInfo GetIleInfo(Island ile)
+	{
+		IslandInfo info = null;
+		Vector2 ilekey = new Vector2 (ile.SpawnGlobalLocation.x, ile.SpawnGlobalLocation.z);
+		ilekey -= CellSize / 2;
+		ilekey = WorldToMap(ilekey);
+		info = ilemap[ilekey];
+		return info;
+	}
 	public Island SpawnIsland(IslandInfo info)
 	{
 		Island Ile = (Island)info.IleType.Instance();
@@ -631,6 +671,11 @@ public class WorldMap : TileMap
 
 		info.Island = Ile;
 		info.ImageIndex = Ile.ImageID;
+		if (UnlockedLightHouses.Contains(info.Position))
+		{
+			LightHouse lhouse = Ile.GetNode<LightHouse>("Spatial/LightHouse");
+			lhouse.Enabled = true;
+		}
 		return Ile;
 	}
 	public Island ReSpawnIsland(IslandInfo info)
@@ -644,6 +689,12 @@ public class WorldMap : TileMap
 		Ile.SetSpawnInfo(new Vector3(postoput.x, 0, postoput.y), info.RotationToSpawn, info.SpecialName);
 
 		info.Island = Ile;
+		
+		if (UnlockedLightHouses.Contains(info.Position))
+		{
+			LightHouse lhouse = Ile.GetNode<LightHouse>("Spatial/LightHouse");
+			lhouse.ToggeLightHouse(true);
+		}
 
 		MyWorld.GetInstance().AddChild(Ile);
 		return Ile;
@@ -680,8 +731,8 @@ public class WorldMap : TileMap
 		// μαχαλάς randomise
 		var lighthousecells = GetUsedCellsById(4);
 		int RandomLightHouseIndex = RandomContainer.Next(0, lighthousecells.Count);
-		Vector2 Μαχαλάςpalcement = (Vector2)lighthousecells[RandomLightHouseIndex];
-		ΜαχαλάςEntryID = OrderedCells.IndexOf(Μαχαλάςpalcement);
+		//Vector2 Μαχαλάςpalcement = (Vector2)lighthousecells[RandomLightHouseIndex];
+		//ΜαχαλάςEntryID = OrderedCells.IndexOf(Μαχαλάςpalcement);
 
 		//wall even randomise
 
@@ -841,24 +892,24 @@ public class WorldMap : TileMap
 			}
 			case 4:
 			{
-				if (IslandSpawnIndex == ΜαχαλάςEntryID)
+				//if (IslandSpawnIndex == ΜαχαλάςEntryID)
+				//{
+				//	SpecialName = "Μαχαλάς";
+				//	scene =  Μαχαλάς;
+				//}
+				//else
+				//{
+				if (LightHouseNames != null && LightHouseNames.Count() > 0)
 				{
-					SpecialName = "Μαχαλάς";
-					scene =  Μαχαλάς;
+					SpecialName = LightHouseNames[LightHouseNames.Count() - 1];
+					LightHouseNames.Remove(SpecialName);
 				}
-				else
-				{
-					if (LightHouseNames != null && LightHouseNames.Count() > 0)
-					{
-						SpecialName = LightHouseNames[LightHouseNames.Count() - 1];
-						LightHouseNames.Remove(SpecialName);
-					}
-					else
-					{
-						SpecialName = "Μαχαλάς";
-					}
-					scene = LightHouse;
-				}
+				//else
+				//{
+				//	SpecialName = "Μαχαλάς";
+				//}
+				scene = LightHouse;
+				//}
 				break;
 			}
 			case 5:

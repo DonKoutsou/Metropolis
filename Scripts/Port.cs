@@ -107,6 +107,8 @@ public class Port : Area
                         CameraAnimation.FadeInOut(2);
                     }
                 }*/
+                if (Worker == null)
+                    return;
                 Worker.GetTalkText().Talk("Καλωσόρισες καϊκτσή μαγκίτη πρώτε");
             }
         }
@@ -158,6 +160,8 @@ public class Port : Area
             Boats.Remove(v);
             if (v.IsPlayerOwned())
             {
+                if (Worker == null)
+                    return;
                 Worker.GetTalkText().Talk("Καλό δρόμο καϊκτσή, καλή επιστροφή");
             }
         }

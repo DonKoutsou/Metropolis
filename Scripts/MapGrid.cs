@@ -106,21 +106,22 @@ public class MapGrid : GridContainer
         {
             Control gridtilex = (Control)XGridTileScene.Instance();
             Control gridtiley = (Control)YGridTileScene.Instance();
-            gridtilex.Name = "x" + (i-20);
-            gridtiley.Name = "y" + (i-20);
+            gridtilex.Name = "x" + (i-15);
+            gridtiley.Name = "y" + (i-15);
             MapGridx.AddChild(gridtilex);
             MapGridy.AddChild(gridtiley);
             
         }
-        
 
-        if (RectScale.x <= 0.5f)
+        if (RectScale.x <= 0.25f)
             SwitchGridValues(0);
-        else if (RectScale.x <= 2)
+        else if (RectScale.x <= 0.5f)
             SwitchGridValues(1);
-        else
+        else if (RectScale.x <= 2)
             SwitchGridValues(2);
-        
+        else
+            SwitchGridValues(3);
+
         for (int i = 0; i < children.Count; i++)
         {
             MapTile child =(MapTile)children[i].MapIle;
@@ -367,8 +368,14 @@ public class MapGrid : GridContainer
     }
     public void SetIslandVisited(IslandInfo ile)
     {
-        if (!pl.GetCharacterInventory().HasItemOfType(ItemName.MAP))
+        if (!Player.GetInstance().GetCharacterInventory().HasItemOfType(ItemName.MAP))
             return;
+        ile.Island.SetVisited();
+        TextureRect child = MapIleList[ile.Position].GetNode<TextureRect>("TextureRect");
+        child.Visible = true;
+    }
+    public void ForceIslandVisited(IslandInfo ile)
+    {
         ile.Island.SetVisited();
         TextureRect child = MapIleList[ile.Position].GetNode<TextureRect>("TextureRect");
         child.Visible = true;

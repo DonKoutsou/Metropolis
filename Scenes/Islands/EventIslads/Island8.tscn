@@ -1,5 +1,6 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
+[ext_resource path="res://Assets/Gen3Machine/Hoodie/HoodieMat3.tres" type="Material" id=1]
 [ext_resource path="res://Scenes/Env_Assets/WindGenerator.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Env_Assets/Rock8.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=4]
@@ -195,12 +196,16 @@ transform = Transform( 0.973798, 0, 0.227416, 0, 1, 0, -0.227416, 0, 0.973798, -
 
 [node name="Character1" parent="." index="31" instance=ExtResource( 19 )]
 transform = Transform( -0.44365, 0, 0.8962, 0, 1, 0, -0.8962, 0, -0.44365, -1063.76, 500.943, -634.756 )
+ClothToWear = 1
+ClothMaterial = ExtResource( 1 )
 Sitting = true
 Chair = NodePath("../StaticBody9")
 TalkPosPos = Vector3( 4.185, -2.011, 5.801 )
 
 [node name="Character2" parent="." index="32" instance=ExtResource( 19 )]
 transform = Transform( 0.236719, 0, -0.971578, 0, 1, 0, 0.971578, 0, 0.236719, -1054.17, 500.87, -637.637 )
+ClothToWear = 1
+ClothMaterial = ExtResource( 1 )
 Sitting = true
 Chair = NodePath("../StaticBody10")
 TalkPosPos = Vector3( -4.992, -1.842, 6 )

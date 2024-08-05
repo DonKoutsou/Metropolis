@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 public class WindGenerator : StaticBody
 {
     [Export]
@@ -148,6 +149,65 @@ public class WindGenerator : StaticBody
             GetNode<MeshInstance>("MeshInstance2").MaterialOverlay = OutlineMat;
         else
             GetNode<MeshInstance>("MeshInstance2").MaterialOverlay = null;
+    }
+    public void DoAction(Player pl)
+	{
+        List<Item> batteries;
+        pl.GetCharacterInventory().GetItemsByType(out batteries, ItemName.BATTERY);
+        float availableenergy = GetCurrentEnergy();
+        float rechargeamm = 0;
+        for (int i = batteries.Count - 1; i > -1; i--)
+        {
+            if (availableenergy <= 0)
+                break;
+            Battery bat = (Battery)batteries[i];
+            float cap = bat.GetCapacity();
+            float energy = bat.GetCurrentCap();
+            if (energy < cap)
+            {
+                float reachargeammount = cap - energy;
+                if (availableenergy > reachargeammount)
+                {
+                    bat.Recharge(reachargeammount);
+                    availableenergy -= reachargeammount;
+                    rechargeamm += reachargeammount;
+                }
+                else
+                {
+                    bat.Recharge(availableenergy);
+                    rechargeamm += availableenergy;
+                    availableenergy = 0;
+                }
+            }
+        }
+        float charrechargeamm = pl.GetCharacterBatteryCap() - pl.GetCurrentCharacterEnergy();
+        if (charrechargeamm > availableenergy)
+        {
+            pl.RechargeCharacter(charrechargeamm);
+            rechargeamm += charrechargeamm;
+        }
+        else
+        {
+            pl.RechargeCharacter(availableenergy);
+            rechargeamm += availableenergy;
+        }
+        ConsumeEnergy(rechargeamm);
+        int time = (int)Math.Round(rechargeamm / 6);
+        int days, hours, mins;
+        DayNight.MinsToTime(time, out days,out hours, out mins);
+        DayNight.ProgressTime(days, hours, mins);
+    }
+    public string GetActionName(Player pl)
+    {
+        return "Φόρτιση";
+    }
+    public bool ShowActionName(Player pl)
+    {
+        return true;
+    }
+    public string GetObjectDescription()
+    {
+        return "Γεννήτρια";
     }
     public void SetData(WindGeneratorInfo info)
 	{

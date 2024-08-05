@@ -338,7 +338,7 @@ public class Vehicle : RigidBody
             Particles part = EnginePivot.GetNode<Particles>("Particles");
             Particles partd = EnginePivot.GetNode<Particles>("ParticlesDirt");
             Particles partHover = EnginePivot.GetNode<Particles>("HoverEngineParticles");
-            Vector3 engrot = new Vector3(Mathf.Deg2Rad(Mathf.Lerp(0, 60, latsspeed /speed)), 0, 0);
+            Vector3 engrot = new Vector3(Mathf.Deg2Rad(Mathf.Lerp(0, 45, latsspeed /speed)), 0, 0);
             if (ray.IsColliding())
             {
                 var collisionpoint = ray.GetCollisionPoint();
@@ -689,6 +689,50 @@ public class Vehicle : RigidBody
             GetNode<MeshInstance>("MeshInstance").MaterialOverlay = OutlineMat;
         else
             GetNode<MeshInstance>("MeshInstance").MaterialOverlay = null;
+    }
+    public void DoAction(Player pl)
+	{
+		if (!IsPlayerOwned())
+        {
+            pl.GetTalkText().Talk("Δεν είναι δικιά μου. Δεν μπορώ να την χρησιμοποιήσω.");
+            return;
+        }
+        if (!pl.HasVehicle())
+        {
+            BoardVehicle(pl);
+            pl.SetVehicle(this);
+        }
+        else
+        {
+            if (!UnBoardVehicle(pl))
+                return;
+            pl.SetVehicle(null);
+        }
+	}
+    public string GetActionName(Player pl)
+    {
+        string actiontex;
+        if (pl.HasVehicle() && pl.GetVehicle() == this)
+        {
+            actiontex = "Αποβιβάση";
+        } 
+        else
+            actiontex = "Επιβιβάση";
+
+        return actiontex;
+    }
+    public bool ShowActionName(Player pl)
+    {
+        return true;
+    }
+    public string GetObjectDescription()
+    {
+        string desc;
+        if (IsPlayerOwned())
+            desc = "Καΐκάρα μου!";
+        else
+            desc = "Καΐκι, δεν είμαι σίγουρος πιανού.";
+        return desc;
     }
     //////Data Saving////////
     public void InputData(VehicleInfo data)

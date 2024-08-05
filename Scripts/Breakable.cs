@@ -94,6 +94,25 @@ public class Breakable : StaticBody
         else
             GetNode<MeshInstance>("RockParent/MeshInstance").MaterialOverlay = null;
     }
+    public void DoAction(Player pl)
+	{
+        List<Item> items;
+        pl.GetCharacterInventory().GetItemsByType(out items, ItemName.EXPLOSIVE);
+        pl.GetCharacterInventory().RemoveItem(items[0], false);
+        AtatchExplosive(pl, (Explosive)items[0]);
+    }
+    public string GetActionName(Player pl)
+    {
+		return "Τοποθέτησε εκρηκτικό.";
+    }
+    public bool ShowActionName(Player pl)
+    {
+        return pl.GetCharacterInventory().HasItemOfType(ItemName.EXPLOSIVE);
+    }
+    public string GetObjectDescription()
+    {
+        return "Με ένα εκρηκτικό θα μπορούσα να το σπάσω";
+    }
 }
 public class BreakableInfo
 {

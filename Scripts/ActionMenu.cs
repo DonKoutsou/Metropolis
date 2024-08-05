@@ -82,139 +82,8 @@ public class ActionMenu : Control
 			return;
 		}
 		
-		if (SelectedObj is Item it)
-		{
-			if (!pl.GetCharacterInventory().InsertItem(it))
-			{
-				pl.GetTalkText().Talk("Δέν έχω χώρο.");
-			}
-		}
-		else if (SelectedObj is NPC chara)
-		{
-			DialogueManager.GetInstance().StartDialogue(chara, chara.GetDialogue());
-			//TalkText.GetInst().Talk("Φίλος", (Character)SelectedObj);
-		}
-		else if (SelectedObj is Vehicle veh)
-		{
-			if (!veh.IsPlayerOwned())
-			{
-				pl.GetTalkText().Talk("Δεν είναι δικιά μου. Δεν μπορώ να την χρησιμοποιήσω.");
-				return;
-			}
-			if (!pl.HasVehicle())
-			{
-				veh.BoardVehicle(pl);
-				pl.SetVehicle(veh);
-			}
-			else
-			{
-				if (!veh.UnBoardVehicle(pl))
-					return;
-				pl.SetVehicle(null);
-			}
-		}
-		else if (SelectedObj is Furniture furn)
-		{
-			Item foundit;
-			furn.Search(out foundit);
-			if (foundit != null)
-			{
-				pl.GetCharacterInventory().InsertItem(foundit);
-				pl.GetTalkText().Talk(foundit.GetItemPickUpText());
-			}
-			else
-				pl.GetTalkText().Talk("Άδειο...");
-		}
-		else if (SelectedObj is WindGenerator generator)
-		{
-			List<Item> batteries;
-			pl.GetCharacterInventory().GetItemsByType(out batteries, ItemName.BATTERY);
-			float availableenergy = generator.GetCurrentEnergy();
-			float rechargeamm = 0;
-			for (int i = batteries.Count - 1; i > -1; i--)
-			{
-				if (availableenergy <= 0)
-					break;
-				Battery bat = (Battery)batteries[i];
-				float cap = bat.GetCapacity();
-				float energy = bat.GetCurrentCap();
-				if (energy < cap)
-				{
-					float reachargeammount = cap - energy;
-					if (availableenergy > reachargeammount)
-					{
-						bat.Recharge(reachargeammount);
-						availableenergy -= reachargeammount;
-						rechargeamm += reachargeammount;
-					}
-					else
-					{
-						bat.Recharge(availableenergy);
-						rechargeamm += availableenergy;
-						availableenergy = 0;
-					}
-				}
-			}
-			float charrechargeamm = pl.GetCharacterBatteryCap() - pl.GetCurrentCharacterEnergy();
-			if (charrechargeamm > availableenergy)
-			{
-				pl.RechargeCharacter(charrechargeamm);
-				rechargeamm += charrechargeamm;
-			}
-			else
-			{
-				pl.RechargeCharacter(availableenergy);
-				rechargeamm += availableenergy;
-			}
-			generator.ConsumeEnergy(rechargeamm);
-			int time = (int)Math.Round(rechargeamm / 6);
-			int days, hours, mins;
-			DayNight.MinsToTime(time, out days,out hours, out mins);
-			DayNight.ProgressTime(days, hours, mins);
-			
-		}
-		else if (SelectedObj is FireplaceLight fire)
-		{
-			fire.ToggleFileplace();
-		}
-		else if (SelectedObj is SittingThing sit)
-		{
-			if (!sit.HasEmptySeat())
-			{
-				pl.GetTalkText().Talk("Δεν έχει χώρο.");
-				return;
-			}
-			if (pl.HasVehicle())
-			{
-				if (!pl.GetVehicle().UnBoardVehicle(pl))
-					return;
-			}
-			Position3D seat = sit.GetSeat();
-			pl.Sit(seat, sit);
-		}
-		else if (SelectedObj is Ladder lad)
-		{
-			lad.TraverseLadder(pl);
-		}
-		else if (SelectedObj is GeneratorDoor gen)
-		{
-			gen.ToggleDoor();
-		}
-		else if (SelectedObj is JobBoardPanel jobp)
-		{
-			jobp.ToggleUI(true);
-		}
-		else if (SelectedObj is Breakable br)
-		{
-			List<Item> items;
-			pl.GetCharacterInventory().GetItemsByType(out items, ItemName.EXPLOSIVE);
-			pl.GetCharacterInventory().RemoveItem(items[0], false);
-			br.AtatchExplosive(pl, (Explosive)items[0]);
-		}
-		else if (SelectedObj is Pod p)
-		{
-			p.OpenPod();
-		}
+		SelectedObj.Call("DoAction", pl);
+
 		selecting = false;
 		Stop();
 	}
@@ -228,65 +97,7 @@ public class ActionMenu : Control
 	}
 	private void On_Interact_Button_Down()
 	{
-		if (SelectedObj is Item)
-		{
-			pl.GetTalkText().Talk(((Item)SelectedObj).GetItemName());
-		}
-		else if (SelectedObj is Character)
-		{
-			pl.GetTalkText().Talk("Φίλος");
-		}
-        
-		else if (SelectedObj is Vehicle veh)
-		{
-			if (veh.IsPlayerOwned())
-				pl.GetTalkText().Talk("Καΐκάρα μου!");
-			else
-				pl.GetTalkText().Talk("Καΐκι, δεν είμαι σίγουρος πιανού.");
-		}
-		else if (SelectedObj is WindGenerator)
-		{
-			pl.GetTalkText().Talk("Γεννήτρια");
-		}
-		else if (SelectedObj is Furniture)
-		{
-			Furniture furni = (Furniture)SelectedObj;
-			if (furni.HasBeenSearched())
-				pl.GetTalkText().Talk("Το έψαξα, είναι άδειο");
-			else
-				pl.GetTalkText().Talk(furni.FurnitureDescription);
-		}
-		else if (SelectedObj is SittingThing)
-		{
-			SittingThing sit = (SittingThing)SelectedObj;
-			if (!sit.HasEmptySeat())
-			{
-				pl.GetTalkText().Talk("Δεν έχει χώρο.");
-				return;
-			}
-			pl.GetTalkText().Talk("Μπορώ να κάτσω.");
-		}
-		else if (SelectedObj is Ladder)
-		{
-			pl.GetTalkText().Talk("Σκάλα");
-		}
-		else if (SelectedObj is JobBoardPanel)
-		{
-			pl.GetTalkText().Talk("Πίνας αγγελιών");
-		}
-		else if (SelectedObj is Breakable)
-		{
-			pl.GetTalkText().Talk("Με ένα εκρηκτικό θα μπορούσα να το σπάσω");
-		}
-		else if (SelectedObj is Pod p)
-		{
-			if (p.IsDestroyed())
-				pl.GetTalkText().Talk("Ένα σκάφος διαφυγής, δυστυχώς δεν τα κατάφερε.");
-			else if (p.IsOpen())
-				pl.GetTalkText().Talk("Ένα σκάφος διαφυγής.");
-			else
-				pl.GetTalkText().Talk("Το σκάφος που επέζησε, μπορώ να το ανοίξω.");
-		}
+		pl.GetTalkText().Talk((string)SelectedObj.Call("GetObjectDescription"));
 	}
 	public void Start(Spatial obj)
 	{
@@ -295,83 +106,26 @@ public class ActionMenu : Control
 		if (selecting)
             return;
 		
-		GetNode<VehicleHud>("VBoxContainer/VehicleUI").Hide();
 
-		
+		if (obj is Vehicle v)
+		{
+			if (pl.HasVehicle() && pl.GetVehicle() == v)
+				GetNode<VehicleHud>("VBoxContainer/VehicleUI").Visible = true;
 
-		if (obj is Item)
-		{
-			PickButton.Text = "Πάρε";
 		}
-		else if (obj is Character)
-		{
-			PickButton.Text = "Kουβέντα";
-		}
-		else if (obj is Vehicle)
-		{
-			if (pl.HasVehicle() && pl.GetVehicle() == obj)
-			{
-				PickButton.Text = "Αποβιβάση";
-				GetNode<VehicleHud>("VBoxContainer/VehicleUI").Show();
-			}
-				
-			else
-				PickButton.Text = "Επιβιβάση";
-			
-		}
-		else if (obj is Furniture f)
-		{
-			if (f.HasBeenSearched())
-				PickButton.Hide();	
-			PickButton.Text = "Ψάξε";
-		}
-		else if (obj is WindGenerator)
-		{
-			PickButton.Text = "Φόρτιση";
-		}
-		else if (obj is SittingThing)
-		{
-			PickButton.Text = "Κάτσε";
-		}
-		else if (obj is FireplaceLight fp)
-		{
-			IntButton.Hide();
-			if (fp.State)
-				PickButton.Text = "Σβήσε.";
-			else
-				PickButton.Text = "Άναψε.";
-			//PickButton.Hide();
-		}
-		else if (obj is Ladder || obj is GeneratorDoor)
-		{
-			//IntButton.Hide();
-			//FireplaceLight fp = (FireplaceLight)SelectedObj;
+		else
+			GetNode<VehicleHud>("VBoxContainer/VehicleUI").Visible = false;
 
-			PickButton.Text = (string)obj.Call("GetActionName", pl.GlobalTranslation);
-			
-			//PickButton.Hide();
-		}
-		else if (obj is JobBoardPanel)
-		{
-			PickButton.Text = "Κοίτα";
-		}
-		else if (obj is Breakable)
-		{
-			if (!pl.GetCharacterInventory().HasItemOfType(ItemName.EXPLOSIVE))
-				PickButton.Hide();
-			else
-				PickButton.Show();
-			PickButton.Text = "Τοποθέτησε εκρηκτικό.";
-		}
-		else if (obj is Pod p)
-		{
-			PickButton.Text = "Άνοιξε";
-		}
+		//PickButton.Show();
+		IntButton.Show();
+
+		PickButton.Text = (string)obj.Call("GetActionName", pl);
+		PickButton.Visible = (bool)obj.Call("ShowActionName", pl);
+
 		DeselectCurrent();
 		SelectedObj = obj;
 		SelectedObj.Call("HighLightObject", true, OutLineMat);
-		PickButton.Show();
-		IntButton.Show();
+		
 		Show();
 		SetPhysicsProcess(true);
 	}

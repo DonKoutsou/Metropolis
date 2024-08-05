@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/LightHouseSwitch.cs" type="Script" id=1]
+[ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=2]
+
+[sub_resource type="CubeMesh" id=1]
+
+[sub_resource type="BoxShape" id=2]
+
+[node name="LightHouseSwitch" type="StaticBody" groups=["Interactables"]]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = SubResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 2 )
+
+[node name="ActionComponent" parent="." instance=ExtResource( 2 )]
+ActionDistance = 15.0

@@ -85,6 +85,25 @@ public class Item : RigidBody
         else
             GetNode<MeshInstance>("MeshInstance").MaterialOverlay = null;
     }
+	public void DoAction(Player pl)
+	{
+		if (!pl.GetCharacterInventory().InsertItem(this))
+		{
+			pl.GetTalkText().Talk("Δέν έχω χώρο.");
+		}
+	}
+	public string GetActionName(Player pl)
+    {
+        return "Πάρε";
+    }
+	public bool ShowActionName(Player pl)
+    {
+        return true;
+    }
+	public string GetObjectDescription()
+    {
+        return GetItemName();
+    }
 	public void InputData(ItemInfo data)
 	{
 		Translation = data.Position;

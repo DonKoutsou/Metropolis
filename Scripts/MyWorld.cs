@@ -93,9 +93,10 @@ public class MyWorld : Spatial
 		pl.Teleport(pos, rot);
 		//pl.GlobalRotation = rot;
 		//WorldMap.GetInstance().pl = pl;
-		EmitSignal("PlayerSpawnedEventHandler", pl);
 		MapGrid.GetInstance().ConnectPlayer(pl);
 		VehicleHud.GetInstance().ConnectToPlayer(pl);
+		EmitSignal("PlayerSpawnedEventHandler", pl);
+		
 		CameraAnimationPlayer.GetInstance().FadeIn(6);
 		return pl;
 	}
@@ -285,8 +286,8 @@ public class MyWorld : Spatial
 		//Vector2 pos = WorldMap.GetInstance().GlobalToMap();
 		
 		//to.Visited = true;
-		MapGrid.GetInstance().SetIslandVisited(to);
-		DayNight.GetInstance().UpdatePlayerDistance(Math.Max(Math.Abs(to.Position.x), Math.Abs(to.Position.y)) / 20);
+		//MapGrid.GetInstance().SetIslandVisited(to);
+		DayNight.GetInstance().UpdatePlayerDistance(Math.Max(Math.Abs(to.Position.x), Math.Abs(to.Position.y)) / 15);
 		
 		int ViewDistance = Settings.GetGameSettings().ViewDistance;
 
@@ -342,6 +343,7 @@ public class MyWorld : Spatial
 			}
 			else if (!ileinfo.IsIslandSpawned())
 			{
+				
 				ActiveIles.Add(ileinfo);
 				WorldMap.GetInstance().ReSpawnIsland(ileinfo).InputData(ileinfo);
 			}

@@ -109,4 +109,27 @@ public class Pod : StaticBody
         }
             
     }
+    public void DoAction(Player pl)
+	{
+        OpenPod();
+    }
+    public string GetActionName(Player pl)
+    {
+        return "Άνοιξε";
+    }
+    public bool ShowActionName(Player pl)
+    {
+        return !Opened;
+    }
+    public string GetObjectDescription()
+    {
+        string desc;
+        if (IsDestroyed())
+            desc = "Ένα σκάφος διαφυγής, δυστυχώς δεν τα κατάφερε.";
+        else if (IsOpen())
+            desc = "Ένα σκάφος διαφυγής.";
+        else
+            desc = "Το σκάφος που επέζησε, μπορώ να το ανοίξω.";
+        return desc;
+    }
 }

@@ -54,7 +54,17 @@ public class DayNight : WorldEnvironment
 
     public void UpdatePlayerDistance(float newdist)
     {
+        int lighthouseamm = WorldMap.GetInstance().GetUnlockedLightHouseCount();
+        if (lighthouseamm == 4)
+        {
+            CurrentDistance = 0;
+            return;
+        }
         CurrentDistance = newdist;
+        if (CurrentDistance >= 0.6)
+        {
+            Player.GetInstance().GetTalkText().Talk("Η ομίχλη γίνεται πολύ πυκνή για το μωρό, ίσος να μην πάω πιο βαθιά...");
+        }
     }
 
     [Signal]

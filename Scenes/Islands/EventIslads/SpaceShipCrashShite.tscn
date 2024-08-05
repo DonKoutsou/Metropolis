@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=2]
+[gd_scene load_steps=67 format=2]
 
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://Scripts/DepartureSystemPosition.cs" type="Script" id=27]
 [ext_resource path="res://Scenes/Systems/DepartureSystem.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Scenes/Env_Assets/SandPile1.tscn" type="PackedScene" id=29]
+[ext_resource path="res://Assets/Building/BuildingComposition.tscn" type="PackedScene" id=30]
 
 [sub_resource type="SpatialMaterial" id=13]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -689,5 +690,9 @@ LeaveDialogues = [  ]
 
 [node name="Rock7" parent="." index="26" instance=ExtResource( 29 )]
 transform = Transform( 9.14328, -12.3972, 7.99113, 1.80301, -8.39207, -15.0821, 14.6389, 8.77674, -3.13358, 587.943, -23.3848, 786.028 )
+
+[node name="House" parent="." index="28" instance=ExtResource( 30 )]
+transform = Transform( -0.995696, 0, 0.0926833, 0, 1, 0, -0.0926833, 0, -0.995696, 79.9204, 89.7282, 1112.96 )
+spawnItems = false
 
 [editable path="Vehicle0"]

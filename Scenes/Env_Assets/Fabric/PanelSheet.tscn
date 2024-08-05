@@ -1,14 +1,6 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://shaders/Outline.shader" type="Shader" id=1]
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=2]
-
-[sub_resource type="ShaderMaterial" id=4]
-resource_local_to_scene = true
-shader = ExtResource( 1 )
-shader_param/enable = false
-shader_param/outline_thickness = 0.259
-shader_param/color = Color( 0.882353, 0.898039, 0.360784, 0 )
 
 [sub_resource type="Shader" id=7]
 code = "/*
@@ -20,7 +12,7 @@ the rest was added by kmitt91; void fragment() + void vertex() and corresponding
 
 shader_type spatial;
 
-render_mode cull_disabled, depth_draw_alpha_prepass, diffuse_toon, specular_toon; 
+render_mode cull_disabled, depth_draw_opaque; 
 
 const float PI = 3.14159;
 
@@ -177,7 +169,7 @@ noise = SubResource( 3 )
 
 [sub_resource type="ShaderMaterial" id=8]
 resource_local_to_scene = true
-next_pass = SubResource( 4 )
+render_priority = 10
 shader = SubResource( 7 )
 shader_param/color = Color( 0.905882, 0.717647, 0.494118, 1 )
 shader_param/strength = 20.0

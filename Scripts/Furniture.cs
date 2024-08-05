@@ -127,7 +127,35 @@ public class Furniture : Spatial
 		}
 			
     }
-
+	public void DoAction(Player pl)
+	{
+		Item foundit;
+		Search(out foundit);
+		if (foundit != null)
+		{
+			pl.GetCharacterInventory().InsertItem(foundit);
+			pl.GetTalkText().Talk(foundit.GetItemPickUpText());
+		}
+		else
+			pl.GetTalkText().Talk("Άδειο...");
+	}
+	public string GetActionName(Player pl)
+    {
+		return "Ψάξε";
+    }
+	public bool ShowActionName(Player pl)
+    {
+        return !HasBeenSearched();
+    }
+	public string GetObjectDescription()
+    {
+		string desc;
+		if (HasBeenSearched())
+			desc = "Το έψαξα, είναι άδειο";
+		else
+			desc = FurnitureDescription;
+        return desc;
+    }
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
 //  public override void _Process(float delta)
 //  {

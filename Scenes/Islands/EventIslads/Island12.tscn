@@ -7,6 +7,7 @@
 [ext_resource path="res://Scenes/Env_Assets/Rock1.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Env_Assets/Ladder.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Env_Assets/Rock4.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Gen3Machine/Hoodie/HoodieMat2.tres" type="Material" id=8]
 [ext_resource path="res://Scenes/Env_Assets/WindGenerator2.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Building/BuildingComposition.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Env_Assets/Pagaki.tscn" type="PackedScene" id=11]
@@ -19,7 +20,6 @@
 [ext_resource path="res://Scenes/Env_Assets/Fireplace.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Scenes/Env_Assets/Skampo.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Scenes/Env_Assets/Table.tscn" type="PackedScene" id=20]
-[ext_resource path="res://Scenes/Characters/NPC.tscn" type="PackedScene" id=21]
 
 [sub_resource type="SpatialMaterial" id=13]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -147,6 +147,8 @@ transform = Transform( 0.341809, 0, 0, 0, 1, 0, 0, 0, 0.167167, -1210.85, -22.39
 
 [node name="PortWorker" parent="." index="14" instance=ExtResource( 13 )]
 transform = Transform( 0.78672, 0, 0.617311, 0, 1, 0, -0.617311, 0, 0.78672, -1212.45, 204.218, 861.493 )
+ClothToWear = 1
+ClothMaterial = ExtResource( 8 )
 Chair = NodePath("../Pagaki")
 PortPath = NodePath("../Port")
 
@@ -187,8 +189,3 @@ transform = Transform( 0.696539, 0, 0.717519, 0, 1, 0, -0.717519, 0, 0.696539, -
 
 [node name="StaticBody7" parent="." index="26" instance=ExtResource( 19 )]
 transform = Transform( -0.587912, 0, -0.808925, 0, 1, 0, 0.808925, 0, -0.587912, -1204.82, 204.134, 867.124 )
-
-[node name="Character" parent="." index="27" instance=ExtResource( 21 )]
-transform = Transform( -0.650032, 0, -0.759907, 0, 1, 0, 0.759907, 0, -0.650032, -1206.23, 204.134, 866.27 )
-Sitting = true
-Chair = NodePath("../StaticBody7")

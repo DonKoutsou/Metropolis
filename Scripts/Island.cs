@@ -16,7 +16,7 @@ public class Island : Spatial
 
 	public string IslandSpecialName = null;
 
-	protected Vector3 SpawnGlobalLocation;
+	public Vector3 SpawnGlobalLocation;
 
 	protected float SpawnRotation;
 
@@ -715,6 +715,11 @@ public class Island : Spatial
 				
 			Char.Add(Characters[i]);
 		}
+	}
+	private void Player_Visited(Node body)
+	{
+		IslandInfo info = WorldMap.GetInstance().GetIleInfo(this);
+		MapGrid.GetInstance().SetIslandVisited(info);
 	}
 }
 public class IslandInfo
