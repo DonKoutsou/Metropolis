@@ -718,8 +718,12 @@ public class Island : Spatial
 	}
 	private void Player_Visited(Node body)
 	{
-		IslandInfo info = WorldMap.GetInstance().GetIleInfo(this);
-		MapGrid.GetInstance().SetIslandVisited(info);
+		if (body is Player pl)
+		{
+			IslandInfo info = WorldMap.GetInstance().GetIleInfo(this);
+			MapGrid.GetInstance().SetIslandVisited(info, pl);
+		}
+		
 	}
 }
 public class IslandInfo

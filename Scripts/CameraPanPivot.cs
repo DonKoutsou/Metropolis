@@ -80,7 +80,7 @@ public class CameraPanPivot : Position3D
 				if (Mathf.Rad2Deg(prevrot.x) > -20)
 				{
 					rot.x -= 0.00004f * ammount;
-					YOffset += ammount * 0.15f;
+					YOffset += ammount * 0.05f;
 				}
 			}
 			//UP
@@ -91,7 +91,7 @@ public class CameraPanPivot : Position3D
 				if (Mathf.Rad2Deg(prevrot.x) < 10)
 				{
 					rot.x += 0.00004f * ammount;
-					YOffset -= ammount * 0.15f;
+					YOffset -= ammount * 0.05f;
 				}
 			}
 		}
@@ -102,6 +102,7 @@ public class CameraPanPivot : Position3D
 		}
 
 		Vector3 sptrans = CameraInitialPosition;
+		//sptrans.x -= Mathf.Deg2Rad(YOffset * ZoomPivot.GetZoomNormalised());
 		sptrans.x -= Mathf.Deg2Rad(YOffset * ZoomPivot.GetZoomNormalised());
 		SpringArm.Rotation = sptrans;
 		

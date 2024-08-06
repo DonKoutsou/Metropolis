@@ -131,7 +131,7 @@ public class MyWorld : Spatial
 		start.GameOver(reason);
 		SaveLoadManager.GetInstance().ClearSaves();
 	}
-	bool TryRescue(Island ile, Vector3 pos, out Character rescuer)
+	/*bool TryRescue(Island ile, Vector3 pos, out Character rescuer)
 	{
 		rescuer = null;
 		List<NPC> chars;
@@ -187,7 +187,7 @@ public class MyWorld : Spatial
 
 		Rescuer = null;
 		RescueIle = null;
-	}
+	}*/
 	public void AttemptDeathSave()
 	{
 
@@ -395,7 +395,8 @@ public class MyWorld : Spatial
 	{
 		if (@event.IsActionPressed("Pause"))
 		{
-			Pause();
+			if (WorldMap.GetInstance().HasSpawningFinished())
+				Pause();
 		}
 	}
 	public void Pause()

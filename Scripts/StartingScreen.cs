@@ -79,7 +79,7 @@ public class StartingScreen : Control
 	{
 		LoadSave = true;
 		FadeInOut.FadeInOut();
-		LoadingScreen.GetInstance().Start();
+		//LoadingScreen.GetInstance().Start();
 		
 		FadeInOut.Connect("FadeOutFinished", this, "StartGame");
 	}
@@ -136,10 +136,20 @@ public class StartingScreen : Control
 		GetNode<Label>("GameOverLabel").Visible = true;
 		CameraAnimationPlayer.GetInstance().FadeOut(5);
 	}
-	public void GameEnded()
+	public void GameEnded(GameOverType Type)
 	{
 		GetNode<Timer>("RestartTimer").Start();
+		if (Type == GameOverType.Ending1)
+			GetNode<Label>("GameOverLabel2/Panel10/Label").Text = "Τέλος #1 : Αναχώρηση";
+		else if (Type == GameOverType.Ending2)
+			GetNode<Label>("GameOverLabel2/Panel10/Label").Text = "Τέλος #2 : Αναχώρηση";
+		else if (Type == GameOverType.Ending3)
+			GetNode<Label>("GameOverLabel2/Panel10/Label").Text = "Τέλος #3 : Η Σωτηρία";
+		else if (Type == GameOverType.Ending4)
+			GetNode<Label>("GameOverLabel2/Panel10/Label").Text = "Τέλος #4 : Η Αμαρτία";
+			
 		GetNode<Label>("GameOverLabel2").Visible = true;
+		
 		CameraAnimationPlayer.GetInstance().FadeOut(5);
 	}
 	public void ShowCredits()

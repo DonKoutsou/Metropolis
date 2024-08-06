@@ -1,11 +1,11 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://Assets/Water/textures/post/waterplane_low_Whole.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Env_Assets/Rock6.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Water/textures/post/WholeTerain.obj" type="ArrayMesh" id=4]
 [ext_resource path="res://Scenes/Env_Assets/Rock3.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Characters/NPC.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Characters/NPCVariants/Priest.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Env_Assets/Rock9.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Env_Assets/Rock7.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Env_Assets/Rock8.tscn" type="PackedScene" id=9]
@@ -20,7 +20,6 @@
 [ext_resource path="res://Assets/TerainTex/Rock029_2K-PNG/Rock029_2K-PNG_Roughness.png" type="Texture" id=22]
 [ext_resource path="res://Scenes/Env_Assets/Rock4.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Assets/Rocks/RockMat.tres" type="Material" id=24]
-[ext_resource path="res://Scenes/Items/Bouzouki.tscn" type="PackedScene" id=27]
 [ext_resource path="res://Scenes/Env_Assets/Skampo.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Scenes/Env_Assets/Table.tscn" type="PackedScene" id=29]
 
@@ -272,20 +271,18 @@ transform = Transform( 243.563, -197.15, 73.1198, 115.058, 31.3007, -298.863, 17
 [node name="Rock20" parent="." index="35" instance=ExtResource( 10 )]
 transform = Transform( 61.8087, -129.081, 117.046, -8.36687, -126.247, -134.81, 174.046, 39.7716, -48.0469, -1184.86, -158.408, -703.031 )
 
-[node name="Character" parent="." index="36" instance=ExtResource( 6 )]
-transform = Transform( -0.111867, 0, -0.993723, 0, 1, 0, 0.993723, 0, -0.111867, -295.92, 60.1981, -221.623 )
-Sitting = true
-Chair = NodePath("../StaticBody3")
-PlayInstrument = true
-InstrumentToSpawnWith = ExtResource( 27 )
-
-[node name="StaticBody3" parent="." index="37" instance=ExtResource( 28 )]
+[node name="StaticBody3" parent="." index="36" instance=ExtResource( 28 )]
 transform = Transform( -0.134367, 0, -0.990932, 0, 1, 0, 0.990932, 0, -0.134367, -294.415, 60.1574, -221.297 )
 
-[node name="StaticBody4" parent="." index="38" instance=ExtResource( 28 )]
+[node name="StaticBody4" parent="." index="37" instance=ExtResource( 28 )]
 transform = Transform( -0.875717, 0, -0.482824, 0, 1, 0, 0.482824, 0, -0.875717, -297.564, 60.1717, -214.376 )
 
-[node name="StaticBody5" parent="." index="39" instance=ExtResource( 29 )]
+[node name="StaticBody5" parent="." index="38" instance=ExtResource( 29 )]
 transform = Transform( -0.447478, 0, 0.894295, 0, 1, 0, -0.894295, 0, -0.447478, -300.442, 63.2691, -219.491 )
+
+[node name="Priest" parent="." index="40" instance=ExtResource( 6 )]
+transform = Transform( -0.085956, 0, -0.996299, 0, 1, 0, 0.996299, 0, -0.085956, -296.107, 60.2693, -221.926 )
+Sitting = true
+Chair = NodePath("../StaticBody3")
 
 [editable path="SeaBed"]

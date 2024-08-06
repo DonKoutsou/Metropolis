@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scripts/Item.cs" type="Script" id=1]
+[ext_resource path="res://Assets/BloodVial/BloodVial.tres" type="Material" id=2]
+[ext_resource path="res://Assets/BloodVial/BloodVialMesh.tres" type="ArrayMesh" id=3]
+[ext_resource path="res://Assets/BloodVial/BloodVialItem.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=5]
+
+[sub_resource type="CylinderShape" id=1]
+height = 0.120465
+radius = 0.0544137
+
+[node name="Item" type="RigidBody" groups=["Interactables"]]
+collision_layer = 16
+collision_mask = 36
+mode = 1
+mass = 0.0346939
+linear_damp = 1.22
+angular_damp = 1.22
+script = ExtResource( 1 )
+ItemType = 19
+ItemIcon = ExtResource( 4 )
+ItemPickupActionName = "Μιά δραχμή.."
+ItemName = "Σταγόνα ανθρώπινου αίματος"
+ItemDesc = "Ένα φιαλίδιο που κρατάει μέσα του μια σταγόνα από αίμα ανθρώπου. Πολύ σπάνιο πλέον μετά την εξαφάνιση των ανθρώπων."
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 34.3935, 0, 0, 0, 34.3935, 0, 0, 0, 34.3935, 0, 0.0534815, 0 )
+material_override = ExtResource( 2 )
+mesh = ExtResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0618309, 0 )
+shape = SubResource( 1 )
+
+[node name="ActionComponent" parent="." instance=ExtResource( 5 )]
+ActionDistance = 5.0

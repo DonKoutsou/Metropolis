@@ -5,9 +5,6 @@ using System;
 
 public class CameraZoomPivot : Position3D
 {
-    [Export]
-	public int Speed { get; set; } = 14; // How fast the player will move (pixels/sec).
-
 	[Export]
 	public float MaxDist = 460;
 	
@@ -15,7 +12,7 @@ public class CameraZoomPivot : Position3D
 	int zoomSteps = 39;
 	SpringArm arm;
 
-	Vector2 InitialTransforms;
+	//Vector2 InitialTransforms;
 
 	//Camera cam;
 	CameraPanPivot panp;
@@ -25,7 +22,7 @@ public class CameraZoomPivot : Position3D
 	{
 		arm = (SpringArm)GetParent();
 		panp = (CameraPanPivot)GetParent().GetParent();
-		InitialTransforms = new Vector2(arm.SpringLength, panp.Translation.y);
+		//InitialTransforms = new Vector2(arm.SpringLength, panp.Translation.y);
 		instance = this;
 		//cam = GetNode<Camera>("Camera");
 		
@@ -68,11 +65,11 @@ public class CameraZoomPivot : Position3D
 	}
 	public void UpdatePos()
 	{
-		Vector3 prevpos = panp.Translation;
-		PlayerCamera cam = PlayerCamera.GetInstance();
+		//Vector3 prevpos = panp.Translation;
+		//PlayerCamera cam = PlayerCamera.GetInstance();
 
 		float fovvalue = ZoomStage/ (zoomSteps + 1);
-		cam.Fov = Mathf.Lerp(25, 65, fovvalue);
+		//cam.Fov = Mathf.Lerp(25, 65, fovvalue);
 		float value = Mathf.Lerp(4, MaxDist, fovvalue);
 		arm.SpringLength = value;
 		//panp.Translation = new Vector3(prevpos.x, value / 4, prevpos.z);

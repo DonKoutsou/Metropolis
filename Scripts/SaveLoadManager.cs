@@ -34,6 +34,7 @@ public class SaveLoadManager : Control
 		Dictionary<string, object> pldata = new Dictionary<string, object>(){
 			{"PlayerHasVehicle", HasVecicle},
 			{"PlayerEnergy", pl.GetCurrentEnergy()},
+			{"BabyAlive", pl.BabyAlive},
 			{"HasBaby", pl.HasBaby}
 
 		};

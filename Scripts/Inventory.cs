@@ -242,9 +242,10 @@ public class Inventory : Spatial
 
         
         //currentweight += itW;
-        if (item is Instrument && !CharacterOwner.HasInstrument())
+        if (item is Instrument || item.ItemType == ItemName.WEAPON)
         {
-            CharacterOwner.AddInstrument((Instrument)item);
+            if (!CharacterOwner.HasEquippedItem())
+                CharacterOwner.EquipItem(item);
         }
         else
         {
@@ -280,16 +281,16 @@ public class Inventory : Spatial
         //ui.UpdateInventory();
         return true;
     }
-    public void ChangeInstrument(Instrument inst)
+    public void ChangeEquippedItem(Item it)
     {
-        Instrument currentinst = CharacterOwner.GetInstrument();
-        if (currentinst == inst)
+        Item currentIt = CharacterOwner.GetEquippedItem();
+        if (currentIt == it)
             return;
-        currentinst.GetParent().RemoveChild(currentinst);
-        AddChild(currentinst);
-        currentinst.Visible = false;
-        RemoveChild(inst);
-        CharacterOwner.AddInstrument(inst);
+        currentIt.GetParent().RemoveChild(currentIt);
+        AddChild(currentIt);
+        currentIt.Visible = false;
+        RemoveChild(it);
+        CharacterOwner.EquipItem(it);
     }
     public bool RemoveItem(Item item, bool RegisterToIsle = true)
     {

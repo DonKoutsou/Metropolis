@@ -366,9 +366,9 @@ public class MapGrid : GridContainer
             }
         }
     }
-    public void SetIslandVisited(IslandInfo ile)
+    public void SetIslandVisited(IslandInfo ile, Player pl)
     {
-        if (!Player.GetInstance().GetCharacterInventory().HasItemOfType(ItemName.MAP))
+        if (!pl.GetCharacterInventory().HasItemOfType(ItemName.MAP))
             return;
         ile.Island.SetVisited();
         TextureRect child = MapIleList[ile.Position].GetNode<TextureRect>("TextureRect");

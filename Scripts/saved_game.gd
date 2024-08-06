@@ -7,7 +7,7 @@ func _SetData(data):
 	EventWallID = data["EventWallID"]
 	ExitID = data["ExitID"]
 	Exitpalcement = data["Exitpalcement"]
-	OrderedCells = data["OrderedCells"]
+	##OrderedCells = data["OrderedCells"]
 	CurrentTile = data["CurrentTile"]
 	finishedspawning = data["finishedspawning"]
 	RandomisedEntryID = data["RandomisedEntryID"]
@@ -19,6 +19,7 @@ func _SetData(data):
 	playerlocation = data["PlayerLocation"]
 	PlayerEnergy = data["PlayerEnergy"]
 	HasBaby = data["HasBaby"]
+	BabyAlive = data["BabyAlive"]
 	InventoryContents = data["InventoryContents"]
 	PlayerHasVehicle = data["PlayerHasVehicle"]
 	##DeliverJobs = data["DeliverJobs"]
@@ -36,7 +37,7 @@ export var currentile:int
 export var EventWallID:int
 export var ExitID:int
 export var Exitpalcement:Vector2
-export (Array, Vector2) var OrderedCells = []
+##export (Array, Vector2) var OrderedCells = []
 
 export var CurrentTile:Vector2
 export var finishedspawning:bool
@@ -54,6 +55,7 @@ export  (Array, Resource) var InventoryContents = []
 export var playerlocation:Vector3
 export var PlayerEnergy:float
 export var HasBaby:bool
+export var BabyAlive:bool
 export var PlayerHasVehicle:bool
 
 

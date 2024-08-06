@@ -260,7 +260,7 @@ public class InventoryUI : Control
         map.ToggleMap(ShowingMap);
 
         
-        bool selectinginst = FocusedSlot != null && FocusedSlot.item is Instrument;
+        bool selectinginst = FocusedSlot != null && (FocusedSlot.item is Instrument || FocusedSlot.item.ItemType == global::ItemName.WEAPON);
         bool selectingbat = FocusedSlot != null && FocusedSlot.item is Battery;
         bool selectinglimb = FocusedSlot != null && FocusedSlot.item is Limb;
 
@@ -349,10 +349,10 @@ public class InventoryUI : Control
     {
         if (FocusedSlot == null)
             return;
-        if (!Inv.CharacterOwner.HasInstrument())
-            Inv.CharacterOwner.AddInstrument((Instrument)FocusedSlot.item);
+        if (!Inv.CharacterOwner.HasEquippedInstrument())
+            Inv.CharacterOwner.EquipItem(FocusedSlot.item);
         else
-            Inv.ChangeInstrument((Instrument)FocusedSlot.item);
+            Inv.ChangeEquippedItem(FocusedSlot.item);
     }
     private void On_Limb_Button_Down()
     {

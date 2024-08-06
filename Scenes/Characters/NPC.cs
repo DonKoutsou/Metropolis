@@ -71,10 +71,10 @@ public class NPC : Character
 		if (InstrumentToSpawnWith != null)
 		{
 			Instrument inst = InstrumentToSpawnWith.Instance<Instrument>();
-			AddInstrument(inst);
+			EquipItem(inst);
 		}
 		
-		if (PlayInstrument && HasInstrument())
+		if (PlayInstrument && HasEquippedInstrument())
 		{
 			PlayMusic();
 		}
@@ -149,11 +149,11 @@ public class NPC : Character
 	{
 		DialogueManager.GetInstance().StartDialogue(this, GetDialogue());
 	}
-	public string GetActionName()
+	public string GetActionName(Player pl)
     {
         return "Kουβέντα";
     }
-	public bool ShowActionName()
+	public bool ShowActionName(Player pl)
     {
         return true;
     }

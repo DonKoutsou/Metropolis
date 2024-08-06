@@ -278,7 +278,7 @@ public class Character : KinematicBody
 	public virtual void OnVehicleBoard(Vehicle veh)
 	{
 		EmitSignal("VehicleBoardEventHandler", true, veh);
-		if (HasInstrument())
+		if (HasEquippedInstrument())
 		{
 			IdleTimer.Start();
 		}
@@ -344,35 +344,48 @@ public class Character : KinematicBody
 		instatatchment.GetNode<RemoteTransform>("PlayingAtatchment").RemotePath = instatatchment.GetNode<RemoteTransform>("PlayingAtatchment").GetPath();
 		PlayingInstrument = false;
 	}
-	public bool HasInstrument()
+	public bool HasEquippedItem()
 	{
 		return GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("InstrumentAtatchment").GetNode<Spatial>("Instrument").GetChildCount() > 0;
 	}
-	public Instrument GetInstrument()
+	public bool HasEquippedInstrument()
 	{
-		return (Instrument)GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("InstrumentAtatchment").GetNode<Spatial>("Instrument").GetChild(0);
+		var childs = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("InstrumentAtatchment").GetNode<Spatial>("Instrument").GetChildren();
+		bool anyisnt = false;
+		for (int i = 0; i < childs.Count; i++)
+		{
+			if (childs[i] is Instrument)
+			{
+				anyisnt = true;
+			}
+		}
+		return anyisnt;
 	}
-	public void AddInstrument(Instrument inst)
+	public Item GetEquippedItem()
+	{
+		return (Item)GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("InstrumentAtatchment").GetNode<Spatial>("Instrument").GetChild(0);
+	}
+	public void EquipItem(Item it)
 	{
 		Spatial instrumentspace = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("InstrumentAtatchment").GetNode<Spatial>("Instrument");
-		inst.GetNode<CollisionShape>("CollisionShape").Disabled = true;
-		inst.RegisterOnIsland = false;
-		inst.Visible = true;
-		instrumentspace.AddChild(inst);
-		inst.Translation = Vector3.Zero;
-		inst.Rotation = Vector3.Zero;
+		it.GetNode<CollisionShape>("CollisionShape").Disabled = true;
+		it.RegisterOnIsland = false;
+		it.Visible = true;
+		instrumentspace.AddChild(it);
+		it.Translation = Vector3.Zero;
+		it.Rotation = Vector3.Zero;
 	}
 	public virtual void OnSongEnded(Instrument inst)
 	{
 		StopMusic();
-		if (HasInstrument())
+		if (HasEquippedInstrument())
 		{
 			IdleTimer.Start();
 		}
 	}
 	public void Idle_Timer_Ended()
 	{
-		if (IsInsideTree() && HasInstrument())
+		if (IsInsideTree() && HasEquippedInstrument())
 			PlayMusic();
 	}
 	//////////////////////////////////////////////////////////////////////////

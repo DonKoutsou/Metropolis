@@ -377,6 +377,7 @@ unit_db = 10.0
 unit_size = 2.0
 max_db = 6.0
 pitch_scale = 0.58
+max_distance = 4096.0
 area_mask = 4
 
 [node name="ExaustParticlesR" type="Particles" parent="VehicleBody/Position3D/MeshInstance3"]
@@ -396,6 +397,7 @@ stream = ExtResource( 13 )
 unit_db = 10.0
 unit_size = 1.5
 max_db = 6.0
+max_distance = 4096.0
 area_mask = 4
 attenuation_filter_db = 0.0
 

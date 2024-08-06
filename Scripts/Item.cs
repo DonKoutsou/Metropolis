@@ -260,4 +260,6 @@ public enum ItemName
 	DOSIER,
 	EXPLOSIVE,
 	PAINTCAN,
+	BLOOD_VIAL,
+	WEAPON,
 }

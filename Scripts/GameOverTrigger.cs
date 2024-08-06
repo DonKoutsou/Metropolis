@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class GameOverTrigger : Spatial
 {
+    [Export]
+    GameOverType Type = GameOverType.Ending1; 
     static bool GlobalEnabled = true;
 
     public static void ToggleTriggers(bool t)
@@ -25,7 +27,7 @@ public class GameOverTrigger : Spatial
         if (pl.GettingInVehicle)
             return;
         StartingScreen start = WorldRoot.GetInstance().GetStartingScreen();
-		start.GameEnded();
+		start.GameEnded(Type);
 		SaveLoadManager.GetInstance().ClearSaves();
     }
     private void On_Player_Left(object body)
@@ -36,7 +38,7 @@ public class GameOverTrigger : Spatial
         if (pl.GettingInVehicle)
             return;
         StartingScreen start = WorldRoot.GetInstance().GetStartingScreen();
-		start.GameEnded();
+		start.GameEnded(Type);
 		SaveLoadManager.GetInstance().ClearSaves();
     }
     public override void _ExitTree()
@@ -45,6 +47,12 @@ public class GameOverTrigger : Spatial
         Enabled = false;
     }
 }
-
+public enum GameOverType
+{
+    Ending1,
+    Ending2,
+    Ending3,
+    Ending4
+}
 
 

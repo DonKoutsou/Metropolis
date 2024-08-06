@@ -48,6 +48,8 @@ public class Player : Character
 
 	public bool HasBaby = false;
 
+	public bool BabyAlive = true;
+
 	public void SetRunSpeed(int NewSpeed)
 	{
 		RunSpeed = NewSpeed;
@@ -117,7 +119,7 @@ public class Player : Character
 	
 	private void CheckIfIdling()
 	{
-		if (sitting && !PlayingInstrument && HasInstrument())
+		if (sitting && !PlayingInstrument && HasEquippedInstrument())
 		{
 			IdleTimer.Start();
 		}

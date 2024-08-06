@@ -79,6 +79,10 @@ public class WorldMap : TileMap
 	Vector2 Exitpalcement;
 	static WorldMap Instance;
 
+	public bool HasSpawningFinished()
+	{
+		return finishedspawning;
+	}
 
 	public int GetIslandCount()
 	{
@@ -112,7 +116,7 @@ public class WorldMap : TileMap
 	}
     public Dictionary<string, object> GetSaveData()
 	{
-		if (IleToSave != null)
+		/*if (IleToSave != null)
 		{
 			SaveIsland();
 			IleToSave = null;
@@ -124,7 +128,7 @@ public class WorldMap : TileMap
 
 
 		Vector2[] OrdC = new Vector2[OrderedCells.Count];
-		OrderedCells.CopyTo(OrdC);
+		OrderedCells.CopyTo(OrdC);*/
 
 
 		GDScript IleSaveScript = GD.Load<GDScript>("res://Scripts/IleSaveInfo.gd");
@@ -159,7 +163,7 @@ public class WorldMap : TileMap
 			{"ExitID", ExitID},
 			{"Exitpalcement", Exitpalcement},
 			{"EventWallID", WallEventID},
-			{"OrderedCells", OrdC},
+			//{"OrderedCells", OrdC},
 			{"CurrentTile", CurrentTile},
 			{"RandomTimes", RandomContainer.GetState()},
 			{"Seed", Settings.GetGameSettings().Seed},
@@ -250,11 +254,11 @@ public class WorldMap : TileMap
 		WallEventID = (int)data.Get("EventWallID");
 		ExitID = (int)data.Get("ExitID");
 
-		Vector2[] cells = (Vector2[])data.Get("OrderedCells");
+		/*Vector2[] cells = (Vector2[])data.Get("OrderedCells");
 		foreach (Vector2 cell in cells)
 		{
 			OrderedCells.Add(cell);
-		}
+		}*/
 
 		int[] RandomisedEntryIDArray = (int[])data.Get("RandomisedEntryID");
 		foreach (int cell in RandomisedEntryIDArray)
@@ -345,6 +349,7 @@ public class WorldMap : TileMap
 			pl.GetNode<Control>("Tutorial").Free();
 			//setting player energy
 			pl.SetEnergy((float)save.Get("PlayerEnergy"));
+			pl.BabyAlive = (bool)save.Get("BabyAlive");
 			if ((bool)save.Get("HasBaby"))
 			{
 				pl.OnBabyGot();
@@ -408,8 +413,6 @@ public class WorldMap : TileMap
 	//}
 	public IslandInfo GetRandomIle(int MinDist, int MaxDist)
 	{
-		Vector2 min = new Vector2(MinDist, MinDist);
-		Vector2 max = new Vector2(MaxDist, MaxDist);
 		List<IslandInfo> iles = new List<IslandInfo>();
 		foreach (KeyValuePair<Vector2, IslandInfo> i in ilemap)
 		{
@@ -530,6 +533,7 @@ public class WorldMap : TileMap
 		if (IslandSpawnIndex == OrderedCells.Count)
 		{
 			finishedspawning = true; 
+			loadedscenes.Clear();
 			SetProcess(false);
 		}
 
@@ -725,6 +729,10 @@ public class WorldMap : TileMap
 		for (int i = 0; i < Eventscenestospawn.Count(); i++)
 		{
 			int SpawnIndex = RandomContainer.Next(0, OrderedCells.Count);
+			while (RandomisedEntryID.Contains(SpawnIndex) || SpawnIndex > OrderedCells.Count * 0.66f)
+			{
+				SpawnIndex = RandomContainer.Next(0, OrderedCells.Count);
+			}
 			RandomisedEntryID.Insert(i, SpawnIndex);
 		}
 
@@ -875,7 +883,7 @@ public class WorldMap : TileMap
 			case 2:
 			{
 				if (IslandSpawnIndex == ExitID)
-				scene =  Exittospawn;
+					scene =  Exittospawn;
 				else
 				{
 					scene = loadedscenes[RandomContainer.Next(0, loadedscenes.Count)];
