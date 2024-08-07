@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Characters/NPC.cs" type="Script" id=1]
-[ext_resource path="res://Scripts/DialogueScripts/PainterScript.cs" type="Script" id=2]
+[ext_resource path="res://Scripts/DialogueScripts/BaseDialogueScript.cs" type="Script" id=2]
 [ext_resource path="res://Scenes/Characters/Gen3Machine/Body.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Fonts/Play-Bold.ttf" type="DynamicFontData" id=5]
@@ -10,10 +10,11 @@
 [sub_resource type="CapsuleShape" id=6]
 height = 5.16563
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=175]
 size = 24
-outline_size = 6
+outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
 font_data = ExtResource( 5 )
 
 [node name="Character" type="KinematicBody" groups=["Interactables"]]
@@ -46,16 +47,17 @@ one_shot = true
 [node name="TalkText" type="Label3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.74809, 0 )
 cast_shadow = 0
-pixel_size = 0.002
+pixel_size = 0.0012
 billboard = 1
 double_sided = false
-no_depth_test = true
 fixed_size = true
+alpha_cut = 1
 render_priority = 10
 outline_render_priority = 9
 modulate = Color( 0.988235, 0.964706, 0.631373, 1 )
 text = "Talk"
-font = SubResource( 7 )
+font = SubResource( 175 )
+vertical_alignment = 2
 autowrap = true
 script = ExtResource( 6 )
 

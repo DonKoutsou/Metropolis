@@ -20,6 +20,7 @@ public class TalkText : Label3D
     {
         if (CharPar)
         {
+            Player.GetInstance().BeingTalkedTo = true;
             GetParent<NPC>().HeadLook(Player.GetInstance().GetHeadGlobalPos());
         }
         TextToShow = diag;
@@ -32,22 +33,27 @@ public class TalkText : Label3D
     public void TurnOff()
     {
         Talking = false;
+        if (CharPar)
+        {
+            GetParent<NPC>().ResetLook();
+            Player.GetInstance().BeingTalkedTo = false;
+        }
         Hide();
     }
     public bool IsTalking()
     {
         return Talking;
     }
-    float d = 0.05f;
+    float d = 0.06f;
     public override void _Process(float delta)
     {
         d -= delta;
         if (d > 0)
             return;
-        d = 0.05f;
+        d = 0.06f;
        // Vector3 plpos = Talking.GlobalTransform.origin;
-        float zoo = CameraZoomPivot.GetInstance().GetZoomNormalised();
-        PixelSize = Mathf.Lerp(0.001f, 0.002f, zoo);
+        //float zoo = CameraZoomPivot.GetInstance().GetZoomNormalised();
+        //PixelSize = Mathf.Lerp(0.001f, 0.002f, zoo);
 
         Text = TextToShow.Substr(0, CharactersShowing);
 
@@ -56,10 +62,6 @@ public class TalkText : Label3D
         if (CharactersShowing == TextToShow.Length + 1)
         {
             TalkTimer.Start();
-            if (CharPar)
-            {
-                GetParent<NPC>().ResetLook();
-            }
             SetProcess(false);
         }
         //GlobalTranslation = new Vector3(plpos.x, plpos.y + (5 *  CameraZoomPivot.GetInstance().GetZoomNormalised()) + 10, plpos.z);

@@ -9,7 +9,7 @@ public class DialogueManager : Node
         Instance = this;
     }
     NPC TalkingChar;
-	static bool IsTalking = false;
+	//static bool IsTalking = false;
     //public static bool IsPlayerTalking()
     //{
     //    return IsTalking;
@@ -58,7 +58,7 @@ public class DialogueManager : Node
 			//dialogue.Connect("timeline_end", this, "EndDialogue");
 		}
 		TalkingChar = character;
-		IsTalking = true;
+		//IsTalking = true;
 		//DialogueCam.Current = true;
 	}
 	/*public void EndUnconDialogue(Player pl, string timeline_name)
@@ -87,7 +87,7 @@ public class DialogueManager : Node
 		//if (dialogueprog == "false")
 			//TalkingChar.Talked = false;
 		CameraAnimationPlayer.GetInstance().PlayAnim("FadeOutDialogue");
-		IsTalking = false;
+		//IsTalking = false;
 		TalkingChar.ResetLook();
 	}
 	public void GiveBoat()

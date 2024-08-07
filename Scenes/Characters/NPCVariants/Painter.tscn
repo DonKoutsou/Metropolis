@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Scenes/Characters/NPC.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Gen3Machine/CharBlendTree.tres" type="AnimationNodeBlendTree" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://Assets/Gen3Machine/Body/FaceMat3.tres" type="Material" id=14]
 [ext_resource path="res://Assets/Gen3Machine/Body/FaceMat7.tres" type="Material" id=15]
 [ext_resource path="res://Assets/Gen3Machine/Hoodie/HoodieMat6.tres" type="Material" id=16]
+[ext_resource path="res://Scripts/DialogueScripts/PainterScript.cs" type="Script" id=17]
 
 [sub_resource type="SpatialMaterial" id=63]
 albedo_color = Color( 0.952941, 0.921569, 0.831373, 1 )
@@ -194,17 +195,21 @@ graph_offset = Vector2( -352, -31 )
 ClothToWear = 1
 ClothMaterial = ExtResource( 16 )
 
+[node name="Skeleton" parent="Pivot/Guy/Armature" index="1"]
+bones/3/bound_children = [ NodePath("InstrumentAtatchment") ]
+bones/6/bound_children = [ NodePath("BoneAttachment") ]
+
 [node name="HeadRot2Pivot" parent="Pivot/Guy/Armature/Skeleton" index="0"]
-transform = Transform( -1, 0, -8.74228e-08, 8.16763e-16, 1, -9.44411e-09, 8.74228e-08, -2.27374e-13, -1, -4.25464, 280.55, 20.5641 )
+transform = Transform( -1, 0, -8.74228e-08, 8.27268e-16, 1, -9.56851e-09, 8.74228e-08, -2.27374e-13, -1, -2.43232, 280.667, 20.8769 )
 
 [node name="BoneAttachment" parent="Pivot/Guy/Armature/Skeleton" index="1"]
-transform = Transform( 0.99747, -0.0660608, -0.026268, 0.0625512, 0.991123, -0.117309, 0.0337844, 0.115369, 0.992747, -3.00861, 265.261, 12.0828 )
+transform = Transform( 0.997338, -0.0577085, -0.0445748, 0.05164, 0.990557, -0.127001, 0.051483, 0.124361, 0.9909, -1.19981, 265.451, 12.2621 )
 
 [node name="MeshInstance" parent="Pivot/Guy/Armature/Skeleton/BoneAttachment/HeadPivot" index="0"]
 mesh = SubResource( 64 )
 
 [node name="InstrumentAtatchment" parent="Pivot/Guy/Armature/Skeleton" index="2"]
-transform = Transform( 0.99855, -0.0290079, -0.0453416, 0.0281063, 0.999396, -0.0203987, 0.0459059, 0.0190947, 0.998763, 0.100769, 213.043, 0.340883 )
+transform = Transform( 0.997541, -0.0172606, -0.0679185, 0.0150664, 0.999351, -0.0326878, 0.0684387, 0.0315841, 0.997155, 1.52119, 213.281, 0.0042018 )
 
 [node name="Instrument" parent="Pivot/Guy/Armature/Skeleton/InstrumentAtatchment" index="2"]
 transform = Transform( -37.9657, 16.6749, -2.44876, 16.6429, 38.0451, 1.02921, 2.64825, -0.040322, -41.5738, -29.2251, -41.0474, -25.1529 )
@@ -269,5 +274,8 @@ material/0 = SubResource( 66 )
 [node name="AnimationTree" parent="Pivot/Guy/AnimationPlayer" index="0"]
 tree_root = SubResource( 69 )
 parameters/playback = SubResource( 70 )
+
+[node name="DialogueScript" parent="." index="6"]
+script = ExtResource( 17 )
 
 [editable path="Pivot/Guy"]

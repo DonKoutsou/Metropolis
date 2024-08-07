@@ -50,6 +50,8 @@ public class Player : Character
 
 	public bool BabyAlive = true;
 
+	public bool BeingTalkedTo = false;
+
 	public void SetRunSpeed(int NewSpeed)
 	{
 		RunSpeed = NewSpeed;
@@ -159,8 +161,8 @@ public class Player : Character
 	}
 	private void UpdateMoveLocation()
 	{
-		//if (DialogueManager.IsPlayerTalking())
-			//return;
+		if (BeingTalkedTo)
+			return;
 		var spacestate = GetWorld().DirectSpaceState;
 		float mult = OS.WindowSize.x / DViewport.GetInstance().Size.x;
 		Vector2 mousepos = DViewport.GetInstance().GetMousePosition() / mult;

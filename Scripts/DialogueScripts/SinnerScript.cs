@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class SinnerScript : BaseDialogueScript
 {
-    
+
     public override void DoDialogue(NPC Talker, NPC TalkerColaborator = null)
     {   
         
@@ -37,8 +37,6 @@ public class SinnerScript : BaseDialogueScript
     {
         Dictionary<string, object> savedata = new Dictionary<string, object>(){
             {"DialogueProg", DialogueProg},
-            {"ColorsGiven", ColorsGiven},
-            {"branch", branch}
         };
         return savedata;
     }

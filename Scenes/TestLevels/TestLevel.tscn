@@ -390,6 +390,11 @@ data = PoolVector3Array( 2.1737, 1.0181, 0.797, 2.2412, 1.0099, 0.8208, 2.2225, 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -17.0192 )
 script = ExtResource( 44 )
 
+[node name="MusicManager" type="Node" parent="."]
+script = ExtResource( 11 )
+BouzoukiSongExports = [ ExtResource( 10 ), ExtResource( 12 ) ]
+GuitarSongExports = [ ExtResource( 10 ), ExtResource( 12 ) ]
+
 [node name="RandomContainer" type="Node" parent="."]
 script = ExtResource( 26 )
 
@@ -495,15 +500,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -960.0
-margin_top = -540.0
-margin_right = 960.0
-margin_bottom = 540.0
+margin_left = -640.0
+margin_top = -360.0
+margin_right = 640.0
+margin_bottom = 360.0
+rect_scale = Vector2( 1.5, 1.5 )
 rect_pivot_offset = Vector2( 640, 360 )
 
 [node name="Viewport" type="Viewport" parent="Control/ViewportContainer"]
 pause_mode = 2
-size = Vector2( 1920, 1080 )
+size = Vector2( 1280, 720 )
 handle_input_locally = false
 msaa = 1
 fxaa = true
@@ -618,11 +624,6 @@ material/0 = SubResource( 145 )
 
 [node name="HoverEngineParticles" parent="Control/ViewportContainer/Viewport/Vehicle/RayBL/EnginePivot" index="3"]
 process_material = SubResource( 151 )
-
-[node name="MusicManager" type="Node" parent="Control/ViewportContainer/Viewport"]
-script = ExtResource( 11 )
-BouzoukiSongExports = [ ExtResource( 10 ), ExtResource( 12 ) ]
-GuitarSongExports = [ ExtResource( 10 ), ExtResource( 12 ) ]
 
 [node name="Item" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.52578, 13.5021, -17.7839 )

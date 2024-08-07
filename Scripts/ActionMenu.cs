@@ -104,8 +104,8 @@ public class ActionMenu : Control
 	}
 	public void Start(Spatial obj)
 	{
-		//if (DialogueManager.IsPlayerTalking())
-			//return;
+		if (pl.BeingTalkedTo)
+			return;
 		if (selecting)
             return;
 		
