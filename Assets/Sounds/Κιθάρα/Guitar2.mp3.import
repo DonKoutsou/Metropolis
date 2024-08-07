@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Guitar2.mp3-2dd9bed20b9c24ca878bdc8e3dfd147f.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/Κιθάρα/Guitar2.mp3"
+dest_files=[ "res://.import/Guitar2.mp3-2dd9bed20b9c24ca878bdc8e3dfd147f.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

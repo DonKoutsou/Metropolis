@@ -15,7 +15,7 @@
 [ext_resource path="res://Scenes/Systems/Breakable.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/Env_Assets/Rock1.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/Env_Assets/RockCave.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Scenes/Characters/NPC.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/Characters/NPCVariants/Painter.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/Env_Assets/Skampo.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scenes/Vehicles/HoverBoard.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Scenes/Env_Assets/Easel.tscn" type="PackedScene" id=20]
@@ -195,21 +195,19 @@ transform = Transform( 24.7822, 9.38269, -11.9268, 10.2893, -27.1767, 0, -11.154
 [node name="Breakable" parent="." index="20" instance=ExtResource( 13 )]
 transform = Transform( -0.434175, 0.575879, -0.692716, 0.589854, -0.399457, -0.701788, -0.680855, -0.713301, -0.16625, 528.183, 13.167, 313.337 )
 
-[node name="Character" parent="." index="21" instance=ExtResource( 16 )]
-transform = Transform( -0.0817646, 0, -0.996652, 0, 1, 0, 0.996652, 0, -0.0817646, -1444.18, 1155.6, 1319.35 )
-Sitting = true
-Chair = NodePath("../StaticBody2")
-FirstDialogue = "PainterDialogue"
-RestDialogue = "PainterDialogue2"
-
-[node name="StaticBody2" parent="." index="22" instance=ExtResource( 17 )]
+[node name="StaticBody2" parent="." index="21" instance=ExtResource( 17 )]
 transform = Transform( 0.0307479, 0, -0.999527, 0, 1, 0, 0.999527, 0, 0.0307479, -1442.75, 1155.39, 1319.22 )
 
-[node name="StaticBody3" parent="." index="23" instance=ExtResource( 17 )]
+[node name="StaticBody3" parent="." index="22" instance=ExtResource( 17 )]
 transform = Transform( -0.313976, 0, -0.949431, 0, 1, 0, 0.949431, 0, -0.313976, -1442.75, 1155.39, 1325.27 )
 
-[node name="Vehicle" parent="." index="24" instance=ExtResource( 19 )]
+[node name="Vehicle" parent="." index="23" instance=ExtResource( 19 )]
 transform = Transform( -0.487616, 0, -0.873058, 0, 1, 0, 0.873058, 0, -0.487616, -1395.96, 1163.89, 1296.46 )
 
-[node name="StaticBody4" parent="." index="26" instance=ExtResource( 20 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1447.2, 1154.99, 1319.33 )
+[node name="StaticBody4" parent="." index="25" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1446.28, 1154.99, 1319.19 )
+
+[node name="Painter" parent="." index="27" instance=ExtResource( 16 )]
+transform = Transform( -0.22575, 0, -0.974185, 0, 1, 0, 0.974185, 0, -0.22575, -1444.27, 1155.28, 1318.85 )
+Sitting = true
+Chair = NodePath("../StaticBody2")

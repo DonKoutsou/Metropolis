@@ -344,6 +344,8 @@ public class WorldMap : TileMap
 			Intro intro = SpawnIntro(CurIle);
 			intro.LoadStop((Vector3)save.Get("playerlocation"));
 			Player pl = Player.GetInstance();
+
+			DayNight.GetInstance().UpdatePlayerDistance(Math.Max(Math.Abs(CurIle.Position.x), Math.Abs(CurIle.Position.y)) / 15);
 			
 			PlayerUI.OnMenuToggled(false);
 			pl.GetNode<Control>("Tutorial").Free();
@@ -545,6 +547,7 @@ public class WorldMap : TileMap
 		if (finishedspawning == true)
 		{
 			SpawnIntro();
+			DayNight.GetInstance().UpdatePlayerDistance(Math.Max(Math.Abs(ilemap[entry].Position.x), Math.Abs(ilemap[entry].Position.y)) / 15);
 		}
 	}
 	public void SaveIsland()
@@ -588,7 +591,7 @@ public class WorldMap : TileMap
 			start = ilemap[entry];
 
 		
-		DayNight.GetInstance().UpdatePlayerDistance(Math.Max(Math.Abs(start.Position.x), Math.Abs(start.Position.y)) / 15);
+		
 
 		//MyWorld.IleTransition(start);
 		MyWorld.GetInstance().ToggleIsland(start, true, true);

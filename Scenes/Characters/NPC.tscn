@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Characters/NPC.cs" type="Script" id=1]
+[ext_resource path="res://Scripts/DialogueScripts/PainterScript.cs" type="Script" id=2]
 [ext_resource path="res://Scenes/Characters/Gen3Machine/Body.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Fonts/Play-Bold.ttf" type="DynamicFontData" id=5]
@@ -35,7 +36,8 @@ shape = SubResource( 6 )
 transform = Transform( -7.7783, 0, -1.17449e-06, 0, 7.7783, 0, 1.17449e-06, 0, -7.7783, 0, 0.5, 6 )
 
 [node name="ActionComponent" parent="." instance=ExtResource( 4 )]
-ActionDistance = 5.0
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.13991, 0 )
+ActionDistance = 15.0
 
 [node name="IdleTimer" type="Timer" parent="."]
 wait_time = 30.0
@@ -55,7 +57,9 @@ modulate = Color( 0.988235, 0.964706, 0.631373, 1 )
 text = "Talk"
 font = SubResource( 7 )
 autowrap = true
-width = 5000.0
 script = ExtResource( 6 )
+
+[node name="DialogueScript" type="Node" parent="."]
+script = ExtResource( 2 )
 
 [connection signal="timeout" from="IdleTimer" to="." method="Idle_Timer_Ended"]

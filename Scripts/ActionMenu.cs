@@ -22,6 +22,7 @@ public class ActionMenu : Control
     Button PickButton;
 	Button IntButton;
 	Button IntButton2;
+	Button IntButton3;
 
 	[Export]
 	int VisibleInteractableDistance = 100;
@@ -45,9 +46,11 @@ public class ActionMenu : Control
         PickButton = cont.GetNode<Button>("PickUp_Button");
 		IntButton = cont.GetNode<Button>("Interact_Button");
 		IntButton2 = cont.GetNode<Button>("Interact_Button2");
+		IntButton3 = cont.GetNode<Button>("Interact_Button3");
 		IntButton.Hide();
 		PickButton.Hide();
 		IntButton2.Hide();
+		IntButton3.Hide();
 		pl = (Player)GetParent();
 	}
 	public bool IsSelecting()
@@ -101,8 +104,8 @@ public class ActionMenu : Control
 	}
 	public void Start(Spatial obj)
 	{
-		if (DialogueManager.IsPlayerTalking())
-			return;
+		//if (DialogueManager.IsPlayerTalking())
+			//return;
 		if (selecting)
             return;
 		

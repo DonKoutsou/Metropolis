@@ -45,7 +45,7 @@
 [ext_resource path="res://Scenes/Systems/Breakable.tscn" type="PackedScene" id=43]
 [ext_resource path="res://Scripts/TestLevel.cs" type="Script" id=44]
 [ext_resource path="res://Scenes/Items/PaintCan.tscn" type="PackedScene" id=45]
-[ext_resource path="res://Scripts/DialogueManager.cs" type="Script" id=46]
+[ext_resource path="res://Scenes/Characters/NPCVariants/Painter.tscn" type="PackedScene" id=46]
 [ext_resource path="res://Assets/Terains/Island24/Island24_LOD.tres" type="ArrayMesh" id=47]
 [ext_resource path="res://Assets/Rocks/RockMat.tres" type="Material" id=48]
 [ext_resource path="res://Assets/Terains/Island24/Island24.tres" type="ArrayMesh" id=49]
@@ -395,9 +395,6 @@ script = ExtResource( 26 )
 
 [node name="UniversalLODManager" type="Node" parent="."]
 script = ExtResource( 53 )
-
-[node name="DialogueManager" type="Node" parent="."]
-script = ExtResource( 46 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 4
@@ -774,7 +771,10 @@ transform = Transform( 0.230288, 0, 0.973123, 0, 4.69358, 0, -0.973123, 0, 0.230
 TopPossition = Vector3( -3.307, 170.549, -5.432 )
 BottomPossition = Vector3( 0, 23.911, 6 )
 
-[node name="Item" parent="." instance=ExtResource( 51 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.7781, 13.5021, -5.64366 )
+[node name="Item27" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 51 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.7781, 13.5021, -22.6629 )
+
+[node name="Painter" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 46 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.977, 13.5021, -29.2983 )
 
 [editable path="Control/ViewportContainer/Viewport/Vehicle"]

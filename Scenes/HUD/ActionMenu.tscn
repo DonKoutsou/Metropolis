@@ -148,7 +148,7 @@ alignment = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
 margin_right = 116.0
-margin_bottom = 141.0
+margin_bottom = 184.0
 theme = ExtResource( 3 )
 custom_styles/panel = SubResource( 52 )
 
@@ -156,7 +156,7 @@ custom_styles/panel = SubResource( 52 )
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 108.0
-margin_bottom = 133.0
+margin_bottom = 176.0
 rect_pivot_offset = Vector2( 45, 0 )
 
 [node name="PickUp_Button" type="Button" parent="VBoxContainer/PanelContainer/VBoxContainer"]
@@ -191,15 +191,25 @@ theme = SubResource( 27 )
 enabled_focus_mode = 0
 text = "Interact"
 
+[node name="Interact_Button3" type="Button" parent="VBoxContainer/PanelContainer/VBoxContainer"]
+margin_top = 129.0
+margin_right = 100.0
+margin_bottom = 168.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme = SubResource( 27 )
+enabled_focus_mode = 0
+text = "Interact"
+
 [node name="VehicleUI" parent="VBoxContainer" instance=ExtResource( 6 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
-margin_top = 161.0
+margin_top = 204.0
 margin_right = 116.0
-margin_bottom = 161.0
+margin_bottom = 204.0
 
 [connection signal="button_down" from="VBoxContainer/PanelContainer/VBoxContainer/PickUp_Button" to="." method="On_PickUp_Button_Down"]
 [connection signal="mouse_entered" from="VBoxContainer/PanelContainer/VBoxContainer/PickUp_Button" to="." method="Selecting_Action"]
@@ -210,5 +220,8 @@ margin_bottom = 161.0
 [connection signal="button_down" from="VBoxContainer/PanelContainer/VBoxContainer/Interact_Button2" to="." method="On_Interact_Button2_Down"]
 [connection signal="mouse_entered" from="VBoxContainer/PanelContainer/VBoxContainer/Interact_Button2" to="." method="Selecting_Action"]
 [connection signal="mouse_exited" from="VBoxContainer/PanelContainer/VBoxContainer/Interact_Button2" to="." method="Stoped_Selecting_Action"]
+[connection signal="button_down" from="VBoxContainer/PanelContainer/VBoxContainer/Interact_Button3" to="." method="On_Interact_Button2_Down"]
+[connection signal="mouse_entered" from="VBoxContainer/PanelContainer/VBoxContainer/Interact_Button3" to="." method="Selecting_Action"]
+[connection signal="mouse_exited" from="VBoxContainer/PanelContainer/VBoxContainer/Interact_Button3" to="." method="Stoped_Selecting_Action"]
 [connection signal="MouseEtered" from="VBoxContainer/VehicleUI" to="." method="Selecting_Action"]
 [connection signal="MouseLeft" from="VBoxContainer/VehicleUI" to="." method="Stoped_Selecting_Action"]

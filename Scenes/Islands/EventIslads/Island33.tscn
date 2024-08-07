@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://Assets/Water/textures/post/waterplane_low_Whole.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://Scenes/Env_Assets/Water.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Assets/TerainTex/Rock029_2K-PNG/Rock029_2K-PNG_NormalGL.png" type="Texture" id=15]
 [ext_resource path="res://Assets/CemetaryTemple/Cemetary_Temple.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/Characters/NPCVariants/Kanaris.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scenes/Env_Assets/Rock1.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Assets/TerainTex/Rock029_2K-PNG/Rock029_2K-PNG_Roughness.png" type="Texture" id=22]
 [ext_resource path="res://Scenes/Env_Assets/Rock4.tscn" type="PackedScene" id=23]
@@ -284,5 +285,8 @@ transform = Transform( -0.447478, 0, 0.894295, 0, 1, 0, -0.894295, 0, -0.447478,
 transform = Transform( -0.085956, 0, -0.996299, 0, 1, 0, 0.996299, 0, -0.085956, -296.107, 60.2693, -221.926 )
 Sitting = true
 Chair = NodePath("../StaticBody3")
+
+[node name="Kanaris" parent="." index="41" instance=ExtResource( 17 )]
+transform = Transform( -0.942075, 0, 0.335402, 0, 1, 0, -0.335402, 0, -0.942075, -442.727, 97.0991, -54.0381 )
 
 [editable path="SeaBed"]

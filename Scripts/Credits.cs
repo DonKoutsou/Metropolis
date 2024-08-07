@@ -13,6 +13,7 @@ public class Credits : Control
     {
         Show();
         GetNode<AnimationPlayer>("AnimationPlayer").Play("Credit Roll");
+        GetNode<AudioStreamPlayer>("OuttroMusic").Playing = true;
     }
     private void Credits_Finished(string anim)
     {

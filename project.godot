@@ -19,60 +19,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/CharacterSaveInfo.gd"
 }, {
-"base": "Reference",
-"class": "DTS",
-"language": "GDScript",
-"path": "res://addons/dialogic/Localization/translation_service.gd"
-}, {
 "base": "Resource",
 "class": "DecoSaveInfo",
 "language": "GDScript",
 "path": "res://Scripts/DecoSaveInfo.gd"
-}, {
-"base": "Node",
-"class": "Dialogic",
-"language": "GDScript",
-"path": "res://addons/dialogic/Other/DialogicClass.gd"
-}, {
-"base": "Reference",
-"class": "DialogicAnimaPropertiesHelper",
-"language": "GDScript",
-"path": "res://addons/dialogic/Nodes/Anima/DialogicAnimaPropertiesHelper.gd"
-}, {
-"base": "Node",
-"class": "DialogicAnimaResources",
-"language": "GDScript",
-"path": "res://addons/dialogic/Nodes/Anima/DialogicAnimaResources.gd"
-}, {
-"base": "Control",
-"class": "DialogicBackgroundMusic",
-"language": "GDScript",
-"path": "res://addons/dialogic/Nodes/BackgroundMusic.gd"
-}, {
-"base": "Node",
-"class": "DialogicCustomEvents",
-"language": "GDScript",
-"path": "res://addons/dialogic/Nodes/DialogicCustomEvents.gd"
-}, {
-"base": "Node",
-"class": "DialogicDefinitionsUtil",
-"language": "GDScript",
-"path": "res://addons/dialogic/Other/DialogicDefinitionsUtil.gd"
-}, {
-"base": "Node",
-"class": "DialogicParser",
-"language": "GDScript",
-"path": "res://addons/dialogic/Parser/DialogicParser.gd"
-}, {
-"base": "Reference",
-"class": "DialogicResources",
-"language": "GDScript",
-"path": "res://addons/dialogic/Other/DialogicResources.gd"
-}, {
-"base": "Reference",
-"class": "DialogicUtil",
-"language": "GDScript",
-"path": "res://addons/dialogic/Other/DialogicUtil.gd"
 }, {
 "base": "Resource",
 "class": "FurnitureSaveInfo",
@@ -83,11 +33,6 @@ _global_script_classes=[ {
 "class": "GeneratorSaveInfo",
 "language": "GDScript",
 "path": "res://Scripts/GeneratorSaveInfo.gd"
-}, {
-"base": "PanelContainer",
-"class": "HistoryRow",
-"language": "GDScript",
-"path": "res://addons/dialogic/Example Assets/History/HistoryRow.gd"
 }, {
 "base": "Resource",
 "class": "HouseSaveInfo",
@@ -147,20 +92,9 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "BreakableSaveInfo": "",
 "CharacterSaveInfo": "",
-"DTS": "",
 "DecoSaveInfo": "",
-"Dialogic": "",
-"DialogicAnimaPropertiesHelper": "",
-"DialogicAnimaResources": "",
-"DialogicBackgroundMusic": "",
-"DialogicCustomEvents": "",
-"DialogicDefinitionsUtil": "",
-"DialogicParser": "",
-"DialogicResources": "",
-"DialogicUtil": "",
 "FurnitureSaveInfo": "",
 "GeneratorSaveInfo": "",
-"HistoryRow": "",
 "HouseSaveInfo": "",
 "IleSaveInfo": "",
 "InventoryItemSaveInfo": "",
@@ -202,7 +136,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/ImageGenButton/plugin.cfg", "res://addons/SIsilicon.vfx.godrays/plugin.cfg", "res://addons/dialogic/plugin.cfg", "res://addons/octahedral_impostors/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/ImageGenButton/plugin.cfg", "res://addons/SIsilicon.vfx.godrays/plugin.cfg", "res://addons/octahedral_impostors/plugin.cfg" )
 
 [global]
 

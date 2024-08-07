@@ -10,15 +10,14 @@ public class DialogueManager : Node
     }
     NPC TalkingChar;
 	static bool IsTalking = false;
-    public static bool IsPlayerTalking()
-    {
-        return IsTalking;
-    }
+    //public static bool IsPlayerTalking()
+    //{
+    //    return IsTalking;
+    //}
     public static DialogueManager GetInstance()
     {
         return Instance;
     }
-
 	public void StartDialogue(NPC character, string Dialogue = "TestTimeline")
 	{
 		Player pl = Player.GetInstance();
@@ -33,39 +32,39 @@ public class DialogueManager : Node
 
 		pl.UpdateLocationToMove(talkpos.GlobalTranslation);
 		
-		DialogicSharp.SetVariable("MetropolisDirection", WorldMap.GetInstance().GetExitDirection());
-		DialogicSharp.SetVariable("GenericCharacter", character.GetCharacterName());
+		//DialogicSharp.SetVariable("MetropolisDirection", WorldMap.GetInstance().GetExitDirection());
+		//DialogicSharp.SetVariable("GenericCharacter", character.GetCharacterName());
 		Camera cam = pl.GetDialogueCamera();
 		
 		Spatial Diagcampivot = (Spatial)cam.GetParent();
 		Diagcampivot.GlobalRotation = talkpos.GlobalRotation;
 		Diagcampivot.GlobalTranslation = talkpos.GlobalTranslation;
 		cam.LookAt(character.GetHeadGlobalPos(), Vector3.Up);
-		character.HeadLook(pl.GetHeadGlobalPos());
+		
 		CameraAnimationPlayer.GetInstance().PlayAnim("FadeInDialogue");
 		if (character.GetUnconState())
 		{
 			bool HasBat = pl.GetCharacterInventory().HasBatteries();
-			DialogicSharp.SetVariable("HasBatteries", HasBat.ToString().ToLower());
-			var dialogue = DialogicSharp.Start("UnConDialogue");
-			AddChild(dialogue);
-			dialogue.Connect("timeline_end", this, "EndUnconDialogue");
+			//DialogicSharp.SetVariable("HasBatteries", HasBat.ToString().ToLower());
+			//var dialogue = DialogicSharp.Start("UnConDialogue");
+			//AddChild(dialogue);
+			//dialogue.Connect("timeline_end", this, "EndUnconDialogue");
 		}
 		else
 		{
-			var dialogue =  DialogicSharp.Start(Dialogue);
+			//var dialogue =  DialogicSharp.Start(Dialogue);
 
-			AddChild(dialogue);
-			dialogue.Connect("timeline_end", this, "EndDialogue");
+			//AddChild(dialogue);
+			//dialogue.Connect("timeline_end", this, "EndDialogue");
 		}
 		TalkingChar = character;
 		IsTalking = true;
 		//DialogueCam.Current = true;
 	}
-	public void EndUnconDialogue(Player pl, string timeline_name)
+	/*public void EndUnconDialogue(Player pl, string timeline_name)
 	{
 		CameraAnimationPlayer.GetInstance().PlayAnim("FadeOutDialogue");
-		string saved = DialogicSharp.GetVariable("SavedCharacter");
+		//string saved = DialogicSharp.GetVariable("SavedCharacter");
 		if (saved == "true")
 		{
             Inventory inv = pl.GetCharacterInventory();
@@ -79,14 +78,14 @@ public class DialogueManager : Node
 		}
 		TalkingChar.ResetLook();
 		IsTalking = false;
-	}
+	}*/
 	public void EndDialogue(string timeline_name)
 	{
-		string dialogueprog = DialogicSharp.GetVariable("DialogueProgressed");
-		if (dialogueprog == "true")
-			TalkingChar.Talked = true;
-		if (dialogueprog == "false")
-			TalkingChar.Talked = false;
+		//string dialogueprog = DialogicSharp.GetVariable("DialogueProgressed");
+		//if (dialogueprog == "true")
+			//TalkingChar.Talked = true;
+		//if (dialogueprog == "false")
+			//TalkingChar.Talked = false;
 		CameraAnimationPlayer.GetInstance().PlayAnim("FadeOutDialogue");
 		IsTalking = false;
 		TalkingChar.ResetLook();

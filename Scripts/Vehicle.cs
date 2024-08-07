@@ -207,7 +207,9 @@ public class Vehicle : RigidBody
         Vector3 strrot = str.Rotation;
 
         strrot.y = Mathf.Clamp( (Mathf.Pi * Math.Sign(SteeringWheel.Rotation.y)) - SteeringWheel.Rotation.y , -1, 1);
-        str.Rotation = strrot;
+        //str.Rotation = strrot;
+        var tw = CreateTween();
+        tw.TweenProperty(str, "rotation", strrot, 0.25f);
     }
     public void Boost(int Ammount)
     {

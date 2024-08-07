@@ -149,18 +149,16 @@ transform = Transform( 0.024, 0, 0, 0, 0.024, 6.77112e-09, 0, -6.77112e-09, 0.02
 
 [node name="Skeleton" parent="Armature" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 5.68434e-14, 0, -2.84217e-14, 1, -0.314196, 5.03759e-08, -0.178556 )
-bones/3/bound_children = [ NodePath("InstrumentAtatchment") ]
-bones/6/bound_children = [ NodePath("BoneAttachment") ]
 script = ExtResource( 18 )
 
 [node name="HeadRot2Pivot" type="Spatial" parent="Armature/Skeleton" index="0"]
-transform = Transform( -1, 0, -8.74228e-08, 4.66841e-16, 1, -5.36562e-09, 8.74228e-08, -2.27374e-13, -1, 0, 127.425, 5.23605 )
+transform = Transform( -1, 0, -8.74228e-08, 5.26272e-16, 1, -6.05434e-09, 8.74228e-08, -2.27374e-13, -1, -4.1864, 280.164, 21.7634 )
 
 [node name="HeadRot2" type="Spatial" parent="Armature/Skeleton/HeadRot2Pivot" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, -2.84217e-14, 0, 2.84217e-14, 1, 0, 0, 0 )
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton" index="1"]
-transform = Transform( 1, -2.58447e-14, -7.7916e-11, 2.40858e-14, 1, 2.2446e-07, 7.7916e-11, -2.09558e-07, 1, -1.12896e-12, 111.211, -1.42294 )
+transform = Transform( 0.997234, -0.0695114, -0.0262972, 0.0654422, 0.98901, -0.132574, 0.0352236, 0.130487, 0.990823, -2.88423, 265.011, 13.0498 )
 bone_name = "mixamorig_Head"
 
 [node name="HeadPivot" type="Spatial" parent="Armature/Skeleton/BoneAttachment" index="0"]
@@ -196,7 +194,7 @@ update_rotation = false
 update_scale = false
 
 [node name="InstrumentAtatchment" type="BoneAttachment" parent="Armature/Skeleton" index="2"]
-transform = Transform( 1, -9.56768e-15, 2.01166e-07, -2.39924e-08, 0.992862, 0.119267, -1.9973e-07, -0.119267, 0.992862, 3.70443e-14, 56.8687, -3.5024 )
+transform = Transform( 0.998157, -0.0310072, -0.0521503, 0.0294078, 0.999081, -0.0311629, 0.0530686, 0.0295718, 0.998153, 0.398352, 212.996, 0.646583 )
 bone_name = "mixamorig_Spine1"
 
 [node name="PlayingAtatchment" type="RemoteTransform" parent="Armature/Skeleton/InstrumentAtatchment" index="0"]

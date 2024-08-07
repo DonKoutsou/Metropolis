@@ -77,7 +77,7 @@ public class Port : Area
         RestLocations.Add(pos);
     }
     Vehicle incomingBoat;
-    List<Job> IncomingBoatJobs = null;
+    //List<Job> IncomingBoatJobs = null;
     private void OnShipEntered(Node body)
     {
         if (body is Vehicle v)
@@ -124,7 +124,7 @@ public class Port : Area
         }
        
     }
-    void CompleteJobs()
+    /*void CompleteJobs()
     {
         CameraAnimationPlayer CameraAnimation = CameraAnimationPlayer.GetInstance();
         CameraAnimation.Disconnect("FadeOutFinished", this, "CompleteJobs");
@@ -152,7 +152,7 @@ public class Port : Area
         DialogicSharp.SetVariable("RewardAmmount", rew.ToString());
         DialogueManager.GetInstance().StartDialogue(Worker, "RewardDialogue");
         incomingBoat = null;
-    }
+    }*/
     private void OnShipLeft(Node body)
     {
         if (body is Vehicle v)

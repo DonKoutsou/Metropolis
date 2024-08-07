@@ -8,28 +8,60 @@ public class TalkText : Label3D
     //static TalkText instance;
     Timer TalkTimer;
     //Character Talking;
+
+    string TextToShow;
+
+    int CharactersShowing = 0;
+
+    bool Talking = false;
+
+    bool CharPar = false;
     public void Talk(string diag)
     {
-        Text = diag;
-        TalkTimer.WaitTime = diag.Length / 8;
-        TalkTimer.Start();
+        if (CharPar)
+        {
+            GetParent<NPC>().HeadLook(Player.GetInstance().GetHeadGlobalPos());
+        }
+        TextToShow = diag;
+        Text = string.Empty;
+        CharactersShowing = 0;
+        Talking = true;
         Show();
         SetProcess(true);
     }
     public void TurnOff()
     {
-        SetProcess(false);
+        Talking = false;
         Hide();
     }
     public bool IsTalking()
     {
-        return TalkTimer.TimeLeft > 0;
+        return Talking;
     }
+    float d = 0.05f;
     public override void _Process(float delta)
     {
+        d -= delta;
+        if (d > 0)
+            return;
+        d = 0.05f;
        // Vector3 plpos = Talking.GlobalTransform.origin;
         float zoo = CameraZoomPivot.GetInstance().GetZoomNormalised();
         PixelSize = Mathf.Lerp(0.001f, 0.002f, zoo);
+
+        Text = TextToShow.Substr(0, CharactersShowing);
+
+        CharactersShowing ++;
+
+        if (CharactersShowing == TextToShow.Length + 1)
+        {
+            TalkTimer.Start();
+            if (CharPar)
+            {
+                GetParent<NPC>().ResetLook();
+            }
+            SetProcess(false);
+        }
         //GlobalTranslation = new Vector3(plpos.x, plpos.y + (5 *  CameraZoomPivot.GetInstance().GetZoomNormalised()) + 10, plpos.z);
     }
     //public static TalkText GetInst()
@@ -39,12 +71,19 @@ public class TalkText : Label3D
     public override void _Ready()
     {
         base._Ready();
+
+        if (GetParent() is NPC)
+        {
+            CharPar = true;
+        }
+
         TalkTimer = new Timer()
         {
             OneShot = true,
             Autostart = true,
         };
         TalkTimer.Connect("timeout", this, "TurnOff");
+        TalkTimer.WaitTime = 2;
         AddChild(TalkTimer);
         //TalkTimer = GetNode<Timer>("UpdateTimer");
         SetProcess(false);

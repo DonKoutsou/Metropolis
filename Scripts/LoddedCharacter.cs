@@ -4,28 +4,44 @@ using System;
 public class LoddedCharacter : Skeleton
 {
     int currentlod = 0;
+
+    Spatial headrotp;
+    Spatial headrotp2;
+
+    public override void _Ready()
+    {
+        base._Ready();
+        headrotp =  GetNode<Spatial>("BoneAttachment/HeadRot");
+        headrotp2 =  GetNode<Spatial>("HeadRot2Pivot/HeadRot2");
+
+        SetProcess(false);
+    }
     public override void _EnterTree()
     {
         AddToGroup("LODDEDCHAR");
         //SetBoneRest(FindBone("mixamorig_Head") ,GetNode<Spatial>("BoneAttachment/HeadRot").Transform);
+        
     }
     public void HeadLookAt(Vector3 pos)
     {
-        Spatial headrotp =  GetNode<Spatial>("BoneAttachment/HeadRot");
-        Spatial headrotp2 =  GetNode<Spatial>("HeadRot2Pivot/HeadRot2");
         headrotp2.LookAt(pos, Vector3.Up);
         Vector3 rot = headrotp2.Rotation;
         Vector3 newrot = new Vector3(-Mathf.Clamp(rot.x, -1, 1), Mathf.Clamp(rot.y, -1, 1), -Mathf.Clamp(rot.z, -1, 1));
-        headrotp.Rotation = newrot;
-        SetBoneRest(FindBone("mixamorig_Head") ,headrotp.Transform);
+        var tw = CreateTween();
+        tw.TweenProperty(headrotp, "rotation", newrot, 0.25f);
+        //headrotp.Rotation = newrot;
+        SetProcess(true);
     }
     public void ResetHead()
     {
-        Spatial headrotp =  GetNode<Spatial>("BoneAttachment/HeadRot");
         
-        headrotp.Rotation = new Vector3(0,0,0);
+        //headrotp.Rotation = new Vector3(0,0,0);
 
-        SetBoneRest(FindBone("mixamorig_Head") ,headrotp.Transform);
+        var tw = CreateTween();
+        tw.TweenProperty(headrotp, "rotation", new Vector3(0,0,0), 0.25f);
+
+        SetProcess(true);
+        //SetBoneRest(FindBone("mixamorig_Head") ,headrotp.Transform);
     }
     public override void _ExitTree()
     {
@@ -103,5 +119,14 @@ public class LoddedCharacter : Skeleton
                 break;
             }
         }
+    }
+    public override void _PhysicsProcess(float delta)
+    {
+        base._PhysicsProcess(delta);
+        int bone = FindBone("mixamorig_Head");
+        if (GetBoneRest(bone) == headrotp.Transform)
+            SetProcess(false);
+
+        SetBoneRest(bone ,headrotp.Transform);
     }
 }

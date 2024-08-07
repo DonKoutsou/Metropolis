@@ -15,27 +15,24 @@ public class NPC : Character
 	Vector3 TalkPosPos = new Vector3(0, 0.5f, 6);
 	[Export]
 	PackedScene InstrumentToSpawnWith = null;
+	//[Export]
+    //string FirstDialogue = "TestTimeline";
+	//[Export]
+	//string RestDialogue = "TestTimeline";
 
 	[Export]
-    string FirstDialogue = "TestTimeline";
-	[Export]
-	string RestDialogue = "TestTimeline";
+	NodePath DialogueColaborator = null;
 
 	public bool Talked;
 
-	public string GetDialogue()
+	public void DoDialogue()
 	{
-		if (Talked)
-			return RestDialogue;
+		if (DialogueColaborator == null )
+			GetNode<BaseDialogueScript>("DialogueScript").DoDialogue(this, null);
 		else
-		{
-			//Talked = true;
-			return FirstDialogue;
-		}	
+			GetNode<BaseDialogueScript>("DialogueScript").DoDialogue(this, GetNodeOrNull<NPC>(DialogueColaborator));
 	}
 	Node Skeleton;
-
-	
 
     public override void _Process(float delta)
     {
@@ -147,7 +144,8 @@ public class NPC : Character
     }
 	public void DoAction(Player pl)
 	{
-		DialogueManager.GetInstance().StartDialogue(this, GetDialogue());
+		DoDialogue();
+		//DialogueManager.GetInstance().StartDialogue(this, DoDialogue());
 	}
 	public string GetActionName(Player pl)
     {

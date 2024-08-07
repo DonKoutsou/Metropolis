@@ -1,9 +1,10 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Rocks/RockMat.tres" type="Material" id=3]
 [ext_resource path="res://Assets/Terains/Island22/Island22_LOD.tres" type="ArrayMesh" id=4]
+[ext_resource path="res://Scenes/Characters/NPCVariants/BoatEngineer.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Terains/Island22/Island22.tres" type="ArrayMesh" id=6]
 [ext_resource path="res://Scenes/Env_Assets/Rock9.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Env_Assets/Rock7.tscn" type="PackedScene" id=8]
@@ -20,6 +21,7 @@
 [ext_resource path="res://Scenes/Env_Assets/Cable.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Scenes/Env_Assets/PortRopething.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Scenes/Env_Assets/Port.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Scenes/Env_Assets/Skampo.tscn" type="PackedScene" id=22]
 
 [sub_resource type="SpatialMaterial" id=13]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -256,3 +258,10 @@ transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 522.418
 transform = Transform( 0.0241842, 0.00408357, -0.999699, 0.00136848, 0.999991, 0.00411786, 0.999706, -0.00146765, 0.0241784, 624.806, -1.52588e-05, -605.89 )
 RestLocations = PoolVector3Array( 623.466, 14.2007, -593.858, 598.19, 14.2007, -593.858, 560.938, 14.2007, -593.858, 509.892, 14.2007, -599.08, 504.782, 14.2007, -651.452, 731.205, 14.2007, -634.83, 731.205, 14.2007, -656.779, 725.472, 14.2007, -598.456, 685.746, 14.2007, -593.858, 656.451, 14.2007, -593.858 )
 PortExtents = Vector3( 67.228, 80, 150 )
+
+[node name="Kanaris" parent="." index="38" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 618.734, 14.4663, -756.783 )
+Chair = NodePath("../StaticBody16")
+
+[node name="StaticBody16" parent="." index="39" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 619.15, 14.4659, -758.854 )

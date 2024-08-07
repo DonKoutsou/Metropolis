@@ -417,6 +417,7 @@ anims/RESET = SubResource( 111 )
 script = ExtResource( 35 )
 
 [node name="Listener" type="Listener" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/PlayerCamera"]
+transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0 )
 current = true
 
 [node name="RemoteTransform" type="RemoteTransform" parent="CameraMovePivot/CameraPanPivot"]

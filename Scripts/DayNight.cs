@@ -60,8 +60,10 @@ public class DayNight : WorldEnvironment
             CurrentDistance = 0;
             return;
         }
-        CurrentDistance = newdist;
-        if (CurrentDistance >= 0.6)
+         SceneTreeTween tw = CreateTween();
+        tw.TweenProperty(this, "CurrentDistance", newdist, 10);
+        //CurrentDistance = newdist;
+        if (newdist >= 0.6)
         {
             Player.GetInstance().GetTalkText().Talk("Η ομίχλη γίνεται πολύ πυκνή για το μωρό, ίσος να μην πάω πιο βαθιά...");
         }

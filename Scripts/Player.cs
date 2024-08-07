@@ -159,8 +159,8 @@ public class Player : Character
 	}
 	private void UpdateMoveLocation()
 	{
-		if (DialogueManager.IsPlayerTalking())
-			return;
+		//if (DialogueManager.IsPlayerTalking())
+			//return;
 		var spacestate = GetWorld().DirectSpaceState;
 		float mult = OS.WindowSize.x / DViewport.GetInstance().Size.x;
 		Vector2 mousepos = DViewport.GetInstance().GetMousePosition() / mult;
