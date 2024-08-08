@@ -94,4 +94,9 @@ public class PriestScript : BaseDialogueScript
         };
         return savedata;
     }
+    public override void LoadSaveData(Dictionary<string, object> Data)
+    {
+        DialogueProg = (int)Data["DialogueProg"];
+        BooksGiven = (int)Data["BooksGiven"];
+    }
 }

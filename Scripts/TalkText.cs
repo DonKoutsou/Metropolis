@@ -82,7 +82,7 @@ public class TalkText : Label3D
         TalkTimer = new Timer()
         {
             OneShot = true,
-            Autostart = true,
+            //Autostart = true,
         };
         TalkTimer.Connect("timeout", this, "TurnOff");
         TalkTimer.WaitTime = 2;

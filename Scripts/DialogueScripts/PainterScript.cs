@@ -110,4 +110,10 @@ public class PainterScript : BaseDialogueScript
         };
         return savedata;
     }
+    public override void LoadSaveData(Dictionary<string, object> Data)
+    {
+        DialogueProg = (int)Data["DialogueProg"];
+        ColorsGiven = (int)Data["ColorsGiven"];
+        branch = (int)Data["branch"];
+    }
 }

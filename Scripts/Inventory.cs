@@ -165,10 +165,10 @@ public class Inventory : Spatial
                     {
                         bat.SetCurrentCap((float)CustomDataValues[i]);
                     }
-                    if ((string)CustomDataKeys.GetValue(i) == "CurrentCondition")
-                    {
-                        bat.SetCurrentCondition((float)CustomDataValues[i]);
-                    }
+                    //if ((string)CustomDataKeys.GetValue(i) == "CurrentCondition")
+                    //{
+                    //    bat.SetCurrentCondition((float)CustomDataValues[i]);
+                    //}
                 }
             }
             if (newItem is Toolbox box)
@@ -419,7 +419,7 @@ public class Inventory : Spatial
 		if (it is Battery bat)
 		{
 			CustomData.Add("CurrentEnergy", bat.GetCurrentCap());
-            CustomData.Add("CurrentCondition", bat.GetCondition());
+            //CustomData.Add("CurrentCondition", bat.GetCondition());
 		}
 	}
 	public Dictionary<string, object>GetPackedData()

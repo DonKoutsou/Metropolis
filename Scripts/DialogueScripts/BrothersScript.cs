@@ -85,4 +85,8 @@ public class BrothersScript : BaseDialogueScript
         };
         return savedata;
     }
+    public override void LoadSaveData(Dictionary<string, object> Data)
+    {
+        DialogueProg = (int)Data["DialogueProg"];
+    }
 }

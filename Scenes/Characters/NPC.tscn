@@ -33,9 +33,6 @@ Chair = NodePath("")
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3.3181, 0 )
 shape = SubResource( 6 )
 
-[node name="TalkPosition" type="Position3D" parent="."]
-transform = Transform( -7.7783, 0, -1.17449e-06, 0, 7.7783, 0, 1.17449e-06, 0, -7.7783, 0, 0.5, 6 )
-
 [node name="ActionComponent" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.13991, 0 )
 ActionDistance = 15.0

@@ -54,6 +54,11 @@ public class Furniture : Spatial
 		itemToDrop.Translation = Vector3.Zero;
 		StashedItem = itemToDrop;
 		StashedItem.Hide();
+		if (itemToDrop is Battery bat)
+		{
+			bat.SetCurrentCap(0);
+			//bat.SetCurrentCondition(RandomContainer.Next(0, 100));
+		}
 	}
 	public bool HasItem()
 	{

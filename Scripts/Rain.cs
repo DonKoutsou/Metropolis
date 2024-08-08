@@ -27,7 +27,7 @@ public class Rain : Spatial
         float rotf = 45 * (DayNight.GetWindStr() - 50) / 100;
         rot.x = Mathf.Deg2Rad( rotf );
         RainPart.Rotation = rot;
-        AudioStreamPlayer3D RainSound = WorldSoundManager.GetInstance().GetSound("Rain");
+        AudioStreamPlayer RainSound = WorldSoundManager.GetInstance().GetSound("Rain");
         float multi = DayNight.GetRainStr() / 100;
         if (multi < 0.1)
         {
@@ -40,7 +40,7 @@ public class Rain : Spatial
              if (!RainSound.Playing)
                 RainSound.Playing = true;
              RainSound.PitchScale = PitchScaleCurve.Interpolate(multi);
-             RainSound.UnitDb = SoundScaleCurve.Interpolate(multi);
+             RainSound.VolumeDb = SoundScaleCurve.Interpolate(multi);
         }
         //int particleammount = (int)(MaxRainParticleAmmount * multi);
         //if (particleammount < 1)

@@ -162,5 +162,6 @@ public enum BookSeries
 {
     MACHINES,
     HISTORY,
-    MOTHERCITY
+    MOTHERCITY,
+    MUSIC,
 }

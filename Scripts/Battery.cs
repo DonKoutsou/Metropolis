@@ -9,8 +9,8 @@ public class Battery : Item
     [Export]
     float CurrentEnergy = 0;
 
-    [Export]
-    float condition = 100;
+    //[Export]
+    //float condition = 100;
 
     public void Recharge(float ammount)
     {
@@ -22,25 +22,27 @@ public class Battery : Item
     }
     public override string GetInventoryItemName()
 	{
-		return ItemName + CurrentEnergy.ToString() + condition;
+		//return ItemName + CurrentEnergy.ToString() + condition;
+        return ItemName + CurrentEnergy.ToString() ;
 	}
-    public void Repair(float amm)
-    {
-        condition += amm;
-    }
+   // public void Repair(float amm)
+    //{
+    //    condition += amm;
+    //}
     public void ConsumeEnergy(float ammount)
     {
-        CurrentEnergy -= ammount * (1 - condition / 100 + 1);
-        condition -= ammount /10;
+        CurrentEnergy -= ammount;
+        //CurrentEnergy -= ammount * (1 - condition / 100 + 1);
+        //condition = Mathf.Max(condition - ammount /10, 0);
     }
     public float GetCapacity()
     {
         return Capacity;
     }
-    public float GetCondition()
-    {
-        return condition;
-    }
+    //public float GetCondition()
+    //{
+        //return condition;
+    //}
     public float GetCurrentCap()
     {
         return CurrentEnergy;
@@ -49,13 +51,14 @@ public class Battery : Item
     {
         CurrentEnergy = CurCap;
     }
-    public void SetCurrentCondition(float cond)
-    {
-        condition = cond;
-    }
+    //public void SetCurrentCondition(float cond)
+    //{
+    //    condition = cond;
+    //}
     public override string GetItemDesc()
     {
-        return ItemDesc + " \n Capacity: " + (int)CurrentEnergy + "/" + Capacity + "\n Condition " + (int)condition + "/" + 100;
+        return ItemDesc + " \n Φόρτωση: " + (int)CurrentEnergy + "/" + Capacity;
+       // return ItemDesc + " \n Capacity: " + (int)CurrentEnergy + "/" + Capacity + "\n Condition " + (int)condition + "/" + 100;
     }
 
 }

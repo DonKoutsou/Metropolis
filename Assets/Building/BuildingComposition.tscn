@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Assets/Building/Assets/House_Exterior.tres" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Building/Assets/House_Interior.tres" type="ArrayMesh" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Scenes/Env_Assets/Furniture.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=8]
 [ext_resource path="res://Assets/Building/Assets/House_ExteriorLOD.tres" type="ArrayMesh" id=9]
+[ext_resource path="res://Scripts/DoorPivot.cs" type="Script" id=10]
 [ext_resource path="res://Scenes/Env_Assets/IndoorsLight.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Env_Assets/Furniture2.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/BuildingDecorations/Decorations2.tscn" type="PackedScene" id=14]
@@ -32,51 +33,6 @@ data = PoolVector3Array( -2.2667, 3.531, 10.0572, -10.0572, 3.531, 10.0572, -10.
 [sub_resource type="CubeMesh" id=6]
 size = Vector3( 5.109, 8.214, 2.727 )
 
-[sub_resource type="Animation" id=11]
-resource_name = "Close"
-tracks/0/type = "value"
-tracks/0/path = NodePath("DoorPivot:rotation_degrees")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 171.119, 0 ), Vector3( 0, 0, 0 ) ]
-}
-
-[sub_resource type="Animation" id=10]
-resource_name = "Open"
-tracks/0/type = "value"
-tracks/0/path = NodePath("DoorPivot:rotation_degrees")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 171.119, 0 ) ]
-}
-
-[sub_resource type="Animation" id=12]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("DoorPivot:rotation_degrees")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0 ) ]
-}
-
 [sub_resource type="CubeMesh" id=8]
 size = Vector3( 7.563, 4.743, 0.12 )
 
@@ -85,12 +41,12 @@ script = ExtResource( 5 )
 PossibleFurni = [ ExtResource( 7 ), ExtResource( 13 ), ExtResource( 16 ) ]
 PossibleDeco = [ ExtResource( 15 ), ExtResource( 14 ) ]
 SpawnPool = {
-Resource( "res://Scenes/Items/BatteryEmpty.tscn" ): 10,
-Resource( "res://Scenes/Items/FastLeg_L.tscn" ): 1,
 Resource( "res://Scenes/Items/Guitar.tscn" ): 1,
-Resource( "res://Scenes/Items/Battery.tscn" ): 0,
+Resource( "res://Scenes/Items/Item.tscn" ): 10,
 Resource( "res://Scenes/Items/FastLeg_R.tscn" ): 1,
-Resource( "res://Scenes/Items/Item.tscn" ): 10
+Resource( "res://Scenes/Items/Battery.tscn" ): 0,
+Resource( "res://Scenes/Items/BatteryEmpty.tscn" ): 10,
+Resource( "res://Scenes/Items/FastLeg_L.tscn" ): 1
 }
 
 [node name="HouseDoor" parent="." instance=ExtResource( 4 )]
@@ -130,6 +86,9 @@ collision_mask = 0
 mesh = ExtResource( 2 )
 skeleton = NodePath("../..")
 material/0 = ExtResource( 3 )
+script = ExtResource( 8 )
+LOD0 = ExtResource( 2 )
+HideIfNoLod = true
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody2"]
 shape = SubResource( 2 )
@@ -204,18 +163,20 @@ mesh = SubResource( 6 )
 
 [node name="Decorations" type="Spatial" parent="."]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Close = SubResource( 11 )
-anims/Open = SubResource( 10 )
-anims/RESET = SubResource( 12 )
-
 [node name="DoorPivot" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.25, 7.26628, 10.0431 )
+script = ExtResource( 10 )
+Doors = [ NodePath("Door1") ]
+Rotations = [ Vector3( 0, 170, 0 ) ]
+Translations = [  ]
 
-[node name="Door" type="MeshInstance" parent="DoorPivot"]
-transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 2.25, 0, 0 )
+[node name="Door1" type="Spatial" parent="DoorPivot"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.53674e-07 )
+
+[node name="Door" type="MeshInstance" parent="DoorPivot/Door1"]
+transform = Transform( -4.37114e-08, 1, -1.94118e-23, -1, -4.37114e-08, -4.44089e-16, -4.44089e-16, 3.15544e-30, 1, 2.25, 0, -9.53674e-07 )
 mesh = SubResource( 8 )
-skeleton = NodePath("../..")
+skeleton = NodePath("../../..")
 material/0 = ExtResource( 3 )
 
 [node name="Lights" type="Spatial" parent="."]
@@ -225,4 +186,3 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.2561, 0 )
 
 [connection signal="body_entered" from="HouseDoor" to="." method="Entered"]
 [connection signal="body_exited" from="HouseDoor" to="." method="Left"]
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="On_Door_Animation_Finished"]

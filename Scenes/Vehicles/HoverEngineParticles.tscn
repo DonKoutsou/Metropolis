@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [sub_resource type="Curve" id=149]
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.520965, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.1 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.494144, 0.333935 ), 1.44566, -1.01951, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=150]
 curve = SubResource( 149 )
@@ -9,7 +9,7 @@ curve = SubResource( 149 )
 [sub_resource type="ParticlesMaterial" id=152]
 resource_local_to_scene = true
 trail_divisor = 11
-direction = Vector3( 0, 1, 0 )
+direction = Vector3( 0, -1, 0 )
 spread = 0.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 6.0
@@ -19,17 +19,17 @@ scale_curve = SubResource( 150 )
 
 [sub_resource type="SpatialMaterial" id=151]
 render_priority = 1
-flags_unshaded = true
 vertex_color_use_as_albedo = true
+params_diffuse_mode = 4
+params_specular_mode = 3
 params_blend_mode = 1
-params_depth_draw_mode = 3
-params_billboard_mode = 3
-params_use_alpha_scissor = true
-params_alpha_scissor_threshold = 0.98
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
+params_depth_draw_mode = 1
 albedo_color = Color( 0, 0.584314, 1, 1 )
+emission_enabled = true
+emission = Color( 0, 0.819608, 1, 1 )
+emission_energy = 16.0
+emission_operator = 0
+emission_on_uv2 = false
 
 [sub_resource type="CylinderMesh" id=153]
 material = SubResource( 151 )
@@ -37,8 +37,8 @@ radial_segments = 8
 rings = 0
 
 [node name="HoverEngineParticles" type="Particles"]
-transform = Transform( 1, -8.74228e-08, -8.74228e-08, -8.74228e-08, -1, 0, -8.74228e-08, 7.64275e-15, -1, 0, 0, 0 )
 cast_shadow = 0
+generate_lightmap = false
 amount = 10
 lifetime = 0.5
 visibility_aabb = AABB( -0.72, -0.0496562, -0.61, 1.44, 3.12131, 1.219 )

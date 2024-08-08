@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 public class Character : KinematicBody
 {
@@ -62,6 +63,10 @@ public class Character : KinematicBody
 		IdleTimer = GetNode<Timer>("IdleTimer");
 		SetClothing();
 
+	}
+	public bool IsPlayerInstrument()
+	{
+		return PlayingInstrument;
 	}
 	public TalkText GetTalkText()
 	{
@@ -446,8 +451,10 @@ public class Character : KinematicBody
 	{
         Name = info.Name;
         Translation = info.Position;
-		//CurrentEnergy = info.CurrentEnergy;
+		CurrentEnergy = info.CurrentEnergy;
 		m_balive = info.Alive;
+
+		GetNode<BaseDialogueScript>("DialogueScript").LoadSaveData(info.CustomData);
 
 		/*for (int i = 0; i < 6; i++)
 		{
@@ -498,6 +505,15 @@ public class CharacterInfo
 		CurrentEnergy = it.GetCurrentCharacterEnergy();
 		Alive = it.IsAlive();
 		Talked = it.Talked;
+		BaseDialogueScript diag = it.GetNode<BaseDialogueScript>("DialogueScript");
+		Dictionary<string, object> Savedata = diag.GetSaveData();
+		foreach(KeyValuePair<string, object> data in Savedata)
+		{
+			if (CustomData.ContainsKey(data.Key))
+				CustomData[data.Key] = data.Value;
+			else
+				CustomData.Add(data.Key, data.Value);
+		}
 		/*for (int i = 0; i < 6; i++)
 		{
 			LimbColors.Add(it.GetLimbColor((LimbType)i));
@@ -551,16 +567,14 @@ public class CharacterInfo
 		{
 			LimbColors.Add(LimbCols[i]);
 		}*/
-
-
-		Godot.Collections.Array CustomDataKeys = (Godot.Collections.Array)data.Get("CustomDataKeys");
+		string[] CustomDataKeys = (string[])data.Get("CustomDataKeys");
 		Godot.Collections.Array CustomDataValues = (Godot.Collections.Array)data.Get("CustomDataValues");
 
-		if (CustomDataKeys.Count > 0 && CustomDataValues.Count > 0)
+		if (CustomDataKeys.Count() > 0 && CustomDataValues.Count > 0)
 		{
-			for (int i = 0; i < CustomDataKeys.Count; i++)
+			for (int i = 0; i < CustomDataKeys.Count(); i++)
 			{
-				CustomData.Add((string)CustomDataKeys[i], CustomDataValues[i]);
+				CustomData.Add(CustomDataKeys[i], CustomDataValues[i]);
 			}
 		}
     }

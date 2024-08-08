@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://Scenes/Characters/NPC.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Gen3Machine/CharBlendTree.tres" type="AnimationNodeBlendTree" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://Assets/Gen3Machine/Body/Textures/Body_Texture_Body_Normal.png" type="Texture" id=13]
 [ext_resource path="res://Assets/Gen3Machine/Body/FaceMat5.tres" type="Material" id=14]
 [ext_resource path="res://Assets/Gen3Machine/Hoodie/HoodieMat5.tres" type="Material" id=15]
+[ext_resource path="res://Scripts/DialogueScripts/BoatEngineerScript.cs" type="Script" id=16]
 
 [sub_resource type="SpatialMaterial" id=63]
 albedo_color = Color( 0.952941, 0.921569, 0.831373, 1 )
@@ -141,7 +142,7 @@ nodes/ChairBlend/position = Vector2( 186.667, 160 )
 nodes/IntrumentBlend/node = SubResource( 54 )
 nodes/IntrumentBlend/position = Vector2( 360, 266.667 )
 nodes/output/position = Vector2( 533.333, 160 )
-node_connections = [ "output", 0, "IntrumentBlend", "IntrumentBlend", 0, "ChairBlend", "IntrumentBlend", 1, "Animation 2", "ChairBlend", 0, "Animation", "ChairBlend", 1, "Animation 3" ]
+node_connections = [ "output", 0, "IntrumentBlend", "ChairBlend", 0, "Animation", "ChairBlend", 1, "Animation 3", "IntrumentBlend", 0, "ChairBlend", "IntrumentBlend", 1, "Animation 2" ]
 
 [sub_resource type="AnimationNodeAnimation" id=55]
 animation = "Standing"
@@ -189,23 +190,23 @@ graph_offset = Vector2( -352, -31 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=70]
 
-[node name="Kanaris" instance=ExtResource( 1 )]
+[node name="Karavopios" instance=ExtResource( 1 )]
 ClothToWear = 1
 ClothMaterial = ExtResource( 15 )
 CharacterName = "Καναράκιας"
 Sitting = true
 
 [node name="HeadRot2Pivot" parent="Pivot/Guy/Armature/Skeleton" index="0"]
-transform = Transform( -1, 0, -8.74228e-08, 6.3569e-16, 1, -7.3224e-09, 8.74228e-08, -2.27374e-13, -1, -4.19404, 280.742, 21.1634 )
+transform = Transform( -1, 0, -8.74228e-08, 6.58238e-16, 1, -7.58371e-09, 8.74228e-08, -2.27374e-13, -1, -1.7038, 280.69, 20.2896 )
 
 [node name="BoneAttachment" parent="Pivot/Guy/Armature/Skeleton" index="1"]
-transform = Transform( 0.996503, -0.0717578, -0.0427996, 0.0659832, 0.990118, -0.123744, 0.0512563, 0.120487, 0.99139, -2.74555, 265.513, 12.6082 )
+transform = Transform( 0.997105, -0.0530114, -0.0545189, 0.0454354, 0.990225, -0.131869, 0.0609767, 0.12901, 0.989767, -0.481236, 265.512, 11.6069 )
 
 [node name="MeshInstance" parent="Pivot/Guy/Armature/Skeleton/BoneAttachment/HeadPivot" index="0"]
 mesh = SubResource( 64 )
 
 [node name="InstrumentAtatchment" parent="Pivot/Guy/Armature/Skeleton" index="2"]
-transform = Transform( 0.997282, -0.0275002, -0.0683499, 0.0256971, 0.999301, -0.0271214, 0.069048, 0.0252913, 0.997292, 0.552323, 213.302, 0.69307 )
+transform = Transform( 0.996764, -0.0104152, -0.079697, 0.0079419, 0.999478, -0.0312885, 0.0799814, 0.0305543, 0.996328, 1.99624, 213.294, -0.543955 )
 
 [node name="Instrument" parent="Pivot/Guy/Armature/Skeleton/InstrumentAtatchment" index="2"]
 transform = Transform( -37.9657, 16.6749, -2.44876, 16.6429, 38.0451, 1.02921, 2.64825, -0.040322, -41.5738, -29.2251, -41.0474, -25.1529 )
@@ -273,5 +274,8 @@ material/0 = SubResource( 66 )
 [node name="AnimationTree" parent="Pivot/Guy/AnimationPlayer" index="0"]
 tree_root = SubResource( 69 )
 parameters/playback = SubResource( 70 )
+
+[node name="DialogueScript" parent="." index="6"]
+script = ExtResource( 16 )
 
 [editable path="Pivot/Guy"]

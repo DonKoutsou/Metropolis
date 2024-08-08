@@ -1,8 +1,8 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/Rocks/RockMat.tres" type="Material" id=3]
+[ext_resource path="res://Assets/TerainTex/SandSimple.tres" type="Material" id=3]
 [ext_resource path="res://Assets/Terains/Island22/Island22_LOD.tres" type="ArrayMesh" id=4]
 [ext_resource path="res://Scenes/Characters/NPCVariants/BoatEngineer.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Terains/Island22/Island22.tres" type="ArrayMesh" id=6]
@@ -22,6 +22,10 @@
 [ext_resource path="res://Scenes/Env_Assets/PortRopething.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Scenes/Env_Assets/Port.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Scenes/Env_Assets/Skampo.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Scripts/PortWorker.cs" type="Script" id=23]
+[ext_resource path="res://Assets/Gen3Machine/Hoodie/HoodieMat.tres" type="Material" id=24]
+[ext_resource path="res://Scenes/Vehicles/HoverBoard.tscn" type="PackedScene" id=25]
+[ext_resource path="res://Scenes/Vehicles/HoverBoard_Lite.tscn" type="PackedScene" id=26]
 
 [sub_resource type="SpatialMaterial" id=13]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -255,13 +259,24 @@ transform = Transform( -0.703915, 0, 0.710283, 0, 1, 0, -0.710283, 0, -0.703915,
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 522.418, 14.2007, -651.452 )
 
 [node name="Port" parent="." index="35" instance=ExtResource( 21 )]
-transform = Transform( 0.0241842, 0.00408357, -0.999699, 0.00136848, 0.999991, 0.00411786, 0.999706, -0.00146765, 0.0241784, 624.806, -1.52588e-05, -605.89 )
+transform = Transform( 0.0241842, 0.00408357, -0.999699, 0.00136848, 0.999991, 0.00411786, 0.999706, -0.00146765, 0.0241784, 624.806, -1.52588e-05, -706.069 )
 RestLocations = PoolVector3Array( 623.466, 14.2007, -593.858, 598.19, 14.2007, -593.858, 560.938, 14.2007, -593.858, 509.892, 14.2007, -599.08, 504.782, 14.2007, -651.452, 731.205, 14.2007, -634.83, 731.205, 14.2007, -656.779, 725.472, 14.2007, -598.456, 685.746, 14.2007, -593.858, 656.451, 14.2007, -593.858 )
-PortExtents = Vector3( 67.228, 80, 150 )
+PortExtents = Vector3( 150, 80, 153.526 )
 
-[node name="Kanaris" parent="." index="38" instance=ExtResource( 5 )]
+[node name="Karavopios" parent="." index="38" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 618.734, 14.4663, -756.783 )
-Chair = NodePath("../StaticBody16")
+script = ExtResource( 23 )
+ClothToWear = 0
+ClothMaterial = ExtResource( 24 )
+CharacterName = "Βαλάντης"
+Chair = null
+PortPath = NodePath("../Port")
 
 [node name="StaticBody16" parent="." index="39" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 619.15, 14.4659, -758.854 )
+
+[node name="Vehicle0" parent="." index="40" instance=ExtResource( 26 )]
+transform = Transform( -0.00797606, 0, -0.999968, 0, 1, 0, 0.999968, 0, -0.00797606, 598.144, 9.2732, -595.834 )
+
+[node name="Vehicle" parent="." index="41" instance=ExtResource( 25 )]
+transform = Transform( 0.0066147, 0, 0.999978, 0, 1, 0, -0.999978, 0, 0.0066147, 645.779, 9.17292, -594.971 )

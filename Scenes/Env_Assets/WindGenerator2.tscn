@@ -244,7 +244,6 @@ transform = Transform( 30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0 )
 shape = SubResource( 18 )
 
 [node name="Rotor_Pivot" type="Spatial" parent="."]
-transform = Transform( 1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 0, 0, 0 )
 
 [node name="BladePivot" type="Spatial" parent="Rotor_Pivot"]
 transform = Transform( 30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 5767.41, 0 )
@@ -265,7 +264,7 @@ visible = false
 shape = SubResource( 4 )
 
 [node name="StaticBody2" type="StaticBody" parent="Rotor_Pivot/BladePivot"]
-transform = Transform( 1, 1.74846e-07, 0, -1.74846e-07, 1, 0, 0, 0, 1, 0, 0, -6.67876 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.67876 )
 collision_layer = 4
 collision_mask = 0
 

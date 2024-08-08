@@ -12,8 +12,6 @@ public class NPC : Character
 	[Export]
 	bool PlayInstrument = false;
 	[Export]
-	Vector3 TalkPosPos = new Vector3(0, 0.5f, 6);
-	[Export]
 	PackedScene InstrumentToSpawnWith = null;
 	//[Export]
     //string FirstDialogue = "TestTimeline";
@@ -33,18 +31,6 @@ public class NPC : Character
 			GetNode<BaseDialogueScript>("DialogueScript").DoDialogue(this, GetNodeOrNull<NPC>(DialogueColaborator));
 	}
 	Node Skeleton;
-
-    public override void _Process(float delta)
-    {
-		#if DEBUG
-		if (Engine.EditorHint)
-		{
-			GetNode<Position3D>("TalkPosition").Translation = TalkPosPos;
-			return;
-		}
-		#endif
-		base._Process(delta);
-    }
 	public Vector3 GetActionPos(Vector3 PlayerPos)
     {
         return GlobalTranslation;
@@ -82,7 +68,7 @@ public class NPC : Character
 			IsUncon = true;
 			Kill();
 		}
-		GetNode<Position3D>("TalkPosition").Translation = TalkPosPos;
+
 
 		Skeleton = GetNode("Pivot").GetNode("Guy").GetNode("Armature").GetNode("Skeleton");
 		
@@ -146,7 +132,7 @@ public class NPC : Character
 	{
 		DoDialogue();
 		//DialogueManager.GetInstance().StartDialogue(this, DoDialogue());
-	}
+	}	
 	public string GetActionName(Player pl)
     {
         return "Kουβέντα";

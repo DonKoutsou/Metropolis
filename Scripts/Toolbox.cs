@@ -25,13 +25,13 @@ public class Toolbox : Item
     {
         CurrentSupplies = Math.Max(0, CurrentSupplies - ammount);
     }
-    public void RepaiItem(Battery it)
+    /*public void RepaiItem(Battery it)
     {
         float AmmountToRepair = 100 - it.GetCondition();
         float AmmountThatCaneBeRepaired = Math.Min(CurrentSupplies, AmmountToRepair);
         ConsumeSupplies(AmmountThatCaneBeRepaired);
         it.Repair(AmmountThatCaneBeRepaired);
-    }
+    }*/
     public override string GetInventoryItemName()
 	{
 		return ItemName + CurrentSupplies.ToString();

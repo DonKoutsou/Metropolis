@@ -930,7 +930,8 @@ public class IslandInfo
 		{
 			Resource CharInfor = (Resource)CharSaveScript.New();
 			bool hasdata;
-			CharInfor.Call("_SetData", Characters[i].GetPackedData(out hasdata), false);
+			var dat = Characters[i].GetPackedData(out hasdata);
+			CharInfor.Call("_SetData", dat, hasdata);
 			CharacterInfoobjects[i] = CharInfor;
 		}
 		//data.Add("Characters", CharacterInfoobjects);

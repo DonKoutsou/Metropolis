@@ -112,8 +112,8 @@ public class Item : RigidBody
 		{
 			float cap = (float)data.CustomData["CurrentEnergy"];
 			battery.SetCurrentCap(cap);
-			float cond = (float)data.CustomData["CurrentCondition"];
-			battery.SetCurrentCondition(cond);
+			//float cond = (float)data.CustomData["CurrentCondition"];
+			//battery.SetCurrentCondition(cond);
 		}
 		else if (this is Toolbox box)
 		{
@@ -157,10 +157,10 @@ public class ItemInfo
 				CustomData["CurrentEnergy"] = bat.GetCurrentCap();
 			else
 				CustomData.Add("CurrentEnergy", bat.GetCurrentCap());
-			if (CustomData.ContainsKey("CurrentCondition"))
-				CustomData["CurrentCondition"] = bat.GetCondition();
-			else
-				CustomData.Add("CurrentCondition", bat.GetCondition());
+			//if (CustomData.ContainsKey("CurrentCondition"))
+				//CustomData["CurrentCondition"] = bat.GetCondition();
+			//else
+				//CustomData.Add("CurrentCondition", bat.GetCondition());
 		}
 		else if (it is Toolbox box)
 		{
@@ -262,4 +262,5 @@ public enum ItemName
 	PAINTCAN,
 	BLOOD_VIAL,
 	WEAPON,
+	KEYCARD,
 }

@@ -160,6 +160,7 @@ public class Road : Path
         foreach (StaticBody bod in bodies)
         {
             bod.CollisionLayer = FloorLayer;
+            bod.CollisionMask = new uint();
             //bod.Hide();
         }
         //GetTree.CurrentScene.sav

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Scripts/GeneratorDoor.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=2]
@@ -213,6 +213,16 @@ tracks/3/keys = {
 [sub_resource type="CubeMesh" id=8]
 size = Vector3( 2, 2, 3 )
 
+[sub_resource type="CubeMesh" id=55]
+size = Vector3( 1.007, 1.404, 0.5 )
+
+[sub_resource type="SpatialMaterial" id=56]
+emission_enabled = true
+emission = Color( 0.294118, 1, 0, 1 )
+emission_energy = 16.0
+emission_operator = 0
+emission_on_uv2 = false
+
 [node name="Door" type="Spatial"]
 
 [node name="StaticBody" type="StaticBody" parent="." groups=["Interactables"]]
@@ -286,3 +296,9 @@ material/0 = ExtResource( 12 )
 script = ExtResource( 7 )
 LOD0 = SubResource( 8 )
 HideIfNoLod = true
+
+[node name="Switch2" type="MeshInstance" parent="Switch"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.3571 )
+mesh = SubResource( 55 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 56 )

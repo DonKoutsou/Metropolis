@@ -5,19 +5,19 @@
 
 [sub_resource type="Curve" id=3]
 max_value = 2.0
-_data = [ Vector2( 0, 2 ), 0.0, 0.0, 0, 0, Vector2( 0.38538, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.754559, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 2 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.31392, 0.494585 ), 0.0, 0.0, 0, 0, Vector2( 0.734375, 0.537906 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=6]
 max_value = 3.0
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.192814, 3 ), 0.0, 0.0, 0, 0, Vector2( 0.490385, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.98836, 0 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.196223, 1.47834 ), 0.0, 0.0, 0, 0, Vector2( 0.490385, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.98836, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=7]
 max_value = 3.0
 _data = [ Vector2( 0, 0.330325 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=4]
-offsets = PoolRealArray( 0, 0.250608, 0.274939, 0.374194, 0.394184, 0.584821, 0.866071, 0.9375, 1 )
-colors = PoolColorArray( 0.887207, 0.662202, 0.458944, 1, 0.888268, 0.654101, 0.450267, 1, 0.888672, 0.608351, 0.434092, 1, 0.888672, 0.608351, 0.434092, 1, 1, 0.950159, 0.768012, 1, 1, 0.943967, 0.739193, 1, 0.912109, 0.580372, 0.442912, 1, 0.919922, 0.636775, 0.550097, 1, 0.887207, 0.662202, 0.458944, 1 )
+offsets = PoolRealArray( 0, 0.274939, 0.374194, 0.394184, 0.584821, 0.866071, 0.9375, 1 )
+colors = PoolColorArray( 0.887207, 0.662202, 0.458944, 1, 0.888672, 0.608351, 0.434092, 1, 0.888672, 0.608351, 0.434092, 1, 1, 0.950159, 0.768012, 1, 1, 0.943967, 0.739193, 1, 0.959961, 0.516524, 0.294155, 1, 0.916992, 0.359357, 0.188652, 1, 0.887207, 0.662202, 0.458944, 1 )
 
 [sub_resource type="Gradient" id=5]
 offsets = PoolRealArray( 0, 0.997019 )
@@ -48,6 +48,7 @@ WindDirCurve = SubResource( 1 )
 WindStreangthCurve = SubResource( 2 )
 RainStreangthCurve = SubResource( 2 )
 FogDirstanceCurve = SubResource( 8 )
+FogDistantColor = Color( 1, 0.745098, 0.470588, 1 )
 
 [node name="Sun" type="DirectionalLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.0171732, 0.999853, 0, -0.999853, 0.0171732, 0, 0, 0 )
@@ -58,6 +59,7 @@ shadow_enabled = true
 shadow_color = Color( 0.607843, 0.603922, 0.603922, 1 )
 shadow_bias = 1.5
 shadow_reverse_cull_face = true
+directional_shadow_depth_range = 1
 directional_shadow_max_distance = 1000.0
 
 [node name="GodRays" type="Spatial" parent="Sun"]
@@ -71,6 +73,7 @@ light_bake_mode = 0
 shadow_enabled = true
 shadow_color = Color( 0.737255, 0.737255, 0.737255, 1 )
 shadow_bias = 1.5
+directional_shadow_depth_range = 1
 directional_shadow_max_distance = 1000.0
 
 [node name="GodRays" type="Spatial" parent="Moon"]

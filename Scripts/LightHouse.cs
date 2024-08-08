@@ -16,32 +16,15 @@ public class LightHouse : House
 		GetNode<Occluder>("Occluder").Visible = false;
 		GetNode<Occluder>("Occluder2").Visible = false;
 
-		GetNode<Spatial>("Furnitures").Show();
-		GetNode<Spatial>("Decorations").Show();
-
-		AnimationPlayer Anim = GetNode<AnimationPlayer>("AnimationPlayer");
-		Anim.Play("Open");
-		
-		return;
+		base.Entered(body);
 
 	}
-	protected override void On_Door_Animation_Finished(string anim)
-	{
-		if (anim == "Close")
-		{
-			//((SpatialMaterial)GetNode<MeshInstance>("LightHouseBody").GetActiveMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Disabled;
-			//((SpatialMaterial)GetNode<MeshInstance>("Walls").GetActiveMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Disabled;
-			GetNode<Occluder>("Occluder").Visible = true;
-			GetNode<Occluder>("Occluder2").Visible = true;
-			GetNode<Spatial>("Furnitures").Hide();
-			GetNode<Spatial>("Decorations").Hide();
-		}
-	}
+	
 	public override void Left(Node body)
 	{
-		AnimationPlayer Anim = GetNode<AnimationPlayer>("AnimationPlayer");
-		Anim.Play("Close");
-		return;
+		GetNode<Occluder>("Occluder").Visible = true;
+		GetNode<Occluder>("Occluder2").Visible = true;
+		base.Left(body);
 	}
 	public void ToggeLightHouse(bool t)
 	{

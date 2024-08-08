@@ -48,7 +48,10 @@ public class MusicManager : Node
         }
         if (song == null)
         {
-            song = GetSongForInstrument(inst, (Song)RandomContainer.Next(0, BouzoukiSongs.Count));
+            if (inst is Bouzouki)
+                song = GetSongForInstrument(inst, (Song)RandomContainer.Next(0, BouzoukiSongs.Count));
+            if (inst is Guitar)
+                song = GetSongForInstrument(inst, (Song)RandomContainer.Next(0, GuitarSongs.Count));
         }
         return song;
     }

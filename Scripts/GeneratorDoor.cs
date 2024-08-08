@@ -41,7 +41,6 @@ public class GeneratorDoor : StaticBody
             Open = true;
             anim.Play("Open");
         }
-
         //pl.anim.PlayAnimation(anim);
         //pl.global
     }
@@ -54,7 +53,10 @@ public class GeneratorDoor : StaticBody
     }
     public void DoAction(Player pl)
 	{
-        ToggleDoor();
+        if (pl.GetCharacterInventory().HasItemOfType(ItemName.KEYCARD))
+            ToggleDoor();
+        else
+            pl.GetTalkText().Talk("Φένεταί σαν να χρειάζεται κάποιου είδους κλειδί για να ελέγξω την πύλη.");
     }
 
 }

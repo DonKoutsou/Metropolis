@@ -1,16 +1,20 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=63 format=2]
 
 [ext_resource path="res://Assets/Clutter/Powerline/PowerLine.tres" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Sea/OceanShader.tres" type="Material" id=2]
 [ext_resource path="res://Assets/Water/textures/post/waterplane_low.obj" type="ArrayMesh" id=3]
+[ext_resource path="res://Assets/Terains/Island2/Island2.tres" type="ArrayMesh" id=4]
 [ext_resource path="res://addons/SIsilicon.vfx.godrays/GodRays.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Clouds/Clouds2.material" type="Material" id=6]
 [ext_resource path="res://Assets/Sounds/RainSound.mp3" type="AudioStream" id=7]
 [ext_resource path="res://Assets/Clutter/Antenna/Antenna.material" type="Material" id=8]
 [ext_resource path="res://Assets/Sounds/Cave_Ambient.mp3" type="AudioStream" id=9]
 [ext_resource path="res://Assets/Rocks/RockMat.tres" type="Material" id=10]
+[ext_resource path="res://Assets/Terains/Island2/Island2_LOD.tres" type="ArrayMesh" id=11]
+[ext_resource path="res://Assets/TerainTex/SandSimple.tres" type="Material" id=12]
 [ext_resource path="res://Assets/Clutter/Powerline/PowerLineMat.tres" type="Material" id=13]
 [ext_resource path="res://Assets/Clutter/CylinderThing/CylThingyMat.material" type="Material" id=14]
+[ext_resource path="res://Assets/PostProcess/PixelShader.gdshader" type="Shader" id=15]
 [ext_resource path="res://Assets/Building/Assets/Building_Dest4.tres" type="ArrayMesh" id=16]
 [ext_resource path="res://Assets/Building/Assets/Building_Dest.tres" type="ArrayMesh" id=17]
 [ext_resource path="res://Assets/Building/Assets/Building_Dest2.tres" type="ArrayMesh" id=18]
@@ -79,12 +83,12 @@ ambient_light_color = Color( 1, 0.921569, 0.733333, 1 )
 ambient_light_energy = 0.07
 ambient_light_sky_contribution = 0.0
 fog_enabled = true
-fog_color = Color( 0.262745, 0.25098, 0.239216, 1 )
+fog_color = Color( 0.592157, 0.47451, 0.356863, 1 )
 fog_sun_color = Color( 0.964706, 0.670588, 0.34902, 1 )
 fog_sun_amount = 0.2
 fog_depth_begin = 0.0
-fog_depth_end = 20000.0
-fog_depth_curve = 0.18301
+fog_depth_end = 10000.0
+fog_depth_curve = 0.353552
 fog_transmit_curve = 0.0947323
 fog_height_enabled = true
 fog_height_min = 520.7
@@ -108,16 +112,15 @@ ssao_quality = 2
 ssao_edge_sharpness = 0.0
 dof_blur_far_enabled = true
 dof_blur_far_distance = 0.01
-dof_blur_far_transition = 8192.0
+dof_blur_far_transition = 5122.47
 dof_blur_far_amount = 0.08
 dof_blur_far_quality = 2
 dof_blur_near_enabled = true
-dof_blur_near_distance = 2738.88
-dof_blur_near_transition = 805.83
-dof_blur_near_amount = 0.12
+dof_blur_near_distance = 261.85
+dof_blur_near_transition = 102.38
+dof_blur_near_amount = 0.11
 dof_blur_near_quality = 2
 glow_enabled = true
-glow_levels/3 = false
 glow_intensity = 1.0
 glow_strength = 0.94
 glow_bloom = 1.0
@@ -144,6 +147,13 @@ albedo_color = Color( 0.890196, 0.988235, 1, 1 )
 [sub_resource type="QuadMesh" id=3]
 material = SubResource( 122 )
 size = Vector2( 0.5, 50 )
+
+[sub_resource type="QuadMesh" id=127]
+size = Vector2( 4, 4 )
+
+[sub_resource type="ShaderMaterial" id=128]
+render_priority = -1
+shader = ExtResource( 15 )
 
 [sub_resource type="SpatialMaterial" id=99]
 flags_use_shadow_to_opacity = true
@@ -350,13 +360,13 @@ skeleton = NodePath("")
 material/0 = ExtResource( 13 )
 
 [node name="MeshInstance5" type="MeshInstance" parent="Island10"]
-transform = Transform( 0.98015, -0.0602962, -0.188865, 0, 0.95263, -0.304133, 0.198256, 0.298096, 0.93372, -6828.38, 95.763, 3859.17 )
+transform = Transform( 0.98015, -0.0602962, -0.188865, 0, 0.95263, -0.304133, 0.198256, 0.298096, 0.93372, -2946.61, 95.763, 3859.17 )
 mesh = ExtResource( 1 )
 skeleton = NodePath("")
 material/0 = ExtResource( 13 )
 
 [node name="MeshInstance6" type="MeshInstance" parent="Island10"]
-transform = Transform( 0.955538, -0.270922, -0.116396, 0.218268, 0.915282, -0.338554, 0.198256, 0.298096, 0.93372, 1607.33, -226.355, 4132.39 )
+transform = Transform( 0.955538, -0.270922, -0.116396, 0.218268, 0.915282, -0.338554, 0.198256, 0.298096, 0.93372, 799.682, -226.355, 4151.16 )
 mesh = ExtResource( 1 )
 skeleton = NodePath("")
 material/0 = ExtResource( 13 )
@@ -374,7 +384,7 @@ skeleton = NodePath("")
 material/0 = ExtResource( 13 )
 
 [node name="MeshInstance4" type="MeshInstance" parent="Island10"]
-transform = Transform( -0.930053, -0.102692, 0.352784, -0.354786, 0.00131676, -0.934947, 0.0955468, -0.994712, -0.0376582, 2816.3, -736.815, -127.711 )
+transform = Transform( 0.0379684, 0.999194, -0.0130007, -0.354786, 0.00131676, -0.934947, -0.934177, 0.0401105, 0.35455, -223.087, -736.815, 3489.44 )
 mesh = SubResource( 123 )
 skeleton = NodePath("")
 material/0 = ExtResource( 13 )
@@ -394,7 +404,7 @@ skeleton = NodePath("")
 material/0 = ExtResource( 20 )
 
 [node name="Bulding_Dest6" type="MeshInstance" parent="Island10"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3253.11, -57.2853, 4958.34 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -583.254, -57.2853, 6524.92 )
 mesh = ExtResource( 18 )
 skeleton = NodePath("")
 material/0 = ExtResource( 20 )
@@ -406,7 +416,7 @@ skeleton = NodePath("")
 material/0 = ExtResource( 20 )
 
 [node name="Bulding_Dest10" type="MeshInstance" parent="Island10"]
-transform = Transform( -0.78604, -0.179643, 0.591497, 0, 0.956844, 0.290602, -0.618175, 0.228425, -0.752118, -4078.22, -172.362, 4693.63 )
+transform = Transform( -0.78604, -0.179643, 0.591497, 0, 0.956844, 0.290602, -0.618175, 0.228425, -0.752118, -1550.85, -172.362, 5618.08 )
 mesh = ExtResource( 19 )
 skeleton = NodePath("")
 material/0 = ExtResource( 20 )
@@ -418,7 +428,7 @@ skeleton = NodePath("")
 material/0 = ExtResource( 20 )
 
 [node name="Bulding_Dest9" type="MeshInstance" parent="Island10"]
-transform = Transform( 0.956814, -0.0844786, 0.278157, 0.247952, 0.736642, -0.629189, -0.151749, 0.670986, 0.725775, -1877.09, -212.527, 3953 )
+transform = Transform( 0.858123, 0.134414, 0.495539, -0.498597, 0.448579, 0.74174, -0.122588, -0.883578, 0.451954, 912.378, -59.5728, 6109.96 )
 mesh = ExtResource( 19 )
 skeleton = NodePath("")
 material/0 = ExtResource( 20 )
@@ -436,7 +446,7 @@ skeleton = NodePath("")
 material/0 = ExtResource( 20 )
 
 [node name="Bulding_Dest7" type="MeshInstance" parent="Island10"]
-transform = Transform( -0.861363, 0, -0.507989, 0, 1, 0, 0.507989, 0, -0.861363, -1198.67, -69.3086, 5520.44 )
+transform = Transform( -0.861363, 0, -0.507989, 0, 1, 0, 0.507989, 0, -0.861363, -332.195, -69.3087, 6755.21 )
 mesh = ExtResource( 17 )
 skeleton = NodePath("")
 material/0 = ExtResource( 20 )
@@ -453,7 +463,7 @@ material/0 = ExtResource( 20 )
 environment = SubResource( 91 )
 
 [node name="Sun" type="DirectionalLight" parent="Sky"]
-transform = Transform( 0.743697, -0.0582916, -0.665971, -0.0607667, -0.997962, 0.0194915, -0.66575, 0.0259731, -0.745723, -0.00488281, 392.423, -0.00720215 )
+transform = Transform( 0.733138, -0.163234, -0.6602, -0.138875, -0.986245, 0.0896314, -0.66575, 0.0259731, -0.745723, -0.00488281, 392.423, -0.00720215 )
 light_color = Color( 1, 0.756863, 0.619608, 1 )
 light_energy = 1.92
 light_indirect_energy = 0.0
@@ -471,7 +481,7 @@ script = ExtResource( 5 )
 light_size = 0.06
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 0.950304, -0.0403773, 0.308694, 0, 0.991554, 0.129696, -0.311323, -0.12325, 0.942278, 853.276, 1027.04, 8376.68 )
+transform = Transform( 0.950304, -0.00668284, 0.311252, 0, 0.99977, 0.0214659, -0.311323, -0.0203991, 0.950085, 513.301, 108.677, 7493.77 )
 current = true
 fov = 45.0
 near = 1.0
@@ -508,6 +518,11 @@ unit_size = 100.0
 max_db = 6.0
 pitch_scale = 1.97
 autoplay = true
+
+[node name="MeshInstance3" type="MeshInstance" parent="Camera"]
+transform = Transform( 1, -5.29396e-22, 0, -1.05879e-22, 1, 0, 2.11758e-21, 0, 1, 0, -0.0144858, -1.05511 )
+mesh = SubResource( 127 )
+material/0 = SubResource( 128 )
 
 [node name="SunMoonPivot" type="Spatial" parent="."]
 transform = Transform( -0.356924, 0.042694, -0.933157, 0.0550472, 0.998181, 0.0246138, 0.932511, -0.0425823, -0.358623, -4186.49, -98.5417, -3429.98 )
@@ -564,13 +579,13 @@ process_material = SubResource( 115 )
 draw_pass_1 = SubResource( 103 )
 
 [node name="pPlane1" type="MeshInstance" parent="."]
-transform = Transform( 54.2433, -5.44583, 16.2796, 4.77287, 56.6129, 3.03499, -16.4895, -1.52793, 54.4314, 5439.82, 0, -1334.57 )
+transform = Transform( 53.0608, -13.2284, 15.7029, 12.234, 55.3144, 5.2588, -16.4895, -1.52793, 54.4314, -1014.54, -290.091, 1107.25 )
 mesh = SubResource( 104 )
 skeleton = NodePath("")
 material/0 = ExtResource( 8 )
 
 [node name="pPlane3" type="MeshInstance" parent="."]
-transform = Transform( 54.2433, -5.44583, 16.2796, 4.77287, 56.6129, 3.03499, -16.4895, -1.52793, 54.4314, 7055.4, 0, -125.275 )
+transform = Transform( 32.5337, 45.3292, 11.1281, -43.6655, 34.3502, -12.2638, -16.4895, -1.52793, 54.4314, -2261.69, -493.077, 4715.65 )
 mesh = SubResource( 104 )
 skeleton = NodePath("")
 material/0 = ExtResource( 8 )
@@ -606,17 +621,6 @@ local_coords = false
 draw_order = 1
 process_material = SubResource( 112 )
 draw_pass_1 = SubResource( 113 )
-
-[node name="Rock1" type="MeshInstance" parent="."]
-transform = Transform( 1530.56, -778.646, -883.21, -1075.21, -333.941, -1568.88, 479.875, 1735.27, -698.232, -3469.64, -1831.02, 7489.1 )
-material_override = ExtResource( 10 )
-lod_max_distance = 2000.0
-mesh = ExtResource( 22 )
-skeleton = NodePath("../..")
-material/0 = ExtResource( 10 )
-script = ExtResource( 29 )
-LOD0 = ExtResource( 22 )
-LOD1 = ExtResource( 27 )
 
 [node name="Rock3" type="MeshInstance" parent="."]
 transform = Transform( -1673.85, 847.243, -457.583, 873.21, 1722.34, -5.20087, 405.844, -211.423, -1876.05, 3811.41, -1774.46, -4541.52 )
@@ -659,7 +663,7 @@ LOD0 = ExtResource( 26 )
 LOD1 = ExtResource( 28 )
 
 [node name="Rock5" type="MeshInstance" parent="."]
-transform = Transform( -76.6738, -190.655, -68.5623, 69.1477, -93.5301, 182.756, -190.444, 42.7993, 93.9601, -769.453, -269.103, 4868.48 )
+transform = Transform( -204.607, -47.2142, 53.2523, 69.1477, -93.5301, 182.756, -16.8398, 189.61, 103.409, 169.105, -269.103, 5087.21 )
 lod_max_distance = 2000.0
 mesh = ExtResource( 26 )
 material/0 = ExtResource( 10 )
@@ -668,7 +672,7 @@ LOD0 = ExtResource( 26 )
 LOD1 = ExtResource( 28 )
 
 [node name="Rock6" type="MeshInstance" parent="."]
-transform = Transform( 39.7805, 187.344, 101.237, 75.3157, -108.709, 171.578, 199.184, 3.68949, -85.096, -2637.72, -269.103, 5008.11 )
+transform = Transform( 39.7805, 187.344, 101.237, 75.3157, -108.709, 171.578, 199.184, 3.68949, -85.096, -2637.72, -271.299, 5008.11 )
 lod_max_distance = 2000.0
 mesh = ExtResource( 26 )
 material/0 = ExtResource( 10 )
@@ -695,7 +699,7 @@ LOD0 = ExtResource( 26 )
 LOD1 = ExtResource( 28 )
 
 [node name="Rock9" type="MeshInstance" parent="."]
-transform = Transform( 93.1176, -171.165, 294.532, 315.564, -71.6717, -141.419, 128.317, 300.471, 134.048, -275.753, -443.321, 1301.62 )
+transform = Transform( 232.056, -426.556, 733.996, 786.409, -178.611, -352.427, 319.776, 748.797, 334.058, -938.232, -1210.99, 559.044 )
 lod_max_distance = 2000.0
 mesh = ExtResource( 26 )
 material/0 = ExtResource( 10 )
@@ -707,3 +711,13 @@ LOD1 = ExtResource( 28 )
 cast_shadow = 0
 mesh = SubResource( 124 )
 material/0 = SubResource( 125 )
+
+[node name="Terain" type="MeshInstance" parent="."]
+transform = Transform( 1345.96, 0, 0, 0, 1345.96, 0, 0, 0, 1345.96, -559.171, -195.694, 4073.53 )
+lod_max_distance = 6000.0
+mesh = ExtResource( 4 )
+material/0 = ExtResource( 12 )
+script = ExtResource( 29 )
+LOD0 = ExtResource( 4 )
+LOD1 = ExtResource( 11 )
+HideIfNoLod = true

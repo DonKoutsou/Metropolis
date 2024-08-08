@@ -98,8 +98,8 @@ public class SaveLoadManager : Control
 			{
 				Keys[0] = "CurrentEnergy";
 				Values[0] = bat.GetCurrentCap();
-				Keys[1] = "CurrentCondition";
-				Values[1] = bat.GetCondition();
+				//Keys[1] = "CurrentCondition";
+				//Values[1] = bat.GetCondition();
 				HasData = true;
 			}
 			else if (it is Toolbox box)

@@ -40,4 +40,8 @@ public class BaseDialogueScript : Node
         };
         return savedata;
     }
+    public virtual void LoadSaveData(Dictionary<string, object> Data)
+    {
+        DialogueProg = (int)Data["DialogueProg"];
+    }
 }

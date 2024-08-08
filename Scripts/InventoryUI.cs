@@ -38,7 +38,7 @@ public class InventoryUI : Control
 
     bool hascompass = false;
     bool hasmap = false;
-    bool hastoolbox = false;
+    //bool hastoolbox = false;
     bool ShowingCompass = false;
     bool ShowingMap = false;
 
@@ -154,7 +154,7 @@ public class InventoryUI : Control
 
             hascompass = false;
             hasmap = false;
-            hastoolbox = false;
+            //hastoolbox = false;
             int Itamm = 0;
 
             for (int v = Items.Count() - 1; v > -1; v --)
@@ -179,8 +179,8 @@ public class InventoryUI : Control
                     hascompass = true;
                 else if (Items[v].GetItemType() == global::ItemName.MAP)
                     hasmap = true;
-                else if (Items[v].GetItemType() == global::ItemName.TOOLBOX)
-                    hastoolbox = true;
+                //else if (Items[v].GetItemType() == global::ItemName.TOOLBOX)
+                    //hastoolbox = true;
 
             }
             maxpage = Itamm / 12;
@@ -265,7 +265,7 @@ public class InventoryUI : Control
         bool selectinglimb = FocusedSlot != null && FocusedSlot.item is Limb;
 
         GetNode<Button>("InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/DropButton").Visible = !ShowingMap;
-        GetNode<Button>("InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/RepairButton").Visible = selectingbat && hastoolbox;
+        //GetNode<Button>("InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/RepairButton").Visible = selectingbat && hastoolbox;
         GetNode<Button>("InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/SwitchButton").Visible = selectinginst;
         GetNode<Button>("InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/SwitchLimbButton").Visible = selectinglimb;
         GetNode<Control>("InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/CompassButton").Visible = hascompass;
@@ -319,7 +319,7 @@ public class InventoryUI : Control
 
         slot.Toggle(t);
     }
-    private void On_Repair_Button_Down()
+    /*private void On_Repair_Button_Down()
     {
         List<Item> toolboxes;
         Inv.GetItemsByType(out toolboxes, global::ItemName.TOOLBOX);
@@ -334,7 +334,7 @@ public class InventoryUI : Control
             if (ittorepair.GetCondition() == 100)
                 break;
         }
-    }
+    }*/
     private void On_Drop_Button_Down()
     {
         if (FocusedSlot == null)

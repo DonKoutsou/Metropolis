@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Assets/Building/Assets/House_Exterior3.tres" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Building/BuildingInterior.material" type="Material" id=2]
+[ext_resource path="res://Scripts/DoorPivot.cs" type="Script" id=3]
 [ext_resource path="res://Scenes/Env_Assets/HouseDoor.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scripts/House.cs" type="Script" id=5]
 [ext_resource path="res://Assets/Building/BuildingExterior.material" type="Material" id=6]
@@ -19,51 +20,6 @@ data = PoolVector3Array( 2.2757, 3.5748, 10.0835, 2.2757, 11.1083, 10.0835, 98.4
 margin = 0.001
 extents = Vector3( 54.0338, 19.8718, 29.5541 )
 
-[sub_resource type="Animation" id=9]
-resource_name = "Close"
-tracks/0/type = "value"
-tracks/0/path = NodePath("DoorPivot:rotation_degrees")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 171.119, 0 ), Vector3( 0, 0, 0 ) ]
-}
-
-[sub_resource type="Animation" id=10]
-resource_name = "Open"
-tracks/0/type = "value"
-tracks/0/path = NodePath("DoorPivot:rotation_degrees")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 171.119, 0 ) ]
-}
-
-[sub_resource type="Animation" id=11]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("DoorPivot:rotation_degrees")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0 ) ]
-}
-
 [sub_resource type="CubeMesh" id=12]
 size = Vector3( 7.563, 4.743, 0.12 )
 
@@ -74,12 +30,12 @@ PossibleDeco = [ ExtResource( 15 ), ExtResource( 14 ) ]
 FurnitureAmmount = 6
 DecorationAmmount = 2
 SpawnPool = {
-Resource( "res://Scenes/Items/Battery.tscn" ): 2,
-Resource( "res://Scenes/Items/Drahma.tscn" ): 40,
 Resource( "res://Scenes/Items/Guitar.tscn" ): 1,
+Resource( "res://Scenes/Items/Drahma.tscn" ): 40,
 Resource( "res://Scenes/Items/FastLeg_R.tscn" ): 1,
-Resource( "res://Scenes/Items/FastLeg_L.tscn" ): 1,
-Resource( "res://Scenes/Items/BatteryEmpty.tscn" ): 10
+Resource( "res://Scenes/Items/Battery.tscn" ): 2,
+Resource( "res://Scenes/Items/BatteryEmpty.tscn" ): 10,
+Resource( "res://Scenes/Items/FastLeg_L.tscn" ): 1
 }
 
 [node name="HouseExterior" type="StaticBody" parent="."]
@@ -108,21 +64,20 @@ shape = SubResource( 8 )
 
 [node name="DecorationPlacaments" type="Spatial" parent="."]
 
-[node name="Occluders" type="Spatial" parent="."]
-
 [node name="Furnitures" type="Spatial" parent="."]
 
 [node name="Decorations" type="Spatial" parent="."]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Close = SubResource( 9 )
-anims/Open = SubResource( 10 )
-anims/RESET = SubResource( 11 )
-
 [node name="DoorPivot" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.25, 7.26628, 10.0431 )
+script = ExtResource( 3 )
+Doors = [ NodePath("Door1") ]
+Rotations = [ Vector3( 0, 170, 0 ) ]
+Translations = [  ]
 
-[node name="Door" type="MeshInstance" parent="DoorPivot"]
+[node name="Door1" type="Spatial" parent="DoorPivot"]
+
+[node name="Door" type="MeshInstance" parent="DoorPivot/Door1"]
 transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 2.25, 0, 0 )
 mesh = SubResource( 12 )
 skeleton = NodePath("../..")
@@ -135,6 +90,5 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.15153, 36.9538, -5.64926 )
 
 [connection signal="body_entered" from="HouseDoor" to="." method="Entered"]
 [connection signal="body_exited" from="HouseDoor" to="." method="Left"]
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="On_Door_Animation_Finished"]
 
 [editable path="HouseDoor"]

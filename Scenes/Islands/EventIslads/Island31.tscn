@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Assets/Terains/Island24/Island24.tres" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Terains/Island24/Island24_LOD.tres" type="ArrayMesh" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Env_Assets/Ladder.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Building/BuildingComposition3.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Env_Assets/Water.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Characters/Smoke.tscn" type="PackedScene" id=9]
 
 [sub_resource type="SpatialMaterial" id=447]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -124,3 +126,15 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -399.482, 725.908, 280.873 )
 transform = Transform( 1, 0, 0, 0, 4.69358, 0, 0, 0, 1, -396.869, -70.234, 290.68 )
 TopPossition = Vector3( -3.307, 170.549, -5.432 )
 BottomPossition = Vector3( 0, 23.911, 6 )
+
+[node name="Particles" parent="." index="10" instance=ExtResource( 8 )]
+transform = Transform( -0.828266, 0, 0.560336, 0, 1, 0, -0.560336, 0, -0.828266, 1981.59, 1729.16, -639.987 )
+
+[node name="Particles2" parent="." index="11" instance=ExtResource( 9 )]
+transform = Transform( -0.586005, 0, -0.810308, 0, 1, 0, 0.810308, 0, -0.586005, 2176.77, 13.4465, -958.511 )
+
+[node name="Particles3" parent="." index="12" instance=ExtResource( 8 )]
+transform = Transform( -0.631339, 0, -0.775507, 0, 1, 0, 0.775507, 0, -0.631339, -2207.31, 837.375, -394.141 )
+
+[node name="Particles4" parent="." index="13" instance=ExtResource( 9 )]
+transform = Transform( 0.75535, 0, -0.655321, 0, 1, 0, 0.655321, 0, 0.75535, -2395.19, 10.8872, -545.031 )

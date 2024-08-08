@@ -5,12 +5,12 @@
 
 [sub_resource type="Curve" id=4]
 max_value = 3.0
-_data = [ Vector2( 0, 1.07669 ), 0.0, 0.0, 0, 0, Vector2( 1, 2.4 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 1.07669 ), 0.0, 0.0, 0, 0, Vector2( 1, 1.69495 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=5]
 min_value = -80.0
 max_value = 69.65
-_data = [ Vector2( 0, -80 ), 0.0, 0.0, 0, 0, Vector2( 1, 69.65 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, -80 ), 0.0, 0.0, 0, 0, Vector2( 1, -44.0732 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="ParticlesMaterial" id=2]
 emission_shape = 2

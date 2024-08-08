@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=2]
+[gd_scene load_steps=78 format=2]
 
 [ext_resource path="res://Scenes/Characters/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/HUD/InventoryUI.tscn" type="PackedScene" id=2]
@@ -53,6 +53,7 @@
 [ext_resource path="res://Scenes/Items/Sword.tscn" type="PackedScene" id=51]
 [ext_resource path="res://Scenes/Env_Assets/Ladder.tscn" type="PackedScene" id=52]
 [ext_resource path="res://Scripts/UniversalLodManager.cs" type="Script" id=53]
+[ext_resource path="res://Scenes/Env_Assets/BoatWorkshop.tscn" type="PackedScene" id=54]
 
 [sub_resource type="DynamicFont" id=4]
 size = 64
@@ -533,6 +534,9 @@ shape = SubResource( 3 )
 
 [node name="Player" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 1 )]
 transform = Transform( -0.494352, 0, 0.869262, 0, 1, 0, -0.869262, 0, -0.494352, 0.0285597, 14.2142, -16.9589 )
+
+[node name="BoatWorkshop" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 54 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 45.4111, 17.8682, 91.6745 )
 
 [node name="WindGenerator" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 4 )]
 transform = Transform( 0.032754, 0, 0.999463, 0, 1, 0, -0.999463, 0, 0.032754, -335.441, 5.09844, -46.893 )

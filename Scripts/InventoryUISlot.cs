@@ -56,9 +56,9 @@ public class InventoryUISlot : Control
             {
                 Battery bat = (Battery)it;
                 Rbar.Value = bat.GetCurrentCap();
-                Condition.SetCondition(bat.GetCondition());
+                //Condition.SetCondition(bat.GetCondition());
                 Rbar.Show();
-                Condition.Show();
+                //Condition.Show();
                 LimbColor.Hide();
             }
             else if (it is Limb limbitem)

@@ -381,8 +381,8 @@ margin = 0.5
 [node name="CameraZoomPivot" type="Position3D" parent="CameraMovePivot/CameraPanPivot/SpringArm"]
 transform = Transform( 1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0, 0, 20 )
 script = ExtResource( 12 )
-MaxDist = 80.0
-zoomSteps = 10
+MaxDist = 150.0
+zoomSteps = 20
 
 [node name="CameraPanXPivot" type="Position3D" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot"]
 transform = Transform( 1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0 )

@@ -7,16 +7,16 @@ using System.Security.Policy;
 public class WorldSoundManager : Spatial
 {
     static WorldSoundManager Instance;
-    Dictionary<string, AudioStreamPlayer3D> Players = new Dictionary<string, AudioStreamPlayer3D>();
+    Dictionary<string, AudioStreamPlayer> Players = new Dictionary<string, AudioStreamPlayer>();
     public override void _Ready()
     {
         Instance = this;
         var children = GetChildren();
         foreach (Node child in children)
         {
-            if (child is AudioStreamPlayer3D)
+            if (child is AudioStreamPlayer)
             {
-                Players.Add(child.Name, (AudioStreamPlayer3D)child);
+                Players.Add(child.Name, (AudioStreamPlayer)child);
             }
         }
     }
@@ -24,9 +24,9 @@ public class WorldSoundManager : Spatial
     {
         return Instance;
     }
-    public AudioStreamPlayer3D GetSound(string SoundName)
+    public AudioStreamPlayer GetSound(string SoundName)
     {
-        AudioStreamPlayer3D Sound;
+        AudioStreamPlayer Sound;
         Players.TryGetValue(SoundName, out Sound);
         return Sound;
     }

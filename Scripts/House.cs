@@ -7,6 +7,8 @@ public class House : Spatial
 {
 	[Export]
 	bool spawnItems = true;
+	[Export]
+	bool HideExterior = true;
 	//[Export]
 	//public PackedScene[] ItemSpawnPool;
 	
@@ -49,19 +51,24 @@ public class House : Spatial
 	}
 	public virtual void Entered(Node body)
 	{
-		StaticBody HouseExterior  = GetNode<StaticBody>("HouseExterior");
-		((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Front;
+		if (HideExterior)
+		{
+			StaticBody HouseExterior  = GetNode<StaticBody>("HouseExterior");
+			((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Front;
+		}
+		
 		GetNode<Spatial>("Furnitures").Show();
 		GetNode<Spatial>("Decorations").Show();
 
-		AnimationPlayer Anim = GetNode<AnimationPlayer>("AnimationPlayer");
-		Anim.Play("Open");
+		DoorPivot Piv = GetNode<DoorPivot>("DoorPivot");
+		Piv.Open();
+
+		AudioServer.SetBusEffectEnabled(0,0, true);
 		//((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(2)).ParamsCullMode = SpatialMaterial.CullMode.Front;
 		/*foreach (Spatial Oclude in GetNode<Spatial>("Occluders").GetChildren()) 
 		{
 			Oclude.Visible = false;
 		}*/
-		return;
 	}
 	protected virtual void On_Door_Animation_Finished(string anim)
 	{
@@ -75,9 +82,18 @@ public class House : Spatial
 	}
 	public virtual void Left(Node body)
 	{
-		
-		AnimationPlayer Anim = GetNode<AnimationPlayer>("AnimationPlayer");
-		Anim.Play("Close");
+		DoorPivot Piv = GetNode<DoorPivot>("DoorPivot");
+		Piv.Close();
+		if (HideExterior)
+		{
+			StaticBody HouseExterior  = GetNode<StaticBody>("HouseExterior");
+			((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Disabled;
+			
+		}
+		GetNode<Spatial>("Furnitures").Hide();
+		GetNode<Spatial>("Decorations").Hide();
+
+		AudioServer.SetBusEffectEnabled(0,0, false);
 		//((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(2)).ParamsCullMode = SpatialMaterial.CullMode.Disabled;
 		/*foreach (Spatial Oclude in GetNode<Spatial>("Occluders").GetChildren()) 
 		{

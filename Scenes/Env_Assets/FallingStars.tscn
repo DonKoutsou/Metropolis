@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=2]
+
+[sub_resource type="SpatialMaterial" id=1]
+flags_transparent = true
+flags_fixed_size = true
+vertex_color_use_as_albedo = true
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+emission_enabled = true
+emission = Color( 1, 0.615686, 0, 1 )
+emission_energy = 16.0
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.51954, 1 )
+colors = PoolColorArray( 0.971292, 0.971292, 0.971292, 0.0287082, 0, 0, 0, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.144722, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+trail_divisor = 20
+trail_size_modifier = SubResource( 5 )
+emission_shape = 5
+emission_ring_radius = 600.0
+emission_ring_inner_radius = 590.0
+emission_ring_height = 1.0
+emission_ring_axis = Vector3( 0, 0, 10 )
+spread = 0.0
+initial_velocity = 400.0
+angular_velocity = 86.52
+angular_velocity_random = 1.0
+scale = 0.5
+color_ramp = SubResource( 3 )
+
+[sub_resource type="SphereMesh" id=7]
+radius = 0.05
+height = 0.1
+radial_segments = 8
+rings = 4
+
+[node name="Particles" type="Particles"]
+material_override = SubResource( 1 )
+amount = 20
+process_material = SubResource( 6 )
+draw_pass_1 = SubResource( 7 )
