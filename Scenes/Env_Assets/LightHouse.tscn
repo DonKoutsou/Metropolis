@@ -297,7 +297,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ true ]
+"values": [ false ]
 }
 
 [node name="LightHouse" type="Spatial"]
@@ -307,8 +307,8 @@ PossibleFurni = [ ExtResource( 16 ) ]
 PossibleDeco = [ ExtResource( 24 ), ExtResource( 23 ) ]
 FurnitureAmmount = 14
 SpawnPool = {
-Resource( "res://Scenes/Items/Book2.tscn" ): 10,
 Resource( "res://Scenes/Items/Book1.tscn" ): 10,
+Resource( "res://Scenes/Items/Book2.tscn" ): 10,
 Resource( "res://Scenes/Items/Book3.tscn" ): 10
 }
 
@@ -717,7 +717,6 @@ anims/RESET = SubResource( 2181 )
 
 [node name="Camera" type="Camera" parent="LightHouse_UnlockedAnimation"]
 transform = Transform( 0.730067, 0.252609, 0.634973, 0, 0.929171, -0.369649, -0.683376, 0.269869, 0.678357, 209.311, 734.523, 361.766 )
-current = true
 fov = 45.0
 far = 8192.0
 

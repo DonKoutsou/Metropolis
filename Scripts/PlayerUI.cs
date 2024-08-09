@@ -13,10 +13,19 @@ public class PlayerUI : Control
     //NodePath JobBoard = null;   
     [Export]
     NodePath Inventory = null;
+    [Export]
+    NodePath MapUI = null;
+    [Export]
+    NodePath ControlsUI = null;
+    [Export]
+    NodePath ActionMenu = null;
 
     static PlayerUI instance;
 
     static int OpenMenus = 0;
+
+    Player Play;
+
     public static void OnMenuToggled(bool t)
     {
         if (t)
@@ -27,25 +36,61 @@ public class PlayerUI : Control
     public override void _Ready()
     {
         instance = this;
+        SetProcessInput(false);
+    }
+    public void ConnectPlayer(Player pl)
+    {
+        Play = pl;
+        SetProcessInput(true);
+        Control_UI ui = (Control_UI)GetUI(PlayerUIType.CONTROLS);
+        ui.EnableUI();
 
+
+        ActionMenu AMenu = (ActionMenu)GetUI(PlayerUIType.ACTION_MENU);
+        AMenu.ConnectPlayer(pl);
+    }
+    public void OnPlayerDisconnected()
+    {
+        SetProcessInput(false);
+        MapUI map = (MapUI)GetUI(PlayerUIType.MAP);
+            
+        if (map.IsOpen)
+            map.ToggleMap(false);
+
+        InventoryUI inv = (InventoryUI)GetUI(PlayerUIType.INVENTORY);
+        if (inv.IsOpen)
+            inv.CloseInventory();
+
+        Control_UI ui = (Control_UI)GetUI(PlayerUIType.CONTROLS);
+        ui.DissableUI();
+
+        ActionMenu AMenu = (ActionMenu)GetUI(PlayerUIType.ACTION_MENU);
+        AMenu.DissconnectPlayer();
+        
     }
     public static PlayerUI GetInstance()
     {
         return instance;
     }
-    public Node GetUI(PlayerUIType type)
+    public Control GetUI(PlayerUIType type)
     {
-        Node UIToReturn = null;
+        Control UIToReturn = null;
         if (type == PlayerUIType.CITYNAME)
-            UIToReturn = GetNode(CityNameUI);
+            UIToReturn = GetNode<Control>(CityNameUI);
         else if (type == PlayerUIType.SCREENEFFECTS)
-            UIToReturn = GetNode(ScreenEffects);
+            UIToReturn = GetNode<Control>(ScreenEffects);
         else if (type == PlayerUIType.CHEATMENU)
-            UIToReturn = GetNode(CheatMenu);
+            UIToReturn = GetNode<Control>(CheatMenu);
         //else if (type == PlayerUIType.JOBBOARD)
             //UIToReturn = GetNode(JobBoard);
         else if (type == PlayerUIType.INVENTORY)
-            UIToReturn = GetNode(Inventory);
+            UIToReturn = GetNode<Control>(Inventory);
+        else if (type == PlayerUIType.MAP)
+            UIToReturn = GetNode<Control>(MapUI);
+        else if (type == PlayerUIType.CONTROLS)
+            UIToReturn = GetNode<Control>(ControlsUI);
+        else if (type == PlayerUIType.ACTION_MENU)
+            UIToReturn = GetNode<Control>(ActionMenu);
 
         return UIToReturn;
     }
@@ -60,7 +105,36 @@ public class PlayerUI : Control
         Show();
         GetNode(Inventory).CallDeferred("OnPlayerSpawned", pl);
         GetNode(CheatMenu).CallDeferred("OnPlayerSpawned", pl);
+        ConnectPlayer(pl);
     }
+    public override void _Input(InputEvent @event)
+	{
+		if (@event.IsActionPressed("Inventory"))
+		{
+			InventoryUI inv = (InventoryUI)GetUI(PlayerUIType.INVENTORY);
+			if (inv.IsOpen)
+				inv.CloseInventory();
+			else
+				inv.OpenInventory();
+		}
+        else if (@event.IsActionPressed("Map"))
+        {
+            MapUI map = (MapUI)GetUI(PlayerUIType.MAP);
+            
+			if (map.IsOpen)
+				map.ToggleMap(false);
+			else
+            {
+                bool hasmap = Play.GetCharacterInventory().HasItemOfType(ItemName.MAP);
+                if (!hasmap)
+                {
+                    Play.GetTalkText().Talk("Δεν έχω χάρτη...");
+                }
+                else
+                    map.ToggleMap(true);
+            }
+        }
+	}
 }
 public enum PlayerUIType
 {
@@ -68,5 +142,8 @@ public enum PlayerUIType
     //JOBBOARD,
     SCREENEFFECTS,
     CHEATMENU,
-    INVENTORY
+    INVENTORY,
+    MAP,
+    CONTROLS,
+    ACTION_MENU,
 }

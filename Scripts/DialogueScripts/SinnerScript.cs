@@ -7,7 +7,35 @@ public class SinnerScript : BaseDialogueScript
 
     public override void DoDialogue(NPC Talker, NPC TalkerColaborator = null)
     {   
+        string text = string.Empty;
         
+        switch(DialogueProg)
+        {
+            case 0:
+            {
+                text = "Για κοίτα τη .";
+                DialogueProg ++;
+                break;
+            }
+            case 1:
+            {
+                text = "Αυτό που κουβαλάς είναι αυτό που νομίζω; Πηγένεις στην Μητρόπολη από'τι συμπερένω. Θα ήθελα να σε βοηθήσω στο ταξίδι σου αλλά δυστηχώς τα καΐκια που βλέπεις δεν λειτουργούν. Μου λείπουν τα εργαλεία και δεν μπορώ να τα επιδιορθώσω.";
+                DialogueProg ++;
+                break;
+            }
+            case 2:
+            {
+                text = string.Format("Μόλις επισκευάσω τα καΐκια είσαι ελεύθερος να πάρεις όποιο θες. Τα πανία τους θα σε βοηθήσουν να φτάσεις στην Μητρόπολη πολύ πιο εύκολά, εφόσον ο άνεμος είναι με το μέρος σου.");
+                DialogueProg ++;
+                break;
+            }
+            case 3:
+            {
+                text = "Ότι εργαλεία βρείς στα ταξίδια σου φέρτα εδώ και θα επισκευάσω τα καΐκια.";
+                break;
+            }
+        }
+        Talker.GetTalkText().Talk(text);
     }
     public override bool ShouldShowExtraAction()
     {

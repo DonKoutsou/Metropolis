@@ -9,13 +9,33 @@ public class MapUI : Control
     //MapGrid grid;
     static bool IsMouseInMapBool = false;
 
-    public void UpdateCoordinates()
+    public bool IsOpen = false;
+
+    MapGrid Grid;
+
+    public override void _Ready()
     {
-        //Vector2 tile = WorldMap.GetInstance().GetCurrentTile();
-        //CoordText.BbcodeText = "[center]X:" + tile.x + " / Y:" + tile.y;
-        //XCordText.Text = tile.x.ToString();
-        //YCordText.Text = tile.y.ToString();
-        PlayerUI.GetInstance().GetUI(PlayerUIType.INVENTORY).Call("On_Map_Button_Down");
+        base._Ready();
+        Grid = GetNode<MapGrid>("MapGridPanel/MapGrid");
+    }
+    public MapGrid GetGrid()
+    {
+        return Grid;
+    }
+    public void ToggleMap(bool toggle)
+    {
+        if (IsOpen == toggle)
+            return;
+
+        
+        if (toggle)
+        {
+            OnMapOpened();
+        }
+        else
+        {
+            OnMapClosed();
+        }
     }
     public static bool IsMouseInMap()
     {
@@ -31,13 +51,34 @@ public class MapUI : Control
     }
     public void OnMapOpened()
     {
-        GetNode<AnimationPlayer>("AnimationPlayer").Play("static");
+        PlayerUI.OnMenuToggled(true);
+        GetNode<AnimationPlayer>("AnimationPlayer").Play("MapOpen");
         GetNode<Panel>("MapGridPanel").GetNode<Control>("PlayerIconPivot").GetNode<AnimationPlayer>("PlayerIconAnim").Play("Blinking");
+        Show();
+        IsOpen = true;
+        
     }
     public void OnMapClosed()
     {
-        GetNode<AnimationPlayer>("AnimationPlayer").Stop();
+        PlayerUI.OnMenuToggled(false);
+        GetNode<AnimationPlayer>("AnimationPlayer").Play("MapClose");
         GetNode<Panel>("MapGridPanel").GetNode<Control>("PlayerIconPivot").GetNode<AnimationPlayer>("PlayerIconAnim").Stop();
+        AudioServer.SetBusEffectEnabled(0,0, false);
+        Grid.ToggleMap(false);
+    }
+    private void OnAnimFinished(string anim)
+    {
+        if (anim == "MapOpen")
+        {
+            AudioServer.SetBusEffectEnabled(0,0, true);
+            Grid.ToggleMap(true);
+        }
+        if (anim == "MapClose")
+        {
+            
+            Hide();
+            IsOpen = false;
+        }
     }
     //public override void _Ready()
     //{

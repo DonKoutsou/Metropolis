@@ -458,7 +458,7 @@ public class DayNight : WorldEnvironment
         }
        //Environment.FogSunColor = FogSunColor;
 
-       Color fogdistc = new Color(0,0,0).LinearInterpolate(FogDistantColor, AmbientLightEnergy);
+       Color fogdistc = new Color(0.1f,0.1f,0.1f).LinearInterpolate(FogDistantColor, AmbientLightEnergy);
 
         //Environment.FogColor = FogColor.LinearInterpolate(fogdistc, CurrentDistance);
         Environment.FogColor = fogdistc;

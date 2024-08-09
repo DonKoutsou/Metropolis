@@ -721,7 +721,7 @@ public class Island : Spatial
 		if (body is Player pl)
 		{
 			IslandInfo info = WorldMap.GetInstance().GetIleInfo(this);
-			MapGrid.GetInstance().SetIslandVisited(info, pl);
+			((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid().SetIslandVisited(info, pl);
 		}
 		
 	}

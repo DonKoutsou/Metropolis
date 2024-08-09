@@ -91,7 +91,7 @@ public class Port : Area
                 {
                     Island ile = (Island)GetParent();
                     Vector2 pos = WorldMap.GetInstance().GlobalToMap(ile.GlobalTranslation);
-                    MapGrid.GetInstance().SetPortVissible(pos, new Vector2(Translation.x, Translation.z));
+                    ((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid().SetPortVissible(pos, new Vector2(Translation.x, Translation.z));
                     Visited = true;
                 }
                 
@@ -118,7 +118,7 @@ public class Port : Area
             {
                 Island ile = (Island)GetParent();
                 Vector2 pos = WorldMap.GetInstance().GlobalToMap(ile.GlobalTranslation);
-                MapGrid.GetInstance().SetPortVissible(pos, new Vector2(Translation.x, Translation.z));
+                ((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid().SetPortVissible(pos, new Vector2(Translation.x, Translation.z));
                 Visited = true;
             }
         }

@@ -38,7 +38,7 @@ public class CameraZoomPivot : Position3D
 	float ZoomStage = 1;
 	public override void _Input(InputEvent @event)
 	{
-		if (MapGrid.GetInstance().IsMouseInMap())
+		if (MapUI.IsMouseInMap())
 			return;
 		if (@event.IsActionPressed("ZoomOut") && ZoomStage < zoomSteps)
 		{

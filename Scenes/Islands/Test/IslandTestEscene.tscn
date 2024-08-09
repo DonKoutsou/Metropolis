@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://Assets/Clutter/Powerline/PowerLine.tres" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Sea/OceanShader.tres" type="Material" id=2]
@@ -14,7 +14,6 @@
 [ext_resource path="res://Assets/TerainTex/SandSimple.tres" type="Material" id=12]
 [ext_resource path="res://Assets/Clutter/Powerline/PowerLineMat.tres" type="Material" id=13]
 [ext_resource path="res://Assets/Clutter/CylinderThing/CylThingyMat.material" type="Material" id=14]
-[ext_resource path="res://Assets/PostProcess/PixelShader.gdshader" type="Shader" id=15]
 [ext_resource path="res://Assets/Building/Assets/Building_Dest4.tres" type="ArrayMesh" id=16]
 [ext_resource path="res://Assets/Building/Assets/Building_Dest.tres" type="ArrayMesh" id=17]
 [ext_resource path="res://Assets/Building/Assets/Building_Dest2.tres" type="ArrayMesh" id=18]
@@ -29,6 +28,7 @@
 [ext_resource path="res://Assets/Rocks/Rock1_Lod.tres" type="ArrayMesh" id=27]
 [ext_resource path="res://Assets/Rocks/Rock4_Lod.tres" type="ArrayMesh" id=28]
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=29]
+[ext_resource path="res://Assets/Rain/Rain.tres" type="Material" id=30]
 
 [sub_resource type="SpatialMaterial" id=1]
 resource_name = "initialShadingGroup"
@@ -76,7 +76,7 @@ surfaces/2 = {
 }
 
 [sub_resource type="Environment" id=91]
-background_mode = 2
+background_mode = 1
 background_color = Color( 0.262745, 0.25098, 0.239216, 1 )
 background_energy = 0.71
 ambient_light_color = Color( 1, 0.921569, 0.733333, 1 )
@@ -136,24 +136,9 @@ spread = 5.03
 gravity = Vector3( 0, -100, 0 )
 initial_velocity = 10000.0
 
-[sub_resource type="SpatialMaterial" id=122]
-render_priority = 1
-flags_unshaded = true
-params_blend_mode = 1
-params_cull_mode = 2
-params_depth_draw_mode = 1
-albedo_color = Color( 0.890196, 0.988235, 1, 1 )
-
 [sub_resource type="QuadMesh" id=3]
-material = SubResource( 122 )
+material = ExtResource( 30 )
 size = Vector2( 0.5, 50 )
-
-[sub_resource type="QuadMesh" id=127]
-size = Vector2( 4, 4 )
-
-[sub_resource type="ShaderMaterial" id=128]
-render_priority = -1
-shader = ExtResource( 15 )
 
 [sub_resource type="SpatialMaterial" id=99]
 flags_use_shadow_to_opacity = true
@@ -487,13 +472,9 @@ fov = 45.0
 near = 1.0
 far = 100000.0
 
-[node name="EnvSound" type="AudioStreamPlayer3D" parent="Camera"]
-transform = Transform( 1, 0, 0, -7.45058e-09, 1, 0, 2.98023e-08, 0, 1, 0, 0, 0 )
+[node name="EnvSound" type="AudioStreamPlayer" parent="Camera"]
 stream = ExtResource( 9 )
-max_db = -13.118
 autoplay = true
-max_distance = 16.06
-area_mask = 0
 
 [node name="Spatial" type="Spatial" parent="Camera"]
 transform = Transform( 1, -1.86265e-08, 2.08616e-07, -3.72529e-09, 1, -4.47035e-08, 5.96046e-08, 6.70552e-08, 1, 0, 0, 0 )
@@ -511,18 +492,10 @@ draw_order = 2
 process_material = SubResource( 117 )
 draw_pass_1 = SubResource( 3 )
 
-[node name="RainSound" type="AudioStreamPlayer3D" parent="Camera/Spatial"]
+[node name="RainSound" type="AudioStreamPlayer" parent="Camera/Spatial"]
 stream = ExtResource( 7 )
-unit_db = -77.188
-unit_size = 100.0
-max_db = 6.0
 pitch_scale = 1.97
 autoplay = true
-
-[node name="MeshInstance3" type="MeshInstance" parent="Camera"]
-transform = Transform( 1, -5.29396e-22, 0, -1.05879e-22, 1, 0, 2.11758e-21, 0, 1, 0, -0.0144858, -1.05511 )
-mesh = SubResource( 127 )
-material/0 = SubResource( 128 )
 
 [node name="SunMoonPivot" type="Spatial" parent="."]
 transform = Transform( -0.356924, 0.042694, -0.933157, 0.0550472, 0.998181, 0.0246138, 0.932511, -0.0425823, -0.358623, -4186.49, -98.5417, -3429.98 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Scripts/MapGrid.cs" type="Script" id=1]
 [ext_resource path="res://Fonts/Play-Bold.ttf" type="DynamicFontData" id=2]
@@ -13,6 +13,9 @@
 [ext_resource path="res://Assets/MapIcons/Border.png" type="Texture" id=11]
 [ext_resource path="res://UIThemes/Panel_Black_BottomCorner.tres" type="StyleBox" id=12]
 [ext_resource path="res://Assets/MapIcons/grid.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Compass/compass.png" type="Texture" id=14]
+[ext_resource path="res://UIThemes/Panel_Black_TopCorner.tres" type="StyleBox" id=15]
+[ext_resource path="res://UIThemes/Panel_Black_LeftCorners.tres" type="StyleBox" id=16]
 
 [sub_resource type="StyleBoxFlat" id=39]
 
@@ -64,24 +67,6 @@ tracks/0/keys = {
 "values": [ Color( 0.541176, 0.737255, 0.435294, 1 ) ]
 }
 
-[sub_resource type="OpenSimplexNoise" id=38]
-octaves = 1
-period = 0.1
-persistence = 0.0
-lacunarity = 1.65
-
-[sub_resource type="NoiseTexture" id=6]
-width = 256
-height = 256
-seamless = true
-noise = SubResource( 38 )
-
-[sub_resource type="StyleBoxTexture" id=19]
-resource_local_to_scene = true
-resource_name = "normal"
-texture = SubResource( 6 )
-region_rect = Rect2( 0, 0, 512, 512 )
-
 [sub_resource type="StyleBoxFlat" id=46]
 bg_color = Color( 0.235294, 0.321569, 0.372549, 0.54902 )
 border_width_left = 2
@@ -131,10 +116,402 @@ use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 2 )
 
+[sub_resource type="Animation" id=48]
+resource_name = "MapClose"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("MapGridPanel:rect_size")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1823, 990 ), Vector2( 1823, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MapGridPanel:rect_position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 65, 60 ), Vector2( 65, 555 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Panel2:rect_position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, 60 ), Vector2( 32, 555 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Panel2:rect_size")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 33, 990 ), Vector2( 33, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Panel7:rect_position")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 31, 0 ), Vector2( 32.5, 510 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Panel4:rect_position")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, 1050 ), Vector2( 32, 540 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Panel4:rect_size")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1856, 30 ), Vector2( 1856, 30 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Panel3:rect_position")
+tracks/7/interp = 2
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 65, 30 ), Vector2( 65, 521 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Panel5:rect_position")
+tracks/8/interp = 2
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, 30 ), Vector2( 32, 523 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Panel6:rect_position")
+tracks/9/interp = 2
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1888, 30 ), Vector2( 1888, 518 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Panel6:rect_size")
+tracks/10/interp = 2
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, 1020 ), Vector2( 32, 44 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("Panel8:rect_position")
+tracks/11/interp = 2
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 30 ), Vector2( 0, 518 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("Panel8:rect_size")
+tracks/12/interp = 2
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, 1020 ), Vector2( 32, 44 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("Panel7:rect_size")
+tracks/13/interp = 2
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1859, 30 ), Vector2( 1860, 30 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath(".:rect_position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( -1920, 0 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("MapGridPanel/Panel:modulate")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=49]
+resource_name = "MapOpen"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("MapGridPanel:rect_size")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1823, 0 ), Vector2( 1823, 0 ), Vector2( 1823, 990 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MapGridPanel:rect_position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 65, 555 ), Vector2( 65, 555 ), Vector2( 65, 60 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Panel2:rect_position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, 555 ), Vector2( 32, 555 ), Vector2( 32, 60 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Panel2:rect_size")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 33, 0 ), Vector2( 33, 0 ), Vector2( 33, 990 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Panel7:rect_position")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32.5, 510 ), Vector2( 32.5, 510 ), Vector2( 31, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Panel4:rect_position")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, 540 ), Vector2( 32, 540 ), Vector2( 32, 1050 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Panel4:rect_size")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1856, 30 ), Vector2( 1856, 30 ), Vector2( 1856, 30 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Panel3:rect_position")
+tracks/7/interp = 2
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 65, 521 ), Vector2( 65, 521 ), Vector2( 65, 30 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Panel5:rect_position")
+tracks/8/interp = 2
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, 523 ), Vector2( 32, 523 ), Vector2( 32, 30 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Panel6:rect_position")
+tracks/9/interp = 2
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1888, 518 ), Vector2( 1888, 518 ), Vector2( 1888, 30 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Panel6:rect_size")
+tracks/10/interp = 2
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, 44 ), Vector2( 32, 44 ), Vector2( 32, 1020 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("Panel8:rect_position")
+tracks/11/interp = 2
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 518 ), Vector2( 0, 518 ), Vector2( 0, 30 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("Panel8:rect_size")
+tracks/12/interp = 2
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, 44 ), Vector2( 32, 44 ), Vector2( 32, 1020 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("Panel7:rect_size")
+tracks/13/interp = 2
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1860, 30 ), Vector2( 1860, 30 ), Vector2( 1859, 30 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath(".:rect_position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -1920, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("MapGridPanel/Panel:modulate")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0, 1.3, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+
 [sub_resource type="Animation" id=20]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("MapGridPanel/Panel:custom_styles/panel:texture:noise:seed")
+tracks/0/path = NodePath("MapGridPanel:rect_size")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -143,23 +520,199 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 0 ]
+"values": [ Vector2( 1823, 990 ) ]
 }
-
-[sub_resource type="Animation" id=18]
-resource_name = "static"
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("MapGridPanel/Panel:custom_styles/panel:texture:noise:seed")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+tracks/1/type = "value"
+tracks/1/path = NodePath("MapGridPanel:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 65, 60 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Panel2:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 32, 60 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Panel2:rect_size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 33, 990 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Panel7:rect_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 32.5, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Panel4:rect_position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 32, 1050 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Panel4:rect_size")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1856, 30 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Panel3:rect_position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 65, 30 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Panel5:rect_position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 32, 30 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Panel6:rect_position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1888, 30 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Panel6:rect_size")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 32, 1020 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("Panel8:rect_position")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 30 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("Panel8:rect_size")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 32, 1020 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("Panel7:rect_size")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1859, 30 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath(".:rect_position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -1920, 0 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath(".:rect_size")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1920, 1080 ) ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("MapGridPanel/Panel:modulate")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ) ]
 }
 
 [node name="MapUI" type="Control"]
@@ -167,10 +720,8 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -640.0
-margin_top = -360.0
-margin_right = 640.0
-margin_bottom = 360.0
+margin_left = -1920.0
+margin_bottom = 1080.0
 mouse_filter = 1
 script = ExtResource( 3 )
 
@@ -179,10 +730,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -243.5
-margin_top = -128.5
-margin_right = 243.5
-margin_bottom = 128.5
+margin_left = 65.0
+margin_top = 60.0
+margin_right = 1888.0
+margin_bottom = 1050.0
 rect_clip_content = true
 mouse_filter = 1
 mouse_default_cursor_shape = 6
@@ -199,11 +750,11 @@ mouse_filter = 1
 custom_styles/panel = SubResource( 40 )
 
 [node name="MapGrid" type="GridContainer" parent="MapGridPanel"]
-rect_scale = Vector2( 4, 4 )
+rect_scale = Vector2( 12, 12 )
 mouse_filter = 2
 custom_constants/vseparation = 12
 custom_constants/hseparation = 12
-columns = 31
+columns = 23
 script = ExtResource( 1 )
 MaxZoomScale = 25.0
 TileScene = ExtResource( 6 )
@@ -233,41 +784,32 @@ root_node = NodePath("../..")
 anims/Blinking = SubResource( 28 )
 anims/RESET = SubResource( 30 )
 
+[node name="TextureRect3" type="TextureRect" parent="MapGridPanel"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -193.0
+margin_top = -184.0
+margin_right = -41.0
+margin_bottom = -32.0
+texture = ExtResource( 14 )
+expand = true
+
 [node name="TextureRect" type="TextureRect" parent="MapGridPanel"]
 visible = false
 modulate = Color( 1, 1, 1, 0.705882 )
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -237.5
-margin_top = -104.0
-margin_right = 237.5
-margin_bottom = 104.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 texture = ExtResource( 11 )
 expand = true
-
-[node name="Panel" type="Panel" parent="MapGridPanel"]
-modulate = Color( 1, 1, 1, 0.380392 )
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -243.5
-margin_top = -243.5
-margin_right = 243.5
-margin_bottom = 243.5
-rect_clip_content = true
-mouse_filter = 2
-mouse_default_cursor_shape = 6
-custom_styles/panel = SubResource( 19 )
 
 [node name="Panel2" type="Panel" parent="MapGridPanel"]
 anchor_top = 0.5
 anchor_bottom = 0.5
-margin_top = -1.5
-margin_right = 239.0
-margin_bottom = 1.5
+margin_top = -1.0
+margin_right = 907.0
+margin_bottom = 2.0
 rect_pivot_offset = Vector2( 0, 1.5 )
 mouse_filter = 1
 custom_styles/panel = SubResource( 46 )
@@ -275,9 +817,9 @@ custom_styles/panel = SubResource( 46 )
 [node name="Panel6" type="Panel" parent="MapGridPanel"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -1.5
-margin_right = 1.5
-margin_bottom = 124.0
+margin_left = -0.5
+margin_right = 2.5
+margin_bottom = 491.0
 rect_pivot_offset = Vector2( 0, 1.5 )
 mouse_filter = 2
 custom_styles/panel = SubResource( 46 )
@@ -297,28 +839,32 @@ theme = SubResource( 26 )
 custom_styles/panel = SubResource( 27 )
 
 [node name="TextureRect2" type="TextureRect" parent="MapGridPanel"]
+visible = false
 self_modulate = Color( 1, 1, 1, 0.168627 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -243.5
-margin_top = -237.0
-margin_right = 244.5
-margin_bottom = 238.0
+margin_left = -928.0
+margin_top = -904.0
+margin_right = 929.0
+margin_bottom = 904.0
 mouse_filter = 2
 texture = ExtResource( 13 )
 expand = true
 
+[node name="Panel" type="Panel" parent="MapGridPanel"]
+modulate = Color( 0, 0, 0, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+
 [node name="Panel2" type="Panel" parent="."]
-anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -276.0
-margin_top = -128.5
-margin_right = -243.0
-margin_bottom = 128.5
+margin_left = 32.0
+margin_top = 60.0
+margin_right = 65.0
+margin_bottom = 1050.0
 rect_clip_content = true
 mouse_filter = 1
 custom_styles/panel = SubResource( 42 )
@@ -326,8 +872,8 @@ custom_styles/panel = SubResource( 42 )
 [node name="MapGridY" type="GridContainer" parent="Panel2"]
 margin_right = 10.0
 margin_bottom = 1000.0
-custom_constants/vseparation = 48
-custom_constants/hseparation = 48
+custom_constants/vseparation = 144
+custom_constants/hseparation = 144
 
 [node name="PanelContainer" type="PanelContainer" parent="Panel2"]
 anchor_left = 0.5
@@ -353,10 +899,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -243.0
-margin_top = -158.0
-margin_right = 244.0
-margin_bottom = -128.0
+margin_left = 65.0
+margin_top = 30.0
+margin_right = 1888.0
+margin_bottom = 60.0
 rect_clip_content = true
 mouse_filter = 1
 custom_styles/panel = SubResource( 42 )
@@ -364,8 +910,8 @@ custom_styles/panel = SubResource( 42 )
 [node name="MapGridX" type="GridContainer" parent="Panel3"]
 margin_right = 1000.0
 margin_bottom = 10.0
-custom_constants/vseparation = 48
-custom_constants/hseparation = 48
+custom_constants/vseparation = 144
+custom_constants/hseparation = 144
 columns = 81
 
 [node name="PanelContainer" type="PanelContainer" parent="Panel3"]
@@ -388,19 +934,15 @@ align = 1
 valign = 1
 
 [node name="Panel5" type="Panel" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -276.0
-margin_top = -158.0
-margin_right = -243.0
-margin_bottom = -128.0
+margin_left = 32.0
+margin_top = 30.0
+margin_right = 65.0
+margin_bottom = 59.9999
 rect_clip_content = true
 mouse_filter = 1
 custom_styles/panel = SubResource( 42 )
 
-[node name="RefreshCoords" type="Button" parent="Panel5"]
+[node name="RefreshCoords" type="Button" parent="Panel5" groups=["Buttons"]]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -420,13 +962,61 @@ icon = ExtResource( 5 )
 icon_align = 1
 expand_icon = true
 
+[node name="Panel4" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 32.0
+margin_top = 1050.0
+margin_right = 1888.0
+margin_bottom = 1080.0
+rect_clip_content = true
+mouse_filter = 1
+custom_styles/panel = ExtResource( 12 )
+
+[node name="Panel7" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 32.5
+margin_right = 1891.5
+margin_bottom = 30.0
+rect_clip_content = true
+mouse_filter = 1
+custom_styles/panel = ExtResource( 15 )
+
+[node name="Panel6" type="Panel" parent="."]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 1888.0
+margin_top = 30.0
+margin_right = 1920.0
+margin_bottom = 1050.0
+rect_clip_content = true
+mouse_filter = 1
+custom_styles/panel = ExtResource( 10 )
+
+[node name="Panel8" type="Panel" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = 30.0
+margin_right = 32.0
+margin_bottom = 1050.0
+rect_clip_content = true
+mouse_filter = 1
+custom_styles/panel = ExtResource( 16 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 2.0
+anims/MapClose = SubResource( 48 )
+anims/MapOpen = SubResource( 49 )
 anims/RESET = SubResource( 20 )
-anims/static = SubResource( 18 )
 
 [connection signal="mouse_entered" from="MapGridPanel" to="." method="OnMouseEntered"]
 [connection signal="mouse_exited" from="MapGridPanel" to="." method="OnMouseLeft"]
-[connection signal="mouse_entered" from="MapGridPanel/Panel" to="." method="OnMouseEntered"]
-[connection signal="mouse_exited" from="MapGridPanel/Panel" to="." method="OnMouseLeft"]
 [connection signal="button_down" from="Panel5/RefreshCoords" to="." method="UpdateCoordinates"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="OnAnimFinished"]

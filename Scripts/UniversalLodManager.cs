@@ -133,11 +133,13 @@ public partial class UniversalLodManager : Node
         if (objtocheck != null && Godot.Object.IsInstanceValid(objtocheck) && objtocheck.IsInsideTree())
         {
           float dist = campos.DistanceTo(objtocheck.GlobalTranslation);
-        
-          if (dist > 200)
-              objtocheck.SwitchLod(true);
+
+          if (dist > 800)
+              objtocheck.SwitchLod(2);
+          else if (dist > 200)
+              objtocheck.SwitchLod(1);
           else
-              objtocheck.SwitchLod(false);
+              objtocheck.SwitchLod(0);
         }
       }
       

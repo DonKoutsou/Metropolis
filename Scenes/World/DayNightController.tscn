@@ -1,7 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://new_environment2.tres" type="Environment" id=1]
 [ext_resource path="res://Scripts/DayNight.cs" type="Script" id=2]
+
+[sub_resource type="Curve" id=3]
+max_value = 2.0
+_data = [ Vector2( 0, 2 ), 0.0, 0.0, 0, 0, Vector2( 0.240057, 2 ), 0.0, 0.0, 0, 0, Vector2( 0.365057, 0.422383 ), 0.0, 0.0, 0, 0, Vector2( 0.859375, 0.436823 ), 0.0, 0.0, 0, 0, Vector2( 1, 2 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=8]
 _data = [ Vector2( 0, 0.3 ), 0.0, 0.0, 0, 0, Vector2( 0.290865, 0.778374 ), 0.0, 0.0, 0, 0, Vector2( 0.560096, 0.815184 ), 0.0, 0.0, 0, 0, Vector2( 0.8, 0.7 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.3 ), 0.0, 0.0, 0, 0 ]
@@ -13,18 +17,55 @@ _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.3, 0.1 ), 0.0, 0.0, 0, 0, 
 _data = [ Vector2( 0, 0.0575153 ), 0.0, 0.0, 0, 0, Vector2( 0.5, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0513804 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=15]
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.247596, 0.0529141 ), 0.0, 0.0, 0, 0, Vector2( 0.598558, 0.775307 ), 0.0, 0.0, 0, 0, Vector2( 0.848558, 0.077454 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.247596, 0.0529141 ), 0.0, 0.0, 0, 0, Vector2( 0.598558, 0.775307 ), 0.0, 0.0, 0, 0, Vector2( 0.757983, 0.651625 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=6]
+max_value = 3.0
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.188865, 1.11552 ), 0.0, 0.0, 0, 0, Vector2( 0.499637, 0.0703971 ), 0.0, 0.0, 0, 0, Vector2( 0.83952, 1.12094 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=7]
+max_value = 3.0
+_data = [ Vector2( 0, 0.871841 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=4]
 max_value = 360.0
 _data = [ Vector2( 0, 0 ), 0.0, 369.23, 0, 0, Vector2( 1, 360 ), 372.237, 319.291, 0, 0 ]
 
+[sub_resource type="Gradient" id=16]
+offsets = PoolRealArray( 0, 0.274939, 0.374194, 0.394184, 0.771552, 0.862069, 1 )
+colors = PoolColorArray( 0.887207, 0.662202, 0.458944, 1, 0.888672, 0.608351, 0.434092, 1, 0.888672, 0.608351, 0.434092, 1, 1, 0.950159, 0.768012, 1, 1, 0.943967, 0.739193, 1, 0.916992, 0.359357, 0.188652, 1, 0.887207, 0.662202, 0.458944, 1 )
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0, 0.997019 )
+colors = PoolColorArray( 1, 0.963969, 0.68732, 1, 1, 0.963969, 0.68732, 1 )
+
+[sub_resource type="Curve" id=1]
+max_value = 360.0
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.130519, 360 ), 0.0, 0.0, 0, 0, Vector2( 0.208442, 191.043 ), 0.0, 0.0, 0, 0, Vector2( 0.372078, 360 ), 0.0, 0.0, 0, 0, Vector2( 0.559091, 76.1963 ), 0.0, 0.0, 0, 0, Vector2( 0.594156, 358.896 ), 0.0, 0.0, 0, 0, Vector2( 0.688961, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.774675, 360 ), 0.0, 0.0, 0, 0, Vector2( 0.895455, 140.245 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=2]
+max_value = 100.0
+_data = [ Vector2( 0, 76.3804 ), 0.0, 0.0, 0, 0, Vector2( 0.0655844, 88.6503 ), 0.0, 0.0, 0, 0, Vector2( 0.117532, 56.7485 ), 0.0, 0.0, 0, 0, Vector2( 0.19026, 74.5399 ), 0.0, 0.0, 0, 0, Vector2( 0.25, 5.82822 ), 0.0, 0.0, 0, 0, Vector2( 0.266883, 100 ), 0.0, 0.0, 0, 0, Vector2( 0.477273, 82.5153 ), 0.0, 0.0, 0, 0, Vector2( 0.587662, 56.135 ), 0.0, 0.0, 0, 0, Vector2( 0.656493, 94.1718 ), 0.0, 0.0, 0, 0, Vector2( 0.782468, 12.5767 ), 0.0, 0.0, 0, 0, Vector2( 0.874675, 54.2945 ), 0.0, 0.0, 0, 0, Vector2( 1, 80.6749 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=17]
+max_value = 20.0
+_data = [ Vector2( 0, 20 ), 0.0, -32.663, 0, 0, Vector2( 1, 0 ), 1.32912, 0.0, 0, 0 ]
+
 [node name="DayNightController" type="WorldEnvironment"]
 environment = ExtResource( 1 )
 script = ExtResource( 2 )
+AutoExposureCurve = SubResource( 3 )
 brightnesscurve = SubResource( 8 )
 sunbrightnesscurve = SubResource( 10 )
 moonbrightnesscurve = SubResource( 11 )
 softlightnesscurve = SubResource( 15 )
+SunGodRayCurve = SubResource( 6 )
+MoonGodRayCurve = SubResource( 7 )
 sunrotcurve = SubResource( 4 )
-startinghour = 4
+SunColorGradient = SubResource( 16 )
+MoonColorGradient = SubResource( 5 )
+startinghour = 9
+WindDirCurve = SubResource( 1 )
+WindStreangthCurve = SubResource( 2 )
+RainStreangthCurve = SubResource( 2 )
+FogDirstanceCurve = SubResource( 17 )

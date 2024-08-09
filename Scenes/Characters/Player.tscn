@@ -1,10 +1,8 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
-[ext_resource path="res://Scenes/HUD/ActionMenu.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Systems/Tutorial.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Fonts/Play-Bold.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://Assets/PostProcess/PixelShader.gdshader" type="Shader" id=5]
 [ext_resource path="res://Scenes/Items/NormalLeg_R.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Inventory/Inventory.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Items/NormalLeg_L.tscn" type="PackedScene" id=8]
@@ -21,7 +19,7 @@
 [ext_resource path="res://Scripts/CameraAnimationPlayer.cs" type="Script" id=35]
 
 [sub_resource type="Curve" id=165]
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.16065 ), 0.59819, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.211191 ), 0.59819, 0.0, 0, 0 ]
 
 [sub_resource type="CapsuleShape" id=164]
 height = 5.27483
@@ -46,10 +44,6 @@ render_priority = 1
 flags_transparent = true
 params_specular_mode = 4
 albedo_color = Color( 0, 0, 0, 1 )
-
-[sub_resource type="ShaderMaterial" id=126]
-render_priority = -1
-shader = ExtResource( 5 )
 
 [sub_resource type="Animation" id=110]
 resource_name = "FadeIn"
@@ -94,52 +88,16 @@ tracks/0/keys = {
 "values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../../../../../../DialogueCameraPivot/DialogueCamera:current")
+tracks/1/path = NodePath("MeshInstance2:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.6 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("MeshInstance2:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0, 3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("../../../../../../DialogueCameraPivot/DialogueCamera/DialogueCameraBox:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.6, 3 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("../../../../../../DialogueCameraPivot/DialogueCamera/DialogueCameraBox:material/0:albedo_color")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0, 0.6, 3 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=117]
@@ -173,52 +131,28 @@ tracks/1/keys = {
 resource_name = "FadeOutDialogue"
 length = 3.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("../../../../../../DialogueCameraPivot/DialogueCamera/DialogueCameraBox:material/0:albedo_color")
+tracks/0/path = NodePath(".:current")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:current")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
 "times": PoolRealArray( 1.5 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("MeshInstance2:material/0:albedo_color")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
+tracks/1/type = "value"
+tracks/1/path = NodePath("MeshInstance2:material/0:albedo_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
 "times": PoolRealArray( 1.5, 3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("../../../../../../DialogueCameraPivot/DialogueCamera/DialogueCameraBox:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 1.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
 }
 
 [sub_resource type="Animation" id=111]
@@ -248,7 +182,7 @@ tracks/1/keys = {
 "values": [ false ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("../../../../../../DialogueCameraPivot/DialogueCamera:current")
+tracks/2/path = NodePath(".:current")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -257,49 +191,8 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ false ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("../../../../../../DialogueCameraPivot/DialogueCamera/DialogueCameraBox:material/0:albedo_color")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 0, 0, 0, 0 ) ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath(".:current")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
 "values": [ true ]
 }
-tracks/5/type = "value"
-tracks/5/path = NodePath("../../../../../../DialogueCameraPivot/DialogueCamera/DialogueCameraBox:visible")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ true ]
-}
-
-[sub_resource type="SpatialMaterial" id=151]
-render_priority = 1
-flags_transparent = true
-albedo_color = Color( 0, 0, 0, 0 )
 
 [node name="Player" type="KinematicBody" groups=["player"]]
 pause_mode = 1
@@ -335,13 +228,6 @@ monitorable = false
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.72654, 0 )
 shape = SubResource( 92 )
 
-[node name="ActionMenu" parent="." instance=ExtResource( 2 )]
-visible = false
-margin_left = 960.0
-margin_top = 540.0
-margin_right = 960.0
-margin_bottom = 540.0
-
 [node name="Inventory" parent="." instance=ExtResource( 7 )]
 StartingItems = [ ExtResource( 33 ), ExtResource( 34 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 10 ) ]
 
@@ -368,11 +254,11 @@ pause_mode = 1
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
 
 [node name="CameraPanPivot" type="Position3D" parent="CameraMovePivot"]
-transform = Transform( 0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 6.52882, 0 )
+transform = Transform( 0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 4.23468, 0 )
 script = ExtResource( 14 )
 
 [node name="SpringArm" type="SpringArm" parent="CameraMovePivot/CameraPanPivot"]
-transform = Transform( 0.999998, 3.55271e-15, -1.42109e-14, -1.37926e-15, 0.965926, 0.258818, 7.10543e-15, -0.258819, 0.965924, 0, -0.779459, 0 )
+transform = Transform( 0.999998, 3.55271e-15, -1.42109e-14, -1.37926e-15, 0.965926, 0.258818, 7.10543e-15, -0.258819, 0.965924, 0, 0, 0 )
 collision_mask = 260
 shape = SubResource( 125 )
 spring_length = 20.0
@@ -403,11 +289,6 @@ visible = false
 mesh = SubResource( 107 )
 material/0 = SubResource( 109 )
 
-[node name="MeshInstance3" type="MeshInstance" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/PlayerCamera"]
-transform = Transform( 1, -5.29396e-22, 0, -1.05879e-22, 1, 0, 2.11758e-21, 0, 1, 0, -0.0144858, -1.05511 )
-mesh = SubResource( 107 )
-material/0 = SubResource( 126 )
-
 [node name="CameraAnimationPlayer" type="AnimationPlayer" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/PlayerCamera"]
 anims/FadeIn = SubResource( 110 )
 anims/FadeInDialogue = SubResource( 118 )
@@ -434,27 +315,6 @@ update_scale = false
 __meta__ = {
 "_editor_description_": "World Particle manager is atatched here to avoid particles getting their rotation manipulated"
 }
-
-[node name="DialogueCameraPivot" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.49102, 0 )
-
-[node name="DialogueCamera" type="Camera" parent="DialogueCameraPivot"]
-transform = Transform( -0.921308, 0, -0.388835, -0.0421153, 0.994117, 0.0997884, 0.386547, 0.108312, -0.915888, -3.41939, 2.60236, -0.622742 )
-fov = 45.0
-near = 1.0
-far = 40000.0
-
-[node name="DialogueCameraBox" type="MeshInstance" parent="DialogueCameraPivot/DialogueCamera"]
-transform = Transform( 1, -5.29396e-22, 0, -1.05879e-22, 1, 0, 2.11758e-21, 0, 1, 0, -0.0144858, -1.05511 )
-layers = 524288
-mesh = SubResource( 107 )
-material/0 = SubResource( 151 )
-
-[node name="DialogueCameraBox2" type="MeshInstance" parent="DialogueCameraPivot/DialogueCamera"]
-transform = Transform( 1, -5.29396e-22, 0, -1.05879e-22, 1, 0, 2.11758e-21, 0, 1, 0, -0.0144858, -1.05511 )
-layers = 524288
-mesh = SubResource( 107 )
-material/0 = SubResource( 126 )
 
 [node name="Tutorial" parent="." instance=ExtResource( 3 )]
 

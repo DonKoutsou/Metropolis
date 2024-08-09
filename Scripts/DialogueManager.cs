@@ -34,12 +34,12 @@ public class DialogueManager : Node
 		
 		//DialogicSharp.SetVariable("MetropolisDirection", WorldMap.GetInstance().GetExitDirection());
 		//DialogicSharp.SetVariable("GenericCharacter", character.GetCharacterName());
-		Camera cam = pl.GetDialogueCamera();
+		//Camera cam = pl.GetDialogueCamera();
 		
-		Spatial Diagcampivot = (Spatial)cam.GetParent();
-		Diagcampivot.GlobalRotation = talkpos.GlobalRotation;
-		Diagcampivot.GlobalTranslation = talkpos.GlobalTranslation;
-		cam.LookAt(character.GetHeadGlobalPos(), Vector3.Up);
+		//Spatial Diagcampivot = (Spatial)cam.GetParent();
+		//Diagcampivot.GlobalRotation = talkpos.GlobalRotation;
+		//Diagcampivot.GlobalTranslation = talkpos.GlobalTranslation;
+		//cam.LookAt(character.GetHeadGlobalPos(), Vector3.Up);
 		
 		CameraAnimationPlayer.GetInstance().PlayAnim("FadeInDialogue");
 		if (character.GetUnconState())

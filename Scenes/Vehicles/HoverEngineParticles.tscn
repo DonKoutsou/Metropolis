@@ -27,7 +27,7 @@ params_depth_draw_mode = 1
 albedo_color = Color( 0, 0.584314, 1, 1 )
 emission_enabled = true
 emission = Color( 0, 0.819608, 1, 1 )
-emission_energy = 16.0
+emission_energy = 5.54
 emission_operator = 0
 emission_on_uv2 = false
 

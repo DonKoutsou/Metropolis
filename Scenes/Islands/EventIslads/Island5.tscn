@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://Scenes/Systems/Breakable.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scenes/Characters/NPCVariants/Sinner.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Scenes/Env_Assets/FabricRoofLong.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Scenes/Env_Assets/JailFrame.tscn" type="PackedScene" id=20]
 
 [sub_resource type="ParticlesMaterial" id=18]
 emission_shape = 2
@@ -198,22 +199,22 @@ transform = Transform( 611.556, 0, 0, 0, 611.556, 0, 0, 0, 611.555, -765.543, -2
 transform = Transform( 533.445, -7.28548, 171.043, -171.199, -22.7011, 532.961, 0, -559.736, -23.8415, 687.667, -2030.9, 1252.26 )
 
 [node name="Rock7" parent="." index="19" instance=ExtResource( 14 )]
-transform = Transform( 106.986, 109.884, 39.0464, -48.3598, -6.41257, 150.549, 106.115, -113.708, 29.2431, 328.38, -2073.75, 219.099 )
+transform = Transform( 106.986, 109.884, 39.0464, -48.3598, -6.41257, 150.549, 106.115, -113.708, 29.2431, 527.522, -2087.44, 402.767 )
 
 [node name="Rock4" parent="." index="20" instance=ExtResource( 15 )]
 transform = Transform( 445.136, 0, 0, 0, 445.136, 0, 0, 0, 445.135, 1008.03, -2138.93, -926.568 )
 
 [node name="Rock6" parent="." index="21" instance=ExtResource( 15 )]
-transform = Transform( 236.547, -6.83166, 20.5781, 10.9064, 232.333, -48.2384, -18.7398, 48.9819, 231.677, 712.652, -2145.87, -316.783 )
+transform = Transform( 236.547, -6.83166, 20.5781, 10.9064, 232.333, -48.2384, -18.7398, 48.9819, 231.677, 911.794, -2159.56, -133.115 )
 
 [node name="Rock5" parent="." index="22" instance=ExtResource( 16 )]
-transform = Transform( 183.21, 0, 393.667, 0, 434.212, 0, -393.667, 0, 183.21, 982.933, -1829.14, 141.664 )
+transform = Transform( 183.21, 0, 393.667, 0, 434.212, 0, -393.667, 0, 183.21, 1182.07, -1842.83, 325.332 )
 
 [node name="Breakable" parent="." index="23" instance=ExtResource( 17 )]
-transform = Transform( 1.09835, -0.266035, -0.561534, -0.591021, -0.0952582, -1.1109, 0.191806, 1.22989, -0.207506, 422.095, -2090.99, 27.9577 )
+transform = Transform( 0.591188, -1.11466, -0.0223766, -0.672086, -0.336106, -1.01381, 0.889531, 0.486866, -0.751109, 621.202, -2103.14, 214.13 )
 
 [node name="Character2" parent="." index="24" instance=ExtResource( 18 )]
-transform = Transform( -0.0440902, 0, -0.999027, 0, 1, 0, 0.999027, 0, -0.0440902, 925.497, -2101.07, 331.492 )
+transform = Transform( -0.74914, 0, -0.66241, 0, 1, 0, 0.66241, 0, -0.74914, 660.507, -2108.24, 248.586 )
 
 [node name="StaticBody" parent="." index="25" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0.000541083, 0, 1, 0, -0.000541083, 0, 1, -1258.03, 923.567, 212.023 )
@@ -223,3 +224,6 @@ transform = Transform( 0.925418, 0.259363, 0.276283, 0.264983, -0.964095, 0.0174
 
 [node name="StaticBody2" parent="." index="27" instance=ExtResource( 11 )]
 transform = Transform( 0.984059, 0, -0.17784, 0, 1, 0, 0.17784, 0, 0.984059, -1250.53, 916.933, 208.173 )
+
+[node name="JailFrame" parent="." index="28" instance=ExtResource( 20 )]
+transform = Transform( -0.66648, 0, -0.745523, 0, 1, 0, 0.745523, 0, -0.66648, 654.93, -2109.84, 251.715 )

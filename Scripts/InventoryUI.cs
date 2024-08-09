@@ -5,8 +5,8 @@ using System.Linq;
 
 public class InventoryUI : Control
 {
-    [Export]
-    string NoMapText = "Δεν έχω χάρτη...";
+    //[Export]
+    //string NoMapText = "Δεν έχω χάρτη...";
     [Export]
     string NoCompassText = "Δεν έχω πυξήδα...";
     [Export]
@@ -22,7 +22,7 @@ public class InventoryUI : Control
 
     //float MaxLoad = 0;
     Panel DescPan;
-    Panel JobPan;
+    //Panel JobPan;
     //RichTextLabel Capacity;
     RichTextLabel Description;
     //RichTextLabel WeightText;
@@ -37,10 +37,10 @@ public class InventoryUI : Control
     Item ShowingDescSample = null;
 
     bool hascompass = false;
-    bool hasmap = false;
+    //bool hasmap = false;
     //bool hastoolbox = false;
     bool ShowingCompass = false;
-    bool ShowingMap = false;
+    //bool ShowingMap = false;
 
     ProgressBar CharacterBatteryCharge;
 
@@ -52,13 +52,13 @@ public class InventoryUI : Control
 
     int currentpage = 0;
     int maxpage = 0;
-    public void ConfigureJob(string JobName, Vector2 Jobloc, string JobOwner, int RewardAmmount)
+    /*public void ConfigureJob(string JobName, Vector2 Jobloc, string JobOwner, int RewardAmmount)
     {
         JobPan.GetNode<RichTextLabel>("MarginContainer/VBoxContainer/TaskName").BbcodeText = "[center]" + JobName;
         JobPan.GetNode<RichTextLabel>("MarginContainer/VBoxContainer/Location").BbcodeText = "[center]" + string.Format("Προορισμός : X = {0} - Y = {1}", Jobloc.x, Jobloc.y);
         JobPan.GetNode<RichTextLabel>("MarginContainer/VBoxContainer/Description").BbcodeText = "[center]" + string.Format("Μεταφορά προμηθειών στον φάρο {0}", JobOwner);
         JobPan.GetNode<RichTextLabel>("MarginContainer/VBoxContainer/Reward").BbcodeText = "[center]" + string.Format("Αμοιβή : {0} Δραχμές", RewardAmmount);
-    }
+    }*/
     public override void _Ready()
     {
         //Capacity = GetNode<RichTextLabel>("InventoryContainer/Inventory/CapPanel/CapAmmount");
@@ -69,13 +69,13 @@ public class InventoryUI : Control
         CharacterRPM = GetNode<Panel>("InventoryContainer/Inventory/BatteryPanel/RPMAmount");
         
         DescPan = GetNode<Panel>("InventoryContainer/Inventory/DescriptionPanel");
-        JobPan = GetNode<Panel>("InventoryContainer/Inventory/JobPanel");
+        //JobPan = GetNode<Panel>("InventoryContainer/Inventory/JobPanel");
         Description = DescPan.GetNode<MarginContainer>("MarginContainer").GetNode<VBoxContainer>("VBoxContainer").GetNode<RichTextLabel>("Description");
         //WeightText =  DescPan.GetNode<MarginContainer>("MarginContainer").GetNode<VBoxContainer>("VBoxContainer").GetNode<RichTextLabel>("WeightText");
         ItemName = DescPan.GetNode<MarginContainer>("MarginContainer").GetNode<VBoxContainer>("VBoxContainer").GetNode<RichTextLabel>("ItemName");
         //ItemOptionPanel = GetNode<Panel>("ItemOptionPanel");
         DescPan.Hide();
-        JobPan.Hide();
+        //JobPan.Hide();
 
         for (int i = 0; i < childc; i ++)
         {
@@ -96,7 +96,7 @@ public class InventoryUI : Control
         CharacterBatteryCharge.MaxValue = pl.GetCharacterBatteryCap();
         CharacterBatteryCharge.Value = pl.GetCurrentCharacterEnergy();
         comp = GetNode<Compass>("InventoryContainer/Inventory/CompassUI");
-        map = MapGrid.GetInstance();
+        map = ((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid();
         Show();
     }
     private void ToggleInventory()
@@ -143,100 +143,100 @@ public class InventoryUI : Control
 
     public void UpdateInventory()
     {
-        if (!ShowingMap)
+        //if (!ShowingMap)
+        //{
+        List<Item> Items;
+        Inv.GetContents(out Items);
+
+        Dictionary <string, int> itemcatalogue = new Dictionary<string, int>();
+        Dictionary <string, Item> itemcat2 = new Dictionary<string, Item>();
+
+
+        hascompass = false;
+        //hasmap = false;
+        //hastoolbox = false;
+        int Itamm = 0;
+
+        for (int v = Items.Count() - 1; v > -1; v --)
         {
-            List<Item> Items;
-            Inv.GetContents(out Items);
+            if (Items[v] is Limb l && Inv.IsLimbEquipped(l))
+                continue;
+            if (!itemcat2.ContainsKey(Items[v].GetInventoryItemName()))
+                itemcat2.Add(Items[v].GetInventoryItemName(), Items[v]);
 
-            Dictionary <string, int> itemcatalogue = new Dictionary<string, int>();
-            Dictionary <string, Item> itemcat2 = new Dictionary<string, Item>();
-
-
-            hascompass = false;
-            hasmap = false;
-            //hastoolbox = false;
-            int Itamm = 0;
-
-            for (int v = Items.Count() - 1; v > -1; v --)
+            if (itemcatalogue.ContainsKey(Items[v].GetInventoryItemName()))
             {
-                if (Items[v] is Limb l && Inv.IsLimbEquipped(l))
-                    continue;
-                if (!itemcat2.ContainsKey(Items[v].GetInventoryItemName()))
-                    itemcat2.Add(Items[v].GetInventoryItemName(), Items[v]);
-
-                if (itemcatalogue.ContainsKey(Items[v].GetInventoryItemName()))
-                {
-                    itemcatalogue[Items[v].GetInventoryItemName()] += 1;
-                }
-                else
-                {
-                    itemcatalogue.Add(Items[v].GetInventoryItemName(), 1);
-                }
-
-                Itamm ++;
-
-                if (Items[v].GetItemType() ==  global::ItemName.COMPASS)
-                    hascompass = true;
-                else if (Items[v].GetItemType() == global::ItemName.MAP)
-                    hasmap = true;
-                //else if (Items[v].GetItemType() == global::ItemName.TOOLBOX)
-                    //hastoolbox = true;
-
+                itemcatalogue[Items[v].GetInventoryItemName()] += 1;
             }
-            maxpage = Itamm / 12;
-            GetNode<Control>("InventoryContainer/Inventory/CapPanel2/InventoryPage").Visible = maxpage > 0;
-            int slottofill = 0;
-            int currentit = 0;
-
-            int min = 0;
-            for (int i = 0; i < currentpage; i++)
-                min += 12;
-
-            int max = min + 11;
-
-
-            foreach(KeyValuePair<string, int> it in itemcatalogue)
+            else
             {
-                if (itemcat2[it.Key] is Limb l && Inv.IsLimbEquipped(l))
-                    continue;
+                itemcatalogue.Add(Items[v].GetInventoryItemName(), 1);
+            }
 
-                if (currentit > max)
-                    break;
-                if (!itemcat2[it.Key].stackable)
+            Itamm ++;
+
+            if (Items[v].GetItemType() ==  global::ItemName.COMPASS)
+                hascompass = true;
+            //else if (Items[v].GetItemType() == global::ItemName.MAP)
+                //hasmap = true;
+            //else if (Items[v].GetItemType() == global::ItemName.TOOLBOX)
+                //hastoolbox = true;
+
+        }
+        maxpage = Itamm / 12;
+        GetNode<Control>("InventoryContainer/Inventory/CapPanel2/InventoryPage").Visible = maxpage > 0;
+        int slottofill = 0;
+        int currentit = 0;
+
+        int min = 0;
+        for (int i = 0; i < currentpage; i++)
+            min += 12;
+
+        int max = min + 11;
+
+
+        foreach(KeyValuePair<string, int> it in itemcatalogue)
+        {
+            if (itemcat2[it.Key] is Limb l && Inv.IsLimbEquipped(l))
+                continue;
+
+            if (currentit > max)
+                break;
+            if (!itemcat2[it.Key].stackable)
+            {
+                for (int i = 0; i < it.Value; i++)
                 {
-                    for (int i = 0; i < it.Value; i++)
-                    {
-                        if (currentit > max)
-                            break;
-                        if (currentit >= min)
-                        {
-                            slots[slottofill].SetItem(itemcat2[it.Key], 1);
-                            slottofill++;
-                        }
-                        currentit ++;
-                    }
-                }
-                else
-                {
+                    if (currentit > max)
+                        break;
                     if (currentit >= min)
                     {
-                        slots[slottofill].SetItem(itemcat2[it.Key], it.Value);
+                        slots[slottofill].SetItem(itemcat2[it.Key], 1);
                         slottofill++;
                     }
                     currentit ++;
                 }
             }
- 
-            for (int i = 0; i < slots.Count(); i++)
+            else
             {
-                if (i >= slottofill)
-                    slots[i].SetItem(null, 0);
-
+                if (currentit >= min)
+                {
+                    slots[slottofill].SetItem(itemcat2[it.Key], it.Value);
+                    slottofill++;
+                }
+                currentit ++;
             }
+        }
+
+        for (int i = 0; i < slots.Count(); i++)
+        {
+            if (i >= slottofill)
+                slots[i].SetItem(null, 0);
+
+        }
 
             //float currentload = Inv.GetCurrentWeight();
             //Capacity.BbcodeText = string.Format("[center]{0}/{1}", currentload, MaxLoad);
-        }
+        //}
 
         CharacterBatteryCharge.Value = pl.GetCurrentCharacterEnergy();
         float rpm = pl.GetRPM();
@@ -257,19 +257,20 @@ public class InventoryUI : Control
 
         comp.ToggleCompass(ShowingCompass);
 
-        map.ToggleMap(ShowingMap);
+        //map.ToggleMap(ShowingMap);
 
         
-        bool selectinginst = FocusedSlot != null && (FocusedSlot.item is Instrument || FocusedSlot.item.ItemType == global::ItemName.WEAPON);
-        bool selectingbat = FocusedSlot != null && FocusedSlot.item is Battery;
+        bool selectinginst = FocusedSlot != null && (FocusedSlot.item is Instrument);
+        //bool selecingwp = FocusedSlot != null && FocusedSlot.item.ItemType == global::ItemName.WEAPON;
+        //bool selectingbat = FocusedSlot != null && FocusedSlot.item is Battery;
         bool selectinglimb = FocusedSlot != null && FocusedSlot.item is Limb;
 
-        GetNode<Button>("InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/DropButton").Visible = !ShowingMap;
+        //GetNode<Button>("InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/DropButton").Visible = !ShowingMap;
         //GetNode<Button>("InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/RepairButton").Visible = selectingbat && hastoolbox;
-        GetNode<Button>("InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/SwitchButton").Visible = selectinginst;
+        GetNode<Button>("InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/SwitchButton").Visible = selectinginst ;
         GetNode<Button>("InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/SwitchLimbButton").Visible = selectinglimb;
         GetNode<Control>("InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/CompassButton").Visible = hascompass;
-        GetNode<Control>("InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/MapButton").Visible = hasmap;
+        //GetNode<Control>("InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/MapButton").Visible = hasmap;
     }
     private void PageForw()
     {
@@ -316,6 +317,9 @@ public class InventoryUI : Control
             FocusedSlot.Toggle(false);
 
         FocusedSlot = slot;
+
+        if (!t)
+            FocusedSlot = null;
 
         slot.Toggle(t);
     }
@@ -386,7 +390,7 @@ public class InventoryUI : Control
             ShowingCompass = false;
     }
     
-    public void On_Map_Button_Down()
+    /*public void On_Map_Button_Down()
     {
         if (!hasmap)
         {
@@ -403,9 +407,9 @@ public class InventoryUI : Control
         else
         {
             ShowingMap = false;
-            JobPan.Visible = false;
+            //JobPan.Visible = false;
         }
             
-    }
+    }*/
     
 }

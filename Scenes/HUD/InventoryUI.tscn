@@ -1,11 +1,9 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://Scenes/HUD/InventoryUISlot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/InventoryUI.cs" type="Script" id=2]
 [ext_resource path="res://Assets/MapIcons/RepairIcon2.png" type="Texture" id=3]
-[ext_resource path="res://UIThemes/Panel_Black_Top-BottomCorner.tres" type="StyleBox" id=4]
 [ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=5]
-[ext_resource path="res://Scenes/HUD/Map.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/UI/Icon/CrossGreen.png" type="Texture" id=7]
 [ext_resource path="res://UIThemes/Panel_Black_NoCorner.tres" type="StyleBox" id=8]
 [ext_resource path="res://Assets/Compass/Compass/CompL3.png" type="Texture" id=11]
@@ -28,7 +26,6 @@
 [ext_resource path="res://UIThemes/Panel_Blue_Digital_SMall.tres" type="StyleBox" id=28]
 [ext_resource path="res://UIThemes/Panel_DarkBlue_Digital_SMall.tres" type="StyleBox" id=29]
 [ext_resource path="res://UIThemes/Panel_Black_LeftCorners.tres" type="StyleBox" id=30]
-[ext_resource path="res://Assets/UI/panelstylegrey.tres" type="StyleBox" id=31]
 
 [sub_resource type="Animation" id=57]
 resource_name = "MenuClose"
@@ -45,24 +42,12 @@ tracks/0/keys = {
 "values": [ Vector2( 1920, 1080 ), Vector2( 1920, 1482 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Panel4:rect_position")
-tracks/1/interp = 2
+tracks/1/path = NodePath("InventoryContainer/Inventory:visible")
+tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1738, 642 ), Vector2( 1738, 1044 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("InventoryContainer/Inventory:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
@@ -72,7 +57,7 @@ tracks/2/keys = {
 [sub_resource type="Animation" id=55]
 resource_name = "MenuOpen"
 tracks/0/type = "value"
-tracks/0/path = NodePath("Panel4:rect_position")
+tracks/0/path = NodePath("InventoryContainer:rect_size")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -81,27 +66,15 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1739, 1044 ), Vector2( 1738, 642 ) ]
+"values": [ Vector2( 1920, 1482 ), Vector2( 1920, 1080 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("InventoryContainer:rect_size")
-tracks/1/interp = 2
+tracks/1/path = NodePath("InventoryContainer/Inventory:visible")
+tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1920, 1482 ), Vector2( 1920, 1080 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("InventoryContainer/Inventory:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
@@ -123,24 +96,12 @@ tracks/0/keys = {
 "values": [ Vector2( 1920, 1482 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Panel4:rect_position")
+tracks/1/path = NodePath("InventoryContainer/Inventory:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 1738, 1044 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("InventoryContainer/Inventory:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
@@ -282,34 +243,6 @@ Panel/styles/panel = SubResource( 53 )
 
 [sub_resource type="DynamicFont" id=8]
 font_data = ExtResource( 5 )
-
-[sub_resource type="StyleBoxFlat" id=58]
-bg_color = Color( 1, 1, 1, 1 )
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color( 0, 0, 0, 1 )
-border_blend = true
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-shadow_size = 1
-
-[sub_resource type="DynamicFont" id=33]
-font_data = ExtResource( 19 )
-
-[sub_resource type="Theme" id=59]
-default_font = SubResource( 33 )
-
-[sub_resource type="DynamicFont" id=60]
-size = 12
-outline_size = 2
-outline_color = Color( 0, 0, 0, 1 )
-use_mipmaps = true
-use_filter = true
-font_data = ExtResource( 19 )
 
 [node name="InvntoryUI" type="Control"]
 anchor_right = 1.0
@@ -528,7 +461,7 @@ bbcode_enabled = true
 bbcode_text = "[center]0"
 text = "0"
 
-[node name="Repair" type="Button" parent="InventoryContainer/Inventory/CapPanel2/InventoryPage"]
+[node name="Repair" type="Button" parent="InventoryContainer/Inventory/CapPanel2/InventoryPage" groups=["Buttons"]]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -542,7 +475,7 @@ custom_fonts/font = SubResource( 45 )
 icon = ExtResource( 22 )
 expand_icon = true
 
-[node name="Repair2" type="Button" parent="InventoryContainer/Inventory/CapPanel2/InventoryPage"]
+[node name="Repair2" type="Button" parent="InventoryContainer/Inventory/CapPanel2/InventoryPage" groups=["Buttons"]]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -915,7 +848,8 @@ margin_right = -4.0
 margin_bottom = -4.0
 alignment = 2
 
-[node name="RepairButton" type="Button" parent="InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer"]
+[node name="RepairButton" type="Button" parent="InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer" groups=["Buttons"]]
+visible = false
 margin_right = 82.0
 margin_bottom = 49.0
 focus_mode = 0
@@ -930,9 +864,8 @@ icon = ExtResource( 3 )
 icon_align = 1
 expand_icon = true
 
-[node name="SwitchButton" type="Button" parent="InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer"]
-margin_left = 86.0
-margin_right = 168.0
+[node name="SwitchButton" type="Button" parent="InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer" groups=["Buttons"]]
+margin_right = 125.0
 margin_bottom = 49.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -946,8 +879,8 @@ icon = ExtResource( 20 )
 icon_align = 1
 expand_icon = true
 
-[node name="SwitchLimbButton" type="Button" parent="InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer"]
-margin_left = 172.0
+[node name="SwitchLimbButton" type="Button" parent="InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer" groups=["Buttons"]]
+margin_left = 129.0
 margin_right = 254.0
 margin_bottom = 49.0
 focus_mode = 0
@@ -962,9 +895,9 @@ icon = ExtResource( 21 )
 icon_align = 1
 expand_icon = true
 
-[node name="DropButton" type="Button" parent="InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer"]
+[node name="DropButton" type="Button" parent="InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer" groups=["Buttons"]]
 margin_left = 258.0
-margin_right = 340.0
+margin_right = 383.0
 margin_bottom = 49.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -978,9 +911,10 @@ icon = ExtResource( 18 )
 icon_align = 1
 expand_icon = true
 
-[node name="MapButton" type="Button" parent="InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer"]
-margin_left = 344.0
-margin_right = 426.0
+[node name="MapButton" type="Button" parent="InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer" groups=["Buttons"]]
+visible = false
+margin_left = 309.0
+margin_right = 408.0
 margin_bottom = 49.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -994,8 +928,8 @@ icon = ExtResource( 17 )
 icon_align = 1
 expand_icon = true
 
-[node name="CompassButton" type="Button" parent="InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer"]
-margin_left = 430.0
+[node name="CompassButton" type="Button" parent="InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer" groups=["Buttons"]]
+margin_left = 387.0
 margin_right = 512.0
 margin_bottom = 49.0
 focus_mode = 0
@@ -1020,7 +954,7 @@ rect_clip_content = true
 mouse_filter = 1
 custom_styles/panel = ExtResource( 26 )
 
-[node name="RefreshCoords" type="Button" parent="InventoryContainer/Inventory/Panel4"]
+[node name="RefreshCoords" type="Button" parent="InventoryContainer/Inventory/Panel4" groups=["Buttons"]]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -1052,82 +986,6 @@ rect_clip_content = true
 mouse_filter = 1
 custom_styles/panel = ExtResource( 27 )
 
-[node name="MapUI" parent="InventoryContainer/Inventory" instance=ExtResource( 6 )]
-visible = false
-margin_left = 22.0
-margin_top = -34.0
-margin_right = 62.0
-margin_bottom = 6.0
-
-[node name="Panel4" type="Panel" parent="."]
-visible = false
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 1738.0
-margin_top = 1044.0
-margin_right = 1912.0
-margin_bottom = 1080.0
-rect_pivot_offset = Vector2( 167, 36 )
-mouse_filter = 1
-custom_styles/panel = ExtResource( 26 )
-
-[node name="RPMAmount" type="Panel" parent="Panel4"]
-modulate = Color( 0.431373, 0.717647, 0.937255, 1 )
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = 25.5
-margin_top = -11.0
-margin_right = 47.5
-margin_bottom = 11.0
-rect_pivot_offset = Vector2( 4, 4 )
-custom_styles/panel = SubResource( 58 )
-
-[node name="Label2" type="Label" parent="Panel4"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -44.5
-margin_top = -11.5
-margin_right = 4.5
-margin_bottom = 11.5
-theme = SubResource( 59 )
-custom_styles/normal = ExtResource( 31 )
-text = "NULL"
-align = 1
-valign = 1
-
-[node name="Panel5" type="Panel" parent="Panel4"]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -176.0
-margin_top = -72.0
-margin_right = 2.0
-margin_bottom = -36.0
-rect_pivot_offset = Vector2( 167, 36 )
-rect_clip_content = true
-mouse_filter = 1
-custom_styles/panel = ExtResource( 4 )
-
-[node name="Button" type="Button" parent="Panel4/Panel5"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -52.5
-margin_top = 5.0
-margin_right = 52.5
-margin_bottom = 30.0
-theme = ExtResource( 24 )
-custom_fonts/font = SubResource( 60 )
-text = "Τσάντα"
-icon_align = 1
-expand_icon = true
-
 [connection signal="button_down" from="InventoryContainer/Inventory/CapPanel2/InventoryPage/Repair" to="." method="PageBack"]
 [connection signal="button_down" from="InventoryContainer/Inventory/CapPanel2/InventoryPage/Repair2" to="." method="PageForw"]
 [connection signal="button_down" from="InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/RepairButton" to="." method="On_Repair_Button_Down"]
@@ -1137,4 +995,3 @@ expand_icon = true
 [connection signal="button_down" from="InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/MapButton" to="." method="On_Map_Button_Down"]
 [connection signal="button_down" from="InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer/CompassButton" to="." method="On_Compass_Button_Down"]
 [connection signal="button_down" from="InventoryContainer/Inventory/Panel4/RefreshCoords" to="." method="CloseInventory"]
-[connection signal="button_down" from="Panel4/Panel5/Button" to="." method="ToggleInventory"]

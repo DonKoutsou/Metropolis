@@ -725,7 +725,7 @@ margin_right = -132.0
 margin_bottom = -162.0
 custom_styles/panel = ExtResource( 12 )
 
-[node name="Start_Button_Half" type="Button" parent="Settings/Panel"]
+[node name="Start_Button_Half" type="Button" parent="Settings/Panel" groups=["Buttons"]]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -739,7 +739,7 @@ theme = ExtResource( 19 )
 enabled_focus_mode = 0
 text = "Έναρξη"
 
-[node name="Continue_Button_Half" type="Button" parent="Settings/Panel"]
+[node name="Continue_Button_Half" type="Button" parent="Settings/Panel" groups=["Buttons"]]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -753,7 +753,7 @@ theme = ExtResource( 19 )
 enabled_focus_mode = 0
 text = "Συνέχεια"
 
-[node name="Start_Button" type="Button" parent="Settings/Panel"]
+[node name="Start_Button" type="Button" parent="Settings/Panel" groups=["Buttons"]]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -767,7 +767,7 @@ theme = ExtResource( 19 )
 enabled_focus_mode = 0
 text = "Έναρξη"
 
-[node name="Exit_Button" type="Button" parent="Settings/Panel"]
+[node name="Exit_Button" type="Button" parent="Settings/Panel" groups=["Buttons"]]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -832,7 +832,7 @@ margin_right = 180.0
 margin_bottom = 96.0
 custom_styles/panel = ExtResource( 13 )
 
-[node name="Full_Screen_Checkbox" type="CheckBox" parent="Settings/Panel/SeedSetting2"]
+[node name="Full_Screen_Checkbox" type="CheckBox" parent="Settings/Panel/SeedSetting2" groups=["Buttons"]]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -948,10 +948,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -659.0
-margin_top = 214.0
-margin_right = 1977.0
-margin_bottom = 1646.0
+margin_left = -1318.0
+margin_top = -144.0
+margin_right = 1318.0
+margin_bottom = 1288.0
 rect_pivot_offset = Vector2( 1318, 752 )
 custom_constants/separation = 78
 alignment = 1
@@ -1369,10 +1369,10 @@ anims/Start = SubResource( 31 )
 anims/Stop = SubResource( 32 )
 script = ExtResource( 16 )
 
-[connection signal="button_down" from="Settings/Panel/Start_Button_Half" to="." method="On_Start_Button_Down"]
-[connection signal="button_down" from="Settings/Panel/Continue_Button_Half" to="." method="On_Continue_Button_Down"]
-[connection signal="button_down" from="Settings/Panel/Start_Button" to="." method="On_Start_Button_Down"]
-[connection signal="button_down" from="Settings/Panel/Exit_Button" to="." method="On_Exit_Button_Down"]
+[connection signal="pressed" from="Settings/Panel/Start_Button_Half" to="." method="On_Start_Button_Down"]
+[connection signal="pressed" from="Settings/Panel/Continue_Button_Half" to="." method="On_Continue_Button_Down"]
+[connection signal="pressed" from="Settings/Panel/Start_Button" to="." method="On_Start_Button_Down"]
+[connection signal="pressed" from="Settings/Panel/Exit_Button" to="." method="On_Exit_Button_Down"]
 [connection signal="toggled" from="Settings/Panel/SeedSetting2/Full_Screen_Checkbox" to="." method="On_Full_Screen_Toggled"]
 [connection signal="animation_finished" from="Credits/AnimationPlayer" to="Credits" method="Credits_Finished"]
 [connection signal="timeout" from="RestartTimer" to="." method="StopGame"]

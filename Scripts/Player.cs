@@ -42,7 +42,7 @@ public class Player : Character
 	bool Autowalk = false;
 	bool IsRunning = false;
 
-	Camera DialogueCam;
+	//Camera DialogueCam;
 
 	static Player instance;
 
@@ -65,6 +65,7 @@ public class Player : Character
     {
         base._ExitTree();
 		instance = null;
+		
     }
 	public static bool IsSpawned()
 	{
@@ -74,10 +75,10 @@ public class Player : Character
 	{
 		return instance;
 	}
-	public Camera GetDialogueCamera()
-	{
-		return DialogueCam;
-	}
+	//public Camera GetDialogueCamera()
+	//{
+	//	return DialogueCam;
+	//}
 	public float GetCurrentEnergy()
 	{
 		return CurrentEnergy;
@@ -114,7 +115,7 @@ public class Player : Character
 
 		moveloc = GetNode<MoveLocation>("MoveLoc");
 		
-		DialogueCam = GetNode<Camera>("DialogueCameraPivot/DialogueCamera");
+		//DialogueCam = GetNode<Camera>("DialogueCameraPivot/DialogueCamera");
 
 		GetNode<MeshInstance>("Pivot/Guy/Armature/Skeleton/BabyLowpolySurface1").Visible = HasBaby;
 	}
@@ -396,15 +397,6 @@ public class Player : Character
 			{
 				IsRunning = !IsRunning;
 			}
-		}
-		
-		if (@event.IsActionPressed("Inventory"))
-		{
-			InventoryUI inv = (InventoryUI)PlayerUI.GetInstance().GetUI(PlayerUIType.INVENTORY);
-			if (inv.IsOpen)
-				inv.CloseInventory();
-			else
-				inv.OpenInventory();
 		}
 	}
 	public override void OnKillFieldDetectorBodyEntered(Node body)

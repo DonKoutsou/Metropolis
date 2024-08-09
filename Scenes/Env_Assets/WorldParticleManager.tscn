@@ -58,14 +58,15 @@ rings = 1
 [sub_resource type="SpatialMaterial" id=112]
 render_priority = 1
 flags_transparent = true
+flags_unshaded = true
+flags_fixed_size = true
 flags_do_not_receive_shadows = true
-params_specular_mode = 4
 params_depth_draw_mode = 2
 params_billboard_mode = 3
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
-albedo_color = Color( 1, 0.839216, 0.552941, 0.254902 )
+albedo_color = Color( 1, 0.839216, 0.552941, 0.0117647 )
 albedo_texture = ExtResource( 7 )
 
 [sub_resource type="Curve" id=113]
@@ -88,13 +89,13 @@ angular_velocity_random = 1.0
 linear_accel_random = 0.35
 tangential_accel_random = 1.0
 angle_random = 1.0
-scale = 1.5
+scale = 0.01
 scale_random = 0.53
 hue_variation = 1.0
 hue_variation_random = 1.0
 
 [sub_resource type="QuadMesh" id=115]
-size = Vector2( 1000, 1000 )
+size = Vector2( 5, 5 )
 
 [node name="WorldParticleManager" type="Spatial"]
 script = ExtResource( 5 )
@@ -131,7 +132,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 118.329, 2500 )
 material_override = SubResource( 112 )
 cast_shadow = 0
 generate_lightmap = false
-amount = 50
+amount = 20
 lifetime = 15.0
 speed_scale = 5.0
 visibility_aabb = AABB( -3825.97, 0, -4096, 7651.96, 3042.07, 8192 )

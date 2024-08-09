@@ -41,12 +41,12 @@ script = ExtResource( 5 )
 PossibleFurni = [ ExtResource( 7 ), ExtResource( 13 ), ExtResource( 16 ) ]
 PossibleDeco = [ ExtResource( 15 ), ExtResource( 14 ) ]
 SpawnPool = {
-Resource( "res://Scenes/Items/Guitar.tscn" ): 1,
+Resource( "res://Scenes/Items/Battery.tscn" ): 0,
+Resource( "res://Scenes/Items/FastLeg_L.tscn" ): 1,
 Resource( "res://Scenes/Items/Item.tscn" ): 10,
 Resource( "res://Scenes/Items/FastLeg_R.tscn" ): 1,
-Resource( "res://Scenes/Items/Battery.tscn" ): 0,
-Resource( "res://Scenes/Items/BatteryEmpty.tscn" ): 10,
-Resource( "res://Scenes/Items/FastLeg_L.tscn" ): 1
+Resource( "res://Scenes/Items/Guitar.tscn" ): 1,
+Resource( "res://Scenes/Items/BatteryEmpty.tscn" ): 10
 }
 
 [node name="HouseDoor" parent="." instance=ExtResource( 4 )]

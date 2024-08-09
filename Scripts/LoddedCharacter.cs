@@ -52,14 +52,15 @@ public class LoddedCharacter : Skeleton
     {
         return currentlod;
     }
-    public void SwitchLod(bool LOD)
+    public void SwitchLod(int LOD)
     {
         switch (LOD)
         {
-            case false:
+            case 0:
             {
                 if (currentlod == 0)
                     return;
+                Visible = true;
                 GetNode<MeshInstance>("Body").Visible = true;
                 GetNode<MeshInstance>("Body_LOD").Visible = false;
                 GetNode<MeshInstance>("eyes001").Visible = true;
@@ -88,11 +89,12 @@ public class LoddedCharacter : Skeleton
                 currentlod = 0;
                 break;
             }
-            case true:
+            case 1:
             {
                 if (currentlod == 1)
                     return;
                 
+                Visible = true;
                 GetNode<MeshInstance>("Body").Visible = false;
                 GetNode<MeshInstance>("Body_LOD").Visible = true;
                 GetNode<MeshInstance>("eyes001").Visible = false;
@@ -116,6 +118,11 @@ public class LoddedCharacter : Skeleton
                 GetNode<MeshInstance>("Leg2_R").Visible = false;
                 
                 currentlod = 1;
+                break;
+            }
+            case 2:
+            {
+                Visible = false;
                 break;
             }
         }

@@ -93,7 +93,7 @@ public class MyWorld : Spatial
 		pl.Teleport(pos, rot);
 		//pl.GlobalRotation = rot;
 		//WorldMap.GetInstance().pl = pl;
-		MapGrid.GetInstance().ConnectPlayer(pl);
+		((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid().ConnectPlayer(pl);
 		VehicleHud.GetInstance().ConnectToPlayer(pl);
 		EmitSignal("PlayerSpawnedEventHandler", pl);
 		
@@ -126,7 +126,7 @@ public class MyWorld : Spatial
 				return;
 			}
 		}*/
-
+		PlayerUI.GetInstance().OnPlayerDisconnected();
 		StartingScreen start = ((WorldRoot)GetParent().GetParent().GetParent().GetParent()).GetStartingScreen();
 		start.GameOver(reason);
 		SaveLoadManager.GetInstance().ClearSaves();
@@ -374,7 +374,7 @@ public class MyWorld : Spatial
 				ToggleIsland(closestto[i], toggle, false);
 		}
 		#if DEBUG
-		MapGrid.GetInstance().OnIslandToggled(ileinfo.Position, toggle);
+		((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid().OnIslandToggled(ileinfo.Position, toggle);
 		#endif
 	}
 	static private void ToggleChildrenCollision(Node node, bool toggle, bool recursive)

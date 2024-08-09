@@ -1,7 +1,7 @@
-[gd_scene load_steps=78 format=2]
+[gd_scene load_steps=68 format=2]
 
 [ext_resource path="res://Scenes/Characters/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/HUD/InventoryUI.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/HUD/PlayerUI.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/World/Settings.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Env_Assets/WindGenerator2.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Poseidon.tscn" type="PackedScene" id=5]
@@ -27,12 +27,6 @@
 [ext_resource path="res://Scenes/Items/Battery.tscn" type="PackedScene" id=25]
 [ext_resource path="res://Scripts/RandomContainer.cs" type="Script" id=26]
 [ext_resource path="res://Scenes/World/Sky.tscn" type="PackedScene" id=27]
-[ext_resource path="res://Scenes/HUD/CheatMenu.tscn" type="PackedScene" id=28]
-[ext_resource path="res://Fonts/Caudex-Bold.ttf" type="DynamicFontData" id=29]
-[ext_resource path="res://Scenes/HUD/SplashScreenPanelTheme.tres" type="StyleBox" id=30]
-[ext_resource path="res://Scripts/PlayerUI.cs" type="Script" id=31]
-[ext_resource path="res://Scripts/ScreenEffects.cs" type="Script" id=32]
-[ext_resource path="res://Scripts/CityNameUI.cs" type="Script" id=33]
 [ext_resource path="res://Scripts/DViewport.cs" type="Script" id=34]
 [ext_resource path="res://Scenes/Islands/WallOpen.tscn" type="PackedScene" id=35]
 [ext_resource path="res://Assets/Boat/ΚαικιΗιγη_Καικι3_BaseColor.png" type="Texture" id=36]
@@ -54,73 +48,6 @@
 [ext_resource path="res://Scenes/Env_Assets/Ladder.tscn" type="PackedScene" id=52]
 [ext_resource path="res://Scripts/UniversalLodManager.cs" type="Script" id=53]
 [ext_resource path="res://Scenes/Env_Assets/BoatWorkshop.tscn" type="PackedScene" id=54]
-
-[sub_resource type="DynamicFont" id=4]
-size = 64
-outline_size = 2
-outline_color = Color( 0.215686, 0.215686, 0.215686, 1 )
-use_mipmaps = true
-use_filter = true
-font_data = ExtResource( 29 )
-
-[sub_resource type="Animation" id=5]
-resource_name = "Damage"
-length = 6.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("ScreenEffects/DamageColor:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 1, 2, 6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 0.623529, 0.172549, 0.172549, 0 ), Color( 0.623529, 0.172549, 0.172549, 0.117647 ), Color( 0.623529, 0.172549, 0.172549, 0 ), Color( 0.623529, 0.172549, 0.172549, 0.117647 ), Color( 0.623529, 0.172549, 0.172549, 0 ) ]
-}
-
-[sub_resource type="Animation" id=6]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("ScreenEffects/DamageColor:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 0.623529, 0.172549, 0.172549, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("CityNameUI/Label2:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ) ]
-}
-
-[sub_resource type="Animation" id=7]
-resource_name = "Show"
-length = 6.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("CityNameUI/Label2:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 2, 4, 6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
-}
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_texture = ExtResource( 6 )
@@ -408,87 +335,7 @@ layer = 4
 [node name="Settings" parent="CanvasLayer" instance=ExtResource( 3 )]
 visible = false
 
-[node name="PlayerUI" type="Control" parent="CanvasLayer"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-script = ExtResource( 31 )
-CityNameUI = NodePath("CityNameUI")
-ScreenEffects = NodePath("ScreenEffects")
-CheatMenu = NodePath("CheatMenu")
-Inventory = NodePath("InvntoryUI")
-
-[node name="ScreenEffects" type="Control" parent="CanvasLayer/PlayerUI"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-script = ExtResource( 32 )
-AnimationPlayer = NodePath("../UIAnimation")
-
-[node name="DamageColor" type="ColorRect" parent="CanvasLayer/PlayerUI/ScreenEffects"]
-show_behind_parent = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-color = Color( 0.623529, 0.172549, 0.172549, 0 )
-
-[node name="InvntoryUI" parent="CanvasLayer/PlayerUI" instance=ExtResource( 2 )]
-
-[node name="CityNameUI" type="Control" parent="CanvasLayer/PlayerUI"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -18.0
-margin_top = 216.0
-margin_right = 22.0
-margin_bottom = 256.0
-mouse_filter = 2
-script = ExtResource( 33 )
-AnimationNode = NodePath("../UIAnimation")
-
-[node name="Label2" type="Label" parent="CanvasLayer/PlayerUI/CityNameUI"]
-modulate = Color( 1, 1, 1, 0 )
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -552.5
-margin_top = -122.0
-margin_right = 552.5
-margin_bottom = 70.0
-custom_colors/font_color = Color( 0.892578, 0.785462, 0.626348, 1 )
-custom_fonts/font = SubResource( 4 )
-text = "ΜΗΤΡΟΠΟΛΗ"
-align = 1
-valign = 1
-
-[node name="Panel7" type="Panel" parent="CanvasLayer/PlayerUI/CityNameUI/Label2"]
-anchor_right = 1.0
-margin_left = 312.5
-margin_top = 46.0
-margin_right = -306.5
-margin_bottom = 60.0
-rect_clip_content = true
-mouse_filter = 2
-custom_styles/panel = ExtResource( 30 )
-
-[node name="Panel8" type="Panel" parent="CanvasLayer/PlayerUI/CityNameUI/Label2"]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -239.5
-margin_top = -58.0
-margin_right = 249.5
-margin_bottom = -44.0
-rect_clip_content = true
-mouse_filter = 2
-custom_styles/panel = ExtResource( 30 )
-
-[node name="CheatMenu" parent="CanvasLayer/PlayerUI" instance=ExtResource( 28 )]
-visible = false
-
-[node name="UIAnimation" type="AnimationPlayer" parent="CanvasLayer/PlayerUI"]
-anims/Damage = SubResource( 5 )
-anims/RESET = SubResource( 6 )
-anims/Show = SubResource( 7 )
+[node name="PlayerUI" parent="CanvasLayer" instance=ExtResource( 2 )]
 
 [node name="Control" type="Control" parent="."]
 pause_mode = 2
@@ -717,11 +564,9 @@ transform = Transform( 0.377679, 0, 0.925937, 0, 1, 0, -0.925937, 0, 0.377679, -
 [node name="Battery" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.31909, 13.5021, -14.2813 )
 CurrentEnergy = 64.0
-condition = 64.0
 
 [node name="Battery2" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.50098, 13.5021, -14.6627 )
-condition = 12.0
 
 [node name="Sky" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -17.0192 )

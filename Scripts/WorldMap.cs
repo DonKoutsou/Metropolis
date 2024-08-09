@@ -269,6 +269,8 @@ public class WorldMap : TileMap
 		//random = data.random;
 		Vector2[] IleVectors = (Vector2[])data.Get("ilemapvectors");
 		Godot.Collections.Array Iles = (Godot.Collections.Array)data.Get("ilemap");
+
+		MapGrid grid = ((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid();
 		for (int i = 0; i < Iles.Count; i++)
 		{
 			IslandInfo info = new IslandInfo((Resource)Iles[i]);
@@ -281,9 +283,11 @@ public class WorldMap : TileMap
 			//tex.Load(ile.Image);
 
 			//MapGrid.GetInstance().UpdateIleInfo(info.Position, info.Type, info.HasPort, info.Ports, - info.RotationToSpawn, tex, info.SpecialName);
-			MapGrid.GetInstance().UpdateIleInfo(info.Position, info.Visited, info.HasPort, info.Ports, - info.RotationToSpawn, tex, info.SpecialName);
+			grid.UpdateIleInfo(info.Position, info.Visited, info.HasPort, info.Ports, - info.RotationToSpawn, tex, info.SpecialName);
 		}
 
+		grid.FrameMap();
+		
 		Vector2[] UnlockedLs = (Vector2[])data.Get("UnlockedLightHouses");
 
 		for (int i = 0; i < UnlockedLs.Count(); i++)
@@ -318,13 +322,13 @@ public class WorldMap : TileMap
 			if (save == null)
 			{
 				ArrangeCellsBasedOnDistance();
-				MapGrid.GetInstance().InitMap();
+				((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid().InitMap();
 				return;
 			}
 			int[] Date = (int[])save.Get("Date");
 			DayNight.GetInstance().SetTime(Date[0], Date[1], Date[2]);
 
-			MapGrid.GetInstance().InitMap();
+			((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid().InitMap();
 
 			LoadSaveData(save);
 			IslandInfo CurIle;
@@ -345,7 +349,7 @@ public class WorldMap : TileMap
 			intro.LoadStop((Vector3)save.Get("playerlocation"));
 			Player pl = Player.GetInstance();
 
-			DayNight.GetInstance().UpdatePlayerDistance(Math.Max(Math.Abs(CurIle.Position.x), Math.Abs(CurIle.Position.y)) / 15);
+			DayNight.GetInstance().UpdatePlayerDistance(Math.Max(Math.Abs(CurIle.Position.x), Math.Abs(CurIle.Position.y)) / 11);
 			
 			PlayerUI.OnMenuToggled(false);
 			pl.GetNode<Control>("Tutorial").Free();
@@ -394,7 +398,7 @@ public class WorldMap : TileMap
 		else
 		{
 			ArrangeCellsBasedOnDistance();
-			MapGrid.GetInstance().InitMap();
+			((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid().InitMap();
 		}
 	}
 	public Vector2 GetCurrentTile()
@@ -547,7 +551,8 @@ public class WorldMap : TileMap
 		if (finishedspawning == true)
 		{
 			SpawnIntro();
-			DayNight.GetInstance().UpdatePlayerDistance(Math.Max(Math.Abs(ilemap[entry].Position.x), Math.Abs(ilemap[entry].Position.y)) / 15);
+			DayNight.GetInstance().UpdatePlayerDistance(Math.Max(Math.Abs(ilemap[entry].Position.x), Math.Abs(ilemap[entry].Position.y)) / 11);
+			((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid().FrameMap();
 		}
 	}
 	public void SaveIsland()
@@ -567,7 +572,7 @@ public class WorldMap : TileMap
 		ImageTexture tex = new ImageTexture();
 		tex.CreateFromImage(IslandImageHolder.GetInstance().Images[imageId]);
 		//MapGrid.GetInstance().UpdateIleInfo(position, Type, HasPort, Ports, - RotationToSpawn, tex, name);
-		MapGrid.GetInstance().UpdateIleInfo(position, Visited, HasPort, Ports, - RotationToSpawn, tex, name);
+		((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid().UpdateIleInfo(position, Visited, HasPort, Ports, - RotationToSpawn, tex, name);
 	}
 	void DespawnIle(Island ile, bool KeepInstance)
 	{
@@ -732,7 +737,7 @@ public class WorldMap : TileMap
 		for (int i = 0; i < Eventscenestospawn.Count(); i++)
 		{
 			int SpawnIndex = RandomContainer.Next(0, OrderedCells.Count);
-			while (RandomisedEntryID.Contains(SpawnIndex) || SpawnIndex > OrderedCells.Count * 0.66f)
+			while (RandomisedEntryID.Contains(SpawnIndex) || SpawnIndex > OrderedCells.Count * 0.66f || SpawnIndex < 9)
 			{
 				SpawnIndex = RandomContainer.Next(0, OrderedCells.Count);
 			}

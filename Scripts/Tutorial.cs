@@ -15,6 +15,10 @@ public class Tutorial : Control
     VideoStream InventoryTutorial = null;
     [Export]
     string InventoryTutorialText = null;
+    [Export]
+    VideoStream MapTutorial = null;
+    [Export]
+    string MapTutorialText = null;
 
     int stage = 0;
 
@@ -51,6 +55,17 @@ public class Tutorial : Control
         GetNode<VideoPlayer>("VideoPlayer").Stream = WalkTutorial;
         GetNode<Label>("VideoPlayer/Panel/Label").Text = WalkTutorialText;
         GetNode<VideoPlayer>("VideoPlayer").Play();
+    }
+    public void OnMapPickup()
+    {
+        if (MapTutorial != null)
+        {
+            GetNode<VideoPlayer>("VideoPlayer").Stream = MapTutorial;
+            GetNode<VideoPlayer>("VideoPlayer").Play();
+        }
+        GetNode<Label>("VideoPlayer/Panel/Label").Text = MapTutorialText;
+        GetNode<AnimationPlayer>("AnimationPlayer").Play("Restart");
+        Show();
     }
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
 //  public override void _Process(float delta)

@@ -1,16 +1,18 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
-[Tool]
 public class GeneratorDoor : StaticBody
 {
+    [Export]
+    ItemName ItemRequiredToOpen = ItemName.KEYCARD;
+    [Export]
+    bool ConsumeItem = false;
     bool Open = false;
     AnimationPlayer anim;
-    Spatial Switch;
     public override void _Ready()
     {
         anim = GetParent().GetNode<AnimationPlayer>("AnimationPlayer");
-        Switch = GetParent().GetNode<Spatial>("Switch");
     }
     public string GetActionName(Player pl)
     {   
@@ -53,8 +55,18 @@ public class GeneratorDoor : StaticBody
     }
     public void DoAction(Player pl)
 	{
-        if (pl.GetCharacterInventory().HasItemOfType(ItemName.KEYCARD))
+        if (pl.GetCharacterInventory().HasItemOfType(ItemRequiredToOpen))
+        {
             ToggleDoor();
+            if (ConsumeItem)
+            {
+                Inventory inv = pl.GetCharacterInventory();
+                List<Item> its;
+                inv.GetItemsByType(out its, ItemRequiredToOpen);
+                inv.DeleteItem(its[0]);
+            }
+        }
+            
         else
             pl.GetTalkText().Talk("Φένεταί σαν να χρειάζεται κάποιου είδους κλειδί για να ελέγξω την πύλη.");
     }

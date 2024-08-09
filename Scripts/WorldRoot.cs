@@ -56,7 +56,7 @@ public class WorldRoot : Spatial
 		intro = (Spatial)ResourceLoader.Load<PackedScene>(Intro).Instance();
 		GetNode("Control/ViewportContainer/Viewport").AddChild(intro, true);
 		OS.VsyncEnabled = false;
-		MapGrid.GetInstance().ResetMap();
+		((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid().ResetMap();
 		GetNode<Control>("CanvasLayer/PlayerUI").Hide();
 	}
 }

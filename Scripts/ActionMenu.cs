@@ -17,7 +17,7 @@ using System.Linq;
 public class ActionMenu : Control
 {
 	Spatial SelectedObj;
-	Player pl;
+	Player Play;
     bool selecting = false;
     Button PickButton;
 	Button IntButton;
@@ -51,7 +51,18 @@ public class ActionMenu : Control
 		PickButton.Hide();
 		IntButton2.Hide();
 		IntButton3.Hide();
-		pl = (Player)GetParent();
+
+		SetProcessInput(false);
+
+	}
+	public void ConnectPlayer(Player pl)
+	{
+		Play = pl;
+		SetProcessInput(true);
+	}
+	public void DissconnectPlayer()
+	{
+		SetProcessInput(false);
 	}
 	public bool IsSelecting()
 	{
@@ -64,19 +75,19 @@ public class ActionMenu : Control
 	public void StartPerformingAction(int type)
 	{
 		ActionComponent Acomp = SelectedObj.GetNode<ActionComponent>("ActionComponent");
-		pl.UpdateLocationToMove(Acomp.GetActionPos(pl.GlobalTranslation));
+		Play.UpdateLocationToMove(Acomp.GetActionPos(Play.GlobalTranslation));
 		PerformingAction = true;
 		ActionIndex = type;
 	}
 	private void On_PickUp_Button_Down()
 	{
-		if (pl.HasVehicle() && pl.GetVehicle() != SelectedObj)
+		if (Play.HasVehicle() && Play.GetVehicle() != SelectedObj)
 		{
-			pl.GetTalkText().Talk("Δεν μπορώ πάνω από την βάρκα");
+			Play.GetTalkText().Talk("Δεν μπορώ πάνω από την βάρκα");
 		}
 		ActionComponent Acomp = SelectedObj.GetNode<ActionComponent>("ActionComponent");
-		Vector3 actionpos = Acomp.GetActionPos(pl.GlobalTranslation);
-		if (actionpos.DistanceTo(pl.GlobalTranslation) > Acomp.ActionDistance)
+		Vector3 actionpos = Acomp.GetActionPos(Play.GlobalTranslation);
+		if (actionpos.DistanceTo(Play.GlobalTranslation) > Acomp.ActionDistance)
 		{
 			if (!PerformingAction)
 			{
@@ -85,7 +96,7 @@ public class ActionMenu : Control
 			return;
 		}
 		
-		SelectedObj.Call("DoAction", pl);
+		SelectedObj.Call("DoAction", Play);
 
 		selecting = false;
 		Stop();
@@ -100,11 +111,11 @@ public class ActionMenu : Control
 	}
 	private void On_Interact_Button_Down()
 	{
-		pl.GetTalkText().Talk((string)SelectedObj.Call("GetObjectDescription"));
+		Play.GetTalkText().Talk((string)SelectedObj.Call("GetObjectDescription"));
 	}
 	public void Start(Spatial obj)
 	{
-		if (pl.BeingTalkedTo)
+		if (Play.BeingTalkedTo)
 			return;
 		if (selecting)
             return;
@@ -112,7 +123,7 @@ public class ActionMenu : Control
 
 		if (obj is Vehicle v)
 		{
-			if (pl.HasVehicle() && pl.GetVehicle() == v)
+			if (Play.HasVehicle() && Play.GetVehicle() == v)
 				GetNode<VehicleHud>("VBoxContainer/VehicleUI").Visible = true;
 
 		}
@@ -122,8 +133,8 @@ public class ActionMenu : Control
 		//PickButton.Show();
 		IntButton.Show();
 
-		PickButton.Text = (string)obj.Call("GetActionName", pl);
-		PickButton.Visible = (bool)obj.Call("ShowActionName", pl);
+		PickButton.Text = (string)obj.Call("GetActionName", Play);
+		PickButton.Visible = (bool)obj.Call("ShowActionName", Play);
 
 		DeselectCurrent();
 		SelectedObj = obj;
@@ -143,12 +154,12 @@ public class ActionMenu : Control
 	{
 		if (SelectedObj == null)
 			return;
-		pl.GetNode<LoddedCharacter>("Pivot/Guy/Armature/Skeleton").ResetHead();
+		Play.GetNode<LoddedCharacter>("Pivot/Guy/Armature/Skeleton").ResetHead();
 		if (PerformingAction)
 		{
 			PerformingAction = false;
 			ActionIndex = 0;
-			pl.UpdateLocationToMove(pl.GlobalTranslation);
+			Play.UpdateLocationToMove(Play.GlobalTranslation);
 		}
 		if (selecting)
 		{
@@ -166,11 +177,12 @@ public class ActionMenu : Control
 	public override void _PhysicsProcess(float delta)
 	{
 		ActionComponent Acomp = SelectedObj.GetNode<ActionComponent>("ActionComponent");
-		Vector3 actionpos = Acomp.GetActionPos(pl.GlobalTranslation);
+		Vector3 actionpos = Acomp.GetActionPos(Play.GlobalTranslation);
 
-		var screenpos = DViewport.GetInstance().GetCamera().UnprojectPosition(actionpos);
+		float mult = OS.WindowSize.x / DViewport.GetInstance().Size.x;
+		var screenpos = DViewport.GetInstance().GetCamera().UnprojectPosition(actionpos) * mult;
 
-		pl.GetNode<LoddedCharacter>("Pivot/Guy/Armature/Skeleton").HeadLookAt(actionpos);
+		Play.GetNode<LoddedCharacter>("Pivot/Guy/Armature/Skeleton").HeadLookAt(actionpos);
 		//Vector3 pos = SelectedObj.GlobalTransform.origin;
 
 		//if (pl.GlobalTransform.origin.DistanceTo(pos) > 60 && selecting)
@@ -186,14 +198,15 @@ public class ActionMenu : Control
 
 		RectPosition = new Vector2 (screenpos.x, screenpos.y +50);
 
-		if (screenpos < Vector2.Zero || screenpos > DViewport.GetInstance().Size)
+		if (screenpos < Vector2.Zero || screenpos > GetViewport().Size)
 			Stop();
 
 		if (PerformingAction)
 		{
-			if (actionpos.DistanceTo(pl.GlobalTranslation) <= SelectedObj.GetNode<ActionComponent>("ActionComponent").ActionDistance)
+			Vector3 PlGlobalPos = Play.GlobalTranslation;
+			if (actionpos.DistanceTo(PlGlobalPos) <= SelectedObj.GetNode<ActionComponent>("ActionComponent").ActionDistance)
 			{
-				pl.UpdateLocationToMove(pl.GlobalTranslation);
+				Play.UpdateLocationToMove(PlGlobalPos);
 				
 				if (ActionIndex == 0)
 				{
@@ -247,11 +260,13 @@ public class ActionMenu : Control
 				return;
 			}
 			Spatial obj = (Spatial)rayar["collider"];
+
+			Vector3 PlayPos = Play.GlobalTranslation;
 			
 			ActionComponent Acomp = obj.GetNode<ActionComponent>("ActionComponent");
-			Vector3 actionpos = Acomp.GetActionPos(pl.GlobalTranslation);
+			Vector3 actionpos = Acomp.GetActionPos(PlayPos);
 
-			if (actionpos.DistanceTo(pl.GlobalTranslation) > 100)
+			if (actionpos.DistanceTo(PlayPos) > 100)
 			{
 				Stop();
 				return;
@@ -260,7 +275,7 @@ public class ActionMenu : Control
 		}
 		if (@event.IsActionPressed("ActionCheck"))
 		{
-			Vector3 plpos = pl.GlobalTranslation;
+			Vector3 plpos = Play.GlobalTranslation;
 			var interactables = GetTree().GetNodesInGroup("Interactables");
 			foreach (Spatial inter in interactables)
 			{

@@ -7,6 +7,6 @@ public class MapItem : Item
     public override void OnItemPickedUp()
     {
         base.OnItemPickedUp();
-        MapGrid.GetInstance().ForceIslandVisited(WorldMap.GetInstance().GetCurrentIleInfo());
+       ((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid().ForceIslandVisited(WorldMap.GetInstance().GetCurrentIleInfo());
     }
 }

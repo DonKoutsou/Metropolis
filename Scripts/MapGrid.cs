@@ -20,45 +20,40 @@ public class MapGrid : GridContainer
     GridContainer MapGridx;
     GridContainer MapGridy;
 
-    static MapGrid Instance;
-
     public bool MapActive = false;
 
     MapUI mapui;
 
     Control PlayerIconPivot;
 
-    public static MapGrid GetInstance()
-    {
-        return Instance;
-    }
+    bool first = true;
     public void ToggleMap(bool toggle)
     {
         if (MapActive == toggle)
             return;
         if (toggle)
         {
-            
-            ((Control)GetParent().GetParent()).Show();
+            if (first)
+            {
+                FrameMap();
+                first = false;
+            }
+            //((Control)GetParent().GetParent()).Show();
             SetProcessInput(true);
             SetProcess(true);
             MapActive = true;
-            mapui.OnMapOpened();
-            FrameMap();
         }
         else
         {
-            ((Control)GetParent().GetParent()).Hide();
+            //((Control)GetParent().GetParent()).Hide();
             SetProcessInput(false);
             SetProcess(false);
             MapActive = false;
-            mapui.OnMapClosed();
         }
             
     }
     public override void _Ready()
     {
-        Instance = this;
         Panel par = (Panel)GetParent();
         mapui = (MapUI)par.GetParent();
         //Texture tex = (Texture)th.Texture;
@@ -96,8 +91,10 @@ public class MapGrid : GridContainer
         while (times > 0)
         {
             Control maptile = (Control)TileScene.Instance();
-            ChildMapIleInfo info = new ChildMapIleInfo();
-            info.MapIle = maptile;
+            ChildMapIleInfo info = new ChildMapIleInfo()
+            {
+                MapIle = maptile
+            };
             AddChild(maptile);
             times -= 1;
             children.Insert(children.Count, info);
@@ -106,8 +103,8 @@ public class MapGrid : GridContainer
         {
             Control gridtilex = (Control)XGridTileScene.Instance();
             Control gridtiley = (Control)YGridTileScene.Instance();
-            gridtilex.Name = "x" + (i-15);
-            gridtiley.Name = "y" + (i-15);
+            gridtilex.Name = "x" + (i-11);
+            gridtiley.Name = "y" + (i-11);
             MapGridx.AddChild(gridtilex);
             MapGridy.AddChild(gridtiley);
             
@@ -127,8 +124,6 @@ public class MapGrid : GridContainer
             MapTile child =(MapTile)children[i].MapIle;
             MapIleList.Add((Vector2)cells[i], child);
         }
-
-        FrameMap();
     }
     public bool IsMouseInMap()
     {
@@ -146,8 +141,8 @@ public class MapGrid : GridContainer
     }
     public override void _Input(InputEvent @event)
 	{
-        if (!IsMouseInMap())
-            return;
+        //if (!IsMouseInMap())
+            //return;
 		if (@event is InputEventMouseMotion)
 		{
             if (!Visible)
@@ -197,7 +192,7 @@ public class MapGrid : GridContainer
 		}
 		if (@event.IsActionPressed("ZoomOut"))
 		{
-			if (RectScale.x > 4f)
+			if (RectScale.x > 12)
             {
                 RectScale /= 2;
                 

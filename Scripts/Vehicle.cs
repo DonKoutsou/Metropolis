@@ -133,6 +133,14 @@ public class Vehicle : RigidBody
         Rays.Insert(1, GetNode<Spatial>("RemoteTransform2"));
         Rays.Insert(2, GetNode<Spatial>("RemoteTransform3"));
         Rays.Insert(3, GetNode<Spatial>("RemoteTransform4"));
+
+        BoostTimer = new Timer()
+        {
+            WaitTime = 40,
+            OneShot = true
+        };
+        GetNode<VehicleBoostTrails>("VehicleBoostTrails").AddChild(BoostTimer);
+        BoostTimer.Connect("timeout", this, "BoostEnded");
         //((Spatial)GetParent()).GlobalRotation = Vector3.Zero;
 
         //DamageMan = GetParent().GetNode<VehicleDamageManager>("VehicleDamageManager");
@@ -215,11 +223,25 @@ public class Vehicle : RigidBody
     {
         SpeedBuildup = 1;
         LinearVelocity *= Ammount;
+
+        //EnergyBuff = Ammount * (speed * 1200);
+
+        HasBoost = true;
         
         GetNode<VehicleBoostTrails>("VehicleBoostTrails").StartBoost();
+
+        BoostTimer.Start();
     }
+    private void BoostEnded()
+    {
+        HasBoost = false;
+    }
+    Timer BoostTimer;
+    bool HasBoost = false;
     public float GetRPM()
     {
+        if (HasBoost)
+            return 0;
         return SpeedBuildup;
     }
     float SpeedBuildup = 0;
@@ -227,7 +249,7 @@ public class Vehicle : RigidBody
     public override void _PhysicsProcess(float delta)
     {
         base._PhysicsProcess(delta);
-        if (!PlayerOwned)
+        if (!Working)
             return;
 
         if (!thr.IsActive())
@@ -275,11 +297,8 @@ public class Vehicle : RigidBody
         
         latsspeed = speed * (distmulti * SpeedBuildup);
 
-        if (!Working)
-        {
-            loctomove = GlobalTranslation;   
-            return;
-        }
+        //EnergyBuff = Mathf.Max(0, EnergyBuff - latsspeed);
+        
         //engine
         AddCentralForce(force * latsspeed * (delta * 2));
 

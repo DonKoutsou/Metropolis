@@ -1,0 +1,281 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://Scripts/ScreenEffects.cs" type="Script" id=1]
+[ext_resource path="res://Scripts/Control_UI.cs" type="Script" id=2]
+[ext_resource path="res://UIThemes/Panel_Black_Top-BottomCorner.tres" type="StyleBox" id=3]
+[ext_resource path="res://Scenes/HUD/ActionMenu.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scripts/PlayerUI.cs" type="Script" id=5]
+[ext_resource path="res://Scripts/CityNameUI.cs" type="Script" id=6]
+[ext_resource path="res://Scenes/HUD/Map.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/HUD/SplashScreenPanelTheme.tres" type="StyleBox" id=8]
+[ext_resource path="res://Fonts/Caudex-Bold.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://Scenes/HUD/CheatMenu.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/HUD/InventoryUI.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Assets/Sounds/UI/Hover2.mp3" type="AudioStream" id=12]
+[ext_resource path="res://Assets/Sounds/UI/Hover.mp3" type="AudioStream" id=13]
+[ext_resource path="res://Scripts/UISoundManager.cs" type="Script" id=14]
+
+[sub_resource type="DynamicFont" id=36]
+size = 64
+outline_size = 2
+outline_color = Color( 0.215686, 0.215686, 0.215686, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 9 )
+
+[sub_resource type="Animation" id=37]
+resource_name = "Damage"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("ScreenEffects/DamageColor:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 1, 2, 6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.623529, 0.172549, 0.172549, 0 ), Color( 0.623529, 0.172549, 0.172549, 0.117647 ), Color( 0.623529, 0.172549, 0.172549, 0 ), Color( 0.623529, 0.172549, 0.172549, 0.117647 ), Color( 0.623529, 0.172549, 0.172549, 0 ) ]
+}
+
+[sub_resource type="Animation" id=38]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("ScreenEffects/DamageColor:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.623529, 0.172549, 0.172549, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CityNameUI/Label2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=39]
+resource_name = "Show"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("CityNameUI/Label2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 4, 6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="DynamicFont" id=40]
+size = 26
+outline_size = 2
+outline_color = Color( 0.215686, 0.215686, 0.215686, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=41]
+size = 24
+outline_size = 2
+outline_color = Color( 0.215686, 0.215686, 0.215686, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 9 )
+
+[node name="PlayerUI" type="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -960.0
+margin_top = -540.0
+margin_right = 960.0
+margin_bottom = 540.0
+rect_pivot_offset = Vector2( 2400, -53 )
+mouse_filter = 2
+script = ExtResource( 5 )
+CityNameUI = NodePath("CityNameUI")
+ScreenEffects = NodePath("ScreenEffects")
+CheatMenu = NodePath("CheatMenu")
+Inventory = NodePath("InvntoryUI")
+MapUI = NodePath("MapUI")
+ControlsUI = NodePath("Control_UI")
+ActionMenu = NodePath("ActionMenu")
+
+[node name="UISoundManager" type="Node" parent="."]
+pause_mode = 2
+script = ExtResource( 14 )
+HoverSound = ExtResource( 12 )
+ClickSound = ExtResource( 13 )
+
+[node name="ScreenEffects" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 1 )
+AnimationPlayer = NodePath("../UIAnimation")
+
+[node name="DamageColor" type="ColorRect" parent="ScreenEffects"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0.623529, 0.172549, 0.172549, 0 )
+
+[node name="ActionMenu" parent="." instance=ExtResource( 4 )]
+visible = false
+
+[node name="InvntoryUI" parent="." instance=ExtResource( 11 )]
+
+[node name="CityNameUI" type="Control" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -18.0
+margin_top = 216.0
+margin_right = 22.0
+margin_bottom = 256.0
+mouse_filter = 2
+script = ExtResource( 6 )
+AnimationNode = NodePath("../UIAnimation")
+
+[node name="Label2" type="Label" parent="CityNameUI"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -552.5
+margin_top = -122.0
+margin_right = 552.5
+margin_bottom = 70.0
+custom_colors/font_color = Color( 0.892578, 0.785462, 0.626348, 1 )
+custom_fonts/font = SubResource( 36 )
+text = "ΜΗΤΡΟΠΟΛΗ"
+align = 1
+valign = 1
+
+[node name="Panel7" type="Panel" parent="CityNameUI/Label2"]
+anchor_right = 1.0
+margin_left = 312.5
+margin_top = 46.0
+margin_right = -306.5
+margin_bottom = 60.0
+rect_clip_content = true
+mouse_filter = 2
+custom_styles/panel = ExtResource( 8 )
+
+[node name="Panel8" type="Panel" parent="CityNameUI/Label2"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -239.5
+margin_top = -58.0
+margin_right = 249.5
+margin_bottom = -44.0
+rect_clip_content = true
+mouse_filter = 2
+custom_styles/panel = ExtResource( 8 )
+
+[node name="CheatMenu" parent="." instance=ExtResource( 10 )]
+visible = false
+
+[node name="MapUI" parent="." instance=ExtResource( 7 )]
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="UIAnimation" type="AnimationPlayer" parent="."]
+anims/Damage = SubResource( 37 )
+anims/RESET = SubResource( 38 )
+anims/Show = SubResource( 39 )
+
+[node name="Control_UI" type="Control" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 7.0
+margin_top = -147.0
+margin_right = 236.0
+margin_bottom = -5.0
+script = ExtResource( 2 )
+
+[node name="Panel" type="Panel" parent="Control_UI"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -40.0
+margin_right = 40.0
+custom_styles/panel = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="Control_UI/Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -17.0
+margin_right = 13.0
+margin_bottom = 17.0
+custom_fonts/font = SubResource( 40 )
+text = "I"
+align = 1
+
+[node name="Label2" type="Label" parent="Control_UI/Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 24.0
+margin_top = -16.0
+margin_right = 192.0
+margin_bottom = 16.0
+custom_fonts/font = SubResource( 41 )
+text = "Τσάντα"
+
+[node name="Panel2" type="Panel" parent="Control_UI"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -87.0
+margin_right = 40.0
+margin_bottom = -47.0
+custom_styles/panel = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="Control_UI/Panel2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -17.0
+margin_right = 13.0
+margin_bottom = 17.0
+custom_fonts/font = SubResource( 40 )
+text = "M"
+align = 1
+
+[node name="Label2" type="Label" parent="Control_UI/Panel2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 24.0
+margin_top = -16.0
+margin_right = 172.0
+margin_bottom = 16.0
+custom_fonts/font = SubResource( 41 )
+text = "Χάρτης"
