@@ -41,12 +41,12 @@ PossibleDeco = [ ExtResource( 15 ), ExtResource( 14 ) ]
 FurnitureAmmount = 6
 DecorationAmmount = 2
 SpawnPool = {
+Resource( "res://Scenes/Items/FastLeg_L.tscn" ): 1,
 Resource( "res://Scenes/Items/Guitar.tscn" ): 1,
-Resource( "res://Scenes/Items/Drahma.tscn" ): 0,
 Resource( "res://Scenes/Items/FastLeg_R.tscn" ): 1,
+Resource( "res://Scenes/Items/Drahma.tscn" ): 0,
 Resource( "res://Scenes/Items/Battery.tscn" ): 0,
-Resource( "res://Scenes/Items/BatteryEmpty.tscn" ): 10,
-Resource( "res://Scenes/Items/FastLeg_L.tscn" ): 1
+Resource( "res://Scenes/Items/BatteryEmpty.tscn" ): 10
 }
 
 [node name="HouseExterior" type="StaticBody" parent="."]
@@ -169,13 +169,10 @@ mesh = SubResource( 6 )
 [node name="DecorationPlacaments" type="Spatial" parent="."]
 
 [node name="Position3D" type="Position3D" parent="DecorationPlacaments"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.36304, 3.53325, -2.05728 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.39634, 3.53325, 2.22325 )
 
 [node name="Position3D2" type="Position3D" parent="DecorationPlacaments"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.9636, 3.53325, -2.08377 )
-
-[node name="Position3D3" type="Position3D" parent="DecorationPlacaments"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.1477, 3.53325, 3.60478 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.2881, 3.53325, 2.19676 )
 
 [node name="Furnitures" type="Spatial" parent="."]
 

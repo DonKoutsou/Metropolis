@@ -498,7 +498,7 @@ public class WorldMap : TileMap
 		float rot;
 		rot = RandomContainer.Next(0, 360);
 		
-		IslandInfo ileinfo = new IslandInfo(rot, ilescene, cell, SpecialName);
+		IslandInfo ileinfo = new IslandInfo(rot, ilescene, cell);
 
 		
 		//SaveEntry
@@ -565,7 +565,7 @@ public class WorldMap : TileMap
 		IleToSave = null;
 		CallDeferred("DespawnIle", ilei.Island, ilei.KeepInstance);
 		//CallDeferred("AddMapData", ilei.Position, ilei.Type, ilei.HasPort, ilei.Ports, ilei.RotationToSpawn, ile.ImageID, ilei.SpecialName);
-		AddMapData(ilei.Position, ilei.Visited, ilei.HasPort, ilei.Ports, ilei.RotationToSpawn, ile.ImageID, ilei.SpecialName);
+		AddMapData(ilei.Position, ilei.Visited, ilei.HasPort, ilei.Ports, ilei.RotationToSpawn, ile.ImageID, ile.IslandName);
 	}
 	void AddMapData(Vector2 position, bool Visited, bool HasPort, List<PortInfo> Ports, float RotationToSpawn, int imageId, string name = null)
 	{
@@ -737,7 +737,7 @@ public class WorldMap : TileMap
 		for (int i = 0; i < Eventscenestospawn.Count(); i++)
 		{
 			int SpawnIndex = RandomContainer.Next(0, OrderedCells.Count);
-			while (RandomisedEntryID.Contains(SpawnIndex) || SpawnIndex > OrderedCells.Count * 0.66f || SpawnIndex < 9)
+			while (RandomisedEntryID.Contains(SpawnIndex) || SpawnIndex > OrderedCells.Count * 0.63f || SpawnIndex < 9)
 			{
 				SpawnIndex = RandomContainer.Next(0, OrderedCells.Count);
 			}
@@ -745,8 +745,8 @@ public class WorldMap : TileMap
 		}
 
 		// μαχαλάς randomise
-		var lighthousecells = GetUsedCellsById(4);
-		int RandomLightHouseIndex = RandomContainer.Next(0, lighthousecells.Count);
+		//var lighthousecells = GetUsedCellsById(4);
+		//int RandomLightHouseIndex = RandomContainer.Next(0, lighthousecells.Count);
 		//Vector2 Μαχαλάςpalcement = (Vector2)lighthousecells[RandomLightHouseIndex];
 		//ΜαχαλάςEntryID = OrderedCells.IndexOf(Μαχαλάςpalcement);
 

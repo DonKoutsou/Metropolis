@@ -73,7 +73,7 @@ PossibleFurni = [ ExtResource( 11 ), ExtResource( 10 ), ExtResource( 12 ) ]
 PossibleDeco = [ ExtResource( 8 ), ExtResource( 9 ) ]
 FurnitureAmmount = 8
 SpawnPool = {
-Resource( "res://Scenes/Items/MemoryStick.tscn" ): 2,
+Resource( "res://Scenes/Items/Toolbox.tscn" ): 10,
 Resource( "res://Scenes/Items/PaintCan.tscn" ): 10
 }
 

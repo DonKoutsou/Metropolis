@@ -356,8 +356,8 @@ public class Vehicle : RigidBody
 
             Spatial EnginePivot = ray.GetNode<Spatial>("EnginePivot");
             ray.ForceRaycastUpdate();
-            Particles part = EnginePivot.GetNode<Particles>("Particles");
-            Particles partd = EnginePivot.GetNode<Particles>("ParticlesDirt");
+            Particles part = ray.GetNode<Particles>("Particles");
+            Particles partd = ray.GetNode<Particles>("ParticlesDirt");
             Particles partHover = EnginePivot.GetNode<Particles>("HoverEngineParticles");
             Vector3 engrot = new Vector3(Mathf.Deg2Rad(Mathf.Lerp(0, 45, latsspeed /speed)), 0, 0);
             if (ray.IsColliding())
@@ -384,7 +384,7 @@ public class Vehicle : RigidBody
                 }
                 if (dist <= 35)
                 {
-                    float particleoffset = dist + engrot.x / 10;
+                    float particleoffset = dist;
 
                     parttotranslate.Translation = new Vector3(parttotranslate.Translation.x, - particleoffset, parttotranslate.Translation.z);
                 }

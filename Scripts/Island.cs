@@ -11,6 +11,8 @@ public class Island : Spatial
 	public bool KeepInstance = false;
 	[Export]
 	public int ImageID = 0;
+	[Export]
+	public string IslandName = null;
 
 	List<Port> Ports = new List<Port>();
 
@@ -32,6 +34,7 @@ public class Island : Spatial
 
 	List<Breakable> Breakables = new List<Breakable>();
 	bool Visited = false;
+	
 	
 	public void SetVisited()
 	{
@@ -747,13 +750,13 @@ public class IslandInfo
 	public float RotationToSpawn;
 	public bool KeepInstance;
 	public bool Visited;
-	public IslandInfo(float rotation, PackedScene scene, Vector2 cell, string specialn)
+	public IslandInfo(float rotation, PackedScene scene, Vector2 cell)
 	{
 		RotationToSpawn = rotation;
 		IleType = scene;
 		//ImageFile = Imag;
 		Position = cell;
-		SpecialName = specialn;
+		
 	}
 	public IslandInfo(Godot.Object data)
 	{
@@ -967,7 +970,7 @@ public class IslandInfo
 		KeepInstance = Ile.KeepInstance;
 		Visited = Ile.IsVisited();
 		HasPort = Ile.HasPort();
-		
+		SpecialName = Ile.IslandName;
 		//SpecialName = Ile.IslandSpecialName;
 		List<House> hous;
 		Ile.GetHouses(out hous);

@@ -87,7 +87,7 @@ item/2/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 item/2/preview = SubResource( 455 )
 
 [node name="Island" instance=ExtResource( 1 )]
-ImageID = 20
+ImageID = 21
 
 [node name="Spatial" parent="." index="2" instance=ExtResource( 3 )]
 transform = Transform( 0.999854, 0.0167315, -0.00334063, -0.0170465, 0.987894, -0.154189, 0.000720381, 0.154223, 0.988036, 0, 0, 0 )

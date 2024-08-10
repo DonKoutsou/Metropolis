@@ -1,6 +1,7 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
+[ext_resource path="res://Scenes/Items/MapItem.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Systems/Tutorial.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Fonts/Play-Bold.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Scenes/Items/NormalLeg_R.tscn" type="PackedScene" id=6]
@@ -229,7 +230,7 @@ transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.72
 shape = SubResource( 92 )
 
 [node name="Inventory" parent="." instance=ExtResource( 7 )]
-StartingItems = [ ExtResource( 33 ), ExtResource( 34 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 10 ) ]
+StartingItems = [ ExtResource( 33 ), ExtResource( 34 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 10 ), ExtResource( 2 ) ]
 
 [node name="TalkText" type="Label3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.50505, 0 )
@@ -242,7 +243,7 @@ alpha_cut = 1
 alpha_scissor_threshold = 0.38
 render_priority = 10
 outline_render_priority = 9
-modulate = Color( 0.988235, 0.964706, 0.631373, 1 )
+modulate = Color( 1, 0.976471, 0.623529, 1 )
 text = "Talk"
 font = SubResource( 175 )
 vertical_alignment = 2
@@ -254,7 +255,7 @@ pause_mode = 1
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
 
 [node name="CameraPanPivot" type="Position3D" parent="CameraMovePivot"]
-transform = Transform( 0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 4.23468, 0 )
+transform = Transform( 0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 3.68688, 0 )
 script = ExtResource( 14 )
 
 [node name="SpringArm" type="SpringArm" parent="CameraMovePivot/CameraPanPivot"]
@@ -268,7 +269,7 @@ margin = 0.5
 transform = Transform( 1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0, 0, 20 )
 script = ExtResource( 12 )
 MaxDist = 150.0
-zoomSteps = 20
+zoomSteps = 24
 
 [node name="CameraPanXPivot" type="Position3D" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot"]
 transform = Transform( 1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0 )

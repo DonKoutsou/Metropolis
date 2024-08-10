@@ -78,6 +78,11 @@ public class MapGrid : GridContainer
             child.QueueFree();
         }
     }
+    string HoveredName = string.Empty;
+    public void OnTileHovered(string name)
+    {
+        HoveredName = name;
+    }
     public void InitMap()
     {
         WorldMap map = WorldMap.GetInstance();
@@ -96,6 +101,7 @@ public class MapGrid : GridContainer
                 MapIle = maptile
             };
             AddChild(maptile);
+            maptile.Connect("OnHovered", this, "OnTileHovered");
             times -= 1;
             children.Insert(children.Count, info);
         }
@@ -448,6 +454,7 @@ public class MapGrid : GridContainer
         //Color c = fogp.Modulate;
         //c.a = thing;
         //fogp.Modulate = c;
+        child.IslandName = name;
         child.Modulate = new Color(1,1,1,1);
     }
     float d = 0.2f;
@@ -465,6 +472,19 @@ public class MapGrid : GridContainer
         //player icon location is at 0,0 in the grid wich is top left corner. Get location of center of grid and treat that as 0,0
         Vector2 center = MapIleList[new Vector2(0,0)].RectPosition;
         GetParent().GetNode<Control>("PlayerIconPivot").GetNode<Panel>("PlayerIcon").RectPosition = (center + new Vector2( (pl.GlobalTranslation.x - 4000) * 0.0015f,  (pl.GlobalTranslation.z - 4000) * 0.0015f)) * RectScale;
+
+        Control l = GetParent().GetParent().GetNode<Control>("IleName");
+        if (HoveredName == string.Empty)
+        {
+            l.Hide();
+        }
+        else
+        {
+            l.Show();
+            Vector2 mousepos = GetViewport().GetMousePosition();
+            l.RectPosition = mousepos;
+            l.GetNode<Label>("IslandName").Text = HoveredName;
+        }
     } 
 }
 class ChildMapIleInfo

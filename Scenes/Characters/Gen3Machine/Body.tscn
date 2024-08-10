@@ -152,13 +152,13 @@ transform = Transform( 1, 0, 0, 0, 1, 5.68434e-14, 0, -2.84217e-14, 1, -0.314196
 script = ExtResource( 18 )
 
 [node name="HeadRot2Pivot" type="Spatial" parent="Armature/Skeleton" index="0"]
-transform = Transform( -1, 0, -8.74228e-08, 5.26272e-16, 1, -6.05434e-09, 8.74228e-08, -2.27374e-13, -1, -4.1864, 280.164, 21.7634 )
+transform = Transform( -1, 0, -8.74228e-08, 5.30087e-16, 1, -6.09856e-09, 8.74228e-08, -2.27374e-13, -1, -1.69252, 280.779, 19.7088 )
 
 [node name="HeadRot2" type="Spatial" parent="Armature/Skeleton/HeadRot2Pivot" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, -2.84217e-14, 0, 2.84217e-14, 1, 0, 0, 0 )
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton" index="1"]
-transform = Transform( 0.997234, -0.0695114, -0.0262972, 0.0654422, 0.98901, -0.132574, 0.0352236, 0.130487, 0.990823, -2.88423, 265.011, 13.0498 )
+transform = Transform( 0.997105, -0.0537586, -0.0537884, 0.0464943, 0.990655, -0.128218, 0.0601787, 0.125345, 0.990286, -0.462701, 265.57, 11.0821 )
 bone_name = "mixamorig_Head"
 
 [node name="HeadPivot" type="Spatial" parent="Armature/Skeleton/BoneAttachment" index="0"]
@@ -178,7 +178,7 @@ light_color = Color( 0.992157, 0.952941, 0.772549, 1 )
 light_energy = 20.0
 light_bake_mode = 0
 shadow_enabled = true
-shadow_bias = 2.0
+shadow_bias = 1.239
 shadow_reverse_cull_face = true
 spot_range = 58.3185
 spot_angle = 55.0843
@@ -194,7 +194,7 @@ update_rotation = false
 update_scale = false
 
 [node name="InstrumentAtatchment" type="BoneAttachment" parent="Armature/Skeleton" index="2"]
-transform = Transform( 0.998157, -0.0310072, -0.0521503, 0.0294078, 0.999081, -0.0311629, 0.0530686, 0.0295718, 0.998153, 0.398352, 212.996, 0.646583 )
+transform = Transform( 0.996803, -0.0116432, -0.0790504, 0.00959875, 0.99961, -0.0261936, 0.0793246, 0.025351, 0.996526, 2.06194, 213.288, -0.78169 )
 bone_name = "mixamorig_Spine1"
 
 [node name="PlayingAtatchment" type="RemoteTransform" parent="Armature/Skeleton/InstrumentAtatchment" index="0"]

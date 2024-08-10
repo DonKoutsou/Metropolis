@@ -30,7 +30,7 @@ radius = 6000.0
 pause_mode = 1
 script = ExtResource( 1 )
 MoveLayer = 260
-Resolution = 128
+Resolution = 256
 
 [node name="SeaBed" parent="." instance=ExtResource( 8 )]
 

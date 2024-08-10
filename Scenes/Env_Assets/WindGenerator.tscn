@@ -310,3 +310,5 @@ shape = SubResource( 11 )
 
 [node name="ActionComponent" parent="." instance=ExtResource( 8 )]
 ActionDistance = 60.0
+
+[connection signal="visibility_changed" from="." to="." method="_on_Generator_visibility_changed"]

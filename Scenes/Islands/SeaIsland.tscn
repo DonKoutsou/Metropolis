@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/Env_Assets/Sea.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Island.cs" type="Script" id=2]
 [ext_resource path="res://Scripts/VehicleSpawnLocation.cs" type="Script" id=3]
 [ext_resource path="res://Scripts/CharacterSpawnLocations.cs" type="Script" id=4]
+[ext_resource path="res://Scenes/Env_Assets/Portal.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CylinderShape" id=1]
 height = 2000.0
@@ -31,3 +32,9 @@ collision_layer = 0
 [node name="CollisionShape" type="CollisionShape" parent="VisitTrigger"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1000, 0 )
 shape = SubResource( 1 )
+
+[node name="Protal" parent="." instance=ExtResource( 5 )]
+transform = Transform( 0.842448, 0.307809, 0.442195, -0.343184, 0.939268, 0, -0.415339, -0.151754, 0.896919, 2250.48, -4.17868, 1864.36 )
+
+[node name="Protal2" parent="." instance=ExtResource( 5 )]
+transform = Transform( -0.682396, 0.468313, 0.561266, 0.395918, 0.882238, -0.254765, -0.614479, 0.0483643, -0.787449, -2284.18, 22.8223, -3218.78 )

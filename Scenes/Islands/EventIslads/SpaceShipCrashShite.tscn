@@ -517,6 +517,7 @@ polygon_points = PoolVector2Array( 192.317, 36.2645, 180.552, 152.244, 8.74609, 
 [node name="Island" instance=ExtResource( 2 )]
 type = 2
 ImageID = 35
+IslandName = "Start"
 
 [node name="SoundMap" parent="." index="3"]
 mesh_library = SubResource( 25 )
@@ -592,7 +593,7 @@ material/0 = SubResource( 155 )
 material_override = SubResource( 155 )
 material/0 = SubResource( 147 )
 
-[node name="HoverEngineParticles" parent="Vehicle0/RayFL/EnginePivot" index="3"]
+[node name="HoverEngineParticles" parent="Vehicle0/RayFL/EnginePivot" index="1"]
 process_material = SubResource( 164 )
 
 [node name="RayFR" parent="Vehicle0" index="2"]
@@ -606,7 +607,7 @@ material/0 = SubResource( 155 )
 material_override = SubResource( 155 )
 material/0 = SubResource( 147 )
 
-[node name="HoverEngineParticles" parent="Vehicle0/RayFR/EnginePivot" index="3"]
+[node name="HoverEngineParticles" parent="Vehicle0/RayFR/EnginePivot" index="1"]
 process_material = SubResource( 164 )
 
 [node name="RayBR" parent="Vehicle0" index="3"]
@@ -620,7 +621,7 @@ material/0 = SubResource( 155 )
 material_override = SubResource( 155 )
 material/0 = SubResource( 147 )
 
-[node name="HoverEngineParticles" parent="Vehicle0/RayBR/EnginePivot" index="3"]
+[node name="HoverEngineParticles" parent="Vehicle0/RayBR/EnginePivot" index="1"]
 process_material = SubResource( 164 )
 
 [node name="RayBL" parent="Vehicle0" index="4"]
@@ -634,7 +635,7 @@ material/0 = SubResource( 155 )
 material_override = SubResource( 155 )
 material/0 = SubResource( 147 )
 
-[node name="HoverEngineParticles" parent="Vehicle0/RayBL/EnginePivot" index="3"]
+[node name="HoverEngineParticles" parent="Vehicle0/RayBL/EnginePivot" index="1"]
 process_material = SubResource( 164 )
 
 [node name="Protal" parent="." index="10" instance=ExtResource( 10 )]
@@ -650,7 +651,7 @@ transform = Transform( -317.85, 329.468, 663.005, -733.121, -39.4467, -331.861, 
 transform = Transform( -741.699, -87.8214, -302.198, 94.0747, 676.442, -427.47, 300.311, -428.799, -612.452, -1567.45, -872.751, -1226.36 )
 
 [node name="Furniture" parent="." index="15" instance=ExtResource( 18 )]
-transform = Transform( -0.93772, 0.293089, 0.186496, 0.347035, 0.814676, 0.464618, -0.0157594, 0.500402, -0.865649, -1365.76, 3.31067, -1825.15 )
+transform = Transform( -0.93772, 0.293089, 0.186496, 0.343963, 0.858571, 0.38019, -0.0486905, 0.420659, -0.90591, -1365.76, 3.60444, -1825.15 )
 FurnitureDescription = "Μια νεκρή μηχανή.."
 ItemToSpawnWith = ExtResource( 24 )
 
@@ -667,7 +668,7 @@ transform = Transform( 44.3727, 3.03159, -17.3316, -3.29448, -44.7567, -16.2633,
 transform = Transform( 0.916878, -0.399128, 0.00566314, 0.371864, 0.848918, -0.375573, 0.145094, 0.34646, 0.926776, -1352.17, 2.49847, -1826.35 )
 
 [node name="Furniture2" parent="." index="20" instance=ExtResource( 23 )]
-transform = Transform( 0.952635, -0.300539, 0.0465045, 0.304116, 0.941431, -0.145674, 0, 0.152917, 0.988239, -1351.78, 1.42351, -1829.24 )
+transform = Transform( 0.999995, 0.00313962, -0.000485752, -0.00317669, 0.988234, -0.152916, 0, 0.152917, 0.988239, -1352.37, 1.42352, -1829.31 )
 ItemToSpawnWith = ExtResource( 22 )
 
 [node name="Occluder" type="Occluder" parent="." index="22"]

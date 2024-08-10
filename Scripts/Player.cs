@@ -52,6 +52,8 @@ public class Player : Character
 
 	public bool BeingTalkedTo = false;
 
+	public bool CanTraverseDeep = false;
+
 	public void SetRunSpeed(int NewSpeed)
 	{
 		RunSpeed = NewSpeed;
@@ -181,8 +183,22 @@ public class Player : Character
 				return;
 			else
 			{
+				Vector3 pos = (Vector3)rayar["position"];
+				if (!CanTraverseDeep)
+				{
+					if (pos.DistanceTo(Vector3.Zero) > 7 * 8000)
+					{
+						TalkText t = GetTalkText();
+						if (!t.IsTalking())
+						{
+							t.Talk("Δεν μπορώ να πάω πιο βαθυιά με το μωρό μαζί μου, η ομήχλη είναι πολύ πηκνή.");
+						}
+						return;
+					}
+				}
+				
 				//Spatial ob = (Spatial)rayar["collider"];
-				loctomove = (Vector3)rayar["position"];
+				loctomove = pos;
 				Vector3 norm = (Vector3)rayar["normal"];
 
 				moveloc.Scale = new Vector3(1,1,1);

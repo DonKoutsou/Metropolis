@@ -614,11 +614,9 @@ transform = Transform( 1, 4.79616e-12, 0, -2.65032e-12, 1, 5.82077e-11, 0, -5.82
 transform = Transform( 0.116012, 0.000537527, -0.993247, -6.82953e-05, 0.999998, 0.000533204, 0.993247, 5.99853e-06, 0.116012, 35.6055, 3.34657, 2332.61 )
 Chair = NodePath("../../Clutter/Chair1")
 PlayInstrument = true
-TalkPosPos = Vector3( 1.503, 0.5, 6 )
 
 [node name="Character3" parent="Characters" index="1" instance=ExtResource( 23 )]
 transform = Transform( 0.680195, 0.000308434, -0.733029, -0.000138675, 0.999998, 0.000292081, 0.733029, -9.70068e-05, 0.680196, -38.9165, 0.433637, 2370.84 )
-TalkPosPos = Vector3( -3.91, 0.5, -6.137 )
 
 [node name="Character4" parent="Characters" index="2" instance=ExtResource( 23 )]
 transform = Transform( 0.949215, 0.000109431, -0.314621, -8.24728e-05, 0.999997, 9.89912e-05, 0.314621, -6.80107e-05, 0.949216, 38.2859, 0.716993, 2359.03 )
@@ -633,13 +631,11 @@ Chair = NodePath("../../Clutter/Bench5")
 transform = Transform( 0.650294, 0.000324495, -0.759676, -0.000138867, 0.999993, 0.000308274, 0.759675, -9.49619e-05, 0.650295, -73.4766, 43.3796, -3631.58 )
 Sitting = true
 PlayInstrument = true
-TalkPosPos = Vector3( -5.184, 0.5, -0.772 )
 
 [node name="Character6" parent="Characters" index="5" instance=ExtResource( 36 )]
 transform = Transform( 0.880007, 0.000291027, 0.474961, 0.000898977, 0.999997, -0.0022784, -0.47496, 0.00243199, 0.880004, -201.244, 0.856902, -3686.28 )
 Chair = NodePath("../../Clutter/Chair4")
 InstrumentToSpawnWith = ExtResource( 29 )
-FirstDialogue = "TakeBoatDialogue"
 PortPath = NodePath("../../Port")
 
 [node name="MotherCity" parent="." index="6" instance=ExtResource( 9 )]

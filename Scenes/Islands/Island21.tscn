@@ -1,6 +1,7 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Env_Assets/Portal.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Env_Assets/CylinderThingHuge.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Env_Assets/CylinderThing.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Building/MultistoryBuildingExterior.material" type="Material" id=5]
@@ -103,16 +104,19 @@ ImageID = 19
 [node name="StaticBody" parent="." index="1" instance=ExtResource( 3 )]
 transform = Transform( 0.799614, -0.305493, 0.517003, 0.423154, 0.897514, -0.12413, -0.426097, 0.318028, 0.846935, -364, -172, 1412 )
 
-[node name="StaticBody2" parent="." index="2" instance=ExtResource( 4 )]
+[node name="StaticBody3" parent="." index="2" instance=ExtResource( 3 )]
+transform = Transform( 0.760494, 0.140125, 0.634046, -0.634889, 0.365353, 0.680759, -0.136259, -0.920262, 0.366812, 503.41, -74.4158, -382.161 )
+
+[node name="StaticBody2" parent="." index="3" instance=ExtResource( 4 )]
 transform = Transform( 0.836516, 0.224144, -0.5, -0.258819, 0.965926, 0, 0.482963, 0.12941, 0.866025, -564, -192, 1783 )
 
-[node name="Rock1" parent="." index="3" instance=ExtResource( 15 )]
+[node name="Rock1" parent="." index="4" instance=ExtResource( 15 )]
 transform = Transform( -185.328, 95.0623, -97.2269, 118.854, 193.092, -37.7593, 66.0582, -80.7167, -204.835, 466.994, -133.31, 933.645 )
 
-[node name="Rock2" parent="." index="4" instance=ExtResource( 14 )]
+[node name="Rock2" parent="." index="5" instance=ExtResource( 14 )]
 transform = Transform( -155.774, -41.9745, 303.685, -8.91419, 341.116, 42.5755, -306.443, 11.414, -155.61, -157.28, -197.576, 588.194 )
 
-[node name="MultiMeshInstance" type="MultiMeshInstance" parent="." index="5"]
+[node name="MultiMeshInstance" type="MultiMeshInstance" parent="." index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -28.6995, 0 )
 multimesh = SubResource( 4 )
 
@@ -127,8 +131,11 @@ visible = false
 mesh = ExtResource( 16 )
 material/0 = ExtResource( 5 )
 
-[node name="SoundMap" parent="." index="8"]
+[node name="SoundMap" parent="." index="9"]
 mesh_library = SubResource( 461 )
 data = {
 "cells": PoolIntArray( 1, 0, 0, 2, 0, 0, 3, 0, 0, 65525, 0, 0, 65526, 0, 0, 65527, 0, 0, 3, 1, 0, 4, 1, 0, 65524, 1, 0, 65525, 1, 0, 4, 2, 0, 5, 2, 0, 65524, 2, 0, 5, 3, 0, 6, 3, 0, 7, 3, 0, 65523, 3, 0, 65524, 3, 0, 7, 4, 0, 8, 4, 0, 9, 4, 0, 65522, 4, 0, 65523, 4, 0, 9, 5, 0, 10, 5, 0, 65522, 5, 0, 10, 6, 0, 11, 6, 0, 65521, 6, 0, 65522, 6, 0, 11, 7, 0, 12, 7, 0, 65521, 7, 0, 12, 8, 0, 65521, 8, 0, 65522, 8, 0, 12, 9, 0, 13, 9, 0, 65522, 9, 0, 13, 10, 0, 65522, 10, 0, 13, 11, 0, 14, 11, 0, 15, 11, 0, 65522, 11, 0, 15, 12, 0, 16, 12, 0, 65522, 12, 0, 16, 13, 0, 65522, 13, 0, 65523, 13, 0, 16, 14, 0, 17, 14, 0, 65523, 14, 0, 65524, 14, 0, 17, 15, 0, 65524, 15, 0, 17, 16, 0, 65524, 16, 0, 17, 17, 0, 65524, 17, 0, 65525, 17, 0, 17, 18, 0, 65525, 18, 0, 17, 19, 0, 65525, 19, 0, 65526, 19, 0, 16, 20, 0, 17, 20, 0, 65526, 20, 0, 65527, 20, 0, 65528, 20, 0, 65529, 20, 0, 65530, 20, 0, 65531, 20, 0, 65532, 20, 0, 65533, 20, 0, 16, 21, 0, 65533, 21, 0, 65534, 21, 0, 0, 22, 0, 16, 22, 0, 65534, 22, 0, 65535, 22, 0, 0, 23, 0, 1, 23, 0, 2, 23, 0, 14, 23, 0, 15, 23, 0, 16, 23, 0, 2, 24, 0, 3, 24, 0, 13, 24, 0, 14, 24, 0, 3, 25, 0, 4, 25, 0, 12, 25, 0, 13, 25, 0, 4, 26, 0, 5, 26, 0, 12, 26, 0, 5, 27, 0, 6, 27, 0, 11, 27, 0, 12, 27, 0, 6, 28, 0, 7, 28, 0, 8, 28, 0, 9, 28, 0, 10, 28, 0, 11, 28, 0, 65527, 28, 0, 65528, 28, 0, 65526, 29, 0, 65527, 29, 0, 65528, 29, 0, 65529, 29, 0, 65526, 30, 0, 65527, 30, 0, 65528, 30, 0, 65529, 30, 0, 65527, 31, 0, 65528, 31, 0, 65529, 65534, 0, 65530, 65534, 0, 65531, 65534, 0, 65532, 65534, 0, 0, 65535, 0, 1, 65535, 0, 65527, 65535, 0, 65528, 65535, 0, 65529, 65535, 0, 65532, 65535, 0, 65533, 65535, 0, 65534, 65535, 0, 65535, 65535, 0 )
 }
+
+[node name="Protal" parent="." index="13" instance=ExtResource( 2 )]
+transform = Transform( 0.301936, 0.180217, 0.936139, -0.524962, 0.851108, 0.00546992, -0.79577, -0.493089, 0.351587, -287.388, 14.021, 1218.79 )

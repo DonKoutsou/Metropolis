@@ -83,6 +83,11 @@ public class Furniture : Spatial
 		{
 			anim.Play("Open");
 		}
+		AudioStreamPlayer3D Sound = GetNodeOrNull<AudioStreamPlayer3D>("AudioStreamPlayer3D");
+		if (Sound != null)
+		{
+			Sound.Play();
+		}
 	}
 	public bool HasBeenSearched()
 	{
@@ -130,7 +135,6 @@ public class Furniture : Spatial
 					GetNode<MeshInstance>(path).MaterialOverlay = null;
 			}
 		}
-			
     }
 	public void DoAction(Player pl)
 	{
@@ -161,11 +165,6 @@ public class Furniture : Spatial
 			desc = FurnitureDescription;
         return desc;
     }
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
 }
 public class DecorationInfo
 {

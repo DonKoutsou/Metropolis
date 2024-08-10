@@ -124,7 +124,7 @@ public class WindGenerator : StaticBody
             //mut.Unlock();
         }
     }
-    /*private void _on_Generator_visibility_changed()
+    private void _on_Generator_visibility_changed()
     {
         if (Visible)
         {
@@ -139,7 +139,7 @@ public class WindGenerator : StaticBody
             anim2.Stop();
             SetProcess(false);
         }
-    }*/
+    }
     public void HighLightObject(bool toggle, Material OutlineMat)
     {
         if (HasInternals)
@@ -155,6 +155,11 @@ public class WindGenerator : StaticBody
         List<Item> batteries;
         pl.GetCharacterInventory().GetItemsByType(out batteries, ItemName.BATTERY);
         float availableenergy = GetCurrentEnergy();
+        if (availableenergy <= 1)
+        {
+            pl.GetTalkText().Talk("Έχει ξεμίνει από ενέργεια...");
+            return;
+        }
         float rechargeamm = 0;
         for (int i = batteries.Count - 1; i > -1; i--)
         {

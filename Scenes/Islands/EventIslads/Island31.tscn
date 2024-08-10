@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Assets/Terains/Island24/Island24.tres" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Terains/Island24/Island24_LOD.tres" type="ArrayMesh" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://Assets/Building/BuildingComposition3.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Env_Assets/Water.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Characters/Smoke.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Characters/NPCVariants/Kanaris.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Env_Assets/Skampo.tscn" type="PackedScene" id=11]
 
 [sub_resource type="SpatialMaterial" id=447]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -138,3 +140,10 @@ transform = Transform( -0.631339, 0, -0.775507, 0, 1, 0, 0.775507, 0, -0.631339,
 
 [node name="Particles4" parent="." index="13" instance=ExtResource( 9 )]
 transform = Transform( 0.75535, 0, -0.655321, 0, 1, 0, 0.655321, 0, 0.75535, -2395.19, 10.8872, -545.031 )
+
+[node name="Kanaris" parent="." index="14" instance=ExtResource( 10 )]
+transform = Transform( -0.585693, 0, -0.810533, 0, 1, 0, 0.810533, 0, -0.585693, -308.097, 730.022, 284.963 )
+Chair = NodePath("../StaticBody")
+
+[node name="StaticBody" parent="." index="15" instance=ExtResource( 11 )]
+transform = Transform( -0.572947, 0, -0.819592, 0, 1, 0, 0.819592, 0, -0.572947, -305.95, 729.378, 286.649 )

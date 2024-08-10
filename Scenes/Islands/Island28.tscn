@@ -1,10 +1,12 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Terains/Island8/Island8.tres" type="ArrayMesh" id=2]
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=3]
 [ext_resource path="res://Assets/Terains/Island8/Island8_LOD.tres" type="ArrayMesh" id=4]
+[ext_resource path="res://Scenes/Env_Assets/Antena2.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/TerainTex/SandSimple.tres" type="Material" id=6]
+[ext_resource path="res://Scenes/Env_Assets/Rock1.tscn" type="PackedScene" id=7]
 
 [sub_resource type="SpatialMaterial" id=13]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -117,3 +119,9 @@ collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance5/StaticBody" index="0"]
 shape = SubResource( 22 )
+
+[node name="StaticBody" parent="." index="8" instance=ExtResource( 5 )]
+transform = Transform( 105.003, -1.41277, 96.4773, -5.72289, 142.245, 8.31155, -96.3178, -9.99187, 104.683, -930.068, -1938.4, 1578.29 )
+
+[node name="Rock1" parent="." index="9" instance=ExtResource( 7 )]
+transform = Transform( -516.347, 149.023, 620.651, 627.211, 266.569, 457.797, -118.422, 762.079, -281.501, -1120.75, -1146.22, -1261.74 )

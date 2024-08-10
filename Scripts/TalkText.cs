@@ -23,6 +23,7 @@ public class TalkText : Label3D
             Player.GetInstance().BeingTalkedTo = true;
             GetParent<NPC>().HeadLook(Player.GetInstance().GetHeadGlobalPos());
         }
+        TalkTimer.Stop();
         TextToShow = diag;
         Text = string.Empty;
         CharactersShowing = 0;

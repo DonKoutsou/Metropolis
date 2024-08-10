@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Clutter/Rock/Rock.obj" type="ArrayMesh" id=2]
@@ -13,6 +13,9 @@
 [ext_resource path="res://Scenes/Env_Assets/WindGenerator.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Env_Assets/WindGenerator2.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Env_Assets/Rock2.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/Env_Assets/FabricRoofLong.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/Env_Assets/Skampo.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/Env_Assets/Pagaki.tscn" type="PackedScene" id=16]
 
 [sub_resource type="MultiMesh" id=2]
 transform_format = 1
@@ -104,11 +107,11 @@ item/2/preview = SubResource( 12 )
 ImageID = 5
 
 [node name="House" parent="." index="1" instance=ExtResource( 3 )]
-transform = Transform( 0.043742, 0, 0.999043, 0, 1, 0, -0.999043, 0, 0.043742, 327.726, 1.29846, -1233.01 )
+transform = Transform( -0.579836, 0, 0.814734, 0, 1, 0, -0.814734, 0, -0.579836, 331.989, 0.103267, -1218.6 )
 FurnitureAmmount = 4
 
 [node name="House2" parent="." index="2" instance=ExtResource( 3 )]
-transform = Transform( -0.99634, 0, 0.0854688, 0, 1, 0, -0.0854688, 0, -0.99634, 374.704, 0.80531, -1197.73 )
+transform = Transform( -0.791084, 0, -0.611706, 0, 1, 0, 0.611706, 0, -0.791084, 387.811, 0.80531, -1199.33 )
 
 [node name="MultiMeshInstance" type="MultiMeshInstance" parent="." index="4"]
 visible = false
@@ -154,3 +157,12 @@ data = {
 
 [node name="WindGenerator2" parent="." index="17" instance=ExtResource( 12 )]
 transform = Transform( -0.917178, 0, -0.398477, 0, 1, 0, 0.398477, 0, -0.917178, 812.416, 0, 937.633 )
+
+[node name="StaticBody4" parent="." index="21" instance=ExtResource( 14 )]
+transform = Transform( 0.600978, 0, -0.799265, 0, 1, 0, 0.799265, 0, 0.600978, 364.677, 7.94256, -1231.83 )
+
+[node name="StaticBody6" parent="." index="22" instance=ExtResource( 15 )]
+transform = Transform( -0.159278, 0, 0.987234, 0, 1, 0, -0.987234, 0, -0.159278, 356.741, 1.35559, -1230.14 )
+
+[node name="Pagaki" parent="." index="23" instance=ExtResource( 16 )]
+transform = Transform( -0.796899, 0, -0.604112, 0, 1, 0, 0.604112, 0, -0.796899, 367.489, 1.35564, -1226.64 )
