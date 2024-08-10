@@ -517,7 +517,6 @@ polygon_points = PoolVector2Array( 192.317, 36.2645, 180.552, 152.244, 8.74609, 
 [node name="Island" instance=ExtResource( 2 )]
 type = 2
 ImageID = 35
-IslandName = "Start"
 
 [node name="SoundMap" parent="." index="3"]
 mesh_library = SubResource( 25 )

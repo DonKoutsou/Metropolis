@@ -169,6 +169,21 @@ public class Vehicle : RigidBody
         
         //SetProcessInput(false);
     }
+    public void DespawnVeh()
+    {
+        
+
+        GetParent().QueueFree();
+        Node par = GetParent();
+		while (!(par is Island))
+		{
+            if (par == null)
+				return;
+			par = par.GetParent();
+		}
+		Island ile = (Island)par;
+		ile.UnRegisterChild(this);
+    }
     public bool HasWings()
     {
         return WingMaterials.Count > 0;
@@ -249,7 +264,7 @@ public class Vehicle : RigidBody
     public override void _PhysicsProcess(float delta)
     {
         base._PhysicsProcess(delta);
-        if (!Working)
+        if (!PlayerOwned)
             return;
 
         if (!thr.IsActive())
@@ -296,6 +311,12 @@ public class Vehicle : RigidBody
         }
         
         latsspeed = speed * (distmulti * SpeedBuildup);
+
+        if (!Working)
+        {
+            loctomove = GlobalTranslation;   
+            return;
+        }
 
         //EnergyBuff = Mathf.Max(0, EnergyBuff - latsspeed);
         
@@ -392,7 +413,7 @@ public class Vehicle : RigidBody
                 float multi = forcecurve.Interpolate(distmulti);
 
                 f= Vector3.Up * Force * delta * multi;
-                partHover.Emitting = true;
+                partHover.Emitting = Working;
             }
             else
             {
@@ -402,10 +423,11 @@ public class Vehicle : RigidBody
                 f = Vector3.Up * 8000 * delta * -8;
             }
             EnginePivot.Rotation = engrot;
-            AddForce(f, ray.GlobalTranslation - GlobalTranslation);
+            if (Working)
+                AddForce(f, ray.GlobalTranslation - GlobalTranslation);
         }
-
-        AddTorque(torquebalance);
+        if (Working)
+            AddTorque(torquebalance);
         torquebalance = Vector3.Zero;
         
         //keeping balance and casizing if to rotated in z
@@ -741,6 +763,22 @@ public class Vehicle : RigidBody
             actiontex = "Επιβιβάση";
 
         return actiontex;
+    }
+    public string GetActionName2(Player pl)
+    {
+		return "Null.";
+    }
+    public string GetActionName3(Player pl)
+    {
+		return "Null.";
+    }
+    public bool ShowActionName2(Player pl)
+    {
+        return false;
+    }
+    public bool ShowActionName3(Player pl)
+    {
+        return false;
     }
     public bool ShowActionName(Player pl)
     {

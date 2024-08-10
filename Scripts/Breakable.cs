@@ -105,6 +105,23 @@ public class Breakable : StaticBody
     {
 		return "Τοποθέτησε εκρηκτικό.";
     }
+    public string GetActionName2(Player pl)
+    {
+		return "Null.";
+    }
+    public string GetActionName3(Player pl)
+    {
+		return "Null.";
+    }
+    public bool ShowActionName2(Player pl)
+    {
+        return false;
+    }
+    public bool ShowActionName3(Player pl)
+    {
+        return false;
+    }
+
     public bool ShowActionName(Player pl)
     {
         return pl.GetCharacterInventory().HasItemOfType(ItemName.EXPLOSIVE);

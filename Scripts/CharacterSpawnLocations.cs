@@ -6,9 +6,9 @@ using System.Linq;
 public class CharacterSpawnLocations : Node
 {
     [Export]
-    Vector3[] Locations = new Vector3[0];
+    public Vector3[] Locations = new Vector3[0];
     [Export]
-    Vector3[] Rotations = new Vector3[0];
+    public Vector3[] Rotations = new Vector3[0];
     
     public bool HasChars()
     {

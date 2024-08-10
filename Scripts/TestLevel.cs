@@ -10,7 +10,7 @@ public class TestLevel : Spatial
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        ((InventoryUI)PlayerUI.GetInstance().GetUI(PlayerUIType.INVENTORY)).OnPlayerSpawned(GetNode<Player>("Control/ViewportContainer/Viewport/Player"));
+        PlayerUI.GetInstance().OnPlayerSpawned(GetNode<Player>("Control/ViewportContainer/Viewport/Player"));
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -93,6 +93,22 @@ public class FireplaceLight : StaticBody
     {
         return true;
     }
+    public string GetActionName2(Player pl)
+    {
+		return "Null.";
+    }
+    public string GetActionName3(Player pl)
+    {
+		return "Null.";
+    }
+    public bool ShowActionName2(Player pl)
+    {
+        return false;
+    }
+    public bool ShowActionName3(Player pl)
+    {
+        return false;
+    }
     public string GetObjectDescription()
     {
         return "Με ένα εκρηκτικό θα μπορούσα να το σπάσω";

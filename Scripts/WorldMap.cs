@@ -105,6 +105,12 @@ public class WorldMap : TileMap
 	public void UnlockLightHouse(IslandInfo Info)
 	{
 		UnlockedLightHouses.Add(Info.Position);
+		if (UnlockedLightHouses.Count == 4)
+		{
+			Player pl = Player.GetInstance();
+			pl.CanTraverseDeep = true;
+			pl.GetTalkText().Talk("Και οι 4 φάροι είναι αναμένοι, μπορώ να φτάσω την Μητρόπολη τώρα.");
+		}
 	}
 	public bool IsLightHouseUnlocked(IslandInfo Info)
 	{
@@ -282,8 +288,11 @@ public class WorldMap : TileMap
 			tex.CreateFromImage(IslandImageHolder.GetInstance().Images[info.ImageIndex]);
 			//tex.Load(ile.Image);
 
+			string name = "No_Name";
+			if (info.UnlockName)
+				name = info.SpecialName;
 			//MapGrid.GetInstance().UpdateIleInfo(info.Position, info.Type, info.HasPort, info.Ports, - info.RotationToSpawn, tex, info.SpecialName);
-			grid.UpdateIleInfo(info.Position, info.Visited, info.HasPort, info.Ports, - info.RotationToSpawn, tex, info.SpecialName);
+			grid.UpdateIleInfo(info.Position, info.Visited, info.HasPort, info.Ports, - info.RotationToSpawn, tex, name);
 		}
 
 		grid.FrameMap();
@@ -353,6 +362,13 @@ public class WorldMap : TileMap
 			
 			PlayerUI.OnMenuToggled(false);
 			pl.GetNode<Control>("Tutorial").Free();
+
+			Vector2[] UnlockedLs = (Vector2[])save.Get("UnlockedLightHouses");
+
+			if (UnlockedLs.Count() == 4)
+			{
+				pl.CanTraverseDeep = true;
+			}
 			//setting player energy
 			pl.SetEnergy((float)save.Get("PlayerEnergy"));
 			pl.BabyAlive = (bool)save.Get("BabyAlive");
@@ -498,7 +514,7 @@ public class WorldMap : TileMap
 		float rot;
 		rot = RandomContainer.Next(0, 360);
 		
-		IslandInfo ileinfo = new IslandInfo(rot, ilescene, cell);
+		IslandInfo ileinfo = new IslandInfo(rot, ilescene, cell, SpecialName);
 
 		
 		//SaveEntry
@@ -565,7 +581,10 @@ public class WorldMap : TileMap
 		IleToSave = null;
 		CallDeferred("DespawnIle", ilei.Island, ilei.KeepInstance);
 		//CallDeferred("AddMapData", ilei.Position, ilei.Type, ilei.HasPort, ilei.Ports, ilei.RotationToSpawn, ile.ImageID, ilei.SpecialName);
-		AddMapData(ilei.Position, ilei.Visited, ilei.HasPort, ilei.Ports, ilei.RotationToSpawn, ile.ImageID, ile.IslandName);
+		string name = "No_Name";
+		if (ile.UnlockName)
+			name = ile.IslandName;
+		AddMapData(ilei.Position, ilei.Visited, ilei.HasPort, ilei.Ports, ilei.RotationToSpawn, ile.ImageID, name);
 	}
 	void AddMapData(Vector2 position, bool Visited, bool HasPort, List<PortInfo> Ports, float RotationToSpawn, int imageId, string name = null)
 	{
@@ -867,13 +886,12 @@ public class WorldMap : TileMap
 	PackedScene GetSceneToSpawn(int type, out string SpecialName)
 	{
 		PackedScene scene = null;
-		SpecialName = null;
+		SpecialName = "No_Name";
 		
 		switch (type)
 		{
 			case 0:
 			{
-				SpecialName = "Μητρόπολη";
 				scene = Entrytospawn;
 				break;
 			}
@@ -885,7 +903,6 @@ public class WorldMap : TileMap
 				{
 					scene = loadedscenes[RandomContainer.Next(0, loadedscenes.Count)];
 				}
-				SpecialName = "Νησί";
 				break;
 			}
 			case 2:
@@ -896,34 +913,22 @@ public class WorldMap : TileMap
 				{
 					scene = loadedscenes[RandomContainer.Next(0, loadedscenes.Count)];
 				}
-					
-				SpecialName = "Νησί";
 				break;
 			}
 			case 3:
 			{
 				scene =  SeaVariations[RandomContainer.Next(0, SeaVariations.Count())];
-				SpecialName = "Νησί";
 				break;
 			}
 			case 4:
 			{
-				//if (IslandSpawnIndex == ΜαχαλάςEntryID)
-				//{
-				//	SpecialName = "Μαχαλάς";
-				//	scene =  Μαχαλάς;
-				//}
-				//else
-				//{
+
 				if (LightHouseNames != null && LightHouseNames.Count() > 0)
 				{
 					SpecialName = LightHouseNames[LightHouseNames.Count() - 1];
 					LightHouseNames.Remove(SpecialName);
 				}
-				//else
-				//{
-				//	SpecialName = "Μαχαλάς";
-				//}
+
 				scene = LightHouse;
 				//}
 				break;
@@ -932,13 +937,11 @@ public class WorldMap : TileMap
 			{
 				if (IslandSpawnIndex == WallEventID)
 				{
-					SpecialName = "Τύχος";
 					scene =  EventWall;
 				}
 				else
 				{
 					scene =  WallToSpawn;
-					SpecialName = "Τύχος";
 				}
 				break;
 				

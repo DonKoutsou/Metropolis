@@ -258,7 +258,7 @@ public class Player : Character
 		}
 		else
 		{
-			if (!ExpressedNoBatteries)
+			if (!ExpressedNoBatteries && !BeingTalkedTo)
 			{
 				GetTalkText().Talk("Ξέμεινα από μπαταρίες. Πρέπει να βρώ κάπου να φωρτήσω.");
 				ExpressedNoBatteries = true;
@@ -355,7 +355,7 @@ public class Player : Character
 
 		if (GetCurrentEnergy() < GetCharacterBatteryCap() / 10)
 		{
-			if (!ExpressedLowBattery)
+			if (!ExpressedLowBattery && !BeingTalkedTo)
 			{
 				GetTalkText().Talk("Θα ξεμείνω από μπαταρία σε λίγο. Δεν νιώθω καλά.");
 				ScreenEffects ui = (ScreenEffects)PlayerUI.GetInstance().GetUI(PlayerUIType.SCREENEFFECTS);

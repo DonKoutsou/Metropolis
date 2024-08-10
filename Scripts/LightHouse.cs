@@ -53,6 +53,9 @@ public class LightHouse : House
 	}
 	private void FadeFin()
 	{
+		WorldMap map = WorldMap.GetInstance();
+        map.UnlockLightHouse(map.GetCurrentIleInfo());
+		
 		CameraAnimationPlayer CameraAnimation = CameraAnimationPlayer.GetInstance();
         CameraAnimation.Disconnect("FadeOutFinished", this, "FadeFin");
 		PlayerCamera.GetInstance().Current = true;

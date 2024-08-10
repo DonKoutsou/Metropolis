@@ -18,7 +18,7 @@ public class MapTile : Control
         if (GetNode<TextureRect>("TextureRect").Visible)
             EmitSignal("OnHovered",IslandName);
         else
-            EmitSignal("OnHovered",string.Empty);
+            EmitSignal("OnHovered", "No_Name");
 
     }
 }

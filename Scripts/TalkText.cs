@@ -18,6 +18,10 @@ public class TalkText : Label3D
     bool CharPar = false;
     public void Talk(string diag)
     {
+        if (diag == string.Empty)
+        {
+            return;
+        }
         if (CharPar)
         {
             Player.GetInstance().BeingTalkedTo = true;

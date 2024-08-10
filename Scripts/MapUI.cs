@@ -3,10 +3,8 @@ using System;
 
 public class MapUI : Control
 {
-    //RichTextLabel CoordText;
-    //Label XCordText;
-    //Label YCordText;
-    //MapGrid grid;
+    [Signal]
+    public delegate void TileHovered();
     static bool IsMouseInMapBool = false;
 
     public bool IsOpen = false;
@@ -79,6 +77,10 @@ public class MapUI : Control
             Hide();
             IsOpen = false;
         }
+    }
+    private void MapTileHovered()
+    {
+        EmitSignal("TileHovered");
     }
     //public override void _Ready()
     //{

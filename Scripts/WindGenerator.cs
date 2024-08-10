@@ -214,6 +214,22 @@ public class WindGenerator : StaticBody
     {
         return "Γεννήτρια";
     }
+    public string GetActionName2(Player pl)
+    {
+		return "Null.";
+    }
+    public string GetActionName3(Player pl)
+    {
+		return "Null.";
+    }
+    public bool ShowActionName2(Player pl)
+    {
+        return false;
+    }
+    public bool ShowActionName3(Player pl)
+    {
+        return false;
+    }
     public void SetData(WindGeneratorInfo info)
 	{
         int curday;

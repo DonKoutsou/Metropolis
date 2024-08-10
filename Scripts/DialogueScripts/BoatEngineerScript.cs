@@ -71,7 +71,7 @@ public class BoatEngineerScript : BaseDialogueScript
     {
         return "Δώσε σταγώνα αίματος.";
     }
-    public override string Action1Done()
+    public override string Action1Done(NPC owner, Player pl)
     {
         Inventory inv = Player.GetInstance().GetCharacterInventory();
         List<Item> Tollboxes;
@@ -89,7 +89,7 @@ public class BoatEngineerScript : BaseDialogueScript
 
         return "Ωραίος, θα γίνει δουλειά με αυτά. Φέρε λίγα ακόμη και όπου νάνε τελειώνουμε.";
     }
-    public override string Action2Done()
+    public override string Action2Done(NPC owner, Player pl)
     {
 
         Inventory inv = Player.GetInstance().GetCharacterInventory();

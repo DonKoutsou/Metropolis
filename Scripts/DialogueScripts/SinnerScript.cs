@@ -53,11 +53,11 @@ public class SinnerScript : BaseDialogueScript
     {
         return "Null";
     }
-    public override string Action1Done()
+    public override string Action1Done(NPC owner, Player pl)
     {
         return "null";
     }
-    public override string Action2Done()
+    public override string Action2Done(NPC owner, Player pl)
     {
         return "null";
     }

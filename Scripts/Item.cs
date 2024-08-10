@@ -100,6 +100,22 @@ public class Item : RigidBody
     {
         return true;
     }
+	public string GetActionName2(Player pl)
+    {
+		return "Null.";
+    }
+    public string GetActionName3(Player pl)
+    {
+		return "Null.";
+    }
+    public bool ShowActionName2(Player pl)
+    {
+        return false;
+    }
+    public bool ShowActionName3(Player pl)
+    {
+        return false;
+    }
 	public string GetObjectDescription()
     {
         return GetItemName();
@@ -256,11 +272,12 @@ public enum ItemName
 	LOG,
 	BOOK,
 	BLUEPRINT,
-	MEMORYSTICK,
+	MEMORY_STICK,
 	DOSIER,
 	EXPLOSIVE,
 	PAINTCAN,
 	BLOOD_VIAL,
 	WEAPON,
 	KEYCARD,
+	SHEET_MUSIC,
 }

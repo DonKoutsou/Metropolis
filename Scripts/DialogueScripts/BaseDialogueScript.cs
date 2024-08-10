@@ -25,11 +25,11 @@ public class BaseDialogueScript : Node
     {
         return "Null";
     }
-    public virtual string Action1Done()
+    public virtual string Action1Done(NPC owner, Player pl)
     {
         return "null";
     }
-    public virtual string Action2Done()
+    public virtual string Action2Done(NPC owner, Player pl)
     {
         return "null";
     }

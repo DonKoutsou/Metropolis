@@ -59,13 +59,13 @@ public class KanarisScript : BaseDialogueScript
     }
     public override string GetExtraActionText()
     {
-        return "Δώσε εργαλειοθήκη.";
+        return "Δώσε πατιτούρα.";
     }
     public override string GetExtraActionText2()
     {
-        return "Δώσε σταγώνα αίματος.";
+        return "Δώσε μουσική.";
     }
-    public override string Action1Done()
+    public override string Action1Done(NPC owner, Player pl)
     {
         Inventory inv = Player.GetInstance().GetCharacterInventory();
         List<Item> Tollboxes;
@@ -80,9 +80,11 @@ public class KanarisScript : BaseDialogueScript
             return "Ευχαριστώ καΐκτση, θα μπορέσω να προχορήσω τον πίνακά μου λίγο ακόμη.";
         }
 
+        //GlobalItemCatalogue.GetItemByType
+
         return "Ωραίος, θα γίνει δουλειά με αυτά. Φέρε λίγα ακόμη και όπου νάνε τελειώνουμε.";
     }
-    public override string Action2Done()
+    public override string Action2Done(NPC owner, Player pl)
     {
 
         Inventory inv = Player.GetInstance().GetCharacterInventory();

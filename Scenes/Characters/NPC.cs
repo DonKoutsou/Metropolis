@@ -17,9 +17,10 @@ public class NPC : Character
     //string FirstDialogue = "TestTimeline";
 	//[Export]
 	//string RestDialogue = "TestTimeline";
-
 	[Export]
 	NodePath DialogueColaborator = null;
+	[Export]
+	NodePath OwnedVeh = null;
 
 	public bool Talked;
 
@@ -88,6 +89,26 @@ public class NPC : Character
 		Island ile = (Island)par;
 		ile.RegisterChild(this);
 	}
+	public void DespawnChar()
+	{
+		CameraAnimationPlayer CameraAnimation = CameraAnimationPlayer.GetInstance();
+        CameraAnimation.Disconnect("FadeOutFinished", this, "DespawnChar");
+		if (OwnedVeh != null)
+		{
+			GetNode<Vehicle>(OwnedVeh).DespawnVeh();
+		}
+		
+		QueueFree();
+		Node par = GetParent();
+		while (!(par is Island))
+		{
+            if (par == null)
+				return;
+			par = par.GetParent();
+		}
+		Island ile = (Island)par;
+		ile.UnRegisterChild(this);
+	}
 	public void InitialSpawn()
 	{
 		//RandomiseLimbs();
@@ -130,9 +151,28 @@ public class NPC : Character
     }
 	public void DoAction(Player pl)
 	{
-		DoDialogue();
+		if (IsUncon)
+			pl.GetTalkText().Talk("Είναι απενεργοπηημένη, μπορώ να της δώσω μια μπάταριά.");
+		else
+			DoDialogue();
 		//DialogueManager.GetInstance().StartDialogue(this, DoDialogue());
-	}	
+	}
+	public void DoAction2(Player pl)
+	{
+		string text = GetNode<BaseDialogueScript>("DialogueScript").Action1Done(this, pl);
+		if (text != "null")
+		{
+			GetTalkText().Talk(text);
+		}
+	}
+	public void DoAction3(Player pl)
+	{
+		string text = GetNode<BaseDialogueScript>("DialogueScript").Action2Done(this, pl);
+		if (text != "null")
+		{
+			GetTalkText().Talk(text);
+		}
+	}
 	public string GetActionName(Player pl)
     {
         return "Kουβέντα";
@@ -141,9 +181,38 @@ public class NPC : Character
     {
         return true;
     }
+	public string GetActionName2(Player pl)
+    {
+		return GetNode<BaseDialogueScript>("DialogueScript").GetExtraActionText();
+    }
+    public string GetActionName3(Player pl)
+    {
+		return GetNode<BaseDialogueScript>("DialogueScript").GetExtraActionText2();;
+    }
+    public bool ShowActionName2(Player pl)
+    {
+        return GetNode<BaseDialogueScript>("DialogueScript").ShouldShowExtraAction();
+    }
+    public bool ShowActionName3(Player pl)
+    {
+        return GetNode<BaseDialogueScript>("DialogueScript").ShouldShowExtraAction2();
+    }
 	public string GetObjectDescription()
     {
         return "Φίλος";
     }
-	
+	public override void Respawn()
+	{
+		m_balive = true;
+		IsUncon = false;
+		Start();
+		if(Sitting)
+		{
+			anim.ToggleSitting();
+		}
+		else
+		{
+			anim.ToggleIdle();
+		}
+	}
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=2]
+[gd_scene load_steps=69 format=2]
 
 [ext_resource path="res://Scenes/Characters/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/HUD/PlayerUI.tscn" type="PackedScene" id=2]
@@ -27,6 +27,7 @@
 [ext_resource path="res://Scenes/Items/Battery.tscn" type="PackedScene" id=25]
 [ext_resource path="res://Scripts/RandomContainer.cs" type="Script" id=26]
 [ext_resource path="res://Scenes/World/Sky.tscn" type="PackedScene" id=27]
+[ext_resource path="res://Scenes/Characters/NPCVariants/UnconMachine.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Scripts/DViewport.cs" type="Script" id=34]
 [ext_resource path="res://Scenes/Islands/WallOpen.tscn" type="PackedScene" id=35]
 [ext_resource path="res://Assets/Boat/ΚαικιΗιγη_Καικι3_BaseColor.png" type="Texture" id=36]
@@ -431,7 +432,7 @@ material/0 = SubResource( 145 )
 material_override = SubResource( 145 )
 material/0 = SubResource( 145 )
 
-[node name="HoverEngineParticles" parent="Control/ViewportContainer/Viewport/Vehicle/RayFL/EnginePivot" index="3"]
+[node name="HoverEngineParticles" parent="Control/ViewportContainer/Viewport/Vehicle/RayFL/EnginePivot" index="1"]
 process_material = SubResource( 151 )
 
 [node name="RayFR" parent="Control/ViewportContainer/Viewport/Vehicle" index="2"]
@@ -445,7 +446,7 @@ material/0 = SubResource( 145 )
 material_override = SubResource( 145 )
 material/0 = SubResource( 145 )
 
-[node name="HoverEngineParticles" parent="Control/ViewportContainer/Viewport/Vehicle/RayFR/EnginePivot" index="3"]
+[node name="HoverEngineParticles" parent="Control/ViewportContainer/Viewport/Vehicle/RayFR/EnginePivot" index="1"]
 process_material = SubResource( 151 )
 
 [node name="RayBR" parent="Control/ViewportContainer/Viewport/Vehicle" index="3"]
@@ -459,7 +460,7 @@ material/0 = SubResource( 145 )
 material_override = SubResource( 145 )
 material/0 = SubResource( 145 )
 
-[node name="HoverEngineParticles" parent="Control/ViewportContainer/Viewport/Vehicle/RayBR/EnginePivot" index="3"]
+[node name="HoverEngineParticles" parent="Control/ViewportContainer/Viewport/Vehicle/RayBR/EnginePivot" index="1"]
 process_material = SubResource( 151 )
 
 [node name="RayBL" parent="Control/ViewportContainer/Viewport/Vehicle" index="4"]
@@ -473,7 +474,7 @@ material/0 = SubResource( 145 )
 material_override = SubResource( 145 )
 material/0 = SubResource( 145 )
 
-[node name="HoverEngineParticles" parent="Control/ViewportContainer/Viewport/Vehicle/RayBL/EnginePivot" index="3"]
+[node name="HoverEngineParticles" parent="Control/ViewportContainer/Viewport/Vehicle/RayBL/EnginePivot" index="1"]
 process_material = SubResource( 151 )
 
 [node name="Item" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 13 )]
@@ -626,5 +627,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.7781, 13.5021, -22.6629 )
 
 [node name="Painter" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 46 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.977, 13.5021, -29.2983 )
+
+[node name="Character2" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 28 )]
+transform = Transform( -0.999661, 0, 0.0260199, 0, 1, 0, -0.0260199, 0, -0.999661, 14.8554, 13.502, 13.3533 )
 
 [editable path="Control/ViewportContainer/Viewport/Vehicle"]

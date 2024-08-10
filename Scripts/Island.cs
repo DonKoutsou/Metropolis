@@ -12,7 +12,9 @@ public class Island : Spatial
 	[Export]
 	public int ImageID = 0;
 	[Export]
-	public string IslandName = null;
+	public string IslandName = "No_Name";
+	[Export]
+	public bool UnlockName = false;
 
 	List<Port> Ports = new List<Port>();
 
@@ -511,66 +513,61 @@ public class Island : Spatial
 			c.InitialSpawn();
 		}
 		
-		/*CharacterSpawnLocations Chars = GetNode<CharacterSpawnLocations>("CharacterSpawnLocations");
-		//if (Chars != null)
-		//{
+		CharacterSpawnLocations Chars = GetNode<CharacterSpawnLocations>("CharacterSpawnLocations");
+		if (Chars != null)
+		{
 			
 			//if (Children.Count > 0)
 			//{
-		if (Chars.HasChars())
-		{
-			for (int i = 0; i < Chars.Locations.Count(); i++)
+			if (Chars.HasChars())
 			{
-				int Spawn = r.Next(0, 2);
-				RandomUses ++;
-				if (Spawn == 0)
+				for (int i = 0; i < Chars.Locations.Count(); i++)
 				{
-					int selection = r.Next(1, Chars.CharSpawns.Count());
-					RandomUses ++;
-					NPC chara = (NPC)Chars.CharSpawns[selection - 1].Instance();
-					//chara.Set("spawnUncon", true);
-					AddChild(chara);
-					chara.Translation = Chars.Locations[i];
-					chara.Rotation = Chars.Rotations[i];
-					chara.InitialSpawn(r);
-					RandomUses += 6;
-					Characters.Add(chara);
+					int Spawn = RandomContainer.Next(0, 2);
+					if (Spawn == 0)
+					{
+						int selection = RandomContainer.Next(0, GlobalItemCatalogue.GetInstance().CharacterCataluge.Count());
+						NPC chara = (NPC)GlobalItemCatalogue.GetInstance().CharacterCataluge[selection].Instance();
+						//chara.Set("spawnUncon", true);
+						AddChild(chara);
+						chara.Translation = Chars.Locations[i];
+						chara.Rotation = Chars.Rotations[i];
+						chara.InitialSpawn();
+						Characters.Add(chara);
+					}
 				}
 			}
-		}
 			//}
-		//}
+		}
 		
 		VehicleSpawnLocation Vehs = GetNode<VehicleSpawnLocation>("VehicleSpawnLocation");
-		//if (Vehs != null)
-		//{
+		if (Vehs != null)
+		{
 			
 			//if (VehChild.Count > 0)
 			//{
-		if (Vehs.HasVehicles())
-		{
-			var VehChild = Vehs.GetChildren();
-			foreach (Position3D pos in VehChild)
+			if (Vehs.HasVehicles())
 			{
-				int Spawn = r.Next(0, 2);
-				RandomUses ++;
-				if (Spawn == 0)
+				var VehChild = Vehs.GetChildren();
+				foreach (Position3D pos in VehChild)
 				{
-					int selection = r.Next(1, Vehs.VehSpawns.Count());
-					RandomUses ++;
-					Spatial veh = (Spatial)Vehs.VehSpawns[selection - 1].Instance();
-					AddChild(veh);
-					
-					Vehicle vehchild = veh.GetNode<Vehicle>("VehicleBody");
-					vehchild.Translation = pos.Translation;
-					if (vehchild.SpawnBroken)
-						vehchild.OnLightDamaged();
-					Vehicles.Add(vehchild);
+					int Spawn = RandomContainer.Next(0, 2);
+					if (Spawn == 0)
+					{
+						int selection = RandomContainer.Next(0, GlobalItemCatalogue.GetInstance().VehicleCatalogue.Count());
+						Spatial veh = (Spatial)GlobalItemCatalogue.GetInstance().VehicleCatalogue[selection].Instance();
+						AddChild(veh);
+						
+						Vehicle vehchild = veh.GetNode<Vehicle>("VehicleBody");
+						vehchild.Translation = pos.Translation;
+						//if (vehchild.SpawnBroken)
+							//vehchild.OnLightDamaged();
+						Vehicles.Add(vehchild);
+					}
 				}
 			}
-		}*/
 			//}
-		//}
+		}
 		
 	}
 	public void RegisterChild(Node child)
@@ -725,8 +722,23 @@ public class Island : Spatial
 		{
 			IslandInfo info = WorldMap.GetInstance().GetIleInfo(this);
 			((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid().SetIslandVisited(info, pl);
+			//if (IslandName != "No_Name")
+			//{
+			//	pl.GetTalkText().Talk("Αναγνωρίζω αυτό το μέρος...");
+			//}
 		}
-		
+	}
+	private void IslandNameUnlocked(Node body)
+	{
+		GetNode<Spatial>("IslandNameTrigger").QueueFree();
+		if(UnlockName)
+			return;
+		if (body is Player pl)
+		{
+			IslandInfo info = WorldMap.GetInstance().GetIleInfo(this);
+			((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid().UnlockIslandName(info, pl);
+
+		}
 	}
 }
 public class IslandInfo
@@ -737,6 +749,7 @@ public class IslandInfo
 	public bool HasPort;
 	public List<PortInfo> Ports = new List<PortInfo>();
 	public string SpecialName = null;
+	public bool UnlockName = false;
 	public PackedScene IleType;
 	public int ImageIndex = 0;
 	public List<HouseInfo> Houses = new List<HouseInfo>();
@@ -750,13 +763,13 @@ public class IslandInfo
 	public float RotationToSpawn;
 	public bool KeepInstance;
 	public bool Visited;
-	public IslandInfo(float rotation, PackedScene scene, Vector2 cell)
+	public IslandInfo(float rotation, PackedScene scene, Vector2 cell, string Name)
 	{
 		RotationToSpawn = rotation;
 		IleType = scene;
 		//ImageFile = Imag;
 		Position = cell;
-		
+		SpecialName = Name;
 	}
 	public IslandInfo(Godot.Object data)
 	{
@@ -767,6 +780,7 @@ public class IslandInfo
         Type = (IleType)data.Get("Type");
         Position = (Vector2)data.Get("Pos");
 		SpecialName = (string)data.Get("SpecialName");
+		UnlockName = (bool)data.Get("UnlockName");
         IleType = (PackedScene)data.Get("Scene");
 		ImageIndex = (int)data.Get("ImageIndex");
         RotationToSpawn = (float)data.Get("Rotation");
@@ -944,6 +958,7 @@ public class IslandInfo
             { "Type", Type },
             { "Pos", Position },
 			{ "SpecialName", SpecialName},
+			{ "UnlockName", UnlockName},
 			{"Scene", IleType},
 			{"ImageIndex", ImageIndex},
 			{"Rotation", RotationToSpawn},
@@ -970,7 +985,12 @@ public class IslandInfo
 		KeepInstance = Ile.KeepInstance;
 		Visited = Ile.IsVisited();
 		HasPort = Ile.HasPort();
-		SpecialName = Ile.IslandName;
+		if (SpecialName == "No_Name")
+		{
+			SpecialName = Ile.IslandName;
+			UnlockName = Ile.UnlockName;
+		}
+			
 		//SpecialName = Ile.IslandSpecialName;
 		List<House> hous;
 		Ile.GetHouses(out hous);
@@ -1084,6 +1104,7 @@ public class IslandInfo
 	}
 	public void UpdateInfo(Island island)
 	{
+		UnlockName = island.UnlockName;
 		Visited = island.IsVisited();
 		List<House> hous;
 		island.GetHouses(out hous);

@@ -66,7 +66,7 @@ public class PriestScript : BaseDialogueScript
     {
         return "Null";
     }
-    public override string Action1Done()
+    public override string Action1Done(NPC owner, Player pl)
     {
         Inventory inv = Player.GetInstance().GetCharacterInventory();
         List<Item> Books;
@@ -82,7 +82,7 @@ public class PriestScript : BaseDialogueScript
         
         return "Ευχαριστώ καΐκτση, θα μπορέσω να προχορήσω τον πίνακά μου λίγο ακόμη.";
     }
-    public override string Action2Done()
+    public override string Action2Done(NPC owner, Player pl)
     {
         return "null";
     }

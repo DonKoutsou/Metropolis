@@ -222,6 +222,6 @@ margin_bottom = 204.0
 [connection signal="pressed" from="VBoxContainer/PanelContainer/VBoxContainer/Interact_Button2" to="." method="On_Interact_Button2_Down"]
 [connection signal="mouse_entered" from="VBoxContainer/PanelContainer/VBoxContainer/Interact_Button3" to="." method="Selecting_Action"]
 [connection signal="mouse_exited" from="VBoxContainer/PanelContainer/VBoxContainer/Interact_Button3" to="." method="Stoped_Selecting_Action"]
-[connection signal="pressed" from="VBoxContainer/PanelContainer/VBoxContainer/Interact_Button3" to="." method="On_Interact_Button2_Down"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/VBoxContainer/Interact_Button3" to="." method="On_Interact_Button3_Down"]
 [connection signal="MouseEtered" from="VBoxContainer/VehicleUI" to="." method="Selecting_Action"]
 [connection signal="MouseLeft" from="VBoxContainer/VehicleUI" to="." method="Stoped_Selecting_Action"]

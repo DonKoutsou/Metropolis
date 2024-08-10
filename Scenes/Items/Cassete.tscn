@@ -21,7 +21,7 @@ ItemType = 10
 ItemIcon = ExtResource( 4 )
 ItemPickupActionName = "Μια κασέτα"
 ItemName = "Κασέτα"
-ItemDesc = "Μια κασέτα"
+ItemDesc = "Μια κασέτα. Χρειάζεται ειδική συσκευή για να παιχτεί."
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 material_override = ExtResource( 2 )

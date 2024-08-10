@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Scripts/WorldMap.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/World/World_Tileset.tres" type="TileSet" id=2]
@@ -27,7 +27,6 @@
 [ext_resource path="res://Scenes/Islands/EventIslads/Island22.tscn" type="PackedScene" id=25]
 [ext_resource path="res://Scenes/Islands/EventIslads/Volcano.tscn" type="PackedScene" id=26]
 [ext_resource path="res://Scenes/Islands/FinIslands.tscn" type="PackedScene" id=27]
-[ext_resource path="res://Scenes/Islands/Island13.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Scenes/Islands/Into.tscn" type="PackedScene" id=29]
 [ext_resource path="res://Scenes/Islands/EventIslads/Island24.tscn" type="PackedScene" id=30]
 [ext_resource path="res://Scenes/Islands/Island25.tscn" type="PackedScene" id=31]
@@ -36,7 +35,6 @@
 [ext_resource path="res://Scenes/Islands/Island29.tscn" type="PackedScene" id=34]
 [ext_resource path="res://Scenes/Islands/Island28.tscn" type="PackedScene" id=35]
 [ext_resource path="res://Scenes/Islands/Island30.tscn" type="PackedScene" id=36]
-
 
 [node name="WorldMap" type="TileMap"]
 tile_set = ExtResource( 2 )
@@ -53,7 +51,6 @@ Eventscenestospawn = [ ExtResource( 26 ), ExtResource( 25 ) ]
 Entrytospawn = ExtResource( 4 )
 Exittospawn = ExtResource( 27 )
 LightHouse = ExtResource( 3 )
-"Μαχαλάς" = ExtResource( 28 )
 IntroScene = ExtResource( 29 )
 LightHouseNames = [ "Νιαβέντ", "Νικρίζ", "Ουσάκ", "Ραστ", "Σαμπάχ", "Σεγκιάχ", "Χιτζάζ", "Χιτζαζσκιάρ", "Χουζάμ", "Κιουρδί" ]
 

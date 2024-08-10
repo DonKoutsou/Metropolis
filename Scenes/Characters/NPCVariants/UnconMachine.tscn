@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/Characters/NPC.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Gen3Machine/Hoodie/HoodieMat2.tres" type="Material" id=2]
+[ext_resource path="res://Scripts/DialogueScripts/UnconDialogueScript.cs" type="Script" id=3]
+
+[node name="Character" instance=ExtResource( 1 )]
+ClothToWear = 1
+ClothMaterial = ExtResource( 2 )
+spawnUncon = true
+Sitting = true
+
+[node name="DialogueScript" parent="." index="5"]
+script = ExtResource( 3 )

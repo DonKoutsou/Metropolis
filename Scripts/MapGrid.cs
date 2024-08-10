@@ -5,6 +5,8 @@ using System.Linq;
 
 public class MapGrid : GridContainer
 {
+    [Signal]
+    public delegate void TileHovered();
     [Export]
     float MaxZoomScale = 2;
     [Export]
@@ -27,6 +29,8 @@ public class MapGrid : GridContainer
     Control PlayerIconPivot;
 
     bool first = true;
+
+    Label IleNameLabel;
     public void ToggleMap(bool toggle)
     {
         if (MapActive == toggle)
@@ -42,6 +46,7 @@ public class MapGrid : GridContainer
             SetProcessInput(true);
             SetProcess(true);
             MapActive = true;
+            
         }
         else
         {
@@ -49,6 +54,7 @@ public class MapGrid : GridContainer
             SetProcessInput(false);
             SetProcess(false);
             MapActive = false;
+            IleNameLabel.Visible = false;
         }
             
     }
@@ -64,6 +70,8 @@ public class MapGrid : GridContainer
         SetProcess(false);
         //MarginLeft = -(RectSize.x / 2);
         //RectPosition = RectScale/2; 
+        IleNameLabel = GetParent().GetParent().GetNode<Label>("IleName");
+        IleNameLabel.Hide();
     }
     Player pl;
     public void ConnectPlayer(Player p)
@@ -81,6 +89,8 @@ public class MapGrid : GridContainer
     string HoveredName = string.Empty;
     public void OnTileHovered(string name)
     {
+        if (name != "No_Name")
+            EmitSignal("TileHovered");
         HoveredName = name;
     }
     public void InitMap()
@@ -375,6 +385,16 @@ public class MapGrid : GridContainer
         TextureRect child = MapIleList[ile.Position].GetNode<TextureRect>("TextureRect");
         child.Visible = true;
     }
+    public void UnlockIslandName(IslandInfo ile, Player pl)
+    {
+        if (!pl.GetCharacterInventory().HasItemOfType(ItemName.MAP))
+            return;
+        ile.Island.UnlockName = true;
+        MapTile child = MapIleList[ile.Position];
+        child.IslandName = ile.SpecialName;
+        Panel pan = child.GetNode<TextureRect>("TextureRect").GetNode<Panel>("Panel");
+        pan.Visible = true;
+    }
     public void ForceIslandVisited(IslandInfo ile)
     {
         ile.Island.SetVisited();
@@ -455,35 +475,32 @@ public class MapGrid : GridContainer
         //c.a = thing;
         //fogp.Modulate = c;
         child.IslandName = name;
+        
+        Panel pan = child.GetNode<TextureRect>("TextureRect").GetNode<Panel>("Panel");
+        pan.Visible = name != "No_Name";
+
         child.Modulate = new Color(1,1,1,1);
     }
-    float d = 0.2f;
     public override void _Process(float delta)
     {
         base._Process(delta);
-        d -= delta;
-        if (d > 0)
-            return;
-        d = 0.2f;
-
-        if (pl == null || !Godot.Object.IsInstanceValid(pl))
-            return;
 
         //player icon location is at 0,0 in the grid wich is top left corner. Get location of center of grid and treat that as 0,0
         Vector2 center = MapIleList[new Vector2(0,0)].RectPosition;
         GetParent().GetNode<Control>("PlayerIconPivot").GetNode<Panel>("PlayerIcon").RectPosition = (center + new Vector2( (pl.GlobalTranslation.x - 4000) * 0.0015f,  (pl.GlobalTranslation.z - 4000) * 0.0015f)) * RectScale;
 
-        Control l = GetParent().GetParent().GetNode<Control>("IleName");
-        if (HoveredName == string.Empty)
+        if (HoveredName == "No_Name")
         {
-            l.Hide();
+            IleNameLabel.Hide();
         }
         else
         {
-            l.Show();
+            IleNameLabel.Show();
+            IleNameLabel.Text = HoveredName;
             Vector2 mousepos = GetViewport().GetMousePosition();
-            l.RectPosition = mousepos;
-            l.GetNode<Label>("IslandName").Text = HoveredName;
+            mousepos.x -= IleNameLabel.RectSize.x /2;
+            mousepos.y -= IleNameLabel.RectSize.y;
+            IleNameLabel.RectPosition = mousepos;
         }
     } 
 }

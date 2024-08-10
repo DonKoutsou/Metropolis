@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://Assets/Clutter/Powerline/PowerLine.tres" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Sea/OceanShader.tres" type="Material" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Assets/TerainTex/SandSimple.tres" type="Material" id=12]
 [ext_resource path="res://Assets/Clutter/Powerline/PowerLineMat.tres" type="Material" id=13]
 [ext_resource path="res://Assets/Clutter/CylinderThing/CylThingyMat.material" type="Material" id=14]
+[ext_resource path="res://Scenes/Env_Assets/Antena2.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Assets/Building/Assets/Building_Dest4.tres" type="ArrayMesh" id=16]
 [ext_resource path="res://Assets/Building/Assets/Building_Dest.tres" type="ArrayMesh" id=17]
 [ext_resource path="res://Assets/Building/Assets/Building_Dest2.tres" type="ArrayMesh" id=18]
@@ -466,7 +467,7 @@ script = ExtResource( 5 )
 light_size = 0.06
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 0.950304, -0.00668284, 0.311252, 0, 0.99977, 0.0214659, -0.311323, -0.0203991, 0.950085, 513.301, 108.677, 7493.77 )
+transform = Transform( 0.950304, 0.0203778, 0.310656, 0, 0.997855, -0.0654554, -0.311323, 0.0622025, 0.948266, 513.301, 103.236, 7493.77 )
 current = true
 fov = 45.0
 near = 1.0
@@ -654,7 +655,16 @@ LOD0 = ExtResource( 26 )
 LOD1 = ExtResource( 28 )
 
 [node name="Rock7" type="MeshInstance" parent="."]
-transform = Transform( -49.2853, 103.142, -184.016, -195.715, 48.154, 79.4094, 78.7123, 184.315, 82.2279, 641.943, -269.103, 5484.48 )
+transform = Transform( -49.2853, 103.142, -184.016, -195.715, 48.154, 79.4094, 78.7123, 184.315, 82.2279, -43.2484, -275.484, 6831.7 )
+lod_max_distance = 2000.0
+mesh = ExtResource( 26 )
+material/0 = ExtResource( 10 )
+script = ExtResource( 29 )
+LOD0 = ExtResource( 26 )
+LOD1 = ExtResource( 28 )
+
+[node name="Rock11" type="MeshInstance" parent="."]
+transform = Transform( 170.119, 96.893, 92.7376, -133.736, 111.205, 129.14, 10.1546, -158.664, 147.146, 477.451, -291.68, 7158.01 )
 lod_max_distance = 2000.0
 mesh = ExtResource( 26 )
 material/0 = ExtResource( 10 )
@@ -694,3 +704,6 @@ script = ExtResource( 29 )
 LOD0 = ExtResource( 4 )
 LOD1 = ExtResource( 11 )
 HideIfNoLod = true
+
+[node name="StaticBody" parent="." instance=ExtResource( 15 )]
+transform = Transform( -23.518, 0, 30.958, 0, 38.878, 0, -30.958, 0, -23.518, 590.222, -588.108, 6561.87 )

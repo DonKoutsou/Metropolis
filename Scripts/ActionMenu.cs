@@ -103,11 +103,47 @@ public class ActionMenu : Control
 	}
 	private void On_Interact_Button2_Down()
 	{
-		if (SelectedObj is Vehicle)
+		if (Play.HasVehicle() && Play.GetVehicle() != SelectedObj)
 		{
-			Vehicle veh = (Vehicle)SelectedObj;
-			veh.ToggleMachine(!veh.IsRunning());
+			Play.GetTalkText().Talk("Δεν μπορώ πάνω από την βάρκα");
 		}
+		ActionComponent Acomp = SelectedObj.GetNode<ActionComponent>("ActionComponent");
+		Vector3 actionpos = Acomp.GetActionPos(Play.GlobalTranslation);
+		if (actionpos.DistanceTo(Play.GlobalTranslation) > Acomp.ActionDistance)
+		{
+			if (!PerformingAction)
+			{
+				StartPerformingAction(2);
+			}
+			return;
+		}
+		
+		SelectedObj.Call("DoAction2", Play);
+
+		selecting = false;
+		Stop();
+	}
+	private void On_Interact_Button3_Down()
+	{
+		if (Play.HasVehicle() && Play.GetVehicle() != SelectedObj)
+		{
+			Play.GetTalkText().Talk("Δεν μπορώ πάνω από την βάρκα");
+		}
+		ActionComponent Acomp = SelectedObj.GetNode<ActionComponent>("ActionComponent");
+		Vector3 actionpos = Acomp.GetActionPos(Play.GlobalTranslation);
+		if (actionpos.DistanceTo(Play.GlobalTranslation) > Acomp.ActionDistance)
+		{
+			if (!PerformingAction)
+			{
+				StartPerformingAction(3);
+			}
+			return;
+		}
+		
+		SelectedObj.Call("DoAction3", Play);
+
+		selecting = false;
+		Stop();
 	}
 	private void On_Interact_Button_Down()
 	{
@@ -135,6 +171,12 @@ public class ActionMenu : Control
 
 		PickButton.Text = (string)obj.Call("GetActionName", Play);
 		PickButton.Visible = (bool)obj.Call("ShowActionName", Play);
+
+		IntButton2.Text = (string)obj.Call("GetActionName2", Play);
+		IntButton2.Visible = (bool)obj.Call("ShowActionName2", Play);
+
+		IntButton3.Text = (string)obj.Call("GetActionName3", Play);
+		IntButton3.Visible = (bool)obj.Call("ShowActionName3", Play);
 
 		DeselectCurrent();
 		SelectedObj = obj;
