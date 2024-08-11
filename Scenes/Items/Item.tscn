@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Item.cs" type="Script" id=1]
 [ext_resource path="res://Assets/Guy/RopeMat.material" type="Material" id=2]
 [ext_resource path="res://Assets/Guy/Rope.obj" type="ArrayMesh" id=3]
 [ext_resource path="res://Assets/Guy/Textures/RopeIco.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=6]
 
 [sub_resource type="CylinderShape" id=1]
 height = 0.402767
@@ -28,6 +29,10 @@ ItemDesc = "Ένα σκοινί"
 transform = Transform( -0.5, 0.866025, 1.50996e-07, 0.866025, 0.5, 4.37115e-08, -3.76426e-08, 1.52622e-07, -1, -2.21785, -1.60118, -0.00615969 )
 material_override = ExtResource( 2 )
 mesh = ExtResource( 3 )
+script = ExtResource( 6 )
+LOD0 = ExtResource( 3 )
+LOD1 = ExtResource( 3 )
+HideIfNoLod = true
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0391024, 0 )

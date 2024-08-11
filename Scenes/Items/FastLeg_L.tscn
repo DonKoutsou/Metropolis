@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Limb.cs" type="Script" id=1]
 [ext_resource path="res://Assets/FastLegs/FastLeg_L.tres" type="ArrayMesh" id=2]
 [ext_resource path="res://Assets/FastLegs/FastLeg_L.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=4]
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/FastLegs/M_FastLegs.material" type="Material" id=6]
 
@@ -30,6 +31,10 @@ SlotType = 2
 transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0 )
 mesh = ExtResource( 2 )
 material/0 = ExtResource( 6 )
+script = ExtResource( 4 )
+LOD0 = ExtResource( 2 )
+LOD1 = ExtResource( 2 )
+HideIfNoLod = true
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( -0.621134, 0, -0.783704, 0, 1, 0, 0.783704, 0, -0.621134, 0.0334845, 0.291984, -0.0374186 )

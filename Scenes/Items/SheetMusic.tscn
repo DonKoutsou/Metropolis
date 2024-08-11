@@ -1,13 +1,13 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Item.cs" type="Script" id=1]
-[ext_resource path="res://Assets/Guy/RopeMat.material" type="Material" id=2]
-[ext_resource path="res://Assets/Battery/Battery.tres" type="ArrayMesh" id=3]
-[ext_resource path="res://Assets/Dosier/DosierICon.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Dosier/DosierMat.tres" type="Material" id=2]
+[ext_resource path="res://Assets/Dosier/Dosier.obj" type="ArrayMesh" id=3]
+[ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=4]
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=5]
 
 [sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.234361, 0.378668, 0.619071 )
+extents = Vector3( 0.234361, 0.0495705, 0.20555 )
 
 [node name="Item" type="RigidBody" groups=["Interactables"]]
 collision_layer = 16
@@ -17,18 +17,17 @@ mass = 0.0346939
 linear_damp = 1.22
 angular_damp = 1.22
 script = ExtResource( 1 )
-ItemType = 22
-ItemIcon = ExtResource( 4 )
-ItemPickupActionName = "Ένας βιβλίο μουσικής..."
-ItemName = "Παρτιτούρες για κιθάρα"
-ItemDesc = "Παρτιτούρες για κιθάρα. Περιέχει μουσικά πεντάγραμμα με πολλαπλά τραγούδια. Πιθανός γραμμένα πρίν την πρώτη πτώση."
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 material_override = ExtResource( 2 )
 mesh = ExtResource( 3 )
+script = ExtResource( 4 )
+LOD0 = ExtResource( 3 )
+LOD1 = ExtResource( 3 )
+HideIfNoLod = true
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375896, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00449482, 0 )
 shape = SubResource( 1 )
 
 [node name="ActionComponent" parent="." instance=ExtResource( 5 )]

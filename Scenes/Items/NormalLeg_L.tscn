@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Limb.cs" type="Script" id=1]
 [ext_resource path="res://Assets/NormalLegs/NormalLeg_L_Item.obj" type="ArrayMesh" id=2]
 [ext_resource path="res://Assets/NormalLegs/Textures/Leg_L_Icon.png" type="Texture" id=3]
 [ext_resource path="res://Assets/NormalLegs/M_Legs.material" type="Material" id=4]
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=6]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.795704, 0.238448, 2.07675 )
@@ -31,6 +32,10 @@ SlotType = 2
 transform = Transform( 1.73992, 0, -1.34636, 0, 2.2, 0, 1.34636, 0, 1.73992, 0, 0, 0 )
 mesh = ExtResource( 2 )
 material/0 = ExtResource( 4 )
+script = ExtResource( 6 )
+LOD0 = ExtResource( 2 )
+LOD1 = ExtResource( 2 )
+HideIfNoLod = true
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( -0.587065, 0, -0.80954, 0, 1, 0, 0.80954, 0, -0.587065, 0.320875, 0.291984, -0.204729 )

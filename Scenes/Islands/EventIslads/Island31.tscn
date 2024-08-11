@@ -1,9 +1,8 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Assets/Terains/Island24/Island24.tres" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Terains/Island24/Island24_LOD.tres" type="ArrayMesh" id=2]
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=3]
-[ext_resource path="res://Assets/Rocks/RockMat.tres" type="Material" id=4]
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Env_Assets/Ladder.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Building/BuildingComposition3.tscn" type="PackedScene" id=7]
@@ -114,7 +113,6 @@ data = {
 transform = Transform( 800, 0, 0, 0, 800, 0, 0, 0, 800, 0, -386.66, 0 )
 lod_max_distance = 6000.0
 mesh = ExtResource( 1 )
-material/0 = ExtResource( 4 )
 script = ExtResource( 3 )
 LOD0 = ExtResource( 1 )
 LOD1 = ExtResource( 2 )

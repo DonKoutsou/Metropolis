@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Battery.cs" type="Script" id=1]
+[ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=2]
 [ext_resource path="res://Assets/Battery/Battery.tres" type="ArrayMesh" id=3]
 [ext_resource path="res://Assets/Battery/BatteryIcon.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=5]
@@ -26,6 +27,9 @@ CurrentEnergy = 100.0
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = ExtResource( 3 )
+script = ExtResource( 2 )
+LOD0 = ExtResource( 3 )
+LOD1 = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.398272, 0 )

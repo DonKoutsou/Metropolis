@@ -1,10 +1,15 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/PaintCan.cs" type="Script" id=1]
 [ext_resource path="res://Assets/PaintCan/PaintCanMat.tres" type="Material" id=2]
 [ext_resource path="res://Assets/PaintCan/PaintCan.obj" type="ArrayMesh" id=3]
 [ext_resource path="res://Assets/PaintCan/PaintCanIcon.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=6]
+
+[sub_resource type="CylinderMesh" id=2]
+radial_segments = 8
+rings = 0
 
 [sub_resource type="CylinderShape" id=1]
 height = 1.16769
@@ -31,6 +36,10 @@ RandomiseColor = true
 transform = Transform( 0.535284, 0, 0, 0, 0.535284, 0, 0, 0, 0.535284, 0, 0.605334, 0 )
 material_override = ExtResource( 2 )
 mesh = ExtResource( 3 )
+script = ExtResource( 6 )
+LOD0 = ExtResource( 3 )
+LOD1 = SubResource( 2 )
+HideIfNoLod = true
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.606456, 0 )

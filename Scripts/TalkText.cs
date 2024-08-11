@@ -3,7 +3,7 @@ using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
-public class TalkText : Label3D
+public class TalkText : Spatial
 {
     //static TalkText instance;
     Timer TalkTimer;
@@ -16,6 +16,10 @@ public class TalkText : Label3D
     bool Talking = false;
 
     bool CharPar = false;
+
+    Label TextL;
+
+    Vector2 Vsize;
     public void Talk(string diag)
     {
         if (diag == string.Empty)
@@ -29,11 +33,18 @@ public class TalkText : Label3D
         }
         TalkTimer.Stop();
         TextToShow = diag;
-        Text = string.Empty;
+        //Text = string.Empty;
         CharactersShowing = 0;
+
+        TextL.Text = string.Empty;
         Talking = true;
-        Show();
+
+
+        TextL.Show();
         SetProcess(true);
+        SetPhysicsProcess(true);
+
+        Vsize = DViewport.GetInstance().Size;
     }
     public void TurnOff()
     {
@@ -43,7 +54,8 @@ public class TalkText : Label3D
             GetParent<NPC>().ResetLook();
             Player.GetInstance().BeingTalkedTo = false;
         }
-        Hide();
+        TextL.Hide();
+        SetPhysicsProcess(false);
     }
     public bool IsTalking()
     {
@@ -60,7 +72,7 @@ public class TalkText : Label3D
         //float zoo = CameraZoomPivot.GetInstance().GetZoomNormalised();
         //PixelSize = Mathf.Lerp(0.001f, 0.002f, zoo);
 
-        Text = TextToShow.Substr(0, CharactersShowing);
+        TextL.Text = TextToShow.Substr(0, CharactersShowing);
 
         CharactersShowing ++;
 
@@ -69,7 +81,16 @@ public class TalkText : Label3D
             TalkTimer.Start();
             SetProcess(false);
         }
+        
         //GlobalTranslation = new Vector3(plpos.x, plpos.y + (5 *  CameraZoomPivot.GetInstance().GetZoomNormalised()) + 10, plpos.z);
+    }
+    public override void _PhysicsProcess(float delta)
+    {
+        base._PhysicsProcess(delta);
+        Vector3 pos = GlobalTranslation;
+        Vector2 position2D = PlayerCamera.GetInstance().UnprojectPosition(pos);
+        position2D = new Vector2(Mathf.Min(Vsize.x, Mathf.Max(0, position2D.x - (TextL.RectSize.x / 2))), Mathf.Min(Vsize.y, Mathf.Max(0, position2D.y - TextL.RectSize.y)));
+        TextL.RectPosition = position2D;
     }
     //public static TalkText GetInst()
     //{
@@ -94,7 +115,11 @@ public class TalkText : Label3D
         AddChild(TalkTimer);
         //TalkTimer = GetNode<Timer>("UpdateTimer");
         SetProcess(false);
-        Hide();
+        SetPhysicsProcess(false);
+        
+
+        TextL = GetNode<Label>("2DText");
+        TextL.Hide();
         //instance = this;
     }
     

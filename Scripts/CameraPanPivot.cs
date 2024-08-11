@@ -45,7 +45,7 @@ public class CameraPanPivot : Position3D
 	float YOffset = 0;
 
 	float d = 0.01f;
-	public override void _Process(float delta)
+	public override void _PhysicsProcess(float delta)
 	{
 		d -= delta;
 		if (d > 0)

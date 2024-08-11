@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://Assets/Boat/Parts/EngineJoint.tres" type="ArrayMesh" id=1]
 [ext_resource path="res://Scripts/Vehicle.cs" type="Script" id=2]
@@ -115,6 +115,37 @@ top_radius = 0.2
 bottom_radius = 0.1
 height = 0.5
 radial_segments = 10
+
+[sub_resource type="SpatialMaterial" id=156]
+flags_transparent = true
+vertex_color_use_as_albedo = true
+emission_enabled = true
+emission = Color( 0.431373, 0.717647, 0.937255, 1 )
+emission_energy = 4.6
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="Curve" id=153]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.207055 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=14]
+curve = SubResource( 153 )
+
+[sub_resource type="ParticlesMaterial" id=154]
+emission_shape = 5
+emission_ring_radius = 0.01
+emission_ring_inner_radius = 8.85
+emission_ring_height = 1.0
+emission_ring_axis = Vector3( 0, 0, -1 )
+direction = Vector3( 0, 0, -1 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 11.8
+radial_accel = 35.1
+scale = 0.2
+scale_curve = SubResource( 14 )
+
+[sub_resource type="SphereMesh" id=155]
 
 [sub_resource type="ArrayMesh" id=148]
 resource_name = "godot_plush_Cube002"
@@ -365,6 +396,15 @@ toWidth = 0.0
 lifespan = 0.0
 startColor = Color( 1, 1, 1, 1 )
 endColor = Color( 0.431373, 0.717647, 0.937255, 1 )
+
+[node name="BoostPart" type="Particles" parent="VehicleBody/VehicleBoostTrails"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16.3183 )
+material_override = SubResource( 156 )
+cast_shadow = 0
+amount = 100
+draw_order = 2
+process_material = SubResource( 154 )
+draw_pass_1 = SubResource( 155 )
 
 [node name="godot_plush_sitted" type="MeshInstance" parent="VehicleBody"]
 transform = Transform( 2.01621, 1.28624, 3.12714, -0.49628, 3.714, -1.20765, -3.34472, 0.224279, 2.06424, 3.26234, 2.27878, 0.0313188 )

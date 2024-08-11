@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Toolbox.cs" type="Script" id=1]
 [ext_resource path="res://Assets/ToolBox/Toolbox.png" type="Texture" id=2]
 [ext_resource path="res://Assets/ToolBox/ToolBox.obj" type="ArrayMesh" id=3]
+[ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=4]
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/ToolBox/ToolboxMat.tres" type="Material" id=7]
 
@@ -27,6 +28,10 @@ CurrentSupplies = 20.0
 [node name="MeshInstance" type="MeshInstance" parent="."]
 material_override = ExtResource( 7 )
 mesh = ExtResource( 3 )
+script = ExtResource( 4 )
+LOD0 = ExtResource( 3 )
+LOD1 = ExtResource( 3 )
+HideIfNoLod = true
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.450368, 0 )

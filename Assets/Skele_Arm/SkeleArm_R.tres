@@ -1,6 +1,4 @@
-[gd_resource type="ArrayMesh" load_steps=2 format=2]
-
-[ext_resource path="res://Assets/Skele_Arm/Arms_Mat_Character_L.material" type="Material" id=1]
+[gd_resource type="ArrayMesh" format=2]
 
 [resource]
 resource_name = "Arms_Mesh001"
@@ -11,7 +9,6 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 2194711,
 "index_count": 36018,
-"material": ExtResource( 1 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 7694

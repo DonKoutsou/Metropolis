@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Book.cs" type="Script" id=1]
 [ext_resource path="res://Assets/Book/Book2Mat.tres" type="Material" id=2]
+[ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=3]
 [ext_resource path="res://Assets/Book/Book2.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Book/Book.obj" type="ArrayMesh" id=6]
@@ -29,6 +30,10 @@ Series = 1
 transform = Transform( 3, 2.62268e-07, 3.57628e-07, -2.62268e-07, 3, 2.62268e-07, -3.57628e-07, -2.62268e-07, 3, 0, 0, 0 )
 material_override = ExtResource( 2 )
 mesh = ExtResource( 6 )
+script = ExtResource( 3 )
+LOD0 = ExtResource( 6 )
+LOD1 = ExtResource( 6 )
+HideIfNoLod = true
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00538313, 0, 0 )
