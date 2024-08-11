@@ -401,6 +401,7 @@ endColor = Color( 0.431373, 0.717647, 0.937255, 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16.3183 )
 material_override = SubResource( 156 )
 cast_shadow = 0
+emitting = false
 amount = 100
 draw_order = 2
 process_material = SubResource( 154 )
