@@ -94,7 +94,8 @@ public class RepairUI : Control
         Player pl = Player.GetInstance();
 
         List<Item> toolboxes;
-        pl.GetCharacterInventory().GetItemsByType(out toolboxes, ItemName.TOOLBOX);
+        ItemName[] types = {ItemName.TOOLBOX};
+        pl.GetCharacterInventory().GetItemsByType(out toolboxes, types);
 
         if(toolboxes.Count == 0)
         {

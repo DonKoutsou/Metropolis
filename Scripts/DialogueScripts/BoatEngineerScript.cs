@@ -75,7 +75,8 @@ public class BoatEngineerScript : BaseDialogueScript
     {
         Inventory inv = Player.GetInstance().GetCharacterInventory();
         List<Item> Tollboxes;
-        inv.GetItemsByType(out Tollboxes, ItemName.TOOLBOX);
+        ItemName[] types = {ItemName.TOOLBOX};
+        inv.GetItemsByType(out Tollboxes, types);
         inv.DeleteItem(Tollboxes[0]);
 
         ToolboxesGiven ++;
@@ -94,7 +95,8 @@ public class BoatEngineerScript : BaseDialogueScript
 
         Inventory inv = Player.GetInstance().GetCharacterInventory();
         List<Item> Blood;
-        inv.GetItemsByType(out Blood, ItemName.BLOOD_VIAL);
+        ItemName[] types = {ItemName.BLOOD_VIAL};
+        inv.GetItemsByType(out Blood, types);
         inv.DeleteItem(Blood[0]);
 
         DialogueProg ++;

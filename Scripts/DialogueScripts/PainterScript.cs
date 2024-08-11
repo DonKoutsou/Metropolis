@@ -75,7 +75,8 @@ public class PainterScript : BaseDialogueScript
     {
         Inventory inv = Player.GetInstance().GetCharacterInventory();
         List<Item> Cans;
-        inv.GetItemsByType(out Cans, ItemName.PAINTCAN);
+        ItemName[] types = {ItemName.PAINTCAN};
+        inv.GetItemsByType(out Cans, types);
         inv.DeleteItem(Cans[0]);
 
         ColorsGiven ++;
@@ -93,7 +94,8 @@ public class PainterScript : BaseDialogueScript
 
         Inventory inv = Player.GetInstance().GetCharacterInventory();
         List<Item> Blood;
-        inv.GetItemsByType(out Blood, ItemName.BLOOD_VIAL);
+        ItemName[] types = {ItemName.BLOOD_VIAL};
+        inv.GetItemsByType(out Blood, types);
         inv.DeleteItem(Blood[0]);
 
         DialogueProg ++;

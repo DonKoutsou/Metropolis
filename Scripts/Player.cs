@@ -240,7 +240,8 @@ public class Player : Character
 			UpdateMoveLocation();
 		}
 		List<Item> batteries;
-		CharacterInventory.GetItemsByType(out batteries, ItemName.BATTERY);
+		ItemName[] types = {ItemName.BATTERY};
+		CharacterInventory.GetItemsByType(out batteries, types);
 
 		for (int i = batteries.Count() -1; i > -1; i--)
 		{

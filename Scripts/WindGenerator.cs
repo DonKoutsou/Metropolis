@@ -153,7 +153,8 @@ public class WindGenerator : StaticBody
     public void DoAction(Player pl)
 	{
         List<Item> batteries;
-        pl.GetCharacterInventory().GetItemsByType(out batteries, ItemName.BATTERY);
+        ItemName[] types = {ItemName.BATTERY};
+        pl.GetCharacterInventory().GetItemsByType(out batteries, types);
         float availableenergy = GetCurrentEnergy();
         if (availableenergy <= 1)
         {

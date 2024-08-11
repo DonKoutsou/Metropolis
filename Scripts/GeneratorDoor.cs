@@ -78,7 +78,8 @@ public class GeneratorDoor : StaticBody
             {
                 Inventory inv = pl.GetCharacterInventory();
                 List<Item> its;
-                inv.GetItemsByType(out its, ItemRequiredToOpen);
+                ItemName[] types = {ItemRequiredToOpen};
+                inv.GetItemsByType(out its, types);
                 inv.DeleteItem(its[0]);
             }
         }

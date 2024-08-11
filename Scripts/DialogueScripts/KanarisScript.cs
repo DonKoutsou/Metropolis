@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 public class KanarisScript : BaseDialogueScript
 {
-    int BooksGiven = 0;
+    int MusicGiven = 0;
+    int MusicSheetGiven = 0;
     public override void DoDialogue(NPC Talker, NPC TalkerColaborator = null)
     {
         string text = string.Empty;
@@ -51,15 +52,17 @@ public class KanarisScript : BaseDialogueScript
     }
     public override bool ShouldShowExtraAction()
     {
-        return DialogueProg == 3 && Player.GetInstance().GetCharacterInventory().HasItemOfType(ItemName.TOOLBOX);
+        return DialogueProg == 3 && Player.GetInstance().GetCharacterInventory().HasItemOfType(ItemName.SHEET_MUSIC);
     }
     public override bool ShouldShowExtraAction2()
     {
-        return false;
+        ItemName[] types = {ItemName.VINYL, ItemName.CASSETTE};
+        
+        return DialogueProg == 3 && Player.GetInstance().GetCharacterInventory().HasAnyOfItems(types);
     }
     public override string GetExtraActionText()
     {
-        return "Δώσε πατιτούρα.";
+        return "Δώσε παρτιτούρα.";
     }
     public override string GetExtraActionText2()
     {
@@ -67,46 +70,48 @@ public class KanarisScript : BaseDialogueScript
     }
     public override string Action1Done(NPC owner, Player pl)
     {
-        Inventory inv = Player.GetInstance().GetCharacterInventory();
-        List<Item> Tollboxes;
-        inv.GetItemsByType(out Tollboxes, ItemName.TOOLBOX);
-        inv.DeleteItem(Tollboxes[0]);
-
-        BooksGiven ++;
-
-        if (BooksGiven == 3)
-        {
-            DialogueProg ++;
-            return "Ευχαριστώ καΐκτση, θα μπορέσω να προχορήσω τον πίνακά μου λίγο ακόμη.";
-        }
-
-        //GlobalItemCatalogue.GetItemByType
-
-        return "Ωραίος, θα γίνει δουλειά με αυτά. Φέρε λίγα ακόμη και όπου νάνε τελειώνουμε.";
-    }
-    public override string Action2Done(NPC owner, Player pl)
-    {
 
         Inventory inv = Player.GetInstance().GetCharacterInventory();
-        List<Item> Blood;
-        inv.GetItemsByType(out Blood, ItemName.BLOOD_VIAL);
-        inv.DeleteItem(Blood[0]);
+        ItemName[] types = {ItemName.SHEET_MUSIC};
+        List<Item> MusicSheets;
+        inv.GetItemsByType(out MusicSheets, types);
+        inv.DeleteItem(MusicSheets[0]);
+
+        Item newItem = GlobalItemCatalogue.GetItemByType(ItemName.EXPLOSIVE).Instance<Item>();
+        inv.InsertItem(newItem);
 
         DialogueProg ++;
 
         return "Ενδιαφέρων, δεν περέμενα κάτι τέτοιο... είσαι σίγουρος οτι θες να το αποχοριστείς, είναι ένα αρκετά σπάνιο ανικείμενο στις ημέρες μας. Θα προσπαθήσω να το εκμετελευτό πλήρος, ευχαριστώ καΐκτση";
     }
+    public override string Action2Done(NPC owner, Player pl)
+    {
+        Inventory inv = Player.GetInstance().GetCharacterInventory();
+        ItemName[] types = {ItemName.VINYL, ItemName.CASSETTE};
+        List<Item> Music;
+        inv.GetItemsByType(out Music, types);
+        inv.DeleteItem(Music[0]);
+
+        Item newItem = GlobalItemCatalogue.GetItemByType(ItemName.EXPLOSIVE).Instance<Item>();
+        inv.InsertItem(newItem);
+
+        //GlobalItemCatalogue.GetItemByType
+
+        return "Ωραίος, ";
+    }
     public override Dictionary<string, object>GetSaveData()
     {
         Dictionary<string, object> savedata = new Dictionary<string, object>(){
             {"DialogueProg", DialogueProg},
-            {"BooksGiven", BooksGiven}
+            {"MusicGiven", MusicGiven},
+            {"MusicSheetGiven", MusicSheetGiven}
         };
         return savedata;
     }
     public override void LoadSaveData(Dictionary<string, object> Data)
     {
         DialogueProg = (int)Data["DialogueProg"];
-        BooksGiven = (int)Data["BooksGiven"];
+        MusicGiven = (int)Data["MusicGiven"];
+        MusicSheetGiven = (int)Data["MusicSheetGiven"];
     }
 }

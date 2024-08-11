@@ -70,7 +70,8 @@ public class PriestScript : BaseDialogueScript
     {
         Inventory inv = Player.GetInstance().GetCharacterInventory();
         List<Item> Books;
-        inv.GetItemsByType(out Books, ItemName.BOOK);
+        ItemName[] types = {ItemName.BOOK};
+        inv.GetItemsByType(out Books, types);
         inv.DeleteItem(Books[0]);
 
         BooksGiven ++;

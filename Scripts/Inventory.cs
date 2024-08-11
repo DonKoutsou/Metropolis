@@ -122,9 +122,20 @@ public class Inventory : Spatial
     }
     public bool HasItemOfType(ItemName type)
     {
-         for (int i = InventoryContents.Count - 1; i > -1; i--)
+        for (int i = InventoryContents.Count - 1; i > -1; i--)
         {
             if (InventoryContents[i].GetItemType() == type)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    public bool HasAnyOfItems(ItemName[] types)
+    {
+        for (int i = InventoryContents.Count - 1; i > -1; i--)
+        {
+            if (types.Contains(InventoryContents[i].GetItemType()))
             {
                 return true;
             }
@@ -374,12 +385,12 @@ public class Inventory : Spatial
         //if (CharacterOwner.HasInstrument())
             //Items.Add(CharacterOwner.GetInstrument());
     }
-    public void GetItemsByType(out List<Item> Items, ItemName Type)
+    public void GetItemsByType(out List<Item> Items, ItemName[] Types)
     {
         Items = new List<Item>();
         for (int i = 0; i < InventoryContents.Count; i++)
         {
-            if (InventoryContents[i].GetItemType() == Type)
+            if (Types.Contains(InventoryContents[i].GetItemType()))
                 Items.Add(InventoryContents[i]);
         }
     }

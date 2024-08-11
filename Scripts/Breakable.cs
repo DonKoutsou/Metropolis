@@ -97,7 +97,8 @@ public class Breakable : StaticBody
     public void DoAction(Player pl)
 	{
         List<Item> items;
-        pl.GetCharacterInventory().GetItemsByType(out items, ItemName.EXPLOSIVE);
+        ItemName[] types = {ItemName.EXPLOSIVE};
+        pl.GetCharacterInventory().GetItemsByType(out items, types);
         pl.GetCharacterInventory().RemoveItem(items[0], false);
         AtatchExplosive(pl, (Explosive)items[0]);
     }

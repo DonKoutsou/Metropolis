@@ -110,7 +110,7 @@ public class Furniture : Spatial
 		{
 			if (info.HasItem)
 			{
-				RespawnItem(GlobalItemCatalogue.GetItemByType(info.item));
+				RespawnItem(GlobalItemCatalogue.GetItemByName(info.item));
 			}
 		}
 		else
