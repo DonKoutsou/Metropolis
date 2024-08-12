@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Assets/Terains/Island24/Island24.tres" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Terains/Island24/Island24_LOD.tres" type="ArrayMesh" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Scenes/Characters/NPCVariants/Kanaris.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Env_Assets/Skampo.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Systems/IslandNameTrigger.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Vehicles/HoverBoard_NoWings.tscn" type="PackedScene" id=13]
 
 [sub_resource type="SpatialMaterial" id=447]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -141,24 +142,33 @@ transform = Transform( -0.828266, 0, 0.560336, 0, 1, 0, -0.560336, 0, -0.828266,
 [node name="Particles2" parent="." index="11" instance=ExtResource( 9 )]
 transform = Transform( -0.586005, 0, -0.810308, 0, 1, 0, 0.810308, 0, -0.586005, 2176.77, 13.4465, -958.511 )
 
-[node name="Particles3" parent="." index="12" instance=ExtResource( 8 )]
+[node name="Particles5" parent="." index="12" instance=ExtResource( 8 )]
+transform = Transform( 0.954423, 0, 0.298458, 0, 1, 0, -0.298458, 0, 0.954423, 1878.11, 1712.52, 681.99 )
+
+[node name="Particles6" parent="." index="13" instance=ExtResource( 9 )]
+transform = Transform( -0.268415, 0, 0.963304, 0, 1, 0, -0.963304, 0, -0.268415, 2005.55, 13.4464, 1033.15 )
+
+[node name="Particles3" parent="." index="14" instance=ExtResource( 8 )]
 transform = Transform( -0.631339, 0, -0.775507, 0, 1, 0, 0.775507, 0, -0.631339, -2207.31, 837.375, -394.141 )
 
-[node name="Particles4" parent="." index="13" instance=ExtResource( 9 )]
+[node name="Particles4" parent="." index="15" instance=ExtResource( 9 )]
 transform = Transform( 0.75535, 0, -0.655321, 0, 1, 0, 0.655321, 0, 0.75535, -2395.19, 10.8872, -545.031 )
 
-[node name="Kanaris" parent="." index="14" instance=ExtResource( 10 )]
-transform = Transform( -0.585693, 0, -0.810533, 0, 1, 0, 0.810533, 0, -0.585693, -308.097, 730.022, 284.963 )
+[node name="Kanaris" parent="." index="16" instance=ExtResource( 10 )]
+transform = Transform( -0.943778, 0, 0.33058, 0, 1, 0, -0.33058, 0, -0.943778, -330.422, 730.022, 281.132 )
 Chair = NodePath("../StaticBody")
 
-[node name="StaticBody" parent="." index="15" instance=ExtResource( 11 )]
-transform = Transform( -0.572947, 0, -0.819592, 0, 1, 0, 0.819592, 0, -0.572947, -305.95, 729.378, 286.649 )
+[node name="StaticBody" parent="." index="17" instance=ExtResource( 11 )]
+transform = Transform( -0.76854, 0, 0.639801, 0, 1, 0, -0.639801, 0, -0.76854, -331.427, 729.378, 283.67 )
 
-[node name="IslandNameTrigger" parent="." index="16" instance=ExtResource( 12 )]
+[node name="IslandNameTrigger" parent="." index="18" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -331.639, 349.198, 207.597 )
 
 [node name="CollisionShape" parent="IslandNameTrigger" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 469 )
+
+[node name="Vehicle" parent="." index="19" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -835.982, 94.5211, 159.948 )
 
 [editable path="IslandNameTrigger"]

@@ -51,6 +51,8 @@ public class House : Spatial
 	}
 	public virtual void Entered(Node body)
 	{
+		if (!IsInsideTree())
+            return;
 		if (HideExterior)
 		{
 			StaticBody HouseExterior  = GetNode<StaticBody>("HouseExterior");
@@ -82,6 +84,8 @@ public class House : Spatial
 	}
 	public virtual void Left(Node body)
 	{
+		if (!IsInsideTree())
+            return;
 		DoorPivot Piv = GetNode<DoorPivot>("DoorPivot");
 		Piv.Close();
 		if (HideExterior)

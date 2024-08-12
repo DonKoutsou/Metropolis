@@ -42,7 +42,7 @@ public class Character : KinematicBody
 
 	protected SittingThing chair = null;
 
-	protected Position3D seat = null;
+	protected RemoteTransform seat = null;
 
 	protected TalkText TText = null;
 
@@ -179,10 +179,9 @@ public class Character : KinematicBody
 	{
 		Kill();
 	}
-	public void Sit(Position3D pos, SittingThing Sitter = null)
+	public void Sit(RemoteTransform pos, SittingThing Sitter = null)
 	{
-		GlobalTranslation = pos.GlobalTranslation;
-		loctomove = GlobalTranslation;
+		pos.RemotePath = GetPath();
 		if (Sitter != null)
 		{
 			anim.ToggleSitting(true);
@@ -197,19 +196,25 @@ public class Character : KinematicBody
 		sitting = true;
 		
 	}
+	public void SitDown()
+	{
+		anim.ToggleSitting();
+		sitting = true;
+	}
 	public void StandUp()
 	{
 		if (chair != null)
 		{
 			chair.UpdateOccupation(seat, false);
 			chair = null;
+			seat.RemotePath = seat.GetPath();
 			seat = null;
-			
 		}
 		if (PlayingInstrument)
 		{
 			StopMusic();
 		}
+		IdleTimer.Stop();
 		anim.ToggleIdle();
 		sitting = false;
 	}

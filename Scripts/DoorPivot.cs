@@ -30,6 +30,7 @@ public class DoorPivot : Spatial
     }
     public void Open()
     {
+
         for (int i = 0; i < Doors.Count; i++)
         {
             if (Rotations.Count > i)
@@ -48,6 +49,7 @@ public class DoorPivot : Spatial
     }
     public void Close()
     {
+        
         for (int i = 0; i < Doors.Count; i++)
         {
             if (Rotations.Count > i)

@@ -70,6 +70,12 @@ public class UnconDialogueScript : BaseDialogueScript
         GivenBattery = true;
 
         Item newItem = PossibleRewards[RandomContainer.Next(0, PossibleRewards.Count())].Instance<Item>();
+        if (newItem is Book b)
+		{
+			int volume = BookVolumeHolder.GetRandomUnfoundVolume(b.GetSeries());
+			b.SetVoluemeNumber(volume);
+			BookVolumeHolder.IsVolumeFound(b.GetSeries(), volume);
+		}
         inv.InsertItem(newItem);
 
         return "Νά'σε καλά καΐκτση, δεν ξέρω τι συνέβη. Τρελός ο πόνος της ατροφίας. Ευχαριστώ για την μπαταρία... Δεν ξέρω πως να το ανταποδώσω, βρήκα αυτό στα ταξίδια μου, ελπίζω να σου φανεί χρήσημο.";

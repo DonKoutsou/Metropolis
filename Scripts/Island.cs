@@ -551,7 +551,7 @@ public class Island : Spatial
 							//if (vehchild.SpawnBroken)
 								//vehchild.OnLightDamaged();
 							Vehicles.Add(vehchild);
-							chara.OwnedVeh = veh.GetPath();
+							chara.OwnedVeh = chara.GetPathTo(veh);
 
 						}
 

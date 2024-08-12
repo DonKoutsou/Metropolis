@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class GeneratorDoor : StaticBody
 {
+    [Signal]
+    public delegate void OnDoorOpened();
     [Export]
     ItemName ItemRequiredToOpen = ItemName.KEYCARD;
     [Export]
@@ -58,6 +60,7 @@ public class GeneratorDoor : StaticBody
         {
             Open = true;
             anim.Play("Open");
+            EmitSignal("OnDoorOpened");
         }
         //pl.anim.PlayAnimation(anim);
         //pl.global

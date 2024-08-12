@@ -91,7 +91,7 @@ public class DayNight : WorldEnvironment
     Node SunGodRays;
     DirectionalLight moon;
     Node MoonGodRays;
-    static bool day = true;
+    static int daystage = -1;
 
     public SunMoonPivot SunMoonMeshPivot;
 
@@ -179,37 +179,37 @@ public class DayNight : WorldEnvironment
                 SunMoonMeshPivot.GetNode<MeshInstance>("Sun").Show();
                 SunMoonMeshPivot.GetNode<MeshInstance>("Moon").Hide();
             }
-            day = true;
         }
         if (Phase == 1)
         {
             EmitSignal("DayShift", false);
             sun.Hide();
             moon.Show();
+             moon.ShadowEnabled = true;
             if (SunMoonMeshPivot != null)
             {
                  SunMoonMeshPivot.GetNode<MeshInstance>("Sun").Hide();
                 SunMoonMeshPivot.GetNode<MeshInstance>("Moon").Show();
             }
-           
-            day = false;
         }
         if (Phase == 2)
         {
             sun.Show();
             moon.Show();
+            moon.ShadowEnabled = false;
             if (SunMoonMeshPivot != null)
             {
                 SunMoonMeshPivot.GetNode<MeshInstance>("Sun").Show();
                 SunMoonMeshPivot.GetNode<MeshInstance>("Moon").Show();
             }
         }
+        daystage = Phase;
     }
     //private void CalculateDay(out Color FogColor, out Color FogSunColor, out Color AmbientLightColor, out Color BackgroundColor, out float AmbientLightEnergy)
     //private void CalculateDay(out Color FogColor, out Color AmbientLightColor, out Color BackgroundColor, out float AmbientLightEnergy)
     private void CalculateDay(out Color AmbientLightColor, out float AmbientLightEnergy)
     {
-        //if (!day)
+        if (daystage != 0)
             ToggleDay(0);
 
         sun.LightEnergy = SunBrightness;
@@ -232,7 +232,7 @@ public class DayNight : WorldEnvironment
     //private void CalculateNight(out Color FogColor, out Color AmbientLightColor, out Color BackgroundColor, out float AmbientLightEnergy)
     private void CalculateNight(out Color AmbientLightColor, out float AmbientLightEnergy)
     {
-        //if (day)
+        if (daystage != 1)
             ToggleDay(1);
         
         moon.LightEnergy = MoonBrightness;
@@ -257,7 +257,8 @@ public class DayNight : WorldEnvironment
     {
         //sun.Show();
         //moon.Show();
-        ToggleDay(2);
+        if (daystage != 2)
+            ToggleDay(2);
         float multi;
 
         Color combination;
@@ -481,7 +482,7 @@ public class DayNight : WorldEnvironment
     }
     public static bool IsDay()
     {
-        return day;
+        return daystage == 0;
     }
     public static void UpdateTimeProgression(int time)
     {

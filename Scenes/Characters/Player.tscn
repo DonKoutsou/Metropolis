@@ -257,7 +257,7 @@ current = true
 fov = 45.0
 size = 5.0
 near = 1.0
-far = 11000.0
+far = 15000.0
 script = ExtResource( 20 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/PlayerCamera"]

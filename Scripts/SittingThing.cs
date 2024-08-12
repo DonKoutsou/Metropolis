@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class SittingThing : StaticBody
 {
-    List<Position3D> Seats = new List<Position3D>();
+    List<RemoteTransform> Seats = new List<RemoteTransform>();
     List<bool> Occupied = new List<bool>();
 
     bool Inited = false;
@@ -19,9 +19,9 @@ public class SittingThing : StaticBody
     {
         foreach(Node Child in GetChildren())
         {
-            if (Child is Position3D)
+            if (Child is RemoteTransform r)
             {
-                Seats.Add((Position3D)Child);
+                Seats.Add(r);
                 Occupied.Add(false);
             }
         }
@@ -46,7 +46,7 @@ public class SittingThing : StaticBody
             if (!pl.GetVehicle().UnBoardVehicle(pl))
                 return;
         }
-        Position3D seat = GetSeat();
+        RemoteTransform seat = GetSeat();
         pl.Sit(seat, this);
     }
     public string GetActionName(Player pl)
@@ -87,7 +87,7 @@ public class SittingThing : StaticBody
     {
         
     }
-    public void UpdateOccupation(Position3D seat, bool occupanc)
+    public void UpdateOccupation(RemoteTransform seat, bool occupanc)
     {
         for (int i = 0; i < Seats.Count; i++)
         {
@@ -112,9 +112,9 @@ public class SittingThing : StaticBody
         }
         return EmptySeat;
     }
-    public Position3D GetSeat()
+    public RemoteTransform GetSeat()
     {
-        Position3D Seat = null;
+        RemoteTransform Seat = null;
 
         for (int i = 0; i < Seats.Count; i++)
         {

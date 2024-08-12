@@ -1,6 +1,6 @@
 using Godot;
 using System;
-
+using System.Collections.Generic;
 public class LightHouseSwitch : StaticBody
 {
     // Declare member variables here. Examples:
@@ -32,15 +32,28 @@ public class LightHouseSwitch : StaticBody
     }
     public void DoAction(Player pl)
 	{
-        WorldMap map = WorldMap.GetInstance();
-        map.UnlockLightHouse(map.GetCurrentIleInfo());
+        if (pl.GetCharacterInventory().HasItemOfType(ItemName.BLOOD_VIAL))
+        {
+            WorldMap map = WorldMap.GetInstance();
+            map.UnlockLightHouse(map.GetCurrentIleInfo());
 
-        LightHouse L = GetParent<LightHouse>();
-        //L.ToggeLightHouse(true);
+            LightHouse L = GetParent<LightHouse>();
+            //L.ToggeLightHouse(true);
 
-        CameraAnimationPlayer CameraAnimation = CameraAnimationPlayer.GetInstance();
-        CameraAnimation.Connect("FadeOutFinished", L, "FixLightHouse");
-        CameraAnimation.FadeInOut(1);
+            CameraAnimationPlayer CameraAnimation = CameraAnimationPlayer.GetInstance();
+            CameraAnimation.Connect("FadeOutFinished", L, "FixLightHouse");
+            CameraAnimation.FadeInOut(1);
+ 
+            Inventory inv = pl.GetCharacterInventory();
+            List<Item> its;
+            ItemName[] types = {ItemName.BLOOD_VIAL};
+            inv.GetItemsByType(out its, types);
+            inv.DeleteItem(its[0]);
+        }
+        else
+            pl.GetTalkText().Talk("Φένεταί σαν να χρειάζεται κάποιου είδους κλειδί για πάρει μπρός.");
+
+        
         
     }
     public string GetActionName(Player pl)

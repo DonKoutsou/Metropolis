@@ -122,12 +122,7 @@ public class NPC : Character
 		}
 		else
 		{
-			Position3D pos = new Position3D();
-			AddChild(pos);
-			pos.Translation = Vector3.Zero;
-			pos.Rotation = Vector3.Zero;
-			Sit(pos);
-			pos.QueueFree();
+			SitDown();
 		}
 	}
 	/*void RandomiseLimbs()

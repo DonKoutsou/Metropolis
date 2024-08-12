@@ -22,9 +22,9 @@ public class ItemNotification : PanelContainer
             GetNode<Label>("HBoxContainer/Label").Text = ammount.ToString();
             type = NotifType.NEGATIVE;
         }
-        Modulate = new Color(1,1,1,0);
+        Modulate = new Color(1,1,1,0.99f);
         tw = CreateTween();
-        tw.TweenProperty(this, "modulate", new Color(1,1,1,1), 2);
+        tw.TweenProperty(this, "modulate", new Color(1,1,1,1), 3);
         tw.Connect("finished", this, "StartFadeout");
     }
     private void StartFadeout()

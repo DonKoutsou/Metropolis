@@ -58,13 +58,13 @@ public class InventoryUISlot : Control
                 Rbar.Value = bat.GetCurrentCap();
                 //Condition.SetCondition(bat.GetCondition());
                 Rbar.Show();
-                //Condition.Show();
+                Condition.Hide();
                 LimbColor.Hide();
             }
             else if (it is Limb limbitem)
             {
                 //((StyleBoxFlat)LimbColor.GetStylebox("panel")).BgColor = limbitem.GetColor();
-                //LimbColor.Show();
+                LimbColor.Hide();
                 Rbar.Hide();
                 Condition.Hide();
             }

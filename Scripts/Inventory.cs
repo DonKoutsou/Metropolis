@@ -160,7 +160,7 @@ public class Inventory : Spatial
     }
     public void LoadSavedInventory(Godot.Collections.Array items)
     {
-        DeleteContents();
+        DeleteContents(false);
         //CharacterOwner = (Character)GetParent();
         //CharacterOwner.ToggleAllLimbs();
         foreach(var It in items)
@@ -292,6 +292,7 @@ public class Inventory : Spatial
 
         if (ShowNotif)
             ui.OnItemAdded(item);
+            
         //EmitSignal(nameof(On_Item_Added), item);
         
         //ui.UpdateInventory();
@@ -351,7 +352,7 @@ public class Inventory : Spatial
         ui.UpdateInventory();
 
         if (ShowNotif)
-            ui.OnItemAdded(item);
+            ui.OnItemRemoved(item);
 
         return true;
     }
@@ -369,7 +370,7 @@ public class Inventory : Spatial
         }
         item.GetParent().RemoveChild(item);
         if (ShowNotif)
-            ui.OnItemAdded(item);
+            ui.OnItemRemoved(item);
         item.Free();
     }
     public void RemoveAllItems()
@@ -379,11 +380,11 @@ public class Inventory : Spatial
             RemoveItem(InventoryContents[i]);
         }
     }
-    public void DeleteContents()
+    public void DeleteContents(bool ShowNotif = true)
     {
         for (int i = InventoryContents.Count - 1; i > -1; i--)
         {
-            DeleteItem(InventoryContents[i]);
+            DeleteItem(InventoryContents[i], ShowNotif);
         }
     }
     public void GetContents(out List<Item> Items)

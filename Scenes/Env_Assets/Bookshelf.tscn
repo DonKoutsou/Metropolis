@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/Env_Assets/DosierClutter.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Building/PlatformWood.material" type="Material" id=2]
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 8, 0.1, 2 )
+
+[node name="StaticBody" type="Spatial"]
+
+[node name="DosierClutter" parent="." instance=ExtResource( 1 )]
+transform = Transform( -1.74846e-07, 4, 0, -4, -1.74846e-07, 0, 0, 0, 4, 0, 0.822114, 0 )
+
+[node name="DosierClutter2" parent="." instance=ExtResource( 1 )]
+transform = Transform( -1.74846e-07, 4, 0, -4, -1.74846e-07, 0, 0, 0, 4, 0.39712, 0.822114, 0 )
+
+[node name="DosierClutter3" parent="." instance=ExtResource( 1 )]
+transform = Transform( -1.74846e-07, 4, 0, -4, -1.74846e-07, 0, 0, 0, 4, 0.835729, 0.822114, 0 )
+
+[node name="DosierClutter4" parent="." instance=ExtResource( 1 )]
+transform = Transform( -1.74846e-07, 4, 0, -4, -1.74846e-07, 0, 0, 0, 4, 1.25672, 0.822114, 0 )
+
+[node name="DosierClutter5" parent="." instance=ExtResource( 1 )]
+transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 2.32413, 0.314302, 0 )
+
+[node name="DosierClutter6" parent="." instance=ExtResource( 1 )]
+transform = Transform( 3.54024, 0, 1.8619, 0, 4, 0, -1.8619, 0, 3.54024, -2.08399, 0.314302, 0.385973 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )

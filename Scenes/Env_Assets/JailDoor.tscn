@@ -1,32 +1,13 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Scripts/GeneratorDoor.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Building/WindGenerator/GeneratorDoor.obj" type="ArrayMesh" id=3]
 [ext_resource path="res://Assets/Building/WindGenerator/GeneratorDoorHandle.obj" type="ArrayMesh" id=4]
-[ext_resource path="res://Assets/TerainTex/Metal041C_1K-JPG/Metal041C_1K-JPG_Color.jpg" type="Texture" id=5]
+[ext_resource path="res://Scripts/DoorOpenerSignaler.cs" type="Script" id=5]
 [ext_resource path="res://Assets/Clouds/Textures/smoke_01.png" type="Texture" id=6]
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=7]
-[ext_resource path="res://Assets/TerainTex/Metal041C_1K-JPG/Metal041C_1K-JPG_Roughness.jpg" type="Texture" id=9]
-[ext_resource path="res://Assets/TerainTex/Metal041C_1K-JPG/Metal041C_1K-JPG_NormalGL.jpg" type="Texture" id=10]
-[ext_resource path="res://Assets/TerainTex/Metal041C_1K-JPG/Metal041C_1K-JPG_Metalness.jpg" type="Texture" id=11]
 [ext_resource path="res://Assets/Building/Materials/WindGenMatBig.tres" type="Material" id=12]
-
-[sub_resource type="SpatialMaterial" id=54]
-resource_local_to_scene = true
-resource_name = "M_GenDoor"
-flags_world_triplanar = true
-albedo_texture = ExtResource( 5 )
-metallic = 1.0
-metallic_texture = ExtResource( 11 )
-metallic_texture_channel = 4
-roughness_texture = ExtResource( 9 )
-roughness_texture_channel = 4
-normal_enabled = true
-normal_scale = 1.0
-normal_texture = ExtResource( 10 )
-uv1_scale = Vector3( 0.002, 0.002, 0.002 )
-uv1_triplanar = true
 
 [sub_resource type="CubeMesh" id=53]
 size = Vector3( 2, 2, 5 )
@@ -222,6 +203,7 @@ emission_operator = 0
 emission_on_uv2 = false
 
 [node name="Door" type="Spatial"]
+script = ExtResource( 5 )
 
 [node name="StaticBody" type="StaticBody" parent="." groups=["Interactables"]]
 collision_layer = 20
@@ -234,7 +216,7 @@ ConsumeItem = true
 transform = Transform( 0.380159, 0, 0, 0, 0.380159, 0, 0, 0, 0.380159, 0.544879, 0, 3.34599 )
 mesh = ExtResource( 3 )
 skeleton = NodePath("../..")
-material/0 = SubResource( 54 )
+material/0 = ExtResource( 12 )
 script = ExtResource( 7 )
 LOD0 = ExtResource( 3 )
 LOD1 = ExtResource( 3 )
@@ -257,7 +239,7 @@ __meta__ = {
 }
 
 [node name="ActionComponent" parent="StaticBody" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.1513, 7.70192, 0.208038 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.47123, 4.44748, 2.06136 )
 ActionDistance = 10.0
 
 [node name="Particles" type="Particles" parent="StaticBody"]
@@ -302,3 +284,5 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.705855 )
 mesh = SubResource( 55 )
 skeleton = NodePath("../..")
 material/0 = SubResource( 56 )
+
+[connection signal="OnDoorOpened" from="StaticBody" to="." method="OnDoorOpened"]

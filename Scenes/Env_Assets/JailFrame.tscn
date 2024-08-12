@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Assets/Jail/Jail.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Scenes/Env_Assets/JailDoor.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Building/Materials/WindGenMatBig.tres" type="Material" id=3]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 35.8466, 48.9183, 1 )
@@ -10,6 +11,7 @@ extents = Vector3( 35.8466, 48.9183, 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = ExtResource( 1 )
+material/0 = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 49.1836, 0 )

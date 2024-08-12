@@ -280,4 +280,5 @@ public enum ItemName
 	WEAPON,
 	KEYCARD,
 	SHEET_MUSIC,
+	SINNER_NOTE,
 }

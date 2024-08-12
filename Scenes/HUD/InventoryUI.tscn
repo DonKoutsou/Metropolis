@@ -1001,11 +1001,11 @@ script = ExtResource( 6 )
 ItemNodeScene = ExtResource( 4 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="InventoryContainer/InventoryItemInOutNotification"]
-margin_left = -74.0
-margin_top = -54.0
-margin_right = 23.0
-margin_bottom = 33.0
-custom_constants/separation = -180
+margin_left = -65.0
+margin_top = -25.0
+margin_right = 32.0
+margin_bottom = 62.0
+custom_constants/separation = -115
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="InventoryContainer/InventoryItemInOutNotification"]
 stream = ExtResource( 9 )

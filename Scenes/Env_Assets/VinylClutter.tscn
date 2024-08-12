@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Vinyl/VinylMat.tres" type="Material" id=1]
+[ext_resource path="res://Assets/Vinyl/Vinyl.tres" type="ArrayMesh" id=2]
+
+[node name="VinylClutter" type="MeshInstance"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+mesh = ExtResource( 2 )
+material/0 = ExtResource( 1 )

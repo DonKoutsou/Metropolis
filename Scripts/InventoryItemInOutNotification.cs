@@ -41,6 +41,7 @@ public class InventoryItemInOutNotification : Control
             if (notif.ItName == it.GetInventoryItemName() && notif.type == NotifType.NEGATIVE)
             {
                 notif.AddtoAmmount();
+                GetNode<AudioStreamPlayer>("AudioStreamPlayer").Play();
                 return;
             }
         }

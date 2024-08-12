@@ -37,11 +37,13 @@ material/0 = ExtResource( 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.900592, 0 )
 shape = SubResource( 3 )
 
-[node name="SittingPosition" type="Position3D" parent="."]
+[node name="SittingPosition" type="RemoteTransform" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.55482, 1.80579, 0 )
+update_scale = false
 
-[node name="SittingPosition2" type="Position3D" parent="." groups=["Interactables"]]
+[node name="SittingPosition2" type="RemoteTransform" parent="." groups=["Interactables"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.92119, 1.80579, 0 )
+update_scale = false
 
 [node name="ActionComponent" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.63113, 0 )

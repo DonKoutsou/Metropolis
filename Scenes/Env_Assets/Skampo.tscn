@@ -21,8 +21,9 @@ material/0 = ExtResource( 2 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.901345, 0 )
 shape = SubResource( 1 )
 
-[node name="SittingPosition2" type="Position3D" parent="."]
+[node name="SittingPosition" type="RemoteTransform" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00925004, 1.80579, 0.00297302 )
+update_scale = false
 
 [node name="ActionComponent" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.61493, 0 )

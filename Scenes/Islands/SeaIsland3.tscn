@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Scenes/Env_Assets/Sea.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Island.cs" type="Script" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://Scripts/CharacterSpawnLocations.cs" type="Script" id=4]
 [ext_resource path="res://Scenes/SoundMap/ShoreSound.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scripts/SoundMap.cs" type="Script" id=6]
+[ext_resource path="res://Assets/Building/BuildingDust.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Building/BuildingDust3.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Env_Assets/Rock3.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Env_Assets/Rock4.tscn" type="PackedScene" id=10]
 
@@ -141,3 +143,18 @@ collision_layer = 0
 [node name="CollisionShape" type="CollisionShape" parent="VisitTrigger"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1000, 0 )
 shape = SubResource( 17 )
+
+[node name="DestBuilding" parent="." instance=ExtResource( 7 )]
+transform = Transform( 0.892798, 0.411669, -0.182865, -0.450457, 0.815922, -0.362436, 0, 0.405955, 0.913893, 2400.62, -63.1638, 431.998 )
+
+[node name="DestBuilding2" parent="." instance=ExtResource( 7 )]
+transform = Transform( 0.939346, -0.313439, 0.139231, 0.152406, 0.745147, 0.649253, -0.307249, -0.588653, 0.74772, 1275.71, -83.3436, -2707.1 )
+
+[node name="DestBuilding3" parent="." instance=ExtResource( 7 )]
+transform = Transform( -0.778734, -0.313966, 0.543138, -0.572877, 0.708761, -0.411667, -0.255706, -0.63173, -0.7318, -2997.09, -31.2095, -1021.99 )
+
+[node name="DestBuilding4" parent="." instance=ExtResource( 8 )]
+transform = Transform( 0.726703, -0.467108, -0.503699, 0.66805, 0.309722, 0.676595, -0.160036, -0.82818, 0.537128, -2254.23, -68.8327, 1215.29 )
+
+[node name="DestBuilding5" parent="." instance=ExtResource( 8 )]
+transform = Transform( 0.242977, 0.95731, -0.15659, -0.906112, 0.16636, -0.388953, -0.346299, 0.236395, 0.907852, 2330.91, -68.8326, 2617.69 )
