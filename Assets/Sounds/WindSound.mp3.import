@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/WindSound.mp3-ef691134db2a679f95212d57940fddae.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/WindSound.mp3"
+dest_files=[ "res://.import/WindSound.mp3-ef691134db2a679f95212d57940fddae.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

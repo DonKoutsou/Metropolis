@@ -20,7 +20,7 @@ public class NPC : Character
 	[Export]
 	NodePath DialogueColaborator = null;
 	[Export]
-	NodePath OwnedVeh = null;
+	public NodePath OwnedVeh = null;
 
 	public bool Talked;
 
@@ -95,7 +95,7 @@ public class NPC : Character
         CameraAnimation.Disconnect("FadeOutFinished", this, "DespawnChar");
 		if (OwnedVeh != null)
 		{
-			GetNode<Vehicle>(OwnedVeh).DespawnVeh();
+			GetNode<Spatial>(OwnedVeh).GetNode<Vehicle>("VehicleBody").DespawnVeh();
 		}
 		
 		QueueFree();

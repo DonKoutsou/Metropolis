@@ -63,7 +63,7 @@ public class House : Spatial
 		DoorPivot Piv = GetNode<DoorPivot>("DoorPivot");
 		Piv.Open();
 
-		AudioServer.SetBusEffectEnabled(0,0, true);
+		AudioServer.SetBusEffectEnabled(2,0, true);
 		//((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(2)).ParamsCullMode = SpatialMaterial.CullMode.Front;
 		/*foreach (Spatial Oclude in GetNode<Spatial>("Occluders").GetChildren()) 
 		{
@@ -93,7 +93,7 @@ public class House : Spatial
 		GetNode<Spatial>("Furnitures").Hide();
 		GetNode<Spatial>("Decorations").Hide();
 
-		AudioServer.SetBusEffectEnabled(0,0, false);
+		AudioServer.SetBusEffectEnabled(2,0, false);
 		//((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(2)).ParamsCullMode = SpatialMaterial.CullMode.Disabled;
 		/*foreach (Spatial Oclude in GetNode<Spatial>("Occluders").GetChildren()) 
 		{

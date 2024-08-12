@@ -1,6 +1,9 @@
-[gd_resource type="AudioBusLayout" load_steps=2 format=2]
+[gd_resource type="AudioBusLayout" load_steps=3 format=2]
 
 [sub_resource type="AudioEffectLowPassFilter" id=5]
+resource_name = "LowPassFilter"
+
+[sub_resource type="AudioEffectLowPassFilter" id=6]
 resource_name = "LowPassFilter"
 
 [resource]
@@ -13,3 +16,11 @@ bus/1/mute = false
 bus/1/bypass_fx = false
 bus/1/volume_db = -4.87777
 bus/1/send = "Master"
+bus/2/name = "Weather"
+bus/2/solo = false
+bus/2/mute = false
+bus/2/bypass_fx = false
+bus/2/volume_db = 0.0
+bus/2/send = "Master"
+bus/2/effect/0/effect = SubResource( 6 )
+bus/2/effect/0/enabled = false

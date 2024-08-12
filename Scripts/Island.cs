@@ -534,13 +534,34 @@ public class Island : Spatial
 						chara.Rotation = Chars.Rotations[i];
 						chara.InitialSpawn();
 						Characters.Add(chara);
+
+
+						VehicleSpawnLocation Vehs = GetNode<VehicleSpawnLocation>("VehicleSpawnLocation");
+
+						if (Vehs.HasVehicles())
+						{
+
+							int vselection = RandomContainer.Next(0, GlobalItemCatalogue.GetInstance().VehicleCatalogue.Count());
+							Spatial veh = (Spatial)GlobalItemCatalogue.GetInstance().VehicleCatalogue[vselection].Instance();
+							AddChild(veh);
+							
+							Vehicle vehchild = veh.GetNode<Vehicle>("VehicleBody");
+							vehchild.Translation = Vehs.Locations[i];
+							vehchild.Rotation = Vehs.Rotations[i];
+							//if (vehchild.SpawnBroken)
+								//vehchild.OnLightDamaged();
+							Vehicles.Add(vehchild);
+							chara.OwnedVeh = veh.GetPath();
+
+						}
+
 					}
 				}
 			}
 			//}
 		}
 		
-		VehicleSpawnLocation Vehs = GetNode<VehicleSpawnLocation>("VehicleSpawnLocation");
+		/*VehicleSpawnLocation Vehs = GetNode<VehicleSpawnLocation>("VehicleSpawnLocation");
 		if (Vehs != null)
 		{
 			
@@ -567,7 +588,7 @@ public class Island : Spatial
 				}
 			}
 			//}
-		}
+		}*/
 		
 	}
 	public void RegisterChild(Node child)

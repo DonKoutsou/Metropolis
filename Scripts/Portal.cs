@@ -36,10 +36,12 @@ public class Portal : Area
         if (t)
         {
             GetNode<AnimationPlayer>("AnimationPlayer").Play("EmmisivePulse");
+            GetNode<AudioStreamPlayer3D>("AudioStreamPlayer3D").Play();
         }
         else
         {
             GetNode<AnimationPlayer>("AnimationPlayer").Play("RESET");
+            GetNode<AudioStreamPlayer3D>("AudioStreamPlayer3D").Stop();
         }
         
     }

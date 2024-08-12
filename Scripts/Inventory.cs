@@ -46,16 +46,18 @@ public class Inventory : Spatial
         //        InsertItem(it);
         //    }
         //}
+
+        ui = (InventoryUI)PlayerUI.GetInstance().GetUI(PlayerUIType.INVENTORY);
         
         if (StartingItems == null)
             return;
         for (int i = 0; i < StartingItems.Count(); i ++)
         {
             Item it = (Item)StartingItems[i].Instance();
-            InsertItem(it);
+            InsertItem(it, false);
         }
 
-        ui = (InventoryUI)PlayerUI.GetInstance().GetUI(PlayerUIType.INVENTORY);
+        
     }
 
     //LIMB stuff
@@ -233,14 +235,14 @@ public class Inventory : Spatial
                     }
                 }
             }
-            InsertItem(newItem);
+            InsertItem(newItem, false);
         }
     }
     //public bool IsEmpty()
     //{
     //    return currentweight <= 0;
     //}
-    public bool InsertItem(Item item)
+    public bool InsertItem(Item item, bool ShowNotif = true)
     {
         //int itW = item.GetInventoryWeight();
         //if (currentweight + itW > Capacity)
@@ -287,6 +289,9 @@ public class Inventory : Spatial
         //}
         InventoryContents.Add(item);
         item.OnItemPickedUp();
+
+        if (ShowNotif)
+            ui.OnItemAdded(item);
         //EmitSignal(nameof(On_Item_Added), item);
         
         //ui.UpdateInventory();
@@ -303,7 +308,7 @@ public class Inventory : Spatial
         RemoveChild(it);
         CharacterOwner.EquipItem(it);
     }
-    public bool RemoveItem(Item item, bool RegisterToIsle = true)
+    public bool RemoveItem(Item item, bool RegisterToIsle = true, bool ShowNotif = true)
     {
         InventoryContents.Remove(item);
         //currentweight -= item.GetInventoryWeight();
@@ -344,9 +349,13 @@ public class Inventory : Spatial
         item.GetNode<CollisionShape>("CollisionShape").SetDeferred("disabled",false);
         
         ui.UpdateInventory();
+
+        if (ShowNotif)
+            ui.OnItemAdded(item);
+
         return true;
     }
-    public void DeleteItem(Item item)
+    public void DeleteItem(Item item, bool ShowNotif = true)
     {
         InventoryContents.Remove(item);
         //currentweight -= item.GetInventoryWeight();
@@ -359,6 +368,8 @@ public class Inventory : Spatial
             
         }
         item.GetParent().RemoveChild(item);
+        if (ShowNotif)
+            ui.OnItemAdded(item);
         item.Free();
     }
     public void RemoveAllItems()

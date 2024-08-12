@@ -1,0 +1,93 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Scenes/Env_Assets/BoatClutter.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Building/MotherCity/WoodPort.material" type="Material" id=2]
+[ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=3]
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 2, 20, 6 )
+
+[sub_resource type="CylinderMesh" id=2]
+top_radius = 0.05
+bottom_radius = 0.05
+height = 9.585
+radial_segments = 8
+rings = 0
+
+[sub_resource type="CubeMesh" id=3]
+size = Vector3( 0.622, 36.56, 12.412 )
+
+[sub_resource type="CylinderMesh" id=4]
+top_radius = 2.5
+bottom_radius = 2.5
+height = 26.157
+radial_segments = 8
+rings = 0
+
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 14, 7.3804, 8.70538 )
+
+[node name="StaticBody" type="StaticBody"]
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, -13, 4.94375, -4.08202 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+script = ExtResource( 3 )
+LOD0 = SubResource( 1 )
+LOD1 = SubResource( 1 )
+HideIfNoLod = true
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 5.06198, 4.77159 )
+mesh = SubResource( 2 )
+script = ExtResource( 3 )
+LOD0 = SubResource( 2 )
+HideIfNoLod = true
+
+[node name="MeshInstance3" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 13, 4.94375, -4.08202 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+script = ExtResource( 3 )
+LOD0 = SubResource( 1 )
+LOD1 = SubResource( 1 )
+HideIfNoLod = true
+
+[node name="MeshInstance5" type="MeshInstance" parent="."]
+transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, -9.43068 )
+mesh = SubResource( 3 )
+material/0 = ExtResource( 2 )
+script = ExtResource( 3 )
+LOD0 = SubResource( 3 )
+HideIfNoLod = true
+
+[node name="MeshInstance4" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 5.06198, 4.77159 )
+mesh = SubResource( 2 )
+script = ExtResource( 3 )
+LOD0 = SubResource( 2 )
+HideIfNoLod = true
+
+[node name="StaticBody12" parent="." instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -3.01226, 4.54296 )
+
+[node name="MeshInstance6" type="MeshInstance" parent="."]
+transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 10.1796, 0.849404 )
+mesh = SubResource( 4 )
+script = ExtResource( 3 )
+LOD0 = SubResource( 4 )
+LOD1 = SubResource( 4 )
+HideIfNoLod = true
+
+[node name="MeshInstance7" type="MeshInstance" parent="."]
+transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 3.13364, -5.99783 )
+mesh = SubResource( 4 )
+script = ExtResource( 3 )
+LOD0 = SubResource( 4 )
+LOD1 = SubResource( 4 )
+HideIfNoLod = true
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.64772, -4.3178 )
+shape = SubResource( 5 )

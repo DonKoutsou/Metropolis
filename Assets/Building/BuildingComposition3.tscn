@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Assets/Building/Assets/House_Exterior3.tres" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Building/BuildingInterior.material" type="Material" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://Scripts/House.cs" type="Script" id=5]
 [ext_resource path="res://Assets/Building/BuildingExterior.material" type="Material" id=6]
 [ext_resource path="res://Scenes/Env_Assets/Furniture.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Sounds/Doors/DoorWood_Open.mp3" type="AudioStream" id=8]
+[ext_resource path="res://Assets/Sounds/Doors/DoorWood_Close.mp3" type="AudioStream" id=9]
 [ext_resource path="res://Scenes/Env_Assets/IndoorsLight.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Env_Assets/Furniture2.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/BuildingDecorations/Decorations2.tscn" type="PackedScene" id=14]
@@ -31,12 +33,12 @@ PossibleDeco = [ ExtResource( 15 ), ExtResource( 14 ) ]
 FurnitureAmmount = 6
 DecorationAmmount = 2
 SpawnPool = {
+Resource( "res://Scenes/Items/BatteryEmpty.tscn" ): 10,
 Resource( "res://Scenes/Items/FastLeg_L.tscn" ): 1,
+Resource( "res://Scenes/Items/Drahma.tscn" ): 40,
 Resource( "res://Scenes/Items/Guitar.tscn" ): 1,
 Resource( "res://Scenes/Items/FastLeg_R.tscn" ): 1,
-Resource( "res://Scenes/Items/Drahma.tscn" ): 40,
-Resource( "res://Scenes/Items/Battery.tscn" ): 2,
-Resource( "res://Scenes/Items/BatteryEmpty.tscn" ): 10
+Resource( "res://Scenes/Items/Battery.tscn" ): 2
 }
 
 [node name="HouseExterior" type="StaticBody" parent="."]
@@ -72,9 +74,12 @@ shape = SubResource( 8 )
 [node name="DoorPivot" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.25, 7.26628, 10.0431 )
 script = ExtResource( 3 )
+OpenCloseTime = 1.0
 Doors = [ NodePath("Door1") ]
 Rotations = [ Vector3( 0, 170, 0 ) ]
 Translations = [  ]
+OpenSound = ExtResource( 8 )
+CloseSound = ExtResource( 9 )
 
 [node name="Door1" type="Spatial" parent="DoorPivot"]
 

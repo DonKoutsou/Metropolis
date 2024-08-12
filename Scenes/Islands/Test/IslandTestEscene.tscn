@@ -8,7 +8,7 @@
 [ext_resource path="res://Assets/Clouds/Clouds2.material" type="Material" id=6]
 [ext_resource path="res://Assets/Sounds/RainSound.mp3" type="AudioStream" id=7]
 [ext_resource path="res://Assets/Clutter/Antenna/Antenna.material" type="Material" id=8]
-[ext_resource path="res://Assets/Sounds/Cave_Ambient.mp3" type="AudioStream" id=9]
+[ext_resource path="res://Assets/Sounds/WindSound.mp3" type="AudioStream" id=9]
 [ext_resource path="res://Assets/Rocks/RockMat.tres" type="Material" id=10]
 [ext_resource path="res://Assets/Terains/Island2/Island2_LOD.tres" type="ArrayMesh" id=11]
 [ext_resource path="res://Assets/TerainTex/SandSimple.tres" type="Material" id=12]
@@ -29,7 +29,6 @@
 [ext_resource path="res://Assets/Rocks/Rock1_Lod.tres" type="ArrayMesh" id=27]
 [ext_resource path="res://Assets/Rocks/Rock4_Lod.tres" type="ArrayMesh" id=28]
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=29]
-[ext_resource path="res://Assets/Rain/Rain.tres" type="Material" id=30]
 
 [sub_resource type="SpatialMaterial" id=1]
 resource_name = "initialShadingGroup"
@@ -137,8 +136,17 @@ spread = 5.03
 gravity = Vector3( 0, -100, 0 )
 initial_velocity = 10000.0
 
+[sub_resource type="SpatialMaterial" id=126]
+render_priority = 1
+flags_transparent = true
+flags_unshaded = true
+params_diffuse_mode = 4
+params_cull_mode = 2
+params_depth_draw_mode = 1
+albedo_color = Color( 0.890196, 0.988235, 1, 0.290196 )
+
 [sub_resource type="QuadMesh" id=3]
-material = ExtResource( 30 )
+material = SubResource( 126 )
 size = Vector2( 0.5, 50 )
 
 [sub_resource type="SpatialMaterial" id=99]
@@ -475,6 +483,7 @@ far = 100000.0
 
 [node name="EnvSound" type="AudioStreamPlayer" parent="Camera"]
 stream = ExtResource( 9 )
+volume_db = -12.0
 autoplay = true
 
 [node name="Spatial" type="Spatial" parent="Camera"]

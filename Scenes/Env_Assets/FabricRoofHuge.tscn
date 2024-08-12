@@ -9,14 +9,13 @@ radius = 0.941581
 
 [sub_resource type="CylinderMesh" id=1]
 material = ExtResource( 1 )
-height = 80.0
+height = 100.0
 
 [sub_resource type="ShaderMaterial" id=4]
 resource_local_to_scene = true
 shader = ExtResource( 2 )
 shader_param/enable = false
 shader_param/outline_thickness = 0.259
-shader_param/color2 = Color( 0, 0, 0, 0 )
 shader_param/color = Color( 0.882353, 0.898039, 0.360784, 0 )
 
 [sub_resource type="Shader" id=7]
@@ -195,6 +194,8 @@ gradient = SubResource( 9 )
 
 [sub_resource type="OpenSimplexNoise" id=3]
 seed = 1
+period = 146.4
+persistence = 1.0
 
 [sub_resource type="NoiseTexture" id=2]
 width = 256
@@ -280,57 +281,57 @@ shape = SubResource( 10 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -172.839, -31.0524, 2.01344 )
 shape = SubResource( 10 )
 
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 72.083, -31.052, 74.188 )
+shape = SubResource( 10 )
+
 [node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 171.103, -34.9144, 74.1689 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 171.103, -44.596, 74.1689 )
 mesh = SubResource( 1 )
 
 [node name="MeshInstance5" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 72.0966, -34.9144, 74.169 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 72.0966, -44.596, 74.169 )
 mesh = SubResource( 1 )
 
 [node name="MeshInstance6" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -91.0328, -34.9144, 74.169 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -91.0328, -44.596, 74.169 )
 mesh = SubResource( 1 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -172.839, -34.9144, 75.0982 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -172.839, -44.596, 75.0982 )
 mesh = SubResource( 1 )
 
 [node name="MeshInstance7" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 171.103, -34.9144, -75.0853 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 171.103, -44.596, -75.0853 )
 mesh = SubResource( 1 )
 
 [node name="MeshInstance8" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 72.0966, -34.9144, -75.0852 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 72.0966, -44.596, -75.0852 )
 mesh = SubResource( 1 )
 
 [node name="MeshInstance9" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -91.0328, -34.9144, -75.0852 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -91.0328, -44.596, -75.0852 )
 mesh = SubResource( 1 )
 
 [node name="MeshInstance10" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -172.839, -34.9144, -74.1561 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -172.839, -44.596, -74.1561 )
 mesh = SubResource( 1 )
 
 [node name="MeshInstance11" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 171.103, -34.9144, 1.08422 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 171.103, -44.596, 1.08422 )
 mesh = SubResource( 1 )
 
 [node name="MeshInstance12" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 72.0966, -34.9144, 1.0843 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 72.0966, -44.596, 1.0843 )
 mesh = SubResource( 1 )
 
 [node name="MeshInstance13" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -91.0328, -34.9144, 1.0843 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -91.0328, -44.596, 1.0843 )
 mesh = SubResource( 1 )
 
 [node name="MeshInstance14" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -172.839, -34.9144, 2.01344 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -172.839, -44.596, 2.01344 )
 mesh = SubResource( 1 )
-
-[node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 72.0834, -16.0348, 74.1877 )
-shape = SubResource( 10 )
 
 [node name="Fabric" type="Spatial" parent="."]
 transform = Transform( -7.34892e-06, 0, -168.124, 0, 108.738, 0, 78.3286, 0, -3.42385e-06, 0, 0, 0 )

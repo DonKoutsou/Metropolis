@@ -14,7 +14,7 @@ public class Item : RigidBody
 	public Texture ItemIcon = null;
 
 	[Export]
-	string ItemPickupActionName = null;
+	string ItemPickupActionName = "Null";
 
 	[Export]
 	protected string ItemName = "Item";

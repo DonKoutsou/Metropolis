@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Inventory_Add.mp3-38db475bef1e15473d8fa4dbb1be77d8.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/Inventory_Add.mp3"
+dest_files=[ "res://.import/Inventory_Add.mp3-38db475bef1e15473d8fa4dbb1be77d8.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

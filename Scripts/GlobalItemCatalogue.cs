@@ -63,6 +63,10 @@ public class GlobalItemCatalogue : Node
 				}
 			}
 		}
+		if (path == null)
+		{
+			GD.Print("Trying to get item with name : " + name + " | and failed.");
+		}
 		return path;
 	}
     public static PackedScene GetItemByType(ItemName name, string stname = "Null")

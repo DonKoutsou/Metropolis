@@ -265,14 +265,14 @@ public class WindGenerator : StaticBody
         GetNode<Spatial>("GenInternals").Show();
         GetNode<Spatial>("GenInternals2").Show();
 
-        AudioServer.SetBusEffectEnabled(0,0, true);
+        AudioServer.SetBusEffectEnabled(2,0, true);
     }
     private void CharacterLeft(Node body)
     {
         GetNode<Spatial>("GenInternals").Hide();
         GetNode<Spatial>("GenInternals2").Hide();
 
-        AudioServer.SetBusEffectEnabled(0,0, false);
+        AudioServer.SetBusEffectEnabled(2,0, false);
     }
     public override void _EnterTree()
     {

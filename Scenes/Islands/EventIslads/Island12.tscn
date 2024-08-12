@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Scenes/Vehicles/HoverBoard_NoWings.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Env_Assets/PortRopething.tscn" type="PackedScene" id=2]
@@ -7,9 +7,12 @@
 [ext_resource path="res://Scenes/Env_Assets/Rock1.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Env_Assets/Ladder.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Env_Assets/Rock4.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Items/Guitar.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Env_Assets/WindGenerator2.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Building/BuildingComposition.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Env_Assets/Pagaki.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Assets/Building/BuildingComposition2.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Env_Assets/BoatCrane.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/Env_Assets/Rock7.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/Env_Assets/Rock8.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Env_Assets/Rock9.tscn" type="PackedScene" id=16]
@@ -124,68 +127,103 @@ data = {
 transform = Transform( -0.477772, 0, 0.878484, 0, 1, 0, -0.878484, 0, -0.477772, -981.504, -4.11378, -1133.77 )
 
 [node name="Rock3" parent="." index="7" instance=ExtResource( 17 )]
-transform = Transform( 109.188, 0, 0, 0, 106.913, 22.1737, 0, -22.1737, 106.913, -1330.28, 91.805, 935.733 )
+transform = Transform( -88.3461, 36.0022, -197.544, 0.974988, -215.739, -39.7544, -200.795, -16.8879, 86.7226, -1568.66, 758.547, 480.759 )
 
-[node name="Rock4" parent="." index="8" instance=ExtResource( 17 )]
-transform = Transform( -84.7932, 3.25158, -32.8268, -6.35736, 87.2327, 25.0619, 32.3691, 25.6504, -81.0699, -1304.39, 519.78, 610.32 )
-
-[node name="House" parent="." index="9" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1184.38, 203.927, 838.881 )
+[node name="House" parent="." index="8" instance=ExtResource( 10 )]
+transform = Transform( -0.794754, 0, -0.606932, 0, 1, 0, 0.606932, 0, -0.794754, -1325.99, 203.927, 886.933 )
 HasPower = false
 
-[node name="House2" parent="." index="10" instance=ExtResource( 10 )]
-transform = Transform( 0.440378, 0, 0.897812, 0, 1, 0, -0.897812, 0, 0.440378, -1242.22, 203.69, 879.266 )
+[node name="House5" parent="." index="9" instance=ExtResource( 10 )]
+transform = Transform( -0.794754, 0, -0.606932, 0, 1, 0, 0.606932, 0, -0.794754, -1378.65, 203.927, 927.71 )
 HasPower = false
 
-[node name="Ladder2" parent="." index="11" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1.38777, 0, 0, 0, 1, -1208.54, -33.0123, 904.813 )
+[node name="House6" parent="." index="10" instance=ExtResource( 10 )]
+transform = Transform( -0.794754, 0, -0.606932, 0, 1, 0, 0.606932, 0, -0.794754, -1405.88, 203.927, 948.486 )
+HasPower = false
+
+[node name="House2" parent="." index="11" instance=ExtResource( 10 )]
+transform = Transform( 0.836496, 0, 0.547972, 0, 1, 0, -0.547972, 0, 0.836496, -1533.21, 203.69, 831.599 )
+HasPower = false
+
+[node name="Ladder2" parent="." index="12" instance=ExtResource( 6 )]
+transform = Transform( 0.606932, 0, -0.794754, 0, 1.38777, 0, 0.794754, 0, 0.606932, -1533.09, -33.0123, 886.272 )
 TopPossition = Vector3( 0, 171.088, -6.461 )
 BottomPossition = Vector3( 0, 24.785, 3.832 )
 
-[node name="StaticBody" parent="." index="12" instance=ExtResource( 3 )]
-transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, -1219.46, 225.788, 854.737 )
+[node name="StaticBody" parent="." index="13" instance=ExtResource( 3 )]
+transform = Transform( -0.606932, 5.30597e-08, -0.794754, -8.74228e-08, -1, 0, -0.794754, 6.94796e-08, 0.606932, -1499.92, 225.788, 847.2 )
 
-[node name="StaticBody2" parent="." index="13" instance=ExtResource( 3 )]
-transform = Transform( 0.341809, 0, 0, 0, 1, 0, 0, 0, 0.167167, -1210.85, -22.3933, 907.547 )
+[node name="StaticBody8" parent="." index="14" instance=ExtResource( 3 )]
+transform = Transform( -0.606932, 5.30597e-08, -0.794754, -8.74228e-08, -1, 0, -0.794754, 6.94796e-08, 0.606932, -1416.66, 225.788, 909.245 )
 
-[node name="Pagaki" parent="." index="14" instance=ExtResource( 11 )]
-transform = Transform( 0.843954, 0, 0.536416, 0, 1, 0, -0.536416, 0, 0.843954, -1213.93, 204.134, 859.416 )
+[node name="StaticBody9" parent="." index="15" instance=ExtResource( 3 )]
+transform = Transform( -0.606932, 5.30597e-08, -0.794754, -8.74228e-08, -1, 0, -0.794754, 6.94796e-08, 0.606932, -1337.15, 225.788, 848.547 )
 
-[node name="StaticBody3" parent="." index="15" instance=ExtResource( 2 )]
-transform = Transform( 0.0329982, 0, 0.999455, 0, 1, 0, -0.999455, 0, 0.0329982, -1226.84, 1.14121, 908.029 )
+[node name="StaticBody10" parent="." index="16" instance=ExtResource( 3 )]
+transform = Transform( -0.606932, 5.30597e-08, -0.794754, -8.74228e-08, -1, 0, -0.794754, 6.94796e-08, 0.606932, -1420.39, 225.788, 786.483 )
 
-[node name="StaticBody4" parent="." index="16" instance=ExtResource( 2 )]
-transform = Transform( -0.999455, 0, 0.0329982, 0, 1, 0, -0.0329982, 0, -0.999455, -1210.31, 1.14121, 914.715 )
+[node name="StaticBody2" parent="." index="17" instance=ExtResource( 3 )]
+transform = Transform( 0.207455, 0, -0.132857, 0, 1, 0, 0.271654, 0, 0.101459, -1536.66, -22.3933, 886.095 )
 
-[node name="StaticBody5" parent="." index="17" instance=ExtResource( 2 )]
-transform = Transform( -0.0329981, 0, -0.999455, 0, 1, 0, 0.999455, 0, -0.0329981, -1194.84, 1.14121, 908.463 )
+[node name="Pagaki" parent="." index="18" instance=ExtResource( 11 )]
+transform = Transform( 0.869461, 0, -0.494003, 0, 1, 0, 0.494003, 0, 0.869461, -1392.59, 204.134, 792.969 )
 
-[node name="Vehicle0" parent="." index="18" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1237.23, 9.59352, 906.624 )
+[node name="StaticBody3" parent="." index="19" instance=ExtResource( 2 )]
+transform = Transform( 0.814348, 0, 0.580376, 0, 1, 0, -0.580376, 0, 0.814348, -1546.75, 1.14123, 873.68 )
 
-[node name="Rock5" parent="." index="19" instance=ExtResource( 14 )]
+[node name="StaticBody4" parent="." index="20" instance=ExtResource( 2 )]
+transform = Transform( -0.580376, 0, 0.814348, 0, 1, 0, -0.814348, 0, -0.580376, -1542.03, 1.14123, 890.875 )
+
+[node name="StaticBody5" parent="." index="21" instance=ExtResource( 2 )]
+transform = Transform( -0.814348, 0, -0.580376, 0, 1, 0, 0.580376, 0, -0.814348, -1527.67, 1.14123, 899.375 )
+
+[node name="Vehicle0" parent="." index="22" instance=ExtResource( 1 )]
+transform = Transform( 0.606932, 0, -0.794754, 0, 1, 0, 0.794754, 0, 0.606932, -1551.94, 9.59354, 864.57 )
+
+[node name="Rock5" parent="." index="23" instance=ExtResource( 14 )]
 transform = Transform( 43.238, 40.8005, 9.20769, -41.3861, 39.8163, 17.9121, 6.05418, -19.2088, 56.6864, -937.791, -379.289, -520.361 )
 
-[node name="Rock6" parent="." index="20" instance=ExtResource( 15 )]
+[node name="Rock6" parent="." index="24" instance=ExtResource( 15 )]
 transform = Transform( 23.1284, 43.1562, 34.9514, 19.7016, 29.0226, -48.8725, -51.9222, 30.2361, -2.97552, -473.779, -358.354, 665.372 )
 
-[node name="Rock7" parent="." index="21" instance=ExtResource( 16 )]
+[node name="Rock7" parent="." index="25" instance=ExtResource( 16 )]
 transform = Transform( -14.7586, -44.6501, 37.5172, -11.0718, 40.1412, 43.4174, -57.2589, 3.7468, -18.0655, -589.935, -185.082, -62.1287 )
 
-[node name="Fireplace" parent="." index="22" instance=ExtResource( 18 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1213.9, 204.134, 871.865 )
+[node name="Fireplace" parent="." index="26" instance=ExtResource( 18 )]
+transform = Transform( 0.468793, 0, -0.883308, 0, 1, 0, 0.883308, 0, 0.468793, -1405.26, 204.134, 807.829 )
 
-[node name="StaticBody6" parent="." index="23" instance=ExtResource( 20 )]
-transform = Transform( 0.696539, 0, 0.717519, 0, 1, 0, -0.717519, 0, 0.696539, -1209.7, 207.325, 864.518 )
+[node name="StaticBody6" parent="." index="27" instance=ExtResource( 20 )]
+transform = Transform( 0.960323, 0, -0.27889, 0, 1, 0, 0.27889, 0, 0.960323, -1395.11, 207.325, 799.097 )
 
-[node name="StaticBody7" parent="." index="24" instance=ExtResource( 19 )]
-transform = Transform( -0.587912, 0, -0.808925, 0, 1, 0, 0.808925, 0, -0.587912, -1204.82, 204.134, 867.124 )
+[node name="StaticBody7" parent="." index="28" instance=ExtResource( 19 )]
+transform = Transform( -0.990139, 0, 0.140089, 0, 1, 0, -0.140089, 0, -0.990139, -1395.11, 204.134, 804.58 )
 
-[node name="IslandNameTrigger" parent="." index="28" instance=ExtResource( 21 )]
+[node name="IslandNameTrigger" parent="." index="32" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1206.45, 85.9439, 905.542 )
 
 [node name="CollisionShape" parent="IslandNameTrigger" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 24 )
+
+[node name="Guitar" parent="." index="33" instance=ExtResource( 8 )]
+transform = Transform( 0.296558, -0.304895, 0.905037, 0, 0.947668, 0.319257, -0.955015, -0.0946783, 0.281039, -1391.62, 204.134, 800.516 )
+
+[node name="House3" parent="." index="34" instance=ExtResource( 12 )]
+transform = Transform( 0.59069, 0, -0.806898, 0, 1, 0, 0.806898, 0, 0.59069, -1314.57, 203.448, 836.884 )
+HasPower = false
+
+[node name="House4" parent="." index="35" instance=ExtResource( 12 )]
+transform = Transform( 0.930481, 0, -0.366339, 0, 1, 0, 0.366339, 0, 0.930481, -1369.82, 203.448, 812.115 )
+HasPower = false
+
+[node name="House7" parent="." index="36" instance=ExtResource( 12 )]
+transform = Transform( 0.800909, 0, 0.598786, 0, 1, 0, -0.598786, 0, 0.800909, -1449.16, 203.448, 828.825 )
+HasPower = false
+
+[node name="StaticBody13" parent="." index="37" instance=ExtResource( 13 )]
+transform = Transform( 0.607154, 0, -0.794584, 0, 1, 0, 0.794584, 0, 0.607154, -1446.08, 204.139, 956.439 )
+
+[node name="StaticBody14" parent="." index="38" instance=ExtResource( 13 )]
+transform = Transform( 0.607154, 0, -0.794584, 0, 1, 0, 0.794584, 0, 0.607154, -1468.8, 204.139, 926.255 )
 
 [editable path="IslandNameTrigger"]

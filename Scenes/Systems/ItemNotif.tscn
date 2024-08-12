@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://UIThemes/Panel_Black_Top-BottomCorner.tres" type="StyleBox" id=1]
+[ext_resource path="res://Fonts/Caudex-Bold.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Assets/ToolBox/Toolbox.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/ItemNotification.cs" type="Script" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 64
+outline_size = 2
+outline_color = Color( 0.215686, 0.215686, 0.215686, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 2 )
+
+[node name="ItemNotification" type="PanelContainer"]
+margin_right = 131.0
+margin_bottom = 87.0
+size_flags_horizontal = 3
+custom_styles/panel = ExtResource( 1 )
+script = ExtResource( 4 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 129.0
+margin_bottom = 85.0
+custom_constants/separation = 25
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+margin_right = 68.0
+margin_bottom = 83.0
+custom_fonts/font = SubResource( 1 )
+text = "+1"
+
+[node name="Control" type="Control" parent="HBoxContainer"]
+margin_left = 93.0
+margin_right = 93.0
+margin_bottom = 83.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -32.0
+margin_top = -32.0
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 3 )
+expand = true
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="DeathTimer" to="." method="DeathTimer_Ended"]

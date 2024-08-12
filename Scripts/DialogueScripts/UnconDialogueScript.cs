@@ -1,9 +1,12 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class UnconDialogueScript : BaseDialogueScript
 {
+    [Export]
+	PackedScene[] PossibleRewards = null;
     bool GivenBattery = false;
     public override void DoDialogue(NPC Talker, NPC TalkerColaborator = null)
     {
@@ -11,24 +14,19 @@ public class UnconDialogueScript : BaseDialogueScript
         
         switch(DialogueProg)
         {
-            case 9:
-            {
-                text = "Ψάχνεις τους φάρους, κάτσε να σου σημειώσω τον κοντινότερο στον χάρτη.";
-                DialogueProg ++;
-                break;
-            }
-            case 1:
+            case 0:
             {
                 text = string.Format("Θα φύγω προς την Μητρόπολη, αν θημάμε καλά είναι κάπου προς τα {0}. Ελπίζω να σας δω εκέι.", WorldMap.GetInstance().GetExitDirection());
                 DialogueProg ++;
                 break;
             }
-            case 2:
+            case 1:
             {
                 text = "Θα σε δω στην Μητρόπολη καΐκτση, καλό δρόμο.";
                 CameraAnimationPlayer CameraAnimation = CameraAnimationPlayer.GetInstance();
                 CameraAnimation.Connect("FadeOutFinished", Talker, "DespawnChar");
                 CameraAnimation.FadeInOut(3);
+                DialogueProg ++;
                 break;
             }
 
@@ -69,11 +67,12 @@ public class UnconDialogueScript : BaseDialogueScript
 
         inv.DeleteItem(bats[0]);
 
-        DialogueProg ++;
-
         GivenBattery = true;
 
-        return "Νά'σε καλά καΐκτση, δεν ξέρω τι συνέβη. Τρελός ο πόνος της ατροφίας. Ευχαριστώ για την μπαταρία... Δεν ξέρω πώς να στο ανταποδώσω.";
+        Item newItem = PossibleRewards[RandomContainer.Next(0, PossibleRewards.Count())].Instance<Item>();
+        inv.InsertItem(newItem);
+
+        return "Νά'σε καλά καΐκτση, δεν ξέρω τι συνέβη. Τρελός ο πόνος της ατροφίας. Ευχαριστώ για την μπαταρία... Δεν ξέρω πως να το ανταποδώσω, βρήκα αυτό στα ταξίδια μου, ελπίζω να σου φανεί χρήσημο.";
     }
     public override Dictionary<string, object>GetSaveData()
     {

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Assets/Building/Assets/House_Exterior.tres" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Building/Assets/House_Interior.tres" type="ArrayMesh" id=2]
@@ -10,11 +10,13 @@
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=8]
 [ext_resource path="res://Assets/Building/Assets/House_ExteriorLOD.tres" type="ArrayMesh" id=9]
 [ext_resource path="res://Scripts/DoorPivot.cs" type="Script" id=10]
+[ext_resource path="res://Assets/Sounds/Doors/DoorWood_Open.mp3" type="AudioStream" id=11]
 [ext_resource path="res://Scenes/Env_Assets/IndoorsLight.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Env_Assets/Furniture2.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/BuildingDecorations/Decorations2.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/BuildingDecorations/Decorations1.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Env_Assets/Furniture3.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Assets/Sounds/Doors/DoorWood_Close.mp3" type="AudioStream" id=17]
 
 [sub_resource type="BoxShape" id=7]
 margin = 0.001
@@ -41,14 +43,16 @@ script = ExtResource( 5 )
 PossibleFurni = [ ExtResource( 7 ), ExtResource( 13 ), ExtResource( 16 ) ]
 PossibleDeco = [ ExtResource( 15 ), ExtResource( 14 ) ]
 SpawnPool = {
-Resource( "res://Scenes/Items/Clock.tscn" ): 5,
-Resource( "res://Scenes/Items/Item.tscn" ): 10,
-Resource( "res://Scenes/Items/FastLeg_L.tscn" ): 1,
+Resource( "res://Scenes/Items/SheetMusic.tscn" ): 8,
+Resource( "res://Scenes/Items/FastLeg_L.tscn" ): 2,
+Resource( "res://Scenes/Items/NormalLeg_L.tscn" ): 2,
+Resource( "res://Scenes/Items/Item.tscn" ): 4,
+Resource( "res://Scenes/Items/Vinyl.tscn" ): 8,
+Resource( "res://Scenes/Items/Clock.tscn" ): 8,
 Resource( "res://Scenes/Items/Guitar.tscn" ): 1,
-Resource( "res://Scenes/Items/FastLeg_R.tscn" ): 1,
-Resource( "res://Scenes/Items/Cassete.tscn" ): 5,
-Resource( "res://Scenes/Items/SheetMusic.tscn" ): 5,
-Resource( "res://Scenes/Items/Vinyl.tscn" ): 5,
+Resource( "res://Scenes/Items/FastLeg_R.tscn" ): 2,
+Resource( "res://Scenes/Items/NormalLeg_R.tscn" ): 2,
+Resource( "res://Scenes/Items/Cassete.tscn" ): 8,
 Resource( "res://Scenes/Items/BatteryEmpty.tscn" ): 10
 }
 
@@ -166,9 +170,12 @@ mesh = SubResource( 6 )
 [node name="DoorPivot" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.25, 7.26628, 10.0431 )
 script = ExtResource( 10 )
+OpenCloseTime = 1.0
 Doors = [ NodePath("Door1") ]
 Rotations = [ Vector3( 0, 170, 0 ) ]
 Translations = [  ]
+OpenSound = ExtResource( 11 )
+CloseSound = ExtResource( 17 )
 
 [node name="Door1" type="Spatial" parent="DoorPivot"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.53674e-07 )

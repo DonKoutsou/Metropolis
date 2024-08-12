@@ -52,6 +52,8 @@ public class InventoryUI : Control
 
     int currentpage = 0;
     int maxpage = 0;
+
+    InventoryItemInOutNotification ItemNotif;
     /*public void ConfigureJob(string JobName, Vector2 Jobloc, string JobOwner, int RewardAmmount)
     {
         JobPan.GetNode<RichTextLabel>("MarginContainer/VBoxContainer/TaskName").BbcodeText = "[center]" + JobName;
@@ -75,6 +77,8 @@ public class InventoryUI : Control
         ItemName = DescPan.GetNode<MarginContainer>("MarginContainer").GetNode<VBoxContainer>("VBoxContainer").GetNode<RichTextLabel>("ItemName");
         //ItemOptionPanel = GetNode<Panel>("ItemOptionPanel");
         DescPan.Hide();
+
+        ItemNotif = GetNode<InventoryItemInOutNotification>("InventoryContainer/InventoryItemInOutNotification");
         //JobPan.Hide();
 
         for (int i = 0; i < childc; i ++)
@@ -85,6 +89,14 @@ public class InventoryUI : Control
             sl.Connect("Focused", this, "SetFocused");
         }
         SetProcess(false);
+    }
+    public void OnItemAdded(Item it)
+    {
+        ItemNotif.OnItemAddedToInv(it);
+    }
+    public void OnItemRemoved(Item it)
+    {
+        ItemNotif.OnItemRemovedFromInv(it);
     }
     public void OnPlayerSpawned(Player play)
     {

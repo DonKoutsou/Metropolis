@@ -20,30 +20,24 @@ public class KanarisScript : BaseDialogueScript
             {
                 case 0:
                 {
-                    text = ".";
+                    text = "Άλλος ένας ταξιδιάρης που είδε φώς και μπήκε. Εσύ είσαι ο πρώτος που κουβαλάει ένα μωρό μαζί του. Τι σε φέρνει από εδώ καΐκτσή;";
                     DialogueProg ++;
                     break;
                 }
                 case 1:
                 {
-                    text = "Αυτό που κουβαλάς είναι αυτό που νομίζω; Πηγένεις στην Μητρόπολη από'τι συμπερένω. Θα ήθελα να σε βοηθήσω στο ταξίδι σου αλλά δυστηχώς τα καΐκια που βλέπεις δεν λειτουργούν. Μου λείπουν τα εργαλεία και δεν μπορώ να τα επιδιορθώσω.";
+                    text = "Εγώ αράζω, δεν έχει μίνει και τίποτε άλλο να κάνει κανείς σε τούτο εδώ το μέρος. Έσω βρεί κάτι δίσκους προπολεμικούς και ακούω. Κάνει την ώρα να περνάει λίγο πιό ευχάριστα. Τι δε θα έδηνα για μια κιθάρα.";
                     DialogueProg ++;
                     break;
                 }
                 case 2:
                 {
-                    text = string.Format("Μόλις επισκευάσω τα καΐκια είσαι ελεύθερος να πάρεις όποιο θες. Τα πανία τους θα σε βοηθήσουν να φτάσεις στην Μητρόπολη πολύ πιο εύκολά, εφόσον ο άνεμος είναι με το μέρος σου.");
-                    DialogueProg ++;
+                    text = "Άμα βρείς καμία κιθάρα στα ταξίδια σου θα στην αντάλαζα για μερικά από αυτά τα εκρηκτηκά. Μπορεί να σου φανούν χρείσιμα κάπου, είναι μιά από τις γνώσεις που μου έμειναν απο το αφεντικό...";
                     break;
                 }
                 case 3:
                 {
-                    text = "Ότι εργαλεία βρείς στα ταξίδια σου φέρτα εδώ και θα επισκευάσω τα καΐκια.";
-                    break;
-                }
-                case 4:
-                {
-                    
+                    text = "Θα σου ανταλάξω ότι παρτιτούρες ή μουσική μου φέρεις με ερκηκτηκά. Θα σου φανούν χρήσημα εκέι έξω σίγουρα.";
                     break;
                 }
             }
@@ -52,6 +46,15 @@ public class KanarisScript : BaseDialogueScript
     }
     public override bool ShouldShowExtraAction()
     {
+        bool showaction = false;
+        if (DialogueProg == 2)
+        {
+            showaction = Player.GetInstance().GetCharacterInventory().HasItemOfType(ItemName.GUITAR);
+        }
+        if (DialogueProg == 3)
+        {
+            showaction = Player.GetInstance().GetCharacterInventory().HasItemOfType(ItemName.SHEET_MUSIC);
+        }
         return DialogueProg == 3 && Player.GetInstance().GetCharacterInventory().HasItemOfType(ItemName.SHEET_MUSIC);
     }
     public override bool ShouldShowExtraAction2()
@@ -70,24 +73,51 @@ public class KanarisScript : BaseDialogueScript
     }
     public override string Action1Done(NPC owner, Player pl)
     {
+        string returntext = null;
+        if (DialogueProg == 2)
+        {
+            Inventory inv = Player.GetInstance().GetCharacterInventory();
+            ItemName[] types = {ItemName.GUITAR};
+            List<Item> MusicSheets;
+            inv.GetItemsByType(out MusicSheets, types);
+            inv.DeleteItem(MusicSheets[0]);
 
-        Inventory inv = Player.GetInstance().GetCharacterInventory();
-        ItemName[] types = {ItemName.SHEET_MUSIC};
-        List<Item> MusicSheets;
-        inv.GetItemsByType(out MusicSheets, types);
-        inv.DeleteItem(MusicSheets[0]);
+            for (int i = 0; i < 2; i++)
+            {
+                Item newItem = GlobalItemCatalogue.GetItemByType(ItemName.EXPLOSIVE).Instance<Item>();
+                inv.InsertItem(newItem);
+            }
+            
+            DialogueProg ++;
 
-        Item newItem = GlobalItemCatalogue.GetItemByType(ItemName.EXPLOSIVE).Instance<Item>();
-        inv.InsertItem(newItem);
+            returntext =  "Ποοοο είσαι τεράστιος, έχω να ρίξω κάτι πενιές. Ωρίστε 2 εκρηχτηκά. Μπορώ να φτιάξω περισσότερα. Άμα βρείς ταμπλατούρες για κιθάρα εκεί έξω φέρτες από εδώ και ανταλάζουμε πάλι.";
+        }
+        if (DialogueProg == 3)
+        {
+            Inventory inv = Player.GetInstance().GetCharacterInventory();
+            ItemName[] types = {ItemName.SHEET_MUSIC};
 
-        DialogueProg ++;
+            MusicSheetGiven ++;
 
-        return "Ενδιαφέρων, δεν περέμενα κάτι τέτοιο... είσαι σίγουρος οτι θες να το αποχοριστείς, είναι ένα αρκετά σπάνιο ανικείμενο στις ημέρες μας. Θα προσπαθήσω να το εκμετελευτό πλήρος, ευχαριστώ καΐκτση";
+            List<Item> MusicSheets;
+            inv.GetItemsByType(out MusicSheets, types);
+            inv.DeleteItem(MusicSheets[0]);
+
+            Item newItem = GlobalItemCatalogue.GetItemByType(ItemName.EXPLOSIVE).Instance<Item>();
+            inv.InsertItem(newItem);
+
+            returntext =  "Σ'ωραίος... τσάκα άλλο ένα ακόμη εκρηχκτηκό.";
+       
+        }
+        return returntext;
     }
     public override string Action2Done(NPC owner, Player pl)
     {
         Inventory inv = Player.GetInstance().GetCharacterInventory();
         ItemName[] types = {ItemName.VINYL, ItemName.CASSETTE};
+
+        MusicGiven ++;
+
         List<Item> Music;
         inv.GetItemsByType(out Music, types);
         inv.DeleteItem(Music[0]);
@@ -95,7 +125,6 @@ public class KanarisScript : BaseDialogueScript
         Item newItem = GlobalItemCatalogue.GetItemByType(ItemName.EXPLOSIVE).Instance<Item>();
         inv.InsertItem(newItem);
 
-        //GlobalItemCatalogue.GetItemByType
 
         return "Ωραίος, ";
     }

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/DoorWood_Open.mp3-996716140dcc62cb74a1d7b0ec2d6d08.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/Doors/DoorWood_Open.mp3"
+dest_files=[ "res://.import/DoorWood_Open.mp3-996716140dcc62cb74a1d7b0ec2d6d08.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
