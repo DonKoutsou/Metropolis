@@ -1,11 +1,15 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/Building/SkyscraperMesh.tres" type="CubeMesh" id=1]
-[ext_resource path="res://Assets/Materials/BuildingClutterExtrerior.tres" type="Material" id=2]
+[ext_resource path="res://Assets/Materials/BuildingClutterExtrerior_MLOD.tres" type="Material" id=2]
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=3]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 50, 100, 50 )
+
+[sub_resource type="CubeMesh" id=3]
+material = ExtResource( 2 )
+size = Vector3( 100, 200, 100 )
 
 [sub_resource type="OccluderShapePolygon" id=2]
 polygon_points = PoolVector2Array( 50, -103, 50, 96, -50, 97, -50, -103 )
@@ -22,11 +26,10 @@ shape = SubResource( 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 75, 0 )
 layers = 3
 mesh = ExtResource( 1 )
-material/0 = ExtResource( 2 )
 script = ExtResource( 3 )
 LOD0 = ExtResource( 1 )
-LOD1 = ExtResource( 1 )
-LOD2 = ExtResource( 1 )
+LOD1 = SubResource( 3 )
+LOD2 = SubResource( 3 )
 HideIfNoLod = true
 
 [node name="Occluder" type="Occluder" parent="."]

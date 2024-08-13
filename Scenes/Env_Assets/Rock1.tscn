@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/Rocks/Rock1.tres" type="ArrayMesh" id=1]
-[ext_resource path="res://Assets/Materials/RockMat.tres" type="Material" id=2]
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=3]
 [ext_resource path="res://Assets/Rocks/Rock1_Lod2.tres" type="ArrayMesh" id=4]
 [ext_resource path="res://Assets/Rocks/Rock1_Lod.tres" type="ArrayMesh" id=5]
@@ -16,7 +15,6 @@ spheres = [ Plane( 0, 0, 0, 1.547 ) ]
 transform = Transform( 60.158, 0, 0, 0, 60.158, 0, 0, 0, 60.1579, -50.5595, -23.3779, 14.1993 )
 lod_max_distance = 2000.0
 mesh = ExtResource( 1 )
-material/0 = ExtResource( 2 )
 script = ExtResource( 3 )
 LOD0 = ExtResource( 1 )
 LOD1 = ExtResource( 5 )

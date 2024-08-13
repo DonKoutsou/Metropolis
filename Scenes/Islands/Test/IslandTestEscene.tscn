@@ -10,15 +10,15 @@
 [ext_resource path="res://Assets/Clutter/Antenna/AntennaMat.tres" type="Material" id=8]
 [ext_resource path="res://Assets/Sounds/WindSound.mp3" type="AudioStream" id=9]
 [ext_resource path="res://Assets/Materials/RockMat.tres" type="Material" id=10]
-[ext_resource path="res://Assets/Materials/BuildingClutterExtrerior.tres" type="Material" id=11]
+[ext_resource path="res://Assets/Materials/BuildingClutterExtrerior_MLOD.tres" type="Material" id=11]
 [ext_resource path="res://Assets/TerainTex/SandSimple.tres" type="Material" id=12]
-[ext_resource path="res://Assets/Clutter/Powerline/PowerLineMat.tres" type="Material" id=13]
+[ext_resource path="res://Assets/Materials/RockMat_Mlod.tres" type="Material" id=13]
 [ext_resource path="res://Assets/Clutter/CylinderThing/CylThingyMat.material" type="Material" id=14]
 [ext_resource path="res://Scenes/Env_Assets/Antena2.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Assets/Building/Assets/Building_Dest4.tres" type="ArrayMesh" id=16]
-[ext_resource path="res://Assets/Building/Assets/Building_Dest.tres" type="ArrayMesh" id=17]
-[ext_resource path="res://Assets/Building/Assets/Building_Dest2.tres" type="ArrayMesh" id=18]
-[ext_resource path="res://Assets/Building/Assets/Building_Dest3.tres" type="ArrayMesh" id=19]
+[ext_resource path="res://Assets/Building/Assets/Building_Dest4_LOD2.tres" type="ArrayMesh" id=16]
+[ext_resource path="res://Assets/Building/Assets/Building_Dest_LOD.tres" type="ArrayMesh" id=17]
+[ext_resource path="res://Assets/Building/Assets/Building_Dest2_LOD2.tres" type="ArrayMesh" id=18]
+[ext_resource path="res://Assets/Building/Assets/Building_Dest3_LOD.tres" type="ArrayMesh" id=19]
 [ext_resource path="res://Assets/Clouds/Textures/smoke_01.png" type="Texture" id=21]
 [ext_resource path="res://Assets/Rocks/Rock1.tres" type="ArrayMesh" id=22]
 [ext_resource path="res://Assets/Clouds/Textures/smoke_04.png" type="Texture" id=24]
@@ -242,104 +242,89 @@ pause_mode = 1
 transform = Transform( 0.98015, -0.0602962, -0.188865, 0, 0.95263, -0.304133, 0.198256, 0.298096, 0.93372, -8190.25, 95.763, -159.14 )
 mesh = ExtResource( 1 )
 skeleton = NodePath("")
-material/0 = ExtResource( 13 )
+material/0 = ExtResource( 11 )
 
 [node name="MeshInstance5" type="MeshInstance" parent="Island10"]
 transform = Transform( 0.98015, -0.0602962, -0.188865, 0, 0.95263, -0.304133, 0.198256, 0.298096, 0.93372, -2946.61, 95.763, 3859.17 )
 mesh = ExtResource( 1 )
 skeleton = NodePath("")
-material/0 = ExtResource( 13 )
+material/0 = ExtResource( 11 )
 
 [node name="MeshInstance6" type="MeshInstance" parent="Island10"]
 transform = Transform( 0.955538, -0.270922, -0.116396, 0.218268, 0.915282, -0.338554, 0.198256, 0.298096, 0.93372, 799.682, -226.355, 4151.16 )
 mesh = ExtResource( 1 )
 skeleton = NodePath("")
-material/0 = ExtResource( 13 )
+material/0 = ExtResource( 11 )
 
 [node name="MeshInstance7" type="MeshInstance" parent="Island10"]
 transform = Transform( 0.0256901, 0.341409, 0.939563, 0.218268, 0.915282, -0.338554, -0.97555, 0.213775, -0.0510047, -1657.88, -226.355, 4117.53 )
 mesh = ExtResource( 1 )
 skeleton = NodePath("")
-material/0 = ExtResource( 13 )
+material/0 = ExtResource( 11 )
 
 [node name="MeshInstance3" type="MeshInstance" parent="Island10"]
 transform = Transform( -0.962375, -0.0826408, -0.258854, 0, 0.95263, -0.304133, 0.271726, -0.29269, -0.916787, -5065.7, -83.1826, 2264.95 )
 mesh = ExtResource( 1 )
 skeleton = NodePath("")
-material/0 = ExtResource( 13 )
+material/0 = ExtResource( 11 )
 
 [node name="MeshInstance4" type="MeshInstance" parent="Island10"]
 transform = Transform( 0.0379684, 0.999194, -0.0130007, -0.354786, 0.00131676, -0.934947, -0.934177, 0.0401105, 0.35455, -223.087, -736.815, 3489.44 )
 mesh = ExtResource( 1 )
 skeleton = NodePath("")
+material/0 = ExtResource( 11 )
 
 [node name="Bulding_Dest2" type="MeshInstance" parent="Island10"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -748.422, -71.0593, 5760.77 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -748.422, 44.7744, 5760.77 )
 mesh = ExtResource( 18 )
 skeleton = NodePath("")
-material/0 = ExtResource( 11 )
 
 [node name="Bulding_Dest5" type="MeshInstance" parent="Island10"]
 transform = Transform( -0.809396, 0, 0.587263, 0, 1, 0, -0.587263, 0, -0.809396, -53.1133, -57.7369, 5218.53 )
 mesh = ExtResource( 18 )
 skeleton = NodePath("")
-material/0 = ExtResource( 11 )
 
 [node name="Bulding_Dest6" type="MeshInstance" parent="Island10"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -583.254, -57.2853, 6524.92 )
 mesh = ExtResource( 18 )
 skeleton = NodePath("")
-material/0 = ExtResource( 11 )
 
 [node name="Bulding_Dest3" type="MeshInstance" parent="Island10"]
 transform = Transform( -0.977886, -0.0607767, 0.200115, 0, 0.956844, 0.290602, -0.209141, 0.284175, -0.935684, -3160.89, -222.02, 3797.8 )
 mesh = ExtResource( 19 )
 skeleton = NodePath("")
-material/0 = ExtResource( 11 )
 
 [node name="Bulding_Dest10" type="MeshInstance" parent="Island10"]
 transform = Transform( -0.78604, -0.179643, 0.591497, 0, 0.956844, 0.290602, -0.618175, 0.228425, -0.752118, -1550.85, -172.362, 5618.08 )
 mesh = ExtResource( 19 )
 skeleton = NodePath("")
-material/0 = ExtResource( 11 )
 
 [node name="Bulding_Dest8" type="MeshInstance" parent="Island10"]
 transform = Transform( 0.956814, -0.0844786, 0.278157, 0, 0.956844, 0.290602, -0.290702, -0.278052, 0.915521, -4614.44, -86.8695, 2757.8 )
 mesh = ExtResource( 19 )
 skeleton = NodePath("")
-material/0 = ExtResource( 11 )
 
 [node name="Bulding_Dest9" type="MeshInstance" parent="Island10"]
 transform = Transform( 0.858123, 0.134414, 0.495539, -0.498597, 0.448579, 0.74174, -0.122588, -0.883578, 0.451954, 912.378, -59.5728, 6109.96 )
 generate_lightmap = false
 mesh = ExtResource( 19 )
 skeleton = NodePath("")
-material/0 = ExtResource( 11 )
 
 [node name="Bulding_Dest4" type="MeshInstance" parent="Island10"]
 transform = Transform( 0.543011, 0.82135, 0.174709, -0.672104, 0.300382, 0.676791, 0.503403, -0.484928, 0.715144, -2189.45, 4.6576, 5385.38 )
 generate_lightmap = false
 mesh = ExtResource( 16 )
 skeleton = NodePath("")
-material/0 = ExtResource( 11 )
 
 [node name="Bulding_Dest" type="MeshInstance" parent="Island10"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 43.1343, -94.9811, 6074.08 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 43.1343, -43.0528, 6074.08 )
 mesh = ExtResource( 17 )
 skeleton = NodePath("")
-material/0 = ExtResource( 11 )
 
 [node name="Bulding_Dest7" type="MeshInstance" parent="Island10"]
 transform = Transform( -0.861363, 0, -0.507989, 0, 1, 0, 0.507989, 0, -0.861363, -332.195, -69.3087, 6755.21 )
 mesh = ExtResource( 17 )
 skeleton = NodePath("")
-material/0 = ExtResource( 11 )
-
-[node name="Bulding_Dest11" type="MeshInstance" parent="Island10"]
-transform = Transform( -0.238639, 0.0972071, -0.966231, 0.948398, 0.237248, -0.210366, 0.208787, -0.966573, -0.148808, -754.939, -35.9022, 5305.11 )
-mesh = ExtResource( 17 )
-skeleton = NodePath("")
-material/0 = ExtResource( 11 )
 
 [node name="Sky" type="Spatial" parent="."]
 
@@ -457,14 +442,6 @@ draw_order = 1
 process_material = SubResource( 112 )
 draw_pass_1 = SubResource( 113 )
 
-[node name="Rock3" type="MeshInstance" parent="."]
-transform = Transform( -1673.85, 847.243, -457.583, 873.21, 1722.34, -5.20087, 405.844, -211.423, -1876.05, 3811.41, -1774.46, -4541.52 )
-material_override = ExtResource( 10 )
-lod_max_distance = 2000.0
-mesh = ExtResource( 22 )
-skeleton = NodePath("../..")
-material/0 = ExtResource( 10 )
-
 [node name="Rock2" type="MeshInstance" parent="."]
 transform = Transform( 717.759, 823.09, 62.5131, 792.802, -710.452, 251.571, 229.896, -119.764, -1062.72, -1939.46, -23.7651, -8821.77 )
 material_override = ExtResource( 10 )
@@ -483,7 +460,7 @@ material/0 = ExtResource( 10 )
 transform = Transform( 969.534, 2410.82, 1189.18, 2651.29, -1066.24, 0, 443.704, 1103.3, -2598.47, 2393.14, -5863.31, 1405.95 )
 lod_max_distance = 2000.0
 mesh = ExtResource( 26 )
-material/0 = ExtResource( 10 )
+material/0 = ExtResource( 13 )
 
 [node name="Rock5" type="MeshInstance" parent="."]
 transform = Transform( -204.607, -47.2142, 53.2523, 69.1477, -93.5301, 182.756, -16.8398, 189.61, 103.409, 169.105, -269.103, 5087.21 )
@@ -495,7 +472,7 @@ material/0 = ExtResource( 10 )
 transform = Transform( 39.7805, 187.344, 101.237, 75.3157, -108.709, 171.578, 199.184, 3.68949, -85.096, -2637.72, -271.299, 5008.11 )
 lod_max_distance = 2000.0
 mesh = ExtResource( 26 )
-material/0 = ExtResource( 10 )
+material/0 = ExtResource( 13 )
 
 [node name="Rock7" type="MeshInstance" parent="."]
 transform = Transform( -49.2853, 103.142, -184.016, -195.715, 48.154, 79.4094, 78.7123, 184.315, 82.2279, -43.2484, -275.484, 6831.7 )
@@ -519,7 +496,7 @@ material/0 = ExtResource( 10 )
 transform = Transform( 232.056, -426.556, 733.996, 786.409, -178.611, -352.427, 319.776, 748.797, 334.058, -938.232, -1210.99, 559.044 )
 lod_max_distance = 2000.0
 mesh = ExtResource( 26 )
-material/0 = ExtResource( 10 )
+material/0 = ExtResource( 13 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 cast_shadow = 0
