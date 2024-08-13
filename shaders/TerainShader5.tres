@@ -21,6 +21,7 @@ render_mode world_vertex_coords, cull_disabled;
 uniform float offset : hint_range(-1.0, 1.0) = 0.5;
 uniform float fade : hint_range(0.0, 1.0) = 0.1;
 uniform float NormalForce;
+uniform float AOLightAffect;
 
 uniform sampler2D albedo_texture_fg : hint_albedo;
 uniform sampler2D Rough_texture_fg : hint_white;
@@ -97,7 +98,7 @@ void fragment() {
 	
 	ALBEDO = mix(albedo_tex_bg, albedo_tex_fg, mask);
 	AO = mix(ao_texfg, ao_texbg, mask);
-	AO_LIGHT_AFFECT = 2.0;
+	AO_LIGHT_AFFECT = AOLightAffect;
 	ROUGHNESS = mix(roughness_texfg, roughness_texbg, mask);
 	METALLIC = 0.0;
 	NORMALMAP = mix(normal_tex_bg, normal_tex_fg, mask);
