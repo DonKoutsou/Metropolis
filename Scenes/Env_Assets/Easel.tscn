@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Assets/Building/Assets/Easel.tres" type="ArrayMesh" id=1]
-[ext_resource path="res://Assets/Building/PlatformWood.material" type="Material" id=2]
+[ext_resource path="res://Assets/Materials/WoodPlankMaterial_TP.tres" type="Material" id=2]
 
 [sub_resource type="CubeMesh" id=2]
 size = Vector3( 0.034, 1.803, 1.388 )

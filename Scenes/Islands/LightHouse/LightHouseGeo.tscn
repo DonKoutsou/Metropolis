@@ -1,7 +1,7 @@
 [gd_scene load_steps=207 format=2]
 
-[ext_resource path="res://Assets/Rocks/RockMat.tres" type="Material" id=1]
-[ext_resource path="res://Assets/LightHouse/LightHouseMetalWithSand.tres" type="Material" id=2]
+[ext_resource path="res://Assets/Materials/RockMat.tres" type="Material" id=1]
+[ext_resource path="res://Assets/Materials/Concrete_RockMat.tres" type="Material" id=3]
 [ext_resource path="res://Scenes/Env_Assets/Platform.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Env_Assets/WindGenerator.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Assets/Terains/LightHouse/Lighthouse.tres" type="ArrayMesh" id=13]
@@ -1083,6 +1083,7 @@ material/0 = ExtResource( 1 )
 script = ExtResource( 19 )
 LOD0 = ExtResource( 13 )
 LOD1 = ExtResource( 20 )
+LOD2 = ExtResource( 20 )
 
 [node name="StaticBody" type="StaticBody" parent="MeshInstance6"]
 collision_layer = 4
@@ -1196,7 +1197,7 @@ pushtoflootam = 2.5
 
 [node name="MultiMeshInstance" type="MultiMeshInstance" parent="Road"]
 transform = Transform( 1, -2.42935e-11, 2.91038e-11, 2.64819e-11, 1, 0, 2.91038e-11, 2.91038e-11, 1, 0, -0.243, 0 )
-material_override = ExtResource( 2 )
+material_override = ExtResource( 3 )
 multimesh = SubResource( 21 )
 
 [node name="body0" type="StaticBody" parent="Road"]
@@ -2457,7 +2458,7 @@ shape = SubResource( 3691 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 169, 473, -455 )
-material_override = ExtResource( 2 )
+material_override = ExtResource( 3 )
 mesh = SubResource( 861 )
 
 [node name="StaticBody" type="StaticBody" parent="MeshInstance"]
@@ -2470,7 +2471,7 @@ shape = SubResource( 1698 )
 [node name="MeshInstance2" type="MeshInstance" parent="."]
 transform = Transform( 0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 44.9827, 680.569, -671.259 )
 mesh = SubResource( 3058 )
-material/0 = ExtResource( 2 )
+material/0 = ExtResource( 3 )
 
 [node name="StaticBody" type="StaticBody" parent="MeshInstance2"]
 collision_layer = 4
@@ -2482,7 +2483,7 @@ shape = SubResource( 3060 )
 [node name="MeshInstance4" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 416.772, 680.394, -473.531 )
 mesh = SubResource( 3059 )
-material/0 = ExtResource( 2 )
+material/0 = ExtResource( 3 )
 
 [node name="StaticBody" type="StaticBody" parent="MeshInstance4"]
 collision_layer = 4
@@ -2494,7 +2495,7 @@ shape = SubResource( 3532 )
 [node name="MeshInstance8" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, -78.9708, 680.394, -437.388 )
 mesh = SubResource( 3059 )
-material/0 = ExtResource( 2 )
+material/0 = ExtResource( 3 )
 
 [node name="StaticBody" type="StaticBody" parent="MeshInstance8"]
 collision_layer = 4
@@ -2506,7 +2507,7 @@ shape = SubResource( 3532 )
 [node name="MeshInstance7" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 258.778, 680.394, -748.923 )
 mesh = SubResource( 3533 )
-material/0 = ExtResource( 2 )
+material/0 = ExtResource( 3 )
 
 [node name="StaticBody" type="StaticBody" parent="MeshInstance7"]
 collision_layer = 4
@@ -2518,7 +2519,7 @@ shape = SubResource( 3534 )
 [node name="MeshInstance5" type="MeshInstance" parent="."]
 transform = Transform( -0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866025, 366.733, 680.394, -282.418 )
 mesh = SubResource( 3059 )
-material/0 = ExtResource( 2 )
+material/0 = ExtResource( 3 )
 
 [node name="StaticBody" type="StaticBody" parent="MeshInstance5"]
 collision_layer = 4
@@ -2530,7 +2531,7 @@ shape = SubResource( 3532 )
 [node name="MeshInstance3" type="MeshInstance" parent="."]
 transform = Transform( 0.612372, 0.612372, 0.5, -0.707107, 0.707107, 0, -0.353553, -0.353553, 0.866025, 498, 108, -761 )
 mesh = SubResource( 862 )
-material/0 = ExtResource( 2 )
+material/0 = ExtResource( 3 )
 
 [node name="StaticBody" type="StaticBody" parent="MeshInstance3"]
 collision_layer = 4

@@ -31,7 +31,7 @@ scale = 0.5
 
 [node name="SandParticles" type="Particles"]
 material_override = SubResource( 2 )
-amount = 5000
+amount = 1000
 lifetime = 1.75
 process_material = SubResource( 1 )
 draw_pass_1 = SubResource( 3 )

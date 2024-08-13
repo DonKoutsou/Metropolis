@@ -20,6 +20,7 @@ public class LoddedObject : MeshInstance
     {
         base._Ready();
         abbLeangth = GetTransformedAabb().GetLongestAxisSize();
+        Mesh = null;
     }
 
     public override void _EnterTree()

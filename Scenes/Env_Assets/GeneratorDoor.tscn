@@ -10,7 +10,7 @@
 [ext_resource path="res://Assets/TerainTex/Metal041C_1K-JPG/Metal041C_1K-JPG_Roughness.jpg" type="Texture" id=9]
 [ext_resource path="res://Assets/TerainTex/Metal041C_1K-JPG/Metal041C_1K-JPG_NormalGL.jpg" type="Texture" id=10]
 [ext_resource path="res://Assets/TerainTex/Metal041C_1K-JPG/Metal041C_1K-JPG_Metalness.jpg" type="Texture" id=11]
-[ext_resource path="res://Assets/Building/Materials/WindGenMatBig.tres" type="Material" id=12]
+[ext_resource path="res://Assets/Materials/WindGenMatBig.tres" type="Material" id=12]
 
 [sub_resource type="SpatialMaterial" id=54]
 resource_local_to_scene = true

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Assets/Jail/Jail.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Scenes/Env_Assets/JailDoor.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/Building/Materials/WindGenMatBig.tres" type="Material" id=3]
+[ext_resource path="res://Assets/Materials/WindGenMatBig.tres" type="Material" id=3]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 35.8466, 48.9183, 1 )

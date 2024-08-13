@@ -639,7 +639,7 @@ public class WorldMap : TileMap
 
 		//GlobalJobManager.GetInstance().OnNewDay();
 
-		OS.VsyncEnabled = true;
+		//OS.VsyncEnabled = true;
 		return intr;
 	}
 	private void CheckForTransition()

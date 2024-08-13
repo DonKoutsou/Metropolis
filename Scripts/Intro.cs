@@ -9,6 +9,8 @@ public class Intro : Spatial
         
         GetNode<AnimationPlayer>("AnimationPlayer").Play("Intro");
         GetNode<Camera>("Camera").MakeCurrent();
+
+        UniversalLodManager.GetInstance().UpdateCamera(GetNode<Camera>("Camera"));
     }
     public override void _Process(float delta)
     {

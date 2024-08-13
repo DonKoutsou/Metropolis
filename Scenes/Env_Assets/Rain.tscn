@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Assets/Rain/Rain.tres" type="Material" id=2]
+[ext_resource path="res://Assets/Materials/Rain.tres" type="Material" id=2]
 [ext_resource path="res://Scripts/Rain.cs" type="Script" id=3]
 
 [sub_resource type="Curve" id=4]
@@ -14,7 +14,7 @@ _data = [ Vector2( 0, -80 ), 0.0, 0.0, 0, 0, Vector2( 1, -44.0732 ), 0.0, 0.0, 0
 
 [sub_resource type="ParticlesMaterial" id=2]
 emission_shape = 2
-emission_box_extents = Vector3( 800, 10, 800 )
+emission_box_extents = Vector3( 200, 10, 200 )
 direction = Vector3( 0, -10, 0 )
 spread = 5.03
 gravity = Vector3( 0, -100, 0 )
@@ -35,10 +35,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1000, 0 )
 sorting_use_aabb_center = false
 cast_shadow = 0
 generate_lightmap = false
-amount = 5000
-lifetime = 3.0
+amount = 500
+lifetime = 0.5
 visibility_aabb = AABB( -1293.38, -1000, -1158.37, 2586.77, 1000, 2316.74 )
-local_coords = false
 draw_order = 2
 process_material = SubResource( 2 )
 draw_pass_1 = SubResource( 3 )

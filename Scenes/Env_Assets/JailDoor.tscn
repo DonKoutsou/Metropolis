@@ -7,7 +7,7 @@
 [ext_resource path="res://Scripts/DoorOpenerSignaler.cs" type="Script" id=5]
 [ext_resource path="res://Assets/Clouds/Textures/smoke_01.png" type="Texture" id=6]
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=7]
-[ext_resource path="res://Assets/Building/Materials/WindGenMatBig.tres" type="Material" id=12]
+[ext_resource path="res://Assets/Materials/WindGenMatBig.tres" type="Material" id=12]
 
 [sub_resource type="CubeMesh" id=53]
 size = Vector3( 2, 2, 5 )

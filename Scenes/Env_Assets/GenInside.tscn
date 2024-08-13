@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Assets/Building/Materials/WindGenMatBig.tres" type="Material" id=1]
+[ext_resource path="res://Assets/Materials/WindGenMatBig.tres" type="Material" id=1]
 
 [sub_resource type="CylinderMesh" id=23]
 height = 0.1

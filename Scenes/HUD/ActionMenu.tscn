@@ -1,8 +1,7 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://Assets/UI/ButtonGreen.tres" type="Theme" id=1]
+[ext_resource path="res://UIThemes/ButtonGreen.tres" type="Theme" id=1]
 [ext_resource path="res://Scripts/ActionMenu.cs" type="Script" id=2]
-[ext_resource path="res://Assets/UI/PanelTheme.tres" type="Theme" id=3]
 [ext_resource path="res://Fonts/Play-Bold.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://shaders/OutlineShader.tres" type="Material" id=5]
 [ext_resource path="res://Scenes/HUD/VehicleHud.tscn" type="PackedScene" id=6]
@@ -149,7 +148,6 @@ alignment = 1
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
 margin_right = 116.0
 margin_bottom = 184.0
-theme = ExtResource( 3 )
 custom_styles/panel = SubResource( 52 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer"]

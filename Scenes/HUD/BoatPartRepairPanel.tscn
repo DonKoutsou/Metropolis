@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Assets/MapIcons/RepairIcon2.png" type="Texture" id=1]
 [ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://Assets/UI/ButtonGreen.tres" type="Theme" id=3]
+[ext_resource path="res://UIThemes/ButtonGreen.tres" type="Theme" id=3]
 [ext_resource path="res://Scripts/BoatPartRepairPanel.cs" type="Script" id=4]
 [ext_resource path="res://Fonts/Play-Bold.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://UIThemes/Panel_Blue_Digital_SMall.tres" type="StyleBox" id=6]

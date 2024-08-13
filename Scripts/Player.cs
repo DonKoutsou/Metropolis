@@ -342,11 +342,16 @@ public class Player : Character
 				direction = Vector3.Zero;
 			else
 			{
-				bool ItsSea = ((CollisionObject)dropcheck.GetCollider()).GetCollisionLayerBit(8);
-				if (ItsSea)
+				CollisionObject obj = (CollisionObject)dropcheck.GetCollider();
+				if (obj != null)
 				{
-					direction = Vector3.Zero;
+					bool ItsSea = obj.GetCollisionLayerBit(8);
+					if (ItsSea)
+					{
+						direction = Vector3.Zero;
+					}
 				}
+				
 			}
 		}
 		/////////////////////////////////////////////

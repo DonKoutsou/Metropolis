@@ -20,7 +20,7 @@
 [ext_resource path="res://Scenes/Env_Assets/Rock1.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Assets/TerainTex/Rock029_2K-PNG/Rock029_2K-PNG_Roughness.png" type="Texture" id=22]
 [ext_resource path="res://Scenes/Env_Assets/Rock4.tscn" type="PackedScene" id=23]
-[ext_resource path="res://Assets/Rocks/RockMat.tres" type="Material" id=24]
+[ext_resource path="res://Assets/Materials/RockMat.tres" type="Material" id=24]
 [ext_resource path="res://Scenes/Env_Assets/Skampo.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Scenes/Env_Assets/Table.tscn" type="PackedScene" id=29]
 

@@ -21,6 +21,6 @@ normal_texture = ExtResource( 4 )
 ao_enabled = true
 ao_light_affect = 1.0
 ao_texture = ExtResource( 3 )
-ao_on_uv2 = true
+ao_on_uv2 = false
 ao_texture_channel = 0
 uv1_scale = Vector3( 5, 5, 5 )

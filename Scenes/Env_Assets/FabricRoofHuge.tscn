@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://Assets/Building/PlatformWood.material" type="Material" id=1]
+[ext_resource path="res://Assets/Materials/WoodPlankMaterial_TP.tres" type="Material" id=1]
 [ext_resource path="res://shaders/Outline.shader" type="Shader" id=2]
 
 [sub_resource type="CylinderShape" id=10]
@@ -8,7 +8,6 @@ height = 72.4003
 radius = 0.941581
 
 [sub_resource type="CylinderMesh" id=1]
-material = ExtResource( 1 )
 height = 100.0
 
 [sub_resource type="ShaderMaterial" id=4]
@@ -288,50 +287,62 @@ shape = SubResource( 10 )
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 171.103, -44.596, 74.1689 )
 mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
 
 [node name="MeshInstance5" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 72.0966, -44.596, 74.169 )
 mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
 
 [node name="MeshInstance6" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -91.0328, -44.596, 74.169 )
 mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -172.839, -44.596, 75.0982 )
 mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
 
 [node name="MeshInstance7" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 171.103, -44.596, -75.0853 )
 mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
 
 [node name="MeshInstance8" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 72.0966, -44.596, -75.0852 )
 mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
 
 [node name="MeshInstance9" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -91.0328, -44.596, -75.0852 )
 mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
 
 [node name="MeshInstance10" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -172.839, -44.596, -74.1561 )
 mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
 
 [node name="MeshInstance11" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 171.103, -44.596, 1.08422 )
 mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
 
 [node name="MeshInstance12" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 72.0966, -44.596, 1.0843 )
 mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
 
 [node name="MeshInstance13" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -91.0328, -44.596, 1.0843 )
 mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
 
 [node name="MeshInstance14" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -172.839, -44.596, 2.01344 )
 mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
 
 [node name="Fabric" type="Spatial" parent="."]
 transform = Transform( -7.34892e-06, 0, -168.124, 0, 108.738, 0, 78.3286, 0, -3.42385e-06, 0, 0, 0 )

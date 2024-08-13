@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=2]
 
-[ext_resource path="res://Assets/Building/Materials/WindGenMatBig.tres" type="Material" id=2]
+[ext_resource path="res://Assets/Materials/WindGenMatBig.tres" type="Material" id=2]
 
 [sub_resource type="CylinderMesh" id=1]
 top_radius = 4.0

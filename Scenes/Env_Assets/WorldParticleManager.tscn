@@ -115,7 +115,6 @@ SoundScaleCurve = SubResource( 5 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 100, 200 )
 material_override = SubResource( 2 )
 cast_shadow = 0
-amount = 1000
 visibility_aabb = AABB( -1163.96, -976.849, -1014.37, 2327.92, 1953.7, 2028.74 )
 local_coords = false
 draw_order = 2
@@ -147,11 +146,9 @@ script = ExtResource( 9 )
 stream = ExtResource( 10 )
 autoplay = true
 mix_target = 1
-bus = "Weather"
 
 [node name="Enviroment" type="AudioStreamPlayer" parent="WorldSoundManager"]
 stream = ExtResource( 8 )
 volume_db = -3.0
 autoplay = true
 mix_target = 1
-bus = "Weather"

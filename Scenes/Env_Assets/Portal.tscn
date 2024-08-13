@@ -99,7 +99,6 @@ height = 7.21517
 radius = 72.3309
 
 [sub_resource type="SpatialMaterial" id=6]
-vertex_color_use_as_albedo = true
 emission_enabled = true
 emission = Color( 0.431373, 0.717647, 0.937255, 1 )
 emission_energy = 4.6

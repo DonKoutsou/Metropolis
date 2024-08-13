@@ -5,7 +5,7 @@
 [ext_resource path="res://Assets/BoatWorkshop/BoatWorkShopMat.tres" type="Material" id=3]
 [ext_resource path="res://Scenes/Env_Assets/BoatClutter.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/BoatStand/BoatStand.obj" type="ArrayMesh" id=5]
-[ext_resource path="res://Assets/Building/BuildingInterior.material" type="Material" id=6]
+[ext_resource path="res://Assets/Materials/WoodPlankMaterial_TP.tres" type="Material" id=6]
 [ext_resource path="res://Scripts/House.cs" type="Script" id=7]
 [ext_resource path="res://Scenes/BuildingDecorations/Decorations1.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/BuildingDecorations/Decorations2.tscn" type="PackedScene" id=9]
@@ -75,12 +75,12 @@ PossibleFurni = [ ExtResource( 11 ), ExtResource( 10 ), ExtResource( 12 ) ]
 PossibleDeco = [ ExtResource( 8 ), ExtResource( 9 ) ]
 FurnitureAmmount = 8
 SpawnPool = {
-Resource( "res://Scenes/Items/MapItem.tscn" ): 2,
-Resource( "res://Scenes/Items/PaintCan.tscn" ): 10,
 Resource( "res://Scenes/Items/Compass.tscn" ): 6,
 Resource( "res://Scenes/Items/Toolbox.tscn" ): 10,
-Resource( "res://Scenes/Items/BatteryEmpty.tscn" ): 8,
-Resource( "res://Scenes/Items/LOG.tscn" ): 6
+Resource( "res://Scenes/Items/MapItem.tscn" ): 2,
+Resource( "res://Scenes/Items/PaintCan.tscn" ): 10,
+Resource( "res://Scenes/Items/LOG.tscn" ): 6,
+Resource( "res://Scenes/Items/BatteryEmpty.tscn" ): 8
 }
 
 [node name="MeshInstance2" type="MeshInstance" parent="."]

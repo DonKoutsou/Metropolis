@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Env_Assets/BoatClutter.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Assets/Building/MotherCity/WoodPort.material" type="Material" id=2]
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=3]
+[ext_resource path="res://Assets/Materials/WoodPlankMaterial_TP.tres" type="Material" id=4]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 2, 20, 6 )
@@ -32,7 +32,7 @@ extents = Vector3( 14, 7.3804, 8.70538 )
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, -13, 4.94375, -4.08202 )
 mesh = SubResource( 1 )
-material/0 = ExtResource( 2 )
+material/0 = ExtResource( 4 )
 script = ExtResource( 3 )
 LOD0 = SubResource( 1 )
 LOD1 = SubResource( 1 )
@@ -48,7 +48,7 @@ HideIfNoLod = true
 [node name="MeshInstance3" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 13, 4.94375, -4.08202 )
 mesh = SubResource( 1 )
-material/0 = ExtResource( 2 )
+material/0 = ExtResource( 4 )
 script = ExtResource( 3 )
 LOD0 = SubResource( 1 )
 LOD1 = SubResource( 1 )
@@ -57,7 +57,7 @@ HideIfNoLod = true
 [node name="MeshInstance5" type="MeshInstance" parent="."]
 transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, -9.43068 )
 mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
+material/0 = ExtResource( 4 )
 script = ExtResource( 3 )
 LOD0 = SubResource( 3 )
 HideIfNoLod = true

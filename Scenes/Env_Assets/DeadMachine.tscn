@@ -181,11 +181,11 @@ shader_param/albedo_texture_bg = ExtResource( 4 )
 shader_param/ORM_BG = ExtResource( 5 )
 shader_param/normal_texture_bg = ExtResource( 7 )
 
-[node name="Furniture" type="StaticBody" groups=["Interactables"]]
+[node name="DeadMachine" type="StaticBody" groups=["Interactables"]]
 collision_layer = 16
 collision_mask = 0
 script = ExtResource( 2 )
-FurnitureDescription = "Μια ντουλάπα..."
+FurnitureDescription = "Μία νεκρή μηχανή... πιός ξέρει ποόσο καιρό είναι εδώ."
 ToHighLight = [ NodePath("DeadMachine/Body001") ]
 ItemToSpawnWith = ExtResource( 6 )
 

@@ -14,7 +14,7 @@
 [ext_resource path="res://Assets/Gen3Machine/Body/Textures/Body_Texture_Body_OcclusionRoughnessMetallic.png" type="Texture" id=12]
 [ext_resource path="res://Assets/Gen3Machine/Body/Textures/Body_Texture_Body_BaseColor.png" type="Texture" id=13]
 [ext_resource path="res://Scripts/DialogueScripts/SinnerScript.cs" type="Script" id=14]
-[ext_resource path="res://Scenes/Characters/Sinner.cs" type="Script" id=15]
+[ext_resource path="res://Scripts/Sinner.cs" type="Script" id=15]
 [ext_resource path="res://Assets/Gen3Machine/Body/Textures/Body_Texture_Body_Normal.png" type="Texture" id=16]
 [ext_resource path="res://Scenes/Items/SinnerNote.tscn" type="PackedScene" id=17]
 

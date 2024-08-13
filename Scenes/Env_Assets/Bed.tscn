@@ -1,13 +1,12 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Assets/Building/PlatformWood.material" type="Material" id=1]
+[ext_resource path="res://Assets/Materials/WoodPlankMaterial_TP.tres" type="Material" id=1]
 
 [sub_resource type="CubeMesh" id=1]
 material = ExtResource( 1 )
 size = Vector3( 4.842, 0.746, 12.343 )
 
 [sub_resource type="CubeMesh" id=3]
-material = ExtResource( 1 )
 size = Vector3( 0.5, 2.5, 0.5 )
 
 [sub_resource type="CubeMesh" id=2]
@@ -30,18 +29,22 @@ mesh = SubResource( 1 )
 [node name="MeshInstance3" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.07766, 0.399018, 5.88201 )
 mesh = SubResource( 3 )
+material/0 = ExtResource( 1 )
 
 [node name="MeshInstance4" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.12776, 0.399018, 5.88201 )
 mesh = SubResource( 3 )
+material/0 = ExtResource( 1 )
 
 [node name="MeshInstance5" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.07766, 0.399018, -5.8921 )
 mesh = SubResource( 3 )
+material/0 = ExtResource( 1 )
 
 [node name="MeshInstance6" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.12776, 0.399018, -5.8921 )
 mesh = SubResource( 3 )
+material/0 = ExtResource( 1 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68964, 0 )

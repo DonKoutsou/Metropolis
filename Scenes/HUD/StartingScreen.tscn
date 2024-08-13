@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://Scenes/HUD/CreditName.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/StartingScreen.cs" type="Script" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://Scripts/LoadingScreen.cs" type="Script" id=4]
 [ext_resource path="res://UIThemes/Panel_LightGray_BottomCorner.tres" type="StyleBox" id=5]
 [ext_resource path="res://Scripts/Credits.cs" type="Script" id=6]
-[ext_resource path="res://Assets/Themes/PanelTheme1.tres" type="Theme" id=7]
 [ext_resource path="res://UIThemes/Panel_LightGray_LeftCorner.tres" type="StyleBox" id=8]
 [ext_resource path="res://Scripts/Settings.cs" type="Script" id=9]
 [ext_resource path="res://UIThemes/Panel_LightGray_TopCorner.tres" type="StyleBox" id=10]
@@ -18,7 +17,7 @@
 [ext_resource path="res://Scripts/MainMenuAnimation.cs" type="Script" id=16]
 [ext_resource path="res://Scripts/SaveLoadManager.cs" type="Script" id=17]
 [ext_resource path="res://Assets/UI/Icon/Replay.png" type="Texture" id=18]
-[ext_resource path="res://Assets/UI/ButtonGreen.tres" type="Theme" id=19]
+[ext_resource path="res://UIThemes/ButtonGreen.tres" type="Theme" id=19]
 [ext_resource path="res://Assets/LoadingPics/P10.png" type="Texture" id=20]
 [ext_resource path="res://Assets/LoadingPics/P7.png" type="Texture" id=21]
 [ext_resource path="res://Assets/LoadingPics/P12.png" type="Texture" id=22]
@@ -802,7 +801,7 @@ margin_left = -107.0
 margin_top = -23.0
 margin_right = -16.0
 margin_bottom = 23.0
-theme = ExtResource( 7 )
+custom_fonts/font = ExtResource( 11 )
 custom_styles/read_only = SubResource( 23 )
 custom_styles/focus = SubResource( 22 )
 custom_styles/normal = SubResource( 23 )
@@ -948,10 +947,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -1318.0
-margin_top = -144.0
-margin_right = 1318.0
-margin_bottom = 1288.0
+margin_left = -659.0
+margin_top = 214.0
+margin_right = 1977.0
+margin_bottom = 1646.0
 rect_pivot_offset = Vector2( 1318, 752 )
 custom_constants/separation = 78
 alignment = 1

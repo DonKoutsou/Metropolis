@@ -3,7 +3,7 @@
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Clutter/Rock/Rock.obj" type="ArrayMesh" id=2]
 [ext_resource path="res://Assets/Building/BuildingComposition.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/Clutter/Rock/RockMat.tres" type="Material" id=4]
+[ext_resource path="res://Assets/Materials/RockMat.tres" type="Material" id=4]
 [ext_resource path="res://Scenes/Env_Assets/Antena.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Env_Assets/Rock1.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Env_Assets/Platform.tscn" type="PackedScene" id=7]
@@ -113,6 +113,10 @@ FurnitureAmmount = 4
 [node name="House2" parent="." index="2" instance=ExtResource( 3 )]
 transform = Transform( -0.791084, 0, -0.611706, 0, 1, 0, 0.611706, 0, -0.791084, 387.811, 0.80531, -1199.33 )
 
+[node name="CharacterSpawnLocations" parent="." index="3"]
+Locations = PoolVector3Array( 900, 12.805, 764.045 )
+Rotations = PoolVector3Array( 0, 2.731, 0 )
+
 [node name="MultiMeshInstance" type="MultiMeshInstance" parent="." index="4"]
 visible = false
 material_override = ExtResource( 4 )
@@ -148,6 +152,10 @@ transform = Transform( 327.15, -80.3001, 94.0307, 118.746, 278.193, -175.57, -34
 
 [node name="Rock4" parent="." index="14" instance=ExtResource( 13 )]
 transform = Transform( -113.898, 0, 167.74, 0, 202.754, 0, -167.74, 0, -113.898, 285.047, -123.356, -1124.06 )
+
+[node name="VehicleSpawnLocation" parent="." index="15"]
+Locations = PoolVector3Array( 944.314, 12.805, 765.584 )
+Rotations = PoolVector3Array( 0, 0, 0 )
 
 [node name="SoundMap" parent="." index="16"]
 mesh_library = SubResource( 20 )

@@ -42,6 +42,7 @@ func _ready() -> void:
 	set_clouds(null)
 
 func _process(delta : float) -> void:
+
 	if not light:
 		material.set_shader_param("light_type", 0)
 		material.set_shader_param("light_pos", Vector3())

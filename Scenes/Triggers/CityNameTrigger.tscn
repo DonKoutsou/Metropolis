@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Scenes/Triggers/CityNameTrigger.cs" type="Script" id=1]
+[ext_resource path="res://Scripts/CityNameTrigger.cs" type="Script" id=1]
 
 [sub_resource type="SphereShape" id=1]
 radius = 3000.0

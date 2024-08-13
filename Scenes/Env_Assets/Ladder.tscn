@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Assets/Ladder/lambert1.material" type="Material" id=1]
-[ext_resource path="res://Assets/Building/PlatformWood.material" type="Material" id=3]
+[ext_resource path="res://Assets/Materials/WoodPlankMaterial_TP.tres" type="Material" id=1]
 [ext_resource path="res://Scripts/Ladder.cs" type="Script" id=8]
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=10]
@@ -15,7 +14,6 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 2194711,
 "index_count": 2136,
-"material": ExtResource( 1 ),
 "name": "lambert1",
 "primitive": 4,
 "skeleton_aabb": [  ],
@@ -33,7 +31,7 @@ TopPossition = Vector3( 0, 200, 6 )
 
 [node name="Ladder" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )
-material/0 = ExtResource( 3 )
+material/0 = ExtResource( 1 )
 script = ExtResource( 10 )
 LOD0 = SubResource( 1 )
 HideIfNoLod = true

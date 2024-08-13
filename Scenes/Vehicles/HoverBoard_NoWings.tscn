@@ -117,11 +117,9 @@ height = 0.5
 radial_segments = 10
 
 [sub_resource type="SpatialMaterial" id=156]
-flags_transparent = true
-vertex_color_use_as_albedo = true
 emission_enabled = true
 emission = Color( 0.431373, 0.717647, 0.937255, 1 )
-emission_energy = 4.6
+emission_energy = 5.0
 emission_operator = 0
 emission_on_uv2 = false
 

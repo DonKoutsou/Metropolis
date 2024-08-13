@@ -6,7 +6,7 @@ public partial class UniversalLodManager : Node
 {
   private static UniversalLodManager _instance;
   Camera CurrentCamera;
-  Player pl;
+  //Player pl;
   List<LoddedObject> LODedObj;
   List<LoddedCharacter> LODedChar;
   int Currentcheck = 0;
@@ -45,9 +45,8 @@ public partial class UniversalLodManager : Node
       else
       {
         SetProcess(true);
-        pl = (Player)cam.Owner;
-      }
-        
+        //pl = (Player)cam.Owner;
+      } 
   }
 
   public override void _EnterTree()
@@ -67,6 +66,8 @@ public partial class UniversalLodManager : Node
   {
       base._Process(delta);
 
+      Vector3 campos = CurrentCamera.GlobalTranslation;
+
       if (Currentcheck >= LODedObj.Count)
       {
           Currentcheck = 0;
@@ -75,7 +76,7 @@ public partial class UniversalLodManager : Node
       else
       {
         int processed = 0;
-        Vector3 campos = new Vector3(pl.GlobalTranslation.x, CurrentCamera.GlobalTranslation.y, pl.GlobalTranslation.z);
+        
         while (processed < 10)
         {
           if (Currentcheck >= LODedObj.Count)
@@ -121,7 +122,7 @@ public partial class UniversalLodManager : Node
       }
       else
       {
-        Vector3 campos = new Vector3(pl.GlobalTranslation.x, CurrentCamera.GlobalTranslation.y, pl.GlobalTranslation.z);
+        //Vector3 campos = new Vector3(pl.GlobalTranslation.x, CurrentCamera.GlobalTranslation.y, pl.GlobalTranslation.z);
 
         if (CurrentCharCheck >= LODedChar.Count)
           return;

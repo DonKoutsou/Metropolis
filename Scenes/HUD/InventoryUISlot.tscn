@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scripts/InventoryUISlot.cs" type="Script" id=1]
 [ext_resource path="res://Assets/Drachma/Drachma.png" type="Texture" id=2]
-[ext_resource path="res://Assets/UI/ButtonGreen.tres" type="Theme" id=3]
+[ext_resource path="res://UIThemes/ButtonGreen.tres" type="Theme" id=3]
 [ext_resource path="res://Fonts/Play-Bold.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://UIThemes/Panel_Digital_Blue_NoCorner.tres" type="StyleBox" id=5]
 [ext_resource path="res://Assets/MapIcons/CheckMark.png" type="Texture" id=6]

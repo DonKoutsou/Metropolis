@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Assets/FastLegs/M_FastLegs.material" type="Material" id=1]
 [ext_resource path="res://Assets/Gen3Machine/Gen3Machine.glb" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Assets/Clouds/Textures/smoke_01.png" type="Texture" id=9]
 [ext_resource path="res://Scripts/Character_Animations.cs" type="Script" id=10]
 [ext_resource path="res://Assets/Sounds/WalkingSound.mp3" type="AudioStream" id=11]
+[ext_resource path="res://Assets/Gen3Machine/Body/BagMat.tres" type="Material" id=12]
 [ext_resource path="res://Scripts/CharacterSoundManager.cs" type="Script" id=14]
 [ext_resource path="res://Assets/Gen3Machine/Textures/BabyMat.tres" type="Material" id=15]
 [ext_resource path="res://Assets/NormalLegs/M_Legs.material" type="Material" id=16]
@@ -71,7 +72,7 @@ nodes/ChairBlend/position = Vector2( 186.667, 160 )
 nodes/IntrumentBlend/node = SubResource( 54 )
 nodes/IntrumentBlend/position = Vector2( 360, 266.667 )
 nodes/output/position = Vector2( 533.333, 160 )
-node_connections = [ "output", 0, "IntrumentBlend", "IntrumentBlend", 0, "ChairBlend", "IntrumentBlend", 1, "Animation 2", "ChairBlend", 0, "Animation", "ChairBlend", 1, "Animation 3" ]
+node_connections = [ "ChairBlend", 0, "Animation", "ChairBlend", 1, "Animation 3", "output", 0, "IntrumentBlend", "IntrumentBlend", 0, "ChairBlend", "IntrumentBlend", 1, "Animation 2" ]
 
 [sub_resource type="AnimationNodeAnimation" id=55]
 animation = "Standing"
@@ -149,16 +150,18 @@ transform = Transform( 0.024, 0, 0, 0, 0.024, 6.77112e-09, 0, -6.77112e-09, 0.02
 
 [node name="Skeleton" parent="Armature" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 5.68434e-14, 0, -2.84217e-14, 1, -0.314196, 5.03759e-08, -0.178556 )
+bones/3/bound_children = [ NodePath("InstrumentAtatchment") ]
+bones/6/bound_children = [ NodePath("BoneAttachment") ]
 script = ExtResource( 18 )
 
 [node name="HeadRot2Pivot" type="Spatial" parent="Armature/Skeleton" index="0"]
-transform = Transform( -1, 0, -8.74228e-08, 5.31044e-16, 1, -6.10973e-09, 8.74228e-08, -2.27374e-13, -1, -4.58907, 280.009, 22.1072 )
+transform = Transform( -1, 0, -8.74228e-08, 6.19942e-16, 1, -7.1401e-09, 8.74228e-08, -2.27374e-13, -1, -3.97842, 281.286, 18.8888 )
 
 [node name="HeadRot2" type="Spatial" parent="Armature/Skeleton/HeadRot2Pivot" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, -2.84217e-14, 0, 2.84217e-14, 1, 0, 0, 0 )
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton" index="1"]
-transform = Transform( 0.996961, -0.07329, -0.0263779, 0.0690941, 0.988444, -0.134921, 0.0359614, 0.132688, 0.990504, -3.2251, 264.881, 13.36 )
+transform = Transform( 0.997014, -0.0706423, -0.0311749, 0.0670499, 0.992294, -0.104193, 0.0382952, 0.101792, 0.994067, -2.62543, 265.89, 10.6189 )
 bone_name = "mixamorig_Head"
 
 [node name="HeadPivot" type="Spatial" parent="Armature/Skeleton/BoneAttachment" index="0"]
@@ -194,7 +197,7 @@ update_rotation = false
 update_scale = false
 
 [node name="InstrumentAtatchment" type="BoneAttachment" parent="Armature/Skeleton" index="2"]
-transform = Transform( 0.998081, -0.0343112, -0.0515346, 0.0323682, 0.99875, -0.0380775, 0.0527767, 0.0363364, 0.997945, 0.229112, 213.005, 0.52571 )
+transform = Transform( 0.997815, -0.0296755, -0.0590165, 0.0292775, 0.999542, -0.00759619, 0.0592149, 0.00585176, 0.998228, 0.718666, 213.353, -0.0912507 )
 bone_name = "mixamorig_Spine1"
 
 [node name="PlayingAtatchment" type="RemoteTransform" parent="Armature/Skeleton/InstrumentAtatchment" index="0"]
@@ -203,13 +206,13 @@ use_global_coordinates = false
 update_scale = false
 
 [node name="HolsterAtatchment" type="RemoteTransform" parent="Armature/Skeleton/InstrumentAtatchment" index="1"]
-transform = Transform( -0.914001, 0.401428, -0.0587828, 0.400667, 0.915891, 0.024705, 0.0637551, -0.000970755, -0.997962, -29.2251, -41.0474, -25.1529 )
+transform = Transform( -0.868639, -0.490606, 0.0690331, -0.473869, 0.863387, 0.173231, -0.144591, 0.117764, -0.982456, 27.6828, -49.0322, -37.2074 )
 remote_path = NodePath("../Instrument")
 use_global_coordinates = false
 update_scale = false
 
 [node name="Instrument" type="Spatial" parent="Armature/Skeleton/InstrumentAtatchment" index="2"]
-transform = Transform( -37.9657, 16.6749, -2.44876, 16.6429, 38.0451, 1.02921, 2.64825, -0.040322, -41.5738, -29.2251, -41.0474, -25.1529 )
+transform = Transform( -36.0815, -20.3793, 2.87583, -19.6835, 35.8642, 7.21661, -6.00601, 4.8918, -40.9278, 27.6828, -49.0322, -37.2074 )
 
 [node name="Arm_L" parent="Armature/Skeleton" index="3"]
 material/0 = ExtResource( 3 )
@@ -229,65 +232,69 @@ material/0 = ExtResource( 3 )
 visible = false
 material/0 = ExtResource( 15 )
 
-[node name="Body" parent="Armature/Skeleton" index="8"]
+[node name="Bag" parent="Armature/Skeleton" index="8"]
+allow_merging = false
+material_override = ExtResource( 12 )
+
+[node name="Body" parent="Armature/Skeleton" index="9"]
 material/0 = ExtResource( 4 )
 
-[node name="Body_LOD" parent="Armature/Skeleton" index="9"]
+[node name="Body_LOD" parent="Armature/Skeleton" index="10"]
 visible = false
 material/0 = ExtResource( 4 )
 
-[node name="eyes001" parent="Armature/Skeleton" index="10"]
+[node name="eyes001" parent="Armature/Skeleton" index="11"]
 material/0 = ExtResource( 7 )
 
-[node name="Face" parent="Armature/Skeleton" index="11"]
+[node name="Face" parent="Armature/Skeleton" index="12"]
 material/0 = ExtResource( 5 )
 
-[node name="Face_LOD" parent="Armature/Skeleton" index="12"]
+[node name="Face_LOD" parent="Armature/Skeleton" index="13"]
 visible = false
 material/0 = ExtResource( 5 )
 
-[node name="Hoodie" parent="Armature/Skeleton" index="13"]
+[node name="Hoodie" parent="Armature/Skeleton" index="14"]
 visible = false
 material_override = ExtResource( 8 )
 
-[node name="Hoodie_SleeveLess" parent="Armature/Skeleton" index="14"]
+[node name="Hoodie_SleeveLess" parent="Armature/Skeleton" index="15"]
 transform = Transform( 1, 0, 0, 0, 1, 2.84217e-14, 0, -2.84217e-14, 1, 0, 0, 0 )
 material_override = ExtResource( 8 )
 
-[node name="Leg2_L" parent="Armature/Skeleton" index="15"]
+[node name="Leg2_L" parent="Armature/Skeleton" index="16"]
 material/0 = ExtResource( 16 )
 
-[node name="Leg2_L_LOD" parent="Armature/Skeleton" index="16"]
+[node name="Leg2_L_LOD" parent="Armature/Skeleton" index="17"]
 visible = false
 material/0 = ExtResource( 16 )
 
-[node name="Leg2_R" parent="Armature/Skeleton" index="17"]
+[node name="Leg2_R" parent="Armature/Skeleton" index="18"]
 material/0 = ExtResource( 16 )
 
-[node name="Leg2_R_LOD" parent="Armature/Skeleton" index="18"]
+[node name="Leg2_R_LOD" parent="Armature/Skeleton" index="19"]
 visible = false
 material_override = ExtResource( 16 )
 
-[node name="Leg_L" parent="Armature/Skeleton" index="19"]
+[node name="Leg_L" parent="Armature/Skeleton" index="20"]
 visible = false
 material/0 = ExtResource( 1 )
 
-[node name="Leg_L_LOD" parent="Armature/Skeleton" index="20"]
+[node name="Leg_L_LOD" parent="Armature/Skeleton" index="21"]
 visible = false
 material/0 = ExtResource( 1 )
 
-[node name="Leg_R" parent="Armature/Skeleton" index="21"]
+[node name="Leg_R" parent="Armature/Skeleton" index="22"]
 visible = false
 material/0 = ExtResource( 1 )
 
-[node name="Leg_R_LOD" parent="Armature/Skeleton" index="22"]
+[node name="Leg_R_LOD" parent="Armature/Skeleton" index="23"]
 visible = false
 material/0 = ExtResource( 1 )
 
-[node name="LegsUpper" parent="Armature/Skeleton" index="23"]
+[node name="LegsUpper" parent="Armature/Skeleton" index="24"]
 material/0 = ExtResource( 4 )
 
-[node name="LegsUpper_LOD" parent="Armature/Skeleton" index="24"]
+[node name="LegsUpper_LOD" parent="Armature/Skeleton" index="25"]
 visible = false
 material/0 = ExtResource( 4 )
 
@@ -327,6 +334,7 @@ parameters/Walking/IntrumentBlend/blend_amount = 0.0
 parameters/Walking/JumpShot/active = false
 parameters/Walking/TimeScale/scale = 1.0
 "parameters/Walking/TimeScale 2/scale" = 1.0
+"parameters/Walking/TimeScale 3/scale" = 0.8
 
 [node name="Particles" type="Particles" parent="." index="3"]
 sorting_use_aabb_center = false

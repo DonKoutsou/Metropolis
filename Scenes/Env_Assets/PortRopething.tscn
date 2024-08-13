@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Assets/Building/Materials/RopteTHingMat.tres" type="Material" id=1]
+[ext_resource path="res://Assets/Materials/RopteTHingMat.tres" type="Material" id=1]
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=5]
 
 [sub_resource type="CylinderMesh" id=1]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Assets/CemetaryTemple/Cemetary_Temple.glb" type="PackedScene" id=1]
-[ext_resource path="res://Assets/Rocks/Concrete_RockMat.tres" type="Material" id=2]
+[ext_resource path="res://Assets/Materials/Concrete_RockMat.tres" type="Material" id=2]
 
 [node name="Cemetary_Temple" instance=ExtResource( 1 )]
 

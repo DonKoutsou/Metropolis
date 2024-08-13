@@ -5,7 +5,6 @@
 [ext_resource path="res://Assets/Guitar/Guitar_Low 2_Body_Normal.png" type="Texture" id=3]
 
 [resource]
-resource_local_to_scene = true
 albedo_texture = ExtResource( 1 )
 metallic_texture = ExtResource( 2 )
 metallic_texture_channel = 2

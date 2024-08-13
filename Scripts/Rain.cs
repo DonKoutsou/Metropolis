@@ -23,10 +23,10 @@ public class Rain : Spatial
 		if (d > 0)
             return;
         d = 0.5f;
-        Vector3 rot = RainPart.Rotation;
-        float rotf = 45 * (DayNight.GetWindStr() - 50) / 100;
-        rot.x = Mathf.Deg2Rad( rotf );
-        RainPart.Rotation = rot;
+        //Vector3 rot = RainPart.Rotation;
+        //float rotf = 45 * (DayNight.GetWindStr() - 50) / 100;
+        //rot.x = Mathf.Deg2Rad( rotf );
+        //RainPart.Rotation = rot;
         AudioStreamPlayer RainSound = WorldSoundManager.GetInstance().GetSound("Rain");
         float multi = DayNight.GetRainStr() / 100;
         if (multi < 0.1)

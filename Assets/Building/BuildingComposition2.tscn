@@ -2,14 +2,14 @@
 
 [ext_resource path="res://Assets/Building/Assets/House_Interior2.tres" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Building/Assets/House_Exterior2.tres" type="ArrayMesh" id=2]
-[ext_resource path="res://Assets/Building/BuildingInterior.material" type="Material" id=3]
 [ext_resource path="res://Scenes/Env_Assets/HouseDoor.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scripts/House.cs" type="Script" id=5]
-[ext_resource path="res://Assets/Building/BuildingExterior.material" type="Material" id=6]
+[ext_resource path="res://Assets/Materials/BuildingExterior.material" type="Material" id=6]
 [ext_resource path="res://Scenes/Env_Assets/Furniture.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scripts/DoorPivot.cs" type="Script" id=8]
 [ext_resource path="res://Assets/Sounds/Doors/DoorWood_Open.mp3" type="AudioStream" id=9]
 [ext_resource path="res://Assets/Sounds/Doors/DoorWood_Close.mp3" type="AudioStream" id=10]
+[ext_resource path="res://Assets/Materials/WoodPlankMaterial_TP.tres" type="Material" id=11]
 [ext_resource path="res://Scenes/Env_Assets/IndoorsLight.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Env_Assets/Furniture2.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/BuildingDecorations/Decorations2.tscn" type="PackedScene" id=14]
@@ -43,15 +43,15 @@ PossibleDeco = [ ExtResource( 15 ), ExtResource( 14 ) ]
 FurnitureAmmount = 6
 DecorationAmmount = 2
 SpawnPool = {
-Resource( "res://Scenes/Items/SheetMusic.tscn" ): 8,
-Resource( "res://Scenes/Items/FastLeg_L.tscn" ): 2,
-Resource( "res://Scenes/Items/NormalLeg_L.tscn" ): 2,
-Resource( "res://Scenes/Items/Item.tscn" ): 4,
 Resource( "res://Scenes/Items/Vinyl.tscn" ): 8,
-Resource( "res://Scenes/Items/Clock.tscn" ): 8,
-Resource( "res://Scenes/Items/Guitar.tscn" ): 1,
-Resource( "res://Scenes/Items/FastLeg_R.tscn" ): 2,
 Resource( "res://Scenes/Items/NormalLeg_R.tscn" ): 2,
+Resource( "res://Scenes/Items/Guitar.tscn" ): 1,
+Resource( "res://Scenes/Items/FastLeg_L.tscn" ): 2,
+Resource( "res://Scenes/Items/Clock.tscn" ): 8,
+Resource( "res://Scenes/Items/Item.tscn" ): 4,
+Resource( "res://Scenes/Items/NormalLeg_L.tscn" ): 2,
+Resource( "res://Scenes/Items/SheetMusic.tscn" ): 8,
+Resource( "res://Scenes/Items/FastLeg_R.tscn" ): 2,
 Resource( "res://Scenes/Items/Cassete.tscn" ): 8,
 Resource( "res://Scenes/Items/BatteryEmpty.tscn" ): 10
 }
@@ -89,7 +89,7 @@ collision_mask = 0
 [node name="BuildingInterior" type="MeshInstance" parent="StaticBody2"]
 mesh = ExtResource( 1 )
 skeleton = NodePath("../..")
-material/0 = ExtResource( 3 )
+material/0 = ExtResource( 11 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody2"]
 shape = SubResource( 11 )
@@ -201,7 +201,7 @@ CloseSound = ExtResource( 10 )
 transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 2.25, 0, 0 )
 mesh = SubResource( 17 )
 skeleton = NodePath("../..")
-material/0 = ExtResource( 3 )
+material/0 = ExtResource( 11 )
 
 [node name="Lights" type="Spatial" parent="."]
 

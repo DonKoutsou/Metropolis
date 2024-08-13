@@ -1,10 +1,9 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/CheatMenu.cs" type="Script" id=1]
 [ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://Assets/UI/ButtonRectTheme.tres" type="Theme" id=3]
-[ext_resource path="res://Assets/Themes/PanelTheme1.tres" type="Theme" id=4]
-[ext_resource path="res://Assets/UI/panelstylegrey.tres" type="StyleBox" id=5]
+[ext_resource path="res://UIThemes/ButtonGreen.tres" type="Theme" id=3]
+[ext_resource path="res://UIThemes/Panel_Blue_Digital.tres" type="StyleBox" id=5]
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.568627, 0.537255, 0.45098, 1 )
@@ -155,7 +154,6 @@ anchor_bottom = 0.5
 margin_top = -47.5
 margin_right = 53.0
 margin_bottom = 0.5
-theme = ExtResource( 4 )
 custom_styles/read_only = SubResource( 3 )
 custom_styles/focus = SubResource( 4 )
 custom_styles/normal = SubResource( 3 )
@@ -168,7 +166,6 @@ anchor_bottom = 0.5
 margin_top = 1.5
 margin_right = 53.0
 margin_bottom = 47.5
-theme = ExtResource( 4 )
 custom_styles/read_only = SubResource( 3 )
 custom_styles/focus = SubResource( 4 )
 custom_styles/normal = SubResource( 3 )
@@ -219,6 +216,7 @@ margin_left = -33.5
 margin_top = 11.0
 margin_right = 33.5
 margin_bottom = 32.0
+theme = ExtResource( 3 )
 text = "+"
 
 [node name="Button2" type="Button" parent="Buttons/TimeProgressionSetting"]
@@ -230,6 +228,7 @@ margin_left = -31.5
 margin_top = -37.0
 margin_right = 31.5
 margin_bottom = -16.0
+theme = ExtResource( 3 )
 text = "-"
 
 [node name="TimeProgText" type="Label" parent="Buttons/TimeProgressionSetting"]

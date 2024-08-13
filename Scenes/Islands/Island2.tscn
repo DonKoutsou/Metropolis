@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://Assets/Terains/Island3/Island3_LOD.tres" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Building/BuildingDust3.tscn" type="PackedScene" id=2]
@@ -17,7 +17,6 @@
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=15]
 [ext_resource path="res://Assets/Building/SkyscraperMesh.tres" type="CubeMesh" id=17]
 [ext_resource path="res://Scenes/Env_Assets/House.tscn" type="PackedScene" id=18]
-[ext_resource path="res://Assets/Building/MultistoryBuildingExterior.material" type="Material" id=19]
 [ext_resource path="res://Assets/Terains/Island3/Island3.tres" type="ArrayMesh" id=20]
 [ext_resource path="res://Scenes/Env_Assets/WindGenerator2.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Scenes/Env_Assets/Rock2.tscn" type="PackedScene" id=23]
@@ -333,7 +332,6 @@ mesh = SubResource( 3 )
 transform = Transform( 1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, -117.321, 0 )
 visible = false
 mesh = ExtResource( 17 )
-material/0 = ExtResource( 19 )
 
 [node name="WindGenerator" parent="." index="7" instance=ExtResource( 21 )]
 transform = Transform( 0.268012, 0, 0.963416, 0, 1, 0, -0.963416, 0, 0.268012, 1454.48, -4.11378, 1268.93 )

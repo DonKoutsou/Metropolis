@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/Env_Assets/DosierClutter.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Assets/Building/PlatformWood.material" type="Material" id=2]
+[ext_resource path="res://Assets/Materials/WoodPlankMaterial_TP.tres" type="Material" id=2]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 8, 0.1, 2 )

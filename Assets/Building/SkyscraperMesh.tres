@@ -1,7 +1,4 @@
-[gd_resource type="CubeMesh" load_steps=2 format=2]
-
-[ext_resource path="res://Assets/Building/MultistoryBuildingExterior.material" type="Material" id=1]
+[gd_resource type="CubeMesh" format=2]
 
 [resource]
-material = ExtResource( 1 )
 size = Vector3( 100, 200, 100 )

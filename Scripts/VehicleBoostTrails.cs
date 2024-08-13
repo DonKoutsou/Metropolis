@@ -29,10 +29,10 @@ public class VehicleBoostTrails : Spatial
         t2.TweenProperty(GetNode<Spatial>("MotionTrail2"), "lifespan", 0, 40);
 
         GetNode<Particles>("BoostPart").Emitting = true;
-        mat.AlbedoColor = new Color(1,1,1,1);
+        mat.EmissionEnergy = 5;
 
         t3 = CreateTween();
-        t3.TweenProperty(mat, "albedo_color", new Color(1,1,1,0), 40);
+        t3.TweenProperty(mat, "emission_energy", 0, 40);
         t3.Connect("finished", this, "MatTweenFin");
     }
     public override void _Ready()
