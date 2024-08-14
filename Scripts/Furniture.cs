@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-public class Furniture : Spatial
+public class Furniture : StaticBody
 {
 	[Export]
 	public string FurnitureDescription;
@@ -71,7 +71,7 @@ public class Furniture : Spatial
 		{
 			int volume = BookVolumeHolder.GetRandomUnfoundVolume(b.GetSeries());
 			b.SetVoluemeNumber(volume);
-			BookVolumeHolder.IsVolumeFound(b.GetSeries(), volume);
+			BookVolumeHolder.OnVolumeFound(b.GetSeries(), volume);
 		}
 		founditem = StashedItem;
 		Searched = true;
@@ -143,10 +143,12 @@ public class Furniture : Spatial
 		if (foundit != null)
 		{
 			pl.GetCharacterInventory().InsertItem(foundit);
-			pl.GetTalkText().Talk(foundit.GetItemPickUpText());
+			DialogueManager.GetInstance().ScheduleDialogue(pl, foundit.GetItemPickUpText());
+			//pl.GetTalkText().Talk(foundit.GetItemPickUpText());
 		}
 		else
-			pl.GetTalkText().Talk("Άδειο...");
+			DialogueManager.GetInstance().ScheduleDialogue(pl, "Άδειο...");
+			//pl.GetTalkText().Talk("Άδειο...");
 	}
 	public string GetActionName(Player pl)
     {

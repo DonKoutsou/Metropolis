@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/InventoryClose.mp3-652a3673c957232a8be32c4fb8cccb34.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/UI/InventoryClose.mp3"
+dest_files=[ "res://.import/InventoryClose.mp3-652a3673c957232a8be32c4fb8cccb34.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

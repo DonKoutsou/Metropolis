@@ -380,6 +380,7 @@ public class Vehicle : RigidBody
             Particles part = ray.GetNode<Particles>("Particles");
             Particles partd = ray.GetNode<Particles>("ParticlesDirt");
             Particles partHover = EnginePivot.GetNode<Particles>("HoverEngineParticles");
+            AudioStreamPlayer3D sound = ray.GetNode<AudioStreamPlayer3D>("HoverSound");
             Vector3 engrot = new Vector3(Mathf.Deg2Rad(Mathf.Lerp(0, 45, latsspeed /speed)), 0, 0);
             if (ray.IsColliding())
             {
@@ -414,10 +415,16 @@ public class Vehicle : RigidBody
 
                 f= Vector3.Up * Force * delta * multi;
                 partHover.Emitting = Working;
+                if (sound.Playing != Working)
+                    sound.Playing = Working;
+                
+                sound.PitchScale = Mathf.Lerp(0.5f, 1.5f, latsspeed /speed);
             }
             else
             {
                 part.Emitting = false;
+                if (!sound.Playing)
+                    sound.Playing = false;
                 partd.Emitting = false;
                 partHover.Emitting = false;
                 f = Vector3.Up * 8000 * delta * -8;
@@ -671,7 +678,8 @@ public class Vehicle : RigidBody
         Vector3 postoput;
         if (!CheckForGround(out postoput))
         {
-            cha.GetTalkText().Talk("Πρέπει να πάω πιό κοντά στην στεριά.");
+            DialogueManager.GetInstance().ScheduleDialogue(cha, "Πρέπει να πάω πιό κοντά στην στεριά.");
+            //cha.GetTalkText().Talk("Πρέπει να πάω πιό κοντά στην στεριά.");
             return false;
         }
         ContactMonitor = false;
@@ -737,7 +745,8 @@ public class Vehicle : RigidBody
 	{
 		if (!IsPlayerOwned())
         {
-            pl.GetTalkText().Talk("Δεν είναι δικιά μου. Δεν μπορώ να την χρησιμοποιήσω.");
+            DialogueManager.GetInstance().ScheduleDialogue(pl, "Δεν είναι δικιά μου. Δεν μπορώ να την χρησιμοποιήσω.");
+            //pl.GetTalkText().Talk("Δεν είναι δικιά μου. Δεν μπορώ να την χρησιμοποιήσω.");
             return;
         }
         if (!pl.HasVehicle())

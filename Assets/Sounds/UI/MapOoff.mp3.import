@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/MapOoff.mp3-dca3aa3e5899c4c7e894ffad85c61737.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/UI/MapOoff.mp3"
+dest_files=[ "res://.import/MapOoff.mp3-dca3aa3e5899c4c7e894ffad85c61737.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

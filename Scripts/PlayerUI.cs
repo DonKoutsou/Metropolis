@@ -128,7 +128,8 @@ public class PlayerUI : Control
                 bool hasmap = Play.GetCharacterInventory().HasItemOfType(ItemName.MAP);
                 if (!hasmap)
                 {
-                    Play.GetTalkText().Talk("Δεν έχω χάρτη...");
+                    DialogueManager.GetInstance().ScheduleDialogue(Play, "Δεν έχω χάρτη...");
+                    //Play.GetTalkText().Talk("Δεν έχω χάρτη...");
                 }
                 else
                     map.ToggleMap(true);

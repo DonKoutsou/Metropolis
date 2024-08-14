@@ -53,6 +53,8 @@ public class InventoryUI : Control
     int currentpage = 0;
     int maxpage = 0;
 
+    AudioStreamPlayer SoundOpen;
+    AudioStreamPlayer SoundClose;
     InventoryItemInOutNotification ItemNotif;
     /*public void ConfigureJob(string JobName, Vector2 Jobloc, string JobOwner, int RewardAmmount)
     {
@@ -80,6 +82,9 @@ public class InventoryUI : Control
 
         ItemNotif = GetNode<InventoryItemInOutNotification>("InventoryContainer/InventoryItemInOutNotification");
         //JobPan.Hide();
+
+        SoundOpen = GetNode<AudioStreamPlayer>("InventoryContainer/Inventory/InvOpen");
+        SoundClose = GetNode<AudioStreamPlayer>("InventoryContainer/Inventory/InvClose");
 
         for (int i = 0; i < childc; i ++)
         {
@@ -127,6 +132,7 @@ public class InventoryUI : Control
         UpdateInventory();
         IsOpen = true;
         SetProcess(true);
+        SoundOpen.Play();
     }
     public void CloseInventory()
     {
@@ -137,6 +143,8 @@ public class InventoryUI : Control
         WarpMouse(GetViewport().Size/2);
         IsOpen = false;
         SetProcess(false);
+
+        SoundClose.Play();
 
         if (FocusedSlot != null)
             SetFocused(false, FocusedSlot);
@@ -355,7 +363,8 @@ public class InventoryUI : Control
     {
         if (FocusedSlot == null)
         {
-            pl.GetTalkText().Talk(NoSelectionOnDropText);
+            //pl.GetTalkText().Talk(NoSelectionOnDropText);
+            DialogueManager.GetInstance().ScheduleDialogue(pl, NoSelectionOnDropText);
             return;
         }
         Inv.RemoveItem(FocusedSlot.item);
@@ -393,7 +402,8 @@ public class InventoryUI : Control
     {
         if (!hascompass)
         {
-            pl.GetTalkText().Talk(NoCompassText);
+            DialogueManager.GetInstance().ScheduleDialogue(pl, NoCompassText);
+            //pl.GetTalkText().Talk(NoCompassText);
             return;
         }
         if (!ShowingCompass)

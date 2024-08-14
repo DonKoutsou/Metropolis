@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Assets/Boat/Parts/EngineJoint.tres" type="ArrayMesh" id=1]
 [ext_resource path="res://Scripts/Vehicle.cs" type="Script" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://Scenes/Vehicles/HoverEngineParticles.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Assets/Boat/Parts/Body_LOD.tres" type="ArrayMesh" id=20]
 [ext_resource path="res://Assets/Boat/Parts/Body_LOD1.tres" type="ArrayMesh" id=21]
+[ext_resource path="res://Assets/Sounds/Engine/HoverEngines.mp3" type="AudioStream" id=22]
 
 [sub_resource type="Curve" id=7]
 min_value = -150.0
@@ -159,26 +160,6 @@ surfaces/0 = {
 "skeleton_aabb": [  ],
 "vertex_count": 2786
 }
-
-[sub_resource type="Curve" id=149]
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.520965, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.1 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=150]
-curve = SubResource( 149 )
-
-[sub_resource type="ParticlesMaterial" id=151]
-resource_local_to_scene = true
-trail_divisor = 11
-direction = Vector3( 0, 1, 0 )
-spread = 0.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 10.0
-angular_velocity = 40.0
-angular_velocity_random = 1.0
-linear_accel = 6.6
-angle = 360.0
-scale = 0.5
-scale_curve = SubResource( 150 )
 
 [node name="Vehicle" type="Spatial"]
 pause_mode = 1
@@ -434,14 +415,18 @@ skeleton = NodePath("../..")
 material/0 = ExtResource( 12 )
 
 [node name="HoverEngineParticles" parent="RayFL/EnginePivot" instance=ExtResource( 19 )]
-transform = Transform( 1, -0.00130585, 2.58742e-05, -0.00130585, -1, 3.39875e-07, 2.58776e-05, -3.64832e-07, -1, 0.527987, -1.60219, -0.00650311 )
-process_material = SubResource( 151 )
+transform = Transform( 1, 0, 3.39273e-26, -2.38755e-40, 1, 0, 0, 0, 1, 0.563299, -1.72765, 0 )
 
 [node name="Particles" parent="RayFL" instance=ExtResource( 8 )]
 transform = Transform( 1, -2.93525e-11, -1.24077e-24, 1.58479e-10, 1, 1.16415e-10, 0, 2.8026e-45, 1, 1.61196, -5.96046e-08, 0 )
 
 [node name="ParticlesDirt" parent="RayFL" instance=ExtResource( 16 )]
 transform = Transform( 1, -2.93525e-11, -1.24077e-24, 1.58479e-10, 1, 1.16415e-10, 0, 2.8026e-45, 1, 1.61196, -5.96046e-08, 0 )
+
+[node name="HoverSound" type="AudioStreamPlayer3D" parent="RayFL"]
+stream = ExtResource( 22 )
+unit_size = 2.0
+max_distance = 4096.0
 
 [node name="RayFR" type="RayCast" parent="."]
 transform = Transform( 1, -5.96046e-08, 2.73576e-09, 5.96046e-08, 1, -2.91038e-09, -2.73576e-09, 2.91038e-09, 1, -6.8, -0.48, 8.879 )
@@ -466,14 +451,18 @@ skeleton = NodePath("../..")
 material/0 = ExtResource( 12 )
 
 [node name="HoverEngineParticles" parent="RayFR/EnginePivot" instance=ExtResource( 19 )]
-transform = Transform( 1, -8.74228e-08, -8.74228e-08, -8.74228e-08, -1, 0, -8.74228e-08, 7.54952e-15, -1, -0.527782, -1.47395, 0.04702 )
-process_material = SubResource( 151 )
+transform = Transform( 1, -7.9621e-18, 0, -7.64362e-18, 1, 0, 0, 0, 1, -0.56771, -1.72765, 0 )
 
 [node name="Particles" parent="RayFR" instance=ExtResource( 8 )]
 transform = Transform( 1, -5.11058e-11, 0, 7.73603e-11, 1, 1.16415e-10, 0, 0, 1, -1.72643, 2.98023e-08, 0 )
 
 [node name="ParticlesDirt" parent="RayFR" instance=ExtResource( 16 )]
 transform = Transform( 1, -5.11058e-11, 0, 7.73603e-11, 1, 1.16415e-10, 0, 0, 1, -1.72643, 2.98023e-08, 0 )
+
+[node name="HoverSound" type="AudioStreamPlayer3D" parent="RayFR"]
+stream = ExtResource( 22 )
+unit_size = 2.0
+max_distance = 4096.0
 
 [node name="RayBR" type="RayCast" parent="."]
 transform = Transform( 1, -5.96046e-08, 1.10595e-09, 5.96046e-08, 1, -3.37604e-09, -1.10595e-09, 3.37604e-09, 1, -6.8, -0.48, -10.564 )
@@ -505,8 +494,12 @@ skeleton = NodePath("../..")
 material/0 = ExtResource( 12 )
 
 [node name="HoverEngineParticles" parent="RayBR/EnginePivot" instance=ExtResource( 19 )]
-transform = Transform( 1, -0.00130585, 2.58742e-05, -0.00130585, -1, 3.39875e-07, 2.58776e-05, -3.64832e-07, -1, -0.560289, -1.60219, 0.0660887 )
-process_material = SubResource( 151 )
+transform = Transform( 1, -3.73373e-18, 0, -3.60498e-18, 1, 0, 0, 0, 1, -0.56771, -1.72765, 0 )
+
+[node name="HoverSound" type="AudioStreamPlayer3D" parent="RayBR"]
+stream = ExtResource( 22 )
+unit_size = 2.0
+max_distance = 4096.0
 
 [node name="RayBL" type="RayCast" parent="."]
 transform = Transform( 1, -5.96046e-08, 1.04774e-09, 5.96046e-08, 1, -3.14321e-09, -1.04774e-09, 3.14321e-09, 1, 6.8, -0.48, -10.508 )
@@ -538,5 +531,9 @@ skeleton = NodePath("../..")
 material/0 = ExtResource( 12 )
 
 [node name="HoverEngineParticles" parent="RayBL/EnginePivot" instance=ExtResource( 19 )]
-transform = Transform( 1, -0.00130585, 2.58742e-05, -0.00130585, -1, 3.39875e-07, 2.58776e-05, -3.64832e-07, -1, 0.568394, -1.60219, -0.0438747 )
-process_material = SubResource( 151 )
+transform = Transform( 1, -3.29327e-18, 0, -3.29327e-18, 1, 0, 0, 0, 1, 0.563304, -1.72765, 0 )
+
+[node name="HoverSound" type="AudioStreamPlayer3D" parent="RayBL"]
+stream = ExtResource( 22 )
+unit_size = 2.0
+max_distance = 4096.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Scripts/ScreenEffects.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/Control_UI.cs" type="Script" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://Scripts/UISoundManager.cs" type="Script" id=14]
 [ext_resource path="res://Fonts/Play-Bold.ttf" type="DynamicFontData" id=15]
 [ext_resource path="res://UIThemes/Panel_Black_TopCorner.tres" type="StyleBox" id=16]
+[ext_resource path="res://Assets/Sounds/UI/CityName.mp3" type="AudioStream" id=17]
 
 [sub_resource type="DynamicFont" id=42]
 size = 59
@@ -191,6 +192,10 @@ margin_bottom = -44.0
 rect_clip_content = true
 mouse_filter = 2
 custom_styles/panel = ExtResource( 8 )
+
+[node name="CityNotifSound" type="AudioStreamPlayer" parent="CityNameUI"]
+stream = ExtResource( 17 )
+volume_db = 10.0
 
 [node name="CheatMenu" parent="." instance=ExtResource( 10 )]
 visible = false

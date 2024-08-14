@@ -89,7 +89,8 @@ public class Item : RigidBody
 	{
 		if (!pl.GetCharacterInventory().InsertItem(this))
 		{
-			pl.GetTalkText().Talk("Δέν έχω χώρο.");
+			DialogueManager.GetInstance().ScheduleDialogue(pl, "Δέν έχω χώρο.");
+			//pl.GetTalkText().Talk("Δέν έχω χώρο.");
 		}
 	}
 	public string GetActionName(Player pl)
@@ -131,12 +132,12 @@ public class Item : RigidBody
 			//float cond = (float)data.CustomData["CurrentCondition"];
 			//battery.SetCurrentCondition(cond);
 		}
-		else if (this is Toolbox box)
+		/*else if (this is Toolbox box)
 		{
 			float cap = (float)data.CustomData["CurrentSupplies"];
 			box.SetCurrentSupplies(cap);
 		}
-		/*else if (this is Limb limb)
+		else if (this is Limb limb)
 		{
 			Color cap = (Color)data.CustomData["LimbColor"];
 			limb.SetColor(cap);
@@ -178,14 +179,14 @@ public class ItemInfo
 			//else
 				//CustomData.Add("CurrentCondition", bat.GetCondition());
 		}
-		else if (it is Toolbox box)
+		/*else if (it is Toolbox box)
 		{
 			if (CustomData.ContainsKey("CurrentSupplies"))
 				CustomData["CurrentSupplies"] = box.GetCurrentSupplyAmmount();
 			else
 				CustomData.Add("CurrentSupplies", box.GetCurrentSupplyAmmount());
 		}
-		/*else if (it is Limb l)
+		else if (it is Limb l)
 		{
 			if (CustomData.ContainsKey("LimbColor"))
 				CustomData["LimbColor"] = l.GetColor();

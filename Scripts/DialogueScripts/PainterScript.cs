@@ -53,7 +53,7 @@ public class PainterScript : BaseDialogueScript
                 break;
             }
         }
-        Talker.GetTalkText().Talk(text);
+        DialogueManager.GetInstance().ScheduleDialogue(Talker, text);
     }
     public override bool ShouldShowExtraAction()
     {

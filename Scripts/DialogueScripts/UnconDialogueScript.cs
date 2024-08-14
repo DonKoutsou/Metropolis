@@ -31,7 +31,7 @@ public class UnconDialogueScript : BaseDialogueScript
             }
 
         }
-        Talker.GetTalkText().Talk(text);
+        DialogueManager.GetInstance().ScheduleDialogue(Talker, text);
     }
     public override bool ShouldShowExtraAction()
     {
@@ -58,7 +58,8 @@ public class UnconDialogueScript : BaseDialogueScript
 
         if (bats.Count == 0)
         {
-            pl.GetTalkText().Talk("Δεν έχω μπαταρίες...");
+            DialogueManager.GetInstance().ScheduleDialogue(pl, "Δεν έχω μπαταρίες...");
+            //pl.GetTalkText().Talk("Δεν έχω μπαταρίες...");
             return "null";
         }
 
@@ -74,7 +75,7 @@ public class UnconDialogueScript : BaseDialogueScript
 		{
 			int volume = BookVolumeHolder.GetRandomUnfoundVolume(b.GetSeries());
 			b.SetVoluemeNumber(volume);
-			BookVolumeHolder.IsVolumeFound(b.GetSeries(), volume);
+			BookVolumeHolder.OnVolumeFound(b.GetSeries(), volume);
 		}
         inv.InsertItem(newItem);
 

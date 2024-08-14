@@ -109,7 +109,8 @@ public class WorldMap : TileMap
 		{
 			Player pl = Player.GetInstance();
 			pl.CanTraverseDeep = true;
-			pl.GetTalkText().Talk("Και οι 4 φάροι είναι αναμένοι, μπορώ να φτάσω την Μητρόπολη τώρα.");
+			DialogueManager.GetInstance().ScheduleDialogue(pl, "Και οι 4 φάροι είναι αναμένοι, μπορώ να φτάσω την Μητρόπολη τώρα.");
+			//pl.GetTalkText().Talk("Και οι 4 φάροι είναι αναμένοι, μπορώ να φτάσω την Μητρόπολη τώρα.");
 		}
 	}
 	public bool IsLightHouseUnlocked(IslandInfo Info)

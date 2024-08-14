@@ -36,11 +36,15 @@ public class DoorPivot : Spatial
             if (Rotations.Count > i)
             {
                 var tw = CreateTween();
+                if (tw == null)
+                    return;
                 tw.TweenProperty(GetNode(Doors[i]), "rotation_degrees", Rotations[i], OpenCloseTime);
             }
             if (Translations.Count > i)
             {
                 var tw = CreateTween();
+                if (tw == null)
+                    return;
                 tw.TweenProperty(GetNode(Doors[i]), "translation", Translations[i], OpenCloseTime);
             }
         }
@@ -55,11 +59,15 @@ public class DoorPivot : Spatial
             if (Rotations.Count > i)
             {
                 var tw = CreateTween();
+                if (tw == null)
+                    return;
                 tw.TweenProperty(GetNode(Doors[i]), "rotation_degrees", Vector3.Zero, OpenCloseTime);
             }
             if (Translations.Count > i)
             {
                 var tw = CreateTween();
+                if (tw == null)
+                    return;
                 tw.TweenProperty(GetNode(Doors[i]), "translation", Vector3.Zero, OpenCloseTime);
             }
         }

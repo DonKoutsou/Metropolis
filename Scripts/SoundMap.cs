@@ -50,9 +50,14 @@ public class SoundMap : GridMap
             MeshLibrary.SetItemMesh(0, mesh);
             PlLoc = GetNode<Position3D>("PlayerLocator");
 
-            SeekRandom = new RandomNumberGenerator(){
-                Seed = (ulong)Settings.GetGameSettings().Seed
-            };
+            Settings set = Settings.GetGameSettings();
+            if (set != null)
+            {
+                 SeekRandom = new RandomNumberGenerator(){
+                Seed = (ulong)set.Seed
+                };
+            }
+           
 
             for (int i = 0; i < SoundScenes.Count; i++)
             {

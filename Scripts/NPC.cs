@@ -147,7 +147,8 @@ public class NPC : Character
 	public void DoAction(Player pl)
 	{
 		if (IsUncon)
-			pl.GetTalkText().Talk("Είναι απενεργοπηημένη, μπορώ να της δώσω μια μπάταριά.");
+			DialogueManager.GetInstance().ScheduleDialogue(pl, "Είναι απενεργοπηημένη, μπορώ να της δώσω μια μπάταριά.");
+			//pl.GetTalkText().Talk("Είναι απενεργοπηημένη, μπορώ να της δώσω μια μπάταριά.");
 		else
 			DoDialogue();
 		//DialogueManager.GetInstance().StartDialogue(this, DoDialogue());
@@ -157,7 +158,8 @@ public class NPC : Character
 		string text = GetNode<BaseDialogueScript>("DialogueScript").Action1Done(this, pl);
 		if (text != "null")
 		{
-			GetTalkText().Talk(text);
+			DialogueManager.GetInstance().ScheduleDialogue(this, text);
+			//GetTalkText().Talk(text);
 		}
 	}
 	public void DoAction3(Player pl)
@@ -165,7 +167,8 @@ public class NPC : Character
 		string text = GetNode<BaseDialogueScript>("DialogueScript").Action2Done(this, pl);
 		if (text != "null")
 		{
-			GetTalkText().Talk(text);
+			DialogueManager.GetInstance().ScheduleDialogue(this, text);
+			//GetTalkText().Talk(text);
 		}
 	}
 	public string GetActionName(Player pl)

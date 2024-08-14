@@ -8,7 +8,8 @@ public class Sinner : NPC
 	public void OnDoorOpened()
 	{
 		anim.ToggleIdle();
-		GetTalkText().Talk("Ενδιαφέρον... Ευχαριστώ καΐκτσή.");
+		DialogueManager.GetInstance().ScheduleDialogue(this, "Ενδιαφέρον... Ευχαριστώ καΐκτσή.");
+		//GetTalkText().Talk("Ενδιαφέρον... Ευχαριστώ καΐκτσή.");
 		CameraAnimationPlayer CameraAnimation = CameraAnimationPlayer.GetInstance();
 		CameraAnimation.Connect("FadeOutFinished", this, "TeleportOut");
 		CameraAnimation.FadeInOut(1);
@@ -24,7 +25,8 @@ public class Sinner : NPC
 		CameraAnimation.Connect("FadeOutFinished", this, "TeleportToWall");
 		CameraAnimation.FadeInOut(5);
 
-		GetTalkText().Talk("Θα σε περιμένω εδώ...");
+		DialogueManager.GetInstance().ScheduleDialogue(this, "Θα σε περιμένω εδώ...");
+		//GetTalkText().Talk("Θα σε περιμένω εδώ...");
 
 		Item note = NoteScene.Instance<Item>();
 

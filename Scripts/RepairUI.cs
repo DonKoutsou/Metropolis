@@ -99,7 +99,8 @@ public class RepairUI : Control
 
         if(toolboxes.Count == 0)
         {
-            pl.GetTalkText().Talk("Δέν έχω προμήθειες για να το επισκευάσω");
+            DialogueManager.GetInstance().ScheduleDialogue(pl, "Δέν έχω προμήθειες για να το επισκευάσω");
+            //pl.GetTalkText().Talk("Δέν έχω προμήθειες για να το επισκευάσω");
         }
         bool outofsupplies = true;
         /*VehicleDamageManager damageman = currentv.GetDamageManager();
@@ -132,7 +133,8 @@ public class RepairUI : Control
         }*/
         if (outofsupplies)
         {
-            pl.GetTalkText().Talk("Οι εργαλειοθήκες μου είναι άδειες");
+            DialogueManager.GetInstance().ScheduleDialogue(pl, "Οι εργαλειοθήκες μου είναι άδειες");
+            //pl.GetTalkText().Talk("Οι εργαλειοθήκες μου είναι άδειες");
         }
     }
 }

@@ -43,6 +43,8 @@ public class LightHouse : House
 		AnimationPlayer anim = GetNode<AnimationPlayer>("LightHouse_UnlockedAnimation/AnimationPlayer");
 		anim.Play("EnabledAnim");
 
+		GetNode<Camera>("LightHouse_UnlockedAnimation/Camera").Current = true;
+
 		ToggeLightHouse(true);
 	}
 	private void EnableAnimationFinished(string anim)
@@ -58,6 +60,7 @@ public class LightHouse : House
 		
 		CameraAnimationPlayer CameraAnimation = CameraAnimationPlayer.GetInstance();
         CameraAnimation.Disconnect("FadeOutFinished", this, "FadeFin");
+		
 		PlayerCamera.GetInstance().Current = true;
 	}
 }

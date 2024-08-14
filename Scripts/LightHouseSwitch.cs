@@ -51,7 +51,8 @@ public class LightHouseSwitch : StaticBody
             inv.DeleteItem(its[0]);
         }
         else
-            pl.GetTalkText().Talk("Φένεταί σαν να χρειάζεται κάποιου είδους κλειδί για πάρει μπρός.");
+            DialogueManager.GetInstance().ScheduleDialogue(pl, "Φένεταί σαν να χρειάζεται κάποιου είδους κλειδί για πάρει μπρός.");
+            //pl.GetTalkText().Talk("Φένεταί σαν να χρειάζεται κάποιου είδους κλειδί για πάρει μπρός.");
 
         
         

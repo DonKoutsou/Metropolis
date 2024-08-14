@@ -184,7 +184,7 @@ public class Inventory : Spatial
                     //}
                 }
             }
-            if (newItem is Toolbox box)
+            /*if (newItem is Toolbox box)
             {
                 Array CustomDataKeys = (Array)res.Get("CustomDataKeys");
 		        Godot.Collections.Array CustomDataValues = (Godot.Collections.Array)res.Get("CustomDataValues");
@@ -196,7 +196,7 @@ public class Inventory : Spatial
                     }
                 }
             }
-            /*else if (newItem is Limb l)
+                else if (newItem is Limb l)
             {
                 Array CustomDataKeys = (Array)res.Get("CustomDataKeys");
 		        Godot.Collections.Array CustomDataValues = (Godot.Collections.Array)res.Get("CustomDataValues");

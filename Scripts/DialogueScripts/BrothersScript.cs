@@ -6,8 +6,9 @@ public class BrothersScript : BaseDialogueScript
 {
     public override void DoDialogue(NPC Talker, NPC TalkerColaborator = null)
     {   
-        string text = string.Empty;
+        string text = "Διάλογος 1";
         
+        /*
         switch(DialogueProg)
         {
             case 0:
@@ -47,12 +48,21 @@ public class BrothersScript : BaseDialogueScript
                         text = ".......";
                         break;
                     }
-                }*/
+                }
                 break;
             }
-        }
-
-        Talker.GetTalkText().Talk(text);
+        }*/
+        string text2 = "Διάλογος 2";
+        string text3 = "Διάλογος 3";
+        string text4 = "Διάλογος 4";
+        string text5 = "Διάλογος 5";
+        string text6 = "Διάλογος 6";
+        DialogueManager.GetInstance().ScheduleDialogue(Talker, text);
+        DialogueManager.GetInstance().ScheduleDialogue(TalkerColaborator, text2);
+        DialogueManager.GetInstance().ScheduleDialogue(Talker, text3);
+        DialogueManager.GetInstance().ScheduleDialogue(TalkerColaborator, text4);
+        DialogueManager.GetInstance().ScheduleDialogue(Talker, text5);
+        DialogueManager.GetInstance().ScheduleDialogue(TalkerColaborator, text6);
     }
     public override bool ShouldShowExtraAction()
     {

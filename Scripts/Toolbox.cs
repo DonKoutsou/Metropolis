@@ -3,17 +3,18 @@ using System;
 
 public class Toolbox : Item
 {
-    [Export]
-    float SupplyCapacity = 100;
+    //[Export]
+    //float SupplyCapacity = 100;
 
-    [Export]
-    float CurrentSupplies = 0;
+    //[Export]
+    //float CurrentSupplies = 0;
 
     public override string GetItemDesc()
     {
-        return ItemDesc + " \n Supplies: " + (int)CurrentSupplies + "/" + SupplyCapacity;
+        return ItemDesc;
+        //return ItemDesc + " \n Supplies: " + (int)CurrentSupplies + "/" + SupplyCapacity;
     }
-    public float GetCurrentSupplyAmmount()
+    /*public float GetCurrentSupplyAmmount()
     {
         return CurrentSupplies;
     }
@@ -31,9 +32,9 @@ public class Toolbox : Item
         float AmmountThatCaneBeRepaired = Math.Min(CurrentSupplies, AmmountToRepair);
         ConsumeSupplies(AmmountThatCaneBeRepaired);
         it.Repair(AmmountThatCaneBeRepaired);
-    }*/
+    }
     public override string GetInventoryItemName()
 	{
 		return ItemName + CurrentSupplies.ToString();
-	}
+	}*/
 }

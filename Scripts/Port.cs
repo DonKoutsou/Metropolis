@@ -109,7 +109,8 @@ public class Port : Area
                 }*/
                 if (Worker == null)
                     return;
-                Worker.GetTalkText().Talk("Καλωσόρισες καϊκτσή μαγκίτη πρώτε");
+                DialogueManager.GetInstance().ScheduleDialogue(Worker, "Καλωσόρισες καϊκτσή μαγκίτη πρώτε");
+                //Worker.GetTalkText().Talk("Καλωσόρισες καϊκτσή μαγκίτη πρώτε");
             }
         }
         if (body is Player pl)
@@ -162,7 +163,8 @@ public class Port : Area
             {
                 if (Worker == null)
                     return;
-                Worker.GetTalkText().Talk("Καλό δρόμο καϊκτσή, καλή επιστροφή");
+                DialogueManager.GetInstance().ScheduleDialogue(Worker, "Καλό δρόμο καϊκτσή, καλή επιστροφή");
+                //Worker.GetTalkText().Talk("Καλό δρόμο καϊκτσή, καλή επιστροφή");
             }
         }
         

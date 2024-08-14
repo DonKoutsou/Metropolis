@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://Scenes/HUD/InventoryUISlot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/InventoryUI.cs" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Assets/UI/Icon/CrossGreen.png" type="Texture" id=7]
 [ext_resource path="res://UIThemes/Panel_Black_NoCorner.tres" type="StyleBox" id=8]
 [ext_resource path="res://Assets/Sounds/Inventory_Add.mp3" type="AudioStream" id=9]
+[ext_resource path="res://Assets/Sounds/UI/InventoryOpen.mp3" type="AudioStream" id=10]
 [ext_resource path="res://Assets/Compass/Compass/CompL3.png" type="Texture" id=11]
 [ext_resource path="res://Assets/Compass/Compass/CompL1N.png" type="Texture" id=12]
 [ext_resource path="res://Assets/Compass/Compass/CompL2.png" type="Texture" id=13]
@@ -29,6 +30,7 @@
 [ext_resource path="res://UIThemes/Panel_Blue_Digital_SMall.tres" type="StyleBox" id=28]
 [ext_resource path="res://UIThemes/Panel_DarkBlue_Digital_SMall.tres" type="StyleBox" id=29]
 [ext_resource path="res://UIThemes/Panel_Black_LeftCorners.tres" type="StyleBox" id=30]
+[ext_resource path="res://Assets/Sounds/UI/InventoryClose.mp3" type="AudioStream" id=31]
 
 [sub_resource type="Animation" id=57]
 resource_name = "MenuClose"
@@ -260,6 +262,7 @@ mouse_filter = 2
 
 [node name="InventoryAnimation" type="AnimationPlayer" parent="InventoryContainer"]
 root_node = NodePath("../..")
+playback_speed = 2.0
 anims/MenuClose = SubResource( 57 )
 anims/MenuOpen = SubResource( 55 )
 anims/RESET = SubResource( 56 )
@@ -987,6 +990,14 @@ margin_right = 286.0
 rect_clip_content = true
 mouse_filter = 1
 custom_styles/panel = ExtResource( 27 )
+
+[node name="InvOpen" type="AudioStreamPlayer" parent="InventoryContainer/Inventory"]
+stream = ExtResource( 10 )
+volume_db = -10.0
+
+[node name="InvClose" type="AudioStreamPlayer" parent="InventoryContainer/Inventory"]
+stream = ExtResource( 31 )
+volume_db = -10.0
 
 [node name="InventoryItemInOutNotification" type="Control" parent="InventoryContainer"]
 anchor_left = 1.0

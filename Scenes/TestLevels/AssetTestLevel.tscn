@@ -1,0 +1,236 @@
+[gd_scene load_steps=51 format=2]
+
+[ext_resource path="res://Scenes/Characters/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/HUD/PlayerUI.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Items/SinnerNote.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Items/BatteryEmpty.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Poseidon.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/UI/Checkerboard.jpg" type="Texture" id=6]
+[ext_resource path="res://Scenes/Items/Battery_Large_Empty.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Items/BloodVial.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Items/Battery_Large.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/Sounds/Mpouzoukia/Bouzouki1-Ambient.mp3" type="AudioStream" id=10]
+[ext_resource path="res://Scripts/MusicManager.cs" type="Script" id=11]
+[ext_resource path="res://Assets/Sounds/Mpouzoukia/Bouzouki3.mp3" type="AudioStream" id=12]
+[ext_resource path="res://Scenes/Items/NormalLeg_L.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/Items/NormalLeg_R.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/Env_Assets/BrokenWindBlade.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/Env_Assets/BrokenWindSingle.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/Items/Guitar.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Scenes/Items/FastLeg_L.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Scenes/Items/FastLeg_R.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Scenes/Items/SkeleArm_R.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Scenes/Items/SkeleArm_L.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Scenes/Items/MemoryStick.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Scenes/Items/Drahma.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Scenes/Items/Clock.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Scenes/Items/Battery.tscn" type="PackedScene" id=25]
+[ext_resource path="res://Scripts/RandomContainer.cs" type="Script" id=26]
+[ext_resource path="res://Scenes/World/Sky.tscn" type="PackedScene" id=27]
+[ext_resource path="res://Scenes/Items/Item.tscn" type="PackedScene" id=28]
+[ext_resource path="res://Scenes/Items/Bouzouki.tscn" type="PackedScene" id=29]
+[ext_resource path="res://Scenes/Items/Dosier.tscn" type="PackedScene" id=30]
+[ext_resource path="res://Scenes/Items/Cassete.tscn" type="PackedScene" id=31]
+[ext_resource path="res://Scenes/Items/SheetMusic.tscn" type="PackedScene" id=32]
+[ext_resource path="res://Scenes/Items/Vinyl.tscn" type="PackedScene" id=33]
+[ext_resource path="res://Scripts/DViewport.cs" type="Script" id=34]
+[ext_resource path="res://Scenes/Items/Book1.tscn" type="PackedScene" id=35]
+[ext_resource path="res://Scenes/Items/Compass.tscn" type="PackedScene" id=36]
+[ext_resource path="res://Scenes/Items/Book3.tscn" type="PackedScene" id=37]
+[ext_resource path="res://Scenes/Items/LOG.tscn" type="PackedScene" id=38]
+[ext_resource path="res://Scenes/Items/Toolbox.tscn" type="PackedScene" id=39]
+[ext_resource path="res://Scenes/Items/Book2.tscn" type="PackedScene" id=40]
+[ext_resource path="res://Scenes/Items/MapItem.tscn" type="PackedScene" id=41]
+[ext_resource path="res://Scenes/Items/Explosive.tscn" type="PackedScene" id=42]
+[ext_resource path="res://Scenes/HUD/Settings.tscn" type="PackedScene" id=43]
+[ext_resource path="res://Scripts/TestLevel.cs" type="Script" id=44]
+[ext_resource path="res://Scenes/Items/PaintCan.tscn" type="PackedScene" id=45]
+[ext_resource path="res://Scenes/Items/Sword.tscn" type="PackedScene" id=51]
+[ext_resource path="res://Scripts/UniversalLodManager.cs" type="Script" id=53]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_texture = ExtResource( 6 )
+uv1_scale = Vector3( 4, 4, 4 )
+
+[sub_resource type="PlaneMesh" id=2]
+material = SubResource( 1 )
+size = Vector2( 200, 200 )
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 100, 1, 100 )
+
+[node name="TestLevel" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -17.0192 )
+script = ExtResource( 44 )
+
+[node name="MusicManager" type="Node" parent="."]
+script = ExtResource( 11 )
+BouzoukiSongExports = [ ExtResource( 10 ), ExtResource( 12 ) ]
+GuitarSongExports = [ ExtResource( 10 ), ExtResource( 12 ) ]
+
+[node name="RandomContainer" type="Node" parent="."]
+script = ExtResource( 26 )
+
+[node name="UniversalLODManager" type="Node" parent="."]
+script = ExtResource( 53 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 4
+
+[node name="PlayerUI" parent="CanvasLayer" instance=ExtResource( 2 )]
+
+[node name="Settings" parent="CanvasLayer" instance=ExtResource( 43 )]
+
+[node name="Control" type="Control" parent="."]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ViewportContainer" type="ViewportContainer" parent="Control"]
+pause_mode = 2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -640.0
+margin_top = -360.0
+margin_right = 640.0
+margin_bottom = 360.0
+rect_scale = Vector2( 1.5, 1.5 )
+rect_pivot_offset = Vector2( 640, 360 )
+
+[node name="Viewport" type="Viewport" parent="Control/ViewportContainer"]
+pause_mode = 2
+size = Vector2( 1280, 720 )
+handle_input_locally = false
+msaa = 1
+fxaa = true
+render_target_update_mode = 3
+audio_listener_enable_3d = true
+shadow_atlas_size = 512
+script = ExtResource( 34 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Control/ViewportContainer/Viewport"]
+mesh = SubResource( 2 )
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody" type="StaticBody" parent="Control/ViewportContainer/Viewport/MeshInstance"]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="Control/ViewportContainer/Viewport/MeshInstance/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+shape = SubResource( 3 )
+
+[node name="Player" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 1 )]
+transform = Transform( -0.494352, 0, 0.869262, 0, 1, 0, -0.869262, 0, -0.494352, 0.0285597, 14.2142, -16.9589 )
+
+[node name="Poseidon" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -17.0192 )
+
+[node name="Sky" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 27 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -17.0192 )
+
+[node name="Battery" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28.8763, 1.14441e-05, -3.73629 )
+
+[node name="Battery2" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.9846, 1.14441e-05, -3.73629 )
+
+[node name="Battery3" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.3529, 1.14441e-05, -3.73629 )
+
+[node name="Battery4" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30.3372, 1.14441e-05, -3.73629 )
+
+[node name="Item" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28.8592, 0.106146, -5.37229 )
+
+[node name="Item2" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 35 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.909, 1.14441e-05, -5.35563 )
+
+[node name="Item3" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 40 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.2769, 1.14441e-05, -6.63428 )
+
+[node name="Item4" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 37 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.8116, 1.14441e-05, -6.87413 )
+
+[node name="Bouzouki" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 29 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.8554, 1.14441e-05, -10.6951 )
+
+[node name="Item5" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 31 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.7326, 0.0639582, -3.73629 )
+
+[node name="Battery5" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.3751, 1.14441e-05, -8.87829 )
+
+[node name="Item6" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 36 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7687, 1.14441e-05, -3.73629 )
+
+[node name="Item7" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 30 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28.2079, 1.14441e-05, -7.4839 )
+
+[node name="Item8" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 23 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.838, 1.14441e-05, -4.67852 )
+
+[node name="Explosive" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 42 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.4371, 1.14441e-05, -3.73629 )
+
+[node name="Item9" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.628, 1.14441e-05, -3.73629 )
+
+[node name="Item10" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 19 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.6808, 1.14441e-05, -7.61785 )
+
+[node name="Guitar" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.4272, 1.14441e-05, -8.77935 )
+
+[node name="Item11" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.0646, 1.04904e-05, -1.32602 )
+
+[node name="Item12" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 38 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.6682, 0.21972, -6.50566 )
+
+[node name="MapItem" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 41 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.8802, 1.14441e-05, -8.09707 )
+
+[node name="Item13" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.2845, 1.14441e-05, -8.53209 )
+
+[node name="Item14" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.9972, 1.14441e-05, -0.391788 )
+
+[node name="Item15" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6712, 1.14441e-05, -6.6792 )
+
+[node name="Item16" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 45 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31.9627, 1.14441e-05, 0.892651 )
+
+[node name="Item17" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 32 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.9141, 1.14441e-05, -8.78495 )
+
+[node name="Item18" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32.5328, 1.14441e-05, -5.62824 )
+
+[node name="Item19" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.2682, 1.14441e-05, 0.426426 )
+
+[node name="Item20" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.0756, 1.14441e-05, -0.665115 )
+
+[node name="Item21" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 51 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.8525, 1.14441e-05, 2.19748 )
+
+[node name="Toolbox" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 39 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.0163, 1.14441e-05, -0.46405 )
+
+[node name="Item22" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 33 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.8964, 1.14441e-05, -2.00529 )
+
+[node name="MeshInstance2" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.0171, 1.90735e-05, 79.5393 )
+skeleton = NodePath("../../../..")
+
+[node name="MeshInstance3" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.38546, 1.90735e-05, 66.7485 )
+skeleton = NodePath("../../../..")

@@ -101,7 +101,7 @@ script = ExtResource( 5 )
 [node name="Clouds" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5000, 0 )
 script = ExtResource( 4 )
-CloudHeight = 5000.0
+CloudHeight = 4000.0
 
 [node name="SunMoonPivot" parent="." instance=ExtResource( 6 )]
 
@@ -129,7 +129,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 118.329, 2500 )
 material_override = SubResource( 112 )
 cast_shadow = 0
 generate_lightmap = false
-amount = 20
+amount = 5
 lifetime = 15.0
 speed_scale = 5.0
 visibility_aabb = AABB( -3825.97, 0, -4096, 7651.96, 3042.07, 8192 )

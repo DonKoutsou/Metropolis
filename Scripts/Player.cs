@@ -188,11 +188,12 @@ public class Player : Character
 				{
 					if (pos.DistanceTo(Vector3.Zero) > 7 * 8000)
 					{
-						TalkText t = GetTalkText();
+						DialogueManager.GetInstance().ScheduleDialogue(this, "Δεν μπορώ να πάω πιο βαθυιά με το μωρό μαζί μου, η ομήχλη είναι πολύ πηκνή.");
+						/*TalkText t = GetTalkText();
 						if (!t.IsTalking())
 						{
 							t.Talk("Δεν μπορώ να πάω πιο βαθυιά με το μωρό μαζί μου, η ομήχλη είναι πολύ πηκνή.");
-						}
+						}*/
 						return;
 					}
 				}
@@ -222,7 +223,8 @@ public class Player : Character
 	{
 		if (!CharacterInventory.IsLimbSlotFilled(LimbSlotType.ARM_L) || !CharacterInventory.IsLimbSlotFilled(LimbSlotType.ARM_R))
 		{
-			GetTalkText().Talk("Δεν μπορώ να παίξω χωρίς χέρια");
+			DialogueManager.GetInstance().ScheduleDialogue(this, "Δεν μπορώ να παίξω χωρίς χέρια");
+			//GetTalkText().Talk("Δεν μπορώ να παίξω χωρίς χέρια");
 			return;
 		}
 		base.PlayMusic();
@@ -261,7 +263,8 @@ public class Player : Character
 		{
 			if (!ExpressedNoBatteries && !BeingTalkedTo)
 			{
-				GetTalkText().Talk("Ξέμεινα από μπαταρίες. Πρέπει να βρώ κάπου να φωρτήσω.");
+				DialogueManager.GetInstance().ScheduleDialogue(this, "Ξέμεινα από μπαταρίες. Πρέπει να βρώ κάπου να φωρτήσω.");
+				//GetTalkText().Talk("Ξέμεινα από μπαταρίες. Πρέπει να βρώ κάπου να φωρτήσω.");
 				ExpressedNoBatteries = true;
 			}
 		}
@@ -342,16 +345,11 @@ public class Player : Character
 				direction = Vector3.Zero;
 			else
 			{
-				CollisionObject obj = (CollisionObject)dropcheck.GetCollider();
-				if (obj != null)
+				bool ItsSea = ((CollisionObject)dropcheck.GetCollider()).GetCollisionLayerBit(8);
+				if (ItsSea)
 				{
-					bool ItsSea = obj.GetCollisionLayerBit(8);
-					if (ItsSea)
-					{
-						direction = Vector3.Zero;
-					}
+					direction = Vector3.Zero;
 				}
-				
 			}
 		}
 		/////////////////////////////////////////////
@@ -363,7 +361,8 @@ public class Player : Character
 		{
 			if (!ExpressedLowBattery && !BeingTalkedTo)
 			{
-				GetTalkText().Talk("Θα ξεμείνω από μπαταρία σε λίγο. Δεν νιώθω καλά.");
+				DialogueManager.GetInstance().ScheduleDialogue(this, "Θα ξεμείνω από μπαταρία σε λίγο. Δεν νιώθω καλά.");
+				//GetTalkText().Talk("Θα ξεμείνω από μπαταρία σε λίγο. Δεν νιώθω καλά.");
 				ScreenEffects ui = (ScreenEffects)PlayerUI.GetInstance().GetUI(PlayerUIType.SCREENEFFECTS);
 				ui.PlayEffect(ScreenEffectTypes.DAMAGE);
 				ExpressedLowBattery = true;

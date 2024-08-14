@@ -7,14 +7,13 @@ _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.494144, 0.333935 ), 1.4456
 curve = SubResource( 149 )
 
 [sub_resource type="ParticlesMaterial" id=152]
-resource_local_to_scene = true
 trail_divisor = 11
 direction = Vector3( 0, -1, 0 )
 spread = 0.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 6.0
 angle = 360.0
-scale = 0.5
+scale = 2.0
 scale_curve = SubResource( 150 )
 
 [sub_resource type="SpatialMaterial" id=151]
@@ -39,10 +38,8 @@ rings = 0
 [node name="HoverEngineParticles" type="Particles"]
 cast_shadow = 0
 generate_lightmap = false
-emitting = false
 amount = 10
-lifetime = 0.5
-visibility_aabb = AABB( -0.72, -0.0496562, -0.61, 1.44, 3.12131, 1.219 )
+visibility_aabb = AABB( -0.72, -2.89122, -0.61, 1.44, 3.12131, 1.219 )
 draw_order = 2
 process_material = SubResource( 152 )
 draw_pass_1 = SubResource( 153 )

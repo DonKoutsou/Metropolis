@@ -56,6 +56,7 @@ public class InventoryUISlot : Control
             {
                 Battery bat = (Battery)it;
                 Rbar.Value = bat.GetCurrentCap();
+                Rbar.MaxValue = bat.GetCapacity();
                 //Condition.SetCondition(bat.GetCondition());
                 Rbar.Show();
                 Condition.Hide();

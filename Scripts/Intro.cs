@@ -31,7 +31,8 @@ public class Intro : Spatial
         map.AddChild(man);
         pl.GetNode<RemoteTransform>("WorldParticleRemoteTransform").RemotePath = man.GetPath();
 
-        pl.GetTalkText().Talk("Ένα από τα σκάφη επέζησε. Τι μπορεί να έχει μέσα;...");
+        DialogueManager.GetInstance().ScheduleDialogue(pl, "Ένα από τα σκάφη επέζησε. Τι μπορεί να έχει μέσα;...");
+        //pl.GetTalkText().Talk("Ένα από τα σκάφη επέζησε. Τι μπορεί να έχει μέσα;...");
         pl.MoveTo(PodPosition.GetInstance().GlobalTranslation, true, true);
         man.GlobalRotation = Vector3.Zero;
         PlayerCamera.GetInstance().Current = true;

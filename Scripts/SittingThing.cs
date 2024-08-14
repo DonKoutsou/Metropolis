@@ -38,7 +38,8 @@ public class SittingThing : StaticBody
 	{
         if (!HasEmptySeat())
         {
-            pl.GetTalkText().Talk("Δεν έχει χώρο.");
+            DialogueManager.GetInstance().ScheduleDialogue(pl, "Δεν έχει χώρο.");
+            //pl.GetTalkText().Talk("Δεν έχει χώρο.");
             return;
         }
         if (pl.HasVehicle())

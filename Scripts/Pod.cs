@@ -39,7 +39,8 @@ public class Pod : StaticBody
             AnimationPlayer anim = GetNode<AnimationPlayer>("AnimationPlayer");
             anim.Play("PodOpen");
             Opened = true;
-            pl.GetTalkText().Talk("Δεν έχει κάτι άλλο μέσα...");
+            DialogueManager.GetInstance().ScheduleDialogue(pl, "Δεν έχει κάτι άλλο μέσα...");
+            //pl.GetTalkText().Talk("Δεν έχει κάτι άλλο μέσα...");
         }
         CameraAnimationPlayer CameraAnimation = CameraAnimationPlayer.GetInstance();
         CameraAnimation.Connect("FadeOutFinished", this, "InitialChoice");
@@ -59,7 +60,8 @@ public class Pod : StaticBody
     {
         CameraAnimationPlayer CameraAnimation = CameraAnimationPlayer.GetInstance();
         CameraAnimation.Disconnect("FadeOutFinished", this, "OpenHatch");
-        Player.GetInstance().GetTalkText().Talk("Κλείσε τα μάτια σου μικρό είχες μεγάλο ταξίδι, σε λίγο θα είσαι σπίτι...");
+        DialogueManager.GetInstance().ScheduleDialogue(Player.GetInstance(), "Κλείσε τα μάτια σου μικρό είχες μεγάλο ταξίδι, σε λίγο θα είσαι σπίτι...");
+        //Player.GetInstance().GetTalkText().Talk("Κλείσε τα μάτια σου μικρό είχες μεγάλο ταξίδι, σε λίγο θα είσαι σπίτι...");
         //CameraAnimation.FadeOut(1);
 
         AnimationPlayer anim = GetNode<AnimationPlayer>("AnimationPlayer");
@@ -74,7 +76,8 @@ public class Pod : StaticBody
     {
         CameraAnimationPlayer CameraAnimation = CameraAnimationPlayer.GetInstance();
         CameraAnimation.Disconnect("FadeOutFinished", this, "Leave");
-        Player.GetInstance().GetTalkText().Talk("Καλή τύχη μικρό...");
+        DialogueManager.GetInstance().ScheduleDialogue(Player.GetInstance(), "Καλή τύχη μικρό...");
+        //Player.GetInstance().GetTalkText().Talk("Καλή τύχη μικρό...");
     }
     public void HandleInitialChoiceResault(bool b)
     {

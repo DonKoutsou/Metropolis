@@ -65,7 +65,8 @@ public class DayNight : WorldEnvironment
         //CurrentDistance = newdist;
         if (newdist >= 0.6)
         {
-            Player.GetInstance().GetTalkText().Talk("Η ομίχλη γίνεται πολύ πυκνή για το μωρό, ίσος να μην πάω πιο βαθιά...");
+            DialogueManager.GetInstance().ScheduleDialogue(Player.GetInstance(), "Η ομίχλη γίνεται πολύ πυκνή για το μωρό, ίσος να μην πάω πιο βαθιά...");
+            //Player.GetInstance().GetTalkText().Talk("Η ομίχλη γίνεται πολύ πυκνή για το μωρό, ίσος να μην πάω πιο βαθιά...");
         }
     }
 
@@ -537,13 +538,19 @@ public class DayNight : WorldEnvironment
         base._Ready();
         
         currenthour = startinghour;
-        Random rand = new Random(Settings.GetGameSettings().Seed);
-        currentDay = rand.Next(0, 10);
+        Settings set = Settings.GetGameSettings();
+        if (set != null)
+        {
+            Random rand = new Random(set.Seed);
+            currentDay = rand.Next(0, 10);
+            timeprogmultiplier = set.TimeProgression;
+        }
+        
         sun = GetParent().GetNode<DirectionalLight>("Sun");
         moon = GetParent().GetNode<DirectionalLight>("Moon");
         SunGodRays = sun.GetNode("GodRays");
         MoonGodRays = moon.GetNode("GodRays");
-        timeprogmultiplier = Settings.GetGameSettings().TimeProgression;
+        //timeprogmultiplier = Settings.GetGameSettings().TimeProgression;
         Environment.FogEnabled = true;
     }
 

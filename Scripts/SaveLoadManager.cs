@@ -102,13 +102,13 @@ public class SaveLoadManager : Control
 				//Values[1] = bat.GetCondition();
 				HasData = true;
 			}
-			else if (it is Toolbox box)
+			/*else if (it is Toolbox box)
 			{
 				Keys[0] = "CurrentSupplies";
 				Values[0] = box.GetCurrentSupplyAmmount();
 				HasData = true;
 			}
-			/*else if (it is Limb l)
+			else if (it is Limb l)
 			{
 				Keys[0] = "LimbColor";
 				Values[0] = l.GetColor();

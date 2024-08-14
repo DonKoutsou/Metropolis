@@ -56,6 +56,7 @@ public class TalkText : Spatial
         }
         TextL.Hide();
         SetPhysicsProcess(false);
+        DialogueManager.GetInstance().OnDialogueEnded();
     }
     public bool IsTalking()
     {

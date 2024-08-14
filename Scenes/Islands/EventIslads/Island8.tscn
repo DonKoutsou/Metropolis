@@ -203,11 +203,13 @@ transform = Transform( 0.973798, 0, 0.227416, 0, 1, 0, -0.227416, 0, 0.973798, -
 transform = Transform( 0.0253917, 0, -0.999678, 0, 1, 0, 0.999678, 0, 0.0253917, -661.068, 490.241, -684.766 )
 Sitting = true
 Chair = NodePath("../StaticBody10")
+DialogueColaborator = NodePath("../Brother2")
 
 [node name="Brother2" parent="." index="34" instance=ExtResource( 19 )]
 transform = Transform( -0.548979, 0, 0.835836, 0, 1, 0, -0.835836, 0, -0.548979, -670.528, 490.241, -682.288 )
 Sitting = true
 Chair = NodePath("../StaticBody9")
+DialogueColaborator = NodePath("../Brother1")
 
 [node name="MeshInstance" parent="." index="35" instance=ExtResource( 18 )]
 transform = Transform( -11.0512, -6.80362, 1.30611, 2.14975e-07, -2.45903, -12.8093, 6.92785, -10.8531, 2.08348, -1023.27, 522.914, -470.016 )

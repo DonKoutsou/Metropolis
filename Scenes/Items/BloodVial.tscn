@@ -8,8 +8,8 @@
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=6]
 
 [sub_resource type="CylinderShape" id=1]
-height = 0.120465
-radius = 0.0544137
+height = 0.325962
+radius = 0.153166
 
 [node name="Item" type="RigidBody" groups=["Interactables"]]
 collision_layer = 16
@@ -26,7 +26,7 @@ ItemName = "Σταγόνα ανθρώπινου αίματος"
 ItemDesc = "Ένα φιαλίδιο που κρατάει μέσα του μια σταγόνα από αίμα ανθρώπου. Πολύ σπάνιο πλέον μετά την εξαφάνιση των ανθρώπων."
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 34.3935, 0, 0, 0, 34.3935, 0, 0, 0, 34.3935, 0, 0.0534815, 0 )
+transform = Transform( 90.8958, 0, 0, 0, 90.8958, 0, 0, 0, 90.8958, 0, 0.141275, 0 )
 material_override = ExtResource( 2 )
 mesh = ExtResource( 3 )
 script = ExtResource( 6 )
@@ -35,7 +35,7 @@ LOD1 = ExtResource( 3 )
 HideIfNoLod = true
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0618309, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.163698, 0 )
 shape = SubResource( 1 )
 
 [node name="ActionComponent" parent="." instance=ExtResource( 5 )]

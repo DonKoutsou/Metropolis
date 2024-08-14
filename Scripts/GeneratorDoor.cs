@@ -88,7 +88,8 @@ public class GeneratorDoor : StaticBody
         }
             
         else
-            pl.GetTalkText().Talk("Φένεταί σαν να χρειάζεται κάποιου είδους κλειδί για να ελέγξω την πύλη.");
+            DialogueManager.GetInstance().ScheduleDialogue(pl, "Φένεταί σαν να χρειάζεται κάποιου είδους κλειδί για να ελέγξω την πύλη.");
+            //pl.GetTalkText().Talk("Φένεταί σαν να χρειάζεται κάποιου είδους κλειδί για να ελέγξω την πύλη.");
     }
 
 }

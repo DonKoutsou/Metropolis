@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class WorldParticleManager : Spatial
 {
     List<Particles> WorldParticles = new List<Particles>();
-    Spatial WindAllignedParticles;
+    static Spatial WindAllignedParticles;
     public override void _Ready()
     {
         WindAllignedParticles = GetNode<Spatial>("WindAllignedParticles");
@@ -39,5 +39,9 @@ public class WorldParticleManager : Spatial
        
         
         WindAllignedParticles.GlobalRotation = new Godot.Vector3(0, rot, 0);
+    }
+    public static void ToggleExternalParts(bool t)
+    {
+        WindAllignedParticles.Visible = t;
     }
 }

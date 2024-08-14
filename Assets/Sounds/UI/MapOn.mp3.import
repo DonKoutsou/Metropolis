@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/MapOn.mp3-b92a178e4457223949ba055035a80c44.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/UI/MapOn.mp3"
+dest_files=[ "res://.import/MapOn.mp3-b92a178e4457223949ba055035a80c44.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

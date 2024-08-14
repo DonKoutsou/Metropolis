@@ -48,8 +48,9 @@ public class DialogueTrigger : Spatial
             return;
 
         Entered = true;
-                
-        pl.GetTalkText().Talk(EnterDialogues[TimesEntered]);
+
+        DialogueManager.GetInstance().ScheduleDialogue(pl, EnterDialogues[TimesEntered]);     
+        //pl.GetTalkText().Talk(EnterDialogues[TimesEntered]);
                 
         TimesEntered += 1;
     }
@@ -69,7 +70,8 @@ public class DialogueTrigger : Spatial
 
         Left = true;
 
-        pl.GetTalkText().Talk(LeaveDialogues[TimesLeft]);
+        DialogueManager.GetInstance().ScheduleDialogue(pl, LeaveDialogues[TimesLeft]);
+        //pl.GetTalkText().Talk(LeaveDialogues[TimesLeft]);
 
         TimesLeft += 1;
     }

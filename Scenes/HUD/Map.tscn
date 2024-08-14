@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Scripts/MapGrid.cs" type="Script" id=1]
 [ext_resource path="res://Fonts/Play-Bold.ttf" type="DynamicFontData" id=2]
@@ -17,6 +17,8 @@
 [ext_resource path="res://UIThemes/Panel_Black_TopCorner.tres" type="StyleBox" id=15]
 [ext_resource path="res://UIThemes/Panel_Black_LeftCorners.tres" type="StyleBox" id=16]
 [ext_resource path="res://UIThemes/Panel_DarkBlue_Digital_SMall.tres" type="StyleBox" id=17]
+[ext_resource path="res://Assets/Sounds/UI/MapOn.mp3" type="AudioStream" id=18]
+[ext_resource path="res://Assets/Sounds/UI/MapOoff.mp3" type="AudioStream" id=19]
 
 [sub_resource type="StyleBoxFlat" id=39]
 
@@ -715,6 +717,18 @@ tracks/16/keys = {
 "update": 0,
 "values": [ Color( 0, 0, 0, 0 ) ]
 }
+tracks/17/type = "value"
+tracks/17/path = NodePath("MapClose:playing")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
 
 [sub_resource type="DynamicFont" id=51]
 size = 24
@@ -744,9 +758,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -895.0
-margin_top = -480.0
+margin_top = 15.0
 margin_right = 928.0
-margin_bottom = 510.0
+margin_bottom = 15.0
 rect_clip_content = true
 mouse_filter = 2
 mouse_default_cursor_shape = 6
@@ -868,7 +882,7 @@ texture = ExtResource( 13 )
 expand = true
 
 [node name="Panel" type="Panel" parent="MapGridPanel"]
-modulate = Color( 0, 0, 0, 0 )
+modulate = Color( 0, 0, 0, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -877,9 +891,9 @@ mouse_filter = 2
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_left = 32.0
-margin_top = -480.0
+margin_top = 15.0
 margin_right = 65.0
-margin_bottom = 510.0
+margin_bottom = 15.0
 rect_clip_content = true
 mouse_filter = 1
 custom_styles/panel = SubResource( 42 )
@@ -915,9 +929,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -895.0
-margin_top = -510.0
+margin_top = -19.0
 margin_right = 928.0
-margin_bottom = -480.0
+margin_bottom = 11.0001
 rect_clip_content = true
 mouse_filter = 1
 custom_styles/panel = SubResource( 42 )
@@ -950,9 +964,9 @@ valign = 1
 
 [node name="Panel5" type="Panel" parent="."]
 margin_left = 32.0
-margin_top = 30.0
+margin_top = 523.0
 margin_right = 65.0
-margin_bottom = 59.9999
+margin_bottom = 553.0
 rect_clip_content = true
 mouse_filter = 1
 custom_styles/panel = SubResource( 42 )
@@ -983,9 +997,8 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -928.0
-margin_top = 510.0
 margin_right = 928.0
-margin_bottom = 540.0
+margin_bottom = 30.0
 rect_clip_content = true
 mouse_filter = 1
 custom_styles/panel = ExtResource( 12 )
@@ -996,9 +1009,8 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -927.5
-margin_top = -540.0
-margin_right = 931.5
-margin_bottom = -510.0
+margin_top = -30.0
+margin_right = 932.5
 rect_clip_content = true
 mouse_filter = 1
 custom_styles/panel = ExtResource( 15 )
@@ -1009,8 +1021,8 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 margin_left = -32.0
-margin_top = -510.0
-margin_bottom = 510.0
+margin_top = -22.0
+margin_bottom = 22.0
 rect_clip_content = true
 mouse_filter = 1
 custom_styles/panel = ExtResource( 10 )
@@ -1018,9 +1030,9 @@ custom_styles/panel = ExtResource( 10 )
 [node name="Panel8" type="Panel" parent="."]
 anchor_top = 0.5
 anchor_bottom = 0.5
-margin_top = -510.0
+margin_top = -22.0
 margin_right = 32.0
-margin_bottom = 510.0
+margin_bottom = 22.0
 rect_clip_content = true
 mouse_filter = 1
 custom_styles/panel = ExtResource( 16 )
@@ -1053,6 +1065,12 @@ margin_top = -4.0
 margin_right = 4.0
 margin_bottom = 4.0
 custom_styles/panel = ExtResource( 17 )
+
+[node name="MapOpen" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 18 )
+
+[node name="MapClose" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 19 )
 
 [connection signal="mouse_entered" from="MapGridPanel" to="." method="OnMouseEntered"]
 [connection signal="mouse_exited" from="MapGridPanel" to="." method="OnMouseLeft"]

@@ -29,10 +29,10 @@ public class Book : Item
     {
         return BookEnumTranslator.TranslateBookEnum(Series) + "\n Τόμος : " + VolumeNumber.ToString();
     }
-    /*public override string GetItemDesc()
+    public override string GetItemDesc()
     {
         return BookEnumTranslator.TranslateBookEnum(Series) + "\n Τόμος : " + VolumeNumber.ToString();
-    }*/
+    }
 }
 public class BookVolumeHolder
 {

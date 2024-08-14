@@ -1,11 +1,13 @@
-[gd_scene load_steps=69 format=2]
+[gd_scene load_steps=72 format=2]
 
 [ext_resource path="res://Scenes/Characters/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/HUD/PlayerUI.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/DialogueManager.cs" type="Script" id=3]
 [ext_resource path="res://Scenes/Env_Assets/WindGenerator2.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Poseidon.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/UI/Checkerboard.jpg" type="Texture" id=6]
 [ext_resource path="res://Assets/Building/BuildingComposition.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Characters/NPCVariants/Brother1.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Vehicles/HoverBoard_NoWings.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Sounds/Mpouzoukia/Bouzouki1-Ambient.mp3" type="AudioStream" id=10]
 [ext_resource path="res://Scripts/MusicManager.cs" type="Script" id=11]
@@ -26,6 +28,7 @@
 [ext_resource path="res://Scripts/RandomContainer.cs" type="Script" id=26]
 [ext_resource path="res://Scenes/World/Sky.tscn" type="PackedScene" id=27]
 [ext_resource path="res://Scenes/Characters/NPCVariants/UnconMachine.tscn" type="PackedScene" id=28]
+[ext_resource path="res://Scenes/Characters/NPCVariants/Brother2.tscn" type="PackedScene" id=29]
 [ext_resource path="res://Scripts/DViewport.cs" type="Script" id=34]
 [ext_resource path="res://Scenes/Islands/WallOpen.tscn" type="PackedScene" id=35]
 [ext_resource path="res://Assets/Boat/ΚαικιΗιγη_Καικι3_BaseColor.png" type="Texture" id=36]
@@ -370,6 +373,9 @@ script = ExtResource( 26 )
 [node name="UniversalLODManager" type="Node" parent="."]
 script = ExtResource( 53 )
 
+[node name="DialogueManager" type="Node" parent="."]
+script = ExtResource( 3 )
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 4
 
@@ -660,5 +666,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.977, 13.5021, -29.2983 )
 
 [node name="Character2" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 28 )]
 transform = Transform( -0.999661, 0, 0.0260199, 0, 1, 0, -0.0260199, 0, -0.999661, 14.8554, 13.502, 13.3533 )
+
+[node name="Brother1" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.6142, 13.5021, -24.3727 )
+DialogueColaborator = NodePath("../Brother2")
+
+[node name="Brother2" parent="Control/ViewportContainer/Viewport" instance=ExtResource( 29 )]
+transform = Transform( 0.444276, 0, -0.89589, 0, 1, 0, 0.89589, 0, 0.444276, 25.7077, 13.5021, -20.881 )
+DialogueColaborator = NodePath("../Brother1")
 
 [editable path="Control/ViewportContainer/Viewport/Vehicle"]

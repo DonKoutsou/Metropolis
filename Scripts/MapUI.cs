@@ -54,6 +54,7 @@ public class MapUI : Control
         GetNode<Panel>("MapGridPanel").GetNode<Control>("PlayerIconPivot").GetNode<AnimationPlayer>("PlayerIconAnim").Play("Blinking");
         Show();
         IsOpen = true;
+       
         
     }
     public void OnMapClosed()
@@ -63,6 +64,7 @@ public class MapUI : Control
         GetNode<Panel>("MapGridPanel").GetNode<Control>("PlayerIconPivot").GetNode<AnimationPlayer>("PlayerIconAnim").Stop();
         AudioServer.SetBusEffectEnabled(0,0, false);
         Grid.ToggleMap(false);
+        GetNode<AudioStreamPlayer>("MapClose").Play();
     }
     private void OnAnimFinished(string anim)
     {
@@ -70,6 +72,7 @@ public class MapUI : Control
         {
             AudioServer.SetBusEffectEnabled(0,0, true);
             Grid.ToggleMap(true);
+             GetNode<AudioStreamPlayer>("MapOpen").Play();
         }
         if (anim == "MapClose")
         {

@@ -40,7 +40,9 @@ public class House : Spatial
 		GetNode<Spatial>("Furnitures").Hide();
 		GetNode<Spatial>("Decorations").Hide();
 
+
 		Spatial l = GetNode<Spatial>("Lights");
+		l.Hide();
 		if (l.GetChildCount() == 0)
 			return;
 
@@ -61,11 +63,13 @@ public class House : Spatial
 		
 		GetNode<Spatial>("Furnitures").Show();
 		GetNode<Spatial>("Decorations").Show();
+		GetNode<Spatial>("Lights").Show();
 
 		DoorPivot Piv = GetNode<DoorPivot>("DoorPivot");
 		Piv.Open();
 
 		AudioServer.SetBusEffectEnabled(2,0, true);
+		WorldParticleManager.ToggleExternalParts(false);
 		//((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(2)).ParamsCullMode = SpatialMaterial.CullMode.Front;
 		/*foreach (Spatial Oclude in GetNode<Spatial>("Occluders").GetChildren()) 
 		{
@@ -96,8 +100,10 @@ public class House : Spatial
 		}
 		GetNode<Spatial>("Furnitures").Hide();
 		GetNode<Spatial>("Decorations").Hide();
+		GetNode<Spatial>("Lights").Hide();
 
 		AudioServer.SetBusEffectEnabled(2,0, false);
+		WorldParticleManager.ToggleExternalParts(true);
 		//((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(2)).ParamsCullMode = SpatialMaterial.CullMode.Disabled;
 		/*foreach (Spatial Oclude in GetNode<Spatial>("Occluders").GetChildren()) 
 		{

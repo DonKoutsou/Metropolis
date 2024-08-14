@@ -22,8 +22,6 @@ ItemType = 9
 ItemIcon = ExtResource( 2 )
 ItemPickupActionName = "Μια εργαλειοθήκη"
 ItemName = "Εργαλειοθήκη"
-stackable = false
-CurrentSupplies = 20.0
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 material_override = ExtResource( 7 )

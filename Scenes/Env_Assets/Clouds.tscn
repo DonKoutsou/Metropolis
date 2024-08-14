@@ -11,7 +11,7 @@ curve = SubResource( 7 )
 [sub_resource type="ParticlesMaterial" id=2]
 lifetime_randomness = 0.32
 emission_shape = 2
-emission_box_extents = Vector3( 20000, 10, 20000 )
+emission_box_extents = Vector3( 10000, 10, 10000 )
 spread = 0.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 100.0
@@ -34,7 +34,7 @@ size = Vector2( 1500, 1500 )
 layers = 256
 cast_shadow = 0
 generate_lightmap = false
-amount = 1000
+amount = 500
 lifetime = 40.0
 explosiveness = 0.24
 visibility_aabb = AABB( -4096, -5596, -4096, 8192, 8192, 8192 )

@@ -15,6 +15,7 @@ shader = ExtResource( 4 )
 shader_param/offset = 0.073
 shader_param/fade = 0.112
 shader_param/NormalForce = 1.0
+shader_param/AOLightAffect = null
 shader_param/roughness_texture_channel = Plane( 0, 0, 0, 1 )
 shader_param/uv1_blend_sharpness = 8.0
 shader_param/uv1_scale = 0.003
