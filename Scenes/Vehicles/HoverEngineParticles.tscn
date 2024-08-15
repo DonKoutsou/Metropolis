@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [sub_resource type="Curve" id=149]
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.494144, 0.333935 ), 1.44566, -1.01951, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0.211191 ), 0.0, 0.0, 0, 0, Vector2( 0.497485, 0.5 ), 1.44566, -1.01951, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=150]
 curve = SubResource( 149 )
@@ -32,13 +32,15 @@ emission_on_uv2 = false
 
 [sub_resource type="CylinderMesh" id=153]
 material = SubResource( 151 )
+height = 0.5
 radial_segments = 8
 rings = 0
 
 [node name="HoverEngineParticles" type="Particles"]
 cast_shadow = 0
 generate_lightmap = false
-amount = 10
+emitting = false
+amount = 15
 visibility_aabb = AABB( -0.72, -2.89122, -0.61, 1.44, 3.12131, 1.219 )
 draw_order = 2
 process_material = SubResource( 152 )

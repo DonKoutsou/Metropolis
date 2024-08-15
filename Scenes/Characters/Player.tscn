@@ -191,6 +191,7 @@ pause_mode = 1
 collision_layer = 9
 collision_mask = 55
 script = ExtResource( 1 )
+ClothToWear = 1
 ClothMaterial = ExtResource( 9 )
 JumpImpulse = 30
 RunSpeed = 30.0

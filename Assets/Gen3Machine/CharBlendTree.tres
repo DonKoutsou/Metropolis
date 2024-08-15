@@ -1,4 +1,4 @@
-[gd_resource type="AnimationNodeBlendTree" load_steps=17 format=2]
+[gd_resource type="AnimationNodeBlendTree" load_steps=21 format=2]
 
 [sub_resource type="AnimationNodeAnimation" id=14]
 animation = "Jump"
@@ -39,12 +39,20 @@ filters = [ "Armature/Skeleton:mixamorig_Head", "Armature/Skeleton:mixamorig_Hea
 
 [sub_resource type="AnimationNodeTimeScale" id=45]
 
+[sub_resource type="AnimationNodeTimeScale" id=46]
+
+[sub_resource type="AnimationNodeTimeScale" id=47]
+
+[sub_resource type="AnimationNodeTimeScale" id=48]
+
+[sub_resource type="AnimationNodeTimeScale" id=49]
+
 [sub_resource type="AnimationNodeTimeScale" id=23]
 
 [resource]
-graph_offset = Vector2( -837.963, 28.4255 )
+graph_offset = Vector2( -976.144, -87.0958 )
 nodes/Animation/node = SubResource( 16 )
-nodes/Animation/position = Vector2( -120, 120 )
+nodes/Animation/position = Vector2( -304, 96 )
 "nodes/Animation 2/node" = SubResource( 14 )
 "nodes/Animation 2/position" = Vector2( -20, 0 )
 "nodes/Animation 3/node" = SubResource( 15 )
@@ -52,21 +60,21 @@ nodes/Animation/position = Vector2( -120, 120 )
 "nodes/Animation 4/node" = SubResource( 31 )
 "nodes/Animation 4/position" = Vector2( -32, 528 )
 "nodes/Animation 5/node" = SubResource( 37 )
-"nodes/Animation 5/position" = Vector2( 613.333, 440 )
+"nodes/Animation 5/position" = Vector2( 432, 448 )
 "nodes/Animation 6/node" = SubResource( 39 )
-"nodes/Animation 6/position" = Vector2( 933.333, 600 )
+"nodes/Animation 6/position" = Vector2( 736, 608 )
 "nodes/Animation 8/node" = SubResource( 43 )
-"nodes/Animation 8/position" = Vector2( 1093.33, 826.667 )
+"nodes/Animation 8/position" = Vector2( 944, 832 )
 nodes/ClimbDown/node = SubResource( 42 )
 nodes/ClimbDown/position = Vector2( 1293.33, 613.333 )
 nodes/ClimbUp/node = SubResource( 44 )
 nodes/ClimbUp/position = Vector2( 1136, 432 )
 nodes/Idle_Run_Blend/node = SubResource( 32 )
-nodes/Idle_Run_Blend/position = Vector2( 320, 280 )
+nodes/Idle_Run_Blend/position = Vector2( 320, 272 )
 nodes/Idle_Walk_Blend/node = SubResource( 17 )
 nodes/Idle_Walk_Blend/position = Vector2( 53.3333, 253.333 )
 nodes/IntrumentBlend/node = SubResource( 38 )
-nodes/IntrumentBlend/position = Vector2( 887.933, 324.531 )
+nodes/IntrumentBlend/position = Vector2( 864, 288 )
 nodes/JumpShot/node = SubResource( 18 )
 nodes/JumpShot/position = Vector2( 560, 160 )
 nodes/TimeScale/node = SubResource( 23 )
@@ -75,5 +83,13 @@ nodes/TimeScale/position = Vector2( 241.076, 25.6959 )
 "nodes/TimeScale 2/position" = Vector2( -186.667, 333.333 )
 "nodes/TimeScale 3/node" = SubResource( 45 )
 "nodes/TimeScale 3/position" = Vector2( 144, 448 )
+"nodes/TimeScale 4/node" = SubResource( 46 )
+"nodes/TimeScale 4/position" = Vector2( -112, 144 )
+"nodes/TimeScale 5/node" = SubResource( 47 )
+"nodes/TimeScale 5/position" = Vector2( 701.052, 472.841 )
+"nodes/TimeScale 6/node" = SubResource( 48 )
+"nodes/TimeScale 6/position" = Vector2( 960, 576 )
+"nodes/TimeScale 7/node" = SubResource( 49 )
+"nodes/TimeScale 7/position" = Vector2( 1120, 752 )
 nodes/output/position = Vector2( 1506.67, 640 )
-node_connections = [ "output", 0, "ClimbDown", "ClimbDown", 0, "ClimbUp", "ClimbDown", 1, "Animation 8", "ClimbUp", 0, "IntrumentBlend", "ClimbUp", 1, "Animation 6", "Idle_Run_Blend", 0, "Idle_Walk_Blend", "Idle_Run_Blend", 1, "TimeScale 3", "TimeScale", 0, "Animation 2", "JumpShot", 0, "Idle_Run_Blend", "JumpShot", 1, "TimeScale", "TimeScale 3", 0, "Animation 4", "Idle_Walk_Blend", 0, "Animation", "Idle_Walk_Blend", 1, "TimeScale 2", "IntrumentBlend", 0, "JumpShot", "IntrumentBlend", 1, "Animation 5", "TimeScale 2", 0, "Animation 3" ]
+node_connections = [ "output", 0, "ClimbDown", "Idle_Run_Blend", 0, "Idle_Walk_Blend", "Idle_Run_Blend", 1, "TimeScale 3", "Idle_Walk_Blend", 0, "TimeScale 4", "Idle_Walk_Blend", 1, "TimeScale 2", "TimeScale", 0, "Animation 2", "TimeScale 3", 0, "Animation 4", "TimeScale 5", 0, "Animation 5", "TimeScale 7", 0, "Animation 8", "IntrumentBlend", 0, "JumpShot", "IntrumentBlend", 1, "TimeScale 5", "JumpShot", 0, "Idle_Run_Blend", "JumpShot", 1, "TimeScale", "TimeScale 2", 0, "Animation 3", "TimeScale 6", 0, "Animation 6", "TimeScale 4", 0, "Animation", "ClimbUp", 0, "IntrumentBlend", "ClimbUp", 1, "TimeScale 6", "ClimbDown", 0, "ClimbUp", "ClimbDown", 1, "TimeScale 7" ]

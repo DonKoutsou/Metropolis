@@ -336,7 +336,7 @@ nodes/ChairBlend/position = Vector2( 186.667, 160 )
 nodes/IntrumentBlend/node = SubResource( 54 )
 nodes/IntrumentBlend/position = Vector2( 360, 266.667 )
 nodes/output/position = Vector2( 533.333, 160 )
-node_connections = [ "output", 0, "IntrumentBlend", "IntrumentBlend", 0, "ChairBlend", "IntrumentBlend", 1, "Animation 2", "ChairBlend", 0, "Animation", "ChairBlend", 1, "Animation 3" ]
+node_connections = [ "output", 0, "IntrumentBlend", "ChairBlend", 0, "Animation", "ChairBlend", 1, "Animation 3", "IntrumentBlend", 0, "ChairBlend", "IntrumentBlend", 1, "Animation 2" ]
 
 [sub_resource type="AnimationNodeAnimation" id=55]
 animation = "Standing"
@@ -451,21 +451,17 @@ material/0 = ExtResource( 8 )
 [node name="Gen3Machine" parent="." instance=ExtResource( 19 )]
 transform = Transform( -0.492894, 0, 0.870089, 0, 1, 0, -0.870089, 0, -0.492894, 76.0386, 91.2997, 1060.73 )
 
-[node name="Skeleton" parent="Gen3Machine/Armature" index="1"]
-bones/3/bound_children = [  ]
-bones/6/bound_children = [  ]
-
 [node name="HeadRot2Pivot" parent="Gen3Machine/Armature/Skeleton" index="0"]
-transform = Transform( -1, -7.45078e-09, -1.63913e-06, 2.07296e-07, 1.00003, 2.19968e-07, 1.63913e-06, -7.07796e-08, -1, -4.48047, 279.87, 22.0117 )
+transform = Transform( -1, -7.45078e-09, -1.63913e-06, 2.07266e-07, 1.00003, 2.19968e-07, 1.63913e-06, -7.07796e-08, -1, -3.84375, 280.915, 20.3691 )
 
 [node name="BoneAttachment" parent="Gen3Machine/Armature/Skeleton" index="1"]
-transform = Transform( 1, 3.48467e-14, -8.52902e-11, -1.35406e-14, 1, -1.1968e-07, 8.54891e-11, 1.49483e-07, 1, 3.16403e-13, 111.211, -1.42295 )
+transform = Transform( 0.996946, -0.0678477, -0.0386591, 0.0628672, 0.991017, -0.118032, 0.0463201, 0.115241, 0.992256, -2.48858, 265.632, 11.8934 )
 
 [node name="MeshInstance" parent="Gen3Machine/Armature/Skeleton/BoneAttachment/HeadPivot" index="0"]
 mesh = SubResource( 64 )
 
 [node name="InstrumentAtatchment" parent="Gen3Machine/Armature/Skeleton" index="2"]
-transform = Transform( 1, -1.55244e-14, 2.63523e-07, -3.14296e-08, 0.992862, 0.119267, -2.61642e-07, -0.119267, 0.992862, -7.09666e-13, 56.8686, -3.5024 )
+transform = Transform( 0.997543, -0.0248811, -0.0654779, 0.0235549, 0.999502, -0.0209488, 0.0659666, 0.019355, 0.997634, 0.639946, 213.298, 0.357729 )
 
 [node name="Instrument" parent="Gen3Machine/Armature/Skeleton/InstrumentAtatchment" index="2"]
 transform = Transform( -36.0815, -20.3793, 2.87583, -19.6836, 35.8642, 7.21661, -6.00602, 4.8918, -40.9278, 27.6828, -49.0322, -37.2074 )
@@ -495,11 +491,10 @@ material/0 = SubResource( 67 )
 material/0 = SubResource( 67 )
 
 [node name="Hoodie" parent="Gen3Machine/Armature/Skeleton" index="14"]
-visible = true
 material_override = ExtResource( 26 )
 
 [node name="Hoodie_SleeveLess" parent="Gen3Machine/Armature/Skeleton" index="15"]
-visible = false
+material_override = ExtResource( 26 )
 
 [node name="Leg2_L" parent="Gen3Machine/Armature/Skeleton" index="16"]
 material/0 = SubResource( 68 )
