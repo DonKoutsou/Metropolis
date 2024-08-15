@@ -3,7 +3,12 @@
 [resource]
 render_priority = 1
 flags_transparent = true
-flags_unshaded = true
+flags_do_not_receive_shadows = true
+flags_disable_ambient_light = true
+params_blend_mode = 1
 params_cull_mode = 2
 params_depth_draw_mode = 1
-albedo_color = Color( 0.890196, 0.988235, 1, 0.00392157 )
+albedo_color = Color( 0.890196, 0.988235, 1, 0.294118 )
+rim_enabled = true
+rim = 0.09
+rim_tint = 1.0

@@ -126,7 +126,7 @@ config/windows_native_icon="res://IconMetropolis.ico"
 
 [audio]
 
-default_bus_layout=""
+default_bus_layout="res://Busses.tres"
 
 [display]
 

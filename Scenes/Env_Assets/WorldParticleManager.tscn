@@ -146,9 +146,11 @@ script = ExtResource( 9 )
 stream = ExtResource( 10 )
 autoplay = true
 mix_target = 1
+bus = "Weather"
 
 [node name="Enviroment" type="AudioStreamPlayer" parent="WorldSoundManager"]
 stream = ExtResource( 8 )
 volume_db = -3.0
 autoplay = true
 mix_target = 1
+bus = "Weather"

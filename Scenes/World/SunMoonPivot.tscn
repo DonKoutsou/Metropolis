@@ -1,6 +1,18 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/SunMoonPivot.cs" type="Script" id=1]
+
+[sub_resource type="OpenSimplexNoise" id=91]
+octaves = 1
+period = 56.9
+persistence = 0.998
+lacunarity = 0.65
+
+[sub_resource type="NoiseTexture" id=92]
+width = 1024
+height = 1024
+seamless = true
+noise = SubResource( 91 )
 
 [sub_resource type="SpatialMaterial" id=16]
 params_blend_mode = 1
@@ -10,6 +22,7 @@ emission = Color( 0.937255, 0.878431, 0.643137, 1 )
 emission_energy = 3.0
 emission_operator = 0
 emission_on_uv2 = false
+emission_texture = SubResource( 92 )
 
 [sub_resource type="SphereMesh" id=85]
 material = SubResource( 16 )
@@ -26,6 +39,7 @@ emission = Color( 0.890196, 1, 0.996078, 1 )
 emission_energy = 8.0
 emission_operator = 0
 emission_on_uv2 = false
+emission_texture = SubResource( 92 )
 
 [sub_resource type="SphereMesh" id=86]
 material = SubResource( 14 )

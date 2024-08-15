@@ -49,7 +49,6 @@ dof_blur_far_enabled = true
 dof_blur_far_distance = 2507.16
 dof_blur_far_transition = 409.63
 dof_blur_far_amount = 0.08
-dof_blur_near_enabled = true
 dof_blur_near_distance = 10.0
 dof_blur_near_transition = 4.48
 glow_enabled = true
