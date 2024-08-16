@@ -225,8 +225,9 @@ public class ActionMenu : Control
 		ActionComponent Acomp = SelectedObj.GetNode<ActionComponent>("ActionComponent");
 		Vector3 actionpos = Acomp.GetActionPos(Play.GlobalTranslation);
 
-		float mult = OS.WindowSize.x / DViewport.GetInstance().Size.x;
-		var screenpos = DViewport.GetInstance().GetCamera().UnprojectPosition(actionpos) * mult;
+		
+		float mult = ((Control)DViewport.GetInstance().GetParent()).RectScale.x;
+		var screenpos = DViewport.GetInstance().GetCamera().UnprojectPosition(actionpos);
 
 		Play.GetNode<LoddedCharacter>("Pivot/Guy/Armature/Skeleton").HeadLookAt(actionpos);
 		//Vector3 pos = SelectedObj.GlobalTransform.origin;
@@ -242,7 +243,7 @@ public class ActionMenu : Control
 				PickButton.Hide();
 		}
 
-		RectPosition = new Vector2 (screenpos.x, screenpos.y +50);
+		RectPosition = new Vector2 (screenpos.x, screenpos.y +50) * mult;
 
 		if (screenpos < Vector2.Zero || screenpos > GetViewport().Size)
 			Stop();

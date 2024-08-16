@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Assets/Clutter/Powerline/PowerLine.tres" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Sea/OceanShader.tres" type="Material" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://Assets/Building/Assets/Building_Dest_LOD.tres" type="ArrayMesh" id=17]
 [ext_resource path="res://Assets/Building/Assets/Building_Dest2_LOD2.tres" type="ArrayMesh" id=18]
 [ext_resource path="res://Assets/Building/Assets/Building_Dest3_LOD.tres" type="ArrayMesh" id=19]
+[ext_resource path="res://Assets/PostProcess/PixelShader.gdshader" type="Shader" id=20]
 [ext_resource path="res://Assets/Clouds/Textures/smoke_01.png" type="Texture" id=21]
 [ext_resource path="res://Assets/Rocks/Rock1.tres" type="ArrayMesh" id=22]
 [ext_resource path="res://Assets/Clouds/Textures/smoke_04.png" type="Texture" id=24]
@@ -98,6 +99,12 @@ albedo_color = Color( 0.890196, 0.988235, 1, 0.290196 )
 [sub_resource type="QuadMesh" id=3]
 material = SubResource( 126 )
 size = Vector2( 0.5, 50 )
+
+[sub_resource type="QuadMesh" id=127]
+
+[sub_resource type="ShaderMaterial" id=128]
+render_priority = -1
+shader = ExtResource( 20 )
 
 [sub_resource type="Curve" id=116]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.0241546, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.497585, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.975845, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
@@ -381,6 +388,11 @@ draw_pass_1 = SubResource( 3 )
 stream = ExtResource( 7 )
 pitch_scale = 1.97
 autoplay = true
+
+[node name="MeshInstance" type="MeshInstance" parent="Camera"]
+transform = Transform( 2.08414, 3.72529e-09, -5.96046e-08, -1.11759e-08, 2.08414, 7.45058e-09, 0, 0, 2.08414, 0.000244141, 0, -1.17725 )
+mesh = SubResource( 127 )
+material/0 = SubResource( 128 )
 
 [node name="Spatial" type="Spatial" parent="."]
 transform = Transform( 0.998121, 0.061275, 0, -0.061275, 0.998121, 0, 0, 0, 1, 9.34131, 1798.53, -138.101 )

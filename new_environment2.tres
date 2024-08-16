@@ -35,7 +35,6 @@ fog_height_curve = 0.514189
 tonemap_mode = 2
 tonemap_exposure = 0.2
 tonemap_white = 0.5
-auto_exposure_enabled = true
 auto_exposure_scale = 0.7
 ssao_radius = 128.0
 ssao_intensity = 128.0
