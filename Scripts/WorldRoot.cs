@@ -33,7 +33,7 @@ public class WorldRoot : Spatial
 
 		GetNode("Control/ViewportContainer/Viewport").AddChild(intro, true);
 
-		GetNode<Control>("CanvasLayer/PlayerUI").Hide();
+		//GetNode<Control>("CanvasLayer/PlayerUI").Hide();
 	}
 	public bool IsMapSpawned()
 	{
@@ -46,8 +46,6 @@ public class WorldRoot : Spatial
 		m_myworld.LoadSave = LoadSave;
 		m_myworld.Connect("PlayerSpawnedEventHandler", PlayerUI.GetInstance(), "OnPlayerSpawned");
 		GetNode("Control/ViewportContainer/Viewport").AddChild(m_myworld);
-
-		
 	}
 	public void StopGame()
 	{

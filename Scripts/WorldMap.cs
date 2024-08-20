@@ -8,28 +8,30 @@ using System.Security.Policy;
 public class WorldMap : TileMap
 {
 	[Export]
-	public PackedScene[] scenestospawn;
+	string[] ScenesToSpawnLocs = null;
+	//[Export]
+	//public PackedScene[] scenestospawn;
 
 	[Export]
-	public PackedScene[] Eventscenestospawn;
+	string[] Eventscenestospawn = null;
 
-	List <PackedScene> loadedscenes = new List<PackedScene>();
-
-	[Export]
-	public PackedScene Entrytospawn;
+	//List <PackedScene> loadedscenes = new List<PackedScene>();
 
 	[Export]
-	public PackedScene Exittospawn;
-	[Export]
-	public PackedScene WallToSpawn;
-	[Export]
-	public PackedScene EventWall;
+	string Entrytospawn = null;
 
 	[Export]
-	public PackedScene[] SeaVariations;
+	string Exittospawn = null;
+	[Export]
+	string WallToSpawn = null;
+	[Export]
+	string EventWall = null;
 
 	[Export]
-	public PackedScene LightHouse;
+	string[] SeaVariations = null;
+
+	[Export]
+	string LightHouse = null;
 
 	//[Export]
 	//public PackedScene Μαχαλάς;
@@ -38,7 +40,8 @@ public class WorldMap : TileMap
 	int CellSizeOverride = 8000;
 
 	[Export]
-	PackedScene IntroScene = null;
+	string IntroScene = null;
+
 	[Signal]
 	public delegate void OnTransitionEventHandler(Island ile);
 
@@ -318,10 +321,11 @@ public class WorldMap : TileMap
 
 		CellSize = new Vector2(CellSizeOverride, CellSizeOverride);
 
-		for (int i = 0; i < scenestospawn.Count(); i++)
+		/*for (int i = 0; i < ScenesToSpawnLocs.Count(); i++)
 		{
-			loadedscenes.Insert(i, scenestospawn[i]);
-		}
+
+			loadedscenes.Insert(i, ScenesToSpawnLocs[i]);
+		}*/
 	}
 	public void Init(bool LoadSave)
 	{
@@ -507,7 +511,7 @@ public class WorldMap : TileMap
 		string SpecialName;
 
 		//Scene using ID from cell
-		PackedScene ilescene = GetSceneToSpawn(id, out SpecialName);
+		PackedScene ilescene = ResourceLoader.Load<PackedScene>(GetSceneToSpawn(id, out SpecialName));
 
 
 		//Start the Data saving
@@ -556,7 +560,7 @@ public class WorldMap : TileMap
 		if (IslandSpawnIndex == OrderedCells.Count)
 		{
 			finishedspawning = true; 
-			loadedscenes.Clear();
+			//loadedscenes.Clear();
 			SetProcess(false);
 		}
 
@@ -625,7 +629,7 @@ public class WorldMap : TileMap
 
 		//MapGrid.GetInstance().SetIslandVisited(start);
 
-		Intro intr = (Intro)IntroScene.Instance();
+		Intro intr = (Intro)ResourceLoader.Load<PackedScene>(IntroScene).Instance();
 
 		EmitSignal("OnTransitionEventHandler", island);
 
@@ -884,9 +888,9 @@ public class WorldMap : TileMap
 	/// <param name="type"></param>
 	/// <param name="SpecialName"></param>
 	/// <returns></returns>
-	PackedScene GetSceneToSpawn(int type, out string SpecialName)
+	string GetSceneToSpawn(int type, out string SpecialName)
 	{
-		PackedScene scene = null;
+		string scene = null;
 		SpecialName = "No_Name";
 		
 		switch (type)
@@ -902,7 +906,7 @@ public class WorldMap : TileMap
 					scene = Eventscenestospawn[RandomisedEntryID.IndexOf(IslandSpawnIndex)];
 				else
 				{
-					scene = loadedscenes[RandomContainer.Next(0, loadedscenes.Count)];
+					scene = ScenesToSpawnLocs[RandomContainer.Next(0, ScenesToSpawnLocs.Count())];
 				}
 				break;
 			}
@@ -912,7 +916,7 @@ public class WorldMap : TileMap
 					scene =  Exittospawn;
 				else
 				{
-					scene = loadedscenes[RandomContainer.Next(0, loadedscenes.Count)];
+					scene = ScenesToSpawnLocs[RandomContainer.Next(0, ScenesToSpawnLocs.Count())];
 				}
 				break;
 			}

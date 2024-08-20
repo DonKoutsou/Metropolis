@@ -49,6 +49,10 @@ public class WindGenerator : StaticBody
         //anim.PlaybackSpeed = rand.Next(2500, 3000) / 1000;
         anim3.Stop();
         anim2.Advance(rand.Next(0, 5000) / 1000);
+
+        anim.Stop();
+        anim2.Stop();
+        UpdateAnims = false;
         //anim2.PlaybackSpeed = rand.Next(2500, 3000) / 1000;
         //Spatial rotorpivot = GetNode<Spatial>("Rotor_Pivot");
         //rotorpivot.LookAt(new Vector3(rotorpivot.Translation.x, rotorpivot.Translation.y, rotorpivot.Translation.z + 1), Vector3.Up);
@@ -78,6 +82,8 @@ public class WindGenerator : StaticBody
     //Thread WindGenThread;
     //Mutex mut = new Mutex();
     float d = 0.5f;
+
+    bool UpdateAnims = true;
     public override void _Process(float delta)
     {
         base._Process(delta);
@@ -86,7 +92,12 @@ public class WindGenerator : StaticBody
             return;
         d = 0.5f;
 
-        UpdateGenerator();
+        float windstr = DayNight.GetWindStr();
+
+        if (UpdateAnims)
+            UpdateGenerator(windstr);
+        
+        CollectEnergy(windstr);
         /*if (!WindGenThread.IsAlive())
         {
             WindGenThread.WaitToFinish();
@@ -95,11 +106,20 @@ public class WindGenerator : StaticBody
                 
         }*/
     }
-    public void UpdateGenerator()
+    public void CollectEnergy(float windstr)
+    {
+        float energy = EnergyPerWindStreangth * (windstr/100);
+        if (CurrentEnergy + energy < EnergyCapacity)
+        {
+            //mut.Lock();
+            CurrentEnergy += energy;
+            //mut.Unlock();
+        }
+    }
+    public void UpdateGenerator(float windstr)
     {
         //mut.Lock();
         float winddir = DayNight.GetWindDirection();
-        float windstr = DayNight.GetWindStr();
         //mut.Unlock();
         //Spatial rotorpivot = GetNode<Spatial>("Rotor_Pivot");
         float rot = winddir;
@@ -112,33 +132,24 @@ public class WindGenerator : StaticBody
         anim3.Seek(rot / 36, true);
         //rotorpivot.GlobalRotation = new Vector3(0.0f, rot, 0.0f);
         float animspeed = windstr * 0.03f;
-        float energy = EnergyPerWindStreangth * (windstr/100);
+        
  
         anim.PlaybackSpeed = Mathf.Max(animspeed / scale, 0);
         anim2.PlaybackSpeed = Mathf.Max(animspeed / scale, 0);
         
-        if (CurrentEnergy + energy < EnergyCapacity)
-        {
-            //mut.Lock();
-            CurrentEnergy += energy;
-            //mut.Unlock();
-        }
-    }
-    private void _on_Generator_visibility_changed()
-    {
-        if (Visible)
-        {
-            anim.Play();
-            anim2.Play();
-            SetProcess(true);
-        }
         
-        else
-        {
-            anim.Stop();
-            anim2.Stop();
-            SetProcess(false);
-        }
+    }
+    private void VizOff(Camera cam)
+    {
+        anim.Stop();
+        anim2.Stop();
+        UpdateAnims = false;
+    }
+    private void VizOn(Camera cam)
+    {
+        anim.Play();
+        anim2.Play();
+        UpdateAnims = true;
     }
     public void HighLightObject(bool toggle, Material OutlineMat)
     {

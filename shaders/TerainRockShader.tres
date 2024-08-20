@@ -24,12 +24,38 @@ uniform vec3 u_instance_scale = vec3(1.0, 1.0, 1.0);
 varying vec3 v_normal;
 varying vec2 v_map_uv;
 
+uniform vec2 seed = vec2( 0.0, 0.0 );
+uniform float factor : hint_range( 0.0, 1.0 ) = 0.0;
+
 float get_hash(vec2 c) {
 	return fract(sin(dot(c.xy, vec2(12.9898,78.233))) * 43758.5453);
 }
-
+vec2 random( vec2 pos )
+{ 
+	return clamp( fract(
+		sin(
+			vec2(
+				dot(pos, vec2(12.9898,78.233))
+			,	dot(pos, vec2(-148.998,-65.233))
+			) + seed
+		) * 43758.5453
+	) - vec2( factor ), vec2( 0.0 ), vec2( 1.0 ) );
+}
 
 void vertex() {
+	//vec2 origin_uv = floor( UV * u_instance_scale );
+	//#vec2 right_uv = origin_uv + vec2( 1.0, 0.0 );
+	//#vec2 down_uv = origin_uv + vec2( 0.0, 1.0 );
+
+	//vec2 origin_tile = step( 0.5, random( origin_uv ) );
+	//vec2 right_tile = step( 0.5, random( right_uv ) );
+	//vec2 down_tile = step( 0.5, random( down_uv ) );
+
+	//vec2 tile_uv = vec2(
+	//	mix( right_tile.x, 3.0 - right_tile.x, origin_tile.x )
+	//,	3.0 + mix( down_tile.y, 3.0 - down_tile.y, origin_tile.y )
+	//) * 0.25 + ( fract( UV * u_instance_scale ) * 0.25 );
+
 	vec4 obj_pos = WORLD_MATRIX * vec4(0, 1, 0, 1);
 	vec3 cell_coords = (u_terrain_inverse_transform * obj_pos).xyz;
 	// Must add a half-offset so that we sample the center of pixels,

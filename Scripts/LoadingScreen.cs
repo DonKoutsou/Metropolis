@@ -5,14 +5,13 @@ using System.Linq;
 
 public class LoadingScreen : Control
 {
-	[Export]
-	StreamTexture[] LoadingImages = null;
 	static int Wtime = 0;
 	static LoadingScreen Instance;
 
 	List<StreamTexture> PicsToShow = new List<StreamTexture>();
 
 	Random r;
+	int LastPickedPic = -1;
 	public override void _Ready()
 	{
 		base._Ready();
@@ -31,21 +30,42 @@ public class LoadingScreen : Control
 	}
 	public void ChangePic(string anim)
 	{
+		if (LastPickedPic != -1)
+		{
+			StreamTexture lasttexttex = PicsToShow[LastPickedPic];
+			PicsToShow.Remove(lasttexttex);
+			VisualServer.FreeRid(lasttexttex.GetRid());
+		}
+		
+
 		if (PicsToShow.Count == 0)
 		{
-			foreach (StreamTexture te in LoadingImages)
-				PicsToShow.Add(te);
+			RephreshPics();	
 		}
+		
 		TextureRect t = GetNode<TextureRect>("LoadingPics");
 
-		StreamTexture tex = PicsToShow[r.Next(0, PicsToShow.Count())];
-		PicsToShow.Remove(tex);
+		LastPickedPic = r.Next(0, PicsToShow.Count());
+		StreamTexture tex = PicsToShow[LastPickedPic];
+		
 		t.Texture = tex;
 		AnimationPlayer pl = GetNode<AnimationPlayer>("LoadingPic");
 		pl.Play("ShowPic");
 	}
+	private void RephreshPics()
+	{
+		int image = 1;
+		while (ResourceLoader.Exists(string.Format("res://Assets/LoadingPics/P{0}.png", image)))
+		{
+			StreamTexture im = ResourceLoader.Load<StreamTexture>(string.Format("res://Assets/LoadingPics/P{0}.png", image));
+			PicsToShow.Add(im);
+			image ++;
+		}
+	}
 	public void Start()
 	{
+		RephreshPics();
+
 		GetNode<AnimationPlayer>("AnimationPlayer").Play("FadeIn");
 		GetNode<AnimationPlayer>("AnimationPlayer2").Play("Spinner");
 		
@@ -77,6 +97,11 @@ public class LoadingScreen : Control
 			SetProcess(false);
 			AnimationPlayer pl = GetNode<AnimationPlayer>("LoadingPic");
 			pl.Disconnect("animation_finished", this, "ChangePic");
+			foreach (StreamTexture t in PicsToShow)
+			{
+				VisualServer.FreeRid(t.GetRid());
+			}
+			PicsToShow.Clear();
 		}
 	}
 }

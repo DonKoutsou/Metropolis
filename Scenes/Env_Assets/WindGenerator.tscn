@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Assets/Building/Assets/WindGen_Base.tres" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Building/Assets/WindGeN_Blade.tres" type="ArrayMesh" id=2]
@@ -206,9 +206,6 @@ tracks/0/keys = {
 "values": [ Vector3( 0, 0, 0 ) ]
 }
 
-[sub_resource type="OccluderShapePolygon" id=11]
-polygon_points = PoolVector2Array( 14, -44, 14, 45, -22, 45, -22, -44 )
-
 [node name="WindGenerator" type="StaticBody" groups=["Interactables"]]
 collision_layer = 48
 collision_mask = 0
@@ -236,6 +233,10 @@ shape = SubResource( 10 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )
+
+[node name="VisibilityNotifier" type="VisibilityNotifier" parent="."]
+transform = Transform( 0.999999, -1.74846e-07, -1.74846e-07, 1.74846e-07, 1, 0, 1.74846e-07, -3.05711e-14, 0.999999, -1.09585e-06, 191.821, 0.400691 )
+aabb = AABB( -86.488, -97.53, -15.8026, 172.976, 195.06, 31.6053 )
 
 [node name="Rotor_Pivot" type="Spatial" parent="."]
 transform = Transform( 1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 0, 0, 0 )
@@ -300,15 +301,8 @@ playback_speed = 3.0
 anims/LookDir = SubResource( 8 )
 anims/RESET = SubResource( 9 )
 
-[node name="Occluder" type="Occluder" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.546, 43.3733, -3 )
-shape = SubResource( 11 )
-
-[node name="Occluder2" type="Occluder" parent="."]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -24.546, 43.3733, -6 )
-shape = SubResource( 11 )
-
 [node name="ActionComponent" parent="." instance=ExtResource( 8 )]
 ActionDistance = 60.0
 
-[connection signal="visibility_changed" from="." to="." method="_on_Generator_visibility_changed"]
+[connection signal="camera_entered" from="VisibilityNotifier" to="." method="VizOn"]
+[connection signal="camera_exited" from="VisibilityNotifier" to="." method="VizOff"]

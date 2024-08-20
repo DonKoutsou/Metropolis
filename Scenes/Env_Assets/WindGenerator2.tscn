@@ -233,6 +233,10 @@ script = ExtResource( 3 )
 EnergyCapacity = 1000.0
 HasInternals = true
 
+[node name="VisibilityNotifier" type="VisibilityNotifier" parent="."]
+transform = Transform( 0.999999, -1.74846e-07, -1.74846e-07, 1.74846e-07, 1, 0, 1.74846e-07, -3.05711e-14, 0.999999, -1.09585e-06, 5785.51, 0.400691 )
+aabb = AABB( -2664.89, -2908.19, -435.327, 5329.77, 5816.38, 870.655 )
+
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0 )
 include_in_bound = false
@@ -455,5 +459,7 @@ shape = SubResource( 28 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 184.122, 181.637 )
 shape = SubResource( 29 )
 
+[connection signal="camera_entered" from="VisibilityNotifier" to="." method="VizOn"]
+[connection signal="camera_exited" from="VisibilityNotifier" to="." method="VizOff"]
 [connection signal="body_entered" from="Area" to="." method="CharacterEntered"]
 [connection signal="body_exited" from="Area" to="." method="CharacterLeft"]

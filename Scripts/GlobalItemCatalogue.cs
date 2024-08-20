@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 public class GlobalItemCatalogue : Node
 {
-    [Export]
-	PackedScene[] GlobalItemListConfiguration = null;
-
+	[Export]
+	string[] GlobalItemDirList = null;
+    //[Export]
+	//PackedScene[] GlobalItemListConfiguration = null;
     [Export]
     public PackedScene[] CharacterCataluge = new PackedScene[0];
     
@@ -25,21 +26,22 @@ public class GlobalItemCatalogue : Node
 	{
 		base._Ready();
 		//pl = GetNode<Player>("Player");
-		foreach (PackedScene pair in GlobalItemListConfiguration)
+		foreach (string pair in GlobalItemDirList)
 		{
-			Item it = pair.Instance<Item>();
+			PackedScene sc = ResourceLoader.Load<PackedScene>(pair);
+			Item it = sc.Instance<Item>();
 			
 			string key = it.GetItemName();
 			
 			if (GlobalItemList.ContainsKey(it.ItemType))
 			{
 				Dictionary<string, PackedScene> dic = GlobalItemList[it.ItemType];
-				dic.Add(key, pair);
+				dic.Add(key, sc);
 			}
 			else
 			{
 				Dictionary<string, PackedScene> dic = new Dictionary<string, PackedScene>(){
-				{key, pair}
+				{key, sc}
 				};
 				GlobalItemList.Add(it.ItemType, dic);
 			}

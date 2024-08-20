@@ -1,9 +1,8 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Systems/TalkText.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Systems/Tutorial.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/PostProcess/PixelShader.gdshader" type="Shader" id=4]
 [ext_resource path="res://Scenes/Items/NormalLeg_R.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Inventory/Inventory.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Items/NormalLeg_L.tscn" type="PackedScene" id=8]
@@ -37,10 +36,6 @@ render_priority = 1
 flags_transparent = true
 params_specular_mode = 4
 albedo_color = Color( 0, 0, 0, 1 )
-
-[sub_resource type="ShaderMaterial" id=166]
-render_priority = -1
-shader = ExtResource( 4 )
 
 [sub_resource type="Animation" id=110]
 resource_name = "FadeIn"
@@ -271,11 +266,6 @@ transform = Transform( 1, -5.29396e-22, 0, -1.05879e-22, 1, 0, 2.11758e-21, 0, 1
 visible = false
 mesh = SubResource( 107 )
 material/0 = SubResource( 109 )
-
-[node name="MeshInstance3" type="MeshInstance" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/PlayerCamera"]
-transform = Transform( 1, -5.29396e-22, 0, -1.05879e-22, 1, 0, 2.11758e-21, 0, 1, 0, -0.0144858, -1.05511 )
-mesh = SubResource( 107 )
-material/0 = SubResource( 166 )
 
 [node name="CameraAnimationPlayer" type="AnimationPlayer" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/PlayerCamera"]
 anims/FadeIn = SubResource( 110 )

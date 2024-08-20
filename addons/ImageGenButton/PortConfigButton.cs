@@ -10,7 +10,10 @@ public class PortConfigButton : Button
     {
         Connect("pressed", this, "clicked");
     }
-
+    public override void _ExitTree()
+    {
+        Disconnect("pressed", this, "clicked");
+    }
     public void clicked()
     {
         EmitSignal("OnButtonClicked");

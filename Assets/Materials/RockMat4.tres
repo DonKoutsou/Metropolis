@@ -1,0 +1,26 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=2]
+
+[ext_resource path="res://Assets/TerainTex/Rock029_2K-PNG/Rock029_2K-PNG_NormalGL.png" type="Texture" id=1]
+[ext_resource path="res://shaders/TerainShader2.tres" type="Shader" id=2]
+[ext_resource path="res://Assets/TerainTex/Ground059_1K-JPG/Ground059_1K-JPG_Color.jpg" type="Texture" id=5]
+[ext_resource path="res://Assets/TerainTex/Ground059_1K-JPG/Ground059_1K-JPG_NormalGL.jpg" type="Texture" id=7]
+[ext_resource path="res://Assets/TerainTex/Rock029_2K-PNG/Rock029_2K-PNG_Color.png" type="Texture" id=8]
+
+[resource]
+shader = ExtResource( 2 )
+shader_param/metallic = 0.0
+shader_param/roughness = 0.392
+shader_param/light_affect = 2.277
+shader_param/uv1_blend_sharpness = 2.273
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/uv2_scale = Vector3( 1, 1, 1 )
+shader_param/uv2_offset = null
+shader_param/sides_smoothing = 0.25
+shader_param/top_smoothing = 0.35
+shader_param/g_fallOffContrast = 0.6
+shader_param/g_exp = 7.0
+shader_param/top_base_color = ExtResource( 5 )
+shader_param/top_normal_map = ExtResource( 7 )
+shader_param/side_base_color = ExtResource( 8 )
+shader_param/side_normal_map = ExtResource( 1 )

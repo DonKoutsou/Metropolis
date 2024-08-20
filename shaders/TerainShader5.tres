@@ -42,7 +42,6 @@ uniform float uv1_scale;
 uniform float uv2_scale;
 uniform vec3 uv1_offset;
 
-
 void vertex() {
 	TANGENT = vec3(0.0,0.0,-1.0) * abs(NORMAL.x);
 	TANGENT+= vec3(1.0,0.0,0.0) * abs(NORMAL.y);
@@ -73,6 +72,19 @@ vec4 triplanar_texture(sampler2D p_sampler,vec3 p_weights,vec3 p_triplanar_pos) 
 
 
 void fragment() {
+	/*vec2 origin_uv = floor( UV * uv1_scale );
+	vec2 right_uv = origin_uv + vec2( 1.0, 0.0 );
+	vec2 down_uv = origin_uv + vec2( 0.0, 1.0 );
+
+	vec2 origin_tile = step( 0.5, random( origin_uv ) );
+	vec2 right_tile = step( 0.5, random( right_uv ) );
+	vec2 down_tile = step( 0.5, random( down_uv ) );
+
+	vec2 tile_uv = vec2(
+		mix( right_tile.x, 3.0 - right_tile.x, origin_tile.x )
+	,	3.0 + mix( down_tile.y, 3.0 - down_tile.y, origin_tile.y )
+	) * 0.25 + ( fract( UV * uv1_scale ) * 0.25 );*/
+	
 	vec3 albedo_tex_fg = triplanar_texture(albedo_texture_fg,uv1_power_normal,uv1_triplanar_pos).xyz;
 	vec3 normal_tex_fg = triplanar_texture(normal_texture_fg,uv1_power_normal,uv1_triplanar_pos).xyz;
 	
