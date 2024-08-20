@@ -38,7 +38,7 @@ public class SittingThing : StaticBody
 	{
         if (!HasEmptySeat())
         {
-            DialogueManager.GetInstance().ScheduleDialogue(pl, "Δεν έχει χώρο.");
+            DialogueManager.GetInstance().ForceDialogue(pl, "Δεν έχει χώρο.");
             //pl.GetTalkText().Talk("Δεν έχει χώρο.");
             return;
         }

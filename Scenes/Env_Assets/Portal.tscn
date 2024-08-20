@@ -179,4 +179,10 @@ unit_db = 4.5
 unit_size = 12.0
 max_distance = 4096.0
 
+[node name="VisibilityNotifier" type="VisibilityNotifier" parent="."]
+aabb = AABB( -86.0763, -91.1012, -1, 172.153, 182.202, 2 )
+max_distance = 8000.0
+
 [connection signal="body_entered" from="." to="." method="BoatEntered"]
+[connection signal="camera_entered" from="VisibilityNotifier" to="." method="VizOn"]
+[connection signal="camera_exited" from="VisibilityNotifier" to="." method="VizOff"]

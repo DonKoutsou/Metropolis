@@ -89,7 +89,7 @@ public class Item : RigidBody
 	{
 		if (!pl.GetCharacterInventory().InsertItem(this))
 		{
-			DialogueManager.GetInstance().ScheduleDialogue(pl, "Δέν έχω χώρο.");
+			DialogueManager.GetInstance().ForceDialogue(pl, "Δέν έχω χώρο.");
 			//pl.GetTalkText().Talk("Δέν έχω χώρο.");
 		}
 	}

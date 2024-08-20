@@ -65,7 +65,7 @@ public class DayNight : WorldEnvironment
         //CurrentDistance = newdist;
         if (newdist >= 0.6)
         {
-            DialogueManager.GetInstance().ScheduleDialogue(Player.GetInstance(), "Η ομίχλη γίνεται πολύ πυκνή για το μωρό, ίσος να μην πάω πιο βαθιά...");
+            DialogueManager.GetInstance().ForceDialogue(Player.GetInstance(), "Η ομίχλη γίνεται πολύ πυκνή για το μωρό, ίσος να μην πάω πιο βαθιά...");
             //Player.GetInstance().GetTalkText().Talk("Η ομίχλη γίνεται πολύ πυκνή για το μωρό, ίσος να μην πάω πιο βαθιά...");
         }
     }
@@ -369,10 +369,6 @@ public class DayNight : WorldEnvironment
             }
                 
         }
-        //if (UI != null)
-         //   UI.UpdateTime(currenthour, currentmins);
-        //else
-            //UI = Time_UI.GetInstance();
     }
     //updating values
     float MinuteValue;

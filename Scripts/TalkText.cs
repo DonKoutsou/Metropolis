@@ -20,7 +20,9 @@ public class TalkText : Spatial
     Label TextL;
 
     Vector2 Vsize;
-    public void Talk(string diag)
+
+    bool DoingForcedDialogue = false;
+    public void Talk(string diag, bool forced = false)
     {
         if (diag == string.Empty)
         {
@@ -45,6 +47,7 @@ public class TalkText : Spatial
         SetPhysicsProcess(true);
 
         Vsize = DViewport.GetInstance().Size;
+        DoingForcedDialogue = forced;
     }
     public void TurnOff()
     {
@@ -56,7 +59,7 @@ public class TalkText : Spatial
         }
         TextL.Hide();
         SetPhysicsProcess(false);
-        DialogueManager.GetInstance().OnDialogueEnded();
+        DialogueManager.GetInstance().OnDialogueEnded(DoingForcedDialogue);
     }
     public bool IsTalking()
     {

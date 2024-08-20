@@ -83,7 +83,7 @@ public class ActionMenu : Control
 	{
 		if (Play.HasVehicle() && Play.GetVehicle() != SelectedObj)
 		{
-			DialogueManager.GetInstance().ScheduleDialogue(Play, "Δεν μπορώ πάνω από την βάρκα");
+			DialogueManager.GetInstance().ForceDialogue(Play, "Δεν μπορώ πάνω από την βάρκα");
 			//Play.GetTalkText().Talk("Δεν μπορώ πάνω από την βάρκα");
 		}
 		ActionComponent Acomp = SelectedObj.GetNode<ActionComponent>("ActionComponent");
@@ -106,7 +106,7 @@ public class ActionMenu : Control
 	{
 		if (Play.HasVehicle() && Play.GetVehicle() != SelectedObj)
 		{
-			DialogueManager.GetInstance().ScheduleDialogue(Play, "Δεν μπορώ πάνω από την βάρκα");
+			DialogueManager.GetInstance().ForceDialogue(Play, "Δεν μπορώ πάνω από την βάρκα");
 			//Play.GetTalkText().Talk("Δεν μπορώ πάνω από την βάρκα");
 		}
 		ActionComponent Acomp = SelectedObj.GetNode<ActionComponent>("ActionComponent");
@@ -129,7 +129,7 @@ public class ActionMenu : Control
 	{
 		if (Play.HasVehicle() && Play.GetVehicle() != SelectedObj)
 		{
-			DialogueManager.GetInstance().ScheduleDialogue(Play, "Δεν μπορώ πάνω από την βάρκα");
+			DialogueManager.GetInstance().ForceDialogue(Play, "Δεν μπορώ πάνω από την βάρκα");
 			//Play.GetTalkText().Talk("Δεν μπορώ πάνω από την βάρκα");
 		}
 		ActionComponent Acomp = SelectedObj.GetNode<ActionComponent>("ActionComponent");
@@ -150,7 +150,7 @@ public class ActionMenu : Control
 	}
 	private void On_Interact_Button_Down()
 	{
-		DialogueManager.GetInstance().ScheduleDialogue(Play, (string)SelectedObj.Call("GetObjectDescription"));
+		DialogueManager.GetInstance().ForceDialogue(Play, (string)SelectedObj.Call("GetObjectDescription"));
 		//Play.GetTalkText().Talk((string)SelectedObj.Call("GetObjectDescription"));
 	}
 	public void Start(Spatial obj)

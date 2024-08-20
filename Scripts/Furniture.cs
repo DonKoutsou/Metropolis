@@ -143,11 +143,11 @@ public class Furniture : StaticBody
 		if (foundit != null)
 		{
 			pl.GetCharacterInventory().InsertItem(foundit);
-			DialogueManager.GetInstance().ScheduleDialogue(pl, foundit.GetItemPickUpText());
+			DialogueManager.GetInstance().ForceDialogue(pl, foundit.GetItemPickUpText());
 			//pl.GetTalkText().Talk(foundit.GetItemPickUpText());
 		}
 		else
-			DialogueManager.GetInstance().ScheduleDialogue(pl, "Άδειο...");
+			DialogueManager.GetInstance().ForceDialogue(pl, "Άδειο...");
 			//pl.GetTalkText().Talk("Άδειο...");
 	}
 	public string GetActionName(Player pl)

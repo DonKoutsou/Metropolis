@@ -30,16 +30,23 @@ public class DialogueManager : Node
 		if (NextTalker.Count == 1)
 			DoNextDialogue();
 	}
+	public void ForceDialogue(Character talker, string text)
+	{
+		talker.GetTalkText().Talk(text, true);
+		DialogueRunning = true;
+	}
 	public void DoNextDialogue()
 	{
 		NextTalker[0].GetTalkText().Talk(NextLine[0]);
 		DialogueRunning = true;
-
-		NextTalker.RemoveAt(0);
-		NextLine.RemoveAt(0);
 	}
-	public void OnDialogueEnded()
+	public void OnDialogueEnded(bool forced = false)
 	{
+		if (!forced)
+		{
+			NextTalker.RemoveAt(0);
+			NextLine.RemoveAt(0);
+		}
 		DialogueRunning = false;
 		if (NextTalker.Count > 0)
 		{

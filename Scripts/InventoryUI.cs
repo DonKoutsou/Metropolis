@@ -364,7 +364,7 @@ public class InventoryUI : Control
         if (FocusedSlot == null)
         {
             //pl.GetTalkText().Talk(NoSelectionOnDropText);
-            DialogueManager.GetInstance().ScheduleDialogue(pl, NoSelectionOnDropText);
+            DialogueManager.GetInstance().ForceDialogue(pl, NoSelectionOnDropText);
             return;
         }
         Inv.RemoveItem(FocusedSlot.item);
@@ -402,7 +402,7 @@ public class InventoryUI : Control
     {
         if (!hascompass)
         {
-            DialogueManager.GetInstance().ScheduleDialogue(pl, NoCompassText);
+            DialogueManager.GetInstance().ForceDialogue(pl, NoCompassText);
             //pl.GetTalkText().Talk(NoCompassText);
             return;
         }

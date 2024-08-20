@@ -169,7 +169,7 @@ public class WindGenerator : StaticBody
         float availableenergy = GetCurrentEnergy();
         if (availableenergy <= 1)
         {
-            DialogueManager.GetInstance().ScheduleDialogue(pl, "Έχει ξεμίνει από ενέργεια...");
+            DialogueManager.GetInstance().ForceDialogue(pl, "Έχει ξεμίνει από ενέργεια...");
             //pl.GetTalkText().Talk("Έχει ξεμίνει από ενέργεια...");
             return;
         }

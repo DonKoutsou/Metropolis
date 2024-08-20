@@ -678,7 +678,7 @@ public class Vehicle : RigidBody
         Vector3 postoput;
         if (!CheckForGround(out postoput))
         {
-            DialogueManager.GetInstance().ScheduleDialogue(cha, "Πρέπει να πάω πιό κοντά στην στεριά.");
+            DialogueManager.GetInstance().ForceDialogue(cha, "Πρέπει να πάω πιό κοντά στην στεριά.");
             //cha.GetTalkText().Talk("Πρέπει να πάω πιό κοντά στην στεριά.");
             return false;
         }
@@ -745,7 +745,7 @@ public class Vehicle : RigidBody
 	{
 		if (!IsPlayerOwned())
         {
-            DialogueManager.GetInstance().ScheduleDialogue(pl, "Δεν είναι δικιά μου. Δεν μπορώ να την χρησιμοποιήσω.");
+            DialogueManager.GetInstance().ForceDialogue(pl, "Δεν είναι δικιά μου. Δεν μπορώ να την χρησιμοποιήσω.");
             //pl.GetTalkText().Talk("Δεν είναι δικιά μου. Δεν μπορώ να την χρησιμοποιήσω.");
             return;
         }
