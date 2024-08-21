@@ -304,6 +304,9 @@ public class Player : Character
 				moveloc.Show();
 			}
 			rpm = currveh.GetRPM();
+
+			if (currveh.IsRunning())
+				currveh.UpdateMoveLoc(loctomove);
 		}
 		else
 		{
@@ -317,9 +320,9 @@ public class Player : Character
 			else
 			{
 				direction = direction.Normalized();
+
 				Vector3 lookloc = new Vector3(direction.x, 0, direction.z);
-				if (!HasVecicle)
-					GetNode<Spatial>("Pivot").LookAt(GlobalTranslation - lookloc, Vector3.Up);
+				GetNode<Spatial>("Pivot").LookAt(GlobalTranslation - lookloc, Vector3.Up);
 
 				if (!IsRunning)
 				{
@@ -351,7 +354,29 @@ public class Player : Character
 					direction = Vector3.Zero;
 				}
 			}
+
+			//Apply velicity
+			_velocity.x = direction.x * spd;
+			_velocity.z = direction.z * spd;
+			_velocity.y -= FallAcceleration * delta;
+			_velocity = MoveAndSlide(_velocity, Vector3.Up);
+			for (int i = 0; i < GetSlideCount(); i++)
+			{
+				KinematicCollision col = GetSlideCollision(i);
+				PhysicsBody b = (PhysicsBody)col.Collider;
+				if (col.Normal.y > 0.1f)
+					continue;
+
+				if (b.GetCollisionLayerBit(12))
+				{
+					
+					break;
+				}
+					
+					
+			}
 		}
+
 		/////////////////////////////////////////////
 		//battery consumption
 		float coons = Consumption.Interpolate(rpm) * delta;
@@ -371,36 +396,6 @@ public class Player : Character
 		else
 		{
 			ExpressedLowBattery = false;
-		}
-
-		// Moving the character
-		if (!HasVecicle)
-		{
-			_velocity.x = direction.x * spd;
-			_velocity.z = direction.z * spd;
-			_velocity.y -= FallAcceleration * delta;
-			_velocity = MoveAndSlide(_velocity, Vector3.Up);
-			for (int i = 0; i < GetSlideCount(); i++)
-			{
-				KinematicCollision col = GetSlideCollision(i);
-				PhysicsBody b = (PhysicsBody)col.Collider;
-				if (col.Normal.y > 0.1f)
-					continue;
-
-				if (b.GetCollisionLayerBit(12))
-				{
-					_velocity.y += 500 * delta;
-					break;
-				}
-					
-					
-			}
-			
-		}
-		else
-		{
-			if (currveh.IsRunning())
-				currveh.UpdateMoveLoc(loctomove);
 		}
 	}
 	//Handling of input

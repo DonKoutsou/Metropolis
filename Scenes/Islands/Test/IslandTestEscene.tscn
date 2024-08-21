@@ -40,9 +40,8 @@ fog_depth_begin = 0.0
 fog_depth_end = 10000.0
 fog_depth_curve = 0.353552
 fog_transmit_curve = 0.0947323
-fog_height_enabled = true
-fog_height_min = 520.7
-fog_height_max = 2280.4
+fog_height_min = -222.5
+fog_height_max = 699.3
 fog_height_curve = 0.757861
 tonemap_mode = 4
 tonemap_white = 0.57
@@ -105,16 +104,17 @@ _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.0241546, 1 ), 0.0, 0.0, 0,
 [sub_resource type="CurveTexture" id=4]
 curve = SubResource( 116 )
 
-[sub_resource type="ParticlesMaterial" id=114]
+[sub_resource type="ParticlesMaterial" id=127]
 lifetime_randomness = 0.32
 emission_shape = 2
-emission_box_extents = Vector3( 20000, 5, 20000 )
+emission_box_extents = Vector3( 5000, 5, 5000 )
 spread = 0.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 100.0
 initial_velocity_random = 0.2
 linear_accel = 0.2
 linear_accel_random = 0.19
+scale = 3.0
 scale_curve = SubResource( 4 )
 hue_variation = 1.0
 hue_variation_random = 1.0
@@ -386,16 +386,16 @@ autoplay = true
 transform = Transform( 0.998121, 0.061275, 0, -0.061275, 0.998121, 0, 0, 0, 1, 9.34131, 1798.53, -138.101 )
 
 [node name="Clouds2" type="Particles" parent="Spatial"]
-visible = false
+transform = Transform( 0.999998, 1.49012e-08, 0, -1.49012e-08, 0.999998, 0, 0, 0, 1, 0, 474.263, 0 )
 generate_lightmap = false
-amount = 1000
+amount = 20
 lifetime = 43.86
 speed_scale = 0.2
 explosiveness = 1.0
 visibility_aabb = AABB( -4096, -3000, -4096, 8192, 3000, 8192 )
 local_coords = false
 draw_order = 2
-process_material = SubResource( 114 )
+process_material = SubResource( 127 )
 draw_pass_1 = SubResource( 102 )
 
 [node name="pPlane1" type="MeshInstance" parent="."]

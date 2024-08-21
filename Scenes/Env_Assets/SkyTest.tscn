@@ -1,0 +1,166 @@
+[gd_scene load_steps=10 format=2]
+
+[sub_resource type="PlaneMesh" id=1]
+subdivide_width = 200
+subdivide_depth = 200
+
+[sub_resource type="Shader" id=2]
+code = "shader_type spatial;
+
+render_mode blend_mix, cull_disabled, depth_draw_never;
+
+//This is where we set up the shader parameters so we can tweak the shader in real time later.
+
+uniform sampler2D Noise1;
+uniform float timeScale1;
+uniform float timeScale2;
+uniform float cloud1worldScale;
+uniform float cloud2worldScale;
+uniform float displacementStrength;
+
+//This is the vertexshader
+
+void vertex()
+{
+	//Time is multiplied by cloudSpeed1 & cloudSpeed2, to give us control to tweak how fast the clouds are moving.
+	float cloudSpeed1 = timeScale1 * TIME;
+	float cloudSpeed2 = timeScale2 * TIME;
+	
+	//Here we set the UV for the texture to be world position stretched over X and Z axis
+	vec2 world_pos = (vec4(VERTEX,1.f) ).xz;
+	
+	//Two different UV's are made here for the clouds, they will move in different directions in the world x-axis but in the same direction in world z-axis
+	vec2 Cloud1UV = vec2((world_pos.x * cloud1worldScale) + cloudSpeed1 ,(world_pos.y * cloud1worldScale) + cloudSpeed1);
+	vec2 Cloud2UV = vec2((world_pos.x * cloud2worldScale) - cloudSpeed2 ,(world_pos.y * cloud2worldScale) + cloudSpeed2);
+	
+	//Noise-textures are sampled and assigned the UV's created earlier
+	vec4 Cloud1 = texture(Noise1, Cloud1UV) ;
+	vec4 Cloud2 = texture(Noise1, Cloud2UV) ;
+	
+	//Multiplying the Cloud noise-textures here, this resulting in them seemingly \"melting together\". We then normalize the result to make sure it's between -1 and 1.
+	vec4 CloudCombined = normalize(Cloud1 * Cloud2);
+	
+	//Position of the vertex in y-space is moved based on the combined clouds and the parameter displacementStrength so we can tweak it in real time.
+	VERTEX.y = VERTEX.y + (1.f - CloudCombined.r) * displacementStrength;
+}
+
+uniform float discardHeight;
+
+//This is the pixelshader/fragmentshader
+
+void fragment() {
+	
+	//Pixels are taken from viewspace to worldspace by multiplying with the inverse view matrix.
+	vec4 worldVertex = CAMERA_MATRIX * vec4(VERTEX, 1.0);
+	
+	//Checking if the pixels world position is above the discardheight, if not we discard them since we dont want to render them.
+	if (worldVertex.y < discardHeight)
+		ALBEDO = vec3(1.f,1.f,1.f);
+	else
+		discard;
+}
+"
+
+[sub_resource type="OpenSimplexNoise" id=3]
+
+[sub_resource type="NoiseTexture" id=4]
+seamless = true
+noise = SubResource( 3 )
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = SubResource( 2 )
+shader_param/timeScale1 = 0.001
+shader_param/timeScale2 = 0.0
+shader_param/cloud1worldScale = 3.116
+shader_param/cloud2worldScale = 0.01
+shader_param/displacementStrength = 23.04
+shader_param/discardHeight = 3617.06
+shader_param/Noise1 = SubResource( 4 )
+
+[sub_resource type="Shader" id=6]
+code = "shader_type spatial;
+
+render_mode blend_mix, cull_disabled;
+
+//This is where we set up the shader parameters so we can tweak the shader in real time later.
+
+uniform sampler2D Noise1;
+uniform float timeScale1;
+uniform float timeScale2;
+uniform float cloud1worldScale;
+uniform float cloud2worldScale;
+uniform float displacementStrength;
+
+//This is the vertexshader
+
+void vertex()
+{
+	//Time is multiplied by cloudSpeed1 & cloudSpeed2, to give us control to tweak how fast the clouds are moving.
+	float cloudSpeed1 = timeScale1 * TIME;
+	float cloudSpeed2 = timeScale2 * TIME;
+	
+	//Here we set the UV for the texture to be world position stretched over X and Z axis
+	vec2 world_pos = (vec4(VERTEX,1.f) ).xz;
+	
+	//Two different UV's are made here for the clouds, they will move in different directions in the world x-axis but in the same direction in world z-axis
+	vec2 Cloud1UV = vec2((world_pos.x * cloud1worldScale) + cloudSpeed1 ,(world_pos.y * cloud1worldScale) + cloudSpeed1);
+	vec2 Cloud2UV = vec2((world_pos.x * cloud2worldScale) - cloudSpeed2 ,(world_pos.y * cloud2worldScale) + cloudSpeed2);
+	
+	//Noise-textures are sampled and assigned the UV's created earlier
+	vec4 Cloud1 = texture(Noise1, Cloud1UV) ;
+	vec4 Cloud2 = texture(Noise1, Cloud2UV) ;
+	
+	//Multiplying the Cloud noise-textures here, this resulting in them seemingly \"melting together\". We then normalize the result to make sure it's between -1 and 1.
+	vec4 CloudCombined = normalize(Cloud1 * Cloud2);
+	
+	//Position of the vertex in y-space is moved based on the combined clouds and the parameter displacementStrength so we can tweak it in real time.
+	VERTEX.y = VERTEX.y + CloudCombined.r * displacementStrength;
+}
+
+uniform float discardHeight;
+
+//This is the pixelshader/fragmentshader
+
+void fragment() {
+	
+	//Pixels are taken from viewspace to worldspace by multiplying with the inverse view matrix.
+	vec4 worldVertex = CAMERA_MATRIX * vec4(VERTEX, 1.0);
+	
+	//Checking if the pixels world position is above the discardheight, if not we discard them since we dont want to render them.
+	if (worldVertex.y > discardHeight)
+		ALBEDO = vec3(1.f,1.f,1.f);
+	else
+		discard;
+}"
+
+[sub_resource type="OpenSimplexNoise" id=8]
+
+[sub_resource type="NoiseTexture" id=9]
+seamless = true
+noise = SubResource( 8 )
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = SubResource( 6 )
+shader_param/timeScale1 = 0.003
+shader_param/timeScale2 = 0.0
+shader_param/cloud1worldScale = 0.988
+shader_param/cloud2worldScale = 0.01
+shader_param/displacementStrength = 23.0
+shader_param/discardHeight = 3506.25
+shader_param/Noise1 = SubResource( 9 )
+
+[node name="Spatial" type="Spatial"]
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 15000, 0, 0, 0, 1, 0, 0, 0, 15000, 0, 3600, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 5 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+transform = Transform( 15000, 0, 0, 0, 1, 0, 0, 0, 15000, 0, 3500, 0 )
+visible = false
+mesh = SubResource( 1 )
+material/0 = SubResource( 7 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( -0.1471, -0.985989, -0.0786638, 0.225767, 0.0439605, -0.973189, 0.963012, -0.160916, 0.216137, 0, 0, 0 )
