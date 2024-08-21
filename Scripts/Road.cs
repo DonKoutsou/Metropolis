@@ -25,6 +25,8 @@ public class Road : Path
 
     [Export(PropertyHint.Layers3dPhysics)]
     public uint FloorLayer { get; set; }
+    [Export(PropertyHint.Layers3dPhysics)]
+    public uint StairLayer { get; set; }
 
     // Declare member variables here. Examples:
     // private int a = 2;
@@ -159,7 +161,7 @@ public class Road : Path
         }
         foreach (StaticBody bod in bodies)
         {
-            bod.CollisionLayer = FloorLayer;
+            bod.CollisionLayer = StairLayer;
             bod.CollisionMask = new uint();
             //bod.Hide();
         }

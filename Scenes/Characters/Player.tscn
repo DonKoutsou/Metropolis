@@ -20,8 +20,8 @@
 [sub_resource type="Curve" id=165]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.211191 ), 0.59819, 0.0, 0, 0 ]
 
-[sub_resource type="CapsuleShape" id=164]
-height = 5.27483
+[sub_resource type="CylinderShape" id=166]
+height = 7.20584
 
 [sub_resource type="CapsuleShape" id=92]
 height = 1.97053
@@ -193,6 +193,7 @@ collision_mask = 55
 script = ExtResource( 1 )
 ClothToWear = 1
 ClothMaterial = ExtResource( 9 )
+FallAcceleration = 100.0
 JumpImpulse = 30
 RunSpeed = 30.0
 Consumption = SubResource( 165 )
@@ -208,8 +209,8 @@ cast_to = Vector3( 0, -30, 0 )
 collision_mask = 260
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3.64395, 0 )
-shape = SubResource( 164 )
+transform = Transform( 1, 0, 0, 0, 1, 1.06581e-14, 0, -1.06581e-14, 1, 0, 3.61331, 0 )
+shape = SubResource( 166 )
 
 [node name="KillFieldDetector" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.57626, 0 )

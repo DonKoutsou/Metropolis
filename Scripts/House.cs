@@ -96,7 +96,6 @@ public class House : Spatial
 		{
 			StaticBody HouseExterior  = GetNode<StaticBody>("HouseExterior");
 			((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Disabled;
-			
 		}
 		GetNode<Spatial>("Furnitures").Hide();
 		GetNode<Spatial>("Decorations").Hide();

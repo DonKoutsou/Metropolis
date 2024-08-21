@@ -11,6 +11,8 @@ public class TestLevel : Spatial
     public override void _Ready()
     {
         PlayerUI.GetInstance().OnPlayerSpawned(GetNode<Player>("Control/ViewportContainer/Viewport/Player"));
+
+        UniversalLodManager.GetInstance().UpdateCamera(PlayerCamera.GetInstance());
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.

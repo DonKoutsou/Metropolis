@@ -380,6 +380,22 @@ public class Player : Character
 			_velocity.z = direction.z * spd;
 			_velocity.y -= FallAcceleration * delta;
 			_velocity = MoveAndSlide(_velocity, Vector3.Up);
+			for (int i = 0; i < GetSlideCount(); i++)
+			{
+				KinematicCollision col = GetSlideCollision(i);
+				PhysicsBody b = (PhysicsBody)col.Collider;
+				if (col.Normal.y > 0.1f)
+					continue;
+
+				if (b.GetCollisionLayerBit(12))
+				{
+					_velocity.y += 500 * delta;
+					break;
+				}
+					
+					
+			}
+			
 		}
 		else
 		{
