@@ -11,7 +11,6 @@ _data = [ Vector2( 0, 20 ), 0.0, -32.663, 0, 0, Vector2( 1, 0 ), 1.32912, 0.0, 0
 
 [node name="DayNightController" parent="." instance=ExtResource( 2 )]
 FogDirstanceCurve = SubResource( 8 )
-FogDistantColor = Color( 1, 0.745098, 0.470588, 1 )
 
 [node name="Sun" type="DirectionalLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.0171732, 0.999853, 0, -0.999853, 0.0171732, 0, 0, 0 )

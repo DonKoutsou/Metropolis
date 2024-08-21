@@ -10,8 +10,11 @@ curve = SubResource( 7 )
 
 [sub_resource type="ParticlesMaterial" id=2]
 lifetime_randomness = 0.32
-emission_shape = 2
-emission_box_extents = Vector3( 10000, 10, 10000 )
+emission_shape = 5
+emission_ring_radius = 16000.0
+emission_ring_inner_radius = 0.0
+emission_ring_height = 1.0
+emission_ring_axis = Vector3( 0, 1, 0 )
 spread = 0.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 100.0

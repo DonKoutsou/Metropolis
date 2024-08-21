@@ -73,6 +73,7 @@ cast_shadow = 0
 mesh = SubResource( 86 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
+visible = false
 cast_shadow = 0
 mesh = SubResource( 87 )
 material/0 = SubResource( 88 )
