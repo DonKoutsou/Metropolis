@@ -58,22 +58,22 @@ public class Player : Character
 	{
 		RunSpeed = NewSpeed;
 	}
-    public override void _EnterTree()
-    {
-        base._EnterTree();
+	public override void _EnterTree()
+	{
+		base._EnterTree();
 		instance = this;
-    }
-    public override void _ExitTree()
-    {
-        base._ExitTree();
+	}
+	public override void _ExitTree()
+	{
+		base._ExitTree();
 		instance = null;
 		
-    }
+	}
 	public static bool IsSpawned()
 	{
 		return instance != null;
 	}
-    public static Player GetInstance()
+	public static Player GetInstance()
 	{
 		return instance;
 	}
@@ -188,7 +188,7 @@ public class Player : Character
 				{
 					if (pos.DistanceTo(Vector3.Zero) > 7 * 8000)
 					{
-						DialogueManager.GetInstance().ScheduleDialogue(this, "Δεν μπορώ να πάω πιο βαθυιά με το μωρό μαζί μου, η ομήχλη είναι πολύ πηκνή.");
+						DialogueManager.GetInstance().ForceDialogue(this, "Η ομίχλη αρχίζει να πυκνώνει πολύ προς εκείνη την κατεύθυνση. Καλύτερα να μην πάω με το μωρό μαζί μου.");
 						/*TalkText t = GetTalkText();
 						if (!t.IsTalking())
 						{
@@ -231,9 +231,9 @@ public class Player : Character
 	}
 	bool ExpressedNoBatteries = true;
 	bool ExpressedLowBattery = false;
-    public override void _Process(float delta)
-    {
-        base._Process(delta);
+	public override void _Process(float delta)
+	{
+		base._Process(delta);
 
 		CheckIfIdling();
 
@@ -268,8 +268,8 @@ public class Player : Character
 				ExpressedNoBatteries = true;
 			}
 		}
-    }
-    public override void _PhysicsProcess(float delta)
+	}
+	public override void _PhysicsProcess(float delta)
 	{
 		//ulong ms = OS.GetSystemTimeMsecs();
 

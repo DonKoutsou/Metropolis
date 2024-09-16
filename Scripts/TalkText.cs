@@ -24,7 +24,7 @@ public class TalkText : Spatial
     bool DoingForcedDialogue = false;
     public void Talk(string diag, bool forced = false)
     {
-        if (diag == string.Empty)
+        if (diag == string.Empty || diag == TextToShow)
         {
             return;
         }
@@ -52,6 +52,7 @@ public class TalkText : Spatial
     public void TurnOff()
     {
         Talking = false;
+        TextToShow = string.Empty;
         if (CharPar)
         {
             GetParent<NPC>().ResetLook();

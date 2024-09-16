@@ -311,6 +311,12 @@ public class ActionMenu : Control
 			Vector3 PlayPos = Play.GlobalTranslation;
 			
 			ActionComponent Acomp = obj.GetNode<ActionComponent>("ActionComponent");
+			
+			if (Acomp == null)
+			{
+				return;
+			}
+				
 			Vector3 actionpos = Acomp.GetActionPos(PlayPos);
 
 			if (actionpos.DistanceTo(PlayPos) > 100)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://Scripts/SpawnPosition.cs" type="Script" id=5]
 [ext_resource path="res://Assets/TerainTex/SandSimple.tres" type="Material" id=6]
 [ext_resource path="res://Assets/Terains/Island2/Island2_LOD.tres" type="ArrayMesh" id=7]
+[ext_resource path="res://Scenes/Env_Assets/Antena2.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Env_Assets/Antena.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Env_Assets/Portal.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Env_Assets/Ship.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/Env_Assets/Rock4.tscn" type="PackedScene" id=17]
@@ -124,7 +126,6 @@ mesh_library = SubResource( 25 )
 
 [node name="Terain" type="MeshInstance" parent="." index="4"]
 transform = Transform( 800, 0, 0, 0, 800, 0, 0, 0, 800, 0, -93.9364, 0 )
-lod_max_distance = 6000.0
 mesh = ExtResource( 3 )
 material/0 = ExtResource( 6 )
 script = ExtResource( 1 )
@@ -210,3 +211,12 @@ transform = Transform( 9.14328, -12.3972, 7.99113, 1.80301, -8.39207, -15.0821, 
 
 [node name="Vehicle" parent="." index="27" instance=ExtResource( 4 )]
 transform = Transform( -0.63531, 0, 0.772257, 0, 1, 0, -0.772257, 0, -0.63531, 67.6015, 95.6728, 1046.35 )
+
+[node name="StaticBody2" parent="." index="28" instance=ExtResource( 8 )]
+transform = Transform( 7.47811, -24.3451, 23.7855, 7.30166, 24.9334, 23.2243, -33.2434, 0, 10.4516, -222.691, -250.397, 55.9756 )
+
+[node name="StaticBody3" parent="." index="29" instance=ExtResource( 9 )]
+transform = Transform( 64.3934, 29.2183, 0, -29.2183, 64.3934, 0, 0, 0, 70.7123, -1570.29, -242.847, 1937.07 )
+
+[node name="StaticBody4" parent="." index="30" instance=ExtResource( 9 )]
+transform = Transform( 0.729235, 0.330887, -40.7425, -16.838, 37.1089, 0, 37.1017, 16.8348, 0.800791, 1710.94, -242.847, -214.189 )

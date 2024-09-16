@@ -458,7 +458,7 @@ material/0 = SubResource( 143 )
 material_override = SubResource( 143 )
 material/0 = SubResource( 143 )
 
-[node name="HoverEngineParticles" parent="RayFL/EnginePivot" index="3"]
+[node name="HoverEngineParticles" parent="RayFL/EnginePivot" index="1"]
 process_material = SubResource( 151 )
 
 [node name="RayFR" parent="." index="2"]
@@ -472,7 +472,7 @@ material/0 = SubResource( 143 )
 material_override = SubResource( 143 )
 material/0 = SubResource( 143 )
 
-[node name="HoverEngineParticles" parent="RayFR/EnginePivot" index="3"]
+[node name="HoverEngineParticles" parent="RayFR/EnginePivot" index="1"]
 process_material = SubResource( 151 )
 
 [node name="RayBR" parent="." index="3"]
@@ -486,7 +486,7 @@ material/0 = SubResource( 143 )
 material_override = SubResource( 143 )
 material/0 = SubResource( 143 )
 
-[node name="HoverEngineParticles" parent="RayBR/EnginePivot" index="3"]
+[node name="HoverEngineParticles" parent="RayBR/EnginePivot" index="1"]
 process_material = SubResource( 151 )
 
 [node name="RayBL" parent="." index="4"]
@@ -500,5 +500,5 @@ material/0 = SubResource( 143 )
 material_override = SubResource( 143 )
 material/0 = SubResource( 143 )
 
-[node name="HoverEngineParticles" parent="RayBL/EnginePivot" index="3"]
+[node name="HoverEngineParticles" parent="RayBL/EnginePivot" index="1"]
 process_material = SubResource( 151 )

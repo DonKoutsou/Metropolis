@@ -5,11 +5,8 @@
 [ext_resource path="res://Scripts/FireplaceLight.cs" type="Script" id=3]
 [ext_resource path="res://Assets/Sounds/Torch_Sound.mp3" type="AudioStream" id=4]
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=6]
+[ext_resource path="res://Scenes/Effects/SmokeFireplace.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Clutter/BoneFire/Fireplace_LOD.obj" type="ArrayMesh" id=7]
-
-[sub_resource type="BoxShape" id=1]
-extents = Vector3( 1.37293, 0.547474, 1.36897 )
 
 [sub_resource type="Curve" id=5]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.275, 0.745454 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.1 ), 0.0, 0.0, 0, 0 ]
@@ -51,24 +48,23 @@ albedo_color = Color( 1, 0.301961, 0.027451, 1 )
 [sub_resource type="QuadMesh" id=3]
 material = SubResource( 7 )
 
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 1.37293, 0.547474, 1.36897 )
+
 [node name="Fireplace" type="StaticBody" groups=["Interactables"]]
 collision_layer = 16
 collision_mask = 0
 script = ExtResource( 3 )
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
+[node name="LOD" type="LOD" parent="."]
+
+[node name="MeshInstance2" type="MeshInstance" parent="LOD"]
+lod_range = 299.19
 mesh = ExtResource( 1 )
+skeleton = NodePath("../..")
 material/0 = ExtResource( 2 )
-script = ExtResource( 6 )
-LOD0 = ExtResource( 1 )
-LOD1 = ExtResource( 7 )
-HideIfNoLod = true
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.543886, 0 )
-shape = SubResource( 1 )
-
-[node name="Particles" type="Particles" parent="."]
+[node name="Particles" type="Particles" parent="LOD/MeshInstance2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00683868, 0.313734, -0.00524759 )
 amount = 200
 lifetime = 0.5
@@ -78,13 +74,25 @@ draw_order = 2
 process_material = SubResource( 2 )
 draw_pass_1 = SubResource( 3 )
 
-[node name="FireplaceLight" type="OmniLight" parent="."]
+[node name="Smoke2" parent="LOD/MeshInstance2" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.92181, 0.162743 )
+
+[node name="FireplaceLight" type="OmniLight" parent="LOD/MeshInstance2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0 )
 light_color = Color( 0.964706, 0.85098, 0.729412, 1 )
 light_energy = 1.8
 light_indirect_energy = 0.0
 shadow_enabled = true
 omni_range = 10.248
+
+[node name="MeshInstance" type="MeshInstance" parent="LOD"]
+visible = false
+lod_range = 1024.0
+mesh = ExtResource( 7 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.543886, 0 )
+shape = SubResource( 1 )
 
 [node name="FireplaceSound" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 4 )

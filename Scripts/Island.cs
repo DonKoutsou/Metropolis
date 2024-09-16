@@ -91,235 +91,7 @@ public class Island : Spatial
 	//{
 	//	return Ports;
 	//}
-	#if DEBUG
-	[Export(PropertyHint.Layers3dPhysics)]
-    public uint MoveLayer { get; set; }
-
-	enum ImageRes
-	{
-		x16 = 16,
-		x32 = 32,
-		x64 = 64,
-		x128 = 128,
-		x256 = 256,
-	}
-	Image im = null;
-	int row = 0;
-	int col = 0;
-	Vector2 res;
-	List <Vector2> seapix = null;
-	float mult = 0;
-	int ilesize = 12000;
-
-	bool GeneratingImage = false;
-	bool OutliningImage = false;
-
-	ImageGenDock d;
-	void GeneratePixelRow()
-	{
-		for (int i = 0; i < res.x; i++)
-		{
-			//GD.Print("Generating Pixel : X: " + row.ToString() + " Y: " + col.ToString() );
-			var spacestate = GetWorld().DirectSpaceState;
-
-			Vector3 rayor = new Vector3((mult * col) - (ilesize / 2), 5000, (mult * row)  - (ilesize / 2));
-			Vector3 rayend = rayor;
-			rayend.y = -5; 
-
-			var rayar = spacestate.IntersectRay(rayor, rayend, new Godot.Collections.Array { this }, MoveLayer);
-			Color color = new Color(r: 0, g: 0, b: 0, a: 0);
-			if (rayar.Count == 0)
-			{
-				seapix.Add(new Vector2(col, row));
-			}
-			else
-			{
-				CollisionObject obj = (CollisionObject)rayar["collider"];
-				//MeshInstance instance;
-				//if (GetParent() is MeshInstance)
-				//{
-				//	instance = (MeshInstance)GetParent();
-				//}
-				//else
-				//{
-				//	instance = GetNode<MeshInstance>("MeshInstance");
-				//}
-				//Vector3 VectorLocalPos = instance.GlobalTransform.basis.XformInv((Vector3)rayar["position"]);
-				//MeshDataTool tool = new MeshDataTool();
-				//SurfaceTool tool2 = new SurfaceTool();
-				//tool2.CreateFrom(instance.Mesh, 0);
-				//tool.CreateFromSurface(tool2.Commit(), 0);
-
-				//int VertexIndex = Get_Closest_Vertex(VectorLocalPos, tool);
-
-				bool ItsSea = obj.GetCollisionLayerBit(8);
-				bool ITsRock = obj.GetCollisionLayerBit(10);
-				
-				//im.SetPixel(col, row, tool.GetVertexColor(VertexIndex));
-				
-				if (ItsSea)
-				{
-					seapix.Add(new Vector2(col, row));
-				}
-				else if (ITsRock)
-				{
-					color = new Color(r: 0.66f, g: 0.57f, b: 0.42f, a: 1);
-					//int t = r.Next(0,2);
-					//if (t ==0)
-						//
-					//else
-						//color = new Color(r: 0.83f, g: 0.7f, b: 0.49f, a: 1);
-				}
-				else
-				{
-					color = new Color(r: 0.83f, g: 0.7f, b: 0.49f, a: 1);
-				}
-			}
-			im.Lock();
-			im.SetPixel(col, row, color);
-			im.Unlock();
-			col ++;
-			if (col >= res.x)
-			{
-				col = 0;
-				row ++;
-				if (row >= res.x)
-				{
-					GeneratingImage = false;
-					row = 0;
-					col = 0;
-					im.ClearMipmaps();
-					im.GenerateMipmaps(true);
-					d.OnImageFinished(im, this);
-					//OutliningImage = true;
-					break;
-				}
-			}
-		}
-	}
-	void GenerateOulinePixel()
-	{
-		
-		//for (int i = 0; i < res.x * res.y; i++)
-		//{
-		for (int i = 0; i < res.x; i++)
-		{
-			//GD.Print("Generating Outline Pixel : X: " + row.ToString() + " Y: " + col.ToString() );
-			if (seapix.Contains(new Vector2(col, row)))
-			{
-				float minDistance = float.MaxValue;
-
-				for (int newr = row - 8; newr <= row + 8; newr++)
-				{
-					for (int newc = col - 8; newc <= col + 8; newc++)
-					{
-
-						if (newr == row && newc == col)
-							continue;
-
-						if (newr < 0 || newr >= res.x || newc < 0 || newc >= res.x)
-							continue;
-
-						if (!seapix.Contains(new Vector2(newc, newr)))
-						{
-							float distance = Mathf.Sqrt(Mathf.Pow(newr - row, 2) + Mathf.Pow(newc - col, 2));
-							if (distance < minDistance)
-							{
-								minDistance = distance;
-							}
-						}
-					}
-				}
-
-				if (minDistance < float.MaxValue)
-				{
-					float gradientFactor = minDistance /8.0f;
-					gradientFactor = Mathf.Clamp(gradientFactor, 0, 1); 
-
 	
-					//Color startColor = new Color(r: 0.76f, g: 0.9f, b: 1, a: 1);
-					Color startColor = new Color(r: 0.83f, g: 0.7f, b: 0.49f, a: 1);
-					//Color endColor = new Color(r: 0.2f, g: 0.4f, b: 0.8f, a: 1); 
-					Color endColor = new Color(r: 0.66f, g: 0.57f, b: 0.42f, a: 1);
-					Color outlineColor = startColor.LinearInterpolate(endColor, gradientFactor);
-
-					im.Lock();
-					im.SetPixel(col, row, outlineColor);
-					im.Unlock();
-				}
-			}
-
-			col++;
-			if (col >= res.x)
-			{
-				col = 0;
-				row++;
-				if (row >= res.x)
-				{
-					OutliningImage = false;
-					im.ClearMipmaps();
-					im.GenerateMipmaps();
-					d.OnImageFinished(im, this);
-					break;
-				}
-			}
-		}
-		//}
-		//ImageTexture t = new ImageTexture();
-		//t.CreateFromImage(im, flags:4);
-        //Image = t;
-		
-		//im.SavePng("res://Assets/IslandPics/" + Filename.GetFile().Substr(0, Filename.GetFile().Length - 5) + ".png");
-		//Image = "res://Assets/IslandPics/" + Filename.GetFile().Substr(0, Filename.GetFile().Length - 5) + ".png";
-		
-	}
-    public override void _Process(float delta)
-    {
-        base._Process(delta);
-		if (GeneratingImage)
-		{
-			GeneratePixelRow();
-		}
-		if (OutliningImage)
-		{
-			GenerateOulinePixel();
-		}
-		
-    }
-    [Export]
-	ImageRes Resolution = ImageRes.x16; 
-    public void GenerateImage(ImageGenDock Gend)
-	{
-		d = Gend;
-		res = new Vector2((int)Resolution, (int)Resolution);
-		
-		im = new Image();
-		im.Create((int)res.x, (int)res.y, true, Godot.Image.Format.Rgba8);
-		row = 0;
-		col = 0;
-        mult = ilesize/res.x;
-		seapix = new List<Vector2>();
-		GeneratingImage = true;
-	}
-	int Get_Closest_Vertex(Vector3 LocalPosition, MeshDataTool Tool)
-	{
-		float closest_dist_squared = float.MaxValue;
-		int closest_vertex_index = -1;
-
-		for (int i = 0; i < Tool.GetVertexCount(); i++)
-		{
-			Vector3 i_pos = Tool.GetVertex(i);
-			float DistTemp = LocalPosition.DistanceSquaredTo(i_pos);
-			if (DistTemp <= closest_dist_squared)
-			{
-				closest_dist_squared = DistTemp;
-				closest_vertex_index = i;
-
-			}
-		}
-		return closest_vertex_index;
-	}
-	#endif
 	public void SetSpawnInfo(Vector3 SpawnPos, float SpawnRot, string SpecialName)
 	{
 		SpawnGlobalLocation = SpawnPos;
@@ -526,8 +298,12 @@ public class Island : Spatial
 					int Spawn = RandomContainer.Next(0, 2);
 					if (Spawn == 0)
 					{
-						int selection = RandomContainer.Next(0, GlobalItemCatalogue.GetInstance().CharacterCataluge.Count());
-						NPC chara = (NPC)GlobalItemCatalogue.GetInstance().CharacterCataluge[selection].Instance();
+						PackedScene packedcharacter = GlobalItemCatalogue.GetInstance().GetRandomCharacterFromCatalogue();
+						if (packedcharacter == null)
+						{
+							continue;
+						}
+						NPC chara = (NPC)packedcharacter.Instance();
 						//chara.Set("spawnUncon", true);
 						AddChild(chara);
 						chara.Translation = Chars.Locations[i];
@@ -540,11 +316,14 @@ public class Island : Spatial
 
 						if (Vehs.HasVehicles())
 						{
-
-							int vselection = RandomContainer.Next(0, GlobalItemCatalogue.GetInstance().VehicleCatalogue.Count());
-							Spatial veh = (Spatial)GlobalItemCatalogue.GetInstance().VehicleCatalogue[vselection].Instance();
+							PackedScene packedvehicle= GlobalItemCatalogue.GetInstance().GetRandomVehicleFromCatalogue();
+							if (packedvehicle == null)
+							{
+								continue;
+							}
+	
+							Spatial veh = (Spatial)packedvehicle.Instance();
 							AddChild(veh);
-							
 							Vehicle vehchild = veh.GetNode<Vehicle>("VehicleBody");
 							vehchild.Translation = Vehs.Locations[i];
 							vehchild.Rotation = Vehs.Rotations[i];
@@ -761,6 +540,242 @@ public class Island : Spatial
 
 		}
 	}
+	#if DEBUG
+	[Export(PropertyHint.Layers3dPhysics)]
+    public uint MoveLayer { get; set; }
+
+	enum ImageRes
+	{
+		x16 = 16,
+		x32 = 32,
+		x64 = 64,
+		x128 = 128,
+		x256 = 256,
+		x512 = 512,
+	}
+	Image im = null;
+	int row = 0;
+	int col = 0;
+	Vector2 res;
+	List <Vector2> seapix = null;
+	float mult = 0;
+	int ilesize = 12000;
+
+	bool GeneratingImage = false;
+	bool OutliningImage = false;
+
+	ImageGenDock d;
+	void GeneratePixelRow()
+	{
+		for (int i = 0; i < res.x; i++)
+		{
+			//GD.Print("Generating Pixel : X: " + row.ToString() + " Y: " + col.ToString() );
+			var spacestate = GetWorld().DirectSpaceState;
+
+			Vector3 rayor = new Vector3((mult * col) - (ilesize / 2), 5000, (mult * row)  - (ilesize / 2));
+			Vector3 rayend = rayor;
+			rayend.y = -5; 
+
+			var rayar = spacestate.IntersectRay(rayor, rayend, new Godot.Collections.Array { this }, MoveLayer);
+			Color color = new Color(r: 0, g: 0, b: 0, a: 0);
+			if (rayar.Count == 0)
+			{
+				seapix.Add(new Vector2(col, row));
+			}
+			else
+			{
+				CollisionObject obj = (CollisionObject)rayar["collider"];
+				//MeshInstance instance;
+				//if (GetParent() is MeshInstance)
+				//{
+				//	instance = (MeshInstance)GetParent();
+				//}
+				//else
+				//{
+				//	instance = GetNode<MeshInstance>("MeshInstance");
+				//}
+				//Vector3 VectorLocalPos = instance.GlobalTransform.basis.XformInv((Vector3)rayar["position"]);
+				//MeshDataTool tool = new MeshDataTool();
+				//SurfaceTool tool2 = new SurfaceTool();
+				//tool2.CreateFrom(instance.Mesh, 0);
+				//tool.CreateFromSurface(tool2.Commit(), 0);
+
+				//int VertexIndex = Get_Closest_Vertex(VectorLocalPos, tool);
+
+				bool ItsSea = obj.GetCollisionLayerBit(8);
+				//bool ITsRock = obj.GetCollisionLayerBit(10);
+				
+				//im.SetPixel(col, row, tool.GetVertexColor(VertexIndex));
+				
+				if (ItsSea)
+				{
+					seapix.Add(new Vector2(col, row));
+				}
+				/*else if (ITsRock)
+				{
+					Vector3 pos = (Vector3)rayar[Position];
+					float height = pos.y;
+					float hNorm = height / 5000;
+					color = new Color(r: 0.66f, g: 0.57f, b: 0.42f, a: 1).LinearInterpolate(new Color(r: 0.92f, g: 0.78f, b: 0.57f, a: 1), hNorm);
+					//int t = r.Next(0,2);
+					//if (t ==0)
+						//
+					//else
+						//color = new Color(r: 0.83f, g: 0.7f, b: 0.49f, a: 1);
+				}*/
+				else
+				{
+					Vector3 pos = (Vector3)rayar["position"];
+					float height = pos.y;
+					float hNorm = Mathf.Clamp(height, 0, 2000) / 2000;
+					color = new Color(r: 0.83f, g: 0.7f, b: 0.49f, a: 1).LinearInterpolate(new Color(r: 0.66f, g: 0.57f, b: 0.42f, a: 1), hNorm);
+				}
+			}
+			im.Lock();
+			im.SetPixel(col, row, color);
+			im.Unlock();
+			col ++;
+			if (col >= res.x)
+			{
+				col = 0;
+				row ++;
+				if (row >= res.x)
+				{
+					GeneratingImage = false;
+					row = 0;
+					col = 0;
+					im.ClearMipmaps();
+					im.GenerateMipmaps(true);
+					d.OnImageFinished(im, this);
+					//OutliningImage = true;
+					break;
+				}
+			}
+		}
+	}
+	void GenerateOulinePixel()
+	{
+		
+		//for (int i = 0; i < res.x * res.y; i++)
+		//{
+		for (int i = 0; i < res.x; i++)
+		{
+			//GD.Print("Generating Outline Pixel : X: " + row.ToString() + " Y: " + col.ToString() );
+			if (seapix.Contains(new Vector2(col, row)))
+			{
+				float minDistance = float.MaxValue;
+
+				for (int newr = row - 8; newr <= row + 8; newr++)
+				{
+					for (int newc = col - 8; newc <= col + 8; newc++)
+					{
+
+						if (newr == row && newc == col)
+							continue;
+
+						if (newr < 0 || newr >= res.x || newc < 0 || newc >= res.x)
+							continue;
+
+						if (!seapix.Contains(new Vector2(newc, newr)))
+						{
+							float distance = Mathf.Sqrt(Mathf.Pow(newr - row, 2) + Mathf.Pow(newc - col, 2));
+							if (distance < minDistance)
+							{
+								minDistance = distance;
+							}
+						}
+					}
+				}
+
+				if (minDistance < float.MaxValue)
+				{
+					float gradientFactor = minDistance /8.0f;
+					gradientFactor = Mathf.Clamp(gradientFactor, 0, 1); 
+
+	
+					//Color startColor = new Color(r: 0.76f, g: 0.9f, b: 1, a: 1);
+					Color startColor = new Color(r: 0.83f, g: 0.7f, b: 0.49f, a: 1);
+					//Color endColor = new Color(r: 0.2f, g: 0.4f, b: 0.8f, a: 1); 
+					Color endColor = new Color(r: 0.66f, g: 0.57f, b: 0.42f, a: 1);
+					Color outlineColor = startColor.LinearInterpolate(endColor, gradientFactor);
+
+					im.Lock();
+					im.SetPixel(col, row, outlineColor);
+					im.Unlock();
+				}
+			}
+
+			col++;
+			if (col >= res.x)
+			{
+				col = 0;
+				row++;
+				if (row >= res.x)
+				{
+					OutliningImage = false;
+					im.ClearMipmaps();
+					im.GenerateMipmaps();
+					d.OnImageFinished(im, this);
+					break;
+				}
+			}
+		}
+		//}
+		//ImageTexture t = new ImageTexture();
+		//t.CreateFromImage(im, flags:4);
+        //Image = t;
+		
+		//im.SavePng("res://Assets/IslandPics/" + Filename.GetFile().Substr(0, Filename.GetFile().Length - 5) + ".png");
+		//Image = "res://Assets/IslandPics/" + Filename.GetFile().Substr(0, Filename.GetFile().Length - 5) + ".png";
+		
+	}
+    public override void _Process(float delta)
+    {
+        base._Process(delta);
+		if (GeneratingImage)
+		{
+			GeneratePixelRow();
+		}
+		if (OutliningImage)
+		{
+			GenerateOulinePixel();
+		}
+		
+    }
+    [Export]
+	ImageRes Resolution = ImageRes.x16; 
+    public void GenerateImage(ImageGenDock Gend)
+	{
+		d = Gend;
+		res = new Vector2((int)Resolution, (int)Resolution);
+		
+		im = new Image();
+		im.Create((int)res.x, (int)res.y, true, Godot.Image.Format.Rgba8);
+		row = 0;
+		col = 0;
+        mult = ilesize/res.x;
+		seapix = new List<Vector2>();
+		GeneratingImage = true;
+	}
+	int Get_Closest_Vertex(Vector3 LocalPosition, MeshDataTool Tool)
+	{
+		float closest_dist_squared = float.MaxValue;
+		int closest_vertex_index = -1;
+
+		for (int i = 0; i < Tool.GetVertexCount(); i++)
+		{
+			Vector3 i_pos = Tool.GetVertex(i);
+			float DistTemp = LocalPosition.DistanceSquaredTo(i_pos);
+			if (DistTemp <= closest_dist_squared)
+			{
+				closest_dist_squared = DistTemp;
+				closest_vertex_index = i;
+
+			}
+		}
+		return closest_vertex_index;
+	}
+	#endif
 }
 public class IslandInfo
 {

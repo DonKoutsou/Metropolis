@@ -4,10 +4,13 @@
 render_priority = 1
 flags_transparent = true
 flags_do_not_receive_shadows = true
-flags_disable_ambient_light = true
 params_blend_mode = 1
 params_cull_mode = 2
 params_depth_draw_mode = 1
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
 albedo_color = Color( 0.890196, 0.988235, 1, 0.294118 )
 rim_enabled = true
 rim = 0.09

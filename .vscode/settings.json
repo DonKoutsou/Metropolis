@@ -13,7 +13,7 @@
         "System.SystemException": "always",
         "System.TypeInitializationException": "always"
     },
-    "godot_tools.editor_path": "E:/Godot/Godot_v3.5.3-stable_mono_win64/Godot_v3.5.3-stable_mono_win64.exe",
+    "godot_tools.editor_path": "E:/Godot/Godot_v3.6-stable_mono_win64/Godot_v3.6-stable_mono_win64.exe",
     "debug.allowBreakpointsEverywhere": true,
     "godotTools.editorPath.godot3": "c:\\Users\\koutsouradisant\\Downloads\\Godot_v3.5.3-stable_mono_win64\\Godot_v3.5.3-stable_mono_win64.exe",
 }

@@ -84,7 +84,7 @@ public class KanarisScript : BaseDialogueScript
 
             for (int i = 0; i < 2; i++)
             {
-                Item newItem = GlobalItemCatalogue.GetItemByType(ItemName.EXPLOSIVE).Instance<Item>();
+                Item newItem = GlobalItemCatalogue.GetInstance().GetItemByType(ItemName.EXPLOSIVE).Instance<Item>();
                 inv.InsertItem(newItem);
             }
             
@@ -103,7 +103,7 @@ public class KanarisScript : BaseDialogueScript
             inv.GetItemsByType(out MusicSheets, types);
             inv.DeleteItem(MusicSheets[0]);
 
-            Item newItem = GlobalItemCatalogue.GetItemByType(ItemName.EXPLOSIVE).Instance<Item>();
+            Item newItem = GlobalItemCatalogue.GetInstance().GetItemByType(ItemName.EXPLOSIVE).Instance<Item>();
             inv.InsertItem(newItem);
 
             returntext =  "Σ'ωραίος... τσάκα άλλο ένα ακόμη εκρηχκτηκό.";
@@ -122,7 +122,7 @@ public class KanarisScript : BaseDialogueScript
         inv.GetItemsByType(out Music, types);
         inv.DeleteItem(Music[0]);
 
-        Item newItem = GlobalItemCatalogue.GetItemByType(ItemName.EXPLOSIVE).Instance<Item>();
+        Item newItem = GlobalItemCatalogue.GetInstance().GetItemByType(ItemName.EXPLOSIVE).Instance<Item>();
         inv.InsertItem(newItem);
 
 

@@ -108,7 +108,6 @@ data = {
 
 [node name="Terain" type="MeshInstance" parent="." index="4"]
 transform = Transform( 1209.57, 0, 0, 0, 1209.57, 0, 0, 0, 1209.57, 0, -140.533, 0 )
-lod_max_distance = 6000.0
 mesh = ExtResource( 5 )
 material/0 = ExtResource( 4 )
 script = ExtResource( 3 )

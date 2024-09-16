@@ -366,7 +366,7 @@ public class WorldMap : TileMap
 			DayNight.GetInstance().UpdatePlayerDistance(Math.Max(Math.Abs(CurIle.Position.x), Math.Abs(CurIle.Position.y)) / 11);
 			
 			PlayerUI.OnMenuToggled(false);
-			pl.GetNode<Control>("Tutorial").Free();
+			pl.GetNode<Control>("Tutorial").QueueFree();
 
 			Vector2[] UnlockedLs = (Vector2[])save.Get("UnlockedLightHouses");
 

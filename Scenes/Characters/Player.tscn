@@ -1,8 +1,10 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Systems/TalkText.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Systems/Tutorial.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Items/Compass.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Items/MapItem.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Items/NormalLeg_R.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Inventory/Inventory.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Items/NormalLeg_L.tscn" type="PackedScene" id=8]
@@ -223,7 +225,7 @@ transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.72
 shape = SubResource( 92 )
 
 [node name="Inventory" parent="." instance=ExtResource( 7 )]
-StartingItems = [ ExtResource( 33 ), ExtResource( 34 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 10 ) ]
+StartingItems = [ ExtResource( 33 ), ExtResource( 34 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 10 ), ExtResource( 5 ), ExtResource( 4 ) ]
 
 [node name="TalkText" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.2661, 0 )

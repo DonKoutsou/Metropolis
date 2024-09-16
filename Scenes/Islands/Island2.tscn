@@ -119,7 +119,6 @@ ImageID = 1
 
 [node name="MeshInstance5" type="MeshInstance" parent="." index="1"]
 transform = Transform( 800, 0, 0, 0, 400, 0, 0, 0, 800, 0, -160.644, 0 )
-lod_max_distance = 6000.0
 mesh = ExtResource( 20 )
 material/0 = ExtResource( 13 )
 script = ExtResource( 15 )

@@ -18,7 +18,7 @@ public class Instrument : Item
         if (Toggle)
 		{
             float pos;
-			Speaker.Stream = MusicManager.GetSong(this, out pos);
+			Speaker.Stream = MusicManager.GetInstance().GetSong(this, out pos);
 			Speaker.Play(pos);
 		}
 	}
@@ -36,12 +36,12 @@ public class Instrument : Item
     public override void _EnterTree()
     {
         base._EnterTree();
-        MusicManager.RegisterInstrument(this);
+        MusicManager.GetInstance().RegisterInstrument(this);
     }
     public override void _ExitTree()
     {
         base._ExitTree();
-        MusicManager.RemoveInstrument(this);
+        MusicManager.GetInstance().RemoveInstrument(this);
     }
     public bool IsPlaying()
     {

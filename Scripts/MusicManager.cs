@@ -1,37 +1,46 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 public class MusicManager : Node
 {
-    
+        
     [Export]
-	public List <AudioStream> BouzoukiSongExports = null;
+	string[] BouzoukiSongExports = null;
     [Export]
-	public List <AudioStream> GuitarSongExports = null;
-	static Dictionary<Song, AudioStream> BouzoukiSongs = new Dictionary<Song, AudioStream>();
-    static Dictionary<Song, AudioStream> GuitarSongs = new Dictionary<Song, AudioStream>();
+	string[] GuitarSongExports = null;
+	Dictionary<Song, AudioStream> BouzoukiSongs = new Dictionary<Song, AudioStream>();
+    Dictionary<Song, AudioStream> GuitarSongs = new Dictionary<Song, AudioStream>();
 
-    static List <object> Instruments = new List<object>();
+    List <object> Instruments = new List<object>();
+
+    static MusicManager Instance;
+
+    public static MusicManager GetInstance()
+    {
+        return Instance;
+    }
     public override void _Ready()
     {
-        for (int i = 0; i < BouzoukiSongExports.Count; i++)
+        Instance = this;
+        for (int i = 0; i < BouzoukiSongExports.Count(); i++)
 		{
-			BouzoukiSongs.Add((Song)i, BouzoukiSongExports[i]);
+			BouzoukiSongs.Add((Song)i, ResourceLoader.Load<AudioStream>(BouzoukiSongExports[i]));
 		}
-        for (int i = 0; i < GuitarSongExports.Count; i++)
+        for (int i = 0; i < GuitarSongExports.Count(); i++)
 		{
-			GuitarSongs.Add((Song)i, GuitarSongExports[i]);
+			GuitarSongs.Add((Song)i, ResourceLoader.Load<AudioStream>(GuitarSongExports[i]));
 		}
     }
-    public static void RegisterInstrument(object instrument)
+    public void RegisterInstrument(object instrument)
     {
         Instruments.Add(instrument);
     }
-    public static void RemoveInstrument(object instrument)
+    public void RemoveInstrument(object instrument)
     {
         Instruments.Remove(instrument);
     }
-    public static AudioStream GetSong(Instrument inst, out float loc)
+    public AudioStream GetSong(Instrument inst, out float loc)
     {
         AudioStream song = null;
         loc = 0;
@@ -56,7 +65,7 @@ public class MusicManager : Node
         }
         return song;
     }
-    static int SongToEnum(AudioStream song)
+    int SongToEnum(AudioStream song)
     {
         int s = -1;
         if (BouzoukiSongs.ContainsValue(song))
@@ -83,7 +92,7 @@ public class MusicManager : Node
         }
         return s;
     }
-    static AudioStream GetSongForInstrument(Instrument name, Song s)
+    AudioStream GetSongForInstrument(Instrument name, Song s)
     {
         AudioStream song = null;
         if (name is Bouzouki)

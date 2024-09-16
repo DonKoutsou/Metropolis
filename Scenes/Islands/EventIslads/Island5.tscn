@@ -138,6 +138,7 @@ normal_scale = 1.0
 normal_texture = ExtResource( 24 )
 uv1_scale = Vector3( 0.002, 0.002, 0.002 )
 uv1_triplanar = true
+uv1_triplanar_sharpness = 1.0
 
 [sub_resource type="CylinderShape" id=33]
 height = 1278.34
@@ -174,7 +175,6 @@ data = {
 
 [node name="Terain" type="MeshInstance" parent="." index="9"]
 transform = Transform( 1611.07, 0, 0, 0, 1611.07, 0, 0, 0, 1611.07, 0, -422.946, 0 )
-lod_max_distance = 6000.0
 mesh = ExtResource( 10 )
 material/0 = ExtResource( 6 )
 script = ExtResource( 1 )
@@ -190,7 +190,6 @@ shape = SubResource( 29 )
 
 [node name="Terain2" type="MeshInstance" parent="." index="10"]
 transform = Transform( 343.416, 0, 0, 0, 343.416, 0, 0, 0, 343.416, 0, -2231.85, 0 )
-lod_max_distance = 6000.0
 mesh = ExtResource( 10 )
 material/0 = ExtResource( 6 )
 script = ExtResource( 1 )

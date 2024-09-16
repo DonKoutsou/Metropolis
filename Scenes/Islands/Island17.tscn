@@ -170,7 +170,6 @@ data = {
 
 [node name="MeshInstance5" type="MeshInstance" parent="." index="24"]
 transform = Transform( 1434.4, 0, 0, 0, 2500.78, 0, 0, 0, 1434.4, 59.9863, -759.544, -20.8598 )
-lod_max_distance = 6000.0
 mesh = ExtResource( 2 )
 material/0 = ExtResource( 10 )
 script = ExtResource( 9 )

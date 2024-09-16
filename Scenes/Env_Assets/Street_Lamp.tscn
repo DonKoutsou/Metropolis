@@ -22,6 +22,7 @@ mesh = ExtResource( 1 )
 script = ExtResource( 4 )
 LOD0 = ExtResource( 1 )
 LOD1 = ExtResource( 5 )
+HideIfNoLod = true
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.28984, 0 )

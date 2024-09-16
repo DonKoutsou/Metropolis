@@ -11,7 +11,7 @@
             "type": "coreclr",
             "request": "launch",
             
-            "program": "E:/Godot/Godot_v3.5.3-stable_mono_win64/Godot_v3.5.3-stable_mono_win64.exe",
+            "program": "E:/Godot/Godot_v3.6-stable_mono_win64/Godot_v3.6-stable_mono_win64.exe",
             // Change the arguments below for the project you want to test with.
             // To run the project instead of editing it, remove the "--editor" argument.
             "args": [
@@ -35,7 +35,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "E:/Godot/Godot_v3.5.3-stable_mono_win64/Godot_v3.5.3-stable_mono_win64.exe",
+            "program": "E:/Godot/Godot_v3.6-stable_mono_win64/Godot_v3.6-stable_mono_win64.exe",
             "args": [
                 "--path",
                 "${workspaceRoot}"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Scripts/ScreenEffects.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/Control_UI.cs" type="Script" id=2]
@@ -11,9 +11,6 @@
 [ext_resource path="res://Fonts/Caudex-Bold.ttf" type="DynamicFontData" id=9]
 [ext_resource path="res://Scenes/HUD/CheatMenu.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/HUD/InventoryUI.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Assets/Sounds/UI/Hover2.mp3" type="AudioStream" id=12]
-[ext_resource path="res://Assets/Sounds/UI/Hover.mp3" type="AudioStream" id=13]
-[ext_resource path="res://Scripts/UISoundManager.cs" type="Script" id=14]
 [ext_resource path="res://Fonts/Play-Bold.ttf" type="DynamicFontData" id=15]
 [ext_resource path="res://UIThemes/Panel_Black_TopCorner.tres" type="StyleBox" id=16]
 [ext_resource path="res://Assets/Sounds/UI/CityName.mp3" type="AudioStream" id=17]
@@ -119,12 +116,6 @@ Inventory = NodePath("InvntoryUI")
 MapUI = NodePath("MapUI")
 ControlsUI = NodePath("Control_UI")
 ActionMenu = NodePath("ActionMenu")
-
-[node name="UISoundManager" type="Node" parent="."]
-pause_mode = 2
-script = ExtResource( 14 )
-HoverSound = ExtResource( 12 )
-ClickSound = ExtResource( 13 )
 
 [node name="ScreenEffects" type="Control" parent="."]
 anchor_right = 1.0
@@ -285,5 +276,3 @@ margin_right = 172.0
 margin_bottom = 16.0
 custom_fonts/font = SubResource( 41 )
 text = "Χάρτης"
-
-[connection signal="TileHovered" from="MapUI" to="UISoundManager" method="OnButtonHovered"]

@@ -1,0 +1,83 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Fonts/Play-Bold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://UIThemes/ButtonGreen.tres" type="Theme" id=2]
+[ext_resource path="res://UIThemes/Panel_Black_Top-BottomCorner.tres" type="StyleBox" id=3]
+[ext_resource path="res://Scripts/LanguageSelect.cs" type="Script" id=4]
+[ext_resource path="res://Scenes/World/LocalisationHolder.cs" type="Script" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 1 )
+
+[node name="Language Select" type="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -160.0
+margin_top = -55.0
+margin_right = 160.0
+margin_bottom = 55.0
+script = ExtResource( 4 )
+GameScene = "res://Scenes/World/WorldRoot.tscn"
+
+[node name="Panel" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -159.0
+margin_top = -54.0
+margin_right = 159.0
+margin_bottom = 54.0
+custom_styles/panel = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="Panel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -76.0
+margin_top = 5.0
+margin_right = 76.0
+margin_bottom = 19.0
+custom_fonts/font = SubResource( 1 )
+text = "Language / Γλώσσα"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -141.0
+margin_top = -20.0
+margin_right = 141.0
+margin_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_constants/separation = 70
+alignment = 1
+
+[node name="EnglishButton" type="Button" parent="Panel/HBoxContainer"]
+margin_left = 1.0
+margin_right = 96.0
+margin_bottom = 40.0
+theme = ExtResource( 2 )
+text = "English"
+
+[node name="GreekButton" type="Button" parent="Panel/HBoxContainer"]
+margin_left = 166.0
+margin_right = 280.0
+margin_bottom = 40.0
+theme = ExtResource( 2 )
+text = "Ελληνικά"
+
+[node name="LocalisationHolder" type="Node" parent="."]
+script = ExtResource( 5 )
+Localizations = {
+"Dialogue1": PoolStringArray( "Γειά σου!", "Hello !" ),
+"Dialogue2": PoolStringArray( "Που είσαι;", "Where are you\?" ),
+"Έναρξη": PoolStringArray( "Έναρξη", "Start" ),
+"Πλήρης Οθόνη": PoolStringArray( "Πλήρης Οθόνη", "Full Screen" )
+}
+
+[connection signal="pressed" from="Panel/HBoxContainer/EnglishButton" to="." method="SelectEnglish"]
+[connection signal="pressed" from="Panel/HBoxContainer/GreekButton" to="." method="SelectGreek"]

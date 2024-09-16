@@ -24,6 +24,7 @@ mesh = ExtResource( 1 )
 script = ExtResource( 2 )
 LOD0 = ExtResource( 1 )
 LOD1 = SubResource( 4 )
+HideIfNoLod = true
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 2 )

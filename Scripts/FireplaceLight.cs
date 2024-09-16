@@ -9,16 +9,19 @@ public class FireplaceLight : StaticBody
 
     OmniLight light;
     Particles part;
+    Particles smokepart;
     bool covered = false;
     public override void _Ready()
     {
-        light = GetNode<OmniLight>("FireplaceLight");
-        part = GetNode<Particles>("Particles");
+        light = GetNode<OmniLight>("LOD/MeshInstance2/FireplaceLight");
+        part = GetNode<Particles>("LOD/MeshInstance2/Particles");
+        smokepart = GetNode<Particles>("LOD/MeshInstance2/Smoke2");
 
         if (!State)
         {
             light.LightEnergy = 0.0f;
             part.Emitting = false;
+            smokepart.Emitting = false;
             SetProcess(false);
             GetNode<AudioStreamPlayer3D>("FireplaceSound").Stop();
         }
@@ -26,6 +29,7 @@ public class FireplaceLight : StaticBody
         {
             GetNode<AudioStreamPlayer3D>("FireplaceSound").Play();
             part.Emitting = true;
+            smokepart.Emitting = true;
             SetProcess(true);
         }
         RayCast CoverCast = GetNode<RayCast>("RoofRayCast");
@@ -40,6 +44,7 @@ public class FireplaceLight : StaticBody
             State = false;
             light.LightEnergy = 0.0f;
             part.Emitting = false;
+            smokepart.Emitting = false;
             GetNode<AudioStreamPlayer3D>("FireplaceSound").Stop();
             SetProcess(false);
         }
@@ -48,6 +53,7 @@ public class FireplaceLight : StaticBody
             State = true;
             GetNode<AudioStreamPlayer3D>("FireplaceSound").Play();
             part.Emitting = true;
+            smokepart.Emitting = true;
             SetProcess(true);
         }
     }

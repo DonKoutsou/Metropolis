@@ -41,7 +41,7 @@ public class WorldRoot : Spatial
 	}
 	public void SpawnMap(bool LoadSave)
 	{
-		intro.Free();
+		intro.QueueFree();
 		m_myworld = (MyWorld)ResourceLoader.Load<PackedScene>(WorldScene).Instance();
 		m_myworld.LoadSave = LoadSave;
 		m_myworld.Connect("PlayerSpawnedEventHandler", PlayerUI.GetInstance(), "OnPlayerSpawned");
@@ -49,7 +49,7 @@ public class WorldRoot : Spatial
 	}
 	public void StopGame()
 	{
-		m_myworld.Free();
+		m_myworld.QueueFree();
 		m_myworld = null;
 		intro = (Spatial)ResourceLoader.Load<PackedScene>(Intro).Instance();
 		GetNode("Control/ViewportContainer/Viewport").AddChild(intro, true);

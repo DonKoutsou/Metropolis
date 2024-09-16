@@ -143,7 +143,6 @@ transform = Transform( -0.729673, 0, -0.683796, 0, 1, 0, 0.683796, 0, -0.729673,
 
 [node name="Landscape001" type="MeshInstance" parent="." index="4"]
 transform = Transform( 1988.14, 0, 0, 0, 1988.14, 0, 0, 0, 1988.14, 0, -140.558, 0 )
-lod_max_distance = 6000.0
 mesh = ExtResource( 20 )
 skeleton = NodePath("")
 material/0 = ExtResource( 3 )

@@ -107,7 +107,7 @@ public class SoundMap : GridMap
 
         Sounds.Remove(at);
 
-        sound.Free();
+        sound.QueueFree();
     }
     public override void _PhysicsProcess(float delta)
     {
@@ -279,7 +279,7 @@ public class SoundMap : GridMap
     {
          foreach (KeyValuePair<Vector3, Spatial> sound in Sounds)
         {
-            sound.Value.Free();
+            sound.Value.QueueFree();
         }
         Sounds = new Dictionary<Vector3, Spatial>();
     }

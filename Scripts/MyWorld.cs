@@ -6,7 +6,7 @@ using System.Linq;
 public class MyWorld : Spatial
 {
 	[Export]
-	PackedScene PlayerScene = null;
+	string PlayerScene = null;
 
 	[Signal]
     public delegate void PlayerSpawnedEventHandler(Player Pl);
@@ -88,7 +88,7 @@ public class MyWorld : Spatial
 	
 	public Player SpawnPlayer(Vector3 pos, Vector3 rot)
 	{
-		Player pl = (Player)PlayerScene.Instance();
+		Player pl = (Player)ResourceLoader.Load<PackedScene>(PlayerScene).Instance();
 		AddChild(pl);
 		pl.Teleport(pos, rot);
 		//pl.GlobalRotation = rot;
@@ -343,7 +343,6 @@ public class MyWorld : Spatial
 			}
 			else if (!ileinfo.IsIslandSpawned())
 			{
-				
 				ActiveIles.Add(ileinfo);
 				WorldMap.GetInstance().ReSpawnIsland(ileinfo).InputData(ileinfo);
 			}

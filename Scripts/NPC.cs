@@ -134,15 +134,29 @@ public class NPC : Character
 		SetLimbColor(LimbType.N01_LEG_R, LimbRandomColorProvider.GetRandomColor());
 		SetLimbColor(LimbType.N01_LEG_L, LimbRandomColorProvider.GetRandomColor());
 	}*/
-	public void HighLightObject(Material OutlineMat)
+	public void HighLightObject(bool toggle, Material OutlineMat)
     {
-		foreach (Node child in Skeleton.GetChildren())
-		{
-			if (child is MeshInstance mesh)
+		if (toggle)
+        {
+            foreach (Node child in Skeleton.GetChildren())
 			{
-				mesh.MaterialOverlay = OutlineMat;
+				if (child is MeshInstance mesh)
+				{
+					mesh.MaterialOverlay = OutlineMat;
+				}
 			}
-		}
+        } 
+        else
+        {
+            foreach (Node child in Skeleton.GetChildren())
+			{
+				if (child is MeshInstance mesh)
+				{
+					mesh.MaterialOverlay = null;
+				}
+			}
+        }
+		
     }
 	public void DoAction(Player pl)
 	{

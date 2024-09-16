@@ -371,7 +371,7 @@ public class Inventory : Spatial
         item.GetParent().RemoveChild(item);
         if (ShowNotif)
             ui.OnItemRemoved(item);
-        item.Free();
+        item.QueueFree();
     }
     public void RemoveAllItems()
     {

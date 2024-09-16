@@ -1,19 +1,14 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Terains/Crater/Crater.tres" type="ArrayMesh" id=2]
 [ext_resource path="res://Assets/Terains/Crater/Crater_LOD.tres" type="ArrayMesh" id=3]
 [ext_resource path="res://Assets/Materials/RockMat.tres" type="Material" id=4]
 [ext_resource path="res://Scenes/Env_Assets/Rock8.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Env_Assets/Platform.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Water/textures/post/waterplane_low_Whole_Crate_Collision.tres" type="Shape" id=6]
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=7]
-[ext_resource path="res://Scenes/Vehicles/HoverBoard_Lite.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Env_Assets/FabricRoofLong.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Scenes/Env_Assets/Table.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Scenes/Env_Assets/Antena2.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Scenes/Env_Assets/Skampo.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Scenes/Characters/NPCVariants/BoatEngineer.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scenes/Env_Assets/DosierClutter.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/Env_Assets/Slab.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Assets/Water/textures/post/waterplane_low_Whole_Crater.obj" type="ArrayMesh" id=16]
 
 [sub_resource type="SpatialMaterial" id=13]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -101,12 +96,19 @@ data = PoolVector3Array( -2.0435, 0.3357, 2.5076, -2.2508, 0.3322, 2.4025, -2.13
 [node name="Island" instance=ExtResource( 1 )]
 ImageID = 39
 
+[node name="Sea" parent="SeaBed" index="0"]
+mesh = ExtResource( 16 )
+material/0 = null
+
+[node name="CollisionShape" parent="SeaBed" index="2"]
+transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, -37.18, 0 )
+shape = ExtResource( 6 )
+
 [node name="SoundMap" parent="." index="3"]
 mesh_library = SubResource( 20 )
 
 [node name="Terain" type="MeshInstance" parent="." index="4"]
-transform = Transform( 1929.6, 0, 0, 0, 2686.27, 0, 0, 0, 1929.6, 0, -1575.35, 701.395 )
-lod_max_distance = 6000.0
+transform = Transform( 1929.6, 0, 0, 0, 1500, 0, 0, 0, 1929.6, 0, -867.453, 701.395 )
 mesh = ExtResource( 2 )
 material/0 = ExtResource( 4 )
 script = ExtResource( 7 )
@@ -120,36 +122,10 @@ collision_mask = 0
 [node name="CollisionShape" type="CollisionShape" parent="Terain/StaticBody" index="0"]
 shape = SubResource( 24 )
 
-[node name="Bounds" parent="." index="5"]
-visible = false
-
 [node name="Rock1" parent="." index="8" instance=ExtResource( 5 )]
 transform = Transform( 96.4389, -2.47489, 124.405, 98.7541, 97.2779, -74.6188, -75.6999, 123.751, 61.1441, -1119.3, -591.808, 2715.15 )
 
-[node name="StaticBody" parent="." index="9" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.2275, -17.5871, 3.70691 )
+[node name="StaticBody6" parent="." index="9" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -357.232, 0 )
 
-[node name="Vehicle" parent="." index="10" instance=ExtResource( 8 )]
-transform = Transform( -0.00993077, 0, 0.999951, 0, 1, 0, -0.999951, 0, -0.00993077, 5.35639, 6.28986, -56.5413 )
-
-[node name="StaticBody2" parent="." index="11" instance=ExtResource( 11 )]
-transform = Transform( 1.74622, 0, -1.8976, 0, 2.57879, 0, 1.8976, 0, 1.74622, 40.2719, 5.09807, -19.4634 )
-
-[node name="StaticBody3" parent="." index="12" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.9106, 9.03788, -17.7603 )
-
-[node name="StaticBody4" parent="." index="13" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4671, 12.6964, -18.089 )
-
-[node name="StaticBody5" parent="." index="14" instance=ExtResource( 12 )]
-transform = Transform( -0.999402, 0, 0.0345855, 0, 1, 0, -0.0345855, 0, -0.999402, 15.9617, 6.06736, -13.3601 )
-
-[node name="Karavopios" parent="." index="15" instance=ExtResource( 13 )]
-transform = Transform( -0.996622, 0, -0.0821298, 0, 1, 0, 0.0821298, 0, -0.996622, 11.7449, 6.06734, -13.9703 )
-Chair = NodePath("../StaticBody5")
-
-[node name="DosierClutter" parent="." index="16" instance=ExtResource( 14 )]
-transform = Transform( -1.90514, -0.311983, -3.5033, -3.48313e-07, -3.98423, 0.354812, -3.51717, 0.168992, 1.89763, 15.326, 9.24759, -17.2175 )
-
-[node name="DosierClutter2" parent="." index="17" instance=ExtResource( 14 )]
-transform = Transform( 3.05951, -0.16103, 2.57167, 3.49008e-07, -3.99218, -0.249978, 2.57671, 0.191202, -3.05352, 15.525, 9.41115, -18.044 )
+[editable path="SeaBed"]

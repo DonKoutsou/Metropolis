@@ -30,6 +30,7 @@ public class DialogueManager : Node
 		if (NextTalker.Count == 1)
 			DoNextDialogue();
 	}
+	// forces dialogue to player and not scheduling it. If there is a dialogue being played atm its stopped and resumed once the forced dialogue is finished
 	public void ForceDialogue(Character talker, string text)
 	{
 		talker.GetTalkText().Talk(text, true);

@@ -110,7 +110,7 @@ public class Furniture : StaticBody
 		{
 			if (info.HasItem)
 			{
-				RespawnItem(GlobalItemCatalogue.GetItemByName(info.item));
+				RespawnItem(GlobalItemCatalogue.GetInstance().GetItemByName(info.item));
 			}
 		}
 		else

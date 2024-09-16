@@ -11,15 +11,17 @@ public class ImageGenDock : EditorPlugin
     Control buttondock;
     Control ImageGen;
     Control PortConfig;
-
+    Control LocImport;
     public override void _EnterTree()
     {
-        buttondock = (Control)GD.Load<PackedScene>("res://addons/ImageGenButton/ButtonDock.tscn").Instance(); 
+        buttondock = (Control)GD.Load<PackedScene>("res://addons/ImageGenButton/ButtonDock.tscn").Instance();
         ImageGen = buttondock.GetNode<VBoxContainer>("VBoxContainer").GetNode<Control>("Dock2");
         PortConfig = buttondock.GetNode<VBoxContainer>("VBoxContainer").GetNode<Control>("Dock");
+        LocImport = buttondock.GetNode<VBoxContainer>("VBoxContainer").GetNode<Control>("Dock3");
         AddControlToDock(DockSlot.LeftUl, buttondock);
         ImageGen.Connect("OnButtonClicked", this, "Clicked");
         PortConfig.Connect("OnButtonClicked", this, "PortClicked");
+        LocImport.Connect("OnButtonClicked", this, "DialogueImportClicked");
     }
     //List<string> IslandFiles = null;
     //Random GenerationRandom = null;
@@ -87,7 +89,7 @@ public class ImageGenDock : EditorPlugin
         }
         else
         {
-            interf.OpenSceneFromPath("res://Scenes/World/WorldRoot.tscn");
+            interf.OpenSceneFromPath("res://Scenes/World/MyWorld.tscn");
         }
         //interf.OpenSceneFromPath(IslandFiles[GenerationIndex]);
         //Island NewIlde = (Island)interf.GetEditedSceneRoot();
@@ -121,13 +123,20 @@ public class ImageGenDock : EditorPlugin
             p.AddPosition(pos.GlobalTranslation);
         }
     }
+    public void DialogueImportClicked()
+    {
+        EditorInterface interf = GetEditorInterface();
+        GD.Print("Getting Localisation Holder");
+        LocalisationHolder holder = (LocalisationHolder)interf.GetSelection().GetSelectedNodes()[0];
+        holder.ImportLocalisation();
+    }
     public override void _ExitTree()
     {
         // Clean-up of the plugin goes here.
         // Remove the dock.
         RemoveControlFromDocks(ImageGen);
         // Erase the control from the memory.
-        buttondock.Free();
+        buttondock.QueueFree();
     }
 
 }

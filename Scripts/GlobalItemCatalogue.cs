@@ -9,12 +9,12 @@ public class GlobalItemCatalogue : Node
     //[Export]
 	//PackedScene[] GlobalItemListConfiguration = null;
     [Export]
-    public PackedScene[] CharacterCataluge = new PackedScene[0];
+    string[] CharacterCataluge = null;
     
     [Export]
-    public PackedScene[] VehicleCatalogue = new PackedScene[0];
+    string[] VehicleCatalogue = null;
 
-    static Dictionary<ItemName, Dictionary<string, PackedScene>> GlobalItemList = new Dictionary<ItemName, Dictionary<string, PackedScene>>();
+    Dictionary<ItemName, Dictionary<string, PackedScene>> GlobalItemList = new Dictionary<ItemName, Dictionary<string, PackedScene>>();
 
     static GlobalItemCatalogue Instance;
 
@@ -46,11 +46,31 @@ public class GlobalItemCatalogue : Node
 				GlobalItemList.Add(it.ItemType, dic);
 			}
 			
-			it.Free();
+			it.QueueFree();
 		}
 		Instance = this;
 	}
-	public static PackedScene GetItemByName(string name)
+	public PackedScene GetRandomCharacterFromCatalogue()
+	{
+		PackedScene character = null;
+
+		if (CharacterCataluge.Count() > 0)
+		{
+			character = ResourceLoader.Load<PackedScene>(CharacterCataluge[RandomContainer.Next(0, CharacterCataluge.Count())]);
+		}
+		return character;
+	}
+	public PackedScene GetRandomVehicleFromCatalogue()
+	{
+		PackedScene veh = null;
+
+		if (VehicleCatalogue.Count() > 0)
+		{
+			veh = ResourceLoader.Load<PackedScene>(VehicleCatalogue[RandomContainer.Next(0, VehicleCatalogue.Count())]);
+		}
+		return veh;
+	}
+	public PackedScene GetItemByName(string name)
 	{
 		PackedScene path = null;
 		//var lookup = GlobalItemList.ToLookup(kvp => (int)name, kvp => kvp.Value);
@@ -71,7 +91,7 @@ public class GlobalItemCatalogue : Node
 		}
 		return path;
 	}
-    public static PackedScene GetItemByType(ItemName name, string stname = "Null")
+    public PackedScene GetItemByType(ItemName name, string stname = "Null")
 	{
 		Dictionary<string, PackedScene> thang = GlobalItemList[name];
 		

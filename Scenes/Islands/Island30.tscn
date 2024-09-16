@@ -105,7 +105,6 @@ __meta__ = {
 
 [node name="MeshInstance5" type="MeshInstance" parent="." index="4"]
 transform = Transform( 1568.34, 0, 0, 0, 1282.65, 0, 0, 0, 1568.34, 0, -396.992, 0 )
-lod_max_distance = 6000.0
 mesh = ExtResource( 5 )
 material/0 = ExtResource( 6 )
 script = ExtResource( 3 )

@@ -128,7 +128,7 @@ transform = Transform( 0.988362, 0, 0.152123, 0, 1, 0, -0.152123, 0, 0.988362, 5
 transform = Transform( 0.988362, 0, 0.152123, 0, 1, 0, -0.152123, 0, 0.988362, 604.563, 11.872, -682.573 )
 
 [node name="Barrel8" parent="." index="5" instance=ExtResource( 4 )]
-transform = Transform( 0.988362, 0, 0.152123, 0, 1, 0, -0.152123, 0, 0.988362, 546.884, 11.9119, -707.434 )
+transform = Transform( 0.988362, 0, 0.152123, 0, 1, 0, -0.152123, 0, 0.988362, 546.884, 11.8858, -707.434 )
 
 [node name="Barrel6" parent="." index="6" instance=ExtResource( 4 )]
 transform = Transform( 0.988362, 0, 0.152123, 0, 1, 0, -0.152123, 0, 0.988362, 616.983, 11.9067, -694.706 )

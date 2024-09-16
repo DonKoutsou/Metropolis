@@ -710,7 +710,7 @@ margin_right = -132.0
 margin_bottom = -162.0
 custom_styles/panel = ExtResource( 12 )
 
-[node name="Start_Button_Half" type="Button" parent="Settings/Panel" groups=["Buttons"]]
+[node name="Start_Button_Half" type="Button" parent="Settings/Panel" groups=["Buttons", "Translatables"]]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -724,7 +724,7 @@ theme = ExtResource( 19 )
 enabled_focus_mode = 0
 text = "Έναρξη"
 
-[node name="Continue_Button_Half" type="Button" parent="Settings/Panel" groups=["Buttons"]]
+[node name="Continue_Button_Half" type="Button" parent="Settings/Panel" groups=["Buttons", "Translatables"]]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -738,7 +738,7 @@ theme = ExtResource( 19 )
 enabled_focus_mode = 0
 text = "Συνέχεια"
 
-[node name="Start_Button" type="Button" parent="Settings/Panel" groups=["Buttons"]]
+[node name="Start_Button" type="Button" parent="Settings/Panel" groups=["Buttons", "Translatables"]]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -752,7 +752,7 @@ theme = ExtResource( 19 )
 enabled_focus_mode = 0
 text = "Έναρξη"
 
-[node name="Exit_Button" type="Button" parent="Settings/Panel" groups=["Buttons"]]
+[node name="Exit_Button" type="Button" parent="Settings/Panel" groups=["Buttons", "Translatables"]]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -837,7 +837,7 @@ custom_styles/hover_pressed = SubResource( 20 )
 custom_styles/normal = SubResource( 20 )
 enabled_focus_mode = 0
 
-[node name="Label" type="Label" parent="Settings/Panel/SeedSetting2"]
+[node name="Label" type="Label" parent="Settings/Panel/SeedSetting2" groups=["Translatables"]]
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_left = 50.0
@@ -933,10 +933,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -659.0
-margin_top = 214.0
-margin_right = 1977.0
-margin_bottom = 1646.0
+margin_left = -1318.0
+margin_top = -144.0
+margin_right = 1318.0
+margin_bottom = 1288.0
 rect_pivot_offset = Vector2( 1318, 752 )
 custom_constants/separation = 78
 alignment = 1
@@ -1059,22 +1059,22 @@ expand = true
 [node name="Title" type="Label" parent="Intro"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -552.5
-margin_top = 87.0
-margin_right = 552.5
-margin_bottom = 279.0
+margin_left = -575.5
+margin_top = 82.0
+margin_right = 575.5
+margin_bottom = 274.0
 custom_colors/font_color = Color( 0.431373, 0.717647, 0.937255, 1 )
 custom_fonts/font = SubResource( 65 )
-text = "ΜΗΤΡΟΠΟΛΗ"
+text = "ONUS MACHINA"
 align = 1
 valign = 1
 
 [node name="Panel7" type="Panel" parent="Intro/Title"]
 show_behind_parent = true
 anchor_right = 1.0
-margin_left = 75.0
+margin_left = -1.0
 margin_top = 1.0
-margin_right = -71.0
+margin_right = 7.0
 margin_bottom = 15.0
 rect_clip_content = true
 mouse_filter = 2
@@ -1086,9 +1086,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -475.5
+margin_left = -574.5
 margin_top = -14.0
-margin_right = 480.5
+margin_right = 581.5
 rect_clip_content = true
 mouse_filter = 2
 custom_styles/panel = ExtResource( 5 )
@@ -1099,9 +1099,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -488.5
+margin_left = -588.5
 margin_top = -87.0
-margin_right = 491.5
+margin_right = 593.5
 margin_bottom = 87.0
 rect_clip_content = true
 mouse_filter = 2
