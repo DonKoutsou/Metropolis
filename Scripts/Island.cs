@@ -18,7 +18,7 @@ public class Island : Spatial
 
 	List<Port> Ports = new List<Port>();
 
-	public string IslandSpecialName = null;
+	string IslandSpecialName = null;
 
 	public Vector3 SpawnGlobalLocation;
 
@@ -45,6 +45,10 @@ public class Island : Spatial
 	public bool IsVisited()
 	{
 		return Visited;
+	}
+	public string GetIslandSpecialName()
+	{
+		return LocalisationHolder.GetString(IslandSpecialName);
 	}
 	public override void _Ready()
 	{

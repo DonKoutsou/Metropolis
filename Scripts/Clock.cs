@@ -21,6 +21,6 @@ public class Clock : Item
     {
         UpdateTime();
 
-        return ItemDesc + " \n Ώρα: " + time;
+        return LocalisationHolder.GetString(ItemDesc) + " \n " + LocalisationHolder.GetString("Ώρα") + ": " + time;
     }
 }

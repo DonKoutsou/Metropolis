@@ -36,7 +36,7 @@ public class CityNameTrigger : Spatial
             
             Player pl = (Player)body;
             CityNameUI UI = (CityNameUI)PlayerUI.GetInstance().GetUI(PlayerUIType.CITYNAME);
-            UI.ShowName(((Island)GetParent()).IslandSpecialName);
+            UI.ShowName(((Island)GetParent()).GetIslandSpecialName());
             //
         }
     }

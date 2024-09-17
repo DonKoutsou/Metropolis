@@ -268,7 +268,7 @@ public class InventoryUI : Control
             CharacterRPM.Modulate = new Color(0,1,0);
 
         if (showingDesc)
-            Description.BbcodeText = "[center]" + LocalisationHolder.GetString(ShowingDescSample.GetItemDesc());
+            Description.BbcodeText = "[center]" + ShowingDescSample.GetItemDesc();
 
         if (!hascompass)
             ShowingCompass = false;
@@ -320,7 +320,7 @@ public class InventoryUI : Control
             showingDesc = true;
             ShowingDescSample = it;
             DescPan.Show();
-            Description.BbcodeText = "[center]" + LocalisationHolder.GetString(it.GetItemDesc());
+            Description.BbcodeText = "[center]" + it.GetItemDesc();
             ItemName.BbcodeText = "[center]" + LocalisationHolder.GetString(it.GetItemName());
             //WeightText.BbcodeText = "[center]Βάρος: " + ShowingDescSample.GetInventoryWeight();
         }

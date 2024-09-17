@@ -57,7 +57,7 @@ public class Battery : Item
     //}
     public override string GetItemDesc()
     {
-        return ItemDesc + " \n Φόρτωση: " + (int)CurrentEnergy + "/" + Capacity;
+        return LocalisationHolder.GetString(ItemDesc) + " \n " + LocalisationHolder.GetString("Φόρτωση") + ": " + (int)CurrentEnergy + "/" + Capacity;
        // return ItemDesc + " \n Capacity: " + (int)CurrentEnergy + "/" + Capacity + "\n Condition " + (int)condition + "/" + 100;
     }
 

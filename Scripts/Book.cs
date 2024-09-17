@@ -31,7 +31,7 @@ public class Book : Item
     }
     public override string GetItemDesc()
     {
-        return BookEnumTranslator.TranslateBookEnum(Series) + "\n Τόμος : " + VolumeNumber.ToString();
+        return LocalisationHolder.GetString(BookEnumTranslator.TranslateBookEnum(Series)) + "\n " + LocalisationHolder.GetString("Τόμος") + " : " + VolumeNumber.ToString();;
     }
 }
 public class BookVolumeHolder

@@ -274,8 +274,7 @@ public class MyWorld : Spatial
 			}
 		}
     }
-	
-	public static void IleTransition(IslandInfo to)
+	public void IleTransition(IslandInfo to)
 	{
 		//GD.Print("Transitioning from : " + from.Name + " to " + to.Name);
 		WorldMap map = WorldMap.GetInstance();
@@ -284,7 +283,7 @@ public class MyWorld : Spatial
 		List<IslandInfo> ilestoenable = new List<IslandInfo>();
 
 		//Vector2 pos = WorldMap.GetInstance().GlobalToMap();
-		
+		Translation = - new Vector3(to.Island.Translation.x, 0, to.Island.Translation.y);
 		//to.Visited = true;
 		//MapGrid.GetInstance().SetIslandVisited(to);
 		DayNight.GetInstance().UpdatePlayerDistance(Math.Max(Math.Abs(to.Position.x), Math.Abs(to.Position.y)) / 15);

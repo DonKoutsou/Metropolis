@@ -14,9 +14,6 @@ public class Item : RigidBody
 	public Texture ItemIcon = null;
 
 	[Export]
-	string ItemPickupActionName = "Null";
-
-	[Export]
 	protected string ItemName = "Item";
 
 	[Export]
@@ -35,13 +32,9 @@ public class Item : RigidBody
 	{
 		return ItemName;
 	}
-	public string GetItemPickUpText()
-	{
-		return ItemPickupActionName;
-	}
 	public virtual string GetItemDesc()
 	{
-		return ItemDesc;
+		return LocalisationHolder.GetString(ItemDesc);
 	}
 	public ItemName GetItemType()
 	{

@@ -9,11 +9,11 @@ public class Toolbox : Item
     //[Export]
     //float CurrentSupplies = 0;
 
-    public override string GetItemDesc()
-    {
-        return ItemDesc;
+    //public override string GetItemDesc()
+   // {
+   //    return ItemDesc;
         //return ItemDesc + " \n Supplies: " + (int)CurrentSupplies + "/" + SupplyCapacity;
-    }
+   // }
     /*public float GetCurrentSupplyAmmount()
     {
         return CurrentSupplies;

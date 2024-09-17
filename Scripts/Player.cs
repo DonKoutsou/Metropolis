@@ -369,7 +369,7 @@ public class Player : Character
 
 				if (b.GetCollisionLayerBit(12))
 				{
-					
+					_velocity.y += 500 * delta;
 					break;
 				}
 					

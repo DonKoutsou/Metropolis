@@ -143,7 +143,7 @@ public class Furniture : StaticBody
 		if (foundit != null)
 		{
 			pl.GetCharacterInventory().InsertItem(foundit);
-			DialogueManager.GetInstance().ForceDialogue(pl, foundit.GetItemPickUpText());
+			DialogueManager.GetInstance().ForceDialogue(pl, LocalisationHolder.GetString("ItmFoundDiag"));
 			//pl.GetTalkText().Talk(foundit.GetItemPickUpText());
 		}
 		else
