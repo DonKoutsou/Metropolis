@@ -5,28 +5,32 @@ using System;
 [Tool]
 public class LocalisationHolder : Node
 {
-    [Export]
-    Dictionary<string, string[]> Localizations = null;
-    static LocalisationHolder Instance;
-    Language CurrentLanguage = Language.GREEK;
+    //[Export]
+    //Dictionary<string, string[]> TempLocalizations = null;
+    static Dictionary<string, string[]> Localizations = null;
+    //static LocalisationHolder Instance;
+    static Language CurrentLanguage = Language.GREEK;
 
     public override void _Ready()
     {
         base._Ready();
-        Instance = this;
+        ImportLocalisation();
+        //Instance = this;
+        //Localizations = TempLocalizations.Duplicate();
+        //TempLocalizations.Clear();
     }
     public void Initialise(Language l)
     {
         CurrentLanguage = l;
         LocaliseUI();
     }
-    public static LocalisationHolder GetInstance()
-    {
-        return Instance;
-    }
+    //public static LocalisationHolder GetInstance()
+    //{
+    //    return Instance;
+    //}
     public void ImportLocalisation()
     {
-        GD.Print("Importing JSon");
+        GD.Print("Importing Localization JSon");
         var LocDataFile = new File();
         LocDataFile.Open("res://Assets/Dialogue/DialogueTest.json", File.ModeFlags.Read);
         var LocDataJson = JSON.Parse(LocDataFile.GetAsText());
@@ -63,10 +67,15 @@ public class LocalisationHolder : Node
         }
        // GD.Print(LocDataJson.Result);
     }
-    public string GetString(string Name)
+    public static string GetString(string Name)
     {
         string Text = string.Empty;
-        if (CurrentLanguage == Language.GREEK)
+        if (!Localizations.ContainsKey(Name))
+        {
+            GD.Print("Key not found |" + Name);
+            return "String Not Localised";
+        }
+        else if (CurrentLanguage == Language.GREEK)
         {
             Text =  Localizations[Name][0];
         }

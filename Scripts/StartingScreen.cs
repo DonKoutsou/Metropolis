@@ -52,7 +52,7 @@ public class StartingScreen : Control
 
 		Control SeedSet = ButtonList["SeedSetting"];
 		SeedSet.GetNode<TextEdit>("SeedText").Readonly = false;
-		cont.GetNode<Panel>("Panel").GetNode<Button>("Start_Button").Text = "Έναρξη";
+		cont.GetNode<Panel>("Panel").GetNode<Button>("Start_Button").Text = LocalisationHolder.GetString("Έναρξη");
 		if (HasSave)
 			cont.GetNode<Panel>("Panel").GetNode<Button>("Start_Button").Hide();
 		else
@@ -100,7 +100,7 @@ public class StartingScreen : Control
 		Control SeedSet = ButtonList["SeedSetting"];
 
 		SeedSet.GetNode<TextEdit>("SeedText").Readonly = true;
-		((Button)Startbut).Text = "Συνέχεια";
+		((Button)Startbut).Text = LocalisationHolder.GetString("Συνέχεια");
 		Startbut.Show();
 		StartHalf.Hide();
 		ContinueBut.Hide();

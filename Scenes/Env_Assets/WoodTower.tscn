@@ -20,6 +20,7 @@ rings = 0
 albedo_texture = ExtResource( 1 )
 uv1_scale = Vector3( 0.1, 0.1, 0.1 )
 uv1_triplanar = true
+uv1_triplanar_sharpness = 1.0
 
 [sub_resource type="CylinderMesh" id=7]
 height = 57.149

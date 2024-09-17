@@ -116,13 +116,13 @@ ResourceScriptDirectories=[ "res://", "res://Scripts/" ]
 
 [application]
 
-config/name="Metropolis"
+config/name="Onus Machina"
 run/main_scene="res://Scenes/Systems/LanguageSelect.tscn"
 run/delta_sync_after_draw=true
 boot_splash/show_image=false
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
-config/icon="res://IconMetropolis.png"
-config/windows_native_icon="res://IconMetropolis.ico"
+config/icon="res://Assets/UI/MainIcon2.png"
+config/windows_native_icon="res://IconMetropolis2.ico"
 
 [audio]
 
@@ -133,6 +133,7 @@ default_bus_layout="res://Busses.tres"
 window/size/width=1920
 window/size/height=1080
 window/size/borderless=true
+window/stretch/aspect="expand"
 
 [editor]
 

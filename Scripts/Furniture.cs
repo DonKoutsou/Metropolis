@@ -147,12 +147,12 @@ public class Furniture : StaticBody
 			//pl.GetTalkText().Talk(foundit.GetItemPickUpText());
 		}
 		else
-			DialogueManager.GetInstance().ForceDialogue(pl, "Άδειο...");
+			DialogueManager.GetInstance().ForceDialogue(pl, LocalisationHolder.GetString("Άδειο..."));
 			//pl.GetTalkText().Talk("Άδειο...");
 	}
 	public string GetActionName(Player pl)
     {
-		return "Ψάξε";
+		return LocalisationHolder.GetString("Ψάξε");
     }
 	public bool ShowActionName(Player pl)
     {
@@ -178,7 +178,7 @@ public class Furniture : StaticBody
     {
 		string desc;
 		if (HasBeenSearched())
-			desc = "Το έψαξα, είναι άδειο";
+			desc = LocalisationHolder.GetString("SearchedDiag");
 		else
 			desc = FurnitureDescription;
         return desc;

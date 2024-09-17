@@ -187,7 +187,7 @@ public class NPC : Character
 	}
 	public string GetActionName(Player pl)
     {
-        return "Kουβέντα";
+        return LocalisationHolder.GetString("Kουβέντα");
     }
 	public bool ShowActionName(Player pl)
     {
@@ -211,7 +211,7 @@ public class NPC : Character
     }
 	public string GetObjectDescription()
     {
-        return "Φίλος";
+        return LocalisationHolder.GetString("Φίλος");
     }
 	public override void Respawn()
 	{

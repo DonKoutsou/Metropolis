@@ -36,11 +36,16 @@ public class WindGenerator : StaticBody
         anim3 = GetNode<AnimationPlayer>("AnimationPlayer3");
         anim.CurrentAnimation = "Blade_Rot";
         anim2.CurrentAnimation = "Blade_Rot";
+        scale = Math.Max((int)(Scale.x * GetNode<MeshInstance>("MeshInstance").Scale.x), 1);
         if (Auto)
         {
             SetProcess(false);
             anim.Play();
             anim2.Play();
+            anim.PlaybackSpeed = 0.3f;
+            anim2.PlaybackSpeed = 0.3f;
+            anim.Advance(rand.Next(0, 5000) / 1000);
+            anim2.Advance(rand.Next(0, 5000) / 1000);
             return;
         }
             
@@ -56,7 +61,7 @@ public class WindGenerator : StaticBody
         //anim2.PlaybackSpeed = rand.Next(2500, 3000) / 1000;
         //Spatial rotorpivot = GetNode<Spatial>("Rotor_Pivot");
         //rotorpivot.LookAt(new Vector3(rotorpivot.Translation.x, rotorpivot.Translation.y, rotorpivot.Translation.z + 1), Vector3.Up);
-        scale = Math.Max((int)(Scale.x * GetNode<MeshInstance>("MeshInstance").Scale.x), 1);
+        
         Node parent = GetParent();
 		while (!(parent is Island))
 		{
@@ -217,7 +222,7 @@ public class WindGenerator : StaticBody
     }
     public string GetActionName(Player pl)
     {
-        return "Φόρτιση";
+        return LocalisationHolder.GetString("Φόρτιση");
     }
     public bool ShowActionName(Player pl)
     {

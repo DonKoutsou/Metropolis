@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Scenes/HUD/CreditName.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/StartingScreen.cs" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Scripts/LoadingScreen.cs" type="Script" id=4]
 [ext_resource path="res://UIThemes/Panel_LightGray_BottomCorner.tres" type="StyleBox" id=5]
 [ext_resource path="res://Scripts/Credits.cs" type="Script" id=6]
+[ext_resource path="res://Assets/UI/MainIcon.png" type="Texture" id=7]
 [ext_resource path="res://UIThemes/Panel_LightGray_LeftCorner.tres" type="StyleBox" id=8]
 [ext_resource path="res://Scripts/Settings.cs" type="Script" id=9]
 [ext_resource path="res://UIThemes/Panel_LightGray_TopCorner.tres" type="StyleBox" id=10]
@@ -360,6 +361,14 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
+[sub_resource type="DynamicFont" id=65]
+size = 54
+outline_size = 3
+outline_color = Color( 0.443137, 0.580392, 0.631373, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 3 )
+
 [sub_resource type="StyleBoxFlat" id=23]
 bg_color = Color( 0.160784, 0.215686, 0.25098, 1 )
 border_width_left = 2
@@ -444,14 +453,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( -659, 214 ) ]
 }
-
-[sub_resource type="DynamicFont" id=65]
-size = 140
-outline_size = 4
-outline_color = Color( 0.235294, 0.321569, 0.372549, 1 )
-use_mipmaps = true
-use_filter = true
-font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=62]
 size = 140
@@ -705,10 +706,79 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -556.0
-margin_top = -578.0
+margin_top = -801.0
 margin_right = -132.0
 margin_bottom = -162.0
 custom_styles/panel = ExtResource( 12 )
+
+[node name="Title" type="Label" parent="Settings/Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -105.0
+margin_top = -350.5
+margin_right = 223.0
+margin_bottom = -21.5
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_constants/line_spacing = 0
+custom_fonts/font = SubResource( 65 )
+text = "ONUS MACHINA"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Panel7" type="Panel" parent="Settings/Panel/Title"]
+visible = false
+show_behind_parent = true
+anchor_right = 1.0
+margin_left = -79.0
+margin_top = -10.0
+margin_right = -109.0
+margin_bottom = 4.0
+rect_clip_content = true
+mouse_filter = 2
+custom_styles/panel = ExtResource( 10 )
+
+[node name="Panel8" type="Panel" parent="Settings/Panel/Title"]
+visible = false
+show_behind_parent = true
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -578.0
+margin_top = -6.0
+margin_right = 390.0
+margin_bottom = 8.0
+rect_clip_content = true
+mouse_filter = 2
+custom_styles/panel = ExtResource( 5 )
+
+[node name="Panel9" type="Panel" parent="Settings/Panel/Title"]
+visible = false
+show_behind_parent = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -593.0
+margin_top = -165.5
+margin_right = 407.0
+margin_bottom = 165.5
+rect_clip_content = true
+mouse_filter = 2
+custom_styles/panel = ExtResource( 12 )
+
+[node name="TextureRect" type="TextureRect" parent="Settings/Panel/Title"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = -147.0
+margin_top = -120.5
+margin_right = 79.0
+margin_bottom = 105.5
+texture = ExtResource( 7 )
+expand = true
 
 [node name="Start_Button_Half" type="Button" parent="Settings/Panel" groups=["Buttons", "Translatables"]]
 anchor_left = 0.5
@@ -716,9 +786,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -179.0
-margin_top = -168.0
+margin_top = -73.5
 margin_right = -4.0
-margin_bottom = -128.0
+margin_bottom = -33.5
 focus_mode = 0
 theme = ExtResource( 19 )
 enabled_focus_mode = 0
@@ -730,9 +800,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = 4.0
-margin_top = -168.0
+margin_top = -73.5
 margin_right = 179.0
-margin_bottom = -128.0
+margin_bottom = -33.5
 focus_mode = 0
 theme = ExtResource( 19 )
 enabled_focus_mode = 0
@@ -744,9 +814,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -179.0
-margin_top = -168.0
+margin_top = -73.5
 margin_right = 179.0
-margin_bottom = -128.0
+margin_bottom = -33.5
 focus_mode = 0
 theme = ExtResource( 19 )
 enabled_focus_mode = 0
@@ -758,9 +828,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -178.0
-margin_top = 136.0
+margin_top = 230.5
 margin_right = 180.0
-margin_bottom = 176.0
+margin_bottom = 270.5
 focus_mode = 0
 theme = ExtResource( 19 )
 action_mode = 0
@@ -773,9 +843,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -179.0
-margin_top = -88.0
+margin_top = 6.5
 margin_right = 179.0
-margin_bottom = -16.0
+margin_bottom = 78.5
 custom_styles/panel = ExtResource( 13 )
 
 [node name="SeedText" type="TextEdit" parent="Settings/Panel/SeedSetting"]
@@ -812,9 +882,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -178.0
-margin_top = 24.0
+margin_top = 118.5
 margin_right = 180.0
-margin_bottom = 96.0
+margin_bottom = 190.5
 custom_styles/panel = ExtResource( 13 )
 
 [node name="Full_Screen_Checkbox" type="CheckBox" parent="Settings/Panel/SeedSetting2" groups=["Buttons"]]
@@ -866,9 +936,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 32.0
-margin_top = -96.0
+margin_top = -113.0
 margin_right = -32.0
-margin_bottom = -88.0
+margin_bottom = -105.0
 rect_clip_content = true
 mouse_filter = 1
 custom_styles/panel = ExtResource( 5 )
@@ -878,9 +948,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 32.0
-margin_top = -208.0
+margin_top = -225.0
 margin_right = -32.0
-margin_bottom = -200.0
+margin_bottom = -217.0
 rect_clip_content = true
 mouse_filter = 1
 custom_styles/panel = ExtResource( 5 )
@@ -890,9 +960,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 32.0
-margin_top = -320.0
+margin_top = -338.0
 margin_right = -32.0
-margin_bottom = -312.0
+margin_bottom = -330.0
 rect_clip_content = true
 mouse_filter = 1
 custom_styles/panel = ExtResource( 5 )
@@ -933,10 +1003,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -1318.0
-margin_top = -144.0
-margin_right = 1318.0
-margin_bottom = 1288.0
+margin_left = -659.0
+margin_top = 214.0
+margin_right = 1977.0
+margin_bottom = 1646.0
 rect_pivot_offset = Vector2( 1318, 752 )
 custom_constants/separation = 78
 alignment = 1
@@ -1055,57 +1125,6 @@ mouse_filter = 2
 theme = SubResource( 28 )
 texture = ExtResource( 14 )
 expand = true
-
-[node name="Title" type="Label" parent="Intro"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -575.5
-margin_top = 82.0
-margin_right = 575.5
-margin_bottom = 274.0
-custom_colors/font_color = Color( 0.431373, 0.717647, 0.937255, 1 )
-custom_fonts/font = SubResource( 65 )
-text = "ONUS MACHINA"
-align = 1
-valign = 1
-
-[node name="Panel7" type="Panel" parent="Intro/Title"]
-show_behind_parent = true
-anchor_right = 1.0
-margin_left = -1.0
-margin_top = 1.0
-margin_right = 7.0
-margin_bottom = 15.0
-rect_clip_content = true
-mouse_filter = 2
-custom_styles/panel = ExtResource( 10 )
-
-[node name="Panel8" type="Panel" parent="Intro/Title"]
-show_behind_parent = true
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -574.5
-margin_top = -14.0
-margin_right = 581.5
-rect_clip_content = true
-mouse_filter = 2
-custom_styles/panel = ExtResource( 5 )
-
-[node name="Panel9" type="Panel" parent="Intro/Title"]
-show_behind_parent = true
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -588.5
-margin_top = -87.0
-margin_right = 593.5
-margin_bottom = 87.0
-rect_clip_content = true
-mouse_filter = 2
-custom_styles/panel = ExtResource( 12 )
 
 [node name="Control" type="Control" parent="Intro"]
 anchor_right = 1.0
@@ -1277,7 +1296,7 @@ rect_clip_content = true
 mouse_filter = 2
 custom_styles/panel = ExtResource( 12 )
 
-[node name="PauseLabel" type="Label" parent="."]
+[node name="PauseLabel" type="Label" parent="." groups=["Translatables"]]
 visible = false
 anchor_left = 0.5
 anchor_top = 0.5

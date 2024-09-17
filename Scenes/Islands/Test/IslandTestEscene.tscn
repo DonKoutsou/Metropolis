@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://Assets/Clutter/Powerline/PowerLine.tres" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Sea/OceanShader.tres" type="Material" id=2]
@@ -19,11 +19,15 @@
 [ext_resource path="res://Assets/Building/Assets/Building_Dest_LOD.tres" type="ArrayMesh" id=17]
 [ext_resource path="res://Assets/Building/Assets/Building_Dest2_LOD2.tres" type="ArrayMesh" id=18]
 [ext_resource path="res://Assets/Building/Assets/Building_Dest3_LOD.tres" type="ArrayMesh" id=19]
+[ext_resource path="res://Scenes/Env_Assets/Rock7.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Assets/Clouds/Textures/smoke_01.png" type="Texture" id=21]
 [ext_resource path="res://Assets/Rocks/Rock1.tres" type="ArrayMesh" id=22]
+[ext_resource path="res://Scenes/Env_Assets/GunClutter.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Assets/Clouds/Textures/smoke_04.png" type="Texture" id=24]
 [ext_resource path="res://Scenes/Env_Assets/SandParticles.tscn" type="PackedScene" id=25]
 [ext_resource path="res://Assets/Rocks/Rock4.tres" type="ArrayMesh" id=26]
+[ext_resource path="res://Scenes/Env_Assets/BrokenWindBlade.tscn" type="PackedScene" id=28]
+[ext_resource path="res://Scenes/Env_Assets/WindGeneratorClutter.tscn" type="PackedScene" id=29]
 
 [sub_resource type="Environment" id=91]
 background_mode = 1
@@ -515,5 +519,32 @@ skeleton = NodePath("")
 transform = Transform( -0.861363, 0, -0.507989, 0, 1, 0, 0.507989, 0, -0.861363, -332.195, -69.3087, 6755.21 )
 mesh = ExtResource( 17 )
 skeleton = NodePath("")
+
+[node name="Rock1" parent="MergeGroup" instance=ExtResource( 20 )]
+transform = Transform( 36.097, 46.1616, -13.6051, -38.1552, 37.8163, 27.0757, 29.3287, -7.61747, 51.9691, -1355.74, -272.872, 3253.58 )
+skeleton = NodePath("../..")
+
+[node name="Rock3" parent="MergeGroup" instance=ExtResource( 20 )]
+transform = Transform( -20.082, -51.9769, 22.674, -49.7154, 27.7079, 19.4841, -27.2778, -12.2339, -52.2038, -2080.2, -242.995, 5253.7 )
+skeleton = NodePath("../..")
+
+[node name="MeshInstance8" parent="MergeGroup" instance=ExtResource( 28 )]
+transform = Transform( 4.19948, -0.654202, -0.263562, 0.51528, 1.75925, 3.84352, -0.481593, -3.82232, 1.81411, -183.419, 62.1817, 6016.28 )
+skeleton = NodePath("../..")
+
+[node name="WindGenerator5" parent="." instance=ExtResource( 29 )]
+transform = Transform( 0.361597, 0, -0.283029, 0, 0.459192, 0, 0.283029, 0, 0.361597, -93.2341, -220.851, 2082.61 )
+
+[node name="GunClutter" parent="." instance=ExtResource( 23 )]
+transform = Transform( 0.123057, 0.389445, -0.912792, -0.0520321, 0.921049, 0.385954, 0.991035, 0, 0.133606, -126.659, 38.5453, 6341.78 )
+
+[node name="WindGenerator" parent="." instance=ExtResource( 29 )]
+transform = Transform( 0.39303, 0, -0.237456, 0, 0.459192, 0, 0.237456, 0, 0.39303, -2888.93, -220.851, 491.583 )
+
+[node name="WindGenerator6" parent="." instance=ExtResource( 29 )]
+transform = Transform( 0.430546, 0, -0.159648, 0, 0.459192, 0, 0.159648, 0, 0.430546, 1442.58, -362.807, 359.585 )
+
+[node name="WindGenerator7" parent="." instance=ExtResource( 29 )]
+transform = Transform( 0.394866, 0, -0.165776, 0, 0.428253, 0, 0.165776, 0, 0.394866, -2936.37, -51.8113, 4261.89 )
 
 [editable path="StaticBody"]

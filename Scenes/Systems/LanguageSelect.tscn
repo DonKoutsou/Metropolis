@@ -1,44 +1,45 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Fonts/Play-Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://UIThemes/ButtonGreen.tres" type="Theme" id=2]
 [ext_resource path="res://UIThemes/Panel_Black_Top-BottomCorner.tres" type="StyleBox" id=3]
 [ext_resource path="res://Scripts/LanguageSelect.cs" type="Script" id=4]
 [ext_resource path="res://Scenes/World/LocalisationHolder.cs" type="Script" id=5]
+[ext_resource path="res://Assets/UI/MainIcon.png" type="Texture" id=6]
+[ext_resource path="res://UIThemes/Panel_LightGray_TopCorner.tres" type="StyleBox" id=7]
+[ext_resource path="res://UIThemes/Panel_LightGray_BottomCorner.tres" type="StyleBox" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 1 )
 
+[sub_resource type="DynamicFont" id=2]
+size = 54
+outline_size = 3
+outline_color = Color( 0.443137, 0.580392, 0.631373, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 1 )
+
 [node name="Language Select" type="Control"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -160.0
-margin_top = -55.0
-margin_right = 160.0
-margin_bottom = 55.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 script = ExtResource( 4 )
 GameScene = "res://Scenes/World/WorldRoot.tscn"
 
 [node name="Panel" type="Panel" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -159.0
-margin_top = -54.0
-margin_right = 159.0
-margin_bottom = 54.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 custom_styles/panel = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="Panel"]
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
+anchor_bottom = 0.5
 margin_left = -76.0
-margin_top = 5.0
+margin_top = 46.5
 margin_right = 76.0
-margin_bottom = 19.0
+margin_bottom = 65.5
 custom_fonts/font = SubResource( 1 )
 text = "Language / Γλώσσα"
 
@@ -48,9 +49,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -141.0
-margin_top = -20.0
+margin_top = 111.0
 margin_right = 141.0
-margin_bottom = 20.0
+margin_bottom = 151.0
 grow_horizontal = 2
 grow_vertical = 2
 custom_constants/separation = 70
@@ -70,14 +71,77 @@ margin_bottom = 40.0
 theme = ExtResource( 2 )
 text = "Ελληνικά"
 
+[node name="Title" type="Label" parent="Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -217.0
+margin_right = 228.0
+margin_bottom = 112.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_constants/line_spacing = 0
+custom_fonts/font = SubResource( 2 )
+text = "ONUS MACHINA"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Panel7" type="Panel" parent="Panel/Title"]
+visible = false
+show_behind_parent = true
+anchor_right = 1.0
+margin_left = -79.0
+margin_top = -10.0
+margin_right = -109.0
+margin_bottom = 4.0
+rect_clip_content = true
+mouse_filter = 2
+custom_styles/panel = ExtResource( 7 )
+
+[node name="Panel8" type="Panel" parent="Panel/Title"]
+visible = false
+show_behind_parent = true
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -578.0
+margin_top = -6.0
+margin_right = 390.0
+margin_bottom = 8.0
+rect_clip_content = true
+mouse_filter = 2
+custom_styles/panel = ExtResource( 8 )
+
+[node name="Panel9" type="Panel" parent="Panel/Title"]
+visible = false
+show_behind_parent = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -593.0
+margin_top = -165.5
+margin_right = 407.0
+margin_bottom = 165.5
+rect_clip_content = true
+mouse_filter = 2
+custom_styles/panel = ExtResource( 3 )
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Title"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = -147.0
+margin_top = -120.5
+margin_right = 79.0
+margin_bottom = 105.5
+texture = ExtResource( 6 )
+expand = true
+
 [node name="LocalisationHolder" type="Node" parent="."]
 script = ExtResource( 5 )
-Localizations = {
-"Dialogue1": PoolStringArray( "Γειά σου!", "Hello !" ),
-"Dialogue2": PoolStringArray( "Που είσαι;", "Where are you\?" ),
-"Έναρξη": PoolStringArray( "Έναρξη", "Start" ),
-"Πλήρης Οθόνη": PoolStringArray( "Πλήρης Οθόνη", "Full Screen" )
-}
 
 [connection signal="pressed" from="Panel/HBoxContainer/EnglishButton" to="." method="SelectEnglish"]
 [connection signal="pressed" from="Panel/HBoxContainer/GreekButton" to="." method="SelectGreek"]

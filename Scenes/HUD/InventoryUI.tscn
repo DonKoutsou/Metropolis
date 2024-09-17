@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://Scenes/HUD/InventoryUISlot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/InventoryUI.cs" type="Script" id=2]
@@ -35,46 +35,46 @@
 [sub_resource type="Animation" id=57]
 resource_name = "MenuClose"
 tracks/0/type = "value"
-tracks/0/path = NodePath("InventoryContainer:rect_size")
-tracks/0/interp = 2
+tracks/0/path = NodePath("InventoryContainer/Inventory:visible")
+tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1920, 1080 ), Vector2( 1920, 1482 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("InventoryContainer/Inventory:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("InventoryContainer/Inventory:rect_position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1348, 678 ), Vector2( 1348, 1080 ) ]
+}
 
 [sub_resource type="Animation" id=55]
 resource_name = "MenuOpen"
 tracks/0/type = "value"
-tracks/0/path = NodePath("InventoryContainer:rect_size")
-tracks/0/interp = 2
+tracks/0/path = NodePath("InventoryContainer/Inventory:visible")
+tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1920, 1482 ), Vector2( 1920, 1080 ) ]
+"update": 1,
+"values": [ true, true ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("InventoryContainer/Inventory:visible")
+tracks/1/path = NodePath("InventoryContainer/Inventory:rect_position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -82,14 +82,14 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, true ]
+"update": 0,
+"values": [ Vector2( 1348, 1080 ), Vector2( 1348, 678 ) ]
 }
 
 [sub_resource type="Animation" id=56]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("InventoryContainer:rect_size")
+tracks/0/path = NodePath("InventoryContainer/Inventory:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -98,10 +98,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 1920, 1482 ) ]
+"values": [ true ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("InventoryContainer/Inventory:visible")
+tracks/1/path = NodePath("InventoryContainer/Inventory:rect_position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -110,7 +110,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ true ]
+"values": [ Vector2( 1348, 1080 ) ]
 }
 
 [sub_resource type="DynamicFont" id=27]
@@ -209,15 +209,12 @@ expand_margin_top = 1.0
 expand_margin_bottom = 1.0
 shadow_size = 4
 
-[sub_resource type="DynamicFont" id=34]
-size = 10
+[sub_resource type="DynamicFont" id=59]
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 19 )
-
-[sub_resource type="Theme" id=26]
-default_font = SubResource( 34 )
 
 [sub_resource type="StyleBoxFlat" id=46]
 bg_color = Color( 1, 1, 1, 1 )
@@ -256,8 +253,12 @@ mouse_filter = 2
 script = ExtResource( 2 )
 
 [node name="InventoryContainer" type="Control" parent="."]
-margin_right = 1920.0
-margin_bottom = 1482.0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1920.0
+margin_top = -1080.0
 mouse_filter = 2
 
 [node name="InventoryAnimation" type="AnimationPlayer" parent="InventoryContainer"]
@@ -272,8 +273,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -572.0
-margin_top = -402.0
+margin_left = 1348.0
+margin_top = 1080.0
+margin_right = 1920.0
+margin_bottom = 1482.0
 
 [node name="GridContainer" type="GridContainer" parent="InventoryContainer/Inventory"]
 anchor_left = 0.5
@@ -806,19 +809,19 @@ custom_styles/bg = SubResource( 29 )
 value = 93.63
 percent_visible = false
 
-[node name="w2" type="RichTextLabel" parent="InventoryContainer/Inventory/BatteryPanel/CharacterBatteryCharge"]
+[node name="Label" type="Label" parent="InventoryContainer/Inventory/BatteryPanel/CharacterBatteryCharge" groups=["Translatables"]]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -27.0
-margin_top = -7.5
-margin_right = 27.0
-margin_bottom = 7.5
-theme = SubResource( 26 )
-bbcode_enabled = true
-bbcode_text = "[center]Ενέργεια"
+margin_left = -158.0
+margin_top = -9.5
+margin_right = 158.0
+margin_bottom = 9.5
+custom_fonts/font = SubResource( 59 )
 text = "Ενέργεια"
+align = 1
+valign = 1
 
 [node name="RPMAmount" type="Panel" parent="InventoryContainer/Inventory/BatteryPanel"]
 modulate = Color( 1, 1, 0, 1 )

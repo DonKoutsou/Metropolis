@@ -9,7 +9,7 @@ public class LanguageSelect : Control
     Language L;
     public override void _Ready()
     {
-        OS.WindowSize = new Vector2(320, 110);
+        OS.WindowSize = new Vector2(462, 342);
         //GetTree().Root.Size = new Vector2(320, 110);
         //ProjectSettings.SetSetting("display/window/size/width", 320);
         //ProjectSettings.SetSetting("display/window/size/height", 110);
@@ -35,6 +35,7 @@ public class LanguageSelect : Control
         root.AddChild(lang);
         GetTree().Root.AddChild(root);
         lang.CallDeferred("Initialise", L);
+        QueueFree();
     }
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
 //  public override void _Process(float delta)

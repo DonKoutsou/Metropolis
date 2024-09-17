@@ -223,7 +223,7 @@ public class Player : Character
 	{
 		if (!CharacterInventory.IsLimbSlotFilled(LimbSlotType.ARM_L) || !CharacterInventory.IsLimbSlotFilled(LimbSlotType.ARM_R))
 		{
-			DialogueManager.GetInstance().ScheduleDialogue(this, "Δεν μπορώ να παίξω χωρίς χέρια");
+			DialogueManager.GetInstance().ScheduleDialogue(this, LocalisationHolder.GetString("InstrumentNoHandDiag"));
 			//GetTalkText().Talk("Δεν μπορώ να παίξω χωρίς χέρια");
 			return;
 		}
@@ -263,7 +263,7 @@ public class Player : Character
 		{
 			if (!ExpressedNoBatteries && !BeingTalkedTo)
 			{
-				DialogueManager.GetInstance().ScheduleDialogue(this, "Ξέμεινα από μπαταρίες. Πρέπει να βρώ κάπου να φωρτήσω.");
+				DialogueManager.GetInstance().ScheduleDialogue(this, LocalisationHolder.GetString("OutOfBatDiag"));
 				//GetTalkText().Talk("Ξέμεινα από μπαταρίες. Πρέπει να βρώ κάπου να φωρτήσω.");
 				ExpressedNoBatteries = true;
 			}
@@ -386,7 +386,7 @@ public class Player : Character
 		{
 			if (!ExpressedLowBattery && !BeingTalkedTo)
 			{
-				DialogueManager.GetInstance().ScheduleDialogue(this, "Θα ξεμείνω από μπαταρία σε λίγο. Δεν νιώθω καλά.");
+				DialogueManager.GetInstance().ScheduleDialogue(this, LocalisationHolder.GetString("OutOfEnerguDiag"));
 				//GetTalkText().Talk("Θα ξεμείνω από μπαταρία σε λίγο. Δεν νιώθω καλά.");
 				ScreenEffects ui = (ScreenEffects)PlayerUI.GetInstance().GetUI(PlayerUIType.SCREENEFFECTS);
 				ui.PlayEffect(ScreenEffectTypes.DAMAGE);

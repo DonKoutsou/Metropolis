@@ -49,7 +49,7 @@ public class DialogueTrigger : Spatial
 
         Entered = true;
 
-        DialogueManager.GetInstance().ScheduleDialogue(pl, EnterDialogues[TimesEntered]);     
+        DialogueManager.GetInstance().ScheduleDialogue(pl, LocalisationHolder.GetString(EnterDialogues[TimesEntered]));     
         //pl.GetTalkText().Talk(EnterDialogues[TimesEntered]);
                 
         TimesEntered += 1;

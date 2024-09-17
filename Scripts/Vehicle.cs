@@ -684,7 +684,7 @@ public class Vehicle : RigidBody
 		Vector3 postoput;
 		if (!CheckForGround(out postoput))
 		{
-			DialogueManager.GetInstance().ForceDialogue(cha, "Πρέπει να πάω πιό κοντά στην στεριά.");
+			DialogueManager.GetInstance().ForceDialogue(cha, LocalisationHolder.GetString("FarFromLandBoatDiag"));
 			//cha.GetTalkText().Talk("Πρέπει να πάω πιό κοντά στην στεριά.");
 			return false;
 		}
@@ -751,7 +751,7 @@ public class Vehicle : RigidBody
 	{
 		if (!IsPlayerOwned())
 		{
-			DialogueManager.GetInstance().ForceDialogue(pl, "Δεν είναι δικιά μου. Δεν μπορώ να την χρησιμοποιήσω.");
+			DialogueManager.GetInstance().ForceDialogue(pl, LocalisationHolder.GetString("NotMyBoatDiag"));
 			//pl.GetTalkText().Talk("Δεν είναι δικιά μου. Δεν μπορώ να την χρησιμοποιήσω.");
 			return;
 		}
@@ -772,10 +772,10 @@ public class Vehicle : RigidBody
 		string actiontex;
 		if (pl.HasVehicle() && pl.GetVehicle() == this)
 		{
-			actiontex = "Αποβιβάση";
+			actiontex = LocalisationHolder.GetString("Αποβιβάση");
 		} 
 		else
-			actiontex = "Επιβιβάση";
+			actiontex = LocalisationHolder.GetString("Επιβιβάση");
 
 		return actiontex;
 	}

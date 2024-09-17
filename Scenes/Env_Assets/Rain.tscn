@@ -19,7 +19,7 @@ direction = Vector3( 0, -10, 0 )
 spread = 5.03
 gravity = Vector3( 0, -100, 0 )
 initial_velocity = 2000.0
-scale = 732.7
+scale = 409.03
 
 [sub_resource type="QuadMesh" id=3]
 material = ExtResource( 2 )
