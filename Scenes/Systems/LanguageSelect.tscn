@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Fonts/Play-Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://UIThemes/ButtonGreen.tres" type="Theme" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Assets/UI/MainIcon.png" type="Texture" id=6]
 [ext_resource path="res://UIThemes/Panel_LightGray_TopCorner.tres" type="StyleBox" id=7]
 [ext_resource path="res://UIThemes/Panel_LightGray_BottomCorner.tres" type="StyleBox" id=8]
+[ext_resource path="res://Assets/Sounds/UI/CityName.mp3" type="AudioStream" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 1 )
@@ -20,6 +21,37 @@ use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 1 )
 
+[sub_resource type="Animation" id=3]
+resource_name = "FadeOut"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ) ]
+}
+
 [node name="Language Select" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -29,6 +61,7 @@ GameScene = "res://Scenes/World/WorldRoot.tscn"
 [node name="Panel" type="Panel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+rect_clip_content = true
 custom_styles/panel = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="Panel"]
@@ -140,8 +173,22 @@ margin_bottom = 105.5
 texture = ExtResource( 6 )
 expand = true
 
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 0 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+
 [node name="LocalisationHolder" type="Node" parent="."]
 script = ExtResource( 5 )
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/FadeOut = SubResource( 3 )
+anims/RESET = SubResource( 4 )
+
 [connection signal="pressed" from="Panel/HBoxContainer/EnglishButton" to="." method="SelectEnglish"]
 [connection signal="pressed" from="Panel/HBoxContainer/GreekButton" to="." method="SelectGreek"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="StartGame"]

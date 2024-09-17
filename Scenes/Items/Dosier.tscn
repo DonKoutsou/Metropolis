@@ -24,8 +24,8 @@ script = ExtResource( 1 )
 ItemType = 16
 ItemIcon = ExtResource( 3 )
 ItemPickupActionName = "Μια καταγραφή"
-ItemName = "Φάκελος"
-ItemDesc = "Μια καταγραφή"
+ItemName = "Αρχεία"
+ItemDesc = "ResearchDocDescription"
 stackable = false
 
 [node name="MeshInstance" type="MeshInstance" parent="."]

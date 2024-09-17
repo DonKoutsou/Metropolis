@@ -22,8 +22,8 @@ script = ExtResource( 1 )
 ItemType = 19
 ItemIcon = ExtResource( 4 )
 ItemPickupActionName = "Μιά δραχμή.."
-ItemName = "Σταγόνα ανθρώπινου αίματος"
-ItemDesc = "Ένα φιαλίδιο που κρατάει μέσα του μια σταγόνα από αίμα ανθρώπου. Πολύ σπάνιο πλέον μετά την εξαφάνιση των ανθρώπων."
+ItemName = "Αίμα"
+ItemDesc = "BloodDescription"
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 90.8958, 0, 0, 0, 90.8958, 0, 0, 0, 90.8958, 0, 0.141275, 0 )

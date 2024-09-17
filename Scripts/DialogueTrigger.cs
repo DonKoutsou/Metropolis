@@ -70,7 +70,7 @@ public class DialogueTrigger : Spatial
 
         Left = true;
 
-        DialogueManager.GetInstance().ScheduleDialogue(pl, LeaveDialogues[TimesLeft]);
+        DialogueManager.GetInstance().ScheduleDialogue(pl, LocalisationHolder.GetString(LeaveDialogues[TimesLeft]));
         //pl.GetTalkText().Talk(LeaveDialogues[TimesLeft]);
 
         TimesLeft += 1;

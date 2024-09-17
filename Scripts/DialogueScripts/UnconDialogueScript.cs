@@ -16,13 +16,13 @@ public class UnconDialogueScript : BaseDialogueScript
         {
             case 0:
             {
-                text = string.Format("Θα φύγω προς την Μητρόπολη, αν θημάμε καλά είναι κάπου προς τα {0}. Ελπίζω να σας δω εκέι.", WorldMap.GetInstance().GetExitDirection());
+                text = string.Format(LocalisationHolder.GetString("IGoToMetropolis"), WorldMap.GetInstance().GetExitDirection());
                 DialogueProg ++;
                 break;
             }
             case 1:
             {
-                text = "Θα σε δω στην Μητρόπολη καΐκτση, καλό δρόμο.";
+                text = LocalisationHolder.GetString("SeeYouInM");
                 CameraAnimationPlayer CameraAnimation = CameraAnimationPlayer.GetInstance();
                 CameraAnimation.Connect("FadeOutFinished", Talker, "DespawnChar");
                 CameraAnimation.FadeInOut(3);
@@ -58,7 +58,7 @@ public class UnconDialogueScript : BaseDialogueScript
 
         if (bats.Count == 0)
         {
-            DialogueManager.GetInstance().ScheduleDialogue(pl, "Δεν έχω μπαταρίες...");
+            DialogueManager.GetInstance().ScheduleDialogue(pl, LocalisationHolder.GetString("Δεν έχω μπαταρίες..."));
             //pl.GetTalkText().Talk("Δεν έχω μπαταρίες...");
             return "null";
         }

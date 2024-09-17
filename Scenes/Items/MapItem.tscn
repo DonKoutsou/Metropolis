@@ -21,8 +21,8 @@ script = ExtResource( 1 )
 ItemType = 5
 ItemIcon = ExtResource( 3 )
 ItemPickupActionName = "Ένας χάρτης.."
-ItemName = "Μονάδα συντεταγμένων"
-ItemDesc = "Μονάδα αποθήκευσης συντεταγμένων, ένδειξη συντεταγμένων χρήστη, και αποθήκευση πορείας."
+ItemName = "ΧάρτηςΑντικείμενο"
+ItemDesc = "MapDescription"
 stackable = false
 
 [node name="MeshInstance" type="MeshInstance" parent="."]

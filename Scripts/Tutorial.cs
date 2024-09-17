@@ -32,13 +32,13 @@ public class Tutorial : Control
         if (stage == 1)
         {
             GetNode<VideoPlayer>("VideoPlayer").Stream = SelectTutorial;
-            GetNode<Label>("VideoPlayer/Panel/Label").Text = SelectTutorialText;
+            GetNode<Label>("VideoPlayer/Panel/Label").Text = LocalisationHolder.GetString(SelectTutorialText);
             GetNode<VideoPlayer>("VideoPlayer").Play();
         }
         else if (stage == 2)
         {
             GetNode<VideoPlayer>("VideoPlayer").Stream = InventoryTutorial;
-            GetNode<Label>("VideoPlayer/Panel/Label").Text = InventoryTutorialText;
+            GetNode<Label>("VideoPlayer/Panel/Label").Text = LocalisationHolder.GetString(InventoryTutorialText);
             GetNode<VideoPlayer>("VideoPlayer").Play();
         }
         else
@@ -53,7 +53,7 @@ public class Tutorial : Control
         PlayerUI.OnMenuToggled(true);
         GetNode<AnimationPlayer>("AnimationPlayer").Play("Start");
         GetNode<VideoPlayer>("VideoPlayer").Stream = WalkTutorial;
-        GetNode<Label>("VideoPlayer/Panel/Label").Text = WalkTutorialText;
+        GetNode<Label>("VideoPlayer/Panel/Label").Text = LocalisationHolder.GetString(WalkTutorialText);
         GetNode<VideoPlayer>("VideoPlayer").Play();
     }
     public void OnMapPickup()

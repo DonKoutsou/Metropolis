@@ -227,24 +227,26 @@ public class WorldMap : TileMap
 
     private static string AngleToCompassDirection(float angle)
     {
+		string dir = string.Empty;
         if (angle >= 337.5 || angle < 22.5)
-            return "Βόρεια";
+            dir = "Βόρεια";
         else if (angle >= 22.5 && angle < 67.5)
-            return "Βορειοανατολικά";
+            dir = "Βορειοανατολικά";
         else if (angle >= 67.5 && angle < 112.5)
-            return "Ανατολικά";
+            dir = "Ανατολικά";
         else if (angle >= 112.5 && angle < 157.5)
-            return "Νοτιοανατολικά";
+            dir = "Νοτιοανατολικά";
         else if (angle >= 157.5 && angle < 202.5)
-            return "Νότια";
+            dir = "Νότια";
         else if (angle >= 202.5 && angle < 247.5)
-            return "Νοτιοδυτικά";
+            dir = "Νοτιοδυτικά";
         else if (angle >= 247.5 && angle < 292.5)
-            return "Δυτικά";
+            dir = "Δυτικά";
         else if (angle >= 292.5 && angle < 337.5)
-            return "Βορειοδυτικά";
+            dir = "Βορειοδυτικά";
         else
-            return "Unknown";
+            dir = "Unknown";
+		return LocalisationHolder.GetString(dir);
     }
 	public void LoadSaveData(Resource data)
 	{
@@ -652,7 +654,7 @@ public class WorldMap : TileMap
 		if (!Player.IsSpawned())
 			return;
 		Player pl = Player.GetInstance();
-		Vector3 pos = pl.GlobalTranslation;
+		Vector3 pos = pl.GlobalTranslation + (-MyWorld.GetInstance().Translation);
 		Vector2 plpos = new Vector2(pos.x, pos.z);
 		if (plpos.DistanceTo(CurrentTile) > CellSize.x/2)
 		{
@@ -674,7 +676,7 @@ public class WorldMap : TileMap
 					ileinfto.AddNewVehicle(veh);
 				}
 				
-				MyWorld.IleTransition(ileinfto);
+				MyWorld.GetInstance().IleTransition(ileinfto);
 				
 				EmitSignal("OnTransitionEventHandler", ileinfto.Island);
 			}

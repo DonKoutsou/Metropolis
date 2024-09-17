@@ -102,10 +102,11 @@ anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 2 )
 WalkTutorial = ExtResource( 1 )
-WalkTutorialText = "Χρησιμοποίησε το δεξιό κλικ για να κουνήσεις τον χαρακτήρα."
+WalkTutorialText = "Tutorial1"
 SelectTutorial = ExtResource( 3 )
-SelectTutorialText = "Με το αριστερό κλίκ μπορείς να διαλέξεις τα αντικείμενα γύρο σου."
+SelectTutorialText = "Tutorial2"
 InventoryTutorial = ExtResource( 1 )
+InventoryTutorialText = "Tutorial3"
 
 [node name="Panel" type="Panel" parent="."]
 modulate = Color( 0, 0, 0, 1 )

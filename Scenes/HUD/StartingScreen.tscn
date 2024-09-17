@@ -498,7 +498,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 0, 0, 0, 0 ) ]
+"values": [ Color( 0, 0, 0, 1 ) ]
 }
 
 [sub_resource type="Animation" id=31]
@@ -698,7 +698,7 @@ FOVOverride = 40
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-color = Color( 0, 0, 0, 0.8 )
+color = Color( 0, 0, 0, 1 )
 
 [node name="Panel" type="Panel" parent="Settings"]
 anchor_left = 1.0
@@ -1364,7 +1364,7 @@ layer = 10
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-color = Color( 0, 0, 0, 0 )
+color = Color( 0, 0, 0, 1 )
 
 [node name="MainMenuAnimation" type="AnimationPlayer" parent="FadeInOut"]
 root_node = NodePath("../../Intro")

@@ -77,9 +77,9 @@ public class FireplaceLight : StaticBody
     public void HighLightObject(bool toggle, Material OutlineMat)
     {
         if (toggle)
-            GetNode<MeshInstance>("MeshInstance").MaterialOverlay = OutlineMat;
+            GetNode<MeshInstance>("LOD/MeshInstance2").MaterialOverlay = OutlineMat;
         else
-            GetNode<MeshInstance>("MeshInstance").MaterialOverlay = null;
+            GetNode<MeshInstance>("LOD/MeshInstance2").MaterialOverlay = null;
     }
     public void DoAction(Player pl)
 	{

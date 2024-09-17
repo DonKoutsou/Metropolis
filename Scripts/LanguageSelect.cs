@@ -9,7 +9,7 @@ public class LanguageSelect : Control
     Language L;
     public override void _Ready()
     {
-        OS.WindowSize = new Vector2(462, 342);
+        //OS.WindowSize = new Vector2(462, 342);
         //GetTree().Root.Size = new Vector2(320, 110);
         //ProjectSettings.SetSetting("display/window/size/width", 320);
         //ProjectSettings.SetSetting("display/window/size/height", 110);
@@ -20,14 +20,19 @@ public class LanguageSelect : Control
     private void SelectGreek()
     {
         L = Language.GREEK;
-        StartGame();
+        PlayFadeOut();
     }
     private void SelectEnglish()
     {
         L = Language.ENGLISH;
-        StartGame();
+        PlayFadeOut();
     }
-    private void StartGame()
+    void PlayFadeOut()
+    {
+        GetNode<AnimationPlayer>("AnimationPlayer").Play("FadeOut");
+        GetNode<AudioStreamPlayer>("AudioStreamPlayer").Play();
+    }
+    public void StartGame(string animname)
     {
         WorldRoot root = ResourceLoader.Load<PackedScene>(GameScene).Instance<WorldRoot>();
         LocalisationHolder lang = GetNode<LocalisationHolder>("LocalisationHolder");

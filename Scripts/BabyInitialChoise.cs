@@ -30,6 +30,9 @@ public class BabyInitialChoise : Control
     AnimationPlayer pl;
     public override void _Ready()
     {
+        GetNode<Label>("VBoxContainer/Label").Text = LocalisationHolder.GetString("InitialChoiceDiag");
+        GetNode<Button>("VBoxContainer/HBoxContainer/Button").Text = LocalisationHolder.GetString("Πάρε το μωρο μαζί σου.");
+        GetNode<Button>("VBoxContainer/HBoxContainer/Button2").Text = LocalisationHolder.GetString("Άφησε το μωρό στο σκάφος.");
         pl = GetNode<AnimationPlayer>("AnimationPlayer");
         pl.Play("Start");
         SetProcess(false);

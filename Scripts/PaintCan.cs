@@ -43,6 +43,6 @@ public class PaintCan : Item
 	}
     public override string GetItemDesc()
     {
-        return ItemDesc + "\n Χρώμα :" + LimbRandomColorProvider.TranslateColor(CanColor);
+        return "\n Χρώμα :" + LimbRandomColorProvider.TranslateColor(CanColor) + "\n" + LocalisationHolder.GetString(ItemDesc);
     }
 }

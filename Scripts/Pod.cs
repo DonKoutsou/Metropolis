@@ -39,7 +39,7 @@ public class Pod : StaticBody
             AnimationPlayer anim = GetNode<AnimationPlayer>("AnimationPlayer");
             anim.Play("PodOpen");
             Opened = true;
-            DialogueManager.GetInstance().ScheduleDialogue(pl, "Δεν έχει κάτι άλλο μέσα...");
+            DialogueManager.GetInstance().ScheduleDialogue(pl, LocalisationHolder.GetString("Δεν έχει κάτι άλλο μέσα..."));
             //pl.GetTalkText().Talk("Δεν έχει κάτι άλλο μέσα...");
         }
         CameraAnimationPlayer CameraAnimation = CameraAnimationPlayer.GetInstance();
@@ -60,7 +60,7 @@ public class Pod : StaticBody
     {
         CameraAnimationPlayer CameraAnimation = CameraAnimationPlayer.GetInstance();
         CameraAnimation.Disconnect("FadeOutFinished", this, "OpenHatch");
-        DialogueManager.GetInstance().ScheduleDialogue(Player.GetInstance(), "Κλείσε τα μάτια σου μικρό είχες μεγάλο ταξίδι, σε λίγο θα είσαι σπίτι...");
+        DialogueManager.GetInstance().ScheduleDialogue(Player.GetInstance(), LocalisationHolder.GetString("FirstBabyDiag"));
         //Player.GetInstance().GetTalkText().Talk("Κλείσε τα μάτια σου μικρό είχες μεγάλο ταξίδι, σε λίγο θα είσαι σπίτι...");
         //CameraAnimation.FadeOut(1);
 
@@ -76,7 +76,7 @@ public class Pod : StaticBody
     {
         CameraAnimationPlayer CameraAnimation = CameraAnimationPlayer.GetInstance();
         CameraAnimation.Disconnect("FadeOutFinished", this, "Leave");
-        DialogueManager.GetInstance().ScheduleDialogue(Player.GetInstance(), "Καλή τύχη μικρό...");
+        DialogueManager.GetInstance().ScheduleDialogue(Player.GetInstance(), LocalisationHolder.GetString("Καλή τύχη μικρό..."));
         //Player.GetInstance().GetTalkText().Talk("Καλή τύχη μικρό...");
     }
     public void HandleInitialChoiceResault(bool b)
@@ -118,7 +118,7 @@ public class Pod : StaticBody
     }
     public string GetActionName(Player pl)
     {
-        return "Άνοιξε";
+        return LocalisationHolder.GetString("Άνοιξε");
     }
     public bool ShowActionName(Player pl)
     {
@@ -144,11 +144,11 @@ public class Pod : StaticBody
     {
         string desc;
         if (IsDestroyed())
-            desc = "Ένα σκάφος διαφυγής, δυστυχώς δεν τα κατάφερε.";
+            desc = LocalisationHolder.GetString("Ένα σκάφος διαφυγής, δυστυχώς δεν τα κατάφερε.");
         else if (IsOpen())
-            desc = "Ένα σκάφος διαφυγής.";
+            desc = LocalisationHolder.GetString("Ένα σκάφος διαφυγής.");
         else
-            desc = "Το σκάφος που επέζησε, μπορώ να το ανοίξω.";
+            desc = LocalisationHolder.GetString("Το σκάφος που επέζησε, μπορώ να το ανοίξω.");
         return desc;
     }
 }
