@@ -20,6 +20,10 @@ public class MapUI : Control
     {
         return Grid;
     }
+    public void ConnectPlayer(Player pl)
+    {
+        Grid.ConnectPlayer(pl);
+    }
     public void ToggleMap(bool toggle)
     {
         if (IsOpen == toggle)

@@ -103,7 +103,7 @@ public class InventoryUI : Control
     {
         ItemNotif.OnItemRemovedFromInv(it);
     }
-    public void OnPlayerSpawned(Player play)
+    public void ConnectPlayer(Player play)
     {
         pl = play;
         Inv = pl.GetNode<Inventory>("Inventory");
@@ -369,7 +369,7 @@ public class InventoryUI : Control
                 break;
         }
     }*/
-    private void On_Drop_Button_Down()
+    /*private void On_Drop_Button_Down()
     {
         if (FocusedSlot == null)
         {
@@ -379,7 +379,7 @@ public class InventoryUI : Control
         }
         Inv.RemoveItem(FocusedSlot.item);
         SetFocused(false, FocusedSlot);
-    }
+    }*/
     private void On_Instrument_Button_Down()
     {
         if (FocusedSlot == null)

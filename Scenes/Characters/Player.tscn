@@ -1,8 +1,7 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Systems/TalkText.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Systems/Tutorial.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Items/Compass.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Items/MapItem.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Items/NormalLeg_R.tscn" type="PackedScene" id=6]
@@ -294,8 +293,6 @@ update_scale = false
 __meta__ = {
 "_editor_description_": "World Particle manager is atatched here to avoid particles getting their rotation manipulated"
 }
-
-[node name="Tutorial" parent="." instance=ExtResource( 3 )]
 
 [node name="IdleTimer" type="Timer" parent="."]
 wait_time = 10.0

@@ -20,7 +20,6 @@ angular_damp = 1.22
 script = ExtResource( 1 )
 ItemType = 6
 ItemIcon = ExtResource( 4 )
-ItemPickupActionName = "Ένα χέρι.."
 ItemName = "Δεξί άκρο ακρίβιας"
 ItemDesc = "Τα άκρα σχεδιάσμένα για ελαφριές δουλειές που χρειάζοντε ακρίβια. Χειρισμός μικρός εργαλείων."
 stackable = false

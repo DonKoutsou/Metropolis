@@ -18,8 +18,6 @@ public class Character : KinematicBody
 	protected bool m_balive = true;
 
     protected Vector3 _velocity = Vector3.Zero;
-	
-	protected Inventory CharacterInventory;
 
 	[Export]
 	float MaxEnergyAmmount = 100;
@@ -27,8 +25,6 @@ public class Character : KinematicBody
 
 	protected SpotLight NightLight;
 	protected SpatialMaterial BulbMat;
-
-	protected Spatial HeadPivot;
 
 	protected Vector3 loctomove;
 
@@ -56,9 +52,8 @@ public class Character : KinematicBody
 	{
 		TText = GetNode<TalkText>("TalkText");
 		anim = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Character_Animations>("AnimationPlayer");
-		HeadPivot = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("BoneAttachment").GetNode<Spatial>("HeadPivot");
-		NightLight = HeadPivot.GetNode<SpotLight>("NightLight");
-		BulbMat = (SpatialMaterial)HeadPivot.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0);
+		NightLight = GetNode<SpotLight>("Pivot/Guy/Armature/Skeleton/BoneAttachment/HeadPivot/NightLight");
+		BulbMat = (SpatialMaterial)GetNode<MeshInstance>("Pivot/Guy/Armature/Skeleton/BoneAttachment/HeadPivot/MeshInstance").GetActiveMaterial(0);
 		ToggleNightLight(DayNight.IsDay());
 		IdleTimer = GetNode<Timer>("IdleTimer");
 		SetClothing();
@@ -97,34 +92,17 @@ public class Character : KinematicBody
 			//skel.GetNode<MeshInstance>(LimbTranslator.EnumToString((LimbType)i)).Visible = false;
 		}
 	}
-	public override void _EnterTree()
-	{
-		base._EnterTree();
-		
-		
-		DayNight.GetInstance().Connect("DayShift", this, "ToggleNightLight");
-		//loctomove = GlobalTranslation;
-	}
-    public override void _ExitTree()
-    {
-        base._ExitTree();
-		DayNight.GetInstance().Disconnect("DayShift", this, "ToggleNightLight");
-    }
-    public Character_Animations Anims()
-	{
-		return anim;
-	}
+	//Subscribing to shifting of day to turn on head lamp
+	public override void _EnterTree()	{	DayNight.GetInstance().Connect("DayShift", this, "ToggleNightLight");	}
+    public override void _ExitTree()	{	DayNight.GetInstance().Disconnect("DayShift", this, "ToggleNightLight");	}
+    public Character_Animations Anims()	{	return anim;	}
 	public string GetCharacterName()	{	return CharacterName;	}
-	
-	public Inventory GetCharacterInventory()	{	return CharacterInventory;	}
-
 	public void UpdateLocationToMove(Vector3 NewLoc) {	loctomove = NewLoc;	}
 	public Vector3 GetMovingLocation()	{	return loctomove;	}
 	public bool IsAlive()	{	return m_balive;	}
     public override void _Process(float delta)
     {
         base._Process(delta);
-
 		if (CurrentEnergy <= 0 && IsAlive())
 		{
 			Kill();
@@ -137,13 +115,10 @@ public class Character : KinematicBody
 	public void ToggleNightLight(bool toggle)
 	{
 		if (toggle)
-		{
 			NightLight.LightEnergy = 0;
-		}
 		else
-		{
 			NightLight.LightEnergy = 10f;
-		}
+
 		BulbMat.EmissionEnabled = !toggle;
 	}
 	public virtual void Start()
@@ -169,37 +144,25 @@ public class Character : KinematicBody
 		anim.ToggleDeath();
 
 		Stop();
-		Die();
 	}
-	private void Die()
+	public virtual void OnKillFieldDetectorBodyEntered(Node body)	{	Kill();	}
+	public void Sit(RemoteTransform pos = null, SittingThing Sitter = null)
 	{
-		//QueueFree();
-	}
-	public virtual void OnKillFieldDetectorBodyEntered(Node body)
-	{
-		Kill();
-	}
-	public void Sit(RemoteTransform pos, SittingThing Sitter = null)
-	{
-		pos.RemotePath = GetPath();
+		
 		if (Sitter != null)
 		{
+			pos.RemotePath = GetPath();
 			anim.ToggleSitting(true);
 			chair = Sitter;
 			seat = pos;
 			Sitter.UpdateOccupation(pos, true);
+			GetNode<Spatial>("Pivot").GlobalRotation = pos.GlobalRotation;
 		}
 		else
-			anim.ToggleSitting(false);
+			anim.ToggleSitting();
 		
-		GetNode<Spatial>("Pivot").GlobalRotation = pos.GlobalRotation;
 		sitting = true;
 		
-	}
-	public void SitDown()
-	{
-		anim.ToggleSitting();
-		sitting = true;
 	}
 	public void StandUp()
 	{
@@ -331,9 +294,9 @@ public class Character : KinematicBody
 	{
 		anim.ToggleInstrument(true);
 		
-		Spatial instrumentparent = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("InstrumentAtatchment").GetNode<Spatial>("Instrument");
+		Spatial instrumentparent = GetNode<Spatial>("Pivot/Guy/Armature/Skeleton/InstrumentAtatchment/Instrument");
 		Instrument bouz = (Instrument)instrumentparent.GetChild(0);
-		BoneAttachment instatatchment = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("InstrumentAtatchment");
+		BoneAttachment instatatchment = GetNode<BoneAttachment>("Pivot/Guy/Armature/Skeleton/InstrumentAtatchment");
 		instatatchment.GetNode<RemoteTransform>("HolsterAtatchment").RemotePath = instatatchment.GetNode<RemoteTransform>("HolsterAtatchment").GetPath();
 		instatatchment.GetNode<RemoteTransform>("PlayingAtatchment").RemotePath = instrumentparent.GetPath();
 		
@@ -345,22 +308,22 @@ public class Character : KinematicBody
 	{
 		anim.ToggleInstrument(false);
 
-		Spatial instrumentparent = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("InstrumentAtatchment").GetNode<Spatial>("Instrument");
+		Spatial instrumentparent = GetNode<Spatial>("Pivot/Guy/Armature/Skeleton/InstrumentAtatchment/Instrument");
 		Instrument bouz = (Instrument)instrumentparent.GetChild(0);
 		bouz.Disconnect("OnSongEnded", this, "OnSongEnded");
 		bouz.ToggleMusic(false);
-		BoneAttachment instatatchment = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("InstrumentAtatchment");
+		BoneAttachment instatatchment = GetNode<BoneAttachment>("Pivot/Guy/Armature/Skeleton/InstrumentAtatchment");
 		instatatchment.GetNode<RemoteTransform>("HolsterAtatchment").RemotePath = instrumentparent.GetPath();
 		instatatchment.GetNode<RemoteTransform>("PlayingAtatchment").RemotePath = instatatchment.GetNode<RemoteTransform>("PlayingAtatchment").GetPath();
 		PlayingInstrument = false;
 	}
 	public bool HasEquippedItem()
 	{
-		return GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("InstrumentAtatchment").GetNode<Spatial>("Instrument").GetChildCount() > 0;
+		return GetNode<Spatial>("Pivot/Guy/Armature/Skeleton/InstrumentAtatchment/Instrument").GetChildCount() > 0;
 	}
 	public bool HasEquippedInstrument()
 	{
-		var childs = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("InstrumentAtatchment").GetNode<Spatial>("Instrument").GetChildren();
+		var childs = GetNode<Spatial>("Pivot/Guy/Armature/Skeleton/InstrumentAtatchment/Instrument").GetChildren();
 		bool anyisnt = false;
 		for (int i = 0; i < childs.Count; i++)
 		{
@@ -373,11 +336,11 @@ public class Character : KinematicBody
 	}
 	public Item GetEquippedItem()
 	{
-		return (Item)GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("InstrumentAtatchment").GetNode<Spatial>("Instrument").GetChild(0);
+		return (Item)GetNode<Spatial>("Pivot/Guy/Armature/Skeleton/InstrumentAtatchment/Instrument").GetChild(0);
 	}
 	public void EquipItem(Item it)
 	{
-		Spatial instrumentspace = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("InstrumentAtatchment").GetNode<Spatial>("Instrument");
+		Spatial instrumentspace = GetNode<Spatial>("Pivot/Guy/Armature/Skeleton/InstrumentAtatchment/Instrument");
 		it.GetNode<CollisionShape>("CollisionShape").Disabled = true;
 		it.RegisterOnIsland = false;
 		it.Visible = true;
@@ -402,12 +365,12 @@ public class Character : KinematicBody
 	/////Limb stuff
 	public void ToggleLimb(LimbType limb, bool toggle)
 	{
-		LoddedCharacter lod = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<LoddedCharacter>("Skeleton");
+		LoddedCharacter lod = GetNode<LoddedCharacter>("Pivot/Guy/Armature/Skeleton");
 		string limbname = LimbTranslator.EnumToString(limb);
 		if (lod.GetCurrentLOD() == 1)
 			limbname += "_LOD";
 
-		GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("Armature").GetNode<Skeleton>("Skeleton").GetNode<MeshInstance>(limbname).Visible = toggle;
+		lod.GetNode<MeshInstance>(limbname).Visible = toggle;
 	}
 	public void SetClothing ()
 	{

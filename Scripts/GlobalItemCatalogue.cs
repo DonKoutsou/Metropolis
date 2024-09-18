@@ -77,17 +77,15 @@ public class GlobalItemCatalogue : Node
 		foreach (KeyValuePair<ItemName, Dictionary<string, PackedScene>> thing in GlobalItemList)
 		{
 			Dictionary<string, PackedScene> thang = thing.Value;
-			foreach (KeyValuePair<string, PackedScene> thang2 in thang)
+			if (thang.ContainsKey(name))
 			{
-				if (thang2.Key == name)
-				{
-					path = thang2.Value;
-				}
+				path = thang[name];
 			}
 		}
 		if (path == null)
 		{
 			GD.Print("Trying to get item with name : " + name + " | and failed.");
+			throw new ApplicationException();
 		}
 		return path;
 	}

@@ -20,13 +20,12 @@ angular_damp = 1.22
 script = ExtResource( 1 )
 ItemType = 20
 ItemIcon = ExtResource( 4 )
-ItemPickupActionName = "Ένα σπαθί.."
 ItemName = "Σπαθί"
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 0.0612131, 0, 0, 0, 0.0612131, 0, 0, 0, 0.0612131, 0, 2.08541, 0.117772 )
-material_override = ExtResource( 2 )
 mesh = ExtResource( 3 )
+material/0 = ExtResource( 2 )
 script = ExtResource( 6 )
 LOD0 = ExtResource( 3 )
 LOD1 = ExtResource( 3 )

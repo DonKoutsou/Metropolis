@@ -86,16 +86,20 @@ public class MyWorld : Spatial
 		}
 	}
 	
-	public Player SpawnPlayer(Vector3 pos, Vector3 rot)
+	public Player SpawnPlayer(Vector3 pos, Vector3 rot, bool ShowTutorial = false)
 	{
 		Player pl = (Player)ResourceLoader.Load<PackedScene>(PlayerScene).Instance();
 		AddChild(pl);
 		pl.Teleport(pos, rot);
 		//pl.GlobalRotation = rot;
 		//WorldMap.GetInstance().pl = pl;
-		((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid().ConnectPlayer(pl);
+		
 		VehicleHud.GetInstance().ConnectToPlayer(pl);
 		EmitSignal("PlayerSpawnedEventHandler", pl);
+		if (ShowTutorial)
+		{
+			PlayerUI.GetInstance().PlayTutorial(0);
+		}
 		
 		CameraAnimationPlayer.GetInstance().FadeIn(6);
 		return pl;
@@ -283,7 +287,9 @@ public class MyWorld : Spatial
 		List<IslandInfo> ilestoenable = new List<IslandInfo>();
 
 		//Vector2 pos = WorldMap.GetInstance().GlobalToMap();
-		Translation = - new Vector3(to.Island.Translation.x, 0, to.Island.Translation.y);
+
+		//Translation = - new Vector3(to.Position.x * map.CellSize.x, 0, to.Position.y * map.CellSize.y);
+		
 		//to.Visited = true;
 		//MapGrid.GetInstance().SetIslandVisited(to);
 		DayNight.GetInstance().UpdatePlayerDistance(Math.Max(Math.Abs(to.Position.x), Math.Abs(to.Position.y)) / 15);

@@ -873,7 +873,7 @@ icon_align = 1
 expand_icon = true
 
 [node name="SwitchButton" type="Button" parent="InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer" groups=["Buttons"]]
-margin_right = 125.0
+margin_right = 168.0
 margin_bottom = 49.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -888,8 +888,8 @@ icon_align = 1
 expand_icon = true
 
 [node name="SwitchLimbButton" type="Button" parent="InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer" groups=["Buttons"]]
-margin_left = 129.0
-margin_right = 254.0
+margin_left = 172.0
+margin_right = 340.0
 margin_bottom = 49.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -904,6 +904,7 @@ icon_align = 1
 expand_icon = true
 
 [node name="DropButton" type="Button" parent="InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer" groups=["Buttons"]]
+visible = false
 margin_left = 258.0
 margin_right = 383.0
 margin_bottom = 49.0
@@ -937,7 +938,7 @@ icon_align = 1
 expand_icon = true
 
 [node name="CompassButton" type="Button" parent="InventoryContainer/Inventory/ItemOptionPanel/HBoxContainer" groups=["Buttons"]]
-margin_left = 387.0
+margin_left = 344.0
 margin_right = 512.0
 margin_bottom = 49.0
 focus_mode = 0

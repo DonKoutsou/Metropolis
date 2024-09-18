@@ -226,7 +226,7 @@ public class ActionMenu : Control
 		Vector3 actionpos = Acomp.GetActionPos(Play.GlobalTranslation);
 
 		
-		float mult = ((Control)DViewport.GetInstance().GetParent()).RectScale.x;
+		float mult =  GetViewport().Size.x / DViewport.GetInstance().Size.x;
 		var screenpos = DViewport.GetInstance().GetCamera().UnprojectPosition(actionpos);
 
 		Play.GetNode<LoddedCharacter>("Pivot/Guy/Armature/Skeleton").HeadLookAt(actionpos);

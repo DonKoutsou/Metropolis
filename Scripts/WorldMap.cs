@@ -367,8 +367,10 @@ public class WorldMap : TileMap
 
 			DayNight.GetInstance().UpdatePlayerDistance(Math.Max(Math.Abs(CurIle.Position.x), Math.Abs(CurIle.Position.y)) / 11);
 			
-			PlayerUI.OnMenuToggled(false);
-			pl.GetNode<Control>("Tutorial").QueueFree();
+			//PlayerUI.OnMenuToggled(false);
+			Control c = pl.GetNodeOrNull<Control>("Tutorial");
+			if (c != null)
+				c.QueueFree();
 
 			Vector2[] UnlockedLs = (Vector2[])save.Get("UnlockedLightHouses");
 
@@ -628,6 +630,8 @@ public class WorldMap : TileMap
 		MyWorld.GetInstance().ToggleIsland(start, true, true);
 				
 		Island island = start.Island;
+
+		//MyWorld.GetInstance().Translation = - new Vector3(info.Position.x * CellSize.x, 0, info.Position.y * CellSize.y);
 
 		//MapGrid.GetInstance().SetIslandVisited(start);
 

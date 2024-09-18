@@ -49,7 +49,7 @@ public class NPC : Character
 		base._Ready();
 		//GetNode<MeshInstance>("Pivot/Guy/Armature/Skeleton/BabyLowpolySurface1").Visible = false;
 		if (Sitting)
-		{
+			{
 			SpawnSit();
 		}
 		if (InstrumentToSpawnWith != null)
@@ -122,7 +122,7 @@ public class NPC : Character
 		}
 		else
 		{
-			SitDown();
+			Sit();
 		}
 	}
 	/*void RandomiseLimbs()

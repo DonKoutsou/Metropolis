@@ -109,11 +109,6 @@ public class StartingScreen : Control
 		world.CallDeferred("SpawnMap", LoadSave);
 		GameIsRunning = true;
 	}
-	private void On_Full_Screen_Toggled(bool button_pressed)
-	{
-		OS.WindowFullscreen = !OS.WindowFullscreen;
-	}
-	
 	private void On_Exit_Button_Down()
 	{
 		if (GameIsRunning)
@@ -140,14 +135,17 @@ public class StartingScreen : Control
 	public void GameEnded(GameOverType Type)
 	{
 		GetNode<Timer>("RestartTimer").Start();
+		string endingtext = string.Empty;
 		if (Type == GameOverType.Ending1)
-			GetNode<Label>("GameOverLabel2/Panel10/Label").Text = "Τέλος #1 : Αναχώρηση";
+			endingtext = "Τέλος1";
 		else if (Type == GameOverType.Ending2)
-			GetNode<Label>("GameOverLabel2/Panel10/Label").Text = "Τέλος #2 : Αναχώρηση";
+			endingtext = "Τέλος2";
 		else if (Type == GameOverType.Ending3)
-			GetNode<Label>("GameOverLabel2/Panel10/Label").Text = "Τέλος #3 : Η Σωτηρία";
+			endingtext = "Τέλος3";
 		else if (Type == GameOverType.Ending4)
-			GetNode<Label>("GameOverLabel2/Panel10/Label").Text = "Τέλος #4 : Η Αμαρτία";
+			endingtext = "Τέλος4";
+
+		GetNode<Label>("GameOverLabel2/Panel10/Label").Text = LocalisationHolder.GetString(endingtext);
 			
 		GetNode<Label>("GameOverLabel2").Visible = true;
 		

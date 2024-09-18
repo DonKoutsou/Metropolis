@@ -11,6 +11,9 @@ public class Intro : Spatial
         GetNode<Camera>("Camera").MakeCurrent();
 
         UniversalLodManager.GetInstance().UpdateCamera(GetNode<Camera>("Camera"));
+
+        GetNode<Label>("Camera/LoadingScreen/Button").Text = LocalisationHolder.GetString(GetNode<Label>("Camera/LoadingScreen/Button").Text);
+        GetNode<Label>("Camera/LoadingScreen/Label").Text = LocalisationHolder.GetString(GetNode<Label>("Camera/LoadingScreen/Label").Text);
     }
     public override void _Process(float delta)
     {
@@ -18,13 +21,17 @@ public class Intro : Spatial
             return;
         Stop();
     }
-    private void On_Skip_Button_Down()
+    public override void _Input(InputEvent @event)
     {
-        Stop();
+        base._Input(@event);
+        if (@event.IsActionPressed("SkipCinematic"))
+		{
+			Stop();
+		}
     }
     private void Stop()
     {
-        Player pl = MyWorld.GetInstance().SpawnPlayer(SpawnPosition.GetInstance().GlobalTranslation, SpawnPosition.GetInstance().GlobalRotation);
+        Player pl = MyWorld.GetInstance().SpawnPlayer(SpawnPosition.GetInstance().GlobalTranslation, SpawnPosition.GetInstance().GlobalRotation, true);
         WorldMap map = WorldMap.GetInstance();
         WorldParticleManager man = GetNode<WorldParticleManager>("WorldParticleManager");
         RemoveChild(man);

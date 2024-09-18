@@ -20,12 +20,11 @@ angular_damp = 1.22
 script = ExtResource( 1 )
 ItemType = 9
 ItemIcon = ExtResource( 2 )
-ItemPickupActionName = "Μια εργαλειοθήκη"
 ItemName = "Εργαλειοθήκη"
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-material_override = ExtResource( 7 )
 mesh = ExtResource( 3 )
+material/0 = ExtResource( 7 )
 script = ExtResource( 4 )
 LOD0 = ExtResource( 3 )
 LOD1 = ExtResource( 3 )

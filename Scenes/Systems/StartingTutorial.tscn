@@ -101,12 +101,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 2 )
-WalkTutorial = ExtResource( 1 )
-WalkTutorialText = "Tutorial1"
-SelectTutorial = ExtResource( 3 )
-SelectTutorialText = "Tutorial2"
-InventoryTutorial = ExtResource( 1 )
-InventoryTutorialText = "Tutorial3"
+Tutorials = {
+"Tutorial1": ExtResource( 1 ),
+"Tutorial2": ExtResource( 3 ),
+"Tutorial3": null
+}
 
 [node name="Panel" type="Panel" parent="."]
 modulate = Color( 0, 0, 0, 1 )

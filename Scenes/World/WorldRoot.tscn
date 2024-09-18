@@ -59,3 +59,5 @@ pause_mode = 2
 script = ExtResource( 4 )
 HoverSound = ExtResource( 8 )
 ClickSound = ExtResource( 9 )
+
+[node name="TutorialManager" type="Node" parent="."]

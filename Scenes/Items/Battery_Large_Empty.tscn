@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/Items/Battery_Large.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Battery/Texture/BatLowTx_Battery_Emissive.png" type="Texture" id=2]
@@ -34,8 +34,15 @@ ao_texture = ExtResource( 4 )
 ao_on_uv2 = false
 ao_texture_channel = 0
 
+[sub_resource type="CylinderShape" id=2]
+height = 1.00105
+radius = 0.295733
+
 [node name="Battery" instance=ExtResource( 1 )]
 CurrentEnergy = 0.0
 
 [node name="MeshInstance" parent="." index="0"]
-material_override = SubResource( 1 )
+material/0 = SubResource( 1 )
+
+[node name="CollisionShape" parent="." index="1"]
+shape = SubResource( 2 )

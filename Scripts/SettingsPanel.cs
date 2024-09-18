@@ -4,6 +4,8 @@ using System;
 public class SettingsPanel : Control
 {
     [Export]
+    Godot.Environment Startscreenenv = null;
+    [Export]
     Godot.Environment gameenv = null;
     public override void _Ready()
     {
@@ -70,6 +72,8 @@ public class SettingsPanel : Control
     {
         DViewport v = DViewport.GetInstance();
         v.Fxaa = T;
+        ItemPreviewViewport vp = ItemPreviewViewport.GetInstance();
+        v.Fxaa = T;
     }
     private void Update_FullScreen(bool T)
 	{
@@ -78,14 +82,21 @@ public class SettingsPanel : Control
     private void Update_Brightness(float v)
     {
         gameenv.AdjustmentBrightness = v;
+        Startscreenenv.AdjustmentBrightness = v;
     }
     private void Update_Contrast(float v)
     {
         gameenv.AdjustmentContrast = v;
+        Startscreenenv.AdjustmentContrast = v;
     }
     private void Update_Saturation(float v)
     {
         gameenv.AdjustmentSaturation = v;
+        Startscreenenv.AdjustmentSaturation = v;
+    }
+    private void Update_Sound(float v)
+    {
+        AudioServer.SetBusVolumeDb(0, v);
     }
     private void UpdateMaxFPS(int p)
     {
@@ -115,27 +126,76 @@ public class SettingsPanel : Control
     }
     private void Update_MSAA(int p)
     {
+        ItemPreviewViewport vp = ItemPreviewViewport.GetInstance();
         DViewport v = DViewport.GetInstance();
         switch (p)
         {
             case 0:
             {
-                v.Msaa = Viewport.MSAA.Msaa2x;
+                v.Msaa = Viewport.MSAA.Disabled;
+                vp.Msaa = Viewport.MSAA.Disabled;
                 break;
             }
             case 1:
             {
-                v.Msaa = Viewport.MSAA.Msaa4x;
+                v.Msaa = Viewport.MSAA.Msaa2x;
+                vp.Msaa = Viewport.MSAA.Msaa2x;
                 break;
             }
             case 2:
             {
-                v.Msaa = Viewport.MSAA.Msaa8x;
+                v.Msaa = Viewport.MSAA.Msaa4x;
+                vp.Msaa = Viewport.MSAA.Msaa4x;
                 break;
             }
             case 3:
             {
+                v.Msaa = Viewport.MSAA.Msaa8x;
+                vp.Msaa = Viewport.MSAA.Msaa8x;
+                break;
+            }
+            case 4:
+            {
                 v.Msaa = Viewport.MSAA.Msaa16x;
+                vp.Msaa = Viewport.MSAA.Msaa16x;
+                break;
+            }
+        }
+    }
+    private void Update_Resolution(int p)
+    {
+        DViewport v = DViewport.GetInstance();
+        ItemPreviewViewport vp = ItemPreviewViewport.GetInstance();
+        switch (p)
+        {
+            case 0:
+            {
+                v.Size = new Vector2(3840, 2160);
+                vp.Size = new Vector2(3840, 2160);
+                break;
+            }
+            case 1:
+            {
+                v.Size = new Vector2(1920,1080);
+                vp.Size = new Vector2(1920,1080);
+                break;
+            }
+            case 2:
+            {
+                v.Size = new Vector2(1280,720);
+                vp.Size = new Vector2(1280,720);
+                break;
+            }
+            case 3:
+            {
+                v.Size = new Vector2(960,540);
+                vp.Size = new Vector2(960,540);
+                break;
+            }
+            case 4:
+            {
+                v.Size = new Vector2(480,270);
+                vp.Size = new Vector2(480,270);
                 break;
             }
         }

@@ -19,6 +19,8 @@ public class PlayerUI : Control
     NodePath ControlsUI = null;
     [Export]
     NodePath ActionMenu = null;
+    [Export]
+    PackedScene InitialTutorialScene = null;
 
     static PlayerUI instance;
 
@@ -33,21 +35,17 @@ public class PlayerUI : Control
         else
             OpenMenus --;
     }
+    public void PlayTutorial(int index)
+    {
+        if (index == 0)
+        {
+            AddChild(InitialTutorialScene.Instance());
+        }
+    }
     public override void _Ready()
     {
         instance = this;
         SetProcessInput(false);
-    }
-    public void ConnectPlayer(Player pl)
-    {
-        Play = pl;
-        SetProcessInput(true);
-        Control_UI ui = (Control_UI)GetUI(PlayerUIType.CONTROLS);
-        ui.EnableUI();
-
-
-        ActionMenu AMenu = (ActionMenu)GetUI(PlayerUIType.ACTION_MENU);
-        AMenu.ConnectPlayer(pl);
     }
     public void OnPlayerDisconnected()
     {
@@ -102,10 +100,15 @@ public class PlayerUI : Control
     }
     public void OnPlayerSpawned(Player pl)
     {
+        Play = pl;
+        SetProcessInput(true);
         Show();
-        GetNode(Inventory).CallDeferred("OnPlayerSpawned", pl);
-        GetNode(CheatMenu).CallDeferred("OnPlayerSpawned", pl);
-        ConnectPlayer(pl);
+
+        GetNode(Inventory).CallDeferred("ConnectPlayer", pl);
+        GetNode(CheatMenu).CallDeferred("ConnectPlayer", pl);
+        GetNode(MapUI).CallDeferred("ConnectPlayer", pl);
+        GetNode(ActionMenu).CallDeferred("ConnectPlayer", pl);
+        GetNode(ControlsUI).CallDeferred("EnableUI");
     }
     public override void _Input(InputEvent @event)
 	{

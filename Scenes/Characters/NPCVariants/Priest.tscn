@@ -141,7 +141,7 @@ nodes/ChairBlend/position = Vector2( 186.667, 160 )
 nodes/IntrumentBlend/node = SubResource( 54 )
 nodes/IntrumentBlend/position = Vector2( 360, 266.667 )
 nodes/output/position = Vector2( 533.333, 160 )
-node_connections = [ "output", 0, "IntrumentBlend", "IntrumentBlend", 0, "ChairBlend", "IntrumentBlend", 1, "Animation 2", "ChairBlend", 0, "Animation", "ChairBlend", 1, "Animation 3" ]
+node_connections = [ "ChairBlend", 0, "Animation", "ChairBlend", 1, "Animation 3", "IntrumentBlend", 0, "ChairBlend", "IntrumentBlend", 1, "Animation 2", "output", 0, "IntrumentBlend" ]
 
 [sub_resource type="AnimationNodeAnimation" id=55]
 animation = "Standing"
@@ -193,23 +193,23 @@ graph_offset = Vector2( -352, -31 )
 ClothToWear = 1
 
 [node name="Skeleton" parent="Pivot/Guy/Armature" index="1"]
-bones/3/bound_children = [ NodePath("InstrumentAtatchment") ]
-bones/6/bound_children = [ NodePath("BoneAttachment") ]
+bones/3/bound_children = [  ]
+bones/6/bound_children = [  ]
 
 [node name="HeadRot2Pivot" parent="Pivot/Guy/Armature/Skeleton" index="0"]
-transform = Transform( -1, 0, -8.74228e-08, 1.22055e-15, 1, -1.42267e-08, 8.74228e-08, -2.27374e-13, -1, -3.66399, 280.524, 20.9182 )
+transform = Transform( -1, 0, -8.74228e-08, 1.56816e-15, 1, -1.83835e-08, 8.74228e-08, -2.27374e-13, -1, -1.77978, 280.695, 19.067 )
 
 [node name="BoneAttachment" parent="Pivot/Guy/Armature/Skeleton" index="1"]
-transform = Transform( 0.997124, -0.0651397, -0.0387514, 0.0598971, 0.990501, -0.12377, 0.0464457, 0.121093, 0.991554, -2.34977, 265.288, 12.3521 )
+transform = Transform( 0.9975, -0.0585137, -0.0395997, 0.0530265, 0.990392, -0.127716, 0.0466924, 0.125297, 0.991018, -0.567342, 265.488, 10.4363 )
 
 [node name="MeshInstance" parent="Pivot/Guy/Armature/Skeleton/BoneAttachment/HeadPivot" index="0"]
 mesh = SubResource( 64 )
 
 [node name="InstrumentAtatchment" parent="Pivot/Guy/Armature/Skeleton" index="2"]
-transform = Transform( 0.997965, -0.0265375, -0.057973, 0.0247644, 0.999209, -0.031092, 0.0587522, 0.0295931, 0.997834, 0.748822, 213.168, 0.0945459 )
+transform = Transform( 0.997538, -0.0170932, -0.067999, 0.0154624, 0.999581, -0.0244375, 0.0683883, 0.023326, 0.997386, 2.14465, 213.216, -1.38374 )
 
 [node name="Instrument" parent="Pivot/Guy/Armature/Skeleton/InstrumentAtatchment" index="2"]
-transform = Transform( -37.9657, 16.6749, -2.44876, 16.6429, 38.0451, 1.02921, 2.64825, -0.040322, -41.5738, -29.2251, -41.0474, -25.1529 )
+transform = Transform( -36.0815, -20.3793, 2.87584, -19.6836, 35.8642, 7.21661, -6.00602, 4.89179, -40.9278, 27.6828, -49.0322, -37.2074 )
 
 [node name="Arm_L" parent="Pivot/Guy/Armature/Skeleton" index="3"]
 material/0 = SubResource( 65 )
@@ -223,54 +223,54 @@ material/0 = SubResource( 65 )
 [node name="Arm_R_LOD" parent="Pivot/Guy/Armature/Skeleton" index="6"]
 material/0 = SubResource( 65 )
 
-[node name="Body" parent="Pivot/Guy/Armature/Skeleton" index="8"]
+[node name="Body" parent="Pivot/Guy/Armature/Skeleton" index="9"]
 material/0 = SubResource( 66 )
 
-[node name="Body_LOD" parent="Pivot/Guy/Armature/Skeleton" index="9"]
+[node name="Body_LOD" parent="Pivot/Guy/Armature/Skeleton" index="10"]
 material/0 = SubResource( 66 )
 
-[node name="Face" parent="Pivot/Guy/Armature/Skeleton" index="11"]
+[node name="Face" parent="Pivot/Guy/Armature/Skeleton" index="12"]
 material/0 = ExtResource( 14 )
 
-[node name="Face_LOD" parent="Pivot/Guy/Armature/Skeleton" index="12"]
+[node name="Face_LOD" parent="Pivot/Guy/Armature/Skeleton" index="13"]
 material/0 = ExtResource( 14 )
 
-[node name="Leg2_L" parent="Pivot/Guy/Armature/Skeleton" index="15"]
+[node name="Leg2_L" parent="Pivot/Guy/Armature/Skeleton" index="16"]
 visible = false
 material/0 = SubResource( 67 )
 
-[node name="Leg2_L_LOD" parent="Pivot/Guy/Armature/Skeleton" index="16"]
+[node name="Leg2_L_LOD" parent="Pivot/Guy/Armature/Skeleton" index="17"]
 material/0 = SubResource( 67 )
 
-[node name="Leg2_R" parent="Pivot/Guy/Armature/Skeleton" index="17"]
+[node name="Leg2_R" parent="Pivot/Guy/Armature/Skeleton" index="18"]
 material/0 = SubResource( 67 )
 
-[node name="Leg2_R_LOD" parent="Pivot/Guy/Armature/Skeleton" index="18"]
+[node name="Leg2_R_LOD" parent="Pivot/Guy/Armature/Skeleton" index="19"]
 material_override = SubResource( 67 )
 
-[node name="Leg_L" parent="Pivot/Guy/Armature/Skeleton" index="19"]
+[node name="Leg_L" parent="Pivot/Guy/Armature/Skeleton" index="20"]
 material/0 = SubResource( 68 )
 
-[node name="Leg_L_LOD" parent="Pivot/Guy/Armature/Skeleton" index="20"]
+[node name="Leg_L_LOD" parent="Pivot/Guy/Armature/Skeleton" index="21"]
 material/0 = SubResource( 68 )
 
-[node name="Leg_R" parent="Pivot/Guy/Armature/Skeleton" index="21"]
+[node name="Leg_R" parent="Pivot/Guy/Armature/Skeleton" index="22"]
 material/0 = SubResource( 68 )
 
-[node name="Leg_R_LOD" parent="Pivot/Guy/Armature/Skeleton" index="22"]
+[node name="Leg_R_LOD" parent="Pivot/Guy/Armature/Skeleton" index="23"]
 material/0 = SubResource( 68 )
 
-[node name="LegsUpper" parent="Pivot/Guy/Armature/Skeleton" index="23"]
+[node name="LegsUpper" parent="Pivot/Guy/Armature/Skeleton" index="24"]
 material/0 = SubResource( 66 )
 
-[node name="LegsUpper_LOD" parent="Pivot/Guy/Armature/Skeleton" index="24"]
+[node name="LegsUpper_LOD" parent="Pivot/Guy/Armature/Skeleton" index="25"]
 material/0 = SubResource( 66 )
 
 [node name="AnimationTree" parent="Pivot/Guy/AnimationPlayer" index="0"]
 tree_root = SubResource( 69 )
 parameters/playback = SubResource( 70 )
 
-[node name="DialogueScript" parent="." index="6"]
+[node name="DialogueScript" parent="." index="4"]
 script = ExtResource( 15 )
 
 [editable path="Pivot/Guy"]

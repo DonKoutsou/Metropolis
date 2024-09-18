@@ -31,7 +31,7 @@ public class Portal : Area
             return;
         Vehicle v = (Vehicle)body;
         v.Boost(2);
-        GD.Print("Boat found!!");
+        
     }
     public void Toggle(bool t)
     {

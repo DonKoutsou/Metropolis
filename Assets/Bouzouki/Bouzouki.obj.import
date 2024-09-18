@@ -13,8 +13,9 @@ dest_files=[ "res://.import/Bouzouki.obj-97f1810c7790f12fc4cd63989d70420b.mesh",
 
 [params]
 
-generate_tangents=true
 scale_mesh=Vector3( 0.04, 0.04, 0.04 )
 offset_mesh=Vector3( 0, 0, 0 )
-octahedral_compression=true
 optimize_mesh_flags=4286
+generate_tangents=true
+vertex_cache_optimization=true
+octahedral_compression=true

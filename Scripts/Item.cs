@@ -110,10 +110,6 @@ public class Item : RigidBody
     {
         return false;
     }
-	public string GetObjectDescription()
-    {
-        return GetItemName();
-    }
 	public void InputData(ItemInfo data)
 	{
 		Translation = data.Position;

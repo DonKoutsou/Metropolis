@@ -128,7 +128,7 @@ public class CheatMenu : Control
 	{
 		GD.Print(WorldMap.GetInstance().GetExitDirection());
 	}
-	public void OnPlayerSpawned(Player play)
+	public void ConnectPlayer(Player play)
 	{
 		pl = play;
 		CameraPanPivot pan = play.GetNode<Position3D>("CameraMovePivot").GetNode<CameraPanPivot>("CameraPanPivot");

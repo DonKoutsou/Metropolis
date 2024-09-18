@@ -34,7 +34,7 @@ public class Settings : Control
 	}
 	private void OpenSettings()
 	{
-		GetNode<SettingsPanel>("SettingsPanel").Visible = true;
+		GetNode<SettingsPanel>("SettingsPanel").Visible = !GetNode<SettingsPanel>("SettingsPanel").Visible;
 	}
 	private void UpdateViewDistance()
 	{

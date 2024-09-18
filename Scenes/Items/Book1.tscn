@@ -20,15 +20,14 @@ angular_damp = 1.22
 script = ExtResource( 1 )
 ItemType = 13
 ItemIcon = ExtResource( 4 )
-ItemPickupActionName = "Ένα βιβλίο"
 ItemName = "Βιβλίο"
 ItemDesc = "Ένα βιβλίο"
 stackable = false
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 3, 2.62268e-07, 3.57628e-07, -2.62268e-07, 3, 2.62268e-07, -3.57628e-07, -2.62268e-07, 3, 0, 0, 0 )
-material_override = ExtResource( 2 )
 mesh = ExtResource( 6 )
+material/0 = ExtResource( 2 )
 script = ExtResource( 3 )
 LOD0 = ExtResource( 6 )
 LOD1 = ExtResource( 6 )

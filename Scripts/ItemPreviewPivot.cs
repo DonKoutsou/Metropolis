@@ -26,6 +26,7 @@ public class ItemPreviewPivot : Spatial
     public void Start(MeshInstance m)
     {
         Visible = true;
+        Rotation = Vector3.Zero;
         SetProcessInput(true);
 
         GetNode<Spatial>("ItemPreviewPivot2").GetNode<MeshInstance>("MeshInstance").Mesh = m.Mesh;
@@ -36,7 +37,7 @@ public class ItemPreviewPivot : Spatial
         {
             Preview.SetSurfaceMaterial(i, m.GetSurfaceMaterial(i));
         }
-        
+
         Vector3 transla = GetParent().GetNode<Camera>("Camera").Translation;
         transla.z = m.GetAabb().GetLongestAxisSize();
         GetParent().GetNode<Camera>("Camera").Translation = transla;

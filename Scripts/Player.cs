@@ -45,50 +45,20 @@ public class Player : Character
 	//Camera DialogueCam;
 
 	static Player instance;
-
 	public bool HasBaby = false;
-
 	public bool BabyAlive = true;
-
 	public bool BeingTalkedTo = false;
-
 	public bool CanTraverseDeep = false;
+	protected Inventory CharacterInventory;
 
-	public void SetRunSpeed(int NewSpeed)
-	{
-		RunSpeed = NewSpeed;
-	}
-	public override void _EnterTree()
-	{
-		base._EnterTree();
-		instance = this;
-	}
-	public override void _ExitTree()
-	{
-		base._ExitTree();
-		instance = null;
-		
-	}
-	public static bool IsSpawned()
-	{
-		return instance != null;
-	}
-	public static Player GetInstance()
-	{
-		return instance;
-	}
-	//public Camera GetDialogueCamera()
-	//{
-	//	return DialogueCam;
-	//}
-	public float GetCurrentEnergy()
-	{
-		return CurrentEnergy;
-	}
-	public float GetRPM()
-	{
-		return rpm;
-	}
+	public Inventory GetCharacterInventory()	{	return CharacterInventory;	}
+	public void SetRunSpeed(int NewSpeed)	{	RunSpeed = NewSpeed;	}
+	public override void _EnterTree()	{	base._EnterTree();	instance = this;	}
+	public override void _ExitTree()	{	base._ExitTree();	instance = null;	}
+	public static bool IsSpawned()	{	return instance != null;	}
+	public static Player GetInstance()	{	return instance;	}
+	public float GetCurrentEnergy()	{	return CurrentEnergy;	}
+	public float GetRPM()	{	return rpm;	}
 	public void Teleport(Vector3 pos, Vector3 rot)
 	{
 		
@@ -104,7 +74,6 @@ public class Player : Character
 
 		CameraPanPivot.GetInstance().GlobalRotation = rota;
 	}
-	
 	public override void _Ready()
 	{
 		base._Ready();
@@ -166,15 +135,14 @@ public class Player : Character
 	{
 		if (BeingTalkedTo)
 			return;
-		var spacestate = GetWorld().DirectSpaceState;
-		float mult = OS.WindowSize.x / DViewport.GetInstance().Size.x;
-		Vector2 mousepos = DViewport.GetInstance().GetMousePosition() / mult;
-		Camera cam = DViewport.GetInstance().GetCamera();
+
+		DViewport viewp = DViewport.GetInstance();
+		Vector2 mousepos = viewp.GetMousePosition() / (OS.WindowSize.x / viewp.Size.x);
+		Camera cam = viewp.GetCamera();
 		Vector3 rayor = cam.ProjectRayOrigin(mousepos);
 		Vector3 rayend = rayor + cam.ProjectRayNormal(mousepos) * 20000;
-		Dictionary rayar;
 
-		rayar = spacestate.IntersectRay(rayor, rayend, new Godot.Collections.Array { this }, moveloc.MoveLayer);
+		Dictionary rayar = GetWorld().DirectSpaceState.IntersectRay(rayor, rayend, new Godot.Collections.Array { this }, moveloc.MoveLayer);
 		//if ray finds nothiong return
 		if (rayar.Count > 0)
 		{
@@ -229,29 +197,40 @@ public class Player : Character
 		}
 		base.PlayMusic();
 	}
+
 	bool ExpressedNoBatteries = true;
 	bool ExpressedLowBattery = false;
+
+	float ProcedD = 0.5f;
+
+	//Used for checking batteries and recharging character
 	public override void _Process(float delta)
 	{
-		base._Process(delta);
+		//Updading location to move if right click is being pressed
+		if (Input.IsActionPressed("Move") || Autowalk)
+			UpdateMoveLocation();
 
+		ProcedD -= delta;
+		if (ProcedD > 0)
+			return;
+		ProcedD = 0.5f;
+
+		base._Process(delta);
+		//check for idling to player instrument
 		CheckIfIdling();
 
-		if (Input.IsActionPressed("Move") || Autowalk)
-		{
-			UpdateMoveLocation();
-		}
+		//Get batteries from inventory
 		List<Item> batteries;
 		ItemName[] types = {ItemName.BATTERY};
 		CharacterInventory.GetItemsByType(out batteries, types);
 
+		//scrap empty ones
 		for (int i = batteries.Count() -1; i > -1; i--)
 		{
 			if (((Battery)batteries[i]).GetCurrentCap() <= 0)
-			{
 				batteries.RemoveAt(i);
-			}
 		}
+		//Recharge using the batteries with energy in them
 		if (batteries.Count() > 0)
 		{
 			float rechargeammount = Math.Min( GetCharacterBatteryCap() - GetCurrentCharacterEnergy() , 0.1f);
@@ -259,12 +238,12 @@ public class Player : Character
 			RechargeCharacter(rechargeammount);
 			ExpressedNoBatteries = false;
 		}
+		//if no battereis with energy in inventory complain about it using dialogue.
 		else
 		{
 			if (!ExpressedNoBatteries && !BeingTalkedTo)
 			{
 				DialogueManager.GetInstance().ScheduleDialogue(this, LocalisationHolder.GetString("OutOfBatDiag"));
-				//GetTalkText().Talk("Ξέμεινα από μπαταρίες. Πρέπει να βρώ κάπου να φωρτήσω.");
 				ExpressedNoBatteries = true;
 			}
 		}
@@ -295,12 +274,10 @@ public class Player : Character
 			{
 				anim.PlayAnimation(E_Animations.Idle);
 				moveloc.Hide();
-				HeadPivot.Rotation = new Vector3(0.0f,0.0f,0.0f);
 			}
 			else if (dist > 10)
 			{
 				anim.PlayAnimation(E_Animations.Idle);
-				HeadPivot.Rotation = new Vector3(0.0f,0.0f,0.0f);
 				moveloc.Show();
 			}
 			rpm = currveh.GetRPM();
@@ -314,7 +291,6 @@ public class Player : Character
 			{
 				anim.PlayAnimation(E_Animations.Idle);
 				moveloc.Hide();
-				HeadPivot.Rotation = new Vector3(0.0f,0.0f,0.0f);
 				rpm = 0.05f;
 			}
 			else
@@ -335,31 +311,23 @@ public class Player : Character
 					rpm = 0.5f;
 					anim.PlayAnimation(E_Animations.Run);
 				}
-				float heightdif = GlobalTranslation.y - loctomove.y ;
-				float rot = heightdif / 45;
-				if (rot > 0)
-					HeadPivot.Rotation = new Vector3(Math.Min(rot, 0.3f) , 0.0f,0.0f);
-				else
-					HeadPivot.Rotation = new Vector3(Math.Max(rot, -0.5f) , 0.0f,0.0f);
 			}
-			RayCast dropcheck = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<RayCast>("RayCast");
-			dropcheck.ForceUpdateTransform();
-			if (!dropcheck.IsColliding())
-				direction = Vector3.Zero;
-			else
-			{
-				bool ItsSea = ((CollisionObject)dropcheck.GetCollider()).GetCollisionLayerBit(8);
-				if (ItsSea)
-				{
-					direction = Vector3.Zero;
-				}
-			}
+			
 
 			//Apply velicity
 			_velocity.x = direction.x * spd;
 			_velocity.z = direction.z * spd;
 			_velocity.y -= FallAcceleration * delta;
+
+			//check if we are going to fall of cliff or in sea and make direction zero if so.
+			RayCast dropcheck = GetNode<RayCast>("Pivot/Guy/RayCast");
+			dropcheck.ForceUpdateTransform();
+			if (!dropcheck.IsColliding() || ((CollisionObject)dropcheck.GetCollider()).GetCollisionLayerBit(8))
+				_velocity = Vector3.Zero;
+
 			_velocity = MoveAndSlide(_velocity, Vector3.Up);
+
+			//Solution for stairs, check if colliding with stairs and if so give a small push upwards.
 			for (int i = 0; i < GetSlideCount(); i++)
 			{
 				KinematicCollision col = GetSlideCollision(i);
@@ -371,9 +339,7 @@ public class Player : Character
 				{
 					_velocity.y += 500 * delta;
 					break;
-				}
-					
-					
+				}	
 			}
 		}
 
@@ -431,10 +397,6 @@ public class Player : Character
 			}
 		}
 	}
-	public override void OnKillFieldDetectorBodyEntered(Node body)
-	{
-		Kill("Πνίξιμο");
-	}
 	public void OnBabyGot()
 	{
 		HasBaby = true;
@@ -445,5 +407,4 @@ public class Player : Character
 		base.Kill(reason);
 		MyWorld.GetInstance().OnPlayerKilled(reason);
 	}
-	
 }

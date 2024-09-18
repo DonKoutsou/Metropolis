@@ -1,11 +1,10 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=31 format=2]
 
-[ext_resource path="res://Scenes/HUD/CreditName.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/HUD/Credits.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/StartingScreen.cs" type="Script" id=2]
 [ext_resource path="res://Fonts/Play-Bold.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://Scripts/LoadingScreen.cs" type="Script" id=4]
+[ext_resource path="res://Scenes/HUD/LoadingScreen.tscn" type="PackedScene" id=4]
 [ext_resource path="res://UIThemes/Panel_LightGray_BottomCorner.tres" type="StyleBox" id=5]
-[ext_resource path="res://Scripts/Credits.cs" type="Script" id=6]
 [ext_resource path="res://Assets/UI/MainIcon.png" type="Texture" id=7]
 [ext_resource path="res://UIThemes/Panel_LightGray_LeftCorner.tres" type="StyleBox" id=8]
 [ext_resource path="res://Scripts/Settings.cs" type="Script" id=9]
@@ -17,350 +16,9 @@
 [ext_resource path="res://Assets/UI/ΜΧΨLogoTrans.png" type="Texture" id=15]
 [ext_resource path="res://Scripts/MainMenuAnimation.cs" type="Script" id=16]
 [ext_resource path="res://Scripts/SaveLoadManager.cs" type="Script" id=17]
-[ext_resource path="res://Assets/UI/Icon/Replay.png" type="Texture" id=18]
 [ext_resource path="res://UIThemes/ButtonGreen.tres" type="Theme" id=19]
 [ext_resource path="res://Scenes/Systems/SettingsPanel.tscn" type="PackedScene" id=20]
 [ext_resource path="res://UIThemes/Panel_Black_BottomCorner.tres" type="StyleBox" id=32]
-[ext_resource path="res://Assets/Sounds/Mpouzoukia/Bouzouki_Outtro.mp3" type="AudioStream" id=33]
-
-[sub_resource type="Theme" id=28]
-
-[sub_resource type="Animation" id=37]
-resource_name = "FadeIn"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("ColorRect:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("ProgressBar:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 1.9, 2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ false, false, true ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("TextureRect:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 1.9, 2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ false, false, true ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Label2:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 1.9, 2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ false, false, true ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("TextureRect2:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0, 1.9, 2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ false, false, true ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("Label3:visible")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0, 1.9, 2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ false, false, true ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("LoadingPics:visible")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0, 1.9, 2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ false, false, true ]
-}
-
-[sub_resource type="Animation" id=41]
-resource_name = "FadeOut"
-tracks/0/type = "value"
-tracks/0/path = NodePath("ColorRect:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-
-[sub_resource type="Animation" id=39]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("ColorRect:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 0, 0, 0, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("ProgressBar:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ false ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath(".:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ false ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("TextureRect:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ false ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Label2:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ false ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("TextureRect2:visible")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ false ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("Label3:visible")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ false ]
-}
-tracks/7/type = "value"
-tracks/7/path = NodePath("LoadingPics:visible")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ false ]
-}
-
-[sub_resource type="StyleBoxFlat" id=56]
-bg_color = Color( 0.235294, 0.321569, 0.372549, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0.431373, 0.882353, 0.937255, 1 )
-border_blend = true
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-corner_detail = 1
-
-[sub_resource type="StyleBoxFlat" id=42]
-bg_color = Color( 0.576471, 0.564706, 0.533333, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
-border_blend = true
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-corner_detail = 1
-
-[sub_resource type="DynamicFont" id=29]
-size = 64
-outline_size = 4
-outline_color = Color( 0.235294, 0.321569, 0.372549, 1 )
-use_mipmaps = true
-use_filter = true
-font_data = ExtResource( 3 )
-
-[sub_resource type="Animation" id=48]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("TextureRect2:rect_rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Label3:text")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ "" ]
-}
-
-[sub_resource type="Animation" id=47]
-resource_name = "Spinner"
-length = 2.0
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("TextureRect2:rect_rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1, 2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 0.0, 180.0, 360.0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Label3:text")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.6, 1.1, 1.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ "", ".", "..", "..." ]
-}
-
-[sub_resource type="Animation" id=63]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("LoadingPics:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ) ]
-}
-
-[sub_resource type="Animation" id=64]
-resource_name = "ShowPic"
-length = 5.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("LoadingPics:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1.5, 3.5, 5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
-}
 
 [sub_resource type="DynamicFont" id=65]
 size = 54
@@ -396,36 +54,7 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[sub_resource type="Animation" id=67]
-resource_name = "Credit Roll"
-length = 10.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("VBoxContainer:rect_position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 10 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( -659, 214 ), Vector2( -659, -1047 ) ]
-}
-
-[sub_resource type="Animation" id=68]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("VBoxContainer:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( -659, 214 ) ]
-}
+[sub_resource type="Theme" id=28]
 
 [sub_resource type="DynamicFont" id=62]
 size = 140
@@ -512,153 +141,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
 
-[node name="LoadingScreen" type="Control" parent="."]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-script = ExtResource( 4 )
-
-[node name="ColorRect" type="ColorRect" parent="LoadingScreen"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-color = Color( 0, 0, 0, 0 )
-
-[node name="LoadingPics" type="TextureRect" parent="LoadingScreen"]
-visible = false
-self_modulate = Color( 1, 1, 1, 0 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-theme = SubResource( 28 )
-expand = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="LoadingScreen"]
-anims/FadeIn = SubResource( 37 )
-anims/FadeOut = SubResource( 41 )
-anims/RESET = SubResource( 39 )
-
-[node name="ProgressBar" type="ProgressBar" parent="LoadingScreen"]
-visible = false
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 56.0
-margin_top = -40.0
-margin_right = -16.0
-margin_bottom = -16.0
-mouse_filter = 2
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_styles/fg = SubResource( 56 )
-custom_styles/bg = SubResource( 42 )
-max_value = 6000.0
-step = 1.0
-value = 1000.0
-percent_visible = false
-
-[node name="TextureRect" type="TextureRect" parent="LoadingScreen"]
-visible = false
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_top = -56.0
-margin_right = 56.0
-mouse_filter = 2
-theme = SubResource( 28 )
-texture = ExtResource( 15 )
-expand = true
-
-[node name="Label2" type="Label" parent="LoadingScreen"]
-visible = false
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -655.0
-margin_top = -11.0
-margin_right = 656.0
-margin_bottom = 181.0
-custom_colors/font_color = Color( 0.431373, 0.717647, 0.937255, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/shadow_offset_y = 3
-custom_fonts/font = SubResource( 29 )
-text = "Δημιουργία κόσμου"
-align = 1
-valign = 1
-
-[node name="Panel7" type="Panel" parent="LoadingScreen/Label2"]
-show_behind_parent = true
-anchor_right = 1.0
-margin_left = 289.0
-margin_top = 37.0
-margin_right = -285.0
-margin_bottom = 51.0
-rect_clip_content = true
-mouse_filter = 2
-custom_styles/panel = ExtResource( 10 )
-
-[node name="Panel8" type="Panel" parent="LoadingScreen/Label2"]
-show_behind_parent = true
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -366.5
-margin_top = -39.0
-margin_right = 370.5
-margin_bottom = -25.0
-rect_clip_content = true
-mouse_filter = 2
-custom_styles/panel = ExtResource( 5 )
-
-[node name="Panel9" type="Panel" parent="LoadingScreen/Label2"]
-show_behind_parent = true
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -375.5
-margin_top = -51.0
-margin_right = 378.5
-margin_bottom = 63.0
-rect_clip_content = true
-mouse_filter = 2
-custom_styles/panel = ExtResource( 12 )
-
-[node name="Label3" type="Label" parent="LoadingScreen"]
-visible = false
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = 310.0
-margin_top = -11.0
-margin_right = 1620.0
-margin_bottom = 181.0
-custom_colors/font_color = Color( 0.431373, 0.717647, 0.937255, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/shadow_offset_y = 3
-custom_fonts/font = SubResource( 29 )
-valign = 1
-
-[node name="TextureRect2" type="TextureRect" parent="LoadingScreen"]
-visible = false
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -20.0
-margin_top = -374.0
-margin_right = 28.0
-margin_bottom = -317.0
-rect_pivot_offset = Vector2( 24, 30 )
-texture = ExtResource( 18 )
-
-[node name="AnimationPlayer2" type="AnimationPlayer" parent="LoadingScreen"]
-anims/RESET = SubResource( 48 )
-anims/Spinner = SubResource( 47 )
-
-[node name="LoadingPic" type="AnimationPlayer" parent="LoadingScreen"]
-anims/RESET = SubResource( 63 )
-anims/ShowPic = SubResource( 64 )
+[node name="LoadingScreen" parent="." instance=ExtResource( 4 )]
 
 [node name="Settings" type="Control" parent="."]
 anchor_right = 1.0
@@ -666,13 +149,6 @@ anchor_bottom = 1.0
 script = ExtResource( 9 )
 ViewDistance = 1
 FOVOverride = 40
-
-[node name="ColorRect" type="ColorRect" parent="Settings"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-color = Color( 0, 0, 0, 1 )
 
 [node name="Panel" type="Panel" parent="Settings"]
 anchor_left = 1.0
@@ -683,6 +159,7 @@ margin_left = -556.0
 margin_top = -801.0
 margin_right = -132.0
 margin_bottom = -162.0
+mouse_filter = 2
 custom_styles/panel = ExtResource( 12 )
 
 [node name="Title" type="Label" parent="Settings/Panel"]
@@ -927,120 +404,7 @@ script = ExtResource( 17 )
 
 [node name="SettingsPanel" parent="Settings" instance=ExtResource( 20 )]
 
-[node name="Credits" type="Control" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -659.0
-margin_top = -259.0
-margin_right = 659.0
-margin_bottom = 457.0
-rect_clip_content = true
-script = ExtResource( 6 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Credits"]
-"anims/Credit Roll" = SubResource( 67 )
-anims/RESET = SubResource( 68 )
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Credits"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -659.0
-margin_top = 214.0
-margin_right = 1977.0
-margin_bottom = 1646.0
-rect_pivot_offset = Vector2( 1318, 752 )
-custom_constants/separation = 78
-alignment = 1
-
-[node name="CreditName" parent="Credits/VBoxContainer" instance=ExtResource( 1 )]
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 0.0
-margin_top = 560.0
-margin_right = 2636.0
-margin_bottom = 560.0
-
-[node name="CreditName2" parent="Credits/VBoxContainer" instance=ExtResource( 1 )]
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 0.0
-margin_top = 638.0
-margin_right = 2636.0
-margin_bottom = 638.0
-
-[node name="VBoxContainer" parent="Credits/VBoxContainer/CreditName2" index="0"]
-margin_left = -162.5
-margin_right = 162.5
-
-[node name="DevTitle" parent="Credits/VBoxContainer/CreditName2/VBoxContainer" index="0"]
-margin_right = 325.0
-text = "Character Animations"
-
-[node name="DevName" parent="Credits/VBoxContainer/CreditName2/VBoxContainer" index="1"]
-margin_right = 325.0
-text = "Samuel Sandoval"
-
-[node name="CreditName3" parent="Credits/VBoxContainer" instance=ExtResource( 1 )]
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 0.0
-margin_top = 716.0
-margin_right = 2636.0
-margin_bottom = 716.0
-
-[node name="DevTitle" parent="Credits/VBoxContainer/CreditName3/VBoxContainer" index="0"]
-text = "Μπουζούκι"
-
-[node name="DevName" parent="Credits/VBoxContainer/CreditName3/VBoxContainer" index="1"]
-text = "Λευτέρης Σκλάβος"
-
-[node name="CreditName4" parent="Credits/VBoxContainer" instance=ExtResource( 1 )]
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 0.0
-margin_top = 794.0
-margin_right = 2636.0
-margin_bottom = 794.0
-
-[node name="DevTitle" parent="Credits/VBoxContainer/CreditName4/VBoxContainer" index="0"]
-text = "Κιθάρα"
-
-[node name="DevName" parent="Credits/VBoxContainer/CreditName4/VBoxContainer" index="1"]
-text = "Βασίλης Κανάρης"
-
-[node name="CreditName5" parent="Credits/VBoxContainer" instance=ExtResource( 1 )]
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 0.0
-margin_top = 872.0
-margin_right = 2636.0
-margin_bottom = 872.0
-
-[node name="DevTitle" parent="Credits/VBoxContainer/CreditName5/VBoxContainer" index="0"]
-visible = false
-
-[node name="DevName" parent="Credits/VBoxContainer/CreditName5/VBoxContainer" index="1"]
-margin_top = 5.0
-margin_bottom = 66.0
-text = "Κουτσουράδης Αντώνης"
-
-[node name="OuttroMusic" type="AudioStreamPlayer" parent="Credits"]
-stream = ExtResource( 33 )
-volume_db = -10.0
+[node name="Credits" parent="." instance=ExtResource( 1 )]
 
 [node name="Intro" type="Control" parent="."]
 anchor_right = 1.0
@@ -1102,7 +466,7 @@ custom_styles/panel = ExtResource( 5 )
 wait_time = 5.0
 one_shot = true
 
-[node name="GameOverLabel" type="Label" parent="."]
+[node name="GameOverLabel" type="Label" parent="." groups=["Translatables"]]
 visible = false
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1160,7 +524,7 @@ rect_clip_content = true
 mouse_filter = 2
 custom_styles/panel = ExtResource( 12 )
 
-[node name="GameOverLabel2" type="Label" parent="."]
+[node name="GameOverLabel2" type="Label" parent="." groups=["Translatables"]]
 visible = false
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1323,10 +687,4 @@ script = ExtResource( 16 )
 [connection signal="pressed" from="Settings/Panel/Start_Button" to="." method="On_Start_Button_Down"]
 [connection signal="pressed" from="Settings/Panel/Exit_Button" to="." method="On_Exit_Button_Down"]
 [connection signal="pressed" from="Settings/Panel/Settings_Button" to="Settings" method="OpenSettings"]
-[connection signal="animation_finished" from="Credits/AnimationPlayer" to="Credits" method="Credits_Finished"]
 [connection signal="timeout" from="RestartTimer" to="." method="StopGame"]
-
-[editable path="Credits/VBoxContainer/CreditName2"]
-[editable path="Credits/VBoxContainer/CreditName3"]
-[editable path="Credits/VBoxContainer/CreditName4"]
-[editable path="Credits/VBoxContainer/CreditName5"]
