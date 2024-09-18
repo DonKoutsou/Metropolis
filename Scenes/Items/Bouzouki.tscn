@@ -19,7 +19,6 @@ mode = 1
 script = ExtResource( 2 )
 ItemType = 8
 ItemIcon = ExtResource( 9 )
-ItemPickupActionName = "Ένα μπουζούκι.."
 ItemName = "Μπουζούκι"
 ItemDesc = "BouzoukiDescription"
 stackable = false

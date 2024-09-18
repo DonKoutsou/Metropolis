@@ -336,7 +336,7 @@ nodes/ChairBlend/position = Vector2( 186.667, 160 )
 nodes/IntrumentBlend/node = SubResource( 54 )
 nodes/IntrumentBlend/position = Vector2( 360, 266.667 )
 nodes/output/position = Vector2( 533.333, 160 )
-node_connections = [ "output", 0, "IntrumentBlend", "IntrumentBlend", 0, "ChairBlend", "IntrumentBlend", 1, "Animation 2", "ChairBlend", 0, "Animation", "ChairBlend", 1, "Animation 3" ]
+node_connections = [ "ChairBlend", 0, "Animation", "ChairBlend", 1, "Animation 3", "IntrumentBlend", 0, "ChairBlend", "IntrumentBlend", 1, "Animation 2", "output", 0, "IntrumentBlend" ]
 
 [sub_resource type="AnimationNodeAnimation" id=55]
 animation = "Standing"
@@ -452,16 +452,16 @@ material/0 = ExtResource( 8 )
 transform = Transform( -0.492894, 0, 0.870089, 0, 1, 0, -0.870089, 0, -0.492894, 76.0386, 91.2997, 1060.73 )
 
 [node name="HeadRot2Pivot" parent="Gen3Machine/Armature/Skeleton" index="0"]
-transform = Transform( -1, -7.45078e-09, -1.63913e-06, 2.07251e-07, 1.00003, 2.19968e-07, 1.63913e-06, -7.07796e-08, -1, -3.62109, 280.526, 20.6641 )
+transform = Transform( -1, -7.45078e-09, -1.63913e-06, 2.07246e-07, 1.00003, 2.19968e-07, 1.63913e-06, -7.07796e-08, -1, -4.29688, 281.109, 19.2871 )
 
 [node name="BoneAttachment" parent="Gen3Machine/Armature/Skeleton" index="1"]
-transform = Transform( 0.997536, -0.0634614, -0.0299266, 0.0595109, 0.991199, -0.118246, 0.0371673, 0.116174, 0.992533, -2.39337, 265.241, 12.1713 )
+transform = Transform( 0.996701, -0.0739572, -0.0334125, 0.0700626, 0.991935, -0.105623, 0.0409547, 0.102934, 0.993844, -2.87408, 265.729, 11.0009 )
 
 [node name="MeshInstance" parent="Gen3Machine/Armature/Skeleton/BoneAttachment/HeadPivot" index="0"]
 mesh = SubResource( 64 )
 
 [node name="InstrumentAtatchment" parent="Gen3Machine/Armature/Skeleton" index="2"]
-transform = Transform( 0.998417, -0.0265504, -0.0495681, 0.0252354, 0.999317, -0.0269701, 0.0502504, 0.0256765, 0.998406, 0.615655, 213.079, 0.0957616 )
+transform = Transform( 0.997948, -0.0306423, -0.0562143, 0.0299448, 0.999464, -0.0132088, 0.056589, 0.0114984, 0.998331, 0.515352, 213.284, -0.0648576 )
 
 [node name="Instrument" parent="Gen3Machine/Armature/Skeleton/InstrumentAtatchment" index="2"]
 transform = Transform( -36.0815, -20.3793, 2.87583, -19.6836, 35.8642, 7.21661, -6.00602, 4.8918, -40.9278, 27.6828, -49.0322, -37.2074 )

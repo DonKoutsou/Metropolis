@@ -337,9 +337,19 @@ public class InventoryUI : Control
             FocusedSlot.Toggle(false);
 
         FocusedSlot = slot;
-
-        if (!t)
+        if (t)
+        {
+            MeshInstance meshi = slot.item.GetNode<MeshInstance>("MeshInstance");
+            
+            
+            ItemPreviewPivot.GetInstance().Start(meshi);
+        }
+        else
+        {
             FocusedSlot = null;
+            ItemPreviewPivot.GetInstance().Stop();
+        }
+            
 
         slot.Toggle(t);
     }

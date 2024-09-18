@@ -21,12 +21,11 @@ angular_damp = 1.22
 script = ExtResource( 1 )
 ItemType = 19
 ItemIcon = ExtResource( 4 )
-ItemPickupActionName = "Μιά δραχμή.."
 ItemName = "Αίμα"
 ItemDesc = "BloodDescription"
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 90.8958, 0, 0, 0, 90.8958, 0, 0, 0, 90.8958, 0, 0.141275, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.141275, 0 )
 material_override = ExtResource( 2 )
 mesh = ExtResource( 3 )
 script = ExtResource( 6 )

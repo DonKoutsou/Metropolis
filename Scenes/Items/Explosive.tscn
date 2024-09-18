@@ -83,6 +83,7 @@ ao_texture = SubResource( 114 )
 ao_on_uv2 = false
 ao_texture_channel = 0
 uv1_triplanar = true
+uv1_triplanar_sharpness = 1.0
 
 [sub_resource type="SphereMesh" id=117]
 material = SubResource( 119 )
@@ -239,14 +240,13 @@ mass = 0.0346939
 script = ExtResource( 1 )
 ItemType = 17
 ItemIcon = ExtResource( 7 )
-ItemPickupActionName = "Ένα εκρηκτικό.."
 ItemName = "Εκρηκτικό"
 ItemDesc = "Ένα εκρηκτικό"
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( -1.94389, 0, -1.6994e-07, 0, 1.94389, 0, 1.6994e-07, 0, -1.94389, 0, 0.177693, 0 )
-material_override = ExtResource( 2 )
 mesh = ExtResource( 3 )
+material/0 = ExtResource( 2 )
 script = ExtResource( 9 )
 LOD0 = ExtResource( 3 )
 LOD1 = ExtResource( 3 )

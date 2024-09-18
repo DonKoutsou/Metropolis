@@ -1,6 +1,5 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Assets/Compass/M_Compass.tres" type="Material" id=1]
 [ext_resource path="res://Assets/Compass/CompassItem.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/Item.cs" type="Script" id=3]
 [ext_resource path="res://Assets/Compass/Compass_Body.obj" type="ArrayMesh" id=4]
@@ -23,14 +22,13 @@ angular_damp = 1.22
 script = ExtResource( 3 )
 ItemType = 4
 ItemIcon = ExtResource( 2 )
-ItemPickupActionName = "Μια πυξίδα..."
 ItemName = "Πυξίδα"
 ItemDesc = "CompassDescription"
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.145963, 0 )
-material_override = ExtResource( 6 )
 mesh = ExtResource( 4 )
+material/0 = ExtResource( 6 )
 script = ExtResource( 8 )
 LOD0 = ExtResource( 4 )
 LOD1 = ExtResource( 4 )
@@ -38,7 +36,6 @@ HideIfNoLod = true
 
 [node name="MeshInstance2" type="MeshInstance" parent="."]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.145963, 0 )
-material_override = ExtResource( 1 )
 mesh = ExtResource( 5 )
 material/0 = ExtResource( 6 )
 script = ExtResource( 8 )

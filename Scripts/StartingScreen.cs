@@ -92,7 +92,7 @@ public class StartingScreen : Control
 
 		GetNode<Control>("Settings").Hide();
 
-		GetNode<Control>("Settings").GetNode<ColorRect>("ColorRect").Visible = true;
+		//GetNode<Control>("Settings").GetNode<ColorRect>("ColorRect").Visible = true;
 
 		Control Startbut = ButtonList["Start"];
 		Control StartHalf = ButtonList["StartHalf"];
@@ -181,7 +181,7 @@ public class StartingScreen : Control
 	{
 		GetNode<Label>("GameOverLabel").Visible = false;
 		GetNode<Label>("GameOverLabel2").Visible = false;
-		GetNode<Control>("Settings").GetNode<ColorRect>("ColorRect").Visible = false;
+		//GetNode<Control>("Settings").GetNode<ColorRect>("ColorRect").Visible = false;
 		world.StopGame();
 
 		GameIsRunning = false;

@@ -1,0 +1,147 @@
+using Godot;
+using System;
+
+public class SettingsPanel : Control
+{
+    [Export]
+    Godot.Environment gameenv = null;
+    public override void _Ready()
+    {
+        DViewport v = DViewport.GetInstance();
+        GetNode<CheckBox>("Panel/GridContainer/Full_Screen_Check").SetPressedNoSignal(OS.WindowFullscreen);
+        GetNode<CheckBox>("Panel/GridContainer/VSync_Check").SetPressedNoSignal(OS.VsyncEnabled);
+        GetNode<CheckBox>("Panel/GridContainer/FXAA_Check").SetPressedNoSignal(v.Fxaa);
+        switch (v.Msaa)
+        {
+            case Viewport.MSAA.Msaa2x:
+            {
+                GetNode<OptionButton>("Panel/GridContainer/MSAA_Option").Selected = 0;
+                break;
+            }
+            case Viewport.MSAA.Msaa4x:
+            {
+                GetNode<OptionButton>("Panel/GridContainer/MSAA_Option").Selected = 1;
+                break;
+            }
+            case Viewport.MSAA.Msaa8x:
+            {
+                GetNode<OptionButton>("Panel/GridContainer/MSAA_Option").Selected = 2;
+                break;
+            }
+            case Viewport.MSAA.Msaa16x:
+            {
+                GetNode<OptionButton>("Panel/GridContainer/MSAA_Option").Selected = 3;;
+                break;
+            }
+        }
+        switch (Engine.TargetFps)
+        {
+            case 30:
+            {
+                GetNode<OptionButton>("Panel/GridContainer/FPS_Choice").Selected = 0;
+                break;
+            }
+            case 60:
+            {
+                GetNode<OptionButton>("Panel/GridContainer/FPS_Choice").Selected = 1;
+                break;
+            }
+            case 75:
+            {
+                GetNode<OptionButton>("Panel/GridContainer/FPS_Choice").Selected = 2;
+                break;
+            }
+            case 120:
+            {
+                GetNode<OptionButton>("Panel/GridContainer/FPS_Choice").Selected = 3;
+                break;
+            }
+        }
+        GetNode<Slider>("Panel/GridContainer/HSlider").Value = gameenv.AdjustmentBrightness;
+        GetNode<Slider>("Panel/GridContainer/HSlider2").Value = gameenv.AdjustmentContrast;
+        GetNode<Slider>("Panel/GridContainer/HSlider3").Value = gameenv.AdjustmentSaturation;
+        Visible = false;
+    }
+    private void Update_Vsync(bool T)
+    {
+        OS.VsyncEnabled = T;
+    }
+    private void Update_FXAA(bool T)
+    {
+        DViewport v = DViewport.GetInstance();
+        v.Fxaa = T;
+    }
+    private void Update_FullScreen(bool T)
+	{
+		OS.WindowFullscreen = T;
+	}
+    private void Update_Brightness(float v)
+    {
+        gameenv.AdjustmentBrightness = v;
+    }
+    private void Update_Contrast(float v)
+    {
+        gameenv.AdjustmentContrast = v;
+    }
+    private void Update_Saturation(float v)
+    {
+        gameenv.AdjustmentSaturation = v;
+    }
+    private void UpdateMaxFPS(int p)
+    {
+        switch (p)
+        {
+            case 0:
+            {
+                Engine.TargetFps = 30;
+                break;
+            }
+            case 1:
+            {
+                Engine.TargetFps = 60;
+                break;
+            }
+            case 2:
+            {
+                Engine.TargetFps = 75;
+                break;
+            }
+            case 3:
+            {
+                Engine.TargetFps = 120;
+                break;
+            }
+        }
+    }
+    private void Update_MSAA(int p)
+    {
+        DViewport v = DViewport.GetInstance();
+        switch (p)
+        {
+            case 0:
+            {
+                v.Msaa = Viewport.MSAA.Msaa2x;
+                break;
+            }
+            case 1:
+            {
+                v.Msaa = Viewport.MSAA.Msaa4x;
+                break;
+            }
+            case 2:
+            {
+                v.Msaa = Viewport.MSAA.Msaa8x;
+                break;
+            }
+            case 3:
+            {
+                v.Msaa = Viewport.MSAA.Msaa16x;
+                break;
+            }
+        }
+    }
+    private void Close()
+    {
+        Visible = false;
+    }
+}
