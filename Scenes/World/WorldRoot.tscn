@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/HUD/PlayerUI.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Systems/ItemRender.tscn" type="PackedScene" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://Scripts/UISoundManager.cs" type="Script" id=4]
 [ext_resource path="res://Scenes/HUD/StartingScreen.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scripts/RandomContainer.cs" type="Script" id=6]
-[ext_resource path="res://Scripts/WindowCentering.cs" type="Script" id=7]
 [ext_resource path="res://Assets/Sounds/UI/Hover2.mp3" type="AudioStream" id=8]
 [ext_resource path="res://Assets/Sounds/UI/Hover.mp3" type="AudioStream" id=9]
 [ext_resource path="res://Scripts/DViewport.cs" type="Script" id=11]
@@ -47,9 +46,6 @@ follow_viewport_enable = true
 
 [node name="StartScreen" parent="CanvasLayer" instance=ExtResource( 5 )]
 rect_pivot_offset = Vector2( 1954.5, 1603.5 )
-
-[node name="WindowCent" type="Node" parent="."]
-script = ExtResource( 7 )
 
 [node name="RandomContainer" type="Node" parent="."]
 script = ExtResource( 6 )

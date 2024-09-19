@@ -402,11 +402,17 @@ public class Island : Spatial
 		else if (child is WindGenerator generator)
 			Generators.Remove(generator);
 		else if (child is Vehicle vehicle)
+		{
 			Vehicles.Remove(vehicle);
+			WorldMap.GetInstance().GetIleInfo(this).RemoveVehicle(vehicle);
+		}
 		else if (child is Item item)
 			Items.Remove(item);
 		else if (child is NPC character)
+		{
 			Characters.Remove(character);
+			WorldMap.GetInstance().GetIleInfo(this).RemoveCharacter(character);
+		}
 		else if (child is Port p)
 			Ports.Remove(p);
 		else if (child is Breakable br)

@@ -97,8 +97,7 @@ public class NPC : Character
 		{
 			GetNode<Spatial>(OwnedVeh).GetNode<Vehicle>("VehicleBody").DespawnVeh();
 		}
-		
-		QueueFree();
+
 		Node par = GetParent();
 		while (!(par is Island))
 		{
@@ -106,8 +105,12 @@ public class NPC : Character
 				return;
 			par = par.GetParent();
 		}
+		
+		WorldMap.GetInstance().GetIleInfo(ile).RemoveCharacter(this);
 		Island ile = (Island)par;
 		ile.UnRegisterChild(this);
+
+		QueueFree();
 	}
 	public void InitialSpawn()
 	{

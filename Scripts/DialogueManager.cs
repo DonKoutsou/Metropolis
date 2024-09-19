@@ -6,6 +6,7 @@ using System.Linq;
 public class DialogueManager : Node
 {
     static DialogueManager Instance;
+	Dictionary<Character, string> Subscribers = new Dictionary<Character, string>();
     public override void _Ready()
     {
         Instance = this;
@@ -20,10 +21,15 @@ public class DialogueManager : Node
 	List<Character> NextTalker = new List<Character>();
 	List<string> NextLine = new List<string>();
 
-	public void ScheduleDialogue(Character talker, string text)
+	public void ScheduleDialogue(Character talker, string text, string methtocal = null)
 	{
 		NextTalker.Add(talker);
 		NextLine.Add(text);
+		
+		if (methtocal != null)
+		{
+			Subscribers.Add(talker, methtocal);
+		}
 
 		if (DialogueRunning)
 			return;
@@ -45,6 +51,11 @@ public class DialogueManager : Node
 	{
 		if (!forced)
 		{
+			if (Subscribers.ContainsKey(NextTalker[0]))
+			{
+				NextTalker[0].GetNode<BaseDialogueScript>("DialogueScript").Call(Subscribers[NextTalker[0]], NextTalker[0]);
+				Subscribers.Remove(NextTalker[0]);
+			}
 			NextTalker.RemoveAt(0);
 			NextLine.RemoveAt(0);
 		}

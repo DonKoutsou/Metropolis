@@ -11,6 +11,7 @@ public class UnconDialogueScript : BaseDialogueScript
     public override void DoDialogue(NPC Talker, NPC TalkerColaborator = null)
     {
         string text = string.Empty;
+        string subscription = null;
         
         switch(DialogueProg)
         {
@@ -23,15 +24,19 @@ public class UnconDialogueScript : BaseDialogueScript
             case 1:
             {
                 text = LocalisationHolder.GetString("SeeYouInM");
-                CameraAnimationPlayer CameraAnimation = CameraAnimationPlayer.GetInstance();
-                CameraAnimation.Connect("FadeOutFinished", Talker, "DespawnChar");
-                CameraAnimation.FadeInOut(3);
+                subscription = "UnconCharDepart";
                 DialogueProg ++;
                 break;
             }
 
         }
-        DialogueManager.GetInstance().ScheduleDialogue(Talker, text);
+        DialogueManager.GetInstance().ScheduleDialogue(Talker, text, subscription);
+    }
+    public void UnconCharDepart(NPC Talker)
+    {
+        CameraAnimationPlayer CameraAnimation = CameraAnimationPlayer.GetInstance();
+        CameraAnimation.Connect("FadeOutFinished", Talker, "DespawnChar");
+        CameraAnimation.FadeInOut(3);
     }
     public override bool ShouldShowExtraAction()
     {
@@ -91,7 +96,9 @@ public class UnconDialogueScript : BaseDialogueScript
     }
     public override void LoadSaveData(Dictionary<string, object> Data)
     {
-        DialogueProg = (int)Data["DialogueProg"];
-        GivenBattery = (bool)Data["GivenBattery"];
+        if (Data.ContainsKey("DialogueProg"))
+            DialogueProg = (int)Data["DialogueProg"];
+        if (Data.ContainsKey("GivenBattery"))
+            GivenBattery = (bool)Data["GivenBattery"];
     }
 }

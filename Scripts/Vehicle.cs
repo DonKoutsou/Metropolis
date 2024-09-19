@@ -266,6 +266,7 @@ public class Vehicle : RigidBody
 	public override void _PhysicsProcess(float delta)
 	{
 		base._PhysicsProcess(delta);
+		//ulong ms = OS.GetSystemTimeMsecs();
 		if (!PlayerOwned)
 			return;
 
@@ -337,6 +338,8 @@ public class Vehicle : RigidBody
 
 		AddTorque(steert);
 		steert = Vector3.Zero;
+		//ulong msaf = OS.GetSystemTimeMsecs();
+		//GD.Print("Veh Physics calculations took : Process time : " + (msaf - ms).ToString() + " ms");
 	}
 	
 	private void EnableWindOnWings(bool toggle)

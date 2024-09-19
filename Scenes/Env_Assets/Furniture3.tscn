@@ -102,6 +102,7 @@ anims/RESET = SubResource( 6 )
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 1 )
 stream = ExtResource( 7 )
+unit_db = 12.0
 unit_size = 25.6
 max_distance = 4096.0
 area_mask = 0

@@ -78,6 +78,13 @@ public class SettingsPanel : Control
     private void Update_FullScreen(bool T)
 	{
 		OS.WindowFullscreen = T;
+        if (!T)
+        {
+            OS.WindowSize = new Vector2(1920, 1080);
+            var actual_size = OS.GetRealWindowSize(); 
+            var centered = new Vector2(OS.GetScreenSize().x / 2 - actual_size.x / 2, OS.GetScreenSize().y / 2 - actual_size.y / 2);
+            OS.WindowPosition = centered;
+        }
 	}
     private void Update_Brightness(float v)
     {

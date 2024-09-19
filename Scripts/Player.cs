@@ -137,7 +137,8 @@ public class Player : Character
 			return;
 
 		DViewport viewp = DViewport.GetInstance();
-		Vector2 mousepos = viewp.GetMousePosition() / (OS.WindowSize.x / viewp.Size.x);
+		Vector2 mult = OS.WindowSize / viewp.Size;
+		Vector2 mousepos = viewp.GetMousePosition()/mult;
 		Camera cam = viewp.GetCamera();
 		Vector3 rayor = cam.ProjectRayOrigin(mousepos);
 		Vector3 rayend = rayor + cam.ProjectRayNormal(mousepos) * 20000;

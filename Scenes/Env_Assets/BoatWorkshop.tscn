@@ -75,12 +75,12 @@ PossibleFurni = [ ExtResource( 11 ), ExtResource( 10 ), ExtResource( 12 ) ]
 PossibleDeco = [ ExtResource( 8 ), ExtResource( 9 ) ]
 FurnitureAmmount = 8
 SpawnPool = {
-Resource( "res://Scenes/Items/Compass.tscn" ): 6,
 Resource( "res://Scenes/Items/Toolbox.tscn" ): 10,
-Resource( "res://Scenes/Items/MapItem.tscn" ): 2,
-Resource( "res://Scenes/Items/PaintCan.tscn" ): 10,
 Resource( "res://Scenes/Items/LOG.tscn" ): 6,
-Resource( "res://Scenes/Items/BatteryEmpty.tscn" ): 8
+Resource( "res://Scenes/Items/BatteryEmpty.tscn" ): 8,
+Resource( "res://Scenes/Items/PaintCan.tscn" ): 10,
+Resource( "res://Scenes/Items/Compass.tscn" ): 6,
+Resource( "res://Scenes/Items/MapItem.tscn" ): 2
 }
 
 [node name="MeshInstance2" type="MeshInstance" parent="."]

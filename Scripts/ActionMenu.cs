@@ -225,8 +225,9 @@ public class ActionMenu : Control
 		ActionComponent Acomp = SelectedObj.GetNode<ActionComponent>("ActionComponent");
 		Vector3 actionpos = Acomp.GetActionPos(Play.GlobalTranslation);
 
-		
-		float mult =  GetViewport().Size.x / DViewport.GetInstance().Size.x;
+
+		Vector2 s = GetViewportRect().Size;
+		float mult =  s.x / DViewport.GetInstance().Size.x;
 		var screenpos = DViewport.GetInstance().GetCamera().UnprojectPosition(actionpos);
 
 		Play.GetNode<LoddedCharacter>("Pivot/Guy/Armature/Skeleton").HeadLookAt(actionpos);
@@ -245,7 +246,7 @@ public class ActionMenu : Control
 
 		RectPosition = new Vector2 (screenpos.x, screenpos.y +50) * mult;
 
-		if (screenpos < Vector2.Zero || screenpos > GetViewport().Size)
+		if (screenpos < Vector2.Zero || screenpos > s)
 			Stop();
 
 		if (PerformingAction)
@@ -294,8 +295,8 @@ public class ActionMenu : Control
 		if (@event.IsActionPressed("Select"))
 		{
 			var spacestate = GetTree().Root.World.DirectSpaceState;
-			float mult = OS.WindowSize.x / DViewport.GetInstance().Size.x;
-			Vector2 mousepos = DViewport.GetInstance().GetMousePosition() / mult;
+			float mult = GetViewportRect().Size.x / DViewport.GetInstance().Size.x;
+			Vector2 mousepos = GetViewport().GetMousePosition() / mult;
 			Camera cam = DViewport.GetInstance().GetCamera();
 			Vector3 rayor = cam.ProjectRayOrigin(mousepos);
 			Vector3 rayend = rayor + cam.ProjectRayNormal(mousepos) * 10000;

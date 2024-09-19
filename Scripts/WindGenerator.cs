@@ -204,7 +204,7 @@ public class WindGenerator : StaticBody
             }
         }
         float charrechargeamm = pl.GetCharacterBatteryCap() - pl.GetCurrentCharacterEnergy();
-        if (charrechargeamm > availableenergy)
+        if (availableenergy > charrechargeamm)
         {
             pl.RechargeCharacter(charrechargeamm);
             rechargeamm += charrechargeamm;

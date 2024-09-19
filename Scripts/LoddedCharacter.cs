@@ -127,9 +127,9 @@ public class LoddedCharacter : Skeleton
             }
         }
     }
-    public override void _PhysicsProcess(float delta)
+    public override void _Process(float delta)
     {
-        base._PhysicsProcess(delta);
+        base._Process(delta);
         int bone = FindBone("mixamorig_Head");
         if (GetBoneRest(bone) == headrotp.Transform)
             SetProcess(false);

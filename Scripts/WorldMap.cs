@@ -674,8 +674,6 @@ public class WorldMap : TileMap
 				if (pl.HasVehicle())
 				{
 					Vehicle veh = pl.GetVehicle();
-					
-					ileinf.RemoveVehicle(veh);
 					veh.ReparentVehicle(ileinfto.Island);
 					ileinfto.AddNewVehicle(veh);
 				}

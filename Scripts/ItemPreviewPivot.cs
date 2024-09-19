@@ -18,11 +18,6 @@ public class ItemPreviewPivot : Spatial
     {
         return Instance;
     }
-    public override void _PhysicsProcess(float delta)
-    {
-        base._PhysicsProcess(delta);
-        //Rotation = new Vector3(0,Rotation.y + 0.1f,0);
-    }
     public void Start(MeshInstance m)
     {
         Visible = true;
