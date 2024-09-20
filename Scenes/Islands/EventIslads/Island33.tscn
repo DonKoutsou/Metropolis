@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://Assets/Water/textures/post/waterplane_low_Whole.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=2]
@@ -11,35 +11,14 @@
 [ext_resource path="res://Scenes/Env_Assets/Rock8.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Env_Assets/Rock5.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Env_Assets/Rock2.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Assets/TerainTex/Rock029_2K-PNG/Rock029_2K-PNG_AmbientOcclusion.png" type="Texture" id=12]
-[ext_resource path="res://Assets/TerainTex/Rock029_2K-PNG/Rock029_2K-PNG_Color.png" type="Texture" id=13]
 [ext_resource path="res://Scenes/Env_Assets/Water.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Assets/TerainTex/Rock029_2K-PNG/Rock029_2K-PNG_NormalGL.png" type="Texture" id=15]
 [ext_resource path="res://Assets/CemetaryTemple/Cemetary_Temple.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/Systems/IslandNameTrigger.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scenes/Env_Assets/Rock1.tscn" type="PackedScene" id=18]
-[ext_resource path="res://Assets/TerainTex/Rock029_2K-PNG/Rock029_2K-PNG_Roughness.png" type="Texture" id=22]
 [ext_resource path="res://Scenes/Env_Assets/Rock4.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Assets/Materials/RockMat.tres" type="Material" id=24]
 [ext_resource path="res://Scenes/Env_Assets/Skampo.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Scenes/Env_Assets/Table.tscn" type="PackedScene" id=29]
-
-[sub_resource type="SpatialMaterial" id=44]
-flags_world_triplanar = true
-albedo_texture = ExtResource( 13 )
-roughness_texture = ExtResource( 22 )
-roughness_texture_channel = 4
-normal_enabled = true
-normal_scale = 1.0
-normal_texture = ExtResource( 15 )
-ao_enabled = true
-ao_light_affect = 1.0
-ao_texture = ExtResource( 12 )
-ao_on_uv2 = false
-ao_texture_channel = 0
-uv1_scale = Vector3( 0.001, 0.001, 0.001 )
-uv1_triplanar = true
-uv1_triplanar_sharpness = 1.0
 
 [sub_resource type="ConcavePolygonShape" id=9]
 data = PoolVector3Array( -400, 0, -24, -92.186, 0, 97.5273, -400, -0.0001, 400, 8.7139, 0, 198.153, 117.06, 0, 1.1611, 400, -0.0001, 400, -12, -0.0001, 400, -92.186, 0, 97.5273, 8.7139, 0, 198.153, 8.7139, 0, 198.153, 400, -0.0001, 400, -12, -0.0001, 400, 400, 0, 4, 400, -0.0001, 400, 117.06, 0, 1.1611, 400, 0.0001, -400, -8.887, 0, -164.383, -32, 0.0001, -400, 400, 0, 4, 24.7358, 0, -79.791, 400, 0.0001, -400, 8.7139, -306.452, 198.153, 8.7139, 0, 198.153, -92.186, -306.452, 97.5273, -92.186, -306.452, 97.5273, 8.7139, 0, 198.153, -92.186, 0, 97.5273, 8.7139, -306.452, 198.153, 117.06, -306.452, 1.1611, 8.7139, 0, 198.153, 8.7139, 0, 198.153, 117.06, -306.452, 1.1611, 117.06, 0, 1.1611, -8.887, -306.452, -164.383, -134.353, -306.452, -153.852, -8.887, 0, -164.383, -8.887, 0, -164.383, -134.353, -306.452, -153.852, -134.353, 0, -153.852, 117.06, -306.452, 1.1611, 24.7358, -306.452, -79.791, 117.06, 0, 1.1611, 117.06, 0, 1.1611, 24.7358, -306.452, -79.791, 24.7358, 0, -79.791, 24.7358, -306.452, -79.791, -8.887, -306.452, -164.383, 24.7358, 0, -79.791, 24.7358, 0, -79.791, -8.887, -306.452, -164.383, -8.887, 0, -164.383, -8.887, 0, -164.383, -134.353, 0, -153.852, -32, 0.0001, -400, -32, 0.0001, -400, -134.353, 0, -153.852, -400, 0.0001, -400, -400, 0, -24, -400, 0.0001, -400, -134.353, 0, -153.852, -92.186, 0, 97.5273, -400, 0, -24, -134.353, 0, -153.852, -92.186, 0, 97.5273, -12, -0.0001, 400, -400, -0.0001, 400, 400, 0, 4, 117.06, 0, 1.1611, 24.7358, 0, -79.791, 24.7358, 0, -79.791, -8.887, 0, -164.383, 400, 0.0001, -400, -92.186, 0, 97.5273, -134.353, 0, -153.852, -92.186, -306.452, 97.5273, -92.186, -306.452, 97.5273, -134.353, 0, -153.852, -134.353, -306.452, -153.852 )
@@ -169,13 +148,13 @@ radius = 2500.0
 [node name="Island" instance=ExtResource( 2 )]
 ImageID = 38
 IslandName = "Κοιμητήριο μηχανών"
+RotateIle = false
 
 [node name="Sea" parent="SeaBed" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 mesh = ExtResource( 1 )
-material/1 = SubResource( 44 )
 
-[node name="CollisionShape" parent="SeaBed" index="2"]
-transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, -37.18, 0 )
+[node name="CollisionShape" parent="SeaBed" index="1"]
 shape = SubResource( 9 )
 
 [node name="SoundMap" parent="." index="3"]

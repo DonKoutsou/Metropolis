@@ -1,9 +1,13 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Env_Assets/Portal.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Env_Assets/CylinderThingHuge.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Env_Assets/CylinderThing.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Building/BuildingDust2.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Building/BuildingDust.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Building/BuildingDust3.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Building/BuildingDust4.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Env_Assets/Rock2.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/Env_Assets/Rock3.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Assets/Building/SkyscraperMesh.tres" type="CubeMesh" id=16]
@@ -137,3 +141,15 @@ data = {
 
 [node name="Protal" parent="." index="13" instance=ExtResource( 2 )]
 transform = Transform( 0.301936, 0.180217, 0.936139, -0.524962, 0.851108, 0.00546992, -0.79577, -0.493089, 0.351587, -287.388, 14.021, 1218.79 )
+
+[node name="DestBuilding" parent="." index="14" instance=ExtResource( 5 )]
+transform = Transform( 0.854839, -0.323521, -0.405689, 0.518893, 0.532979, 0.668344, 0, -0.781836, 0.623484, 1954.55, -59.0162, 1887.46 )
+
+[node name="DestBuilding2" parent="." index="15" instance=ExtResource( 6 )]
+transform = Transform( 0.864985, 0.501798, 0, -0.489753, 0.844223, 0.217786, 0.109284, -0.188381, 0.975997, 549.605, -47.9098, -1734.92 )
+
+[node name="DestBuilding3" parent="." index="16" instance=ExtResource( 7 )]
+transform = Transform( 0.841944, -0.172358, -0.511295, 0.539565, 0.26895, 0.797832, 0, -0.947607, 0.319439, -2034.28, -76.1396, -214.783 )
+
+[node name="DestBuilding4" parent="." index="17" instance=ExtResource( 8 )]
+transform = Transform( 0.564823, 0.555634, 0.61012, -0.802499, 0.542112, 0.24922, -0.192278, -0.630386, 0.752092, -1223.26, -29.2974, 1722.79 )

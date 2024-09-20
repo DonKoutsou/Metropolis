@@ -200,3 +200,6 @@ transform = Transform( 0.207186, 0, 0.244738, 0, 0.32066, 0, -0.244738, 0, 0.207
 
 [node name="Rock4" parent="." index="33" instance=ExtResource( 15 )]
 transform = Transform( 112.489, -417.889, 7.1176, 417.593, 112.072, -19.7888, 17.263, 12.0102, 432.311, -1048.78, -519.807, -512.93 )
+
+[node name="DestBuilding18" parent="." index="34" instance=ExtResource( 3 )]
+transform = Transform( 0.484251, -0.292799, 0.824481, -0.0773304, 0.924329, 0.373678, -0.871505, -0.244711, 0.424965, -2750.69, -56.5914, -3231.38 )

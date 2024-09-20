@@ -9,6 +9,8 @@ func _SetData(data, HasData):
 	Alive = data["Alive"]
 	Talked = data["Talked"]
 	##LimbColors = data["LimbColors"]
+	if (data["OwnedVeh"] != null):
+		OwnedVeh = data["OwnedVeh"]
 	if (HasData):
 		CustomDataKeys = data["CustomDataKeys"]
 		CustomDataValues = data["CustomDataValues"]
@@ -22,3 +24,4 @@ export var Talked:bool
 ##export (Array, Color) var LimbColors = []
 export (Array, String) var CustomDataKeys = []
 export (Array, Resource) var CustomDataValues = []
+export var OwnedVeh:NodePath

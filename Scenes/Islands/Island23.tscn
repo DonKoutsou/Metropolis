@@ -1,9 +1,13 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Env_Assets/Rock4.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Env_Assets/Rock5.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Env_Assets/Portal.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Building/BuildingDust.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Building/BuildingDust2.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Building/BuildingDust3.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Building/BuildingDust4.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Env_Assets/Rock1.tscn" type="PackedScene" id=12]
 
 [sub_resource type="SpatialMaterial" id=13]
@@ -121,3 +125,27 @@ transform = Transform( 0.834936, 0.0265947, -0.549704, -0.319018, 0.83729, -0.44
 
 [node name="Protal2" parent="." index="15" instance=ExtResource( 4 )]
 transform = Transform( 0.24923, -0.296702, -0.921874, 0.760575, 0.649241, -0.00333357, 0.599508, -0.700324, 0.387475, -1668.21, 12.3903, 3110.36 )
+
+[node name="DestBuilding" parent="." index="16" instance=ExtResource( 5 )]
+transform = Transform( -0.00842425, 0.346556, 0.937991, -0.143467, 0.927901, -0.344117, -0.989619, -0.13747, 0.0419026, -2045.85, -57.4785, -1158.75 )
+
+[node name="DestBuilding2" parent="." index="17" instance=ExtResource( 6 )]
+transform = Transform( 0.478831, 0.149112, -0.865151, -0.297325, 0.954776, 0, 0.826026, 0.257231, 0.501511, 937.54, -86.4476, 10.0095 )
+
+[node name="DestBuilding3" parent="." index="18" instance=ExtResource( 7 )]
+transform = Transform( -0.331781, -0.743523, 0.580598, -0.804459, 0.544451, 0.237527, -0.492714, -0.38826, -0.778772, 162.497, -131.813, -2159.65 )
+
+[node name="DestBuilding4" parent="." index="19" instance=ExtResource( 8 )]
+transform = Transform( 0.8165, 0.455846, 0.354304, -0.577345, 0.644673, 0.501069, 0, -0.613679, 0.789556, -1967.49, -17.0839, -2810.95 )
+
+[node name="DestBuilding5" parent="." index="20" instance=ExtResource( 7 )]
+transform = Transform( 0.209848, -0.963313, 0.16731, 0.753215, 0.268382, 0.600531, -0.623402, 0, 0.781901, 1516.75, -58.2385, -2558.71 )
+
+[node name="DestBuilding6" parent="." index="21" instance=ExtResource( 7 )]
+transform = Transform( -0.592257, 0.673922, 0.441657, 0.704888, 0.167814, 0.689181, 0.390339, 0.719491, -0.574429, -1998.12, -31.5748, -164.79 )
+
+[node name="DestBuilding7" parent="." index="22" instance=ExtResource( 7 )]
+transform = Transform( -0.564761, 0.700073, -0.436969, 0.150947, 0.608194, 0.779304, 0.811332, 0.374161, -0.449159, 2768.09, -147.827, 748.213 )
+
+[node name="DestBuilding8" parent="." index="23" instance=ExtResource( 5 )]
+transform = Transform( 0.86615, 0.446732, -0.224086, -0.306992, 0.829368, 0.466804, 0.394385, -0.33553, 0.8555, 884.283, -44.1999, -1534.94 )

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/waterplane_low_Whole_Crater_Collision.obj-eb3668ed095bf8c3010e06f2abe91523.mesh"
+
+[deps]
+
+files=[ "res://.import/waterplane_low_Whole_Crater_Collision.obj-eb3668ed095bf8c3010e06f2abe91523.mesh" ]
+
+source_file="res://Assets/Water/textures/post/waterplane_low_Whole_Crater_Collision.obj"
+dest_files=[ "res://.import/waterplane_low_Whole_Crater_Collision.obj-eb3668ed095bf8c3010e06f2abe91523.mesh", "res://.import/waterplane_low_Whole_Crater_Collision.obj-eb3668ed095bf8c3010e06f2abe91523.mesh" ]
+
+[params]
+
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh_flags=4286
+generate_tangents=true
+vertex_cache_optimization=true
+octahedral_compression=true

@@ -1,9 +1,12 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Env_Assets/Rock3.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Clutter/Powerline/PowerLine.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Env_Assets/Rock9.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Building/BuildingDust2.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Building/BuildingDust3.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Building/BuildingDust.tscn" type="PackedScene" id=7]
 
 [sub_resource type="SpatialMaterial" id=447]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -101,6 +104,14 @@ __meta__ = {
 "apply_volumetrics": false
 }
 
+[node name="CharacterSpawnLocations" parent="." index="4"]
+Locations = PoolVector3Array( -3092.54, 1.901, 509.895 )
+Rotations = PoolVector3Array( 0, 3.069, 0 )
+
+[node name="VehicleSpawnLocation" parent="." index="5"]
+Locations = PoolVector3Array( -3070.96, 1.901, 496.278 )
+Rotations = PoolVector3Array( 0, -2.283, 0 )
+
 [node name="SoundMap" parent="." index="6"]
 mesh_library = SubResource( 461 )
 data = {
@@ -127,3 +138,24 @@ transform = Transform( 9.71765, 57.8688, -13.2575, 39.6905, 3.65765, 45.0584, 44
 
 [node name="Rock5" parent="." index="13" instance=ExtResource( 4 )]
 transform = Transform( -42.8702, 27.2125, 32.2584, 36.3535, 0.454193, 47.9291, 21.4372, 53.6495, -16.7682, -1748.56, -216.429, 1505.45 )
+
+[node name="DestBuilding" parent="." index="17" instance=ExtResource( 5 )]
+transform = Transform( 0.790095, 0.26162, 0.554351, -0.31434, 0.94931, 0, -0.526251, -0.174255, 0.832283, -776.628, -81.1908, -1012.78 )
+
+[node name="DestBuilding2" parent="." index="18" instance=ExtResource( 5 )]
+transform = Transform( -0.293781, -0.624502, 0.723664, -0.53293, 0.735498, 0.418364, -0.793522, -0.262755, -0.548891, 1564.97, -60.8503, 1404.96 )
+
+[node name="DestBuilding3" parent="." index="19" instance=ExtResource( 6 )]
+transform = Transform( 0.545294, -0.719562, 0.429983, 0.726755, 0.661444, 0.185251, -0.41771, 0.211476, 0.883627, -1284.77, -114.795, 1553.09 )
+
+[node name="DestBuilding4" parent="." index="20" instance=ExtResource( 7 )]
+transform = Transform( 0.665454, 0.326132, 0.671423, -0.44008, 0.897958, 0, -0.60291, -0.29548, 0.741074, -1492.89, -54.4169, -66.361 )
+
+[node name="DestBuilding5" parent="." index="21" instance=ExtResource( 7 )]
+transform = Transform( -0.342553, -0.717514, 0.60649, -0.700395, 0.625295, 0.34417, -0.626183, -0.306886, -0.71674, 1909.56, -19.7175, -2294.41 )
+
+[node name="DestBuilding6" parent="." index="22" instance=ExtResource( 7 )]
+transform = Transform( -0.312309, 0.165106, -0.935523, -0.139196, 0.966199, 0.216988, 0.939727, 0.197988, -0.278771, 389.117, -58.8229, -1356.14 )
+
+[node name="DestBuilding7" parent="." index="23" instance=ExtResource( 7 )]
+transform = Transform( -0.459177, 0, -0.888345, 0, 1, 0, 0.888345, 0, -0.459177, -3099.01, -46.6126, 479.706 )

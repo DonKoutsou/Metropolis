@@ -21,6 +21,8 @@ public class Character : KinematicBody
 
 	[Export]
 	float MaxEnergyAmmount = 100;
+	[Export]
+	public NodePath OwnedVeh = null;
 	protected float CurrentEnergy = 100;
 
 	protected SpotLight NightLight;
@@ -114,6 +116,9 @@ public class Character : KinematicBody
     }
 	public void ToggleNightLight(bool toggle)
 	{
+		if (!IsAlive())
+			return;
+			
 		if (toggle)
 			NightLight.LightEnergy = 0;
 		else
@@ -132,6 +137,7 @@ public class Character : KinematicBody
 	}
 	public virtual void Respawn()
 	{
+		ToggleNightLight(DayNight.IsDay());
 		m_balive = true;
 		IsUncon = false;
 		anim.ToggleIdle();
@@ -421,7 +427,7 @@ public class Character : KinematicBody
         Translation = info.Position;
 		CurrentEnergy = info.CurrentEnergy;
 		m_balive = info.Alive;
-
+		OwnedVeh = info.OwnedVeh;
 		GetNode<BaseDialogueScript>("DialogueScript").LoadSaveData(info.CustomData);
 
 		/*for (int i = 0; i < 6; i++)
@@ -465,11 +471,15 @@ public class CharacterInfo
 	public Dictionary<string, object> CustomData = new Dictionary<string, object>();
 	//public List<Color> LimbColors = new List<Color>();
 	public bool Talked = false;
+	public NodePath OwnedVeh;
+
+	//Called to fill the data
 	public void UpdateInfo(NPC it)
 	{
 		Name = it.Name;
 		Position = it.Translation;
 		SceneData = it.Filename;
+		OwnedVeh = it.OwnedVeh;
 		CurrentEnergy = it.GetCurrentCharacterEnergy();
 		Alive = it.IsAlive();
 		Talked = it.Talked;
@@ -487,6 +497,7 @@ public class CharacterInfo
 			LimbColors.Add(it.GetLimbColor((LimbType)i));
 		}*/
 	}
+	//Called to get data when saving
 	public Dictionary<string, object>GetPackedData(out bool HasData)
 	{
 		HasData = false;
@@ -497,7 +508,8 @@ public class CharacterInfo
 			{"SceneData", SceneData},
 			{"Energy", CurrentEnergy},
 			{"Alive", Alive},
-			{"Talked", Talked}
+			{"Talked", Talked},
+			{"OwnedVeh", OwnedVeh}
 		};
 		/*Color[] LimbColorsAr = new Color[6];
 		for (int i = 0; i < 6; i++)
@@ -522,6 +534,7 @@ public class CharacterInfo
 		}
 		return data;
 	}
+	//Called when loading data
     public void UnPackData(Resource data)
     {
         Position = (Vector3)data.Get("Position");
@@ -530,6 +543,7 @@ public class CharacterInfo
 		CurrentEnergy = (float)data.Get("Energy");
 		Alive = (bool)data.Get("Alive");
 		Talked = (bool)data.Get("Talked");
+		OwnedVeh = (NodePath)data.Get("OwnedVeh");
 		/*Godot.Color[] LimbCols = (Godot.Color[])data.Get("LimbColors");
 		for (int i = 0; i < 6; i++)
 		{

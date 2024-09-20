@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/SunMoonPivot.cs" type="Script" id=1]
+[ext_resource path="res://Assets/AllSkyFree_Sky_OvercastLow_Equirect.png" type="Texture" id=2]
 
 [sub_resource type="OpenSimplexNoise" id=91]
 octaves = 1
@@ -54,10 +55,10 @@ height = 28000.0
 
 [sub_resource type="SpatialMaterial" id=88]
 flags_do_not_receive_shadows = true
-flags_disable_ambient_light = true
 params_specular_mode = 4
 params_cull_mode = 1
 params_depth_draw_mode = 2
+albedo_texture = ExtResource( 2 )
 
 [node name="SunMoonPivot" type="Spatial"]
 script = ExtResource( 1 )
@@ -73,7 +74,6 @@ cast_shadow = 0
 mesh = SubResource( 86 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-visible = false
 cast_shadow = 0
 mesh = SubResource( 87 )
 material/0 = SubResource( 88 )

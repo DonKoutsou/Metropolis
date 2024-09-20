@@ -15,6 +15,8 @@ public class Island : Spatial
 	public string IslandName = "No_Name";
 	[Export]
 	public bool UnlockName = false;
+	[Export]
+	bool RotateIle = true;
 
 	List<Port> Ports = new List<Port>();
 
@@ -66,6 +68,13 @@ public class Island : Spatial
 			bi.QueueFree();
 			
 		Translation = SpawnGlobalLocation;
+
+		if (!RotateIle)
+		{
+			SpawnRotation = 0;
+			return;
+		}
+			
 
 		Rotate(new Vector3(0, 1, 0), Mathf.Deg2Rad(SpawnRotation));
 

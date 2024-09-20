@@ -261,9 +261,9 @@ PossibleFurni = [ ExtResource( 16 ) ]
 PossibleDeco = [ ExtResource( 24 ), ExtResource( 23 ) ]
 FurnitureAmmount = 14
 SpawnPool = {
-Resource( "res://Scenes/Items/Book3.tscn" ): 10,
+Resource( "res://Scenes/Items/Book2.tscn" ): 10,
 Resource( "res://Scenes/Items/Book1.tscn" ): 10,
-Resource( "res://Scenes/Items/Book2.tscn" ): 10
+Resource( "res://Scenes/Items/Book3.tscn" ): 10
 }
 
 [node name="Spatial" type="Spatial" parent="."]

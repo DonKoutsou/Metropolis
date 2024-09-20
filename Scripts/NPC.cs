@@ -19,8 +19,7 @@ public class NPC : Character
 	//string RestDialogue = "TestTimeline";
 	[Export]
 	NodePath DialogueColaborator = null;
-	[Export]
-	public NodePath OwnedVeh = null;
+	
 
 	public bool Talked;
 
@@ -106,10 +105,10 @@ public class NPC : Character
 			par = par.GetParent();
 		}
 		
-		WorldMap.GetInstance().GetIleInfo(ile).RemoveCharacter(this);
+		
 		Island ile = (Island)par;
 		ile.UnRegisterChild(this);
-
+		
 		QueueFree();
 	}
 	public void InitialSpawn()
