@@ -1,0 +1,76 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scripts/MemoryButton.cs" type="Script" id=1]
+[ext_resource path="res://Scenes/Systems/Puzzles/MemoryButtonMat.tres" type="Material" id=2]
+
+[sub_resource type="CubeMesh" id=2]
+size = Vector3( 0.25, 0.25, 0.25 )
+
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 0.11848, 0.121393, 0.119772 )
+
+[sub_resource type="Animation" id=7]
+resource_name = "Flash"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material/0:emission_energy")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.258212, 0.499987 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 16.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "FlashStatic"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material/0:emission_energy")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 16.0 ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material/0:emission_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[node name="MemoryPuzzleButton" type="MeshInstance"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.179228, 0 )
+mesh = SubResource( 2 )
+skeleton = NodePath("../..")
+material/0 = ExtResource( 2 )
+script = ExtResource( 1 )
+
+[node name="Area" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+shape = SubResource( 6 )
+
+[node name="ButtonAnims" type="AnimationPlayer" parent="."]
+anims/Flash = SubResource( 7 )
+anims/FlashStatic = SubResource( 9 )
+anims/RESET = SubResource( 8 )
+
+[connection signal="input_event" from="Area" to="." method="ButtonHovered"]

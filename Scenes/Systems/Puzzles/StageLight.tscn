@@ -1,0 +1,102 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scripts/StageLight.cs" type="Script" id=1]
+[ext_resource path="res://Scenes/Systems/Puzzles/StageLightMat.tres" type="Material" id=2]
+
+[sub_resource type="CylinderMesh" id=4]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.5
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material/0:emission_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:material/0:emission")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 0.745098, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "StagePass"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material/0:emission_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 16.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:material/0:emission")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 1, 0.00784314, 1 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "StageSemiPass"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material/0:emission_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 16.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:material/0:emission")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 0.745098, 0, 1 ) ]
+}
+
+[node name="StageLight" type="MeshInstance"]
+mesh = SubResource( 4 )
+material/0 = ExtResource( 2 )
+script = ExtResource( 1 )
+
+[node name="StageLightAnim" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 7 )
+anims/StagePass = SubResource( 6 )
+anims/StageSemiPass = SubResource( 8 )
