@@ -151,7 +151,10 @@ scale_curve = SubResource( 69 )
 
 [sub_resource type="SpatialMaterial" id=61]
 flags_transparent = true
+flags_do_not_receive_shadows = true
+flags_disable_ambient_light = true
 params_diffuse_mode = 4
+params_blend_mode = 1
 params_billboard_mode = 3
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
@@ -168,16 +171,18 @@ transform = Transform( 0.024, 0, 0, 0, 0.024, 6.77112e-09, 0, -6.77112e-09, 0.02
 
 [node name="Skeleton" parent="Armature" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 5.68434e-14, 0, -2.84217e-14, 1, -0.314196, 5.03759e-08, -0.178556 )
+bones/3/bound_children = [ NodePath("InstrumentAtatchment") ]
+bones/6/bound_children = [ NodePath("BoneAttachment") ]
 script = ExtResource( 18 )
 
 [node name="HeadRot2Pivot" type="Spatial" parent="Armature/Skeleton" index="0"]
-transform = Transform( -1, 0, -8.74228e-08, 7.93163e-16, 1, -9.16518e-09, 8.74228e-08, -2.27374e-13, -1, -4.32676, 280.148, 21.7769 )
+transform = Transform( -1, 0, -8.74228e-08, 8.66816e-16, 1, -1.00367e-08, 8.74228e-08, -2.27374e-13, -1, -3.64576, 280.525, 20.8859 )
 
 [node name="HeadRot2" type="Spatial" parent="Armature/Skeleton/HeadRot2Pivot" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, -2.84217e-14, 0, 2.84217e-14, 1, 0, 0, 0 )
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton" index="1"]
-transform = Transform( 0.997182, -0.0706897, -0.0251154, 0.0668487, 0.989239, -0.130145, 0.0340452, 0.1281, 0.991175, -3.01335, 264.975, 13.0997 )
+transform = Transform( 0.997152, -0.064964, -0.038318, 0.0597914, 0.990552, -0.123417, 0.0459737, 0.120775, 0.991614, -2.33728, 265.286, 12.3245 )
 bone_name = "mixamorig_Head"
 
 [node name="HeadPivot" type="Spatial" parent="Armature/Skeleton/BoneAttachment" index="0"]
@@ -213,7 +218,7 @@ update_rotation = false
 update_scale = false
 
 [node name="InstrumentAtatchment" type="BoneAttachment" parent="Armature/Skeleton" index="2"]
-transform = Transform( 0.998224, -0.0320118, -0.0502372, 0.0304078, 0.999013, -0.0323751, 0.051224, 0.03079, 0.998212, 0.305827, 212.985, 0.61638 )
+transform = Transform( 0.997986, -0.02641, -0.0576747, 0.024681, 0.99923, -0.030488, 0.0584355, 0.0290032, 0.997869, 0.751803, 213.16, 0.0950274 )
 bone_name = "mixamorig_Spine1"
 
 [node name="PlayingAtatchment" type="RemoteTransform" parent="Armature/Skeleton/InstrumentAtatchment" index="0"]

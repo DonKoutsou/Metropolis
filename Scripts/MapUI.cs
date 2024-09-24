@@ -5,7 +5,7 @@ public class MapUI : Control
 {
     [Signal]
     public delegate void TileHovered();
-    static bool IsMouseInMapBool = false;
+    //static bool IsMouseInMapBool = false;
 
     public bool IsOpen = false;
 
@@ -28,8 +28,6 @@ public class MapUI : Control
     {
         if (IsOpen == toggle)
             return;
-
-        
         if (toggle)
         {
             OnMapOpened();
@@ -39,18 +37,6 @@ public class MapUI : Control
             OnMapClosed();
         }
     }
-    public static bool IsMouseInMap()
-    {
-        return IsMouseInMapBool;
-    }       
-    private void OnMouseEntered()
-    {
-        IsMouseInMapBool = true;
-    }
-    private void OnMouseLeft()
-    {
-        IsMouseInMapBool = false;
-    }
     public void OnMapOpened()
     {
         PlayerUI.OnMenuToggled(true);
@@ -58,8 +44,6 @@ public class MapUI : Control
         GetNode<Panel>("MapGridPanel").GetNode<Control>("PlayerIconPivot").GetNode<AnimationPlayer>("PlayerIconAnim").Play("Blinking");
         Show();
         IsOpen = true;
-       
-        
     }
     public void OnMapClosed()
     {

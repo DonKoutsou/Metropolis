@@ -1076,8 +1076,6 @@ bus = "UI"
 stream = ExtResource( 19 )
 bus = "UI"
 
-[connection signal="mouse_entered" from="MapGridPanel" to="." method="OnMouseEntered"]
-[connection signal="mouse_exited" from="MapGridPanel" to="." method="OnMouseLeft"]
 [connection signal="TileHovered" from="MapGridPanel/MapGrid" to="." method="MapTileHovered"]
 [connection signal="button_down" from="Panel5/RefreshCoords" to="." method="UpdateCoordinates"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="OnAnimFinished"]

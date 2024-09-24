@@ -187,7 +187,6 @@ public class MapGrid : GridContainer
             RectPosition = new Vector2(pos.x, pos.y);
             PlayerIconPivot.RectPosition = RectPosition;
 		}
-        Vector2 scale = RectScale;
         if (@event.IsActionPressed("ZoomIn"))
 		{
 			if (RectScale.x < MaxZoomScale)
@@ -377,19 +376,15 @@ public class MapGrid : GridContainer
             }
         }
     }
-    public void SetIslandVisited(IslandInfo ile, Player pl)
+    public void SetIslandVisited(IslandInfo ile)
     {
-        if (!pl.GetCharacterInventory().HasItemOfType(ItemName.MAP))
-            return;
         ile.Island.SetVisited();
         TextureRect child = MapIleList[ile.Position].GetNode<TextureRect>("TextureRect");
         child.Visible = true;
     }
-    public void UnlockIslandName(IslandInfo ile, Player pl)
+    public void UnlockIslandName(IslandInfo ile)
     {
-        if (!pl.GetCharacterInventory().HasItemOfType(ItemName.MAP))
-            return;
-        ile.Island.UnlockName = true;
+        //ile.Island.UnlockName = true;
         MapTile child = MapIleList[ile.Position];
         child.IslandName = ile.SpecialName;
         Panel pan = child.GetNode<TextureRect>("TextureRect").GetNode<Panel>("Panel");
@@ -402,11 +397,11 @@ public class MapGrid : GridContainer
         child.Visible = true;
     }
     //public void UpdateIleInfo(Vector2 index, IleType type, bool HasPort, List<Vector2> portpos, float rot = 0, ImageTexture img = null, string name = null)
-    public void UpdateIleInfo(Vector2 index, bool Visited, bool HasPort, List<PortInfo> portpos, float rot = 0, ImageTexture img = null, string name = null)
+    public void UpdateIleInfo(Vector2 index, bool Visited, float rot = 0, ImageTexture img = null, string name = null)
     {
         MapTile child = MapIleList[index];
 
-        for (int i = 0; i < 3; i++)
+        /*for (int i = 0; i < 3; i++)
         {
             TextureRect t = child.GetNode<TextureRect>("TextureRect").GetNode<TextureRect>("PortTex" + i);
             if (portpos.Count - 1 < i)
@@ -424,7 +419,7 @@ public class MapGrid : GridContainer
             if (!portpos[i].Visited)
                 t.Visible = false;
             //t.RectPosition = Vector2.Zero;
-        }
+        }*/
         /*if (type == IleType.ENTRANCE)
         {
             child.GetNode<TextureRect>("TextureRect").GetNode<Panel>("SignPanel").Visible = true;
@@ -475,6 +470,11 @@ public class MapGrid : GridContainer
         //c.a = thing;
         //fogp.Modulate = c;
         child.IslandName = name;
+        if (name != "No_Name")
+        {
+            Panel pan2 = child.GetNode<TextureRect>("TextureRect").GetNode<Panel>("Panel");
+            pan2.Visible = true;
+        }
         
         Panel pan = child.GetNode<TextureRect>("TextureRect").GetNode<Panel>("Panel");
         pan.Visible = name != "No_Name";

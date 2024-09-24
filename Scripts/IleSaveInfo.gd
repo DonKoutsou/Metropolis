@@ -18,9 +18,9 @@ func _SetData(data):
 	Rotation = data["Rotation"]
 	KeepInstance = data["KeepInstance"]
 	Visited = data["Visited"]
-	HasPort = data["HasPort"]
-	if (HasPort) :
-		Ports = data["Ports"]
+	##HasPort = data["HasPort"]
+	##if (HasPort) :
+		##Ports = data["Ports"]
 
 
 export var Type:int = 0
@@ -36,8 +36,8 @@ export (Array, Resource)  var Breakables
 export (Array, Resource)  var Vehicles
 export (Array, Resource)  var Items
 export (Array, Resource) var Characters
-export var HasPort :bool
-export (Array, Resource) var Ports
+##export var HasPort :bool
+##export (Array, Resource) var Ports
 export var Rotation:float
 export var KeepInstance:bool
 export var Visited:bool

@@ -298,7 +298,7 @@ public class WorldMap : TileMap
 			if (info.UnlockName)
 				name = info.SpecialName;
 			//MapGrid.GetInstance().UpdateIleInfo(info.Position, info.Type, info.HasPort, info.Ports, - info.RotationToSpawn, tex, info.SpecialName);
-			grid.UpdateIleInfo(info.Position, info.Visited, info.HasPort, info.Ports, - info.RotationToSpawn, tex, name);
+			grid.UpdateIleInfo(info.Position, info.Visited, - info.RotationToSpawn, tex, name);
 		}
 
 		grid.FrameMap();
@@ -588,19 +588,18 @@ public class WorldMap : TileMap
 		ilei.SetInfo(ile);
 
 		IleToSave = null;
-		CallDeferred("DespawnIle", ilei.Island, ilei.KeepInstance);
+
+		DespawnIle(ilei.Island, ilei.KeepInstance);
+
 		//CallDeferred("AddMapData", ilei.Position, ilei.Type, ilei.HasPort, ilei.Ports, ilei.RotationToSpawn, ile.ImageID, ilei.SpecialName);
-		string name = "No_Name";
-		if (ile.UnlockName)
-			name = ile.IslandName;
-		AddMapData(ilei.Position, ilei.Visited, ilei.HasPort, ilei.Ports, ilei.RotationToSpawn, ile.ImageID, name);
-	}
-	void AddMapData(Vector2 position, bool Visited, bool HasPort, List<PortInfo> Ports, float RotationToSpawn, int imageId, string name = null)
-	{
+		string name = ile.IslandName;
+		//if (ile.UnlockName)
+			//name = ile.IslandName;
+
 		ImageTexture tex = new ImageTexture();
-		tex.CreateFromImage(IslandImageHolder.GetInstance().Images[imageId]);
-		//MapGrid.GetInstance().UpdateIleInfo(position, Type, HasPort, Ports, - RotationToSpawn, tex, name);
-		((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid().UpdateIleInfo(position, Visited, HasPort, Ports, - RotationToSpawn, tex, name);
+		tex.CreateFromImage(IslandImageHolder.GetInstance().Images[ile.ImageID]);
+
+		((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid().UpdateIleInfo(ilei.Position, ilei.Visited, - ilei.RotationToSpawn, tex, name);
 	}
 	void DespawnIle(Island ile, bool KeepInstance)
 	{
@@ -765,7 +764,7 @@ public class WorldMap : TileMap
 		for (int i = 0; i < Eventscenestospawn.Count(); i++)
 		{
 			int SpawnIndex = RandomContainer.Next(0, OrderedCells.Count);
-			while (RandomisedEntryID.Contains(SpawnIndex) || SpawnIndex > OrderedCells.Count * 0.63f || SpawnIndex < 9)
+			while (RandomisedEntryID.Contains(SpawnIndex) || SpawnIndex > OrderedCells.Count * 0.63f || SpawnIndex < 9 || GetCell((int)OrderedCells[SpawnIndex].x, (int)OrderedCells[SpawnIndex].y) != 1)
 			{
 				SpawnIndex = RandomContainer.Next(0, OrderedCells.Count);
 			}

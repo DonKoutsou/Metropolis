@@ -147,6 +147,7 @@ radius = 2500.0
 [node name="Island" instance=ExtResource( 2 )]
 ImageID = 4
 IslandName = "Υπόγεια φυλακή"
+UnlockName = true
 
 [node name="Particles" type="Particles" parent="." index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -118.02, 0 )

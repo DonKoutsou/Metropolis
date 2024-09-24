@@ -92,6 +92,7 @@ extents = Vector3( 4000, 4000, 4000 )
 
 [node name="Island" instance=ExtResource( 1 )]
 script = ExtResource( 11 )
+Visited = false
 IsEventWall = false
 
 [node name="SoundMap" parent="." index="3"]

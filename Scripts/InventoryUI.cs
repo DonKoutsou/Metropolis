@@ -9,8 +9,8 @@ public class InventoryUI : Control
     //string NoMapText = "Δεν έχω χάρτη...";
     [Export]
     string NoCompassText = "Δεν έχω πυξήδα...";
-    [Export]
-    string NoSelectionOnDropText = "Πρέπει να διαλέξω κάτι για να αφήσω...";
+    //[Export]
+    //string NoSelectionOnDropText = "Πρέπει να διαλέξω κάτι για να αφήσω...";
 
     Inventory Inv;
 

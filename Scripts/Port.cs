@@ -87,13 +87,13 @@ public class Port : Area
 
             if (v.IsPlayerOwned())
             {
-                if (!Visited)
-                {
-                    Island ile = (Island)GetParent();
-                    Vector2 pos = WorldMap.GetInstance().GlobalToMap(ile.GlobalTranslation);
-                    ((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid().SetPortVissible(pos, new Vector2(Translation.x, Translation.z));
+                //if (!Visited)
+                //{
+                    //Island ile = (Island)GetParent();
+                    //Vector2 pos = WorldMap.GetInstance().GlobalToMap(ile.GlobalTranslation);
+                    //((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid().SetPortVissible(pos, new Vector2(Translation.x, Translation.z));
                     Visited = true;
-                }
+                //}
                 
                 /*GlobalJobManager jobm = GlobalJobManager.GetInstance();
                 if (jobm.HasJobAssigned())
@@ -115,13 +115,13 @@ public class Port : Area
         }
         if (body is Player pl)
         {
-            if (!Visited)
-            {
-                Island ile = (Island)GetParent();
-                Vector2 pos = WorldMap.GetInstance().GlobalToMap(ile.GlobalTranslation);
-                ((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid().SetPortVissible(pos, new Vector2(Translation.x, Translation.z));
+            //if (!Visited)
+            //{
+                //Island ile = (Island)GetParent();
+                //Vector2 pos = WorldMap.GetInstance().GlobalToMap(ile.GlobalTranslation);
+                //((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid().SetPortVissible(pos, new Vector2(Translation.x, Translation.z));
                 Visited = true;
-            }
+            //}
         }
        
     }

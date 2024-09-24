@@ -282,6 +282,7 @@ radius = 384.813
 [node name="Island" instance=ExtResource( 5 )]
 ImageID = 26
 IslandName = "Καταυλισμός"
+UnlockName = true
 
 [node name="SoundMap" parent="." index="3"]
 mesh_library = SubResource( 18 )

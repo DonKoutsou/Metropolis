@@ -255,6 +255,7 @@ type = 0
 KeepInstance = true
 ImageID = 22
 IslandName = "Μητρόπολη"
+Visited = false
 
 [node name="RemoteTransform" type="RemoteTransform" parent="SeaBed" index="2"]
 remote_path = NodePath("../../Planks")

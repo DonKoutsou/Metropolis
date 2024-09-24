@@ -14,13 +14,11 @@ public class Island : Spatial
 	[Export]
 	public string IslandName = "No_Name";
 	[Export]
-	public bool UnlockName = false;
-	[Export]
 	bool RotateIle = true;
+	[Export]
+	bool Visited = true;
 
 	List<Port> Ports = new List<Port>();
-
-	string IslandSpecialName = null;
 
 	public Vector3 SpawnGlobalLocation;
 
@@ -37,7 +35,7 @@ public class Island : Spatial
 	List<NPC> Characters = new List<NPC>();
 
 	List<Breakable> Breakables = new List<Breakable>();
-	bool Visited = false;
+	
 	
 	
 	public void SetVisited()
@@ -50,7 +48,7 @@ public class Island : Spatial
 	}
 	public string GetIslandSpecialName()
 	{
-		return LocalisationHolder.GetString(IslandSpecialName);
+		return LocalisationHolder.GetString(IslandName);
 	}
 	public override void _Ready()
 	{
@@ -109,7 +107,8 @@ public class Island : Spatial
 	{
 		SpawnGlobalLocation = SpawnPos;
 		SpawnRotation = SpawnRot;
-		IslandSpecialName = SpecialName;
+		if (SpecialName != "No_Name")
+			IslandName = SpecialName;
 	}
 	public IleType GetIslandType()
 	{
@@ -138,7 +137,7 @@ public class Island : Spatial
 				}
 			}
 		}
-		foreach (Port p in Ports)
+		/*foreach (Port p in Ports)
 		{
 			foreach(PortInfo Pnfo in data.Ports)
 			{
@@ -147,7 +146,7 @@ public class Island : Spatial
 					p.Visited = Pnfo.Visited;
 				}
 			}
-		}
+		}*/
 		foreach (WindGenerator gen in Generators)
 		{
 			foreach(WindGeneratorInfo GenInfo in data.Generators)
@@ -540,7 +539,8 @@ public class Island : Spatial
 		if (body is Player pl)
 		{
 			IslandInfo info = WorldMap.GetInstance().GetIleInfo(this);
-			((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid().SetIslandVisited(info, pl);
+			if (pl.GetCharacterInventory().HasItemOfType(ItemName.MAP))
+				((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid().SetIslandVisited(info);
 			//if (IslandName != "No_Name")
 			//{
 			//	pl.GetTalkText().Talk("Αναγνωρίζω αυτό το μέρος...");
@@ -550,13 +550,13 @@ public class Island : Spatial
 	private void IslandNameUnlocked(Node body)
 	{
 		GetNode<Spatial>("IslandNameTrigger").QueueFree();
-		if(UnlockName)
-			return;
+		//if(UnlockName)
+			//return;
 		if (body is Player pl)
 		{
 			IslandInfo info = WorldMap.GetInstance().GetIleInfo(this);
-			((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid().UnlockIslandName(info, pl);
-
+			if (pl.GetCharacterInventory().HasItemOfType(ItemName.MAP))
+				((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid().UnlockIslandName(info);
 		}
 	}
 	#if DEBUG
@@ -801,8 +801,8 @@ public class IslandInfo
 	public Island Island;
 	public IleType Type;
 	public Vector2 Position;
-	public bool HasPort;
-	public List<PortInfo> Ports = new List<PortInfo>();
+	//public bool HasPort;
+	//public List<PortInfo> Ports = new List<PortInfo>();
 	public string SpecialName = null;
 	public bool UnlockName = false;
 	public PackedScene IleType;
@@ -841,9 +841,9 @@ public class IslandInfo
         RotationToSpawn = (float)data.Get("Rotation");
 		KeepInstance = (bool)data.Get("KeepInstance");
 		Visited = (bool)data.Get("Visited");
-		HasPort = (bool)data.Get("HasPort");
+		//HasPort = (bool)data.Get("HasPort");
 
-		if (HasPort)
+		/*if (HasPort)
 		{
 			Godot.Collections.Array PortData = ( Godot.Collections.Array)data.Get("Ports");
 			for (int i  = 0; i < PortData.Count; i++)
@@ -852,7 +852,7 @@ public class IslandInfo
 				info.UnPackData((Resource)PortData[i]);
 				Ports.Add(info);
 			}
-		}
+		}*/
 		
 
         Godot.Collections.Array HouseData = ( Godot.Collections.Array)data.Get("Houses");
@@ -907,7 +907,7 @@ public class IslandInfo
     }
 	public Dictionary<string, object>GetPackedData()
 	{
-		GDScript PortSaveScript = GD.Load<GDScript>("res://Scripts/PortSaveInfo.gd");
+		/*GDScript PortSaveScript = GD.Load<GDScript>("res://Scripts/PortSaveInfo.gd");
 		Resource[] PortInfoobjects = new Resource[Ports.Count];
 
 
@@ -917,7 +917,7 @@ public class IslandInfo
 			Resource PortInfor = (Resource)PortSaveScript.New();
 			PortInfor.Call("_SetData", Ports[i].GetPackedData());
 			PortInfoobjects[i] = PortInfor;
-		}
+		}*/
 		
 		//Houses
 		GDScript HouseSaveScript = GD.Load<GDScript>("res://Scripts/HouseSaveInfo.gd");
@@ -1026,8 +1026,8 @@ public class IslandInfo
 			{"Characters", CharacterInfoobjects},
 			{"KeepInstance", KeepInstance},
 			{"Visited", Visited},
-			{"HasPort", HasPort},
-			{"Ports", PortInfoobjects}
+			//{"HasPort", HasPort},
+			//{"Ports", PortInfoobjects}
         };
 
 		return data;
@@ -1039,11 +1039,11 @@ public class IslandInfo
 		Type = Ile.GetIslandType();
 		KeepInstance = Ile.KeepInstance;
 		Visited = Ile.IsVisited();
-		HasPort = Ile.HasPort();
+		//HasPort = Ile.HasPort();
 		if (SpecialName == "No_Name")
 		{
 			SpecialName = Ile.IslandName;
-			UnlockName = Ile.UnlockName;
+			//UnlockName = Ile.UnlockName;
 		}
 			
 		//SpecialName = Ile.IslandSpecialName;
@@ -1070,12 +1070,12 @@ public class IslandInfo
 		AddChars(Chars);
 		AddBreakables(Breaks);
 
-		if (HasPort)
+		/*if (HasPort)
 		{
 			List <Port> Ports;
 			Ile.GetPorts(out Ports);
 			AddPorts(Ports);
-		}
+		}*/
 	}
 	public void AddNewVehicle(Vehicle veh)
 	{
@@ -1159,7 +1159,7 @@ public class IslandInfo
 	}
 	public void UpdateInfo(Island island)
 	{
-		UnlockName = island.UnlockName;
+		//UnlockName = island.UnlockName;
 		Visited = island.IsVisited();
 		List<House> hous;
 		island.GetHouses(out hous);
@@ -1395,7 +1395,7 @@ public class IslandInfo
 			Characters.Add(info);
 		}
 	}
-	public void AddPorts(List<Port> PortsToAdd)
+	/*public void AddPorts(List<Port> PortsToAdd)
 	{
 		for (int i = 0; i < PortsToAdd.Count; i++)
 		{
@@ -1403,7 +1403,7 @@ public class IslandInfo
 			info.SetInfo(new Vector2 (PortsToAdd[i].Translation.x, PortsToAdd[i].Translation.z), PortsToAdd[i].Visited);
 			Ports.Add(info);
 		}
-	}
+	}*/
 	public bool IsIslandSpawned()
 	{
 		if (Island == null)

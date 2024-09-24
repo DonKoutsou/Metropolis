@@ -106,6 +106,7 @@ data = PoolVector3Array( -2.0435, 0.3357, 2.5076, -2.2508, 0.3322, 2.4025, -2.13
 
 [node name="Island" instance=ExtResource( 1 )]
 ImageID = 20
+IslandName = "1η πτώση"
 RotateIle = false
 
 [node name="Sea" parent="SeaBed" index="0"]

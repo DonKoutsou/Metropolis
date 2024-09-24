@@ -38,7 +38,7 @@ public class CameraZoomPivot : Position3D
 	float ZoomStage = 1;
 	public override void _Input(InputEvent @event)
 	{
-		if (MapUI.IsMouseInMap())
+		if ((bool)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP).Get("IsOpen"))
 			return;
 		if (@event.IsActionPressed("ZoomOut") && ZoomStage < zoomSteps)
 		{

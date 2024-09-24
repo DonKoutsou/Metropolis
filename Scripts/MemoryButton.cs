@@ -3,8 +3,6 @@ using System;
 
 public class MemoryButton : MeshInstance
 {
-    [Export]
-    int ButtonNum = 0;
     [Signal]
     public delegate void OnPressed(MemoryButton button);
     public bool Enabled = false;
