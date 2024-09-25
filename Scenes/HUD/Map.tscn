@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Scripts/MapGrid.cs" type="Script" id=1]
 [ext_resource path="res://Fonts/Play-Bold.ttf" type="DynamicFontData" id=2]
@@ -12,7 +12,6 @@
 [ext_resource path="res://UIThemes/Panel_Black_RightCorners.tres" type="StyleBox" id=10]
 [ext_resource path="res://Assets/MapIcons/Border.png" type="Texture" id=11]
 [ext_resource path="res://UIThemes/Panel_Black_BottomCorner.tres" type="StyleBox" id=12]
-[ext_resource path="res://Assets/MapIcons/grid.png" type="Texture" id=13]
 [ext_resource path="res://Assets/Compass/compass.png" type="Texture" id=14]
 [ext_resource path="res://UIThemes/Panel_Black_TopCorner.tres" type="StyleBox" id=15]
 [ext_resource path="res://UIThemes/Panel_Black_LeftCorners.tres" type="StyleBox" id=16]
@@ -101,12 +100,72 @@ corner_radius_top_right = 1
 corner_radius_bottom_right = 1
 corner_radius_bottom_left = 1
 
+[sub_resource type="Shader" id=1]
+code = "// Based on: https://www.shadertoy.com/view/Ms23DR
+shader_type canvas_item;
+vec2 curve(vec2 uv)
+{
+	uv = (uv - 0.5) * 2.1;
+	uv *= 1.1;	
+	uv.x *= 1.0 + pow((abs(uv.y) / 5.0), 2.0);
+	uv.y *= 1.0 + pow((abs(uv.x) / 4.0), 2.0);
+	uv  = (uv / 2.0) + 0.5;
+	uv =  uv *0.92 + 0.04;
+	return uv;
+}
+void fragment(  )
+{
+	vec2 iResolution = 1.0 / SCREEN_PIXEL_SIZE;
+    vec2 q = FRAGCOORD.xy / iResolution.xy;
+    vec2 uv = q;
+	//uv = curve( uv );
+    vec3 oricol = texture( SCREEN_TEXTURE, vec2(q.x,q.y) ).xyz;
+    vec3 col;
+	float x =  sin(0.3*TIME+uv.y*21.0)*sin(0.7*TIME+uv.y*29.0)*sin(0.3+0.33*TIME+uv.y*31.0)*0.0025;
+
+    col.r = texture(SCREEN_TEXTURE,vec2(x+uv.x+0.001,uv.y+0.001)).x+0.05;
+    col.g = texture(SCREEN_TEXTURE,vec2(x+uv.x+0.000,uv.y-0.002)).y+0.05;
+    col.b = texture(SCREEN_TEXTURE,vec2(x+uv.x-0.002,uv.y+0.000)).z+0.05;
+    col.r += 0.08*texture(SCREEN_TEXTURE,0.75*vec2(x+0.025, -0.027)+vec2(uv.x+0.001,uv.y+0.001)).x;
+    col.g += 0.05*texture(SCREEN_TEXTURE,0.75*vec2(x+-0.022, -0.02)+vec2(uv.x+0.000,uv.y-0.002)).y;
+    col.b += 0.08*texture(SCREEN_TEXTURE,0.75*vec2(x+-0.02, -0.018)+vec2(uv.x-0.002,uv.y+0.000)).z;
+
+    col = clamp(col*0.6+0.4*col*col*1.0,0.0,1.0);
+
+    float vig = (0.0 + 1.0*16.0*uv.x*uv.y*(1.0-uv.x)*(1.0-uv.y));
+	col *= vec3(pow(vig,1));
+
+    col *= vec3(0.65,2.15,0.65);
+	col *= 2.8;
+
+	float scans = clamp( 0.35+0.35*sin(3.5*TIME+uv.y*iResolution.y*1.5), 0.0, 1.0);
+	
+	float s = pow(scans,1.7);
+	col = col*vec3( 0.4+0.7*s) ;
+
+    col *= 1.0+0.01*sin(110.0*TIME);
+	if (uv.x < 0.0 || uv.x > 1.0)
+		col *= 0.0;
+	if (uv.y < 0.0 || uv.y > 1.0)
+		col *= 0.0;
+	
+	col*=1.0-0.65*vec3(clamp((mod(FRAGCOORD.x, 2.0)-1.0)*2.0,0.0,1.0));
+	
+    float comp = smoothstep( 0.1, 0.9, sin(TIME) );
+ 
+
+    COLOR = vec4(col,1.0);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+
 [sub_resource type="StyleBoxFlat" id=42]
-bg_color = Color( 0.160784, 0.160784, 0.160784, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
+bg_color = Color( 0.215686, 0.215686, 0.215686, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
 border_color = Color( 0, 0, 0, 1 )
 border_blend = true
 anti_aliasing = false
@@ -118,6 +177,16 @@ outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=51]
+size = 24
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 2 )
+
+[sub_resource type="Theme" id=52]
+default_font = SubResource( 51 )
 
 [sub_resource type="Animation" id=48]
 resource_name = "MapClose"
@@ -302,18 +371,6 @@ tracks/14/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( -1920, 0 ) ]
 }
-tracks/15/type = "value"
-tracks/15/path = NodePath("MapGridPanel/Panel:modulate")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
-}
 
 [sub_resource type="Animation" id=49]
 resource_name = "MapOpen"
@@ -497,18 +554,6 @@ tracks/14/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( -1920, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ) ]
-}
-tracks/15/type = "value"
-tracks/15/path = NodePath("MapGridPanel/Panel:modulate")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/keys = {
-"times": PoolRealArray( 0, 1.3, 1.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=20]
@@ -706,7 +751,7 @@ tracks/15/keys = {
 "values": [ Vector2( 1920, 1080 ) ]
 }
 tracks/16/type = "value"
-tracks/16/path = NodePath("MapGridPanel/Panel:modulate")
+tracks/16/path = NodePath("MapClose:playing")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/imported = false
@@ -715,39 +760,17 @@ tracks/16/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 0, 0, 0, 0 ) ]
-}
-tracks/17/type = "value"
-tracks/17/path = NodePath("MapClose:playing")
-tracks/17/interp = 1
-tracks/17/loop_wrap = true
-tracks/17/imported = false
-tracks/17/enabled = true
-tracks/17/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
 "values": [ false ]
 }
-
-[sub_resource type="DynamicFont" id=51]
-size = 24
-outline_size = 2
-outline_color = Color( 0, 0, 0, 1 )
-use_filter = true
-font_data = ExtResource( 2 )
-
-[sub_resource type="Theme" id=52]
-default_font = SubResource( 51 )
 
 [node name="MapUI" type="Control"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -2880.0
+margin_left = -960.0
 margin_top = -540.0
-margin_right = -960.0
+margin_right = 960.0
 margin_bottom = 540.0
 mouse_filter = 2
 script = ExtResource( 3 )
@@ -812,6 +835,8 @@ anims/Blinking = SubResource( 28 )
 anims/RESET = SubResource( 30 )
 
 [node name="TextureRect3" type="TextureRect" parent="MapGridPanel"]
+visible = false
+self_modulate = Color( 0.760784, 0.760784, 0.760784, 1 )
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -866,23 +891,9 @@ mouse_filter = 2
 theme = SubResource( 26 )
 custom_styles/panel = SubResource( 27 )
 
-[node name="TextureRect2" type="TextureRect" parent="MapGridPanel"]
-visible = false
+[node name="TextureRect2" type="ColorRect" parent="MapGridPanel"]
 self_modulate = Color( 1, 1, 1, 0.168627 )
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -928.0
-margin_top = -904.0
-margin_right = 929.0
-margin_bottom = 904.0
-mouse_filter = 2
-texture = ExtResource( 13 )
-expand = true
-
-[node name="Panel" type="Panel" parent="MapGridPanel"]
-modulate = Color( 0, 0, 0, 0 )
+material = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -914,9 +925,9 @@ margin_bottom = 20.0
 custom_styles/panel = ExtResource( 12 )
 
 [node name="Label2" type="Label" parent="Panel2/PanelContainer"]
-margin_left = 2.0
+margin_left = 1.0
 margin_top = 3.0
-margin_right = 23.0
+margin_right = 24.0
 margin_bottom = 18.0
 custom_fonts/font = SubResource( 25 )
 text = "Y"
@@ -953,9 +964,9 @@ margin_bottom = 11.0
 custom_styles/panel = ExtResource( 10 )
 
 [node name="Label2" type="Label" parent="Panel3/PanelContainer"]
-margin_left = 2.0
+margin_left = 1.0
 margin_top = 3.0
-margin_right = 24.0
+margin_right = 25.0
 margin_bottom = 18.0
 custom_fonts/font = SubResource( 25 )
 text = "X"
@@ -991,6 +1002,28 @@ icon = ExtResource( 5 )
 icon_align = 1
 expand_icon = true
 
+[node name="IleName" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -14.5
+margin_right = 71.0
+margin_bottom = 14.5
+theme = SubResource( 52 )
+text = "Μητρόπ"
+
+[node name="Panel" type="Panel" parent="IleName"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -4.0
+margin_top = -4.0
+margin_right = 4.0
+margin_bottom = 4.0
+custom_styles/panel = ExtResource( 17 )
+
 [node name="Panel4" type="Panel" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1009,9 +1042,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -927.5
+margin_left = -929.0
 margin_top = -540.0
-margin_right = 931.5
+margin_right = 930.0
 margin_bottom = -510.0
 rect_clip_content = true
 mouse_filter = 1
@@ -1045,28 +1078,6 @@ playback_speed = 2.0
 anims/MapClose = SubResource( 48 )
 anims/MapOpen = SubResource( 49 )
 anims/RESET = SubResource( 20 )
-
-[node name="IleName" type="Label" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -20.0
-margin_top = -14.5
-margin_right = 20.0
-margin_bottom = 14.5
-theme = SubResource( 52 )
-text = "Μητρόπ"
-
-[node name="Panel" type="Panel" parent="IleName"]
-show_behind_parent = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -4.0
-margin_top = -4.0
-margin_right = 4.0
-margin_bottom = 4.0
-custom_styles/panel = ExtResource( 17 )
 
 [node name="MapOpen" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 18 )

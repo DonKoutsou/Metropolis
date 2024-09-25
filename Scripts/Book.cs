@@ -33,6 +33,23 @@ public class Book : Item
     {
         return LocalisationHolder.GetString(BookEnumTranslator.TranslateBookEnum(Series)) + "\n " + LocalisationHolder.GetString("Τόμος") + " : " + VolumeNumber.ToString();;
     }
+    public override void InputData(ItemInfo data)
+	{
+		base.InputData(data);
+
+        int cap = (int)data.CustomData["VolumeNumber"];
+        SetVoluemeNumber(cap);
+        BookVolumeHolder.OnVolumeFound(GetSeries(), cap);
+
+	}
+    public override void GetCustomData(out string[] Keys, out object[] Values)
+	{
+		Keys = new string[1];
+		Values = new object[1];
+        
+        Keys[0] = "VolumeNumber";
+		Values[0] = GetVolumeNumber();
+	}
 }
 public class BookVolumeHolder
 {
@@ -131,6 +148,7 @@ public class BookVolumeHolder
         }
         return volume;
     }
+    
 }
 public class BookEnumTranslator
 {

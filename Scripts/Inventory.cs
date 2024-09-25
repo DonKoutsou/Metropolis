@@ -254,25 +254,10 @@ public class Inventory : Spatial
             parent.RemoveChild(item);
 
         
+
+        
         //currentweight += itW;
-        if (item is Instrument || item.ItemType == ItemName.WEAPON)
-        {
-            if (!CharacterOwner.HasEquippedItem())
-                CharacterOwner.EquipItem(item);
-        }
-        else
-        {
-            AddChild(item);
-            item.Hide();
-            item.GetNode<CollisionShape>("CollisionShape").SetDeferred("disabled",true);
-
-            //if (item is Limb limb && !CharacterOwner.HasLimbOfType(limb.GetLimbType()))
-            if (item is Limb limb && !IsLimbSlotFilled(limb.GetSlotType()))
-            {
-                EquipLimp(limb);
-            }
-        }
-
+        
         WorldMap map = WorldMap.GetInstance();
         if (map != null)
         {
@@ -280,14 +265,42 @@ public class Inventory : Spatial
             ileinfo.RemoveItem(item);
             ileinfo.Island.UnRegisterChild(item);
         }
-        
-
+        if (item is Instrument || item.ItemType == ItemName.WEAPON)
+        {
+            if (!CharacterOwner.HasEquippedItem())
+            {
+                CharacterOwner.EquipItem(item);
+                InventoryContents.Add(item);
+            }
+            else
+            {
+                PlaceInInventory(item);
+            }
+        }
+        else if (item is DrahmaStack d)
+        {
+            Item[] drahmas = d.DecomposeStack();
+            for (int i = 0; i < drahmas.Count(); i++)
+            {
+                Item drah = drahmas[i];
+                PlaceInInventory(drah);
+            }
+        }
+        else
+        {
+            PlaceInInventory(item);
+            //if (item is Limb limb && !CharacterOwner.HasLimbOfType(limb.GetLimbType()))
+            if (item is Limb limb && !IsLimbSlotFilled(limb.GetSlotType()))
+            {
+                EquipLimp(limb);
+            }
+        }
         //if (item.GetItemType() == (int)ItemName.ROPE)
         //{
         //    MeshInstance rope = pl.GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Spatial>("rig").GetNode<Skeleton>("Skeleton").GetNode<BoneAttachment>("BoneAttachment2").GetNode<MeshInstance>("Rope");
         //    rope.Show();
         //}
-        InventoryContents.Add(item);
+        
         item.OnItemPickedUp();
 
         if (ShowNotif)
@@ -298,6 +311,13 @@ public class Inventory : Spatial
         //ui.UpdateInventory();
         return true;
     }
+    private void PlaceInInventory(Item i)
+    {
+        AddChild(i);
+        i.Hide();
+        i.GetNode<CollisionShape>("CollisionShape").SetDeferred("disabled",true);
+        InventoryContents.Add(i);
+}
     public void ChangeEquippedItem(Item it)
     {
         Item currentIt = CharacterOwner.GetEquippedItem();

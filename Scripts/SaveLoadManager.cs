@@ -90,45 +90,13 @@ public class SaveLoadManager : Control
 		{
 			Resource Inventorysave = (Resource)InventorySaveGD.New();
 			Dictionary<string, object> Itemdata = new Dictionary<string, object>();
-			string[] Keys = new string[4];
-			object[] Values = new object[4];
+			string[] Keys;
+			object[] Values;
 			Itemdata.Add("SceneData", it.Filename);
-			bool HasData = false;
-			if (it is Battery bat)
-			{
-				Keys[0] = "CurrentEnergy";
-				Values[0] = bat.GetCurrentCap();
-				//Keys[1] = "CurrentCondition";
-				//Values[1] = bat.GetCondition();
-				HasData = true;
-			}
-			/*else if (it is Toolbox box)
-			{
-				Keys[0] = "CurrentSupplies";
-				Values[0] = box.GetCurrentSupplyAmmount();
-				HasData = true;
-			}
-			else if (it is Limb l)
-			{
-				Keys[0] = "LimbColor";
-				Values[0] = l.GetColor();
-				HasData = true;
-			}*/
-			else if (it is PaintCan p)
-			{
-				Keys[0] = "CanColor";
-				Values[0] = p.GetColor();
-				HasData = true;
-			}
-			else if (it is Book b)
-			{
-				Keys[0] = "VolumeNumber";
-				Values[0] = b.GetVolumeNumber();
-				HasData = true;
-			}
+			it.GetCustomData(out Keys, out Values);
 			Itemdata.Add("CustomDataKeys", Keys);
 			Itemdata.Add("CustomDataValues", Values);
-			Inventorysave.Call("_SetData", Itemdata, HasData);
+			Inventorysave.Call("_SetData", Itemdata);
 			Inventorydata[v] = Inventorysave;
 			v ++;
 		}

@@ -294,9 +294,7 @@ public class WorldMap : TileMap
 			tex.CreateFromImage(IslandImageHolder.GetInstance().Images[info.ImageIndex]);
 			//tex.Load(ile.Image);
 
-			string name = "No_Name";
-			if (info.UnlockName)
-				name = info.SpecialName;
+			string name = info.SpecialName;
 			//MapGrid.GetInstance().UpdateIleInfo(info.Position, info.Type, info.HasPort, info.Ports, - info.RotationToSpawn, tex, info.SpecialName);
 			grid.UpdateIleInfo(info.Position, info.Visited, - info.RotationToSpawn, tex, name);
 		}

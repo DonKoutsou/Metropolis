@@ -1,9 +1,9 @@
 class_name InventoryItemSaveInfo
 extends Resource
 
-func _SetData(data, HasData):
+func _SetData(data):
 	SceneData = data["SceneData"]
-	if HasData:
+	if (CustomDataKeys.size() > 0):
 		CustomDataKeys = data["CustomDataKeys"]
 		CustomDataValues = data["CustomDataValues"]
 

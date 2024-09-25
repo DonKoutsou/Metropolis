@@ -202,7 +202,7 @@ public class Player : Character
 	bool ExpressedNoBatteries = true;
 	bool ExpressedLowBattery = false;
 
-	float ProcedD = 0.5f;
+	float ProcedD = 0.1f;
 
 	//Used for checking batteries and recharging character
 	public override void _Process(float delta)
@@ -214,7 +214,7 @@ public class Player : Character
 		ProcedD -= delta;
 		if (ProcedD > 0)
 			return;
-		ProcedD = 0.5f;
+		ProcedD = 0.1f;
 
 		base._Process(delta);
 		//check for idling to player instrument

@@ -1,11 +1,11 @@
 class_name ItemSaveInfo
 extends Resource
 
-func _SetData(data, HasData):
+func _SetData(data):
 	Name = data["Name"]
 	Position = data["Position"]
 	SceneData = data["SceneData"]
-	if (HasData) :
+	if (CustomDataKeys.size() > 0) :
 		CustomDataKeys = data["CustomDataKeys"]
 		CustomDataValues = data["CustomDataValues"]
 

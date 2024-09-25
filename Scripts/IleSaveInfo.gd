@@ -6,7 +6,7 @@ func _SetData(data):
 	Pos = data["Pos"]
 	Scene = data["Scene"]
 	SpecialName = data["SpecialName"]
-	UnlockName = data["UnlockName"]
+	##UnlockName = data["UnlockName"]
 	ImageIndex = data["ImageIndex"]
 	Houses = data["Houses"]
 	Furnitures = data["Furnitures"]
@@ -27,7 +27,7 @@ export var Type:int = 0
 export var Pos:Vector2 = Vector2.ZERO
 export var Scene:PackedScene
 export var SpecialName: String
-export var UnlockName: bool
+##export var UnlockName: bool
 export var ImageIndex:int = 0
 export (Array, Resource) var Houses
 export (Array, Resource) var Furnitures

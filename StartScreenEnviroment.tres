@@ -51,4 +51,4 @@ glow_bloom = 1.0
 glow_bicubic_upscale = true
 adjustment_enabled = true
 adjustment_contrast = 0.91
-adjustment_saturation = 0.82
+adjustment_saturation = 0.59

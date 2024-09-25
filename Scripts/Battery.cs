@@ -60,5 +60,20 @@ public class Battery : Item
         return LocalisationHolder.GetString(ItemDesc) + " \n " + LocalisationHolder.GetString("Φόρτωση") + ": " + (int)CurrentEnergy + "/" + Capacity;
        // return ItemDesc + " \n Capacity: " + (int)CurrentEnergy + "/" + Capacity + "\n Condition " + (int)condition + "/" + 100;
     }
+    public override void InputData(ItemInfo data)
+	{
+		base.InputData(data);
 
+        float cap = (float)data.CustomData["CurrentEnergy"];
+        SetCurrentCap(cap);
+
+	}
+    public override void GetCustomData(out string[] Keys, out object[] Values)
+	{
+		Keys = new string[1];
+		Values = new object[1];
+        
+        Keys[0] = "CurrentEnergy";
+		Values[0] = GetCurrentCap();
+	}
 }

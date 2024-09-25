@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scenes/Items/DrahmaStack.cs" type="Script" id=1]
+[ext_resource path="res://Assets/Drachma/M_Drachma.material" type="Material" id=2]
+[ext_resource path="res://Assets/Drachma/Drachma.obj" type="ArrayMesh" id=3]
+[ext_resource path="res://Assets/Drachma/DrachmaStackIcon.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=6]
+
+[sub_resource type="CylinderShape" id=1]
+height = 0.054156
+radius = 0.367012
+
+[node name="Item" type="RigidBody" groups=["Interactables"]]
+collision_layer = 16
+collision_mask = 36
+mode = 1
+mass = 0.0346939
+linear_damp = 1.22
+angular_damp = 1.22
+script = ExtResource( 1 )
+ItemIcon = ExtResource( 4 )
+ItemName = "Δραχμή"
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0.0897251 )
+material_override = ExtResource( 2 )
+mesh = ExtResource( 3 )
+script = ExtResource( 6 )
+LOD0 = ExtResource( 3 )
+LOD1 = ExtResource( 3 )
+HideIfNoLod = true
+
+[node name="MeshInstance3" type="MeshInstance" parent="."]
+transform = Transform( 0.196165, -0.0389804, 0, 0.0385721, 0.19411, 0.0288712, -0.00562706, -0.0283176, 0.197905, -0.165326, 0.0436975, -0.124923 )
+material_override = ExtResource( 2 )
+mesh = ExtResource( 3 )
+script = ExtResource( 6 )
+LOD0 = ExtResource( 3 )
+LOD1 = ExtResource( 3 )
+HideIfNoLod = true
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+transform = Transform( -0.174063, -0.0340078, 0.0924426, 0.0383502, -0.196289, 0, 0.0907272, 0.017726, 0.177354, 0.245574, 0.0827288, 0.0128706 )
+material_override = ExtResource( 2 )
+mesh = ExtResource( 3 )
+script = ExtResource( 6 )
+LOD0 = ExtResource( 3 )
+LOD1 = ExtResource( 3 )
+HideIfNoLod = true
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0228063, 0 )
+shape = SubResource( 1 )
+
+[node name="ActionComponent" parent="." instance=ExtResource( 5 )]
+ActionDistance = 5.0

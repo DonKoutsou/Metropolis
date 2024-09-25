@@ -596,7 +596,7 @@ public class Island : Spatial
 			rayend.y = -5; 
 
 			var rayar = spacestate.IntersectRay(rayor, rayend, new Godot.Collections.Array { this }, MoveLayer);
-			Color color = new Color(r: 0, g: 0, b: 0, a: 0);
+			Color color = new Color(r: 0.83f, g: 0.7f, b: 0.49f, a: 0);
 			if (rayar.Count == 0)
 			{
 				seapix.Add(new Vector2(col, row));
@@ -644,10 +644,11 @@ public class Island : Spatial
 				}*/
 				else
 				{
-					Vector3 pos = (Vector3)rayar["position"];
-					float height = pos.y;
-					float hNorm = Mathf.Clamp(height, 0, 2000) / 2000;
-					color = new Color(r: 0.83f, g: 0.7f, b: 0.49f, a: 1).LinearInterpolate(new Color(r: 0.66f, g: 0.57f, b: 0.42f, a: 1), hNorm);
+					//Vector3 pos = (Vector3)rayar["position"];
+					//float height = pos.y;
+					//float hNorm = Mathf.Clamp(height, 0, 1000) / 1000;
+					//color = new Color(r: 0.83f, g: 0.7f, b: 0.49f, a: 1).LinearInterpolate(new Color(r: 0.66f, g: 0.57f, b: 0.42f, a: 1), hNorm);
+					color = new Color(r: 0.83f, g: 0.7f, b: 0.49f, a: 1);
 				}
 			}
 			im.Lock();
@@ -769,7 +770,9 @@ public class Island : Spatial
 		res = new Vector2((int)Resolution, (int)Resolution);
 		
 		im = new Image();
+
 		im.Create((int)res.x, (int)res.y, true, Godot.Image.Format.Rgba8);
+
 		row = 0;
 		col = 0;
         mult = ilesize/res.x;
@@ -804,7 +807,7 @@ public class IslandInfo
 	//public bool HasPort;
 	//public List<PortInfo> Ports = new List<PortInfo>();
 	public string SpecialName = null;
-	public bool UnlockName = false;
+	//public bool UnlockName = false;
 	public PackedScene IleType;
 	public int ImageIndex = 0;
 	public List<HouseInfo> Houses = new List<HouseInfo>();
@@ -835,7 +838,7 @@ public class IslandInfo
         Type = (IleType)data.Get("Type");
         Position = (Vector2)data.Get("Pos");
 		SpecialName = (string)data.Get("SpecialName");
-		UnlockName = (bool)data.Get("UnlockName");
+		//UnlockName = (bool)data.Get("UnlockName");
         IleType = (PackedScene)data.Get("Scene");
 		ImageIndex = (int)data.Get("ImageIndex");
         RotationToSpawn = (float)data.Get("Rotation");
@@ -976,9 +979,8 @@ public class IslandInfo
 		for (int i = 0; i < Items.Count; i ++)
 		{
 			Resource ItemInfo = (Resource)ItemSaveScript.New();
-			bool hasData;
-			Dictionary<string, object> packeddata = Items[i].GetPackedData(out hasData);
-			ItemInfo.Call("_SetData", packeddata, hasData);
+			Dictionary<string, object> packeddata = Items[i].GetPackedData();
+			ItemInfo.Call("_SetData", packeddata);
 			ItemInfoobjects[i] = ItemInfo;
 		}
 		//data.Add("Items", ItemInfoobjects);
@@ -1001,9 +1003,8 @@ public class IslandInfo
 		for (int i = 0; i < Characters.Count; i ++)
 		{
 			Resource CharInfor = (Resource)CharSaveScript.New();
-			bool hasdata;
-			var dat = Characters[i].GetPackedData(out hasdata);
-			CharInfor.Call("_SetData", dat, hasdata);
+			var dat = Characters[i].GetPackedData();
+			CharInfor.Call("_SetData", dat);
 			CharacterInfoobjects[i] = CharInfor;
 		}
 		//data.Add("Characters", CharacterInfoobjects);
@@ -1013,7 +1014,7 @@ public class IslandInfo
             { "Type", Type },
             { "Pos", Position },
 			{ "SpecialName", SpecialName},
-			{ "UnlockName", UnlockName},
+			//{ "UnlockName", UnlockName},
 			{"Scene", IleType},
 			{"ImageIndex", ImageIndex},
 			{"Rotation", RotationToSpawn},
@@ -1040,11 +1041,9 @@ public class IslandInfo
 		KeepInstance = Ile.KeepInstance;
 		Visited = Ile.IsVisited();
 		//HasPort = Ile.HasPort();
-		if (SpecialName == "No_Name")
-		{
-			SpecialName = Ile.IslandName;
+
+		SpecialName = Ile.IslandName;
 			//UnlockName = Ile.UnlockName;
-		}
 			
 		//SpecialName = Ile.IslandSpecialName;
 		List<House> hous;
@@ -1124,7 +1123,7 @@ public class IslandInfo
 	{
 		for(int i = 0; i < Characters.Count; i++)
 		{
-			if (Characters[i].Name == ch.GetParent().Name)
+			if (Characters[i].Name == ch.Name)
 			{
 				CharacterInfo info = Characters[i];
 				Characters.Remove(info);

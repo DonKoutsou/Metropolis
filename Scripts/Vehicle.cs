@@ -172,8 +172,6 @@ public class Vehicle : RigidBody
 	}
 	public void DespawnVeh()
 	{
-		
-
 		GetParent().QueueFree();
 		Node par = GetParent();
 		while (!(par is Island))

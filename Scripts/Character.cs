@@ -498,9 +498,8 @@ public class CharacterInfo
 		}*/
 	}
 	//Called to get data when saving
-	public Dictionary<string, object>GetPackedData(out bool HasData)
+	public Dictionary<string, object>GetPackedData()
 	{
-		HasData = false;
 		Dictionary<string, object> data = new Dictionary<string, object>()
 		{
 			{"Position", Position},
@@ -519,7 +518,6 @@ public class CharacterInfo
 		data.Add("LimbColors", LimbColorsAr);*/
 		if (CustomData.Count > 0)
 		{
-			HasData = true;
 			string[] CustomDataKeys = new string[CustomData.Count];
 			object[] CustomDataValues = new object[CustomData.Count];
 			int i = 0;

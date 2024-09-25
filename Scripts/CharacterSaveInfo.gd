@@ -1,7 +1,7 @@
 class_name CharacterSaveInfo
 extends Resource
 
-func _SetData(data, HasData):
+func _SetData(data):
 	Name = data["Name"]
 	Position = data["Position"]
 	SceneData = data["SceneData"]
@@ -11,7 +11,7 @@ func _SetData(data, HasData):
 	##LimbColors = data["LimbColors"]
 	if (data["OwnedVeh"] != null):
 		OwnedVeh = data["OwnedVeh"]
-	if (HasData):
+	if (CustomDataKeys.size() > 0):
 		CustomDataKeys = data["CustomDataKeys"]
 		CustomDataValues = data["CustomDataValues"]
 

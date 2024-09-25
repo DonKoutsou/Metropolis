@@ -59,6 +59,10 @@ public class Furniture : StaticBody
 			bat.SetCurrentCap(0);
 			//bat.SetCurrentCondition(RandomContainer.Next(0, 100));
 		}
+		if (itemToDrop is DrahmaStack d)
+		{
+			d.SetAmmount(RandomContainer.Next(3, 8));
+		}
 	}
 	public bool HasItem()
 	{
@@ -112,6 +116,12 @@ public class Furniture : StaticBody
 			{
 				RespawnItem(GlobalItemCatalogue.GetInstance().GetItemByName(info.item));
 			}
+			else
+			{
+				Searched = true;
+				PlayerSearchAnim();
+			}
+				
 		}
 		else
 			PlayerSearchAnim();

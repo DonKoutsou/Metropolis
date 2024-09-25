@@ -2,6 +2,6 @@
 
 [resource]
 params_cull_mode = 2
-albedo_color = Color( 0.690196, 0.592157, 0.435294, 1 )
+albedo_color = Color( 0.756863, 0.584314, 0.376471, 1 )
 roughness_texture_channel = 4
 uv1_scale = Vector3( 4, 4, 4 )

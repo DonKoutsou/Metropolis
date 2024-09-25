@@ -45,4 +45,21 @@ public class PaintCan : Item
     {
         return "Χρώμα :" + LimbRandomColorProvider.TranslateColor(CanColor) + "\n" + LocalisationHolder.GetString(ItemDesc);
     }
+
+    public override void InputData(ItemInfo data)
+	{
+		base.InputData(data);
+
+        Color cap = (Color)data.CustomData["CanColor"];
+	    SetColor(cap);
+
+	}
+    public override void GetCustomData(out string[] Keys, out object[] Values)
+	{
+		Keys = new string[1];
+		Values = new object[1];
+        
+        Keys[0] = "CanColor";
+		Values[0] = GetColor();
+	}
 }

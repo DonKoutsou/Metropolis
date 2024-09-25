@@ -19,7 +19,7 @@
 [ext_resource path="res://Scripts/CameraAnimationPlayer.cs" type="Script" id=35]
 
 [sub_resource type="Curve" id=165]
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.211191 ), 0.59819, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.5 ), 0.59819, 0.0, 0, 0 ]
 
 [sub_resource type="CylinderShape" id=166]
 height = 7.20584

@@ -24,6 +24,12 @@ public class Item : RigidBody
 	[Export]
 	public bool RegisterOnIsland = true;
 
+	public virtual void GetCustomData(out string[] Keys, out object[] Values)
+	{
+		Keys = new string[0];
+		Values = new object[0];
+	}
+
 	public virtual string GetItemName()
 	{
 		return ItemName;
@@ -110,38 +116,10 @@ public class Item : RigidBody
     {
         return false;
     }
-	public void InputData(ItemInfo data)
+	public virtual void InputData(ItemInfo data)
 	{
 		Translation = data.Position;
 		Name = data.Name;
-		if (this is Battery battery)
-		{
-			float cap = (float)data.CustomData["CurrentEnergy"];
-			battery.SetCurrentCap(cap);
-			//float cond = (float)data.CustomData["CurrentCondition"];
-			//battery.SetCurrentCondition(cond);
-		}
-		/*else if (this is Toolbox box)
-		{
-			float cap = (float)data.CustomData["CurrentSupplies"];
-			box.SetCurrentSupplies(cap);
-		}
-		else if (this is Limb limb)
-		{
-			Color cap = (Color)data.CustomData["LimbColor"];
-			limb.SetColor(cap);
-		}*/
-		else if (this is PaintCan Can)
-		{
-			Color cap = (Color)data.CustomData["CanColor"];
-			Can.SetColor(cap);
-		}
-		else if (this is Book b)
-		{
-			int cap = (int)data.CustomData["VolumeNumber"];
-			b.SetVoluemeNumber(cap);
-			BookVolumeHolder.OnVolumeFound(b.GetSeries(), cap);
-		}
 	}
 
 }
@@ -157,49 +135,22 @@ public class ItemInfo
 		Name = it.Name;
 		Position = it.Translation;
 		SceneData = it.Filename;
-		if (it is Battery bat)
+
+		string[] Keys;
+		object[] Values;
+
+		it.GetCustomData(out Keys,out Values);
+
+		if (Keys.Count() > 0)
 		{
-			if (CustomData.ContainsKey("CurrentEnergy"))
-				CustomData["CurrentEnergy"] = bat.GetCurrentCap();
-			else
-				CustomData.Add("CurrentEnergy", bat.GetCurrentCap());
-			//if (CustomData.ContainsKey("CurrentCondition"))
-				//CustomData["CurrentCondition"] = bat.GetCondition();
-			//else
-				//CustomData.Add("CurrentCondition", bat.GetCondition());
-		}
-		/*else if (it is Toolbox box)
-		{
-			if (CustomData.ContainsKey("CurrentSupplies"))
-				CustomData["CurrentSupplies"] = box.GetCurrentSupplyAmmount();
-			else
-				CustomData.Add("CurrentSupplies", box.GetCurrentSupplyAmmount());
-		}
-		else if (it is Limb l)
-		{
-			if (CustomData.ContainsKey("LimbColor"))
-				CustomData["LimbColor"] = l.GetColor();
-			else
-				CustomData.Add("LimbColor", l.GetColor());
-		}*/
-		else if (it is PaintCan p)
-		{
-			if (CustomData.ContainsKey("CanColor"))
-				CustomData["CanColor"] = p.GetColor();
-			else
-				CustomData.Add("CanColor", p.GetColor());
-		}
-		else if (it is Book b)
-		{
-			if (CustomData.ContainsKey("VolumeNumber"))
-				CustomData["VolumeNumber"] = b.GetVolumeNumber();
-			else
-				CustomData.Add("VolumeNumber", b.GetVolumeNumber());
+			for (int i = 0; i < Keys.Count(); i++)
+			{
+				CustomData.Add(Keys[i], Values[i]);
+			}
 		}
 	}
-	public Dictionary<string, object>GetPackedData(out bool HasData)
+	public Dictionary<string, object>GetPackedData()
 	{
-		HasData = false;
 		Dictionary<string, object> data = new Dictionary<string, object>()
 		{
 			{"Position", Position},
@@ -208,7 +159,6 @@ public class ItemInfo
 		};
 		if (CustomData.Count > 0)
 		{
-			HasData = true;
 			string[] CustomDataKeys = new string[CustomData.Count];
 			object[] CustomDataValues = new object[CustomData.Count];
 			int i = 0;
