@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Tool2.obj-06d0088c8592ad7692f934bd340a53e5.mesh"
+
+[deps]
+
+files=[ "res://.import/Tool2.obj-06d0088c8592ad7692f934bd340a53e5.mesh" ]
+
+source_file="res://Assets/Lock/Tool2.obj"
+dest_files=[ "res://.import/Tool2.obj-06d0088c8592ad7692f934bd340a53e5.mesh", "res://.import/Tool2.obj-06d0088c8592ad7692f934bd340a53e5.mesh" ]
+
+[params]
+
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh_flags=4286
+generate_tangents=true
+vertex_cache_optimization=true
+octahedral_compression=true

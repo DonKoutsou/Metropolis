@@ -13,11 +13,20 @@ public class WindGenerator : StaticBody
     AnimationPlayer anim2;
     AnimationPlayer anim3;
     static Random rand = new Random(69420);
+    [Export]
+    bool CanBeLocked = true;
+
+    bool Locked = true;
 
     [Export]
     bool Auto = false;
     [Export]
     bool HasInternals = false;
+
+    public bool IsLocked()
+    {
+        return Locked;
+    }
 
     public float GetCurrentEnergy()
     {
@@ -111,6 +120,17 @@ public class WindGenerator : StaticBody
                 
         }*/
     }
+    public void InitialSpawn()
+    {
+        if (CanBeLocked)
+		{
+			int l = RandomContainer.Next(0, 2);
+			if (l == 0)
+				Locked = true;
+			else
+				Locked = false;
+		}
+    }
     public void CollectEnergy(float windstr)
     {
         float energy = EnergyPerWindStreangth * (windstr/100);
@@ -166,8 +186,25 @@ public class WindGenerator : StaticBody
         else
             GetNode<MeshInstance>("MeshInstance2").MaterialOverlay = null;
     }
+    public void Unlocked(bool resault)
+	{
+		PuzzleManager pman = (PuzzleManager)PlayerUI.GetInstance().GetUI(PlayerUIType.PUZZLE);
+		pman.Disconnect("PuzzleResault", this, "Unlocked");
+		if (resault)
+		{
+			Locked = false;
+			DoAction(Player.GetInstance());
+		}
+	}
     public void DoAction(Player pl)
 	{
+        if (Locked)
+		{
+			PuzzleManager pman = (PuzzleManager)PlayerUI.GetInstance().GetUI(PlayerUIType.PUZZLE);
+			pman.Connect("PuzzleResault", this, "Unlocked");
+			pman.StartPuzzle(PuzzleTypes.CODE);
+			return;
+		}
         List<Item> batteries;
         ItemName[] types = {ItemName.BATTERY};
         pl.GetCharacterInventory().GetItemsByType(out batteries, types);
@@ -262,6 +299,7 @@ public class WindGenerator : StaticBody
             hours += 24;
         }
 		CurrentEnergy = Math.Min(info.CurrentEnergy + hours, EnergyCapacity);
+        Locked = info.Locked;
 	}
     /*private void CharacterEntered(Node body)
     {
@@ -306,5 +344,49 @@ public class WindGenerator : StaticBody
             return;
         GetNode<Spatial>("GenInternals").GetNode<AnimationPlayer>("AnimationPlayer").Stop();
         GetNode<Spatial>("GenInternals2").GetNode<AnimationPlayer>("AnimationPlayer").Stop();
+    }
+}
+public class WindGeneratorInfo
+{
+	public string WindGeneratorName;
+	public float CurrentEnergy;
+    public bool Locked;
+	public int DespawnDay = 0;
+	public int Despawnhour = 0;
+	public int Despawnmins = 0;
+	public void UpdateInfo(WindGenerator gen)
+	{
+		DayNight.GetDay(out DespawnDay);
+		DayNight.GetTime(out Despawnhour, out Despawnmins);
+		CurrentEnergy = gen.GetCurrentEnergy();
+        Locked = gen.IsLocked();
+	}
+	public void SetInfo(string name, float CurEn, bool L)
+	{
+		WindGeneratorName = name;
+		CurrentEnergy = CurEn;
+        Locked = L;
+	}
+	public Dictionary<string, object>GetPackedData()
+	{
+		Dictionary<string, object> data = new Dictionary<string, object>()
+		{
+			{"Name", WindGeneratorName},
+			{"CurrentEnergy", CurrentEnergy},
+			{"DespawnDay", DespawnDay},
+			{"DespawnHour", Despawnhour},
+			{"DespawnMins", Despawnmins},
+            {"Locked", Locked}
+		};
+		return data;
+	}
+    public void UnPackData(Resource data)
+    {
+        WindGeneratorName = (string)data.Get("Name");
+		CurrentEnergy = (float)data.Get("CurrentEnergy");
+		DespawnDay = (int)data.Get("DespawnDay");
+		Despawnhour = (int)data.Get("DespawnHour");
+        Despawnmins = (int)data.Get("DespawnMins");
+        Locked = (bool)data.Get("Locked");
     }
 }

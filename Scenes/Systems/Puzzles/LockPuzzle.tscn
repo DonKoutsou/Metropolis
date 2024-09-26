@@ -1,0 +1,220 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Scripts/LockPuzzle.cs" type="Script" id=1]
+[ext_resource path="res://Assets/Lock/Tool2.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://Assets/Lock/Tool1.obj" type="ArrayMesh" id=4]
+[ext_resource path="res://Assets/Lock/Lock_Body.obj" type="ArrayMesh" id=5]
+[ext_resource path="res://Assets/Lock/Lock_Rotating.obj" type="ArrayMesh" id=6]
+[ext_resource path="res://Assets/Lock/LoackMat.tres" type="Material" id=7]
+[ext_resource path="res://Assets/Sounds/Scrape4.mp3" type="AudioStream" id=8]
+[ext_resource path="res://Assets/Sounds/LockOpen.mp3" type="AudioStream" id=9]
+[ext_resource path="res://Assets/Sounds/LockStop.mp3" type="AudioStream" id=10]
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 1, 0.870588, 0.670588, 1 )
+
+[sub_resource type="Animation" id=8]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("LockRotatingBody/LockPick:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.50226, -0.26319 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LockRotatingBody/LockPick:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("LockRotatingBody/Body3:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -0.227672, 1.36086, 0.329895 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("LockRotatingBody/Body3:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 24.834, -30.533, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("LockRotatingBody/LockPick/LockPick2:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "RemovePicks"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("LockRotatingBody/LockPick:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.50226, -0.26319 ), Vector3( 0, 1.1218, -5.22685 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LockRotatingBody/LockPick:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( -48.454, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("LockRotatingBody/Body3:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( -0.227672, 1.36086, 0.329895 ), Vector3( 0, 1.36086, 6.02751 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("LockRotatingBody/Body3:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 24.834, -30.533, 0 ), Vector3( 67.978, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "Twitch"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("LockRotatingBody/Body3:rotation_degrees")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.125, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 24.834, -30.533, 0 ), Vector3( 24.834, -25.816, 0 ), Vector3( 24.834, -39.088, 0 ), Vector3( 24.834, -30.533, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LockRotatingBody/LockPick/LockPick2:rotation_degrees")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.125, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, -6, 0 ), Vector3( 0, 6, 0 ), Vector3( 0, 0, 0 ) ]
+}
+
+[node name="Spatial" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.281052, 0.959692, 0, -0.959692, 0.281052, 0, 3.65596, 0.849255 )
+fov = 45.0
+
+[node name="LockBody" type="MeshInstance" parent="."]
+material_override = ExtResource( 7 )
+mesh = ExtResource( 5 )
+
+[node name="LockRotatingBody" type="MeshInstance" parent="."]
+material_override = ExtResource( 7 )
+mesh = ExtResource( 6 )
+
+[node name="Body3" type="Spatial" parent="LockRotatingBody"]
+transform = Transform( 0.861336, -0.213369, -0.461055, 0, 0.907527, -0.41999, 0.508034, 0.361753, 0.781686, -0.227672, 1.36086, 0.329895 )
+
+[node name="Body4" type="MeshInstance" parent="LockRotatingBody/Body3"]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 1.381, 0 )
+material_override = ExtResource( 7 )
+mesh = ExtResource( 2 )
+skeleton = NodePath("../../..")
+material/0 = SubResource( 5 )
+
+[node name="LockPick" type="Spatial" parent="LockRotatingBody"]
+transform = Transform( 1, 0, 0, 0, 0.999998, 0, 0, 0, 0.999998, 0, 0.50226, -0.26319 )
+
+[node name="LockPick2" type="Spatial" parent="LockRotatingBody/LockPick"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="Body4" type="MeshInstance" parent="LockRotatingBody/LockPick/LockPick2"]
+transform = Transform( 3.14398e-08, 3.03683e-08, 0.999996, 0.694749, -0.719254, 0, 0.719258, 0.694746, -4.37112e-08, 0, 1.78, -1.68084 )
+material_override = ExtResource( 7 )
+mesh = ExtResource( 4 )
+skeleton = NodePath("../../../..")
+material/0 = SubResource( 5 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 8 )
+anims/RemovePicks = SubResource( 7 )
+anims/Twitch = SubResource( 10 )
+
+[node name="SolvedSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = -5.318
+pitch_scale = 0.7
+bus = "UI"
+
+[node name="OpenLockSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = -20.0
+pitch_scale = 0.9
+bus = "UI"
+
+[node name="StopLockSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+volume_db = -10.0
+pitch_scale = 0.8
+bus = "UI"
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="FinishGame"]

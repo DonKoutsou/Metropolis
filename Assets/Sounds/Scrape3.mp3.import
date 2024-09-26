@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Scrape3.mp3-68c71ec6731baf4d35cb4ae76fe3dc9f.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/Scrape3.mp3"
+dest_files=[ "res://.import/Scrape3.mp3-68c71ec6731baf4d35cb4ae76fe3dc9f.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

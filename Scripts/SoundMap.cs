@@ -53,7 +53,7 @@ public class SoundMap : GridMap
             Settings set = Settings.GetGameSettings();
             if (set != null)
             {
-                 SeekRandom = new RandomNumberGenerator(){
+                SeekRandom = new RandomNumberGenerator(){
                 Seed = (ulong)set.Seed
                 };
             }

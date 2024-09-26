@@ -221,4 +221,5 @@ public enum ItemName
 	KEYCARD,
 	SHEET_MUSIC,
 	SINNER_NOTE,
+	LOCKPICK,
 }

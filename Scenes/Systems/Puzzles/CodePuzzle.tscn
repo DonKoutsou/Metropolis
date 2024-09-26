@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Scripts/CodePuzzle.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Systems/Puzzles/MemoryButton.tscn" type="PackedScene" id=2]
@@ -144,6 +144,51 @@ emission_energy = 0.0
 emission_operator = 0
 emission_on_uv2 = false
 
+[sub_resource type="SpatialMaterial" id=41]
+resource_local_to_scene = true
+albedo_color = Color( 1, 0, 0, 1 )
+emission_enabled = true
+emission = Color( 1, 0.745098, 0, 1 )
+emission_energy = 0.0
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="SpatialMaterial" id=42]
+resource_local_to_scene = true
+albedo_color = Color( 1, 0, 0, 1 )
+emission_enabled = true
+emission = Color( 1, 0.745098, 0, 1 )
+emission_energy = 0.0
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="SpatialMaterial" id=43]
+resource_local_to_scene = true
+albedo_color = Color( 1, 0, 0, 1 )
+emission_enabled = true
+emission = Color( 1, 0.745098, 0, 1 )
+emission_energy = 0.0
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="SpatialMaterial" id=44]
+resource_local_to_scene = true
+albedo_color = Color( 1, 0, 0, 1 )
+emission_enabled = true
+emission = Color( 1, 0.745098, 0, 1 )
+emission_energy = 0.0
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="SpatialMaterial" id=45]
+resource_local_to_scene = true
+albedo_color = Color( 1, 0, 0, 1 )
+emission_enabled = true
+emission = Color( 1, 0.745098, 0, 1 )
+emission_energy = 0.0
+emission_operator = 0
+emission_on_uv2 = false
+
 [node name="Spatial" type="Spatial"]
 script = ExtResource( 1 )
 
@@ -162,6 +207,7 @@ margin_left = 79040.0
 margin_top = -240.0
 margin_right = 79520.0
 margin_bottom = 240.0
+mouse_filter = 2
 
 [node name="Viewport" type="Viewport" parent="ViewportContainer"]
 size = Vector2( 480, 480 )
@@ -176,6 +222,7 @@ render_target_update_mode = 3
 [node name="CenterContainer" type="CenterContainer" parent="ViewportContainer/Viewport"]
 margin_right = 563.0
 margin_bottom = 78.0
+mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ViewportContainer/Viewport/CenterContainer"]
 margin_left = 265.0
@@ -323,19 +370,24 @@ material/0 = SubResource( 26 )
 [node name="StageLight_1" parent="StageLights" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.66, 0.033, -1.436 )
 skeleton = NodePath("../..")
+material/0 = SubResource( 41 )
 
 [node name="StageLight_2" parent="StageLights" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33, 0.033, -1.436 )
 skeleton = NodePath("../..")
+material/0 = SubResource( 42 )
 
 [node name="StageLight_3" parent="StageLights" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0325673, -1.43614 )
 skeleton = NodePath("../..")
+material/0 = SubResource( 43 )
 
 [node name="StageLight_4" parent="StageLights" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33, 0.033, -1.436 )
 skeleton = NodePath("../..")
+material/0 = SubResource( 44 )
 
 [node name="StageLight_5" parent="StageLights" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.66, 0.033, -1.436 )
 skeleton = NodePath("../..")
+material/0 = SubResource( 45 )

@@ -7,9 +7,11 @@ func _SetData(data):
 	DespawnDay = data["DespawnDay"]
 	DespawnHour = data["DespawnHour"]
 	DespawnMins = data["DespawnMins"]
+	Locked = data["Locked"]
 
 ## Path to the level that was loaded when the game was saved
 export var Name:String
+export var Locked:bool
 export var CurrentEnergy:float
 export var DespawnDay:int = 0
 export var DespawnHour:int = 0

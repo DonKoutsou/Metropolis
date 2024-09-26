@@ -55,6 +55,7 @@ tracks/0/keys = {
 [node name="Language Select" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 script = ExtResource( 4 )
 GameScene = "res://Scenes/World/WorldRoot.tscn"
 
@@ -62,6 +63,7 @@ GameScene = "res://Scenes/World/WorldRoot.tscn"
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_clip_content = true
+mouse_filter = 2
 custom_styles/panel = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="Panel"]

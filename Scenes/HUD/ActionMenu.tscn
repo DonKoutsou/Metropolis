@@ -129,6 +129,7 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+mouse_filter = 2
 script = ExtResource( 2 )
 SelectLayer = 4112
 OutLineMat = ExtResource( 5 )
@@ -142,12 +143,14 @@ margin_left = -58.0
 margin_top = -102.0
 margin_right = 58.0
 margin_bottom = 102.0
+mouse_filter = 2
 custom_constants/separation = 20
 alignment = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
 margin_right = 116.0
 margin_bottom = 184.0
+mouse_filter = 2
 custom_styles/panel = SubResource( 52 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer"]
@@ -156,6 +159,7 @@ margin_top = 8.0
 margin_right = 108.0
 margin_bottom = 176.0
 rect_pivot_offset = Vector2( 45, 0 )
+mouse_filter = 2
 
 [node name="PickUp_Button" type="Button" parent="VBoxContainer/PanelContainer/VBoxContainer" groups=["Buttons"]]
 margin_right = 100.0
@@ -208,6 +212,7 @@ margin_left = 0.0
 margin_top = 204.0
 margin_right = 116.0
 margin_bottom = 204.0
+mouse_filter = 2
 
 [connection signal="mouse_entered" from="VBoxContainer/PanelContainer/VBoxContainer/PickUp_Button" to="." method="Selecting_Action"]
 [connection signal="mouse_exited" from="VBoxContainer/PanelContainer/VBoxContainer/PickUp_Button" to="." method="Stoped_Selecting_Action"]

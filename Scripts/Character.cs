@@ -428,7 +428,8 @@ public class Character : KinematicBody
 		CurrentEnergy = info.CurrentEnergy;
 		m_balive = info.Alive;
 		OwnedVeh = info.OwnedVeh;
-		GetNode<BaseDialogueScript>("DialogueScript").LoadSaveData(info.CustomData);
+		if (info.CustomData.Count > 0)
+			GetNode<BaseDialogueScript>("DialogueScript").LoadSaveData(info.CustomData);
 
 		/*for (int i = 0; i < 6; i++)
 		{
@@ -547,14 +548,14 @@ public class CharacterInfo
 		{
 			LimbColors.Add(LimbCols[i]);
 		}*/
-		string[] CustomDataKeys = (string[])data.Get("CustomDataKeys");
+		Godot.Collections.Array CustomDataKeys = (Godot.Collections.Array)data.Get("CustomDataKeys");
 		Godot.Collections.Array CustomDataValues = (Godot.Collections.Array)data.Get("CustomDataValues");
 
-		if (CustomDataKeys.Count() > 0 && CustomDataValues.Count > 0)
+		if (CustomDataKeys.Count > 0 && CustomDataValues.Count > 0)
 		{
-			for (int i = 0; i < CustomDataKeys.Count(); i++)
+			for (int i = 0; i < CustomDataKeys.Count; i++)
 			{
-				CustomData.Add(CustomDataKeys[i], CustomDataValues[i]);
+				CustomData.Add((string)CustomDataKeys[i], CustomDataValues[i]);
 			}
 		}
     }

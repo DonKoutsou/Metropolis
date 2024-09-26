@@ -20,6 +20,8 @@ public class PlayerUI : Control
     [Export]
     NodePath ActionMenu = null;
     [Export]
+    NodePath PuzzleMenu = null;
+    [Export]
     PackedScene InitialTutorialScene = null;
 
     static PlayerUI instance;
@@ -89,6 +91,8 @@ public class PlayerUI : Control
             UIToReturn = GetNode<Control>(ControlsUI);
         else if (type == PlayerUIType.ACTION_MENU)
             UIToReturn = GetNode<Control>(ActionMenu);
+        else if (type == PlayerUIType.PUZZLE)
+            UIToReturn = GetNode<Control>(PuzzleMenu);
 
         return UIToReturn;
     }
@@ -150,4 +154,5 @@ public enum PlayerUIType
     MAP,
     CONTROLS,
     ACTION_MENU,
+    PUZZLE,
 }

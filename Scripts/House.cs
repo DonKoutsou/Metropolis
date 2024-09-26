@@ -9,6 +9,9 @@ public class House : Spatial
 	bool spawnItems = true;
 	[Export]
 	bool HideExterior = true;
+	[Export]
+	bool CanBeLocked = true;
+	bool Locked = false;
 	//[Export]
 	//public PackedScene[] ItemSpawnPool;
 	
@@ -18,7 +21,10 @@ public class House : Spatial
 	[Export]
 	bool HasPower = true;
 
-
+	public bool IsLocked()
+	{
+		return Locked;
+	}
 	public override void _Ready()
 	{
 		/*foreach (Node nd in GetChildren())
@@ -51,10 +57,36 @@ public class House : Spatial
 			Light.SetWorkingState(HasPower);
 		}
 	}
+	Node bodytoenter;
+	public void Unlocked(bool resault)
+	{
+		PuzzleManager pman = (PuzzleManager)PlayerUI.GetInstance().GetUI(PlayerUIType.PUZZLE);
+		pman.Disconnect("PuzzleResault", this, "Unlocked");
+		if (resault)
+		{
+			Locked = false;
+			Entered(bodytoenter);
+			bodytoenter = null;
+		}
+	}
 	public virtual void Entered(Node body)
 	{
 		if (!IsInsideTree())
             return;
+		if (Locked)
+		{
+			Player pl = (Player)body;
+			if (!pl.GetCharacterInventory().HasItemOfType(ItemName.LOCKPICK))
+			{
+				pl.GetTalkText().Talk(LocalisationHolder.GetString("NoLockPickDiag"));
+				return;
+			}
+			bodytoenter = body;
+			PuzzleManager pman = (PuzzleManager)PlayerUI.GetInstance().GetUI(PlayerUIType.PUZZLE);
+			pman.Connect("PuzzleResault", this, "Unlocked");
+			pman.StartPuzzle(PuzzleTypes.LOCK);
+			return;
+		}
 		if (HideExterior)
 		{
 			StaticBody HouseExterior  = GetNode<StaticBody>("HouseExterior");
@@ -121,6 +153,14 @@ public class House : Spatial
 	int DecorationAmmount = 1;
 	public void StartHouse()
 	{
+		if (CanBeLocked)
+		{
+			int l = RandomContainer.Next(0, 2);
+			if (l == 0)
+				Locked = true;
+			else
+				Locked = false;
+		}
 
 		Spatial Furiture = GetNode<Spatial>("FurniturePlacements");
 		Spatial RealFurnitures = GetNode<Spatial>("Furnitures");
@@ -148,8 +188,6 @@ public class House : Spatial
 					furn.SpawnItem(GetDrop());
 			}
 		}
-		
-
 
 		Spatial decos = GetNode<Spatial>("DecorationPlacaments");
 		Spatial RealDecorations = GetNode<Spatial>("Decorations");
@@ -246,6 +284,7 @@ public class House : Spatial
 	}
 	public void InputData(HouseInfo data)
 	{
+		Locked = data.Locked;
 		if (FurnitureList.Count == 0 || DecorationList.Count == 0)
 		{
 			if (data.HasInternals())
@@ -289,12 +328,14 @@ public class HouseInfo
 
 	public List<FurnitureInfo> furni = new List<FurnitureInfo>();
 	public List<DecorationInfo> Deco = new List<DecorationInfo>();
+	public bool Locked = true;
 	public bool HasInternals()
 	{
 		return furni.Count > 0 || Deco.Count > 0;
 	}
-	public void UpdateInfo(List<Furniture> funriture)
+	public void UpdateInfo(List<Furniture> funriture, bool Lock)
 	{
+		Locked = Lock;
 		foreach(FurnitureInfo GInfo in furni)
 		{
 			Furniture f = null;
@@ -307,12 +348,12 @@ public class HouseInfo
 				}
 			}
 			GInfo.UpdateInfo(f);
-
 		}
 	}
-	public void SetInfo(string name, List<FurnitureInfo> funriture, List<DecorationInfo> decoration)
+	public void SetInfo(string name, bool Lock, List<FurnitureInfo> funriture, List<DecorationInfo> decoration)
 	{
 		HouseName = name;
+		Locked = Lock;
 		for (int i = 0; i < funriture.Count; i++)
 		{
 			furni.Insert(i, funriture[i]);
@@ -347,6 +388,7 @@ public class HouseInfo
 
 		Dictionary<string, object> data = new Dictionary<string, object>(){
 			{"Name", HouseName},
+			{"Locked", Locked},
 			{"Furniture", FurnitureInfoobjects},
 			{"Decorations", DecoInfoobjects}
 		};
@@ -356,7 +398,7 @@ public class HouseInfo
 	public void UnPackData(Resource data)
     {
         HouseName = (string)data.Get("Name");
-
+		Locked = (bool)data.Get("Locked");
         Godot.Collections.Array FurnitureData = (Godot.Collections.Array)data.Get("Furniture");
 		for (int i  = 0; i < FurnitureData.Count; i++)
 		{

@@ -133,6 +133,8 @@ transform = Transform( 335.935, -320.974, -922.51, 781.786, 673.178, 50.4676, 58
 
 [node name="House" parent="." index="11" instance=ExtResource( 9 )]
 transform = Transform( 0.260589, 0, 0.96545, 0, 1, 0, -0.96545, 0, 0.260589, 2285.6, 10.281, 2211.21 )
+HasPower = false
 
 [node name="House2" parent="." index="12" instance=ExtResource( 10 )]
 transform = Transform( 0.728072, 0, 0.685501, 0, 1, 0, -0.685501, 0, 0.728072, 2313.18, 15.0739, 2182.11 )
+HasPower = false

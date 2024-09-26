@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Lock_Rotating.obj-60bfd17076b4b6f1ba3e3091811d220d.mesh"
+
+[deps]
+
+files=[ "res://.import/Lock_Rotating.obj-60bfd17076b4b6f1ba3e3091811d220d.mesh" ]
+
+source_file="res://Assets/Lock/Lock_Rotating.obj"
+dest_files=[ "res://.import/Lock_Rotating.obj-60bfd17076b4b6f1ba3e3091811d220d.mesh", "res://.import/Lock_Rotating.obj-60bfd17076b4b6f1ba3e3091811d220d.mesh" ]
+
+[params]
+
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh_flags=4286
+generate_tangents=true
+vertex_cache_optimization=true
+octahedral_compression=true

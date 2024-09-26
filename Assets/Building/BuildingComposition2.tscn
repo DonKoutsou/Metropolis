@@ -43,18 +43,18 @@ PossibleDeco = [ ExtResource( 15 ), ExtResource( 14 ) ]
 FurnitureAmmount = 6
 DecorationAmmount = 2
 SpawnPool = {
-Resource( "res://Scenes/Items/Clock.tscn" ): 8,
-Resource( "res://Scenes/Items/SheetMusic.tscn" ): 8,
-Resource( "res://Scenes/Items/Vinyl.tscn" ): 8,
-Resource( "res://Scenes/Items/DrahmaStack.tscn" ): 10,
-Resource( "res://Scenes/Items/FastLeg_L.tscn" ): 2,
-Resource( "res://Scenes/Items/Cassete.tscn" ): 8,
 Resource( "res://Scenes/Items/NormalLeg_R.tscn" ): 2,
+Resource( "res://Scenes/Items/DrahmaStack.tscn" ): 10,
+Resource( "res://Scenes/Items/Cassete.tscn" ): 8,
+Resource( "res://Scenes/Items/Item.tscn" ): 4,
+Resource( "res://Scenes/Items/Guitar.tscn" ): 1,
 Resource( "res://Scenes/Items/NormalLeg_L.tscn" ): 2,
 Resource( "res://Scenes/Items/BatteryEmpty.tscn" ): 10,
+Resource( "res://Scenes/Items/FastLeg_L.tscn" ): 2,
+Resource( "res://Scenes/Items/Clock.tscn" ): 8,
 Resource( "res://Scenes/Items/FastLeg_R.tscn" ): 2,
-Resource( "res://Scenes/Items/Guitar.tscn" ): 1,
-Resource( "res://Scenes/Items/Item.tscn" ): 4
+Resource( "res://Scenes/Items/Vinyl.tscn" ): 8,
+Resource( "res://Scenes/Items/SheetMusic.tscn" ): 8
 }
 
 [node name="HouseExterior" type="StaticBody" parent="."]

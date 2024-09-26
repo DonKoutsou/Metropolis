@@ -170,11 +170,11 @@ public class Inventory : Spatial
             Item newItem = it.Instance<Item>();
             if (newItem is Battery bat)
             {
-                Array CustomDataKeys = (Array)res.Get("CustomDataKeys");
+                Godot.Collections.Array CustomDataKeys = (Godot.Collections.Array)res.Get("CustomDataKeys");
 		        Godot.Collections.Array CustomDataValues = (Godot.Collections.Array)res.Get("CustomDataValues");
-                for (int i = 0; i < CustomDataKeys.Length; i++)
+                for (int i = 0; i < CustomDataKeys.Count; i++)
                 {
-                    if ((string)CustomDataKeys.GetValue(i) == "CurrentEnergy")
+                    if ((string)CustomDataKeys[i] == "CurrentEnergy")
                     {
                         bat.SetCurrentCap((float)CustomDataValues[i]);
                     }
@@ -282,8 +282,7 @@ public class Inventory : Spatial
             Item[] drahmas = d.DecomposeStack();
             for (int i = 0; i < drahmas.Count(); i++)
             {
-                Item drah = drahmas[i];
-                PlaceInInventory(drah);
+                PlaceInInventory(drahmas[i]);
             }
         }
         else

@@ -713,7 +713,7 @@ custom_constants/margin_bottom = 10
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 229.0
-margin_bottom = 145.0
+margin_bottom = 158.0
 custom_constants/separation = 10
 
 [node name="TaskName" type="RichTextLabel" parent="InventoryContainer/Inventory/JobPanel/MarginContainer/VBoxContainer"]

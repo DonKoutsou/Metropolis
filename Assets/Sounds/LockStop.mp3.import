@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/LockStop.mp3-f3bd6e9891e48c69421764a29801bcd8.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/LockStop.mp3"
+dest_files=[ "res://.import/LockStop.mp3-f3bd6e9891e48c69421764a29801bcd8.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

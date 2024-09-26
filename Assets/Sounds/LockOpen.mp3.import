@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/LockOpen.mp3-4d6489df6e36fb57cc0856254e885b77.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/LockOpen.mp3"
+dest_files=[ "res://.import/LockOpen.mp3-4d6489df6e36fb57cc0856254e885b77.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

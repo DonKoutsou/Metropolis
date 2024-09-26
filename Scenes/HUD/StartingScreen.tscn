@@ -139,6 +139,7 @@ tracks/0/keys = {
 pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 script = ExtResource( 2 )
 
 [node name="LoadingScreen" parent="." instance=ExtResource( 4 )]
@@ -146,6 +147,7 @@ script = ExtResource( 2 )
 [node name="Settings" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 script = ExtResource( 9 )
 ViewDistance = 1
 FOVOverride = 40
@@ -405,6 +407,7 @@ script = ExtResource( 17 )
 [node name="SettingsPanel" parent="Settings" instance=ExtResource( 20 )]
 
 [node name="Credits" parent="." instance=ExtResource( 1 )]
+mouse_filter = 2
 
 [node name="Intro" type="Control" parent="."]
 anchor_right = 1.0

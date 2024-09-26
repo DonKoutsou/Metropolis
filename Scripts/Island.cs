@@ -292,6 +292,10 @@ public class Island : Spatial
 		{
 			h.StartHouse();
 		}
+		foreach(WindGenerator g in Generators)
+		{
+			g.InitialSpawn();
+		}
 		foreach(NPC c in Characters)
 		{
 			c.InitialSpawn();
@@ -1175,7 +1179,7 @@ public class IslandInfo
 			}
 			List<Furniture> funriture;
 			h.GetFurniture(out funriture);
-			HInfo.UpdateInfo(funriture);
+			HInfo.UpdateInfo(funriture, h.IsLocked());
 		}
 
 		List<Furniture> furs;
@@ -1330,8 +1334,7 @@ public class IslandInfo
 				dinfo.Add(inf);
 			}
 
-
-			info.SetInfo(HouseToAdd[i].Name, finfo, dinfo);
+			info.SetInfo(HouseToAdd[i].Name, HouseToAdd[i].IsLocked(), finfo, dinfo);
 			Houses.Add(info);
 		}
 	}
@@ -1354,7 +1357,7 @@ public class IslandInfo
 		for (int i = 0; i < GeneratorToAdd.Count; i++)
 		{
 			WindGeneratorInfo info = new WindGeneratorInfo();
-			info.SetInfo(GeneratorToAdd[i].Name, GeneratorToAdd[i].GetCurrentEnergy());
+			info.SetInfo(GeneratorToAdd[i].Name, GeneratorToAdd[i].GetCurrentEnergy(), GeneratorToAdd[i].IsLocked());
 			Generators.Add(info);
 		}
 	}
@@ -1415,45 +1418,7 @@ public class IslandInfo
 	}
 }
 
-public class WindGeneratorInfo
-{
-	public string WindGeneratorName;
-	public float CurrentEnergy;
-	public int DespawnDay = 0;
-	public int Despawnhour = 0;
-	public int Despawnmins = 0;
-	public void UpdateInfo(WindGenerator gen)
-	{
-		DayNight.GetDay(out DespawnDay);
-		DayNight.GetTime(out Despawnhour, out Despawnmins);
-		CurrentEnergy = gen.GetCurrentEnergy();
-	}
-	public void SetInfo(string name, float CurEn)
-	{
-		WindGeneratorName = name;
-		CurrentEnergy = CurEn;
-	}
-	public Dictionary<string, object>GetPackedData()
-	{
-		Dictionary<string, object> data = new Dictionary<string, object>()
-		{
-			{"Name", WindGeneratorName},
-			{"CurrentEnergy", CurrentEnergy},
-			{"DespawnDay", DespawnDay},
-			{"DespawnHour", Despawnhour},
-			{"DespawnMins", Despawnmins},
-		};
-		return data;
-	}
-    public void UnPackData(Resource data)
-    {
-        WindGeneratorName = (string)data.Get("Name");
-		CurrentEnergy = (float)data.Get("CurrentEnergy");
-		DespawnDay = (int)data.Get("DespawnDay");
-		Despawnhour = (int)data.Get("DespawnHour");
-        Despawnmins = (int)data.Get("DespawnMins");
-    }
-}
+
 
 public enum IleType
 {

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Lock_Body.obj-13d0bffb7991d23f58d38600da0eb07c.mesh"
+
+[deps]
+
+files=[ "res://.import/Lock_Body.obj-13d0bffb7991d23f58d38600da0eb07c.mesh" ]
+
+source_file="res://Assets/Lock/Lock_Body.obj"
+dest_files=[ "res://.import/Lock_Body.obj-13d0bffb7991d23f58d38600da0eb07c.mesh", "res://.import/Lock_Body.obj-13d0bffb7991d23f58d38600da0eb07c.mesh" ]
+
+[params]
+
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh_flags=4286
+generate_tangents=true
+vertex_cache_optimization=true
+octahedral_compression=true

@@ -149,9 +149,11 @@ transform = Transform( 0.540068, -0.164176, -0.825453, 0.354166, 0.934053, 0.045
 
 [node name="House" parent="." index="13" instance=ExtResource( 11 )]
 transform = Transform( 0.81643, 0, 0.577444, 0, 1, 0, -0.577444, 0, 0.81643, -1834.11, 27.2531, 1053.36 )
+HasPower = false
 
 [node name="House2" parent="." index="14" instance=ExtResource( 10 )]
 transform = Transform( 0.341725, 0, 0.9398, 0, 1, 0, -0.9398, 0, 0.341725, -1867.35, 22.1833, 1101.71 )
+HasPower = false
 
 [node name="MeshInstance" parent="." index="15" instance=ExtResource( 12 )]
 transform = Transform( 0.401574, -0.331872, 0.424058, -0.0230561, 0.517911, 0.427156, -0.537989, -0.269916, 0.298225, -1924.58, 18.7401, 1227.28 )
