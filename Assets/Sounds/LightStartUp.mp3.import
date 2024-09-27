@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/LightStartUp.mp3-f5981d5ea08edc9dc25f04f81f87d8c0.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/LightStartUp.mp3"
+dest_files=[ "res://.import/LightStartUp.mp3-f5981d5ea08edc9dc25f04f81f87d8c0.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

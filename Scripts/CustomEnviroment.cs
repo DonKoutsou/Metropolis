@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class DayNight : WorldEnvironment
+public class CustomEnviroment : WorldEnvironment
 {
     [Export]
     Curve AutoExposureCurve = null;
@@ -23,7 +23,9 @@ public class DayNight : WorldEnvironment
     Curve MoonGodRayCurve = null;
     [Export]
     Curve sunrotcurve = null;
-
+    [Export]
+    Curve ThunderCurve = null;
+    float ThunderMulti;
     [Export]
     Gradient SunColorGradient = null;
 
@@ -51,6 +53,28 @@ public class DayNight : WorldEnvironment
     Color FogDistantColor = new Color(0.8f, 0.6f, 0.38f);
 
     float CurrentDistance = 0;
+
+    public override void _Ready()
+    {
+        base._Ready();
+        
+        currenthour = startinghour;
+        Settings set = Settings.GetGameSettings();
+        if (set != null)
+        {
+            Random rand = new Random(set.Seed);
+            currentDay = rand.Next(0, 10);
+            timeprogmultiplier = set.TimeProgression;
+        }
+        
+        sun = GetParent().GetNode<DirectionalLight>("Sun");
+        moon = GetParent().GetNode<DirectionalLight>("Moon");
+        SunGodRays = sun.GetNode("GodRays");
+        MoonGodRays = moon.GetNode("GodRays");
+        //timeprogmultiplier = Settings.GetGameSettings().TimeProgression;
+        Environment.FogEnabled = true;
+        SetProcess(false);
+    }
 
     public void UpdatePlayerDistance(float newdist)
     {
@@ -97,13 +121,6 @@ public class DayNight : WorldEnvironment
     public SunMoonPivot SunMoonMeshPivot;
 
     //Time_UI UI;
-
-    static DayNight instance;
-
-    public static DayNight GetInstance()
-    {
-        return instance;
-    }
 
     static public float GetWindDirection()
     {
@@ -167,6 +184,12 @@ public class DayNight : WorldEnvironment
         MoonColor = MoonColorGradient.Interpolate(HourValue);
         //MoonColor = new Color(moonRcolorcurve.Interpolate(HourValue) , moonGcolorcurve.Interpolate(HourValue), moonBcolorcurve.Interpolate(HourValue));
         MoonGodRayBrightness = MoonGodRayCurve.Interpolate(HourValue);
+
+        ThunderMulti = ThunderCurve.Interpolate(MinuteValue);
+        if (ThunderMulti > 1)
+        {
+            WorldParticleManager.PlayThunder();
+        }
     }
     private void ToggleDay(int Phase)
     {
@@ -175,34 +198,28 @@ public class DayNight : WorldEnvironment
             EmitSignal("DayShift", true);
             sun.Show();
             moon.Hide();
-            if (SunMoonMeshPivot != null)
-            {
-                SunMoonMeshPivot.GetNode<MeshInstance>("Sun").Show();
-                SunMoonMeshPivot.GetNode<MeshInstance>("Moon").Hide();
-            }
+            
+            SunMoonMeshPivot.GetNode<MeshInstance>("Sun").Show();
+            SunMoonMeshPivot.GetNode<MeshInstance>("Moon").Hide();
         }
         if (Phase == 1)
         {
             EmitSignal("DayShift", false);
             sun.Hide();
             moon.Show();
-             moon.ShadowEnabled = true;
-            if (SunMoonMeshPivot != null)
-            {
-                 SunMoonMeshPivot.GetNode<MeshInstance>("Sun").Hide();
-                SunMoonMeshPivot.GetNode<MeshInstance>("Moon").Show();
-            }
+            moon.ShadowEnabled = true;
+
+            SunMoonMeshPivot.GetNode<MeshInstance>("Sun").Hide();
+            SunMoonMeshPivot.GetNode<MeshInstance>("Moon").Show();
         }
         if (Phase == 2)
         {
             sun.Show();
             moon.Show();
             moon.ShadowEnabled = false;
-            if (SunMoonMeshPivot != null)
-            {
-                SunMoonMeshPivot.GetNode<MeshInstance>("Sun").Show();
-                SunMoonMeshPivot.GetNode<MeshInstance>("Moon").Show();
-            }
+
+            SunMoonMeshPivot.GetNode<MeshInstance>("Sun").Show();
+            SunMoonMeshPivot.GetNode<MeshInstance>("Moon").Show();
         }
         daystage = Phase;
     }
@@ -420,8 +437,6 @@ public class DayNight : WorldEnvironment
             SunMoonMeshPivot.SetSunColor(SunColor);
             SunMoonMeshPivot.SetMoonColor(MoonColor);
         }
-
-        
         ///
         /////
         //Color FogColor;
@@ -458,8 +473,9 @@ public class DayNight : WorldEnvironment
 
        Color fogdistc = new Color(0.1f,0.1f,0.1f).LinearInterpolate(FogDistantColor, AmbientLightEnergy);
 
+        float tmult = Mathf.Clamp(ThunderMulti, 1, 2);
         //Environment.FogColor = FogColor.LinearInterpolate(fogdistc, CurrentDistance);
-        Environment.FogColor = fogdistc;
+        Environment.FogColor = new Color(Mathf.Clamp(fogdistc.r * tmult, 0, 1), Mathf.Clamp(fogdistc.g * tmult, 0, 1), Mathf.Clamp(fogdistc.b * tmult, 0, 1));
 
         Environment.FogDepthEnd = FogDirstanceCurve.Interpolate(CurrentDistance) * 1000;
 
@@ -467,15 +483,14 @@ public class DayNight : WorldEnvironment
 
         Environment.BackgroundColor = fogdistc;
 
-        Environment.BackgroundEnergy = AmbientLightEnergy;
+        Environment.BackgroundEnergy = AmbientLightEnergy + ThunderMulti;
 
-        Environment.AmbientLightEnergy = AmbientLightEnergy;
+        Environment.AmbientLightEnergy = AmbientLightEnergy + (ThunderMulti / 5);
 
         Environment.FogSunColor = fogdistc;
 
         //Environment.FogSunAmount = 0.3f;
         UpdateSunMoonPlacament();
-
     }
     public static bool IsDay()
     {
@@ -525,29 +540,6 @@ public class DayNight : WorldEnvironment
         }
         mins = ammout;
     }
-    public DayNight()
-    {
-        instance = this;
-    }
-    public override void _Ready()
-    {
-        base._Ready();
-        
-        currenthour = startinghour;
-        Settings set = Settings.GetGameSettings();
-        if (set != null)
-        {
-            Random rand = new Random(set.Seed);
-            currentDay = rand.Next(0, 10);
-            timeprogmultiplier = set.TimeProgression;
-        }
-        
-        sun = GetParent().GetNode<DirectionalLight>("Sun");
-        moon = GetParent().GetNode<DirectionalLight>("Moon");
-        SunGodRays = sun.GetNode("GodRays");
-        MoonGodRays = moon.GetNode("GodRays");
-        //timeprogmultiplier = Settings.GetGameSettings().TimeProgression;
-        Environment.FogEnabled = true;
-    }
+    
 
 }

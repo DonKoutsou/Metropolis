@@ -13,6 +13,7 @@ public class SettingsPanel : Control
         GetNode<CheckBox>("Panel/GridContainer/Full_Screen_Check").SetPressedNoSignal(OS.WindowFullscreen);
         GetNode<CheckBox>("Panel/GridContainer/VSync_Check").SetPressedNoSignal(OS.VsyncEnabled);
         GetNode<CheckBox>("Panel/GridContainer/FXAA_Check").SetPressedNoSignal(v.Fxaa);
+        GetNode<CheckBox>("Panel/GridContainer/SSAO_Check").SetPressedNoSignal(gameenv.SsaoEnabled);
         switch (v.Msaa)
         {
             case Viewport.MSAA.Msaa2x:
@@ -75,6 +76,12 @@ public class SettingsPanel : Control
         ItemPreviewViewport vp = ItemPreviewViewport.GetInstance();
         v.Fxaa = T;
     }
+    private void Update_SSAO(bool T)
+    {
+        gameenv.SsaoEnabled = T;
+        Startscreenenv.SsaoEnabled = T;
+    }
+    
     private void Update_FullScreen(bool T)
 	{
 		OS.WindowFullscreen = T;

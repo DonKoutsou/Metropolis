@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Scenes/HUD/Credits.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/StartingScreen.cs" type="Script" id=2]
@@ -15,7 +15,6 @@
 [ext_resource path="res://Assets/UI/icon_monochrome_light.png" type="Texture" id=14]
 [ext_resource path="res://Assets/UI/ΜΧΨLogoTrans.png" type="Texture" id=15]
 [ext_resource path="res://Scripts/MainMenuAnimation.cs" type="Script" id=16]
-[ext_resource path="res://Scripts/SaveLoadManager.cs" type="Script" id=17]
 [ext_resource path="res://UIThemes/ButtonGreen.tres" type="Theme" id=19]
 [ext_resource path="res://Scenes/Systems/SettingsPanel.tscn" type="PackedScene" id=20]
 [ext_resource path="res://UIThemes/Panel_Black_BottomCorner.tres" type="StyleBox" id=32]
@@ -399,11 +398,6 @@ rect_clip_content = true
 mouse_filter = 1
 custom_styles/panel = ExtResource( 5 )
 
-[node name="SaveLoadManager" type="Control" parent="Settings"]
-margin_right = 40.0
-margin_bottom = 40.0
-script = ExtResource( 17 )
-
 [node name="SettingsPanel" parent="Settings" instance=ExtResource( 20 )]
 
 [node name="Credits" parent="." instance=ExtResource( 1 )]
@@ -673,6 +667,7 @@ custom_styles/panel = ExtResource( 12 )
 layer = 10
 
 [node name="ColorRect" type="ColorRect" parent="FadeInOut"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2

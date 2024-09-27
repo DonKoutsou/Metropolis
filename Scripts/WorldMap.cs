@@ -340,7 +340,7 @@ public class WorldMap : TileMap
 				return;
 			}
 			int[] Date = (int[])save.Get("Date");
-			DayNight.GetInstance().SetTime(Date[0], Date[1], Date[2]);
+			Sky.GetEnviroment().SetTime(Date[0], Date[1], Date[2]);
 
 			((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid().InitMap();
 
@@ -363,7 +363,7 @@ public class WorldMap : TileMap
 			intro.LoadStop((Vector3)save.Get("playerlocation"));
 			Player pl = Player.GetInstance();
 
-			DayNight.GetInstance().UpdatePlayerDistance(Math.Max(Math.Abs(CurIle.Position.x), Math.Abs(CurIle.Position.y)) / 11);
+			Sky.GetEnviroment().UpdatePlayerDistance(Math.Max(Math.Abs(CurIle.Position.x), Math.Abs(CurIle.Position.y)) / 11);
 			
 			//PlayerUI.OnMenuToggled(false);
 			Control c = pl.GetNodeOrNull<Control>("Tutorial");
@@ -574,7 +574,7 @@ public class WorldMap : TileMap
 		if (finishedspawning == true)
 		{
 			SpawnIntro();
-			DayNight.GetInstance().UpdatePlayerDistance(Math.Max(Math.Abs(ilemap[entry].Position.x), Math.Abs(ilemap[entry].Position.y)) / 11);
+			Sky.GetEnviroment().UpdatePlayerDistance(Math.Max(Math.Abs(ilemap[entry].Position.x), Math.Abs(ilemap[entry].Position.y)) / 11);
 			((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid().FrameMap();
 		}
 	}
@@ -640,8 +640,6 @@ public class WorldMap : TileMap
 		
 		intr.GlobalTranslation = island.GlobalTranslation;
 		intr.GlobalRotation = island.GlobalRotation;
-
-		intr.GetNode<WorldParticleManager>("WorldParticleManager").GlobalRotation = Vector3.Zero;
 
 		CurrentTile = new Vector2 (island.GlobalTranslation.x ,island.GlobalTranslation.z);
 

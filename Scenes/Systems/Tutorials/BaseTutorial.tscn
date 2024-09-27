@@ -1,0 +1,170 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Assets/TutorialVids/WalkTutorial.webm" type="VideoStream" id=1]
+[ext_resource path="res://Scripts/Tutorial.cs" type="Script" id=2]
+[ext_resource path="res://Assets/Cassette/CassetteIcon.png" type="Texture" id=3]
+[ext_resource path="res://UIThemes/ButtonGreen.tres" type="Theme" id=4]
+[ext_resource path="res://UIThemes/Panel_Digital_Blue_NoCorner.tres" type="StyleBox" id=5]
+[ext_resource path="res://Fonts/Play-Bold.ttf" type="DynamicFontData" id=6]
+
+[sub_resource type="StyleBoxFlat" id=52]
+content_margin_left = 8.0
+content_margin_right = 8.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 0.12549, 0.12549, 0.12549, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 1
+expand_margin_left = 10.0
+expand_margin_right = 10.0
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
+anti_aliasing = false
+
+[sub_resource type="DynamicFont" id=1]
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 6 )
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel2/VBoxContainer/PanelContainer/VideoPlayer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Restart"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel2/VBoxContainer/PanelContainer/VideoPlayer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Start"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel2/VBoxContainer/PanelContainer/VideoPlayer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="Tutorial" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 2 )
+Tutorials = {
+}
+
+[node name="Panel2" type="PanelContainer" parent="."]
+show_behind_parent = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -829.0
+margin_top = -310.0
+margin_right = -304.0
+margin_bottom = 310.0
+mouse_filter = 2
+size_flags_horizontal = 14
+size_flags_vertical = 14
+custom_styles/panel = SubResource( 52 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel2"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 517.0
+margin_bottom = 612.0
+size_flags_horizontal = 5
+size_flags_vertical = 5
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="Panel2/VBoxContainer"]
+margin_right = 509.0
+margin_bottom = 516.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = ExtResource( 5 )
+
+[node name="VideoPlayer" type="VideoPlayer" parent="Panel2/VBoxContainer/PanelContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 507.0
+margin_bottom = 514.0
+stream = ExtResource( 1 )
+autoplay = true
+bus = "UI"
+
+[node name="TextureRect" type="TextureRect" parent="Panel2/VBoxContainer/PanelContainer"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 507.0
+margin_bottom = 514.0
+texture = ExtResource( 3 )
+expand = true
+
+[node name="Label" type="Label" parent="Panel2/VBoxContainer"]
+margin_top = 520.0
+margin_right = 509.0
+margin_bottom = 561.0
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 1 )
+text = "fawfwafwafawaffwafaςαφαςφαςφςαφςαφςαφαςςαφφαςφawfwafwafawfwafwafwaawfwawfwafwaffwafwafwafwafwafwafwafwafwaf"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Button" type="Button" parent="Panel2/VBoxContainer"]
+margin_left = 233.0
+margin_top = 565.0
+margin_right = 276.0
+margin_bottom = 604.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = ExtResource( 4 )
+text = "OK"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 3 )
+anims/Restart = SubResource( 4 )
+anims/Start = SubResource( 2 )
+
+[connection signal="finished" from="Panel2/VBoxContainer/PanelContainer/VideoPlayer" to="." method="VidFinished"]
+[connection signal="button_down" from="Panel2/VBoxContainer/Button" to="." method="NextTurorial"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Assets/Building/Assets/WindGen_Base.tres" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Building/Assets/WindGeN_Blade.tres" type="ArrayMesh" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Assets/Clutter/CylinderThing/CylThingyMat.material" type="Material" id=6]
 [ext_resource path="res://Assets/Clutter/CylinderThing/CylinderThingy.tres" type="ArrayMesh" id=7]
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/Sounds/ComputerHum.mp3" type="AudioStream" id=9]
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=10]
 
 [sub_resource type="CylinderMesh" id=13]
@@ -226,6 +227,13 @@ mesh = ExtResource( 7 )
 script = ExtResource( 10 )
 LOD0 = ExtResource( 7 )
 LOD1 = SubResource( 14 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="MeshInstance2"]
+stream = ExtResource( 9 )
+unit_db = 24.494
+unit_size = 4.7
+max_distance = 920.33
+out_of_range_mode = 1
 
 [node name="CollisionShape2" type="CollisionShape" parent="."]
 transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, -24.6259, 0, -1.78147 )

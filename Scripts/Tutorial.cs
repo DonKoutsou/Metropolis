@@ -5,32 +5,40 @@ using System.Collections.Generic;
 public class Tutorial : Control
 {
     [Export]
-    Dictionary<string, VideoStream> Tutorials = null;
+    Dictionary<string, object> Tutorials = null;
 
     int stage = 0;
 
     private void VidFinished()
     {
-        GetNode<VideoPlayer>("VideoPlayer").Play();
+        GetNode<VideoPlayer>("Panel2/VBoxContainer/PanelContainer/VideoPlayer").Play();
     }
     private void NextTurorial()
     {
         stage ++;
         int currentcheck = 0;
-        foreach (KeyValuePair<string, VideoStream> tut in Tutorials)
+        foreach (KeyValuePair<string, object> tut in Tutorials)
         {
             if (stage != currentcheck)
             {
                 currentcheck ++;
                 continue;
             }
-             if (tut.Value != null)
-             {
-                GetNode<VideoPlayer>("VideoPlayer").Stream = tut.Value;
-                GetNode<VideoPlayer>("VideoPlayer").Play();
-             }
+            if (tut.Value is VideoStream Vid)
+            {
+            GetNode<VideoPlayer>("Panel2/VBoxContainer/PanelContainer/VideoPlayer").Stream = Vid;
+            GetNode<VideoPlayer>("Panel2/VBoxContainer/PanelContainer/VideoPlayer").Play();
+            GetNode<VideoPlayer>("Panel2/VBoxContainer/PanelContainer/VideoPlayer").Show();
+            GetNode<TextureRect>("Panel2/VBoxContainer/PanelContainer/TextureRect").Hide();
+            }
+            else if (tut.Value is StreamTexture Text)
+            {
+            GetNode<TextureRect>("Panel2/VBoxContainer/PanelContainer/TextureRect").Texture = Text;
+            GetNode<TextureRect>("Panel2/VBoxContainer/PanelContainer/TextureRect").Show();
+            GetNode<VideoPlayer>("Panel2/VBoxContainer/PanelContainer/VideoPlayer").Hide();
+            }
                 
-            GetNode<Label>("VideoPlayer/Panel/Label").Text = LocalisationHolder.GetString(tut.Key);
+            GetNode<Label>("Panel2/VBoxContainer/Label").Text = LocalisationHolder.GetString(tut.Key);
             return;
         }
 
@@ -43,15 +51,23 @@ public class Tutorial : Control
         PlayerUI.OnMenuToggled(true);
         GetNode<AnimationPlayer>("AnimationPlayer").Play("Start");
 
-        foreach (KeyValuePair<string, VideoStream> tut in Tutorials)
+        foreach (KeyValuePair<string, object> tut in Tutorials)
         {
-            if (tut.Value != null)
+            if (tut.Value is VideoStream Vid)
             {
-                GetNode<VideoPlayer>("VideoPlayer").Stream = tut.Value;
-                GetNode<VideoPlayer>("VideoPlayer").Play();
+            GetNode<VideoPlayer>("Panel2/VBoxContainer/PanelContainer/VideoPlayer").Stream = Vid;
+            GetNode<VideoPlayer>("Panel2/VBoxContainer/PanelContainer/VideoPlayer").Play();
+            GetNode<VideoPlayer>("Panel2/VBoxContainer/PanelContainer/VideoPlayer").Show();
+            GetNode<TextureRect>("Panel2/VBoxContainer/PanelContainer/TextureRect").Hide();
+            }
+            else if (tut.Value is StreamTexture Text)
+            {
+            GetNode<TextureRect>("Panel2/VBoxContainer/PanelContainer/TextureRect").Texture = Text;
+            GetNode<TextureRect>("Panel2/VBoxContainer/PanelContainer/TextureRect").Show();
+            GetNode<VideoPlayer>("Panel2/VBoxContainer/PanelContainer/VideoPlayer").Hide();
             }
                 
-            GetNode<Label>("VideoPlayer/Panel/Label").Text = LocalisationHolder.GetString(tut.Key);
+            GetNode<Label>("Panel2/VBoxContainer/Label").Text = LocalisationHolder.GetString(tut.Key);
             break;
         }
         //GetNode<VideoPlayer>("VideoPlayer").Stream = WalkTutorial;

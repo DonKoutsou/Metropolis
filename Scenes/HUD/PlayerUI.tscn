@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Scripts/ScreenEffects.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/Control_UI.cs" type="Script" id=2]
@@ -11,8 +11,9 @@
 [ext_resource path="res://Fonts/Caudex-Bold.ttf" type="DynamicFontData" id=9]
 [ext_resource path="res://Scenes/HUD/CheatMenu.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/HUD/InventoryUI.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Scenes/Systems/StartingTutorial.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scripts/TutorialManager.cs" type="Script" id=12]
 [ext_resource path="res://Scenes/Systems/Puzzles/PuzzleManager.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/Systems/AchievementManager.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Fonts/Play-Bold.ttf" type="DynamicFontData" id=15]
 [ext_resource path="res://UIThemes/Panel_Black_TopCorner.tres" type="StyleBox" id=16]
 [ext_resource path="res://Assets/Sounds/UI/CityName.mp3" type="AudioStream" id=17]
@@ -111,9 +112,10 @@ CheatMenu = NodePath("CheatMenu")
 Inventory = NodePath("InvntoryUI")
 MapUI = NodePath("MapUI")
 ControlsUI = NodePath("Control_UI")
-ActionMenu = NodePath("ActionMenu")
-PuzzleMenu = NodePath("PuzzleManager")
-InitialTutorialScene = ExtResource( 12 )
+ActionManager = NodePath("ActionMenu")
+PuzzleManager = NodePath("PuzzleManager")
+TutorialManager = NodePath("TutorialManager")
+AchievementManager = NodePath("AchievementManager")
 
 [node name="ScreenEffects" type="Control" parent="."]
 anchor_right = 1.0
@@ -270,6 +272,20 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="PuzzleManager" parent="." instance=ExtResource( 13 )]
+
+[node name="TutorialManager" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 12 )
+TutorialList = {
+"CodePuzzle": "res://Scenes/Systems/Tutorials/CodePuzzleTutorial.tscn",
+"LockPuzzle": "res://Scenes/Systems/Tutorials/LockPuzzleTutorial.tscn",
+"Portal": "res://Scenes/Systems/Tutorials/PortalTutorial.tscn",
+"StartTutorial": "res://Scenes/Systems/Tutorials/StartingTutorial.tscn"
+}
+
+[node name="AchievementManager" parent="." instance=ExtResource( 14 )]
 
 [node name="UIAnimation" type="AnimationPlayer" parent="."]
 anims/Damage = SubResource( 37 )

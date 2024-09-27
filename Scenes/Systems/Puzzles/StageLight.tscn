@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/StageLight.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Systems/Puzzles/StageLightMat.tres" type="Material" id=2]
+[ext_resource path="res://Assets/Sounds/LightStartUp.mp3" type="AudioStream" id=3]
 
 [sub_resource type="CylinderMesh" id=4]
 top_radius = 0.1
@@ -100,3 +101,7 @@ script = ExtResource( 1 )
 anims/RESET = SubResource( 7 )
 anims/StagePass = SubResource( 6 )
 anims/StageSemiPass = SubResource( 8 )
+
+[node name="LightSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+pitch_scale = 1.1

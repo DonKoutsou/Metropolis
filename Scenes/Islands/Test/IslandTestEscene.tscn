@@ -223,7 +223,7 @@ far = 18000.0
 
 [node name="EnvSound" type="AudioStreamPlayer" parent="Camera"]
 stream = ExtResource( 9 )
-volume_db = -12.0
+volume_db = 10.992
 autoplay = true
 
 [node name="Spatial" type="Spatial" parent="Camera"]
@@ -244,6 +244,7 @@ draw_pass_1 = SubResource( 3 )
 
 [node name="RainSound" type="AudioStreamPlayer" parent="Camera/Spatial"]
 stream = ExtResource( 7 )
+volume_db = 5.355
 pitch_scale = 1.97
 autoplay = true
 

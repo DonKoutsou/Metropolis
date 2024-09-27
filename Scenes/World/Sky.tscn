@@ -1,13 +1,16 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://addons/SIsilicon.vfx.godrays/GodRays.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/World/DayNightController.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Env_Assets/WorldParticleManager.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scripts/Sky.cs" type="Script" id=4]
 
 [sub_resource type="Curve" id=8]
 max_value = 20.0
 _data = [ Vector2( 0, 20 ), 0.0, -32.663, 0, 0, Vector2( 1, 0 ), 1.32912, 0.0, 0, 0 ]
 
 [node name="Sky" type="Spatial"]
+script = ExtResource( 4 )
 
 [node name="DayNightController" parent="." instance=ExtResource( 2 )]
 FogDirstanceCurve = SubResource( 8 )
@@ -43,3 +46,5 @@ script = ExtResource( 1 )
 exposure = 3.0
 attenuation = 1.18
 light_size = 3.0
+
+[node name="WorldParticleManager" parent="." instance=ExtResource( 3 )]

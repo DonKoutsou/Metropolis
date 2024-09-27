@@ -206,10 +206,10 @@ transform = Transform( -78.8389, -101.548, -162.564, -187.952, 6.48232, 87.1017,
 skeleton = NodePath("../..")
 
 [node name="House2" parent="Clutter" index="15" instance=ExtResource( 7 )]
-transform = Transform( 0.815502, 0, 0.578756, 0, 1, 0, -0.578756, 0, 0.815502, -1946.34, 2.48377, 769.906 )
+transform = Transform( 0.995816, 0, -0.0913965, 0, 1, 0, 0.0913965, 0, 0.995816, -1935.82, 3.22376, 762.219 )
 
 [node name="House3" parent="Clutter" index="16" instance=ExtResource( 7 )]
-transform = Transform( 0.712088, 0, -0.702091, 0, 1, 0, 0.702091, 0, 0.712088, -1898.45, 3.29956, 775.041 )
+transform = Transform( 0.954387, 0, -0.298574, 0, 1, 0, 0.298574, 0, 0.954387, -1897.32, 3.8099, 772.004 )
 
 [node name="StaticBody" parent="Clutter" index="17" instance=ExtResource( 12 )]
 transform = Transform( 22.0028, 6.80931, 0, -4.85224, 15.679, 16.159, 4.77728, -15.4368, 16.4126, 207.244, -0.315842, 348.216 )
@@ -314,7 +314,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1231.27, -89.9059, 2426.53 )
 transform = Transform( 1, 0, 0, 0, 0.554873, 0.831935, 0, -0.831935, 0.554873, -614.091, -66.8198, 2743.07 )
 
 [node name="WindGenerator" parent="Clutter" index="51" instance=ExtResource( 9 )]
-transform = Transform( 0.0711063, 0, -0.186933, 0, 0.2, 0, 0.186933, 0, 0.0711063, -1871.61, 2.52252, 784.715 )
+transform = Transform( 0.0924672, 0, -0.243089, 0, 0.260082, 0, 0.243089, 0, 0.0924672, -1868.24, 2.52252, 789.923 )
 EnergyCapacity = 100.0
 EnergyPerWindStreangth = 0.025
 

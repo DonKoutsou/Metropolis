@@ -77,10 +77,13 @@ public class CodePuzzle : BasePuzzle
     int CorrectNums = 0;
     private void ButtonClicked(MemoryButton ButtonNum)
     {
+        int bnum = ButtonNum.GetButtonNumber();
+        float newpitch = 1 + (((float)bnum - 5) / 50);
+        GetNode<AudioStreamPlayer>("ButtonSound").PitchScale = newpitch;
+        GetNode<AudioStreamPlayer>("ButtonSound").Play();
         if (ClickedSequence.Count < 5)
         {
             int n = ClickedSequence.Count;
-            int bnum = ButtonNum.GetButtonNumber();
 
             Numbers[n].Text = (bnum + 1).ToString();
 

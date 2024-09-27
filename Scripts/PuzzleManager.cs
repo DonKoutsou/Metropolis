@@ -32,16 +32,19 @@ public class PuzzleManager : Control
             case PuzzleTypes.MEMORY:
             {
                 RunningPuzzle = ResourceLoader.Load<PackedScene>(MemoryPuzzle).Instance<BasePuzzle>();
+                ActionTracker.OnActionDone("MemoryPuzzle");
                 break;
             }
             case PuzzleTypes.CODE:
             {
                 RunningPuzzle = ResourceLoader.Load<PackedScene>(CodePuzzle).Instance<BasePuzzle>();
+                ActionTracker.OnActionDone("CodePuzzle");
                 break;
             }
             case PuzzleTypes.LOCK:
             {
                 RunningPuzzle = ResourceLoader.Load<PackedScene>(LockPuzzle).Instance<BasePuzzle>();
+                ActionTracker.OnActionDone("LockPuzzle");
                 break;
             }
         }
@@ -51,6 +54,27 @@ public class PuzzleManager : Control
     
     private void PuzzleFinished(bool resault)
     {
+        if (resault)
+        {
+            switch (RunningPuzzle.GetPuzzleType())
+            {
+                case PuzzleTypes.MEMORY:
+                {
+                    ActionTracker.OnActionDone("MemoryPuzzleSolved");
+                    break;
+                }
+                case PuzzleTypes.CODE:
+                {
+                    ActionTracker.OnActionDone("CodePuzzleSolved");
+                    break;
+                }
+                case PuzzleTypes.LOCK:
+                {
+                    ActionTracker.OnActionDone("LockPuzzleSolved");
+                    break;
+                }
+            }
+        }
         RunningPuzzle.QueueFree();
         RunningPuzzle = null;
         PlayerUI.OnMenuToggled(false);

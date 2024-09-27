@@ -52,7 +52,6 @@ public class PaintCan : Item
 
         Color cap = (Color)data.CustomData["CanColor"];
 	    SetColor(cap);
-
 	}
     public override void GetCustomData(out string[] Keys, out object[] Values)
 	{

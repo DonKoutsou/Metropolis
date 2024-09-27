@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scripts/AchievementData.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/AchievementManager.cs" type="Script" id=2]
+[ext_resource path="res://Assets/UI/Icon/Locker.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/Systems/AchievementNotif.tscn" type="PackedScene" id=4]
+
+[sub_resource type="Resource" id=43]
+script = ExtResource( 1 )
+Name = "LockPuzzleSolved"
+Times = 1
+Description = "Test"
+Icon = ExtResource( 3 )
+
+[sub_resource type="Resource" id=44]
+script = ExtResource( 1 )
+Name = "CodePuzzleSolved"
+Times = 1
+Description = "Test"
+Icon = ExtResource( 3 )
+
+[sub_resource type="Resource" id=45]
+script = ExtResource( 1 )
+Name = "Portal"
+Times = 1
+Description = "Walk through portal"
+Icon = ExtResource( 3 )
+
+[node name="AchievementManager" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 2075, -173 )
+mouse_filter = 2
+script = ExtResource( 2 )
+AchievementNotifScene = ExtResource( 4 )
+Achievements = [ SubResource( 43 ), SubResource( 44 ), SubResource( 45 ) ]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -136.0
+margin_right = 97.0
+custom_constants/separation = -203

@@ -6,11 +6,11 @@ using System.Linq;
 using System.Security.Policy;
 public class WorldSoundManager : Spatial
 {
-    static WorldSoundManager Instance;
-    Dictionary<string, AudioStreamPlayer> Players = new Dictionary<string, AudioStreamPlayer>();
+    [Export]
+    AudioStream[] ThunderVariations = null;
+    static Dictionary<string, AudioStreamPlayer> Players = new Dictionary<string, AudioStreamPlayer>();
     public override void _Ready()
     {
-        Instance = this;
         var children = GetChildren();
         foreach (Node child in children)
         {
@@ -20,15 +20,20 @@ public class WorldSoundManager : Spatial
             }
         }
     }
-    public static WorldSoundManager GetInstance()
+    public static void PlaySound(string SoundName)
     {
-        return Instance;
+        if (Players.ContainsKey(SoundName))
+            Players[SoundName].Play();
     }
-    public AudioStreamPlayer GetSound(string SoundName)
+    public static AudioStreamPlayer GetSound(string SoundName)
     {
-        AudioStreamPlayer Sound;
-        Players.TryGetValue(SoundName, out Sound);
-        return Sound;
+        if (!Players.ContainsKey(SoundName))
+            return null;
+        return Players[SoundName];
+    }
+    private void ThunderFinished()
+    {
+        Players["Thunder"].Stream = ThunderVariations[RandomContainer.Next(0, ThunderVariations.Count())];
     }
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
 //  public override void _Process(float delta)

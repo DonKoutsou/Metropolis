@@ -301,7 +301,7 @@ public class Vehicle : RigidBody
 				Vector3 f = GlobalTransform.basis.z;
 				f.y = 0;
 
-				fmulti += DayNight.GetWindStr();
+				fmulti += CustomEnviroment.GetWindStr();
 
 				wingforce += f * fmulti * speed;
 				if (!WindOnWings)
@@ -352,7 +352,7 @@ public class Vehicle : RigidBody
 		}
 		else
 		{
-			float amm = DayNight.GetWindStr() / 10;
+			float amm = CustomEnviroment.GetWindStr() / 10;
 			for (int i = 0; i < WingMaterials.Count; i++)
 			{
 				//if (DamageMan.IsWingWorking(i))

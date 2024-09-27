@@ -156,9 +156,9 @@ public class CheatMenu : Control
     {
         base._Process(delta);
 		FpsCounter.Text = Engine.GetFramesPerSecond().ToString();
-		RainAmm.Text = Math.Round(DayNight.GetRainStr()).ToString();
-		WindDir.Text = Math.Round(DayNight.GetWindDirection()).ToString();
-		WindAmm.Text = Math.Round(DayNight.GetWindStr()).ToString();
+		RainAmm.Text = Math.Round(CustomEnviroment.GetRainStr()).ToString();
+		WindDir.Text = Math.Round(CustomEnviroment.GetWindDirection()).ToString();
+		WindAmm.Text = Math.Round(CustomEnviroment.GetWindStr()).ToString();
     }
 
     public override void _Input(InputEvent @event)

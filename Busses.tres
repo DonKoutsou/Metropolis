@@ -2,6 +2,10 @@
 
 [sub_resource type="AudioEffectReverb" id=1]
 resource_name = "Reverb"
+room_size = 0.2
+hipass = 0.72
+dry = 0.35
+wet = 0.38
 
 [resource]
 bus/1/name = "UI"

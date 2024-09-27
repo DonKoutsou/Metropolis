@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/MemoryPuzzle.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Systems/Puzzles/MemoryButton.tscn" type="PackedScene" id=2]
@@ -6,87 +6,6 @@
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 2, 0.298, 2.564 )
-
-[sub_resource type="SpatialMaterial" id=18]
-resource_local_to_scene = true
-albedo_color = Color( 0, 0, 0, 1 )
-emission_enabled = true
-emission = Color( 1, 0, 0, 1 )
-emission_energy = 0.0
-emission_operator = 0
-emission_on_uv2 = false
-
-[sub_resource type="SpatialMaterial" id=19]
-resource_local_to_scene = true
-albedo_color = Color( 0, 0, 0, 1 )
-emission_enabled = true
-emission = Color( 1, 0, 0, 1 )
-emission_energy = 0.0
-emission_operator = 0
-emission_on_uv2 = false
-
-[sub_resource type="SpatialMaterial" id=20]
-resource_local_to_scene = true
-albedo_color = Color( 0, 0, 0, 1 )
-emission_enabled = true
-emission = Color( 1, 0, 0, 1 )
-emission_energy = 0.0
-emission_operator = 0
-emission_on_uv2 = false
-
-[sub_resource type="SpatialMaterial" id=21]
-resource_local_to_scene = true
-albedo_color = Color( 0, 0, 0, 1 )
-emission_enabled = true
-emission = Color( 1, 0, 0, 1 )
-emission_energy = 0.0
-emission_operator = 0
-emission_on_uv2 = false
-
-[sub_resource type="SpatialMaterial" id=22]
-resource_local_to_scene = true
-albedo_color = Color( 0, 0, 0, 1 )
-emission_enabled = true
-emission = Color( 1, 0, 0, 1 )
-emission_energy = 0.0
-emission_operator = 0
-emission_on_uv2 = false
-
-[sub_resource type="SpatialMaterial" id=23]
-resource_local_to_scene = true
-albedo_color = Color( 0, 0, 0, 1 )
-emission_enabled = true
-emission = Color( 1, 0, 0, 1 )
-emission_energy = 0.0
-emission_operator = 0
-emission_on_uv2 = false
-
-[sub_resource type="SpatialMaterial" id=24]
-resource_local_to_scene = true
-albedo_color = Color( 0, 0, 0, 1 )
-emission_enabled = true
-emission = Color( 1, 0, 0, 1 )
-emission_energy = 0.0
-emission_operator = 0
-emission_on_uv2 = false
-
-[sub_resource type="SpatialMaterial" id=25]
-resource_local_to_scene = true
-albedo_color = Color( 0, 0, 0, 1 )
-emission_enabled = true
-emission = Color( 1, 0, 0, 1 )
-emission_energy = 0.0
-emission_operator = 0
-emission_on_uv2 = false
-
-[sub_resource type="SpatialMaterial" id=26]
-resource_local_to_scene = true
-albedo_color = Color( 0, 0, 0, 1 )
-emission_enabled = true
-emission = Color( 1, 0, 0, 1 )
-emission_energy = 0.0
-emission_operator = 0
-emission_on_uv2 = false
 
 [sub_resource type="SpatialMaterial" id=29]
 resource_local_to_scene = true
@@ -128,46 +47,29 @@ mesh = SubResource( 1 )
 
 [node name="Button_0" parent="Buttons" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.179, -0.5 )
-skeleton = NodePath("..")
-material/0 = SubResource( 18 )
 
 [node name="Button_1" parent="Buttons" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.179, -0.5 )
-skeleton = NodePath("..")
-material/0 = SubResource( 19 )
 
 [node name="Button_2" parent="Buttons" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.179, -0.5 )
-skeleton = NodePath("..")
-material/0 = SubResource( 20 )
 
 [node name="Button_3" parent="Buttons" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.179, 0 )
-skeleton = NodePath("..")
-material/0 = SubResource( 21 )
 
 [node name="Button_4" parent="Buttons" instance=ExtResource( 2 )]
-material/0 = SubResource( 22 )
 
 [node name="Button_5" parent="Buttons" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.179, 0 )
-skeleton = NodePath("..")
-material/0 = SubResource( 23 )
 
 [node name="Button_6" parent="Buttons" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.179, 0.5 )
-skeleton = NodePath("..")
-material/0 = SubResource( 24 )
 
 [node name="Button_7" parent="Buttons" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.179, 0.5 )
-skeleton = NodePath("..")
-material/0 = SubResource( 25 )
 
 [node name="Button_8" parent="Buttons" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.179, 0.5 )
-skeleton = NodePath("..")
-material/0 = SubResource( 26 )
 
 [node name="StageLights" type="Spatial" parent="."]
 

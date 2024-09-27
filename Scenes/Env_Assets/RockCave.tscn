@@ -10,7 +10,6 @@ data = PoolVector3Array( -1.7327, -0.3823, 1.2232, -1.8052, -0.46, 1.2018, -1.80
 
 [node name="Rock1" type="MeshInstance"]
 transform = Transform( 60.158, 0, 0, 0, 60.158, 0, 0, 0, 60.1579, 0, 0, 0 )
-lod_max_distance = 2000.0
 mesh = ExtResource( 5 )
 script = ExtResource( 3 )
 LOD0 = ExtResource( 5 )

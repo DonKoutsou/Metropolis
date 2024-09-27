@@ -42,7 +42,7 @@ public class Settings : Control
 	}
 	private void UpdateTimeProgression()
 	{
-		DayNight.UpdateTimeProgression(TimeProgression);
+		CustomEnviroment.UpdateTimeProgression(TimeProgression);
 		//GetNode<Panel>("TimeMultiplierSetting").GetNode<RichTextLabel>("TimeProgressionNumber").BbcodeText = "[center]" + TimeProgression.ToString();
 	}
 	private void UpdateFOV()

@@ -27,6 +27,7 @@ normal_scale = 1.0
 normal_texture = ExtResource( 10 )
 uv1_scale = Vector3( 0.002, 0.002, 0.002 )
 uv1_triplanar = true
+uv1_triplanar_sharpness = 1.0
 
 [sub_resource type="CubeMesh" id=53]
 size = Vector3( 2, 2, 5 )

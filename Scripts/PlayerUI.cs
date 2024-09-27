@@ -18,11 +18,13 @@ public class PlayerUI : Control
     [Export]
     NodePath ControlsUI = null;
     [Export]
-    NodePath ActionMenu = null;
+    NodePath ActionManager = null;
     [Export]
-    NodePath PuzzleMenu = null;
+    NodePath PuzzleManager = null;
     [Export]
-    PackedScene InitialTutorialScene = null;
+    NodePath TutorialManager = null;
+    [Export]
+    NodePath AchievementManager = null;
 
     static PlayerUI instance;
 
@@ -37,13 +39,7 @@ public class PlayerUI : Control
         else
             OpenMenus --;
     }
-    public void PlayTutorial(int index)
-    {
-        if (index == 0)
-        {
-            AddChild(InitialTutorialScene.Instance());
-        }
-    }
+    
     public override void _Ready()
     {
         instance = this;
@@ -90,9 +86,13 @@ public class PlayerUI : Control
         else if (type == PlayerUIType.CONTROLS)
             UIToReturn = GetNode<Control>(ControlsUI);
         else if (type == PlayerUIType.ACTION_MENU)
-            UIToReturn = GetNode<Control>(ActionMenu);
+            UIToReturn = GetNode<Control>(ActionManager);
         else if (type == PlayerUIType.PUZZLE)
-            UIToReturn = GetNode<Control>(PuzzleMenu);
+            UIToReturn = GetNode<Control>(PuzzleManager);
+        else if (type == PlayerUIType.TUTORIAL)
+            UIToReturn = GetNode<Control>(TutorialManager);
+        else if (type == PlayerUIType.ACHIEVEMENT)
+            UIToReturn = GetNode<Control>(AchievementManager);
 
         return UIToReturn;
     }
@@ -111,7 +111,7 @@ public class PlayerUI : Control
         GetNode(Inventory).CallDeferred("ConnectPlayer", pl);
         GetNode(CheatMenu).CallDeferred("ConnectPlayer", pl);
         GetNode(MapUI).CallDeferred("ConnectPlayer", pl);
-        GetNode(ActionMenu).CallDeferred("ConnectPlayer", pl);
+        GetNode(ActionManager).CallDeferred("ConnectPlayer", pl);
         GetNode(ControlsUI).CallDeferred("EnableUI");
     }
     public override void _Input(InputEvent @event)
@@ -155,4 +155,6 @@ public enum PlayerUIType
     CONTROLS,
     ACTION_MENU,
     PUZZLE,
+    TUTORIAL,
+    ACHIEVEMENT,
 }

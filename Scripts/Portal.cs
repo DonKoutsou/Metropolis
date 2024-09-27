@@ -11,15 +11,15 @@ public class Portal : Area
     public override void _EnterTree()
     {
         base._EnterTree();
-        Toggle(DayNight.IsDay());
-        DayNight.GetInstance().Connect("DayShift", this, "Toggle");
+        Toggle(CustomEnviroment.IsDay());
+        Sky.GetEnviroment().Connect("DayShift", this, "Toggle");
         
     }
     public override void _ExitTree()
     {
         base._ExitTree();
         GetNode<AnimationPlayer>("AnimationPlayer").Stop();
-        DayNight.GetInstance().Disconnect("DayShift", this, "Toggle");
+        Sky.GetEnviroment().Disconnect("DayShift", this, "Toggle");
     }
     public override void _Ready()
     {
@@ -29,9 +29,11 @@ public class Portal : Area
     {
         if (!Active)
             return;
+        
+        ActionTracker.OnActionDone("Portal");
+
         Vehicle v = (Vehicle)body;
         v.Boost(2);
-        
     }
     public void Toggle(bool t)
     {

@@ -50,7 +50,7 @@ public class Poseidon : Spatial
     bool Enabling = false;
     private void UpdateRotation()
     {
-        float dir = DayNight.GetWindDirection();
+        float dir = CustomEnviroment.GetWindDirection();
         if (gesnervalue <= 0)
         {
             mat.SetShaderParam("TextureRot", -180 - dir);
@@ -85,7 +85,7 @@ public class Poseidon : Spatial
 		{
 			d = 0.05f;
             UpdateRotation();
-            float str = DayNight.GetRainStr();
+            float str = CustomEnviroment.GetRainStr();
 
             mat.SetShaderParam("RainInt", Mathf.Lerp(0.0f, 1.0f, str / 100));
             mat.SetShaderParam("IsRaining", str > 0.1f);

@@ -19,8 +19,8 @@ public class SandParticles : Particles
         d = 0.5f;
         //Vector3 org = Parent.GlobalTransform.origin;
         //Parent.GlobalTranslation = new Vector3 (org.x, 50, org.z);
-        float winddir = DayNight.GetWindDirection();
-        float windstr = DayNight.GetWindStr();
+        float winddir = CustomEnviroment.GetWindDirection();
+        float windstr = CustomEnviroment.GetWindStr();
         float rot = Mathf.Deg2Rad(-360 - winddir);
         SpeedScale = windstr * 0.01f;
         //Lifetime = ((100 - windstr) * 0.5f) + 20;

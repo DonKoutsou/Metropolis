@@ -50,7 +50,7 @@ public class MapUI : Control
         PlayerUI.OnMenuToggled(false);
         GetNode<AnimationPlayer>("AnimationPlayer").Play("MapClose");
         GetNode<Panel>("MapGridPanel").GetNode<Control>("PlayerIconPivot").GetNode<AnimationPlayer>("PlayerIconAnim").Stop();
-        AudioServer.SetBusEffectEnabled(2,0, false);
+        //AudioServer.SetBusEffectEnabled(2,0, false);
         Grid.ToggleMap(false);
         GetNode<AudioStreamPlayer>("MapClose").Play();
     }
@@ -58,7 +58,7 @@ public class MapUI : Control
     {
         if (anim == "MapOpen")
         {
-            AudioServer.SetBusEffectEnabled(2,0, true);
+            //AudioServer.SetBusEffectEnabled(2,0, true);
             Grid.ToggleMap(true);
              GetNode<AudioStreamPlayer>("MapOpen").Play();
         }

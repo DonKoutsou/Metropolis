@@ -56,7 +56,7 @@ public class Character : KinematicBody
 		anim = GetNode<Spatial>("Pivot").GetNode<Spatial>("Guy").GetNode<Character_Animations>("AnimationPlayer");
 		NightLight = GetNode<SpotLight>("Pivot/Guy/Armature/Skeleton/BoneAttachment/HeadPivot/NightLight");
 		BulbMat = (SpatialMaterial)GetNode<MeshInstance>("Pivot/Guy/Armature/Skeleton/BoneAttachment/HeadPivot/MeshInstance").GetActiveMaterial(0);
-		ToggleNightLight(DayNight.IsDay());
+		ToggleNightLight(CustomEnviroment.IsDay());
 		IdleTimer = GetNode<Timer>("IdleTimer");
 		SetClothing();
 
@@ -95,8 +95,8 @@ public class Character : KinematicBody
 		}
 	}
 	//Subscribing to shifting of day to turn on head lamp
-	public override void _EnterTree()	{	DayNight.GetInstance().Connect("DayShift", this, "ToggleNightLight");	}
-    public override void _ExitTree()	{	DayNight.GetInstance().Disconnect("DayShift", this, "ToggleNightLight");	}
+	public override void _EnterTree()	{	Sky.GetEnviroment().Connect("DayShift", this, "ToggleNightLight");	}
+    public override void _ExitTree()	{	Sky.GetEnviroment().Disconnect("DayShift", this, "ToggleNightLight");	}
     public Character_Animations Anims()	{	return anim;	}
 	public string GetCharacterName()	{	return CharacterName;	}
 	public void UpdateLocationToMove(Vector3 NewLoc) {	loctomove = NewLoc;	}
@@ -137,7 +137,7 @@ public class Character : KinematicBody
 	}
 	public virtual void Respawn()
 	{
-		ToggleNightLight(DayNight.IsDay());
+		ToggleNightLight(CustomEnviroment.IsDay());
 		m_balive = true;
 		IsUncon = false;
 		anim.ToggleIdle();

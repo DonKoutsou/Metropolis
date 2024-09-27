@@ -20,29 +20,25 @@ public class Street_Lamp : StaticBody
             TurnOff();
             return;
         }
-        DayNight dcont = DayNight.GetInstance();
-        if (dcont == null)
-            return;
-        Toggle(!DayNight.IsDay());
+
+        Toggle(!CustomEnviroment.IsDay());
            //TurnOff();
         //else
             //TurnOn();
 
         if (connected)
             return;
-        dcont.Connect("DayShift", this, "Toggle");
+        Sky.GetEnviroment().Connect("DayShift", this, "Toggle");
         //dcont.Connect("NightEventHandler", this, "TurnOn");
         connected = true;
     }
     public override void _ExitTree()
     {
         base._ExitTree();
-        DayNight dcont = DayNight.GetInstance();
-        if (dcont == null)
-            return;
+
         if (!connected)
             return;
-        dcont.Disconnect("DayShift", this, "Toggle");
+        Sky.GetEnviroment().Disconnect("DayShift", this, "Toggle");
         //dcont.Disconnect("NightEventHandler", this, "TurnOn");
         connected = false;
     }

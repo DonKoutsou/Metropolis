@@ -1,7 +1,6 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://Scripts/Intro.cs" type="Script" id=1]
-[ext_resource path="res://Scenes/Env_Assets/WorldParticleManager.tscn" type="PackedScene" id=2]
 [ext_resource path="res://UIThemes/ButtonGreen.tres" type="Theme" id=3]
 [ext_resource path="res://Assets/Water/textures/post/waterplane_low.obj" type="ArrayMesh" id=4]
 [ext_resource path="res://Scenes/HUD/StartingScreenFont.tres" type="DynamicFont" id=5]
@@ -389,8 +388,6 @@ graph_offset = Vector2( -352, -31 )
 pause_mode = 1
 script = ExtResource( 1 )
 
-[node name="WorldParticleManager" parent="." instance=ExtResource( 2 )]
-
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 55.5804, -38.3217, 2540.33 )
 fov = 75.0
@@ -450,16 +447,16 @@ material/0 = ExtResource( 8 )
 transform = Transform( -0.492894, 0, 0.870089, 0, 1, 0, -0.870089, 0, -0.492894, 76.0386, 91.2997, 1060.73 )
 
 [node name="HeadRot2Pivot" parent="Gen3Machine/Armature/Skeleton" index="0"]
-transform = Transform( -1, -7.45078e-09, -1.63913e-06, 2.04368e-07, 1.00003, 2.19968e-07, 1.63913e-06, -7.07796e-08, -1, -3.61719, 280.526, 20.6719 )
+transform = Transform( -1, -7.45078e-09, -1.63913e-06, 2.04283e-07, 1.00003, 2.19968e-07, 1.63913e-06, -7.07796e-08, -1, -4.32813, 280.56, 20.5215 )
 
 [node name="BoneAttachment" parent="Gen3Machine/Armature/Skeleton" index="1"]
-transform = Transform( 0.997523, -0.0634974, -0.030265, 0.0594985, 0.991172, -0.118479, 0.037521, 0.116385, 0.992495, -2.38819, 265.243, 12.1759 )
+transform = Transform( 0.997387, -0.0670435, -0.0269119, 0.0634412, 0.991026, -0.117657, 0.0345586, 0.115643, 0.992689, -3.06674, 265.275, 12.0351 )
 
 [node name="MeshInstance" parent="Gen3Machine/Armature/Skeleton/BoneAttachment/HeadPivot" index="0"]
 mesh = SubResource( 64 )
 
 [node name="InstrumentAtatchment" parent="Gen3Machine/Armature/Skeleton" index="2"]
-transform = Transform( 0.9984, -0.0265243, -0.0499277, 0.0251939, 0.999315, -0.02709, 0.0506121, 0.0257887, 0.998385, 0.623297, 213.082, 0.0952174 )
+transform = Transform( 0.998513, -0.0293127, -0.0459615, 0.0284413, 0.999405, -0.0194999, 0.0465058, 0.0181637, 0.998752, 0.0736814, 213.046, 0.346355 )
 
 [node name="Instrument" parent="Gen3Machine/Armature/Skeleton/InstrumentAtatchment" index="2"]
 transform = Transform( -36.0815, -20.3793, 2.87583, -19.6836, 35.8642, 7.21661, -6.00602, 4.8918, -40.9278, 27.6828, -49.0322, -37.2074 )

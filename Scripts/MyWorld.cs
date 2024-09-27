@@ -98,7 +98,7 @@ public class MyWorld : Spatial
 		EmitSignal("PlayerSpawnedEventHandler", pl);
 		if (ShowTutorial)
 		{
-			PlayerUI.GetInstance().PlayTutorial(0);
+			((TutorialManager)PlayerUI.GetInstance().GetUI(PlayerUIType.TUTORIAL)).PlayTutorial("StartTutorial");
 		}
 		
 		CameraAnimationPlayer.GetInstance().FadeIn(6);
@@ -292,7 +292,7 @@ public class MyWorld : Spatial
 		
 		//to.Visited = true;
 		//MapGrid.GetInstance().SetIslandVisited(to);
-		DayNight.GetInstance().UpdatePlayerDistance(Math.Max(Math.Abs(to.Position.x), Math.Abs(to.Position.y)) / 15);
+		Sky.GetEnviroment().UpdatePlayerDistance(Math.Max(Math.Abs(to.Position.x), Math.Abs(to.Position.y)) / 15);
 		
 		int ViewDistance = Settings.GetGameSettings().ViewDistance;
 

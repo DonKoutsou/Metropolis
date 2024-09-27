@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class MemoryButton : MeshInstance
+public class MemoryButton : Spatial
 {
     [Signal]
     public delegate void OnPressed(MemoryButton button);

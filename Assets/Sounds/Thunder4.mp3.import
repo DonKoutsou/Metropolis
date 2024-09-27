@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Thunder4.mp3-db7a8e5423a6d5170b0472e4161f5448.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/Thunder4.mp3"
+dest_files=[ "res://.import/Thunder4.mp3-db7a8e5423a6d5170b0472e4161f5448.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

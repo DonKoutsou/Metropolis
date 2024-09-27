@@ -26,7 +26,9 @@ public class StartingScreen : Control
 		intro = GetNode<Control>("Intro");
 		FadeInOut = GetNode<CanvasLayer>("FadeInOut").GetNode<MainMenuAnimation>("MainMenuAnimation");
 		FadeInOut.FadeOut();
+		GetNode<Control>("FadeInOut/ColorRect").Show();
 		Init();
+		ActionTracker.LoadActions();
 	}
 	private void FillButtonList()
 	{
@@ -112,7 +114,10 @@ public class StartingScreen : Control
 	private void On_Exit_Button_Down()
 	{
 		if (GameIsRunning)
+		{
 			SaveLoadManager.GetInstance().SaveGame();
+		}
+		ActionTracker.SaveActions();
 		GetTree().Quit();
 	}
 	public void Pause(bool toggle)

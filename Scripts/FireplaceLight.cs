@@ -67,7 +67,7 @@ public class FireplaceLight : StaticBody
             double sample = rand.NextDouble();
             double scaled = (sample * 1.2) + 0.6;
             light.LightEnergy = (float)scaled;
-            if (DayNight.GetRainStr() > 10 && !covered)
+            if (CustomEnviroment.GetRainStr() > 10 && !covered)
                 ToggleFileplace();
             //double scaled1 = (sample * 0.5) + -0.5;
             //double scaled2 = (sample * 0.5) + -0.5;

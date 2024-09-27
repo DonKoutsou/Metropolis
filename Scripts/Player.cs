@@ -27,7 +27,6 @@ public class Player : Character
 
 	[Export]
 	protected float RunSpeed = 20;
-
 	////// Energy ///////
 	//Consumption curve
 	[Export]
@@ -41,16 +40,13 @@ public class Player : Character
 	//Toggle that makes character follow cursor without having to rightclick. Keybinding [TAB]
 	bool Autowalk = false;
 	bool IsRunning = false;
-
 	//Camera DialogueCam;
-
 	static Player instance;
 	public bool HasBaby = false;
 	public bool BabyAlive = true;
 	public bool BeingTalkedTo = false;
 	public bool CanTraverseDeep = false;
 	protected Inventory CharacterInventory;
-
 	public Inventory GetCharacterInventory()	{	return CharacterInventory;	}
 	public void SetRunSpeed(int NewSpeed)	{	RunSpeed = NewSpeed;	}
 	public override void _EnterTree()	{	base._EnterTree();	instance = this;	}
@@ -61,7 +57,6 @@ public class Player : Character
 	public float GetRPM()	{	return rpm;	}
 	public void Teleport(Vector3 pos, Vector3 rot)
 	{
-		
 		PhysicsServer.BodySetState(GetRid(), PhysicsServer.BodyState.Transform, Transform.Identity.Translated(pos - GlobalTranslation));
 		if (HasVecicle)
 			currveh.GlobalTranslation = pos;

@@ -150,6 +150,7 @@ public class Furniture : StaticBody
 	{
 		Item foundit;
 		Search(out foundit);
+		ActionTracker.OnActionDone("FurnitureLoot");
 		if (foundit != null)
 		{
 			pl.GetCharacterInventory().InsertItem(foundit);

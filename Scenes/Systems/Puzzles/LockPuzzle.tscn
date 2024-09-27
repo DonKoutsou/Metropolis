@@ -185,7 +185,6 @@ material/0 = SubResource( 5 )
 transform = Transform( 1, 0, 0, 0, 0.999998, 0, 0, 0, 0.999998, 0, 0.50226, -0.26319 )
 
 [node name="LockPick2" type="Spatial" parent="LockRotatingBody/LockPick"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="Body4" type="MeshInstance" parent="LockRotatingBody/LockPick/LockPick2"]
 transform = Transform( 3.14398e-08, 3.03683e-08, 0.999996, 0.694749, -0.719254, 0, 0.719258, 0.694746, -4.37112e-08, 0, 1.78, -1.68084 )

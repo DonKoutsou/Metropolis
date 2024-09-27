@@ -15,7 +15,7 @@ public class WindDetector : MeshInstance
 		if (d > 0)
             return;
         d = 0.5f;
-        Vector3 newrot = new Vector3(0, Mathf.Deg2Rad(-360 - DayNight.GetWindDirection()), 0);
+        Vector3 newrot = new Vector3(0, Mathf.Deg2Rad(-360 - CustomEnviroment.GetWindDirection()), 0);
         GlobalRotation = newrot;
         if (Mathf.Rad2Deg(Rotation.y) < 90 && Mathf.Rad2Deg(Rotation.y) > -90)
             BoatFacingWind = true;

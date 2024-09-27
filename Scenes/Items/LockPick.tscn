@@ -20,13 +20,13 @@ angular_damp = 1.22
 script = ExtResource( 1 )
 ItemType = 24
 ItemIcon = ExtResource( 4 )
-ItemName = "Εργαλείο διάρρηξης"
-ItemDesc = "CassetteDescription"
+ItemName = "LPick"
+ItemDesc = "LPickDescription"
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( -1.53736e-08, 0, 0.351706, 0, 0.351706, 0, -0.351706, 0, -1.53736e-08, 0, 0, 0 )
-material_override = ExtResource( 3 )
 mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
 script = ExtResource( 6 )
 LOD0 = ExtResource( 9 )
 LOD1 = ExtResource( 9 )

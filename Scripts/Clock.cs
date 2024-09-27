@@ -8,7 +8,7 @@ public class Clock : Item
     public void UpdateTime()
     {
         int hour, mins;
-        DayNight.GetTime(out hour, out mins);
+        CustomEnviroment.GetTime(out hour, out mins);
         string minstr = mins.ToString();
         string Hstring = hour.ToString();
         if (mins < 10)

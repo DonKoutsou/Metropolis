@@ -15,6 +15,7 @@ public class Rain : Spatial
     {
         base._Ready();
         RainPart = GetNode<Particles>("Clouds2");
+        SetProcess(false);
     }
     public override void _Process(float delta)
     {
@@ -27,8 +28,8 @@ public class Rain : Spatial
         //float rotf = 45 * (DayNight.GetWindStr() - 50) / 100;
         //rot.x = Mathf.Deg2Rad( rotf );
         //RainPart.Rotation = rot;
-        AudioStreamPlayer RainSound = WorldSoundManager.GetInstance().GetSound("Rain");
-        float multi = DayNight.GetRainStr() / 100;
+        AudioStreamPlayer RainSound = WorldSoundManager.GetSound("Rain");
+        float multi = CustomEnviroment.GetRainStr() / 100;
         if (multi < 0.1)
         {
             RainPart.Emitting = false;

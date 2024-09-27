@@ -106,7 +106,7 @@ public class WindGenerator : StaticBody
             return;
         d = 0.5f;
 
-        float windstr = DayNight.GetWindStr();
+        float windstr = CustomEnviroment.GetWindStr();
 
         if (UpdateAnims)
             UpdateGenerator(windstr);
@@ -144,7 +144,7 @@ public class WindGenerator : StaticBody
     public void UpdateGenerator(float windstr)
     {
         //mut.Lock();
-        float winddir = DayNight.GetWindDirection();
+        float winddir = CustomEnviroment.GetWindDirection();
         //mut.Unlock();
         //Spatial rotorpivot = GetNode<Spatial>("Rotor_Pivot");
         float rot = winddir;
@@ -254,8 +254,8 @@ public class WindGenerator : StaticBody
         ConsumeEnergy(rechargeamm);
         int time = (int)Math.Round(rechargeamm / 6);
         int days, hours, mins;
-        DayNight.MinsToTime(time, out days,out hours, out mins);
-        DayNight.ProgressTime(days, hours, mins);
+        CustomEnviroment.MinsToTime(time, out days,out hours, out mins);
+        CustomEnviroment.ProgressTime(days, hours, mins);
     }
     public string GetActionName(Player pl)
     {
@@ -288,9 +288,9 @@ public class WindGenerator : StaticBody
     public void SetData(WindGeneratorInfo info)
 	{
         int curday;
-        DayNight.GetDay(out curday);
+        CustomEnviroment.GetDay(out curday);
         int curHours, curMins;
-        DayNight.GetTime(out curHours, out curMins);
+        CustomEnviroment.GetTime(out curHours, out curMins);
         int hours = curHours - info.Despawnhour;
         int days = curday - info.DespawnDay;
         while (days > 0)
@@ -356,8 +356,8 @@ public class WindGeneratorInfo
 	public int Despawnmins = 0;
 	public void UpdateInfo(WindGenerator gen)
 	{
-		DayNight.GetDay(out DespawnDay);
-		DayNight.GetTime(out Despawnhour, out Despawnmins);
+		CustomEnviroment.GetDay(out DespawnDay);
+		CustomEnviroment.GetTime(out Despawnhour, out Despawnmins);
 		CurrentEnergy = gen.GetCurrentEnergy();
         Locked = gen.IsLocked();
 	}

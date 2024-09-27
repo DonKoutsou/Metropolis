@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public class SaveLoadManager : Control
+public class SaveLoadManager : Node
 {
 	static SaveLoadManager Instance;
 	public override void _Ready()
@@ -16,8 +16,7 @@ public class SaveLoadManager : Control
 	}
 	public void ClearSaves()
 	{
-		 Directory dir = new Directory();
-
+		Directory dir = new Directory();
 		dir.Remove("user://SavedGame.tres");
 	}
 	
@@ -67,8 +66,8 @@ public class SaveLoadManager : Control
 		}
 
 		int day, hour, mins;
-		DayNight.GetDay(out day);
-		DayNight.GetTime(out hour, out mins);
+		CustomEnviroment.GetDay(out day);
+		CustomEnviroment.GetTime(out hour, out mins);
 
 		int[] Date = new int[3];
 		Date[0] = day;

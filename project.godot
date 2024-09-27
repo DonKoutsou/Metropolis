@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Resource",
+"class": "AchievemntData",
+"language": "GDScript",
+"path": "res://Scripts/AchievementData.gd"
+}, {
+"base": "Resource",
 "class": "BreakableSaveInfo",
 "language": "GDScript",
 "path": "res://Scripts/BreakableSaveInfo.gd"
@@ -65,6 +70,11 @@ _global_script_classes=[ {
 "path": "res://Scripts/PortSaveInfo.gd"
 }, {
 "base": "Resource",
+"class": "SavedActions",
+"language": "GDScript",
+"path": "res://Scripts/Saved_Actions.gd"
+}, {
+"base": "Resource",
 "class": "SavedGame",
 "language": "GDScript",
 "path": "res://Scripts/saved_game.gd"
@@ -90,6 +100,7 @@ _global_script_classes=[ {
 "path": "res://Scripts/VehicleSaveInfo.gd"
 } ]
 _global_script_class_icons={
+"AchievemntData": "",
 "BreakableSaveInfo": "",
 "CharacterSaveInfo": "",
 "DecoSaveInfo": "",
@@ -101,6 +112,7 @@ _global_script_class_icons={
 "ItemSaveInfo": "",
 "MySafeResourceLoader": "",
 "PortSaveInfo": "",
+"SavedActions": "",
 "SavedGame": "",
 "Template": "",
 "TexturePacker": "",

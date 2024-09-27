@@ -1,0 +1,13 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scenes/Systems/Tutorials/BaseTutorial.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/TutorialVids/WalkTutorial.webm" type="VideoStream" id=2]
+[ext_resource path="res://Assets/TutorialVids/SelectionTutorial.webm" type="VideoStream" id=3]
+[ext_resource path="res://Assets/TutorialPics/MapInv.png" type="Texture" id=4]
+
+[node name="Tutorial" instance=ExtResource( 1 )]
+Tutorials = {
+"Tutorial1": ExtResource( 2 ),
+"Tutorial2": ExtResource( 3 ),
+"Tutorial3": ExtResource( 4 )
+}
