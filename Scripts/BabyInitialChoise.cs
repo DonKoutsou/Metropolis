@@ -36,6 +36,7 @@ public class BabyInitialChoise : Control
         pl = GetNode<AnimationPlayer>("AnimationPlayer");
         pl.Play("Start");
         SetProcess(false);
+        GetNode<Button>("VBoxContainer/HBoxContainer/Button").GrabFocus();
     }
     public override void _Process(float delta)
     {
