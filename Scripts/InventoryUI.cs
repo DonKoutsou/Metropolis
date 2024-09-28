@@ -94,6 +94,8 @@ public class InventoryUI : Control
             sl.Connect("Focused", this, "SetFocused");
         }
         SetProcess(false);
+
+        Visible = false;
     }
     public void OnItemAdded(Item it)
     {
@@ -133,6 +135,12 @@ public class InventoryUI : Control
         IsOpen = true;
         SetProcess(true);
         SoundOpen.Play();
+        Visible = true;
+        if (ControllerInput.IsUsingController())
+        {
+            slots[0].GetNode<Button>("ItemIcon").GrabFocus();
+        }
+        
     }
     public void CloseInventory()
     {
@@ -148,6 +156,13 @@ public class InventoryUI : Control
 
         if (FocusedSlot != null)
             SetFocused(false, FocusedSlot);
+    }
+    private void CloseAnimStoped(string anim)
+    {
+        if (anim == "MenuClose")
+        {
+            Visible = false;
+        }
     }
     float d = 0.1f;
     public override void _Process(float delta)
@@ -316,7 +331,7 @@ public class InventoryUI : Control
         if (t)
         {
             if (it == null)
-            return;
+                return;
             showingDesc = true;
             ShowingDescSample = it;
             DescPan.Show();
@@ -333,9 +348,16 @@ public class InventoryUI : Control
     }
     public void SetFocused(bool t, InventoryUISlot slot)
     {
+        if (slot.item == null)
+        {
+            slot.Toggle(false);
+            return;
+        }
+            
+
         if (FocusedSlot != null)
             FocusedSlot.Toggle(false);
-
+        
         FocusedSlot = slot;
         if (t)
         {
@@ -349,8 +371,6 @@ public class InventoryUI : Control
             FocusedSlot = null;
             ItemPreviewPivot.GetInstance().Stop();
         }
-            
-
         slot.Toggle(t);
     }
     /*private void On_Repair_Button_Down()

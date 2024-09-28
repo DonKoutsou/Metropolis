@@ -412,5 +412,7 @@ public class MyWorld : Spatial
 		start.Pause(!paused);
 
 		GetTree().Paused = !paused;
+
+		
 	}
 };

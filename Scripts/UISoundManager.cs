@@ -42,6 +42,7 @@ public class UISoundManager : Node
             Button b = (Button)Buttons[i];
             b.Connect("button_down", this, "OnButtonPressed");
             b.Connect("mouse_entered", this, "OnButtonHovered");
+            b.Connect("focus_entered", this, "OnButtonHovered");
         }
     }
     private void OnButtonHovered()

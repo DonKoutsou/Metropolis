@@ -164,21 +164,17 @@ mouse_filter = 2
 [node name="PickUp_Button" type="Button" parent="VBoxContainer/PanelContainer/VBoxContainer" groups=["Buttons"]]
 margin_right = 100.0
 margin_bottom = 39.0
-focus_mode = 0
 mouse_default_cursor_shape = 2
 theme = ExtResource( 1 )
 action_mode = 0
-enabled_focus_mode = 0
 text = "Πάρε"
 
 [node name="Interact_Button" type="Button" parent="VBoxContainer/PanelContainer/VBoxContainer" groups=["Buttons"]]
 margin_top = 43.0
 margin_right = 100.0
 margin_bottom = 82.0
-focus_mode = 0
 mouse_default_cursor_shape = 2
 theme = ExtResource( 1 )
-enabled_focus_mode = 0
 text = "???"
 icon_align = 1
 expand_icon = true
@@ -187,20 +183,16 @@ expand_icon = true
 margin_top = 86.0
 margin_right = 100.0
 margin_bottom = 125.0
-focus_mode = 0
 mouse_default_cursor_shape = 2
 theme = SubResource( 27 )
-enabled_focus_mode = 0
 text = "Interact"
 
 [node name="Interact_Button3" type="Button" parent="VBoxContainer/PanelContainer/VBoxContainer" groups=["Buttons"]]
 margin_top = 129.0
 margin_right = 100.0
 margin_bottom = 168.0
-focus_mode = 0
 mouse_default_cursor_shape = 2
 theme = SubResource( 27 )
-enabled_focus_mode = 0
 text = "Interact"
 
 [node name="VehicleUI" parent="VBoxContainer" instance=ExtResource( 6 )]

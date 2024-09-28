@@ -16,7 +16,7 @@ using System.Linq;
 ////////////////////////////////////////////////////////////////////////////////////////                                                                                         
 public class ActionMenu : Control
 {
-	Spatial SelectedObj;
+	Node SelectedObj;
 	Player Play;
     bool selecting = false;
     Button PickButton;
@@ -53,12 +53,26 @@ public class ActionMenu : Control
 		IntButton3.Hide();
 
 		SetProcessInput(false);
-
+	}
+	List<Node> InteractableNodes = new List<Node>();
+	int CurrentSelected = 0;
+	public void ActionObjectInteraction(bool EnterBool, Node body)
+	{
+		body.Call("HighLightObject", EnterBool, OutLineMat);
+		if (EnterBool)
+			InteractableNodes.Add(body);
+		else
+		{
+			InteractableNodes.Remove(body);
+			Stop();
+		}
+			
 	}
 	public void ConnectPlayer(Player pl)
 	{
 		Play = pl;
 		SetProcessInput(true);
+		pl.Connect("ActionObjectInteraction", this, "ActionObjectInteraction");
 	}
 	public void DissconnectPlayer()
 	{
@@ -68,7 +82,7 @@ public class ActionMenu : Control
 	{
 		return SelectedObj != null;
 	}
-	public bool IsSelected(Spatial obj)
+	public bool IsSelected(Node obj)
 	{
 		return SelectedObj == obj;
 	}
@@ -153,7 +167,7 @@ public class ActionMenu : Control
 		DialogueManager.GetInstance().ForceDialogue(Play, (string)SelectedObj.Call("GetObjectDescription"));
 		//Play.GetTalkText().Talk((string)SelectedObj.Call("GetObjectDescription"));
 	}
-	public void Start(Spatial obj)
+	public void Start(Node obj)
 	{
 		if (Play.BeingTalkedTo)
 			return;
@@ -164,27 +178,51 @@ public class ActionMenu : Control
 		if (obj is Vehicle v)
 		{
 			if (Play.HasVehicle() && Play.GetVehicle() == v)
+			{
 				GetNode<VehicleHud>("VBoxContainer/VehicleUI").Visible = true;
-
+				GetNode<Button>("VBoxContainer/VehicleUI/Panel/MarginContainer/HBoxContainer/Label/EngineToggle").FocusMode = FocusModeEnum.All;
+			}
+				
 		}
 		else
+		{
 			GetNode<VehicleHud>("VBoxContainer/VehicleUI").Visible = false;
+			GetNode<Button>("VBoxContainer/VehicleUI/Panel/MarginContainer/HBoxContainer/Label/EngineToggle").FocusMode = FocusModeEnum.None;
+		}
+			
 
 		//PickButton.Show();
 		IntButton.Show();
 
 		PickButton.Text = (string)obj.Call("GetActionName", Play);
 		PickButton.Visible = (bool)obj.Call("ShowActionName", Play);
+		if (PickButton.Visible)
+			PickButton.FocusMode = FocusModeEnum.All;
+		else
+			PickButton.FocusMode = FocusModeEnum.None;
 
 		IntButton2.Text = (string)obj.Call("GetActionName2", Play);
 		IntButton2.Visible = (bool)obj.Call("ShowActionName2", Play);
+		if (IntButton2.Visible)
+			IntButton2.FocusMode = FocusModeEnum.All;
+		else
+			IntButton2.FocusMode = FocusModeEnum.None;
 
 		IntButton3.Text = (string)obj.Call("GetActionName3", Play);
 		IntButton3.Visible = (bool)obj.Call("ShowActionName3", Play);
+		if (IntButton3.Visible)
+			IntButton3.FocusMode = FocusModeEnum.All;
+		else
+			IntButton3.FocusMode = FocusModeEnum.None;
 
 		DeselectCurrent();
 		SelectedObj = obj;
 		SelectedObj.Call("HighLightObject", true, OutLineMat);
+
+		if (ControllerInput.IsUsingController())
+		{
+			IntButton.GrabFocus();
+		}
 		
 		Show();
 		SetPhysicsProcess(true);
@@ -219,7 +257,6 @@ public class ActionMenu : Control
 		//WarpMouse(GetViewport().Size/2);
 		RectPosition = new Vector2 (0.0f, 0.0f);
 	}
-	
 	public override void _PhysicsProcess(float delta)
 	{
 		ActionComponent Acomp = SelectedObj.GetNode<ActionComponent>("ActionComponent");
@@ -326,6 +363,19 @@ public class ActionMenu : Control
 				return;
 			}
 			Start(obj);
+		}
+		if (@event.IsActionPressed("NextInteractable"))
+		{
+			if (InteractableNodes.Count > CurrentSelected)
+			{
+				CurrentSelected ++;
+				Start(InteractableNodes[CurrentSelected-1]);
+			}
+			else
+			{
+				CurrentSelected = 0;
+				Stop();
+			}
 		}
 		if (@event.IsActionPressed("ActionCheck"))
 		{

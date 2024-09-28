@@ -35,6 +35,18 @@ public class Settings : Control
 	private void OpenSettings()
 	{
 		GetNode<SettingsPanel>("SettingsPanel").Visible = !GetNode<SettingsPanel>("SettingsPanel").Visible;
+		GetNode<Button>("SettingsPanel/Panel/GridContainer/Full_Screen_Check").GrabFocus();
+	}
+	private void OnSettingsClosed()
+	{
+		TakeFocus();
+	}
+	public void TakeFocus()
+	{
+		if (GetNode<Button>("Panel/Start_Button_Half").Visible)
+			GetNode<Button>("Panel/Start_Button_Half").GrabFocus();
+		if (GetNode<Button>("Panel/Start_Button").Visible)
+			GetNode<Button>("Panel/Start_Button").GrabFocus();
 	}
 	private void UpdateViewDistance()
 	{

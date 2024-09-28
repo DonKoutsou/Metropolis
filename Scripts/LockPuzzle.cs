@@ -13,6 +13,7 @@ public class LockPuzzle : BasePuzzle
 
     public override void _Ready()
     {
+        base._Ready();
         LockPick = GetNode<Spatial>("LockRotatingBody/LockPick");
         LockRotatingBody = GetNode<Spatial>("LockRotatingBody");
 
@@ -21,6 +22,8 @@ public class LockPuzzle : BasePuzzle
         Sounds.Add("SolvedSound", GetNode<AudioStreamPlayer>("SolvedSound"));
 
         ProduceSolution();
+
+        
     }
     private void ProduceSolution()
     {

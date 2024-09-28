@@ -252,10 +252,6 @@ public class Inventory : Spatial
         var parent = item.GetParent();
         if (parent != null)
             parent.RemoveChild(item);
-
-        
-
-        
         //currentweight += itW;
         
         WorldMap map = WorldMap.GetInstance();

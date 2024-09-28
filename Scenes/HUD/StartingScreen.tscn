@@ -241,9 +241,9 @@ margin_left = -179.0
 margin_top = -73.5
 margin_right = -4.0
 margin_bottom = -33.5
-focus_mode = 0
+focus_neighbour_right = NodePath("../Continue_Button_Half")
+focus_neighbour_bottom = NodePath("../SeedSetting/SeedText")
 theme = ExtResource( 19 )
-enabled_focus_mode = 0
 text = "Έναρξη"
 
 [node name="Continue_Button_Half" type="Button" parent="Settings/Panel" groups=["Buttons", "Translatables"]]
@@ -255,9 +255,9 @@ margin_left = 4.0
 margin_top = -73.5
 margin_right = 179.0
 margin_bottom = -33.5
-focus_mode = 0
+focus_neighbour_left = NodePath("../Start_Button_Half")
+focus_neighbour_bottom = NodePath("../SeedSetting/SeedText")
 theme = ExtResource( 19 )
-enabled_focus_mode = 0
 text = "Συνέχεια"
 
 [node name="Start_Button" type="Button" parent="Settings/Panel" groups=["Buttons", "Translatables"]]
@@ -269,9 +269,8 @@ margin_left = -179.0
 margin_top = -73.5
 margin_right = 179.0
 margin_bottom = -33.5
-focus_mode = 0
+focus_neighbour_bottom = NodePath("../SeedSetting/SeedText")
 theme = ExtResource( 19 )
-enabled_focus_mode = 0
 text = "Έναρξη"
 
 [node name="Exit_Button" type="Button" parent="Settings/Panel" groups=["Buttons", "Translatables"]]
@@ -283,10 +282,8 @@ margin_left = -178.0
 margin_top = 230.5
 margin_right = 180.0
 margin_bottom = 270.5
-focus_mode = 0
 theme = ExtResource( 19 )
 action_mode = 0
-enabled_focus_mode = 0
 text = "Exit"
 
 [node name="SeedSetting" type="Panel" parent="Settings/Panel"]
@@ -309,6 +306,7 @@ margin_left = -107.0
 margin_top = -23.0
 margin_right = -16.0
 margin_bottom = 23.0
+focus_neighbour_bottom = NodePath("../../Settings_Button")
 custom_fonts/font = ExtResource( 11 )
 custom_styles/read_only = SubResource( 23 )
 custom_styles/focus = SubResource( 22 )
@@ -337,6 +335,7 @@ margin_left = -176.0
 margin_top = 130.5
 margin_right = 178.0
 margin_bottom = 178.5
+focus_neighbour_bottom = NodePath("../Exit_Button")
 theme = ExtResource( 19 )
 text = "Ρυθμίσεις"
 
@@ -685,4 +684,5 @@ script = ExtResource( 16 )
 [connection signal="pressed" from="Settings/Panel/Start_Button" to="." method="On_Start_Button_Down"]
 [connection signal="pressed" from="Settings/Panel/Exit_Button" to="." method="On_Exit_Button_Down"]
 [connection signal="pressed" from="Settings/Panel/Settings_Button" to="Settings" method="OpenSettings"]
+[connection signal="OnSettingsClosed" from="Settings/SettingsPanel" to="Settings" method="OnSettingsClosed"]
 [connection signal="timeout" from="RestartTimer" to="." method="StopGame"]

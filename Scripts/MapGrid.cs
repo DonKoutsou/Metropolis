@@ -187,6 +187,34 @@ public class MapGrid : GridContainer
             RectPosition = new Vector2(pos.x, pos.y);
             PlayerIconPivot.RectPosition = RectPosition;
 		}
+        else if (@event is InputEventJoypadMotion)
+        {
+            Control parent = (Control)GetParent();
+
+            Vector2 pos = new Vector2(
+            Input.GetActionStrength("CameraRight") - Input.GetActionStrength("CameraLeft"),
+            Input.GetActionStrength("CameraDown") - Input.GetActionStrength("CameraUp")
+            ).LimitLength(2);
+
+            pos = new Vector2((float)Math.Round((double)pos.x * 10, 3), (float)Math.Round((double)pos.y * 10, 3));
+
+            Vector2 size = RectSize * RectScale;
+
+            if (pos.x > 14)
+                pos.x = 14;
+            if (Mathf.Abs(pos.x) + parent.RectSize.x  > size.x + 14)
+                pos.x = -(size.x + 14 - parent.RectSize.x);
+            if (pos.y > 14)
+                pos.y = 14;
+            if (Mathf.Abs(pos.y) +  parent.RectSize.y> size.y + 14)
+                pos.y = -(size.y + 14 - parent.RectSize.y);
+
+            MapGridx.RectPosition += new Vector2(pos.x, 8);
+
+            MapGridy.RectPosition += new Vector2(8, pos.y);
+            RectPosition += new Vector2(pos.x, pos.y);
+            PlayerIconPivot.RectPosition = RectPosition;
+        }
         if (@event.IsActionPressed("ZoomIn"))
 		{
 			if (RectScale.x < MaxZoomScale)
@@ -203,7 +231,6 @@ public class MapGrid : GridContainer
                 MapGridx.AddConstantOverride("hseparation", (int)(12 * RectScale.x));
                 MapGridy.AddConstantOverride("vseparation", (int)(12 * RectScale.y));
             }
-				
 		}
 		if (@event.IsActionPressed("ZoomOut"))
 		{

@@ -53,48 +53,65 @@ public class CameraPanPivot : Position3D
 		d = 0.01f;
 		Vector3 prevrot = new Vector3(PanXPivot.Rotation.x ,Rotation.y, 0);
 		Vector3 rot = new Vector3(PanXPivot.Rotation.x ,Rotation.y, 0);
-		
-		//Vector2 pan = new Vector2();
+
 		if (!PlayerUI.GetInstance().HasMenuOpen())
 		{
-			float mult = OS.WindowSize.x / DViewport.GetInstance().Size.x;
-			Vector2 mousepos = DViewport.GetInstance().GetMousePosition() / mult;
-			Vector2 screensize = DViewport.GetInstance().Size;
-			Vector2 ammx = screensize/3;
-			Vector2 ammy = screensize/6;
-			if (mousepos.x < ammx.x)
+			if (ControllerInput.IsUsingController())
 			{
-				float ammount = ammx.x - mousepos.x;
-				rot.y += 0.00008f * ammount;
-			}
-			if (mousepos.x > screensize.x - ammx.x)
-			{
-				float ammount = ammx.x -(screensize.x - mousepos.x);
-				rot.y -= 0.00008f * ammount;
-			}
-			//Down
-			if (mousepos.y > screensize.y - ammy.y)
-			{
-				float ammount = ammy.y -(screensize.y - mousepos.y);
-				//limmit for down
-				if (Mathf.Rad2Deg(prevrot.x) > -20)
+				if  (!Input.IsActionPressed("ToggleZoom"))
 				{
-					rot.x -= 0.00004f * ammount;
-					YOffset += ammount * 0.05f;
+					Vector2 velocity = new Vector2(
+					Input.GetActionStrength("CameraRight") - Input.GetActionStrength("CameraLeft"),
+					Input.GetActionStrength("CameraDown") - Input.GetActionStrength("CameraUp")
+					).LimitLength(1);
+
+					velocity = new Vector2((float)Math.Round((double)velocity.x / 20, 3), (float)Math.Round((double)velocity.y / 50, 3));
+					rot = new Vector3(Mathf.Clamp(rot.x - velocity.y, -0.35f, 0.35f), rot.y - velocity.x, rot.z);
 				}
 			}
-			//UP
-			if (mousepos.y < ammy.y)
+			else
 			{
-				float ammount = ammy.y - mousepos.y;
-				//limmit for Up
-				if (Mathf.Rad2Deg(prevrot.x) < 20)
+				float mult = OS.WindowSize.x / DViewport.GetInstance().Size.x;
+				Vector2 mousepos = DViewport.GetInstance().GetMousePosition() / mult;
+				Vector2 screensize = DViewport.GetInstance().Size;
+				Vector2 ammx = screensize/3;
+				Vector2 ammy = screensize/6;
+				if (mousepos.x < ammx.x)
 				{
-					rot.x += 0.00004f * ammount;
-					YOffset -= ammount * 0.05f;
+					float ammount = ammx.x - mousepos.x;
+					rot.y += 0.00008f * ammount;
+				}
+				if (mousepos.x > screensize.x - ammx.x)
+				{
+					float ammount = ammx.x -(screensize.x - mousepos.x);
+					rot.y -= 0.00008f * ammount;
+				}
+				//Down
+				if (mousepos.y > screensize.y - ammy.y)
+				{
+					float ammount = ammy.y -(screensize.y - mousepos.y);
+					//limmit for down
+					if (Mathf.Rad2Deg(prevrot.x) > -20)
+					{
+						rot.x -= 0.00004f * ammount;
+						YOffset += ammount * 0.05f;
+					}
+				}
+				//UP
+				if (mousepos.y < ammy.y)
+				{
+					float ammount = ammy.y - mousepos.y;
+					//limmit for Up
+					if (Mathf.Rad2Deg(prevrot.x) < 20)
+					{
+						rot.x += 0.00004f * ammount;
+						YOffset -= ammount * 0.05f;
+					}
 				}
 			}
 		}
+		//Vector2 pan = new Vector2();
+		
 		if (prevrot != rot)
 		{
 			Rotation = new Vector3(0, rot.y, 0);
@@ -105,7 +122,6 @@ public class CameraPanPivot : Position3D
 		//sptrans.x -= Mathf.Deg2Rad(YOffset * ZoomPivot.GetZoomNormalised());
 		sptrans.x -= Mathf.Deg2Rad(YOffset * ZoomPivot.GetZoomNormalised());
 		SpringArm.Rotation = sptrans;
-		
 	}
     
 }

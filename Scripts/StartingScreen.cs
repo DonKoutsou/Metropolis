@@ -18,7 +18,6 @@ public class StartingScreen : Control
 	{
 		return GameIsRunning;
 	}
-
 	public override void _Ready()
 	{
 		FillButtonList();
@@ -49,19 +48,22 @@ public class StartingScreen : Control
 		intro.Show();
 
 		//GetNode<CanvasLayer>("FadeInOut").Show();
-		Control cont = GetNode<Control>("Settings");
+		Settings cont = GetNode<Settings>("Settings");
 		cont.Show();
 
 		Control SeedSet = ButtonList["SeedSetting"];
 		SeedSet.GetNode<TextEdit>("SeedText").Readonly = false;
 		cont.GetNode<Panel>("Panel").GetNode<Button>("Start_Button").Text = LocalisationHolder.GetString("Έναρξη");
 		if (HasSave)
-			cont.GetNode<Panel>("Panel").GetNode<Button>("Start_Button").Hide();
+		{
+			cont.GetNode<Button>("Panel/Start_Button").Hide();
+		}
 		else
 		{
 			cont.GetNode<Panel>("Panel").GetNode<Button>("Start_Button_Half").Hide();
 			cont.GetNode<Panel>("Panel").GetNode<Button>("Continue_Button_Half").Hide();
 		}
+		cont.TakeFocus();
 	}
 	private void On_Start_Button_Down()
 	{
@@ -129,7 +131,8 @@ public class StartingScreen : Control
 
 		//GetNode<Control>("MainScreen").Visible = toggle;
 		GetNode<Control>("Settings").Visible = toggle;
-		GetNode<Label>("PauseLabel").Visible = toggle;	
+		GetNode<Label>("PauseLabel").Visible = toggle;
+		GetNode<Settings>("Settings").TakeFocus();
 	}
 	public void GameOver(string reason = null)
 	{
@@ -192,6 +195,7 @@ public class StartingScreen : Control
 
 		//GetNode<Timer>("RestartTimer").Stop();
 	}
+	
 }
 
 

@@ -49,11 +49,10 @@ valign = 1
 margin_left = 185.0
 margin_right = 209.0
 margin_bottom = 24.0
-focus_mode = 0
+focus_neighbour_bottom = NodePath("../VSync_Check")
 size_flags_horizontal = 0
 custom_constants/check_vadjust = 0
 custom_constants/hseparation = 0
-enabled_focus_mode = 0
 
 [node name="Label" type="Label" parent="Panel/GridContainer"]
 margin_top = 30.0
@@ -69,12 +68,10 @@ margin_left = 185.0
 margin_top = 28.0
 margin_right = 209.0
 margin_bottom = 52.0
-focus_mode = 0
 size_flags_horizontal = 0
 custom_constants/check_vadjust = 0
 custom_constants/hseparation = 0
 pressed = true
-enabled_focus_mode = 0
 
 [node name="Label3" type="Label" parent="Panel/GridContainer"]
 margin_top = 58.0
@@ -90,12 +87,10 @@ margin_left = 185.0
 margin_top = 56.0
 margin_right = 209.0
 margin_bottom = 80.0
-focus_mode = 0
 size_flags_horizontal = 0
 custom_constants/check_vadjust = 0
 custom_constants/hseparation = 0
 pressed = true
-enabled_focus_mode = 0
 
 [node name="Label11" type="Label" parent="Panel/GridContainer"]
 margin_top = 86.0
@@ -111,12 +106,10 @@ margin_left = 185.0
 margin_top = 84.0
 margin_right = 209.0
 margin_bottom = 108.0
-focus_mode = 0
 size_flags_horizontal = 0
 custom_constants/check_vadjust = 0
 custom_constants/hseparation = 0
 pressed = true
-enabled_focus_mode = 0
 
 [node name="Label2" type="Label" parent="Panel/GridContainer"]
 margin_top = 112.0

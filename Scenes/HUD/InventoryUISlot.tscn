@@ -78,10 +78,8 @@ margin_right = 59.0
 margin_bottom = 30.0
 rect_scale = Vector2( 1, 1.06 )
 rect_clip_content = true
-focus_mode = 0
 theme = ExtResource( 3 )
 toggle_mode = true
-enabled_focus_mode = 0
 icon_align = 1
 expand_icon = true
 
@@ -175,6 +173,8 @@ rect_pivot_offset = Vector2( 7, 7 )
 texture = ExtResource( 6 )
 expand = true
 
+[connection signal="focus_entered" from="ItemIcon" to="." method="On_Mouse_Entered"]
+[connection signal="focus_exited" from="ItemIcon" to="." method="On_Mouse_Exited"]
 [connection signal="mouse_entered" from="ItemIcon" to="." method="On_Mouse_Entered"]
 [connection signal="mouse_exited" from="ItemIcon" to="." method="On_Mouse_Exited"]
 [connection signal="toggled" from="ItemIcon" to="." method="ItemIcon_Toggled"]

@@ -62,6 +62,25 @@ public class ItemPreviewPivot : Spatial
             ItemPreviewPivot2.Rotation = rot;
             Rotation = myrot;
         }
+        if (@event is InputEventJoypadMotion)
+        {
+            Vector2 velocity = new Vector2(
+            Input.GetActionStrength("CameraRight") - Input.GetActionStrength("CameraLeft"),
+            Input.GetActionStrength("CameraDown") - Input.GetActionStrength("CameraUp")
+            ).LimitLength(2);
+
+            velocity = new Vector2((float)Math.Round((double)velocity.x * 10, 3), (float)Math.Round((double)velocity.y * 10, 3));
+
+            Vector3 rot = ItemPreviewPivot2.Rotation;
+            Vector3 myrot = Rotation;
+
+            rot.y += velocity.x / 80;
+
+            myrot.x += velocity.y / 160;
+
+            ItemPreviewPivot2.Rotation = rot;
+            Rotation = myrot;
+        }
     }
     //  // Called every frame. 'delta' is the elapsed time since the previous frame.
     //  public override void _Process(float delta)

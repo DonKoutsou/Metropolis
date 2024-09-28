@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Systems/TalkText.tscn" type="PackedScene" id=2]
@@ -21,6 +21,10 @@
 
 [sub_resource type="Curve" id=165]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.4 ), 0.59819, 0.0, 0, 0 ]
+
+[sub_resource type="CylinderShape" id=167]
+height = 8.57168
+radius = 28.7121
 
 [sub_resource type="CylinderShape" id=166]
 height = 7.20584
@@ -210,6 +214,14 @@ enabled = true
 cast_to = Vector3( 0, -30, 0 )
 collision_mask = 260
 
+[node name="Area" type="Area" parent="Pivot/Guy"]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape" type="CollisionShape" parent="Pivot/Guy/Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.58428, 0 )
+shape = SubResource( 167 )
+
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 1.06581e-14, 0, -1.06581e-14, 1, 0, 3.61331, 0 )
 shape = SubResource( 166 )
@@ -285,6 +297,9 @@ current = true
 update_position = false
 update_scale = false
 
+[node name="GanePadMoveLoc" type="Spatial" parent="CameraMovePivot/CameraPanPivot"]
+transform = Transform( -1, 0, 8.74229e-08, 0, 1, 0, -8.74229e-08, 0, -1, 0, -3.68688, 0 )
+
 [node name="MoveLoc" parent="." instance=ExtResource( 16 )]
 visible = false
 
@@ -299,5 +314,7 @@ __meta__ = {
 wait_time = 10.0
 one_shot = true
 
+[connection signal="body_entered" from="Pivot/Guy/Area" to="." method="ActionObjectEntered"]
+[connection signal="body_exited" from="Pivot/Guy/Area" to="." method="ActionObjectLeft"]
 [connection signal="body_entered" from="KillFieldDetector" to="." method="OnKillFieldDetectorBodyEntered"]
 [connection signal="timeout" from="IdleTimer" to="." method="Idle_Timer_Ended"]

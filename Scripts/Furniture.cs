@@ -42,6 +42,7 @@ public class Furniture : StaticBody
 		//AddChild(itemToDrop);
 		//itemToDrop.GlobalTranslation = GlobalTransform.origin;
 		StashedItem = itemToDrop;
+		
 		//StashedItem.Hide();
 	}
 	public void RespawnItem(PackedScene it)
@@ -54,6 +55,7 @@ public class Furniture : StaticBody
 		itemToDrop.Translation = Vector3.Zero;
 		StashedItem = itemToDrop;
 		StashedItem.Hide();
+		itemToDrop.GetNode<CollisionShape>("CollisionShape").SetDeferred("disabled",true);
 		if (itemToDrop is Battery bat)
 		{
 			bat.SetCurrentCap(0);

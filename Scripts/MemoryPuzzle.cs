@@ -10,6 +10,7 @@ public class MemoryPuzzle : BasePuzzle
     int Stage = 0;
     public override void _Ready()
     {
+        base._Ready();
         foreach(MemoryButton b in GetNode<Spatial>("Buttons").GetChildren())
         {
             Buttons.Add(b);

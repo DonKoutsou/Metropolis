@@ -183,6 +183,19 @@ public class Player : Character
 			}
 		}
 	}
+	private void UpdateMoveLocationGamePad()
+	{
+		Vector2 velocity = new Vector2(
+        Input.GetActionStrength("Move_Right") - Input.GetActionStrength("Move_Left"),
+        Input.GetActionStrength("Move_Down") - Input.GetActionStrength("Move_Up")
+        ).LimitLength(1);
+
+        velocity = new Vector2((float)Math.Round(velocity.x, 3), (float)Math.Round(velocity.y, 3)) * 1000;
+
+		GetNode<Spatial>("CameraMovePivot/CameraPanPivot/GanePadMoveLoc").Translation = new Vector3(velocity.x, 0, velocity.y);
+
+		loctomove = GetNode<Spatial>("CameraMovePivot/CameraPanPivot/GanePadMoveLoc").GlobalTranslation;
+	}
 	public override void PlayMusic()
 	{
 		if (!CharacterInventory.IsLimbSlotFilled(LimbSlotType.ARM_L) || !CharacterInventory.IsLimbSlotFilled(LimbSlotType.ARM_R))
@@ -257,6 +270,7 @@ public class Player : Character
 		if (anim.IsStanding() || anim.IsClimbing())
 			return;
 		
+
 		moveloc.GlobalTranslation = loctomove;
 		float spd = Speed;
 
@@ -381,6 +395,10 @@ public class Player : Character
 				//_velocity.y += JumpImpulse * vehmulti;
 			}
 		}
+		if (@event is InputEventJoypadMotion)
+		{
+			UpdateMoveLocationGamePad();
+		}
 		if (@event.IsActionPressed("AutoWalk"))
 		{
 			Autowalk = !Autowalk;
@@ -402,5 +420,15 @@ public class Player : Character
 	{
 		base.Kill(reason);
 		MyWorld.GetInstance().OnPlayerKilled(reason);
+	}
+	[Signal]
+	public delegate void ActionObjectInteraction(bool EnterBool, Node body);
+	public void ActionObjectEntered(Node body)
+	{
+		EmitSignal("ActionObjectInteraction", true, body);
+	}
+	public void ActionObjectLeft(Node body)
+	{
+		EmitSignal("ActionObjectInteraction", false, body);
 	}
 }

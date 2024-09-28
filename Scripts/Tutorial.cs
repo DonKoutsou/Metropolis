@@ -70,9 +70,9 @@ public class Tutorial : Control
             GetNode<Label>("Panel2/VBoxContainer/Label").Text = LocalisationHolder.GetString(tut.Key);
             break;
         }
+        GetNode<Button>("Panel2/VBoxContainer/Button").GrabFocus();
         //GetNode<VideoPlayer>("VideoPlayer").Stream = WalkTutorial;
         //GetNode<Label>("VideoPlayer/Panel/Label").Text = LocalisationHolder.GetString(WalkTutorialText);
-        
     }
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
 //  public override void _Process(float delta)

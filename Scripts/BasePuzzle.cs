@@ -9,6 +9,10 @@ public class BasePuzzle : Spatial
     [Signal]
     public delegate void OnPuzzleFinished(bool Resault);
 
+    public override void _Ready()
+    {
+        PlayerUI.OnMenuToggled(true);
+    }
     public PuzzleTypes GetPuzzleType()
     {
         return Type;
@@ -16,6 +20,7 @@ public class BasePuzzle : Spatial
 
     public void Finished(bool r)
     {
+        PlayerUI.OnMenuToggled(false);
         EmitSignal("OnPuzzleFinished", r);
     }
 }

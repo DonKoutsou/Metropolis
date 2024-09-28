@@ -92,17 +92,19 @@ grow_vertical = 2
 custom_constants/separation = 70
 alignment = 1
 
-[node name="EnglishButton" type="Button" parent="Panel/HBoxContainer"]
+[node name="EnglishButton" type="Button" parent="Panel/HBoxContainer" groups=["Buttons"]]
 margin_left = 1.0
 margin_right = 96.0
 margin_bottom = 40.0
+focus_neighbour_right = NodePath("../GreekButton")
 theme = ExtResource( 2 )
 text = "English"
 
-[node name="GreekButton" type="Button" parent="Panel/HBoxContainer"]
+[node name="GreekButton" type="Button" parent="Panel/HBoxContainer" groups=["Buttons"]]
 margin_left = 166.0
 margin_right = 280.0
 margin_bottom = 40.0
+focus_neighbour_left = NodePath("../EnglishButton")
 theme = ExtResource( 2 )
 text = "Ελληνικά"
 

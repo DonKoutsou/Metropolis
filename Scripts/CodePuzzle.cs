@@ -13,6 +13,7 @@ public class CodePuzzle : BasePuzzle
 
     public override void _Ready()
     {
+        base._Ready();
         foreach(MemoryButton b in GetNode<Spatial>("Buttons").GetChildren())
         {
             Buttons.Add(b);

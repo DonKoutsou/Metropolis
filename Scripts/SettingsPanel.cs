@@ -7,6 +7,8 @@ public class SettingsPanel : Control
     Godot.Environment Startscreenenv = null;
     [Export]
     Godot.Environment gameenv = null;
+    [Signal]
+    public delegate void OnSettingsClosed();
     public override void _Ready()
     {
         DViewport v = DViewport.GetInstance();
@@ -216,6 +218,7 @@ public class SettingsPanel : Control
     }
     private void Close()
     {
+        EmitSignal("OnSettingsClosed");
         Visible = false;
     }
 }

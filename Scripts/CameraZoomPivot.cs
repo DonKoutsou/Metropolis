@@ -25,7 +25,7 @@ public class CameraZoomPivot : Position3D
 		//InitialTransforms = new Vector2(arm.SpringLength, panp.Translation.y);
 		instance = this;
 		//cam = GetNode<Camera>("Camera");
-		
+		SetPhysicsProcess(false);
     }
 	public static CameraZoomPivot GetInstance()
 	{
@@ -43,14 +43,20 @@ public class CameraZoomPivot : Position3D
 		if (@event.IsActionPressed("ZoomOut") && ZoomStage < zoomSteps)
 		{
 			ZoomStage += 1;
-			
 			UpdatePos();
 		}
 		if (@event.IsActionPressed("ZoomIn") && ZoomStage > 1)
 		{
 			ZoomStage -= 1;
 			UpdatePos();
-			
+		}
+		if (@event.IsActionPressed("ToggleZoom"))
+		{
+			SetPhysicsProcess(true);
+		}
+		else if (@event.IsActionReleased("ToggleZoom"))
+		{
+			SetPhysicsProcess(false);
 		}
 		if (@event.IsActionPressed("FrameCamera"))
 		{
@@ -63,7 +69,21 @@ public class CameraZoomPivot : Position3D
 			//Translation = prevpos;
 		//panp.caminitpos = new Vector3(0, Translation.y, Translation.z);
 	}
-	public void UpdatePos()
+    public override void _PhysicsProcess(float delta)
+    {
+        base._PhysicsProcess(delta);
+		if (Input.IsActionPressed("CameraUp") && ZoomStage > 1)
+		{
+			ZoomStage -= 1;
+			UpdatePos();
+		}
+		if (Input.IsActionPressed("CameraDown") && ZoomStage < zoomSteps)
+		{
+			ZoomStage += 1;
+			UpdatePos();
+		}
+    }
+    public void UpdatePos()
 	{
 		//Vector3 prevpos = panp.Translation;
 		//PlayerCamera cam = PlayerCamera.GetInstance();

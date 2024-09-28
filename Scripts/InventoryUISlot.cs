@@ -100,7 +100,7 @@ public class InventoryUISlot : Control
     }
     public void Toggle(bool pressed)
     {
-        ItemIcon.Pressed = pressed;
+        ItemIcon.SetPressedNoSignal(pressed);
     }
     private void On_Mouse_Entered()
     {
