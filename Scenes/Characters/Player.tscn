@@ -23,7 +23,7 @@
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.4 ), 0.59819, 0.0, 0, 0 ]
 
 [sub_resource type="CylinderShape" id=167]
-height = 8.57168
+height = 21.7385
 radius = 28.7121
 
 [sub_resource type="CylinderShape" id=166]

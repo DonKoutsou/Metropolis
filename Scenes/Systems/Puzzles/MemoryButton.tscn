@@ -99,3 +99,4 @@ anims/FlashStatic = SubResource( 9 )
 anims/RESET = SubResource( 8 )
 
 [connection signal="input_event" from="Area" to="." method="ButtonHovered"]
+[connection signal="animation_finished" from="ButtonAnims" to="." method="AnimFin"]

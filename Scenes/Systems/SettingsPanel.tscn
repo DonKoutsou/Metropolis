@@ -20,10 +20,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -157.0
-margin_top = -144.0
-margin_right = 157.0
-margin_bottom = 205.0
+margin_left = -186.0
+margin_top = -166.0
+margin_right = 186.0
+margin_bottom = 227.0
 custom_styles/panel = ExtResource( 1 )
 
 [node name="GridContainer" type="GridContainer" parent="Panel"]
@@ -110,6 +110,27 @@ size_flags_horizontal = 0
 custom_constants/check_vadjust = 0
 custom_constants/hseparation = 0
 pressed = true
+
+[node name="Label12" type="Label" parent="Panel/GridContainer"]
+visible = false
+margin_top = 112.0
+margin_right = 164.0
+margin_bottom = 131.0
+custom_fonts/font = ExtResource( 3 )
+text = "Input Device"
+align = 1
+valign = 1
+
+[node name="MSAA_Option2" type="OptionButton" parent="Panel/GridContainer" groups=["Buttons"]]
+visible = false
+margin_left = 185.0
+margin_top = 112.0
+margin_right = 321.0
+margin_bottom = 132.0
+size_flags_horizontal = 3
+text = "Mouse/Keyboard"
+items = [ "Mouse/Keyboard", null, false, 0, null, "Gamepad", null, false, 1, null ]
+selected = 0
 
 [node name="Label2" type="Label" parent="Panel/GridContainer"]
 margin_top = 112.0
@@ -254,11 +275,24 @@ margin_bottom = -9.0
 theme = ExtResource( 5 )
 text = "Exit"
 
+[node name="Button2" type="Button" parent="Panel" groups=["Buttons", "Translatables"]]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -119.5
+margin_top = -98.0
+margin_right = 119.5
+margin_bottom = -59.0
+theme = ExtResource( 5 )
+text = "Reset Achievements"
+
 [connection signal="toggled" from="Panel/GridContainer/Full_Screen_Check" to="." method="Update_FullScreen"]
 [connection signal="toggled" from="Panel/GridContainer/VSync_Check" to="." method="Update_Vsync"]
 [connection signal="toggled" from="Panel/GridContainer/FXAA_Check" to="." method="Update_FXAA"]
 [connection signal="toggled" from="Panel/GridContainer/SSAO_Check" to="." method="Update_SSAO"]
-[connection signal="toggled" from="Panel/GridContainer/MSAA_Option" to="." method="Update_MSAA"]
+[connection signal="item_selected" from="Panel/GridContainer/MSAA_Option2" to="." method="Update_InputDevice"]
+[connection signal="item_selected" from="Panel/GridContainer/MSAA_Option" to="." method="Update_MSAA"]
 [connection signal="item_selected" from="Panel/GridContainer/FPS_Choice" to="." method="UpdateMaxFPS"]
 [connection signal="item_selected" from="Panel/GridContainer/FPS_Choice2" to="." method="Update_Resolution"]
 [connection signal="value_changed" from="Panel/GridContainer/HSlider" to="." method="Update_Brightness"]
@@ -266,3 +300,4 @@ text = "Exit"
 [connection signal="value_changed" from="Panel/GridContainer/HSlider3" to="." method="Update_Saturation"]
 [connection signal="value_changed" from="Panel/GridContainer/HSlider4" to="." method="Update_Sound"]
 [connection signal="pressed" from="Panel/Button" to="." method="Close"]
+[connection signal="pressed" from="Panel/Button2" to="." method="ClearAchievements"]

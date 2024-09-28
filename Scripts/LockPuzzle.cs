@@ -9,6 +9,8 @@ public class LockPuzzle : BasePuzzle
     int PuzzleSolution;
     bool MovingPick = false;
     float allowed;
+
+    
     Dictionary<string, AudioStreamPlayer> Sounds = new Dictionary<string, AudioStreamPlayer>();
 
     public override void _Ready()
@@ -22,8 +24,6 @@ public class LockPuzzle : BasePuzzle
         Sounds.Add("SolvedSound", GetNode<AudioStreamPlayer>("SolvedSound"));
 
         ProduceSolution();
-
-        
     }
     private void ProduceSolution()
     {
@@ -45,7 +45,7 @@ public class LockPuzzle : BasePuzzle
     public override void _Input(InputEvent @event)
     {
         base._Input(@event);
-        if (Input.IsActionPressed("Select"))
+        if (Input.IsActionPressed("Select") || Input.IsActionPressed("ToggleZoom"))
         {
             MovingPick = true;
             allowed = GetAllowedRotation();
@@ -59,6 +59,21 @@ public class LockPuzzle : BasePuzzle
         if (@event is InputEventMouseMotion)
         {
             Vector2 pos = new Vector2(((InputEventMouseMotion)@event).Relative.x, ((InputEventMouseMotion)@event).Relative.y);
+
+            Vector3 rot = LockPick.Rotation;
+
+            rot.y = Mathf.Clamp(rot.y - pos.x / 80, Mathf.Deg2Rad(-90), Mathf.Deg2Rad(90));
+
+            LockPick.Rotation = rot;
+        }
+        else if (@event is InputEventJoypadMotion)
+        {
+            Vector2 pos = new Vector2(
+            Input.GetActionStrength("CameraRight") - Input.GetActionStrength("CameraLeft"),
+            Input.GetActionStrength("CameraDown") - Input.GetActionStrength("CameraUp")
+            ).LimitLength(2);
+
+            pos = new Vector2((float)Math.Round(pos.x, 3), (float)Math.Round(pos.y, 3))  * 10;
 
             Vector3 rot = LockPick.Rotation;
 

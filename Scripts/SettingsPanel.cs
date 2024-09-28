@@ -140,6 +140,27 @@ public class SettingsPanel : Control
             }
         }
     }
+    private void Update_InputDevice(int p)
+    {
+        switch (p)
+        {
+            case 0:
+            {
+                ControllerInput.ToggleController(false);
+                break;
+            }
+            case 1:
+            {
+                if (Input.GetConnectedJoypads().Count == 0)
+                {
+                    GetNode<OptionButton>("Panel/GridContainer/MSAA_Option2").Selected = 0;
+                    break;
+                }
+                ControllerInput.ToggleController(true);
+                break;
+            }
+        }
+    }
     private void Update_MSAA(int p)
     {
         ItemPreviewViewport vp = ItemPreviewViewport.GetInstance();
@@ -215,6 +236,11 @@ public class SettingsPanel : Control
                 break;
             }
         }
+    }
+    private void ClearAchievements()
+    {
+        ActionTracker.ClearActions();
+        ((AchievementManager)PlayerUI.GetInstance().GetUI(PlayerUIType.ACHIEVEMENT)).ClearAchievements();
     }
     private void Close()
     {

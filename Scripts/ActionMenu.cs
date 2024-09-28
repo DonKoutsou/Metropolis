@@ -115,6 +115,7 @@ public class ActionMenu : Control
 
 		selecting = false;
 		Stop();
+		CurrentSelected = 0;
 	}
 	private void On_Interact_Button2_Down()
 	{
@@ -138,6 +139,7 @@ public class ActionMenu : Control
 
 		selecting = false;
 		Stop();
+		CurrentSelected = 0;
 	}
 	private void On_Interact_Button3_Down()
 	{
@@ -161,6 +163,7 @@ public class ActionMenu : Control
 
 		selecting = false;
 		Stop();
+		CurrentSelected = 0;
 	}
 	private void On_Interact_Button_Down()
 	{
@@ -284,7 +287,11 @@ public class ActionMenu : Control
 		RectPosition = new Vector2 (screenpos.x, screenpos.y +50) * mult;
 
 		if (screenpos < Vector2.Zero || screenpos > s)
+		{
+			CurrentSelected = 0;
 			Stop();
+		}
+			
 
 		if (PerformingAction)
 		{

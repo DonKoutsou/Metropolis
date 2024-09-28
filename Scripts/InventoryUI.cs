@@ -95,7 +95,7 @@ public class InventoryUI : Control
         }
         SetProcess(false);
 
-        Visible = false;
+        GetNode<Control>("InventoryContainer/Inventory").Visible = false;
     }
     public void OnItemAdded(Item it)
     {
@@ -135,7 +135,7 @@ public class InventoryUI : Control
         IsOpen = true;
         SetProcess(true);
         SoundOpen.Play();
-        Visible = true;
+        GetNode<Control>("InventoryContainer/Inventory").Visible = true;
         if (ControllerInput.IsUsingController())
         {
             slots[0].GetNode<Button>("ItemIcon").GrabFocus();
@@ -161,7 +161,7 @@ public class InventoryUI : Control
     {
         if (anim == "MenuClose")
         {
-            Visible = false;
+            GetNode<Control>("InventoryContainer/Inventory").Visible = false;
         }
     }
     float d = 0.1f;

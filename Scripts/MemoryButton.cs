@@ -23,11 +23,22 @@ public class MemoryButton : Spatial
             GetNode<AnimationPlayer>("ButtonAnims").Stop();
         GetNode<AnimationPlayer>("ButtonAnims").Play("Flash");
     }
+    private void AnimFin(string anim)
+    {
+        if (anim == "Flash")
+        {
+            FlashStatic();
+        }
+    }
     public void FlashStatic()
     {
         if (GetNode<AnimationPlayer>("ButtonAnims").IsPlaying())
             GetNode<AnimationPlayer>("ButtonAnims").Stop(true);
         GetNode<AnimationPlayer>("ButtonAnims").Play("FlashStatic");
+    }
+    public void Reset()
+    {
+        GetNode<AnimationPlayer>("ButtonAnims").Play("RESET");
     }
     public int GetButtonNumber()
     {

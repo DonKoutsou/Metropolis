@@ -11,6 +11,8 @@ public class CodePuzzle : BasePuzzle
     List<Label> Numbers = new List<Label>();
     Timer T;
 
+    bool UsingCont = false;
+    int Focusedbutton = 0;
     public override void _Ready()
     {
         base._Ready();
@@ -37,6 +39,12 @@ public class CodePuzzle : BasePuzzle
         T.Connect("timeout", this, "Reset");
 
         AddChild(T);
+        
+        if (ControllerInput.IsUsingController())
+        {
+            UsingCont = true;
+            Buttons[Focusedbutton].FlashStatic();
+        }
     }
     private void Reset()
     {
@@ -55,6 +63,55 @@ public class CodePuzzle : BasePuzzle
         ToggleClicking(true);
 
         CorrectNums = 0;
+    }
+    public override void _Input(InputEvent @event)
+    {
+        base._Input(@event);
+        if (Input.IsActionJustPressed("ToggleZoom"))
+        {
+            Buttons[Focusedbutton].Flash();
+            ButtonClicked(Buttons[Focusedbutton]);
+        }
+        else if (Input.IsActionJustPressed("ui_up"))
+        {
+            int newbutton = Focusedbutton - 3;
+            if (newbutton >= 0)
+            {
+                Buttons[Focusedbutton].Reset();
+                Focusedbutton = newbutton;
+                Buttons[Focusedbutton].FlashStatic();
+            }
+        }
+        else if (Input.IsActionJustPressed("ui_down"))
+        {
+            int newbutton = Focusedbutton + 3;
+            if (newbutton <= 8)
+            {
+                Buttons[Focusedbutton].Reset();
+                Focusedbutton = newbutton;
+                Buttons[Focusedbutton].FlashStatic();
+            }
+        }
+        else if (Input.IsActionJustPressed("ui_left"))
+        {
+            int newbutton = Focusedbutton - 1;
+            if (newbutton >= 0)
+            {
+                Buttons[Focusedbutton].Reset();
+                Focusedbutton = newbutton;
+                Buttons[Focusedbutton].FlashStatic();
+            }
+        }
+        else if (Input.IsActionJustPressed("ui_right"))
+        {
+            int newbutton = Focusedbutton + 1;
+            if (newbutton <= 8)
+            {
+                Buttons[Focusedbutton].Reset();
+                Focusedbutton = newbutton;
+                Buttons[Focusedbutton].FlashStatic();
+            }
+        }
     }
     private void ProduceSolution()
     {
@@ -78,6 +135,15 @@ public class CodePuzzle : BasePuzzle
     int CorrectNums = 0;
     private void ButtonClicked(MemoryButton ButtonNum)
     {
+        if (UsingCont)
+        {
+            if (Buttons[Focusedbutton] != ButtonNum)
+            {
+                Buttons[Focusedbutton].Reset();
+                Focusedbutton = ButtonNum.GetButtonNumber();
+            }
+        }
+        
         int bnum = ButtonNum.GetButtonNumber();
         float newpitch = 1 + (((float)bnum - 5) / 50);
         GetNode<AudioStreamPlayer>("ButtonSound").PitchScale = newpitch;

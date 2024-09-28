@@ -20,12 +20,19 @@ public class AchievementManager : Control
                 if ((int)Achiev.Get("Times") <= times)
                 {
                     UnlockedAchievements.Add(Ach);
-                    AchievementNotification newnotif = AchievementNotifScene.Instance<AchievementNotification>();
-                    newnotif.AchievementName = Ach;
-                    newnotif.Icon = (StreamTexture)Achiev.Get("Icon");
-                    GetNode<VBoxContainer>("VBoxContainer").AddChild(newnotif);
+                    if (Shownotif)
+                    {
+                        AchievementNotification newnotif = AchievementNotifScene.Instance<AchievementNotification>();
+                        newnotif.AchievementName = Ach;
+                        newnotif.Icon = (StreamTexture)Achiev.Get("Icon");
+                        GetNode<VBoxContainer>("VBoxContainer").AddChild(newnotif);
+                    }
                 }
             }
         }
+    }
+    public void ClearAchievements()
+    {
+        UnlockedAchievements.Clear();
     }
 }

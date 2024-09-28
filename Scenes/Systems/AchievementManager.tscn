@@ -36,8 +36,9 @@ AchievementNotifScene = ExtResource( 4 )
 Achievements = [ SubResource( 43 ), SubResource( 44 ), SubResource( 45 ) ]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_top = -136.0
-margin_right = 97.0
-custom_constants/separation = -203
+margin_left = 17.0
+margin_top = -21.0
+margin_right = 374.0
+margin_bottom = 115.0
+custom_constants/separation = -209
+alignment = 2

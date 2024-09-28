@@ -190,9 +190,18 @@ public class Player : Character
         Input.GetActionStrength("Move_Down") - Input.GetActionStrength("Move_Up")
         ).LimitLength(1);
 
-        velocity = new Vector2((float)Math.Round(velocity.x, 3), (float)Math.Round(velocity.y, 3)) * 1000;
+        Vector3 loc = new Vector3((float)Math.Round(velocity.x, 3), 0, (float)Math.Round(velocity.y, 3)) * 1000;
 
-		GetNode<Spatial>("CameraMovePivot/CameraPanPivot/GanePadMoveLoc").Translation = new Vector3(velocity.x, 0, velocity.y);
+		GetNode<Spatial>("CameraMovePivot/CameraPanPivot/GanePadMoveLoc").Translation = loc;
+
+		if (!CanTraverseDeep)
+		{
+			if (loc.DistanceTo(Vector3.Zero) > 7 * 8000)
+			{
+				DialogueManager.GetInstance().ForceDialogue(this, "Η ομίχλη αρχίζει να πυκνώνει πολύ προς εκείνη την κατεύθυνση. Καλύτερα να μην πάω με το μωρό μαζί μου.");
+				return;
+			}
+		}
 
 		loctomove = GetNode<Spatial>("CameraMovePivot/CameraPanPivot/GanePadMoveLoc").GlobalTranslation;
 	}

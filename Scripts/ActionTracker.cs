@@ -89,4 +89,10 @@ public class ActionTracker : Node
 
         ResourceSaver.Save("user://SavedActions.tres", (Resource)save);
     }
+    public static void ClearActions()
+    {
+        Directory dir = new Directory();
+		dir.Remove("user://SavedActions.tres");
+        DoneActions.Clear();
+    }
 }

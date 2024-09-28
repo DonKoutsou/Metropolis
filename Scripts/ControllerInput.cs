@@ -9,6 +9,18 @@ public class ControllerInput : Control
     {
         return UsingController;
     }
+    public static void ToggleController(bool Toggle)
+    {
+        UsingController = Toggle;
+        if (Toggle)
+        {
+            Input.MouseMode = Input.MouseModeEnum.Hidden;
+        }
+        else
+        {
+            Input.MouseMode = Input.MouseModeEnum.Visible;
+        }
+    }
     public override void _Ready()
     {
         

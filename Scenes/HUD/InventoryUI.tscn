@@ -234,8 +234,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -572.0
-margin_bottom = 402.0
+margin_left = 1348.0
+margin_top = 1080.0
+margin_right = 1920.0
+margin_bottom = 1482.0
 
 [node name="GridContainer" type="GridContainer" parent="InventoryContainer/Inventory"]
 anchor_left = 0.5
