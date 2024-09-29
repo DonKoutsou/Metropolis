@@ -101,7 +101,7 @@ shape = SubResource( 1 )
 shape = SubResource( 2 )
 
 [node name="ActionComponent" parent="." instance=ExtResource( 2 )]
-ActionDistance = 10.0
+ActionDistance = 15.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/PodOpen = SubResource( 3 )

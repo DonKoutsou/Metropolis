@@ -194,9 +194,9 @@ public class MapGrid : GridContainer
             Vector2 pos = new Vector2(
             Input.GetActionStrength("CameraRight") - Input.GetActionStrength("CameraLeft"),
             Input.GetActionStrength("CameraDown") - Input.GetActionStrength("CameraUp")
-            ).LimitLength(2);
+            ).LimitLength(1);
 
-            pos = new Vector2((float)Math.Round((double)pos.x * 10, 3), (float)Math.Round((double)pos.y * 10, 3));
+            pos = new Vector2((float)Math.Round(pos.x, 3), (float)Math.Round(pos.y, 3))* 10;
 
             Vector2 size = RectSize * RectScale;
 
@@ -271,7 +271,6 @@ public class MapGrid : GridContainer
         MapGridx.RectPosition = new Vector2(RectPosition.x, 8);
 
         MapGridy.RectPosition = new Vector2(8, RectPosition.y);
-        
     }
     public void SwitchGridValues(int toggle)
     {

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class AchievementManager : Control
 {
     [Export]
-    PackedScene AchievementNotifScene;
+    PackedScene AchievementNotifScene = null;
     [Export]
     Resource[] Achievements = null;
     List<string> UnlockedAchievements = new List<string>();

@@ -16,7 +16,18 @@ public class LanguageSelect : Control
         var actual_size = OS.GetRealWindowSize();
         var centered = new Vector2(OS.GetScreenSize().x / 2 - actual_size.x / 2, OS.GetScreenSize().y / 2 - actual_size.y / 2);
         OS.WindowPosition = centered;
-        GetNode<Button>("Panel/HBoxContainer/EnglishButton").GrabFocus();
+        if (ControllerInput.IsUsingController())
+            SwitchedController(true);
+        ControllerInput.GetInstance().Connect("OnControllerSwitched", this, "SwitchedController");
+    }
+    private void SwitchedController(bool Toggle)
+    {
+        if (Toggle)
+            GetNode<Button>("Panel/HBoxContainer/EnglishButton").GrabFocus();
+        else
+        {
+            GetFocusOwner().ReleaseFocus();
+        }
     }
     private void SelectGreek()
     {

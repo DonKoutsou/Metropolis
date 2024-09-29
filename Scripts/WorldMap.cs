@@ -543,6 +543,9 @@ public class WorldMap : TileMap
 	}
 	public void AddSpawnInfo(Island ile)
 	{
+		if (!ile.RotateIle)
+			IleToSave.RotationToSpawn = 0;
+			
 		Vector2 postoput = MapToWorld(new Vector2(IleToSave.Position.x, IleToSave.Position.y));
 
 		postoput += CellSize / 2;

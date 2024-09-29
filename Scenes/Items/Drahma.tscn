@@ -21,7 +21,7 @@ angular_damp = 1.22
 script = ExtResource( 1 )
 ItemIcon = ExtResource( 4 )
 ItemName = "Δραχμή"
-ItemDesc = "Μια δραχμή. μπλά μπλά μπλά μπλά... μπλά"
+ItemDesc = "DrahmaDescription"
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )

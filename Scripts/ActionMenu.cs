@@ -23,9 +23,8 @@ public class ActionMenu : Control
 	Button IntButton;
 	Button IntButton2;
 	Button IntButton3;
-
-	[Export]
-	int VisibleInteractableDistance = 100;
+	//[Export]
+	//int VisibleInteractableDistance = 100;
 
 	[Export]
 	Material OutLineMat = null;
@@ -66,13 +65,12 @@ public class ActionMenu : Control
 			InteractableNodes.Remove(body);
 			Stop();
 		}
-			
 	}
 	public void ConnectPlayer(Player pl)
 	{
 		Play = pl;
 		SetProcessInput(true);
-		pl.Connect("ActionObjectInteraction", this, "ActionObjectInteraction");
+		pl.Connect("InteractableObjectEntered", this, "ActionObjectInteraction");
 	}
 	public void DissconnectPlayer()
 	{
@@ -128,10 +126,7 @@ public class ActionMenu : Control
 		Vector3 actionpos = Acomp.GetActionPos(Play.GlobalTranslation);
 		if (actionpos.DistanceTo(Play.GlobalTranslation) > Acomp.ActionDistance)
 		{
-			if (!PerformingAction)
-			{
-				StartPerformingAction(2);
-			}
+			StartPerformingAction(2);
 			return;
 		}
 		
@@ -176,7 +171,6 @@ public class ActionMenu : Control
 			return;
 		if (selecting)
             return;
-		
 
 		if (obj is Vehicle v)
 		{
@@ -185,38 +179,24 @@ public class ActionMenu : Control
 				GetNode<VehicleHud>("VBoxContainer/VehicleUI").Visible = true;
 				GetNode<Button>("VBoxContainer/VehicleUI/Panel/MarginContainer/HBoxContainer/Label/EngineToggle").FocusMode = FocusModeEnum.All;
 			}
-				
 		}
 		else
 		{
 			GetNode<VehicleHud>("VBoxContainer/VehicleUI").Visible = false;
 			GetNode<Button>("VBoxContainer/VehicleUI/Panel/MarginContainer/HBoxContainer/Label/EngineToggle").FocusMode = FocusModeEnum.None;
 		}
-			
 
 		//PickButton.Show();
 		IntButton.Show();
 
 		PickButton.Text = (string)obj.Call("GetActionName", Play);
 		PickButton.Visible = (bool)obj.Call("ShowActionName", Play);
-		if (PickButton.Visible)
-			PickButton.FocusMode = FocusModeEnum.All;
-		else
-			PickButton.FocusMode = FocusModeEnum.None;
 
 		IntButton2.Text = (string)obj.Call("GetActionName2", Play);
 		IntButton2.Visible = (bool)obj.Call("ShowActionName2", Play);
-		if (IntButton2.Visible)
-			IntButton2.FocusMode = FocusModeEnum.All;
-		else
-			IntButton2.FocusMode = FocusModeEnum.None;
 
 		IntButton3.Text = (string)obj.Call("GetActionName3", Play);
 		IntButton3.Visible = (bool)obj.Call("ShowActionName3", Play);
-		if (IntButton3.Visible)
-			IntButton3.FocusMode = FocusModeEnum.All;
-		else
-			IntButton3.FocusMode = FocusModeEnum.None;
 
 		DeselectCurrent();
 		SelectedObj = obj;
@@ -232,7 +212,7 @@ public class ActionMenu : Control
 	}
 	void DeselectCurrent()
 	{
-		if (SelectedObj != null)
+		if (SelectedObj != null && !InteractableNodes.Contains(SelectedObj))
 			SelectedObj.Call("HighLightObject", false, OutLineMat);
 
 		SelectedObj = null;
@@ -241,6 +221,7 @@ public class ActionMenu : Control
 	{
 		if (SelectedObj == null)
 			return;
+
 		Play.GetNode<LoddedCharacter>("Pivot/Guy/Armature/Skeleton").ResetHead();
 		if (PerformingAction)
 		{
@@ -252,7 +233,6 @@ public class ActionMenu : Control
 		{
             return;
 		}
-
 		DeselectCurrent();
 		
 		Hide();
@@ -291,7 +271,6 @@ public class ActionMenu : Control
 			CurrentSelected = 0;
 			Stop();
 		}
-			
 
 		if (PerformingAction)
 		{
@@ -312,6 +291,10 @@ public class ActionMenu : Control
 				{
 					On_Interact_Button2_Down();
 				}
+				if (ActionIndex == 3)
+				{
+					On_Interact_Button3_Down();
+				}
 				PerformingAction = false;
 			}
 			//if (pl.loctomove != SelectedObj.GlobalTranslation)
@@ -325,6 +308,10 @@ public class ActionMenu : Control
 		}
 		
 		//GlobalTranslation =  new Vector3(itempos.x, itempos.y, itempos.z);
+	}
+	private void ActionLocationReached()
+	{
+
 	}
     private void Selecting_Action()
     {
@@ -384,7 +371,7 @@ public class ActionMenu : Control
 				Stop();
 			}
 		}
-		if (@event.IsActionPressed("ActionCheck"))
+		/*if (@event.IsActionPressed("ActionCheck"))
 		{
 			Vector3 plpos = Play.GlobalTranslation;
 			var interactables = GetTree().GetNodesInGroup("Interactables");
@@ -402,7 +389,7 @@ public class ActionMenu : Control
 				if (inter != SelectedObj)
 					inter.Call("HighLightObject", false, OutLineMat);
 			}
-		}
+		}*/
 	}
 }
 

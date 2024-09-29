@@ -59,7 +59,6 @@ public class Character : KinematicBody
 		ToggleNightLight(CustomEnviroment.IsDay());
 		IdleTimer = GetNode<Timer>("IdleTimer");
 		SetClothing();
-
 	}
 	public bool IsPlayerInstrument()
 	{

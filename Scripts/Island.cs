@@ -14,7 +14,7 @@ public class Island : Spatial
 	[Export]
 	public string IslandName = "No_Name";
 	[Export]
-	bool RotateIle = true;
+	public bool RotateIle = true;
 	[Export]
 	bool Visited = true;
 
@@ -66,14 +66,7 @@ public class Island : Spatial
 			bi.QueueFree();
 			
 		Translation = SpawnGlobalLocation;
-
-		if (!RotateIle)
-		{
-			SpawnRotation = 0;
-			return;
-		}
 			
-
 		Rotate(new Vector3(0, 1, 0), Mathf.Deg2Rad(SpawnRotation));
 
 		StaticBody sea = GetNode<StaticBody>("SeaBed");

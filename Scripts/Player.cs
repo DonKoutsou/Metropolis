@@ -430,14 +430,15 @@ public class Player : Character
 		base.Kill(reason);
 		MyWorld.GetInstance().OnPlayerKilled(reason);
 	}
+	//interactable hack for controller
 	[Signal]
-	public delegate void ActionObjectInteraction(bool EnterBool, Node body);
+	public delegate void InteractableObjectEntered(bool EnterBool, Node body);
 	public void ActionObjectEntered(Node body)
 	{
-		EmitSignal("ActionObjectInteraction", true, body);
+		EmitSignal("InteractableObjectEntered", true, body);
 	}
 	public void ActionObjectLeft(Node body)
 	{
-		EmitSignal("ActionObjectInteraction", false, body);
+		EmitSignal("InteractableObjectEntered", false, body);
 	}
 }

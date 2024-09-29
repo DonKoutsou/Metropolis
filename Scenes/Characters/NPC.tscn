@@ -11,8 +11,8 @@ height = 5.16563
 
 [node name="Character" type="KinematicBody" groups=["Interactables"]]
 pause_mode = 1
-collision_layer = 4104
-collision_mask = 22
+collision_layer = 4120
+collision_mask = 6
 script = ExtResource( 1 )
 Sitting = false
 Chair = NodePath("")

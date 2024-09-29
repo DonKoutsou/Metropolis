@@ -241,6 +241,7 @@ margin_left = -179.0
 margin_top = -73.5
 margin_right = -4.0
 margin_bottom = -33.5
+focus_neighbour_top = NodePath("../Exit_Button")
 focus_neighbour_right = NodePath("../Continue_Button_Half")
 focus_neighbour_bottom = NodePath("../SeedSetting/SeedText")
 theme = ExtResource( 19 )
@@ -256,6 +257,7 @@ margin_top = -73.5
 margin_right = 179.0
 margin_bottom = -33.5
 focus_neighbour_left = NodePath("../Start_Button_Half")
+focus_neighbour_top = NodePath("../Exit_Button")
 focus_neighbour_bottom = NodePath("../SeedSetting/SeedText")
 theme = ExtResource( 19 )
 text = "Συνέχεια"
@@ -269,6 +271,7 @@ margin_left = -179.0
 margin_top = -73.5
 margin_right = 179.0
 margin_bottom = -33.5
+focus_neighbour_top = NodePath("../Exit_Button")
 focus_neighbour_bottom = NodePath("../SeedSetting/SeedText")
 theme = ExtResource( 19 )
 text = "Έναρξη"
@@ -431,12 +434,7 @@ theme = SubResource( 28 )
 texture = ExtResource( 14 )
 expand = true
 
-[node name="Control" type="Control" parent="Intro"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-
-[node name="Panel6" type="Panel" parent="Intro/Control"]
+[node name="Panel6" type="Panel" parent="Intro"]
 anchor_bottom = 1.0
 margin_left = 64.0
 margin_top = 64.0
@@ -446,7 +444,7 @@ rect_clip_content = true
 mouse_filter = 2
 custom_styles/panel = ExtResource( 8 )
 
-[node name="Panel8" type="Panel" parent="Intro/Control"]
+[node name="Panel8" type="Panel" parent="Intro"]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0

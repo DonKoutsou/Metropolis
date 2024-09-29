@@ -4,18 +4,18 @@
 [ext_resource path="res://Scripts/Sea.cs" type="Script" id=2]
 [ext_resource path="res://Assets/Water/textures/post/waterplane_low.obj" type="ArrayMesh" id=3]
 
-[sub_resource type="PhysicsMaterial" id=6]
+[sub_resource type="PhysicsMaterial" id=90]
 friction = 0.0
 absorbent = true
 
-[sub_resource type="BoxShape" id=5]
+[sub_resource type="BoxShape" id=91]
 extents = Vector3( 4000, 33, 4000 )
 
 [node name="SeaBed" type="StaticBody"]
 pause_mode = 1
 collision_layer = 256
 collision_mask = 0
-physics_material_override = SubResource( 6 )
+physics_material_override = SubResource( 90 )
 script = ExtResource( 2 )
 
 [node name="Sea" type="MeshInstance" parent="."]
@@ -25,4 +25,4 @@ material/0 = ExtResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -37.18, 0 )
-shape = SubResource( 5 )
+shape = SubResource( 91 )

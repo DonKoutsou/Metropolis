@@ -128,7 +128,7 @@ public class ImageGenDock : EditorPlugin
         EditorInterface interf = GetEditorInterface();
         GD.Print("Getting Localisation Holder");
         LocalisationHolder holder = (LocalisationHolder)interf.GetSelection().GetSelectedNodes()[0];
-        holder.ImportLocalisation();
+        //holder.ImportLocalisation();
     }
     public override void _ExitTree()
     {

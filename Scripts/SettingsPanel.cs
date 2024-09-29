@@ -20,22 +20,22 @@ public class SettingsPanel : Control
         {
             case Viewport.MSAA.Msaa2x:
             {
-                GetNode<OptionButton>("Panel/GridContainer/MSAA_Option").Selected = 0;
+                GetNode<OptionButton>("Panel/GridContainer/MSAAChoice").Selected = 0;
                 break;
             }
             case Viewport.MSAA.Msaa4x:
             {
-                GetNode<OptionButton>("Panel/GridContainer/MSAA_Option").Selected = 1;
+                GetNode<OptionButton>("Panel/GridContainer/MSAAChoice").Selected = 1;
                 break;
             }
             case Viewport.MSAA.Msaa8x:
             {
-                GetNode<OptionButton>("Panel/GridContainer/MSAA_Option").Selected = 2;
+                GetNode<OptionButton>("Panel/GridContainer/MSAAChoice").Selected = 2;
                 break;
             }
             case Viewport.MSAA.Msaa16x:
             {
-                GetNode<OptionButton>("Panel/GridContainer/MSAA_Option").Selected = 3;;
+                GetNode<OptionButton>("Panel/GridContainer/MSAAChoice").Selected = 3;;
                 break;
             }
         }
@@ -43,28 +43,28 @@ public class SettingsPanel : Control
         {
             case 30:
             {
-                GetNode<OptionButton>("Panel/GridContainer/FPS_Choice").Selected = 0;
+                GetNode<OptionButton>("Panel/GridContainer/MaxFPSChoice").Selected = 0;
                 break;
             }
             case 60:
             {
-                GetNode<OptionButton>("Panel/GridContainer/FPS_Choice").Selected = 1;
+                GetNode<OptionButton>("Panel/GridContainer/MaxFPSChoice").Selected = 1;
                 break;
             }
             case 75:
             {
-                GetNode<OptionButton>("Panel/GridContainer/FPS_Choice").Selected = 2;
+                GetNode<OptionButton>("Panel/GridContainer/MaxFPSChoice").Selected = 2;
                 break;
             }
             case 120:
             {
-                GetNode<OptionButton>("Panel/GridContainer/FPS_Choice").Selected = 3;
+                GetNode<OptionButton>("Panel/GridContainer/MaxFPSChoice").Selected = 3;
                 break;
             }
         }
-        GetNode<Slider>("Panel/GridContainer/HSlider").Value = gameenv.AdjustmentBrightness;
-        GetNode<Slider>("Panel/GridContainer/HSlider2").Value = gameenv.AdjustmentContrast;
-        GetNode<Slider>("Panel/GridContainer/HSlider3").Value = gameenv.AdjustmentSaturation;
+        GetNode<Slider>("Panel/GridContainer/BrightnessSlider").Value = gameenv.AdjustmentBrightness;
+        GetNode<Slider>("Panel/GridContainer/ContrastSlider").Value = gameenv.AdjustmentContrast;
+        GetNode<Slider>("Panel/GridContainer/SaturationSlider").Value = gameenv.AdjustmentSaturation;
         Visible = false;
     }
     private void Update_Vsync(bool T)

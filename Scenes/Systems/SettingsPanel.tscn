@@ -36,7 +36,7 @@ margin_bottom = 260.0
 custom_constants/hseparation = 21
 columns = 2
 
-[node name="Label7" type="Label" parent="Panel/GridContainer" groups=["Translatables"]]
+[node name="FullScreen" type="Label" parent="Panel/GridContainer" groups=["Translatables"]]
 margin_top = 2.0
 margin_right = 164.0
 margin_bottom = 21.0
@@ -49,12 +49,13 @@ valign = 1
 margin_left = 185.0
 margin_right = 209.0
 margin_bottom = 24.0
+focus_neighbour_top = NodePath("../../Exit")
 focus_neighbour_bottom = NodePath("../VSync_Check")
 size_flags_horizontal = 0
 custom_constants/check_vadjust = 0
 custom_constants/hseparation = 0
 
-[node name="Label" type="Label" parent="Panel/GridContainer"]
+[node name="VSync" type="Label" parent="Panel/GridContainer"]
 margin_top = 30.0
 margin_right = 164.0
 margin_bottom = 49.0
@@ -73,7 +74,7 @@ custom_constants/check_vadjust = 0
 custom_constants/hseparation = 0
 pressed = true
 
-[node name="Label3" type="Label" parent="Panel/GridContainer"]
+[node name="FXAA" type="Label" parent="Panel/GridContainer"]
 margin_top = 58.0
 margin_right = 164.0
 margin_bottom = 77.0
@@ -92,7 +93,7 @@ custom_constants/check_vadjust = 0
 custom_constants/hseparation = 0
 pressed = true
 
-[node name="Label11" type="Label" parent="Panel/GridContainer"]
+[node name="SSAO" type="Label" parent="Panel/GridContainer"]
 margin_top = 86.0
 margin_right = 164.0
 margin_bottom = 105.0
@@ -132,7 +133,7 @@ text = "Mouse/Keyboard"
 items = [ "Mouse/Keyboard", null, false, 0, null, "Gamepad", null, false, 1, null ]
 selected = 0
 
-[node name="Label2" type="Label" parent="Panel/GridContainer"]
+[node name="MSAA" type="Label" parent="Panel/GridContainer"]
 margin_top = 112.0
 margin_right = 164.0
 margin_bottom = 131.0
@@ -141,7 +142,7 @@ text = "Anti-Aliasing (MSAA)"
 align = 1
 valign = 1
 
-[node name="MSAA_Option" type="OptionButton" parent="Panel/GridContainer" groups=["Buttons"]]
+[node name="MSAAChoice" type="OptionButton" parent="Panel/GridContainer" groups=["Buttons"]]
 margin_left = 185.0
 margin_top = 112.0
 margin_right = 285.0
@@ -151,7 +152,7 @@ text = "x2"
 items = [ "Off", null, false, 0, null, "x2", null, false, 1, null, "x4", null, false, 2, null, "x8", null, false, 3, null, "x16", null, false, 4, null ]
 selected = 1
 
-[node name="Label8" type="Label" parent="Panel/GridContainer" groups=["Translatables"]]
+[node name="MaxFPS" type="Label" parent="Panel/GridContainer" groups=["Translatables"]]
 margin_top = 136.0
 margin_right = 164.0
 margin_bottom = 155.0
@@ -160,7 +161,7 @@ text = "Max FPS"
 align = 1
 valign = 1
 
-[node name="FPS_Choice" type="OptionButton" parent="Panel/GridContainer" groups=["Buttons"]]
+[node name="MaxFPSChoice" type="OptionButton" parent="Panel/GridContainer" groups=["Buttons"]]
 margin_left = 185.0
 margin_top = 136.0
 margin_right = 285.0
@@ -170,7 +171,7 @@ text = "60"
 items = [ "30", null, false, 0, null, "60", null, false, 1, null, "75", null, false, 2, null, "120", null, false, 3, null ]
 selected = 1
 
-[node name="Label10" type="Label" parent="Panel/GridContainer" groups=["Translatables"]]
+[node name="Resolution" type="Label" parent="Panel/GridContainer" groups=["Translatables"]]
 margin_top = 160.0
 margin_right = 164.0
 margin_bottom = 179.0
@@ -179,7 +180,7 @@ text = "Resolution"
 align = 1
 valign = 1
 
-[node name="FPS_Choice2" type="OptionButton" parent="Panel/GridContainer" groups=["Buttons"]]
+[node name="ResolutionChoice" type="OptionButton" parent="Panel/GridContainer" groups=["Buttons"]]
 margin_left = 185.0
 margin_top = 160.0
 margin_right = 285.0
@@ -189,7 +190,7 @@ text = "1920x1080"
 items = [ "3840 x 2160", null, false, 0, null, "1920x1080", null, false, 1, null, "1280x720", null, false, 2, null, "960x540", null, false, 3, null, "480x270", null, false, 4, null ]
 selected = 1
 
-[node name="Label4" type="Label" parent="Panel/GridContainer" groups=["Translatables"]]
+[node name="Brightness" type="Label" parent="Panel/GridContainer" groups=["Translatables"]]
 margin_top = 184.0
 margin_right = 164.0
 margin_bottom = 203.0
@@ -198,7 +199,7 @@ text = "Brightness"
 align = 1
 valign = 1
 
-[node name="HSlider" type="HSlider" parent="Panel/GridContainer"]
+[node name="BrightnessSlider" type="HSlider" parent="Panel/GridContainer"]
 margin_left = 185.0
 margin_top = 184.0
 margin_right = 285.0
@@ -208,7 +209,7 @@ max_value = 2.0
 step = 0.05
 value = 1.0
 
-[node name="Label5" type="Label" parent="Panel/GridContainer" groups=["Translatables"]]
+[node name="Contrast" type="Label" parent="Panel/GridContainer" groups=["Translatables"]]
 margin_top = 207.0
 margin_right = 164.0
 margin_bottom = 226.0
@@ -217,7 +218,7 @@ text = "Contrast"
 align = 1
 valign = 1
 
-[node name="HSlider2" type="HSlider" parent="Panel/GridContainer"]
+[node name="ContrastSlider" type="HSlider" parent="Panel/GridContainer"]
 margin_left = 185.0
 margin_top = 207.0
 margin_right = 285.0
@@ -227,7 +228,7 @@ max_value = 2.0
 step = 0.05
 value = 1.0
 
-[node name="Label6" type="Label" parent="Panel/GridContainer" groups=["Translatables"]]
+[node name="Saturation" type="Label" parent="Panel/GridContainer" groups=["Translatables"]]
 margin_top = 230.0
 margin_right = 164.0
 margin_bottom = 249.0
@@ -236,7 +237,7 @@ text = "Saturation"
 align = 1
 valign = 1
 
-[node name="HSlider3" type="HSlider" parent="Panel/GridContainer"]
+[node name="SaturationSlider" type="HSlider" parent="Panel/GridContainer"]
 margin_left = 185.0
 margin_top = 230.0
 margin_right = 285.0
@@ -245,7 +246,7 @@ max_value = 2.0
 step = 0.05
 value = 1.0
 
-[node name="Label9" type="Label" parent="Panel/GridContainer" groups=["Translatables"]]
+[node name="Sound" type="Label" parent="Panel/GridContainer" groups=["Translatables"]]
 margin_top = 253.0
 margin_right = 164.0
 margin_bottom = 272.0
@@ -254,7 +255,7 @@ text = "Sound"
 align = 1
 valign = 1
 
-[node name="HSlider4" type="HSlider" parent="Panel/GridContainer"]
+[node name="SoundSlider" type="HSlider" parent="Panel/GridContainer"]
 margin_left = 185.0
 margin_top = 253.0
 margin_right = 285.0
@@ -263,19 +264,7 @@ min_value = -80.0
 max_value = 6.0
 step = 0.5
 
-[node name="Button" type="Button" parent="Panel" groups=["Buttons", "Translatables"]]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -46.0
-margin_top = -48.0
-margin_right = 46.0
-margin_bottom = -9.0
-theme = ExtResource( 5 )
-text = "Exit"
-
-[node name="Button2" type="Button" parent="Panel" groups=["Buttons", "Translatables"]]
+[node name="ResetAchievements" type="Button" parent="Panel" groups=["Buttons", "Translatables"]]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -287,17 +276,31 @@ margin_bottom = -59.0
 theme = ExtResource( 5 )
 text = "Reset Achievements"
 
+[node name="Exit" type="Button" parent="Panel" groups=["Buttons", "Translatables"]]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -46.0
+margin_top = -48.0
+margin_right = 46.0
+margin_bottom = -9.0
+focus_neighbour_top = NodePath("../ResetAchievements")
+focus_neighbour_bottom = NodePath("../GridContainer/Full_Screen_Check")
+theme = ExtResource( 5 )
+text = "Exit"
+
 [connection signal="toggled" from="Panel/GridContainer/Full_Screen_Check" to="." method="Update_FullScreen"]
 [connection signal="toggled" from="Panel/GridContainer/VSync_Check" to="." method="Update_Vsync"]
 [connection signal="toggled" from="Panel/GridContainer/FXAA_Check" to="." method="Update_FXAA"]
 [connection signal="toggled" from="Panel/GridContainer/SSAO_Check" to="." method="Update_SSAO"]
 [connection signal="item_selected" from="Panel/GridContainer/MSAA_Option2" to="." method="Update_InputDevice"]
-[connection signal="item_selected" from="Panel/GridContainer/MSAA_Option" to="." method="Update_MSAA"]
-[connection signal="item_selected" from="Panel/GridContainer/FPS_Choice" to="." method="UpdateMaxFPS"]
-[connection signal="item_selected" from="Panel/GridContainer/FPS_Choice2" to="." method="Update_Resolution"]
-[connection signal="value_changed" from="Panel/GridContainer/HSlider" to="." method="Update_Brightness"]
-[connection signal="value_changed" from="Panel/GridContainer/HSlider2" to="." method="Update_Contrast"]
-[connection signal="value_changed" from="Panel/GridContainer/HSlider3" to="." method="Update_Saturation"]
-[connection signal="value_changed" from="Panel/GridContainer/HSlider4" to="." method="Update_Sound"]
-[connection signal="pressed" from="Panel/Button" to="." method="Close"]
-[connection signal="pressed" from="Panel/Button2" to="." method="ClearAchievements"]
+[connection signal="item_selected" from="Panel/GridContainer/MSAAChoice" to="." method="Update_MSAA"]
+[connection signal="item_selected" from="Panel/GridContainer/MaxFPSChoice" to="." method="UpdateMaxFPS"]
+[connection signal="item_selected" from="Panel/GridContainer/ResolutionChoice" to="." method="Update_Resolution"]
+[connection signal="value_changed" from="Panel/GridContainer/BrightnessSlider" to="." method="Update_Brightness"]
+[connection signal="value_changed" from="Panel/GridContainer/ContrastSlider" to="." method="Update_Contrast"]
+[connection signal="value_changed" from="Panel/GridContainer/SaturationSlider" to="." method="Update_Saturation"]
+[connection signal="value_changed" from="Panel/GridContainer/SoundSlider" to="." method="Update_Sound"]
+[connection signal="pressed" from="Panel/ResetAchievements" to="." method="ClearAchievements"]
+[connection signal="pressed" from="Panel/Exit" to="." method="Close"]

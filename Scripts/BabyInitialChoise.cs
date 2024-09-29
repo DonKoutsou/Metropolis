@@ -36,7 +36,19 @@ public class BabyInitialChoise : Control
         pl = GetNode<AnimationPlayer>("AnimationPlayer");
         pl.Play("Start");
         SetProcess(false);
-        GetNode<Button>("VBoxContainer/HBoxContainer/Button").GrabFocus();
+        
+        if (ControllerInput.IsUsingController())
+            SwitchedController(true);
+        ControllerInput.GetInstance().Connect("OnControllerSwitched", this, "SwitchedController");
+    }
+    private void SwitchedController(bool Toggle)
+    {
+        if (Toggle)
+            GetNode<Button>("VBoxContainer/HBoxContainer/Button").GrabFocus();
+        else
+        {
+            GetFocusOwner().ReleaseFocus();
+        }
     }
     public override void _Process(float delta)
     {

@@ -1,12 +1,13 @@
 using Godot;
 using Godot.Collections;
 using System;
+using System.Linq;
 
 [Tool]
 public class LocalisationHolder : Node
 {
-    //[Export]
-    //Dictionary<string, string[]> TempLocalizations = null;
+    [Export]
+    string[] TextJsonLocations = null;
     static Dictionary<string, string[]> Localizations = null;
     //static LocalisationHolder Instance;
     static Language CurrentLanguage = Language.GREEK;
@@ -14,7 +15,12 @@ public class LocalisationHolder : Node
     public override void _Ready()
     {
         base._Ready();
-        ImportLocalisation();
+        Localizations = new Dictionary<string, string[]>();
+        for (int i = 0; i < TextJsonLocations.Count(); i++)
+        {
+            ImportLocalisation(TextJsonLocations[i]);
+        }
+        GD.Print("Localisations Imported");
         //Instance = this;
         //Localizations = TempLocalizations.Duplicate();
         //TempLocalizations.Clear();
@@ -28,17 +34,18 @@ public class LocalisationHolder : Node
     //{
     //    return Instance;
     //}
-    public void ImportLocalisation()
+    public void ImportLocalisation(string JsonName)
     {
         GD.Print("Importing Localization JSon");
         var LocDataFile = new File();
-        LocDataFile.Open("res://Assets/Dialogue/DialogueTest.json", File.ModeFlags.Read);
+
+        string JsonLocation = "res://Assets/Spreadsheet_Imports/" + JsonName + ".json";
+
+        LocDataFile.Open(JsonLocation, File.ModeFlags.Read);
         var LocDataJson = JSON.Parse(LocDataFile.GetAsText());
         LocDataFile.Close();
         if (LocDataJson.Result is Godot.Collections.Array)
         {
-            Localizations = new Dictionary<string, string[]>();
-
             Godot.Collections.Array info = (Godot.Collections.Array)LocDataJson.Result;
 
             GD.Print("JSon contains " + info.Count + " entries");
@@ -59,13 +66,8 @@ public class LocalisationHolder : Node
                 };
                 Localizations.Add(DialogueName, translations);
             }
-            GD.Print("Localisations Imported");
+            
         }
-        else
-        {
-            GD.Print("Its Not A Dictionary");
-        }
-       // GD.Print(LocDataJson.Result);
     }
     public static string GetString(string Name)
     {
