@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://UIThemes/Panel_Black_Top-BottomCorner.tres" type="StyleBox" id=1]
 [ext_resource path="res://UIThemes/Panel_LightGray_TopCorner.tres" type="StyleBox" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Assets/UI/ΜΧΨLogoTrans.png" type="Texture" id=5]
 [ext_resource path="res://Assets/UI/Icon/Replay.png" type="Texture" id=6]
 [ext_resource path="res://Scripts/LoadingScreen.cs" type="Script" id=7]
+[ext_resource path="res://Fonts/SettingsFont.tres" type="DynamicFont" id=8]
 
 [sub_resource type="Theme" id=28]
 
@@ -494,3 +495,18 @@ anims/Spinner = SubResource( 47 )
 [node name="LoadingPic" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 63 )
 anims/ShowPic = SubResource( 64 )
+
+[node name="Label" type="Label" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = -163.0
+margin_right = 474.0
+margin_bottom = -122.0
+custom_fonts/font = ExtResource( 8 )
+text = "Loading Tips....... WIP WIP
++
++
++
++"
+autowrap = true

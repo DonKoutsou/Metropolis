@@ -17,13 +17,13 @@ public class UnconDialogueScript : BaseDialogueScript
         {
             case 0:
             {
-                text = string.Format(LocalisationHolder.GetString("IGoToMetropolis"), WorldMap.GetInstance().GetExitDirection());
+                text = string.Format("IGoToMetropolis", WorldMap.GetInstance().GetExitDirection());
                 DialogueProg ++;
                 break;
             }
             case 1:
             {
-                text = LocalisationHolder.GetString("SeeYouInM");
+                text = "SeeYouInM";
                 subscription = "UnconCharDepart";
                 DialogueProg ++;
                 break;
@@ -48,13 +48,13 @@ public class UnconDialogueScript : BaseDialogueScript
     }
     public override string GetExtraActionText()
     {
-        return "Δώσε μπαταρία.";
+        return "GiveBat";
     }
     public override string GetExtraActionText2()
     {
         return "Null";
     }
-    public override string Action1Done(NPC owner, Player pl)
+    public override void Action1Done(NPC owner, Player pl)
     {
         Inventory inv = Player.GetInstance().GetCharacterInventory();
     
@@ -63,9 +63,9 @@ public class UnconDialogueScript : BaseDialogueScript
 
         if (bats.Count == 0)
         {
-            DialogueManager.GetInstance().ScheduleDialogue(pl, LocalisationHolder.GetString("Δεν έχω μπαταρίες..."));
+            DialogueManager.GetInstance().ScheduleDialogue(pl, "NoBat");
             //pl.GetTalkText().Talk("Δεν έχω μπαταρίες...");
-            return "null";
+            return;
         }
 
         //TalkingChar.RechargeCharacter(bats[0].GetCurrentCap());
@@ -86,7 +86,7 @@ public class UnconDialogueScript : BaseDialogueScript
 
         ActionTracker.OnActionDone("SaveUnconMachine");
 
-        return "Νά'σε καλά καΐκτση, δεν ξέρω τι συνέβη. Τρελός ο πόνος της ατροφίας. Ευχαριστώ για την μπαταρία... Δεν ξέρω πως να το ανταποδώσω, βρήκα αυτό στα ταξίδια μου, ελπίζω να σου φανεί χρήσημο.";
+        DialogueManager.GetInstance().ScheduleDialogue(owner, "Νά'σε καλά καΐκτση, δεν ξέρω τι συνέβη. Τρελός ο πόνος της ατροφίας. Ευχαριστώ για την μπαταρία... Δεν ξέρω πως να το ανταποδώσω, βρήκα αυτό στα ταξίδια μου, ελπίζω να σου φανεί χρήσημο.");
     }
     public override Dictionary<string, object>GetSaveData()
     {

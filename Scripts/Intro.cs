@@ -35,7 +35,7 @@ public class Intro : Spatial
     {
         Player pl = MyWorld.GetInstance().SpawnPlayer(SpawnPosition.GetInstance().GlobalTranslation, SpawnPosition.GetInstance().GlobalRotation, true);
         Sky.OnPlayerSpawned(pl);
-        DialogueManager.GetInstance().ScheduleDialogue(pl, LocalisationHolder.GetString("Ένα από τα σκάφη επέζησε. Τι μπορεί να έχει μέσα;..."));
+        DialogueManager.GetInstance().ScheduleDialogue(pl, "Ένα από τα σκάφη επέζησε. Τι μπορεί να έχει μέσα;...");
         //pl.GetTalkText().Talk("Ένα από τα σκάφη επέζησε. Τι μπορεί να έχει μέσα;...");
         pl.MoveTo(PodPosition.GetInstance().GlobalTranslation, true, true);
         PlayerCamera.GetInstance().Current = true;

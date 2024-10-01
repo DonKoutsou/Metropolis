@@ -189,13 +189,13 @@ public class ActionMenu : Control
 		//PickButton.Show();
 		IntButton.Show();
 
-		PickButton.Text = (string)obj.Call("GetActionName", Play);
+		PickButton.Text = LocalisationHolder.GetString((string)obj.Call("GetActionName", Play));
 		PickButton.Visible = (bool)obj.Call("ShowActionName", Play);
 
-		IntButton2.Text = (string)obj.Call("GetActionName2", Play);
+		IntButton2.Text = LocalisationHolder.GetString((string)obj.Call("GetActionName2", Play));
 		IntButton2.Visible = (bool)obj.Call("ShowActionName2", Play);
 
-		IntButton3.Text = (string)obj.Call("GetActionName3", Play);
+		IntButton3.Text = LocalisationHolder.GetString((string)obj.Call("GetActionName3", Play));
 		IntButton3.Visible = (bool)obj.Call("ShowActionName3", Play);
 
 		DeselectCurrent();

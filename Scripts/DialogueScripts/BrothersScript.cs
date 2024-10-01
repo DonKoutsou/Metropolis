@@ -80,13 +80,11 @@ public class BrothersScript : BaseDialogueScript
     {
         return "Null";
     }
-    public override string Action1Done(NPC owner, Player pl)
+    public override void Action1Done(NPC owner, Player pl)
     {
-        return "null";
     }
-    public override string Action2Done(NPC owner, Player pl)
+    public override void Action2Done(NPC owner, Player pl)
     {
-        return "null";
     }
     public override Dictionary<string, object>GetSaveData()
     {

@@ -71,7 +71,7 @@ public class PainterScript : BaseDialogueScript
     {
         return "Δώσε σταγώνα αίματος.";
     }
-    public override string Action1Done(NPC owner, Player pl)
+    public override void Action1Done(NPC owner, Player pl)
     {
         Inventory inv = Player.GetInstance().GetCharacterInventory();
         List<Item> Cans;
@@ -86,10 +86,9 @@ public class PainterScript : BaseDialogueScript
             DialogueProg ++;
             branch = 0;
         }
-
-        return "Ευχαριστώ καΐκτση, θα μπορέσω να προχορήσω τον πίνακά μου λίγο ακόμη.";
+        DialogueManager.GetInstance().ScheduleDialogue(owner, "Ευχαριστώ καΐκτση, θα μπορέσω να προχορήσω τον πίνακά μου λίγο ακόμη.");
     }
-    public override string Action2Done(NPC owner, Player pl)
+    public override void Action2Done(NPC owner, Player pl)
     {
 
         Inventory inv = Player.GetInstance().GetCharacterInventory();
@@ -101,7 +100,7 @@ public class PainterScript : BaseDialogueScript
         DialogueProg ++;
         branch = 1;
 
-        return "Ενδιαφέρων, δεν περέμενα κάτι τέτοιο... είσαι σίγουρος οτι θες να το αποχοριστείς, είναι ένα αρκετά σπάνιο ανικείμενο στις ημέρες μας. Θα προσπαθήσω να το εκμετελευτό πλήρος, ευχαριστώ καΐκτση";
+        DialogueManager.GetInstance().ScheduleDialogue(owner, "Ενδιαφέρων, δεν περέμενα κάτι τέτοιο... είσαι σίγουρος οτι θες να το αποχοριστείς, είναι ένα αρκετά σπάνιο ανικείμενο στις ημέρες μας. Θα προσπαθήσω να το εκμετελευτό πλήρος, ευχαριστώ καΐκτση");
     }
     public override Dictionary<string, object>GetSaveData()
     {

@@ -156,16 +156,16 @@ public class Furniture : StaticBody
 		if (foundit != null)
 		{
 			pl.GetCharacterInventory().InsertItem(foundit);
-			DialogueManager.GetInstance().ForceDialogue(pl, LocalisationHolder.GetString("ItmFoundDiag"));
+			DialogueManager.GetInstance().ForceDialogue(pl, "ItmFoundDiag");
 			//pl.GetTalkText().Talk(foundit.GetItemPickUpText());
 		}
 		else
-			DialogueManager.GetInstance().ForceDialogue(pl, LocalisationHolder.GetString("Άδειο..."));
+			DialogueManager.GetInstance().ForceDialogue(pl, "Άδειο...");
 			//pl.GetTalkText().Talk("Άδειο...");
 	}
 	public string GetActionName(Player pl)
     {
-		return LocalisationHolder.GetString("Ψάξε");
+		return "Ψάξε";
     }
 	public bool ShowActionName(Player pl)
     {

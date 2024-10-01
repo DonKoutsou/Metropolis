@@ -89,9 +89,9 @@ public class FireplaceLight : StaticBody
     {
         string actiontex;
         if (State)
-            actiontex = LocalisationHolder.GetString("Σβήσε.");
+            actiontex = "Σβήσε.";
         else
-            actiontex = LocalisationHolder.GetString("Άναψε.");
+            actiontex = "Άναψε.";
 
         return actiontex;
     }

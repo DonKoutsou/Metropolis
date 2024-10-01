@@ -88,13 +88,13 @@ public class Item : RigidBody
 	{
 		if (!pl.GetCharacterInventory().InsertItem(this))
 		{
-			DialogueManager.GetInstance().ForceDialogue(pl, LocalisationHolder.GetString("Δέν έχω χώρο."));
+			DialogueManager.GetInstance().ForceDialogue(pl, "Δέν έχω χώρο.");
 			//pl.GetTalkText().Talk("Δέν έχω χώρο.");
 		}
 	}
 	public string GetActionName(Player pl)
     {
-        return LocalisationHolder.GetString("Πάρε");
+        return "Πάρε";
     }
 	public bool ShowActionName(Player pl)
     {

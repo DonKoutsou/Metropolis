@@ -171,25 +171,15 @@ public class NPC : Character
 	}
 	public void DoAction2(Player pl)
 	{
-		string text = GetNode<BaseDialogueScript>("DialogueScript").Action1Done(this, pl);
-		if (text != "null")
-		{
-			DialogueManager.GetInstance().ScheduleDialogue(this, text);
-			//GetTalkText().Talk(text);
-		}
+		GetNode<BaseDialogueScript>("DialogueScript").Action1Done(this, pl);
 	}
 	public void DoAction3(Player pl)
 	{
-		string text = GetNode<BaseDialogueScript>("DialogueScript").Action2Done(this, pl);
-		if (text != "null")
-		{
-			DialogueManager.GetInstance().ScheduleDialogue(this, text);
-			//GetTalkText().Talk(text);
-		}
+		GetNode<BaseDialogueScript>("DialogueScript").Action2Done(this, pl);
 	}
 	public string GetActionName(Player pl)
     {
-        return LocalisationHolder.GetString("Kουβέντα");
+        return "Kουβέντα";
     }
 	public bool ShowActionName(Player pl)
     {

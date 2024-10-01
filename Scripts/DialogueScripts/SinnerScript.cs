@@ -77,14 +77,6 @@ public class SinnerScript : BaseDialogueScript
     {
         return "Null";
     }
-    public override string Action1Done(NPC owner, Player pl)
-    {
-        return "null";
-    }
-    public override string Action2Done(NPC owner, Player pl)
-    {
-        return "null";
-    }
     public override Dictionary<string, object>GetSaveData()
     {
         Dictionary<string, object> savedata = new Dictionary<string, object>(){

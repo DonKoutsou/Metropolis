@@ -5,14 +5,16 @@ using System.Collections.Generic;
 public class KanarisScript : BaseDialogueScript
 {
     int MusicGiven = 0;
+    bool GivenGuitar = false;
     int MusicSheetGiven = 0;
+    int InfoStage = 0;
     public override void DoDialogue(NPC Talker, NPC TalkerColaborator = null)
     {
-        string text = string.Empty;
+        List<string> Dialogues = new List<string>();
 
         if (Talker.IsPlayerInstrument())
         {
-            text = "Δώσε μου λίγο, τελειώνω.";
+            Dialogues.Add("#KanarInter");
         }
         else
         {
@@ -20,61 +22,94 @@ public class KanarisScript : BaseDialogueScript
             {
                 case 0:
                 {
-                    text = "Άλλος ένας ταξιδιάρης που είδε φώς και μπήκε. Εσύ είσαι ο πρώτος που κουβαλάει ένα μωρό μαζί του. Τι σε φέρνει από εδώ καΐκτσή;";
+                    Dialogues.Add("#Kanar1");
+                    Dialogues.Add("#Kanar2");
+                    Dialogues.Add("#Kanar3");
                     DialogueProg ++;
                     break;
                 }
                 case 1:
                 {
-                    text = "Εγώ αράζω, δεν έχει μίνει και τίποτε άλλο να κάνει κανείς σε τούτο εδώ το μέρος. Έσω βρεί κάτι δίσκους προπολεμικούς και ακούω. Κάνει την ώρα να περνάει λίγο πιό ευχάριστα. Τι δε θα έδηνα για μια κιθάρα.";
+                    Dialogues.Add("#Kanar4");
+                    Dialogues.Add("#Kanar5");
                     DialogueProg ++;
                     break;
                 }
                 case 2:
                 {
-                    text = "Άμα βρείς καμία κιθάρα στα ταξίδια σου θα στην αντάλαζα για μερικά από αυτά τα εκρηκτηκά. Μπορεί να σου φανούν χρείσιμα κάπου, είναι μιά από τις γνώσεις που μου έμειναν απο το αφεντικό...";
+                    Dialogues.Add("#Kanar6");
+                    Dialogues.Add("#Kanar7");
+                    Dialogues.Add("#Kanar8");
+                    DialogueProg ++;
                     break;
                 }
                 case 3:
                 {
-                    text = "Θα σου ανταλάξω ότι παρτιτούρες ή μουσική μου φέρεις με ερκηκτηκά. Θα σου φανούν χρήσημα εκέι έξω σίγουρα.";
+                    Dialogues.Add("#Kanar9");
+                    Dialogues.Add("#Kanar10");
+                    Dialogues.Add("#Kanar11");
+                    Dialogues.Add("#Kanar12");
+                    DialogueProg ++;
+                    break;
+                }
+                case 4:
+                {
+                    Dialogues.Add("#Kanar13");
+                    Dialogues.Add("#Kanar14");
+                    Dialogues.Add("#Kanar15");
+                    Dialogues.Add("#Kanar16");
+                    Dialogues.Add("#Kanar17");
+                    DialogueProg ++;
+                    break;
+                }
+                case 5:
+                {
+                    Dialogues.Add("#Kanar17");
                     break;
                 }
             }
         }
-        DialogueManager.GetInstance().ScheduleDialogue(Talker, text);
+        foreach (string diag in Dialogues)
+            DialogueManager.GetInstance().ScheduleDialogue(Talker, diag);
     }
     public override bool ShouldShowExtraAction()
     {
-        bool showaction = false;
-        if (DialogueProg == 2)
+        bool showaction;
+
+        if (!GivenGuitar)
         {
             showaction = Player.GetInstance().GetCharacterInventory().HasItemOfType(ItemName.GUITAR);
         }
-        if (DialogueProg == 3)
+        else
         {
             showaction = Player.GetInstance().GetCharacterInventory().HasItemOfType(ItemName.SHEET_MUSIC);
         }
-        return DialogueProg == 3 && Player.GetInstance().GetCharacterInventory().HasItemOfType(ItemName.SHEET_MUSIC);
+
+        return DialogueProg == 5 && showaction;
     }
     public override bool ShouldShowExtraAction2()
     {
         ItemName[] types = {ItemName.VINYL, ItemName.CASSETTE};
         
-        return DialogueProg == 3 && Player.GetInstance().GetCharacterInventory().HasAnyOfItems(types);
+        return DialogueProg == 5 && Player.GetInstance().GetCharacterInventory().HasAnyOfItems(types);
     }
     public override string GetExtraActionText()
     {
-        return "Δώσε παρτιτούρα.";
+        string ActName;
+        if (!GivenGuitar)
+            ActName = "GivGuitar";
+        else
+            ActName = "GivMusSheet";
+        return ActName;
     }
     public override string GetExtraActionText2()
     {
-        return "Δώσε μουσική.";
+        return "GivMus";
     }
-    public override string Action1Done(NPC owner, Player pl)
+    public override void Action1Done(NPC owner, Player pl)
     {
-        string returntext = null;
-        if (DialogueProg == 2)
+        string returntext;
+        if (!GivenGuitar)
         {
             Inventory inv = Player.GetInstance().GetCharacterInventory();
             ItemName[] types = {ItemName.GUITAR};
@@ -87,12 +122,11 @@ public class KanarisScript : BaseDialogueScript
                 Item newItem = GlobalItemCatalogue.GetInstance().GetItemByType(ItemName.EXPLOSIVE).Instance<Item>();
                 inv.InsertItem(newItem);
             }
-            
-            DialogueProg ++;
 
-            returntext =  "Ποοοο είσαι τεράστιος, έχω να ρίξω κάτι πενιές. Ωρίστε 2 εκρηχτηκά. Μπορώ να φτιάξω περισσότερα. Άμα βρείς ταμπλατούρες για κιθάρα εκεί έξω φέρτες από εδώ και ανταλάζουμε πάλι.";
+            GivenGuitar = true;
+            returntext =  "#Kanar62";
         }
-        if (DialogueProg == 3)
+        else
         {
             Inventory inv = Player.GetInstance().GetCharacterInventory();
             ItemName[] types = {ItemName.SHEET_MUSIC};
@@ -106,12 +140,20 @@ public class KanarisScript : BaseDialogueScript
             Item newItem = GlobalItemCatalogue.GetInstance().GetItemByType(ItemName.EXPLOSIVE).Instance<Item>();
             inv.InsertItem(newItem);
 
-            returntext =  "Σ'ωραίος... τσάκα άλλο ένα ακόμη εκρηχκτηκό.";
+            returntext =  "#Kanar63";
        
         }
-        return returntext;
+        DialogueManager.GetInstance().ScheduleDialogue(owner, returntext);
+
+        if (InfoStage == 2 || InfoStage == 5 ||InfoStage == 8 )
+        {
+            foreach (string Diag in GetLabInfo(InfoStage))
+                DialogueManager.GetInstance().ScheduleDialogue(owner, Diag);
+        }
+
+        InfoStage ++;
     }
-    public override string Action2Done(NPC owner, Player pl)
+    public override void Action2Done(NPC owner, Player pl)
     {
         Inventory inv = Player.GetInstance().GetCharacterInventory();
         ItemName[] types = {ItemName.VINYL, ItemName.CASSETTE};
@@ -125,15 +167,26 @@ public class KanarisScript : BaseDialogueScript
         Item newItem = GlobalItemCatalogue.GetInstance().GetItemByType(ItemName.EXPLOSIVE).Instance<Item>();
         inv.InsertItem(newItem);
 
+        DialogueManager.GetInstance().ScheduleDialogue(owner, "#Kanar64");
 
-        return "Ωραίος, ";
+        InfoStage ++;
+
+        if (InfoStage == 2 || InfoStage == 5 ||InfoStage == 8 )
+        {
+            foreach (string Diag in GetLabInfo(InfoStage))
+                DialogueManager.GetInstance().ScheduleDialogue(owner, Diag);
+        }
+
+        
     }
     public override Dictionary<string, object>GetSaveData()
     {
         Dictionary<string, object> savedata = new Dictionary<string, object>(){
             {"DialogueProg", DialogueProg},
             {"MusicGiven", MusicGiven},
-            {"MusicSheetGiven", MusicSheetGiven}
+            {"MusicSheetGiven", MusicSheetGiven},
+            {"GivenGuitar", GivenGuitar},
+            {"InfoStage", InfoStage}
         };
         return savedata;
     }
@@ -142,5 +195,72 @@ public class KanarisScript : BaseDialogueScript
         DialogueProg = (int)Data["DialogueProg"];
         MusicGiven = (int)Data["MusicGiven"];
         MusicSheetGiven = (int)Data["MusicSheetGiven"];
+        GivenGuitar = (bool)Data["GivenGuitar"];
+        InfoStage = (int)Data["InfoStage"];
+    }
+    private List<string> GetLabInfo(int stage)
+    {
+        List<string> Dialogues = new List<string>();
+
+        switch(stage)
+        {
+            case 0:
+            {
+                Dialogues.Add("#Kanar18");
+                Dialogues.Add("#Kanar19");
+                Dialogues.Add("#Kanar20");
+                Dialogues.Add("#Kanar21");
+                Dialogues.Add("#Kanar22");
+                Dialogues.Add("#Kanar23");
+                Dialogues.Add("#Kanar24");
+                Dialogues.Add("#Kanar25");
+                break;
+            }
+            case 1:
+            {
+                Dialogues.Add("#Kanar26");
+                Dialogues.Add("#Kanar27");
+                Dialogues.Add("#Kanar28");
+                Dialogues.Add("#Kanar29");
+                Dialogues.Add("#Kanar30");
+                Dialogues.Add("#Kanar31");
+                Dialogues.Add("#Kanar32");
+                Dialogues.Add("#Kanar33");
+                Dialogues.Add("#Kanar34");
+                Dialogues.Add("#Kanar35");
+                Dialogues.Add("#Kanar36");
+                Dialogues.Add("#Kanar37");
+                Dialogues.Add("#Kanar38");
+                Dialogues.Add("#Kanar39");
+                Dialogues.Add("#Kanar40");
+                Dialogues.Add("#Kanar41");
+                Dialogues.Add("#Kanar42");
+                break;
+            }
+            case 2:
+            {
+                Dialogues.Add("#Kanar43");
+                Dialogues.Add("#Kanar44");
+                Dialogues.Add("#Kanar45");
+                Dialogues.Add("#Kanar46");
+                Dialogues.Add("#Kanar47");
+                Dialogues.Add("#Kanar48");
+                Dialogues.Add("#Kanar49");
+                Dialogues.Add("#Kanar50");
+                Dialogues.Add("#Kanar51");
+                Dialogues.Add("#Kanar52");
+                Dialogues.Add("#Kanar53");
+                Dialogues.Add("#Kanar54");
+                Dialogues.Add("#Kanar55");
+                Dialogues.Add("#Kanar56");
+                Dialogues.Add("#Kanar57");
+                Dialogues.Add("#Kanar58");
+                Dialogues.Add("#Kanar59");
+                Dialogues.Add("#Kanar60");
+                Dialogues.Add("#Kanar61");
+                break;
+            }
+        }
+        return Dialogues;
     }
 }

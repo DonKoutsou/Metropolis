@@ -18,10 +18,10 @@ public class GeneratorDoor : StaticBody
     }
     public string GetActionName(Player pl)
     {   
-        string name = LocalisationHolder.GetString("Άνοιξε");
+        string name = "Άνοιξε";
         if (Open)
         {
-            name = LocalisationHolder.GetString("Κλείσε");
+            name = "Κλείσε";
         }
         return name;
     }
@@ -88,7 +88,7 @@ public class GeneratorDoor : StaticBody
         }
             
         else
-            DialogueManager.GetInstance().ScheduleDialogue(pl, LocalisationHolder.GetString("LockedKeyDialogue"));
+            DialogueManager.GetInstance().ScheduleDialogue(pl, "LockedKeyDialogue");
             //pl.GetTalkText().Talk("Φένεταί σαν να χρειάζεται κάποιου είδους κλειδί για να ελέγξω την πύλη.");
     }
 

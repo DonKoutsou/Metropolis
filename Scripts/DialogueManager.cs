@@ -6,7 +6,7 @@ using System.Linq;
 public class DialogueManager : Node
 {
     static DialogueManager Instance;
-	Dictionary<Character, string> Subscribers = new Dictionary<Character, string>();
+	Dictionary<Character, string[]> Subscribers = new Dictionary<Character, string[]>();
     public override void _Ready()
     {
         Instance = this;
@@ -28,7 +28,8 @@ public class DialogueManager : Node
 		
 		if (methtocal != null)
 		{
-			Subscribers.Add(talker, methtocal);
+			string[] Data = {text, methtocal};
+			Subscribers.Add(talker, Data);
 		}
 
 		if (DialogueRunning)
@@ -39,21 +40,21 @@ public class DialogueManager : Node
 	// forces dialogue to player and not scheduling it. If there is a dialogue being played atm its stopped and resumed once the forced dialogue is finished
 	public void ForceDialogue(Character talker, string text)
 	{
-		talker.GetTalkText().Talk(text, true);
+		talker.GetTalkText().Talk(LocalisationHolder.GetString(text), true);
 		DialogueRunning = true;
 	}
 	public void DoNextDialogue()
 	{
-		NextTalker[0].GetTalkText().Talk(NextLine[0]);
+		NextTalker[0].GetTalkText().Talk(LocalisationHolder.GetString(NextLine[0]));
 		DialogueRunning = true;
 	}
 	public void OnDialogueEnded(bool forced = false)
 	{
 		if (!forced)
 		{
-			if (Subscribers.ContainsKey(NextTalker[0]))
+			if (Subscribers.ContainsKey(NextTalker[0]) && Subscribers[NextTalker[0]][0] == NextLine[0])
 			{
-				NextTalker[0].GetNode<BaseDialogueScript>("DialogueScript").Call(Subscribers[NextTalker[0]], NextTalker[0]);
+				NextTalker[0].GetNode<BaseDialogueScript>("DialogueScript").Call(Subscribers[NextTalker[0]][1], NextTalker[0]);
 				Subscribers.Remove(NextTalker[0]);
 			}
 			NextTalker.RemoveAt(0);

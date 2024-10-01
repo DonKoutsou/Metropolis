@@ -259,7 +259,7 @@ public class WindGenerator : StaticBody
     }
     public string GetActionName(Player pl)
     {
-        return LocalisationHolder.GetString("Φόρτιση");
+        return "Φόρτιση";
     }
     public bool ShowActionName(Player pl)
     {

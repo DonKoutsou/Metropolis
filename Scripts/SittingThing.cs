@@ -38,7 +38,7 @@ public class SittingThing : StaticBody
 	{
         if (!HasEmptySeat())
         {
-            DialogueManager.GetInstance().ForceDialogue(pl, LocalisationHolder.GetString("Δεν έχει χώρο."));
+            DialogueManager.GetInstance().ForceDialogue(pl, "Δεν έχει χώρο.");
             //pl.GetTalkText().Talk("Δεν έχει χώρο.");
             return;
         }
@@ -52,7 +52,7 @@ public class SittingThing : StaticBody
     }
     public string GetActionName(Player pl)
     {
-        return LocalisationHolder.GetString("Κάτσε");
+        return "Κάτσε";
     }
     public bool ShowActionName(Player pl)
     {
@@ -78,9 +78,9 @@ public class SittingThing : StaticBody
     {
         string desc;
         if (HasEmptySeat())
-            desc = LocalisationHolder.GetString("Μπορώ να κάτσω.");
+            desc = "Μπορώ να κάτσω.";
         else
-            desc = LocalisationHolder.GetString("Δεν έχει χώρο.");
+            desc = "Δεν έχει χώρο.";
         return desc;
     }
     
