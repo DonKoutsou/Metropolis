@@ -63,7 +63,8 @@ public class ActionMenu : Control
 		else
 		{
 			InteractableNodes.Remove(body);
-			Stop();
+			if (body == SelectedObj)
+				Stop();
 		}
 	}
 	public void ConnectPlayer(Player pl)

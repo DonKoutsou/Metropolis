@@ -17,7 +17,7 @@ length = 0.001
 collision_layer = 20
 collision_mask = 0
 script = ExtResource( 2 )
-FurnitureDescription = "Μια συρταριέρα..."
+FurnitureDescription = "Furn4Desc"
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 29.9788, 4.76512 )

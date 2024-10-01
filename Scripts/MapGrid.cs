@@ -511,6 +511,8 @@ public class MapGrid : GridContainer
     {
         base._Process(delta);
 
+        if (MapIleList.Count == 0)
+            return;
         //player icon location is at 0,0 in the grid wich is top left corner. Get location of center of grid and treat that as 0,0
         Vector2 center = MapIleList[new Vector2(0,0)].RectPosition;
         GetParent().GetNode<Control>("PlayerIconPivot").GetNode<Panel>("PlayerIcon").RectPosition = (center + new Vector2( (pl.GlobalTranslation.x - 4000) * 0.0015f,  (pl.GlobalTranslation.z - 4000) * 0.0015f)) * RectScale;

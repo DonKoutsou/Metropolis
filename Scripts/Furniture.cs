@@ -191,7 +191,7 @@ public class Furniture : StaticBody
     {
 		string desc;
 		if (HasBeenSearched())
-			desc = LocalisationHolder.GetString("SearchedDiag");
+			desc = "SearchedDiag";
 		else
 			desc = FurnitureDescription;
         return desc;

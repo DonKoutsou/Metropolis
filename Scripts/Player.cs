@@ -38,7 +38,7 @@ public class Player : Character
 	//Node Used to show where player is moving
 	MoveLocation moveloc;
 	//Toggle that makes character follow cursor without having to rightclick. Keybinding [TAB]
-	bool Autowalk = false;
+	//bool Autowalk = false;
 	bool IsRunning = false;
 	//Camera DialogueCam;
 	static Player instance;
@@ -225,7 +225,9 @@ public class Player : Character
 	public override void _Process(float delta)
 	{
 		//Updading location to move if right click is being pressed
-		if (Input.IsActionPressed("Move") || Autowalk)
+		//if (Autowalk)
+			//UpdateMoveLocation();
+		if (Input.IsActionPressed("Move"))
 			UpdateMoveLocation();
 
 		ProcedD -= delta;
@@ -390,6 +392,10 @@ public class Player : Character
 		{
 			UpdateMoveLocation();
 		}
+		else if (@event.IsAction("Move_Right") || @event.IsAction("Move_Left") || @event.IsAction("Move_Down") || @event.IsAction("Move_Up"))
+		{
+			UpdateMoveLocationGamePad();
+		}
 		if (@event.IsActionPressed("jump"))
 		{
 			if (IsOnFloor())
@@ -404,14 +410,11 @@ public class Player : Character
 				//_velocity.y += JumpImpulse * vehmulti;
 			}
 		}
-		if (@event is InputEventJoypadMotion)
-		{
-			UpdateMoveLocationGamePad();
-		}
-		if (@event.IsActionPressed("AutoWalk"))
-		{
-			Autowalk = !Autowalk;
-		}
+		
+		//if (@event.IsActionPressed("AutoWalk"))
+		//{
+		//	Autowalk = !Autowalk;
+		//}
 		if (@event.IsActionPressed("Run"))
 		{
 			if (!HasVecicle)

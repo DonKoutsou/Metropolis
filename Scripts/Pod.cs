@@ -144,11 +144,11 @@ public class Pod : StaticBody
     {
         string desc;
         if (IsDestroyed())
-            desc = LocalisationHolder.GetString("Ένα σκάφος διαφυγής, δυστυχώς δεν τα κατάφερε.");
+            desc = "Ένα σκάφος διαφυγής, δυστυχώς δεν τα κατάφερε.";
         else if (IsOpen())
-            desc = LocalisationHolder.GetString("Ένα σκάφος διαφυγής.");
+            desc = "Ένα σκάφος διαφυγής.";
         else
-            desc = LocalisationHolder.GetString("Το σκάφος που επέζησε, μπορώ να το ανοίξω.");
+            desc = "Το σκάφος που επέζησε, μπορώ να το ανοίξω.";
         return desc;
     }
 }

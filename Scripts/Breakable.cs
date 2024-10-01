@@ -12,6 +12,9 @@ public class Breakable : StaticBody
     {
         base._Ready();
 
+        SetProcess(false);
+
+
         Node parent = GetParent();
 		while (!(parent is Island))
 		{
@@ -26,7 +29,7 @@ public class Breakable : StaticBody
 		Island ile = (Island)parent;
 		ile.RegisterChild(this);
 
-        SetProcess(false);
+        
         
     }
     
@@ -57,7 +60,7 @@ public class Breakable : StaticBody
     }
     public void AtatchedExplosiveGoneBoom()
     {
-        AtatchedEx.GetNode<MeshInstance>("MeshInstance").Hide();    
+        AtatchedEx.GetNode<MeshInstance>("MeshInstance").Hide();
         GetNode<Spatial>("RockParent").Hide();
         SetProcess(true);
     }
@@ -71,6 +74,7 @@ public class Breakable : StaticBody
     }
     public void RemoveBreakable()
     {
+        QueueFree();
         Node parent = GetParent();
         while (!(parent is Island))
         {
@@ -85,7 +89,7 @@ public class Breakable : StaticBody
         Island ile = (Island)parent;
 
         ile.UnRegisterChild(this);
-        QueueFree();
+        
     }
     public void HighLightObject(bool toggle, Material OutlineMat)
     {

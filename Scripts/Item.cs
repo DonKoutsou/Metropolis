@@ -121,7 +121,10 @@ public class Item : RigidBody
 		Translation = data.Position;
 		Name = data.Name;
 	}
-
+	public string GetObjectDescription()
+    {
+        return GetItemName();
+    }
 }
 public class ItemInfo
 {

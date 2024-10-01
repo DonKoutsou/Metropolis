@@ -245,6 +245,7 @@ ItemDesc = "Ένα εκρηκτικό"
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( -1.94389, 0, -1.6994e-07, 0, 1.94389, 0, 1.6994e-07, 0, -1.94389, 0, 0.177693, 0 )
+material_override = ExtResource( 2 )
 mesh = ExtResource( 3 )
 material/0 = ExtResource( 2 )
 script = ExtResource( 9 )

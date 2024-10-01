@@ -203,7 +203,7 @@ public class NPC : Character
     }
 	public string GetObjectDescription()
     {
-        return LocalisationHolder.GetString("Φίλος");
+        return "Φίλος";
     }
 	public override void Respawn()
 	{

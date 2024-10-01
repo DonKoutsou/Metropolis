@@ -5,8 +5,10 @@ public class Sky : Spatial
 {
     static WorldParticleManager SkyParticleManager;
     static CustomEnviroment enviroment;
-    public override void _Ready()
+
+    public override void _EnterTree()
     {
+        base._EnterTree();
         SkyParticleManager = GetNode<WorldParticleManager>("WorldParticleManager");
         enviroment = GetNode<CustomEnviroment>("DayNightController");
 

@@ -40,7 +40,7 @@ public class UnconDialogueScript : BaseDialogueScript
     }
     public override bool ShouldShowExtraAction()
     {
-        return !GivenBattery;
+        return Player.GetInstance().GetCharacterInventory().HasItemOfType(ItemName.BATTERY) && !GivenBattery;
     }
     public override bool ShouldShowExtraAction2()
     {

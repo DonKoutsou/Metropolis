@@ -142,7 +142,7 @@ tracks/4/keys = {
 collision_layer = 16
 collision_mask = 0
 script = ExtResource( 2 )
-FurnitureDescription = "Μια ντουλάπα..."
+FurnitureDescription = "Furn2Desc"
 ToHighLight = [ NodePath("MeshInstance"), NodePath("MeshInstance4"), NodePath("MeshInstance2"), NodePath("MeshInstance3") ]
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
