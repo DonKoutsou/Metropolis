@@ -4,10 +4,9 @@
 [ext_resource path="res://Scenes/Systems/Puzzles/StageLightMat.tres" type="Material" id=2]
 [ext_resource path="res://Assets/Sounds/LightStartUp.mp3" type="AudioStream" id=3]
 
-[sub_resource type="CylinderMesh" id=4]
-top_radius = 0.1
-bottom_radius = 0.1
-height = 0.5
+[sub_resource type="CapsuleMesh" id=9]
+radial_segments = 18
+rings = 2
 
 [sub_resource type="Animation" id=7]
 length = 0.001
@@ -93,7 +92,7 @@ tracks/1/keys = {
 }
 
 [node name="StageLight" type="MeshInstance"]
-mesh = SubResource( 4 )
+mesh = SubResource( 9 )
 material/0 = ExtResource( 2 )
 script = ExtResource( 1 )
 

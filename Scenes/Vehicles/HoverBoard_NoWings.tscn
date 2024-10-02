@@ -425,7 +425,7 @@ transform = Transform( 1, -2.93525e-11, -1.24077e-24, 1.58479e-10, 1, 1.16415e-1
 
 [node name="HoverSound" type="AudioStreamPlayer3D" parent="RayFL"]
 stream = ExtResource( 22 )
-unit_db = 4.0
+unit_db = -5.0
 unit_size = 2.0
 max_distance = 4096.0
 
@@ -462,7 +462,7 @@ transform = Transform( 1, -5.11058e-11, 0, 7.73603e-11, 1, 1.16415e-10, 0, 0, 1,
 
 [node name="HoverSound" type="AudioStreamPlayer3D" parent="RayFR"]
 stream = ExtResource( 22 )
-unit_db = 4.0
+unit_db = -5.0
 unit_size = 2.0
 max_distance = 4096.0
 
@@ -500,7 +500,7 @@ transform = Transform( 1, -3.73373e-18, 0, -3.60498e-18, 1, 0, 0, 0, 1, -0.56771
 
 [node name="HoverSound" type="AudioStreamPlayer3D" parent="RayBR"]
 stream = ExtResource( 22 )
-unit_db = 4.0
+unit_db = -5.0
 unit_size = 2.0
 max_distance = 4096.0
 
@@ -538,6 +538,6 @@ transform = Transform( 1, -3.29327e-18, 0, -3.29327e-18, 1, 0, 0, 0, 1, 0.563304
 
 [node name="HoverSound" type="AudioStreamPlayer3D" parent="RayBL"]
 stream = ExtResource( 22 )
-unit_db = 4.0
+unit_db = -5.0
 unit_size = 2.0
 max_distance = 4096.0

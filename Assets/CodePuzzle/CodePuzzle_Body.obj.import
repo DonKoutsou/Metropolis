@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/CodePuzzle_Body.obj-191106fd5ca9627f91f5ae1acb8228eb.mesh"
+
+[deps]
+
+files=[ "res://.import/CodePuzzle_Body.obj-191106fd5ca9627f91f5ae1acb8228eb.mesh" ]
+
+source_file="res://Assets/CodePuzzle/CodePuzzle_Body.obj"
+dest_files=[ "res://.import/CodePuzzle_Body.obj-191106fd5ca9627f91f5ae1acb8228eb.mesh", "res://.import/CodePuzzle_Body.obj-191106fd5ca9627f91f5ae1acb8228eb.mesh" ]
+
+[params]
+
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh_flags=4286
+generate_tangents=true
+vertex_cache_optimization=true
+octahedral_compression=true

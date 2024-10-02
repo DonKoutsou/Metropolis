@@ -1,8 +1,13 @@
 using Godot;
 using System;
 
+[Tool]
 public class MemoryButton : Spatial
 {
+    [Export]
+    Mesh ButtonMesh = null;
+    [Export]
+    Material Mat = null;
     [Signal]
     public delegate void OnPressed(MemoryButton button);
     public bool Enabled = false;
@@ -17,6 +22,13 @@ public class MemoryButton : Spatial
             Flash();
 		}
     }
+    public override void _Ready()
+    {
+        base._Ready();
+
+        GetNode<MeshInstance>("MeshInstance").Mesh = ButtonMesh;
+        GetNode<MeshInstance>("MeshInstance").SetSurfaceMaterial(0, (Material)Mat.Duplicate());   
+    }
     public void Flash()
     {
         if (GetNode<AnimationPlayer>("ButtonAnims").IsPlaying())
@@ -25,10 +37,11 @@ public class MemoryButton : Spatial
     }
     private void AnimFin(string anim)
     {
-        if (anim == "Flash")
+        if (ControllerInput.IsUsingController() && anim == "Flash")
         {
             FlashStatic();
         }
+        
     }
     public void FlashStatic()
     {

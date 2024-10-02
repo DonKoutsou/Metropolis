@@ -1,8 +1,12 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+
+[Tool]
 public class WindGenerator : StaticBody
 {
+    [Export]
+    Vector3 WindGenOffset = Vector3.Zero;
     [Export]
     private float EnergyCapacity = 100;
     [Export]
@@ -40,12 +44,19 @@ public class WindGenerator : StaticBody
     int scale;
     public override void _Ready()
     {
+        if (Engine.EditorHint)
+        {
+            return;
+        }
         anim = GetNode<AnimationPlayer>("AnimationPlayer");
         anim2 = GetNode<AnimationPlayer>("AnimationPlayer2");
         anim3 = GetNode<AnimationPlayer>("AnimationPlayer3");
         anim.CurrentAnimation = "Blade_Rot";
         anim2.CurrentAnimation = "Blade_Rot";
-        scale = Math.Max((int)(Scale.x * GetNode<MeshInstance>("MeshInstance").Scale.x), 1);
+        if (HasInternals)
+            scale = Math.Max((int)(Scale.x * GetNode<MeshInstance>("MeshInstance").Scale.x), 1);
+        else
+            scale = (int)Math.Max(Scale.x, 1);
         if (Auto)
         {
             SetProcess(false);
@@ -100,6 +111,11 @@ public class WindGenerator : StaticBody
     bool UpdateAnims = true;
     public override void _Process(float delta)
     {
+        if (Engine.EditorHint)
+        {
+            GetNode<CollisionShape>("CollisionShape").Translation = WindGenOffset;
+            return;
+        }
         base._Process(delta);
         d -= delta;
 		if (d > 0)
@@ -182,9 +198,9 @@ public class WindGenerator : StaticBody
             return;
 
         if (toggle)
-            GetNode<MeshInstance>("MeshInstance2").MaterialOverlay = OutlineMat;
+            GetNode<MeshInstance>("CollisionShape2/MeshInstance2").MaterialOverlay = OutlineMat;
         else
-            GetNode<MeshInstance>("MeshInstance2").MaterialOverlay = null;
+            GetNode<MeshInstance>("CollisionShape2/MeshInstance2").MaterialOverlay = null;
     }
     public void Unlocked(bool resault)
 	{
@@ -331,6 +347,10 @@ public class WindGenerator : StaticBody
     }
     public override void _EnterTree()
     {
+        if (Engine.EditorHint)
+        {
+            return;
+        }
         base._EnterTree();
         if (!HasInternals)
             return;
@@ -339,6 +359,10 @@ public class WindGenerator : StaticBody
     }
     public override void _ExitTree()
     {
+        if (Engine.EditorHint)
+        {
+            return;
+        }
         base._ExitTree();
         if (!HasInternals)
             return;

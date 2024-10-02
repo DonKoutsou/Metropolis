@@ -1,18 +1,24 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Scripts/CodePuzzle.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Systems/Puzzles/MemoryButton.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Systems/Puzzles/StageLight.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Fonts/Caudex-Bold.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Assets/Sounds/ButtonClick.mp3" type="AudioStream" id=5]
-
-[sub_resource type="CubeMesh" id=1]
-size = Vector3( 2, 0.298, 3.577 )
+[ext_resource path="res://Assets/CodePuzzle/CodePuzzle_Body.obj" type="ArrayMesh" id=6]
+[ext_resource path="res://Assets/CodePuzzle/CodePuzzleMat.tres" type="Material" id=7]
+[ext_resource path="res://Assets/CodePuzzle/CodePuzle_Button1.obj" type="ArrayMesh" id=8]
+[ext_resource path="res://Assets/CodePuzzle/CodePuzle_Button3.obj" type="ArrayMesh" id=9]
+[ext_resource path="res://Assets/CodePuzzle/CodePuzle_Button6.obj" type="ArrayMesh" id=10]
+[ext_resource path="res://Assets/CodePuzzle/CodePuzle_Button5.obj" type="ArrayMesh" id=11]
+[ext_resource path="res://Assets/CodePuzzle/CodePuzle_Button2.obj" type="ArrayMesh" id=12]
+[ext_resource path="res://Assets/CodePuzzle/CodePuzle_Button4.obj" type="ArrayMesh" id=13]
+[ext_resource path="res://Assets/CodePuzzle/CodePuzle_Button9.obj" type="ArrayMesh" id=14]
+[ext_resource path="res://Assets/CodePuzzle/CodePuzle_Button7.obj" type="ArrayMesh" id=15]
+[ext_resource path="res://Assets/CodePuzzle/CodePuzle_Button8.obj" type="ArrayMesh" id=16]
 
 [sub_resource type="DynamicFont" id=33]
 size = 60
-outline_size = 7
-outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 4 )
@@ -113,10 +119,13 @@ emission_on_uv2 = false
 script = ExtResource( 1 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 1.8209, 1.31947 )
+transform = Transform( 1, 0, 0, 0, 0.281186, 0.959653, 0, -0.959653, 0.281186, 0, 2.75097, 0.914739 )
+fov = 45.0
 
 [node name="Body" type="MeshInstance" parent="."]
-mesh = SubResource( 1 )
+transform = Transform( 6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 7 )
 
 [node name="ViewportContainer" type="ViewportContainer" parent="."]
 anchor_left = 0.5
@@ -147,8 +156,8 @@ mouse_filter = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="ViewportContainer/Viewport/CenterContainer"]
 margin_left = 265.0
 margin_right = 297.0
-margin_bottom = 454.0
-custom_constants/separation = 16
+margin_bottom = 462.0
+custom_constants/separation = 18
 
 [node name="Label" type="Label" parent="ViewportContainer/Viewport/CenterContainer/VBoxContainer"]
 margin_right = 32.0
@@ -162,9 +171,9 @@ align = 1
 valign = 1
 
 [node name="Label2" type="Label" parent="ViewportContainer/Viewport/CenterContainer/VBoxContainer"]
-margin_top = 94.0
+margin_top = 96.0
 margin_right = 32.0
-margin_bottom = 172.0
+margin_bottom = 174.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 1
@@ -174,9 +183,9 @@ align = 1
 valign = 1
 
 [node name="Label3" type="Label" parent="ViewportContainer/Viewport/CenterContainer/VBoxContainer"]
-margin_top = 188.0
+margin_top = 192.0
 margin_right = 32.0
-margin_bottom = 266.0
+margin_bottom = 270.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 1
@@ -186,9 +195,9 @@ align = 1
 valign = 1
 
 [node name="Label4" type="Label" parent="ViewportContainer/Viewport/CenterContainer/VBoxContainer"]
-margin_top = 282.0
+margin_top = 288.0
 margin_right = 32.0
-margin_bottom = 360.0
+margin_bottom = 366.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 1
@@ -198,9 +207,9 @@ align = 1
 valign = 1
 
 [node name="Label5" type="Label" parent="ViewportContainer/Viewport/CenterContainer/VBoxContainer"]
-margin_top = 376.0
+margin_top = 384.0
 margin_right = 32.0
-margin_bottom = 454.0
+margin_bottom = 462.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 1
@@ -210,32 +219,33 @@ align = 1
 valign = 1
 
 [node name="NumberDisplay_0" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.66, 0.170078, -1.036 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.544782, 0.0733294, -0.722917 )
 mesh = SubResource( 34 )
 material/0 = SubResource( 32 )
 
 [node name="NumberDisplay_1" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.33, 0.170078, -1.036 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.269729, 0.0733294, -0.722917 )
 mesh = SubResource( 34 )
 material/0 = SubResource( 35 )
 
 [node name="NumberDisplay_2" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.0102963, 0.170078, -1.03599 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.0102963, 0.0733294, -0.722907 )
 mesh = SubResource( 34 )
 material/0 = SubResource( 36 )
 
 [node name="NumberDisplay_3" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.33, 0.170078, -1.036 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.261681, 0.0733294, -0.722917 )
 mesh = SubResource( 34 )
 material/0 = SubResource( 37 )
 
 [node name="NumberDisplay_4" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.66, 0.170078, -1.036 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.54549, 0.0733294, -0.722917 )
 mesh = SubResource( 34 )
 material/0 = SubResource( 38 )
 
 [node name="Display" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0772049, -1.04176 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0772049, -0.671962 )
+visible = false
 mesh = SubResource( 39 )
 skeleton = NodePath("../ViewportContainer")
 material/0 = SubResource( 40 )
@@ -243,55 +253,74 @@ material/0 = SubResource( 40 )
 [node name="Buttons" type="Spatial" parent="."]
 
 [node name="Button_0" parent="Buttons" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.179, -0.5 )
+transform = Transform( 6.3, 0, 0, 0, 6.3, 0, 0, 0, 6.3, -0.424552, 0.2, -0.102105 )
+ButtonMesh = ExtResource( 8 )
+Mat = ExtResource( 7 )
 
 [node name="Button_1" parent="Buttons" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.179, -0.5 )
+transform = Transform( 6.3, 0, 0, 0, 6.3, 0, 0, 0, 6.3, 0, 0.2, -0.102037 )
+ButtonMesh = ExtResource( 12 )
+Mat = ExtResource( 7 )
 
 [node name="Button_2" parent="Buttons" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.179, -0.5 )
+transform = Transform( 6.3, 0, 0, 0, 6.3, 0, 0, 0, 6.3, 0.428, 0.2, -0.102037 )
+ButtonMesh = ExtResource( 9 )
+Mat = ExtResource( 7 )
 
 [node name="Button_3" parent="Buttons" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.179, 0 )
+transform = Transform( 6.3, 0, 0, 0, 6.3, 0, 0, 0, 6.3, -0.425, 0.2, 0.328963 )
+ButtonMesh = ExtResource( 13 )
+Mat = ExtResource( 7 )
 
 [node name="Button_4" parent="Buttons" instance=ExtResource( 2 )]
+transform = Transform( 6.3, 0, 0, 0, 6.3, 0, 0, 0, 6.3, 0, 0.2, 0.328881 )
+ButtonMesh = ExtResource( 11 )
+Mat = ExtResource( 7 )
 
 [node name="Button_5" parent="Buttons" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.179, 0 )
+transform = Transform( 6.3, 0, 0, 0, 6.3, 0, 0, 0, 6.3, 0.428, 0.2, 0.328963 )
+ButtonMesh = ExtResource( 10 )
+Mat = ExtResource( 7 )
 
 [node name="Button_6" parent="Buttons" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.179, 0.5 )
+transform = Transform( 6.3, 0, 0, 0, 6.3, 0, 0, 0, 6.3, -0.425, 0.2, 0.745963 )
+ButtonMesh = ExtResource( 15 )
+Mat = ExtResource( 7 )
 
 [node name="Button_7" parent="Buttons" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.179, 0.5 )
+transform = Transform( 6.3, 0, 0, 0, 6.3, 0, 0, 0, 6.3, 0, 0.2, 0.745519 )
+ButtonMesh = ExtResource( 16 )
+Mat = ExtResource( 7 )
 
 [node name="Button_8" parent="Buttons" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.179, 0.5 )
+transform = Transform( 6.3, 0, 0, 0, 6.3, 0, 0, 0, 6.3, 0.428, 0.2, 0.745963 )
+ButtonMesh = ExtResource( 14 )
+Mat = ExtResource( 7 )
 
 [node name="StageLights" type="Spatial" parent="."]
 
 [node name="StageLight_1" parent="StageLights" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.66, 0.033, -1.436 )
+transform = Transform( 0.07, 0, 0, 0, -3.0598e-09, 0.07, 0, -0.07, -3.0598e-09, -0.538251, 0.101561, -1.01602 )
 skeleton = NodePath("../..")
 material/0 = SubResource( 41 )
 
 [node name="StageLight_2" parent="StageLights" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33, 0.033, -1.436 )
+transform = Transform( 0.07, 0, 0, 0, -3.0598e-09, 0.07, 0, -0.07, -3.0598e-09, -0.269711, 0.101561, -1.01602 )
 skeleton = NodePath("../..")
 material/0 = SubResource( 42 )
 
 [node name="StageLight_3" parent="StageLights" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0325673, -1.43614 )
+transform = Transform( 0.07, 0, 0, 0, -3.0598e-09, 0.07, 0, -0.07, -3.0598e-09, 0, 0.101421, -1.01558 )
 skeleton = NodePath("../..")
 material/0 = SubResource( 43 )
 
 [node name="StageLight_4" parent="StageLights" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33, 0.033, -1.436 )
+transform = Transform( 0.07, 0, 0, 0, -3.0598e-09, 0.07, 0, -0.07, -3.0598e-09, 0.268891, 0.101561, -1.01602 )
 skeleton = NodePath("../..")
 material/0 = SubResource( 44 )
 
 [node name="StageLight_5" parent="StageLights" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.66, 0.033, -1.436 )
+transform = Transform( 0.07, 0, 0, 0, -3.0598e-09, 0.07, 0, -0.07, -3.0598e-09, 0.537462, 0.101561, -1.01602 )
 skeleton = NodePath("../..")
 material/0 = SubResource( 45 )
 

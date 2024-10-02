@@ -43,9 +43,9 @@ valign = 1
 [node name="DevName" type="Label" parent="VBoxContainer"]
 margin_top = 42.0
 margin_right = 239.0
-margin_bottom = 71.0
+margin_bottom = 103.0
 custom_fonts/font = ExtResource( 2 )
-text = "Tsakas"
+text = "Tsakasafawfwafw afwafwawaf"
 align = 1
 valign = 1
 autowrap = true

@@ -290,15 +290,16 @@ anims/FadeOutDialogue = SubResource( 119 )
 anims/RESET = SubResource( 111 )
 script = ExtResource( 35 )
 
-[node name="Listener" type="Listener" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/PlayerCamera"]
-current = true
-
 [node name="RemoteTransform" type="RemoteTransform" parent="CameraMovePivot/CameraPanPivot"]
 update_position = false
 update_scale = false
 
 [node name="GanePadMoveLoc" type="Spatial" parent="CameraMovePivot/CameraPanPivot"]
 transform = Transform( -1, 0, 8.74229e-08, 0, 1, 0, -8.74229e-08, 0, -1, 0, -3.68688, 0 )
+
+[node name="Listener" type="Listener" parent="CameraMovePivot/CameraPanPivot"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.54145e-08, 2.31361, -0.176321 )
+current = true
 
 [node name="MoveLoc" parent="." instance=ExtResource( 16 )]
 visible = false

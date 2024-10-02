@@ -19,7 +19,10 @@ public class LoddedObject : MeshInstance
     public override void _Ready()
     {
         base._Ready();
-        abbLeangth = GetTransformedAabb().GetLongestAxisSize();
+        if (Filename == "")
+            abbLeangth = GetTransformedAabb().GetLongestAxisSize() * ((Spatial)Owner).Scale.x;
+        else
+            abbLeangth = GetTransformedAabb().GetLongestAxisSize();
         Mesh = null;
     }
 

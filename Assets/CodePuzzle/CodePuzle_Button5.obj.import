@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/CodePuzle_Button5.obj-b80a8fcec65cba1615c9c3de007e82ee.mesh"
+
+[deps]
+
+files=[ "res://.import/CodePuzle_Button5.obj-b80a8fcec65cba1615c9c3de007e82ee.mesh" ]
+
+source_file="res://Assets/CodePuzzle/CodePuzle_Button5.obj"
+dest_files=[ "res://.import/CodePuzle_Button5.obj-b80a8fcec65cba1615c9c3de007e82ee.mesh", "res://.import/CodePuzle_Button5.obj-b80a8fcec65cba1615c9c3de007e82ee.mesh" ]
+
+[params]
+
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh_flags=4286
+generate_tangents=true
+vertex_cache_optimization=true
+octahedral_compression=true
