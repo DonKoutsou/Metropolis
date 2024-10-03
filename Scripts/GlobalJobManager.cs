@@ -14,7 +14,7 @@ public class GlobalJobManager : Node
     public void OnJobAssigned(Job j)
     {
         AssignedJobs.Add(j);
-        PlayerUI.GetInstance().GetUI(PlayerUIType.INVENTORY).Call("ConfigureJob", j.GetJobName(), j.GetLocation(), j.GetOwnerName(), j.GetRewardAmmount());
+        PlayerUI.GetUI(PlayerUIType.INVENTORY).Call("ConfigureJob", j.GetJobName(), j.GetLocation(), j.GetOwnerName(), j.GetRewardAmmount());
     }
     public void OnJobCanceled(Job j)
     {
@@ -54,7 +54,7 @@ public class GlobalJobManager : Node
             if (i == activeDJob)
             {
                 AssignedJobs.Add(j);
-                PlayerUI.GetInstance().GetUI(PlayerUIType.INVENTORY).Call("ConfigureJob", j.GetJobName(), j.GetLocation(), j.GetOwnerName(), j.GetRewardAmmount());
+                PlayerUI.GetUI(PlayerUIType.INVENTORY).Call("ConfigureJob", j.GetJobName(), j.GetLocation(), j.GetOwnerName(), j.GetRewardAmmount());
                 if (j is DeliverJob del)    
                 {
                     var b = GetTree().GetNodesInGroup("PlayerBoat");

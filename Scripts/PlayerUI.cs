@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public class PlayerUI : Control
 {
@@ -25,13 +26,22 @@ public class PlayerUI : Control
     NodePath TutorialManager = null;
     [Export]
     NodePath AchievementManager = null;
-
-    static PlayerUI instance;
-
+    static Dictionary<string, Control> UIList = new Dictionary<string, Control>();
     static int OpenMenus = 0;
-
-    Player Play;
-
+    static bool Working = false;
+    public override void _Ready()
+    {
+        UIList.Add(PlayerUIType.ACHIEVEMENT.ToString(), GetNode<Control>(AchievementManager));
+        UIList.Add(PlayerUIType.ACTION_MENU.ToString(), GetNode<Control>(ActionManager) );
+        UIList.Add(PlayerUIType.CHEATMENU.ToString(), GetNode<Control>(CheatMenu));
+        UIList.Add(PlayerUIType.CITYNAME.ToString(), GetNode<Control>(CityNameUI));
+        UIList.Add(PlayerUIType.CONTROLS.ToString(), GetNode<Control>(ControlsUI));
+        UIList.Add(PlayerUIType.INVENTORY.ToString(), GetNode<Control>(Inventory));
+        UIList.Add(PlayerUIType.MAP.ToString(), GetNode<Control>(MapUI));
+        UIList.Add(PlayerUIType.PUZZLE.ToString(), GetNode<Control>(PuzzleManager));
+        UIList.Add(PlayerUIType.SCREENEFFECTS.ToString(), GetNode<Control>(ScreenEffects));
+        UIList.Add(PlayerUIType.TUTORIAL.ToString(), GetNode<Control>(TutorialManager));
+    }
     public static void OnMenuToggled(bool t)
     {
         if (t)
@@ -39,85 +49,40 @@ public class PlayerUI : Control
         else
             OpenMenus --;
     }
-    
-    public override void _Ready()
+    public static void OnPlayerDisconnected()
     {
-        instance = this;
-        SetProcessInput(false);
+        Working = false;
+
+        foreach(KeyValuePair<string, Control> UI in UIList)
+        {
+            UI.Value.CallDeferred("PlayerToggle", null);
+        }
     }
-    public void OnPlayerDisconnected()
+    public static Control GetUI(PlayerUIType type)
     {
-        SetProcessInput(false);
-        MapUI map = (MapUI)GetUI(PlayerUIType.MAP);
-            
-        if (map.IsOpen)
-            map.ToggleMap(false);
-
-        InventoryUI inv = (InventoryUI)GetUI(PlayerUIType.INVENTORY);
-        if (inv.IsOpen)
-            inv.CloseInventory();
-
-        Control_UI ui = (Control_UI)GetUI(PlayerUIType.CONTROLS);
-        ui.DissableUI();
-
-        ActionMenu AMenu = (ActionMenu)GetUI(PlayerUIType.ACTION_MENU);
-        AMenu.DissconnectPlayer();
-        
+        return UIList[type.ToString()];;
     }
-    public static PlayerUI GetInstance()
-    {
-        return instance;
-    }
-    public Control GetUI(PlayerUIType type)
-    {
-        Control UIToReturn = null;
-        if (type == PlayerUIType.CITYNAME)
-            UIToReturn = GetNode<Control>(CityNameUI);
-        else if (type == PlayerUIType.SCREENEFFECTS)
-            UIToReturn = GetNode<Control>(ScreenEffects);
-        else if (type == PlayerUIType.CHEATMENU)
-            UIToReturn = GetNode<Control>(CheatMenu);
-        //else if (type == PlayerUIType.JOBBOARD)
-            //UIToReturn = GetNode(JobBoard);
-        else if (type == PlayerUIType.INVENTORY)
-            UIToReturn = GetNode<Control>(Inventory);
-        else if (type == PlayerUIType.MAP)
-            UIToReturn = GetNode<Control>(MapUI);
-        else if (type == PlayerUIType.CONTROLS)
-            UIToReturn = GetNode<Control>(ControlsUI);
-        else if (type == PlayerUIType.ACTION_MENU)
-            UIToReturn = GetNode<Control>(ActionManager);
-        else if (type == PlayerUIType.PUZZLE)
-            UIToReturn = GetNode<Control>(PuzzleManager);
-        else if (type == PlayerUIType.TUTORIAL)
-            UIToReturn = GetNode<Control>(TutorialManager);
-        else if (type == PlayerUIType.ACHIEVEMENT)
-            UIToReturn = GetNode<Control>(AchievementManager);
-
-        return UIToReturn;
-    }
-    public bool HasMenuOpen()
+    public static bool HasMenuOpen()
     {
         //return GetNode<InventoryUI>(Inventory).IsOpen || GetNode<JobBoard>(JobBoard).IsOpen();
         //return GetNode<InventoryUI>(Inventory).IsOpen || Tutorial.IsRunning();
         return OpenMenus > 0;
     }
-    public void OnPlayerSpawned(Player pl)
+    public static void OnPlayerSpawned(Player pl)
     {
-        Play = pl;
-        SetProcessInput(true);
-        Show();
-
-        GetNode(Inventory).CallDeferred("ConnectPlayer", pl);
-        GetNode(CheatMenu).CallDeferred("ConnectPlayer", pl);
-        GetNode(MapUI).CallDeferred("ConnectPlayer", pl);
-        GetNode(ActionManager).CallDeferred("ConnectPlayer", pl);
-        GetNode(ControlsUI).CallDeferred("EnableUI");
+        Working = true;
+        foreach(KeyValuePair<string, Control> UI in UIList)
+        {
+            UI.Value.CallDeferred("PlayerToggle", pl);
+        }
     }
     public override void _Input(InputEvent @event)
 	{
+        if (!Working)
+            return;
 		if (@event.IsActionPressed("Inventory"))
 		{
+            
 			InventoryUI inv = (InventoryUI)GetUI(PlayerUIType.INVENTORY);
 			if (inv.IsOpen)
 				inv.CloseInventory();
@@ -132,10 +97,10 @@ public class PlayerUI : Control
 				map.ToggleMap(false);
 			else
             {
-                bool hasmap = Play.GetCharacterInventory().HasItemOfType(ItemName.MAP);
+                bool hasmap = Player.GetInstance().GetCharacterInventory().HasItemOfType(ItemName.MAP);
                 if (!hasmap)
                 {
-                    DialogueManager.GetInstance().ForceDialogue(Play, "Δεν έχω χάρτη...");
+                    DialogueManager.GetInstance().ForceDialogue(Player.GetInstance(), "Δεν έχω χάρτη...");
                     //Play.GetTalkText().Talk("Δεν έχω χάρτη...");
                 }
                 else

@@ -8,6 +8,6 @@ public class MapItem : Item
         base.OnItemPickedUp();
         WorldMap map = WorldMap.GetInstance();
         if (map != null)
-            ((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid().ForceIslandVisited(map.GetCurrentIleInfo());
+            ((MapUI)PlayerUI.GetUI(PlayerUIType.MAP)).GetGrid().ForceIslandVisited(map.GetCurrentIleInfo());
     }
 }

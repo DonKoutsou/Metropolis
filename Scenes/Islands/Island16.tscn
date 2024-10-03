@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Env_Assets/Rock3.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Assets/Building/BuildingDust2.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Building/BuildingDust3.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Building/BuildingDust.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Env_Assets/SuspendedRuin.tscn" type="PackedScene" id=8]
 
 [sub_resource type="SpatialMaterial" id=447]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -159,3 +160,6 @@ transform = Transform( -0.312309, 0.165106, -0.935523, -0.139196, 0.966199, 0.21
 
 [node name="DestBuilding7" parent="." index="23" instance=ExtResource( 7 )]
 transform = Transform( -0.459177, 0, -0.888345, 0, 1, 0, 0.888345, 0, -0.459177, -3099.01, -46.6126, 479.706 )
+
+[node name="Gear" parent="." index="24" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1123.87, -4.17914, 2024.83 )

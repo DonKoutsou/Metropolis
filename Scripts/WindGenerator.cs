@@ -204,7 +204,7 @@ public class WindGenerator : StaticBody
     }
     public void Unlocked(bool resault)
 	{
-		PuzzleManager pman = (PuzzleManager)PlayerUI.GetInstance().GetUI(PlayerUIType.PUZZLE);
+		PuzzleManager pman = (PuzzleManager)PlayerUI.GetUI(PlayerUIType.PUZZLE);
 		pman.Disconnect("PuzzleResault", this, "Unlocked");
 		if (resault)
 		{
@@ -216,7 +216,7 @@ public class WindGenerator : StaticBody
 	{
         if (Locked)
 		{
-			PuzzleManager pman = (PuzzleManager)PlayerUI.GetInstance().GetUI(PlayerUIType.PUZZLE);
+			PuzzleManager pman = (PuzzleManager)PlayerUI.GetUI(PlayerUIType.PUZZLE);
 			pman.Connect("PuzzleResault", this, "Unlocked");
 			pman.StartPuzzle(PuzzleTypes.CODE);
 			return;

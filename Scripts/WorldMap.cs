@@ -282,7 +282,7 @@ public class WorldMap : TileMap
 		Vector2[] IleVectors = (Vector2[])data.Get("ilemapvectors");
 		Godot.Collections.Array Iles = (Godot.Collections.Array)data.Get("ilemap");
 
-		MapGrid grid = ((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid();
+		MapGrid grid = ((MapUI)PlayerUI.GetUI(PlayerUIType.MAP)).GetGrid();
 		for (int i = 0; i < Iles.Count; i++)
 		{
 			IslandInfo info = new IslandInfo((Resource)Iles[i]);
@@ -336,13 +336,13 @@ public class WorldMap : TileMap
 			if (save == null)
 			{
 				ArrangeCellsBasedOnDistance();
-				((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid().InitMap();
+				((MapUI)PlayerUI.GetUI(PlayerUIType.MAP)).GetGrid().InitMap();
 				return;
 			}
 			int[] Date = (int[])save.Get("Date");
 			Sky.GetEnviroment().SetTime(Date[0], Date[1], Date[2]);
 
-			((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid().InitMap();
+			((MapUI)PlayerUI.GetUI(PlayerUIType.MAP)).GetGrid().InitMap();
 
 			LoadSaveData(save);
 			IslandInfo CurIle;
@@ -421,7 +421,7 @@ public class WorldMap : TileMap
 		else
 		{
 			ArrangeCellsBasedOnDistance();
-			((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid().InitMap();
+			((MapUI)PlayerUI.GetUI(PlayerUIType.MAP)).GetGrid().InitMap();
 		}
 	}
 	public Vector2 GetCurrentTile()
@@ -578,7 +578,7 @@ public class WorldMap : TileMap
 		{
 			SpawnIntro();
 			Sky.GetEnviroment().UpdatePlayerDistance(Math.Max(Math.Abs(ilemap[entry].Position.x), Math.Abs(ilemap[entry].Position.y)) / 11);
-			((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid().FrameMap();
+			((MapUI)PlayerUI.GetUI(PlayerUIType.MAP)).GetGrid().FrameMap();
 		}
 	}
 	public void SaveIsland()
@@ -600,7 +600,7 @@ public class WorldMap : TileMap
 		ImageTexture tex = new ImageTexture();
 		tex.CreateFromImage(IslandImageHolder.GetInstance().Images[ile.ImageID]);
 
-		((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid().UpdateIleInfo(ilei.Position, ilei.Visited, - ilei.RotationToSpawn, tex, name);
+		((MapUI)PlayerUI.GetUI(PlayerUIType.MAP)).GetGrid().UpdateIleInfo(ilei.Position, ilei.Visited, - ilei.RotationToSpawn, tex, name);
 	}
 	void DespawnIle(Island ile, bool KeepInstance)
 	{

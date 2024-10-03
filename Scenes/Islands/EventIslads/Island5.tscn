@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=2]
@@ -26,6 +26,7 @@
 [ext_resource path="res://Assets/TerainTex/Metal041C_1K-JPG/Metal041C_1K-JPG_NormalGL.jpg" type="Texture" id=24]
 [ext_resource path="res://Assets/TerainTex/Metal041C_1K-JPG/Metal041C_1K-JPG_Metalness.jpg" type="Texture" id=25]
 [ext_resource path="res://Scenes/Env_Assets/WoodTower.tscn" type="PackedScene" id=26]
+[ext_resource path="res://Assets/TerainTex/SandSimplePlanar.tres" type="Material" id=27]
 
 [sub_resource type="ParticlesMaterial" id=18]
 emission_shape = 2
@@ -176,7 +177,7 @@ data = {
 [node name="Terain" type="MeshInstance" parent="." index="9"]
 transform = Transform( 1611.07, 0, 0, 0, 1611.07, 0, 0, 0, 1611.07, 0, -422.946, 0 )
 mesh = ExtResource( 10 )
-material/0 = ExtResource( 6 )
+material/0 = ExtResource( 27 )
 script = ExtResource( 1 )
 LOD0 = ExtResource( 10 )
 LOD1 = ExtResource( 7 )

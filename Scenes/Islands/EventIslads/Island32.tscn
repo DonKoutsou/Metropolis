@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/TerainTex/SandSimple.tres" type="Material" id=3]
+[ext_resource path="res://Assets/TerainTex/SandSimplePlanar.tres" type="Material" id=3]
 [ext_resource path="res://Assets/Terains/Island22/Island22_LOD.tres" type="ArrayMesh" id=4]
 [ext_resource path="res://Scenes/Characters/NPCVariants/BoatEngineer.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Terains/Island22/Island22.tres" type="ArrayMesh" id=6]

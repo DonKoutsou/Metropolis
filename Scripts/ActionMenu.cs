@@ -40,7 +40,7 @@ public class ActionMenu : Control
 
 	public override void _Ready()
 	{
-		SetPhysicsProcess(false);
+		
 		VBoxContainer cont = GetNode<VBoxContainer>("VBoxContainer/PanelContainer/VBoxContainer");
         PickButton = cont.GetNode<Button>("PickUp_Button");
 		IntButton = cont.GetNode<Button>("Interact_Button");
@@ -51,8 +51,22 @@ public class ActionMenu : Control
 		IntButton2.Hide();
 		IntButton3.Hide();
 
+		SetPhysicsProcess(false);
 		SetProcessInput(false);
+		Visible = false;
 	}
+    public void PlayerToggle(Player pl)
+    {
+		bool toggle = pl != null;
+        //Visible = toggle;
+		SetProcessInput(toggle);
+
+		if (toggle)
+		{
+			Play = pl;
+			pl.Connect("InteractableObjectEntered", this, "ActionObjectInteraction");
+		}
+    }
 	List<Node> InteractableNodes = new List<Node>();
 	int CurrentSelected = 0;
 	public void ActionObjectInteraction(bool EnterBool, Node body)
@@ -67,16 +81,8 @@ public class ActionMenu : Control
 				Stop();
 		}
 	}
-	public void ConnectPlayer(Player pl)
-	{
-		Play = pl;
-		SetProcessInput(true);
-		pl.Connect("InteractableObjectEntered", this, "ActionObjectInteraction");
-	}
-	public void DissconnectPlayer()
-	{
-		SetProcessInput(false);
-	}
+	
+	
 	public bool IsSelecting()
 	{
 		return SelectedObj != null;
@@ -172,6 +178,8 @@ public class ActionMenu : Control
 			return;
 		if (selecting)
             return;
+		if ((bool)PlayerUI.GetUI(PlayerUIType.PUZZLE).Call("IsSolvingPuzzle"))
+			return;
 
 		if (obj is Vehicle v)
 		{

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/SuspendedRuin.obj-70133c8525559c667436aaab136a1dc9.mesh"
+
+[deps]
+
+files=[ "res://.import/SuspendedRuin.obj-70133c8525559c667436aaab136a1dc9.mesh" ]
+
+source_file="res://Assets/Clutter/SuspendedRuin/SuspendedRuin.obj"
+dest_files=[ "res://.import/SuspendedRuin.obj-70133c8525559c667436aaab136a1dc9.mesh", "res://.import/SuspendedRuin.obj-70133c8525559c667436aaab136a1dc9.mesh" ]
+
+[params]
+
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh_flags=4286
+generate_tangents=true
+vertex_cache_optimization=true
+octahedral_compression=true

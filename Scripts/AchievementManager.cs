@@ -35,4 +35,7 @@ public class AchievementManager : Control
     {
         UnlockedAchievements.Clear();
     }
+    public void PlayerToggle(Player pl)
+    {
+    }
 }

@@ -44,7 +44,7 @@ public class WorldRoot : Spatial
 		intro.QueueFree();
 		m_myworld = (MyWorld)ResourceLoader.Load<PackedScene>(WorldScene).Instance();
 		m_myworld.LoadSave = LoadSave;
-		m_myworld.Connect("PlayerSpawnedEventHandler", PlayerUI.GetInstance(), "OnPlayerSpawned");
+		//m_myworld.Connect("PlayerSpawnedEventHandler", PlayerUI, "OnPlayerSpawned");
 		GetNode("Control/ViewportContainer/Viewport").AddChild(m_myworld);
 	}
 	public void StopGame()
@@ -54,7 +54,7 @@ public class WorldRoot : Spatial
 		intro = (Spatial)ResourceLoader.Load<PackedScene>(Intro).Instance();
 		GetNode("Control/ViewportContainer/Viewport").AddChild(intro, true);
 		//OS.VsyncEnabled = false;
-		((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid().ResetMap();
+		((MapUI)PlayerUI.GetUI(PlayerUIType.MAP)).GetGrid().ResetMap();
 		GetNode<Control>("CanvasLayer/PlayerUI").Hide();
 	}
 }

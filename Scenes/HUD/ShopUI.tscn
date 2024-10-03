@@ -1,0 +1,455 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/HUD/InventoryUISlot.tscn" type="PackedScene" id=1]
+[ext_resource path="res://UIThemes/Panel_LightGray_TopBottomCorner.tres" type="StyleBox" id=2]
+
+[node name="ShopUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -531.0
+margin_top = -209.0
+margin_right = 531.0
+margin_bottom = 209.0
+custom_styles/panel = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 1060.0
+margin_bottom = 416.0
+custom_constants/separation = 133
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/HBoxContainer"]
+margin_right = 264.0
+margin_bottom = 414.0
+custom_constants/vseparation = 82
+custom_constants/hseparation = 132
+columns = 3
+
+[node name="InventoryBox" parent="PanelContainer/HBoxContainer/GridContainer" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+
+[node name="InventoryBox2" parent="PanelContainer/HBoxContainer/GridContainer" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 132.0
+margin_right = 132.0
+
+[node name="InventoryBox3" parent="PanelContainer/HBoxContainer/GridContainer" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 264.0
+margin_right = 264.0
+
+[node name="InventoryBox4" parent="PanelContainer/HBoxContainer/GridContainer" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 82.0
+margin_bottom = 82.0
+
+[node name="InventoryBox5" parent="PanelContainer/HBoxContainer/GridContainer" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 132.0
+margin_top = 82.0
+margin_right = 132.0
+margin_bottom = 82.0
+
+[node name="InventoryBox6" parent="PanelContainer/HBoxContainer/GridContainer" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 264.0
+margin_top = 82.0
+margin_right = 264.0
+margin_bottom = 82.0
+
+[node name="InventoryBox7" parent="PanelContainer/HBoxContainer/GridContainer" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 164.0
+margin_bottom = 164.0
+
+[node name="InventoryBox8" parent="PanelContainer/HBoxContainer/GridContainer" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 132.0
+margin_top = 164.0
+margin_right = 132.0
+margin_bottom = 164.0
+
+[node name="InventoryBox9" parent="PanelContainer/HBoxContainer/GridContainer" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 264.0
+margin_top = 164.0
+margin_right = 264.0
+margin_bottom = 164.0
+
+[node name="InventoryBox10" parent="PanelContainer/HBoxContainer/GridContainer" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 246.0
+margin_bottom = 246.0
+
+[node name="InventoryBox11" parent="PanelContainer/HBoxContainer/GridContainer" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 132.0
+margin_top = 246.0
+margin_right = 132.0
+margin_bottom = 246.0
+
+[node name="InventoryBox12" parent="PanelContainer/HBoxContainer/GridContainer" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 264.0
+margin_top = 246.0
+margin_right = 264.0
+margin_bottom = 246.0
+
+[node name="InventoryBox13" parent="PanelContainer/HBoxContainer/GridContainer" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 328.0
+margin_bottom = 328.0
+
+[node name="InventoryBox14" parent="PanelContainer/HBoxContainer/GridContainer" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 132.0
+margin_top = 328.0
+margin_right = 132.0
+margin_bottom = 328.0
+
+[node name="InventoryBox15" parent="PanelContainer/HBoxContainer/GridContainer" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 264.0
+margin_top = 328.0
+margin_right = 264.0
+margin_bottom = 328.0
+
+[node name="GridContainer2" type="GridContainer" parent="PanelContainer/HBoxContainer"]
+margin_left = 397.0
+margin_right = 661.0
+margin_bottom = 414.0
+custom_constants/vseparation = 82
+custom_constants/hseparation = 132
+columns = 3
+
+[node name="InventoryBox" parent="PanelContainer/HBoxContainer/GridContainer2" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+
+[node name="InventoryBox2" parent="PanelContainer/HBoxContainer/GridContainer2" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 132.0
+margin_right = 132.0
+
+[node name="InventoryBox3" parent="PanelContainer/HBoxContainer/GridContainer2" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 264.0
+margin_right = 264.0
+
+[node name="InventoryBox4" parent="PanelContainer/HBoxContainer/GridContainer2" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 82.0
+margin_bottom = 82.0
+
+[node name="InventoryBox5" parent="PanelContainer/HBoxContainer/GridContainer2" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 132.0
+margin_top = 82.0
+margin_right = 132.0
+margin_bottom = 82.0
+
+[node name="InventoryBox6" parent="PanelContainer/HBoxContainer/GridContainer2" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 264.0
+margin_top = 82.0
+margin_right = 264.0
+margin_bottom = 82.0
+
+[node name="InventoryBox7" parent="PanelContainer/HBoxContainer/GridContainer2" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 164.0
+margin_bottom = 164.0
+
+[node name="InventoryBox8" parent="PanelContainer/HBoxContainer/GridContainer2" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 132.0
+margin_top = 164.0
+margin_right = 132.0
+margin_bottom = 164.0
+
+[node name="InventoryBox9" parent="PanelContainer/HBoxContainer/GridContainer2" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 264.0
+margin_top = 164.0
+margin_right = 264.0
+margin_bottom = 164.0
+
+[node name="InventoryBox10" parent="PanelContainer/HBoxContainer/GridContainer2" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 246.0
+margin_bottom = 246.0
+
+[node name="InventoryBox11" parent="PanelContainer/HBoxContainer/GridContainer2" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 132.0
+margin_top = 246.0
+margin_right = 132.0
+margin_bottom = 246.0
+
+[node name="InventoryBox12" parent="PanelContainer/HBoxContainer/GridContainer2" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 264.0
+margin_top = 246.0
+margin_right = 264.0
+margin_bottom = 246.0
+
+[node name="InventoryBox13" parent="PanelContainer/HBoxContainer/GridContainer2" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 328.0
+margin_bottom = 328.0
+
+[node name="InventoryBox14" parent="PanelContainer/HBoxContainer/GridContainer2" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 132.0
+margin_top = 328.0
+margin_right = 132.0
+margin_bottom = 328.0
+
+[node name="InventoryBox15" parent="PanelContainer/HBoxContainer/GridContainer2" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 264.0
+margin_top = 328.0
+margin_right = 264.0
+margin_bottom = 328.0
+
+[node name="GridContainer3" type="GridContainer" parent="PanelContainer/HBoxContainer"]
+margin_left = 794.0
+margin_right = 1058.0
+margin_bottom = 414.0
+custom_constants/vseparation = 82
+custom_constants/hseparation = 132
+columns = 3
+
+[node name="InventoryBox" parent="PanelContainer/HBoxContainer/GridContainer3" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+
+[node name="InventoryBox2" parent="PanelContainer/HBoxContainer/GridContainer3" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 132.0
+margin_right = 132.0
+
+[node name="InventoryBox3" parent="PanelContainer/HBoxContainer/GridContainer3" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 264.0
+margin_right = 264.0
+
+[node name="InventoryBox4" parent="PanelContainer/HBoxContainer/GridContainer3" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 82.0
+margin_bottom = 82.0
+
+[node name="InventoryBox5" parent="PanelContainer/HBoxContainer/GridContainer3" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 132.0
+margin_top = 82.0
+margin_right = 132.0
+margin_bottom = 82.0
+
+[node name="InventoryBox6" parent="PanelContainer/HBoxContainer/GridContainer3" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 264.0
+margin_top = 82.0
+margin_right = 264.0
+margin_bottom = 82.0
+
+[node name="InventoryBox7" parent="PanelContainer/HBoxContainer/GridContainer3" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 164.0
+margin_bottom = 164.0
+
+[node name="InventoryBox8" parent="PanelContainer/HBoxContainer/GridContainer3" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 132.0
+margin_top = 164.0
+margin_right = 132.0
+margin_bottom = 164.0
+
+[node name="InventoryBox9" parent="PanelContainer/HBoxContainer/GridContainer3" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 264.0
+margin_top = 164.0
+margin_right = 264.0
+margin_bottom = 164.0
+
+[node name="InventoryBox10" parent="PanelContainer/HBoxContainer/GridContainer3" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 246.0
+margin_bottom = 246.0
+
+[node name="InventoryBox11" parent="PanelContainer/HBoxContainer/GridContainer3" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 132.0
+margin_top = 246.0
+margin_right = 132.0
+margin_bottom = 246.0
+
+[node name="InventoryBox12" parent="PanelContainer/HBoxContainer/GridContainer3" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 264.0
+margin_top = 246.0
+margin_right = 264.0
+margin_bottom = 246.0
+
+[node name="InventoryBox13" parent="PanelContainer/HBoxContainer/GridContainer3" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 328.0
+margin_bottom = 328.0
+
+[node name="InventoryBox14" parent="PanelContainer/HBoxContainer/GridContainer3" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 132.0
+margin_top = 328.0
+margin_right = 132.0
+margin_bottom = 328.0
+
+[node name="InventoryBox15" parent="PanelContainer/HBoxContainer/GridContainer3" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 264.0
+margin_top = 328.0
+margin_right = 264.0
+margin_bottom = 328.0

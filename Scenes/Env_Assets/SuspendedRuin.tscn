@@ -1,0 +1,73 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Assets/Clutter/SuspendedRuin/SuspendedRuin.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://Assets/Clutter/Antenna/Antenna2.tres" type="ArrayMesh" id=2]
+[ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=3]
+[ext_resource path="res://Assets/Materials/WindGenMatBig.tres" type="Material" id=4]
+[ext_resource path="res://Assets/Clutter/Antenna/Antenna2Mat.tres" type="Material" id=5]
+[ext_resource path="res://Assets/Clutter/Antenna/Antena.tres" type="ArrayMesh" id=6]
+[ext_resource path="res://Assets/Clutter/Antenna/AntennaMat.tres" type="Material" id=7]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 10.9715, 257.581, 10.8973 )
+
+[node name="Gear" type="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.711914, 0.747253, 0.484314 )
+collision_layer = 4
+collision_mask = 0
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.4113, 0 )
+layers = 3
+mesh = ExtResource( 1 )
+material/0 = ExtResource( 4 )
+script = ExtResource( 3 )
+LOD0 = ExtResource( 1 )
+LOD1 = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 99.9288, 208.047, 99.872 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 99.9288, 208.047, -100.447 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -100.445, 208.047, 99.872 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape4" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -100.445, 208.047, -100.447 )
+shape = SubResource( 1 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+transform = Transform( 17.42, 0, 10.9292, 0, 20.5646, 0, -10.9292, 0, 17.42, -352.125, 995.51, -301.152 )
+mesh = ExtResource( 2 )
+skeleton = NodePath("")
+material/0 = ExtResource( 5 )
+script = ExtResource( 3 )
+LOD0 = ExtResource( 2 )
+LOD1 = ExtResource( 2 )
+HideIfNoLod = true
+
+[node name="MeshInstance3" type="MeshInstance" parent="."]
+transform = Transform( -22.2528, 2.39187, 5.34817, 4.84929, 19.3073, 11.5422, -3.28761, 12.2889, -19.1751, 451.827, 910.918, 343.354 )
+mesh = ExtResource( 2 )
+skeleton = NodePath("")
+material/0 = ExtResource( 5 )
+script = ExtResource( 3 )
+LOD0 = ExtResource( 2 )
+LOD1 = ExtResource( 2 )
+HideIfNoLod = true
+
+[node name="MeshInstance4" type="MeshInstance" parent="."]
+transform = Transform( 34.0658, 5.23197, 0.389394, -4.97871, 33.045, -8.44057, -1.65456, 8.28597, 33.4157, 221.685, 1085.1, -27.8605 )
+layers = 3
+mesh = ExtResource( 6 )
+skeleton = NodePath("")
+material/0 = ExtResource( 7 )
+script = ExtResource( 3 )
+LOD0 = ExtResource( 6 )
+LOD1 = ExtResource( 6 )
+HideIfNoLod = true

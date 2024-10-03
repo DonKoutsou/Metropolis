@@ -15,14 +15,20 @@ public class MapUI : Control
     {
         base._Ready();
         Grid = GetNode<MapGrid>("MapGridPanel/MapGrid");
+        Visible = false;
     }
     public MapGrid GetGrid()
     {
         return Grid;
     }
-    public void ConnectPlayer(Player pl)
+    public void PlayerToggle(Player pl)
     {
-        Grid.ConnectPlayer(pl);
+		bool toggle = pl != null;
+        //Visible = toggle;
+		if (toggle)
+        {
+            Grid.ConnectPlayer(pl);
+        }
     }
     public void ToggleMap(bool toggle)
     {

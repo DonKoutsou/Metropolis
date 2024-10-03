@@ -12,17 +12,14 @@ public class Control_UI : Control
         };
         AddChild(IdleTime);
         IdleTime.Connect("timeout", this, "TimerEnded");
-        Hide();
-    }
-    public void DissableUI()
-    {
+        Visible = false;
         SetProcessInput(false);
-        Hide();
     }
-    public void EnableUI()
+    public void PlayerToggle(Player pl)
     {
-        SetProcessInput(true);
-        Show();
+		bool toggle = pl != null;
+        Visible = toggle;
+		SetProcessInput(toggle);
     }
     public override void _Input(InputEvent @event)
     {

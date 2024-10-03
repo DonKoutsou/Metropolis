@@ -34,3 +34,9 @@ render_target_update_mode = 3
 audio_listener_enable_3d = true
 physics_object_picking = true
 shadow_atlas_size = 512
+
+[node name="DirectionalLight" type="DirectionalLight" parent="ViewportContainer/PuzzleViewport"]
+transform = Transform( 0.950217, -0.10157, -0.294569, 0.188846, -0.564232, 0.803729, -0.24784, -0.819345, -0.516961, 0, 0, 0 )
+light_color = Color( 1, 0.945098, 0.886275, 1 )
+light_specular = 2.274
+light_bake_mode = 0

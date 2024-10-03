@@ -14,7 +14,7 @@ public class InventoryUI : Control
 
     Inventory Inv;
 
-    Player pl;
+    Player Playr;
 
     List <InventoryUISlot> slots = new List<InventoryUISlot>();
 
@@ -105,18 +105,19 @@ public class InventoryUI : Control
     {
         ItemNotif.OnItemRemovedFromInv(it);
     }
-    public void ConnectPlayer(Player play)
+    public void PlayerToggle(Player pl)
     {
-        pl = play;
-        Inv = pl.GetNode<Inventory>("Inventory");
-        //MaxLoad = Inv.GetMaxCap();
-        //float currentload = Inv.GetCurrentWeight();
-        //Capacity.BbcodeText = string.Format("[center]{0}/{1}", currentload, MaxLoad);
-        CharacterBatteryCharge.MaxValue = pl.GetCharacterBatteryCap();
-        CharacterBatteryCharge.Value = pl.GetCurrentCharacterEnergy();
-        comp = GetNode<Compass>("InventoryContainer/Inventory/CompassUI");
-        map = ((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid();
-        Show();
+		bool toggle = pl != null;
+        Visible = toggle;
+		if (toggle)
+		{
+            Playr = pl;
+            Inv = pl.GetNode<Inventory>("Inventory");
+            CharacterBatteryCharge.MaxValue = pl.GetCharacterBatteryCap();
+            CharacterBatteryCharge.Value = pl.GetCurrentCharacterEnergy();
+            comp = GetNode<Compass>("InventoryContainer/Inventory/CompassUI");
+            map = ((MapUI)PlayerUI.GetUI(PlayerUIType.MAP)).GetGrid();
+		}
     }
     private void ToggleInventory()
     {
@@ -273,8 +274,8 @@ public class InventoryUI : Control
             //Capacity.BbcodeText = string.Format("[center]{0}/{1}", currentload, MaxLoad);
         //}
 
-        CharacterBatteryCharge.Value = pl.GetCurrentCharacterEnergy();
-        float rpm = pl.GetRPM();
+        CharacterBatteryCharge.Value = Playr.GetCurrentCharacterEnergy();
+        float rpm = Playr.GetRPM();
         if (rpm > 0.66f)
             CharacterRPM.Modulate = new Color(1,0,0);
         else if (rpm > 0.33f)
@@ -432,7 +433,7 @@ public class InventoryUI : Control
     {
         if (!hascompass)
         {
-            DialogueManager.GetInstance().ForceDialogue(pl, NoCompassText);
+            DialogueManager.GetInstance().ForceDialogue(Playr, NoCompassText);
             //pl.GetTalkText().Talk(NoCompassText);
             return;
         }

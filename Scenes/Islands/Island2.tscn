@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://Assets/Terains/Island3/Island3_LOD.tres" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Building/BuildingDust3.tscn" type="PackedScene" id=2]
@@ -12,13 +12,16 @@
 [ext_resource path="res://Scenes/Env_Assets/CylinderThing.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Assets/Building/BuildingDust.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Env_Assets/Antena.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Assets/TerainTex/SandSimple.tres" type="Material" id=13]
+[ext_resource path="res://Assets/TerainTex/SandSimplePlanar.tres" type="Material" id=13]
 [ext_resource path="res://Scenes/Env_Assets/Rock1.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=15]
+[ext_resource path="res://Scenes/Env_Assets/GearThin.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Assets/Building/SkyscraperMesh.tres" type="CubeMesh" id=17]
 [ext_resource path="res://Scenes/Env_Assets/House.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Scenes/Env_Assets/Gear.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Assets/Terains/Island3/Island3.tres" type="ArrayMesh" id=20]
 [ext_resource path="res://Scenes/Env_Assets/WindGenerator2.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Scenes/Env_Assets/BrokenWindSingle.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Scenes/Env_Assets/Rock2.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Scenes/Env_Assets/Rock3.tscn" type="PackedScene" id=24]
 
@@ -126,7 +129,7 @@ LOD0 = ExtResource( 20 )
 LOD1 = ExtResource( 1 )
 
 [node name="StaticBody" type="StaticBody" parent="MeshInstance5" index="0"]
-collision_layer = 4
+collision_layer = 8196
 collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance5/StaticBody" index="0"]
@@ -212,7 +215,7 @@ transform = Transform( 0.995816, 0, -0.0913965, 0, 1, 0, 0.0913965, 0, 0.995816,
 transform = Transform( 0.954387, 0, -0.298574, 0, 1, 0, 0.298574, 0, 0.954387, -1897.32, 3.8099, 772.004 )
 
 [node name="StaticBody" parent="Clutter" index="17" instance=ExtResource( 12 )]
-transform = Transform( 22.0028, 6.80931, 0, -4.85224, 15.679, 16.159, 4.77728, -15.4368, 16.4126, 207.244, -0.315842, 348.216 )
+transform = Transform( 43.3051, 11.8506, 1.50515, -9.46385, 30.5804, 31.5166, 7.28953, -30.6992, 31.9759, 207.244, -183.564, 512.639 )
 
 [node name="StaticBody2" parent="Clutter" index="18" instance=ExtResource( 12 )]
 transform = Transform( 0.996883, 0.0788941, 0, -0.0788941, 0.996883, 0, 0, 0, 1, 687.048, 32.2764, 1360.99 )
@@ -334,3 +337,18 @@ mesh = ExtResource( 17 )
 
 [node name="WindGenerator" parent="." index="7" instance=ExtResource( 21 )]
 transform = Transform( 0.268012, 0, 0.963416, 0, 1, 0, -0.963416, 0, 0.268012, 1454.48, -4.11378, 1268.93 )
+
+[node name="Gear" parent="." index="11" instance=ExtResource( 16 )]
+transform = Transform( 144.808, 20.6024, -1.74669, -20.6763, 144.291, -12.2331, 0, 12.3572, 145.754, 1180.99, -10.7233, -2557.8 )
+
+[node name="Gear2" parent="." index="12" instance=ExtResource( 19 )]
+transform = Transform( -25.7105, 79.5279, -25.447, 80.685, 30.5171, 13.853, 21.4982, -19.4237, -82.4246, 151.481, 146.956, -1629.62 )
+
+[node name="Gear3" parent="." index="13" instance=ExtResource( 16 )]
+transform = Transform( 84.3167, 34.1978, 97.1786, 82.5782, 52.6468, -90.1755, -61.5955, 117.394, 12.1314, 1567.95, -15.7659, 1954.9 )
+
+[node name="Gear4" parent="." index="14" instance=ExtResource( 16 )]
+transform = Transform( 41.3201, -39.5705, -120.205, 69.5429, 112.746, -13.21, 105.73, -58.6933, 55.6657, 2564.11, -66.4958, 1487 )
+
+[node name="MeshInstance" parent="." index="15" instance=ExtResource( 22 )]
+transform = Transform( 1.52768, -4.77375, -0.0293258, 3.77222, 1.226, -3.06441, 2.92573, 0.911918, 3.96634, -10.702, 57.5235, -2105.85 )

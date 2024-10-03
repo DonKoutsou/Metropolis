@@ -20,7 +20,10 @@ public class PuzzleManager : Control
         base._Ready();
         StartPuzzle(PuzzleTypes.LOCK);
     }*/
-    public bool PuzzleRunning()
+    public void PlayerToggle(Player pl)
+    {
+    }
+    public bool IsSolvingPuzzle()
     {
         return RunningPuzzle != null;
     }

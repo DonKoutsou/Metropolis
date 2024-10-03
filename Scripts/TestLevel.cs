@@ -10,7 +10,7 @@ public class TestLevel : Spatial
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        PlayerUI.GetInstance().OnPlayerSpawned(GetNode<Player>("Control/ViewportContainer/Viewport/Player"));
+        //PlayerUI.OnPlayerSpawned(GetNode<Player>("Control/ViewportContainer/Viewport/Player"));
 
         UniversalLodManager.GetInstance().UpdateCamera(PlayerCamera.GetInstance());
     }

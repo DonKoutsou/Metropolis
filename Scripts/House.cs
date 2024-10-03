@@ -60,7 +60,7 @@ public class House : Spatial
 	Node bodytoenter;
 	public void Unlocked(bool resault)
 	{
-		PuzzleManager pman = (PuzzleManager)PlayerUI.GetInstance().GetUI(PlayerUIType.PUZZLE);
+		PuzzleManager pman = (PuzzleManager)PlayerUI.GetUI(PlayerUIType.PUZZLE);
 		pman.Disconnect("PuzzleResault", this, "Unlocked");
 		if (resault)
 		{
@@ -82,7 +82,7 @@ public class House : Spatial
 				return;
 			}
 			bodytoenter = body;
-			PuzzleManager pman = (PuzzleManager)PlayerUI.GetInstance().GetUI(PlayerUIType.PUZZLE);
+			PuzzleManager pman = (PuzzleManager)PlayerUI.GetUI(PlayerUIType.PUZZLE);
 			pman.Connect("PuzzleResault", this, "Unlocked");
 			pman.StartPuzzle(PuzzleTypes.LOCK);
 			return;

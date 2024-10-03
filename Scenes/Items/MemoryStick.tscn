@@ -20,10 +20,8 @@ angular_damp = 1.22
 script = ExtResource( 1 )
 ItemType = 15
 ItemIcon = ExtResource( 3 )
-ItemPickupActionName = "Μια καταγραφή"
-ItemName = "Κάρτα μνήμης"
-ItemDesc = "Μια καταγραφή"
-stackable = false
+ItemName = "Κάρτα πρόσβασης"
+ItemDesc = "EntryCardDescription"
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 4.37114e-08, 8.74228e-08, -1, -8.74228e-08, -1, -8.74228e-08, -1, 8.74228e-08, -4.37114e-08, 0, 0.0258591, 0 )

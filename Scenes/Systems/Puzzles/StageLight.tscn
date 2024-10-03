@@ -103,4 +103,5 @@ anims/StageSemiPass = SubResource( 8 )
 
 [node name="LightSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+volume_db = 3.0
 pitch_scale = 1.1

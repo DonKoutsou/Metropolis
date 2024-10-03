@@ -54,7 +54,7 @@ public class CameraPanPivot : Position3D
 		Vector3 prevrot = new Vector3(PanXPivot.Rotation.x ,Rotation.y, 0);
 		Vector3 rot = new Vector3(PanXPivot.Rotation.x ,Rotation.y, 0);
 
-		if (!PlayerUI.GetInstance().HasMenuOpen())
+		if (!PlayerUI.HasMenuOpen())
 		{
 			if (ControllerInput.IsUsingController())
 			{

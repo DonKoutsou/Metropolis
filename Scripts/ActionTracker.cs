@@ -16,7 +16,7 @@ public class ActionTracker : Node
         {
             DoneActions.Add(Action, 1);
         }
-        ResolveAction(Action, DoneActions[Action]);
+        //ResolveAction(Action, DoneActions[Action]);
     }
     public static Dictionary<string, int> GetActions()
     {
@@ -24,28 +24,28 @@ public class ActionTracker : Node
     }
     static void ResolveAction(string Action, int amm)
     {
-        ((AchievementManager)PlayerUI.GetInstance().GetUI(PlayerUIType.ACHIEVEMENT)).UnlockAchievement(Action, amm, true);
+        ((AchievementManager)PlayerUI.GetUI(PlayerUIType.ACHIEVEMENT)).UnlockAchievement(Action, amm, true);
         switch  (Action)
         {
             case "Portal":
             {
                 if (amm > 1)
                     return;
-                ((TutorialManager)PlayerUI.GetInstance().GetUI(PlayerUIType.TUTORIAL)).PlayTutorial("Portal");
+                ((TutorialManager)PlayerUI.GetUI(PlayerUIType.TUTORIAL)).PlayTutorial("Portal");
                 break;
             }
             case "CodePuzzle":
             {
                 if (amm > 1)
                     return;
-                ((TutorialManager)PlayerUI.GetInstance().GetUI(PlayerUIType.TUTORIAL)).PlayTutorial("CodePuzzle");
+                ((TutorialManager)PlayerUI.GetUI(PlayerUIType.TUTORIAL)).PlayTutorial("CodePuzzle");
                 break;
             }
             case "LockPuzzle":
             {
                 if (amm > 1)
                     return;
-                ((TutorialManager)PlayerUI.GetInstance().GetUI(PlayerUIType.TUTORIAL)).PlayTutorial("LockPuzzle");
+                ((TutorialManager)PlayerUI.GetUI(PlayerUIType.TUTORIAL)).PlayTutorial("LockPuzzle");
                 break;
             }
         }
@@ -63,7 +63,7 @@ public class ActionTracker : Node
         for (int i = 0; i < Actions.Count(); i++)
         {
             DoneActions.Add(Actions[i], ActionAmm[i]);
-            ((AchievementManager)PlayerUI.GetInstance().GetUI(PlayerUIType.ACHIEVEMENT)).UnlockAchievement(Actions[i], ActionAmm[i]);
+            ((AchievementManager)PlayerUI.GetUI(PlayerUIType.ACHIEVEMENT)).UnlockAchievement(Actions[i], ActionAmm[i]);
         }
     }
     public static void SaveActions()

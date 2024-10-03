@@ -7,7 +7,11 @@ public class ScreenEffects : Control
     NodePath AnimationPlayer = null;
     public override void _Ready()
     {
-        
+        Visible = false;
+    }
+    public void PlayerToggle(Player pl)
+    {
+        Visible = pl != null;
     }
     public void PlayEffect(ScreenEffectTypes type)
     {

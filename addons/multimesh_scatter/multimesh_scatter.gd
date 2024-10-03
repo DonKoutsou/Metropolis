@@ -49,9 +49,9 @@ export var placement_size := Vector3(10.0, 10.0, 10.0) setget set_placement_size
 func get_placement_size(): return placement_size
 func set_placement_size(value):
 	placement_size = Vector3(
-		clamp(value.x, 0.01, 1000.0),
-		clamp(value.y, 0.01, 1000.0),
-		clamp(value.z, 0.01, 1000.0))
+		clamp(value.x, 0.01, 10000.0),
+		clamp(value.y, 0.01, 10000.0),
+		clamp(value.z, 0.01, 10000.0))
 	_update()
 
 ## The physics collision mask that the instances should collide with.

@@ -35,7 +35,7 @@ public class CityNameTrigger : Spatial
             IsIn = true;
             
             Player pl = (Player)body;
-            CityNameUI UI = (CityNameUI)PlayerUI.GetInstance().GetUI(PlayerUIType.CITYNAME);
+            CityNameUI UI = (CityNameUI)PlayerUI.GetUI(PlayerUIType.CITYNAME);
             UI.ShowName(((Island)GetParent()).GetIslandSpecialName());
             //
         }

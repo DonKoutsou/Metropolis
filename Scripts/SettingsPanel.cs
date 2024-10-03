@@ -240,7 +240,7 @@ public class SettingsPanel : Control
     private void ClearAchievements()
     {
         ActionTracker.ClearActions();
-        ((AchievementManager)PlayerUI.GetInstance().GetUI(PlayerUIType.ACHIEVEMENT)).ClearAchievements();
+        ((AchievementManager)PlayerUI.GetUI(PlayerUIType.ACHIEVEMENT)).ClearAchievements();
     }
     private void Close()
     {

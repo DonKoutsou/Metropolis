@@ -5,7 +5,7 @@
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=3]
 [ext_resource path="res://Assets/Terains/Island8/Island8_LOD.tres" type="ArrayMesh" id=4]
 [ext_resource path="res://Scenes/Env_Assets/Antena2.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Assets/TerainTex/SandSimple.tres" type="Material" id=6]
+[ext_resource path="res://Assets/TerainTex/SandSimplePlanar.tres" type="Material" id=6]
 [ext_resource path="res://Scenes/Env_Assets/Rock1.tscn" type="PackedScene" id=7]
 
 [sub_resource type="SpatialMaterial" id=13]

@@ -32,7 +32,7 @@ public class Item : RigidBody
 
 	public virtual string GetItemName()
 	{
-		return ItemName;
+		return LocalisationHolder.GetString(ItemName);
 	}
 	public virtual string GetInventoryItemName()
 	{

@@ -128,8 +128,7 @@ public class Player : Character
 	}
 	private void UpdateMoveLocation()
 	{
-		if (BeingTalkedTo)
-			return;
+		
 
 		DViewport viewp = DViewport.GetInstance();
 		Vector2 mult = OS.WindowSize / viewp.Size;
@@ -280,6 +279,8 @@ public class Player : Character
 		}
 		if (anim.IsStanding() || anim.IsClimbing())
 			return;
+		if (BeingTalkedTo || (bool)PlayerUI.GetUI(PlayerUIType.PUZZLE).Call("IsSolvingPuzzle"))
+			return;
 		
 
 		moveloc.GlobalTranslation = loctomove;
@@ -375,7 +376,7 @@ public class Player : Character
 			{
 				DialogueManager.GetInstance().ScheduleDialogue(this, "OutOfEnerguDiag");
 				//GetTalkText().Talk("Θα ξεμείνω από μπαταρία σε λίγο. Δεν νιώθω καλά.");
-				ScreenEffects ui = (ScreenEffects)PlayerUI.GetInstance().GetUI(PlayerUIType.SCREENEFFECTS);
+				ScreenEffects ui = (ScreenEffects)PlayerUI.GetUI(PlayerUIType.SCREENEFFECTS);
 				ui.PlayEffect(ScreenEffectTypes.DAMAGE);
 				ExpressedLowBattery = true;
 			}

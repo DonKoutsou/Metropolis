@@ -537,7 +537,7 @@ public class Island : Spatial
 		{
 			IslandInfo info = WorldMap.GetInstance().GetIleInfo(this);
 			if (pl.GetCharacterInventory().HasItemOfType(ItemName.MAP))
-				((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid().SetIslandVisited(info);
+				((MapUI)PlayerUI.GetUI(PlayerUIType.MAP)).GetGrid().SetIslandVisited(info);
 			//if (IslandName != "No_Name")
 			//{
 			//	pl.GetTalkText().Talk("Αναγνωρίζω αυτό το μέρος...");
@@ -553,7 +553,7 @@ public class Island : Spatial
 		{
 			IslandInfo info = WorldMap.GetInstance().GetIleInfo(this);
 			if (pl.GetCharacterInventory().HasItemOfType(ItemName.MAP))
-				((MapUI)PlayerUI.GetInstance().GetUI(PlayerUIType.MAP)).GetGrid().UnlockIslandName(info);
+				((MapUI)PlayerUI.GetUI(PlayerUIType.MAP)).GetGrid().UnlockIslandName(info);
 		}
 	}
 	#if DEBUG

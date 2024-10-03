@@ -31,7 +31,7 @@ public class Book : Item
     }
     public override string GetItemDesc()
     {
-        return LocalisationHolder.GetString(BookEnumTranslator.TranslateBookEnum(Series)) + "\n " + LocalisationHolder.GetString("Τόμος") + " : " + VolumeNumber.ToString();;
+        return LocalisationHolder.GetString(BookEnumTranslator.TranslateBookEnum(Series)) + "\n " + LocalisationHolder.GetString("Τόμος") + " : " + VolumeNumber.ToString() + "\n" + LocalisationHolder.GetString(ItemDesc);
     }
     public override void InputData(ItemInfo data)
 	{
@@ -159,17 +159,17 @@ public class BookEnumTranslator
         {
             case BookSeries.MACHINES:
             {
-                Name = "Τα χρονικά των μηχανών.";
+                Name = "B1";
                 break;
             }
             case BookSeries.HISTORY:
             {
-                Name = "Καταγεγραμένη ιστορία.";
+                Name = "B2";
                 break;
             }
             case BookSeries.MOTHERCITY:
             {
-                Name = "Η κατασκευή της Μητρόπολης.";
+                Name = "B3";
                 break;
             }
         }

@@ -21,8 +21,8 @@ angular_damp = 1.22
 script = ExtResource( 1 )
 ItemType = 19
 ItemIcon = ExtResource( 4 )
-ItemName = "Αίμα"
-ItemDesc = "BloodDescription"
+ItemName = "HBlood"
+ItemDesc = "HBloodDesc"
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.141275, 0 )

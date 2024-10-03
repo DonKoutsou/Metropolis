@@ -20,8 +20,8 @@ angular_damp = 1.22
 script = ExtResource( 1 )
 ItemType = 13
 ItemIcon = ExtResource( 4 )
-ItemName = "Βιβλίο"
-ItemDesc = "Ένα βιβλίο"
+ItemName = "B2"
+ItemDesc = "B2Desc"
 stackable = false
 Series = 1
 

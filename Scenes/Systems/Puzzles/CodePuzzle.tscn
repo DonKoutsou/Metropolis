@@ -1,9 +1,9 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Scripts/CodePuzzle.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Systems/Puzzles/MemoryButton.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Systems/Puzzles/StageLight.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Fonts/Caudex-Bold.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Fonts/digital-7.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Assets/Sounds/ButtonClick.mp3" type="AudioStream" id=5]
 [ext_resource path="res://Assets/CodePuzzle/CodePuzzle_Body.obj" type="ArrayMesh" id=6]
 [ext_resource path="res://Assets/CodePuzzle/CodePuzzleMat.tres" type="Material" id=7]
@@ -19,8 +19,6 @@
 
 [sub_resource type="DynamicFont" id=33]
 size = 60
-use_mipmaps = true
-use_filter = true
 font_data = ExtResource( 4 )
 
 [sub_resource type="QuadMesh" id=34]
@@ -63,12 +61,6 @@ flags_transparent = true
 albedo_texture = SubResource( 31 )
 uv1_scale = Vector3( 0.088, 0.24, 0.328 )
 uv1_offset = Vector3( 0.545, 0.752, 0 )
-
-[sub_resource type="CubeMesh" id=39]
-size = Vector3( 1.665, 0.182, 0.423 )
-
-[sub_resource type="SpatialMaterial" id=40]
-albedo_color = Color( 0, 0, 0, 1 )
 
 [sub_resource type="SpatialMaterial" id=41]
 resource_local_to_scene = true
@@ -154,17 +146,18 @@ margin_bottom = 78.0
 mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ViewportContainer/Viewport/CenterContainer"]
-margin_left = 265.0
-margin_right = 297.0
-margin_bottom = 462.0
-custom_constants/separation = 18
+margin_left = 267.0
+margin_right = 295.0
+margin_bottom = 418.0
+custom_constants/separation = 62
 
 [node name="Label" type="Label" parent="ViewportContainer/Viewport/CenterContainer/VBoxContainer"]
-margin_right = 32.0
-margin_bottom = 78.0
+margin_right = 28.0
+margin_bottom = 34.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 1
+custom_colors/font_color = Color( 1, 0, 0, 1 )
 custom_fonts/font = SubResource( 33 )
 text = "1"
 align = 1
@@ -172,11 +165,12 @@ valign = 1
 
 [node name="Label2" type="Label" parent="ViewportContainer/Viewport/CenterContainer/VBoxContainer"]
 margin_top = 96.0
-margin_right = 32.0
-margin_bottom = 174.0
+margin_right = 28.0
+margin_bottom = 130.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 1
+custom_colors/font_color = Color( 1, 0, 0, 1 )
 custom_fonts/font = SubResource( 33 )
 text = "2"
 align = 1
@@ -184,11 +178,12 @@ valign = 1
 
 [node name="Label3" type="Label" parent="ViewportContainer/Viewport/CenterContainer/VBoxContainer"]
 margin_top = 192.0
-margin_right = 32.0
-margin_bottom = 270.0
+margin_right = 28.0
+margin_bottom = 226.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 1
+custom_colors/font_color = Color( 1, 0, 0, 1 )
 custom_fonts/font = SubResource( 33 )
 text = "3"
 align = 1
@@ -196,11 +191,12 @@ valign = 1
 
 [node name="Label4" type="Label" parent="ViewportContainer/Viewport/CenterContainer/VBoxContainer"]
 margin_top = 288.0
-margin_right = 32.0
-margin_bottom = 366.0
+margin_right = 28.0
+margin_bottom = 322.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 1
+custom_colors/font_color = Color( 1, 0, 0, 1 )
 custom_fonts/font = SubResource( 33 )
 text = "4"
 align = 1
@@ -208,92 +204,86 @@ valign = 1
 
 [node name="Label5" type="Label" parent="ViewportContainer/Viewport/CenterContainer/VBoxContainer"]
 margin_top = 384.0
-margin_right = 32.0
-margin_bottom = 462.0
+margin_right = 28.0
+margin_bottom = 418.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 1
+custom_colors/font_color = Color( 1, 0, 0, 1 )
 custom_fonts/font = SubResource( 33 )
 text = "5"
 align = 1
 valign = 1
 
 [node name="NumberDisplay_0" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.544782, 0.0733294, -0.722917 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1.46561, -6.40637e-08, -0.544782, 0.0733294, -0.659396 )
 mesh = SubResource( 34 )
 material/0 = SubResource( 32 )
 
 [node name="NumberDisplay_1" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.269729, 0.0733294, -0.722917 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1.46561, -6.40637e-08, -0.269729, 0.0733294, -0.659396 )
 mesh = SubResource( 34 )
 material/0 = SubResource( 35 )
 
 [node name="NumberDisplay_2" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.0102963, 0.0733294, -0.722907 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1.46561, -6.40637e-08, 0.0102963, 0.0733294, -0.659382 )
 mesh = SubResource( 34 )
 material/0 = SubResource( 36 )
 
 [node name="NumberDisplay_3" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.261681, 0.0733294, -0.722917 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1.46561, -6.40637e-08, 0.261681, 0.0733294, -0.659396 )
 mesh = SubResource( 34 )
 material/0 = SubResource( 37 )
 
 [node name="NumberDisplay_4" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.54549, 0.0733294, -0.722917 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1.46561, -6.40637e-08, 0.54549, 0.0733294, -0.659396 )
 mesh = SubResource( 34 )
 material/0 = SubResource( 38 )
-
-[node name="Display" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0772049, -0.671962 )
-visible = false
-mesh = SubResource( 39 )
-skeleton = NodePath("../ViewportContainer")
-material/0 = SubResource( 40 )
 
 [node name="Buttons" type="Spatial" parent="."]
 
 [node name="Button_0" parent="Buttons" instance=ExtResource( 2 )]
-transform = Transform( 6.3, 0, 0, 0, 6.3, 0, 0, 0, 6.3, -0.424552, 0.2, -0.102105 )
+transform = Transform( 6.3, 0, 0, 0, 6.3, 0, 0, 0, 6.3, -0.424552, 0.2, -0.0876794 )
 ButtonMesh = ExtResource( 8 )
 Mat = ExtResource( 7 )
 
 [node name="Button_1" parent="Buttons" instance=ExtResource( 2 )]
-transform = Transform( 6.3, 0, 0, 0, 6.3, 0, 0, 0, 6.3, 0, 0.2, -0.102037 )
+transform = Transform( 6.3, 0, 0, 0, 6.3, 0, 0, 0, 6.3, 0, 0.2, -0.0876114 )
 ButtonMesh = ExtResource( 12 )
 Mat = ExtResource( 7 )
 
 [node name="Button_2" parent="Buttons" instance=ExtResource( 2 )]
-transform = Transform( 6.3, 0, 0, 0, 6.3, 0, 0, 0, 6.3, 0.428, 0.2, -0.102037 )
+transform = Transform( 6.3, 0, 0, 0, 6.3, 0, 0, 0, 6.3, 0.428, 0.2, -0.0876114 )
 ButtonMesh = ExtResource( 9 )
 Mat = ExtResource( 7 )
 
 [node name="Button_3" parent="Buttons" instance=ExtResource( 2 )]
-transform = Transform( 6.3, 0, 0, 0, 6.3, 0, 0, 0, 6.3, -0.425, 0.2, 0.328963 )
+transform = Transform( 6.3, 0, 0, 0, 6.3, 0, 0, 0, 6.3, -0.425, 0.2, 0.343389 )
 ButtonMesh = ExtResource( 13 )
 Mat = ExtResource( 7 )
 
 [node name="Button_4" parent="Buttons" instance=ExtResource( 2 )]
-transform = Transform( 6.3, 0, 0, 0, 6.3, 0, 0, 0, 6.3, 0, 0.2, 0.328881 )
+transform = Transform( 6.3, 0, 0, 0, 6.3, 0, 0, 0, 6.3, 0, 0.2, 0.343307 )
 ButtonMesh = ExtResource( 11 )
 Mat = ExtResource( 7 )
 
 [node name="Button_5" parent="Buttons" instance=ExtResource( 2 )]
-transform = Transform( 6.3, 0, 0, 0, 6.3, 0, 0, 0, 6.3, 0.428, 0.2, 0.328963 )
+transform = Transform( 6.3, 0, 0, 0, 6.3, 0, 0, 0, 6.3, 0.428, 0.2, 0.343389 )
 ButtonMesh = ExtResource( 10 )
 Mat = ExtResource( 7 )
 
 [node name="Button_6" parent="Buttons" instance=ExtResource( 2 )]
-transform = Transform( 6.3, 0, 0, 0, 6.3, 0, 0, 0, 6.3, -0.425, 0.2, 0.745963 )
+transform = Transform( 6.3, 0, 0, 0, 6.3, 0, 0, 0, 6.3, -0.425, 0.2, 0.760389 )
 ButtonMesh = ExtResource( 15 )
 Mat = ExtResource( 7 )
 
 [node name="Button_7" parent="Buttons" instance=ExtResource( 2 )]
-transform = Transform( 6.3, 0, 0, 0, 6.3, 0, 0, 0, 6.3, 0, 0.2, 0.745519 )
+transform = Transform( 6.3, 0, 0, 0, 6.3, 0, 0, 0, 6.3, 0, 0.2, 0.759945 )
 ButtonMesh = ExtResource( 16 )
 Mat = ExtResource( 7 )
 
 [node name="Button_8" parent="Buttons" instance=ExtResource( 2 )]
-transform = Transform( 6.3, 0, 0, 0, 6.3, 0, 0, 0, 6.3, 0.428, 0.2, 0.745963 )
+transform = Transform( 6.3, 0, 0, 0, 6.3, 0, 0, 0, 6.3, 0.428, 0.2, 0.760389 )
 ButtonMesh = ExtResource( 14 )
 Mat = ExtResource( 7 )
 
@@ -326,3 +316,4 @@ material/0 = SubResource( 45 )
 
 [node name="ButtonSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
+volume_db = -6.0

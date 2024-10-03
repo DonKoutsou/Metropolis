@@ -105,3 +105,6 @@ script = ExtResource( 4 )
 mesh = ExtResource( 3 )
 skeleton = NodePath("../../..")
 material/0 = ExtResource( 2 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="ViewportContainer/ItemPreviewViewport"]
+transform = Transform( 0.984808, 0.133022, -0.111619, 0, 0.642788, 0.766044, 0.173648, -0.754407, 0.633022, 0, 0, 0 )

@@ -12,7 +12,7 @@ using System;
 ////////////////////////////////////////////////////////////////////////////////////
 public class CheatMenu : Control
 {
-	Player pl;
+	Player Playr;
 
 	//CameraMovePivot CamMove;
 
@@ -37,13 +37,13 @@ public class CheatMenu : Control
 	{
 		if (HasSpeed)
 		{
-			pl.SetRunSpeed(30);
+			Playr.SetRunSpeed(30);
 			HasSpeed = false;
 		}
 		else
 		{
 			HasSpeed = true;
-			pl.SetRunSpeed(1000);
+			Playr.SetRunSpeed(1000);
 		}
 		
 	}
@@ -128,17 +128,22 @@ public class CheatMenu : Control
 	{
 		GD.Print(WorldMap.GetInstance().GetExitDirection());
 	}
-	public void ConnectPlayer(Player play)
-	{
-		pl = play;
-		CameraPanPivot pan = play.GetNode<Position3D>("CameraMovePivot").GetNode<CameraPanPivot>("CameraPanPivot");
-		CamZoom = pan.GetNode<SpringArm>("SpringArm").GetNode<CameraZoomPivot>("CameraZoomPivot");
-	}
+	public void PlayerToggle(Player pl)
+    {
+		bool toggle = pl != null;
+		SetProcessInput(toggle);
+        //Visible = toggle;
+		if (toggle)
+		{
+			Playr = pl;
+			CameraPanPivot pan = Playr.GetNode<Position3D>("CameraMovePivot").GetNode<CameraPanPivot>("CameraPanPivot");
+			CamZoom = pan.GetNode<SpringArm>("SpringArm").GetNode<CameraZoomPivot>("CameraZoomPivot");
+		}
+    }
 	public override void _Ready()
 	{
 		if (!OS.HasFeature("editor"))
 		{
-			SetProcessInput(false);
 			SetProcess(false);
 			return;
 		}
@@ -150,7 +155,9 @@ public class CheatMenu : Control
 		FpsCounter = labelcont.GetNode<Label>("FPS_Counter");
 		RainAmm = labelcont.GetNode<Label>("RainAmmount");
 		WindDir = labelcont.GetNode<Label>("WindDir");
-		WindAmm = labelcont.GetNode<Label>("WindAmm");	
+		WindAmm = labelcont.GetNode<Label>("WindAmm");
+		Visible = false;
+		SetProcessInput(false);
 	}
     public override void _Process(float delta)
     {

@@ -14,6 +14,11 @@ public class CityNameUI : Control
         lab = GetNode<Label>("Label2");
         Apl = GetNode<AnimationPlayer>(AnimationNode);
         sound = GetNode<AudioStreamPlayer>("CityNotifSound");
+        Visible = false;
+    }
+    public void PlayerToggle(Player pl)
+    {
+        Visible = pl != null;
     }
     public void ShowName(string Name)
     {

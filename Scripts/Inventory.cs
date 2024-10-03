@@ -47,7 +47,7 @@ public class Inventory : Spatial
         //    }
         //}
 
-        ui = (InventoryUI)PlayerUI.GetInstance().GetUI(PlayerUIType.INVENTORY);
+        ui = (InventoryUI)PlayerUI.GetUI(PlayerUIType.INVENTORY);
         
         if (StartingItems == null)
             return;

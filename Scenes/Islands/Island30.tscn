@@ -3,8 +3,8 @@
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Terains/Island18/Island18_LOD.tres" type="ArrayMesh" id=2]
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=3]
+[ext_resource path="res://Assets/TerainTex/SandSimplePlanar.tres" type="Material" id=4]
 [ext_resource path="res://Assets/Terains/Island18/Island18.tres" type="ArrayMesh" id=5]
-[ext_resource path="res://Assets/TerainTex/SandSimple.tres" type="Material" id=6]
 [ext_resource path="res://Scenes/Env_Assets/Rock5.tscn" type="PackedScene" id=7]
 
 [sub_resource type="SpatialMaterial" id=13]
@@ -106,7 +106,7 @@ __meta__ = {
 [node name="MeshInstance5" type="MeshInstance" parent="." index="4"]
 transform = Transform( 1568.34, 0, 0, 0, 1282.65, 0, 0, 0, 1568.34, 0, -396.992, 0 )
 mesh = ExtResource( 5 )
-material/0 = ExtResource( 6 )
+material/0 = ExtResource( 4 )
 script = ExtResource( 3 )
 LOD0 = ExtResource( 5 )
 LOD1 = ExtResource( 2 )

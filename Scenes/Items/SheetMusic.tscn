@@ -20,6 +20,8 @@ angular_damp = 1.22
 script = ExtResource( 1 )
 ItemType = 22
 ItemIcon = ExtResource( 6 )
+ItemName = "MSheet"
+ItemDesc = "MSheetDesc"
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 material_override = ExtResource( 2 )

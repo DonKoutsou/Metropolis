@@ -22,6 +22,7 @@ public class ItemPreviewPivot : Spatial
     {
         Visible = true;
         Rotation = Vector3.Zero;
+        ItemPreviewPivot2.Rotation = Vector3.Zero;
         SetProcessInput(true);
 
         GetNode<Spatial>("ItemPreviewPivot2").GetNode<MeshInstance>("MeshInstance").Mesh = m.Mesh;
