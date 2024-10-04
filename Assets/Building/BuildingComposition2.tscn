@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Assets/Building/Assets/House_Interior2.tres" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Building/Assets/House_Exterior2.tres" type="ArrayMesh" id=2]
@@ -36,6 +36,9 @@ size = Vector3( 5.109, 8.214, 2.727 )
 [sub_resource type="CubeMesh" id=17]
 size = Vector3( 7.563, 4.743, 0.12 )
 
+[sub_resource type="BoxShape" id=19]
+extents = Vector3( 2.23457, 3.75291, 0.0958792 )
+
 [node name="House" type="Spatial" groups=["Clutter"]]
 script = ExtResource( 5 )
 PossibleFurni = [ ExtResource( 7 ), ExtResource( 13 ), ExtResource( 16 ) ]
@@ -43,18 +46,18 @@ PossibleDeco = [ ExtResource( 15 ), ExtResource( 14 ) ]
 FurnitureAmmount = 6
 DecorationAmmount = 2
 SpawnPool = {
-Resource( "res://Scenes/Items/NormalLeg_R.tscn" ): 2,
-Resource( "res://Scenes/Items/DrahmaStack.tscn" ): 10,
+Resource( "res://Scenes/Items/Clock.tscn" ): 8,
 Resource( "res://Scenes/Items/Cassete.tscn" ): 8,
-Resource( "res://Scenes/Items/Item.tscn" ): 4,
+Resource( "res://Scenes/Items/DrahmaStack.tscn" ): 10,
+Resource( "res://Scenes/Items/NormalLeg_R.tscn" ): 2,
+Resource( "res://Scenes/Items/SheetMusic.tscn" ): 8,
 Resource( "res://Scenes/Items/Guitar.tscn" ): 1,
+Resource( "res://Scenes/Items/FastLeg_R.tscn" ): 2,
+Resource( "res://Scenes/Items/Item.tscn" ): 4,
+Resource( "res://Scenes/Items/FastLeg_L.tscn" ): 2,
 Resource( "res://Scenes/Items/NormalLeg_L.tscn" ): 2,
 Resource( "res://Scenes/Items/BatteryEmpty.tscn" ): 10,
-Resource( "res://Scenes/Items/FastLeg_L.tscn" ): 2,
-Resource( "res://Scenes/Items/Clock.tscn" ): 8,
-Resource( "res://Scenes/Items/FastLeg_R.tscn" ): 2,
-Resource( "res://Scenes/Items/Vinyl.tscn" ): 8,
-Resource( "res://Scenes/Items/SheetMusic.tscn" ): 8
+Resource( "res://Scenes/Items/Vinyl.tscn" ): 8
 }
 
 [node name="HouseExterior" type="StaticBody" parent="."]
@@ -196,13 +199,19 @@ Translations = [  ]
 OpenSound = ExtResource( 9 )
 CloseSound = ExtResource( 10 )
 
-[node name="Door1" type="Spatial" parent="DoorPivot"]
+[node name="Door1" type="StaticBody" parent="DoorPivot"]
+collision_layer = 32
+collision_mask = 0
 
 [node name="Door" type="MeshInstance" parent="DoorPivot/Door1"]
 transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 2.25, 0, 0 )
 mesh = SubResource( 17 )
 skeleton = NodePath("../..")
 material/0 = ExtResource( 11 )
+
+[node name="CollisionShape" type="CollisionShape" parent="DoorPivot/Door1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.31914, 0, 0 )
+shape = SubResource( 19 )
 
 [node name="Lights" type="Spatial" parent="."]
 

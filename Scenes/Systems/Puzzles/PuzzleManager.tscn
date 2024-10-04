@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://PuzzleEnviroment.tres" type="Environment" id=1]
 [ext_resource path="res://Scripts/PuzzleManager.cs" type="Script" id=2]
+[ext_resource path="res://Scenes/Systems/Puzzles/LockPuzzle.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Systems/Puzzles/CodePuzzle.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Systems/Puzzles/MemoryPuzzle.tscn" type="PackedScene" id=5]
 
 [sub_resource type="World" id=5]
 environment = ExtResource( 1 )
@@ -11,9 +14,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 2 )
-MemoryPuzzle = "res://Scenes/Systems/Puzzles/MemoryPuzzle.tscn"
-CodePuzzle = "res://Scenes/Systems/Puzzles/CodePuzzle.tscn"
-LockPuzzle = "res://Scenes/Systems/Puzzles/LockPuzzle.tscn"
+MemoryPuzzle = ExtResource( 5 )
+CodePuzzle = ExtResource( 4 )
+LockPuzzle = ExtResource( 3 )
 
 [node name="ViewportContainer" type="ViewportContainer" parent="."]
 pause_mode = 2

@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Terains/Island8/Island8_LOD.tres" type="ArrayMesh" id=2]
@@ -17,10 +17,13 @@
 [ext_resource path="res://Assets/Terains/Island8/Island8.tres" type="ArrayMesh" id=15]
 [ext_resource path="res://Scenes/Env_Assets/BoatWorkshop.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/Env_Assets/PlatformWood.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Scenes/Env_Assets/Gear.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Scenes/Env_Assets/GearThin.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Scenes/Env_Assets/Rock2.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Scenes/Env_Assets/WindGenerator.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Scenes/Env_Assets/Rock4.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Scenes/Env_Assets/SandPile2.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Scenes/Env_Assets/Warhead.tscn" type="PackedScene" id=24]
 
 [sub_resource type="SpatialMaterial" id=447]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -127,7 +130,7 @@ transform = Transform( -0.169541, 1.3209, -0.279373, -0.523742, 0.195172, 1.2406
 transform = Transform( -1.27185, 0.448305, -0.181638, 0.339819, 0.464493, -1.23302, -0.344229, -1.19785, -0.546109, 3172, -166.013, -274.357 )
 
 [node name="DestBuilding3" parent="." index="7" instance=ExtResource( 9 )]
-transform = Transform( 0.789573, 0.613413, 0.0172342, -0.595638, 0.759332, 0.261968, 0.147608, -0.217108, 0.964922, 136.518, 34.8089, -991.137 )
+transform = Transform( 0.789573, 0.613413, 0.0172342, -0.595638, 0.759332, 0.261968, 0.147608, -0.217108, 0.964922, -13.9299, 28.0333, -895.101 )
 
 [node name="DestBuilding4" parent="." index="8" instance=ExtResource( 9 )]
 transform = Transform( -0.531918, -0.0348765, 0.846075, -0.539581, -0.756079, -0.370395, 0.652619, -0.653546, 0.383354, -1110.28, -15.6523, 596.187 )
@@ -224,3 +227,21 @@ transform = Transform( 1404.74, -349.435, 0, 349.435, 1404.74, 0, 0, 0, 1447.55,
 
 [node name="Protal" parent="." index="38" instance=ExtResource( 5 )]
 transform = Transform( -0.250971, 0, -0.967995, -0.568727, 0.809202, 0.147453, 0.783303, 0.587531, -0.203086, -2194.37, -4.1795, 205.12 )
+
+[node name="Gear" parent="." index="39" instance=ExtResource( 18 )]
+transform = Transform( -89.5674, 31.7559, -13.6349, 10.8995, 61.9004, 72.5687, 32.7956, 66.1557, -61.3559, 841.446, 31.2107, -3024.57 )
+
+[node name="Gear3" parent="." index="40" instance=ExtResource( 18 )]
+transform = Transform( 10.6632, 91.7701, -26.1, 2.41804, 25.9942, 92.3857, 95.3788, -10.9187, 0.575779, 2566.5, -23.5109, -1952.22 )
+
+[node name="Gear2" parent="." index="41" instance=ExtResource( 19 )]
+transform = Transform( -60.6759, 47.0064, -2.39084, -9.3681, -15.8838, -74.5441, -46.1255, -58.6088, 18.285, -2241.06, 0.106827, -2673.8 )
+
+[node name="StaticBody9" parent="." index="42" instance=ExtResource( 6 )]
+transform = Transform( 79.4655, -6.42384, -9.26531, -6.73698, 25.8327, -75.6912, 9.04018, 75.7184, 25.0374, 1501.49, -6.13404, 2715.05 )
+
+[node name="Rock8" parent="." index="43" instance=ExtResource( 20 )]
+transform = Transform( 385.8, 0, 0, 0, 342.64, -177.312, 0, 177.312, 342.64, -705.16, -177.146, -3017.4 )
+
+[node name="Warhead" parent="." index="44" instance=ExtResource( 24 )]
+transform = Transform( -1.49025, -5.26329, -10.3885, -11.1673, -2.32545, 2.78014, -3.30395, 10.234, -4.71104, 59.5486, 17.9744, -853.696 )

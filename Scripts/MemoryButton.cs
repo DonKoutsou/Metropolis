@@ -27,7 +27,7 @@ public class MemoryButton : Spatial
         base._Ready();
 
         GetNode<MeshInstance>("MeshInstance").Mesh = ButtonMesh;
-        GetNode<MeshInstance>("MeshInstance").SetSurfaceMaterial(0, (Material)Mat.Duplicate());   
+        GetNode<MeshInstance>("MeshInstance").SetSurfaceMaterial(0, (Material)Mat.Duplicate());
     }
     public void Flash()
     {

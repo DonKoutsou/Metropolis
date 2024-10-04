@@ -21,6 +21,7 @@ script = ExtResource( 1 )
 ItemType = 9
 ItemIcon = ExtResource( 2 )
 ItemName = "Εργαλειοθήκη"
+ItemDesc = "ToolboxDescription"
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = ExtResource( 3 )

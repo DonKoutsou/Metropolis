@@ -349,14 +349,15 @@ public class ActionMenu : Control
 			}
 			Spatial obj = (Spatial)rayar["collider"];
 
-			Vector3 PlayPos = Play.GlobalTranslation;
-			
-			ActionComponent Acomp = obj.GetNode<ActionComponent>("ActionComponent");
+			ActionComponent Acomp = obj.GetNodeOrNull<ActionComponent>("ActionComponent");
 			
 			if (Acomp == null)
 			{
+				Stop();
 				return;
 			}
+
+			Vector3 PlayPos = Play.GlobalTranslation;
 				
 			Vector3 actionpos = Acomp.GetActionPos(PlayPos);
 

@@ -107,20 +107,32 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -603.139, -7.3651, 569.612 )
 [node name="Rock1" parent="." index="9" instance=ExtResource( 4 )]
 transform = Transform( 878.514, -1034.52, 218.677, 1047.86, 889.844, 0, -141.549, 166.684, 1357.2, 151.811, -2029.76, 1415.21 )
 
-[node name="Protal" parent="." index="10" instance=ExtResource( 5 )]
+[node name="Rock2" parent="." index="10" instance=ExtResource( 4 )]
+transform = Transform( 35.584, -113.449, 255.197, -90.13, 238.832, 118.739, -264.336, -96.7057, -6.13242, -2707.18, -395.189, 2535.31 )
+
+[node name="Rock3" parent="." index="11" instance=ExtResource( 4 )]
+transform = Transform( 271.193, 59.1507, -47.1026, -75.5852, 216.926, -162.766, 2.09581, 169.432, 224.835, -213.235, -507.611, -1541.17 )
+
+[node name="Rock4" parent="." index="12" instance=ExtResource( 4 )]
+transform = Transform( 319.396, 93.8584, -186.867, -207.517, 184.354, -262.093, 25.8015, 320.855, 205.255, -2250.72, -596.737, -353.643 )
+
+[node name="Rock5" parent="." index="13" instance=ExtResource( 4 )]
+transform = Transform( -40.4084, -279.71, -256.656, -371.217, -24.8871, 85.5668, -79.425, 258.625, -269.347, 2184.98, -596.737, -2190.75 )
+
+[node name="Protal" parent="." index="14" instance=ExtResource( 5 )]
 transform = Transform( 0.929596, -0.368579, 0, 0.368579, 0.929596, 0, 0, 0, 1, 1267.66, 9.53851, 1009.73 )
 
-[node name="Gear" parent="." index="11" instance=ExtResource( 6 )]
+[node name="Gear" parent="." index="15" instance=ExtResource( 6 )]
 transform = Transform( -12.5662, 23.845, 91.4152, -84.3144, -44.4333, 0, 42.6193, -80.8723, 26.9535, -1052.74, -4.17581, 1200.79 )
 
-[node name="Gear2" parent="." index="12" instance=ExtResource( 6 )]
+[node name="Gear2" parent="." index="16" instance=ExtResource( 6 )]
 transform = Transform( -74.4396, -38.7608, 45.1617, 38.5612, -86.4997, -10.6798, 45.3322, 9.93105, 83.2442, -763.525, -4.17578, 1031.62 )
 
-[node name="Gear3" parent="." index="13" instance=ExtResource( 7 )]
+[node name="Gear3" parent="." index="17" instance=ExtResource( 7 )]
 transform = Transform( 85.702, 100.628, 0, -100.628, 85.702, 0, 0, 0, 132.178, 230.505, -52.2965, 1242.37 )
 
-[node name="Gear4" parent="." index="14" instance=ExtResource( 7 )]
+[node name="Gear4" parent="." index="18" instance=ExtResource( 7 )]
 transform = Transform( -63.7401, -74.8414, -88.3566, -100.628, 85.702, 0, 57.2891, 67.2669, -98.3058, -2153.06, -111.344, -1207.24 )
 
-[node name="Gear5" parent="." index="15" instance=ExtResource( 7 )]
+[node name="Gear5" parent="." index="19" instance=ExtResource( 7 )]
 transform = Transform( -158.264, -17.2231, -143.998, 53.8735, 190.908, -82.0445, 134.647, -96.6282, -136.429, 2017.04, -169.785, -2554.57 )

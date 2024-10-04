@@ -170,9 +170,9 @@ public class Inventory : Spatial
             Item newItem = it.Instance<Item>();
             if (newItem is Battery bat)
             {
-                Godot.Collections.Array CustomDataKeys = (Godot.Collections.Array)res.Get("CustomDataKeys");
+                string[] CustomDataKeys = (string[])res.Get("CustomDataKeys");
 		        Godot.Collections.Array CustomDataValues = (Godot.Collections.Array)res.Get("CustomDataValues");
-                for (int i = 0; i < CustomDataKeys.Count; i++)
+                for (int i = 0; i < CustomDataKeys.Count(); i++)
                 {
                     if ((string)CustomDataKeys[i] == "CurrentEnergy")
                     {
@@ -211,11 +211,11 @@ public class Inventory : Spatial
             }*/
             else if (newItem is PaintCan p)
             {
-                Godot.Collections.Array CustomDataKeys = (Godot.Collections.Array)res.Get("CustomDataKeys");
+                string[] CustomDataKeys = (string[])res.Get("CustomDataKeys");
 		        Godot.Collections.Array CustomDataValues = (Godot.Collections.Array)res.Get("CustomDataValues");
-                for (int i = 0; i < CustomDataKeys.Count; i++)
+                for (int i = 0; i < CustomDataKeys.Count(); i++)
                 {
-                    if ((string)CustomDataKeys[i] == "CanColor")
+                    if (CustomDataKeys[i] == "CanColor")
                     {
                         p.SetColor((Color)CustomDataValues[i]);
                     }
@@ -224,11 +224,11 @@ public class Inventory : Spatial
             }
             else if (newItem is Book b)
             {
-                Godot.Collections.Array CustomDataKeys = (Godot.Collections.Array)res.Get("CustomDataKeys");
+                string[] CustomDataKeys = (string[])res.Get("CustomDataKeys");
 		        Godot.Collections.Array CustomDataValues = (Godot.Collections.Array)res.Get("CustomDataValues");
-                for (int i = 0; i < CustomDataKeys.Count; i++)
+                for (int i = 0; i < CustomDataKeys.Count(); i++)
                 {
-                    if ((string)CustomDataKeys[i] == "VolumeNumber")
+                    if (CustomDataKeys[i] == "VolumeNumber")
                     {
                         b.SetVoluemeNumber((int)CustomDataValues[i]);
                         BookVolumeHolder.OnVolumeFound(b.GetSeries(), (int)CustomDataValues[i]);

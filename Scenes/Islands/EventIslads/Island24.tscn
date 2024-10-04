@@ -421,7 +421,7 @@ __meta__ = {
 }
 
 [node name="body0" type="StaticBody" parent="Path" index="1"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape0" type="CollisionShape" parent="Path/body0" index="0"]
@@ -429,7 +429,7 @@ transform = Transform( -0.772052, 0.00252609, 0.635554, 0.00231233, 0.999997, -0
 shape = SubResource( 94 )
 
 [node name="body1" type="StaticBody" parent="Path" index="2"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape1" type="CollisionShape" parent="Path/body1" index="0"]
@@ -437,7 +437,7 @@ transform = Transform( -0.768743, 0.00252609, 0.639553, 0.00230625, 0.999997, -0
 shape = SubResource( 95 )
 
 [node name="body2" type="StaticBody" parent="Path" index="3"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape2" type="CollisionShape" parent="Path/body2" index="0"]
@@ -445,7 +445,7 @@ transform = Transform( -0.765362, -0.000148455, 0.6436, -0.000135169, 1, 6.99227
 shape = SubResource( 96 )
 
 [node name="body3" type="StaticBody" parent="Path" index="4"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape3" type="CollisionShape" parent="Path/body3" index="0"]
@@ -453,7 +453,7 @@ transform = Transform( -0.762636, -0.000148455, 0.646828, -0.000134872, 1, 7.049
 shape = SubResource( 97 )
 
 [node name="body4" type="StaticBody" parent="Path" index="5"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape4" type="CollisionShape" parent="Path/body4" index="0"]
@@ -461,7 +461,7 @@ transform = Transform( -0.760106, -0.000148455, 0.649799, -0.000134596, 1, 7.101
 shape = SubResource( 98 )
 
 [node name="body5" type="StaticBody" parent="Path" index="6"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape5" type="CollisionShape" parent="Path/body5" index="0"]
@@ -469,7 +469,7 @@ transform = Transform( -0.757994, -0.000148455, 0.652262, -0.000134365, 1, 7.145
 shape = SubResource( 99 )
 
 [node name="body6" type="StaticBody" parent="Path" index="7"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape6" type="CollisionShape" parent="Path/body6" index="0"]
@@ -477,7 +477,7 @@ transform = Transform( -0.753806, -0.000148455, 0.657097, -0.000133905, 1, 7.231
 shape = SubResource( 100 )
 
 [node name="body7" type="StaticBody" parent="Path" index="8"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape7" type="CollisionShape" parent="Path/body7" index="0"]
@@ -485,7 +485,7 @@ transform = Transform( -0.752662, -0.000148455, 0.658407, -0.000133779, 1, 7.254
 shape = SubResource( 101 )
 
 [node name="body8" type="StaticBody" parent="Path" index="9"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape8" type="CollisionShape" parent="Path/body8" index="0"]
@@ -493,7 +493,7 @@ transform = Transform( -0.749373, -0.000194671, 0.662148, -0.00015287, 1, 0.0001
 shape = SubResource( 102 )
 
 [node name="body9" type="StaticBody" parent="Path" index="10"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape9" type="CollisionShape" parent="Path/body9" index="0"]
@@ -501,7 +501,7 @@ transform = Transform( -0.744067, -0.000194671, 0.668105, -0.000151899, 1, 0.000
 shape = SubResource( 103 )
 
 [node name="body10" type="StaticBody" parent="Path" index="11"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape10" type="CollisionShape" parent="Path/body10" index="0"]
@@ -509,7 +509,7 @@ transform = Transform( -0.739849, -0.000194671, 0.672773, -0.000151128, 1, 0.000
 shape = SubResource( 104 )
 
 [node name="body11" type="StaticBody" parent="Path" index="12"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape11" type="CollisionShape" parent="Path/body11" index="0"]
@@ -517,7 +517,7 @@ transform = Transform( -0.734247, -0.000194671, 0.678882, -0.000150101, 1, 0.000
 shape = SubResource( 105 )
 
 [node name="body12" type="StaticBody" parent="Path" index="13"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape12" type="CollisionShape" parent="Path/body12" index="0"]
@@ -525,7 +525,7 @@ transform = Transform( -0.728176, -0.000194671, 0.68539, -0.000148988, 1, 0.0001
 shape = SubResource( 106 )
 
 [node name="body13" type="StaticBody" parent="Path" index="14"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape13" type="CollisionShape" parent="Path/body13" index="0"]
@@ -533,7 +533,7 @@ transform = Transform( -0.720742, -0.000194671, 0.693204, -0.000147623, 1, 0.000
 shape = SubResource( 107 )
 
 [node name="body14" type="StaticBody" parent="Path" index="15"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape14" type="CollisionShape" parent="Path/body14" index="0"]
@@ -541,7 +541,7 @@ transform = Transform( -0.711676, -0.000193174, 0.702508, 8.5084e-05, 1, 0.00036
 shape = SubResource( 108 )
 
 [node name="body15" type="StaticBody" parent="Path" index="16"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape15" type="CollisionShape" parent="Path/body15" index="0"]
@@ -549,7 +549,7 @@ transform = Transform( -0.7019, -0.000193174, 0.712276, 9.0067e-05, 1, 0.0003599
 shape = SubResource( 109 )
 
 [node name="body16" type="StaticBody" parent="Path" index="17"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape16" type="CollisionShape" parent="Path/body16" index="0"]
@@ -557,7 +557,7 @@ transform = Transform( -0.686266, -0.000193174, 0.727351, 9.78631e-05, 1, 0.0003
 shape = SubResource( 110 )
 
 [node name="body17" type="StaticBody" parent="Path" index="18"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape17" type="CollisionShape" parent="Path/body17" index="0"]
@@ -565,7 +565,7 @@ transform = Transform( -0.664654, -0.000193174, 0.747151, 0.000108311, 1, 0.0003
 shape = SubResource( 111 )
 
 [node name="body18" type="StaticBody" parent="Path" index="19"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape18" type="CollisionShape" parent="Path/body18" index="0"]
@@ -573,7 +573,7 @@ transform = Transform( -0.629996, -0.000193174, 0.776599, 0.000124335, 1, 0.0003
 shape = SubResource( 112 )
 
 [node name="body19" type="StaticBody" parent="Path" index="20"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape19" type="CollisionShape" parent="Path/body19" index="0"]
@@ -581,7 +581,7 @@ transform = Transform( -0.567088, -0.000193174, 0.823657, 0.000151396, 1, 0.0003
 shape = SubResource( 113 )
 
 [node name="body20" type="StaticBody" parent="Path" index="21"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape20" type="CollisionShape" parent="Path/body20" index="0"]
@@ -589,7 +589,7 @@ transform = Transform( -0.386647, -0.000242385, 0.922228, 0.000384063, 1, 0.0004
 shape = SubResource( 114 )
 
 [node name="body21" type="StaticBody" parent="Path" index="22"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape21" type="CollisionShape" parent="Path/body21" index="0"]
@@ -597,7 +597,7 @@ transform = Transform( -0.0332112, -0.000242385, 0.999448, 0.000509736, 1, 0.000
 shape = SubResource( 115 )
 
 [node name="body22" type="StaticBody" parent="Path" index="23"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape22" type="CollisionShape" parent="Path/body22" index="0"]
@@ -605,7 +605,7 @@ transform = Transform( 0.11638, -0.000242385, 0.993205, 0.00054276, 1, 0.0001804
 shape = SubResource( 116 )
 
 [node name="body23" type="StaticBody" parent="Path" index="24"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape23" type="CollisionShape" parent="Path/body23" index="0"]
@@ -613,7 +613,7 @@ transform = Transform( 0.200153, -0.000242385, 0.979765, 0.000556102, 1, 0.00013
 shape = SubResource( 117 )
 
 [node name="body24" type="StaticBody" parent="Path" index="25"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape24" type="CollisionShape" parent="Path/body24" index="0"]
@@ -621,7 +621,7 @@ transform = Transform( 0.254761, -0.000242385, 0.967004, 0.000562727, 1, 0.00010
 shape = SubResource( 118 )
 
 [node name="body25" type="StaticBody" parent="Path" index="26"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape25" type="CollisionShape" parent="Path/body25" index="0"]
@@ -629,7 +629,7 @@ transform = Transform( 0.293851, -0.000242385, 0.955851, 0.000566424, 1, 7.94478
 shape = SubResource( 119 )
 
 [node name="body26" type="StaticBody" parent="Path" index="27"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape26" type="CollisionShape" parent="Path/body26" index="0"]
@@ -637,7 +637,7 @@ transform = Transform( 0.31979, -0.000242385, 0.947488, 0.000568379, 1, 6.39823e
 shape = SubResource( 120 )
 
 [node name="body27" type="StaticBody" parent="Path" index="28"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape27" type="CollisionShape" parent="Path/body27" index="0"]
@@ -645,7 +645,7 @@ transform = Transform( 0.338681, -0.000242385, 0.940901, 0.000569545, 1, 5.25993
 shape = SubResource( 121 )
 
 [node name="body28" type="StaticBody" parent="Path" index="29"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape28" type="CollisionShape" parent="Path/body28" index="0"]
@@ -653,7 +653,7 @@ transform = Transform( 0.356742, -0.000242385, 0.934203, 0.000570453, 1, 4.16186
 shape = SubResource( 122 )
 
 [node name="body29" type="StaticBody" parent="Path" index="30"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape29" type="CollisionShape" parent="Path/body29" index="0"]
@@ -661,7 +661,7 @@ transform = Transform( 0.372931, -0.000242385, 0.927859, 0.00057109, 1, 3.16939e
 shape = SubResource( 123 )
 
 [node name="body30" type="StaticBody" parent="Path" index="31"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape30" type="CollisionShape" parent="Path/body30" index="0"]
@@ -669,7 +669,7 @@ transform = Transform( 0.384114, -0.000242385, 0.923286, 0.000571431, 1, 2.47917
 shape = SubResource( 124 )
 
 [node name="body31" type="StaticBody" parent="Path" index="32"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape31" type="CollisionShape" parent="Path/body31" index="0"]
@@ -677,7 +677,7 @@ transform = Transform( 0.392484, -0.000242385, 0.919759, 0.000571633, 1, 1.96009
 shape = SubResource( 125 )
 
 [node name="body32" type="StaticBody" parent="Path" index="33"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape32" type="CollisionShape" parent="Path/body32" index="0"]
@@ -685,7 +685,7 @@ transform = Transform( 0.403732, -0.000193174, 0.914877, 0.000367832, 1, 4.88243
 shape = SubResource( 126 )
 
 [node name="body33" type="StaticBody" parent="Path" index="34"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape33" type="CollisionShape" parent="Path/body33" index="0"]
@@ -693,7 +693,7 @@ transform = Transform( 0.408127, -0.000193174, 0.912925, 0.000368063, 1, 4.70547
 shape = SubResource( 127 )
 
 [node name="body34" type="StaticBody" parent="Path" index="35"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape34" type="CollisionShape" parent="Path/body34" index="0"]
@@ -701,7 +701,7 @@ transform = Transform( 0.419707, -0.000193174, 0.90766, 0.000368632, 1, 4.23691e
 shape = SubResource( 128 )
 
 [node name="body35" type="StaticBody" parent="Path" index="36"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape35" type="CollisionShape" parent="Path/body35" index="0"]
@@ -709,7 +709,7 @@ transform = Transform( 0.424248, -0.000194671, 0.905546, 7.30316e-05, 1, 0.00018
 shape = SubResource( 129 )
 
 [node name="body36" type="StaticBody" parent="Path" index="37"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape36" type="CollisionShape" parent="Path/body36" index="0"]
@@ -717,7 +717,7 @@ transform = Transform( 0.43418, -0.000194671, 0.900826, 7.5015e-05, 1, 0.0001799
 shape = SubResource( 130 )
 
 [node name="body37" type="StaticBody" parent="Path" index="38"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape37" type="CollisionShape" parent="Path/body37" index="0"]
@@ -725,7 +725,7 @@ transform = Transform( 0.441979, -0.000325913, 0.897025, 6.3589e-05, 1, 0.000331
 shape = SubResource( 131 )
 
 [node name="body38" type="StaticBody" parent="Path" index="39"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape38" type="CollisionShape" parent="Path/body38" index="0"]
@@ -733,7 +733,7 @@ transform = Transform( 0.447807, -0.000325913, 0.89413, 6.57481e-05, 1, 0.000331
 shape = SubResource( 132 )
 
 [node name="body39" type="StaticBody" parent="Path" index="40"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape39" type="CollisionShape" parent="Path/body39" index="0"]
@@ -741,7 +741,7 @@ transform = Transform( 0.45421, -0.000325913, 0.890895, 6.8125e-05, 1, 0.0003310
 shape = SubResource( 133 )
 
 [node name="body40" type="StaticBody" parent="Path" index="41"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape40" type="CollisionShape" parent="Path/body40" index="0"]
@@ -749,7 +749,7 @@ transform = Transform( 0.658679, -0.00108259, 0.752424, 0.00129056, 0.999999, 0.
 shape = SubResource( 134 )
 
 [node name="body41" type="StaticBody" parent="Path" index="42"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape41" type="CollisionShape" parent="Path/body41" index="0"]
@@ -757,7 +757,7 @@ transform = Transform( 0.660086, -0.00108259, 0.751189, 0.00129114, 0.999999, 0.
 shape = SubResource( 135 )
 
 [node name="body42" type="StaticBody" parent="Path" index="43"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape42" type="CollisionShape" parent="Path/body42" index="0"]
@@ -765,7 +765,7 @@ transform = Transform( 0.66204, -0.00108259, 0.749468, 0.00129193, 0.999999, 0.0
 shape = SubResource( 136 )
 
 [node name="body43" type="StaticBody" parent="Path" index="44"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape43" type="CollisionShape" parent="Path/body43" index="0"]
@@ -773,7 +773,7 @@ transform = Transform( 0.661194, -0.00108259, 0.750214, 0.00129159, 0.999999, 0.
 shape = SubResource( 137 )
 
 [node name="body44" type="StaticBody" parent="Path" index="45"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape44" type="CollisionShape" parent="Path/body44" index="0"]
@@ -781,7 +781,7 @@ transform = Transform( 0.65932, -0.00108259, 0.751862, 0.00129082, 0.999999, 0.0
 shape = SubResource( 138 )
 
 [node name="body45" type="StaticBody" parent="Path" index="46"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape45" type="CollisionShape" parent="Path/body45" index="0"]
@@ -789,7 +789,7 @@ transform = Transform( 0.659478, -0.00108259, 0.751723, 0.00129089, 0.999999, 0.
 shape = SubResource( 139 )
 
 [node name="body46" type="StaticBody" parent="Path" index="47"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape46" type="CollisionShape" parent="Path/body46" index="0"]
@@ -797,7 +797,7 @@ transform = Transform( 0.660588, -0.00108259, 0.750748, 0.00129134, 0.999999, 0.
 shape = SubResource( 140 )
 
 [node name="body47" type="StaticBody" parent="Path" index="48"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape47" type="CollisionShape" parent="Path/body47" index="0"]
@@ -805,7 +805,7 @@ transform = Transform( 0.658982, -0.00108259, 0.752158, 0.00129068, 0.999999, 0.
 shape = SubResource( 141 )
 
 [node name="body48" type="StaticBody" parent="Path" index="49"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape48" type="CollisionShape" parent="Path/body48" index="0"]
@@ -813,7 +813,7 @@ transform = Transform( 0.658695, -0.00108259, 0.75241, 0.00129057, 0.999999, 0.0
 shape = SubResource( 142 )
 
 [node name="body49" type="StaticBody" parent="Path" index="50"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape49" type="CollisionShape" parent="Path/body49" index="0"]
@@ -821,7 +821,7 @@ transform = Transform( 0.660077, -0.00108259, 0.751198, 0.00129113, 0.999999, 0.
 shape = SubResource( 143 )
 
 [node name="body50" type="StaticBody" parent="Path" index="51"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape50" type="CollisionShape" parent="Path/body50" index="0"]
@@ -829,7 +829,7 @@ transform = Transform( 0.659558, -0.00108259, 0.751653, 0.00129092, 0.999999, 0.
 shape = SubResource( 144 )
 
 [node name="body51" type="StaticBody" parent="Path" index="52"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape51" type="CollisionShape" parent="Path/body51" index="0"]
@@ -837,7 +837,7 @@ transform = Transform( 0.660392, -0.00108259, 0.75092, 0.00129126, 0.999999, 0.0
 shape = SubResource( 145 )
 
 [node name="body52" type="StaticBody" parent="Path" index="53"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 
 [node name="Shape52" type="CollisionShape" parent="Path/body52" index="0"]

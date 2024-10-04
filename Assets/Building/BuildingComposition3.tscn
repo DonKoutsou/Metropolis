@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Assets/Building/Assets/House_Exterior3.tres" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Materials/WoodPlankMaterial_TP.tres" type="Material" id=2]
@@ -34,6 +34,9 @@ extents = Vector3( 54.0338, 19.8718, 29.5541 )
 [sub_resource type="CubeMesh" id=12]
 size = Vector3( 7.563, 4.743, 0.12 )
 
+[sub_resource type="BoxShape" id=13]
+extents = Vector3( 2.23457, 3.75291, 0.0958792 )
+
 [node name="House" type="Spatial" groups=["Clutter"]]
 script = ExtResource( 5 )
 HideExterior = false
@@ -43,12 +46,12 @@ PossibleDeco = [ ExtResource( 15 ), ExtResource( 14 ) ]
 FurnitureAmmount = 6
 DecorationAmmount = 2
 SpawnPool = {
-Resource( "res://Scenes/Items/FastLeg_L.tscn" ): 1,
 Resource( "res://Scenes/Items/Guitar.tscn" ): 1,
-Resource( "res://Scenes/Items/FastLeg_R.tscn" ): 1,
-Resource( "res://Scenes/Items/BatteryEmpty.tscn" ): 10,
 Resource( "res://Scenes/Items/Battery.tscn" ): 2,
-Resource( "res://Scenes/Items/Drahma.tscn" ): 40
+Resource( "res://Scenes/Items/FastLeg_R.tscn" ): 1,
+Resource( "res://Scenes/Items/Drahma.tscn" ): 40,
+Resource( "res://Scenes/Items/FastLeg_L.tscn" ): 1,
+Resource( "res://Scenes/Items/BatteryEmpty.tscn" ): 10
 }
 
 [node name="HouseExterior" type="StaticBody" parent="."]
@@ -91,13 +94,19 @@ Translations = [  ]
 OpenSound = ExtResource( 8 )
 CloseSound = ExtResource( 9 )
 
-[node name="Door1" type="Spatial" parent="DoorPivot"]
+[node name="Door1" type="StaticBody" parent="DoorPivot"]
+collision_layer = 32
+collision_mask = 0
 
 [node name="Door" type="MeshInstance" parent="DoorPivot/Door1"]
 transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 2.25, 0, 0 )
 mesh = SubResource( 12 )
 skeleton = NodePath("../..")
 material/0 = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="DoorPivot/Door1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.31914, 0, 0 )
+shape = SubResource( 13 )
 
 [node name="Lights" type="Spatial" parent="."]
 

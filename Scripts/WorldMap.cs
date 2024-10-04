@@ -763,7 +763,7 @@ public class WorldMap : TileMap
 		for (int i = 0; i < Eventscenestospawn.Count(); i++)
 		{
 			int SpawnIndex = RandomContainer.Next(0, OrderedCells.Count);
-			while (RandomisedEntryID.Contains(SpawnIndex) || SpawnIndex > OrderedCells.Count * 0.63f || SpawnIndex < 9 || GetCell((int)OrderedCells[SpawnIndex].x, (int)OrderedCells[SpawnIndex].y) != 1)
+			while (RandomisedEntryID.Contains(SpawnIndex) || OrderedCells[SpawnIndex].DistanceTo(Vector2.Zero) > 7 || SpawnIndex < 9 || GetCell((int)OrderedCells[SpawnIndex].x, (int)OrderedCells[SpawnIndex].y) != 1)
 			{
 				SpawnIndex = RandomContainer.Next(0, OrderedCells.Count);
 			}

@@ -32,7 +32,7 @@ public class Item : RigidBody
 
 	public virtual string GetItemName()
 	{
-		return LocalisationHolder.GetString(ItemName);
+		return ItemName;
 	}
 	public virtual string GetInventoryItemName()
 	{
@@ -160,10 +160,11 @@ public class ItemInfo
 			{"Name", Name},
 			{"SceneData", SceneData}
 		};
+		string[] CustomDataKeys = new string[CustomData.Count];
+		object[] CustomDataValues = new object[CustomData.Count];
 		if (CustomData.Count > 0)
 		{
-			string[] CustomDataKeys = new string[CustomData.Count];
-			object[] CustomDataValues = new object[CustomData.Count];
+			
 			int i = 0;
 			foreach (KeyValuePair<string, object> Data in CustomData)
 			{
@@ -171,9 +172,9 @@ public class ItemInfo
 				CustomDataValues[i] = Data.Value;
 				i++;
 			}
-			data.Add("CustomDataKeys", CustomDataKeys);
-			data.Add("CustomDataValues", CustomDataValues);
 		}
+		data.Add("CustomDataKeys", CustomDataKeys);
+		data.Add("CustomDataValues", CustomDataValues);
 		return data;
 	}
     public void UnPackData(Resource data)
@@ -181,11 +182,6 @@ public class ItemInfo
         Position = (Vector3)data.Get("Position");
 		Name = (string)data.Get("Name");
 		SceneData = (string)data.Get("SceneData");
-		var thing = data.Get("CustomDataKeys");
-		if (thing is Godot.Collections.Array)
-		{
-			return;
-		}
 		string[] CustomDataKeys = (string[])data.Get("CustomDataKeys");
 		Godot.Collections.Array CustomDataValues = (Godot.Collections.Array)data.Get("CustomDataValues");
 

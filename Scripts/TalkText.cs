@@ -20,6 +20,7 @@ public class TalkText : Spatial
     Label TextL;
 
     Vector2 Vsize;
+    AudioStreamPlayer Audio;
 
     bool DoingForcedDialogue = false;
     public void Talk(string diag, bool forced = false)
@@ -76,6 +77,8 @@ public class TalkText : Spatial
        // Vector3 plpos = Talking.GlobalTransform.origin;
         //float zoo = CameraZoomPivot.GetInstance().GetZoomNormalised();
         //PixelSize = Mathf.Lerp(0.001f, 0.002f, zoo);
+        Audio.PitchScale = RandomContainer.Next(85, 115) / 100;
+        Audio.Play();
 
         TextL.Text = TextToShow.Substr(0, CharactersShowing);
 
@@ -125,6 +128,7 @@ public class TalkText : Spatial
 
         TextL = GetNode<Label>("2DText");
         TextL.Hide();
+        Audio =  GetNode<AudioStreamPlayer>("AudioStreamPlayer");
         //instance = this;
     }
     

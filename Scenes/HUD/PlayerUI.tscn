@@ -272,6 +272,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="PuzzleManager" parent="." instance=ExtResource( 13 )]
+MemoryPuzzle = null
+CodePuzzle = null
+LockPuzzle = null
 
 [node name="TutorialManager" type="Control" parent="."]
 anchor_right = 1.0

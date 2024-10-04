@@ -89,7 +89,7 @@ public class CustomEnviroment : WorldEnvironment
         //CurrentDistance = newdist;
         if (newdist >= 0.6)
         {
-            DialogueManager.GetInstance().ForceDialogue(Player.GetInstance(), "Η ομίχλη γίνεται πολύ πυκνή για το μωρό, ίσος να μην πάω πιο βαθιά...");
+            DialogueManager.GetInstance().ForceDialogue(Player.GetInstance(), "TooDeepFog");
             //Player.GetInstance().GetTalkText().Talk("Η ομίχλη γίνεται πολύ πυκνή για το μωρό, ίσος να μην πάω πιο βαθιά...");
         }
     }

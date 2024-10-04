@@ -1,10 +1,13 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Clutter/Powerline/PowerLine.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Env_Assets/Rock4.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Env_Assets/WindGenerator2.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Env_Assets/BrokenWindBlade.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Env_Assets/Rock2.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Env_Assets/Rock1.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Env_Assets/Rock5.tscn" type="PackedScene" id=8]
 
 [sub_resource type="SpatialMaterial" id=13]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -113,3 +116,21 @@ data = {
 
 [node name="WindGenerator" parent="." index="9" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 186.133, -4.11402, -194.41 )
+
+[node name="Rock2" parent="." index="13" instance=ExtResource( 8 )]
+transform = Transform( 188.753, 0, 0, 0, 188.753, 0, 0, 0, 188.752, 1957.83, -155.795, 693.923 )
+
+[node name="Rock3" parent="." index="14" instance=ExtResource( 8 )]
+transform = Transform( 188.753, 0, 0, 0, -45.6954, -183.138, 0, 183.138, -45.6953, -2876.13, -290.622, 2183.16 )
+
+[node name="Rock4" parent="." index="15" instance=ExtResource( 6 )]
+transform = Transform( 202.359, 0, 0, 0, 202.359, 0, 0, 0, 202.359, 2444.98, -189.285, -2143.09 )
+
+[node name="Rock5" parent="." index="16" instance=ExtResource( 7 )]
+transform = Transform( 183.255, -166.845, -8.58959, 158.698, 177.831, -68.4435, 52.21, 45.0825, 238.191, 1753.89, -405.257, 2497.79 )
+
+[node name="Rock6" parent="." index="17" instance=ExtResource( 7 )]
+transform = Transform( -47.833, -49.0413, -238.328, 204.964, -139.018, -12.5307, -131.13, -199.405, 67.3499, -2447.62, -531.551, 13.0244 )
+
+[node name="Rock7" parent="." index="18" instance=ExtResource( 7 )]
+transform = Transform( 130.836, -210.651, 1.33304, 61.417, 39.6459, 236.959, -201.503, -124.692, 73.0893, -872.283, -372.602, 860.94 )

@@ -151,7 +151,7 @@ public class Player : Character
 				{
 					if (pos.DistanceTo(Vector3.Zero) > 7 * 8000)
 					{
-						DialogueManager.GetInstance().ForceDialogue(this, "Η ομίχλη αρχίζει να πυκνώνει πολύ προς εκείνη την κατεύθυνση. Καλύτερα να μην πάω με το μωρό μαζί μου.");
+						DialogueManager.GetInstance().ForceDialogue(this, "FogGettingThick");
 						/*TalkText t = GetTalkText();
 						if (!t.IsTalking())
 						{

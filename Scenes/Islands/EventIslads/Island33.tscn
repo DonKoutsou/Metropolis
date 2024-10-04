@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://Assets/Water/textures/post/waterplane_low_Whole.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=2]
@@ -11,7 +11,10 @@
 [ext_resource path="res://Scenes/Env_Assets/Rock8.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Env_Assets/Rock5.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Env_Assets/Rock2.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Env_Assets/SandPile1.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Env_Assets/Street_Lamp.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/Env_Assets/Water.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/Env_Assets/WindGenerator.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Assets/CemetaryTemple/Cemetary_Temple.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/Systems/IslandNameTrigger.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scenes/Env_Assets/Rock1.tscn" type="PackedScene" id=18]
@@ -329,6 +332,22 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 152.571, -411.054, 942.584 )
 [node name="CollisionShape" parent="IslandNameTrigger" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -336.686, 501.928, -1026.68 )
 shape = SubResource( 81 )
+
+[node name="Rock2" parent="." index="43" instance=ExtResource( 12 )]
+transform = Transform( -18.5143, -5.19741, -0.0352639, -0.343846, 1.09461, 19.1957, -5.18615, 18.482, -1.1468, -385.254, 47.8238, -202.63 )
+
+[node name="StreetLamp" parent="." index="44" instance=ExtResource( 13 )]
+transform = Transform( -0.895836, 0, 0.444385, 0, 1, 0, -0.444385, 0, -0.895836, -587.78, 96.9967, -1549.36 )
+
+[node name="StreetLamp2" parent="." index="45" instance=ExtResource( 13 )]
+transform = Transform( 0.118092, 0, -0.993003, 0, 1, 0, 0.993003, 0, 0.118092, -394.067, 96.9967, -388.82 )
+
+[node name="StreetLamp3" parent="." index="46" instance=ExtResource( 13 )]
+transform = Transform( -0.225325, 0, 0.974284, 0, 1, 0, -0.974284, 0, -0.225325, -427.999, 96.9967, -384.785 )
+
+[node name="WindGenerator" parent="." index="47" instance=ExtResource( 15 )]
+transform = Transform( 0.540431, 0, 0.841388, 0, 1, 0, -0.841388, 0, 0.540431, -504.717, 97.6108, -333.487 )
+WindGenOffset = Vector3( -100, 220, -676.975 )
 
 [editable path="SeaBed"]
 [editable path="IslandNameTrigger"]

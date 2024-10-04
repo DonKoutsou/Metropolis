@@ -362,6 +362,11 @@ public class Character : KinematicBody
 	}
 	public void Idle_Timer_Ended()
 	{
+		if (GetTalkText().IsTalking())
+		{
+			IdleTimer.Start();
+			return;
+		}
 		if (IsInsideTree() && HasEquippedInstrument())
 			PlayMusic();
 	}
@@ -515,10 +520,10 @@ public class CharacterInfo
 			LimbColorsAr[i] = LimbColors[i];
 		}
 		data.Add("LimbColors", LimbColorsAr);*/
+		string[] CustomDataKeys = new string[CustomData.Count];
+		object[] CustomDataValues = new object[CustomData.Count];
 		if (CustomData.Count > 0)
 		{
-			string[] CustomDataKeys = new string[CustomData.Count];
-			object[] CustomDataValues = new object[CustomData.Count];
 			int i = 0;
 			foreach (KeyValuePair<string, object> Data in CustomData)
 			{
@@ -526,9 +531,10 @@ public class CharacterInfo
 				CustomDataValues[i] = Data.Value;
 				i++;
 			}
-			data.Add("CustomDataKeys", CustomDataKeys);
-			data.Add("CustomDataValues", CustomDataValues);
+			
 		}
+		data.Add("CustomDataKeys", CustomDataKeys);
+		data.Add("CustomDataValues", CustomDataValues);
 		return data;
 	}
 	//Called when loading data
@@ -546,14 +552,14 @@ public class CharacterInfo
 		{
 			LimbColors.Add(LimbCols[i]);
 		}*/
-		Godot.Collections.Array CustomDataKeys = (Godot.Collections.Array)data.Get("CustomDataKeys");
+		string[] CustomDataKeys = (string[])data.Get("CustomDataKeys");
 		Godot.Collections.Array CustomDataValues = (Godot.Collections.Array)data.Get("CustomDataValues");
 
-		if (CustomDataKeys.Count > 0 && CustomDataValues.Count > 0)
+		if (CustomDataKeys.Count() > 0)
 		{
-			for (int i = 0; i < CustomDataKeys.Count; i++)
+			for (int i = 0; i < CustomDataKeys.Count(); i++)
 			{
-				CustomData.Add((string)CustomDataKeys[i], CustomDataValues[i]);
+				CustomData.Add(CustomDataKeys[i], CustomDataValues[i]);
 			}
 		}
     }

@@ -5,11 +5,11 @@ using System.Resources;
 public class PuzzleManager : Control
 {
     [Export]
-    string MemoryPuzzle = null;
+    PackedScene MemoryPuzzle = null;
     [Export]
-    string CodePuzzle = null;
+    PackedScene CodePuzzle = null;
     [Export]
-    string LockPuzzle = null;
+    PackedScene LockPuzzle = null;
     [Signal]
     public delegate void PuzzleResault(bool resault);
 
@@ -34,19 +34,19 @@ public class PuzzleManager : Control
         {
             case PuzzleTypes.MEMORY:
             {
-                RunningPuzzle = ResourceLoader.Load<PackedScene>(MemoryPuzzle).Instance<BasePuzzle>();
+                RunningPuzzle = MemoryPuzzle.Instance<BasePuzzle>();
                 ActionTracker.OnActionDone("MemoryPuzzle");
                 break;
             }
             case PuzzleTypes.CODE:
             {
-                RunningPuzzle = ResourceLoader.Load<PackedScene>(CodePuzzle).Instance<BasePuzzle>();
+                RunningPuzzle = CodePuzzle.Instance<BasePuzzle>();
                 ActionTracker.OnActionDone("CodePuzzle");
                 break;
             }
             case PuzzleTypes.LOCK:
             {
-                RunningPuzzle = ResourceLoader.Load<PackedScene>(LockPuzzle).Instance<BasePuzzle>();
+                RunningPuzzle = LockPuzzle.Instance<BasePuzzle>();
                 ActionTracker.OnActionDone("LockPuzzle");
                 break;
             }

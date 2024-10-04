@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Scenes/Islands/IslandBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Env_Assets/Rock3.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Assets/Building/BuildingDust3.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Building/BuildingDust.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Env_Assets/SuspendedRuin.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Env_Assets/Rock1.tscn" type="PackedScene" id=9]
 
 [sub_resource type="SpatialMaterial" id=447]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -147,7 +148,7 @@ transform = Transform( 0.790095, 0.26162, 0.554351, -0.31434, 0.94931, 0, -0.526
 transform = Transform( -0.293781, -0.624502, 0.723664, -0.53293, 0.735498, 0.418364, -0.793522, -0.262755, -0.548891, 1564.97, -60.8503, 1404.96 )
 
 [node name="DestBuilding3" parent="." index="19" instance=ExtResource( 6 )]
-transform = Transform( 0.545294, -0.719562, 0.429983, 0.726755, 0.661444, 0.185251, -0.41771, 0.211476, 0.883627, -1284.77, -114.795, 1553.09 )
+transform = Transform( 0.545294, -0.719562, 0.429983, 0.726755, 0.661444, 0.185251, -0.41771, 0.211476, 0.883627, -1284.77, -126.086, 1553.09 )
 
 [node name="DestBuilding4" parent="." index="20" instance=ExtResource( 7 )]
 transform = Transform( 0.665454, 0.326132, 0.671423, -0.44008, 0.897958, 0, -0.60291, -0.29548, 0.741074, -1492.89, -54.4169, -66.361 )
@@ -163,3 +164,12 @@ transform = Transform( -0.459177, 0, -0.888345, 0, 1, 0, 0.888345, 0, -0.459177,
 
 [node name="Gear" parent="." index="24" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1123.87, -4.17914, 2024.83 )
+
+[node name="Rock9" parent="." index="25" instance=ExtResource( 9 )]
+transform = Transform( 28.46, -372.89, -235.561, -159.209, 211.451, -353.959, 411.326, 107.646, -120.706, -120.204, -753.701, -2436.16 )
+
+[node name="Rock10" parent="." index="26" instance=ExtResource( 9 )]
+transform = Transform( -166.754, 377.665, -157.824, 336.76, 29.7161, -284.703, -232.663, -227.667, -298.967, 2338.86, -753.701, 2545.99 )
+
+[node name="Rock11" parent="." index="27" instance=ExtResource( 9 )]
+transform = Transform( 273.828, 214.622, -272.584, 310.619, -306.34, 70.8363, -154.533, -235.456, -340.626, 2598.43, -838.05, -2868.96 )

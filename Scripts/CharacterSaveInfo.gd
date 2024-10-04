@@ -11,9 +11,8 @@ func _SetData(data):
 	##LimbColors = data["LimbColors"]
 	if (data["OwnedVeh"] != null):
 		OwnedVeh = data["OwnedVeh"]
-	if (CustomDataKeys.size() > 0):
-		CustomDataKeys = data["CustomDataKeys"]
-		CustomDataValues = data["CustomDataValues"]
+	CustomDataKeys = data["CustomDataKeys"]
+	CustomDataValues = data["CustomDataValues"]
 
 export var Name:String
 export var Position:Vector3

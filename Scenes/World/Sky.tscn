@@ -7,7 +7,7 @@
 
 [sub_resource type="Curve" id=8]
 max_value = 20.0
-_data = [ Vector2( 0, 20 ), 0.0, -32.663, 0, 0, Vector2( 1, 0 ), 1.32912, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 20 ), 0.0, -32.663, 0, 0, Vector2( 0.517332, 0 ), 1.32912, 0.0, 0, 0 ]
 
 [node name="Sky" type="Spatial"]
 script = ExtResource( 4 )
