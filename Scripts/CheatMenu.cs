@@ -98,13 +98,13 @@ public class CheatMenu : Control
 	}
 	private void IncreaseTimeProgression()
 	{
-		Settings.GetGameSettings().IncreaseTimeProgression();
-		TimeProgressionSetting.GetNode<Label>("TimeProgText").Text = "TimeProg" + Settings.GetGameSettings().TimeProgression.ToString();
+		SettingsPanel.Instance.IncreaseTimeProgression();
+		TimeProgressionSetting.GetNode<Label>("TimeProgText").Text = "TimeProg" + SettingsPanel.Instance.ToString();
 	}
 	private void DecreaseTimeProgression()
 	{
-		Settings.GetGameSettings().DecreaseTimeProgression();
-		TimeProgressionSetting.GetNode<Label>("TimeProgText").Text = "TimeProg" + Settings.GetGameSettings().TimeProgression.ToString();
+		SettingsPanel.Instance.DecreaseTimeProgression();
+		TimeProgressionSetting.GetNode<Label>("TimeProgText").Text = "TimeProg" + SettingsPanel.Instance.TimeProgression.ToString();
 	}
 	//private void Recharge_Character()
 	//{

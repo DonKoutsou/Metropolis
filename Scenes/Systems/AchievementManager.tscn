@@ -1,29 +1,62 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scripts/AchievementData.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/AchievementManager.cs" type="Script" id=2]
 [ext_resource path="res://Assets/UI/Icon/Locker.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/Systems/AchievementNotif.tscn" type="PackedScene" id=4]
+[ext_resource path="res://UIThemes/Panel_Blue_Digital.tres" type="StyleBox" id=5]
+[ext_resource path="res://UIThemes/Panel_Black_Top-BottomCorner.tres" type="StyleBox" id=6]
+[ext_resource path="res://Scenes/Systems/AchievementIcon.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/HUD/StartingScreenFont.tres" type="DynamicFont" id=8]
+[ext_resource path="res://Assets/AchievementIcons/PortalAchievementIcon.png" type="Texture" id=9]
 
 [sub_resource type="Resource" id=43]
 script = ExtResource( 1 )
 Name = "LockPuzzleSolved"
 Times = 1
-Description = "Test"
+Description = "LockPuzzleDesc"
 Icon = ExtResource( 3 )
 
 [sub_resource type="Resource" id=44]
 script = ExtResource( 1 )
 Name = "CodePuzzleSolved"
 Times = 1
-Description = "Test"
+Description = "CodePuzzleDesc"
 Icon = ExtResource( 3 )
 
 [sub_resource type="Resource" id=45]
 script = ExtResource( 1 )
 Name = "Portal"
 Times = 1
-Description = "Walk through portal"
+Description = "PortalDesc"
+Icon = ExtResource( 9 )
+
+[sub_resource type="Resource" id=46]
+script = ExtResource( 1 )
+Name = "Τέλος1"
+Times = 1
+Description = "End1Desc"
+Icon = ExtResource( 3 )
+
+[sub_resource type="Resource" id=47]
+script = ExtResource( 1 )
+Name = "Τέλος2"
+Times = 1
+Description = "End2Desc"
+Icon = ExtResource( 3 )
+
+[sub_resource type="Resource" id=49]
+script = ExtResource( 1 )
+Name = "Τέλος3"
+Times = 0
+Description = "End3Desc"
+Icon = ExtResource( 3 )
+
+[sub_resource type="Resource" id=48]
+script = ExtResource( 1 )
+Name = "Τέλος4"
+Times = 1
+Description = "End4Desc"
 Icon = ExtResource( 3 )
 
 [node name="AchievementManager" type="Control"]
@@ -33,12 +66,96 @@ rect_pivot_offset = Vector2( 2075, -173 )
 mouse_filter = 2
 script = ExtResource( 2 )
 AchievementNotifScene = ExtResource( 4 )
-Achievements = [ SubResource( 43 ), SubResource( 44 ), SubResource( 45 ) ]
+AchievementIconScene = ExtResource( 7 )
+Achievements = [ SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 49 ), SubResource( 48 ) ]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 17.0
-margin_top = -21.0
-margin_right = 374.0
-margin_bottom = 115.0
-custom_constants/separation = -209
-alignment = 2
+[node name="AchievementPanel" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -336.0
+margin_top = -351.0
+margin_right = 336.0
+margin_bottom = 351.0
+custom_styles/panel = ExtResource( 6 )
+
+[node name="GridContainer" type="GridContainer" parent="AchievementPanel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -234.0
+margin_top = 85.0
+margin_right = 234.0
+margin_bottom = 397.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 2
+custom_constants/vseparation = 156
+custom_constants/hseparation = 156
+columns = 4
+
+[node name="Panel" type="Panel" parent="AchievementPanel"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -326.0
+margin_top = -223.0
+margin_right = 326.0
+margin_bottom = -15.0
+custom_styles/panel = ExtResource( 5 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AchievementPanel/Panel"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -308.0
+margin_top = -97.5
+margin_right = 308.0
+margin_bottom = 97.5
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="PanelContainer2" type="PanelContainer" parent="AchievementPanel/Panel/VBoxContainer"]
+margin_top = 46.0
+margin_right = 616.0
+margin_bottom = 79.0
+custom_styles/panel = ExtResource( 6 )
+
+[node name="Title" type="Label" parent="AchievementPanel/Panel/VBoxContainer/PanelContainer2"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 614.0
+margin_bottom = 31.0
+custom_fonts/font = ExtResource( 8 )
+text = "Status : Completed"
+align = 1
+valign = 1
+
+[node name="Desc" type="Label" parent="AchievementPanel/Panel/VBoxContainer"]
+margin_top = 83.0
+margin_right = 616.0
+margin_bottom = 112.0
+custom_fonts/font = ExtResource( 8 )
+text = "awfafwafwafwawafwa"
+align = 1
+valign = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="AchievementPanel/Panel/VBoxContainer"]
+margin_top = 116.0
+margin_right = 616.0
+margin_bottom = 149.0
+custom_styles/panel = ExtResource( 6 )
+
+[node name="AchievementStatus" type="Label" parent="AchievementPanel/Panel/VBoxContainer/PanelContainer"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 614.0
+margin_bottom = 31.0
+custom_fonts/font = ExtResource( 8 )
+text = "Status : Completed"
+align = 1
+valign = 1

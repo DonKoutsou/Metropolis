@@ -1,13 +1,10 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Fonts/Play-Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://UIThemes/ButtonGreen.tres" type="Theme" id=2]
 [ext_resource path="res://UIThemes/Panel_Black_Top-BottomCorner.tres" type="StyleBox" id=3]
 [ext_resource path="res://Scripts/LanguageSelect.cs" type="Script" id=4]
-[ext_resource path="res://Scenes/World/LocalisationHolder.cs" type="Script" id=5]
 [ext_resource path="res://Assets/UI/MainIcon.png" type="Texture" id=6]
-[ext_resource path="res://UIThemes/Panel_LightGray_TopCorner.tres" type="StyleBox" id=7]
-[ext_resource path="res://UIThemes/Panel_LightGray_BottomCorner.tres" type="StyleBox" id=8]
 [ext_resource path="res://Assets/Sounds/UI/CityName.mp3" type="AudioStream" id=9]
 
 [sub_resource type="DynamicFont" id=1]
@@ -125,48 +122,6 @@ align = 1
 valign = 1
 autowrap = true
 
-[node name="Panel7" type="Panel" parent="Panel/Title"]
-visible = false
-show_behind_parent = true
-anchor_right = 1.0
-margin_left = -79.0
-margin_top = -10.0
-margin_right = -109.0
-margin_bottom = 4.0
-rect_clip_content = true
-mouse_filter = 2
-custom_styles/panel = ExtResource( 7 )
-
-[node name="Panel8" type="Panel" parent="Panel/Title"]
-visible = false
-show_behind_parent = true
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -578.0
-margin_top = -6.0
-margin_right = 390.0
-margin_bottom = 8.0
-rect_clip_content = true
-mouse_filter = 2
-custom_styles/panel = ExtResource( 8 )
-
-[node name="Panel9" type="Panel" parent="Panel/Title"]
-visible = false
-show_behind_parent = true
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -593.0
-margin_top = -165.5
-margin_right = 407.0
-margin_bottom = 165.5
-rect_clip_content = true
-mouse_filter = 2
-custom_styles/panel = ExtResource( 3 )
-
 [node name="TextureRect" type="TextureRect" parent="Panel/Title"]
 anchor_top = 0.5
 anchor_bottom = 0.5
@@ -186,10 +141,6 @@ color = Color( 0, 0, 0, 0 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
 volume_db = 12.0
-
-[node name="LocalisationHolder" type="Node" parent="."]
-script = ExtResource( 5 )
-TextJsonLocations = PoolStringArray( "UI", "Item_Descriptions", "Tutorials", "Character_Dialogues" )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/FadeOut = SubResource( 3 )

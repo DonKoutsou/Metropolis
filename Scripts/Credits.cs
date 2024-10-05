@@ -12,7 +12,7 @@ public class Credits : Control
     public override void _Ready()
     {
         var LocDataFile = new File();
-        LocDataFile.Open("res://Assets/Spreadsheet_Imports/CreditList.json", File.ModeFlags.Read);
+        LocDataFile.Open("res://Assets/Credits/CreditList.json", File.ModeFlags.Read);
         var LocDataJson = JSON.Parse(LocDataFile.GetAsText());
         LocDataFile.Close();
         if (LocDataJson.Result is Godot.Collections.Array)

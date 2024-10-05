@@ -77,7 +77,8 @@ public class TalkText : Spatial
        // Vector3 plpos = Talking.GlobalTransform.origin;
         //float zoo = CameraZoomPivot.GetInstance().GetZoomNormalised();
         //PixelSize = Mathf.Lerp(0.001f, 0.002f, zoo);
-        Audio.PitchScale = RandomContainer.Next(85, 115) / 100;
+        float r = RandomContainer.Next(85, 115);
+        Audio.PitchScale = r / 100;
         Audio.Play();
 
         TextL.Text = TextToShow.Substr(0, CharactersShowing);

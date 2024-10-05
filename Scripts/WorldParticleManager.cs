@@ -1,15 +1,22 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 public class WorldParticleManager : Spatial
 {
+    public static WorldParticleManager Instance { get; private set; }
+    [Export]
+    public int ThunderLight = 0;
+    [Export]
+    PackedScene ThunderScene = null;
+    [Export]
+    AudioStream[] ThunderVariations = null;
     List<Particles> WorldParticles = new List<Particles>();
     static Spatial WindAllignedParticles;
-    static Spatial ThunderMesh;
     static AnimationPlayer ThunderAnim;
-    static NodePath path;
     public override void _Ready()
     {
+        Instance = this;
         WindAllignedParticles = GetNode<Spatial>("WindAllignedParticles");
         var children = WindAllignedParticles.GetChildren();
         foreach (Node Child in children)
@@ -17,18 +24,17 @@ public class WorldParticleManager : Spatial
             if (Child is Particles)
                 WorldParticles.Add((Particles)Child);
         }
-        
-        ThunderMesh = GetNode<Spatial>("ThunderMesh");
         ThunderAnim = GetNode<AnimationPlayer>("AnimationPlayer");
-        path = GetPath();
     }
-    public static void PlayThunder()
+    public void PlayThunder()
     {
-        if (ThunderAnim.IsPlaying())
-            return;
-        ThunderMesh.Translation = new Vector3(RandomContainer.Next(-8000, 8000), 3000, RandomContainer.Next(-8000, 8000));
         ThunderAnim.Play("ThunderStutter");
-        WorldSoundManager.PlaySound("Thunder");
+        
+        Thunder t = ThunderScene.Instance<Thunder>();
+
+        t.InputData(ThunderVariations[RandomContainer.Next(0, ThunderVariations.Count())]);
+        AddChild(t);
+        t.Translation = new Vector3(RandomContainer.Next(-8000, 8000), 3000, RandomContainer.Next(-8000, 8000));
     }
     public override void _Process(float delta)
     {

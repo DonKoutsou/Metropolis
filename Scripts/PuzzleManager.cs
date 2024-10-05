@@ -35,19 +35,16 @@ public class PuzzleManager : Control
             case PuzzleTypes.MEMORY:
             {
                 RunningPuzzle = MemoryPuzzle.Instance<BasePuzzle>();
-                ActionTracker.OnActionDone("MemoryPuzzle");
                 break;
             }
             case PuzzleTypes.CODE:
             {
                 RunningPuzzle = CodePuzzle.Instance<BasePuzzle>();
-                ActionTracker.OnActionDone("CodePuzzle");
                 break;
             }
             case PuzzleTypes.LOCK:
             {
                 RunningPuzzle = LockPuzzle.Instance<BasePuzzle>();
-                ActionTracker.OnActionDone("LockPuzzle");
                 break;
             }
         }

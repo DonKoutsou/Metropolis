@@ -16,7 +16,7 @@ public class ActionTracker : Node
         {
             DoneActions.Add(Action, 1);
         }
-        //ResolveAction(Action, DoneActions[Action]);
+        ResolveAction(Action, DoneActions[Action]);
     }
     public static Dictionary<string, int> GetActions()
     {
@@ -24,7 +24,7 @@ public class ActionTracker : Node
     }
     static void ResolveAction(string Action, int amm)
     {
-        ((AchievementManager)PlayerUI.GetUI(PlayerUIType.ACHIEVEMENT)).UnlockAchievement(Action, amm, true);
+        AchievementManager.Instance.UnlockAchievement(Action, amm, true);
         switch  (Action)
         {
             case "Portal":
@@ -63,7 +63,7 @@ public class ActionTracker : Node
         for (int i = 0; i < Actions.Count(); i++)
         {
             DoneActions.Add(Actions[i], ActionAmm[i]);
-            ((AchievementManager)PlayerUI.GetUI(PlayerUIType.ACHIEVEMENT)).UnlockAchievement(Actions[i], ActionAmm[i]);
+            AchievementManager.Instance.UnlockAchievement(Actions[i], ActionAmm[i]);
         }
     }
     public static void SaveActions()

@@ -3,7 +3,7 @@ using System;
 
 public class RandomContainer : Node
 {
-    static Random RandomInstance;
+    public static Random RandomInstance { get; private set; }
     static int RandomTimes;
 
     public static void OnGameStart(int seed)
@@ -32,11 +32,6 @@ public class RandomContainer : Node
     public RandomContainer()
     {
         RandomInstance = new Random();
-    }
-    public override void _Ready()
-    {
-        base._Ready();
-        //
     }
     /*public static double NextDouble(double from, double to)
     {

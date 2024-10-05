@@ -8,6 +8,7 @@ public class WorldRoot : Spatial
 	string WorldScene = "res://Scenes/World/MyWorld.tscn";
 	[Export]
 	string Intro = "res://Scenes/Islands/Test/IslandTestEscene.tscn";
+	
 
 	Spatial intro;
 
@@ -32,7 +33,7 @@ public class WorldRoot : Spatial
 		intro = (Spatial)ResourceLoader.Load<PackedScene>(Intro).Instance();
 
 		GetNode("Control/ViewportContainer/Viewport").AddChild(intro, true);
-
+		
 		//GetNode<Control>("CanvasLayer/PlayerUI").Hide();
 	}
 	public bool IsMapSpawned()

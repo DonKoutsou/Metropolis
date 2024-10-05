@@ -8,6 +8,7 @@ dry = 0.35
 wet = 0.38
 
 [resource]
+bus/0/volume_db = 0.0294876
 bus/1/name = "UI"
 bus/1/solo = false
 bus/1/mute = false

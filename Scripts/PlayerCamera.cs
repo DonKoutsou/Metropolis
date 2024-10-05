@@ -13,10 +13,8 @@ public class PlayerCamera : Camera
     public override void _Ready()
     {
         instance = this;
-        Settings set = Settings.GetGameSettings();
-        if (set == null)
-            return;
-        Fov = Settings.GetGameSettings().FOVOverride;
+
+        Fov = SettingsPanel.Instance.FOVOverride;
     }
     public override void _EnterTree()
     {

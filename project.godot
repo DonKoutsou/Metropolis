@@ -143,6 +143,8 @@ default_bus_layout="res://Busses.tres"
 [autoload]
 
 ControllerInput="*res://Scripts/ControllerInput.cs"
+LocalisationHolder="*res://Scripts/LocalisationHolder.cs"
+RandomContainer="*res://Scripts/RandomContainer.cs"
 
 [display]
 

@@ -3,24 +3,32 @@ using Godot.Collections;
 using System;
 using System.Linq;
 
-[Tool]
 public class LocalisationHolder : Node
 {
-    [Export]
-    string[] TextJsonLocations = null;
     static Dictionary<string, string[]> Localizations = null;
     //static LocalisationHolder Instance;
     static Language CurrentLanguage = Language.GREEK;
 
+	public static LocalisationHolder Instance { get; private set; }
+
     public override void _Ready()
     {
         base._Ready();
+        Instance = this;
         Localizations = new Dictionary<string, string[]>();
-        for (int i = 0; i < TextJsonLocations.Count(); i++)
+        Directory dir = new Directory();
+        dir.Open("res://Assets/Spreadsheet_Imports");
+        dir.ListDirBegin(true, true);
+        for (int i = 0; i < 10; i++)
         {
-            ImportLocalisation(TextJsonLocations[i]);
+            string d = dir.GetNext();
+            if (d.Length < 2)
+                continue;
+            GD.Print(d +  " |||||||||File found|||||||");
+            ImportLocalisation(d);
+            GD.Print(d +  " <<<<<<<Imported>>>>>>>");
         }
-        GD.Print("Localisations Imported");
+        GD.Print("!!!!!Localisations Imported!!!!!!");
         //Instance = this;
         //Localizations = TempLocalizations.Duplicate();
         //TempLocalizations.Clear();
@@ -39,7 +47,7 @@ public class LocalisationHolder : Node
         GD.Print("Importing Localization JSon");
         var LocDataFile = new File();
 
-        string JsonLocation = "res://Assets/Spreadsheet_Imports/" + JsonName + ".json";
+        string JsonLocation = "res://Assets/Spreadsheet_Imports/" + JsonName;
 
         LocDataFile.Open(JsonLocation, File.ModeFlags.Read);
         var LocDataJson = JSON.Parse(LocDataFile.GetAsText());

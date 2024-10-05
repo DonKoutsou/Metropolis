@@ -47,11 +47,8 @@ public class LanguageSelect : Control
     public void StartGame(string animname)
     {
         WorldRoot root = ResourceLoader.Load<PackedScene>(GameScene).Instance<WorldRoot>();
-        LocalisationHolder lang = GetNode<LocalisationHolder>("LocalisationHolder");
-        RemoveChild(lang);
-        root.AddChild(lang);
         GetTree().Root.AddChild(root);
-        lang.CallDeferred("Initialise", L);
+        LocalisationHolder.Instance.Initialise(L);
         QueueFree();
     }
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.

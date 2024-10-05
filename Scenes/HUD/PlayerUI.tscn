@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Scripts/ScreenEffects.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/Control_UI.cs" type="Script" id=2]
@@ -13,7 +13,6 @@
 [ext_resource path="res://Scenes/HUD/InventoryUI.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scripts/TutorialManager.cs" type="Script" id=12]
 [ext_resource path="res://Scenes/Systems/Puzzles/PuzzleManager.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scenes/Systems/AchievementManager.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Fonts/Play-Bold.ttf" type="DynamicFontData" id=15]
 [ext_resource path="res://UIThemes/Panel_Black_TopCorner.tres" type="StyleBox" id=16]
 [ext_resource path="res://Assets/Sounds/UI/CityName.mp3" type="AudioStream" id=17]
@@ -45,7 +44,7 @@ font_data = ExtResource( 9 )
 resource_name = "Damage"
 length = 6.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("ScreenEffects/DamageColor:color")
+tracks/0/path = NodePath("SCREENEFFECTS/DamageColor:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -60,7 +59,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=38]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("ScreenEffects/DamageColor:color")
+tracks/0/path = NodePath("SCREENEFFECTS/DamageColor:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -72,7 +71,7 @@ tracks/0/keys = {
 "values": [ Color( 0.623529, 0.172549, 0.172549, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("CityNameUI/Label2:modulate")
+tracks/1/path = NodePath("CITYNAME/Label2:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -88,7 +87,7 @@ tracks/1/keys = {
 resource_name = "Show"
 length = 6.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("CityNameUI/Label2:modulate")
+tracks/0/path = NodePath("CITYNAME/Label2:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -106,37 +105,27 @@ anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 2400, -53 )
 mouse_filter = 2
 script = ExtResource( 5 )
-CityNameUI = NodePath("CityNameUI")
-ScreenEffects = NodePath("ScreenEffects")
-CheatMenu = NodePath("CheatMenu")
-Inventory = NodePath("InvntoryUI")
-MapUI = NodePath("MapUI")
-ControlsUI = NodePath("Control_UI")
-ActionManager = NodePath("ActionMenu")
-PuzzleManager = NodePath("PuzzleManager")
-TutorialManager = NodePath("TutorialManager")
-AchievementManager = NodePath("AchievementManager")
 
-[node name="ScreenEffects" type="Control" parent="."]
+[node name="SCREENEFFECTS" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 1 )
 AnimationPlayer = NodePath("../UIAnimation")
 
-[node name="DamageColor" type="ColorRect" parent="ScreenEffects"]
+[node name="DamageColor" type="ColorRect" parent="SCREENEFFECTS"]
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 color = Color( 0.623529, 0.172549, 0.172549, 0 )
 
-[node name="ActionMenu" parent="." instance=ExtResource( 4 )]
+[node name="ACTION_MENU" parent="." instance=ExtResource( 4 )]
 visible = false
 
-[node name="InvntoryUI" parent="." instance=ExtResource( 11 )]
+[node name="INVENTORY" parent="." instance=ExtResource( 11 )]
 
-[node name="CityNameUI" type="Control" parent="."]
+[node name="CITYNAME" type="Control" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -18.0
@@ -147,7 +136,7 @@ mouse_filter = 2
 script = ExtResource( 6 )
 AnimationNode = NodePath("../UIAnimation")
 
-[node name="Label2" type="Label" parent="CityNameUI"]
+[node name="Label2" type="Label" parent="CITYNAME"]
 modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.5
 anchor_right = 0.5
@@ -161,7 +150,7 @@ text = "ΜΗΤΡΟΠΟΛΗ"
 align = 1
 valign = 1
 
-[node name="Panel7" type="Panel" parent="CityNameUI/Label2"]
+[node name="Panel7" type="Panel" parent="CITYNAME/Label2"]
 anchor_right = 1.0
 margin_left = 312.5
 margin_top = 46.0
@@ -171,7 +160,7 @@ rect_clip_content = true
 mouse_filter = 2
 custom_styles/panel = ExtResource( 16 )
 
-[node name="Panel8" type="Panel" parent="CityNameUI/Label2"]
+[node name="Panel8" type="Panel" parent="CITYNAME/Label2"]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -184,14 +173,14 @@ rect_clip_content = true
 mouse_filter = 2
 custom_styles/panel = ExtResource( 8 )
 
-[node name="CityNotifSound" type="AudioStreamPlayer" parent="CityNameUI"]
+[node name="CityNotifSound" type="AudioStreamPlayer" parent="CITYNAME"]
 stream = ExtResource( 17 )
 volume_db = 10.0
 
-[node name="CheatMenu" parent="." instance=ExtResource( 10 )]
+[node name="CHEATMENU" parent="." instance=ExtResource( 10 )]
 visible = false
 
-[node name="Control_UI" type="Control" parent="."]
+[node name="CONTROLS" type="Control" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_top = -142.0
@@ -199,14 +188,14 @@ margin_right = 229.0
 mouse_filter = 2
 script = ExtResource( 2 )
 
-[node name="Panel" type="Panel" parent="Control_UI"]
+[node name="Panel" type="Panel" parent="CONTROLS"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_top = -40.0
 margin_right = 40.0
 custom_styles/panel = ExtResource( 3 )
 
-[node name="Label" type="Label" parent="Control_UI/Panel"]
+[node name="Label" type="Label" parent="CONTROLS/Panel"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -219,7 +208,7 @@ custom_fonts/font = SubResource( 40 )
 text = "I"
 align = 1
 
-[node name="Label2" type="Label" parent="Control_UI/Panel" groups=["Translatables"]]
+[node name="Label2" type="Label" parent="CONTROLS/Panel" groups=["Translatables"]]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -231,7 +220,7 @@ margin_bottom = 16.0
 custom_fonts/font = SubResource( 41 )
 text = "Τσάντα"
 
-[node name="Panel2" type="Panel" parent="Control_UI"]
+[node name="Panel2" type="Panel" parent="CONTROLS"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_top = -87.0
@@ -239,7 +228,7 @@ margin_right = 40.0
 margin_bottom = -47.0
 custom_styles/panel = ExtResource( 3 )
 
-[node name="Label" type="Label" parent="Control_UI/Panel2"]
+[node name="Label" type="Label" parent="CONTROLS/Panel2"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -252,7 +241,7 @@ custom_fonts/font = SubResource( 40 )
 text = "M"
 align = 1
 
-[node name="Label2" type="Label" parent="Control_UI/Panel2" groups=["Translatables"]]
+[node name="Label2" type="Label" parent="CONTROLS/Panel2" groups=["Translatables"]]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -264,19 +253,19 @@ margin_bottom = 16.0
 custom_fonts/font = SubResource( 41 )
 text = "Χάρτης"
 
-[node name="MapUI" parent="." instance=ExtResource( 7 )]
+[node name="MAP" parent="." instance=ExtResource( 7 )]
 visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="PuzzleManager" parent="." instance=ExtResource( 13 )]
+[node name="PUZZLE" parent="." instance=ExtResource( 13 )]
 MemoryPuzzle = null
 CodePuzzle = null
 LockPuzzle = null
 
-[node name="TutorialManager" type="Control" parent="."]
+[node name="TUTORIAL" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -288,7 +277,13 @@ TutorialList = {
 "StartTutorial": "res://Scenes/Systems/Tutorials/StartingTutorial.tscn"
 }
 
-[node name="AchievementManager" parent="." instance=ExtResource( 14 )]
+[node name="ACHIEVEMENT_NOTIFICATION" type="VBoxContainer" parent="."]
+margin_left = 17.0
+margin_top = -21.0
+margin_right = 374.0
+margin_bottom = 115.0
+custom_constants/separation = -209
+alignment = 2
 
 [node name="UIAnimation" type="AnimationPlayer" parent="."]
 anims/Damage = SubResource( 37 )

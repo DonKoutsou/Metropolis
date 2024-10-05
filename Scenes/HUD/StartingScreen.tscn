@@ -1,13 +1,14 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Scenes/HUD/Credits.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/StartingScreen.cs" type="Script" id=2]
 [ext_resource path="res://Fonts/Play-Bold.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://Scenes/HUD/LoadingScreen.tscn" type="PackedScene" id=4]
 [ext_resource path="res://UIThemes/Panel_LightGray_BottomCorner.tres" type="StyleBox" id=5]
+[ext_resource path="res://Scenes/Systems/AchievementManager.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/UI/MainIcon.png" type="Texture" id=7]
 [ext_resource path="res://UIThemes/Panel_LightGray_LeftCorner.tres" type="StyleBox" id=8]
-[ext_resource path="res://Scripts/Settings.cs" type="Script" id=9]
+[ext_resource path="res://Scripts/PauseMenu.cs" type="Script" id=9]
 [ext_resource path="res://UIThemes/Panel_LightGray_TopCorner.tres" type="StyleBox" id=10]
 [ext_resource path="res://Scenes/HUD/StartingScreenFont.tres" type="DynamicFont" id=11]
 [ext_resource path="res://UIThemes/Panel_Black_Top-BottomCorner.tres" type="StyleBox" id=12]
@@ -19,6 +20,14 @@
 [ext_resource path="res://Scenes/Systems/SettingsPanel.tscn" type="PackedScene" id=20]
 [ext_resource path="res://UIThemes/Panel_Black_BottomCorner.tres" type="StyleBox" id=32]
 
+[sub_resource type="DynamicFont" id=60]
+size = 64
+outline_size = 4
+outline_color = Color( 0.235294, 0.321569, 0.372549, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 3 )
+
 [sub_resource type="DynamicFont" id=65]
 size = 54
 outline_size = 3
@@ -26,6 +35,8 @@ outline_color = Color( 0.443137, 0.580392, 0.631373, 1 )
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxEmpty" id=70]
 
 [sub_resource type="StyleBoxFlat" id=23]
 bg_color = Color( 0.160784, 0.215686, 0.25098, 1 )
@@ -75,14 +86,6 @@ font_data = ExtResource( 3 )
 size = 29
 outline_size = 4
 outline_color = Color( 0.160784, 0.215686, 0.25098, 1 )
-use_mipmaps = true
-use_filter = true
-font_data = ExtResource( 3 )
-
-[sub_resource type="DynamicFont" id=60]
-size = 64
-outline_size = 4
-outline_color = Color( 0.235294, 0.321569, 0.372549, 1 )
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 3 )
@@ -143,35 +146,94 @@ script = ExtResource( 2 )
 
 [node name="LoadingScreen" parent="." instance=ExtResource( 4 )]
 
-[node name="Settings" type="Control" parent="."]
+[node name="PauseLabel" type="Label" parent="." groups=["Translatables"]]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -107.5
+margin_top = -244.0
+margin_right = 107.5
+margin_bottom = -169.0
+custom_colors/font_color = Color( 0.431373, 0.717647, 0.937255, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 60 )
+text = "ΠΑΥΣΗ"
+align = 1
+valign = 1
+
+[node name="Panel7" type="Panel" parent="PauseLabel"]
+show_behind_parent = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -113.5
+margin_top = -44.5
+margin_right = 113.5
+margin_bottom = -30.5
+rect_clip_content = true
+mouse_filter = 2
+custom_styles/panel = ExtResource( 10 )
+
+[node name="Panel8" type="Panel" parent="PauseLabel"]
+show_behind_parent = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -111.5
+margin_top = 33.5
+margin_right = 111.5
+margin_bottom = 47.5
+rect_clip_content = true
+mouse_filter = 2
+custom_styles/panel = ExtResource( 5 )
+
+[node name="Panel9" type="Panel" parent="PauseLabel"]
+show_behind_parent = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -119.5
+margin_top = -38.5
+margin_right = 119.5
+margin_bottom = 39.5
+rect_clip_content = true
+mouse_filter = 2
+custom_styles/panel = ExtResource( 12 )
+
+[node name="PauseMenu" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 9 )
-ViewDistance = 1
-FOVOverride = 40
 
-[node name="Panel" type="Panel" parent="Settings"]
+[node name="Panel" type="Panel" parent="PauseMenu"]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -556.0
-margin_top = -801.0
+margin_top = -876.0
 margin_right = -132.0
 margin_bottom = -162.0
 mouse_filter = 2
 custom_styles/panel = ExtResource( 12 )
 
-[node name="Title" type="Label" parent="Settings/Panel"]
+[node name="Title" type="Label" parent="PauseMenu/Panel"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -105.0
-margin_top = -350.5
+margin_top = -384.0
 margin_right = 223.0
-margin_bottom = -21.5
+margin_bottom = -55.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_constants/line_spacing = 0
 custom_fonts/font = SubResource( 65 )
@@ -180,7 +242,7 @@ align = 1
 valign = 1
 autowrap = true
 
-[node name="Panel7" type="Panel" parent="Settings/Panel/Title"]
+[node name="Panel7" type="Panel" parent="PauseMenu/Panel/Title"]
 visible = false
 show_behind_parent = true
 anchor_right = 1.0
@@ -192,7 +254,7 @@ rect_clip_content = true
 mouse_filter = 2
 custom_styles/panel = ExtResource( 10 )
 
-[node name="Panel8" type="Panel" parent="Settings/Panel/Title"]
+[node name="Panel8" type="Panel" parent="PauseMenu/Panel/Title"]
 visible = false
 show_behind_parent = true
 anchor_left = 0.5
@@ -207,7 +269,7 @@ rect_clip_content = true
 mouse_filter = 2
 custom_styles/panel = ExtResource( 5 )
 
-[node name="Panel9" type="Panel" parent="Settings/Panel/Title"]
+[node name="Panel9" type="Panel" parent="PauseMenu/Panel/Title"]
 visible = false
 show_behind_parent = true
 anchor_left = 0.5
@@ -222,7 +284,7 @@ rect_clip_content = true
 mouse_filter = 2
 custom_styles/panel = ExtResource( 12 )
 
-[node name="TextureRect" type="TextureRect" parent="Settings/Panel/Title"]
+[node name="TextureRect" type="TextureRect" parent="PauseMenu/Panel/Title"]
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_left = -147.0
@@ -232,165 +294,7 @@ margin_bottom = 105.5
 texture = ExtResource( 7 )
 expand = true
 
-[node name="Start_Button_Half" type="Button" parent="Settings/Panel" groups=["Buttons", "Translatables"]]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -179.0
-margin_top = -73.5
-margin_right = -4.0
-margin_bottom = -33.5
-focus_neighbour_top = NodePath("../Exit_Button")
-focus_neighbour_right = NodePath("../Continue_Button_Half")
-focus_neighbour_bottom = NodePath("../SeedSetting/SeedText")
-theme = ExtResource( 19 )
-text = "Έναρξη"
-
-[node name="Continue_Button_Half" type="Button" parent="Settings/Panel" groups=["Buttons", "Translatables"]]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = 4.0
-margin_top = -73.5
-margin_right = 179.0
-margin_bottom = -33.5
-focus_neighbour_left = NodePath("../Start_Button_Half")
-focus_neighbour_top = NodePath("../Exit_Button")
-focus_neighbour_bottom = NodePath("../SeedSetting/SeedText")
-theme = ExtResource( 19 )
-text = "Συνέχεια"
-
-[node name="Start_Button" type="Button" parent="Settings/Panel" groups=["Buttons", "Translatables"]]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -179.0
-margin_top = -73.5
-margin_right = 179.0
-margin_bottom = -33.5
-focus_neighbour_top = NodePath("../Exit_Button")
-focus_neighbour_bottom = NodePath("../SeedSetting/SeedText")
-theme = ExtResource( 19 )
-text = "Έναρξη"
-
-[node name="Exit_Button" type="Button" parent="Settings/Panel" groups=["Buttons", "Translatables"]]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -178.0
-margin_top = 230.5
-margin_right = 180.0
-margin_bottom = 270.5
-theme = ExtResource( 19 )
-action_mode = 0
-text = "Exit"
-
-[node name="SeedSetting" type="Panel" parent="Settings/Panel"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -179.0
-margin_top = 6.5
-margin_right = 179.0
-margin_bottom = 78.5
-custom_styles/panel = ExtResource( 13 )
-
-[node name="SeedText" type="TextEdit" parent="Settings/Panel/SeedSetting"]
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -107.0
-margin_top = -23.0
-margin_right = -16.0
-margin_bottom = 23.0
-focus_neighbour_bottom = NodePath("../../Settings_Button")
-custom_fonts/font = ExtResource( 11 )
-custom_styles/read_only = SubResource( 23 )
-custom_styles/focus = SubResource( 22 )
-custom_styles/normal = SubResource( 23 )
-text = "69420"
-v_scroll_speed = 0.0
-
-[node name="Label" type="Label" parent="Settings/Panel/SeedSetting"]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_left = 50.0
-margin_top = -35.5
-margin_right = 54.0
-margin_bottom = 35.5
-custom_fonts/font = ExtResource( 11 )
-text = "Seed"
-align = 1
-valign = 1
-
-[node name="Settings_Button" type="Button" parent="Settings/Panel" groups=["Buttons", "Translatables"]]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -176.0
-margin_top = 130.5
-margin_right = 178.0
-margin_bottom = 178.5
-focus_neighbour_bottom = NodePath("../Exit_Button")
-theme = ExtResource( 19 )
-text = "Ρυθμίσεις"
-
-[node name="Panel7" type="Panel" parent="Settings/Panel"]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 8.0
-margin_top = -24.0
-margin_right = -8.0
-margin_bottom = -8.0
-rect_clip_content = true
-mouse_filter = 1
-custom_styles/panel = ExtResource( 5 )
-
-[node name="Panel8" type="Panel" parent="Settings/Panel"]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 32.0
-margin_top = -113.0
-margin_right = -32.0
-margin_bottom = -105.0
-rect_clip_content = true
-mouse_filter = 1
-custom_styles/panel = ExtResource( 5 )
-
-[node name="Panel10" type="Panel" parent="Settings/Panel"]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 32.0
-margin_top = -225.0
-margin_right = -32.0
-margin_bottom = -217.0
-rect_clip_content = true
-mouse_filter = 1
-custom_styles/panel = ExtResource( 5 )
-
-[node name="Panel12" type="Panel" parent="Settings/Panel"]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 32.0
-margin_top = -338.0
-margin_right = -32.0
-margin_bottom = -330.0
-rect_clip_content = true
-mouse_filter = 1
-custom_styles/panel = ExtResource( 5 )
-
-[node name="Panel9" type="Panel" parent="Settings/Panel"]
+[node name="Panel9" type="Panel" parent="PauseMenu/Panel"]
 anchor_right = 1.0
 margin_left = 8.0
 margin_top = 8.0
@@ -400,7 +304,175 @@ rect_clip_content = true
 mouse_filter = 1
 custom_styles/panel = ExtResource( 5 )
 
-[node name="SettingsPanel" parent="Settings" instance=ExtResource( 20 )]
+[node name="Panel11" type="Panel" parent="PauseMenu/Panel"]
+anchor_right = 1.0
+margin_left = 8.0
+margin_top = 592.0
+margin_right = -8.0
+margin_bottom = 604.0
+rect_clip_content = true
+mouse_filter = 1
+custom_styles/panel = ExtResource( 5 )
+
+[node name="Panel12" type="Panel" parent="PauseMenu/Panel"]
+anchor_right = 1.0
+margin_left = 8.0
+margin_top = 491.0
+margin_right = -8.0
+margin_bottom = 503.0
+rect_clip_content = true
+mouse_filter = 1
+custom_styles/panel = ExtResource( 5 )
+
+[node name="Panel13" type="Panel" parent="PauseMenu/Panel"]
+anchor_right = 1.0
+margin_left = 8.0
+margin_top = 397.0
+margin_right = -8.0
+margin_bottom = 409.0
+rect_clip_content = true
+mouse_filter = 1
+custom_styles/panel = ExtResource( 5 )
+
+[node name="Panel14" type="Panel" parent="PauseMenu/Panel"]
+anchor_right = 1.0
+margin_left = 8.0
+margin_top = 305.0
+margin_right = -8.0
+margin_bottom = 317.0
+rect_clip_content = true
+mouse_filter = 1
+custom_styles/panel = ExtResource( 5 )
+
+[node name="Panel10" type="Panel" parent="PauseMenu/Panel"]
+anchor_right = 1.0
+margin_left = 8.0
+margin_top = 684.0
+margin_right = -8.0
+margin_bottom = 700.0
+rect_clip_content = true
+mouse_filter = 1
+custom_styles/panel = ExtResource( 10 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/Panel"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -194.0
+margin_top = -470.0
+margin_right = 194.0
+margin_bottom = -50.0
+mouse_filter = 2
+custom_constants/separation = 55
+
+[node name="PanelContainer" type="PanelContainer" parent="PauseMenu/Panel/VBoxContainer"]
+margin_right = 388.0
+margin_bottom = 39.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 70 )
+
+[node name="Start_Button" type="Button" parent="PauseMenu/Panel/VBoxContainer/PanelContainer" groups=["Buttons", "Translatables"]]
+margin_right = 388.0
+margin_bottom = 39.0
+focus_neighbour_top = NodePath("../../Exit_Button")
+focus_neighbour_bottom = NodePath("../../SeedSetting/HBoxContainer/SeedText")
+theme = ExtResource( 19 )
+text = "Έναρξη"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PauseMenu/Panel/VBoxContainer/PanelContainer"]
+margin_right = 388.0
+margin_bottom = 39.0
+mouse_filter = 2
+alignment = 1
+
+[node name="Start_Button_Half" type="Button" parent="PauseMenu/Panel/VBoxContainer/PanelContainer/HBoxContainer" groups=["Buttons", "Translatables"]]
+margin_right = 192.0
+margin_bottom = 39.0
+focus_neighbour_top = NodePath("../../../Exit_Button")
+focus_neighbour_right = NodePath("../Continue_Button_Half")
+focus_neighbour_bottom = NodePath("../../../SeedSetting/HBoxContainer/SeedText")
+size_flags_horizontal = 3
+theme = ExtResource( 19 )
+text = "Έναρξη"
+
+[node name="Continue_Button_Half" type="Button" parent="PauseMenu/Panel/VBoxContainer/PanelContainer/HBoxContainer" groups=["Buttons", "Translatables"]]
+margin_left = 196.0
+margin_right = 388.0
+margin_bottom = 39.0
+focus_neighbour_left = NodePath("../Start_Button_Half")
+focus_neighbour_top = NodePath("../../../Exit_Button")
+focus_neighbour_bottom = NodePath("../../../SeedSetting/HBoxContainer/SeedText")
+size_flags_horizontal = 3
+theme = ExtResource( 19 )
+text = "Συνέχεια"
+
+[node name="Achievements_Button" type="Button" parent="PauseMenu/Panel/VBoxContainer" groups=["Buttons", "Translatables"]]
+margin_top = 94.0
+margin_right = 388.0
+margin_bottom = 133.0
+focus_neighbour_bottom = NodePath("../Exit_Button")
+theme = ExtResource( 19 )
+text = "Achievements"
+
+[node name="Settings_Button" type="Button" parent="PauseMenu/Panel/VBoxContainer" groups=["Buttons", "Translatables"]]
+margin_top = 188.0
+margin_right = 388.0
+margin_bottom = 227.0
+focus_neighbour_bottom = NodePath("../Exit_Button")
+theme = ExtResource( 19 )
+text = "Ρυθμίσεις"
+
+[node name="SeedSetting" type="PanelContainer" parent="PauseMenu/Panel/VBoxContainer"]
+margin_top = 282.0
+margin_right = 388.0
+margin_bottom = 326.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = ExtResource( 13 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PauseMenu/Panel/VBoxContainer/SeedSetting"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 386.0
+margin_bottom = 42.0
+
+[node name="Label" type="Label" parent="PauseMenu/Panel/VBoxContainer/SeedSetting/HBoxContainer"]
+margin_top = 5.0
+margin_right = 190.0
+margin_bottom = 34.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 11 )
+text = "Seed"
+align = 1
+valign = 1
+
+[node name="SeedText" type="TextEdit" parent="PauseMenu/Panel/VBoxContainer/SeedSetting/HBoxContainer"]
+margin_left = 194.0
+margin_right = 384.0
+margin_bottom = 40.0
+focus_neighbour_bottom = NodePath("../../../Settings_Button")
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 11 )
+custom_styles/read_only = SubResource( 23 )
+custom_styles/focus = SubResource( 22 )
+custom_styles/normal = SubResource( 23 )
+text = "69420"
+v_scroll_speed = 0.0
+
+[node name="Exit_Button" type="Button" parent="PauseMenu/Panel/VBoxContainer" groups=["Buttons", "Translatables"]]
+margin_top = 381.0
+margin_right = 388.0
+margin_bottom = 420.0
+theme = ExtResource( 19 )
+action_mode = 0
+text = "Exit"
+
+[node name="AchievementManager" parent="PauseMenu" instance=ExtResource( 6 )]
+
+[node name="SettingsPanel" parent="PauseMenu" instance=ExtResource( 20 )]
 
 [node name="Credits" parent="." instance=ExtResource( 1 )]
 mouse_filter = 2
@@ -599,67 +671,6 @@ rect_clip_content = true
 mouse_filter = 2
 custom_styles/panel = ExtResource( 12 )
 
-[node name="PauseLabel" type="Label" parent="." groups=["Translatables"]]
-visible = false
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -107.0
-margin_top = -238.0
-margin_right = 108.0
-margin_bottom = -163.0
-custom_colors/font_color = Color( 0.431373, 0.717647, 0.937255, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/shadow_offset_y = 3
-custom_fonts/font = SubResource( 60 )
-text = "ΠΑΥΣΗ"
-align = 1
-valign = 1
-
-[node name="Panel7" type="Panel" parent="PauseLabel"]
-show_behind_parent = true
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -113.5
-margin_top = -44.5
-margin_right = 113.5
-margin_bottom = -30.5
-rect_clip_content = true
-mouse_filter = 2
-custom_styles/panel = ExtResource( 10 )
-
-[node name="Panel8" type="Panel" parent="PauseLabel"]
-show_behind_parent = true
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -111.5
-margin_top = 33.5
-margin_right = 111.5
-margin_bottom = 47.5
-rect_clip_content = true
-mouse_filter = 2
-custom_styles/panel = ExtResource( 5 )
-
-[node name="Panel9" type="Panel" parent="PauseLabel"]
-show_behind_parent = true
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -119.5
-margin_top = -38.5
-margin_right = 119.5
-margin_bottom = 39.5
-rect_clip_content = true
-mouse_filter = 2
-custom_styles/panel = ExtResource( 12 )
-
 [node name="FadeInOut" type="CanvasLayer" parent="."]
 layer = 10
 
@@ -677,10 +688,12 @@ anims/Start = SubResource( 31 )
 anims/Stop = SubResource( 32 )
 script = ExtResource( 16 )
 
-[connection signal="pressed" from="Settings/Panel/Start_Button_Half" to="." method="On_Start_Button_Down"]
-[connection signal="pressed" from="Settings/Panel/Continue_Button_Half" to="." method="On_Continue_Button_Down"]
-[connection signal="pressed" from="Settings/Panel/Start_Button" to="." method="On_Start_Button_Down"]
-[connection signal="pressed" from="Settings/Panel/Exit_Button" to="." method="On_Exit_Button_Down"]
-[connection signal="pressed" from="Settings/Panel/Settings_Button" to="Settings" method="OpenSettings"]
-[connection signal="OnSettingsClosed" from="Settings/SettingsPanel" to="Settings" method="OnSettingsClosed"]
+[connection signal="pressed" from="PauseMenu/Panel/VBoxContainer/PanelContainer/Start_Button" to="." method="On_Start_Button_Down"]
+[connection signal="pressed" from="PauseMenu/Panel/VBoxContainer/PanelContainer/HBoxContainer/Start_Button_Half" to="." method="On_Start_Button_Down"]
+[connection signal="pressed" from="PauseMenu/Panel/VBoxContainer/PanelContainer/HBoxContainer/Continue_Button_Half" to="." method="On_Continue_Button_Down"]
+[connection signal="pressed" from="PauseMenu/Panel/VBoxContainer/Achievements_Button" to="PauseMenu" method="OpenAchievements"]
+[connection signal="pressed" from="PauseMenu/Panel/VBoxContainer/Settings_Button" to="PauseMenu" method="OpenSettings"]
+[connection signal="text_changed" from="PauseMenu/Panel/VBoxContainer/SeedSetting/HBoxContainer/SeedText" to="PauseMenu/SettingsPanel" method="On_SeedText_changed"]
+[connection signal="pressed" from="PauseMenu/Panel/VBoxContainer/Exit_Button" to="." method="On_Exit_Button_Down"]
+[connection signal="OnSettingsClosed" from="PauseMenu/SettingsPanel" to="PauseMenu" method="OnSettingsClosed"]
 [connection signal="timeout" from="RestartTimer" to="." method="StopGame"]

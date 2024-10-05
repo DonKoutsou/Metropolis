@@ -33,12 +33,11 @@ public class StartingScreen : Control
 	{
 		if (ButtonList.Count == 0)
 		{
-			Control cont = GetNode<Control>("Settings");
-			ButtonList.Add("Start", cont.GetNode<Panel>("Panel").GetNode<Button>("Start_Button"));
-			ButtonList.Add("StartHalf", cont.GetNode<Panel>("Panel").GetNode<Button>("Start_Button_Half"));
-			ButtonList.Add("Continue", cont.GetNode<Panel>("Panel").GetNode<Button>("Continue_Button_Half"));
-			ButtonList.Add("Exit", cont.GetNode<Panel>("Panel").GetNode<Button>("Exit_Button"));
-			ButtonList.Add("SeedSetting", cont.GetNode<Panel>("Panel").GetNode<Panel>("SeedSetting"));
+			ButtonList.Add("Start", GetNode<Button>("PauseMenu/Panel/VBoxContainer/PanelContainer/Start_Button"));
+			ButtonList.Add("StartHalf", GetNode<Button>("PauseMenu/Panel/VBoxContainer/PanelContainer/HBoxContainer/Start_Button_Half"));
+			ButtonList.Add("Continue", GetNode<Button>("PauseMenu/Panel/VBoxContainer/PanelContainer/HBoxContainer/Continue_Button_Half"));
+			ButtonList.Add("Exit", GetNode<Button>("PauseMenu/Panel/VBoxContainer/Exit_Button"));
+			ButtonList.Add("SeedSetting", GetNode<PanelContainer>("PauseMenu/Panel/VBoxContainer/SeedSetting"));
 		}
 	}
 	public void Init()
@@ -48,20 +47,20 @@ public class StartingScreen : Control
 		intro.Show();
 
 		//GetNode<CanvasLayer>("FadeInOut").Show();
-		Settings cont = GetNode<Settings>("Settings");
+		PauseMenu cont = GetNode<PauseMenu>("PauseMenu");
 		cont.Show();
 
 		Control SeedSet = ButtonList["SeedSetting"];
-		SeedSet.GetNode<TextEdit>("SeedText").Readonly = false;
-		cont.GetNode<Panel>("Panel").GetNode<Button>("Start_Button").Text = LocalisationHolder.GetString("Έναρξη");
+		SeedSet.GetNode<TextEdit>("HBoxContainer/SeedText").Readonly = false;
+		GetNode<Button>("PauseMenu/Panel/VBoxContainer/PanelContainer/Start_Button").Text = LocalisationHolder.GetString("Έναρξη");
 		if (HasSave)
 		{
-			cont.GetNode<Button>("Panel/Start_Button").Hide();
+			ButtonList["Start"].Hide();
 		}
 		else
 		{
-			cont.GetNode<Panel>("Panel").GetNode<Button>("Start_Button_Half").Hide();
-			cont.GetNode<Panel>("Panel").GetNode<Button>("Continue_Button_Half").Hide();
+			ButtonList["StartHalf"].Hide();
+			ButtonList["Continue"].Hide();
 		}
 		cont.TakeFocus();
 	}
@@ -94,7 +93,7 @@ public class StartingScreen : Control
 
 		intro.Hide();
 
-		GetNode<Control>("Settings").Hide();
+		GetNode<Control>("PauseMenu").Hide();
 
 		//GetNode<Control>("Settings").GetNode<ColorRect>("ColorRect").Visible = true;
 
@@ -103,12 +102,12 @@ public class StartingScreen : Control
 		Control ContinueBut = ButtonList["Continue"];
 		Control SeedSet = ButtonList["SeedSetting"];
 
-		SeedSet.GetNode<TextEdit>("SeedText").Readonly = true;
+		SeedSet.GetNode<TextEdit>("HBoxContainer/SeedText").Readonly = true;
 		((Button)Startbut).Text = LocalisationHolder.GetString("Συνέχεια");
 		Startbut.Show();
 		StartHalf.Hide();
 		ContinueBut.Hide();
-		GetNode<Control>("Settings").Hide();
+		GetNode<Control>("PauseMenu").Hide();
 		MouseFilter = MouseFilterEnum.Ignore;
 		world.CallDeferred("SpawnMap", LoadSave);
 		GameIsRunning = true;
@@ -130,9 +129,9 @@ public class StartingScreen : Control
 			MouseFilter = MouseFilterEnum.Ignore;
 
 		//GetNode<Control>("MainScreen").Visible = toggle;
-		GetNode<Control>("Settings").Visible = toggle;
+		GetNode<Control>("PauseMenu").Visible = toggle;
 		GetNode<Label>("PauseLabel").Visible = toggle;
-		GetNode<Settings>("Settings").TakeFocus();
+		GetNode<PauseMenu>("PauseMenu").TakeFocus();
 	}
 	public void GameOver(string reason = null)
 	{
@@ -153,6 +152,7 @@ public class StartingScreen : Control
 		else if (Type == GameOverType.Ending4)
 			endingtext = "Τέλος4";
 
+		ActionTracker.OnActionDone(endingtext);
 		GetNode<Label>("GameOverLabel2/Panel10/Label").Text = LocalisationHolder.GetString(endingtext);
 			
 		GetNode<Label>("GameOverLabel2").Visible = true;

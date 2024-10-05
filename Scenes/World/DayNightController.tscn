@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://new_environment2.tres" type="Environment" id=1]
 [ext_resource path="res://Scripts/CustomEnviroment.cs" type="Script" id=2]
@@ -31,10 +31,6 @@ _data = [ Vector2( 0, 1.07762 ), 0.0, 0.0, 0, 0 ]
 max_value = 360.0
 _data = [ Vector2( 0, 0 ), 0.0, 369.23, 0, 0, Vector2( 1, 360 ), 372.237, 319.291, 0, 0 ]
 
-[sub_resource type="Curve" id=18]
-max_value = 15.0
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.024479, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.0255082, 14.9729 ), 0.0, 0.0, 0, 0, Vector2( 0.026681, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.0282447, 15 ), 0.0, 0.0, 0, 0, Vector2( 0.0290266, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.286599, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.288604, 15 ), 0.0, 0.0, 0, 0, Vector2( 0.289914, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.291341, 15 ), 0.0, 0.0, 0, 0, Vector2( 0.293846, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.294077, 15 ), 0.0, 0.0, 0, 0, Vector2( 0.296814, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.451231, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.451479, 15 ), 0.0, 0.0, 0, 0, Vector2( 0.454359, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.45475, 15 ), 0.0, 0.0, 0, 0, Vector2( 0.457095, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.457877, 15 ), 0.0, 0.0, 0, 0, Vector2( 0.459832, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
-
 [sub_resource type="Gradient" id=16]
 offsets = PoolRealArray( 0, 0.274939, 0.374194, 0.394184, 0.771552, 0.862069, 1 )
 colors = PoolColorArray( 0.887207, 0.662202, 0.458944, 1, 0.888672, 0.608351, 0.434092, 1, 0.888672, 0.608351, 0.434092, 1, 1, 0.950159, 0.768012, 1, 1, 0.943967, 0.739193, 1, 0.916992, 0.359357, 0.188652, 1, 0.887207, 0.662202, 0.458944, 1 )
@@ -66,7 +62,6 @@ softlightnesscurve = SubResource( 15 )
 SunGodRayCurve = SubResource( 6 )
 MoonGodRayCurve = SubResource( 7 )
 sunrotcurve = SubResource( 4 )
-ThunderCurve = SubResource( 18 )
 SunColorGradient = SubResource( 16 )
 MoonColorGradient = SubResource( 5 )
 startinghour = 9

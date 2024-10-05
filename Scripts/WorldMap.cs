@@ -176,7 +176,7 @@ public class WorldMap : TileMap
 			//{"OrderedCells", OrdC},
 			{"CurrentTile", CurrentTile},
 			{"RandomTimes", RandomContainer.GetState()},
-			{"Seed", Settings.GetGameSettings().Seed},
+			{"Seed", SettingsPanel.Instance.Seed},
 			{"UnlockedLightHouses", UnlockedLs},
 			{"ilemap", Iles},
 			{"ilemapVectors", IleVectors},
@@ -256,7 +256,7 @@ public class WorldMap : TileMap
 		CurrentTile = (Vector2)data.Get("CurrentTile");
 
 		int seed = (int)data.Get("Seed");
-		Settings.GetGameSettings().Seed = seed;
+		SettingsPanel.Instance.Seed = seed;
 
 		RandomContainer.LoadState((int)data.Get("RandomTimes"), seed);
 
@@ -315,7 +315,7 @@ public class WorldMap : TileMap
 	}
 	public override void _Ready()
 	{
-		int seed = Settings.GetGameSettings().Seed;
+		int seed = SettingsPanel.Instance.Seed;
 		
 		RandomContainer.OnGameStart(seed);
 

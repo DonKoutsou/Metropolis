@@ -4,13 +4,32 @@ using System;
 public class SettingsPanel : Control
 {
     [Export]
+	public int ViewDistance = 2;
+    
+	[Export]
+	public int FOVOverride = 30;
+    [Export]
+    public int TimeProgression { get; private set; }
+    [Export]
+    public int Seed = 0;
+    [Export]
     Godot.Environment Startscreenenv = null;
     [Export]
     Godot.Environment gameenv = null;
     [Signal]
     public delegate void OnSettingsClosed();
+
+    public static SettingsPanel Instance { get; private set; }
     public override void _Ready()
     {
+        Instance = this;
+
+        UpdateTimeProgression();
+        var index = OS.GetDatetime();
+		
+		int thing = (int)index["hour"] + (int)index["minute"] + (int)index["second"];
+        Random rand = new Random(thing);
+		Seed = rand.Next(0, 99999);
         DViewport v = DViewport.GetInstance();
         GetNode<CheckBox>("Panel/GridContainer/Full_Screen_Check").SetPressedNoSignal(OS.WindowFullscreen);
         GetNode<CheckBox>("Panel/GridContainer/VSync_Check").SetPressedNoSignal(OS.VsyncEnabled);
@@ -240,11 +259,119 @@ public class SettingsPanel : Control
     private void ClearAchievements()
     {
         ActionTracker.ClearActions();
-        ((AchievementManager)PlayerUI.GetUI(PlayerUIType.ACHIEVEMENT)).ClearAchievements();
+        AchievementManager.Instance.ClearAchievements();
     }
     private void Close()
     {
         EmitSignal("OnSettingsClosed");
         Visible = false;
     }
+    private void UpdateFOV()
+	{
+		if (!StartingScreen.IsGameRunning())
+			return;
+		Camera	cam = GetTree().Root.GetCamera();
+		if (cam != null)
+			cam.Fov = FOVOverride;
+	}
+	public void IncreaseTimeProgression()
+	{
+		TimeProgression += 1;
+		UpdateTimeProgression();
+	}
+	public void DecreaseTimeProgression()
+	{
+		if (TimeProgression == 1)
+			return;
+		TimeProgression -= 1;
+		UpdateTimeProgression();
+	}
+	private void IncreaseFOV()
+	{
+		if (FOVOverride == 90)
+			return;
+		FOVOverride += 1;
+		UpdateFOV();
+	}
+	private void DecreaseFOV()
+	{
+		if (FOVOverride == 25)
+			return;
+		FOVOverride -= 1;
+		UpdateFOV();
+	}
+	private void IncreaseViewDistance()
+	{
+		ViewDistance += 1;
+		UpdateViewDistance();
+	}
+	private void DecreaseViewDistance()
+	{
+		if (ViewDistance == 2)
+			return;
+		ViewDistance -= 1;
+		UpdateViewDistance();
+	}
+    private void UpdateViewDistance()
+	{
+		GetNode<Panel>("ViewDistanceSetting").GetNode<RichTextLabel>("ViewDistanceNumber").BbcodeText = "[center]" + ViewDistance.ToString();
+	}
+	private void UpdateTimeProgression()
+	{
+		CustomEnviroment.UpdateTimeProgression(TimeProgression);
+		//GetNode<Panel>("TimeMultiplierSetting").GetNode<RichTextLabel>("TimeProgressionNumber").BbcodeText = "[center]" + TimeProgression.ToString();
+	}
+    private void On_SeedText_changed()
+	{
+		TextEdit text = GetParent().GetNode<TextEdit>("Panel/VBoxContainer/SeedSetting/HBoxContainer/SeedText");
+		string newseedtext = text.Text;
+
+		if (newseedtext == string.Empty)
+		{
+			text.Text = 0.ToString();
+			text.CursorSetColumn(1);
+			return;
+		}
+
+		if (!newseedtext.IsValidInteger())
+		{
+			text.Text = Seed.ToString();
+			return;
+		}
+		
+		if (newseedtext.Contains("\n"))
+		{
+			text.Text = newseedtext.Replace("\n", String.Empty);
+			text.CursorSetColumn(newseedtext.Length - 1);
+		}
+			
+		if (newseedtext.Contains("0"))
+		{
+			newseedtext = newseedtext.TrimStart('0');
+			if (newseedtext == string.Empty)
+			{
+				text.Text = 0.ToString();
+				text.CursorSetColumn(1);
+				return;
+			}
+			text.Text = newseedtext;
+			text.CursorSetColumn(newseedtext.Length);
+		}
+
+		int newseed = text.Text.ToInt();
+		
+		if (newseed > 100000)
+		{
+			text.Text = Seed.ToString();
+			text.CursorSetColumn(Seed.ToString().Length);
+			return;
+		}
+		if (newseed < 0)
+		{
+			text.Text = 0.ToString();
+			text.CursorSetColumn(1);
+			return;
+		}
+		Seed = text.Text.ToInt();
+	}
 }

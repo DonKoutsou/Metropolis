@@ -23,9 +23,9 @@ public class CustomEnviroment : WorldEnvironment
     Curve MoonGodRayCurve = null;
     [Export]
     Curve sunrotcurve = null;
-    [Export]
-    Curve ThunderCurve = null;
     float ThunderMulti;
+    Random ThunderRand = new Random();
+    private const double lambda = 5.0; // Average number of strikes per minute
     [Export]
     Gradient SunColorGradient = null;
 
@@ -59,13 +59,10 @@ public class CustomEnviroment : WorldEnvironment
         base._Ready();
         
         currenthour = startinghour;
-        Settings set = Settings.GetGameSettings();
-        if (set != null)
-        {
-            Random rand = new Random(set.Seed);
-            currentDay = rand.Next(0, 10);
-            timeprogmultiplier = set.TimeProgression;
-        }
+
+        Random rand = new Random(SettingsPanel.Instance.Seed);
+        currentDay = rand.Next(0, 10);
+        timeprogmultiplier = SettingsPanel.Instance.TimeProgression;
         
         sun = GetParent().GetNode<DirectionalLight>("Sun");
         moon = GetParent().GetNode<DirectionalLight>("Moon");
@@ -185,11 +182,28 @@ public class CustomEnviroment : WorldEnvironment
         //MoonColor = new Color(moonRcolorcurve.Interpolate(HourValue) , moonGcolorcurve.Interpolate(HourValue), moonBcolorcurve.Interpolate(HourValue));
         MoonGodRayBrightness = MoonGodRayCurve.Interpolate(HourValue);
 
-        ThunderMulti = ThunderCurve.Interpolate(MinuteValue);
-        if (ThunderMulti > 1)
+
+        ThunderMulti = WorldParticleManager.Instance.ThunderLight;
+        //ThunderMulti = ThunderCurve.Interpolate(MinuteValue);
+        //if (ThunderMulti > 1)
+        //{
+        //    WorldParticleManager.PlayThunder();
+        //}
+    }
+    private int PoissonRandom(double mean)
+    {
+        double L = Math.Exp(-mean);
+        int k = 0;
+        double p = 1.0;
+
+        do
         {
-            WorldParticleManager.PlayThunder();
+            k++;
+            p *= ThunderRand.NextDouble();
         }
+        while (p > L);
+
+        return k - 1;
     }
     private void ToggleDay(int Phase)
     {
@@ -387,6 +401,19 @@ public class CustomEnviroment : WorldEnvironment
                 
         }
     }
+    public void UpdateThunder(float deltaTime)
+    {
+        // Calculate expected strikes for this time step
+        double expectedStrikes = deltaTime / 60.0 * lambda;
+
+        // Generate the actual number of strikes using Poisson distribution
+        int strikes = PoissonRandom(expectedStrikes);
+
+        for (int i = 0; i < strikes; i++)
+        {
+            WorldParticleManager.Instance.PlayThunder(); // Handle individual lightning strikes
+        }
+    }
     //updating values
     float MinuteValue;
     float HourValue;
@@ -413,6 +440,8 @@ public class CustomEnviroment : WorldEnvironment
         d = 0.1f;
 
         UpdateTime(d);
+
+        UpdateThunder(d);
 
         UpdateWind();
 

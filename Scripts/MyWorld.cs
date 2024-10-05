@@ -295,7 +295,7 @@ public class MyWorld : Spatial
 		//MapGrid.GetInstance().SetIslandVisited(to);
 		Sky.GetEnviroment().UpdatePlayerDistance(Math.Max(Math.Abs(to.Position.x), Math.Abs(to.Position.y)) / 15);
 		
-		int ViewDistance = Settings.GetGameSettings().ViewDistance;
+		int ViewDistance = SettingsPanel.Instance.ViewDistance;
 
 		//List<IslandInfo> closestfrom;
 		//map.GetClosestIles(from ,out closestfrom, ViewDistance);
@@ -372,7 +372,7 @@ public class MyWorld : Spatial
 		if (affectneigh)
 		{
 			List<IslandInfo> closestto;
-			int ViewDistance = Settings.GetGameSettings().ViewDistance;
+			int ViewDistance = SettingsPanel.Instance.ViewDistance;
 			WorldMap.GetInstance().GetClosestIles(ileinfo, out closestto, ViewDistance);
 
 			for (int i = 0; i < closestto.Count; i ++)
