@@ -26,6 +26,7 @@ public partial class IslandImporter : EditorScenePostImport
 
 
         List<MeshInstance> Meshes = FindMeshes((Node)scene);
+        List<NavigationMeshInstance> NavMesh = FindNavMeshes((Node)scene);
 
         for (int i = 0; i < Meshes.Count; i++)
         {
@@ -69,6 +70,12 @@ public partial class IslandImporter : EditorScenePostImport
                 }
             }
         }
+        for (int i = 0; i < NavMesh.Count; i++)
+        {
+            NavigationMeshInstance Duplicate = (NavigationMeshInstance)NavMesh[i].Duplicate();
+            Islandscene.AddChild(Duplicate);
+            Duplicate.Owner = Islandscene;
+        }
         Islandscene.GetNode<SoundMap>("SoundMap").RedoMapping = true;
         PackedScene sc = new PackedScene();
         sc.Pack(Islandscene);
@@ -88,6 +95,12 @@ public partial class IslandImporter : EditorScenePostImport
         List<MeshInstance> Meshes = new List<MeshInstance>();
         TraverseTreeMesh(rootNode, Meshes);
         return Meshes;
+    }
+    public List<NavigationMeshInstance> FindNavMeshes(Node rootNode)
+    {
+        List<NavigationMeshInstance> NavMeshes = new List<NavigationMeshInstance>();
+        TraverseTreeNavMesh(rootNode, NavMeshes);
+        return NavMeshes;
     }
     private void TraverseTree(Node node, List<CollisionShape> collisionShapes)
     {
@@ -119,27 +132,19 @@ public partial class IslandImporter : EditorScenePostImport
             TraverseTreeMesh(child, Meshes);
         }
     }
-    private void Thing()
+    private void TraverseTreeNavMesh(Node node, List<NavigationMeshInstance> NavMeshes)
     {
-        string source = GetSourceFile();
-        if (source.Contains(".glb"))
+        // Check if the current node is a CollisionShape and add it to the list if it is
+        if (node is NavigationMeshInstance Meshi)
         {
-            bool useHidden = (bool)ProjectSettings.GetSetting("application/config/use_hidden_project_data_directory");
-            string dataFolder = useHidden ? ".godot" : "godot";
+            NavMeshes.Add(Meshi);
+        }
 
-            string importedFile = "res://" + dataFolder + "/imported/" + 
-                                  source.GetFile().Replace(".glb", "") + "-" + 
-                                  source.MD5Text() + ".gltf";
-            //source = importedFile;
-            GD.Print(source);
-            Godot.File file = new Godot.File();
-            file.Open(source, Godot.File.ModeFlags.Read);
-            GD.Print(file);
-            string content = file.GetAsText();
-            GD.Print(content);
-            JSONParseResult json = JSON.Parse(content);
- 
-            FindExtras((Godot.Collections.Dictionary)json.Result);
+        // Iterate over each child of the current node
+        foreach (Node child in node.GetChildren())
+        {
+            // Recursively call TraverseTree on each child node
+            TraverseTreeNavMesh(child, NavMeshes);
         }
     }
     private Dictionary<string, Godot.Collections.Dictionary> FindExtras(Godot.Collections.Dictionary json)
@@ -155,7 +160,6 @@ public partial class IslandImporter : EditorScenePostImport
                     Single meshIndex = (Single)nodeDict["mesh"];
                     Godot.Collections.Array arr = (Godot.Collections.Array)json["meshes"];
                     var mesh = (Godot.Collections.Dictionary)arr[(int)meshIndex];
-
                     if (mesh.Contains("extras"))
                     {
                         Godot.Collections.Dictionary extr = (Godot.Collections.Dictionary)mesh["extras"];
@@ -166,10 +170,6 @@ public partial class IslandImporter : EditorScenePostImport
                         }
                     }
                 }
-                //if (nodeDict.Contains("extras"))
-                //{
-                 //   GD.Print(nodeDict["extras"]);
-                //}
             }
         }
         return ExtraList;
