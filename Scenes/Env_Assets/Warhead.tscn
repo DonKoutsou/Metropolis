@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Assets/Clutter/Warhead/Warhead.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://Assets/Clutter/Warhead/Warhead.tres" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Clutter/Warhead/Warheadmat.tres" type="Material" id=2]
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=3]
 

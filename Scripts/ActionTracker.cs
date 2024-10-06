@@ -9,13 +9,9 @@ public class ActionTracker : Node
     public static void OnActionDone(string Action)
     {
         if (DoneActions.ContainsKey(Action))
-        {
             DoneActions[Action] ++;
-        }
         else
-        {
             DoneActions.Add(Action, 1);
-        }
         ResolveAction(Action, DoneActions[Action]);
     }
     public static Dictionary<string, int> GetActions()
@@ -70,8 +66,7 @@ public class ActionTracker : Node
     {
 		GDScript SaveGD = GD.Load<GDScript>("res://Scripts/Saved_Actions.gd");
 		Godot.Object save = (Godot.Object)SaveGD.New();
-        
-        
+
         string[] Actions = new string[DoneActions.Count];
         int[] ActionAmmount = new int[DoneActions.Count];
         int i = 0;

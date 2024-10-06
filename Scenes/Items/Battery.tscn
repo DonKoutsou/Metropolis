@@ -2,14 +2,11 @@
 
 [ext_resource path="res://Scripts/Battery.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/LoddedObject.cs" type="Script" id=2]
-[ext_resource path="res://Assets/Battery/Battery.obj" type="ArrayMesh" id=3]
+[ext_resource path="res://Assets/Battery/Battery_Col_0.tres" type="Shape" id=3]
 [ext_resource path="res://Assets/Battery/BatteryIcon.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Battery/M_Battery.material" type="Material" id=6]
-
-[sub_resource type="CylinderShape" id=1]
-height = 1.00105
-radius = 0.295733
+[ext_resource path="res://Assets/Battery/Battery_Mesh_0.tres" type="ArrayMesh" id=7]
 
 [node name="Battery" type="RigidBody" groups=["Interactables"]]
 collision_layer = 16
@@ -28,16 +25,17 @@ Capacity = 50.0
 CurrentEnergy = 50.0
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 0.269307, 0, 0, 0, 0.269307, 0, 0, 0, 0.269307, 0, 0.533258, 0 )
-mesh = ExtResource( 3 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.533258, 0 )
+mesh = ExtResource( 7 )
 material/0 = ExtResource( 6 )
 script = ExtResource( 2 )
-LOD0 = ExtResource( 3 )
-LOD1 = ExtResource( 3 )
+LOD0 = ExtResource( 7 )
+LOD1 = ExtResource( 7 )
+HideIfNoLod = true
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.501644, 0 )
-shape = SubResource( 1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.533, 0 )
+shape = ExtResource( 3 )
 
 [node name="ActionComponent" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.499331, 0 )

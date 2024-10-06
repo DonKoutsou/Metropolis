@@ -171,7 +171,7 @@ public class SoundMap : GridMap
     }
     #if DEBUG
     [Export]
-    bool RedoMapping = false;
+    public bool RedoMapping = false;
     public override void _Process(float delta)
     {
         base._Process(delta);
@@ -181,95 +181,97 @@ public class SoundMap : GridMap
             
             if (RedoMapping)
             {
-                Clear();
-                scale = MapScale / CellSize.x;
-                Vector3 startingpoint = new Vector3(- (scale / 2), 0, - (scale / 2));
-
-                for (int i = 0; i < scale * scale; i ++)
-                {
-                    //bool HasGround = false;
-                    //bool HasSea = false;
-
-                    bool IsAboveSeaLevel = false;
-                    bool IsBellowSeaLevel = false;
-                    Vector3 global = MapToWorld((int)startingpoint.x, (int)startingpoint.y, (int)startingpoint.z);
-                    
-                    global.y += 2000;
-                    global.x -= CellSize.x/2;
-                    global.z -= CellSize.z/2;
-                    var spaceState = GetWorld().DirectSpaceState;
-                    
-
-                    Vector3 RayTo = global;
-                    RayTo.y -= 2500;
-
-                    Vector3 Checking = new Vector3(-1, 0 ,-1);
-                    for (int r = 0; r < 9; r++)
-                    {
-                        var Groundresult = spaceState.IntersectRay(global + (Checking * (CellSize / 2)), RayTo + (Checking * (CellSize / 2)), null, CheckLayer);
-                        
-
-                        if (Checking.x >= 1)
-                        {
-                            Checking.x = -1;
-                            Checking.z += 1;
-                        }
-                        else
-                        {
-                            Checking.x += 1;
-                        }
-
-                        if (Groundresult.Count == 0)
-                        {
-                            IsBellowSeaLevel = true;
-                            continue;
-                        }
-                            
-
-                        Vector3 pos = (Vector3)Groundresult["position"];
-                        
-                        if (pos.y >= 0)
-                            IsAboveSeaLevel = true;
-                        else
-                            IsBellowSeaLevel = true;
-
-                        //var Searesult = spaceState.IntersectRay(global + (Checking * (CellSize / 2)), RayTo + (Checking * (CellSize / 2)), null, SeaLayer);
-
-                        /*bool ItsSea = ((CollisionObject)Groundresult["collider"]).GetCollisionLayerBit(8);
-                        if (ItsSea)
-                        {
-                            HasSea = true;
-                        }
-                        else
-                        {
-                            HasGround = true;
-                        }
-                        //var SeaResault = spaceState.IntersectRay(global + (OffsetsToCheck[r] * CellSize), RayTo + (OffsetsToCheck[r] * CellSize), null, SeaLayer);
-
-                        if (HasGround && HasSea)
-                            break;*/
-                    }
-
-                    //if (HasGround && HasSea)
-                    if (IsBellowSeaLevel && IsAboveSeaLevel)
-                        SetCellItem((int)startingpoint.x, (int)startingpoint.y, (int)startingpoint.z, 0);
-                    else
-                        SetCellItem((int)startingpoint.x, (int)startingpoint.y, (int)startingpoint.z, InvalidCellItem);
-                    
-                    if (startingpoint.x >= MapScale/ 100)
-                    {
-                        startingpoint.x = -MapScale/100;
-                        startingpoint.z += 1;
-                    }
-                    else
-                        startingpoint.x += 1;
-                    
-                }
-
-
-                RedoMapping = false;
+                DoThing();
             }
         }
+    }
+    public void DoThing()
+    {
+        Clear();
+        scale = MapScale / CellSize.x;
+        Vector3 startingpoint = new Vector3(- (scale / 2), 0, - (scale / 2));
+
+        for (int i = 0; i < scale * scale; i ++)
+        {
+            //bool HasGround = false;
+            //bool HasSea = false;
+
+            bool IsAboveSeaLevel = false;
+            bool IsBellowSeaLevel = false;
+            Vector3 global = MapToWorld((int)startingpoint.x, (int)startingpoint.y, (int)startingpoint.z);
+            
+            global.y += 2000;
+            global.x -= CellSize.x/2;
+            global.z -= CellSize.z/2;
+            var spaceState = GetWorld().DirectSpaceState;
+            
+
+            Vector3 RayTo = global;
+            RayTo.y -= 2500;
+
+            Vector3 Checking = new Vector3(-1, 0 ,-1);
+            for (int r = 0; r < 9; r++)
+            {
+                var Groundresult = spaceState.IntersectRay(global + (Checking * (CellSize / 2)), RayTo + (Checking * (CellSize / 2)), null, CheckLayer);
+                
+
+                if (Checking.x >= 1)
+                {
+                    Checking.x = -1;
+                    Checking.z += 1;
+                }
+                else
+                {
+                    Checking.x += 1;
+                }
+
+                if (Groundresult.Count == 0)
+                {
+                    IsBellowSeaLevel = true;
+                    continue;
+                }
+                    
+
+                Vector3 pos = (Vector3)Groundresult["position"];
+                
+                if (pos.y >= 0)
+                    IsAboveSeaLevel = true;
+                else
+                    IsBellowSeaLevel = true;
+
+                //var Searesult = spaceState.IntersectRay(global + (Checking * (CellSize / 2)), RayTo + (Checking * (CellSize / 2)), null, SeaLayer);
+
+                /*bool ItsSea = ((CollisionObject)Groundresult["collider"]).GetCollisionLayerBit(8);
+                if (ItsSea)
+                {
+                    HasSea = true;
+                }
+                else
+                {
+                    HasGround = true;
+                }
+                //var SeaResault = spaceState.IntersectRay(global + (OffsetsToCheck[r] * CellSize), RayTo + (OffsetsToCheck[r] * CellSize), null, SeaLayer);
+
+                if (HasGround && HasSea)
+                    break;*/
+            }
+
+            //if (HasGround && HasSea)
+            if (IsBellowSeaLevel && IsAboveSeaLevel)
+                SetCellItem((int)startingpoint.x, (int)startingpoint.y, (int)startingpoint.z, 0);
+            else
+                SetCellItem((int)startingpoint.x, (int)startingpoint.y, (int)startingpoint.z, InvalidCellItem);
+            
+            if (startingpoint.x >= MapScale/ 100)
+            {
+                startingpoint.x = -MapScale/100;
+                startingpoint.z += 1;
+            }
+            else
+                startingpoint.x += 1;
+            
+        }
+        RedoMapping = false;
     }
     #endif
     private void ClearChildren()

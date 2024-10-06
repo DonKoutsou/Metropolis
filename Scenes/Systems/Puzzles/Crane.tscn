@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=2]
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 2, 25, 2 )
+
+[sub_resource type="CubeMesh" id=2]
+size = Vector3( 2, 20, 2 )
+
+[sub_resource type="CubeMesh" id=3]
+size = Vector3( 0.5, 15, 0.5 )
+
+[sub_resource type="CylinderMesh" id=4]
+top_radius = 3.0
+bottom_radius = 3.0
+height = 0.5
+
+[node name="Crane" type="Spatial"]
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.4583, 0 )
+mesh = SubResource( 1 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="MeshInstance"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 11.4602, 10.8746 )
+mesh = SubResource( 2 )
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3" type="MeshInstance" parent="MeshInstance/MeshInstance2"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 8.13593, 8.25887 )
+mesh = SubResource( 3 )
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance4" type="MeshInstance" parent="MeshInstance/MeshInstance2/MeshInstance3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.1883, -3.8147e-06 )
+mesh = SubResource( 4 )
+skeleton = NodePath("../../../..")
+
+[node name="RemoteTransform" type="RemoteTransform" parent="MeshInstance/MeshInstance2/MeshInstance3/MeshInstance4"]

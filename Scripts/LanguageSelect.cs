@@ -9,10 +9,6 @@ public class LanguageSelect : Control
     Language L;
     public override void _Ready()
     {
-        //OS.WindowSize = new Vector2(462, 342);
-        //GetTree().Root.Size = new Vector2(320, 110);
-        //ProjectSettings.SetSetting("display/window/size/width", 320);
-        //ProjectSettings.SetSetting("display/window/size/height", 110);
         var actual_size = OS.GetRealWindowSize();
         var centered = new Vector2(OS.GetScreenSize().x / 2 - actual_size.x / 2, OS.GetScreenSize().y / 2 - actual_size.y / 2);
         OS.WindowPosition = centered;

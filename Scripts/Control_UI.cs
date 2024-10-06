@@ -14,6 +14,22 @@ public class Control_UI : Control
         IdleTime.Connect("timeout", this, "TimerEnded");
         Visible = false;
         SetProcessInput(false);
+
+        ControllerInput.GetInstance().Connect("OnControllerSwitched", this, "SwitchedController");
+    }
+    private void SwitchedController(bool Toggle)
+    {
+        if (Toggle)
+        {
+            GetNode<Label>("Panel/Label").Text = "X";
+            GetNode<Label>("Panel2/Label").Text = "B";
+        }
+            
+        else
+        {
+            GetNode<Label>("Panel/Label").Text = "I";
+            GetNode<Label>("Panel2/Label").Text = "M";
+        }
     }
     public void PlayerToggle(Player pl)
     {
