@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Godot;
 
+#if DEBUG
 // This sample changes all node names.
 // Called right after the scene is imported and gets the root node.
 [Tool]
@@ -175,3 +176,4 @@ public partial class IslandImporter : EditorScenePostImport
         return ExtraList;
     }
 }
+#endif

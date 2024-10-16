@@ -79,6 +79,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/saved_game.gd"
 }, {
+"base": "Resource",
+"class": "SavedSettings",
+"language": "GDScript",
+"path": "res://Scripts/Saved_Settings.gd"
+}, {
 "base": "Reference",
 "class": "Template",
 "language": "GDScript",
@@ -114,6 +119,7 @@ _global_script_class_icons={
 "PortSaveInfo": "",
 "SavedActions": "",
 "SavedGame": "",
+"SavedSettings": "",
 "Template": "",
 "TexturePacker": "",
 "VehicleDamageSaveInfo": "",
@@ -145,6 +151,10 @@ default_bus_layout="res://Busses.tres"
 ControllerInput="*res://Scripts/ControllerInput.cs"
 LocalisationHolder="*res://Scripts/LocalisationHolder.cs"
 RandomContainer="*res://Scripts/RandomContainer.cs"
+
+[debug]
+
+settings/fps/force_fps=60
 
 [display]
 

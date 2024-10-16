@@ -413,7 +413,7 @@ margin_right = 388.0
 margin_bottom = 133.0
 focus_neighbour_bottom = NodePath("../Exit_Button")
 theme = ExtResource( 19 )
-text = "Achievements"
+text = "Επιτεύγματα"
 
 [node name="Settings_Button" type="Button" parent="PauseMenu/Panel/VBoxContainer" groups=["Buttons", "Translatables"]]
 margin_top = 188.0

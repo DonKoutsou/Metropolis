@@ -1,6 +1,6 @@
 using Godot;
 using System;
-
+using System.Collections.Generic;
 public class SettingsPanel : Control
 {
     [Export]
@@ -26,6 +26,8 @@ public class SettingsPanel : Control
 
         UpdateTimeProgression();
         var index = OS.GetDatetime();
+
+        LoadSettingsFromFile();
 		
 		int thing = (int)index["hour"] + (int)index["minute"] + (int)index["second"];
         Random rand = new Random(thing);
@@ -35,56 +37,64 @@ public class SettingsPanel : Control
         GetNode<CheckBox>("Panel/GridContainer/VSync_Check").SetPressedNoSignal(OS.VsyncEnabled);
         GetNode<CheckBox>("Panel/GridContainer/FXAA_Check").SetPressedNoSignal(v.Fxaa);
         GetNode<CheckBox>("Panel/GridContainer/SSAO_Check").SetPressedNoSignal(gameenv.SsaoEnabled);
-        switch (v.Msaa)
-        {
-            case Viewport.MSAA.Msaa2x:
-            {
-                GetNode<OptionButton>("Panel/GridContainer/MSAAChoice").Selected = 0;
-                break;
-            }
-            case Viewport.MSAA.Msaa4x:
-            {
-                GetNode<OptionButton>("Panel/GridContainer/MSAAChoice").Selected = 1;
-                break;
-            }
-            case Viewport.MSAA.Msaa8x:
-            {
-                GetNode<OptionButton>("Panel/GridContainer/MSAAChoice").Selected = 2;
-                break;
-            }
-            case Viewport.MSAA.Msaa16x:
-            {
-                GetNode<OptionButton>("Panel/GridContainer/MSAAChoice").Selected = 3;;
-                break;
-            }
-        }
-        switch (Engine.TargetFps)
-        {
-            case 30:
-            {
-                GetNode<OptionButton>("Panel/GridContainer/MaxFPSChoice").Selected = 0;
-                break;
-            }
-            case 60:
-            {
-                GetNode<OptionButton>("Panel/GridContainer/MaxFPSChoice").Selected = 1;
-                break;
-            }
-            case 75:
-            {
-                GetNode<OptionButton>("Panel/GridContainer/MaxFPSChoice").Selected = 2;
-                break;
-            }
-            case 120:
-            {
-                GetNode<OptionButton>("Panel/GridContainer/MaxFPSChoice").Selected = 3;
-                break;
-            }
-        }
+
+        GetNode<OptionButton>("Panel/GridContainer/MSAAChoice").Selected = GetMSAAValue(v.Msaa);
+        GetNode<OptionButton>("Panel/GridContainer/MaxFPSChoice").Selected = GetFPSValue(Engine.TargetFps);
+        GetNode<OptionButton>("Panel/GridContainer/ResolutionChoice").Selected = GetResolutionValue(v.Size);
+        
         GetNode<Slider>("Panel/GridContainer/BrightnessSlider").Value = gameenv.AdjustmentBrightness;
         GetNode<Slider>("Panel/GridContainer/ContrastSlider").Value = gameenv.AdjustmentContrast;
         GetNode<Slider>("Panel/GridContainer/SaturationSlider").Value = gameenv.AdjustmentSaturation;
+        GetNode<Slider>("Panel/GridContainer/SoundSlider").Value = AudioServer.GetBusVolumeDb(0);
         Visible = false;
+    }
+    public void SaveSettingsToFile()
+    {
+        DViewport v = DViewport.GetInstance();
+
+        GDScript SaveGD = GD.Load<GDScript>("res://Scripts/Saved_Settings.gd");
+		Godot.Object save = (Godot.Object)SaveGD.New();
+
+		Dictionary<string, object> data = new Dictionary<string, object>(){
+			{"FullScreen", OS.WindowFullscreen},
+            {"Vsync", OS.VsyncEnabled},
+            {"AAFXAA", v.Fxaa},
+            {"SSAO", gameenv.SsaoEnabled},
+            {"MSAA", GetMSAAValue(v.Msaa)},
+            {"MaxFPS", GetFPSValue(Engine.TargetFps)},
+            {"Resolution", GetResolutionValue(DViewport.GetInstance().Size)},
+            {"Brightness", gameenv.AdjustmentBrightness},
+            {"Contrast", gameenv.AdjustmentContrast},
+            {"Saturation", gameenv.AdjustmentSaturation},
+            {"Sound", AudioServer.GetBusVolumeDb(0)}
+		};
+        save.Call("_SetData", data);
+
+		//File savef = new File();
+		ResourceSaver.Save("user://SavedSettings.tres", (Resource)save);
+    }
+    public void LoadSettingsFromFile()
+    {
+        var ResourceLoaderSafe = ResourceLoader.Load("res://Scripts/safe_resource_loader.gd") as Script;
+        Resource save = (Resource)ResourceLoaderSafe.Call("load", "user://SavedSettings.tres");
+        if (save == null)
+        {
+            return;
+        }
+        DViewport v = DViewport.GetInstance();
+
+        OS.WindowFullscreen = (bool)save.Get("FullScreen");
+        OS.VsyncEnabled = (bool)save.Get("Vsync");
+        v.Fxaa = (bool)save.Get("AAFXAA");
+        gameenv.SsaoEnabled = (bool)save.Get("SSAO");
+
+        Update_MSAA((int)save.Get("MSAA"));
+        UpdateMaxFPS((int)save.Get("MaxFPS"));
+        Update_Resolution((int)save.Get("Resolution"));
+        Update_Brightness((float)save.Get("Brightness"));
+        Update_Contrast((float)save.Get("Contrast"));
+        Update_Saturation((float)save.Get("Saturation"));
+        Update_Sound((float)save.Get("Sound"));
     }
     private void Update_Vsync(bool T)
     {
@@ -256,6 +266,7 @@ public class SettingsPanel : Control
             }
         }
     }
+    
     private void ClearAchievements()
     {
         ActionTracker.ClearActions();
@@ -263,6 +274,7 @@ public class SettingsPanel : Control
     }
     private void Close()
     {
+        SaveSettingsToFile();
         EmitSignal("OnSettingsClosed");
         Visible = false;
     }
@@ -374,4 +386,98 @@ public class SettingsPanel : Control
 		}
 		Seed = text.Text.ToInt();
 	}
+    public int GetMSAAValue(Viewport.MSAA msatype)
+    {
+        int type = -1;
+        switch (msatype)
+        {
+            case Viewport.MSAA.Disabled:
+            {
+                type = 0;
+                break;
+            }
+            case Viewport.MSAA.Msaa2x:
+            {
+                type = 1;
+                break;
+            }
+            case Viewport.MSAA.Msaa4x:
+            {
+                type = 2;
+                break;
+            }
+            case Viewport.MSAA.Msaa8x:
+            {
+                type = 3;
+                break;
+            }
+            case Viewport.MSAA.Msaa16x:
+            {
+                type = 4;
+                break;
+            }
+        }
+        return type;
+    }
+    public int GetFPSValue(int TargetFPS)
+    {
+        int value = -1;
+        switch (TargetFPS)
+        {
+            case 30:
+            {
+                value = 0;
+                break;
+            }
+            case 60:
+            {
+                value = 1;
+                break;
+            }
+            case 75:
+            {
+                value = 2;
+                break;
+            }
+            case 120:
+            {
+                value = 3;
+                break;
+            }
+        }
+        return value;
+    }
+    private int GetResolutionValue(Vector2 res)
+    {
+        int resvalue = -1;
+        switch (res.x)
+        {
+            case 3840:
+            {
+                resvalue = 0;
+                break;
+            }
+            case 1920:
+            {
+                resvalue = 1;
+                break;
+            }
+            case 1280:
+            {
+                resvalue = 2;
+                break;
+            }
+            case 960:
+            {
+                resvalue = 3;
+                break;
+            }
+            case 480:
+            {
+                resvalue = 4;
+                break;
+            }
+        }
+        return resvalue;
+    }
 }

@@ -66,8 +66,6 @@ corner_radius_bottom_left = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 7 )
-ViewDistance = 1
-FOVOverride = 40
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
