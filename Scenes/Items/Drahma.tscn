@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Item.cs" type="Script" id=1]
-[ext_resource path="res://Assets/Drachma/M_Drachma.material" type="Material" id=2]
 [ext_resource path="res://Assets/Drachma/Drachma.obj" type="ArrayMesh" id=3]
 [ext_resource path="res://Assets/Drachma/Drachma.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/HUD/ActionComponent.tscn" type="PackedScene" id=5]
@@ -25,7 +24,6 @@ ItemDesc = "DrahmaDescription"
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
-material_override = ExtResource( 2 )
 mesh = ExtResource( 3 )
 script = ExtResource( 6 )
 LOD0 = ExtResource( 3 )

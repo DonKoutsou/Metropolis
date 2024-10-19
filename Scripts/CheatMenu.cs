@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 ////////////////////////////////////////////////////////////////////////////////////
 /*
  ██████╗██╗  ██╗███████╗ █████╗ ████████╗    ███╗   ███╗███████╗███╗   ██╗██╗   ██╗
@@ -10,6 +11,7 @@ using System;
  ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝   ╚═╝       ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝                                                                                    
 */
 ////////////////////////////////////////////////////////////////////////////////////
+#if DEBUG
 public class CheatMenu : Control
 {
 	Player Playr;
@@ -106,10 +108,10 @@ public class CheatMenu : Control
 		SettingsPanel.Instance.DecreaseTimeProgression();
 		TimeProgressionSetting.GetNode<Label>("TimeProgText").Text = "TimeProg" + SettingsPanel.Instance.TimeProgression.ToString();
 	}
-	//private void Recharge_Character()
-	//{
-	//	Player.GetInstance().RechargeCharacter(100);
-	//}
+	private void Recharge_Character()
+	{
+		Player.GetInstance().RechargeCharacter(100);
+	}
 	public void Start()
 	{
 		Show();
@@ -140,13 +142,16 @@ public class CheatMenu : Control
 			CamZoom = pan.GetNode<SpringArm>("SpringArm").GetNode<CameraZoomPivot>("CameraZoomPivot");
 		}
     }
+	private void GiveItem()
+	{
+		int Index = GetNode<OptionButton>("Buttons/Panel/OptionButton").Selected;
+		var values = Enum.GetValues(typeof(ItemName));
+		ItemName it = (ItemName)values.GetValue(Index);
+		Inventory inv = Player.GetInstance().GetCharacterInventory();
+		inv.InsertItem(GlobalItemCatalogue.GetInstance().GetItemByType(it).Instance<Item>());
+	}
 	public override void _Ready()
 	{
-		if (!OS.HasFeature("editor"))
-		{
-			SetProcess(false);
-			return;
-		}
 		Buttons = GetNode<Control>("Buttons");
 		TimeProgressionSetting = Buttons.GetNode<Panel>("TimeProgressionSetting");
 		TeleportPanel = Buttons.GetNode<Panel>("TeleportPanel");
@@ -156,8 +161,15 @@ public class CheatMenu : Control
 		RainAmm = labelcont.GetNode<Label>("RainAmmount");
 		WindDir = labelcont.GetNode<Label>("WindDir");
 		WindAmm = labelcont.GetNode<Label>("WindAmm");
+		OptionButton b = GetNode<OptionButton>("Buttons/Panel/OptionButton");
+		var count = Enum.GetNames(typeof(ItemName));
+		for (int i = 0; i < count.Count(); i++)
+		{
+			b.AddItem(count[i], i);
+		}
 		Visible = false;
 		SetProcessInput(false);
+		SetProcess(false);
 	}
     public override void _Process(float delta)
     {
@@ -179,7 +191,7 @@ public class CheatMenu : Control
 		}
 	}
 }
-
+#endif
 
 
 

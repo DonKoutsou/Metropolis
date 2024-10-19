@@ -15,11 +15,11 @@ public class Rain : Spatial
     {
         base._Ready();
         RainPart = GetNode<Particles>("Clouds2");
-        SetProcess(false);
+        SetPhysicsProcess(false);
     }
-    public override void _Process(float delta)
+    public override void _PhysicsProcess(float delta)
     {
-        base._Process(delta);
+        base._PhysicsProcess(delta);
         d -= delta;
 		if (d > 0)
             return;

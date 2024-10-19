@@ -95,7 +95,7 @@ public class GlobalItemCatalogue : Node
 		
 		PackedScene thing;
 
-		if (thang.Count > 1)
+		if (thang.Count > 1 && stname != "Null")
 		{
 			thing = thang[stname];
 		}

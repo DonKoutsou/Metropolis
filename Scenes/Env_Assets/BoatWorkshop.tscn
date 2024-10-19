@@ -1,9 +1,10 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://Assets/TerainTex/Concrete004_1K-PNG/Concrete004_1K-PNG_Color.png" type="Texture" id=1]
 [ext_resource path="res://Assets/BoatWorkshop/BoatWorkshop.tres" type="ArrayMesh" id=2]
 [ext_resource path="res://Assets/BoatWorkshop/BoatWorkShopMat.tres" type="Material" id=3]
 [ext_resource path="res://Scenes/Env_Assets/BoatClutter.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Clutter/WoodPlanks/WoodPlankMat.tres" type="Material" id=5]
 [ext_resource path="res://Assets/Materials/WoodPlankMaterial_TP.tres" type="Material" id=6]
 [ext_resource path="res://Scripts/House.cs" type="Script" id=7]
 [ext_resource path="res://Scenes/BuildingDecorations/Decorations1.tscn" type="PackedScene" id=8]
@@ -76,9 +77,9 @@ PossibleDeco = [ ExtResource( 8 ), ExtResource( 9 ) ]
 FurnitureAmmount = 8
 SpawnPool = {
 Resource( "res://Scenes/Items/Toolbox.tscn" ): 10,
+Resource( "res://Scenes/Items/Compass.tscn" ): 6,
 Resource( "res://Scenes/Items/MapItem.tscn" ): 2,
 Resource( "res://Scenes/Items/BatteryEmpty.tscn" ): 8,
-Resource( "res://Scenes/Items/Compass.tscn" ): 6,
 Resource( "res://Scenes/Items/LOG.tscn" ): 6,
 Resource( "res://Scenes/Items/PaintCan.tscn" ): 10
 }
@@ -87,11 +88,13 @@ Resource( "res://Scenes/Items/PaintCan.tscn" ): 10
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 19.2553 )
 mesh = ExtResource( 21 )
 skeleton = NodePath("../MeshInstance")
+material/0 = ExtResource( 5 )
 
 [node name="MeshInstance4" type="MeshInstance" parent="."]
 transform = Transform( -1, 0, 8.9407e-08, 0, 1, 0, -8.9407e-08, 0, -1, 0, 0, -2.0215 )
 mesh = ExtResource( 21 )
 skeleton = NodePath("../MeshInstance")
+material/0 = ExtResource( 5 )
 
 [node name="StaticBody2" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 0.999461, -0.0328237, 0, 0.0328237, 0.999461, 0, 6.55636, 8.7725 )
@@ -107,7 +110,7 @@ mesh = ExtResource( 2 )
 material/0 = ExtResource( 3 )
 
 [node name="StaticBody" type="StaticBody" parent="MeshInstance"]
-collision_layer = 4
+collision_layer = 8196
 collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance/StaticBody"]

@@ -352,16 +352,18 @@ public class Player : Character
 			//Solution for stairs, check if colliding with stairs and if so give a small push upwards.
 			for (int i = 0; i < GetSlideCount(); i++)
 			{
-				KinematicCollision col = GetSlideCollision(i);
-				PhysicsBody b = (PhysicsBody)col.Collider;
-				if (col.Normal.y > 0.1f)
-					continue;
-
-				if (b.GetCollisionLayerBit(12))
+				if (GetSlideCollision(i) is KinematicCollision col)
 				{
-					_velocity.y += 500 * delta;
-					break;
-				}	
+					PhysicsBody b = (PhysicsBody)col.Collider;
+					if (col.Normal.y > 0.1f)
+						continue;
+
+					if (b.GetCollisionLayerBit(12))
+					{
+						_velocity.y += 500 * delta;
+						break;
+					}	
+				}
 			}
 		}
 

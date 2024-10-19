@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Scenes/Vehicles/HoverBoard_NoWings.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Env_Assets/PortRopething.tscn" type="PackedScene" id=2]
@@ -21,6 +21,10 @@
 [ext_resource path="res://Scenes/Env_Assets/Skampo.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Scenes/Env_Assets/Table.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Scenes/Systems/IslandNameTrigger.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Assets/Building/BuildingDust4.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Assets/Building/BuildingDust2.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Assets/Building/BuildingDust3.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Assets/Building/BuildingDust.tscn" type="PackedScene" id=25]
 
 [sub_resource type="SpatialMaterial" id=13]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -146,9 +150,9 @@ transform = Transform( 0.836496, 0, 0.547972, 0, 1, 0, -0.547972, 0, 0.836496, -
 HasPower = false
 
 [node name="Ladder2" parent="." index="12" instance=ExtResource( 6 )]
-transform = Transform( 0.606932, 0, -0.794754, 0, 1.38777, 0, 0.794754, 0, 0.606932, -1533.09, -33.0123, 886.272 )
-TopPossition = Vector3( 0, 171.088, -6.461 )
-BottomPossition = Vector3( 0, 24.785, 3.832 )
+transform = Transform( 0.436991, 0, -0.572223, 0, 1, 0, 0.572223, 0, 0.436991, -1533.09, 1.34081, 886.272 )
+TopPossition = Vector3( 0, 202.873, -6.461 )
+BottomPossition = Vector3( 0, 0, 3.832 )
 
 [node name="StaticBody" parent="." index="13" instance=ExtResource( 3 )]
 transform = Transform( -0.606932, 5.30597e-08, -0.794754, -8.74228e-08, -1, 0, -0.794754, 6.94796e-08, 0.606932, -1499.92, 225.788, 847.2 )
@@ -205,7 +209,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1206.45, 85.9439, 905.542 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 24 )
 
-[node name="Guitar" parent="." index="33" instance=ExtResource( 8 )]
+[node name="Guitar1" parent="." index="33" instance=ExtResource( 8 )]
 transform = Transform( 0.296558, -0.304895, 0.905037, 0, 0.947668, 0.319257, -0.955015, -0.0946783, 0.281039, -1391.62, 204.134, 800.516 )
 
 [node name="House3" parent="." index="34" instance=ExtResource( 12 )]
@@ -225,5 +229,32 @@ transform = Transform( 0.607154, 0, -0.794584, 0, 1, 0, 0.794584, 0, 0.607154, -
 
 [node name="StaticBody14" parent="." index="38" instance=ExtResource( 13 )]
 transform = Transform( 0.607154, 0, -0.794584, 0, 1, 0, 0.794584, 0, 0.607154, -1468.8, 204.139, 926.255 )
+
+[node name="DestBuilding" parent="." index="39" instance=ExtResource( 22 )]
+transform = Transform( 0.828891, 0.55941, 0, -0.480291, 0.711658, 0.512702, 0.286811, -0.424974, 0.858566, 2483.81, -14.249, -1069.07 )
+
+[node name="DestBuilding2" parent="." index="40" instance=ExtResource( 23 )]
+transform = Transform( 0.11752, -0.733665, 0.669271, 0, 0.673941, 0.738785, -0.99307, -0.0868221, 0.0792017, 1208.38, -60.3982, -2075.72 )
+
+[node name="DestBuilding3" parent="." index="41" instance=ExtResource( 23 )]
+transform = Transform( 0.999462, -0.0242239, 0.0220978, 0.0326079, 0.805016, -0.592356, -0.00343989, 0.592758, 0.805373, 931.355, -63.9483, 216.12 )
+
+[node name="DestBuilding4" parent="." index="42" instance=ExtResource( 24 )]
+transform = Transform( 0.542676, -0.757715, 0.362451, 0, 0.431519, 0.902104, -0.839942, -0.48955, 0.234175, -2408.88, -87.6086, -2801.21 )
+
+[node name="DestBuilding5" parent="." index="43" instance=ExtResource( 25 )]
+transform = Transform( 0.611572, 0.417996, 0.671758, -0.534372, 0.844354, -0.0388981, -0.583461, -0.33518, 0.739749, -2423.07, -40.3524, 1994.05 )
+
+[node name="DestBuilding6" parent="." index="44" instance=ExtResource( 25 )]
+transform = Transform( -0.361341, -0.439049, 0.822599, -0.20669, 0.897974, 0.388487, -0.909237, -0.0296463, -0.415222, 1861.93, -57.3138, -642.893 )
+
+[node name="DestBuilding7" parent="." index="45" instance=ExtResource( 25 )]
+transform = Transform( 0.993009, 0.0581124, 0.102748, -0.0619513, 0.99748, 0.0345712, -0.10048, -0.0406949, 0.994106, 162.381, -33.9502, -1284.77 )
+
+[node name="DestBuilding8" parent="." index="46" instance=ExtResource( 24 )]
+transform = Transform( 0.398701, -0.887298, 0.231818, -0.734422, -0.157532, 0.660158, -0.549238, -0.433458, -0.714459, 2094.31, 25.8404, -2939.5 )
+
+[node name="DestBuilding9" parent="." index="47" instance=ExtResource( 24 )]
+transform = Transform( -0.801495, 0.515222, 0.303564, 0.236523, 0.739365, -0.630394, -0.549238, -0.433458, -0.714459, -96.3661, -150.317, -2514.64 )
 
 [editable path="IslandNameTrigger"]

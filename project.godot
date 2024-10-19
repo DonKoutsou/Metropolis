@@ -160,7 +160,12 @@ settings/fps/force_fps=60
 
 window/size/width=1920
 window/size/height=1080
+mouse_cursor/custom_image="res://Assets/UI/Curson.png"
 window/stretch/mode="2d"
+
+[editor]
+
+main_run_args="--verbose"
 
 [editor_plugins]
 
@@ -328,6 +333,7 @@ ToggleZoom={
 3d_physics/layer_11="Rock"
 3d_physics/layer_12="Breakable"
 3d_physics/layer_13="Stairs"
+3d_physics/layer_14="ActionRayBlock"
 
 [mono]
 

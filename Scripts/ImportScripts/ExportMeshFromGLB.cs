@@ -3,7 +3,7 @@ using Godot;
 
 // This sample changes all node names.
 // Called right after the scene is imported and gets the root node.
-#if DEBUG
+#if TOOLS
 [Tool]
 public partial class ExportMeshFromGLB : EditorScenePostImport
 {

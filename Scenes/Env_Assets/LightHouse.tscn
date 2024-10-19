@@ -261,8 +261,8 @@ PossibleFurni = [ ExtResource( 16 ) ]
 PossibleDeco = [ ExtResource( 24 ), ExtResource( 23 ) ]
 FurnitureAmmount = 14
 SpawnPool = {
-Resource( "res://Scenes/Items/Book1.tscn" ): 10,
 Resource( "res://Scenes/Items/Book3.tscn" ): 10,
+Resource( "res://Scenes/Items/Book1.tscn" ): 10,
 Resource( "res://Scenes/Items/Book2.tscn" ): 10
 }
 
@@ -291,24 +291,24 @@ visible = false
 shape = SubResource( 2129 )
 
 [node name="Ladder" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1.11358, 0, 0, 0, 1, 37.273, -24.638, -75.353 )
-TopPossition = Vector3( 0, 171.419, -2.29 )
-BottomPossition = Vector3( 0, 30.235, 6 )
+transform = Transform( 0.898, 0, 0, 0, 1, 0, 0, 0, 0.898, 37.273, 9.03458, -75.353 )
+TopPossition = Vector3( 0, 157.2, -2.29 )
+BottomPossition = Vector3( 0, 0, 6 )
 
 [node name="Ladder2" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1.29746, 0, 0, 0, 1, -55.097, 126.997, -77.99 )
-TopPossition = Vector3( 0, 171.449, -2.855 )
-BottomPossition = Vector3( 0, 30.317, 6 )
+transform = Transform( 0.771, 0, 0, 0, 1, 0, 0, 0, 0.771, -55.097, 166.281, -77.99 )
+TopPossition = Vector3( 0, 183.016, -2.855 )
+BottomPossition = Vector3( 0, 0, 6 )
 
 [node name="Ladder3" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1.307, 0, 0, 0, 1, 60.599, 308.708, -58.085 )
-TopPossition = Vector3( 0, 171.566, -3.146 )
-BottomPossition = Vector3( 0, 31.058, 6 )
+transform = Transform( 0.765, 0, 0, 0, 1, 0, 0, 0, 0.765, 60.599, 349.276, -58.085 )
+TopPossition = Vector3( 0, 183.627, -3.146 )
+BottomPossition = Vector3( 0, 0, 6 )
 
 [node name="Ladder4" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1.596, 0, 0, 0, 1, -38.573, 467.707, -37.251 )
-TopPossition = Vector3( 0, 171.315, -2.973 )
-BottomPossition = Vector3( 0, 40.987, 6 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -38.573, 532.952, -37.5218 )
+TopPossition = Vector3( 0, 208.009, -2.973 )
+BottomPossition = Vector3( 0, 0, 6 )
 
 [node name="Planks" type="MeshInstance" parent="."]
 generate_lightmap = false

@@ -24,6 +24,7 @@ auto_exposure_enabled = true
 auto_exposure_scale = 0.38
 auto_exposure_min_luma = 0.71
 auto_exposure_max_luma = 6.99
+auto_exposure_speed = 64.0
 ssao_enabled = true
 ssao_radius = 128.0
 ssao_intensity = 20.0

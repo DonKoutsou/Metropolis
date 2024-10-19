@@ -117,19 +117,12 @@ public class Vehicle : RigidBody
 		WindD = GetNode<WindDetector>("WindDetector");
 		FrontLight = GetNode<MeshInstance>("LightMesh").GetNode<SpotLight>("SpotLight");
 		FrontLight.LightEnergy = 0;
-		//Anim = GetNode<AnimationPlayer>("AnimationPlayer");
 		SteeringWheel = GetNode<Spatial>("SteeringWheel");
 		ExaustParticles.Insert(0, GetNode<Particles>("Position3D/MeshInstance3/ExaustParticlesL"));
 		ExaustParticles.Insert(1, GetNode<Particles>("Position3D/MeshInstance3/ExaustParticlesR"));
-		//ExaustParticles.Insert(2, GetNode<Particles>("ExaustParticlesLSteer"));
-	   // ExaustParticles.Insert(3, GetNode<Particles>("ExaustParticlesRSteer"));
 		ExaustParticles[0].Emitting = false;
 		ExaustParticles[1].Emitting = false;
-		//ExaustParticles[2].Emitting = false;
-		//ExaustParticles[3].Emitting = false;
-		//Spatial parent = (Spatial)GetParent();
 		ZeroPos();
-		//frontray = parent.GetNode<RayCast>("RayF");
 		Rays.Insert(0, GetNode<Spatial>("RemoteTransform"));
 		Rays.Insert(1, GetNode<Spatial>("RemoteTransform2"));
 		Rays.Insert(2, GetNode<Spatial>("RemoteTransform3"));
@@ -167,6 +160,9 @@ public class Vehicle : RigidBody
 		ile.RegisterChild(this);
 
 		thr.Start(this, "Balance", 0.01);
+
+
+		SetProcess(false);
 		
 		//SetProcessInput(false);
 	}
@@ -191,6 +187,8 @@ public class Vehicle : RigidBody
 	{
 		return VType;
 	}
+
+	//Centers parent to 0.0.0
 	public void ZeroPos()
 	{
 		Spatial parent = (Spatial)GetParent();
@@ -203,17 +201,15 @@ public class Vehicle : RigidBody
 		Rotation = parent.Rotation;
 		parent.Rotation = Vector3.Zero;
 	}
-	
-	float d = 0.01f;
 	public override void _Process(float delta)
 	{
 		base._Process(delta);
 
-		d -= delta;
-		if (d > 0)
-			return;
-		d = 0.01f;
-
+		UpdateEngineEffects();
+		//UpdateSteeringWheelRotation();
+	}
+	private void UpdateEngineEffects()
+	{
 		float engineforce = latsspeed / speed;
 		((ParticlesMaterial)ExaustParticles[0].ProcessMaterial).Scale = engineforce * 5;
 		((ParticlesMaterial)ExaustParticles[0].ProcessMaterial).InitialVelocity = engineforce * 60 + 5;
@@ -224,15 +220,9 @@ public class Vehicle : RigidBody
 		((ParticlesMaterial)ExaustParticles[1].ProcessMaterial).InitialVelocity = engineforce * 60 + 5 * 2.5f;
 
 		ExaustParticles[1].GetNode<AudioStreamPlayer3D>("EngineSound").PitchScale = engineforce + 0.6f;
-
-		MeshInstance str = GetNode<MeshInstance>("Position3D/MeshInstance3");
-		Vector3 strrot = str.Rotation;
-
-		strrot.y = Mathf.Clamp( (Mathf.Pi * Math.Sign(SteeringWheel.Rotation.y)) - SteeringWheel.Rotation.y , -1, 1);
-		//str.Rotation = strrot;
-		var tw = CreateTween();
-		tw.TweenProperty(str, "rotation", strrot, 0.25f);
 	}
+	
+	/// Boost Stuff///
 	public void Boost(int Ammount)
 	{
 		SpeedBuildup = 1;
@@ -483,7 +473,7 @@ public class Vehicle : RigidBody
 			Vector3 prevpos = SteeringWheel.Rotation;
 			SteeringWheel.LookAt(loctomove, Vector3.Up);
 			SteeringWheel.Rotation = new Vector3(prevpos.x, SteeringWheel.Rotation.y, prevpos.z);
-			
+			UpdateSteeringWheelRotation();
 		}
 
 		float steer = Mathf.Rad2Deg(SteeringWheel.Rotation.y);
@@ -516,7 +506,24 @@ public class Vehicle : RigidBody
 		steert = torq;
 		SteerThr.CallDeferred("wait_to_finish");
 	}
-	
+	SceneTreeTween SteerTween;
+	private void UpdateSteeringWheelRotation()
+	{
+		MeshInstance str = GetNode<MeshInstance>("Position3D/MeshInstance3");
+		Vector3 strrot = str.Rotation;
+
+		float steeramm = Mathf.Clamp( (Mathf.Pi * Math.Sign(SteeringWheel.Rotation.y)) - SteeringWheel.Rotation.y , -1, 1);
+		if (strrot.y != steeramm)
+		{
+			strrot.y = steeramm;
+			//str.Rotation = strrot;
+			if (SteerTween != null)
+				SteerTween.Kill();
+
+			SteerTween = CreateTween();
+			SteerTween.TweenProperty(str, "rotation", strrot, 0.25f);
+		}
+	}
 	public bool ToggleMachine(bool toggle)
 	{
 		if (toggle)
@@ -535,7 +542,7 @@ public class Vehicle : RigidBody
 			SteerThr.Start(this, "Steer", 0.01);
 		}
 		ToggleEngineVFX(toggle);
-		UpdateMoveLoc(GlobalTranslation);
+		//UpdateMoveLoc(GlobalTranslation);
 		
 		Working = toggle;
 		SetProcess(toggle);
@@ -641,7 +648,6 @@ public class Vehicle : RigidBody
 	{
 		if (passengers.Count == 0)
 			return;
-
 		
 		//SetProcessInput(false);
 		ContactMonitor = false;
@@ -677,7 +683,6 @@ public class Vehicle : RigidBody
 	}
 	 public bool UnBoardVehicle(Character cha)
 	{
-		
 		//SetProcessInput(false);
 		cha.GettingInVehicle = true;
 		Vector3 prevrot = cha.GlobalRotation;
@@ -740,11 +745,12 @@ public class Vehicle : RigidBody
 	///////Action Menu////////
 	public void HighLightObject(bool toggle, Material OutlineMat)
 	{
-		if (!PlayerOwned)
-			return;
-
 		if (toggle)
+		{
+			if (passengers.Count > 0)
+				return;
 			GetNode<MeshInstance>("MeshInstance").MaterialOverlay = OutlineMat;
+		}
 		else
 			GetNode<MeshInstance>("MeshInstance").MaterialOverlay = null;
 	}
@@ -788,6 +794,10 @@ public class Vehicle : RigidBody
 	{
 		return "Null.";
 	}
+	public bool ShowActionName(Player pl)
+	{
+		return true;
+	}
 	public bool ShowActionName2(Player pl)
 	{
 		return false;
@@ -796,10 +806,7 @@ public class Vehicle : RigidBody
 	{
 		return false;
 	}
-	public bool ShowActionName(Player pl)
-	{
-		return true;
-	}
+	
 	public string GetObjectDescription()
 	{
 		string desc;
@@ -823,6 +830,7 @@ public class Vehicle : RigidBody
 		SetPlayerOwned(data.PlayerOwned);
 		//GetParent().GetNode<VehicleDamageManager>("VehicleDamageManager").InputData(data.DamageInfo);
 	}
+	//When moving to new island vehicle gets reparented to it
 	public void ReparentVehicle(Island ile)
 	{
 		Vector3 orig = GlobalTranslation;

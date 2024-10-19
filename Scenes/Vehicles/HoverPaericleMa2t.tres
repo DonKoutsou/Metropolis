@@ -1,12 +1,11 @@
 [gd_resource type="SphereMesh" load_steps=2 format=2]
 
 [sub_resource type="SpatialMaterial" id=116]
-flags_world_triplanar = true
 params_diffuse_mode = 4
 params_specular_mode = 3
-params_depth_draw_mode = 1
 albedo_color = Color( 0.509804, 0.596078, 0.611765, 1 )
-roughness = 0.0
+metallic_specular = 0.11
+roughness = 0.17
 uv1_triplanar = true
 uv1_triplanar_sharpness = 1.0
 

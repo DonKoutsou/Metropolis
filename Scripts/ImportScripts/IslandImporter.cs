@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Godot;
 
-#if DEBUG
+#if TOOLS
 // This sample changes all node names.
 // Called right after the scene is imported and gets the root node.
 [Tool]

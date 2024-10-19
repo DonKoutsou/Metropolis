@@ -161,6 +161,7 @@ public class Character : KinematicBody
 			seat = pos;
 			Sitter.UpdateOccupation(pos, true);
 			GetNode<Spatial>("Pivot").GlobalRotation = pos.GlobalRotation;
+			UpdateLocationToMove(pos.GlobalPosition);
 		}
 		else
 			anim.ToggleSitting();

@@ -14,6 +14,7 @@ public class VehicleSpawnLocation : Node
     {
         return Locations != null && Locations.Count() > 0;
     }
+    #if TOOLS
     public override void _Process(float delta)
     {
         base._Process(delta);
@@ -56,4 +57,5 @@ public class VehicleSpawnLocation : Node
         }
         
     }
+    #endif
 }

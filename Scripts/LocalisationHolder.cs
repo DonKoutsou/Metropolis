@@ -83,7 +83,7 @@ public class LocalisationHolder : Node
         if (!Localizations.ContainsKey(Name))
         {
             //GD.Print("Key not found |" + Name);
-            return "String Not Localised";
+            return "||String Not Localised||";
         }
         else if (CurrentLanguage == Language.GREEK)
         {

@@ -70,7 +70,7 @@ public class CustomEnviroment : WorldEnvironment
         MoonGodRays = moon.GetNode("GodRays");
         //timeprogmultiplier = Settings.GetGameSettings().TimeProgression;
         Environment.FogEnabled = true;
-        SetProcess(false);
+        SetPhysicsProcess(false);
     }
 
     public void UpdatePlayerDistance(float newdist)
@@ -429,9 +429,9 @@ public class CustomEnviroment : WorldEnvironment
     float MoonGodRayBrightness;
 
     float d = 0.1f;
-    public override void _Process(float delta)
+    public override void _PhysicsProcess(float delta)
     {
-        base._Process(delta);
+        base._PhysicsProcess(delta);
     
         d -= delta;
 

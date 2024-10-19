@@ -31,7 +31,8 @@ public class PlayerUI : Control
 
         foreach(KeyValuePair<string, Control> UI in UIList)
         {
-            UI.Value.CallDeferred("PlayerToggle", null);
+            if (UI.Value.HasMethod("PlayerToggle"))
+                UI.Value.CallDeferred("PlayerToggle");
         }
     }
     public static Control GetUI(PlayerUIType type)

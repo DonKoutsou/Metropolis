@@ -13,6 +13,8 @@ public class WindGenerator : StaticBody
     private float CurrentEnergy;
     [Export]
     private float EnergyPerWindStreangth = 0.1f;
+    [Export]
+    private bool GenerateCable = false;
     AnimationPlayer anim;
     AnimationPlayer anim2;
     AnimationPlayer anim3;
@@ -59,7 +61,7 @@ public class WindGenerator : StaticBody
             scale = (int)Math.Max(Scale.x, 1);
         if (Auto)
         {
-            SetProcess(false);
+            SetPhysicsProcess(false);
             anim.Play();
             anim2.Play();
             anim.PlaybackSpeed = 0.3f;
@@ -78,6 +80,8 @@ public class WindGenerator : StaticBody
         anim.Stop();
         anim2.Stop();
         UpdateAnims = false;
+
+        GetNode<CollisionShape>("CollisionShape").Translation = WindGenOffset;
         //anim2.PlaybackSpeed = rand.Next(2500, 3000) / 1000;
         //Spatial rotorpivot = GetNode<Spatial>("Rotor_Pivot");
         //rotorpivot.LookAt(new Vector3(rotorpivot.Translation.x, rotorpivot.Translation.y, rotorpivot.Translation.z + 1), Vector3.Up);
@@ -87,7 +91,7 @@ public class WindGenerator : StaticBody
 		{
             if (parent == null)
             {
-                SetProcess(false);
+                SetPhysicsProcess(false);
                 return;
             }
 				
@@ -109,14 +113,29 @@ public class WindGenerator : StaticBody
     float d = 0.5f;
 
     bool UpdateAnims = true;
-    public override void _Process(float delta)
+    public override void _PhysicsProcess(float delta)
     {
         if (Engine.EditorHint)
         {
+            if (GenerateCable)
+            {
+                Path origpath = GetNodeOrNull<Path>("CablePath");
+                if (origpath != null)
+                    origpath.Free();
+                Path cablescene = ResourceLoader.Load<PackedScene>("res://Scenes/Env_Assets/CablePath.tscn").Instance<Path>();
+                AddChild(cablescene);
+                cablescene.Owner = GetParent();
+                cablescene.Curve = new Curve3D();
+                cablescene.Curve.AddPoint(GetNode<Spatial>("CollisionShape2").Translation);
+                cablescene.Curve.AddPoint(GetNode<Spatial>("CollisionShape").Translation);
+                //cablescene.Curve.SetPointPosition(0, GetNode<Spatial>("CollisionShape2").Translation);
+                //cablescene.Curve.SetPointPosition(0, GetNode<Spatial>("CollisionShape2").Translation);
+                GenerateCable = false;
+            }
             GetNode<CollisionShape>("CollisionShape").Translation = WindGenOffset;
             return;
         }
-        base._Process(delta);
+        base._PhysicsProcess(delta);
         d -= delta;
 		if (d > 0)
             return;

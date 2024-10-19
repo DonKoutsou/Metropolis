@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Assets/TerainTex/Rock029_2K-PNG/Rock029_2K-PNG_NormalGL.png" type="Texture" id=1]
 [ext_resource path="res://Assets/TerainTex/Sand1/Stylized_Sand_002_roughness.png" type="Texture" id=2]
-[ext_resource path="res://Assets/TerainTex/Sand1/Stylized_Sand_002_basecolor.png" type="Texture" id=3]
+[ext_resource path="res://Assets/TerainTex/Sand2/Sand_004_COLOR.png" type="Texture" id=3]
 [ext_resource path="res://shaders/TerainShader5.tres" type="Shader" id=4]
 [ext_resource path="res://Assets/TerainTex/Sand1/Stylized_Sand_002_normal.png" type="Texture" id=5]
 [ext_resource path="res://Assets/TerainTex/Rock029_2K-PNG/Rock029_2K-PNG_Roughness.png" type="Texture" id=6]

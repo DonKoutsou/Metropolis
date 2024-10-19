@@ -8,6 +8,8 @@ public class Ladder : Spatial
 	Vector3 TopPossition = new Vector3(0, 0.5f, 6);
     [Export]
 	Vector3 BottomPossition = new Vector3(0, 0.5f, 6);
+    [Export]
+    bool dothing = false;
     Position3D BottomPos;
     Position3D TopPos;
     public override void _Ready()
@@ -19,6 +21,26 @@ public class Ladder : Spatial
             TopPos.Translation = TopPossition;
             BottomPos.Translation = BottomPossition;
             SetProcess(false);
+            float dif = TopPossition.y - BottomPossition.y;
+
+            MultiMeshInstance mm = GetNode<MultiMeshInstance>("MultiMeshInstance");
+            Mesh ladmesh = mm.Multimesh.Mesh;
+            float Height = ladmesh.GetAabb().Size.y;
+            int instancec = (int)(dif/Height);
+            mm.Multimesh.InstanceCount = instancec;
+
+            Transform t = mm.Transform;
+            for (int i = 0; i < instancec; i++)
+            {
+                Transform instancet = t;
+                instancet.origin = new Vector3(0, Height * i, 0);
+                mm.Multimesh.SetInstanceTransform(i, instancet);
+            }
+            Vector3 ext = ((BoxShape)GetNode<CollisionShape>("CollisionShape").Shape).Extents;
+            ext.y = dif / 2;
+            ((BoxShape)GetNode<CollisionShape>("CollisionShape").Shape).Extents = ext;
+
+            GetNode<CollisionShape>("CollisionShape").Translation = new Vector3(0, dif/2, 0);
         }
     }
     public override void _Process(float delta)
@@ -28,11 +50,34 @@ public class Ladder : Spatial
 		{
 			GetNode<Position3D>("Point1").Translation = TopPossition;
             GetNode<Position3D>("Point2").Translation = BottomPossition;
+
+            if (!dothing)
+                return;
+
+            float dif = TopPossition.y - BottomPossition.y;
+
+            MultiMeshInstance mm = GetNode<MultiMeshInstance>("MultiMeshInstance");
+            Mesh ladmesh = mm.Multimesh.Mesh;
+            float Height = ladmesh.GetAabb().Size.y;
+            int instancec = (int)(dif/Height);
+            mm.Multimesh.InstanceCount = instancec;
+
+            Transform t = mm.Transform;
+            for (int i = 0; i < instancec; i++)
+            {
+                Transform instancet = t;
+                instancet.origin = new Vector3(0, Height * i, 0);
+                mm.Multimesh.SetInstanceTransform(i, instancet);
+            }
+            Vector3 ext = ((BoxShape)GetNode<CollisionShape>("CollisionShape").Shape).Extents;
+            ext.y = dif / 2;
+            ((BoxShape)GetNode<CollisionShape>("CollisionShape").Shape).Extents = ext;
+
+            GetNode<CollisionShape>("CollisionShape").Translation = new Vector3(0, dif/2, 0);
 			return;
 		}
 		#endif
 		base._Process(delta);
-        
     }
     public string GetActionName(Player pl)
     {   
@@ -117,9 +162,9 @@ public class Ladder : Spatial
     public void HighLightObject(bool toggle, Material OutlineMat)
     {
         if (toggle)
-            GetNode<MeshInstance>("Ladder").MaterialOverlay = OutlineMat;
+            GetNode<MultiMeshInstance>("MultiMeshInstance").MaterialOverlay = OutlineMat;
         else
-            GetNode<MeshInstance>("Ladder").MaterialOverlay = null;
+            GetNode<MultiMeshInstance>("MultiMeshInstance").MaterialOverlay = null;
     }
     public void DoAction(Player pl)
 	{

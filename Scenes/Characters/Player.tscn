@@ -270,7 +270,7 @@ transform = Transform( 1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0 )
 transform = Transform( 1, -3.86855e-15, -1.26477e-15, 4.0884e-15, 0.996634, -0.0819745, 1.85581e-15, 0.0819747, 0.996637, 0, 0, 0 )
 cull_mask = 769
 current = true
-fov = 45.0
+fov = 55.0
 size = 5.0
 near = 1.0
 far = 15000.0
@@ -283,6 +283,7 @@ mesh = SubResource( 107 )
 material/0 = SubResource( 109 )
 
 [node name="CameraAnimationPlayer" type="AnimationPlayer" parent="CameraMovePivot/CameraPanPivot/SpringArm/CameraZoomPivot/CameraPanXPivot/PlayerCamera"]
+playback_process_mode = 0
 anims/FadeIn = SubResource( 110 )
 anims/FadeInDialogue = SubResource( 118 )
 anims/FadeOut = SubResource( 117 )

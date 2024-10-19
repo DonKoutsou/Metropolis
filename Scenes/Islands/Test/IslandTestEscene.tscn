@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://Assets/Clutter/Powerline/PowerLine.tres" type="ArrayMesh" id=1]
 [ext_resource path="res://Assets/Sea/OceanShader.tres" type="Material" id=2]
@@ -14,7 +14,7 @@
 [ext_resource path="res://Assets/TerainTex/SandSimple.tres" type="Material" id=12]
 [ext_resource path="res://Assets/Materials/RockMat_Mlod.tres" type="Material" id=13]
 [ext_resource path="res://Assets/Clutter/CylinderThing/CylThingyMat.material" type="Material" id=14]
-[ext_resource path="res://Scenes/Env_Assets/Antena2.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Assets/Clutter/Antenna/Antenna2Mat.tres" type="Material" id=15]
 [ext_resource path="res://Assets/Building/Assets/Building_Dest4_LOD2.tres" type="ArrayMesh" id=16]
 [ext_resource path="res://Assets/Building/Assets/Building_Dest_LOD.tres" type="ArrayMesh" id=17]
 [ext_resource path="res://Assets/Building/Assets/Building_Dest2_LOD2.tres" type="ArrayMesh" id=18]
@@ -29,6 +29,17 @@
 [ext_resource path="res://StartScreenEnviroment.tres" type="Environment" id=27]
 [ext_resource path="res://Scenes/Env_Assets/BrokenWindBlade.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Scenes/Env_Assets/WindGeneratorClutter.tscn" type="PackedScene" id=29]
+[ext_resource path="res://Assets/Clutter/Antenna/Antenna2.tres" type="ArrayMesh" id=30]
+[ext_resource path="res://Assets/Clutter/SuspendedRuin/SuspendedRuin.obj" type="ArrayMesh" id=33]
+[ext_resource path="res://Assets/TerainTex/Metal041C_1K-JPG/Metal041C_1K-JPG_Color.jpg" type="Texture" id=34]
+[ext_resource path="res://Assets/TerainTex/Metal041C_1K-JPG/Metal041C_1K-JPG_Roughness.jpg" type="Texture" id=35]
+[ext_resource path="res://Assets/TerainTex/Metal041C_1K-JPG/Metal041C_1K-JPG_NormalGL.jpg" type="Texture" id=36]
+[ext_resource path="res://Assets/TerainTex/Metal041C_1K-JPG/Metal041C_1K-JPG_Metalness.jpg" type="Texture" id=37]
+[ext_resource path="res://Assets/Clutter/Gear/Gear.obj" type="ArrayMesh" id=39]
+[ext_resource path="res://Assets/Boat/Parts/Body.tres" type="ArrayMesh" id=41]
+[ext_resource path="res://Assets/Boat/ΚαικιΗιγη_Καικι1_Normal.png" type="Texture" id=42]
+[ext_resource path="res://Assets/Boat/ΚαικιΗιγη_Καικι4_BaseColor.png" type="Texture" id=43]
+[ext_resource path="res://Assets/Boat/ΚαικιΗιγη_Καικι1_OcclusionRoughnessMetallic.png" type="Texture" id=44]
 
 [sub_resource type="ParticlesMaterial" id=117]
 emission_shape = 2
@@ -176,13 +187,65 @@ params_specular_mode = 4
 params_cull_mode = 1
 params_depth_draw_mode = 2
 
+[sub_resource type="SpatialMaterial" id=130]
+resource_local_to_scene = true
+resource_name = "M_GenDoor"
+flags_world_triplanar = true
+params_cull_mode = 2
+albedo_texture = ExtResource( 34 )
+metallic = 1.0
+metallic_texture = ExtResource( 37 )
+metallic_texture_channel = 4
+roughness_texture = ExtResource( 35 )
+roughness_texture_channel = 4
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 36 )
+uv1_scale = Vector3( 0.002, 0.002, 0.002 )
+uv1_triplanar = true
+uv1_triplanar_sharpness = 1.0
+
+[sub_resource type="SpatialMaterial" id=131]
+resource_local_to_scene = true
+resource_name = "M_GenDoor"
+params_cull_mode = 2
+albedo_texture = ExtResource( 34 )
+metallic = 1.0
+metallic_texture = ExtResource( 37 )
+metallic_texture_channel = 4
+roughness_texture = ExtResource( 35 )
+roughness_texture_channel = 4
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 36 )
+uv1_scale = Vector3( 0.311, 0.311, 0.311 )
+uv1_triplanar = true
+uv1_triplanar_sharpness = 1.0
+
+[sub_resource type="SpatialMaterial" id=132]
+resource_local_to_scene = true
+albedo_texture = ExtResource( 43 )
+metallic = 1.0
+metallic_texture = ExtResource( 44 )
+metallic_texture_channel = 2
+roughness_texture = ExtResource( 44 )
+roughness_texture_channel = 1
+normal_enabled = true
+normal_scale = -1.0
+normal_texture = ExtResource( 42 )
+ao_enabled = true
+ao_light_affect = 1.0
+ao_texture = ExtResource( 44 )
+ao_on_uv2 = false
+ao_texture_channel = 0
+
 [node name="Spatial" type="Spatial"]
 
 [node name="Spatial3" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -436.303, 0, 1128.44 )
 
 [node name="Sea" type="MeshInstance" parent="Spatial3"]
-transform = Transform( 39.3259, 0, 0, 0, 39.3259, 0, 0, 0, 39.3259, 0, 0, 0 )
+transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
 cast_shadow = 0
 mesh = ExtResource( 3 )
 skeleton = NodePath("")
@@ -205,10 +268,10 @@ light_specular = 2.288
 light_bake_mode = 0
 shadow_enabled = true
 shadow_reverse_cull_face = true
+directional_shadow_mode = 0
 directional_shadow_blend_splits = true
-directional_shadow_normal_bias = 1.807
-directional_shadow_depth_range = 1
-directional_shadow_max_distance = 30000.0
+directional_shadow_normal_bias = 0.0
+directional_shadow_max_distance = 2529.0
 
 [node name="GodRays" type="Spatial" parent="Sky/Sun"]
 script = ExtResource( 5 )
@@ -289,11 +352,11 @@ transform = Transform( 1345.96, 0, 0, 0, 1345.96, 0, 0, 0, 1345.96, -559.171, -1
 mesh = ExtResource( 4 )
 material/0 = ExtResource( 12 )
 
-[node name="StaticBody" parent="." instance=ExtResource( 15 )]
+[node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( -23.518, 0, 30.958, 0, 38.878, 0, -30.958, 0, -23.518, 590.222, -588.108, 6561.87 )
-
-[node name="MeshInstance" parent="StaticBody" index="0"]
-script = null
+mesh = ExtResource( 30 )
+skeleton = NodePath("")
+material/0 = ExtResource( 15 )
 
 [node name="MergeGroup" type="MergeGroup" parent="."]
 
@@ -482,6 +545,47 @@ skeleton = NodePath("../..")
 transform = Transform( 4.19948, -0.654202, -0.263562, 0.51528, 1.75925, 3.84352, -0.481593, -3.82232, 1.81411, -183.419, 62.1817, 6016.28 )
 skeleton = NodePath("../..")
 
+[node name="MeshInstance9" type="MeshInstance" parent="MergeGroup"]
+transform = Transform( 0.214765, 0.196314, -0.956732, 0.674689, -0.738102, 0, -0.706166, -0.645497, -0.290969, -248.192, 275.482, 5531.4 )
+layers = 3
+mesh = ExtResource( 33 )
+skeleton = NodePath("")
+material/0 = SubResource( 130 )
+
+[node name="MeshInstance10" type="MeshInstance" parent="MergeGroup"]
+transform = Transform( 17.9735, 30.3154, 0, -30.3154, 17.9735, 0, 0, 0, 35.243, 226.631, -0.671478, 7107.04 )
+layers = 3
+mesh = ExtResource( 39 )
+skeleton = NodePath("")
+material/0 = SubResource( 131 )
+
+[node name="MeshInstance12" type="MeshInstance" parent="MergeGroup"]
+transform = Transform( -4.2785, -7.21642, 45.3226, -39.6479, 23.5066, 0, -23.114, -38.9857, -8.38942, 539.266, 0.124775, 7080.3 )
+layers = 3
+mesh = ExtResource( 39 )
+skeleton = NodePath("")
+material/0 = SubResource( 131 )
+
+[node name="MeshInstance13" type="MeshInstance" parent="MergeGroup"]
+transform = Transform( -36.0744, 26.0939, 89.3684, 18.0149, 95.9879, -20.7548, -91.3404, 8.62584, -39.389, 100.292, -76.7985, 6627.91 )
+layers = 3
+mesh = ExtResource( 39 )
+skeleton = NodePath("")
+material/0 = SubResource( 131 )
+
+[node name="MeshInstance14" type="MeshInstance" parent="MergeGroup"]
+transform = Transform( -38.9617, -44.0043, 80.713, -10.3868, 89.2087, 43.6222, -91.3404, 8.62584, -39.389, -344.798, -28.0772, 6537.18 )
+layers = 3
+mesh = ExtResource( 39 )
+skeleton = NodePath("")
+material/0 = SubResource( 131 )
+
+[node name="MeshInstance11" type="MeshInstance" parent="MergeGroup"]
+transform = Transform( 0.778348, -0.230372, -0.58404, 0.184266, 0.973103, -0.138266, 0.600183, 0, 0.799863, 398.656, 15.7334, 7201.01 )
+material_override = SubResource( 132 )
+mesh = ExtResource( 41 )
+skeleton = NodePath("")
+
 [node name="WindGenerator5" parent="." instance=ExtResource( 29 )]
 transform = Transform( 0.361597, 0, -0.283029, 0, 0.459192, 0, 0.283029, 0, 0.361597, -93.2341, -220.851, 2082.61 )
 
@@ -496,5 +600,3 @@ transform = Transform( 0.430546, 0, -0.159648, 0, 0.459192, 0, 0.159648, 0, 0.43
 
 [node name="WindGenerator7" parent="." instance=ExtResource( 29 )]
 transform = Transform( 0.394866, 0, -0.165776, 0, 0.428253, 0, 0.165776, 0, 0.394866, -2936.37, -51.8113, 4261.89 )
-
-[editable path="StaticBody"]

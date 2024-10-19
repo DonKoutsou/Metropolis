@@ -4,10 +4,18 @@ using System;
 
 public class Sea : StaticBody
 {
+	[Export]
+	Mesh OverrideSeaMesh = null;
+	[Export]
+	Shape OverrideSeaCollisionShape = null;
 	//ShaderMaterial material;
 	public override void _Ready()
 	{
-		//GlobalRotation = Vector3.Zero;
+		if (OverrideSeaMesh != null)
+			GetNode<MeshInstance>("Sea").Mesh = OverrideSeaMesh;
+		if (OverrideSeaCollisionShape != null)
+			GetNode<CollisionShape>("CollisionShape").Shape = OverrideSeaCollisionShape;
+		GlobalRotation = Vector3.Zero;
 		//GetNode<MeshInstance>("Sea").QueueFree();
 		//AnimationPlayer anim = GetNode<AnimationPlayer>("AnimationPlayer");
 		//anim.Play("Wave");

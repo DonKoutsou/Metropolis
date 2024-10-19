@@ -81,13 +81,12 @@ public class SettingsPanel : Control
         {
             return;
         }
-        DViewport v = DViewport.GetInstance();
-
         OS.WindowFullscreen = (bool)save.Get("FullScreen");
         OS.VsyncEnabled = (bool)save.Get("Vsync");
-        v.Fxaa = (bool)save.Get("AAFXAA");
+
         gameenv.SsaoEnabled = (bool)save.Get("SSAO");
 
+        Update_FXAA((bool)save.Get("AAFXAA"));
         Update_MSAA((int)save.Get("MSAA"));
         UpdateMaxFPS((int)save.Get("MaxFPS"));
         Update_Resolution((int)save.Get("Resolution"));
@@ -102,10 +101,8 @@ public class SettingsPanel : Control
     }
     private void Update_FXAA(bool T)
     {
-        DViewport v = DViewport.GetInstance();
-        v.Fxaa = T;
-        ItemPreviewViewport vp = ItemPreviewViewport.GetInstance();
-        v.Fxaa = T;
+        DViewport vp = DViewport.GetInstance();
+        vp.Fxaa = T;
     }
     private void Update_SSAO(bool T)
     {
@@ -192,78 +189,76 @@ public class SettingsPanel : Control
     }
     private void Update_MSAA(int p)
     {
-        ItemPreviewViewport vp = ItemPreviewViewport.GetInstance();
-        DViewport v = DViewport.GetInstance();
+        Viewport.MSAA set = Viewport.MSAA.Disabled;
         switch (p)
         {
             case 0:
             {
-                v.Msaa = Viewport.MSAA.Disabled;
-                vp.Msaa = Viewport.MSAA.Disabled;
+                set = Viewport.MSAA.Disabled;
                 break;
             }
             case 1:
             {
-                v.Msaa = Viewport.MSAA.Msaa2x;
-                vp.Msaa = Viewport.MSAA.Msaa2x;
+                set = Viewport.MSAA.Msaa2x;
                 break;
             }
             case 2:
             {
-                v.Msaa = Viewport.MSAA.Msaa4x;
-                vp.Msaa = Viewport.MSAA.Msaa4x;
+                set = Viewport.MSAA.Msaa4x;
                 break;
             }
             case 3:
             {
-                v.Msaa = Viewport.MSAA.Msaa8x;
-                vp.Msaa = Viewport.MSAA.Msaa8x;
+                set = Viewport.MSAA.Msaa8x;
                 break;
             }
             case 4:
             {
-                v.Msaa = Viewport.MSAA.Msaa16x;
-                vp.Msaa = Viewport.MSAA.Msaa16x;
+                set = Viewport.MSAA.Msaa16x;
                 break;
             }
+        }
+        var vps = GetTree().GetNodesInGroup("3DVP");
+        foreach(Viewport vp in vps)
+        {
+            vp.Msaa = set;
         }
     }
     private void Update_Resolution(int p)
     {
-        DViewport v = DViewport.GetInstance();
-        ItemPreviewViewport vp = ItemPreviewViewport.GetInstance();
+        Vector2 Size = Vector2.Zero;
         switch (p)
         {
             case 0:
             {
-                v.Size = new Vector2(3840, 2160);
-                vp.Size = new Vector2(3840, 2160);
+                Size = new Vector2(3840, 2160);
                 break;
             }
             case 1:
             {
-                v.Size = new Vector2(1920,1080);
-                vp.Size = new Vector2(1920,1080);
+                Size = new Vector2(1920,1080);
                 break;
             }
             case 2:
             {
-                v.Size = new Vector2(1280,720);
-                vp.Size = new Vector2(1280,720);
+                Size = new Vector2(1280,720);
                 break;
             }
             case 3:
             {
-                v.Size = new Vector2(960,540);
-                vp.Size = new Vector2(960,540);
+                Size = new Vector2(960,540);
                 break;
             }
             case 4:
             {
-                v.Size = new Vector2(480,270);
-                vp.Size = new Vector2(480,270);
+                Size = new Vector2(480,270);
                 break;
             }
+        }
+        var vps = GetTree().GetNodesInGroup("3DVP");
+        foreach(Viewport vp in vps)
+        {
+            vp.Size = Size;
         }
     }
     

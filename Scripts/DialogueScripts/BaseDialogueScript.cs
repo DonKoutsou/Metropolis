@@ -11,11 +11,11 @@ public class BaseDialogueScript : Node
     }
     public virtual bool ShouldShowExtraAction()
     {
-        return true;
+        return false;
     }
     public virtual bool ShouldShowExtraAction2()
     {
-        return true;
+        return false;
     }
     public virtual string GetExtraActionText()
     {

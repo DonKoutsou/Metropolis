@@ -1,8 +1,8 @@
 [gd_resource type="ShaderMaterial" load_steps=6 format=2]
 
 [ext_resource path="res://Assets/TerainTex/Sand1/Stylized_Sand_002_normal.png" type="Texture" id=1]
-[ext_resource path="res://Assets/TerainTex/Sand1/Stylized_Sand_002_basecolor.png" type="Texture" id=2]
-[ext_resource path="res://Assets/TerainTex/Sand1/Stylized_Sand_002_roughness.png" type="Texture" id=3]
+[ext_resource path="res://Assets/TerainTex/Sand2/Sand_004_COLOR.png" type="Texture" id=2]
+[ext_resource path="res://Assets/TerainTex/Sand/Stylized_Sand_001_roughness.jpg" type="Texture" id=3]
 [ext_resource path="res://Assets/TerainTex/Sand1/Stylized_Sand_002_ambientOcclusion.png" type="Texture" id=4]
 
 [sub_resource type="Shader" id=21]
@@ -81,9 +81,9 @@ shader_param/point_size = 1.0
 shader_param/roughness_texture_channel = Plane( 0.333333, 0.333333, 0.333333, 0 )
 shader_param/ao_texture_channel = Plane( 0.333333, 0.333333, 0.333333, 0 )
 shader_param/ao_light_affect = 1.0
-shader_param/normal_scale = 1.22
+shader_param/normal_scale = 0.5
 shader_param/uv1_blend_sharpness = 6.516
-shader_param/uv1_scale = Vector3( 0.002, 0.002, 0.002 )
+shader_param/uv1_scale = Vector3( 0.002, 0.002, 0.001 )
 shader_param/uv1_offset = Vector3( 0, 0, 0 )
 shader_param/uv2_scale = Vector3( 1, 1, 1 )
 shader_param/uv2_offset = Vector3( 0, 0, 0 )

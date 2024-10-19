@@ -48,6 +48,8 @@ public class Island : Spatial
 	}
 	public string GetIslandSpecialName()
 	{
+		if (type == IleType.LIGHTHOUSE)
+			return LocalisationHolder.GetString("Lighthouse") + " " + LocalisationHolder.GetString(IslandName);
 		return LocalisationHolder.GetString(IslandName);
 	}
 	public override void _Ready()
@@ -72,7 +74,9 @@ public class Island : Spatial
 		StaticBody sea = GetNode<StaticBody>("SeaBed");
 		sea.GlobalRotation = Vector3.Zero;
 
-
+		GetNode<CharacterSpawnLocations>("CharacterSpawnLocations").QueueFree();
+		GetNode<VehicleSpawnLocation>("VehicleSpawnLocation").QueueFree();
+		
 		//var kids = GetChildren();
 		//foreach (Node p in kids)
 		//{
@@ -297,7 +301,6 @@ public class Island : Spatial
 		CharacterSpawnLocations Chars = GetNode<CharacterSpawnLocations>("CharacterSpawnLocations");
 		if (Chars != null)
 		{
-			
 			//if (Children.Count > 0)
 			//{
 			if (Chars.HasChars())
@@ -556,7 +559,7 @@ public class Island : Spatial
 				((MapUI)PlayerUI.GetUI(PlayerUIType.MAP)).GetGrid().UnlockIslandName(info);
 		}
 	}
-	#if DEBUG
+	#if TOOLS
 	[Export(PropertyHint.Layers3dPhysics)]
     public uint MoveLayer { get; set; }
 

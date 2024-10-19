@@ -21,10 +21,10 @@ public class Sky : Spatial
     }
     public static void OnGameStart()
     {
-        enviroment.SetProcess(true);
+        enviroment.SetPhysicsProcess(true);
         WorldSoundManager.PlaySound("Rain");
         WorldSoundManager.PlaySound("Enviroment");
-        SkyParticleManager.GetNode<Rain>("WindAllignedParticles/Rain").SetProcess(true);
+        SkyParticleManager.GetNode<Rain>("WindAllignedParticles/Rain").SetPhysicsProcess(true);
     }
     public static CustomEnviroment GetEnviroment()
     {

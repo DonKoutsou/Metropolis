@@ -3,24 +3,22 @@ using System;
 
 public class ItemPreviewPivot : Spatial
 {
+    bool MouseInWindow = false;
+    float ZoomStage = 20;
+    float StartingZoom;
     Spatial ItemPreviewPivot2;
     MeshInstance Preview;
-    static ItemPreviewPivot Instance;
     public override void _Ready()
     {
         base._Ready();
         ItemPreviewPivot2 = GetNode<Spatial>("ItemPreviewPivot2");
         Preview = ItemPreviewPivot2.GetNode<MeshInstance>("MeshInstance");
-        Instance = this;
+
         Stop();
-    }
-    public static ItemPreviewPivot GetInstance()
-    {
-        return Instance;
     }
     public void Start(MeshInstance m)
     {
-        Visible = true;
+        GetParent().GetParent().GetParent().GetParent<Control>().Visible = true;
         Rotation = Vector3.Zero;
         ItemPreviewPivot2.Rotation = Vector3.Zero;
         SetProcessInput(true);
@@ -35,34 +33,19 @@ public class ItemPreviewPivot : Spatial
         }
 
         Vector3 transla = GetParent().GetNode<Camera>("Camera").Translation;
-        transla.z = m.GetAabb().GetLongestAxisSize();
+        StartingZoom = m.GetAabb().GetLongestAxisSize() * 2;
+        transla.z = StartingZoom;
         GetParent().GetNode<Camera>("Camera").Translation = transla;
     }
     public void Stop()
     {
-        Visible = false;
+        GetParent().GetParent().GetParent().GetParent<Control>().Visible = false;
         SetProcessInput(false);
     }
     public override void _Input(InputEvent @event)
     {
         base._Input(@event);
-        if (@event is InputEventMouseMotion)
-		{
-            if (!Input.IsActionPressed("Select"))
-				return;
-
-            Vector2 pos = new Vector2(((InputEventMouseMotion)@event).Relative.x, ((InputEventMouseMotion)@event).Relative.y);
-
-            Vector3 rot = ItemPreviewPivot2.Rotation;
-            Vector3 myrot = Rotation;
-
-            rot.y += pos.x / 80;
-
-            myrot.x += pos.y / 160;
-
-            ItemPreviewPivot2.Rotation = rot;
-            Rotation = myrot;
-        }
+        
         if (@event is InputEventJoypadMotion)
         {
             Vector2 velocity = new Vector2(
@@ -82,6 +65,51 @@ public class ItemPreviewPivot : Spatial
             ItemPreviewPivot2.Rotation = rot;
             Rotation = myrot;
         }
+        if (MouseInWindow)
+        {
+            if (@event is InputEventMouseMotion)
+            {
+                if (!Input.IsActionPressed("Select"))
+                    return;
+
+                Vector2 pos = new Vector2(((InputEventMouseMotion)@event).Relative.x, ((InputEventMouseMotion)@event).Relative.y);
+
+                Vector3 rot = ItemPreviewPivot2.Rotation;
+                Vector3 myrot = Rotation;
+
+                rot.y += pos.x / 80;
+
+                myrot.x += pos.y / 160;
+
+                ItemPreviewPivot2.Rotation = rot;
+                Rotation = myrot;
+            }
+            if (@event.IsActionPressed("ZoomOut") && ZoomStage < 20)
+            {
+                ZoomStage += 1;
+                float fovvalue = StartingZoom * (ZoomStage / 10);
+                Vector3 transla = GetParent().GetNode<Camera>("Camera").Translation;
+                transla.z = fovvalue;
+                GetParent().GetNode<Camera>("Camera").Translation = transla;
+            }
+            if (@event.IsActionPressed("ZoomIn") && ZoomStage > -20)
+            {
+                ZoomStage -= 1;
+                float fovvalue = StartingZoom * (ZoomStage / 10);
+                Vector3 transla = GetParent().GetNode<Camera>("Camera").Translation;
+                transla.z = fovvalue;
+                GetParent().GetNode<Camera>("Camera").Translation = transla;
+            }
+        }
+        
+    }
+    private void MouseIn()
+    {
+        MouseInWindow = true;
+    }
+    private void MouseOut()
+    {
+        MouseInWindow = false;
     }
     //  // Called every frame. 'delta' is the elapsed time since the previous frame.
     //  public override void _Process(float delta)

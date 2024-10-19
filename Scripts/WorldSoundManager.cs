@@ -7,8 +7,10 @@ using System.Security.Policy;
 public class WorldSoundManager : Spatial
 {
     static Dictionary<string, AudioStreamPlayer> Players = new Dictionary<string, AudioStreamPlayer>();
-    public override void _Ready()
+
+    public override void _EnterTree()
     {
+        base._EnterTree();
         var children = GetChildren();
         foreach (Node child in children)
         {
@@ -17,6 +19,11 @@ public class WorldSoundManager : Spatial
                 Players.Add(child.Name, (AudioStreamPlayer)child);
             }
         }
+    }
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+        Players.Clear();
     }
     public static void PlaySound(string SoundName)
     {

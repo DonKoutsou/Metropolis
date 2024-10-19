@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/CheatMenu.cs" type="Script" id=1]
 [ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://UIThemes/ButtonGreen.tres" type="Theme" id=3]
+[ext_resource path="res://UIThemes/OptionButtonTheme2.tres" type="Theme" id=4]
 [ext_resource path="res://UIThemes/Panel_Blue_Digital.tres" type="StyleBox" id=5]
+[ext_resource path="res://Fonts/SettingsFont.tres" type="DynamicFont" id=6]
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.568627, 0.537255, 0.45098, 1 )
@@ -67,7 +69,6 @@ mouse_filter = 2
 [node name="FastRun_Button" type="Button" parent="Buttons"]
 margin_right = 133.0
 margin_bottom = 51.0
-mouse_default_cursor_shape = 2
 theme = ExtResource( 3 )
 action_mode = 0
 text = "FastRun"
@@ -247,12 +248,13 @@ margin_right = 148.0
 margin_bottom = 828.0
 
 [node name="OptionButton" type="OptionButton" parent="Buttons/Panel"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -14.5
-margin_top = 11.0
-margin_right = 14.5
-margin_bottom = 31.0
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 20.0
+margin_top = -33.0
+margin_right = 49.0
+margin_bottom = -10.0
+theme = ExtResource( 4 )
 
 [node name="Button" type="Button" parent="Buttons/Panel"]
 anchor_left = 0.5
@@ -269,93 +271,96 @@ text = "Give Item"
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -141.5
-margin_right = 141.5
-margin_bottom = 206.0
+margin_left = -133.0
+margin_top = 2.0
+margin_right = 25.0
+margin_bottom = 94.0
+grow_horizontal = 2
+grow_vertical = 2
 custom_styles/panel = ExtResource( 5 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 281.0
-margin_bottom = 204.0
+margin_right = 156.0
+margin_bottom = 90.0
 custom_constants/separation = 13
 
 [node name="Names" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
-margin_right = 216.0
-margin_bottom = 202.0
+margin_right = 110.0
+margin_bottom = 88.0
 
 [node name="FPS_Counter" type="Label" parent="PanelContainer/HBoxContainer/Names"]
-margin_right = 216.0
-margin_bottom = 45.0
+margin_right = 110.0
+margin_bottom = 19.0
 theme = SubResource( 2 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 6 )
 text = "FPS"
 
 [node name="RainAmmount" type="Label" parent="PanelContainer/HBoxContainer/Names"]
-margin_top = 49.0
-margin_right = 216.0
-margin_bottom = 94.0
+margin_top = 23.0
+margin_right = 110.0
+margin_bottom = 42.0
 theme = SubResource( 2 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 6 )
 text = "RainAmmount"
 
 [node name="WindDir" type="Label" parent="PanelContainer/HBoxContainer/Names"]
-margin_top = 98.0
-margin_right = 216.0
-margin_bottom = 143.0
+margin_top = 46.0
+margin_right = 110.0
+margin_bottom = 65.0
 theme = SubResource( 2 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 6 )
 text = "WindDir"
 
 [node name="WindAmm" type="Label" parent="PanelContainer/HBoxContainer/Names"]
-margin_top = 147.0
-margin_right = 216.0
-margin_bottom = 192.0
+margin_top = 69.0
+margin_right = 110.0
+margin_bottom = 88.0
 theme = SubResource( 2 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 6 )
 text = "WindAmm"
 
 [node name="Panel" type="Panel" parent="PanelContainer/HBoxContainer"]
-margin_left = 229.0
-margin_right = 229.0
-margin_bottom = 202.0
+margin_left = 123.0
+margin_right = 123.0
+margin_bottom = 88.0
 custom_styles/panel = SubResource( 5 )
 
 [node name="Labels" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
-margin_left = 242.0
-margin_right = 278.0
-margin_bottom = 202.0
+margin_left = 136.0
+margin_right = 154.0
+margin_bottom = 88.0
 
 [node name="FPS_Counter" type="Label" parent="PanelContainer/HBoxContainer/Labels"]
-margin_right = 36.0
-margin_bottom = 45.0
+margin_right = 18.0
+margin_bottom = 19.0
 theme = SubResource( 2 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 6 )
 text = "60"
 
 [node name="RainAmmount" type="Label" parent="PanelContainer/HBoxContainer/Labels"]
-margin_top = 49.0
-margin_right = 36.0
-margin_bottom = 94.0
+margin_top = 23.0
+margin_right = 18.0
+margin_bottom = 42.0
 theme = SubResource( 2 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 6 )
 text = "60"
 
 [node name="WindDir" type="Label" parent="PanelContainer/HBoxContainer/Labels"]
-margin_top = 98.0
-margin_right = 36.0
-margin_bottom = 143.0
+margin_top = 46.0
+margin_right = 18.0
+margin_bottom = 65.0
 theme = SubResource( 2 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 6 )
 text = "60"
 
 [node name="WindAmm" type="Label" parent="PanelContainer/HBoxContainer/Labels"]
-margin_top = 147.0
-margin_right = 36.0
-margin_bottom = 192.0
+margin_top = 69.0
+margin_right = 18.0
+margin_bottom = 88.0
 theme = SubResource( 2 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 6 )
 text = "60"
 
 [connection signal="button_down" from="Buttons/FastRun_Button" to="." method="On_FastRun_Button_Down"]
@@ -368,3 +373,4 @@ text = "60"
 [connection signal="button_down" from="Buttons/TeleportPanel/Tp" to="." method="On_TP_Button_Down"]
 [connection signal="pressed" from="Buttons/TimeProgressionSetting/Button" to="." method="IncreaseTimeProgression"]
 [connection signal="pressed" from="Buttons/TimeProgressionSetting/Button2" to="." method="DecreaseTimeProgression"]
+[connection signal="pressed" from="Buttons/Panel/Button" to="." method="GiveItem"]

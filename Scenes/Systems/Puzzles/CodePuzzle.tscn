@@ -109,6 +109,7 @@ emission_on_uv2 = false
 
 [node name="Spatial" type="Spatial"]
 script = ExtResource( 1 )
+Type = 1
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.281186, 0.959653, 0, -0.959653, 0.281186, 0, 2.75097, 0.914739 )

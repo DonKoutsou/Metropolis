@@ -21,7 +21,7 @@ public class InventoryUI : Control
     public bool IsOpen = false;
 
     //float MaxLoad = 0;
-    Panel DescPan;
+    PanelContainer DescPan;
     //Panel JobPan;
     //RichTextLabel Capacity;
     RichTextLabel Description;
@@ -72,9 +72,9 @@ public class InventoryUI : Control
         CharacterBatteryCharge = GetNode<ProgressBar>("InventoryContainer/Inventory/BatteryPanel/CharacterBatteryCharge");
         CharacterRPM = GetNode<Panel>("InventoryContainer/Inventory/BatteryPanel/RPMAmount");
         
-        DescPan = GetNode<Panel>("InventoryContainer/Inventory/DescriptionPanel");
+        DescPan = GetNode<PanelContainer>("InventoryContainer/Inventory/ItemRender/DescriptionPanel");
         //JobPan = GetNode<Panel>("InventoryContainer/Inventory/JobPanel");
-        Description = DescPan.GetNode<MarginContainer>("MarginContainer").GetNode<VBoxContainer>("VBoxContainer").GetNode<RichTextLabel>("Description");
+        Description = DescPan.GetNode<RichTextLabel>("MarginContainer/VBoxContainer/Panel/ScrollContainer/Description");
         //WeightText =  DescPan.GetNode<MarginContainer>("MarginContainer").GetNode<VBoxContainer>("VBoxContainer").GetNode<RichTextLabel>("WeightText");
         ItemName = DescPan.GetNode<MarginContainer>("MarginContainer").GetNode<VBoxContainer>("VBoxContainer").GetNode<RichTextLabel>("ItemName");
         //ItemOptionPanel = GetNode<Panel>("ItemOptionPanel");
@@ -220,7 +220,9 @@ public class InventoryUI : Control
 
         }
         maxpage = Itamm / 12;
-        GetNode<Control>("InventoryContainer/Inventory/CapPanel2/InventoryPage").Visible = maxpage > 0;
+        bool PageBool = maxpage > 0;
+        GetNode<Button>("InventoryContainer/Inventory/CapPanel2/InventoryPage/PageFront").Disabled = !PageBool;
+        GetNode<Button>("InventoryContainer/Inventory/CapPanel2/InventoryPage/PageBack").Disabled = !PageBool;
         int slottofill = 0;
         int currentit = 0;
 
@@ -331,20 +333,13 @@ public class InventoryUI : Control
     {
         if (t)
         {
-            if (it == null)
-                return;
-            showingDesc = true;
-            ShowingDescSample = it;
-            DescPan.Show();
-            Description.BbcodeText = "[center]" + it.GetItemDesc();
-            ItemName.BbcodeText = "[center]" + LocalisationHolder.GetString(it.GetItemName());
+            
             //WeightText.BbcodeText = "[center]Βάρος: " + ShowingDescSample.GetInventoryWeight();
         }
         else
         {
-            DescPan.Hide();
-            showingDesc = false;
-            ShowingDescSample = null;
+            
+            
         }
     }
     public void SetFocused(bool t, InventoryUISlot slot)
@@ -352,6 +347,7 @@ public class InventoryUI : Control
         if (slot.item == null)
         {
             slot.Toggle(false);
+            
             return;
         }
             
@@ -365,12 +361,21 @@ public class InventoryUI : Control
             MeshInstance meshi = slot.item.GetNode<MeshInstance>("MeshInstance");
             
             
-            ItemPreviewPivot.GetInstance().Start(meshi);
+            GetNode<ItemPreviewPivot>("InventoryContainer/Inventory/ItemRender/Panel2/ViewportContainer/ItemPreviewViewport/ItemPreviewPivot").Start(meshi);
+
+            showingDesc = true;
+            ShowingDescSample = slot.item;
+            DescPan.Show();
+            Description.BbcodeText = "[center]" + slot.item.GetItemDesc();
+            ItemName.BbcodeText = "[center]" + LocalisationHolder.GetString(slot.item.GetItemName());
         }
         else
         {
+            DescPan.Hide();
+            showingDesc = false;
+            ShowingDescSample = null;
             FocusedSlot = null;
-            ItemPreviewPivot.GetInstance().Stop();
+            GetNode<ItemPreviewPivot>("InventoryContainer/Inventory/ItemRender/Panel2/ViewportContainer/ItemPreviewViewport/ItemPreviewPivot").Stop();
         }
         slot.Toggle(t);
     }

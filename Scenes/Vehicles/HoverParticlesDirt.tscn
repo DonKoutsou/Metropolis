@@ -12,24 +12,27 @@ emission_ring_radius = 2.0
 emission_ring_inner_radius = 0.0
 emission_ring_height = 0.0
 emission_ring_axis = Vector3( 0, 1, 0 )
+flag_align_y = true
 direction = Vector3( 0, -1, 0 )
 spread = 0.0
 gravity = Vector3( 0, 0, 0 )
 angular_velocity = 400.0
 radial_accel = 12.4
 radial_accel_random = 0.53
+angle = 175.6
+angle_random = 0.23
 scale = 30.0
 scale_random = 1.0
 scale_curve = SubResource( 6 )
 
 [sub_resource type="SpatialMaterial" id=116]
-flags_world_triplanar = true
 params_diffuse_mode = 4
 params_specular_mode = 3
-params_depth_draw_mode = 1
 albedo_color = Color( 0.792157, 0.65098, 0.501961, 1 )
-roughness = 0.0
+metallic_specular = 0.1
+roughness = 0.25
 uv1_triplanar = true
+uv1_triplanar_sharpness = 1.0
 
 [sub_resource type="SphereMesh" id=117]
 material = SubResource( 116 )

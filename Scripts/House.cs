@@ -85,12 +85,14 @@ public class House : Spatial
 			PuzzleManager pman = (PuzzleManager)PlayerUI.GetUI(PlayerUIType.PUZZLE);
 			pman.Connect("PuzzleResault", this, "Unlocked");
 			pman.StartPuzzle(PuzzleTypes.LOCK);
+			
 			return;
 		}
 		if (HideExterior)
 		{
 			StaticBody HouseExterior  = GetNode<StaticBody>("HouseExterior");
 			((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Front;
+			HouseExterior.SetCollisionLayerBit(13, false);
 		}
 		
 		GetNode<Spatial>("Furnitures").Show();
@@ -128,6 +130,7 @@ public class House : Spatial
 		{
 			StaticBody HouseExterior  = GetNode<StaticBody>("HouseExterior");
 			((SpatialMaterial)HouseExterior.GetNode<MeshInstance>("MeshInstance").GetActiveMaterial(0)).ParamsCullMode = SpatialMaterial.CullMode.Disabled;
+			HouseExterior.SetCollisionLayerBit(13, true);
 		}
 		GetNode<Spatial>("Furnitures").Hide();
 		GetNode<Spatial>("Decorations").Hide();

@@ -241,18 +241,21 @@ material/0 = ExtResource( 17 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 reset_on_save = false
+playback_process_mode = 0
 playback_speed = 3.0
 anims/Blade_Rot = SubResource( 2 )
 anims/RESET = SubResource( 3 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
 reset_on_save = false
+playback_process_mode = 0
 playback_speed = 3.0
 anims/Blade_Rot = SubResource( 6 )
 anims/RESET = SubResource( 7 )
 
 [node name="AnimationPlayer3" type="AnimationPlayer" parent="."]
 reset_on_save = false
+playback_process_mode = 0
 playback_speed = 3.0
 anims/LookDir = SubResource( 8 )
 anims/RESET = SubResource( 9 )

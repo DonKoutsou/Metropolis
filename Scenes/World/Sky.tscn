@@ -24,11 +24,11 @@ shadow_enabled = true
 shadow_color = Color( 0.607843, 0.603922, 0.603922, 1 )
 shadow_bias = 1.5
 shadow_reverse_cull_face = true
-directional_shadow_depth_range = 1
 directional_shadow_max_distance = 1000.0
 
 [node name="GodRays" type="Spatial" parent="Sun"]
 script = ExtResource( 1 )
+exposure = 0.3
 attenuation = 1.1487
 
 [node name="Moon" type="DirectionalLight" parent="."]
